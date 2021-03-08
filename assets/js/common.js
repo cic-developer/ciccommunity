@@ -154,6 +154,7 @@ if (typeof(COMMON_JS) === 'undefined') {
 		if ( post_id == '') {
 			return false;
 		}
+		let _usePoint = prompt("사용할 포인트 수량을 입력해주세요")*1;
 
 		href = cb_url + '/postact/post_like/' + post_id + '/' + like_type;
 
@@ -161,6 +162,9 @@ if (typeof(COMMON_JS) === 'undefined') {
 			url : href,
 			type : 'get',
 			dataType : 'json',
+			data : {
+				usePoint : _usePoint
+			},
 			success : function(data) {
 				if (data.error) {
 					alert(data.error);
@@ -182,12 +186,17 @@ if (typeof(COMMON_JS) === 'undefined') {
 			return false;
 		}
 
+		let _usePoint = prompt("사용할 포인트 수량을 입력해주세요")*1;
+
 		href = cb_url + '/postact/comment_like/' + cmt_id + '/' + like_type;
 
 		$.ajax({
 			url : href,
 			type : 'get',
 			dataType : 'json',
+			data : {
+				usePoint : _usePoint
+			},
 			success : function(data) {
 				if (data.error) {
 					alert(data.error);

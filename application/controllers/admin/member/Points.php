@@ -24,7 +24,7 @@ class Points extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Point');
+	protected $models = array('Point','CIC_vp', 'CIC_cp');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
@@ -252,7 +252,7 @@ class Points extends CB_Controller
 			} elseif ($this->input->post('poi_type') === 'toone') {
 				$mb = $this->Member_model->get_by_userid($this->input->post('mem_userid'), 'mem_id');
 				if (element('mem_id', $mb)) {
-					$this->point->insert_point(
+					$this->point->insert_vp(
 						element('mem_id', $mb),
 						$this->input->post('poi_point'),
 						$this->input->post('poi_content'),
@@ -275,7 +275,7 @@ class Points extends CB_Controller
 			 * 게시물의 신규입력 또는 수정작업이 끝난 후 목록 페이지로 이동합니다
 			 */
 			$param =& $this->querystring;
-			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+			$redirecturl = admin_url($this->pagedir.'/PointManage'. '?' . $param->output());
 			redirect($redirecturl);
 		}
 	}

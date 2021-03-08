@@ -19,7 +19,7 @@
 			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/write_category/' . element('brd_id', element('data', $view))); ?>">카테고리</a></li>
 			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_comment/' . element('brd_id', element('data', $view))); ?>">댓글기능</a></li>
 			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_general/' . element('brd_id', element('data', $view))); ?>">일반기능</a></li>
-			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_point/' . element('brd_id', element('data', $view))); ?>">포인트기능</a></li>
+			<!-- <li role="presentation"><a href="<?php //echo admin_url($this->pagedir . '/write_point/' . element('brd_id', element('data', $view))); ?>">포인트기능</a></li> -->
 			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_alarm/' . element('brd_id', element('data', $view))); ?>">메일/쪽지/문자</a></li>
 			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_rss/' . element('brd_id', element('data', $view))); ?>">RSS/사이트맵 설정</a></li>
 			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_access/' . element('brd_id', element('data', $view))); ?>">권한관리</a></li>

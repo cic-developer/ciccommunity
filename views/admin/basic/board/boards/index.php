@@ -30,7 +30,7 @@
 							<th><a href="<?php echo element('bgr_id', element('sort', $view)); ?>">그룹</a></th>
 							<th>PC (레이아웃 / 사이드바 / 스킨)</th>
 							<th>모바일 (레이아웃 / 사이드바 / 스킨)</th>
-							<th>포인트(읽기/쓰기/댓글/다운)</th>
+							<!-- <th>포인트(읽기/쓰기/댓글/다운)</th> -->
 							<th>검색사용</th>
 							<th><a href="<?php echo element('brd_order', element('sort', $view)); ?>">정렬순서</a></th>
 							<th>수정</th>
@@ -86,12 +86,12 @@
 									<?php echo element('board_mobile_skin_option', $result); ?>
 								</select>
 							</td>
-							<td>
-								<input type="text" name="point_read[<?php echo element(element('primary_key', $view), $result); ?>]" class="form-control" value="<?php echo (int) element('point_read', element('meta', $result)); ?>" style="width:50px;" />
-								<input type="text" name="point_write[<?php echo element(element('primary_key', $view), $result); ?>]" class="form-control" value="<?php echo (int) element('point_write', element('meta', $result)); ?>" style="width:50px;" />
-								<input type="text" name="point_comment[<?php echo element(element('primary_key', $view), $result); ?>]" class="form-control" value="<?php echo (int) element('point_comment', element('meta', $result)); ?>" style="width:50px;" />
-								<input type="text" name="point_download[<?php echo element(element('primary_key', $view), $result); ?>]" class="form-control" value="<?php echo (int) element('point_download', element('meta', $result)); ?>" style="width:50px;" />
-							</td>
+							<!-- <td>
+								<input type="text" name="point_read[<?php //echo element(element('primary_key', $view), $result); ?>]" class="form-control" value="<?php //echo (int) element('point_read', element('meta', $result)); ?>" style="width:50px;" />
+								<input type="text" name="point_write[<?php //echo element(element('primary_key', $view), $result); ?>]" class="form-control" value="<?php //echo (int) element('point_write', element('meta', $result)); ?>" style="width:50px;" />
+								<input type="text" name="point_comment[<?php //echo element(element('primary_key', $view), $result); ?>]" class="form-control" value="<?php //echo (int) element('point_comment', element('meta', $result)); ?>" style="width:50px;" />
+								<input type="text" name="point_download[<?php //echo element(element('primary_key', $view), $result); ?>]" class="form-control" value="<?php //echo (int) element('point_download', element('meta', $result)); ?>" style="width:50px;" />
+							</td> -->
 							<td><input type="checkbox" name="brd_search[<?php echo element(element('primary_key', $view), $result); ?>]" value="1" <?php echo set_checkbox('brd_search', '1', (element('brd_search', $result) ? true : false)); ?> /></td>
 							<td><input type="text" name="brd_order[<?php echo element(element('primary_key', $view), $result); ?>]" class="form-control" value="<?php echo html_escape(element('brd_order', $result)); ?>" style="width:50px;" /></td>
 							<td><a href="<?php echo admin_url($this->pagedir); ?>/write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>

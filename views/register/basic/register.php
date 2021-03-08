@@ -5,9 +5,10 @@
 	echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
 	echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
 	$attributes = array('class' => 'form-horizontal', 'name' => 'fregisterform', 'id' => 'fregisterform');
-	echo form_open(current_full_url(), $attributes);
+	echo form_open(current_full_url(), $attributes);	
 	?>
 		<input type="hidden" name="register" value="1" />
+		<input type="hidden" name="recommend_id" value="<?php echo element('recommend_id',$view)?>"/> 
 		<div class="table-box">
 			<div class="table-heading">회원가입 약관</div>
 			<div class="table-body">

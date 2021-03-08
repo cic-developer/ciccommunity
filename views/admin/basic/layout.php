@@ -66,7 +66,8 @@ var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
 								continue;
 							}
 						?>
-							<li <?php echo (element('menu_dir1', $layout) === $__akey && element('menu_dir2', $layout) === $menukey) ? 'class="active"' : ''; ?>><a href="<?php echo admin_url($__akey . '/' . $menukey); ?>" <?php echo element(1, $menuvalue); ?> ><?php echo element(0, $menuvalue); ?></a></li>
+							<li <?php echo (element('menu_dir1', $layout) === $__akey && element('menu_dir2', $layout) === $menukey) ? 'class="active"' : ''; ?>>
+							<a href="<?php echo admin_url($__akey . '/' . $menukey); ?>" <?php echo element(1, $menuvalue); ?> ><?php echo element(0, $menuvalue); ?></a></li>
 						<?php
 						}
 						?>

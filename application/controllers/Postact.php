@@ -581,12 +581,22 @@ class Postact extends CB_Controller
 		}
 
 		$mem_id = (int) $this->member->item('mem_id');
-
-		$this->load->model(array('Post_model', 'Like_model'));
+		
+		$this->load->model(
+			array(
+				'Post_model',
+				'Like_model',
+				'CIC_vp_model',
+				'CIC_cp_model',
+				'CIC_vp_config_model',
+				'CIC_cp_config_model',
+				'Config_model',
+				'CIC_point_config_model',
+			)
+		);
 
 		$select = 'post_id, brd_id, mem_id, post_del';
 		$post = $this->Post_model->get_one($post_id, $select);
-
 		if ( ! element('post_id', $post)) {
 			$result = array('error' => '존재하지 않는 게시물입니다');
 			exit(json_encode($result));
@@ -627,6 +637,206 @@ class Postact extends CB_Controller
 			exit(json_encode($result));
 		}
 
+		$usedPoint = $this->input->get('usePoint');
+		if(!is_int($usedPoint) && $usedPoint < 0){
+			$result = array('error' => '숫자 이외의 값이 입력되었습니다.');
+			exit(json_encode($result));
+		}
+
+		// if (element('use_point', $board)) {
+		// 	if ($like_type === 1) {
+		// 		$this->point->insert_point(
+		// 			$mem_id,
+		// 			element('point_post_like', $board),
+		// 			element('board_name', $board) . ' ' . $post_id . ' 추천',
+		// 			'like',
+		// 			$post_id,
+		// 			'추천'
+		// 		);
+		// 		$this->point->insert_point(
+		// 			abs(element('mem_id', $post)),
+		// 			element('point_post_liked', $board),
+		// 			element('board_name', $board) . ' ' . $post_id . ' 추천받음',
+		// 			'liked',
+		// 			$post_id,
+		// 			'추천받음'
+		// 		);
+		// 	}
+		// 	if ($like_type === 2) {
+		// 		$this->point->insert_point(
+		// 			$mem_id,
+		// 			element('point_post_dislike', $board),
+		// 			element('board_name', $board) . ' ' . $post_id . ' 추천',
+		// 			'like',
+		// 			$post_id,
+		// 			'추천'
+		// 		);
+		// 		$this->point->insert_point(
+		// 			abs(element('mem_id', $post)),
+		// 			element('point_post_disliked', $board),
+		// 			element('board_name', $board) . ' ' . $post_id . ' 비추천받음',
+		// 			'disliked',
+		// 			$post_id,
+		// 			'비추천받음'
+		// 		);
+		// 	}
+		// }
+
+		//사용되어질 포인트 종류
+		$_defualt_using_point = $this->Config_model->get_one('','',"cfg_key = 'defualt_using_point'");
+		$like_min_vp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_min_vp'"));
+		$like_max_vp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_max_vp'"));
+		$like_min_cp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_min_cp'"));
+		$like_max_cp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_max_cp'"));
+
+
+		switch(element('cfg_value',$_defualt_using_point)){
+			case 'vp' : //vp가 기본 포인트일 경우
+				$_pointSUM = $this->CIC_vp_model->get_point_sum($mem_id);
+				if($like_min_vp > $usedPoint || $like_max_vp < $usedPoint){
+					$result = array('error' => $like_min_vp.' 이상, '.$like_max_vp.' 이하의 자연수를 입력해주세요');
+					exit(json_encode($result));
+				}
+
+				//소유 VP가 사용하려는 포인트보다 적은 경우
+				if($_pointSUM < $usedPoint){
+					$result = array('error' => '보유 포인트가 부족합니다.');
+					exit(json_encode($result));
+				}
+
+				$this->point->insert_vp(
+					$mem_id,
+					$_pointSUM * -1,
+					element('board_name', $board) . ' ' . $post_id . '포인트사용',
+					'point_use',
+					$post_id,
+					'포인트 사용'
+				);
+			break;
+
+
+			case 'cp' :
+				$_pointSUM = $this->CIC_cp_model->get_point_sum($mem_id);
+				if($like_min_cp > $usedPoint || $like_max_cp < $usedPoint){
+					$result = array('error' => $like_min_cp.' 이상, '.$like_max_cp.' 이하의 자연수를 입력해주세요');
+					exit(json_encode($result));
+				}
+
+				//소유 CP가 사용하려는 포인트보다 적은 경우
+				if($_pointSUM < $usedPoint){
+					$result = array('error' => '보유 포인트가 부족합니다.');
+					exit(json_encode($result));
+				}
+
+				$this->point->insert_cp(
+					$mem_id,
+					$usedPoint * -1,
+					element('board_name', $board) . ' ' . $post_id . $_text_ko,
+					$_text_en,
+					$post_id,
+					$_text_ko
+				);
+			break;
+
+			default :
+				$result = array('error' => '사용될 포인트 설정이 올바르지 않습니다.');
+				exit(json_encode($result));
+		}
+
+		if ($like_type === 1) {
+			$_writerRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 6 AND vpc_enable = 1");
+			$_userRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 8 AND vpc_enable = 1");
+			$_writerRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 6 AND cpc_enable = 1");
+			$_userRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 8 AND cpc_enable = 1");
+			$_writerRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 1 AND pc_enable = 1');
+			$_userRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 3 AND pc_enable = 1');
+			$_text_ko = ' 추천받음';
+			$_text_en = ' liked';
+		}else if($like_type === 2){
+			$_writerRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 7 AND vpc_enable = 1");
+			$_userRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 9 AND vpc_enable = 1");
+			$_writerRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 7 AND cpc_enable = 1");
+			$_userRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 9 AND cpc_enable = 1");
+			$_writerRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 2 AND pc_enable = 1');
+			$_userRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 4 AND pc_enable = 1');
+			$_text_ko = ' 비추천받음';
+			$_text_en = ' disliked';
+		}
+
+		if($_writerRatio_vp){
+			$ratio = element('vpc_value', $_writerRatio_vp);
+			$this->point->insert_vp(
+				abs(element('mem_id', $post)),
+				($usedPoint * $ratio)/100,
+				element('board_name', $board) . ' ' . $post_id . $_text_ko,
+				$_text_en,
+				$post_id,
+				$_text_ko
+			);
+		}
+
+		if($_userRatio_vp){
+			$ratio = element('vpc_value', $_userRatio_vp);
+			$this->point->insert_vp(
+				$mem_id,
+				($usedPoint * $ratio)/100,
+				element('board_name', $board) . ' ' . $post_id . $_text_ko,
+				$_text_en,
+				$post_id,
+				$_text_ko
+			);
+		}
+		
+		if($_writerRatio_cp){
+			$ratio = element('cpc_value', $_writerRatio_cp);
+			$this->point->insert_cp(
+				abs(element('mem_id', $post)),
+				($usedPoint * $ratio)/100,
+				element('board_name', $board) . ' ' . $post_id . $_text_ko,
+				$_text_en,
+				$post_id,
+				$_text_ko
+			);
+		}
+		
+		if($_userRatio_cp){
+			$ratio = element('cpc_value', $_userRatio_cp);
+			$this->point->insert_cp(
+				$mem_id,
+				($usedPoint * $ratio)/100,
+				element('board_name', $board) . ' ' . $post_id . $_text_ko,
+				$_text_en,
+				$post_id,
+				$_text_ko
+			);
+		}
+
+
+		if($_writerRatio_poi){
+			$ratio = element('cpc_value', $_writerRatio_poi);
+			$this->point->insert_cp(
+				abs(element('mem_id', $post)),
+				($usedPoint * $ratio),
+				element('board_name', $board) . ' ' . $post_id . $_text_ko,
+				$_text_en,
+				$post_id,
+				$_text_ko
+			);
+		}
+
+		if($_userRatio_poi){
+			$ratio = element('cpc_value', $_writerRatio_poi);
+			$this->point->insert_point(
+				$mem_id,
+				($usedPoint * $ratio),
+				element('board_name', $board) . ' ' . $post_id . $_text_ko,
+				$_text_en,
+				$post_id,
+				$_text_ko
+			);
+		}
+
+
 		$insertdata = array(
 			'target_id' => $post_id,
 			'target_type' => $target_type,
@@ -638,44 +848,6 @@ class Postact extends CB_Controller
 			'lik_ip' => $this->input->ip_address(),
 		);
 		$this->Like_model->insert($insertdata);
-		if (element('use_point', $board)) {
-			if ($like_type === 1) {
-				$this->point->insert_point(
-					$mem_id,
-					element('point_post_like', $board),
-					element('board_name', $board) . ' ' . $post_id . ' 추천',
-					'like',
-					$post_id,
-					'추천'
-				);
-				$this->point->insert_point(
-					abs(element('mem_id', $post)),
-					element('point_post_liked', $board),
-					element('board_name', $board) . ' ' . $post_id . ' 추천받음',
-					'liked',
-					$post_id,
-					'추천받음'
-				);
-			}
-			if ($like_type === 2) {
-				$this->point->insert_point(
-					$mem_id,
-					element('point_post_dislike', $board),
-					element('board_name', $board) . ' ' . $post_id . ' 추천',
-					'like',
-					$post_id,
-					'추천'
-				);
-				$this->point->insert_point(
-					abs(element('mem_id', $post)),
-					element('point_post_disliked', $board),
-					element('board_name', $board) . ' ' . $post_id . ' 비추천받음',
-					'disliked',
-					$post_id,
-					'비추천받음'
-				);
-			}
-		}
 
 		$where = array(
 			'target_id' => $post_id,
@@ -785,6 +957,13 @@ class Postact extends CB_Controller
 			exit(json_encode($result));
 		}
 
+		$usedPoint = $this->input->get('usePoint');
+
+		if(!is_int($usedPoint) && $usedPoint < 0){
+			$result = array('error' => '숫자 이외의 값이 입력되었습니다.');
+			exit(json_encode($result));
+		}
+
 		$select = 'lik_id, lik_type';
 		$where = array(
 			'target_id' => $cmt_id,
@@ -816,43 +995,211 @@ class Postact extends CB_Controller
 		if ($like_type === 2) {
 			$field = 'cmt_dislike';
 		}
-		if (element('use_point', $board)) {
-			if ($like_type === 1) {
-				$this->point->insert_point(
+		// if (element('use_point', $board)) {
+		// 	if ($like_type === 1) {
+		// 		$this->point->insert_point(
+		// 			$mem_id,
+		// 			element('point_comment_like', $board),
+		// 			element('board_name', $board) . ' ' . $cmt_id . ' 추천',
+		// 			'comment_like',
+		// 			$cmt_id,
+		// 			'추천'
+		// 		);
+		// 		$this->point->insert_point(
+		// 			abs(element('mem_id', $comment)),
+		// 			element('point_comment_liked', $board),
+		// 			element('board_name', $board) . ' ' . $cmt_id . ' 추천받음',
+		// 			'comment_liked',
+		// 			$cmt_id,
+		// 			'추천받음'
+		// 		);
+		// 	}
+		// 	if ($like_type === 2) {
+		// 		$this->point->insert_point(
+		// 			$mem_id,
+		// 			element('point_comment_dislike', $board),
+		// 			element('board_name', $board) . ' ' . $cmt_id . ' 추천',
+		// 			'comment_like',
+		// 			$cmt_id,
+		// 			'추천'
+		// 		);
+		// 		$this->point->insert_point(
+		// 			abs(element('mem_id', $comment)),
+		// 			element('point_comment_disliked', $board),
+		// 			element('board_name', $board) . ' ' . $cmt_id . ' 비추천받음',
+		// 			'disliked',
+		// 			$cmt_id,
+		// 			'비추천받음'
+		// 		);
+		// 	}
+		// }
+		
+		//Comment에 추천/비추천 넣었음
+		$this->load->model(
+			array(
+				'Post_model',
+				'Like_model',
+				'CIC_vp_model',
+				'CIC_cp_model',
+				'CIC_vp_config_model',
+				'CIC_cp_config_model',
+				'Config_model',
+				'CIC_point_config_model',
+			)
+		);
+
+		//사용되어질 포인트 종류
+		$_defualt_using_point = $this->Config_model->get_one('','',"cfg_key = 'defualt_using_point'");
+		$like_min_vp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_comment_min_vp'"));
+		$like_max_vp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_comment_max_vp'"));
+		$like_min_cp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_comment_min_cp'"));
+		$like_max_cp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_comment_max_cp'"));
+
+		switch(element('cfg_value',$_defualt_using_point)){
+			case 'vp' : //vp가 기본 포인트일 경우
+				$_pointSUM = $this->CIC_vp_model->get_point_sum($mem_id);
+				if($like_min_vp > $usedPoint || $like_max_vp < $usedPoint){
+					$result = array('error' => $like_min_vp.' 이상, '.$like_max_vp.' 이하의 자연수를 입력해주세요');
+					exit(json_encode($result));
+				}
+
+				//소유 VP가 사용하려는 포인트보다 적은 경우
+				if($_pointSUM < $usedPoint){
+					$result = array('error' => '보유 포인트가 부족합니다.');
+					exit(json_encode($result));
+				}
+
+				$this->point->insert_vp(
 					$mem_id,
-					element('point_comment_like', $board),
-					element('board_name', $board) . ' ' . $cmt_id . ' 추천',
-					'comment_like',
+					$_pointSUM * -1,
+					element('board_name', $board) . ' ' . $cmt_id . '포인트사용',
+					'point_use',
 					$cmt_id,
-					'추천'
+					'포인트 사용'
 				);
-				$this->point->insert_point(
-					abs(element('mem_id', $comment)),
-					element('point_comment_liked', $board),
-					element('board_name', $board) . ' ' . $cmt_id . ' 추천받음',
-					'comment_liked',
-					$cmt_id,
-					'추천받음'
-				);
-			}
-			if ($like_type === 2) {
-				$this->point->insert_point(
+			break;
+
+
+			case 'cp' :
+				$_pointSUM = $this->CIC_cp_model->get_point_sum($mem_id);
+				if($like_min_cp > $usedPoint || $like_max_cp < $usedPoint){
+					$result = array('error' => $like_min_cp.' 이상, '.$like_max_cp.' 이하의 자연수를 입력해주세요');
+					exit(json_encode($result));
+				}
+
+				//소유 CP가 사용하려는 포인트보다 적은 경우
+				if($_pointSUM < $usedPoint){
+					$result = array('error' => '보유 포인트가 부족합니다.');
+					exit(json_encode($result));
+				}
+
+				$this->point->insert_cp(
 					$mem_id,
-					element('point_comment_dislike', $board),
-					element('board_name', $board) . ' ' . $cmt_id . ' 추천',
-					'comment_like',
+					$usedPoint * -1,
+					element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
+					$_text_en,
 					$cmt_id,
-					'추천'
+					$_text_ko
 				);
-				$this->point->insert_point(
-					abs(element('mem_id', $comment)),
-					element('point_comment_disliked', $board),
-					element('board_name', $board) . ' ' . $cmt_id . ' 비추천받음',
-					'disliked',
-					$cmt_id,
-					'비추천받음'
-				);
-			}
+			break;
+
+			default :
+				$result = array('error' => '사용될 포인트 설정이 올바르지 않습니다.');
+				exit(json_encode($result));
+		}
+
+		
+		if ($like_type === 1) {
+			$_writerRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 10 AND vpc_enable = 1");
+			$_userRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 12 AND vpc_enable = 1");
+			$_writerRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 10 AND cpc_enable = 1");
+			$_userRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 12 AND cpc_enable = 1");
+			$_writerRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 7 AND pc_enable = 1');
+			$_userRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 5 AND pc_enable = 1');
+			$_text_ko = ' 추천받음';
+			$_text_en = ' liked';
+		}else if($like_type === 2){
+			$_writerRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 11 AND vpc_enable = 1");
+			$_userRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 13 AND vpc_enable = 1");
+			$_writerRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 11 AND cpc_enable = 1");
+			$_userRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 13 AND cpc_enable = 1");
+			$_writerRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 8 AND pc_enable = 1');
+			$_userRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 6 AND pc_enable = 1');
+			$_text_ko = ' 비추천받음';
+			$_text_en = ' disliked';
+		}
+
+		if($_writerRatio_vp){
+			$ratio = element('vpc_value', $_writerRatio_vp);
+			$this->point->insert_vp(
+				abs(element('mem_id', $post)),
+				($usedPoint * $ratio)/100,
+				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
+				$_text_en,
+				$cmt_id,
+				$_text_ko
+			);
+		}
+
+		if($_userRatio_vp){
+			$ratio = element('vpc_value', $_userRatio_vp);
+			$this->point->insert_vp(
+				$mem_id,
+				($usedPoint * $ratio)/100,
+				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
+				$_text_en,
+				$cmt_id,
+				$_text_ko
+			);
+		}
+		
+		if($_writerRatio_cp){
+			$ratio = element('cpc_value', $_writerRatio_cp);
+			$this->point->insert_cp(
+				abs(element('mem_id', $post)),
+				($usedPoint * $ratio)/100,
+				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
+				$_text_en,
+				$cmt_id,
+				$_text_ko
+			);
+		}
+		
+		if($_userRatio_cp){
+			$ratio = element('cpc_value', $_userRatio_cp);
+			$this->point->insert_cp(
+				$mem_id,
+				($usedPoint * $ratio)/100,
+				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
+				$_text_en,
+				$cmt_id,
+				$_text_ko
+			);
+		}
+
+
+		if($_writerRatio_poi){
+			$ratio = element('cpc_value', $_writerRatio_poi);
+			$this->point->insert_cp(
+				abs(element('mem_id', $post)),
+				($usedPoint * $ratio),
+				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
+				$_text_en,
+				$cmt_id,
+				$_text_ko
+			);
+		}
+
+		if($_userRatio_poi){
+			$ratio = element('cpc_value', $_writerRatio_poi);
+			$this->point->insert_point(
+				$mem_id,
+				($usedPoint * $ratio),
+				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
+				$_text_en,
+				$cmt_id,
+				$_text_ko
+			);
 		}
 
 		$where = array(
@@ -869,7 +1216,6 @@ class Postact extends CB_Controller
 
 		$status = $like_type === 1 ? '추천' : '비추천';
 		$success = '이 글을 ' . $status . ' 하셨습니다';
-
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('after', $eventname);
 

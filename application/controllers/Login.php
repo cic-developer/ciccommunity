@@ -219,6 +219,38 @@ class Login extends CB_Controller
 				$url_after_login = $this->input->get_post('url') ? urldecode($this->input->get_post('url')) : site_url();
 			}
 
+			//admin이 아닌 경우
+			if(! $this->member->is_admin( element('mem_id', $userinfo) ) ){	
+				//로그인시 CP, VP 설정에 따라 포인트 지급하자
+				$this->load->model(array('CIC_vp_config_model', 'CIC_cp_config_model', 'CIC_vp_model', 'CIC_cp_model'));
+				$_vpConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 3 AND vpc_enable = 1 AND vpc_value > 0");
+				$_cpConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 3 AND cpc_enable = 1 AND cpc_value > 0");
+				//VP 설정이 있는경우 로그인시 VP 지급
+				if($_vpConfig){
+					$this->point->insert_vp(
+						element('mem_id', $userinfo),
+						element('vpc_value', $_vpConfig),
+						'로그인 VP 지급',
+						'login',
+						1,
+						'로그인 보상 VP 지급'
+					);
+				}
+
+				//CP 설정이 있는경우 로그인시 VP 지급
+				if($_cpConfig){
+					$this->point->insert_cp(
+						element('mem_id', $userinfo),
+						element('cpc_value', $_cpConfig),
+						'로그인 CP 지급',
+						'login',
+						1,
+						'로그인 보상 CP 지급'
+					);
+				}
+			} 
+
+
 			// 이벤트가 존재하면 실행합니다
 			Events::trigger('after', $eventname);
 

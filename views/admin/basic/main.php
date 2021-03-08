@@ -36,7 +36,7 @@
 		<!-- Default panel contents -->
 		<div class="panel-heading">최근포인트
 			<div class="view-all">
-				<a href="<?php echo admin_url('member/points'); ?>">More <i class="fa fa-angle-right"></i></a>
+				<a href="<?php echo admin_url('member/points/PointManage'); ?>">More <i class="fa fa-angle-right"></i></a>
 			</div>
 		</div>
 		<!-- Table -->

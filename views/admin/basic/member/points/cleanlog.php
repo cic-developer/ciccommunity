@@ -2,7 +2,7 @@
 	<div class="box-table">
 		<div class="box-table-header">
 			<ul class="nav nav-pills">
-				<li role="presentation"><a href="<?php echo admin_url($this->pagedir); ?>">포인트 목록</a></li>
+				<li role="presentation"><a href="<?php echo admin_url($this->pagedir)?>">명예포인트 관리</a></li>
 				<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/cleanlog'); ?>">포인트 로그 정리</a></li>
 			</ul>
 		</div>

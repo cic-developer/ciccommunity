@@ -1,3 +1,4 @@
+<?php $_pointType  = ($this->uri->segment(5,0) === 'cp' ?  'cp': 'vp')?>
 <div class="box">
 	<div class="box-table">
 		<?php
@@ -6,10 +7,12 @@
 		echo form_open(current_full_url(), $attributes);
 		?>
 			<div class="box-table-header">
+	
 				<ul class="nav nav-pills">
-					<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir); ?>">포인트 목록</a></li>
+					<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir)?>">명예포인트 관리</a></li>
 					<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/cleanlog'); ?>">포인트 로그 정리</a></li>
 				</ul>
+	
 				<?php
 				ob_start();
 				?>
@@ -47,10 +50,10 @@
 							<td><?php echo number_format(element('num', $result)); ?></td>
 							<td><a href="?sfield=point.mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('mem_userid', $result)); ?></a></td>
 							<td><?php echo element('display_name', $result); ?></td>
-							<td class="text-right"><?php echo number_format(element('poi_point', $result)); ?></td>
-							<td><?php echo display_datetime(element('poi_datetime', $result), 'full'); ?></td>
-							<td><?php echo html_escape(element('poi_content', $result)); ?></td>
-							<td class="text-right"><?php echo number_format(element('mem_point', $result)); ?></td>
+							<td class="text-right"><?php echo number_format(element($_pointType.'_point', $result)); ?></td>
+							<td><?php echo display_datetime(element($_pointType.'_datetime', $result), 'full'); ?></td>
+							<td><?php echo html_escape(element($_pointType.'_content', $result)); ?></td>
+							<td class="text-right"><?php echo number_format(element('mem_'.$_pointType, $result)); ?></td>
 							<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
 						</tr>
 					<?php

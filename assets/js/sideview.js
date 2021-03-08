@@ -133,7 +133,7 @@ if (typeof(SIDEVIEW_JS) === 'undefined') // 한번만 실행
 				this.insertTail('modify', '<a href="' + cb_admin_url + '/member/members/write/' + memid + '" target="_blank">회원정보변경</a>');
 			// 포인트내역
 			if (userid)
-				this.insertTail('point', '<a href="' + cb_admin_url + '/member/points?sfield=point.mem_id&skeyword=' + memid + '" target="_blank">포인트내역</a>');
+				this.insertTail('point', '<a href="' + cb_admin_url + '/member/points/PointManage?sfield=point.mem_id&skeyword=' + memid + '" target="_blank">포인트내역</a>');
 			if (userid)
 				this.insertTail('new', '<a href="' + cb_admin_url + '/board/post?sfield=mem_id&skeyword=' + memid + '" target="_blank">전체게시물</a>');
 			if (userid)
