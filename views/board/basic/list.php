@@ -4,6 +4,7 @@
 
 <div class="board">
 	<h3><?php echo html_escape(element('board_name', element('board', element('list', $view)))); ?></h3>
+<?php if(! element('board_extra_type',element('board', element('list', $view)))){ ?>
 	<div class="table-top">
 		<?php if ( ! element('access_list', element('board', element('list', $view))) && element('use_rss_feed', element('board', element('list', $view)))) { ?>
 			<a href="<?php echo rss_url(element('brd_key', element('board', element('list', $view)))); ?>" class="btn btn-default btn-sm" title="<?php echo html_escape(element('board_name', element('board', element('list', $view)))); ?> RSS 보기"><i class="fa fa-rss"></i></a>
@@ -99,7 +100,7 @@
 		//]]>
 		</script>
 	</div>
-
+<?php } ?>
 	<?php
 	if (element('use_category', element('board', element('list', $view))) && element('cat_display_style', element('board', element('list', $view))) === 'tab') {
 		$category = element('category', element('board', element('list', $view)));

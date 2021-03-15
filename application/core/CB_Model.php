@@ -96,7 +96,6 @@ class CB_Model extends CI_Model
 			$this->db->limit($limit, $offset);
 		}
 		$result = $this->db->get();
-
 		return $result;
 	}
 

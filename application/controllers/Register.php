@@ -755,7 +755,7 @@ class Register extends CB_Controller
 			$insertdata['mem_password'] = password_hash($this->input->post('mem_password'), PASSWORD_BCRYPT);
 			$insertdata['mem_nickname'] = $this->input->post('mem_nickname');
 			$metadata['meta_nickname_datetime'] = cdate('Y-m-d H:i:s');
-			$insertdata['mem_level'] = $mem_level;
+			$insertdata['mem_level'] = 0;// 시작 레벨은 무조건 0 $mem_level;
 
 			if (isset($form['mem_username']['use']) && $form['mem_username']['use']) {
 				$insertdata['mem_username'] = $this->input->post('mem_username', null, '');

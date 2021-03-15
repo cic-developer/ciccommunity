@@ -88,6 +88,16 @@ if (element('brd_id', element('data', $view))) {
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-sm-2 control-label">게시판 유형</label>
+				<div class="col-sm-8 form-inline">
+					<select name="board_extra_type" id="board_extra_type" class="form-control" >
+						<option value="0" selected>기본 게시판</option>
+						<option value="1" <?php echo element('board_extra_type', element('data', $view)) == 1 ? 'selected':''  ?>>포럼형 게시판</option>
+						<option value="2" <?php echo element('board_extra_type', element('data', $view)) == 2 ? 'selected':''  ?>>QnA형 게시판</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
 				<label class="col-sm-2 control-label">그룹명</label>
 				<div class="col-sm-8 form-inline">
 					<select name="bgr_id" id="bgr_id" class="form-control" >

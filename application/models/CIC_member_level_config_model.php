@@ -27,6 +27,21 @@ class CIC_member_level_config_model extends CB_Model
 		parent::__construct();
 	}
 
+	function get_by_pointSum($pointSum)
+	{
+		if($pointSum >= 0){
+			$this->db->where('mlc_target_point <=', $pointSum);
+			$this->db->where('mlc_enable', 1);
+			$this->db->order_by('mlc_target_point','DESC');
+		}else{
+			$this->db->where('mlc_target_point >=', $pointSum);
+			$this->db->where('mlc_enable', 1);
+			$this->db->order_by('mlc_target_point','ASC');
+		}
+
+		$result = $this->db->get('cic_member_level_config');
+		return element(0 ,$result);
+	}
 }
 
 ?>

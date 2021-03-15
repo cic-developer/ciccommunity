@@ -439,4 +439,45 @@ class Point extends CI_Controller
 
 		return true;
 	}
+
+	/**
+	 * 소유 포인트를 확인하여 현재 레벨과 일치하는지 확인후
+	 * 알맞은 레벨로 옮김
+	 */
+
+	public function setUserLevel($mem_id)
+	{
+		$this->CI->load->model(array('Member_level_history_model', 'CIC_member_level_config_model', 'Member_model', 'Point_model'));
+		$memberInfo = $this->CI->Member_model->get_by_memid($mem_id);
+		if(! ($memberInfo && element('mem_is_admin', $memberInfo)) ){
+			$pointSum = $this->CI->Point_model->get_point_sum($mem_id);
+			$_levelConfig = $this->CI->CIC_member_level_config_model->get_by_pointSum($pointSum);
+			if($_levelConfig)
+			{
+				$_mlclevel = element('mlc_level' , $_levelConfig);
+				$_memLevel = element('mem_level', $memberInfo);
+				if($_mlclevel != $_memLevel)
+				{
+					$this->CI->Member_model->update($mem_id, array('mem_level' => $_mlclevel));
+					$_checkHis = $this->Member_level_history_model->get_one('','', array('mlh_to' => $_mlclevel, 'mem_id' => $mem_id));
+					$levelhistoryinsert = array(
+						'mem_id' => $mem_id,
+						'mlh_from' => $_memLevel,
+						'mlh_to' => $_mlclevel,
+						'mlh_datetime' => cdate('Y-m-d H:i:s'),
+						'mlh_reason' => '명예포인트 변경으로 인한 레벨 변화',
+						'mlh_ip' => $this->CI->input->ip_address(),
+					);
+					$this->Member_level_history_model->insert($levelhistoryinsert);
+
+					if($_mlclevel > $_memLevel && !$_checkHis){
+						return true;
+					}else{
+						return false;
+					}
+				}
+			}
+		}
+		return false;
+	}
 }

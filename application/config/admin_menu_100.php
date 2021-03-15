@@ -11,16 +11,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 
 
-$config['admin_page_menu']['page'] =
+$config['admin_page_menu']['cicconfigs'] =
 	array(
-		'__config'					=> array('페이지설정', 'fa-laptop'),
+		'__config'					=> array('CIC 설정', 'fa-gears'), // 1차 메뉴, 순서대로 (메뉴명, 아이콘클래스(font-awesome))
 		'menu'						=> array(
-			// 'pagemenu'				=> array('메뉴관리', ''),
-			'document'				=> array('일반페이지', ''),
-			'popup'					=> array('팝업관리', ''),
-			// 'faqgroup'				=> array('FAQ관리', ''),
-			// 'faq'					=> array('FAQ 내용', '', 'hide'),
-			// 'banner'				=> array('배너관리', ''),
-			// 'bannerclick'			=> array('배너클릭로그', ''),
+			'Point/VPconfig'		=> array('VP 설정', ''), // 2차 메뉴, 순서대로 (메뉴명, a태그에 속성 부여)
+			'Point/CPconfig'		=> array('CP 설정', ''), // 2차 메뉴, 순서대로 (메뉴명, a태그에 속성 부여)
+			'Point/config'			=> array('명예포인트 설정', ''),
+			'banner'				=> array('배너 설정', ''),
 		),
 	);

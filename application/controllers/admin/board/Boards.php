@@ -291,6 +291,15 @@ class Boards extends CB_Controller
 				'label' => '검색여부',
 				'rules' => 'trim|numeric',
 			),
+			/**
+			 * 2021 03 15 추가
+			 * CIC 포럼 및 QnA등을 위한 설정
+			*/
+			array(
+				'field' => 'board_extra_type',
+				'label' => '게시판설정',
+				'rules' => 'trim'
+			),
 		);
 		if ($this->input->post($primary_key)) {
 			$config[] = array(
@@ -345,7 +354,7 @@ class Boards extends CB_Controller
 
 			$array = array('board_layout', 'board_mobile_layout', 'board_sidebar',
 				'board_mobile_sidebar', 'board_skin', 'board_mobile_skin', 'header_content',
-				'footer_content', 'mobile_header_content', 'mobile_footer_content', 'board_use_captcha');
+				'footer_content', 'mobile_header_content', 'mobile_footer_content', 'board_use_captcha', 'board_extra_type');
 
 			$metadata = array();
 			$groupdata = array();

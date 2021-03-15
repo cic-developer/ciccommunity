@@ -236,6 +236,8 @@ class Point extends CB_Controller
 			}
 			$this->Config_model->meta_update('like_min_vp', $_postData['like_min_vp']);
 			$this->Config_model->meta_update('like_max_vp', $_postData['like_max_vp']);
+			$this->Config_model->meta_update('like_comment_min_vp', $_postData['like_comment_min_vp']);
+			$this->Config_model->meta_update('like_comment_max_vp', $_postData['like_comment_max_vp']);
 			if(element('defualt_using_point',$_postData)){
 				$this->Config_model->meta_update('defualt_using_point', $_postData['defualt_using_point']);
 			}
@@ -250,7 +252,7 @@ class Point extends CB_Controller
 		$view['view']['data'] = $getdata;
 		$view['view']['like_min_vp'] = $this->Config_model->get_one('','',"cfg_key = 'like_min_vp'");
 		$view['view']['like_max_vp'] = $this->Config_model->get_one('','',"cfg_key = 'like_max_vp'");
-		$view['view']['like_comment_min_vp'] = $this->Config_model->get_one('','',"cfg_key = 'like_comment_max_vp'");
+		$view['view']['like_comment_min_vp'] = $this->Config_model->get_one('','',"cfg_key = 'like_comment_min_vp'");
 		$view['view']['like_comment_max_vp'] = $this->Config_model->get_one('','',"cfg_key = 'like_comment_max_vp'");
 		$view['view']['defualt_using_point'] = $this->Config_model->get_one('','',"cfg_key = 'defualt_using_point'"); 
 
@@ -349,6 +351,8 @@ class Point extends CB_Controller
 			}
 			$this->Config_model->meta_update('like_min_cp', $_postData['like_min_cp']);
 			$this->Config_model->meta_update('like_max_cp', $_postData['like_max_cp']);
+			$this->Config_model->meta_update('like_comment_min_cp', $_postData['like_comment_min_cp']);
+			$this->Config_model->meta_update('like_comment_max_cp', $_postData['like_comment_max_cp']);
 			if(element('defualt_using_point',$_postData)){
 				$this->Config_model->meta_update('defualt_using_point', $_postData['defualt_using_point']);
 			}

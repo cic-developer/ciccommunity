@@ -187,7 +187,12 @@ class Level extends CB_Controller
 
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-            $view['view']['data'] = $this->CIC_member_level_config_model->get_one($level_id);
+			if($level_id){
+				$view['view']['data'] = $this->CIC_member_level_config_model->get_one($level_id);
+			}else{
+				$view['view']['data'] = array();
+			}
+			
 			/**
 			 * 어드민 레이아웃을 정의합니다
 			 */
@@ -257,7 +262,6 @@ class Level extends CB_Controller
 					$updatephoto = cdate('Y') . '/' . cdate('m') . '/' . element('file_name', $img);
 				} else {
 					$file_error = $this->upload->display_errors();
-                    print_r($file_error); exit;
 				}
             }
 
@@ -266,10 +270,13 @@ class Level extends CB_Controller
             $Arr = array(
                 'mlc_title' => element('mlc_title', $postData),
                 'mlc_level' => element('mlc_level', $postData),
-                'mlc_attach'=> $updatephoto ? $updatephoto : '',
                 'mlc_target_point' => element('mlc_target_point', $postData),
                 'mlc_enable' => element('mlc_enable', $postData)
-            );            
+            );        
+			
+			if($updatephoto){
+				$Arr['mlc_attach'] = $updatephoto;
+			}
 
             if($mlc_id = element('mlc_id', $postData)){
                 $this->CIC_member_level_config_model->update($mlc_id, $Arr);

@@ -157,25 +157,26 @@ if (typeof(COMMON_JS) === 'undefined') {
 		let _usePoint = prompt("사용할 포인트 수량을 입력해주세요")*1;
 
 		href = cb_url + '/postact/post_like/' + post_id + '/' + like_type;
-
-		$.ajax({
-			url : href,
-			type : 'get',
-			dataType : 'json',
-			data : {
-				usePoint : _usePoint
-			},
-			success : function(data) {
-				if (data.error) {
-					alert(data.error);
-					return false;
-				} else if (data.success) {
-					//alert(data.success);
-					$('.' + classname).text(number_format(String(data.count)));
-					$('#btn-' + classname).effect('highlight', {color : '#f37f60'}, 300);
+		if(_usePoint){
+			$.ajax({
+				url : href,
+				type : 'get',
+				dataType : 'json',
+				data : {
+					usePoint : _usePoint
+				},
+				success : function(data) {
+					if (data.error) {
+						alert(data.error);
+						return false;
+					} else if (data.success) {
+						//alert(data.success);
+						$('.' + classname).text(number_format(String(data.count)));
+						$('#btn-' + classname).effect('highlight', {color : '#f37f60'}, 300);
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 
 	function comment_like(cmt_id, like_type, classname) {
@@ -190,24 +191,29 @@ if (typeof(COMMON_JS) === 'undefined') {
 
 		href = cb_url + '/postact/comment_like/' + cmt_id + '/' + like_type;
 
-		$.ajax({
-			url : href,
-			type : 'get',
-			dataType : 'json',
-			data : {
-				usePoint : _usePoint
-			},
-			success : function(data) {
-				if (data.error) {
-					alert(data.error);
-					return false;
-				} else if (data.success) {
-					//alert(data.success);
-					$('.' + classname).text(number_format(String(data.count)));
-					$('#btn-' + classname).effect('highlight', {color : '#f37f60'}, 500);
+
+		if(_usePoint){
+			$.ajax({
+				url : href,
+				type : 'get',
+				dataType : 'json',
+				data : {
+					usePoint : _usePoint
+				},
+				success : function(data) {
+					if (data.error) {
+						alert(data.error);
+						// alert(data);
+						// console.log(data);
+						return false;
+					} else if (data.success) {
+						//alert(data.success);
+						$('.' + classname).text(number_format(String(data.count)));
+						$('#btn-' + classname).effect('highlight', {color : '#f37f60'}, 500);
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 
 	function post_scrap(post_id, classname) {

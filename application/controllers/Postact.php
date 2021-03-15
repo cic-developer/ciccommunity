@@ -693,6 +693,10 @@ class Postact extends CB_Controller
 		switch(element('cfg_value',$_defualt_using_point)){
 			case 'vp' : //vp가 기본 포인트일 경우
 				$_pointSUM = $this->CIC_vp_model->get_point_sum($mem_id);
+				if($like_max_vp <= 0){
+					$result = array('error' => 'VP 사용 설정이 올바르지 않습니다.\n댓글 추천의 VP 사용 한도를 설정해주세요');
+					exit(json_encode($result));	
+				}
 				if($like_min_vp > $usedPoint || $like_max_vp < $usedPoint){
 					$result = array('error' => $like_min_vp.' 이상, '.$like_max_vp.' 이하의 자연수를 입력해주세요');
 					exit(json_encode($result));
@@ -706,7 +710,7 @@ class Postact extends CB_Controller
 
 				$this->point->insert_vp(
 					$mem_id,
-					$_pointSUM * -1,
+					$usedPoint * -1,
 					element('board_name', $board) . ' ' . $post_id . '포인트사용',
 					'point_use',
 					$post_id,
@@ -717,6 +721,10 @@ class Postact extends CB_Controller
 
 			case 'cp' :
 				$_pointSUM = $this->CIC_cp_model->get_point_sum($mem_id);
+				if($like_max_cp <= 0){
+					$result = array('error' => 'CP 사용 설정이 올바르지 않습니다.\n댓글 추천의 CP 사용 한도를 설정해주세요');
+					exit(json_encode($result));	
+				}
 				if($like_min_cp > $usedPoint || $like_max_cp < $usedPoint){
 					$result = array('error' => $like_min_cp.' 이상, '.$like_max_cp.' 이하의 자연수를 입력해주세요');
 					exit(json_encode($result));
@@ -744,22 +752,40 @@ class Postact extends CB_Controller
 		}
 
 		if ($like_type === 1) {
-			$_writerRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 6 AND vpc_enable = 1");
-			$_userRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 8 AND vpc_enable = 1");
-			$_writerRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 6 AND cpc_enable = 1");
-			$_userRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 8 AND cpc_enable = 1");
+			if(element('brd_id', $board) == 1){
+				//자유 게시판인 경우
+				$_config_w_id = 6;
+				$_config_u_id = 8;
+			}else{
+				//CIC Writer인 경우
+				$_config_w_id = 14;
+				$_config_u_id = 16;
+			}
+			$_writerRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = ".$_config_w_id." AND vpc_enable = 1");
+			$_userRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = ".$_config_u_id." AND vpc_enable = 1");
+			$_writerRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = ".$_config_w_id." AND cpc_enable = 1");
+			$_userRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = ".$_config_u_id." AND cpc_enable = 1");
 			$_writerRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 1 AND pc_enable = 1');
 			$_userRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 3 AND pc_enable = 1');
-			$_text_ko = ' 추천받음';
+			$_text_ko = ' 추천';
 			$_text_en = ' liked';
 		}else if($like_type === 2){
-			$_writerRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 7 AND vpc_enable = 1");
-			$_userRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 9 AND vpc_enable = 1");
-			$_writerRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 7 AND cpc_enable = 1");
-			$_userRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 9 AND cpc_enable = 1");
+			if(element('brd_id', $board) == 1){
+				//자유 게시판인 경우
+				$_config_w_id = 7;
+				$_config_u_id = 9;
+			}else{
+				//CIC Writer인 경우
+				$_config_w_id = 15;
+				$_config_u_id = 17;
+			}
+			$_writerRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = ".$_config_w_id." AND vpc_enable = 1");
+			$_userRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = ".$_config_u_id." AND vpc_enable = 1");
+			$_writerRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = ".$_config_w_id." AND cpc_enable = 1");
+			$_userRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = ".$_config_u_id." AND cpc_enable = 1");
 			$_writerRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 2 AND pc_enable = 1');
 			$_userRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 4 AND pc_enable = 1');
-			$_text_ko = ' 비추천받음';
+			$_text_ko = ' 비추천';
 			$_text_en = ' disliked';
 		}
 
@@ -769,9 +795,9 @@ class Postact extends CB_Controller
 				abs(element('mem_id', $post)),
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $post_id . $_text_ko,
-				$_text_en,
+				$_text_en.' receive',
 				$post_id,
-				$_text_ko
+				$_text_ko.' 받음'
 			);
 		}
 
@@ -781,9 +807,9 @@ class Postact extends CB_Controller
 				$mem_id,
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $post_id . $_text_ko,
-				$_text_en,
+				$_text_en.' receive',
 				$post_id,
-				$_text_ko
+				$_text_ko.' 받음'
 			);
 		}
 		
@@ -793,9 +819,9 @@ class Postact extends CB_Controller
 				abs(element('mem_id', $post)),
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $post_id . $_text_ko,
-				$_text_en,
+				$_text_en.' receive',
 				$post_id,
-				$_text_ko
+				$_text_ko.' 받음'
 			);
 		}
 		
@@ -805,9 +831,9 @@ class Postact extends CB_Controller
 				$mem_id,
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $post_id . $_text_ko,
-				$_text_en,
+				$_text_en.' receive',
 				$post_id,
-				$_text_ko
+				$_text_ko.' 받음'
 			);
 		}
 
@@ -818,9 +844,9 @@ class Postact extends CB_Controller
 				abs(element('mem_id', $post)),
 				($usedPoint * $ratio),
 				element('board_name', $board) . ' ' . $post_id . $_text_ko,
-				$_text_en,
+				$_text_en.' receive',
 				$post_id,
-				$_text_ko
+				$_text_ko.' 받음'
 			);
 		}
 
@@ -830,12 +856,58 @@ class Postact extends CB_Controller
 				$mem_id,
 				($usedPoint * $ratio),
 				element('board_name', $board) . ' ' . $post_id . $_text_ko,
-				$_text_en,
+				$_text_en.' receive',
 				$post_id,
-				$_text_ko
+				$_text_ko.' 받음'
 			);
 		}
 
+		$_writer_levelup = $this->point->setUserLevel(abs(element('mem_id', $post)));
+		$_user_levelup = $this->point->setUserLevel($mem_id);
+		$_vp_levelConf = $this->CIC_vp_config_model->get_one('','',"vpc_id = 2 AND vpc_enable = 1");
+		$_cp_levelConf = $this->CIC_cp_config_model->get_one('','',"cpc_id = 2 AND cpc_enable = 1");
+
+		if($_writer_levelup)
+		{
+			$this->point->insert_vp(
+				abs(element('mem_id', $post)),
+				element('vpc_value' ,$_vp_levelConf),
+				'Level UP 보상 VP 지급',
+				'Level Up',
+				$post_id,
+				'레벨 업'
+			);
+
+			$this->point->insert_cp(
+				abs(element('mem_id', $post)),
+				element('cpc_value' ,$_cp_levelConf),
+				'Level UP 보상 CP 지급',
+				'Level Up',
+				$post_id,
+				'레벨 업'
+			);
+		}
+
+		if($_user_levelup)
+		{
+			$this->point->insert_vp(
+				$mem_id,
+				element('vpc_value' ,$_vp_levelConf),
+				'Level UP 보상 VP 지급',
+				'Level Up',
+				$post_id,
+				'레벨 업'
+			);
+
+			$this->point->insert_cp(
+				$mem_id,
+				element('cpc_value' ,$_cp_levelConf),
+				'Level UP 보상 CP 지급',
+				'Level Up',
+				$post_id,
+				'레벨 업'
+			);
+		}
 
 		$insertdata = array(
 			'target_id' => $post_id,
@@ -957,7 +1029,7 @@ class Postact extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		$usedPoint = $this->input->get('usePoint');
+		$usedPoint = (int) $this->input->get('usePoint');
 
 		if(!is_int($usedPoint) && $usedPoint < 0){
 			$result = array('error' => '숫자 이외의 값이 입력되었습니다.');
@@ -978,17 +1050,6 @@ class Postact extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		$insertdata = array(
-			'target_id' => $cmt_id,
-			'target_type' => $target_type,
-			'brd_id' => element('brd_id', $post),
-			'mem_id' => $mem_id,
-			'target_mem_id' => abs(element('mem_id', $comment)),
-			'lik_type' => $like_type,
-			'lik_datetime' => cdate('Y-m-d H:i:s'),
-			'lik_ip' => $this->input->ip_address(),
-		);
-		$this->Like_model->insert($insertdata);
 		if ($like_type === 1) {
 			$field = 'cmt_like';
 		}
@@ -1058,6 +1119,10 @@ class Postact extends CB_Controller
 		switch(element('cfg_value',$_defualt_using_point)){
 			case 'vp' : //vp가 기본 포인트일 경우
 				$_pointSUM = $this->CIC_vp_model->get_point_sum($mem_id);
+				if($like_max_vp <= 0){
+					$result = array('error' => 'VP 사용 설정이 올바르지 않습니다.\n댓글 추천의 VP 사용 한도를 설정해주세요');
+					exit(json_encode($result));	
+				}
 				if($like_min_vp > $usedPoint || $like_max_vp < $usedPoint){
 					$result = array('error' => $like_min_vp.' 이상, '.$like_max_vp.' 이하의 자연수를 입력해주세요');
 					exit(json_encode($result));
@@ -1068,10 +1133,10 @@ class Postact extends CB_Controller
 					$result = array('error' => '보유 포인트가 부족합니다.');
 					exit(json_encode($result));
 				}
-
+				 
 				$this->point->insert_vp(
 					$mem_id,
-					$_pointSUM * -1,
+					$usedPoint * -1,
 					element('board_name', $board) . ' ' . $cmt_id . '포인트사용',
 					'point_use',
 					$cmt_id,
@@ -1082,6 +1147,10 @@ class Postact extends CB_Controller
 
 			case 'cp' :
 				$_pointSUM = $this->CIC_cp_model->get_point_sum($mem_id);
+				if($like_max_cp <= 0){
+					$result = array('error' => 'CP 사용 설정이 올바르지 않습니다.\n댓글 추천의 CP 사용 한도를 설정해주세요');
+					exit(json_encode($result));	
+				}
 				if($like_min_cp > $usedPoint || $like_max_cp < $usedPoint){
 					$result = array('error' => $like_min_cp.' 이상, '.$like_max_cp.' 이하의 자연수를 입력해주세요');
 					exit(json_encode($result));
@@ -1092,6 +1161,9 @@ class Postact extends CB_Controller
 					$result = array('error' => '보유 포인트가 부족합니다.');
 					exit(json_encode($result));
 				}
+
+				$result = array('error' => $usedPoint * -1);
+				exit(json_encode($result));
 
 				$this->point->insert_cp(
 					$mem_id,
@@ -1110,22 +1182,40 @@ class Postact extends CB_Controller
 
 		
 		if ($like_type === 1) {
-			$_writerRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 10 AND vpc_enable = 1");
-			$_userRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 12 AND vpc_enable = 1");
-			$_writerRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 10 AND cpc_enable = 1");
-			$_userRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 12 AND cpc_enable = 1");
+			if(element('brd_id', $board) == 1){
+				//자유 게시판인 경우
+				$_config_w_id = 10;
+				$_config_u_id = 12;
+			}else{
+				//CIC Writer인 경우
+				$_config_w_id = 18;
+				$_config_u_id = 20;
+			}
+			$_writerRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = ".$_config_w_id." AND vpc_enable = 1");
+			$_userRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = ".$_config_u_id." AND vpc_enable = 1");
+			$_writerRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = ".$_config_w_id." AND cpc_enable = 1");
+			$_userRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = ".$_config_u_id." AND cpc_enable = 1");
 			$_writerRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 7 AND pc_enable = 1');
 			$_userRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 5 AND pc_enable = 1');
-			$_text_ko = ' 추천받음';
+			$_text_ko = ' 추천';
 			$_text_en = ' liked';
 		}else if($like_type === 2){
-			$_writerRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 11 AND vpc_enable = 1");
-			$_userRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = 13 AND vpc_enable = 1");
-			$_writerRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 11 AND cpc_enable = 1");
-			$_userRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = 13 AND cpc_enable = 1");
+			if(element('brd_id', $board) == 1){
+				//자유 게시판인 경우
+				$_config_w_id = 11;
+				$_config_u_id = 13;
+			}else{
+				//CIC Writer인 경우
+				$_config_w_id = 19;
+				$_config_u_id = 21;
+			}
+			$_writerRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = ".$_config_w_id." AND vpc_enable = 1");
+			$_userRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = ".$_config_u_id." AND vpc_enable = 1");
+			$_writerRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = ".$_config_w_id." AND cpc_enable = 1");
+			$_userRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = ".$_config_u_id." AND cpc_enable = 1");
 			$_writerRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 8 AND pc_enable = 1');
 			$_userRatio_poi = $this->CIC_point_config_model->get_one('','','pc_id = 6 AND pc_enable = 1');
-			$_text_ko = ' 비추천받음';
+			$_text_ko = ' 비추천';
 			$_text_en = ' disliked';
 		}
 
@@ -1135,9 +1225,9 @@ class Postact extends CB_Controller
 				abs(element('mem_id', $post)),
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
-				$_text_en,
+				$_text_en.' receive',
 				$cmt_id,
-				$_text_ko
+				$_text_ko.' 받음'
 			);
 		}
 
@@ -1147,9 +1237,9 @@ class Postact extends CB_Controller
 				$mem_id,
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
-				$_text_en,
+				$_text_en.' receive',
 				$cmt_id,
-				$_text_ko
+				$_text_ko.' 받음'
 			);
 		}
 		
@@ -1159,9 +1249,9 @@ class Postact extends CB_Controller
 				abs(element('mem_id', $post)),
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
-				$_text_en,
+				$_text_en.' receive',
 				$cmt_id,
-				$_text_ko
+				$_text_ko.' 받음'
 			);
 		}
 		
@@ -1171,37 +1261,96 @@ class Postact extends CB_Controller
 				$mem_id,
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
-				$_text_en,
+				$_text_en.' receive',
 				$cmt_id,
-				$_text_ko
+				$_text_ko.' 받음'
 			);
 		}
 
 
 		if($_writerRatio_poi){
-			$ratio = element('cpc_value', $_writerRatio_poi);
+			$ratio = element('cpc_value', $_writerRatio_poi)/100;
 			$this->point->insert_cp(
 				abs(element('mem_id', $post)),
 				($usedPoint * $ratio),
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
-				$_text_en,
+				$_text_en.' receive',
 				$cmt_id,
-				$_text_ko
+				$_text_ko.' 받음'
 			);
 		}
 
 		if($_userRatio_poi){
-			$ratio = element('cpc_value', $_writerRatio_poi);
+			$ratio = element('cpc_value', $_writerRatio_poi)/100;
 			$this->point->insert_point(
 				$mem_id,
 				($usedPoint * $ratio),
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
-				$_text_en,
+				$_text_en.' receive',
 				$cmt_id,
-				$_text_ko
+				$_text_ko.' 받음'
 			);
 		}
 
+		$_writer_levelup = $this->point->setUserLevel(abs(element('mem_id', $post)));
+		$_user_levelup = $this->point->setUserLevel($mem_id);
+		$_vp_levelConf = $this->CIC_vp_config_model->get_one('','',"vpc_id = 2 AND vpc_enable = 1");
+		$_cp_levelConf = $this->CIC_cp_config_model->get_one('','',"cpc_id = 2 AND cpc_enable = 1");
+
+		if($_writer_levelup)
+		{
+			$this->point->insert_vp(
+				abs(element('mem_id', $post)),
+				element('vpc_value' ,$_vp_levelConf),
+				'Level UP 보상 VP 지급',
+				'Level Up',
+				$cmt_id,
+				'레벨 업'
+			);
+
+			$this->point->insert_cp(
+				abs(element('mem_id', $post)),
+				element('cpc_value' ,$_cp_levelConf),
+				'Level UP 보상 CP 지급',
+				'Level Up',
+				$cmt_id,
+				'레벨 업'
+			);
+		}
+
+		if($_user_levelup)
+		{
+			$this->point->insert_vp(
+				$mem_id,
+				element('vpc_value' ,$_vp_levelConf),
+				'Level UP 보상 VP 지급',
+				'Level Up',
+				$cmt_id,
+				'레벨 업'
+			);
+
+			$this->point->insert_cp(
+				$mem_id,
+				element('cpc_value' ,$_cp_levelConf),
+				'Level UP 보상 CP 지급',
+				'Level Up',
+				$cmt_id,
+				'레벨 업'
+			);
+		}
+
+		$insertdata = array(
+			'target_id' => $cmt_id,
+			'target_type' => $target_type,
+			'brd_id' => element('brd_id', $post),
+			'mem_id' => $mem_id,
+			'target_mem_id' => abs(element('mem_id', $comment)),
+			'lik_type' => $like_type,
+			'lik_datetime' => cdate('Y-m-d H:i:s'),
+			'lik_ip' => $this->input->ip_address(),
+		);
+		$this->Like_model->insert($insertdata);
+		
 		$where = array(
 			'target_id' => $cmt_id,
 			'target_type' => $target_type,
@@ -1221,7 +1370,6 @@ class Postact extends CB_Controller
 
 		$result = array('success' => $success, 'count' => $count);
 		exit(json_encode($result));
-
 	}
 
 

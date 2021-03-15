@@ -1,9 +1,9 @@
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css'); ?>
 
 <?php echo element('headercontent', element('board', element('list', $view))); ?>
-
 <div class="board">
 	<h3><?php echo html_escape(element('board_name', element('board', element('list', $view)))); ?></h3>
+<?php if(! element('board_extra_type',element('board', element('list', $view)))){ ?>
 	<div class="row mb20">
 		<div class="col-xs-6 form-inline">
 			<?php if ( ! element('access_list', element('board', element('list', $view))) && element('use_rss_feed', element('board', element('list', $view)))) { ?>
@@ -123,7 +123,7 @@
 	<?php
 	}
 	?>
-
+<?php } ?>
 	<?php
 	$attributes = array('name' => 'fboardlist', 'id' => 'fboardlist');
 	echo form_open('', $attributes);
