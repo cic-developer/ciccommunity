@@ -50,10 +50,10 @@
 							<td><?php echo number_format(element('num', $result)); ?></td>
 							<td><a href="?sfield=point.mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('mem_userid', $result)); ?></a></td>
 							<td><?php echo element('display_name', $result); ?></td>
-							<td class="text-right"><?php echo number_format(element($_pointType.'_point', $result)); ?></td>
-							<td><?php echo display_datetime(element($_pointType.'_datetime', $result), 'full'); ?></td>
-							<td><?php echo html_escape(element($_pointType.'_content', $result)); ?></td>
-							<td class="text-right"><?php echo number_format(element('mem_'.$_pointType, $result)); ?></td>
+							<td class="text-right"><?php echo number_format(element('poi_point', $result)); ?></td>
+							<td><?php echo display_datetime(element('poi_datetime', $result), 'full'); ?></td>
+							<td><?php echo html_escape(element('poi_content', $result)); ?></td>
+							<td class="text-right"><?php echo number_format(element('mem_point', $result)); ?></td>
 							<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
 						</tr>
 					<?php

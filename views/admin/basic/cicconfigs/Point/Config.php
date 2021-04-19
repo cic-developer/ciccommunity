@@ -66,4 +66,5 @@ function check_form_changed() {
 	return true;
 }
 //]]>
+$("#POIconfig").parent('li').addClass('active');
 </script>

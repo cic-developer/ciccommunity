@@ -29,6 +29,7 @@ class Point extends CI_Controller
 	 */
 	public function insert_point($mem_id = 0, $point = 0, $content = '', $poi_type = '', $poi_related_id = '', $poi_action = '')
 	{
+		// echo $mem_id. " / ".$point. " / ". $content. " / ". $poi_type. " / ".$poi_related_id. " / ".$poi_action;
 		// 포인트 사용을 하지 않는다면 return
 		if ( ! $this->CI->cbconfig->item('use_point')) {
 			return false;

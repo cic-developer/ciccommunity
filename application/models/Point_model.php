@@ -49,8 +49,8 @@ class Point_model extends CB_Model
 		$this->db->where(array('mem_id' => $mem_id));
 		$result = $this->db->get('point');
 		$result = $result->row_array();
-
-		return $result['poi_point'];
+		if(element('poi_point', $result, 0) === NULL) return 0;
+		return element('poi_point', $result, 0);
 	}
 
 

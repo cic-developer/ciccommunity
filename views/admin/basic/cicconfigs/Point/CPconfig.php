@@ -106,4 +106,6 @@ function check_form_changed() {
 	return true;
 }
 //]]>
+
+$("#CPconfig").parent('li').addClass('active');
 </script>

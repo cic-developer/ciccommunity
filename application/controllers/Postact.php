@@ -547,6 +547,8 @@ class Postact extends CB_Controller
 	 */
 	public function post_like($post_id = 0, $like_type = 0)
 	{
+		//db 트렌젝션 시작
+		$this->db->trans_start();
 
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_postact_post_like';
@@ -643,45 +645,6 @@ class Postact extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		// if (element('use_point', $board)) {
-		// 	if ($like_type === 1) {
-		// 		$this->point->insert_point(
-		// 			$mem_id,
-		// 			element('point_post_like', $board),
-		// 			element('board_name', $board) . ' ' . $post_id . ' 추천',
-		// 			'like',
-		// 			$post_id,
-		// 			'추천'
-		// 		);
-		// 		$this->point->insert_point(
-		// 			abs(element('mem_id', $post)),
-		// 			element('point_post_liked', $board),
-		// 			element('board_name', $board) . ' ' . $post_id . ' 추천받음',
-		// 			'liked',
-		// 			$post_id,
-		// 			'추천받음'
-		// 		);
-		// 	}
-		// 	if ($like_type === 2) {
-		// 		$this->point->insert_point(
-		// 			$mem_id,
-		// 			element('point_post_dislike', $board),
-		// 			element('board_name', $board) . ' ' . $post_id . ' 추천',
-		// 			'like',
-		// 			$post_id,
-		// 			'추천'
-		// 		);
-		// 		$this->point->insert_point(
-		// 			abs(element('mem_id', $post)),
-		// 			element('point_post_disliked', $board),
-		// 			element('board_name', $board) . ' ' . $post_id . ' 비추천받음',
-		// 			'disliked',
-		// 			$post_id,
-		// 			'비추천받음'
-		// 		);
-		// 	}
-		// }
-
 		//사용되어질 포인트 종류
 		$_defualt_using_point = $this->Config_model->get_one('','',"cfg_key = 'defualt_using_point'");
 		$like_min_vp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_min_vp'"));
@@ -711,7 +674,7 @@ class Postact extends CB_Controller
 				$this->point->insert_vp(
 					$mem_id,
 					$usedPoint * -1,
-					element('board_name', $board) . ' ' . $post_id . '포인트사용',
+					element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
 					'point_use',
 					$post_id,
 					'포인트 사용'
@@ -739,10 +702,10 @@ class Postact extends CB_Controller
 				$this->point->insert_cp(
 					$mem_id,
 					$usedPoint * -1,
-					element('board_name', $board) . ' ' . $post_id . $_text_ko,
-					$_text_en,
+					element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
+					'point_use',
 					$post_id,
-					$_text_ko
+					'포인트 사용'
 				);
 			break;
 
@@ -794,8 +757,8 @@ class Postact extends CB_Controller
 			$this->point->insert_vp(
 				abs(element('mem_id', $post)),
 				($usedPoint * $ratio)/100,
-				element('board_name', $board) . ' ' . $post_id . $_text_ko,
-				$_text_en.' receive',
+				element('board_name', $board) . ' ' . $post_id . $_text_ko. '받음',
+				$_text_en.' received',
 				$post_id,
 				$_text_ko.' 받음'
 			);
@@ -807,9 +770,9 @@ class Postact extends CB_Controller
 				$mem_id,
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $post_id . $_text_ko,
-				$_text_en.' receive',
+				$_text_en,
 				$post_id,
-				$_text_ko.' 받음'
+				$_text_ko.' 함'
 			);
 		}
 		
@@ -818,8 +781,8 @@ class Postact extends CB_Controller
 			$this->point->insert_cp(
 				abs(element('mem_id', $post)),
 				($usedPoint * $ratio)/100,
-				element('board_name', $board) . ' ' . $post_id . $_text_ko,
-				$_text_en.' receive',
+				element('board_name', $board) . ' ' . $post_id . $_text_ko. '받음',
+				$_text_en.' received',
 				$post_id,
 				$_text_ko.' 받음'
 			);
@@ -831,34 +794,34 @@ class Postact extends CB_Controller
 				$mem_id,
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $post_id . $_text_ko,
-				$_text_en.' receive',
+				$_text_en,
 				$post_id,
-				$_text_ko.' 받음'
+				$_text_ko.' 함'
 			);
 		}
 
 
 		if($_writerRatio_poi){
-			$ratio = element('cpc_value', $_writerRatio_poi);
-			$this->point->insert_cp(
+			$ratio = element('pc_value', $_writerRatio_poi);
+			$this->point->insert_point(
 				abs(element('mem_id', $post)),
-				($usedPoint * $ratio),
-				element('board_name', $board) . ' ' . $post_id . $_text_ko,
-				$_text_en.' receive',
+				($usedPoint * $ratio) / 100,
+				element('board_name', $board) . ' ' . $post_id . $_text_ko. '받음',
+				$_text_en.' received',
 				$post_id,
 				$_text_ko.' 받음'
 			);
 		}
 
 		if($_userRatio_poi){
-			$ratio = element('cpc_value', $_writerRatio_poi);
+			$ratio = element('pc_value', $_writerRatio_poi);
 			$this->point->insert_point(
 				$mem_id,
-				($usedPoint * $ratio),
+				($usedPoint * $ratio) / 100,
 				element('board_name', $board) . ' ' . $post_id . $_text_ko,
-				$_text_en.' receive',
+				$_text_en,
 				$post_id,
-				$_text_ko.' 받음'
+				$_text_ko.' 함'
 			);
 		}
 
@@ -931,13 +894,20 @@ class Postact extends CB_Controller
 
 		if ($like_type === 1) {
 			$field = 'post_like';
+			$postfield = 'post_like_point';
 		}
 		elseif ($like_type === 2) {
 			$field = 'post_dislike';
+			$postfield = 'post_dislike_point';
 		}
+
+		$_postPoint = element($postfield, $post);
+
+		$_postPoint += $usedPoint;
 
 		$updata = array(
 			$field => $count,
+			$postfield => $_postPoint
 		);
 		$this->Post_model->update($post_id, $updata);
 
@@ -947,7 +917,10 @@ class Postact extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('after', $eventname);
 
-		$result = array('success' => $success, 'count' => $count);
+		$result = array('success' => $success, 'count' => $count, 'point' => $_postPoint);
+
+		//db트렌젝션 끝
+		$this->db->trans_complete();
 		exit(json_encode($result));
 
 	}
@@ -958,7 +931,7 @@ class Postact extends CB_Controller
 	 */
 	public function comment_like($cmt_id = 0, $like_type = 0)
 	{
-
+		$this->db->trans_start();
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_postact_comment_like';
 		$this->load->event($eventname);
@@ -1049,51 +1022,6 @@ class Postact extends CB_Controller
 			$result = array('error' => '이미 이 글을 ' . $status . '하셨습니다');
 			exit(json_encode($result));
 		}
-
-		if ($like_type === 1) {
-			$field = 'cmt_like';
-		}
-		if ($like_type === 2) {
-			$field = 'cmt_dislike';
-		}
-		// if (element('use_point', $board)) {
-		// 	if ($like_type === 1) {
-		// 		$this->point->insert_point(
-		// 			$mem_id,
-		// 			element('point_comment_like', $board),
-		// 			element('board_name', $board) . ' ' . $cmt_id . ' 추천',
-		// 			'comment_like',
-		// 			$cmt_id,
-		// 			'추천'
-		// 		);
-		// 		$this->point->insert_point(
-		// 			abs(element('mem_id', $comment)),
-		// 			element('point_comment_liked', $board),
-		// 			element('board_name', $board) . ' ' . $cmt_id . ' 추천받음',
-		// 			'comment_liked',
-		// 			$cmt_id,
-		// 			'추천받음'
-		// 		);
-		// 	}
-		// 	if ($like_type === 2) {
-		// 		$this->point->insert_point(
-		// 			$mem_id,
-		// 			element('point_comment_dislike', $board),
-		// 			element('board_name', $board) . ' ' . $cmt_id . ' 추천',
-		// 			'comment_like',
-		// 			$cmt_id,
-		// 			'추천'
-		// 		);
-		// 		$this->point->insert_point(
-		// 			abs(element('mem_id', $comment)),
-		// 			element('point_comment_disliked', $board),
-		// 			element('board_name', $board) . ' ' . $cmt_id . ' 비추천받음',
-		// 			'disliked',
-		// 			$cmt_id,
-		// 			'비추천받음'
-		// 		);
-		// 	}
-		// }
 		
 		//Comment에 추천/비추천 넣었음
 		$this->load->model(
@@ -1137,7 +1065,7 @@ class Postact extends CB_Controller
 				$this->point->insert_vp(
 					$mem_id,
 					$usedPoint * -1,
-					element('board_name', $board) . ' ' . $cmt_id . '포인트사용',
+					element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
 					'point_use',
 					$cmt_id,
 					'포인트 사용'
@@ -1168,10 +1096,10 @@ class Postact extends CB_Controller
 				$this->point->insert_cp(
 					$mem_id,
 					$usedPoint * -1,
-					element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
-					$_text_en,
+					element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
+					'point_use',
 					$cmt_id,
-					$_text_ko
+					'포인트 사용'
 				);
 			break;
 
@@ -1225,7 +1153,7 @@ class Postact extends CB_Controller
 				abs(element('mem_id', $post)),
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
-				$_text_en.' receive',
+				$_text_en.' received',
 				$cmt_id,
 				$_text_ko.' 받음'
 			);
@@ -1237,9 +1165,9 @@ class Postact extends CB_Controller
 				$mem_id,
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
-				$_text_en.' receive',
+				$_text_en,
 				$cmt_id,
-				$_text_ko.' 받음'
+				$_text_ko.' 함'
 			);
 		}
 		
@@ -1261,18 +1189,18 @@ class Postact extends CB_Controller
 				$mem_id,
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
-				$_text_en.' receive',
+				$_text_en,
 				$cmt_id,
-				$_text_ko.' 받음'
+				$_text_ko.' 함'
 			);
 		}
 
 
 		if($_writerRatio_poi){
-			$ratio = element('cpc_value', $_writerRatio_poi)/100;
+			$ratio = element('poi_value', $_writerRatio_poi);
 			$this->point->insert_cp(
 				abs(element('mem_id', $post)),
-				($usedPoint * $ratio),
+				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
 				$_text_en.' receive',
 				$cmt_id,
@@ -1281,10 +1209,10 @@ class Postact extends CB_Controller
 		}
 
 		if($_userRatio_poi){
-			$ratio = element('cpc_value', $_writerRatio_poi)/100;
+			$ratio = element('poi_value', $_writerRatio_poi);
 			$this->point->insert_point(
 				$mem_id,
-				($usedPoint * $ratio),
+				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
 				$_text_en.' receive',
 				$cmt_id,
@@ -1351,6 +1279,15 @@ class Postact extends CB_Controller
 		);
 		$this->Like_model->insert($insertdata);
 		
+		if ($like_type === 1) {
+			$field = 'cmt_like';
+			$cmtfield = 'cmt_like_point';
+		}
+		if ($like_type === 2) {
+			$field = 'cmt_dislike';
+			$cmtfield = 'cmt_dislike_point';
+		}
+		
 		$where = array(
 			'target_id' => $cmt_id,
 			'target_type' => $target_type,
@@ -1358,8 +1295,12 @@ class Postact extends CB_Controller
 		);
 		$count = $this->Like_model->count_by($where);
 
+		$cmt_Point = element($cmtfield, $comment);
+		$cmt_Point += $usedPoint;
+
 		$updata = array(
-			$field => $count
+			$field => $count,
+			$cmtfield => $cmt_Point
 		);
 		$this->Comment_model->update($cmt_id, $updata);
 
@@ -1368,7 +1309,8 @@ class Postact extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('after', $eventname);
 
-		$result = array('success' => $success, 'count' => $count);
+		$result = array('success' => $success, 'count' => $count, 'point' => $cmt_Point);
+		$this->db->trans_complete();
 		exit(json_encode($result));
 	}
 
@@ -3399,7 +3341,7 @@ class Postact extends CB_Controller
 		}
 
 		$mem_id = (int) $this->member->item('mem_id');
-
+		
 		$updatedata = array(
 			'cmt_del' => 2,
 		);

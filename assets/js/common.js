@@ -949,3 +949,98 @@ if (typeof(COMMON_JS) === 'undefined') {
 		}
 	}
 }
+
+var nowScrollTop = 0;
+var prevScrollTop = 0;
+$(window).load(function() {
+	setTimeout(function() {
+	 $('#doc').addClass('show');
+	}, 0);
+});
+
+$(function(){
+	// top search
+	$('.bt-search').click(function() {
+		if($('.top-search').hasClass('over')){
+			$(this).removeClass('over');
+			$('.top-search').removeClass('over');
+		}else{
+			$(this).addClass('over');
+			$('.top-search').addClass('over');
+		}
+	 }); 
+	 $('.top-search').find('.close').click(function(){
+		$('.top-search, .bt-search').removeClass('over');
+	 });
+
+	 // top-btn & scroll
+	if($(".top-btn").length<1) $("<a href='#n' class='top-btn'><span class='blind'>top</span></a>").appendTo($("#doc"));
+	$('.top-btn').click(function(){
+		$("body, html").animate({
+				scrollTop: 0
+		}, 500)
+	});
+});
+
+$(window).scroll(function() {
+	var position = $(window).scrollTop(); 
+	var bodyWidth = document.documentElement.clientWidth; 
+	if (position > 0){
+		$('#header-wrap').addClass('fix');
+	}else{
+		$('#header-wrap').removeClass('fix');
+	}
+	if (position > 200){
+		$('.top-btn').addClass('over');
+	}else{
+		$('.top-btn').removeClass('over');
+	}
+});
+$(window).load(function(){
+	var position = $(window).scrollTop(); 
+	var bodyWidth = document.documentElement.clientWidth; 
+	if (position > 0){
+		$('#header-wrap').addClass('fix');
+	}else{
+		$('#header-wrap').removeClass('fix');
+	}
+	if (position > 200){
+		$('.top-btn').addClass('over');
+	}else{
+		$('.top-btn').removeClass('over');
+	}
+});
+
+function sizeControlCommon(width) {
+	width = parseInt(width);
+	var bodyHeight = document.documentElement.clientHeight; 
+	var bodyWidth = document.documentElement.clientWidth; 
+	var chkHeader = $('#header-wrap').outerHeight();
+	var chkFooter = $('#footer').outerHeight();
+	var docW = window.innerWidth;
+	
+
+}
+jQuery(function($){
+	sizeControlCommon($(this).width());
+	$(window).resize(function() {
+		if(this.resizeTO) {
+			clearTimeout(this.resizeTO);
+		}
+		this.resizeTO = setTimeout(function() {
+			$(this).trigger('resizeEnd');
+		}, 10);
+	});
+});	
+$(window).on('resizeEnd', function() {
+	sizeControlCommon($(this).width());
+});
+$(window).load( function() { 
+	sizeControlCommon($(this).width());
+});
+
+
+function wheelDelta(){
+    return prevScrollTop - nowScrollTop > 0 ? 'up' : 'down';
+};
+

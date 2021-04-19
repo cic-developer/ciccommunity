@@ -105,5 +105,6 @@ function check_form_changed() {
 	}
 	return true;
 }
+$("#VPconfig").parent('li').addClass('active');
 //]]>
 </script>
