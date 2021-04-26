@@ -1,6 +1,8 @@
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css'); ?>
+<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
 
 <div class="mypage">
+
 	<div class="page-header">
 		<h4>회원 비밀번호 확인</h4>
 	</div>

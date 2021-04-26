@@ -33,7 +33,7 @@ class Google_Service_Pubsub extends Google_Service
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
-  /** View and manage Pub/Sub topics and subscriptions. */
+  /** View and manage Pub topics and subscriptions. */
   const PUBSUB =
       "https://www.googleapis.com/auth/pubsub";
 
@@ -338,7 +338,7 @@ class Google_Service_Pubsub_ProjectsSubscriptions_Resource extends Google_Servic
 
   /**
    * Acknowledges the messages associated with the ack tokens in the
-   * AcknowledgeRequest. The Pub/Sub system can remove the relevant messages from
+   * AcknowledgeRequest. The Pub system can remove the relevant messages from
    * the subscription. Acknowledging a message whose ack deadline has expired may
    * succeed, but such a message may be redelivered later. Acknowledging a message
    * more than once will not result in an error. (subscriptions.acknowledge)

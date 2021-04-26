@@ -58,7 +58,7 @@
 				<a href="#n" class="plus"><span class="blind">+</span></a>
 			</div>
 			<div class="inner">
-				<h1 id="logo"><a href="./"><span class="blind">cic+community</span></a></h1>
+				<h1 id="logo"><a href="/"><span class="blind">cic+community</span></a></h1>
 				<a href="#n" class="bt-mnall"><span class="blind">메뉴</span></a>
 				<a href="#n" class="bt-mnclose"><span class="blind">메뉴닫기</span></a>
 				<a href="#n" class="bt-search"><span class="blind">검색</span></a>
@@ -166,8 +166,8 @@
 		<!-- s : msec-visual -->
 		<div class="msec-visual">
 			<div class="bg">
-				<p class="desktop"><img src="<?php echo base_url('assets/images/visual-bg.jpg" alt=""/></p>
-				<p class="mobile"><img src="<?php echo base_url('assets/images/visual-bgm.jpg" alt=""/></p>
+				<p class="desktop"><img src="<?php echo base_url('assets/images/visual-bg.jpg')?>" ></p>
+				<p class="mobile"><img src="<?php echo base_url('assets/images/visual-bgm.jpg')?>" ></p>
 			</div>
 			<div class="cont">
 				<div class="search">
@@ -178,16 +178,16 @@
 					<a href="#n" class="prev"><span class="blind">이전</span></a>
 					<div class="visual-slide">
 						<div class="item">
-							<a href="#n"><img src="<?php echo base_url('assets/images/visual-img01.jpg" alt=""/></a>
+							<a href="#n"><img src="<?php echo base_url('assets/images/visual-img01.jpg')?>" alt=""/></a>
 						</div>
 						<div class="item">
-							<a href="#n"><img src="<?php echo base_url('assets/images/visual-img02.jpg" alt=""/></a>
+							<a href="#n"><img src="<?php echo base_url('assets/images/visual-img02.jpg')?>" alt=""/></a>
 						</div>
 						<div class="item">
-							<a href="#n"><img src="<?php echo base_url('assets/images/visual-img03.jpg" alt=""/></a>
+							<a href="#n"><img src="<?php echo base_url('assets/images/visual-img03.jpg')?>" alt=""/></a>
 						</div>
 						<div class="item">
-							<a href="#n"><img src="<?php echo base_url('assets/images/visual-img04.jpg" alt=""/></a>
+							<a href="#n"><img src="<?php echo base_url('assets/images/visual-img04.jpg')?>" alt=""/></a>
 						</div>
 					</div>
 					<a href="#n" class="next"><span class="blind">다음</span></a>
@@ -233,7 +233,7 @@
 							<tr>
 								<td>
 									<div class="vlogo">
-										<p class="img"><img src="<?php echo base_url('assets/images/coin-logo01.png" alt=""/></p>
+										<p class="img"><img src="<?php echo base_url('assets/images/coin-logo01.png')?>" alt=""/></p>
 										<p class="txt">빗썸</p>
 									</div>
 								</td>
@@ -247,7 +247,7 @@
 							<tr>
 								<td>
 									<div class="vlogo">
-										<p class="img"><img src="<?php echo base_url('assets/images/coin-logo02.png" alt=""/></p>
+										<p class="img"><img src="<?php echo base_url('assets/images/coin-logo02.png')?>" alt=""/></p>
 										<p class="txt">업비트 </p>
 									</div>
 								</td>
@@ -261,7 +261,7 @@
 							<tr>
 								<td>
 									<div class="vlogo">
-										<p class="img"><img src="<?php echo base_url('assets/images/coin-logo03.png" alt=""/></p>
+										<p class="img"><img src="<?php echo base_url('assets/images/coin-logo03.png')?>" alt=""/></p>
 										<p class="txt">핫빗 </p>
 									</div>
 								</td>
@@ -293,7 +293,7 @@
 											<span class="hit">(12)</span>
 										</p>
 										<div>
-											<p class="stxt">블로서리 <span><img src="<?php echo base_url('assets/images/like-popo.png" alt=""/></span></p>
+											<p class="stxt">블로서리 <span><img src="<?php echo base_url('assets/images/like-popo.png')?>" alt=""/></span></p>
 											<p class="date">204 <span>49분전</span></p>
 										</div>
 									</a>
@@ -306,7 +306,7 @@
 											<span class="hit">(12)</span>
 										</p>
 										<div>
-											<p class="stxt">블로서리 <span><img src="<?php echo base_url('assets/images/like-popo.png" alt=""/></span></p>
+											<p class="stxt">블로서리 <span><img src="<?php echo base_url('assets/images/like-popo.png')?>" alt=""/></span></p>
 											<p class="date">204 <span>49분전</span></p>
 										</div>
 									</a>
@@ -319,7 +319,7 @@
 											<span class="hit">(12)</span>
 										</p>
 										<div>
-											<p class="stxt">블로서리 <span><img src="<?php echo base_url('assets/images/like-popo.png" alt=""/></span></p>
+											<p class="stxt">블로서리 <span><img src="<?php echo base_url('assets/images/like-popo.png')?>" alt=""/></span></p>
 											<p class="date">204 <span>49분전</span></p>
 										</div>
 									</a>
@@ -332,7 +332,7 @@
 											<span class="hit">(12)</span>
 										</p>
 										<div>
-											<p class="stxt">블로서리 <span><img src="<?php echo base_url('assets/images/like-popo.png" alt=""/></span></p>
+											<p class="stxt">블로서리 <span><img src="<?php echo base_url('assets/images/like-popo.png')?>" alt=""/></span></p>
 											<p class="date">204 <span>49분전</span></p>
 										</div>
 									</a>
@@ -345,7 +345,7 @@
 											<span class="hit">(12)</span>
 										</p>
 										<div>
-											<p class="stxt">블로서리 <span><img src="<?php echo base_url('assets/images/like-popo.png" alt=""/></span></p>
+											<p class="stxt">블로서리 <span><img src="<?php echo base_url('assets/images/like-popo.png')?>" alt=""/></span></p>
 											<p class="date">204 <span>49분전</span></p>
 										</div>
 									</a>
@@ -407,7 +407,7 @@
 					<div class="forum-slide">
 						<div class="item">
 							<div class="img">
-								<img src="<?php echo base_url('assets/images/forum-img01.jpg" alt=""/> 
+								<img src="<?php echo base_url('assets/images/forum-img01.jpg')?>" alt=""/> 
 							</div>
 							<div class="txt">
 								<div class="vc">
@@ -418,7 +418,7 @@
 						</div>
 						<div class="item">
 							<div class="img">
-								<img src="<?php echo base_url('assets/images/forum-img02.jpg" alt=""/> 
+								<img src="<?php echo base_url('assets/images/forum-img02.jpg')?>" alt=""/> 
 							</div>
 							<div class="txt">
 								<div class="vc">
@@ -429,7 +429,7 @@
 						</div>
 						<div class="item">
 							<div class="img">
-								<img src="<?php echo base_url('assets/images/forum-img03.jpg" alt=""/> 
+								<img src="<?php echo base_url('assets/images/forum-img03.jpg')?>" alt=""/> 
 							</div>
 							<div class="txt">
 								<div class="vc">
@@ -451,7 +451,7 @@
 					<a href="#n" class="more"><span>동영상 더보기</span></a>
 					<div class="img">
 						<a href="#n" class="play-btn"><span class="blind">재생</span></a>
-						<p><img src="<?php echo base_url('assets/images/movie-img.png" alt=""/></p>
+						<p><img src="<?php echo base_url('assets/images/movie-img.png')?>" alt=""/></p>
 					</div>
 				</div>
 			</div>
@@ -465,20 +465,20 @@
 					<ul>
 						<li>
 							<a href="#n">
-								<p class="desktop"><img src="<?php echo base_url('assets/images/use-img01.png" alt=""/></p>
-								<p class="mobile"><img src="<?php echo base_url('assets/images/use-img01m.jpg" alt=""/></p>
+								<p class="desktop"><img src="<?php echo base_url('assets/images/use-img01.png')?>" alt=""/></p>
+								<p class="mobile"><img src="<?php echo base_url('assets/images/use-img01m.jpg')?>" alt=""/></p>
 							</a>
 						</li>
 						<li>
 							<a href="#n">
-								<p class="desktop"><img src="<?php echo base_url('assets/images/use-img02.png" alt=""/></p>
-								<p class="mobile"><img src="<?php echo base_url('assets/images/use-img02m.jpg" alt=""/></p>
+								<p class="desktop"><img src="<?php echo base_url('assets/images/use-img02.png')?>" alt=""/></p>
+								<p class="mobile"><img src="<?php echo base_url('assets/images/use-img02m.jpg')?>" alt=""/></p>
 							</a>
 						</li>
 						<li>
 							<a href="#n">
-								<p class="desktop"><img src="<?php echo base_url('assets/images/use-img03.png" alt=""/></p>
-								<p class="mobile"><img src="<?php echo base_url('assets/images/use-img03m.jpg" alt=""/></p>
+								<p class="desktop"><img src="<?php echo base_url('assets/images/use-img03.png')?>" alt=""/></p>
+								<p class="mobile"><img src="<?php echo base_url('assets/images/use-img03m.jpg')?>" alt=""/></p>
 							</a>
 						</li>
 
