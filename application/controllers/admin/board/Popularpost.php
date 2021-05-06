@@ -53,7 +53,7 @@ class Popularpost extends CB_Controller
 	public function index()
 	{
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_popularpost_list_index';
+		$eventname = 'event_admin_board_post_index';
 		$this->load->event($eventname);
 
 		$view = array();
@@ -67,8 +67,8 @@ class Popularpost extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = $this->input->get('findex') ? $this->input->get('findex') : $this->{$this->modelname}->primary_key;
-		$forder = $this->input->get('forder', null, 'desc');
+		$findex = 'post_like_point';
+		$forder = 'asc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 
@@ -78,24 +78,30 @@ class Popularpost extends CB_Controller
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
-		$this->{$this->modelname}->allow_search_field = array('post_id',  'post_mem_id', 'phi_title', 'phi_content', 'phi_ip', 'phi_datetime'); // 검색이 가능한 필드
-		$this->{$this->modelname}->search_field_equal = array('phi_id', 'post_history.post_id', 'post_history.mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->{$this->modelname}->allow_order_field = array('phi_id'); // 정렬이 가능한 필드
+		$this->{$this->modelname}->allow_search_field = array('post_id', 'post_title', 'post_content', 'mem_id', 'post_username', 'post_nickname', 'post_email', 'post_homepage', 'post_datetime', 'post_ip', 'post_device', 'post_exept_state'); // 검색이 가능한 필드
+		$this->{$this->modelname}->search_field_equal = array('post_id', 'mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->{$this->modelname}->allow_order_field = array('post_like_point'); // 정렬이 가능한 필드
 		$where = array(
-			'post.post_del' => 0,
+			'post_del <>' => 2,
 		);
 		if ($brdid = (int) $this->input->get('brd_id')) {
-			$where['post.brd_id'] = $brdid;
+			$where['brd_id'] = $brdid;
 		}
 		$result = $this->{$this->modelname}
-			->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->get_popularpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		
+		// $checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+		// $nowtime = cdate('Y-m-d H:i:s');
+		// $final = $nowtime - $checktime;
+		// print_r($checktime);
+		// exit;
+		
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
-				$result['list'][$key]['display_name'] = display_username(
-					element('mem_userid', $val),
-					element('mem_nickname', $val),
-					element('mem_icon', $val)
+				$result['list'][$key]['post_display_name'] = display_username(
+					element('post_userid', $val),
+					element('post_nickname', $val)
 				);
 				$result['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
 				$result['list'][$key]['num'] = $list_num--;
@@ -103,14 +109,25 @@ class Popularpost extends CB_Controller
 					$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
 					$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
 				}
-				$result['list'][$key]['post_display_name'] = display_username(
-					element('post_userid', $val),
-					element('post_nickname', $val)
-				);
+				$result['list'][$key]['category'] = '';
+				if (element('post_category', $val)) {
+					$result['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+				}
+				if (element('post_image', $val)) {
+					$imagewhere = array(
+						'post_id' => element('post_id', $val),
+						'pfi_is_image' => 1,
+					);
+					$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+					$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+				} else {
+					$result['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+				}
 			}
 		}
 		$view['view']['data'] = $result;
 
+		$select = 'brd_id, brd_name';
 		$view['view']['boardlist'] = $this->Board_model->get_board_list();
 
 		/**
@@ -131,11 +148,12 @@ class Popularpost extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('phi_title' => '제목', 'phi_content' => '내용', 'phi_ip' => 'IP', 'phi_datetime' => '변경일');
+		$search_option = array('post_title' => '제목', 'post_content' => '내용', 'post_username' => '실명', 'post_nickname' => '닉네임', 'post_email' => '이메일', 'post_homepage' => '홈페이지', 'post_datetime' => '작성일', 'post_ip' => 'IP');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
-		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listdelete/?' . $param->output());
+		$view['view']['list_update_url'] = admin_url($this->pagedir . '/listupdate/?' . $param->output());
+		$view['view']['list_trash_url'] = admin_url($this->pagedir . '/listtrash/?' . $param->output());
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

@@ -59,7 +59,7 @@ class CI_Security {
 		'{', '}', '[', ']', '=',
 		';', '?', '%20', '%22',
 		'%3c',		// <
-		'%253c',	// <br
+		'%253c',	// <
 		'%3e',		// >
 		'%0e',		// >
 		'%28',		// (
@@ -210,7 +210,6 @@ class CI_Security {
 		// If it's not a POST request we will set the CSRF cookie
 		if (strtoupper($_SERVER['REQUEST_METHOD']) !== 'POST')
 		{
-			echo 'hoho</br>';
 			return $this->csrf_set_cookie();
 		}
 
@@ -231,7 +230,6 @@ class CI_Security {
 		$valid = isset($_POST[$this->_csrf_token_name], $_COOKIE[$this->_csrf_cookie_name])
 			&& hash_equals($_POST[$this->_csrf_token_name], $_COOKIE[$this->_csrf_cookie_name]);
 
-		print_r('csrf check : '.$_POST['csrf_test_name'].' : '.$_COOKIE['csrf_cookie_name'].'</br>');
 		// We kill this since we're done and we don't want to pollute the _POST array
 		unset($_POST[$this->_csrf_token_name]);
 
@@ -244,8 +242,6 @@ class CI_Security {
 		}
 
 		$this->_csrf_set_hash();
-		
-		echo 'hoho22</br>';
 		$this->csrf_set_cookie();
 
 		if ($valid !== TRUE)
@@ -267,7 +263,6 @@ class CI_Security {
 	 */
 	public function csrf_set_cookie()
 	{
-		print_r('csrf set cookie');
 		$expire = time() + $this->_csrf_expire;
 		$secure_cookie = (bool) config_item('cookie_secure');
 
