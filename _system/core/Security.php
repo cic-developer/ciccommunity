@@ -59,7 +59,7 @@ class CI_Security {
 		'{', '}', '[', ']', '=',
 		';', '?', '%20', '%22',
 		'%3c',		// <
-		'%253c',	// <
+		'%253c',	// <br
 		'%3e',		// >
 		'%0e',		// >
 		'%28',		// (
@@ -231,6 +231,7 @@ class CI_Security {
 		$valid = isset($_POST[$this->_csrf_token_name], $_COOKIE[$this->_csrf_cookie_name])
 			&& hash_equals($_POST[$this->_csrf_token_name], $_COOKIE[$this->_csrf_cookie_name]);
 
+		print_r('csrf check : '.$_POST['csrf_test_name'].' : '.$_COOKIE['csrf_cookie_name'].'</br>');
 		// We kill this since we're done and we don't want to pollute the _POST array
 		unset($_POST[$this->_csrf_token_name]);
 
