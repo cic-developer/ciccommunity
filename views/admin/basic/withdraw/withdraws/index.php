@@ -233,7 +233,7 @@
                             <td colspan="2" class="text-center" id="wid-idx"></td>
                         </tr>
 
-                        <!-- 출금신청 정보 -->
+                        <!-- 신청회원 정보 -->
                         <tr>
                             <td rowspan="7">신청 회원 정보</td>
                         </tr>
@@ -262,7 +262,7 @@
                             <td id="wid-req-datetime"></td>
                         </tr>
 
-                        <!-- 신청처리 정보 -->
+                        <!-- 처리관리자 정보 -->
                         <tr>
                             <td rowspan="3">처리 관리자 정보</td>
                         </tr>
@@ -411,6 +411,7 @@
 
 		var memo = $(this).data('memo');
 
+        // 신청회원정보
         document.getElementById("wid-idx").innerHTML = idx;
         document.getElementById("wid-userid").innerHTML = userid;
         document.getElementById("wid-userip").innerHTML = userip;
@@ -419,17 +420,20 @@
         document.getElementById("wid-req-money").innerHTML = req_money;
         document.getElementById("wid-req-datetime").innerHTML = req_datetime;
 
+        // 처리관리자정보
         document.getElementById("wid-admin-id").innerHTML = adminid;
         document.getElementById("wid-admin-ip").innerHTML = adminip;
 
-
+        // 처리결과정보
         document.getElementById("wid-res-datetime").innerHTML = res_datetime;
         document.getElementById("wid-state").innerHTML = state;
         document.getElementById("wid-content").innerHTML = content;
 
+        // 퍼코인정보
         document.getElementById("wid-percoin").innerHTML = percoin;
         document.getElementById("wid-transaction").innerHTML = transaction;
-        
+
+        // 메모
         $("#myModal-result .modal-footer #cp_content3").val( memo ); 
 	});
 
