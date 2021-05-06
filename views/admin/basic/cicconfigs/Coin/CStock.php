@@ -26,7 +26,7 @@
 						<div class="col-sm-8">
 							활성화 -
 							<label for="cpc_enable" class="control-label">
-								<select name="selected_market[]" id="doc_layout" class="form-control">
+								<select name="selected_market" id="doc_layout" class="form-control">
 								<?php
 								foreach($getStock as $stoks){
 									echo '<option value="'.$stoks->market.'">'.$stoks->market.'</option>';							
@@ -34,7 +34,6 @@
 								}?>	
 								</select>
 							</label>
-					
 						</div>
 				</div>
 
