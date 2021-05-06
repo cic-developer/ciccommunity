@@ -126,20 +126,20 @@
                                                 <!-- <label for="usr"></label> -->
                                                 <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
                                                 <div class="form-group">
-                                                    <label for="cp_content1">트랜잭션:</label>
-                                                    <textarea class="form-control" rows="5" cols="75" id="cp_content1" name="cp_content1" placeholder="출금 승인 사유를 입력해주세요." style="width:100%;"></textarea>
+                                                    <label for="cp_transaction">트랜잭션:</label>
+                                                    <textarea class="form-control" rows="5" cols="75" id="cp_transaction" name="cp_transaction" placeholder="출금 승인 사유를 입력해주세요." style="width:100%;"></textarea>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="cp_content1">퍼코인:</label>
-                                                    <textarea class="form-control" rows="5" cols="75" id="cp_content1" name="cp_content1" placeholder="출금 승인 사유를 입력해주세요." style="width:100%;"></textarea>
+                                                    <label for="cp_percoin">퍼코인:</label>
+                                                    <textarea class="form-control" rows="5" cols="75" id="cp_percoin" name="cp_percoin" placeholder="출금 승인 사유를 입력해주세요." style="width:100%;"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="cp_content1">사유:</label>
                                                     <textarea class="form-control" rows="5" cols="75" id="cp_content1" name="cp_content1" placeholder="출금 승인 사유를 입력해주세요." style="width:100%;"></textarea>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="cp_content1">메모:</label>
-                                                    <textarea class="form-control" rows="5" cols="75" id="cp_content1" name="cp_content1" placeholder="출금 승인 사유를 입력해주세요." style="width:100%;"></textarea>
+                                                    <label for="cp_memo">메모:</label>
+                                                    <textarea class="form-control" rows="5" cols="75" id="cp_memo" name="cp_memo" placeholder="출금 승인 사유를 입력해주세요." style="width:100%;"></textarea>
                                                 </div>
                                         </div>
                                         
