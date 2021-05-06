@@ -433,11 +433,11 @@
         document.getElementById("wid-percoin").innerHTML = percoin;
         document.getElementById("wid-transaction").innerHTML = transaction;
 
-        // 퍼코인 정보가 없을경우 ( 반려인 경우 ) => 필요없는 태그 숨기기
+        // 퍼코인 정보가 없을경우 ( 반려인 경우 ) => 필요없는 태그 숨기기 visibility:hidden 
         if(!percoin && !transaction){
-            $('.tr-percoin').css('display', 'none');
+            $('.tr-percoin').css('visibility', 'hidden');
         }else{
-            $('.tr-percoin').css('display', 'inline');
+            $('.tr-percoin').css('visibility', 'visible');
         }
 
         // 메모
