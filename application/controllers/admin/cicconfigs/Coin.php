@@ -110,7 +110,7 @@ class Coin extends CB_Controller
 				'selected_market' => $this -> input -> post('selected_market')
 			);
 			if(isset($list) && !empty($list)){
-				// $stock = $this->Coin_model->dropdown_list($list);
+				$stock = $this->Coin_model->dropdown_list($list);
 				$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 				print_r($list);
 			}	
