@@ -270,11 +270,11 @@
                         </tr>
                         <tr>
                             <th>아이디</th>
-                            <td id="admin-id"></td>
+                            <td id="wid-admin-id"></td>
                         </tr>
                         <tr>
                             <th>아이피</th>
-                            <td id="admin-ip"></td>
+                            <td id="wid-admin-ip"></td>
                         </tr>
 
                         <!-- 처리결과 정보 -->
@@ -283,7 +283,7 @@
                         </tr>
                         <tr>
                             <th>처리날짜</th>
-                            <td id="res-datetime"></td>
+                            <td id="wid-res-datetime"></td>
                         </tr>
                         <tr>
                             <th>처리결과</th>
@@ -291,7 +291,7 @@
                         </tr>
                         <tr>
                             <th>처리사유</th>
-                            <td id=""></td>
+                            <td id="wid-content"></td>
                         </tr>
 
                         <!-- percoin 정보 -->
@@ -415,15 +415,16 @@
         document.getElementById("wid-req-money").innerHTML = req_money;
         document.getElementById("wid-req-datetime").innerHTML = req_datetime;
 
-        document.getElementById("admin-id").innerHTML = adminid;
-        document.getElementById("admin-ip").innerHTML = adminip;
+        document.getElementById("wid-admin-id").innerHTML = adminid;
+        document.getElementById("wid-admin-ip").innerHTML = adminip;
 
 
-        document.getElementById("res-datetime").innerHTML = res_datetime;
+        document.getElementById("wid-res-datetime").innerHTML = res_datetime;
+        document.getElementById("wid-content").innerHTML = content;
         // $("#myModal-result .modal-body #admin-id").val( adminid ); 
         // $("#myModal-result .modal-body #admin-ip").val( adminip );
         // $("#myModal-result .modal-body #result-date").val( resultdate ); 
-        $("#myModal-result .modal-footer #cp_content3").val( content ); 
+        // $("#myModal-result .modal-footer #cp_content3").val( content ); 
 	});
 
 

@@ -91,7 +91,8 @@ class Popularpost extends CB_Controller
 			->get_popularpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);	
-		print_r($datetime);
+		$nowtime = cdate('Y-m-d H:i:s');
+		print_r($nowtime);
 		exit;
 		
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;

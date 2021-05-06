@@ -28,12 +28,12 @@
 							<?php		
 								foreach($realtime_coin_info as $stocks){	
 									echo "hi";
-									echo '<option value="'.$stocks['market'].'" >' .$stocks['market']. '</option>';
+									echo '<option value="'.$realtime_coin_info['market'].'" >' .$realtime_coin_info['market']. '</option>';
 								}
 							?>	
 						</select>
 
-
+            </div>
 
     <?php echo form_close(); ?> 
     </div>
