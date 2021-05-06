@@ -597,8 +597,6 @@ class Post_model extends CB_Model
 			$sfield = array('post_title', 'post_content');
 		}
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-		$nowtime = cdate('Y-m-d H:i:s');
-		$final = $nowtime - $checktime;
 		$where = array(
 			'post_exept_state' => 0,
 			'post_datetime >=' => $checktime,
@@ -731,6 +729,30 @@ class Post_model extends CB_Model
 		$qry = $this->db->get();
 		$rows = $qry->row_array();
 		$result['total_rows'] = $rows['rownum'];
+
+		return $result;
+	}
+
+	
+	public function get_admin_list($limit = '', $offset = '', $where = '', $orderby = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR')
+	{
+		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
+			$orderby = 'post_like_point desc';
+		}
+
+		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+		$where = array(
+			'post_exept_state' => 0,
+			'post_datetime >=' => $checktime,
+		);
+
+
+		$select = 'post_history.*, post.mem_id as post_mem_id, post.post_userid, post.post_nickname,
+			post.brd_id, post.post_datetime, post.post_hit, post.post_secret, member.mem_id, member.mem_userid,
+			member.mem_username, member.mem_nickname, member.mem_is_admin, member.mem_icon';
+		$join[] = array('table' => 'post', 'on' => 'post_history.post_id = post.post_id', 'type' => 'inner');
+		$join[] = array('table' => 'member', 'on' => 'post_history.mem_id = member.mem_id', 'type' => 'left');
+		$result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
 
 		return $result;
 	}
