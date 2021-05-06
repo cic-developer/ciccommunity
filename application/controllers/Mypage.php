@@ -1217,7 +1217,7 @@ class Mypage extends CB_Controller
 		// print_r($per_page);//70
 		// print_r($offset); //0
 		// print_r($where); //
-		print_r($findex);
+		print_r($result);
 		// print_r($result);
 		// print_r($result);
 		return;

@@ -55,7 +55,7 @@ class CIC_withdraw_model extends CB_Model
 		// $join[] = array('table' => 'member_group_member', 'on' => 'member.mem_id = member_group_member.mem_id', 'type' => 'left');
 		$join[] = null;
 		
-		$result = $this->get_admin_list($limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
+		$result = $this->get_admin_list($limit, $offset, $where, $like, '', $forder, $sfield, $skeyword, $sop);
 
 		return $result;
 	}
