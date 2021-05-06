@@ -29,11 +29,12 @@
 								<select name="selected_market" id="doc_layout" class="form-control">
 								<?php
 								foreach($getStock as $stoks){
-									echo '<option value="'.$stoks->market.'" '.($stock->stk_id == $default)?'selected="selected"'.'>'.$stoks->market.'</option>';							
+									echo '<option value="'.$stoks->market.'">'.$stoks->market.'</option>';							
 								
 								}?>	
 								</select>
 							</label>
+					
 						</div>
 				</div>
 

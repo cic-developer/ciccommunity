@@ -360,6 +360,11 @@
 
     // approve submit
     function wid_approve_submit(f, acttype, actpage){
+
+        var cp_percoin = $('#cp_percoin');
+        console.log("=> ",cp_percoin );
+return;
+
         var cp_transaction = $('#cp_transaction').val().trim();
         if(cp_transaction.length < 1){
             alert("필수값 입니다")
