@@ -79,26 +79,25 @@
 <script>
     // 출금금액 validation
     function validateForm() {
-        // var x, text;
-        // var mem_cp = <?php echo number_format(element('mem_cp', $view), 2); ?>;
+        var x, text;
+        var mem_cp = <?php echo number_format(element('mem_cp', $view), 2); ?>;
 
-        // // // Get the value of the input field with id="numb"
-        // x = document.getElementById("money").value;
-        // btn = document.getElementById("withdraw-request");
+        // // Get the value of the input field with id="numb"
+        x = document.getElementById("money").value;
+        btn = document.getElementById("withdraw-request");
 
-        // // // If x is Not a Number or less than one or greater than 10
-        // if (isNaN(x) || x < 1 || x > mem_cp) {
-        //     text = "금액을 올바르게 입력해주세요.";
-        // } else {
-        //     // text = "Input OK";
-        //     // document.flist.submit();
-        //     wid_req_submit(document.flist, 'req', btn.getAttribute('data-wid-req-url'));
-        // }
+        // // If x is Not a Number or less than one or greater than 10
+        if (isNaN(x) || x < 1 || x > mem_cp) {
+            text = "금액을 올바르게 입력해주세요.";
+        } else {
+            // text = "Input OK";
+            // document.flist.submit();
+            wid_req_submit(document.flist, 'req', btn.getAttribute('data-wid-req-url'));
+        }
 
-        // if(text != undefined){
-        //     document.getElementById("help-text").innerHTML = text;
-        // }
-        document.flist.submit();
+        if(text != undefined){
+            document.getElementById("help-text").innerHTML = text;
+        }
     }
 
     // 출금금액 요청 submit
