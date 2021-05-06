@@ -368,7 +368,8 @@
     }   
     // retier submit
     function wid_retire_submit(f, acttype, actpage){
-        alert($('.cp_content2').value.trim());
+        var cp_content2 = $('.cp_content2').val();
+        alert(cp_content2);
         return;
 
 
