@@ -360,7 +360,6 @@
 
     // approve submit
     function wid_approve_submit(f, acttype, actpage){
-
         var str = '';
         // console.log(" => ", f)
         if (acttype === 'approve' && ! confirm('선택한 요청을 정말 승인 하시겠습니까?')) return;
@@ -369,6 +368,10 @@
     }   
     // retier submit
     function wid_retire_submit(f, acttype, actpage){
+        alert($('.cp_content2').value.trim());
+        return;
+
+
         var str = '';
         // console.log(" => ", f)
         if (acttype === 'retire' && ! confirm('선택한 요청을 정말 반려 하시겠습니까?')) return;
