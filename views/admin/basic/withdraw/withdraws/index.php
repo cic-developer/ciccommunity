@@ -437,7 +437,7 @@
         if(!percoin && !transaction){
             $('.tr-percoin').css('display', 'none');
         }else{
-            $('.tr-percoin').css('display', 'block');
+            $('.tr-percoin').css('display', 'inline');
         }
 
         // 메모
