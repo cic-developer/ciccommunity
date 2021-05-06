@@ -93,8 +93,7 @@ class Popularpost extends CB_Controller
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		$nowtime = cdate('Y-m-d H:i:s');
 		$final = $nowtime - $checktime;
-		$test = date_sub(NOW() - 24 * 60 * 60);
-		print_r($test);
+		print_r($final);
 		exit;
 		
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;

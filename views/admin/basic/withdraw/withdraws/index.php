@@ -74,7 +74,7 @@
                                             data-res-datetime="<?php echo html_escape(element('wid_res_datetime', $result)); ?>"
                                                 data-state="<?php echo html_escape(element('wid_state', $result)) != null ? (html_escape(element('wid_state', $result)) == 1 ? '승인' : '반려' ) : '';?>"
                                                     data-content="<?php echo html_escape(element('wid_content', $result)); ?>"
-                                            data-percoin="<?php echo number_format(element('wid_percoin', $result), 2); ?>"
+                                            data-percoin="<?php echo element('wid_percoin', $result) != null ? (number_format(element('wid_percoin', $result), 2)) : ''; ?>"
                                                 data-transaction="<?php echo html_escape(element('wid_transaction', $result)); ?>"
                                             data-memo="<?php echo html_escape(element('wid_memo', $result)); ?>"       
                                     >
