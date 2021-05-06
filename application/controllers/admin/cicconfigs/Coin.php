@@ -107,10 +107,17 @@ class Coin extends CB_Controller
 					'name_en' => $this -> input -> post('name_en')[$i]
 					));
 				}	
+
+				$data = array(
+				'market' => $this -> input -> post('market'),
+				'name_ko' => $this -> input -> post('name_ko'),
+				'name_en' => $this -> input -> post('name_en'),
+				'key_word' => $this -> input -> $key_word
+				);	
 			
-			// if(isset($data) && !empty($data)){
-			$stock = $this->Coin_model->insertStockData($key_word);
-			// }
+			if(isset($data) && !empty($data)){
+			$stock = $this->Coin_model->insertStockData($data);
+			}
 		    $view['view']['alert_message'] = '정상적으로 저장되었습니다';
 			
 		}
