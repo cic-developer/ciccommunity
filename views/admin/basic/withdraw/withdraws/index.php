@@ -293,14 +293,14 @@
                         </tr>
 
                         <!-- percoin 정보 -->
-                        <tr>
+                        <tr class="tr-percoin">
                             <td rowspan="3">PER COIN 정보</td>
                         </tr>
-                        <tr>
+                        <tr class="tr-percoin">
                             <th>퍼코인</th>
                             <td id="wid-percoin"></td>
                         </tr>
-                        <tr>
+                        <tr class="tr-percoin">
                             <th>트랜잭션</th>
                             <td id="wid-transaction"></td>
                         </tr>
