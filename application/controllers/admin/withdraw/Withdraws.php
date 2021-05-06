@@ -187,6 +187,29 @@ class Withdraws extends CB_Controller
 		Events::trigger('before', $eventname);
 
 		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+
+		$config = array(
+			array(
+				'field' => 'cp_transaction',
+				'label' => '트랜잭션',
+				'rules' => 'trim|required',
+			),
+			array(
+				'field' => 'cp_percoin',
+				'label' => '퍼코인',
+				'rules' => 'trim|required|is_natural_no_zero',
+			),
+			array(
+				'field' => 'cp_content1',
+				'label' => '사유',
+				'rules' => 'trim|required',
+			),
+		);
+
+		/**
 		 * 프라이머리키에 숫자형이 입력되지 않으면 에러처리합니다
 		 */
 		$widIdx = (int)$this->input->post('wid_idx1');
