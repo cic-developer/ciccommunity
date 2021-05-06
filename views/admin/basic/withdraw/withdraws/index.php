@@ -433,6 +433,7 @@
         document.getElementById("wid-percoin").innerHTML = percoin;
         document.getElementById("wid-transaction").innerHTML = transaction;
 
+        // 퍼코인 정보가 없을경우 ( 반려인 경우 ) => 필요없는 태그 삭제
         if(!percoin && !transaction){
             $('.tr-percoin').css('display', 'none');
         }
