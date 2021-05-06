@@ -221,7 +221,7 @@ class Withdraws extends CB_Controller
 			array(
 				'field' => 'cp_percoin',
 				'label' => '퍼코인',
-				'rules' => 'trim|required|is_natural_no_zero',
+				'rules' => 'trim|required|greater_than_equal_to[0.01]',
 			),
 			array(
 				'field' => 'cp_content1',
@@ -244,9 +244,6 @@ class Withdraws extends CB_Controller
 				$memo = $this->input->post('cp_memo');
 
 				$result = $this->{$this->modelname}->set_withdraw_approve($widIdx, $adminid, $adminip, $transaction, $percoin, $content, $memo);
-							
-				print_r($result);
-				return;
 			} else {
 				$this->session->set_flashdata(
 					'message',
