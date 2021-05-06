@@ -360,8 +360,28 @@
 
     // approve submit
     function wid_approve_submit(f, acttype, actpage){
-        var str = '';
-        // console.log(" => ", f)
+        var cp_transaction = $('#cp_transaction').val().trim();
+        if(cp_transaction.length < 1){
+            alert("필수값 입니다")
+            $('#cp_transaction').focus();
+            return;
+        }
+
+        var cp_percoin = $('#cp_percoin').val().trim();
+        if(cp_percoin.length < 1){
+            alert("필수값 입니다")
+            $('#cp_percoin').focus();
+            return;
+        }
+
+        var cp_content1 = $('#cp_content1').val().trim();
+        if(cp_content1.length < 1){
+            alert("필수값 입니다")
+            $('#cp_content1').focus();
+            return;
+        }
+
+
         if (acttype === 'approve' && ! confirm('선택한 요청을 정말 승인 하시겠습니까?')) return;
         f.action = actpage;
 		f.submit();

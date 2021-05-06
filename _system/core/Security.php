@@ -210,6 +210,7 @@ class CI_Security {
 		// If it's not a POST request we will set the CSRF cookie
 		if (strtoupper($_SERVER['REQUEST_METHOD']) !== 'POST')
 		{
+			echo 'hoho';
 			return $this->csrf_set_cookie();
 		}
 
@@ -242,6 +243,8 @@ class CI_Security {
 		}
 
 		$this->_csrf_set_hash();
+		
+		echo 'hoho22';
 		$this->csrf_set_cookie();
 
 		if ($valid !== TRUE)
