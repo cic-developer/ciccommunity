@@ -76,10 +76,7 @@
                                                     data-content="<?php echo html_escape(element('wid_content', $result)); ?>"
                                             data-percoin="<?php echo number_format(element('wid_percoin', $result), 2); ?>"
                                                 data-transaction="<?php echo html_escape(element('wid_transaction', $result)); ?>"
-                                                
-
-
-                                                    
+                                            data-memo="<?php echo html_escape(element('wid_memo', $result)); ?>"       
                                     >
                                         <strong>처리완료</strong>
                                     </button>

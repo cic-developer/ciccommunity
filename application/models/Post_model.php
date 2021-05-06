@@ -597,11 +597,9 @@ class Post_model extends CB_Model
 			$sfield = array('post_title', 'post_content');
 		}
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-		$nowtime = cdate('Y-m-d H:i:s');
-		$final = $nowtime - $checktime;
 		$where = array(
 			'post_exept_state' => 0,
-			'post_date_time ' =>  $checktime,
+			$checktime < 'post_datetime',
 		);
 		// 'post_datetime' => $nowtime - $checktime 
 		$search_where = array();
