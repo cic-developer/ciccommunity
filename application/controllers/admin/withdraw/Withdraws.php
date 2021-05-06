@@ -208,6 +208,8 @@ class Withdraws extends CB_Controller
 				'rules' => 'trim|required',
 			),
 		);
+		$this->form_validation->set_rules($config);
+		$form_validation = $this->form_validation->run();
 
 		/**
 		 * 프라이머리키에 숫자형이 입력되지 않으면 에러처리합니다
