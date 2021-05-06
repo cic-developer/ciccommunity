@@ -8,7 +8,7 @@
 <div class="box">
 	<div class="box-header">
 		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/CStock'); ?>" onclick="return check_form_changed();">CT 설정</a></li>
+			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/CStock'); ?>" onclick="return check_form_changed();">CP 설정</a></li>
 		</ul>
 	</div>
 	<div class="box-table">
@@ -21,6 +21,8 @@
 			<form method ="POST">
 				<input type="hidden" name="is_submit" value="1" />
 				<div class="form-group">
+					<input type="hidden" name="cpc_id[]" value="<?php echo element('cpc_id', $value) ?>"/>
+					<label class="col-sm-3 control-label"><?php echo element('cpc_title', $value)."<br/>(".element('cpc_description', $value).")"?></label>
 						<div class="col-sm-8">
 							활성화 -
 							<label for="cpc_enable" class="control-label">
@@ -71,7 +73,7 @@ function check_form_changed() {
 }
 //]]>
 
-$("#CStock").parent('li').addClass('active');
+$("#CPconfig").parent('li').addClass('active');
 </script>
 
 
