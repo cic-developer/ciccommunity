@@ -57,7 +57,7 @@
                         <tr>
                             <td><?php echo html_escape(element('wid_req_datetime', $result)); ?></td>
                             <td><?php echo number_format(element('wid_req_money', $result), 2); ?>CP</td>
-                            <td><?php echo number_format(element('wid_percoin', $result), 2); ?> PER</td>
+                            <td><?php echo element('wid_percoin', $result) != null ? (number_format(element('wid_percoin', $result), 2)) : ''; ?> PER</td>
                             <td><?php echo html_escape(element('wid_transaction', $result)); ?></td>
                             <td><?php echo html_escape(element('wid_state', $result)) != null ? (html_escape(element('wid_state', $result)) == 1 ? '<p class="text-success">승인</p>' : '<p class="text-danger">반려</p>' ) : '<p class="text-body">미처리</p>';?></td>
                         </tr>
