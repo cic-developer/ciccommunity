@@ -55,7 +55,7 @@
                         foreach (element('list', element('data', $view)) as $result) {
                     ?>
                         <tr>
-                            <td>2021. 03. 21</td>
+                            <td><?php echo html_escape(element('wid_req_datetime', $result)); ?></td>
                             <td>200,000 CP</td>
                             <td>100 PER</td>
                             <td>fasdfsa68bn4a3hg7h4a3ba6ava99</td>
@@ -63,17 +63,9 @@
                                 <p class="cblue">승인</p>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2021. 03. 21</td>
-                            <td>200,000 CP</td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <p class="cred">미승인</p>
-                            </td>
-                        </tr>
                     <?php
-					}
+                        }
+                    }
 					?>
                     </tbody>
                 </table>
@@ -129,3 +121,22 @@
         };
     }); 
 </script>
+
+<!-- <tr>
+    <td>2021. 03. 21</td>
+    <td>200,000 CP</td>
+    <td>100 PER</td>
+    <td>fasdfsa68bn4a3hg7h4a3ba6ava99</td>
+    <td>
+        <p class="cblue">승인</p>
+    </td>
+</tr>
+<tr>
+    <td>2021. 03. 21</td>
+    <td>200,000 CP</td>
+    <td></td>
+    <td></td>
+    <td>
+        <p class="cred">미승인</p>
+    </td>
+</tr> -->
