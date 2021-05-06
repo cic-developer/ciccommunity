@@ -169,7 +169,7 @@ class Membermodify extends CB_Controller
 		$mem_id = (int) $this->member->item('mem_id');
 
 
-		 if ( ! function_exists('password_hash')) {
+		if ( ! function_exists('password_hash')) {
 			$this->load->helper('password');
 		}
 
@@ -2016,7 +2016,7 @@ class Membermodify extends CB_Controller
 	 */
 	public function _cur_password_check($str)
 	{
-		 if ( ! function_exists('password_hash')) {
+		if ( ! function_exists('password_hash')) {
 			$this->load->helper('password');
 		}
 
@@ -2073,4 +2073,5 @@ class Membermodify extends CB_Controller
 		}
 		return true;
 	}
+
 }

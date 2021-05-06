@@ -11,43 +11,76 @@
 		<!-- page start // -->
 		<div class="board-wrap detail">
 			<div class="detail">
+				<div class="upper r">
+					<a href="<?php echo element('list_url', $view); ?>" class="bw-btn"><span>목록</span></a>
+					<a href="<?php echo element('url', element('prev_post', $view)); ?>" class="bw-btn"><span>이전</span></a>
+					<a href="<?php echo element('url', element('next_post', $view)); ?>" class="bw-btn"><span>다음</span></a>
+				</div>
 				<div class="tits">
-					<h3>"축" 대통령 및 국토교통부 장관 표창 수상</h3>
+					<h3><?php echo html_escape(element('post_title', element('post', $view))); ?></h3>
 					<ul>
-						<li>등록일 : 2020-08-25 </li>
-						<li>작성자 : 관리자 </li>
-						<li>조회 : 300 </li>
+						<li>등록일 : <?php echo element('display_datetime', element('post', $view)); ?> </li>
+						<li>작성자 : <?php echo html_escape(element('post_nickname', element('post', $view))); ?> </li>
+						<li>조회 : <?php echo number_format(element('post_hit', element('post', $view))); ?> </li>
 					</ul>
 				</div>
+				<!-- 본문 내용 시작 -->
+				
 				<div class="cons">
-					<p>지속가능한 미래 인재 육성에 앞장섭니다.</p>
-					<p>스타트업을 지원하고 육성하는 액셀러레이팅, 코워킹 스페이스 활동 뿐만 아니라 개개인이 새로운 직업을 발견하고,<br> 배우고, 경험할 수 있는 새로운 기회들을 제공하고
-						있습니다. 또한 불꽃스토리, 불꽃로드 등 다양한 CSR 활동과 쉐어하우스 등의<br>사업을 통해 창업을 넘어 청년 창・취업 지원활동을 대표하는 브랜드가 되고자 합니다.
-					</p>
+					<?php echo element('content', element('post', $view)); ?>
 				</div>
+				<!-- 본문 내용 끝 -->
+				<?php if (element('file_download_count', $view) > 0) { ?>
 				<div class="files">
 					<ul>
-						<li><a href="#">2020년 여성과 문화 지원사업 공모.pdf</a></li>
-						<li><a href="#">2020년 개성상인 지원사업 공모.pdf</a></li>
+						<?php	foreach (element('file_download', $view) as $key => $value) { ?>
+						<li><a href="javascript:file_download('<?php echo element('download_link', $value); ?>')"><?php echo html_escape(element('pfi_originname', $value)); ?>(<?php echo byte_format(element('pfi_filesize', $value)); ?>)</a></li>
+						<?php
+						}
+						?>
 					</ul>
 				</div>
+				
+				<script type="text/javascript">
+				//<![CDATA[
+				function file_download(link) {
+					<?php if (element('point_filedownload', element('board', $view)) < 0) { ?>if ( ! confirm("파일을 다운로드 하시면 포인트가 차감(<?php echo number_format(element('point_filedownload', element('board', $view))); ?>점)됩니다.\n\n포인트는 게시물당 한번만 차감되며 다음에 다시 다운로드 하셔도 중복하여 차감하지 않습니다.\n\n그래도 다운로드 하시겠습니까?")) { return; }<?php }?>
+					document.location.href = link;
+				}
+				//]]>
+				</script>
+				<?php
+				}
+				?>
+				
 				<div class="others">
 					<ul>
 						<li>
 							<p class="btxt">다음글</p>
-							<a href="#">다음 글이 없습니다.</a>
+							<?php if(element('next_post', $view)){ ?>
+								<a href="<?php echo element('url', element('next_post', $view)); ?>"><?php echo element('post_title', element('next_post', $view)); ?></a>
+							<?php } else { ?>
+								<a href="javascript:void(0);">다음 글이 없습니다.</a>
+							<?php } ?>
 						</li>
 						<li>
 							<p class="btxt">이전글</p>
-							<a href="#">"축" 대통령 및 국토교통부 장관 표창 수상</a>
+							<?php if(element('prev_post', $view)){ ?>
+								<a href="<?php echo element('url', element('prev_post', $view)); ?>"><?php echo element('post_title', element('prev_post', $view)); ?></a>
+							<?php } else { ?>
+								<a href="javascript:void(0);">이전 글이 없습니다.</a>
+							<?php } ?>
 						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="lower r">
-				<a href="#n" class="bb-btn"><span>목록</span></a>
-				<a href="#n" class="bw-btn"><span>이전</span></a>
-				<a href="#n" class="bw-btn"><span>다음</span></a>
+				<?php if(element('modify_url', $view)){ ?>
+				<a href="<?php echo element('modify_url', $view); ?>" class="bw-btn"><span>수정</span></a>
+				<?php } ?>
+				<?php if(element('delete_url', $view)){ ?>
+				<a href="javascript:void(0);" class="bw-btn btn-one-delete" data-one-delete-url="<?php echo element('delete_url', $view); ?>"><span>삭제</span></a>
+				<?php } ?>
 			</div>
 
 		</div>

@@ -9,8 +9,13 @@
             </div>
             <div class="cont">
                 <div class="search">
+                    <?php 
+						$attributes = array('class' => 'search_box', 'name' => 'searchForm', 'id' => 'searchForm', 'action' => base_url('/search'));
+						echo form_open(current_full_url(), $attributes);
+					?>
                     <p class="chk-input"><input type="text" placeholder="검색어를 입력해주세요" autocomplete="off" /></p>
                     <button class="enter"><span class="blind">검색</span></button>
+                    <?php echo form_close(); ?>
                 </div>
                 <div class="vis">
                     <a href="#n" class="prev"><span class="blind">이전</span></a>
@@ -51,7 +56,7 @@
                         <li><a href="#n"><span>klay</span></a></li>
                         <li class="cyellow"><a href="#n"><span>PER</span></a></li>
                     </ul>
-                    <a href="#n" class="more"><span>더 많은 코인 보기</span></a>
+                    <a href="<?php echo base_url('/Coin')?>" class="more"><span>더 많은 코인 보기</span></a>
                 </div>
                 <div class="list">
                     <table>
@@ -362,3 +367,6 @@
         <!-- page end // -->
     </div>
 </div>
+<script>
+    setInterval(() => $('.visual-slide').trigger('prev.owl.carousel', [600]), 3000);
+</script>

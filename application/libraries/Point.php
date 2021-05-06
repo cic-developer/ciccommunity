@@ -96,6 +96,9 @@ class Point extends CI_Controller
 		);
 		$this->CI->Member_model->update($mem_id, $updatedata);
 
+		//포인트에 따른 레벨 변경
+		$this->setUserLevel($mem_id);
+		
 		return $sum;
 	}
 
@@ -276,6 +279,9 @@ class Point extends CI_Controller
 			);
 			$this->CI->Member_model->update($mem_id, $updatedata);
 
+			//포인트에 따른 레벨 변경
+			$this->setUserLevel($mem_id);
+
 			return $sum;
 		}
 
@@ -375,6 +381,9 @@ class Point extends CI_Controller
 			);
 			$this->CI->Member_model->update($mem_id, $updatedata);
 
+			//포인트에 따른 레벨 변경
+			$this->setUserLevel($mem_id);
+
 			return $sum;
 		}
 
@@ -451,7 +460,7 @@ class Point extends CI_Controller
 		$this->CI->load->model(array('Member_level_history_model', 'CIC_member_level_config_model', 'Member_model', 'Point_model'));
 		$memberInfo = $this->CI->Member_model->get_by_memid($mem_id);
 		if(! ($memberInfo && element('mem_is_admin', $memberInfo)) ){
-			$pointSum = $this->CI->Point_model->get_point_sum($mem_id);
+			$pointSum = element('mem_point', $memberInfo);
 			$_levelConfig = $this->CI->CIC_member_level_config_model->get_by_pointSum($pointSum);
 			if($_levelConfig)
 			{
@@ -472,7 +481,7 @@ class Point extends CI_Controller
 					$this->Member_level_history_model->insert($levelhistoryinsert);
 
 					if($_mlclevel > $_memLevel && !$_checkHis){
-						return true;
+						return $_mlclevel;
 					}else{
 						return false;
 					}

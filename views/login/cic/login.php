@@ -13,12 +13,13 @@
 				<ul>
 					<li>
 						<p class="chk-input">
-							<input type="text" name="mem_userid" value="<?php echo set_value('mem_userid'); ?>" accesskey="L" placeholder="Email" autocomplete="off">
+							<input type="text" id="mem_userid" name="mem_userid"
+								value="<?php echo set_value('mem_userid'); ?>" accesskey="L" placeholder="Email" autocomplete="off" onkeypress="loginEnter(event)">
 						</p>
 					</li>
 					<li>
 						<p class="chk-input">
-							<input type="password" name="mem_password" placeholder="PASSWORD" autocomplete="off">
+							<input type="password" id="mem_password" name="mem_password" placeholder="PASSWORD" autocomplete="off" onkeypress="loginEnter(event)">
 						</p>
 					</li>
 				</ul>
@@ -28,26 +29,36 @@
 			if ($this->cbconfig->item('use_sociallogin')) {
 				$this->managelayout->add_js(base_url('assets/js/social_login.js'));
 			?>
-				<div class="form-group mt30 form-horizontal">
-					<label class="col-lg-4 control-label">소셜로그인</label>
-					<div class="col-lg-7">
+			<div class="form-group mt30 form-horizontal">
+				<label class="col-lg-4 control-label">소셜로그인</label>
+				<div class="col-lg-7">
 					<?php if ($this->cbconfig->item('use_sociallogin_facebook')) {?>
-						<a href="javascript:;" onClick="social_connect_on('facebook');" title="페이스북 로그인"><img src="<?php echo base_url('assets/images/social_facebook.png'); ?>" width="22" height="22" alt="페이스북 로그인" title="페이스북 로그인" /></a>
+					<a href="javascript:;" onClick="social_connect_on('facebook');" title="페이스북 로그인"><img
+							src="<?php echo base_url('assets/images/social_facebook.png'); ?>" width="22" height="22"
+							alt="페이스북 로그인" title="페이스북 로그인" /></a>
 					<?php } ?>
 					<?php if ($this->cbconfig->item('use_sociallogin_twitter')) {?>
-						<a href="javascript:;" onClick="social_connect_on('twitter');" title="트위터 로그인"><img src="<?php echo base_url('assets/images/social_twitter.png'); ?>" width="22" height="22" alt="트위터 로그인" title="트위터 로그인" /></a>
+					<a href="javascript:;" onClick="social_connect_on('twitter');" title="트위터 로그인"><img
+							src="<?php echo base_url('assets/images/social_twitter.png'); ?>" width="22" height="22"
+							alt="트위터 로그인" title="트위터 로그인" /></a>
 					<?php } ?>
 					<?php if ($this->cbconfig->item('use_sociallogin_google')) {?>
-						<a href="javascript:;" onClick="social_connect_on('google');" title="구글 로그인"><img src="<?php echo base_url('assets/images/social_google.png'); ?>" width="22" height="22" alt="구글 로그인" title="구글 로그인" /></a>
+					<a href="javascript:;" onClick="social_connect_on('google');" title="구글 로그인"><img
+							src="<?php echo base_url('assets/images/social_google.png'); ?>" width="22" height="22"
+							alt="구글 로그인" title="구글 로그인" /></a>
 					<?php } ?>
 					<?php if ($this->cbconfig->item('use_sociallogin_naver')) {?>
-						<a href="javascript:;" onClick="social_connect_on('naver');" title="네이버 로그인"><img src="<?php echo base_url('assets/images/social_naver.png'); ?>" width="22" height="22" alt="네이버 로그인" title="네이버 로그인" /></a>
+					<a href="javascript:;" onClick="social_connect_on('naver');" title="네이버 로그인"><img
+							src="<?php echo base_url('assets/images/social_naver.png'); ?>" width="22" height="22"
+							alt="네이버 로그인" title="네이버 로그인" /></a>
 					<?php } ?>
 					<?php if ($this->cbconfig->item('use_sociallogin_kakao')) {?>
-						<a href="javascript:;" onClick="social_connect_on('kakao');" title="카카오 로그인"><img src="<?php echo base_url('assets/images/social_kakao.png'); ?>" width="22" height="22" alt="카카오 로그인" title="카카오 로그인" /></a>
+					<a href="javascript:;" onClick="social_connect_on('kakao');" title="카카오 로그인"><img
+							src="<?php echo base_url('assets/images/social_kakao.png'); ?>" width="22" height="22"
+							alt="카카오 로그인" title="카카오 로그인" /></a>
 					<?php } ?>
-					</div>
 				</div>
+			</div>
 			<?php } ?>
 			<!-- 여기에 소셜로그인을 등록!! -->
 			<a class="login-btn"><span>SIGN IN</span></a>
@@ -64,7 +75,7 @@
 					</li>
 				</ul>
 			</div>
-			
+
 		</div>
 		<!-- page end // -->
 	</div>
@@ -72,25 +83,34 @@
 
 
 <script type="text/javascript">
-//<![CDATA[
-$(function() {
-	$('#flogin').validate({
-		rules: {
-			mem_userid : { required:true, minlength:3 },
-			mem_password : { required:true, minlength:4 }
-		}
+	//<![CDATA[
+	$(function () {
+		$('#flogin').validate({
+			rules: {
+				mem_userid: {
+					required: true,
+					minlength: 3
+				},
+				mem_password: {
+					required: true,
+					minlength: 4
+				}
+			}
+		});
 	});
-});
-$(document).on('change', "input:checkbox[name='autologin']", function() {
-	if (this.checked) {
-		$('.autologinalert').show(300);
-	} else {
-		$('.autologinalert').hide(300);
-	}
-});
 
-$(document).on('click', ".login-btn", function(){
-	$('#flogin').submit();
-})
-//]]>
+	$(document).on('click', ".login-btn", function () {
+		$('#flogin').submit();
+	});
+
+	function loginEnter(e) {
+		let fc_element = document.activeElement;
+		let is_focused = (document.getElementById('mem_password') == fc_element || document.getElementById('mem_userid') == fc_element);
+		if (e.keyCode == 13 && is_focused ) {
+			$('#flogin').submit();
+		}
+	}
+
+
+	//]]>
 </script>

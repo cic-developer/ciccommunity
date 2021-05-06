@@ -5,24 +5,24 @@
         <div class="member-wrap mypage">
             <div class="myinfo">
                 <div class="fl">
-                    <div class="photo"><img src="<?php echo base_url('assets/images/mypage-photo.png')?>" alt=""></div>
+                    <div class="photo" title="프로필 이미지"><img src="<?php echo base_url('assets/images/mypage-photo.png')?>" alt="">
+                </div>
                     <div class="my">
-                        <p class="btxt">이수호</p>
-                        <p class="stxt">(가나다 라마바사 아자차 가나다라 마바사 아자차)</p>
+                        <p class="btxt" alt="name" title = "이름"> <?=$member['mem_nickname']?> </p>
+                        <p class="stxt" title = "text">(가나다 라마바사 아자차 가나다라 마바사 아자차)</p>
                         <a href="<?php echo base_url('/membermodify/modify')?>" class="modify-btn"><span>수정</span></a>
                     </div>
+
                     <div class="state">
                         <ul>
                             <li>
-                                <p>dltngh2236@naver.com</p>
+                                <p> <?= $member['mem_email'] ?> </p>
                             </li>
                             <li>
-                                <p>010 1234 5678</p>
+                                <p> <?= $member['mem_phone'] ?></p>
                             </li>
                             <li>
-                                <p class="point">-1,000,000</p>
-                                <p class="pico"><img src="<?php echo base_url('assets/images/mypage-cht.png')?>" alt="">
-                                </p>
+                                <p class="point"><?= $member['mem_point'] ?></p>   
                             </li>
                         </ul>
                     </div>
@@ -30,10 +30,10 @@
                 <div class="fr">
                     <ul>
                         <li>
-                            <p>100,000,000</p>
+                            <p> <?= $member['mem_cp'] ?></p>
                         </li>
                         <li>
-                            <p>2,359</p>
+                            <p> <?= $member['mem_vp'] ?></p>
                         </li>
                     </ul>
                 </div>
@@ -52,14 +52,14 @@
                         <div class="txt">
                             <p class="btxt">CP <span>충전하기</span></p>
                             <p class="stxt">디지털 자산으로 <span>충전</span>! <br>건전한 커뮤니티 이용하기 </p>
-                            <a href="#n"><span>바로가기</span></a>
+                            <a href="<?php echo base_url('mypage/charge')?>"><span>바로가기</span></a>
                         </div>
                     </li>
                     <li>
                         <div class="txt">
                             <p class="btxt">CP <span>출금하기</span></p>
-                            <p class="stxt">현금화 인출 하기!</p>
-                            <a href="#n"><span>바로가기</span></a>
+                            <p class="stxt">PER 교환하기!</p>
+                            <a href="<?php echo base_url('mypage/withdraw')?>"><span>바로가기</span></a>
                         </div>
                     </li>
                     <li>

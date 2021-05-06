@@ -16,10 +16,9 @@
 					<p>게시글에 대해서 up / down으로 의견을 표출할 수 있습니다. 작성자는 보팅에 따라 지급 포인트를 받습니다.</p>
 				</div>
 				<div class="gap30"></div>
-				<div class="upper r">
-					<a href="#n" class="bw-btn"><span>목록</span></a>
-					<a href="#n" class="bw-btn"><span>이전</span></a>
-					<a href="#n" class="bw-btn"><span>다음</span></a>
+				<div class="upper r"><a href="<?php echo element('list_url', $view); ?>" class="bw-btn"><span>목록</span></a>
+					<a href="<?php echo element('url', element('prev_post', $view)); ?>" class="bw-btn"><span>이전</span></a>
+					<a href="<?php echo element('url', element('next_post', $view)); ?>" class="bw-btn"><span>다음</span></a>
 				</div>
 				<div class="tits vp">
 					<!-- <p class="logo"><img src="../_Img/Content/record-logo.jpg" alt=""/></p> -->
@@ -43,6 +42,7 @@
 								<li><a href="#n" class="down">152,358</a></li>
 							</ul>
 						</div>
+						
 					</div>
 				</div>
 				<div class="cons">
@@ -64,6 +64,14 @@
 							<li><a href="#n" class="down">152,358</a></li>
 						</ul>
 					</div>
+				</div>
+				<div class="lower r">
+					<?php if(element('modify_url', $view)){ ?>
+					<a href="<?php echo element('modify_url', $view); ?>" class="bw-btn"><span>수정</span></a>
+					<?php } ?>
+					<?php if(element('delete_url', $view)){ ?>
+					<a href="javascript:void(0);" class="bw-btn btn-one-delete" data-one-delete-url="<?php echo element('delete_url', $view); ?>"><span>삭제</span></a>
+					<?php } ?>
 				</div>
 			</div>
 			<div class="gap60"></div>

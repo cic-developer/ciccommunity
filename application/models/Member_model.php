@@ -121,4 +121,16 @@ class Member_model extends CB_Model
 
 		return $result;
 	}
+
+	public function set_user_point($primary_value = '', $money, $mem_cp)
+	{
+		$arr = array(
+			'mem_cp' => $mem_cp-$money,
+		);
+
+		$result = $this->update($primary_value, $arr);
+
+		return $result;
+	}
+
 }

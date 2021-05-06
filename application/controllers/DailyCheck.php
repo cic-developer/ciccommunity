@@ -37,7 +37,29 @@ class DailyCheck extends CB_Controller
 
     public function index()
     {
+        $mem_id = (int) $this->member->item('mem_id');
 
+		$view = array();
+		$view['view'] = array();
+        
+        // if(!$mem_id || is_numeric($mem_id)){
+        //     alert('유저 정보가 없습니다.\n로그인후 다시 시도해주세요' , '/');
+        // }
+		$layoutconfig = array(
+			'path' => 'dailycheck',
+			'layout' => 'layout',
+			'skin' => 'index',
+			'layout_dir' => 'cic_sub',
+			'mobile_layout_dir' => 'cic_sub',
+			'skin_dir' => 'cic',
+			'mobile_skin_dir' => 'cic',
+			'page_title' => '출석체크',
+		);
+
+		$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
     }
 
     function ajax_dailyCheck(){

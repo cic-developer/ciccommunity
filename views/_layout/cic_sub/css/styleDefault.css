@@ -99,9 +99,31 @@ i, em{font-style:normal}
 
 
 /*=======================================================
+  sel-box
+=========================================================*/
+.sel-box{position:relative; width:200px;}
+.sel-box .sel-btn{display:block; line-height:45px; font-size:15px; color:#666; letter-spacing:-0.03em; position:relative;}
+.sel-box .sel-btn:after{width:14px;height:14px; position:absolute;right:7px; top:50%;margin-top:-7px;display:block; content:"";background:url(/assets/images/search-tarrow.png) no-repeat center center;}
+.sel-box .sel-btn.active:after{background-image:url(/assets/images/search-tarrowo.png)}
+.sel-box ul{background:#fff; display:none; width:100%; position:absolute; left:0; top:45px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1)  ; -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1)  ; -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1)  ; }
+.sel-box li{}
+.sel-box li a{display:block;line-height:30px; padding:0 10px;font-size:14px; letter-spacing:-0.03em; color:#555;}
+.sel-box li.active a{color:#111; background:#e7f6fd;}
+	@media only screen and (max-width:999px){
+	    .sel-box .sel-btn{font-size:13px;}
+		.sel-box.sel-box li a{font-size:13px;}
+	}
+	@media only screen and (max-width:680px){
+		
+	}
+	@media only screen and (max-width:480px){
+		
+	}
+	
+/*=======================================================
   paging-wrap
 =========================================================*/
-.paging-wrap{margin-top:30px;font-size:0px; text-align:center; display:block; position:relative;}
+.paging-wrap{margin-top:40px;font-size:0px; text-align:center; display:block; position:relative;}
 .paging-wrap a.ctrl{display:inline-block;vertical-align:top;text-decoration: none; height:24px; font-size:11px; color:#666; line-height:24px; box-sizing:border-box; margin:0 3px;}
 .paging-wrap li, .paging-wrap ul{display:inline-block; vertical-align:top;}
 .paging-wrap ul{padding:0 10px}
@@ -114,6 +136,14 @@ i, em{font-style:normal}
 
 .paging-wrap .num{display:none;vertical-align:top; padding:0 20px; color:#666; font-size:14px; line-height:30px;}
 .paging-wrap .num span{font-weight:700;color:#111;}
+
+/* CIBOARD PAGINATION 용 */
+.paging-wrap li.active a, .paging-wrap li.active a:hover{color:#fe4e10;font-weight:700; border:1px solid #dedede; background:#fff;}
+.paging-wrap a[rel="prev"], .paging-wrap a[rel="next"]{display:inline-block;vertical-align:top;text-decoration: none; height:24px; font-size:11px; color:#666; line-height:24px; box-sizing:border-box; margin:0 3px;}
+.paging-wrap a[rel="prev"]{background:url(/assets/images/page-prev.jpg) no-repeat left center; padding-left:15px;}
+.paging-wrap a[rel="next"]{background:url(/assets/images/page-next.jpg) no-repeat right center; padding-right:15px;}
+/* CIBOARD PAGINATION 용 끝 */
+
 	@media only screen and (max-width:1200px){
 		
 	}

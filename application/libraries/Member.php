@@ -86,6 +86,7 @@ class Member extends CI_Controller
 					$member = array_merge($member, $metas);
 				}
 				$member['social'] = $this->get_all_social_meta(element('mem_id', $member));
+				$member['level'] = $this->get_member_level(element('mem_level', $member));
 				$this->mb = $member;
 			}
 			return $this->mb;
@@ -334,6 +335,39 @@ class Member extends CI_Controller
 		$this->CI->Member_userid_model->update($mem_id, array('mem_status' => 0));
 
 		return true;
+	}
+
+	/**
+	 * 명예포인트에 따른 현재 레벨 가져오기
+	 */
+	public function get_member_level($mem_level = 1)
+	{
+		if ($this->is_member()) {
+			if($mem_level == 100){
+				return array( 
+					'mlc_title' => '관리자', 
+					'mlc_level' => 100, 
+					'mlc_attach' => NULL, 
+				);
+			}
+			$this->CI->load->model('CIC_member_level_config_model');
+			$where = array(
+				'mlc_level' => $mem_level,
+				'mlc_enable' => 0,
+			);
+			$result = $this->CI->CIC_member_level_config_model->get_one('', '', $where);
+
+			if($result){
+				return $result;
+			} else {
+				$this->CI->load->library('point');
+				$this->CI->point->setUserLevel($this->is_member());
+				$member = $this->CI->Member_model->get_by_memid($this->is_member());
+				return $this->get_member_level(element('mem_level', $member));
+			}
+		} else {
+			return false;
+		}
 	}
 
 }

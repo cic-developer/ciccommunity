@@ -431,23 +431,14 @@
                     })
                 </script>
             </div>
-            <?php if($this->member->is_member()){ ?>
+		    <?php if (element('write_url', element('list', $view))) { ?>
             <div class="lower r">
                 <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn">글쓰기</a>
             </div>
             <?php }?>
             <!-- s: paging-wrap -->
             <div class="paging-wrap">
-                <!-- <a href="#" class="prev ctrl"><span>이전</span></a> -->
-                <ul>
-                    <li><a href="#" class="active">1</a></li>
-                    <li><a href="<?php echo base_url('post/3')?>">2</a></li>
-                    <li><a href="<?php echo base_url('post/3')?>">3</a></li>
-                    <li><a href="<?php echo base_url('post/3')?>">4</a></li>
-                    <li><a href="<?php echo base_url('post/3')?>">5</a></li>
-                </ul>
-                <p class="num"><span>1</span> / 10 </p>
-                <a href="#" class="next ctrl"><span>다음</span></a>
+                <?php echo element('paging', element('list', $view)); ?>
             </div>
             <!-- e: paging-wrap -->
             <!-- s: board-filter -->

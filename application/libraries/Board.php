@@ -223,7 +223,7 @@ class Board extends CI_Controller
 		$deletewhere = array(
 			'target_id' => $post_id,
 			'target_type' => 1,
-		 );
+		);
 		$this->CI->Blame_model->delete_where($deletewhere);
 		$this->CI->Like_model->delete_where($deletewhere);
 
@@ -375,6 +375,7 @@ class Board extends CI_Controller
 
 		return true;
 	}
+
 
 
 	/**

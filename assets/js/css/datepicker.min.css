@@ -350,8 +350,8 @@
 	webkit-justify-content: center;
 }
 
-.datepicker--nav-action .prev{display:block; width:32px;height:32px; z-index:9999 !important; background:url(/assets/images/Content/calendar-prev.png) no-repeat center center; background-size:16px auto; }
-.datepicker--nav-action .next{display:block; width:32px;height:32px; z-index:9999 !important; background:url(/assets/images/Content/calendar-next.png) no-repeat center center; background-size:16px auto; }
+.datepicker--nav-action .prev{display:block; width:32px;height:32px; z-index:9999 !important; background:url(../../_Img/Content/calendar-prev.png) no-repeat center center; background-size:16px auto; }
+.datepicker--nav-action .next{display:block; width:32px;height:32px; z-index:9999 !important; background:url(../../_Img/Content/calendar-next.png) no-repeat center center; background-size:16px auto; }
 
 
 .datepicker--nav-action

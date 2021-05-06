@@ -2,10 +2,10 @@
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
 
 <div id="container-wrap">
-		<div id="contents" class="div-cont">
+	<div id="contents" class="div-cont">
 		<!-- page start // -->
 		<div class="member-wrap modify">
-		<?php
+			<?php
 			$attributes = array('class' => 'form-horizontal', 'name' => 'fregisterform', 'id' => 'fregisterform');
 			echo form_open_multipart(current_url(), $attributes);
 		?>
@@ -16,7 +16,8 @@
 						<p class="btxt">ID (Email)</p>
 						<div class="field">
 							<p class="chk-input w210 readonly">
-								<input type="text" placeholder="" value="<?php echo $this->member->item('mem_email'); ?>" readonly="">
+								<input type="text" placeholder=""
+									value="<?php echo $this->member->item('mem_email'); ?>" readonly="">
 							</p>
 						</div>
 					</li>
@@ -24,15 +25,17 @@
 						<p class="btxt">닉네임</p>
 						<div class="field">
 							<p class="chk-input w210 readonly">
-								<input type="text" placeholder="" value="<?php echo $this->member->item('mem_nickname'); ?>" readonly="">
+								<input type="text" placeholder=""
+									value="<?php echo $this->member->item('mem_nickname'); ?>" readonly="">
 							</p>
 						</div>
 					</li>
 					<li>
 						<p class="btxt">핸드폰</p>
-						<div class="field">
+						<div class="field modify">
 							<p class="chk-input w380 readonly">
-								<input type="text" placeholder="" value="<?php echo $this->member->item('mem_phone'); ?>" readonly="">
+								<input type="text" placeholder=""
+									value="<?php echo $this->member->item('mem_phone'); ?>" readonly="">
 							</p>
 							<a href="#n" class="modify-btn"><span>핸드폰번호변경</span></a>
 						</div>
@@ -70,7 +73,7 @@
 				<a href="#n" class="leave-btn"><span>회원탈퇴</span></a>
 			</div>
 			<?php echo form_close(); ?>
-		</div>		
-		<!-- page end // -->
 		</div>
+		<!-- page end // -->
 	</div>
+</div>

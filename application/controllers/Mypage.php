@@ -18,7 +18,7 @@ class Mypage extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array();
+	protected $models = array('CIC_withdraw', 'CIC_withdraw_log', 'Member');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -32,7 +32,7 @@ class Mypage extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('pagination', 'querystring'));
+		$this->load->library(array('pagination', 'querystring','member'));
 
 	}
 
@@ -74,10 +74,12 @@ class Mypage extends CB_Controller
 				$view['view']['member_group_name'] .= element('mgr_title', $item);
 			}
 		}
+		$member_info = $this->member->get_member();
+		$view['member'] = $member_info;
+	
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-
 		/**
 		 * 레이아웃을 정의합니다
 		 */
@@ -1162,6 +1164,198 @@ class Mypage extends CB_Controller
 			'meta_author' => $meta_author,
 			'page_name' => $page_name,
 		);
+		$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
+	}
+
+	// 출금 페이지
+	function withdraw(){
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_mypage_withdraw';
+		$this->load->event($eventname);
+
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+
+		$view = array();
+		$view['view'] = array();
+		
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		// 회원 정보를 가져옵니다
+		$member_info = $this->member->get_member();
+		$view['view']['mem_cp'] = $member_info['mem_cp'];
+
+		// 출금 요청 url
+		$view['view']['req_url'] = site_url('mypage/withdraw_request');
+
+		// $config['base_url'] = site_url('mypage/comment') . '?' . $param->replace('page');
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+		$layoutconfig = array(
+			'path' => 'mypage',
+			'layout' => 'layout',
+			'skin' => 'withdraw',
+			'layout_dir' => 'cic_sub',
+			'mobile_layout_dir' => 'cic_sub',
+			'skin_dir' => 'cic',
+			'mobile_skin_dir' => 'cic',
+			'page_title' => '출금신청',
+		);	
+
+		$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
+	}
+
+	// 출금요청
+	function withdraw_request(){
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_mypage_withdraw_request';
+		$this->load->event($eventname);
+
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+
+		// 데이터 빡스~
+		$view = array();
+		$view['view'] = array();
+
+		// 회원 데이터 가져오기
+		$member_info = $this->member->get_member();
+		$view['member'] = $member_info;
+		
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+        
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+		
+		$config = array(
+			array(
+				'field' => 'money',
+				'label' => '금액',
+				'rules' => 'trim|required|is_natural_no_zero|less_than_equal_to['.$member_info['mem_cp'].']',
+			),
+		);
+		$this->form_validation->set_rules($config);
+		$form_validation = $this->form_validation->run();
+
+		// 출금신청
+		if ($form_validation) {
+
+			// 회원정보 가져오기
+			if($member_info){
+				$money = $this->input->post('money');
+				$mem_id = $member_info['mem_id'];
+				$mem_userid = $member_info['mem_userid'];
+				$mem_userip = $this->input->ip_address();
+				$mem_nickname = $member_info['mem_nickname'];
+				$mem_cp = $member_info['mem_cp'];
+				$mem_wallet_address = $member_info['mem_address1'];
+			}
+
+			/**
+			 * 포인트 차감
+			 * member
+			 */
+			$result = $this->Member_model->set_user_point($mem_id, $money, $mem_cp);
+
+			if($result != 1){
+				$this->session->set_flashdata(
+					'message',
+					'출금 신청에 실패하였습니다 (관리자 문의)'
+				);
+			} else{
+				/**
+				 * 출금 신청
+				 * cic_withdraw
+				 */
+				$result = $this->CIC_withdraw_model->set_withdraw($mem_id, $mem_userid, $mem_userip, $mem_nickname, $mem_wallet_address, $money);
+
+				if($result == 0 ){
+					$this->session->set_flashdata(
+						'message',
+						'포인트 차감후 신청에 실패하였습니다 (관리자 문의)'
+					);
+				} else{
+					$this->session->set_flashdata(
+						'message',
+						'정상적으로 신청되었습니다'
+					);
+				}
+				
+				// else{
+					/**
+					 * 신청 로그를 남깁니다.
+					 * cic_withdraw_log
+					 */
+					// $result = $this->CIC_withdraw_log_model->set_withdraw_log('유저 출금신청', $mem_wallet_address, '', '', $mem_userid, $mem_userip, $money, '');
+
+					// if($result == 0){
+					// 	$this->session->set_flashdata(
+					// 		'message',
+					// 		'정상 처리후 로그오류입니다 (관리자 문의)'
+					// 	);
+					// } else{
+					// 	$this->session->set_flashdata(
+					// 		'message',
+					// 		'정상적으로 신청되었습니다'
+					// 	);
+					// }
+				// }
+			}
+
+		} else {
+			$this->session->set_flashdata(
+				'message',
+				'금액을 옳바르게 입력해주세요'
+			);
+		}
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('after', $eventname);
+
+		/**
+		 * 삭제가 끝난 후 목록페이지로 이동합니다
+		 */
+		// $param =& $this->querystring;
+
+		redirect('mypage/withdraw');
+	}
+
+	function charge(){
+		$mem_id = (int) $this->member->item('mem_id');
+
+		$view = array();
+		$view['view'] = array();
+        
+        // if(!$mem_id || is_numeric($mem_id)){
+        //     alert('유저 정보가 없습니다.\n로그인후 다시 시도해주세요' , '/');
+        // }
+		$layoutconfig = array(
+			'path' => 'mypage',
+			'layout' => 'layout',
+			'skin' => 'charge',
+			'layout_dir' => 'cic_sub',
+			'mobile_layout_dir' => 'cic_sub',
+			'skin_dir' => 'cic',
+			'mobile_skin_dir' => 'cic',
+			'page_title' => '충전하기',
+		);
+
 		$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));

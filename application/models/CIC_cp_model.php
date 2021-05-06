@@ -145,4 +145,21 @@ class CIC_cp_model extends CB_Model
 
 		return $result;
 	}
+
+	public function set_cp_retire($content = '출금반려', $memIdx = 0, $money = 0)
+	{
+
+		$arr = array(
+			'mem_id'=> $memIdx,
+			'cp_datetime' => date("Y-m-d H:i:s"),
+			'cp_content' => $content,
+			'cp_point' => $money,
+			'cp_type' => '@byadmin',
+			'cp_related_id' => $memIdx,
+			'cp_action' => '출금반려'
+		);
+
+		$result = $this->insert($arr);
+		return $result;
+	}
 }
