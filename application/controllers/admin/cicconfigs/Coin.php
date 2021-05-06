@@ -62,7 +62,7 @@ class Coin extends CB_Controller
 
 
 		$getList = $this -> Coin_model->get_coinlist();
-        print_r($getList);
+
 		for($i=0; $i<count($getList); $i++){
 
 			//'market' => $getList[$i]['market']
@@ -77,7 +77,7 @@ class Coin extends CB_Controller
 				if(isset($data) && !empty($data)){
 					$stock = $this->Coin_model->insertStockData($data);
 				}	
-				$view['view']['alert_message'] = '정상적으로 저장되었습니다';}
+					$view['view']['alert_message'] = '정상적으로 저장되었습니다';}
 					
 		}
         
