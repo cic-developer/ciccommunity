@@ -369,12 +369,12 @@
     // retier submit
     function wid_retire_submit(f, acttype, actpage){
         var cp_content2 = $('#cp_content2').val().trim();
-        alert(cp_content2.length);
-        return;
+        if(cp_content2.length < 1){
+            alert("필수값 입니다")
+            $('#cp_content2').focus();
+            return;
+        }
 
-
-        var str = '';
-        // console.log(" => ", f)
         if (acttype === 'retire' && ! confirm('선택한 요청을 정말 반려 하시겠습니까?')) return;
         f.action = actpage;
 		f.submit();

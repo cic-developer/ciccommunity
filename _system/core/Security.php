@@ -263,6 +263,7 @@ class CI_Security {
 	 */
 	public function csrf_set_cookie()
 	{
+		print_r('csrf set cookie');
 		$expire = time() + $this->_csrf_expire;
 		$secure_cookie = (bool) config_item('cookie_secure');
 
