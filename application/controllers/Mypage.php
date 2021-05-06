@@ -1214,13 +1214,13 @@ class Mypage extends CB_Controller
 
 		$result = $this->CIC_withdraw_model->get_withdraw_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 
-		print_r($per_page);
-		print_r('</br>');
-		print_r($result);
-		print_r($result);
-		print_r($result);
-		print_r($result);
-		return;
+		// print_r($per_page);
+		// print_r('~~~~~~~~~~~~~~~~~');
+		// print_r($result);
+		// print_r($result);
+		// print_r($result);
+		// print_r($result);
+		// return;
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
