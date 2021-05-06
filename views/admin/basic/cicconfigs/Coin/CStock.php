@@ -44,7 +44,7 @@
 				</div>
 
 				<div class="btn-group pull-right" role="group" aria-label="...">
-					<button type="submit" class="btn btn-success btn-sm">저장하기</button>
+					<button type="submit" name="submit" class="btn btn-success btn-sm">저장하기</button>
 				</div>
 			</form>	
 			<?php echo form_close(); ?>
