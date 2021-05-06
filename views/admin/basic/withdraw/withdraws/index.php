@@ -73,7 +73,7 @@
                                                 data-adminip="<?php echo html_escape(element('wid_admin_ip', $result)); ?>"
                                                         
                                             data-res-datetime="<?php echo html_escape(element('wid_res_datetime', $result)); ?>"
-                                                data-state="<?php echo html_escape(element('wid_res_datetime', $result)); ?>"
+                                                data-state="<?php echo html_escape(element('wid_state', $result)) != null ? (html_escape(element('wid_state', $result)) == 1 ? '승인' : '반려' ) : '';?>"
                                                     data-content="<?php echo html_escape(element('wid_content', $result)); ?>"
                                                 
 
