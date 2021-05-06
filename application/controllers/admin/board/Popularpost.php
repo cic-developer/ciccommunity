@@ -94,8 +94,7 @@ class Popularpost extends CB_Controller
 		// $nowtime = cdate('Y-m-d H:i:s');
 		// $final = $nowtime - $checktime;
 		// print_r($checktime);
-		print_r($this->db->last_query());
-		exit;
+		// exit;
 		
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		if (element('list', $result)) {
