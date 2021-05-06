@@ -225,21 +225,6 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <table class="table table-hover table-striped table-bordered">
-                        <!-- <thead>
-                            <tr>
-                                <th>관리자아이디</th>
-                                <th>관리자아이피</th>
-                                <th>처리날짜</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="admin-id" id="admin-id"></td>
-                                <td class="admin-ip" id="admin-ip"></td>
-                                <td class="result-date" id="result-date"></td>
-                            </tr>    
-                        </tbody> -->
-
                         <!-- 번호 -->
                         <tr>
                             <th width="135">번호</th>

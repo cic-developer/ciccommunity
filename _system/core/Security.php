@@ -246,6 +246,7 @@ class CI_Security {
 
 		if ($valid !== TRUE)
 		{
+			print_r('hi');
 			$this->csrf_show_error();
 		}
 
