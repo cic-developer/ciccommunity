@@ -163,7 +163,7 @@ class Coin_model extends CB_Model
     }
 
     function dropdown_list($data){
-        $this->db->where('market',$data);
+        //$this->db->where('market',$data);
         $query = $this->db->get('cic_coin_admin');
         if ($query->num_rows() > 0){
             $query_ = $query = $this->db->get('cic_stocks');
