@@ -90,6 +90,9 @@ class Popularpost extends CB_Controller
 		$result = $this->{$this->modelname}
 			->get_popularpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		
+		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);	
+		print_r($datetime);
+		exit;
 		
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		if (element('list', $result)) {

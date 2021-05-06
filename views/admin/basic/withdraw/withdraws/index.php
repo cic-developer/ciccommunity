@@ -283,7 +283,7 @@
                         </tr>
                         <tr>
                             <th>처리날짜</th>
-                            <td id=""></td>
+                            <td id="res-datetime"></td>
                         </tr>
                         <tr>
                             <th>처리결과</th>
@@ -404,7 +404,7 @@
 		var adminid = $(this).data('adminid');
 		var adminip = $(this).data('adminip');
 
-		var resultdate = $(this).data('resultdate');
+		var res_datetime = $(this).data('res-datetime');
 		var content = $(this).data('content');
 
         document.getElementById("wid-idx").innerHTML = idx;
@@ -419,7 +419,7 @@
         document.getElementById("admin-ip").innerHTML = adminip;
 
 
-        document.getElementById("result-date").innerHTML = resultdate;
+        document.getElementById("res-datetime").innerHTML = res_datetime;
         // $("#myModal-result .modal-body #admin-id").val( adminid ); 
         // $("#myModal-result .modal-body #admin-ip").val( adminip );
         // $("#myModal-result .modal-body #result-date").val( resultdate ); 

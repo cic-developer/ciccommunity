@@ -22,9 +22,8 @@
 
 			<div class="form-group">
 			
-					<div class="col-sm-10">
-						활성화 -
-						<label for="cpc_enable" class="control-label">	
+	
+							
 						<select name="cpc_enable[]" id="doc_layout" class="form-control">
 							<?php		
 								foreach($realtime_coin_info as $stocks){	
@@ -33,11 +32,7 @@
 								}
 							?>	
 						</select>
-							
-						</label>
-				
-					</div>
-			</div>
+
 
 
     <?php echo form_close(); ?> 
