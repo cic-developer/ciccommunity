@@ -119,7 +119,6 @@
                                         <!-- Modal Header -->
                                         <div class="modal-header">
                                             <h4 class="modal-title">출금 승인 <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
-                                            <h6>* 필수값</h6>
                                         </div>
 
                                         <!-- Modal body -->
@@ -146,6 +145,7 @@
                                         
                                         <!-- Modal footer -->
                                         <div class="modal-footer">
+                                            <h6 class="pull-left">* 필수값</h6>
                                             <button type="button" class="btn btn-success btn-approve" data-one-modal-url="<?php echo element("approve_url", $view); ?>">승인</button>
                                         </div>
 
