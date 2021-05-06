@@ -160,7 +160,7 @@ class Coin_model extends CB_Model
 
         //convert json to php array or object
         $array = json_decode($response, true);
-        return $array;
+        return $array->row_array();
     }
 
     function dropdown_list($data){
