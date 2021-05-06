@@ -108,16 +108,17 @@ class Coin extends CB_Controller
 			$list = array(
 				'selected_market' => $this -> input -> post('selected_market')
 			);
+			print_r($list);
+			exit;
 			if(isset($list_) && !empty($list_)){
-			foreach($list as $list_){
-				print_r ($list_);
-				exit;
-			
-				$stock_ = $this->Coin_model->dropdown_list($list);
-				$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-				print_r($stock_);
-		}
+				foreach($list as $list_){
+					print_r ($list_);
+					exit;
 				
+					$stock_ = $this->Coin_model->dropdown_list($list);
+					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+					print_r($stock_);
+				}
 			}
 			
 			
@@ -155,7 +156,7 @@ class Coin extends CB_Controller
 			// echo "<br><pre>";
 			// print_r($realtime_coin_info);
 			// echo "</pre>";
-		}
+	}
 	
 
 	public function coin_search(){
