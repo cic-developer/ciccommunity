@@ -45,7 +45,6 @@
 								<th>추천수</th>
 								<th>비추천수</th>
 								<th>조회</th>
-								<th>인기게시글 순위</th>
 								<th>상태</th>
 								<th><input type="checkbox" name="chkall" id="chkall" /></th>
 							</tr>
@@ -65,7 +64,6 @@
 								<td><?php echo number_format(element('post_like_point', $result)); ?></td>
 								<td><?php echo number_format(element('post_dislike_point', $result)); ?></td>
 								<td><?php echo number_format(element('post_hit', $result)); ?></td>
-								<td><?php echo number_format(element('post_pop_ranking', $result)); ?></td>
 								<td><?php echo element('post_secret', $result) === '1' ? '비밀' : '공개'; ?></td>
 								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
 							</tr>
