@@ -246,7 +246,9 @@ class CI_Security {
 
 		if ($valid !== TRUE)
 		{
-			print_r('hi : '.$this->_csrf_token_name." : ".$_POST[$this->_csrf_token_name]);
+			print_r('hi : '.$this->_csrf_token_name." : ".$_POST[$this->_csrf_token_name].'<br/>');
+			print_r('hi : '.$this->_csrf_cookie_name." : ".$_COOKIE[$this->_csrf_cookie_name]);
+			print_r($_COOKIE);
 			$this->csrf_show_error();
 		}
 
