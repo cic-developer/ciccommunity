@@ -209,9 +209,13 @@ class Withdraws extends CB_Controller
 		if($member_info['mem_userid'] 
 				&& $this->input->ip_address() && $this->input->post('cp_transaction')
 					&& $this->input->post('cp_percoin') && $this->input->post('cp_content1') ){
-			$content = $this->input->post('cp_content1');
+
 			$adminid = $member_info['mem_userid'];
 			$adminip = $this->input->ip_address();
+			$transaction = $this->input->post('cp_transaction');
+			$percoin = $this->input->post('cp_percoin');
+			$content = $this->input->post('cp_content1');
+			$memo = $this->input->post('cp_memo');
 		}
 		
 		/**

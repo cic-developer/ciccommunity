@@ -119,7 +119,9 @@ class Coin extends CB_Controller
 
 		//Get price from API
 		//$realtime_coin_info = $this->Coin_model->get_price();
+        
 
+		//
 
 		$getStock = $this -> Coin_model->getstockData();
         $view['getStock'] = $getStock;

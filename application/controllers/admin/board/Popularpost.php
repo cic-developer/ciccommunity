@@ -185,7 +185,7 @@ class Popularpost extends CB_Controller
 		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
 			foreach ($this->input->post('chk') as $val) {
 				if ($val) {
-					$this->Test_model->upadte_post_exept_state($val);
+					$this->Post_model->upadte_post_exept_state($val);
 				}
 			}
 		}
