@@ -132,7 +132,7 @@ class Coin_model extends CB_Model
         }
     }
 
-    function coin_list(){
+    function get_coinlist(){
         $curl = curl_init();
         // $market = "KRW-BTC";
         //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);

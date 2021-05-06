@@ -1206,8 +1206,7 @@ class Mypage extends CB_Controller
 			show_404();
 		}
 		$view['view']['mem_cp'] = $member_info['mem_cp'];
-		// $where['wid_state'] = $member_info['mem_id'];
-		$where['wid_state'] = null;
+		$where['wid_mem_idx'] = $member_info['mem_id'];
 		// $view['view']['mem_id'] = $member_info['mem_id'];
 
 		// 출금 요청 url
@@ -1215,13 +1214,6 @@ class Mypage extends CB_Controller
 
 		$result = $this->CIC_withdraw_model->get_withdraw_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 
-		// print_r($per_page);//70
-		// print_r($offset); //0
-		// print_r($where); //
-		print_r($result);
-		// print_r($result);
-		// print_r($result);
-		return;
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
