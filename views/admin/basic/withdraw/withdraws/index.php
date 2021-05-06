@@ -169,13 +169,18 @@
                                                 <!-- <label for="usr"></label> -->
                                                 <input type="hidden" name="wid_idx2" id="wid_idx2" value="" />
                                                 <div class="form-group">
-                                                    <label for="cp_content2">사유:</label>
-                                                    <textarea class="form-control" rows="5" cols="75" id="cp_content2" name="cp_content2" placeholder="출금 반려 사유를 입력해주세요." style="width:100%;"></textarea>
+                                                    <label for="cp_content2">사유*:</label>
+                                                    <textarea class="form-control" rows="3" cols="75" id="cp_content2" name="cp_content2" placeholder="처리사유를 입력해주세요" required style="width:100%;"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="cp_memo2">메모:</label>
+                                                    <textarea class="form-control" rows="5" cols="75" id="cp_memo2" name="cp_memo2" placeholder="메모" style="width:100%;"></textarea>
                                                 </div>
                                         </div>
                                         
                                         <!-- Modal footer -->
                                         <div class="modal-footer">
+                                            <h6 class="pull-left">* 필수값</h6>
                                             <button type="button" class="btn btn-danger btn-retire" data-one-modal-url="<?php echo element("retire_url", $view); ?>">반려</button>
                                         </div>
 

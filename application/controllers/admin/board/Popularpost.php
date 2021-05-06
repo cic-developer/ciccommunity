@@ -88,7 +88,7 @@ class Popularpost extends CB_Controller
 			$where['brd_id'] = $brdid;
 		}
 		$result = $this->{$this->modelname}
-			->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->get_popularpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		
 		// $checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		// $nowtime = cdate('Y-m-d H:i:s');
