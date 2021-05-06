@@ -1215,6 +1215,18 @@ class Mypage extends CB_Controller
 		$result = $this->CIC_withdraw_model->get_withdraw_list($per_page, $offset, $view['view']['mem_id'], '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
+		$view['view']['data'] = $result;
+
+		/**
+		 * 페이지네이션을 생성합니다
+		 */
+		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['total_rows'] = $result['total_rows'];
+		$config['per_page'] = $per_page;
+		$this->pagination->initialize($config);
+		$view['view']['paging'] = $this->pagination->create_links();
+		$view['view']['page'] = $page;
+
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
