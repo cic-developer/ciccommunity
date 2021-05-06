@@ -157,7 +157,7 @@ class CI_Input {
 		if ($this->_enable_csrf === TRUE && ! is_cli())
 		{
 			
-			print_r('csrf check : '.$this->_csrf_cookie_name." : ".$_POST[$this->_csrf_token_name].' : '.$_COOKIE[$this->_csrf_cookie_name]);
+			print_r('csrf check : '.$_POST['csrf_test_name'].' : '.$_COOKIE['csrf_cookie_name']);
 			$this->security->csrf_verify();
 		}
 
