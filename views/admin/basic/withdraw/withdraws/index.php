@@ -287,7 +287,7 @@
                         </tr>
                         <tr>
                             <th>처리결과</th>
-                            <td id=""></td>
+                            <td id="wid-state"></td>
                         </tr>
                         <tr>
                             <th>처리사유</th>
@@ -421,6 +421,7 @@
 
 
         document.getElementById("wid-res-datetime").innerHTML = res_datetime;
+        document.getElementById("wid-state").innerHTML = state;
         document.getElementById("wid-content").innerHTML = content;
         // $("#myModal-result .modal-body #admin-id").val( adminid ); 
         // $("#myModal-result .modal-body #admin-ip").val( adminip );
