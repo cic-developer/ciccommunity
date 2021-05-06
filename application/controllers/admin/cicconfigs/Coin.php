@@ -164,7 +164,7 @@ class Coin extends CB_Controller
 			// echo "</pre>";
 		}
 	
-
+	}
 	function coin_search(){
 		$this->load->view('search');
 			//skeyword
