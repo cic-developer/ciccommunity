@@ -1220,7 +1220,7 @@ class Mypage extends CB_Controller
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['base_url'] = site_url('mypage/post') . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
