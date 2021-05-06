@@ -156,6 +156,8 @@ class CI_Input {
 		// CSRF Protection check
 		if ($this->_enable_csrf === TRUE && ! is_cli())
 		{
+			
+			print_r('csrf check : '.$this->_csrf_cookie_name." : ".$_POST[$this->_csrf_token_name].' : '.$_COOKIE[$this->_csrf_cookie_name]);
 			$this->security->csrf_verify();
 		}
 
