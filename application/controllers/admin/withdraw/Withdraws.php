@@ -206,6 +206,9 @@ class Withdraws extends CB_Controller
 		if(!$member_info){
 			show_404();
 		}
+
+		print_r("Hi");
+		return;
 		if($member_info['mem_userid'] 
 				&& $this->input->ip_address() && $this->input->post('cp_transaction')
 					&& $this->input->post('cp_percoin') && $this->input->post('cp_content1') ){
