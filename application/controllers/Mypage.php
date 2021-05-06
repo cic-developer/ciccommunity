@@ -1202,13 +1202,17 @@ class Mypage extends CB_Controller
 
 		// 회원 정보를 가져옵니다
 		$member_info = $this->member->get_member();
+		$member_info = $this->member->get_member();
+		if(!$member_info){
+			show_404();
+		}
 		$view['view']['mem_cp'] = $member_info['mem_cp'];
 		$view['view']['mem_id'] = $member_info['mem_id'];
 
 		// 출금 요청 url
 		$view['view']['req_url'] = site_url('mypage/withdraw_request');
 
-		$result = $this->CIC_withdraw_model->get_withdraw_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		$result = $this->CIC_withdraw_model->get_withdraw_list($per_page, $offset, $view['view']['mem_id'], '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		// 이벤트가 존재하면 실행합니다
