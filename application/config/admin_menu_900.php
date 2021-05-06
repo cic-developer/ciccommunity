@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $config['admin_page_menu']['withdraw'] =
 	array(
-		'__config'					=> array('출금요청관리', 'fa-bar-chart-o'),
+		'__config'					=> array('출금요청관리', 'fas fa-hand-holding-usd'),
 		'menu'						=> array(
 			'withdraws'			=> array('출금요청목록', ''),
 		),
