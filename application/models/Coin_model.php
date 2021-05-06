@@ -170,12 +170,11 @@ class Coin_model extends CB_Model
                 $list = array(
                     $query -> market => $query_ -> market,
                     $query -> name_ko => $query_ -> name_ko,
-                    $query -> name_en => $query_ -> name_en,
+                    $query -> name_en => $query->name_en,
                 );
 
                 $result = $this->db->insert('cic_coin_admin', $list);
                 return $result;
-
                 }else{
                     return false;
                 }
