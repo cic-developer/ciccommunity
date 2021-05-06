@@ -168,6 +168,12 @@ class Coin_model extends CB_Model
         if ($query->num_rows() > 0){
             $query_ = $query = $this->db->get('cic_stocks');
                 if($query_['market'] == $data){
+                    $list = array(
+                        $query['market'] => $query_['market'],
+                        $query['name_ko'] => $query_['name_ko'],
+                        $query['name_en'] => $query_['name_en'],
+                    );
+
                     $result = $this->db->insert('cic_coin_admin', $query_);
                     return $result;
                 }else{return false;}

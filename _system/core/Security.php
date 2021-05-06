@@ -231,7 +231,7 @@ class CI_Security {
 			&& hash_equals($_POST[$this->_csrf_token_name], $_COOKIE[$this->_csrf_cookie_name]);
 
 		print_r('hi : '.$this->_csrf_token_name." : ".$_POST[$this->_csrf_token_name].'<br/>');
-		print_r('hi : '.$this->_csrf_cookie_name." : ".$_COOKIE[$this->_csrf_cookie_name]);
+		print_r('hi : '.$this->_csrf_cookie_name." : ".$_POST[$this->_csrf_token_name].' : '.$_COOKIE[$this->_csrf_cookie_name]);
 		// print_r($_COOKIE);
 		// We kill this since we're done and we don't want to pollute the _POST array
 		unset($_POST[$this->_csrf_token_name]);

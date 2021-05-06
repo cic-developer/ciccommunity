@@ -330,6 +330,22 @@ class Withdraws extends CB_Controller
 		}
 
 		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+
+		$config = array(
+			array(
+				'field' => 'cp_content2',
+				'label' => '사유',
+				'rules' => 'trim|required',
+			),
+		);
+		$this->form_validation->set_rules($config);
+		$form_validation = $this->form_validation->run();
+
+
+		/**
 		 * 출금 요청한 금액을 반환합니다.
 		 * member
 		 */
