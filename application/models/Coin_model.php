@@ -162,5 +162,21 @@ class Coin_model extends CB_Model
         return $array;
     }
 
+    function dropdown_list($data){
+        $this->db->where('market',$market);
+        $query = $this->db->get('cic_coin_admin');
+        if ($query->num_rows() > 0){
+            $query_ = $query = $this->db->get('cic_stocks');
+                if($query_['market'] == $data){
+                    $result = $this->db->insert('cic_coin_admin', $query_);
+                    return $result;
+                }else{return false;}
+            
+        }
+        else{
+            return false;
+        }
+    }
+
 }
 ?>
