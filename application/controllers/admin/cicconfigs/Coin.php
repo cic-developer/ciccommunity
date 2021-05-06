@@ -116,7 +116,7 @@ class Coin extends CB_Controller
 			
 				$stock_ = $this->Coin_model->dropdown_list($list);
 				$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-				print_r($stock_);
+				//print_r($stock_);
 		
 				
 			}

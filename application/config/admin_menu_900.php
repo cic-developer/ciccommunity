@@ -11,11 +11,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 
 
-$config['admin_page_menu']['withdraw'] =
+$config['admin_page_menu']['stat'] =
 	array(
-		'__config'					=> array('CIC 출금관리', 'fa-pencil-square-o'),
+		'__config'					=> array('통계관리', 'fa-bar-chart-o'),
 		'menu'						=> array(
-			'withdraws'				=> array('출금요청목록', ''),
-			'withdraws_log'			=> array('출금요청 처리 로그', ''),
+			'statcounter'			=> array('접속자통계', ''),
+			'boardcounter'			=> array('게시판별접속자', ''),
+			'registercounter'		=> array('회원가입통계', ''),
+			'searchkeyword'			=> array('인기검색어현황', ''),
+			'currentvisitor'		=> array('현재접속자', ''),
+			'registerlog'			=> array('회원가입경로', ''),
 		),
 	);
