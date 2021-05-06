@@ -78,11 +78,11 @@ public function index()
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
-		$this->{$this->modelname}->allow_search_field = array('phi_id', 'post_history.post_id', 'post_history.mem_id', 'phi_title', 'phi_content', 'phi_ip', 'phi_datetime'); // 검색이 가능한 필드
-		$this->{$this->modelname}->search_field_equal = array('phi_id', 'post_history.post_id', 'post_history.mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->{$this->modelname}->allow_order_field = array('phi_id'); // 정렬이 가능한 필드
+		$this->{$this->modelname}->allow_search_field = array('post_id', 'post_title', 'post_content', 'mem_id', 'post_username', 'post_nickname', 'post_email', 'post_homepage', 'post_datetime', 'post_ip', 'post_device', 'post_exept_state'); // 검색이 가능한 필드
+		$this->{$this->modelname}->search_field_equal = array('post_id', 'mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->{$this->modelname}->allow_order_field = array('post_like_point'); // 정렬이 가능한 필드
 		$where = array(
-			'post.post_del' => 0,
+			'post.post_del' => 2,
 		);
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['post.brd_id'] = $brdid;
