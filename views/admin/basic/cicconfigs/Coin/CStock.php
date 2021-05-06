@@ -34,12 +34,6 @@
 								}?>	
 								</select>
 							</label>
-					
-							지급 비율/절대값 -
-							<label for="cpc_value" class="control-label">
-								<input type="number" class="form-control" name="cpc_value[]" id="cpc_value" value="<?php echo element('cpc_value', $value)?>">
-								<?php echo element('cpc_class', $value) === '1' ? '%' : ''; ?>
-							</label>
 						</div>
 				</div>
 

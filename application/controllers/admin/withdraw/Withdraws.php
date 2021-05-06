@@ -244,6 +244,9 @@ class Withdraws extends CB_Controller
 				$memo = $this->input->post('cp_memo');
 
 				$result = $this->{$this->modelname}->set_withdraw_approve($widIdx, $adminid, $adminip, $transaction, $percoin, $content, $memo);
+							
+				print_r($result);
+				return;
 			} else {
 				$this->session->set_flashdata(
 					'message',
