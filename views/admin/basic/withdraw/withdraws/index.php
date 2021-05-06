@@ -72,10 +72,13 @@
                                             data-adminid="<?php echo html_escape(element('wid_admin_id', $result)); ?>"
                                                 data-adminip="<?php echo html_escape(element('wid_admin_ip', $result)); ?>"
                                                         
+                                            data-res-datetime="<?php echo html_escape(element('wid_res_datetime', $result)); ?>"
+                                                data-state="<?php echo html_escape(element('wid_res_datetime', $result)); ?>"
+                                                    data-content="<?php echo html_escape(element('wid_content', $result)); ?>"
+                                                
 
 
-                                                    data-resultdate="<?php echo html_escape(element('wid_res_datetime', $result)); ?>"
-                                                        data-content="<?php echo html_escape(element('wid_content', $result)); ?>"
+                                                    
                                     >
                                         <strong>처리완료</strong>
                                     </button>

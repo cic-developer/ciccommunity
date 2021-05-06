@@ -22,7 +22,7 @@
 
 			<div class="form-group">
 			
-					<div class="col-sm-8">
+					<div class="col-sm-10">
 						활성화 -
 						<label for="cpc_enable" class="control-label">	
 						<select name="cpc_enable[]" id="doc_layout" class="form-control">

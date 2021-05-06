@@ -596,7 +596,7 @@ class Post_model extends CB_Model
 		if (empty($sfield)) {
 			$sfield = array('post_title', 'post_content');
 		}
-		$checktime = $datetime < cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		$where = array(
 			'post_exept_state' => 0,
 		);
