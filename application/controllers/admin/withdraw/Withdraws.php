@@ -247,57 +247,21 @@ class Withdraws extends CB_Controller
 			} else {
 				$this->session->set_flashdata(
 					'message',
-					'정보를 정확히 작성해주세요'
+					'정보를 정확히 작성해주세요.'
 				);
+				$param =& $this->querystring;
+				$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+				redirect($redirecturl);
 			}
 		} else {
 			$this->session->set_flashdata(
 				'message',
-				'정보를 정확히 작성해주세요'
+				'정보를 정확히 작성해주세요.'
 			);
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+			redirect($redirecturl);
 		}
-
-		
-		
-		/**
-		 * 승인한 출금 요청건의 상태를 1으로 수정하며, 승인한 관리자 정보를 저장합니다.
-		 */
-		// $result = $this->{$this->modelname}->set_withdraw_approve($widIdx, $content, $adminid, $adminip);
-
-		/**
-		 * 승인 로그를 남깁니다.
-		 * cic_withdraw_log
-		 */
-		// if ($this->member->get_member() 
-		// 		&& $this->input->ip_address()
-		// ) {
-		// 	$member_info = $this->member->get_member();
-		// 	$adminid = $member_info['mem_userid'];
-		// 	$userid = $getdata['wid_userid'];
-		// 	$adminip = $this->input->ip_address();
-		// 	$userip = $getdata['wid_userip'];
-		// 	$address = $getdata['wid_wallet_address'];
-		// 	$money = $getdata['wid_req_money'];
-			
-		// 	$result = $this->CIC_withdraw_log_model->set_withdraw_log('승인', $address, $adminid, get_cookie('user_ip'), $userid, $userip, $money, 1);
-		// }
-
-		// 로그 실패
-		// if($result == 0){
-		// 	// 이벤트가 존재하면 실행합니다
-		// 	Events::trigger('after', $eventname);
-		// 	/**
-		// 	 * 처리가 끝난 후 목록페이지로 이동합니다
-		// 	 */
-		// 	$this->session->set_flashdata(
-		// 		'message',
-		// 		'정상 처리후 로그오류입니다 (관리자 문의)'
-		// 	);
-		// 	$param =& $this->querystring;
-		// 	$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-
-		// 	redirect($redirecturl);
-		// }
 		
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('after', $eventname);
