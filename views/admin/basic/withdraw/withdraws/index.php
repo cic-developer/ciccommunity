@@ -360,11 +360,6 @@
 
     // approve submit
     function wid_approve_submit(f, acttype, actpage){
-
-//         var cp_percoin = $('#cp_percoin').val().trim();
-//         alert(typeof cp_percoin);
-// return;
-
         var cp_transaction = $('#cp_transaction').val().trim();
         if(cp_transaction.length < 1){
             alert("필수값 입니다")
@@ -372,6 +367,7 @@
             return;
         }
 
+        // 0.01보다 작거나 숫자가 아닌경우도 검사해야 한다. ...
         var cp_percoin = $('#cp_percoin').val().trim();
         if(cp_percoin.length < 1){
             alert("필수값 입니다")
