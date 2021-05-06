@@ -206,9 +206,6 @@ class Withdraws extends CB_Controller
 		if(!$member_info){
 			show_404();
 		}
-
-		print_r("Hi");
-		return;
 		if($member_info['mem_userid'] 
 				&& $this->input->ip_address() && $this->input->post('cp_transaction')
 					&& $this->input->post('cp_percoin') && $this->input->post('cp_content1') ){
@@ -224,7 +221,7 @@ class Withdraws extends CB_Controller
 		/**
 		 * 승인한 출금 요청건의 상태를 1으로 수정하며, 승인한 관리자 정보를 저장합니다.
 		 */
-		$result = $this->{$this->modelname}->set_withdraw_approve($widIdx, $content, $adminid, $adminip);
+		// $result = $this->{$this->modelname}->set_withdraw_approve($widIdx, $content, $adminid, $adminip);
 		$result = $this->{$this->modelname}->set_withdraw_approve($widIdx, $adminid, $adminip, $transaction, $percoin, $content, $memo);
 
 		/**

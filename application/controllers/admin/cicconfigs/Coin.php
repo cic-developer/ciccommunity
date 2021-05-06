@@ -79,46 +79,27 @@ class Coin extends CB_Controller
         
 	    
 		
-		// foreach($getList as $coins){
-        //     $market_ = $getList[0]['market'];
-		
-			
-		// }
-		// print_r($market_);
 
-		// $this->load->library('form_validation');
+		$this->load->library('form_validation');
 
-		// $config = array(
-		// 	array(
-		// 		'field' => 'market',
-		// 		'rules'=>'required'
-		// 	),
-
-		// 	array(
-		// 		'field' => 'name_ko',
-		// 		'rules'=>'required'
-		// 	),
-
-			
-		// 	array(
-		// 		'field' => 'name_en',
-		// 		'rules'=>'required'
-		// 	),
-		// );
+		$config = array(
+			array(
+				'field' => 'market',
+				'rules'=>'required'
+			),
+		);
 
 				
-		// 	$this->form_validation->set_rules($config);
+			$this->form_validation->set_rules($config);
 
-		// 	if($this->form_validation -> run () == FALSE)
-		// 	{
-		// 		$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-		// 	}else{
+			if($this->form_validation -> run () == FALSE)
+			{
+				$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+			}else{
 			
-		// 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+				$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 	
 
-		//Get price from API
-		//$realtime_coin_info = $this->Coin_model->get_price();
         
 
 		//Get all stock to drop down
@@ -130,7 +111,26 @@ class Coin extends CB_Controller
 
 		//Admin Create its own Data list from drop down value
 	
-		
+		$this->load->library('form_validation');
+
+		$config = array(
+			array(
+				'field' => 'market',
+				'rules'=>'required'
+			),
+		);
+
+				
+			$this->form_validation->set_rules($config);
+
+			if($this->form_validation -> run () == FALSE)
+			{
+				$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+			}else{
+			
+				$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+			//}	
+	
 
        //Get market data 
 		for($i = 0; $i < count($getStock); $i++){
