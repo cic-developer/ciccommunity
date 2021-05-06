@@ -1187,9 +1187,16 @@ class Mypage extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
+		/**
+		 * 페이지에 숫자가 아닌 문자가 입력되거나 1보다 작은 숫자가 입력되면 에러 페이지를 보여줍니다.
+		 */
+		$param =& $this->querystring;
+		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
+
 		// 회원 정보를 가져옵니다
 		$member_info = $this->member->get_member();
 		$view['view']['mem_cp'] = $member_info['mem_cp'];
+		$view['view']['mem_id'] = $member_info['mem_id'];
 
 		// 출금 요청 url
 		$view['view']['req_url'] = site_url('mypage/withdraw_request');
