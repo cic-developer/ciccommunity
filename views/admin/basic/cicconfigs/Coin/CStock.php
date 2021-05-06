@@ -17,68 +17,28 @@
 		$attributes = array('class' => 'form-horizontal', 'name' => 'fadminwrite', 'id' => 'fadminwrite');
 		echo form_open(current_full_url(), $attributes);
 		?>
-			<input type="hidden" name="is_submit" value="1"/>
+
+
+
 			<div class="form-group">
-				<label class="col-sm-2 control-label"> 마켓 </label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" name="market" value="<?php echo set_value('market', element('market', element('data', $view))); ?>" />
-				</div>
+			
+					<div class="col-sm-8">
+						활성화 -
+						<label for="cpc_enable" class="control-label">	
+						<select name="cpc_enable[]" id="doc_layout" class="form-control">
+							<?php		
+								foreach($realtime_coin_info as $stocks){	
+									echo "hi";
+									echo '<option value="'.$stocks['market'].'" >' .$stocks['market']. '</option>';
+								}
+							?>	
+						</select>
+							
+						</label>
+				
+					</div>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">한국어 이름</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" name="name_ko" value="<?php echo set_value('name_ko', element('name_ko', element('data', $view))); ?>" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">영어 이름</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" name="name_en" value="<?php echo set_value('name_en', element('name_en', element('data', $view))); ?>" />
-				</div>
-			</div>
-            <div class="btn-group pull-right" role="group" aria-label="...">
-				<button type="submit" class="btn btn-success btn-sm">저장하기</button>
-			</div>
-		<?php echo form_close(); ?>
-            
-</div><br>
 
-
-    
-<div class ='box'>
-    <div class="box-header">
-            <ul class="nav nav-tabs">
-                <li role="presentation" class="active">update Coin stock</li>
-            </ul>
-    </div>
-    <div class='box-table'>
-        <form>
-                <div class="form-group col-md-2">
-                    <label for="inputCity">Market name</label>
-                    <input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['market']; ?>'>
-                </div>
-
-                <div class="form-group col-md-2">
-                    <label for="inputCity"> name in Korean</label>
-                    <input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['market']; ?>'>
-                </div>
-
-                <div class="form-group col-md-2">
-                    <label for="inputState">high-price</label>
-                    <input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['high_price']; ?>'>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">low-price</label>
-                    <input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['low_price']; ?>'>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">trade-price</label>
-                    <input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['trade_price']; ?>'>
-                </div>
-                <div class="btn-group pull-right" role="group" aria-label="...">
-                    <button type="submit" class="btn btn-success btn-sm">update</button>        
-                </div>
-        </form>
 
     <?php echo form_close(); ?> 
     </div>

@@ -59,74 +59,74 @@ class Coin extends CB_Controller
 		$view = array();
 		$view['view'] = array();
         $view['view']['event']['before'] = Events::trigger('before', $eventname);
-		
-
-		$this->load->library('form_validation');
-
-		$config = array(
-			array(
-				'field' => 'market',
-				'rules'=>'required'
-			),
-
-			array(
-				'field' => 'name_ko',
-				'rules'=>'required'
-			),
-
-			
-			array(
-				'field' => 'name_en',
-				'rules'=>'required'
-			),
-		);
-
-		
-		$this->form_validation->set_rules($config);
-
-		if($this->form_validation -> run () == FALSE)
-		{
-			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-		}else{
-		
-			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-
-			//$arr = $this->input->post();
 
 
-			// $data = array(
-			// 	'market' => $this -> input -> post('market'),
-			// 	'name_ko' => $this -> input -> post('name_ko'),
-			// 	'name_en' => $this -> input -> post('name_en')
-			// 	);
-			
-			for($i=0; $i<$key_word; $i++){
-				array_push($key_word, array(
-					'market' => $this -> input -> post('market')[$i],
-					'name_ko' => $this -> input -> post('name_ko')[$i],
-					'name_en' => $this -> input -> post('name_en')[$i]
-					));
+		$getList = $this -> Coin_model->coin_list();
+
+		for($i=0; $i<count($getList); $i++){
+			$data = array(
+				'market' => $getList[$i]['market'],
+				'name_ko' => $getList[$i]['english_name'],
+				'name_en' => $getList[$i]['korean_name'],
+			);
+			if( $this->Coin_model->market_exist($exist)){	
+				if(isset($data) && !empty($data)){
+					$stock = $this->Coin_model->insertStockData($data);
 				}	
-
-				$data = array(
-				'market' => $this -> input -> post('market'),
-				'name_ko' => $this -> input -> post('name_ko'),
-				'name_en' => $this -> input -> post('name_en'),
-				'key_word' => $this -> input -> $key_word
-				);	
-			
-			if(isset($data) && !empty($data)){
-			$stock = $this->Coin_model->insertStockData($data);
+				$view['view']['alert_message'] = '정상적으로 저장되었습니다';}
+				
 			}
-		    $view['view']['alert_message'] = '정상적으로 저장되었습니다';
+        
+	    
+		
+		// foreach($getList as $coins){
+        //     $market_ = $getList[0]['market'];
+		
 			
-		}
+		// }
+		// print_r($market_);
+
+		// $this->load->library('form_validation');
+
+		// $config = array(
+		// 	array(
+		// 		'field' => 'market',
+		// 		'rules'=>'required'
+		// 	),
+
+		// 	array(
+		// 		'field' => 'name_ko',
+		// 		'rules'=>'required'
+		// 	),
+
+			
+		// 	array(
+		// 		'field' => 'name_en',
+		// 		'rules'=>'required'
+		// 	),
+		// );
+
+				
+		// 	$this->form_validation->set_rules($config);
+
+		// 	if($this->form_validation -> run () == FALSE)
+		// 	{
+		// 		$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+		// 	}else{
+			
+		// 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+	
 
 		//Get price from API
 		//$realtime_coin_info = $this->Coin_model->get_price();
 
 
 		$getStock = $this -> Coin_model->getstockData();
+        $view['getStock'] = $getStock;
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
+		$this->data = $view;
+		//print_r($getStock[0]->market);
+
 
 		for($i = 0; $i < count($getStock); $i++){
 			$market[] = $getStock[$i]->market;
@@ -135,13 +135,6 @@ class Coin extends CB_Controller
 			}else{
 				$realtime_coin_info = 0;
 			}
-
-			// echo "<br><pre>";
-			// print_r($realtime_coin_info);
-			// echo "</pre>"; 
-		
-
-		// $view['view']['maket'] = $market;
 
 			foreach ($getStock as $getstoks){
 				if($getstoks-> market){
@@ -175,5 +168,24 @@ class Coin extends CB_Controller
 
 
 		}
+
+	public function getCoinList(){
+		
+		$this->load->view('CStock');
+		$getList = $this -> Coin_model->coin_list();
+        
+		print_r($getList);
+
+		$view['getList'] = $getList;
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
+		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
+
+		
+		}
+
+	
 }
 ?>

@@ -62,8 +62,18 @@
                                 ?>
                                     <button type="button" class="text-primary withdraw-result modal_open3" 
                                         style="cursor:pointer; border:0; outline:0; background-color:inherit;"
+                                            data-idx="<?php echo number_format(element('wid_idx', $result)); ?>"
+                                                data-userid="<?php echo html_escape(element('wid_userid', $result)); ?>"
+                                                    data-userip="<?php echo html_escape(element('wid_userip', $result)); ?>"
+                                                        data-nickname="<?php echo html_escape(element('wid_nickname', $result)); ?>"
+                                                            data-wallet-address="<?php echo html_escape(element('wid_wallet_address', $result)); ?>"
+                                                                data-req-money="<?php echo number_format(element('wid_req_money', $result), 2); ?>"
+                                                                    data-req-datetime="<?php echo html_escape(element('wid_req_datetime', $result)); ?>"
                                             data-adminid="<?php echo html_escape(element('wid_admin_id', $result)); ?>"
                                                 data-adminip="<?php echo html_escape(element('wid_admin_ip', $result)); ?>"
+                                                        
+
+
                                                     data-resultdate="<?php echo html_escape(element('wid_res_datetime', $result)); ?>"
                                                         data-content="<?php echo html_escape(element('wid_content', $result)); ?>"
                                     >
@@ -114,7 +124,10 @@
                                         <div class="modal-body">
                                                 <!-- <label for="usr"></label> -->
                                                 <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
-                                                <textarea class="form-control" rows="5" cols="75" id="cp_content1" name="cp_content1" placeholder="출금 승인 사유를 입력해주세요." style="width:100%;"></textarea>
+                                                <div class="form-group">
+                                                    <label for="cp_content1">사유:</label>
+                                                    <textarea class="form-control" rows="5" cols="75" id="cp_content1" name="cp_content1" placeholder="출금 승인 사유를 입력해주세요." style="width:100%;"></textarea>
+                                                </div>
                                         </div>
                                         
                                         <!-- Modal footer -->
@@ -141,7 +154,10 @@
                                         <div class="modal-body">
                                                 <!-- <label for="usr"></label> -->
                                                 <input type="hidden" name="wid_idx2" id="wid_idx2" value="" />
-                                                <textarea class="form-control" rows="5" cols="75" id="cp_content2" name="cp_content2" placeholder="출금 반려 사유를 입력해주세요." style="width:100%;"></textarea>
+                                                <div class="form-group">
+                                                    <label for="cp_content2">사유:</label>
+                                                    <textarea class="form-control" rows="5" cols="75" id="cp_content2" name="cp_content2" placeholder="출금 반려 사유를 입력해주세요." style="width:100%;"></textarea>
+                                                </div>
                                         </div>
                                         
                                         <!-- Modal footer -->
@@ -195,7 +211,7 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <table class="table table-hover table-striped table-bordered">
-                        <thead>
+                        <!-- <thead>
                             <tr>
                                 <th>관리자아이디</th>
                                 <th>관리자아이피</th>
@@ -208,14 +224,97 @@
                                 <td class="admin-ip" id="admin-ip"></td>
                                 <td class="result-date" id="result-date"></td>
                             </tr>    
-                        </tbody>
+                        </tbody> -->
+
+                        <!-- 번호 -->
+                        <tr>
+                            <th width="135">번호</th>
+                            <td colspan="2" class="text-center" id="wid-idx"></td>
+                        </tr>
+
+                        <!-- 출금신청 정보 -->
+                        <tr>
+                            <td rowspan="7">신청 회원 정보</td>
+                        </tr>
+                        <tr>
+                            <th width="95">아이디</th>
+                            <td id="wid-userid"></td>
+                        </tr>
+                        <tr>
+                            <th>아이피</th>
+                            <td id="wid-userip"></td>
+                        </tr>
+                        <tr>
+                            <th>닉네임</th>
+                            <td id="wid-nickname"></td>
+                        </tr>
+                        <tr>
+                            <th>지갑주소</th>
+                            <td id="wid-wallet-address"></td>
+                        </tr>
+                        <tr>
+                            <th>출금금액</th>
+                            <td id="wid-req-money"></td>
+                        </tr>
+                        <tr>
+                            <th>요청날짜</th>
+                            <td id="wid-req-datetime"></td>
+                        </tr>
+
+                        <!-- 신청처리 정보 -->
+                        <tr>
+                            <td rowspan="3">처리 관리자 정보</td>
+                        </tr>
+                        <tr>
+                            <th>아이디</th>
+                            <td id="admin-id"></td>
+                        </tr>
+                        <tr>
+                            <th>아이피</th>
+                            <td id="admin-ip"></td>
+                        </tr>
+
+                        <!-- 처리결과 정보 -->
+                        <tr>
+                            <td rowspan="4">처리 결과 정보</td>
+                        </tr>
+                        <tr>
+                            <th>처리날짜</th>
+                            <td id=""></td>
+                        </tr>
+                        <tr>
+                            <th>처리결과</th>
+                            <td id=""></td>
+                        </tr>
+                        <tr>
+                            <th>처리사유</th>
+                            <td id=""></td>
+                        </tr>
+
+                        <!-- percoin 정보 -->
+                        <tr>
+                            <td rowspan="3">PER COIN 정보</td>
+                        </tr>
+                        <tr>
+                            <th>퍼코인</th>
+                            <td id=""></td>
+                        </tr>
+                        <tr>
+                            <th>트랜잭션</th>
+                            <td id=""></td>
+                        </tr>
+                        
                     </table>
                 </div>
                 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <!-- 처리사유 -->
-                    <textarea class="pull-left" name="cp_content3" id="cp_content3" rows="10" style="width:100%;" disabled></textarea>
+
+                    <!-- 메모 -->
+                    <div class="form-group">
+                        <label class="pull-left" for="cp_content3">메모:</label>
+                        <textarea class="pull-left" name="cp_content3" id="cp_content3" rows="10" style="width:100%;" disabled readonly></textarea>
+                    </div>
                 </div>
 
         </div>
@@ -291,13 +390,36 @@
         $("#myModal-retire .modal-body #wid_idx2").val( widIdx ); 
 	});
     $(document).on('click', '.modal_open3', function() {
+		var idx = $(this).data('idx');
+		var userid = $(this).data('userid');
+		var userip = $(this).data('userip');
+		var nickname = $(this).data('nickname');
+		var wallet_address = $(this).data('wallet-address');
+		var req_money = $(this).data('req-money');
+		var req_datetime = $(this).data('req-datetime');
+
 		var adminid = $(this).data('adminid');
 		var adminip = $(this).data('adminip');
+
 		var resultdate = $(this).data('resultdate');
 		var content = $(this).data('content');
-        $("#myModal-result .modal-body #admin-id").val( adminid ); 
-        $("#myModal-result .modal-body #admin-ip").val( adminip );
-        $("#myModal-result .modal-body #result-date").val( resultdate ); 
+
+        document.getElementById("wid-idx").innerHTML = idx;
+        document.getElementById("wid-userid").innerHTML = userid;
+        document.getElementById("wid-userip").innerHTML = userip;
+        document.getElementById("wid-nickname").innerHTML = nickname;
+        document.getElementById("wid-wallet-address").innerHTML = wallet_address;
+        document.getElementById("wid-req-money").innerHTML = req_money;
+        document.getElementById("wid-req-datetime").innerHTML = req_datetime;
+
+        document.getElementById("admin-id").innerHTML = adminid;
+        document.getElementById("admin-ip").innerHTML = adminip;
+
+
+        document.getElementById("result-date").innerHTML = resultdate;
+        // $("#myModal-result .modal-body #admin-id").val( adminid ); 
+        // $("#myModal-result .modal-body #admin-ip").val( adminip );
+        // $("#myModal-result .modal-body #result-date").val( resultdate ); 
         $("#myModal-result .modal-footer #cp_content3").val( content ); 
 	});
 

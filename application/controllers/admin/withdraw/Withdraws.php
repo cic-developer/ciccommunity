@@ -90,19 +90,15 @@ class Withdraws extends CB_Controller
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
-		$this->{$this->modelname}->allow_search_field = array('wid_idx', 'wid_admin_id', 'wid_userid', 
-																	'wid_admin_ip', 'wid_userip', 'wid_nickname', 
-																		'wid_wallet_address', 'wid_req_money', 'wid_req_datetime', 
-																			'wid_res_datetime', 'wid_content'); // 검색이 가능한 필드
+		// 'wid_admin_id', 'wid_admin_ip', 'wid_res_datetime', 'wid_content'
+		$this->{$this->modelname}->allow_search_field = array('wid_idx', 'wid_userid', 'wid_userip', 'wid_nickname', 
+																	'wid_wallet_address', 'wid_req_money', 'wid_req_datetime'); // 검색이 가능한 필드
 
 		$this->{$this->modelname}->search_field_equal = array('wid_idx', 'wid_req_money', 'wid_wallet_address',
-																	'wid_admin_id', 'wid_userid', 'wid_admin_ip', 
-																		'wid_userip',); // 검색중 like 가 아닌 = 검색을 하는 필드
+																	'wid_userid', 'wid_userip'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		
-		$this->{$this->modelname}->allow_order_field = array('wid_idx', 'wid_admin_id', 'wid_userid', 
-																	'wid_admin_ip', 'wid_userip', 'wid_nickname', 
-																		'wid_wallet_address', 'wid_req_money', 'wid_req_datetime', 
-																				'wid_res_datetime', 'wid_state'); // 정렬이 가능한 필드
+		$this->{$this->modelname}->allow_order_field = array('wid_idx', 'wid_userid', 'wid_userip', 'wid_nickname', 
+																	'wid_wallet_address', 'wid_req_money', 'wid_req_datetime', 'wid_state'); // 정렬이 가능한 필드
 
 		$where = array();
 		if (! $this->input->get('wid_state') && $this->input->get('wid_state') != '0') {
@@ -157,10 +153,10 @@ class Withdraws extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('wid_idx' => '번호',  'wid_userid' => '회원아이디', 
-										'wid_admin_ip' => '관리자아이피', 'wid_userip' => '회원아이피', 'wid_nickname' => '닉네임', 
-											'wid_wallet_address' => '지갑주소', 'wid_req_money' => '출금요청금액', 'wid_req_datetime' => '출금요청날짜', 
-												'wid_res_datetime' => '출금요청 처리날짜', 'wid_content' => '처리사유');
+		// 'wid_admin_id' => '관리자아이디', 'wid_admin_ip' => '관리자아이피', 'wid_res_datetime' => '출금요청 처리날짜', 'wid_content' => '처리사유'
+		$search_option = array('wid_idx' => '번호',  'wid_userid' => '회원아이디', 'wid_userip' => '회원아이피', 
+									'wid_nickname' => '닉네임', 'wid_wallet_address' => '지갑주소', 'wid_req_money' => '출금요청금액', 
+										'wid_req_datetime' => '출금요청날짜');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['approve_url'] = admin_url($this->pagedir . '/approve');

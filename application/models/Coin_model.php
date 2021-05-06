@@ -30,7 +30,8 @@ class Coin_model extends CB_Model
 	/**
 	 * Get RealTime Coin Price
 	 */
-	public function get_price($market)
+
+	function get_price($market)
 	{
 
         
@@ -84,38 +85,81 @@ class Coin_model extends CB_Model
     } 
 
 
-        function getstockData(){
-            $query = $this->db->get('cic_stocks');
-            return $query->result(); 
-        }
+    function getstockData(){
+        $query = $this->db->get('cic_stocks');
+        return $query->result(); 
+    }
 
-        function getonerow(){
-            $this->db->where('stk_id', $id);
-            $query = $this->db->get('cic_stocks');
-            return $query->row();
-        }
+    function getonerow(){
+        $this->db->where('stk_id', $id);
+        $query = $this->db->get('cic_stocks');
+        return $query->row();
+    }
 
 
-        function search_coin($search){
-        //     if(!empty($key)) {
-        //         $this->db->where($_table, $key);
-        //     }
-        //     $search_ = "";
-        //     if(preg_match('/\s/', $search_) > 0){
-        //         $search_ = array_map('trim',array_filter(explode('', $search_)));
-        //         foreach ($search_ as $key_=> $value){
-        //             $this->db->or_like('foo_column', $value);
-        //         }
-        //     }else if($search_ !=''){
-        //         $this->db->like('foo_column', $search_);
-        //     }
-        //     $query = $this->db->get('name_en');
-        //     return $query->result();
-            $search = $this->input->GET('search', TRUE);
-            $data = $this->db->query("SELECT * from $_table where name_en like '%$search%' ");
-            return $data->result();
+    function search_coin($search){
+    //     if(!empty($key)) {
+    //         $this->db->where($_table, $key);
+    //     }
+    //     $search_ = "";
+    //     if(preg_match('/\s/', $search_) > 0){
+    //         $search_ = array_map('trim',array_filter(explode('', $search_)));
+    //         foreach ($search_ as $key_=> $value){
+    //             $this->db->or_like('foo_column', $value);
+    //         }
+    //     }else if($search_ !=''){
+    //         $this->db->like('foo_column', $search_);
+    //     }
+    //     $query = $this->db->get('name_en');
+    //     return $query->result();
+        $search = $this->input->GET('search', TRUE);
+        $data = $this->db->query("SELECT * from $_table where key_word like '%$search%' ");
+        return $data->result();
         
     
+    }
+
+    function market_exist($market){
+        $this->db->where('market',$market);
+        $query = $this->db->get('cic_stocks');
+        if ($query->num_rows() > 0){
+            $result = $this->db->insert('cic_stocks', $data);
+            return $result;
+        }
+        else{
+            return false;
+        }
+    }
+
+    function coin_list(){
+        $curl = curl_init();
+        // $market = "KRW-BTC";
+        //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.upbit.com/v1/market/all",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 90,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET"   
+            
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if($err){
+            echo "cUrl Error :" . $err;
+        }
+
+        //convert json to php array or object
+        $array = json_decode($response, true);
+        return $array;
     }
 
 }

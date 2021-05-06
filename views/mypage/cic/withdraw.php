@@ -34,14 +34,18 @@
             <div class="list">
                 <table>
                     <colgroup>
-                        <col width="33%">
-                        <col width="33%">
-                        <col width="33%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="20%">
                     </colgroup>
                     <thead>
                         <tr>
                             <th>출금 신청일</th>
                             <th>신청한 CP</th>
+                            <th>받은 PER</th>
+                            <th>트랜잭션</th>
                             <th>상태</th>
                         </tr>
                     </thead>
@@ -49,6 +53,8 @@
                         <tr>
                             <td>2021. 03. 21</td>
                             <td>200,000 CP</td>
+                            <td>100 PER</td>
+                            <td>fasdfsa68bn4a3hg7h4a3ba6ava99</td>
                             <td>
                                 <p class="cblue">승인</p>
                             </td>
@@ -56,6 +62,8 @@
                         <tr>
                             <td>2021. 03. 21</td>
                             <td>200,000 CP</td>
+                            <td></td>
+                            <td></td>
                             <td>
                                 <p class="cred">미승인</p>
                             </td>

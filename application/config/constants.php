@@ -109,6 +109,6 @@ if (PHP_VERSION >= '5.1.0') {
 
 
 /*
- *	CiBoard 주 : 현재 시간 정의 상수입니다. 값을 변경하지 말아주세요
+ *	CiBoard 주 :  정의 상수입니다. 값을 변경하지 말아주세요
 */
 defined('TIMESTAMP')         OR define('TIMESTAMP', time());
