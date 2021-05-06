@@ -56,9 +56,9 @@
                     ?>
                         <tr>
                             <td><?php echo html_escape(element('wid_req_datetime', $result)); ?></td>
-                            <td>200,000 CP</td>
-                            <td>100 PER</td>
-                            <td>fasdfsa68bn4a3hg7h4a3ba6ava99</td>
+                            <td><?php echo number_format(element('wid_req_money', $result), 2); ?>CP</td>
+                            <td><?php echo number_format(element('wid_percoin', $result), 2); ?> PER</td>
+                            <td><?php echo html_escape(element('wid_transaction', $result)); ?></td>
                             <td>
                                 <p class="cblue">승인</p>
                             </td>
