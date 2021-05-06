@@ -79,43 +79,29 @@ class Coin extends CB_Controller
         
 	    
 		
-
-		$this->load->library('form_validation');
-
-		$config = array(
-			array(
-				'field' => 'market',
-				'rules'=>'required'
-			),
-		);
-
-				
-			$this->form_validation->set_rules($config);
-
-			if($this->form_validation -> run () == FALSE)
-			{
-				$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-			}else{
+		// foreach($getList as $coins){
+        //     $market_ = $getList[0]['market'];
+		
 			
-				$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-	
+		// }
+		// print_r($market_);
 
-        
-
-		//Get all stock to drop down
-
-		$getStock = $this -> Coin_model->getstockData();
-        $view['getStock'] = $getStock;
-
-
-
-		//Admin Create its own Data list from drop down value
-	
 		// $this->load->library('form_validation');
 
 		// $config = array(
 		// 	array(
 		// 		'field' => 'market',
+		// 		'rules'=>'required'
+		// 	),
+
+		// 	array(
+		// 		'field' => 'name_ko',
+		// 		'rules'=>'required'
+		// 	),
+
+			
+		// 	array(
+		// 		'field' => 'name_en',
 		// 		'rules'=>'required'
 		// 	),
 		// );
@@ -129,8 +115,22 @@ class Coin extends CB_Controller
 		// 	}else{
 			
 		// 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-		// 	//}	
 	
+
+		//Get price from API
+		//$realtime_coin_info = $this->Coin_model->get_price();
+        
+
+		//Get all stock to drop down
+
+		$getStock = $this -> Coin_model->getstockData();
+        $view['getStock'] = $getStock;
+
+
+
+		//Admin Create its own Data list from drop down
+	
+		
 
        //Get market data 
 		for($i = 0; $i < count($getStock); $i++){
@@ -164,8 +164,8 @@ class Coin extends CB_Controller
 			// echo "</pre>";
 		}
 	
-	}
-	function coin_search(){
+
+	public function coin_search(){
 		$this->load->view('search');
 			//skeyword
 		$data2['skeyword'] = $this->Coin_model->search_coin();
@@ -174,7 +174,7 @@ class Coin extends CB_Controller
 
 		}
 
-	function getCoinList(){
+	public function getCoinList(){
 		
 		$this->load->view('CStock');
 		$getList = $this -> Coin_model->coin_list();
