@@ -63,9 +63,12 @@ class CIC_withdraw_model extends CB_Model
 	public function set_withdraw_approve($primary_value = '', $adminid, $adminip, $transaction, $percoin, $content, $memo='')
 	{
 		$arr = array(
+			'wid_memo' => $memo,
 			'wid_content' => $content,
-			'wid_admin_id' => $adminid,
+			'wid_percoin' => $percoin,
+			'wid_transaction' => $transaction,
 			'wid_admin_ip' => $adminip,
+			'wid_admin_id' => $adminid,
 			'wid_res_datetime'=> date("Y-m-d H:i:s"),
 			'wid_state' => 1
 		);

@@ -121,15 +121,18 @@ class Coin extends CB_Controller
 		//$realtime_coin_info = $this->Coin_model->get_price();
         
 
-		//
+		//Get all stock to drop down
 
 		$getStock = $this -> Coin_model->getstockData();
         $view['getStock'] = $getStock;
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
-		$this->data = $view;
-		//print_r($getStock[0]->market);
 
 
+
+		//Admin Create its own Data list from drop down value
+	
+		
+
+       //Get market data 
 		for($i = 0; $i < count($getStock); $i++){
 			$market[] = $getStock[$i]->market;
             if($market){
