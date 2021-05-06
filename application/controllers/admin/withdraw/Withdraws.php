@@ -187,6 +187,27 @@ class Withdraws extends CB_Controller
 		Events::trigger('before', $eventname);
 
 		/**
+		 * 프라이머리키에 숫자형이 입력되지 않으면 에러처리합니다
+		 */
+		$widIdx = (int)$this->input->post('wid_idx1');
+		if (empty($widIdx) OR $widIdx < 1) {
+			show_404();
+		}
+		$primary_key = $this->{$this->modelname}->primary_key;
+
+		// 해당 출금요청 정보 불러오기
+		$getdata = $this->{$this->modelname}->get_one($widIdx);
+		if(!$getdata){
+			show_404();
+		}
+
+		// 로그인한 관리자 정보 불라오기
+		$member_info = $this->member->get_member();
+		if(!$member_info){
+			show_404();
+		}
+
+		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
 		$this->load->library('form_validation');
@@ -211,26 +232,17 @@ class Withdraws extends CB_Controller
 		$this->form_validation->set_rules($config);
 		$form_validation = $this->form_validation->run();
 
-		/**
-		 * 프라이머리키에 숫자형이 입력되지 않으면 에러처리합니다
-		 */
-		$widIdx = (int)$this->input->post('wid_idx1');
-		if (empty($widIdx) OR $widIdx < 1) {
-			show_404();
-		}
-		$primary_key = $this->{$this->modelname}->primary_key;
+		if($form_validation){
 
-		// 해당 출금요청 정보 불러오기
-		$getdata = $this->{$this->modelname}->get_one($widIdx);
-		if(!$getdata){
-			show_404();
+		} else {
+			$this->session->set_flashdata(
+				'message',
+				'정보를 정확히 작성해주세요'
+			);
 		}
 
-		// 로그인한 관리자 정보 불라오기
-		$member_info = $this->member->get_member();
-		if(!$member_info){
-			show_404();
-		}
+		return;
+
 		if($member_info['mem_userid'] 
 				&& $this->input->ip_address() && $this->input->post('cp_transaction')
 					&& $this->input->post('cp_percoin') && $this->input->post('cp_content1') ){
