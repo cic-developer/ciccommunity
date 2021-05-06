@@ -112,14 +112,9 @@ class Coin extends CB_Controller
 			if(isset($list) && !empty($list)){
 				$stock = $this->Coin_model->dropdown_list($list);
 			}	
-			$view['view']['alert_message'] = '정상적으로 저장되었습니다';}
+			$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-		
-		
-		
 		}
-
-
 
 
        //Get market data 
