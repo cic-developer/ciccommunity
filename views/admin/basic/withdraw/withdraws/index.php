@@ -433,6 +433,10 @@
         document.getElementById("wid-percoin").innerHTML = percoin;
         document.getElementById("wid-transaction").innerHTML = transaction;
 
+        if(!percoin && !transaction){
+            $('.tr-percoin').css('display', 'none');
+        }
+
         // 메모
         $("#myModal-result .modal-footer #cp_content3").val( memo ); 
 	});
