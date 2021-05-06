@@ -74,8 +74,8 @@
                                             data-res-datetime="<?php echo html_escape(element('wid_res_datetime', $result)); ?>"
                                                 data-state="<?php echo html_escape(element('wid_state', $result)) != null ? (html_escape(element('wid_state', $result)) == 1 ? '승인' : '반려' ) : '';?>"
                                                     data-content="<?php echo html_escape(element('wid_content', $result)); ?>"
-                                            data-transaction="<?php echo html_escape(element('wid_transaction', $result)); ?>"
-                                                data-percoin="<?php echo number_format(element('wid_percoin', $result), 2); ?>"
+                                            data-percoin="<?php echo number_format(element('wid_percoin', $result), 2); ?>"
+                                                data-transaction="<?php echo html_escape(element('wid_transaction', $result)); ?>"
                                                 
 
 
@@ -301,11 +301,11 @@
                         </tr>
                         <tr>
                             <th>퍼코인</th>
-                            <td id="wid-transaction"></td>
+                            <td id="wid-percoin"></td>
                         </tr>
                         <tr>
                             <th>트랜잭션</th>
-                            <td id="wid-percoin"></td>
+                            <td id="wid-transaction"></td>
                         </tr>
                         
                     </table>
@@ -409,8 +409,8 @@
 		var state = $(this).data('state');
 		var content = $(this).data('content');
 
-		var transaction = $(this).data('transaction');
 		var percoin = $(this).data('percoin');
+		var transaction = $(this).data('transaction');
 
         document.getElementById("wid-idx").innerHTML = idx;
         document.getElementById("wid-userid").innerHTML = userid;
@@ -428,8 +428,8 @@
         document.getElementById("wid-state").innerHTML = state;
         document.getElementById("wid-content").innerHTML = content;
 
-        document.getElementById("wid-transaction").innerHTML = transaction;
         document.getElementById("wid-percoin").innerHTML = percoin;
+        document.getElementById("wid-transaction").innerHTML = transaction;
         // $("#myModal-result .modal-body #admin-id").val( adminid ); 
         // $("#myModal-result .modal-body #admin-ip").val( adminip );
         // $("#myModal-result .modal-body #result-date").val( resultdate ); 
