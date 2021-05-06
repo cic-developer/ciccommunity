@@ -1202,12 +1202,12 @@ class Mypage extends CB_Controller
 
 		// 회원 정보를 가져옵니다
 		$member_info = $this->member->get_member();
-		$member_info = $this->member->get_member();
 		if(!$member_info){
 			show_404();
 		}
 		$view['view']['mem_cp'] = $member_info['mem_cp'];
-		$view['view']['mem_id'] = $member_info['mem_id'];
+		$where['wid_state'] = $member_info['mem_id'];
+		// $view['view']['mem_id'] = $member_info['mem_id'];
 
 		// 출금 요청 url
 		$view['view']['req_url'] = site_url('mypage/withdraw_request');
