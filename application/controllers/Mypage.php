@@ -1034,7 +1034,7 @@ class Mypage extends CB_Controller
 		Events::trigger('before', $eventname);
 
 		$scr_id = (int) $scr_id;
-		if (empty($scr_id) OR $scr_id < 1) {
+		if (empty($scr_id) OR $scr_id <br 1) {
 			show_404();
 		}
 
@@ -1212,10 +1212,15 @@ class Mypage extends CB_Controller
 		// 출금 요청 url
 		$view['view']['req_url'] = site_url('mypage/withdraw_request');
 
-		$result = $this->CIC_withdraw_model->get_withdraw_list($per_page, $offset, $view['view']['mem_id'], '', $findex, $forder, $sfield, $skeyword);
+		$result = $this->CIC_withdraw_model->get_withdraw_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 
-		// print_r($result);
-		// return;
+		print_r($per_page);
+		print_r('</br>');
+		print_r($result);
+		print_r($result);
+		print_r($result);
+		print_r($result);
+		return;
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
