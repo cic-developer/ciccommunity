@@ -18,35 +18,38 @@
 		$attributes = array('class' => 'form-horizontal', 'name' => 'fadminwrite', 'id' => 'fadminwrite');
 		echo form_open(current_full_url(), $attributes);
 		?>
-			<input type="hidden" name="is_submit" value="1" />
-			<div class="form-group">
-				<input type="hidden" name="cpc_id[]" value="<?php echo element('cpc_id', $value) ?>"/>
-				<label class="col-sm-3 control-label"><?php echo element('cpc_title', $value)."<br/>(".element('cpc_description', $value).")"?></label>
-					<div class="col-sm-8">
-						활성화 -
-						<label for="cpc_enable" class="control-label">
-							<select name="selected_market" id="doc_layout" class="form-control">
-							<?php
-							foreach($getStock as $stoks){
-								echo '<option value="'.$stoks->market.'">'.$stoks->market.'</option>';							
-							
-							}?>	
-							</select>
-						</label>
-				
-						지급 비율/절대값 -
-						<label for="cpc_value" class="control-label">
-							<input type="number" class="form-control" name="cpc_value[]" id="cpc_value" value="<?php echo element('cpc_value', $value)?>">
-							<?php echo element('cpc_class', $value) === '1' ? '%' : ''; ?>
-						</label>
-					</div>
-			</div>
+			<form method ="POST">
+				<input type="hidden" name="is_submit" value="1" />
+				<div class="form-group">
+					<input type="hidden" name="cpc_id[]" value="<?php echo element('cpc_id', $value) ?>"/>
+					<label class="col-sm-3 control-label"><?php echo element('cpc_title', $value)."<br/>(".element('cpc_description', $value).")"?></label>
+						<div class="col-sm-8">
+							활성화 -
+							<label for="cpc_enable" class="control-label">
+								<select name="selected_market" id="doc_layout" class="form-control">
+								<?php
+								foreach($getStock as $stoks){
+									echo '<option value="'.$stoks->market.'">'.$stoks->market.'</option>';							
+								
+								}?>	
+								</select>
+							</label>
+					
+							지급 비율/절대값 -
+							<label for="cpc_value" class="control-label">
+								<input type="number" class="form-control" name="cpc_value[]" id="cpc_value" value="<?php echo element('cpc_value', $value)?>">
+								<?php echo element('cpc_class', $value) === '1' ? '%' : ''; ?>
+							</label>
+						</div>
+				</div>
 
-			<div class="btn-group pull-right" role="group" aria-label="...">
-				<button type="submit" class="btn btn-success btn-sm">저장하기</button>
-			</div>
-		<?php echo form_close(); ?>
-	</div>
+				<div class="btn-group pull-right" role="group" aria-label="...">
+					<button type="submit" class="btn btn-success btn-sm">저장하기</button>
+				</div>
+			</form>	
+			<?php echo form_close(); ?>
+		</div>
+    
 </div>
 
 <script type="text/javascript">
