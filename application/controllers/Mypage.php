@@ -1192,7 +1192,7 @@ class Mypage extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = $this->input->get('findex', null, 'mem_id');
+		$findex = $this->input->get('findex', null, 'wid_idx');
 		$forder = $this->input->get('forder', null, 'desc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
@@ -1214,6 +1214,17 @@ class Mypage extends CB_Controller
 
 		$result = $this->CIC_withdraw_model->get_withdraw_list($per_page, $offset, $view['view']['mem_id'], '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
+
+		if (element('list', $result)) {
+			foreach (element('list', $result) as $key => $val) {
+
+				$where = array(
+					'wid_idx' => element('wid_idx', $val),
+				);
+				
+				$result['list'][$key]['num'] = $list_num--;
+			}
+		}
 
 		$view['view']['data'] = $result;
 
