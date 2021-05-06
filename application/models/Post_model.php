@@ -601,6 +601,7 @@ class Post_model extends CB_Model
 		$final = $nowtime - $checktime;
 		$where = array(
 			'post_exept_state' => 0,
+			'post_date_time <=' => $checktime,
 		);
 		// 'post_datetime' => $nowtime - $checktime 
 		$search_where = array();
