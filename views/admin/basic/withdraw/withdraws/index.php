@@ -361,9 +361,9 @@
     // approve submit
     function wid_approve_submit(f, acttype, actpage){
 
-        var cp_percoin = $('#cp_percoin').val().trim();
-        alert(typeof cp_percoin);
-return;
+//         var cp_percoin = $('#cp_percoin').val().trim();
+//         alert(typeof cp_percoin);
+// return;
 
         var cp_transaction = $('#cp_transaction').val().trim();
         if(cp_transaction.length < 1){
