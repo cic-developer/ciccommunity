@@ -405,6 +405,7 @@
 		var adminip = $(this).data('adminip');
 
 		var res_datetime = $(this).data('res-datetime');
+		var state = $(this).data('state');
 		var content = $(this).data('content');
 
         document.getElementById("wid-idx").innerHTML = idx;

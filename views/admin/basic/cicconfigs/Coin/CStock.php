@@ -9,7 +9,7 @@
 							<?php		
 								foreach($realtime_coin_info as $stocks){	
 									echo "hi";
-									echo '<option value="'.$stocks['market'].'" >' .$stocks['market']. '</option>';
+									//echo '<option value="'.$stocks['market'].'" >' .$stocks['market']. '</option>';
 								}
 							?>	
 						</select>
