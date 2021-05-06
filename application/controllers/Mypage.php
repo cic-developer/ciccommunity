@@ -1206,7 +1206,8 @@ class Mypage extends CB_Controller
 			show_404();
 		}
 		$view['view']['mem_cp'] = $member_info['mem_cp'];
-		$where['wid_state'] = $member_info['mem_id'];
+		// $where['wid_state'] = $member_info['mem_id'];
+		$where['wid_state'] = null;
 		// $view['view']['mem_id'] = $member_info['mem_id'];
 
 		// 출금 요청 url
