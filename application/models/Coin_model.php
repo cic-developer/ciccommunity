@@ -174,7 +174,7 @@ class Coin_model extends CB_Model
                         $query['name_en'] => $query_['name_en'],
                     );
 
-                    $result = $this->db->insert('cic_coin_admin', $query_);
+                    $result = $this->db->insert('cic_coin_admin', $list);
                     return $result;
                 }else{return false;}
             
