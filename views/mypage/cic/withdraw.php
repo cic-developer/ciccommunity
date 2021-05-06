@@ -50,6 +50,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <?php
+                    if (element('list', element('data', $view))) {
+                        foreach (element('list', element('data', $view)) as $result) {
+                    ?>
                         <tr>
                             <td>2021. 03. 21</td>
                             <td>200,000 CP</td>
@@ -68,6 +72,9 @@
                                 <p class="cred">미승인</p>
                             </td>
                         </tr>
+                    <?php
+					}
+					?>
                     </tbody>
                 </table>
             </div>
