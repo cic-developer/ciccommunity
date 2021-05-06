@@ -233,7 +233,22 @@ class Withdraws extends CB_Controller
 		$form_validation = $this->form_validation->run();
 
 		if($form_validation){
+				if($member_info['mem_userid'] 
+					&& $this->input->ip_address() && $this->input->post('cp_transaction')
+						&& $this->input->post('cp_percoin') && $this->input->post('cp_content1') ){
 
+				$adminid = $member_info['mem_userid'];
+				$adminip = $this->input->ip_address();
+				$transaction = $this->input->post('cp_transaction');
+				$percoin = $this->input->post('cp_percoin');
+				$content = $this->input->post('cp_content1');
+				$memo = $this->input->post('cp_memo');
+			} else {
+				$this->session->set_flashdata(
+					'message',
+					'정보를 정확히 작성해주세요'
+				);
+			}
 		} else {
 			$this->session->set_flashdata(
 				'message',
@@ -241,19 +256,7 @@ class Withdraws extends CB_Controller
 			);
 		}
 
-		return;
-
-		if($member_info['mem_userid'] 
-				&& $this->input->ip_address() && $this->input->post('cp_transaction')
-					&& $this->input->post('cp_percoin') && $this->input->post('cp_content1') ){
-
-			$adminid = $member_info['mem_userid'];
-			$adminip = $this->input->ip_address();
-			$transaction = $this->input->post('cp_transaction');
-			$percoin = $this->input->post('cp_percoin');
-			$content = $this->input->post('cp_content1');
-			$memo = $this->input->post('cp_memo');
-		}
+		
 		
 		/**
 		 * 승인한 출금 요청건의 상태를 1으로 수정하며, 승인한 관리자 정보를 저장합니다.
