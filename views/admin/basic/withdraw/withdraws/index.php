@@ -429,10 +429,7 @@
 
         document.getElementById("wid-percoin").innerHTML = percoin;
         document.getElementById("wid-transaction").innerHTML = transaction;
-
-        // $("#myModal-result .modal-body #admin-id").val( adminid ); 
-        // $("#myModal-result .modal-body #admin-ip").val( adminip );
-        // $("#myModal-result .modal-body #result-date").val( resultdate ); 
+        
         $("#myModal-result .modal-footer #cp_content3").val( memo ); 
 	});
 
