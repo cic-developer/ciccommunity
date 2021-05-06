@@ -166,7 +166,7 @@ var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
 	</header>
             <!-- 본문 시작 -->
             <?php if (isset($yield))echo $yield; ?>
-            <!-- 본문 끝 -->`
+            <!-- 본문 끝 -->
         <footer id="footer-wrap">
             <div id="footer" class="div-cont">
                 <div class="f-logo">

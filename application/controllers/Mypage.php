@@ -1321,7 +1321,7 @@ class Mypage extends CB_Controller
 		} else {
 			$this->session->set_flashdata(
 				'message',
-				'금액을 올바르게 입력해주세요'
+				'금액을 옳바르게 입력해주세요'
 			);
 		}
 

@@ -107,7 +107,7 @@ class Coin extends CB_Controller
 		}else{
 
 			$list = array(
-				'selected_market' => $this -> select -> post('selected_market')
+				'selected_market' => $this -> input -> post('selected_market')
 			);
 			if(isset($list) && !empty($list)){
 				$stock = $this->Coin_model->dropdown_list($list);

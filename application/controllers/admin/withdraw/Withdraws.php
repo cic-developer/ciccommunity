@@ -243,6 +243,8 @@ class Withdraws extends CB_Controller
 				$percoin = $this->input->post('cp_percoin');
 				$content = $this->input->post('cp_content1');
 				$memo = $this->input->post('cp_memo');
+
+				$result = $this->{$this->modelname}->set_withdraw_approve($widIdx, $adminid, $adminip, $transaction, $percoin, $content, $memo);
 			} else {
 				$this->session->set_flashdata(
 					'message',
@@ -262,7 +264,6 @@ class Withdraws extends CB_Controller
 		 * 승인한 출금 요청건의 상태를 1으로 수정하며, 승인한 관리자 정보를 저장합니다.
 		 */
 		// $result = $this->{$this->modelname}->set_withdraw_approve($widIdx, $content, $adminid, $adminip);
-		$result = $this->{$this->modelname}->set_withdraw_approve($widIdx, $adminid, $adminip, $transaction, $percoin, $content, $memo);
 
 		/**
 		 * 승인 로그를 남깁니다.
