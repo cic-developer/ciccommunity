@@ -425,41 +425,6 @@ class Withdraws extends CB_Controller
 		 * 리턴값이 무조건 1만나옴. ??????<=
 		 */
 		$result = $this->{$this->modelname}->set_withdraw_retire($widIdx, $content, $adminid, $adminip);
-		
-		/**
-		 * 반려 로그를 남깁니다.
-		 * cic_withdraw_log
-		 */
-		// if ($this->member->get_member() 
-		// 		&& $this->input->ip_address()
-		// ) {
-		// 	$member_info = $this->member->get_member();
-		// 	$adminid = $member_info['mem_userid'];
-		// 	$userid = $getdata['wid_userid'];
-		// 	$userip = $getdata['wid_userip'];
-		// 	$address = $getdata['wid_wallet_address'];
-		// 	$money = $getdata['wid_req_money'];
-			
-		// 	$result = $this->CIC_withdraw_log_model->set_withdraw_log($content, $address, $adminid, $this->input->ip_address(), $userid, $userip, $money, 0);
-		// 	// get_cookie('user_ip')
-		// }
-
-		// 로그 실패
-		// if($result == 0){
-		// 	// 이벤트가 존재하면 실행합니다
-		// 	Events::trigger('after', $eventname);
-		// 	/**
-		// 	 * 처리가 끝난 후 목록페이지로 이동합니다
-		// 	 */
-		// 	$this->session->set_flashdata(
-		// 		'message',
-		// 		'정상적으로 처리되었으나 로그에서 오류가 발생하였습니다 (관리자에게 문의해주세요)'
-		// 	);
-		// 	$param =& $this->querystring;
-		// 	$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-
-		// 	redirect($redirecturl);
-		// }
 	
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('after', $eventname);
