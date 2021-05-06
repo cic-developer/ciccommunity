@@ -64,18 +64,21 @@ class Coin extends CB_Controller
 		$getList = $this -> Coin_model->get_coinlist();
 
 		for($i=0; $i<count($getList); $i++){
+
+			//'market' => $getList[$i]['market']
 			$data = array(
 				'market' => $getList[$i]['market'],
 				'name_ko' => $getList[$i]['english_name'],
 				'name_en' => $getList[$i]['korean_name'],
 			);
-			if( $this->Coin_model->market_exist($exist)){	
-				if(isset($data) && !empty($data)){
-					$stock = $this->Coin_model->insertStockData($data);
-				}	
-				$view['view']['alert_message'] = '정상적으로 저장되었습니다';}
-				
-			}
+		    print_t($market);				
+				if( $this->Coin_model->market_exist($exist)){	
+					if(isset($data) && !empty($data)){
+						$stock = $this->Coin_model->insertStockData($data);
+					}	
+					$view['view']['alert_message'] = '정상적으로 저장되었습니다';}
+					
+		}
         
 
 		//Get all stock to drop down
