@@ -165,24 +165,21 @@ class Coin_model extends CB_Model
     function dropdown_list($data){
         //$this->db->where('market',$data);
         $query = $this->db->get('cic_coin_admin');
-        if ($query->num_rows() > 0){
-            $query_ = $query = $this->db->get('cic_stocks');
-                if($query_['market'] == $data){
-                    $list = array(
-                        $query['market'] => $query_['market'],
-                        $query['name_ko'] => $query_['name_ko'],
-                        $query['name_en'] => $query_['name_en'],
-                    );
+        $query_ = $query = $this->db->get('cic_stocks');
+            if($query_['market'] == $data){
+                $list = array(
+                    $query['market'] => $query_['market'],
+                    $query['name_ko'] => $query_['name_ko'],
+                    $query['name_en'] => $query_['name_en'],
+                );
 
-                    $result = $this->db->insert('cic_coin_admin', $list);
-                    return $result;
-                }else{return false;}
+                $result = $this->db->insert('cic_coin_admin', $list);
+                return $result;
+                }else{
+                    return false;
+                }
             
         }
-        else{
-            return false;
-        }
-    }
 
 }
 ?>
