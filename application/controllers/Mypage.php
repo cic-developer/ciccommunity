@@ -1215,9 +1215,9 @@ class Mypage extends CB_Controller
 		$result = $this->CIC_withdraw_model->get_withdraw_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 
 		// print_r($per_page);//70
-		print_r($offset);
-		// print_r($result);
-		// print_r($result);
+		// print_r($offset); //0
+		// print_r($where); //
+		print_r($findex);
 		// print_r($result);
 		// print_r($result);
 		return;
