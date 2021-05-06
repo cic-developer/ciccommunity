@@ -127,15 +127,15 @@
                                                 <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
                                                 <div class="form-group">
                                                     <label for="cp_transaction">트랜잭션:</label>
-                                                    <textarea class="form-control" rows="1" cols="75" id="cp_transaction" name="cp_transaction" placeholder="트랜잭션을 입력해주세요" style="width:100%;"></textarea>
+                                                    <textarea class="form-control" rows="1" cols="75" id="cp_transaction" name="cp_transaction" placeholder="트랜잭션을 입력해주세요" required style="width:100%;"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="cp_percoin">퍼코인:</label>
-                                                    <textarea class="form-control" rows="1" cols="75" id="cp_percoin" name="cp_percoin" placeholder="퍼코인을 입력해주세요" style="width:100%;"></textarea>
+                                                    <textarea class="form-control" rows="1" cols="75" id="cp_percoin" name="cp_percoin" placeholder="퍼코인을 입력해주세요" required style="width:100%;"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="cp_content1">사유:</label>
-                                                    <textarea class="form-control" rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요" style="width:100%;"></textarea>
+                                                    <textarea class="form-control" rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요" required style="width:100%;"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="cp_memo">메모:</label>
