@@ -26,8 +26,11 @@
 						활성화 -
 						<label for="cpc_enable" class="control-label">
 							<select name="cpc_enable[]" id="doc_layout" class="form-control">
-								<option value="0" <?php echo element('cpc_enable', $value) === '0' ? 'selected' : ''; ?>>비활성</option>
-								<option value="1" <?php echo element('cpc_enable', $value) === '1' ? 'selected' : '';; ?>>활성</option>
+							<?php
+							foreach($getStock as $stoks){
+								echo '<option value="">비활성</option>';							
+							
+							}?>	
 							</select>
 						</label>
 				

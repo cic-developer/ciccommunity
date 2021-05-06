@@ -586,7 +586,7 @@ class Post_model extends CB_Model
 		return $this->db->update($this->_table);
 	}
 
-	public function get_popularpost_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
+	public function get_popularpost_list($limit = '', $offset = '', $where = '', $select = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
 
 		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
@@ -599,7 +599,9 @@ class Post_model extends CB_Model
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		$where = array(
 			'post_exept_state' => 0,
-			$checktime < 'post_datetime',
+		);
+		$select = array(
+
 		);
 		// 'post_datetime' => $nowtime - $checktime 
 		$search_where = array();

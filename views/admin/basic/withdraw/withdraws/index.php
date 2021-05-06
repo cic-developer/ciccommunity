@@ -409,6 +409,8 @@
 		var percoin = $(this).data('percoin');
 		var transaction = $(this).data('transaction');
 
+		var memo = $(this).data('memo');
+
         document.getElementById("wid-idx").innerHTML = idx;
         document.getElementById("wid-userid").innerHTML = userid;
         document.getElementById("wid-userip").innerHTML = userip;
@@ -427,10 +429,11 @@
 
         document.getElementById("wid-percoin").innerHTML = percoin;
         document.getElementById("wid-transaction").innerHTML = transaction;
+
         // $("#myModal-result .modal-body #admin-id").val( adminid ); 
         // $("#myModal-result .modal-body #admin-ip").val( adminip );
         // $("#myModal-result .modal-body #result-date").val( resultdate ); 
-        // $("#myModal-result .modal-footer #cp_content3").val( content ); 
+        $("#myModal-result .modal-footer #cp_content3").val( memo ); 
 	});
 
 
