@@ -32,15 +32,12 @@
                     <thead>
                         <tr>
                             <th><a href="<?php echo element('wid_idx', element('sort', $view)); ?>">번호</a></th>
-                            <th><a href="<?php echo element('wid_admin_id', element('sort', $view)); ?>">관리자아이디</a></th>
                             <th><a href="<?php echo element('wid_userid', element('sort', $view)); ?>">유저아이디</a></th>
-                            <th><a href="<?php echo element('wid_admin_ip', element('sort', $view)); ?>">관리자아이피</a></th>
                             <th><a href="<?php echo element('wid_userip', element('sort', $view)); ?>">회원아이피</a></th>
                             <th><a href="<?php echo element('wid_nickname', element('sort', $view)); ?>">닉네임</a></th>
                             <th><a href="<?php echo element('wid_wallet_address', element('sort', $view)); ?>">지갑주소</a></th>
                             <th><a href="<?php echo element('wid_req_money', element('sort', $view)); ?>">출금요청금액</a></th>
                             <th><a href="<?php echo element('wid_req_datetime', element('sort', $view)); ?>">요청날짜</a></th>
-                            <th><a href="<?php echo element('wid_res_datetime', element('sort', $view)); ?>">처리날짜</a></th>
                             <th><a href="<?php echo element('wid_state', element('sort', $view)); ?>">결과</a></th>
                             <th>승인</th>
                         </tr>
@@ -52,32 +49,37 @@
                     ?>
                         <tr>
                             <td><?php echo number_format(element('wid_idx', $result)); ?></td>
-                            <td><?php echo html_escape(element('wid_admin_id', $result)); ?></td>
                             <td><?php echo html_escape(element('wid_userid', $result)); ?></td>
-                            <td><?php echo html_escape(element('wid_admin_ip', $result)); ?></td>
                             <td><?php echo html_escape(element('wid_userip', $result)); ?></td>
                             <td><?php echo element('display_name', $result); ?></td>
                             <td><?php echo html_escape(element('wid_wallet_address', $result)); ?></td>
                             <td><?php echo number_format(element('wid_req_money', $result), 2); ?></td>
                             <td><?php echo html_escape(element('wid_req_datetime', $result)); ?></td>
-                            <td><?php echo html_escape(element('wid_res_datetime', $result)); ?></td>
-                            <td><?php echo html_escape(element('wid_state', $result)) != null ? (element('wid_state', $result) == 1 ? '<p class="text-success">승인</p>' : '<p class="text-danger">반려</p>' ) : '<p class="text-body">미처리</p>';?></td>
+                            <td><?php echo html_escape(element('wid_state', $result)) != null ? (html_escape(element('wid_state', $result)) == 1 ? '<p class="text-success">승인</p>' : '<p class="text-danger">반려</p>' ) : '<p class="text-body">미처리</p>';?></td>
                             <td>
                                 <?php
                                 if (element('wid_state', $result) != null) {
                                 ?>
-                                    <p class="text-primary"><strong>처리완료</strong></p>
+                                    <button type="button" class="text-primary withdraw-result modal_open3" 
+                                        style="cursor:pointer; border:0; outline:0; background-color:inherit;"
+                                            data-adminid="<?php echo html_escape(element('wid_admin_id', $result)); ?>"
+                                                data-adminip="<?php echo html_escape(element('wid_admin_ip', $result)); ?>"
+                                                    data-resultdate="<?php echo html_escape(element('wid_res_datetime', $result)); ?>"
+                                                        data-content="<?php echo html_escape(element('wid_content', $result)); ?>"
+                                    >
+                                        <strong>처리완료</strong>
+                                    </button>
                                 <?php 
                                 } else{
                                 ?>
                                     <div class="btn-group btn-group-sm" role="group">
                                         <button type="button" class="btn btn-success modal_open1" 
-                                            data-idx="<?php echo element("wid_idx", $result); ?>" 
+                                            data-idx="<?php echo number_format(element('wid_idx', $result)); ?>" 
                                         >
                                             승인
                                         </button>
                                         <button type="button" class="btn btn-danger modal_open2" data-toggle="modal" 
-                                            data-idx="<?php echo element("wid_idx", $result); ?>" 
+                                            data-idx="<?php echo number_format(element('wid_idx', $result)); ?>" 
                                         >
                                             반려
                                         </button>
@@ -111,8 +113,8 @@
                                         <!-- Modal body -->
                                         <div class="modal-body">
                                                 <!-- <label for="usr"></label> -->
-                                                <input type="hidden" name="wid_idx" id="wid_idx" value="" />
-                                                <textarea class="form-control" rows="5" cols="75" id="cp_content" name="cp_content" placeholder="출금 승인 사유를 입력해주세요." style="width:100%;"></textarea>
+                                                <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
+                                                <textarea class="form-control" rows="5" cols="75" id="cp_content1" name="cp_content1" placeholder="출금 승인 사유를 입력해주세요." style="width:100%;"></textarea>
                                         </div>
                                         
                                         <!-- Modal footer -->
@@ -123,7 +125,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- data-dismiss="modal-->
+                        <!-- The Modal approve -->
 
                         <!-- The Modal retire -->
                         <div class="modal fade" id="myModal-retire">
@@ -138,8 +140,8 @@
                                         <!-- Modal body -->
                                         <div class="modal-body">
                                                 <!-- <label for="usr"></label> -->
-                                                <input type="hidden" name="wid_idx" id="wid_idx" value="" />
-                                                <textarea class="form-control" rows="5" cols="75" id="cp_content" name="cp_content" placeholder="출금 반려 사유를 입력해주세요." style="width:100%;"></textarea>
+                                                <input type="hidden" name="wid_idx2" id="wid_idx2" value="" />
+                                                <textarea class="form-control" rows="5" cols="75" id="cp_content2" name="cp_content2" placeholder="출금 반려 사유를 입력해주세요." style="width:100%;"></textarea>
                                         </div>
                                         
                                         <!-- Modal footer -->
@@ -150,7 +152,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- data-dismiss="modal-->
+                        <!-- The Modal retire -->
                     </tbody>
                 </table>
             </div>
@@ -180,6 +182,47 @@
 	</form>
 </div>
 
+<!-- The Modal result -->
+<div class="modal fade" id="myModal-result">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">처리 결과 <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <table class="table table-hover table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>관리자아이디</th>
+                                <th>관리자아이피</th>
+                                <th>처리날짜</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="admin-id" id="admin-id"></td>
+                                <td class="admin-ip" id="admin-ip"></td>
+                                <td class="result-date" id="result-date"></td>
+                            </tr>    
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <!-- 처리사유 -->
+                    <textarea class="pull-left" name="cp_content3" id="cp_content3" rows="10" style="width:100%;" disabled></textarea>
+                </div>
+
+        </div>
+    </div>
+</div>
+<!-- The Modal result -->
+
     
 <script>
     // modal options
@@ -188,6 +231,9 @@
     })
     $('.modal_open2').on('click', function(){
         $('#myModal-retire').modal({backdrop: false, keyboard: false});
+    })
+    $('.modal_open3').on('click', function(){
+        $('#myModal-result').modal({backdrop: false, keyboard: false});
     })
 
     // approve submit
@@ -211,6 +257,7 @@
 
     // approve submit
     function wid_approve_submit(f, acttype, actpage){
+
         var str = '';
         // console.log(" => ", f)
         if (acttype === 'approve' && ! confirm('선택한 요청을 정말 승인 하시겠습니까?')) return;
@@ -237,11 +284,21 @@
     // set modal data
     $(document).on('click', '.modal_open1', function() {
 		var widIdx = $(this).data('idx');
-        $("#myModal-approve .modal-body #wid_idx").val( widIdx ); // cic_withdraw
+        $("#myModal-approve .modal-body #wid_idx1").val( widIdx ); 
 	});
     $(document).on('click', '.modal_open2', function() {
 		var widIdx = $(this).data('idx');
-        $("#myModal-retire .modal-body #wid_idx").val( widIdx ); // cic_withdraw
+        $("#myModal-retire .modal-body #wid_idx2").val( widIdx ); 
+	});
+    $(document).on('click', '.modal_open3', function() {
+		var adminid = $(this).data('adminid');
+		var adminip = $(this).data('adminip');
+		var resultdate = $(this).data('resultdate');
+		var content = $(this).data('content');
+        $("#myModal-result .modal-body #admin-id").val( adminid ); 
+        $("#myModal-result .modal-body #admin-ip").val( adminip );
+        $("#myModal-result .modal-body #result-date").val( resultdate ); 
+        $("#myModal-result .modal-footer #cp_content3").val( content ); 
 	});
 
 

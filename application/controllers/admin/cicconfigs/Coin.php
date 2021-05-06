@@ -44,7 +44,7 @@ class Coin extends CB_Controller
 		 * 라이브러리를 로딩합니다
 		 */
 		$this->load->library(array('pagination', 'querystring', 'form_validation'));
-		$this->load->model(array('coin_model'));
+		//$this->load->model(array('coin_model'));
 	}
 
     /**
@@ -92,15 +92,25 @@ class Coin extends CB_Controller
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
 			//$arr = $this->input->post();
-				$data = array(
-					'market' => $this -> input -> post('market'),
-					'name_ko' => $this -> input -> post('name_ko'),
-					'name_en' => $this -> input -> post('name_en')
-				);
+
+
+			// $data = array(
+			// 	'market' => $this -> input -> post('market'),
+			// 	'name_ko' => $this -> input -> post('name_ko'),
+			// 	'name_en' => $this -> input -> post('name_en')
+			// 	);
 			
-			if(isset($data) && !empty($data)){
-			$stock = $this->Coin_model->insertStockData($data);
-			}
+			for($i=0; $i<$key_word; $i++){
+				array_push($key_word, array(
+					'market' => $this -> input -> post('market')[$i],
+					'name_ko' => $this -> input -> post('name_ko')[$i],
+					'name_en' => $this -> input -> post('name_en')[$i]
+					));
+				}	
+			
+			// if(isset($data) && !empty($data)){
+			$stock = $this->Coin_model->insertStockData($key_word);
+			// }
 		    $view['view']['alert_message'] = '정상적으로 저장되었습니다';
 			
 		}
@@ -149,5 +159,14 @@ class Coin extends CB_Controller
 			// echo "</pre>";
 		}
 	
+
+	public function coin_search(){
+		$this->load->view('search');
+			//skeyword
+		$data2['skeyword'] = $this->Coin_model->search_coin();
+       	$this->load->view('result', $data2);
+
+
+		}
 }
 ?>

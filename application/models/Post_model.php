@@ -587,5 +587,28 @@ class Post_model extends CB_Model
 
 		return $this->db->update($this->_table);
 	}
+
+	public function get_admin_list($limit = '', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR')
+	{
+		$select = 'post.*, post.mem_id as member.mem_id, 
+			member.mem_id, member.mem_userid,
+			member.mem_username, member.mem_nickname, member.mem_is_admin, member.mem_icon';
+		$join[] = array('table' => 'member', 'on' => 'post.mem_id = member.mem_id', 'type' => 'left');
+		$result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
+
+		return $result;
+	}
+
+
+	public function get_list($limit = '', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR')
+	{
+		$select = 'post.*, post.mem_id as mem.mem_id, 
+			member.mem_id, member.mem_userid,
+			member.mem_username, member.mem_nickname, member.mem_is_admin, member.mem_icon';
+		$join[] = array('table' => 'member', 'on' => 'post.mem_id = member.mem_id', 'type' => 'left');
+		$result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
+
+		return $result;
+	}
 	
 }

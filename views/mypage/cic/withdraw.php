@@ -80,7 +80,7 @@
 
         // // If x is Not a Number or less than one or greater than 10
         if (isNaN(x) || x < 1 || x > mem_cp) {
-            text = "금액을 옳바르게 입력해주세요.";
+            text = "금액을 올바르게 입력해주세요.";
         } else {
             // text = "Input OK";
             // document.flist.submit();

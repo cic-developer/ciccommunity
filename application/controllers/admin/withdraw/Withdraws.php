@@ -157,7 +157,7 @@ class Withdraws extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('wid_idx' => '번호',  'wid_admin_id' => '관리자아이디', 'wid_userid' => '회원아이디', 
+		$search_option = array('wid_idx' => '번호',  'wid_userid' => '회원아이디', 
 										'wid_admin_ip' => '관리자아이피', 'wid_userip' => '회원아이피', 'wid_nickname' => '닉네임', 
 											'wid_wallet_address' => '지갑주소', 'wid_req_money' => '출금요청금액', 'wid_req_datetime' => '출금요청날짜', 
 												'wid_res_datetime' => '출금요청 처리날짜', 'wid_content' => '처리사유');
@@ -193,7 +193,7 @@ class Withdraws extends CB_Controller
 		/**
 		 * 프라이머리키에 숫자형이 입력되지 않으면 에러처리합니다
 		 */
-		$widIdx = (int)$this->input->post('wid_idx');
+		$widIdx = (int)$this->input->post('wid_idx1');
 		if (empty($widIdx) OR $widIdx < 1) {
 			show_404();
 		}
@@ -210,8 +210,8 @@ class Withdraws extends CB_Controller
 		if(!$member_info){
 			show_404();
 		}
-		if($member_info['mem_userid'] && $this->input->ip_address() && $this->input->post('cp_content')){
-			$content = $this->input->post('content');
+		if($member_info['mem_userid'] && $this->input->ip_address() && $this->input->post('cp_content1')){
+			$content = $this->input->post('cp_content1');
 			$adminid = $member_info['mem_userid'];
 			$adminip = $this->input->ip_address();
 		}
@@ -284,7 +284,7 @@ class Withdraws extends CB_Controller
 		/**
 		 * 프라이머리키에 숫자형이 입력되지 않으면 에러처리합니다
 		 */
-		$widIdx = (int)$this->input->post('wid_idx');
+		$widIdx = (int)$this->input->post('wid_idx2');
 		if (empty($widIdx) OR $widIdx < 1) {
 			show_404();
 		}
@@ -314,8 +314,7 @@ class Withdraws extends CB_Controller
 		if(!$member_info){
 			show_404();
 		}
-		if($member_info['mem_userid'] && $this->input->ip_address() && $this->input->post('cp_content')){
-			$content = $this->input->post('content');
+		if($member_info['mem_userid'] && $this->input->ip_address()){
 			$adminid = $member_info['mem_userid'];
 			$adminip = $this->input->ip_address();
 		}
@@ -340,7 +339,7 @@ class Withdraws extends CB_Controller
 			 * 반환 로그를 기록합니다.
 			 * cic_cp
 			 */
-			if (!$this->input->post('cp_content')
+			if (!$this->input->post('cp_content2')
 			) {
 				// 이벤트가 존재하면 실행합니다
 				Events::trigger('after', $eventname);
@@ -357,7 +356,7 @@ class Withdraws extends CB_Controller
 			}
 		}
 
-		$content = $this->input->post('cp_content');
+		$content = $this->input->post('cp_content2');
 		$result = $this->CIC_cp_model->set_cp_retire($content, $memIdx, $money);
 
 		// 출금반환 실패

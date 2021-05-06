@@ -111,8 +111,8 @@ class Coin_model extends CB_Model
         //     }
         //     $query = $this->db->get('name_en');
         //     return $query->result();
-            $cari = $this->input->GET('search', TRUE);
-            $data = $this->db->query("SELECT * from $_table where Name like '%$search%' ");
+            $search = $this->input->GET('search', TRUE);
+            $data = $this->db->query("SELECT * from $_table where name_en like '%$search%' ");
             return $data->result();
         
     

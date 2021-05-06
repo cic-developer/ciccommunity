@@ -30,7 +30,7 @@ class Popularpost extends CB_Controller
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
 	 */
-	protected $modelname = 'Post_model';
+	protected $modelname = 'Popularpost_model';
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -67,8 +67,8 @@ class Popularpost extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = 'post_like_point';
-		$forder = 'asc';
+		$findex = 'post_pop_ranking';
+		$forder = 'desc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 
