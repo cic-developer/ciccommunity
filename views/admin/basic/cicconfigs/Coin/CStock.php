@@ -21,12 +21,10 @@
 			<form method ="POST">
 				<input type="hidden" name="is_submit" value="1" />
 				<div class="form-group">
-					<input type="hidden" name="cpc_id[]" value="<?php echo element('cpc_id', $value) ?>"/>
-					<label class="col-sm-3 control-label"><?php echo element('cpc_title', $value)."<br/>(".element('cpc_description', $value).")"?></label>
 						<div class="col-sm-8">
 							활성화 -
 							<label for="cpc_enable" class="control-label">
-								<select name="selected_market" id="doc_layout" class="form-control">
+								<select name="selected_market[]" id="doc_layout" class="form-control">
 								<?php
 								foreach($getStock as $stoks){
 									echo '<option value="'.$stoks->market.'">'.$stoks->market.'</option>';							
