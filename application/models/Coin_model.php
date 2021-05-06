@@ -175,6 +175,7 @@ class Coin_model extends CB_Model
 
                 $result = $this->db->insert('cic_coin_admin', $list);
                 return $result;
+
                 }else{
                     return false;
                 }
