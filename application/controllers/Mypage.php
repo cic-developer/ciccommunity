@@ -1034,7 +1034,7 @@ class Mypage extends CB_Controller
 		Events::trigger('before', $eventname);
 
 		$scr_id = (int) $scr_id;
-		if (empty($scr_id) OR $scr_id <br 1) {
+		if (empty($scr_id) OR $scr_id < 1) {
 			show_404();
 		}
 
@@ -1214,13 +1214,13 @@ class Mypage extends CB_Controller
 
 		$result = $this->CIC_withdraw_model->get_withdraw_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 
-		// print_r($per_page);
-		// print_r('~~~~~~~~~~~~~~~~~');
+		// print_r($per_page);//70
+		print_r($offset);
 		// print_r($result);
 		// print_r($result);
 		// print_r($result);
 		// print_r($result);
-		// return;
+		return;
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
