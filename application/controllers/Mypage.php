@@ -1213,6 +1213,9 @@ class Mypage extends CB_Controller
 		$view['view']['req_url'] = site_url('mypage/withdraw_request');
 
 		$result = $this->CIC_withdraw_model->get_withdraw_list($per_page, $offset, $view['view']['mem_id'], '', $findex, $forder, $sfield, $skeyword);
+
+		// print_r($result);
+		// return;
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
