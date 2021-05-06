@@ -1192,6 +1192,13 @@ class Mypage extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
+		$findex = $this->input->get('findex', null, 'mem_id');
+		$forder = $this->input->get('forder', null, 'desc');
+		$sfield = $this->input->get('sfield', null, '');
+		$skeyword = $this->input->get('skeyword', null, '');
+
+		$per_page = admin_listnum();
+		$offset = ($page - 1) * $per_page;
 
 		// 회원 정보를 가져옵니다
 		$member_info = $this->member->get_member();
@@ -1201,7 +1208,8 @@ class Mypage extends CB_Controller
 		// 출금 요청 url
 		$view['view']['req_url'] = site_url('mypage/withdraw_request');
 
-		// $config['base_url'] = site_url('mypage/comment') . '?' . $param->replace('page');
+		$result = $this->CIC_withdraw_model->get_withdraw_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
