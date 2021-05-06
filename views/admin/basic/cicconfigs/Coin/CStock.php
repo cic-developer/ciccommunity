@@ -28,7 +28,7 @@
 							<select name="cpc_enable[]" id="doc_layout" class="form-control">
 							<?php
 							foreach($getStock as $stoks){
-								echo '<option value=".$stoks->market.">'.$stoks->market.'</option>';							
+								echo '<option value="'.$stoks->market.'">'.$stoks->market.'</option>';							
 							
 							}?>	
 							</select>
