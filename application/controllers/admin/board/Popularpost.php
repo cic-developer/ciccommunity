@@ -131,7 +131,7 @@ public function index()
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('phi_title' => '제목', 'phi_content' => '내용', 'phi_ip' => 'IP', 'phi_datetime' => '변경일');
+		$search_option = array('post_title' => '제목', 'post_content' => '내용', 'post_username' => '실명', 'post_nickname' => '닉네임', 'post_email' => '이메일', 'post_homepage' => '홈페이지', 'post_datetime' => '작성일', 'post_ip' => 'IP');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
