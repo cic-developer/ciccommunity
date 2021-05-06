@@ -750,8 +750,6 @@ class Post_model extends CB_Model
 		$select = 'post_history.*, post.mem_id as post_mem_id, post.post_userid, post.post_nickname,
 			post.brd_id, post.post_datetime, post.post_hit, post.post_secret, member.mem_id, member.mem_userid,
 			member.mem_username, member.mem_nickname, member.mem_is_admin, member.mem_icon';
-		$join[] = array('table' => 'post', 'on' => 'post_history.post_id = post.post_id', 'type' => 'inner');
-		$join[] = array('table' => 'member', 'on' => 'post_history.mem_id = member.mem_id', 'type' => 'left');
 		$result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
 
 		return $result;

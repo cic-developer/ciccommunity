@@ -344,6 +344,15 @@ class Withdraws extends CB_Controller
 		$this->form_validation->set_rules($config);
 		$form_validation = $this->form_validation->run();
 
+		if(!$form_validation){
+			$this->session->set_flashdata(
+				'message',
+				'정보를 정확히 작성해주세요.'
+			);
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+			redirect($redirecturl);
+		}
 
 		/**
 		 * 출금 요청한 금액을 반환합니다.
