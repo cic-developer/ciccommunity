@@ -111,25 +111,25 @@ class Coin extends CB_Controller
 
 		//Admin Create its own Data list from drop down value
 	
-		$this->load->library('form_validation');
+		// $this->load->library('form_validation');
 
-		$config = array(
-			array(
-				'field' => 'market',
-				'rules'=>'required'
-			),
-		);
+		// $config = array(
+		// 	array(
+		// 		'field' => 'market',
+		// 		'rules'=>'required'
+		// 	),
+		// );
 
 				
-			$this->form_validation->set_rules($config);
+		// 	$this->form_validation->set_rules($config);
 
-			if($this->form_validation -> run () == FALSE)
-			{
-				$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-			}else{
+		// 	if($this->form_validation -> run () == FALSE)
+		// 	{
+		// 		$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+		// 	}else{
 			
-				$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-			//}	
+		// 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+		// 	//}	
 	
 
        //Get market data 
@@ -165,7 +165,7 @@ class Coin extends CB_Controller
 		}
 	
 
-	public function coin_search(){
+	function coin_search(){
 		$this->load->view('search');
 			//skeyword
 		$data2['skeyword'] = $this->Coin_model->search_coin();
@@ -174,7 +174,7 @@ class Coin extends CB_Controller
 
 		}
 
-	public function getCoinList(){
+	function getCoinList(){
 		
 		$this->load->view('CStock');
 		$getList = $this -> Coin_model->coin_list();
