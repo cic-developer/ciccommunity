@@ -194,7 +194,8 @@ public function index()
 			'정상적으로 제외되었습니다'
 		);
 		$param =& $this->querystring;
-		redirect($pagedir);
+		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+		redirect($redirecturl);
 	}
 
 	/**
