@@ -30,6 +30,8 @@ class Post_history_model extends CB_Model
 
 	public function get_admin_list($limit = '', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
+		print_r($this->_table);
+		exit;
 		$select = 'post_history.*, post.mem_id as post_mem_id, post.post_userid, post.post_nickname,
 			post.brd_id, post.post_datetime, post.post_hit, post.post_secret, member.mem_id, member.mem_userid,
 			member.mem_username, member.mem_nickname, member.mem_is_admin, member.mem_icon';

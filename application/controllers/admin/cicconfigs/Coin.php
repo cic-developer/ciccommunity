@@ -29,7 +29,7 @@ class Coin extends CB_Controller
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
 	 */
-	//protected $modelname = array('Coin_model', 'Coin_model_admin');
+	protected $modelname = 'Coin_model';
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -44,7 +44,7 @@ class Coin extends CB_Controller
 		 * 라이브러리를 로딩합니다
 		 */
 		$this->load->library(array('pagination', 'querystring', 'form_validation'));
-		$this->load->model(array('coin_model', 'Coin_model_admin'));
+		//$this->load->model(array('coin_model'));
 	}
 
     /**
@@ -89,7 +89,7 @@ class Coin extends CB_Controller
 
 		//CREATE COIN LIST FOR ADMIN
 	
-		// $this->load->library('form_validation');
+		$this->load->library('form_validation');
 
 		$config = array(
 			array(
@@ -122,27 +122,24 @@ class Coin extends CB_Controller
 
 
        //GET MARKET PRICE 
-
-
-	    $admincoin = $this -> Coin_model_admin -> get_admin_coinList();
-		for($i = 0; $i < count($admincoin); $i++){
-			$marketdata[] = $admincoin[$i]->market;
-            if($marketdata){
+		for($i = 0; $i < count($getStock); $i++){
+			$market[] = $getStock[$i]->market;
+            if($market){
 				$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
 			}else{
 				$realtime_coin_info = 0;
 			}
 
-			foreach ($admincoin as $admincoin){
-				if($admincoin-> market){
-					$marketdata[] = $admincoin->market;
+			foreach ($getStock as $getstoks){
+				if($getstoks-> market){
+					$marketdata[] = $getstoks->market;
 				}else{
 					$marketdata[] = 0;
 				}
 			}
-			echo "<br><pre>";
-			print_r($realtime_coin_info);
-			echo "</pre>";
+			// echo "<br><pre>";
+			// print_r($realtime_coin_info);
+			// echo "</pre>";
 			
 			$view['realtime_coin_info'] = $realtime_coin_info;
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
