@@ -77,19 +77,7 @@
     </div>
 </div>
 
-<div class="container">
-  <h3>Tooltip Example</h3>
-  <a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>
-</div>
 <script>
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();   
-});
-</script>
-
-
-<script>
-
     // 출금금액 validation
     function validateForm() {
         var x, text;
