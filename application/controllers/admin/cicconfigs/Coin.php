@@ -29,7 +29,7 @@ class Coin extends CB_Controller
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
 	 */
-	protected $modelname = 'Coin_model', 'Coin_model_admin';
+	protected $modelname = array('Coin_model', 'Coin_model_admin');
 
 	/**
 	 * 헬퍼를 로딩합니다
