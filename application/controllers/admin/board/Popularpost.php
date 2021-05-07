@@ -81,7 +81,8 @@ public function index()
 		$this->{$this->modelname}->search_field_equal = array('post_id', 'mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('post_id'); // 정렬이 가능한 필드
 		$where = array(
-			'post_del <>' => 2,
+			'post_exept_state' => 0,
+			'post_datetime >=' => $checktime,
 		);
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;
