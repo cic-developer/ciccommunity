@@ -152,7 +152,6 @@ class Coin_model extends CB_Model
             
         ));
 
-
         $response = curl_exec($curl);
         $err = curl_error($curl);
 
@@ -164,8 +163,8 @@ class Coin_model extends CB_Model
 
         //convert json to php array or object
         $array = json_decode($response, true);
-
         return $array;
+        print_r($array);
        
         // for($i = 0; $i < count($array); $i++){
         //     $kwr_market = $array[$i]['market'];
