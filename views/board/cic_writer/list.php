@@ -288,7 +288,7 @@
                             <div class="abr">
                                 <div class="photo">
                                     <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30);?>"
-                                            alt=""></p>
+                                            alt="<?php echo element('mlc_title', $result); ?>"></p>
                                     <p class="rtxt">코알못259</p>
                                 </div>
                                 <p class="vp">256 VP</p>

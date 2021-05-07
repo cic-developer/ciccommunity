@@ -29,7 +29,7 @@
 						<li>
 							<div class="my-info">
 								<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', element('post', $view))), 20, 20); ?>"
-										alt="">
+										alt="<?php echo element('mlc_title', element('level', element('post', $view))); ?>">
 								</p>
 								<p class="rtxt"><?php echo element('post_nickname', element('post', $view)); ?></p>
 							</div>
