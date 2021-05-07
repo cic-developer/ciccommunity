@@ -69,11 +69,11 @@
                 </table>
             </div>
             <?php echo form_close(); ?>
-            <div class="box-info">
-				<?php echo element('paging', $view); ?>
-				<div class="pull-left ml20"><?php echo admin_listnum_selectbox();?></div>
-				<?php echo $buttons; ?>
-			</div>
+            <!-- s: paging-wrap -->
+            <div class="paging-wrap">
+                <?php echo element('paging', element('list', $view)); ?>
+            </div>
+            <!-- e: paging-wrap -->
         </div>
         <!-- page end // -->
     </div>
