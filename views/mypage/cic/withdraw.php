@@ -73,6 +73,7 @@
 				<div class="pull-left ml20"><?php echo admin_listnum_selectbox();?></div>
 				<?php echo $buttons; ?>
 			</div>
+        <?php echo form_close(); ?>
         </div>
         <!-- page end // -->
     </div>
