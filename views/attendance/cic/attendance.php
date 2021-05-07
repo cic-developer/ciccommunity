@@ -49,7 +49,15 @@
 					<?php for($n = 1, $i = 0; $i < $total_week; $i++){ ?>
 						<tr>
 							<!-- 1일부터 7일 (한 주) -->
-							<?php for ($k = 0; $k < 7; $k++): ?> 
+							<?php for ($k = 0; $k < 7; $k++){ ?>
+								<td>
+									<!-- 시작 요일부터 마지막 날짜까지만 날짜를 보여주도록 -->
+									<?php if ( ($n > 1 || $k >= $start_week) && ($total_day >= $n) ): ?>
+									<!-- 현재 날짜를 보여주고 1씩 더해줌 -->
+										<?php echo $n++ ?>
+									<?php endif ?>
+								</td>
+							<?php } ?> 
 						</tr>
 					<?php } ?>
                         <tr>
