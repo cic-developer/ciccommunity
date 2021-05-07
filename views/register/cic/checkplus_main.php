@@ -44,8 +44,8 @@
     
     // CheckPlus(��������) ó�� ��, ��� ����Ÿ�� ���� �ޱ����� ���������� ���� http���� �Է��մϴ�.
     // ����url�� ���� �� ������������ ȣ���ϱ� �� url�� �����ؾ� �մϴ�. ex) ���� �� url : http://www.~ ���� url : http://www.~
-    $returnurl = "https://dev.ciccommunity.com/checkplus_success.php";	// ������ �̵��� URL
-    $errorurl = "https://dev.ciccommunity.com/checkplus_fail.php";		// ���н� �̵��� URL
+    $returnurl = "https://dev.ciccommunity.com/checkplus_success";	// ������ �̵��� URL
+    $errorurl = "https://dev.ciccommunity.com/checkplus_fail";		// ���н� �̵��� URL
 	
     // reqseq���� ������������ �� ��� ������ ���Ͽ� ���ǿ� ��Ƶд�.
     
