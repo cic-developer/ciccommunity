@@ -18,7 +18,7 @@ class Board_post extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Post', 'Post_meta', 'Post_extra_vars, CIC_member_level_config');
+	protected $models = array('Post', 'Post_meta', 'Post_extra_vars, CIC_member_level_config_model');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -347,7 +347,11 @@ class Board_post extends CB_Controller
 				($use_sideview_icon ? element('mem_icon', $dbmember) : ''),
 				($use_sideview ? 'Y' : 'N')
 			);
-			$view['view']['post']['level'] = $this->member->item('level');
+			$level_where = array(
+				'mlc_level' => element('mem_level', $dbmember),
+				'mlc_enable' => 0,
+			);
+			$view['view']['post']['level'] = $this->CIC_member_level_config_model->get_one('', '', $level_where);
 		} else {
 			$view['view']['post']['display_name'] = '익명사용자';
 		}
