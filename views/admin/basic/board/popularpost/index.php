@@ -38,8 +38,8 @@
 							<tr>
 								<th><a href="<?php echo element('post_id', element('sort', $view)); ?>">번호</a></th>
 								<th>게시판</th>
-								<th>이미지</th>
 								<th>제목</th>
+								<th>상세보기</th>
 								<th>작성자</th>
 								<th>작성일</th>
 								<th>추천수</th>
@@ -57,17 +57,8 @@
 							<tr>
 								<td><?php echo number_format(element('num', $result)); ?></td>
 								<td><a href="?brd_id=<?php echo element('brd_id', $result); ?>"><?php echo html_escape(element('brd_name', element('board', $result))); ?></a> <a href="<?php echo goto_url(element('boardurl', $result)); ?>" target="_blank"><span class="fa fa-external-link"></span></a></td>
-								<td>
-									<?php if (element('thumb_url', $result)) {?>
-										<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank">
-											<img src="<?php echo element('thumb_url', $result); ?>" alt="<?php echo html_escape(element('post_title', $result)); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" class="thumbnail mg0" style="width:80px;" />
-										</a>
-									<?php } ?>
-								</td>
-								<td>
-									<?php if (element('category', $result)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $result))); ?></span><?php } ?>
-									<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><?php echo html_escape(element('post_title', $result)); ?></a>
-								</td>
+								<td><a href="?sfield=post.post_id&amp;skeyword=<?php echo element('post_id', $result); ?>"><?php echo html_escape(element('post_title', $result)); ?></a> <a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><span class="fa fa-external-link"></span></a></td>
+								<td><a href="<?php echo admin_url($this->pagedir . '/view/' . element(element('primary_key', $view), $result)); ?>">상세보기</a></td>
 								<td><?php echo element('post_display_name', $result); ?> <?php if (element('post_userid', $result)) { ?> ( <a href="?sfield=mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('post_userid', $result)); ?></a> ) <?php } ?></td>
 								<td><?php echo display_datetime(element('post_datetime', $result), 'full'); ?></td>
 								<td><?php echo number_format(element('post_like_point', $result)); ?></td>
