@@ -82,16 +82,13 @@ class Coin extends CB_Controller
 		}
         
 
-		//Get all stock to drop down
+		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
 
 		$getStock = $this -> Coin_model->getstockData();
         $view['getStock'] = $getStock;
 
-
-
-		//Admin Create its own Data list from drop down
+		//CREATE COIN LIST FOR ADMIN
 	
-		
 		$this->load->library('form_validation');
 
 		$config = array(
@@ -101,8 +98,7 @@ class Coin extends CB_Controller
 			),
 
 		);
-
-				
+	
 		$this->form_validation->set_rules($config);
 
 		if($this->form_validation -> run () == FALSE)
@@ -125,7 +121,10 @@ class Coin extends CB_Controller
 		}
 
 
-       //Get market data 
+       //GET MARKET PRICE 
+
+
+	    //$admincoin = $this -> C
 		for($i = 0; $i < count($getStock); $i++){
 			$market[] = $getStock[$i]->market;
             if($market){
@@ -152,9 +151,9 @@ class Coin extends CB_Controller
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
 		}
-			// echo "<br><pre>";
-			// print_r($realtime_coin_info);
-			// echo "</pre>";
+			echo "<br><pre>";
+			print_r($realtime_coin_info);
+			echo "</pre>";
 	}
 	
 
