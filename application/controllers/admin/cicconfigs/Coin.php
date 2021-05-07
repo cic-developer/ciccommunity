@@ -72,7 +72,7 @@ class Coin extends CB_Controller
 				echo "<br><pre>";
 				print_r($market); 
 				echo "<pre>";
-			}else{echo "not true";}
+			}else{echo "<br><pre> not true <br><pre>" ;}
 				//'market' => $getList[$i]['market']
 			$data = array(
 				'market' => $getList[$i]['market'],

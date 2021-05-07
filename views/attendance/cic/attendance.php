@@ -262,9 +262,10 @@
             </div>
             <div class="lower">
 				<?php
-				$attributes = array('class' => 'attendance_box text-center mb20', 'name' => 'attendanceform', 'id' => 'attendanceform');
+				$attributes = array('class' => '', 'name' => 'attendanceform', 'id' => 'attendanceform');
 				echo form_open('', $attributes);
 				?>
+				<input type="hidden" name="memo" value="<?php echo html_escape(element(0, element('default_memo', $view))); ?>" id="att_memo" class="input" onClick="this.value='';" />
                 <button type="submit" class="enter-btn"><span>출석하기</span></button>
 				<?php echo form_close(); ?>
             </div>
