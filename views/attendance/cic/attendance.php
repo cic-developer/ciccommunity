@@ -7,7 +7,7 @@
         <div class="member-wrap appear">
             <div class="filter">
                 <div class="month">
-                    <p>2021.04</p>
+                    <p><?php echo cdate('Y.m', strtotime($_date)); ?></p>
                 </div>
                 <div class="abr">
                     <div class="field date">

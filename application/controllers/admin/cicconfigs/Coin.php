@@ -118,13 +118,13 @@ class Coin extends CB_Controller
 			$list = array(
 				'selected_market' => $this -> input -> post('selected_market')
 			);
-			foreach($list as $l){
-				if(isset($l) && !empty($l)){
-					$stock_ = $this->Coin_model->dropdown_list($l);
-					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-					print_r($stock_);
-				}
-			}
+			// foreach($list as $l){
+			// 	if(isset($l) && !empty($l)){
+			// 		$stock_ = $this->Coin_model->dropdown_list($l);
+			// 		$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+			// 		print_r($stock_);
+			// 	}
+			// }
 			
 			
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
