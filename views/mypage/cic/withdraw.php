@@ -79,18 +79,47 @@
 
 <style>
 [data-tooltip-text]:hover {
-    position: relative;
+	position: relative;
+}
+
+[data-tooltip-text]:after {
+	-webkit-transition: bottom .3s ease-in-out, opacity .3s ease-in-out;
+	-moz-transition: bottom .3s ease-in-out, opacity .3s ease-in-out;
+	transition: bottom .3s ease-in-out, opacity .3s ease-in-out;
+
+	background-color: rgba(0, 0, 0, 0.8);
+
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+	-moz-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+	box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+	
+    -webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	
+    color: #FFFFFF;
+	font-size: 12px;
+	margin-bottom: 10px;
+	padding: 7px 12px;
+	position: absolute;
+	width: auto;
+	min-width: 50px;
+	max-width: 300px;
+	word-wrap: break-word;
+
+	z-index: 9999;
+
+	opacity: 0;
+	left: -9999px;
+    top: 90%;
+	
+	content: attr(data-tooltip-text);
 }
 
 [data-tooltip-text]:hover:after {
-    content: attr(data-tooltip-text);
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #FFFFFF;
-    font-size: 12px;
-    z-index: 9999;
+	top: 130%;
+	left: 0;
+	opacity: 1;
 }
 </style>
 
