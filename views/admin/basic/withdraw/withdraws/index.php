@@ -311,8 +311,8 @@
                     </table>
                     <!-- 메모 -->
                     <div class="form-group">
-                        <label class="pull-left" for="cp_content3">메모:</label>
-                        <textarea class="pull-left" name="cp_content3" id="cp_content3" rows="10" style="width:100%;" disabled readonly></textarea>
+                        <label for="cp_content3">메모:</label>
+                        <textarea name="cp_content3" id="cp_content3" rows="10" style="width:100%;" disabled readonly></textarea>
                     </div>
                 </div>
                 
