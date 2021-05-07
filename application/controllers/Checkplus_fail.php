@@ -45,7 +45,7 @@ class Checkplus_main extends CB_Controller
 	 */
 	public function index()
 	{
-		$this->load->view('register/cic/checkplus_main');
+		$this->load->view('register/cic/Checkplus_fail');
 	}
 }
 
