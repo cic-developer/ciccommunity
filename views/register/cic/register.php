@@ -287,7 +287,6 @@
 
 <script>
 	$(document).ready(function(){
-		console.log("= > ",$attributes);
 		$("#submitButton").on('click',function(){
 			$("#fregisterform").submit();
 		});
