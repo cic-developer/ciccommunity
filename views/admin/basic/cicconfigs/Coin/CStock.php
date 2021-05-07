@@ -66,11 +66,11 @@
 							</div>
 							<div class="form-group col-md-2">
 								<label for="inputZip">low-price</label>
-								<input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['low_price']; ?>'>
+								<input type="text" class="form-control" id="myText" value = "'.$realtime_coin_info['low_price'].'">
 							</div>
 							<div class="form-group col-md-2">
 								<label for="inputZip">trade-price</label>
-								<input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['trade_price']; ?>'>
+								<input type="text" class="form-control" id="myText" value = "'.$realtime_coin_info['trade_price'].'">
 							</div>
 							<div class="btn-group pull-right" role="group" aria-label="...">
 								<button type="submit" class="btn btn-success btn-sm">update</button>        

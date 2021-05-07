@@ -41,17 +41,11 @@
 						<?php 
 						if(element('level',element('post', $view))) {
 							print_r(element('level',element('post', $view)));
-							if(element('mlc_level',element('level',element('post', $view))) >= 0){
 						?>
-							<p style="color:#2c3e50;">
-								<?=element('mlc_level',element('level',element('post', $view))).' '.element('mlc_title',element('level',element('post', $view))) ?>
-							</p>
-						<?php  } else { ?>
-							<p>
-								<?=element('mlc_level',element('level',element('post', $view))).' '.element('mlc_title',element('level',element('post', $view))) ?>
-							</p>
+						<p <?php echo (element('mlc_level',element('level',element('post', $view))) >= 0) ? 'style="color:#444;"' : '' ?>>
+							<?=element('mlc_level',element('level',element('post', $view))).' '.element('mlc_title',element('level',element('post', $view))) ?>
+						</p>
 						<?php 
-							}
 						} 
 						?>
 						<div class="vp-point">
