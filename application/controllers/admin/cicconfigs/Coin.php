@@ -94,7 +94,7 @@ class Coin extends CB_Controller
 			
 		}
 		print(1);
-
+		exit();
 		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
 
 		$getStock = $this -> Coin_model->getstockData();
