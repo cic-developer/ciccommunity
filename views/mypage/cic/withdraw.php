@@ -81,10 +81,12 @@
   <h3>Tooltip Example</h3>
   <a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>
 </div>
+
+
 <script>
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();   
-});
+    $(function() {
+        $("#show-tooltip").tooltip();
+    });
 </script>
 
 
