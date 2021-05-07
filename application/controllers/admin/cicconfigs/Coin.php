@@ -124,18 +124,18 @@ class Coin extends CB_Controller
        //GET MARKET PRICE 
 
 
-	    //$admincoin = $this -> C
-		for($i = 0; $i < count($getStock); $i++){
-			$marketdata[] = $getStock[$i]->market;
+	    $admincoin = $this -> Coin_model_admin -> get_admin_coinLis();
+		for($i = 0; $i < count($$admincoin); $i++){
+			$marketdata[] = $$admincoin[$i]->market;
             if($marketdata){
 				$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
 			}else{
 				$realtime_coin_info = 0;
 			}
 
-			foreach ($getStock as $getstoks){
-				if($getstoks-> market){
-					$marketdata[] = $getstoks->market;
+			foreach ($$admincoin as $$admincoin){
+				if($$admincoin-> market){
+					$marketdata[] = $$admincoin->market;
 				}else{
 					$marketdata[] = 0;
 				}
