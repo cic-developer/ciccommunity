@@ -41,11 +41,15 @@
 						<?php 
 						if(element('level',element('post', $view))) {
 							print_r(element('level',element('post', $view)));
-							if(element('mlc_level',element('level',element('post', $view)))){
+							if(element('mlc_level',element('level',element('post', $view))) >= 0){
 						?>
-						<p>
-							4 진정한 흑우
-						</p>
+							<p>
+								4 진정한 흑우
+							</p>
+						<?php  } else { ?>
+							<p>
+								4 진정한 흑우
+							</p>
 						<?php 
 							}
 						} 

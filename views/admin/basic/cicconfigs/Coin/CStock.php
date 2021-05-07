@@ -49,10 +49,10 @@
 				<div class='box-table'>
 				<?php
 					foreach($realtime_coin_info as $coin_info){
-					'<form>
+					echo '<form>
 							<div class="form-group col-md-2">
 								<label for="inputCity">Market name</label>
-								<input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['market']; ?>'>
+								<input type="text" class="form-control" id="myText" value = "'.$realtime_coin_info['market'].'">
 							</div>
 
 							<div class="form-group col-md-2">
