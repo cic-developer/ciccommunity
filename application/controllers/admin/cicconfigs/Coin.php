@@ -137,9 +137,9 @@ class Coin extends CB_Controller
 					$marketdata[] = 0;
 				}
 			}
-			// echo "<br><pre>";
-			// print_r($realtime_coin_info);
-			// echo "</pre>";
+			echo "<br><pre>";
+			print_r($realtime_coin_info);
+			echo "</pre>";
 			
 			$view['realtime_coin_info'] = $realtime_coin_info;
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
@@ -148,9 +148,9 @@ class Coin extends CB_Controller
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
 		}
-			echo "<br><pre>";
-			print_r($realtime_coin_info);
-			echo "</pre>";
+			// echo "<br><pre>";
+			// print_r($realtime_coin_info);
+			// echo "</pre>";
 	}
 	
 
