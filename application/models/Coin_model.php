@@ -175,7 +175,7 @@ class Coin_model extends CB_Model
             
         //     }
 
- }
+
         // foreach($array as $kwr_stocks => $value){
         //     print_r($kwr_market);
         //     $tempStock = $kwr_stocks."[".$value."]";
