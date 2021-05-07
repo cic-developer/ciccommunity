@@ -53,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$del_column = $download_link ? 'post_file_del[' . element('pfi_id', element($i, element('file', $view))) . ']' : '';
 			?>
 				<div class="form-group">
-					<label for="<?php echo $file_column; ?>" class="col-sm-2 control-label">파일 #<?php echo $i+1; ?></label>
+					<label for="<?php echo $file_column; ?>" class="col-sm-2 control-label">대표이미지 #</label>
 					<div class="col-sm-10">
 						<input type="file" class="form-control" name="<?php echo $file_column; ?>" id="<?php echo $file_column; ?>" />
 						<?php if ($download_link) { ?>
