@@ -62,7 +62,7 @@ class Coin extends CB_Controller
 		
 		$getList = $this -> Coin_model->get_coinlist();
 
-		//for($i=0; $i<count($getList); $i++){
+		for($i=0; $i<count($getList); $i++){
 
 			//'market' => $getList[$i]['market']
 			$data = array(
@@ -77,7 +77,7 @@ class Coin extends CB_Controller
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 				}
 			//}		
-		//}
+		}
         
 
 		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
