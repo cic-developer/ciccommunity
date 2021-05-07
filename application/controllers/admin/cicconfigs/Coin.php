@@ -68,7 +68,7 @@ class Coin extends CB_Controller
 			
 			//print_r ($getList[$i]['market']);
 			$market = $getList[$i]['market'];
-			if(strcmp(substr($market, 0, 3), "KWR")==0){
+			if(strcmp(substr($market, 0, 1), "K")==0){
 				echo "<br><pre>";
 				print_r($market); 
 				echo "<pre>";
