@@ -125,6 +125,7 @@ class Coin extends CB_Controller
 
 
 	    $admincoin = $this -> Coin_model_admin -> get_admin_coinList();
+		print_r($admincoin);
 		for($i = 0; $i < count($admincoin); $i++){
 			$marketdata[] = $$admincoin[$i]->market;
             if($marketdata){
