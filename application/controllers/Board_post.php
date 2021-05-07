@@ -18,7 +18,7 @@ class Board_post extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Post', 'Post_meta', 'Post_extra_vars');
+	protected $models = array('Post', 'Post_meta', 'Post_extra_vars, CIC_member_level_config');
 
 	/**
 	 * 헬퍼를 로딩합니다

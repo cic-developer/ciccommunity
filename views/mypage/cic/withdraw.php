@@ -77,15 +77,14 @@
     </div>
 </div>
 
-<div class="container">
-  <h3>Tooltip Example</h3>
-  <a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>
+<div>
+  <p href="#" title="Hooray!">Hover over me</p>
 </div>
 
 
 <script>
     $(function() {
-        $("#show-tooltip").tooltip();
+        $("#tooltip-1").tooltip();
     });
 </script>
 
