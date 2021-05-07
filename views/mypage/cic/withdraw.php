@@ -78,8 +78,19 @@
 </div>
 
 <style>
-.test {
-    color:red;
+[data-tooltip-text]:hover {
+    position: relative;
+}
+
+[data-tooltip-text]:hover:after {
+    content: attr(data-tooltip-text);
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #FFFFFF;
+    font-size: 12px;
+    z-index: 9999;
 }
 </style>
 
