@@ -261,7 +261,12 @@
                 </table>
             </div>
             <div class="lower">
-                <a href="#n" class="enter-btn"><span>출석하기</span></a>
+				<?php
+				$attributes = array('class' => 'attendance_box text-center mb20', 'name' => 'attendanceform', 'id' => 'attendanceform');
+				echo form_open('', $attributes);
+				?>
+                <button type="submit" class="enter-btn"><span>출석하기</span></button>
+				<?php echo form_close(); ?>
             </div>
         </div>
         <!-- page end // -->
