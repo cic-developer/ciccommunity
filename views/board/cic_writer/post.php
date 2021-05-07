@@ -32,10 +32,18 @@
 							</div>
 						</li>
 						<li>등록일 : 2020-08-25 </li>
-						<li>조회 : 300 </li>
+						<li>조회 : <?php echo number_format(element('post_hit', element('post', $view))); ?> </li>
 					</ul>
 					<div class="abr">
-						<p>4 진정한 흑우</p>
+						<?php 
+						if(element('level',element('post', $view))) {
+						?>
+						<p <?php echo (element('mlc_level',element('level',element('post', $view))) >= 0) ? 'style="color:#444;"' : '' ?>>
+							<?php echo element('mlc_level',element('level',element('post', $view))).' '.element('mlc_title',element('level',element('post', $view))); ?>
+						</p>
+						<?php 
+						} 
+						?>
 						<div class="vp-point">
 							<ul>
 								<li><a href="#n" class="up">50,151</a></li>
