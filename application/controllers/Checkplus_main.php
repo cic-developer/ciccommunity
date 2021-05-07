@@ -75,7 +75,7 @@ class Checkplus_main extends CB_Controller
 			$page_name = $this->cbconfig->item('site_page_name_register');
 
 			$layoutconfig = array(
-				'path' => 'register',
+				'path' => 'checkplus_main',
 				'layout' => 'layout',
 				'skin' => 'register_block',
 				'layout_dir' => $this->cbconfig->item('layout_register'),
