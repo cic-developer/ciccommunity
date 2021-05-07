@@ -141,11 +141,13 @@
                                 <li>
                                     <a href="#n" class="new">
                                         <p class="num">1</p>
-                                        <p class="btxt">
-                                            <span class="txt">업비트 싹 뺐습니다 지금 비트코인 어느정도 예상되는 어쩌고 텍스트 예시로 테스트 테스트 테스트 테스트
-                                            </span>
-                                            <span class="hit">(12)</span>
-                                        </p>
+                                        <td>
+									        <?php if (element('thumb_url', $result)) {?>
+										        <a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank">
+											    <img src="<?php echo element('thumb_url', $result); ?>" alt="<?php echo html_escape(element('post_title', $result)); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" class="thumbnail mg0" style="width:80px;" />
+										        </a>
+									        <?php } ?>
+								        </td>
                                         <div>
                                             <p class="stxt">블로서리 <span><img
                                                         src="<?php echo base_url('assets/images/like-popo.png') ?>"
