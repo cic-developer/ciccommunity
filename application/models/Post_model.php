@@ -592,18 +592,18 @@ class Post_model extends CB_Model
 	public function get_popularpost_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
 
-		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
-			$orderby = 'post_like_point desc';
-		}
+		// if ( ! in_array(strtolower($orderby), $this->allow_order)) {
+		// 	$orderby = 'post_like_point desc';
+		// }
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
 		if (empty($sfield)) {
 			$sfield = array('post_title', 'post_content');
 		}
-		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-		$where = array(
-			'post_exept_state' => 0,
-			'post_datetime >=' => $checktime,
-		);
+		// $checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+		// $where = array(
+		// 	'post_exept_state' => 0,
+		// 	'post_datetime >=' => $checktime,
+		// );
 		// 'post_datetime' => $nowtime - $checktime 
 		$search_where = array();
 		$search_like = array();
