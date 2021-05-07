@@ -3,7 +3,7 @@
     <div id="contents" class="div-cont">
         
         <!-- page start // -->
-        <div class="member-wrap withdraw">
+        <div class="member-wrap withdraw list">
             <?php
             echo show_alert_message($this->session->flashdata('message'), '<script>alert("', '")</script>');
             $attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
@@ -76,7 +76,7 @@
             </div>
             <?php echo form_close(); ?>
             <div class="paging-wrap">
-				<?php echo element('paging', element('list', $view)); ?>
+				<?php echo element('paging', $view); ?>
 			</div>
         </div>
         <!-- page end // -->
@@ -128,18 +128,6 @@
 	opacity: 1;
 }
 </style>
-
-<div>
-    <span data-tooltip-text="THIS IS TOOLTIP!!">Hover over me</span>
-</div>
-
-
-<script>
-    $(function() {
-        $("#tooltip-1").tooltip();
-    });
-</script>
-
 
 <script>
     // 출금금액 validation
