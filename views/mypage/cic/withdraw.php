@@ -84,7 +84,7 @@
 <script>
     $(document).ready(function(){
         $('[data-toggle="tooltip"]').tooltip();   
-    });
+        });
 
 
     // 출금금액 validation
