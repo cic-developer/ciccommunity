@@ -1,78 +1,270 @@
-<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css'); ?>
 
-<h4>출석체크</h4>
-
-<div class="wrapmemo">
-	<?php
-	$attributes = array('class' => 'attendance_box text-center mb20', 'name' => 'attendanceform', 'id' => 'attendanceform');
-	echo form_open('', $attributes);
-	?>
-		한마디
-		<input type="text" name="memo" value="<?php echo html_escape(element(0, element('default_memo', $view))); ?>" id="att_memo" class="input" onClick="this.value='';" />
-		<button type="button" name="change_memo" class="btn btn-default" id="change_memo"><span class="fa fa-refresh"></span></button>
-		<button type="button" name="submit" class="btn btn-success" id="add_attendance">출첵하기</button>
-	<?php echo form_close(); ?>
-	<button type="button" name="view_policy" class="btn btn-default btn-xs pull-right view_policy" >포인트정책보기</button>
+<div id="container-wrap">
+    <div id="contents" class="div-cont">
+        <!-- page start // -->
+        <div class="member-wrap appear">
+            <div class="filter">
+                <div class="month">
+                    <p>2021.04</p>
+                </div>
+                <div class="abr">
+                    <div class="field date">
+                        <p class="chk-input">
+                            <input type="text" value="2021-03-08" autocomplete="off">
+                        </p>
+                    </div>
+                    <a href="#n" class="cprev"><span class="blind">이전</span></a>
+                    <a href="#n" class="cnext"><span class="blind">다음</span></a>
+                </div>
+            </div>
+            <div class="calendar">
+                <table>
+                    <colgroup>
+                        <col width="14.2857%">
+                        <col width="14.2857%">
+                        <col width="14.2857%">
+                        <col width="14.2857%">
+                        <col width="14.2857%">
+                        <col width="14.2857%">
+                        <col width="14.2857%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>일<span>요일</span></th>
+                            <th>월<span>요일</span></th>
+                            <th>화<span>요일</span></th>
+                            <th>수<span>요일</span></th>
+                            <th>목<span>요일</span></th>
+                            <th>금<span>요일</span></th>
+                            <th>토<span>요일</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="before">
+                                <div class="con">
+                                    <p class="day">28</p>
+                                </div>
+                            </td>
+                            <td class="before">
+                                <div class="con">
+                                    <p class="day">29</p>
+                                </div>
+                            </td>
+                            <td class="before">
+                                <div class="con">
+                                    <p class="day">30</p>
+                                </div>
+                            </td>
+                            <td class="before">
+                                <div class="con">
+                                    <p class="day">31</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con active">
+                                    <p class="day">1</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con active">
+                                    <p class="day">2</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con active">
+                                    <p class="day">3</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="con active">
+                                    <p class="day">4</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td class="today">
+                                <div class="con active">
+                                    <p class="day">5</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">6</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">7</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">8</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">9</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">10</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="con">
+                                    <p class="day">11</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">12</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">13</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">14</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">15</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">16</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">17</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="con">
+                                    <p class="day">18</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">19</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">20</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">21</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">22</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">23</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">24</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="con">
+                                    <p class="day">25</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">26</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">27</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">28</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">29</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="con">
+                                    <p class="day">30</p>
+                                    <a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+                                </div>
+                            </td>
+                            <td class="after">
+                                <div class="con">
+                                    <p class="day">31</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="lower">
+                <a href="#n" class="enter-btn"><span>출석하기</span></a>
+            </div>
+        </div>
+        <!-- page end // -->
+    </div>
 </div>
-<div class="alert alert-dismissible alert-warning alert-point-policy">
-	<button type="button" class="close alertclose" >&times;</button>
-	<strong>포인트 정책</strong><br />
-	출석가능시간 : <?php echo $this->cbconfig->item('attendance_start_time'); ?> ~ <?php echo $this->cbconfig->item('attendance_end_time'); ?><br />
-	<?php
-	if ($this->cbconfig->item('attendance_point')) {
-		echo '출석포인트 : ' . $this->cbconfig->item('attendance_point') . '점<br />';
-	}
-	if ($this->cbconfig->item('attendance_point_1')) {
-		echo '1등포인트 : 출석포인트 + ' . $this->cbconfig->item('attendance_point_1') . '점<br />';
-	}
-	if ($this->cbconfig->item('attendance_point_2')) {
-		echo '2등포인트 : 출석포인트 + ' . $this->cbconfig->item('attendance_point_2') . '점<br />';
-	}
-	if ($this->cbconfig->item('attendance_point_3')) {
-		echo '3등포인트 : 출석포인트 + ' . $this->cbconfig->item('attendance_point_3') . '점<br />';
-	}
-	if ($this->cbconfig->item('attendance_point_4')) {
-		echo '4등포인트 : 출석포인트 + ' . $this->cbconfig->item('attendance_point_4') . '점<br />';
-	}
-	if ($this->cbconfig->item('attendance_point_5')) {
-		echo '5등포인트 : 출석포인트 + ' . $this->cbconfig->item('attendance_point_5') . '점<br />';
-	}
-	if ($this->cbconfig->item('attendance_point_6')) {
-		echo '6등포인트 : 출석포인트 + ' . $this->cbconfig->item('attendance_point_6') . '점<br />';
-	}
-	if ($this->cbconfig->item('attendance_point_7')) {
-		echo '7등포인트 : 출석포인트 + ' . $this->cbconfig->item('attendance_point_7') . '점<br />';
-	}
-	if ($this->cbconfig->item('attendance_point_8')) {
-		echo '8등포인트 : 출석포인트 + ' . $this->cbconfig->item('attendance_point_8') . '점<br />';
-	}
-	if ($this->cbconfig->item('attendance_point_9')) {
-		echo '9등포인트 : 출석포인트 + ' . $this->cbconfig->item('attendance_point_9') . '점<br />';
-	}
-	if ($this->cbconfig->item('attendance_point_10')) {
-		echo '10등포인트 : 출석포인트 + ' . $this->cbconfig->item('attendance_point_10') . '점<br />';
-	}
-	if ($this->cbconfig->item('attendance_point_regular') && $this->cbconfig->item('attendance_point_regular_days')) {
-		echo '개근포인트 : ' . $this->cbconfig->item('attendance_point_regular') . '점, ' . $this->cbconfig->item('attendance_point_regular_days') . '일 마다 지급<br />';
-	}
-	?>
-</div>
-
-<div class="selected-date"><?php echo element('date_format', $view); ?></div>
-<ul class="date-navigation">
-	<li><a href="<?php echo site_url('attendance'); ?>">오늘보기</a></li>
-	<li><a href="<?php echo site_url('attendance?date=' . element('lastmonth', $view)); ?>">지난달</a></li>
-	<?php
-	for ($day = 1; $day <= element('lastday', $view); $day++) {
-	?>
-		<li class="datepick <?php echo (sprintf("%02d", $day) === element('d', $view)) ? ' active' : ''; ?>" data-attendance-date="<?php echo element('ym', $view) . "-" . sprintf("%02d", $day);?>"><?php echo $day; ?></li>
-	<?php
-	}
-	?>
-	<li><a href="<?php echo element('nextmonth', $view) ? site_url('attendance?date=' . element('nextmonth', $view)) : 'javascript:;'; ?>">다음달</a></li>
-</ul>
-
-<div id="viewattendance"></div>
 <script type="text/javascript">
 //<![CDATA[
 function view_attendance(id, date, page) {
@@ -81,7 +273,7 @@ function view_attendance(id, date, page) {
 }
 
 $(document).on('click', '.datepick', function() {
-	view_attendance('viewattendance', $(this).attr('data-attendance-date'), '1');
+	// view_attendance('viewattendance', $(this).attr('data-attendance-date'), '1');
 	$('.date-navigation > li').removeClass("active");
 	$(this).addClass('active');
 });
