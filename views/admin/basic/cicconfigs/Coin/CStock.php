@@ -29,7 +29,8 @@
 											
 									echo '<option value="'.$stoks->name_ko.'">'.$stoks->market.' : '.$stoks->name_ko.' </option>';							
 									}
-								}?>	
+								
+								?>	
 								</select>
 							</label>
 				

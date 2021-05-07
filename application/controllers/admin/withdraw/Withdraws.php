@@ -389,7 +389,7 @@ class Withdraws extends CB_Controller
 		}
 
 		$content = $this->input->post('cp_content2');
-		$memo = $this->input->post('cp_memo');
+		$memo = $this->input->post('cp_memo2');
 		$result = $this->CIC_cp_model->set_cp_retire($content, $memIdx, $money);
 
 		// 출금반환 실패
