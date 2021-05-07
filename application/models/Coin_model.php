@@ -167,7 +167,7 @@ class Coin_model extends CB_Model
         foreach($array as $kwr_stocks){
 			$kwr_market = $kwr_stocks -> market;
 			if(strcmp(substr($kwr_market, 0, 1), "K")==0){		
-                return $array;
+                return $kwr_market;
 			}
 
 		}
