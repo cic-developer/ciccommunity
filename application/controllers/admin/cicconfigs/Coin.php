@@ -61,7 +61,7 @@ class Coin extends CB_Controller
         $view['view']['event']['before'] = Events::trigger('before', $eventname);
 		
 		$getList = $this -> Coin_model->get_coinlist();
-
+		print_r($getList);
 		for($i=0; $i<count($getList); $i++){
 
 			//'market' => $getList[$i]['market']
@@ -70,7 +70,7 @@ class Coin extends CB_Controller
 				'name_ko' => $getList[$i]['english_name'],
 				'name_en' => $getList[$i]['korean_name'],
 			);
-		   print_r($data);	
+		   	
 			//if( $this->Coin_model->market_exist($exist)){	
 				if(isset($data) && !empty($data)){
 					$stock = $this->Coin_model->insertStockData($data);
