@@ -142,7 +142,7 @@ class Coin extends CB_Controller
 				}
 			}
 			echo "<br><pre>";
-			print_r($realtime_coin_info);
+			print_r($admincoin);
 			echo "</pre>";
 			
 			$view['realtime_coin_info'] = $realtime_coin_info;
