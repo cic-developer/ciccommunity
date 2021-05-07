@@ -4,6 +4,7 @@
 	$total_day = cdate('t', strtotime($_date)); 		// 2. 현재 달의 총 날짜
 	$total_day_lastmonth = cdate('t', strtotime('-1 month', strtotime($_date))); 		// 2. 현재 달의 총 날짜
 	$total_week = ceil(($total_day + $start_week) / 7); // 3. 현재 달의 총 주차
+	$after_date = 1;
 ?>
 <div id="container-wrap">
     <div id="contents" class="div-cont">
@@ -60,6 +61,12 @@
 										<a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
 									</div>
 										
+									<?php } else if($total_day < $n){ ?>
+										<td class="after">
+											<div class="con">
+												<p class="day"><?php echo $after_date++; ?></p>
+											</div>
+										</td>
 									<?php } ?>
 								</td>
 							<?php } ?> 
