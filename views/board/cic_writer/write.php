@@ -14,195 +14,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo form_open_multipart(current_full_url(), $attributes);
 		?>
 		<input type="hidden" name="<?php echo element('primary_key', $view); ?>"	value="<?php echo element(element('primary_key', $view), element('post', $view)); ?>" />
-		<!-- page start // -->
-		<div class="form-horizontal box-table">
-			<?php if (element('is_post_name', element('post', $view))) { ?>
-				<div class="form-group">
-					<label for="post_nickname" class="col-sm-2 control-label">이름</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control px150" name="post_nickname" id="post_nickname" value="<?php echo set_value('post_nickname', element('post_nickname', element('post', $view))); ?>" />
-					</div>
-				</div>
-				<?php if ($this->member->is_member() === false) { ?>
-					<div class="form-group">
-						<label for="post_password" class="col-sm-2 control-label">비밀번호</label>
-						<div class="col-sm-10">
-							<input type="password" class="form-control px150" name="post_password" id="post_password" />
+		<!-- page start // --><div class="board-wrap write">
+			<h3><?php echo html_escape(element('board_name', element('board', $view))); ?> 글쓰기</h3>
+			<div class="entry">
+				<ul>
+					<li>
+						<p class="btxt">제목</p>
+						<div class="field">
+							<p class="chk-input w100p">
+								<input id="post_title" type="text" name="post_title" placeholder="제목을 입력해주세요" value="<?php echo set_value('post_title', element('post_title', element('post', $view))); ?>" />
+							</p>
 						</div>
-					</div>
-				<?php } ?>
-				<div class="form-group">
-					<label for="post_email" class="col-sm-2 control-label">이메일</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" name="post_email" id="post_email" value="<?php echo set_value('post_email', element('post_email', element('post', $view))); ?>" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="post_homepage" class="col-sm-2 control-label">홈페이지</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" name="post_homepage" id="post_homepage" value="<?php echo set_value('post_homepage', element('post_homepage', element('post', $view))); ?>" />
-					</div>
-				</div>
-			<?php } ?>
-			<div class="form-group">
-				<label for="post_title" class="col-sm-2 control-label">제목</label>
-				<div class="col-sm-10" style="display:table;">
-					<input type="text" class="form-control" name="post_title" id="post_title" value="<?php echo set_value('post_title', element('post_title', element('post', $view))); ?>" />
-					<?php if (element('use_google_map', element('board', $view))) { ?>
-						<span class="input-group-btn">
-							<button type="button" class="btn btn-md btn-default" id="btn_google_map" onClick="open_google_map();">지도</button>
-						</span>
-					<?php } ?>
-				</div>
-			</div>
-			<?php if (element('use_subject_style', element('board', $view))) { ?>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">제목옵션</label>
-					<div class="col-sm-10">
-						<label class="checkbox-inline" for="post_title_bold">
-							<input type="checkbox" name="post_title_bold" id="post_title_bold" value="1" <?php echo set_checkbox('post_title_bold', '1', (element('post_title_bold', element('meta', element('post', $view))) ? true : false)); ?> /> 제목굵게
-						</label>
-						<label class="checkbox-inline" for="post_title_font">
-							<select name="post_title_font" class="form-control">
-								<option value="">제목폰트</option>
-								<option value="굴림,gulim" <?php echo set_select('post_title_font', '굴림,gulim', (element('post_title_font', element('meta', element('post', $view))) === '굴림,gulim' ? true : false)); ?> >굴림</option>
-								<option value="굴림체,gulimche" <?php echo set_select('post_title_font', '굴림체,gulimche', (element('post_title_font', element('meta', element('post', $view))) === '굴림체,gulimche' ? true : false)); ?> >굴림체</option>
-								<option value="돋움,dotum" <?php echo set_select('post_title_font', '돋움,dotum', (element('post_title_font', element('meta', element('post', $view))) === '돋움,dotum' ? true : false)); ?> >돋움</option>
-								<option value="돋움체,dotumche,applegothic" <?php echo set_select('post_title_font', '돋움체,dotumche,applegothic', (element('post_title_font', element('meta', element('post', $view))) === '돋움체,dotumche,applegothic' ? true : false)); ?> >돋움체</option>
-								<option value="바탕,batang,applemyungjo" <?php echo set_select('post_title_font', '바탕,batang,applemyungjo', (element('post_title_font', element('meta', element('post', $view))) === '바탕,batang,applemyungjo' ? true : false)); ?> >바탕</option>
-								<option value="바탕체,batangche" <?php echo set_select('post_title_font', '바탕체, batangche', (element('post_title_font', element('meta', element('post', $view))) === '바탕체,batangche' ? true : false)); ?> >바탕체</option>
-								<option value="궁서,gungsuh,gungseo" <?php echo set_select('post_title_font', '궁서,gungsuh,gungseo', (element('post_title_font', element('meta', element('post', $view))) === '궁서,gungsuh,gungseo' ? true : false)); ?> >궁서</option>
-								<option value="arial" <?php echo set_select('post_title_font', 'arial', (element('post_title_font', element('meta', element('post', $view))) === 'arial' ? true : false)); ?> >Arial</option>
-								<option value="tahoma" <?php echo set_select('post_title_font', 'tahoma', (element('post_title_font', element('meta', element('post', $view))) === 'tahoma' ? true : false)); ?> >Tahoma</option>
-								<option value="times new roman" <?php echo set_select('post_title_font', 'times new roman', (element('post_title_font', element('meta', element('post', $view))) === 'times new roman' ? true : false)); ?> >TimesNewRoman</option>
-								<option value="verdana" <?php echo set_select('post_title_font', 'verdana', (element('post_title_font', element('meta', element('post', $view))) === 'verdana' ? true : false)); ?> >Verdana</option>
-								<option value="courier new" <?php echo set_select('post_title_font', 'courier new', (element('post_title_font', element('meta', element('post', $view))) === 'courier new' ? true : false)); ?> >CourierNew</option>
-							</select>
-						</label>
-						<label class="checkbox-inline" for="post_title_color">
-							색상 : <input type="text" class="form-control px100" name="post_title_color" id="post_title_color" value="<?php echo set_value('post_title_color', element('post_title_color', element('meta', element('post', $view))) ? element('post_title_color', element('meta', element('post', $view))) : '#000000'); ?>" />
-							<button type="button" class="btn btn-xs btn-default" id="btn_color_picker" >색상선택</button>
-							<div id="color_picker" style="position:absolute; display:none; padding:10px; background-color:#fff; border:1px solid #ccc; z-index:999;"></div>
-							<?php $this->managelayout->add_css(base_url('assets/js/colorpicker/farbtastic.css')); ?>
-							<?php $this->managelayout->add_js(base_url('assets/js/colorpicker/farbtastic.js')); ?>
-							<script type="text/javascript">
-							//<![CDATA[
-							$(document).ready(function() {
-								$(document).on('click', '#btn_color_picker', function () {
-									$('#color_picker').toggle();
-								});
-								$('#color_picker').farbtastic('#post_title_color');
-							});
-							//]]>
-							</script>
-						</label>
-					</div>
-				</div>
-			<?php } ?>
-			<?php if (element('can_post_notice', element('post', $view)) OR element('can_post_secret', element('post', $view)) OR element('can_post_receive_email', element('post', $view))) { ?>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">옵션</label>
-					<div class="col-sm-10">
-						<?php if (element('can_post_notice', element('post', $view))) { ?>
-							<label class="checkbox-inline" for="post_notice_1">
-								<input type="checkbox" name="post_notice" id="post_notice_1" value="1" <?php echo set_checkbox('post_notice', '1', (element('post_notice', element('post', $view)) === '1' ? true : false)); ?> onChange="if (this.checked) {$('#post_notice_2').prop('disabled', true);} else {$('#post_notice_2').prop('disabled', false);}" <?php if (element('post_notice', element('post', $view)) === '2')echo "disabled='disabled'"; ?> /> 공지
-							</label>
-							<label class="checkbox-inline" for="post_notice_2">
-								<input type="checkbox" name="post_notice" id="post_notice_2" value="2" <?php echo set_checkbox('post_notice', '2', (element('post_notice', element('post', $view)) === '2' ? true : false)); ?> onChange="if (this.checked) {$('#post_notice_1').prop('disabled', true);} else {$('#post_notice_1').prop('disabled', false);}" <?php if (element('post_notice', element('post', $view)) === '1')echo "disabled='disabled'"; ?> /> 전체공지
-							</label>
-						<?php } ?>
-						<?php if (element('can_post_secret', element('post', $view))) { ?>
-							<label class="checkbox-inline" for="post_secret">
-								<input type="checkbox" name="post_secret" id="post_secret" value="1" <?php echo set_checkbox('post_secret', '1', (element('post_secret', element('post', $view)) ? true : false)); ?> /> 비밀글
-							</label>
-						<?php } ?>
-						<?php if (element('can_post_receive_email', element('post', $view))) { ?>
-							<label class="checkbox-inline" for="post_receive_email">
-								<input type="checkbox" name="post_receive_email" id="post_receive_email" value="1" <?php echo set_checkbox('post_receive_email', '1', (element('post_receive_email', element('post', $view)) ? true : false)); ?> /> 답변메일받기
-							</label>
-						<?php } ?>
-					</div>
-				</div>
-			<?php } ?>
-			<?php if (element('use_category', element('board', $view))) { ?>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">분류</label>
-					<div class="col-sm-10">
-						<div class="form-inline">
-							<select name="post_category" class="form-control">
-								<option value="">카테고리선택</option>
-								<?php
-								$category = element('category', $view);
-								function ca_select($p = '', $category = '', $post_category = '')
-								{
-									$return = '';
-									if ($p && is_array($p)) {
-										foreach ($p as $result) {
-											$exp = explode('.', element('bca_key', $result));
-											$len = (element(1, $exp)) ? strlen(element(1, $exp)) : 0;
-											$space = str_repeat('-', $len);
-											$return .= '<option value="' . html_escape(element('bca_key', $result)) . '"';
-											if (element('bca_key', $result) === $post_category) {
-												$return .= 'selected="selected"';
-											}
-											$return .= '>' . $space . html_escape(element('bca_value', $result)) . '</option>';
-											$parent = element('bca_key', $result);
-											$return .= ca_select(element($parent, $category), $category, $post_category);
-										}
-									}
-									return $return;
-								}
-
-								echo ca_select(element(0, $category), $category, element('post_category', element('post', $view)));
-								?>
-							</select>
-						</div>
-					</div>
-				</div>
-			<?php } ?>
-			<?php
-			if (element('extra_content', $view)) {
-				foreach (element('extra_content', $view) as $key => $value) {
-			?>
-				<div class="form-group">
-					<label class="col-sm-2 control-label" for="<?php echo element('field_name', $value); ?>"><?php echo element('display_name', $value); ?></label>
-					<div class="col-sm-10"><?php echo element('input', $value); ?></div>
-				</div>
-			<?php
-				}
-			}
-			?>
-			<?php if ( ! element('use_dhtml', element('board', $view)) AND (element('post_min_length', element('board', $view)) OR element('post_max_length', element('board', $view)))) { ?>
-				<div class="well well-sm" style="margin:15px 0;">
-					현재 <strong><span id="char_count">0</span></strong> 글자이며,
-					<?php if (element('post_min_length', element('board', $view))) { ?>
-						최소 <strong><?php echo number_format(element('post_min_length', element('board', $view))); ?></strong> 글자 이상
-					<?php } if (element('post_max_length', element('board', $view))) { ?>
-						최대 <strong><?php echo number_format(element('post_max_length', element('board', $view))); ?></strong> 글자 이하
-					<?php } ?>
-					입력하실 수 있습니다.
-				</div>
-			<?php } ?>
-			<div class="form-group">
-				<div class="col-sm-12">
-					<?php if ( ! element('use_dhtml', element('board', $view))) { ?>
-						<div>
-							<div class="btn-group pull-right mb10">
-								<?php if (element('use_emoticon', element('board', $view))) { ?>
-									<button type="button" class="btn btn-default btn-sm" onclick="window.open('<?php echo site_url('helptool/emoticon?id=post_content'); ?>', 'emoticon', 'width=600,height=400,scrollbars=yes')"><i class="fa fa-smile-o fa-lg"></i></button>
-								<?php } ?>
-								<?php if (element('use_specialchars', element('board', $view))) { ?>
-									<button type="button" class="btn btn-default btn-sm" onclick="window.open('<?php echo site_url('helptool/specialchars?id=post_content'); ?>', 'specialchars', 'width=490,height=245,scrollbars=yes')"><i class="fa fa-star-o fa-lg"></i></button>
-								<?php } ?>
-								<button type="button" class="btn btn-default btn-sm" onClick="resize_textarea('post_content', 'down');"><i class="fa fa-plus fa-lg"></i></button>
-								<button type="button" class="btn btn-default btn-sm" onClick="resize_textarea('post_content', 'up');"><i class="fa fa-minus fa-lg"></i></button>
-							</div>
-						</div>
-					<?php } ?>
-
-					<?php echo display_dhtml_editor('post_content', set_value('post_content', element('post_content', element('post', $view))), $classname = 'form-control dhtmleditor', $is_dhtml_editor = element('use_dhtml', element('board', $view)), $editor_type = $this->cbconfig->item('post_editor_type')); ?>
-
-				</div>
+					</li>
+					<li class="no-pad">
+						<?php echo display_dhtml_editor('post_content', set_value('post_content', element('post_content', element('post', $view))), $classname = 'form-control dhtmleditor', $is_dhtml_editor = element('use_dhtml', element('board', $view)), $editor_type = $this->cbconfig->item('post_editor_type')); ?>
+					</li>
+				</ul>
 			</div>
 
 			<?php
@@ -266,9 +93,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<?php } ?>
 				</div>
 			<?php } ?>
-			<div class="border_button text-center mt20">
-				<button type="button" class="btn btn-default btn-sm btn-history-back">취소</button>
-				<button type="submit" class="btn btn-success btn-sm">작성완료</button>
+			<div class="lower">
+				<button type="submit" class="enter-btn"><span>등록하기</span></button>
 			</div>
 		</div>
 	<?php echo form_close(); ?>
