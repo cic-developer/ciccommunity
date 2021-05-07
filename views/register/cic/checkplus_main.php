@@ -112,7 +112,7 @@
 		<input type="hidden" name="m" value="checkplusService">				<!-- �ʼ� ����Ÿ��, �����Ͻø� �ȵ˴ϴ�. -->
 		<input type="hidden" name="EncodeData" value="<?= $enc_data ?>">		<!-- ������ ��ü������ ��ȣȭ �� ����Ÿ�Դϴ�. -->
 	    
-		<a href="javascript:fnPopup();"> CheckPlus �Ƚɺ������� Click</a>
+		<a href="javascript:fnPopup();"> CheckPlus 테스트 Click</a>
 	</form>
 </body>
 </html>

@@ -49,7 +49,7 @@ class Attendance extends CB_Controller
 			alert('이 웹사이트는 출석체크 기능을 사용하지 않습니다');
 		}
 
-		$_date = $this->input->get('date') ? cdate('Y-m-d', strtotime($this->input->get('date'))) : cdate('Y-m-01');
+		$_date = $this->input->get('date') ? cdate('Y-m-01', strtotime($this->input->get('date'))) : cdate('Y-m-01');
 		$start_week = cdate('w', strtotime($_date)); 		// 1. 시작 요일
 		$total_day = cdate('t', strtotime($_date)); 		// 2. 현재 달의 총 날짜
 		$total_day_lastmonth = cdate('t', strtotime('-1 month', strtotime($_date))); 		// 2. 현재 달의 총 날짜
@@ -66,7 +66,7 @@ class Attendance extends CB_Controller
 			'after_date' 			=> $after_date,
 			'before_date' 			=> $before_date,
 		);
-		
+
 		$view['view'] = array();
 
 		// 이벤트가 존재하면 실행합니다
