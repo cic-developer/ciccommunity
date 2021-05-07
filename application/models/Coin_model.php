@@ -152,6 +152,7 @@ class Coin_model extends CB_Model
             
         ));
 
+
         $response = curl_exec($curl);
         $err = curl_error($curl);
 
