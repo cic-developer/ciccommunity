@@ -63,7 +63,7 @@ class Coin extends CB_Controller
 		$getList = $this -> Coin_model->get_coinlist();
 
 
-		print_r($getList);
+		//print_r($getList);
 		for($i=0; $i<count($getList); $i++){
 			
 			//print_r ($getList[$i]['market']);
@@ -72,7 +72,7 @@ class Coin extends CB_Controller
 				echo "<br><pre>";
 				print_r($market); 
 				echo "<pre>";
-			}
+			}else{echo "not true";}
 				//'market' => $getList[$i]['market']
 			$data = array(
 				'market' => $getList[$i]['market'],

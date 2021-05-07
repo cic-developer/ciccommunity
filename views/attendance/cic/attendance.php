@@ -269,21 +269,21 @@
 </div>
 <script type="text/javascript">
 //<![CDATA[
-function view_attendance(id, date, page) {
-	var list_url = cb_url + '/attendance/dailylist/' + date + '?page=' + page;
-	$('#' + id).load(list_url);
-}
+// function view_attendance(id, date, page) {
+// 	var list_url = cb_url + '/attendance/dailylist/' + date + '?page=' + page;
+// 	$('#' + id).load(list_url);
+// }
 
-$(document).on('click', '.datepick', function() {
-	// view_attendance('viewattendance', $(this).attr('data-attendance-date'), '1');
-	$('.date-navigation > li').removeClass("active");
-	$(this).addClass('active');
-});
+// $(document).on('click', '.datepick', function() {
+// 	// view_attendance('viewattendance', $(this).attr('data-attendance-date'), '1');
+// 	$('.date-navigation > li').removeClass("active");
+// 	$(this).addClass('active');
+// });
 
-function attendance_page(date, page) {
-	view_attendance('viewattendance', date, page);
-	attendance_cur_page = page;
-}
+// function attendance_page(date, page) {
+// 	view_attendance('viewattendance', date, page);
+// 	attendance_cur_page = page;
+// }
 
 var memos = new Array();
 <?php
