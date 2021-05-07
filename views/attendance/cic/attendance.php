@@ -10,7 +10,7 @@
                 <div class="abr">
                     <div class="field date">
                         <p class="chk-input">
-                            <input type="text" value="2021-03-08" autocomplete="off">
+                            <input type="text" value="<?php echo cdate('Y-m')?>" autocomplete="off">
                         </p>
                     </div>
                     <a href="#n" class="cprev"><span class="blind">이전</span></a>
