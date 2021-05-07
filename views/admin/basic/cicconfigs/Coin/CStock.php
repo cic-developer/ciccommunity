@@ -8,7 +8,7 @@
 <div class="box">
 	<div class="box-header">
 		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/CStock'); ?>" onclick="return check_form_changed();">CP 설정</a></li>
+			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/CStock'); ?>" onclick="return check_form_changed();">코인 검색 설정</a></li>
 		</ul>
 	</div>
 	<div class="box-table">
