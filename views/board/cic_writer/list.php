@@ -270,18 +270,18 @@
                             foreach (element('list', element('data', element('list', $view))) as $result) {
                     ?>
                     <li>
-                        <a href="<?php echo base_url('post/3')?>">
+                        <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>">
                             <div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt="">
                             </div>
                             <div class="txt">
                                 <div class="vc">
-                                    <p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>
+                                    <p class="btxt"><?php echo html_escape(element('title', $result)); ?> <span>(<?php echo element('post_comment_count', $result); ?>)</span></p>
                                     <p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ...
                                     </p>
                                     <p class="ctxt">
                                         <span><?php echo element('post_nickname', $result); ?></span>
-                                        <span>02:18</span>
-                                        <span>조회 82</span>
+                                        <span><?php echo element('display_datetime', $result); ?></span>
+                                        <span>조회 <?php echo number_format(element('post_hit', $result)); ?></span>
                                     </p>
                                 </div>
                             </div>

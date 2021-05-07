@@ -194,7 +194,7 @@ public function index()
 			'정상적으로 제외되었습니다'
 		);
 		$param =& $this->querystring;
-		redirect('/admin/board/popularpost' . $param->output());
+		redirect($pagedir);
 	}
 
 	/**
