@@ -66,9 +66,9 @@ class Coin extends CB_Controller
 			$market = $getList[$i]['market'];
 			if(strcmp(substr($market, 0, 1), "K")==0){
 				$coin_market = substr($market, 4);
-				echo "<br><pre>";
-				//print_r($coin_market);  
-				echo "<pre>";
+				// echo "<br><pre>";
+				// //print_r($coin_market);  
+				// echo "<pre>";
 			
 				//'market' => $getList[$i]['market']
 				$data = array(
@@ -76,6 +76,8 @@ class Coin extends CB_Controller
 					'name_ko' => $getList[$i]['english_name'],
 					'name_en' => $getList[$i]['korean_name'],
 				);
+			
+			
 			}
 		
 		        print_r($data);
