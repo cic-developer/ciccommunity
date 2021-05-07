@@ -100,10 +100,12 @@ class Attendance_model extends CB_Model
 		$this->load->library('member');
 		$mem_id = $this->member->is_member();
 		if($mem_id){
-
-			$this->get('', '', $where);
+			$where = array(
+				'mem_id' => $mem_id,
+			);
+			return $this->get('', '', $where);
 		} else {
-			return [];
+			return array();
 		}
 	}
 }

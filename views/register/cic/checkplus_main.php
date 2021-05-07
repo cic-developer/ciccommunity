@@ -105,7 +105,7 @@
 </head>
 <body>
 	<?= $returnMsg ?><br><br>
-	��ü���� ��ȣȭ ����Ÿ : [<?= $enc_data ?>]<br><br>
+	enc_data: [<?= $enc_data ?>]<br><br>
 
 	<!-- �������� ���� �˾��� ȣ���ϱ� ���ؼ��� ������ ���� form�� �ʿ��մϴ�. -->
 	<form name="form_chk" method="post">
