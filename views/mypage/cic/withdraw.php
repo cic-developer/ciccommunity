@@ -69,11 +69,9 @@
                 </table>
             </div>
             <?php echo form_close(); ?>
-            <!-- s: paging-wrap -->
             <div class="paging-wrap">
-                <?php echo element('paging', element('list', $view)); ?>
-            </div>
-            <!-- e: paging-wrap -->
+				<?php echo element('paging', $view); ?>
+			</div>
         </div>
         <!-- page end // -->
     </div>
