@@ -125,25 +125,23 @@ class Coin extends CB_Controller
 
 
 	    $admincoin = $this -> Coin_model_admin -> get_admin_coinList();
-		//print_r($admincoin);
 		for($i = 0; $i < count($admincoin); $i++){
-			$marketdata[] = $admincoin[$i]['market'];
-			print_r($marketdata);
+			$marketdata[] = $$admincoin[$i]->market;
             if($marketdata){
 				$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
 			}else{
 				$realtime_coin_info = 0;
 			}
 
-			foreach ($admincoin as $admincoin){
-				if($admincoin['market']){
-					$marketdata[] = $admincoin['market'];
+			foreach ($$admincoin as $$admincoin){
+				if($$admincoin-> market){
+					$marketdata[] = $$admincoin->market;
 				}else{
 					$marketdata[] = 0;
 				}
 			}
 			echo "<br><pre>";
-			print_r($admincoin);
+			print_r($realtime_coin_info);
 			echo "</pre>";
 			
 			$view['realtime_coin_info'] = $realtime_coin_info;
