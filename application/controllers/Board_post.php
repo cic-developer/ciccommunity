@@ -1441,25 +1441,25 @@ class Board_post extends CB_Controller
 			$where['brd_id'] = $brdid;
 		}
 		
-		$result = $this->{$this->modelname}
+		$result = $this->modelname
 			->get_popularpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		
-		if (element('list', $result)) {
-			foreach (element('list', $result) as $key => $val) {
-				$result['list'][$key]['post_display_name'] = display_username(
+		if (element('poplist', $result)) {
+			foreach (element('poplist', $result) as $key => $val) {
+				$result['poplist'][$key]['post_display_name'] = display_username(
 					element('post_userid', $val),
 					element('post_nickname', $val)
 				);
-				$result['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-				$result['list'][$key]['num'] = $list_num--;
+				$result['poplist'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+				$result['poplist'][$key]['num'] = $list_num--;
 				if ($board) {
-					$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-					$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+					$result['poplist'][$key]['boardurl'] = board_url(element('brd_key', $board));
+					$result['poplist'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
 				}
-				$result['list'][$key]['category'] = '';
+				$result['poplist'][$key]['category'] = '';
 				if (element('post_category', $val)) {
-					$result['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+					$result['poplist'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
 				}
 				if (element('post_image', $val)) {
 					$imagewhere = array(
@@ -1467,9 +1467,9 @@ class Board_post extends CB_Controller
 						'pfi_is_image' => 1,
 					);
 					$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-					$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+					$result['poplist'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
 				} else {
-					$result['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+					$result['poplist'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
 				}
 			}
 		}
