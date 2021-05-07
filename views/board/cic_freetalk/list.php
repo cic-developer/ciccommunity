@@ -44,15 +44,11 @@
 						?>
 							<tr>
 								<td>
-									<?php if (element('thumb_url', $result)) {?>
-										<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank">
-											<img src="<?php echo element('thumb_url', $result); ?>" alt="<?php echo html_escape(element('post_title', $result)); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" class="thumbnail mg0" style="width:80px;" />
-										</a>
-									<?php } ?>
-								</td>
-								<td>
-									<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><?php echo html_escape(element('post_title', $result)); ?></a>
-								</td>
+                                <td class="l file">
+                                    <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><?php echo html_escape(element('title', $result)); ?>
+                                        <span class="reply">(<?php echo element('post_comment_count', $result); ?>)</span>
+                                    </a>
+                                </td>
 							</tr>
 						<?php
 							}

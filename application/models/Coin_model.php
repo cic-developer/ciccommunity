@@ -45,7 +45,7 @@ class Coin_model extends CB_Model
         //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.upbit.com/v1/ticker?market=".$market,
+            CURLOPT_URL => "https://api.upbit.com/v1/ticker?market=KRW-".$market,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",
