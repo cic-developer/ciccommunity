@@ -71,14 +71,13 @@ class Coin extends CB_Controller
 				'name_ko' => $getList[$i]['english_name'],
 				'name_en' => $getList[$i]['korean_name'],
 			);
-		   // print_t($market);	
-		    print_r($data);   			
-			if( $this->Coin_model->market_exist($exist)){	
+		   // print_t($market);   			
+			// if( $this->Coin_model->market_exist($exist)){	
 				if(isset($data) && !empty($data)){
 					$stock = $this->Coin_model->insertStockData($data);
 				    $view['view']['alert_message'] = '정상적으로 저장되었습니다';}
-				
-				}	
+				    print_r($stock);
+				// }	
 					
 					
 		}
