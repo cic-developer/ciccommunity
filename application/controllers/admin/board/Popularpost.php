@@ -104,8 +104,6 @@ public function index()
 					$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
 				}
 				$result['list'][$key]['category'] = '';
-				print_r($result);
-				exit;
 				if (element('post_category', $val)) {
 					$result['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
 				}
@@ -125,6 +123,8 @@ public function index()
 
 		$select = 'brd_id, brd_name';		
 		$view['view']['boardlist'] = $this->Board_model->get_board_list();
+						print_r($view);
+				exit;
 
 		/**
 		 * primary key 정보를 저장합니다

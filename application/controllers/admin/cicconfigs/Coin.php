@@ -76,7 +76,7 @@ class Coin extends CB_Controller
 					$stock = $this->Coin_model->insertStockData($data);
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 				}
-				//}		
+			}		
 		}
         
 
@@ -119,7 +119,7 @@ class Coin extends CB_Controller
 		}
 
 
-       //GET MARKET 
+       	//GET MARKET 
 	    $admincoin = $this -> Coin_model_admin -> get_admin_coinList();
 		for($i = 0; $i < count($admincoin); $i++){
 			$marketdata[] = $admincoin[$i]->market;
@@ -151,8 +151,7 @@ class Coin extends CB_Controller
 			// print_r($realtime_coin_info);
 			// echo "</pre>";
 	}
-	
-	}
+
 	public function coin_search(){
 		$this->load->view('search');
 			//skeyword
