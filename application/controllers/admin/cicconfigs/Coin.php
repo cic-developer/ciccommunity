@@ -73,15 +73,15 @@ class Coin extends CB_Controller
 				echo "<br><pre>";
 				print_r($coin_market);  
 				echo "<pre>";
-			}
-				//'market' => $getList[$i]['market']
-			$data = array(
-				'market' => $getList[$i]['market'],
-				'name_ko' => $getList[$i]['english_name'],
-				'name_en' => $getList[$i]['korean_name'],
-			);
-
 			
+				//'market' => $getList[$i]['market']
+				$data = array(
+					'market' => $getList[$i]['market'],
+					'name_ko' => $getList[$i]['english_name'],
+					'name_en' => $getList[$i]['korean_name'],
+				);
+
+		}	
 
 
 			if( $this->Coin_model->market_exist($exist)){	

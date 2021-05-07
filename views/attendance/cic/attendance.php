@@ -46,6 +46,12 @@
                         </tr>
                     </thead>
                     <tbody>
+					<?php for($n = 1, $i = 0; $i < $total_week; $i++){ ?>
+						<tr>
+							<!-- 1일부터 7일 (한 주) -->
+							<?php for ($k = 0; $k < 7; $k++): ?> 
+						</tr>
+					<?php } ?>
                         <tr>
                             <td class="before">
                                 <div class="con">
