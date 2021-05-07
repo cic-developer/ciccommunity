@@ -78,7 +78,7 @@
 </div>
 
 <div>
-  <p href="#" title="Hooray!">Hover over me</p>
+    <span data-tooltip-text="THIS IS TOOLTIP!!">Hover over me</span>
 </div>
 
 
