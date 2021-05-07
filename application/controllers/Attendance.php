@@ -80,7 +80,9 @@ class Attendance extends CB_Controller
 		$default_memo = explode("\n", $attendance_default_memo);
 		shuffle($default_memo);
 		$view['view']['default_memo'] = $default_memo;
-
+		
+		// 한달동안 출석내역
+		$view['view']['my_attend'] = $this->Attendance_model->get_this_month_attend($_date);
 		$date = $this->input->get('date') ? $this->input->get('date') : cdate('Y-m-d');
 		if (strlen($date) !== 10) {
 			$date = cdate('Y-m-d');
