@@ -1245,15 +1245,6 @@ class Mypage extends CB_Controller
 		/**
 		 * 레이아웃을 정의합니다
 		 */
-		$page_title = $this->cbconfig->item('site_meta_title_mypage');
-		$meta_description = $this->cbconfig->item('site_meta_description_mypage');
-		$meta_keywords = $this->cbconfig->item('site_meta_keywords_mypage');
-		$meta_author = $this->cbconfig->item('site_meta_author_mypage');
-		$page_name = $this->cbconfig->item('site_page_name_mypage');
-
-		print_r($meta_author);
-		return;
-
 		$layoutconfig = array(
 			'path' => 'mypage',
 			'layout' => 'layout',
@@ -1263,10 +1254,6 @@ class Mypage extends CB_Controller
 			'skin_dir' => 'cic',
 			'mobile_skin_dir' => 'cic',
 			'page_title' => '출금신청',
-			'meta_description' => $meta_description,
-			'meta_keywords' => $meta_keywords,
-			'meta_author' => $meta_author,
-			'page_name' => $page_name,
 		);	
 
 		$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
