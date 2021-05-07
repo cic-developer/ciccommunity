@@ -1251,6 +1251,9 @@ class Mypage extends CB_Controller
 		$meta_author = $this->cbconfig->item('site_meta_author_mypage');
 		$page_name = $this->cbconfig->item('site_page_name_mypage');
 
+		print_r($meta_keywords);
+		return;
+
 		$layoutconfig = array(
 			'path' => 'mypage',
 			'layout' => 'layout',
