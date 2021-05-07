@@ -60,9 +60,6 @@ class Coin extends CB_Controller
         $view['view']['event']['before'] = Events::trigger('before', $eventname);
 		
 		$getList = $this -> Coin_model->get_coinlist();
-
-
-		print_r($getList);
 		for($i=0; $i<count($getList); $i++){
 			
 			//print_r ($getList[$i]['market']);
