@@ -255,7 +255,7 @@
 
 .member-wrap.login .login-btn {
     margin-top: 35px;
-    display: block;
+    display: inline-block;
     vertical-align: top;
     height: 40px;
     width: 340px;

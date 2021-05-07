@@ -87,8 +87,8 @@ class Coin_model extends CB_Model
 
 
     function getstockData(){
-        $query = $this->db->get('cic_stocks');
-        return $query->result(); 
+        $query = $this->db->get('cic_stocks'->row_array());
+        return $query; 
     }
 
     function getonerow(){
@@ -113,9 +113,12 @@ class Coin_model extends CB_Model
     //     }
     //     $query = $this->db->get('name_en');
     //     return $query->result();
-        $search = $this->input->GET('search', TRUE);
-        $data = $this->db->query("SELECT * from $_table where key_word like '%$search%' ");
-        return $data->result();
+
+        // $this->db->or_like('market', $search);
+        // $this->db->or_like('name_en', $search);
+        // $this->db->or_like('name_ko', $search);
+        // $this->db->get('products');
+
         
     
     }
