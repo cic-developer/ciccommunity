@@ -121,10 +121,10 @@ class Coin extends CB_Controller
 		}
 
 
-       //GET MARKET PRICE 
+       //GET MARKET 
 		for($i = 0; $i < count($getStock); $i++){
-			$market[] = $getStock[$i]->market;
-            if($market){
+			$marketdata[] = $getStock[$i]->market;
+            if($marketdata){
 				$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
 			}else{
 				$realtime_coin_info = 0;
@@ -148,9 +148,9 @@ class Coin extends CB_Controller
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
 		}
-			// echo "<br><pre>";
-			// print_r($realtime_coin_info);
-			// echo "</pre>";
+			echo "<br><pre>";
+			print_r($realtime_coin_info);
+			echo "</pre>";
 	}
 	
 

@@ -73,7 +73,6 @@ class Post extends CB_Controller
 
 		$per_page = admin_listnum();
 		$offset = ($page - 1) * $per_page;
-
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
@@ -119,6 +118,8 @@ class Post extends CB_Controller
 		}
 		$view['view']['data'] = $result;
 
+		print_r('2');
+		exit;
 		$select = 'brd_id, brd_name';
 		$view['view']['boardlist'] = $this->Board_model->get_board_list();
 
