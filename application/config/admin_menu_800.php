@@ -21,6 +21,5 @@ $config['admin_page_menu']['stat'] =
 			'searchkeyword'			=> array('인기검색어현황', ''),
 			'currentvisitor'		=> array('현재접속자', ''),
 			'registerlog'			=> array('회원가입경로', ''),
-			'attendancecfg'			=> array('출석체크', ''),
 		),
 	);
