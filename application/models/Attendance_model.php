@@ -95,4 +95,8 @@ class Attendance_model extends CB_Model
 		$result = $qry->row_array();
 		return $result;
 	}
+
+	public function get_this_month_attend(){
+		
+	}
 }
