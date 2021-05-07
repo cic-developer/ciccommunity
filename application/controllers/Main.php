@@ -18,7 +18,7 @@ class Main extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Board');
+	protected $models = array('Board', 'Post');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -54,7 +54,7 @@ class Main extends CB_Controller
 		$where = array(
 			'brd_search' => 1,
 		);
-		$board_id = $this->Board_model->get_board_list($where);
+		$board_id = $this->Post_model->get_popularpost_list($where);
 		$board_list = array();
 		if ($board_id && is_array($board_id)) {
 			foreach ($board_id as $key => $val) {
