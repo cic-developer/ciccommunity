@@ -25,11 +25,8 @@
 							<label for="cpc_enable" class="control-label">
 								<select name="selected_market" id="doc_layout" class="form-control">
 								<?php
-								foreach($getStock as $stoks){
-									$kwr_market = $stoks -> market;
-									if(strcmp(substr($kwr_market, 0, 1), "K")==0){		
+								foreach($getStock as $stoks){		
 									echo '<option value="'.$stoks->name_ko.'">'.$stoks->market.' : '.$stoks->name_ko.' </option>';							
-									}
 								}?>	
 								</select>
 							</label>
