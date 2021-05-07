@@ -18,7 +18,7 @@
                 <div class="abr">
                     <div class="field date">
                         <p class="chk-input">
-                            <input type="text" value="<?php echo cdate('Y-m')?>" autocomplete="off">
+                            <input type="text" value="<?php echo cdate('Y-m', strtotime($_date))?>" autocomplete="off">
                         </p>
                     </div>
                     <a href="<?php echo base_url("attendance?date=".cdate('Y-m-d', strtotime('-1 month', strtotime($_date)))); ?>" class="cprev"><span class="blind">이전</span></a>
