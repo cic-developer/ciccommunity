@@ -39,11 +39,17 @@
 					</ul>
 					<div class="abr">
 						<?php 
+						if(element('level',element('post', $view))) {
 							print_r(element('level',element('post', $view)));
+							if(element('mlc_level',element('level',element('post', $view)))){
 						?>
 						<p>
 							4 진정한 흑우
 						</p>
+						<?php 
+							}
+						} 
+						?>
 						<div class="vp-point">
 							<ul>
 								<li><a href="#n" class="up"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>

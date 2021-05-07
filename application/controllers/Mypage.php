@@ -1251,6 +1251,7 @@ class Mypage extends CB_Controller
 			'skin_dir' => 'cic',
 			'mobile_skin_dir' => 'cic',
 			'page_title' => '출금신청',
+			
 		);	
 
 		$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
