@@ -6,6 +6,8 @@
 			<?php 	
 				$attributes = array('class' => 'form-horizontal', 'name' => 'fregisterform', 'id' => 'fregisterform');
 				echo form_open(current_full_url(), $attributes);
+				
+				
 			?>
 			<div class="agrees">
 				<div class="item c01">
@@ -285,6 +287,7 @@
 
 <script>
 	$(document).ready(function(){
+		console.log("= > ",$attributes);
 		$("#submitButton").on('click',function(){
 			$("#fregisterform").submit();
 		});
