@@ -39,8 +39,6 @@
 					</ul>
 					<div class="abr">
 						<?php 
-						print_r(element('post', $view));
-						exit;
 						if(element('level',element('post', $view))) {
 						?>
 						<p <?php echo (element('mlc_level',element('level',element('post', $view))) >= 0) ? 'style="color:#444;"' : '' ?>>

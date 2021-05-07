@@ -340,15 +340,13 @@ class Board_post extends CB_Controller
 
 		if (element('mem_id', $post) >= 0) {
 			$dbmember = $this->Member_model
-				->get_by_memid(element('mem_id', $post), 'mem_icon');
+				->get_by_memid(element('mem_id', $post), 'mem_icon, mem_level');
 			$view['view']['post']['display_name'] = display_username(
 				element('post_userid', $post),
 				element('post_nickname', $post),
 				($use_sideview_icon ? element('mem_icon', $dbmember) : ''),
 				($use_sideview ? 'Y' : 'N')
 			);
-			echo element('mem_level', $dbmember);
-			exit;
 			$level_where = array(
 				'mlc_level' => element('mem_level', $dbmember),
 				'mlc_enable' => 1,
@@ -1075,7 +1073,6 @@ class Board_post extends CB_Controller
 						($use_sideview_icon ? element('mem_icon', $val) : ''),
 						($use_sideview ? 'Y' : 'N')
 					);
-					$noticeresult[$key]['level'] = $this->member->item('level');
 				} else {
 					$noticeresult[$key]['display_name'] = '익명사용자';
 				}
