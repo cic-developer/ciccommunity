@@ -60,6 +60,7 @@
                             <td><?php echo element('wid_percoin', $result) != null ? (number_format(element('wid_percoin', $result), 2)).PER: ''; ?></td>
                             <td><?php echo html_escape(element('wid_transaction', $result)); ?></td>
                             <td><?php echo html_escape(element('wid_state', $result)) != null ? (html_escape(element('wid_state', $result)) == 1 ? '<p class="cblue">승인</p>' : '<p class="cred">반려</p>' ) : '<p class="text-body">미처리</p>';?></td>
+                            <td><?php echo html_escape(element('wid_content', $result)); ?></td>
                         </tr>
                     <?php
                         }
