@@ -15,7 +15,7 @@
     $sitepasswd = "nHmB3aEoHAiK";			// NICE�κ��� �ο����� ����Ʈ �н�����
     
     // Linux = /������/ , Window = D:\\������\\ , D:\������\
-    $cb_encode_path = "/home/bitnami/dev_ciccommunity/CPClient";
+    $cb_encode_path = "/home/bitnami/dev_ciccommunity/CPClient_64bit";
 	/*
 	�� cb_encode_path ������ ���� ����  ��������������������������������������������������������������������
 		��� ��μ�����, '/������/����' ���� ������ �ּž� �մϴ�.

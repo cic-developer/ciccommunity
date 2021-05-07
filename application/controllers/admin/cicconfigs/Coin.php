@@ -86,14 +86,14 @@ class Coin extends CB_Controller
 					$stock = $this->Coin_model->insertStockData($data);
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 				   
-					//print(1);
+					
 				}else{exit;}
 				
 
 			}	
 			
 		}
-
+		print(1);
 
 		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
 

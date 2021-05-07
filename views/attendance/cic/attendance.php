@@ -1,7 +1,3 @@
-<?php
-	print_r($view['my_attend']);
-	exit;
-?>
 
 <div id="container-wrap">
     <div id="contents" class="div-cont">
