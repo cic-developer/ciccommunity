@@ -89,11 +89,11 @@ public function index()
 		}
 		$result = $this->{$this->modelname}
 			->get_popularpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
+
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
-				$result['list'][$key]['display_name'] = display_username(
+				$result['list'][$key]['post_display_name'] = display_username(
 					element('post_userid', $val),
 					element('post_nickname', $val)
 				);

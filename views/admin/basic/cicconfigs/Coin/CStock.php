@@ -42,6 +42,22 @@
 					<button type="submit" name="submit" class="btn btn-success btn-sm">저장하기</button>
 				</div>
 			</form>	
+
+			<div class="form-group col-md-2">
+                    <label for="inputCity">Market name</label>
+                    <input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['market']; ?>'>
+            </div>
+
+			<div class="form-group col-md-2">
+                    <label for="inputCity"> name in Korean</label>
+                    <input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['market']; ?>'>
+            </div>
+
+            <div class="form-group col-md-2">
+                    <label for="inputState">high-price</label>
+                    <input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['high_price']; ?>'>
+            </div>
+
 			<?php echo form_close(); ?>
 		</div>
     
