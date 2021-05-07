@@ -3,7 +3,7 @@
     <div id="contents" class="div-cont">
         
         <!-- page start // -->
-        <div class="member-wrap withdraw">
+        <div class="member-wrap withdraw list">
             <?php
             echo show_alert_message($this->session->flashdata('message'), '<script>alert("', '")</script>');
             $attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
