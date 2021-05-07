@@ -78,6 +78,7 @@ class Coin extends CB_Controller
 				);
 			}
 		}
+		        print_r($data);
 				if(isset($data) && !empty($data)){
 					$stock = $this->Coin_model->insertStockData($data);
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
