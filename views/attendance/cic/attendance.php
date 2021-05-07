@@ -1,5 +1,5 @@
 <?php
-	$_date = $this->input->get('date');
+	$_date = $this->input->get('date') ? $this->input->get('date') : cdate('Y-m-01');
 ?>
 <div id="container-wrap">
     <div id="contents" class="div-cont">
@@ -15,7 +15,7 @@
                             <input type="text" value="<?php echo cdate('Y-m')?>" autocomplete="off">
                         </p>
                     </div>
-                    <a href="#n" class="cprev"><span class="blind">이전</span></a>
+                    <a href="base_url('attendance?date=<?php echo cdate('Y.m', strtotime($_date));?>')" class="cprev"><span class="blind">이전</span></a>
                     <a href="#n" class="cnext"><span class="blind">다음</span></a>
                 </div>
             </div>
