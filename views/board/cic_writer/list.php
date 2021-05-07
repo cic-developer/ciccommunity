@@ -276,7 +276,7 @@
                             <div class="txt">
                                 <div class="vc">
                                     <p class="btxt"><?php echo html_escape(element('title', $result)); ?> <span>(<?php echo element('post_comment_count', $result); ?>)</span></p>
-                                    <p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ...
+                                    <p class="stxt"><?php echo cut_str('세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ...', 60); ?>
                                     </p>
                                     <p class="ctxt">
                                         <span><?php echo element('post_nickname', $result); ?></span>
