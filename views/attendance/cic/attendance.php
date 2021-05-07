@@ -54,8 +54,17 @@
 									<!-- 시작 요일부터 마지막 날짜까지만 날짜를 보여주도록 -->
 									<?php if ( ($n > 1 || $k >= $start_week) && ($total_day >= $n) ){ ?>
 									<!-- 현재 날짜를 보여주고 1씩 더해줌 -->
+
+									<td>
+										<div class="con">
+											<p class="day">18</p>
+											<a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+										</div>
+									</td>
 										<?php echo $n++ ?>
-									<?php } ?>
+									<?php 
+										$n++;
+									} ?>
 								</td>
 							<?php } ?> 
 						</tr>
