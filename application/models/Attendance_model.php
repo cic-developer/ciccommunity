@@ -104,7 +104,12 @@ class Attendance_model extends CB_Model
 				'mem_id' => $mem_id,
 				'att_date >=' => $_date,
 			);
-			return $this->get('', '', $where);
+			$result = $this->get('', '', $where);
+			$return = array();
+			foreach($result as $val){
+				
+			}
+			return ;
 		} else {
 			return array();
 		}
