@@ -29,7 +29,7 @@ class Coin extends CB_Controller
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
 	 */
-	protected $modelname = array('Coin_model', 'Coin_model_admin');
+	//protected $modelname = array('Coin_model', 'Coin_model_admin');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -44,7 +44,7 @@ class Coin extends CB_Controller
 		 * 라이브러리를 로딩합니다
 		 */
 		$this->load->library(array('pagination', 'querystring', 'form_validation'));
-		//$this->load->model(array('coin_model'));
+		$this->load->model(array('coin_model', 'Coin_model_admin'));
 	}
 
     /**
@@ -89,7 +89,7 @@ class Coin extends CB_Controller
 
 		//CREATE COIN LIST FOR ADMIN
 	
-		$this->load->library('form_validation');
+		// $this->load->library('form_validation');
 
 		$config = array(
 			array(
