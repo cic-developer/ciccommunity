@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo element('layout_skin_url', $layout); ?>/css/main.css" />
 
     <?php echo $this->managelayout->display_css(); ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery/jquery-1.11.3.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery/jquery.easing.1.3.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery/datepicker.min.js'); ?>"></script>
