@@ -121,6 +121,7 @@ public function index()
 		}
 		$view['view']['data'] = $result;
 
+		$select = 'brd_id, brd_name';		
 		$view['view']['boardlist'] = $this->Board_model->get_board_list();
 
 		/**
