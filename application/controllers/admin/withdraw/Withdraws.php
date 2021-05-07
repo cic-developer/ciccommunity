@@ -389,6 +389,7 @@ class Withdraws extends CB_Controller
 		}
 
 		$content = $this->input->post('cp_content2');
+		$memo = $this->input->post('cp_memo');
 		$result = $this->CIC_cp_model->set_cp_retire($content, $memIdx, $money);
 
 		// 출금반환 실패
@@ -413,7 +414,7 @@ class Withdraws extends CB_Controller
 		 * cic_withdraw
 		 * 리턴값이 무조건 1만나옴. ??????<=
 		 */
-		$result = $this->{$this->modelname}->set_withdraw_retire($widIdx, $content, $adminid, $adminip);
+		$result = $this->{$this->modelname}->set_withdraw_retire($widIdx, $content, $adminid, $adminip, $memo);
 	
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('after', $eventname);
