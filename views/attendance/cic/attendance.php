@@ -61,14 +61,14 @@
 										</div>
 									</td>
 										
-									<?php } else if($total_day < $n){ ?>
+									<?php } else if ($total_day < $n){ ?>
 
 										<td class="after">
 											<div class="con">
 												<p class="day"><?php echo $after_date++; ?></p>
 											</div>
 										</td>
-										
+
 									<?php } ?>
 							<?php } ?> 
 						</tr>
