@@ -67,22 +67,22 @@
 
     if( $enc_data == -1 )
     {
-        $returnMsg = "��/��ȣȭ �ý��� �����Դϴ�.";
+        $returnMsg = "암호화 시스템 오류.";
         $enc_data = "";
     }
     else if( $enc_data== -2 )
     {
-        $returnMsg = "��ȣȭ ó�� �����Դϴ�.";
+        $returnMsg = "암호화 처리 오류 .";
         $enc_data = "";
     }
     else if( $enc_data== -3 )
     {
-        $returnMsg = "��ȣȭ ������ ���� �Դϴ�.";
+        $returnMsg = "암호화 데이터 오류 .";
         $enc_data = "";
     }
     else if( $enc_data== -9 )
     {
-        $returnMsg = "�Է°� ���� �Դϴ�.";
+        $returnMsg = "입력 정보 오류 .";
         $enc_data = "";
     }
 ?>
