@@ -166,11 +166,9 @@ class Coin_model extends CB_Model
         $array = json_decode($response, true);
 
        // $data = (object)array($array);
-        print_r($array['market']['Array']);
-
         foreach($array as $kwr_stocks){
-			$kwr_market = $kwr_stocks['market'];
-           // print_r($kwr_market);
+			$kwr_market = $kwr_stocks[0]['market'];
+            print_r($kwr_market);
 			if(strcmp(substr($kwr_market, 0, 1), "K")==0){
                 return $kwr_stocks;
 			}
