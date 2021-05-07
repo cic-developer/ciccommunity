@@ -62,7 +62,7 @@
 
 							<div class="form-group col-md-2">
 								<label for="inputState">high-price</label>
-								<input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['high_price']; ?>'>
+								<input type="text" class="form-control" id="myText" value = "'.$realtime_coin_info['high_price'].'">
 							</div>
 							<div class="form-group col-md-2">
 								<label for="inputZip">low-price</label>
