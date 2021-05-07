@@ -108,7 +108,7 @@ function check_form_changed() {
 }
 //]]>
 
-$("#CPconfig").parent('li').addClass('active');
+$("#CStock").parent('li').addClass('active');
 </script>
 
 
