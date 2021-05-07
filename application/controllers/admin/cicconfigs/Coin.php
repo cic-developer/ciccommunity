@@ -86,7 +86,7 @@ class Coin extends CB_Controller
 
 		$getStock = $this -> Coin_model->getstockData();
 		foreach($getStock as $kwr_stocks){
-			if(strcmp(subst($kwr_stocks -> market, 0, 3), "KWR")==0){		
+			if(strcmp(substr($kwr_stocks, 0, 3), "KWR")==0){		
 				$view['kwr_stocks'] = $kwr_stocks;
 				print_r($kwr_stocks);
 			}
