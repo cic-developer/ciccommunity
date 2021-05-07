@@ -22,7 +22,7 @@
 				</div>
 				<div class="tits vp">
 					<!-- <p class="logo"><img src="../_Img/Content/record-logo.jpg" alt=""/></p> -->
-					<h3>아예 LH직원은 땅 못사도록 법을 만들어야 합니다 ... </h3>
+					<h3><?php echo html_escape(element('post_title', element('post', $view))); ?> </h3>
 					<ul>
 						<li>
 							<div class="my-info">
