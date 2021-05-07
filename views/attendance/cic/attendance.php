@@ -381,8 +381,5 @@ $(function() {
 		}
 	});
 });
-$(document).on('click', '.view_policy', function() {
-	$('.alert-point-policy').toggle();
-});
 //]]>
 </script>

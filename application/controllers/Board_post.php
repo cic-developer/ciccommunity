@@ -1439,8 +1439,7 @@ class Board_post extends CB_Controller
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;
 		}
-		
-		$result = $this->{$this->Postmodel}
+		$result = $this->Postmodel
 			->get_popularpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		
