@@ -39,8 +39,8 @@
                     <h4>실시간 인기 게시물</h4>
                     <ul>
                     	<?php
-						if (element('poplist', element('data', $view))) {
-							foreach (element('poplist', element('data', $view)) as $result) {
+						if (element('view', element('data', $view))) {
+							foreach (element('view', element('data', $view)) as $result) {
 						?>
 							<tr>
 								<td>
@@ -53,7 +53,7 @@
 						<?php
 							}
 						}
-						if ( ! element('poplist', element('data', $view))) {
+						if ( ! element('view', element('data', $view))) {
 						?>
 							<tr>
 								<td colspan="12" class="nopost">자료가 없습니다</td>
