@@ -68,6 +68,11 @@
                     </tbody>
                 </table>
             </div>
+            <div class="box-info">
+				<?php echo element('paging', $view); ?>
+				<div class="pull-left ml20"><?php echo admin_listnum_selectbox();?></div>
+				<?php echo $buttons; ?>
+			</div>
         </div>
         <!-- page end // -->
     </div>
