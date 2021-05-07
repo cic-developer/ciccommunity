@@ -1,5 +1,6 @@
 <?php
 	$_date = $this->input->get('date') ? $this->input->get('date') : cdate('Y-m-01');
+	$start_week = cdate('w', strtotime($_date));
 ?>
 <div id="container-wrap">
     <div id="contents" class="div-cont">
