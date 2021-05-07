@@ -80,7 +80,6 @@ class Coin extends CB_Controller
 			}		
 		}
         
-       
 		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
 
 		$getStock = $this -> Coin_model->getstockData();
@@ -152,8 +151,6 @@ class Coin extends CB_Controller
 			// print_r($realtime_coin_info);
 			// echo "</pre>";
 	}
-	
-
 	public function coin_search(){
 		$this->load->view('search');
 			//skeyword
