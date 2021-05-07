@@ -87,8 +87,8 @@ class Coin_model extends CB_Model
 
 
     function getstockData(){
-        $query = $this->db->get('cic_stocks')->row_array();
-        return $query; 
+        $query = $this->db->get('cic_stocks');
+        return $query->result(); 
     }
 
     function getonerow(){
