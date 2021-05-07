@@ -94,7 +94,7 @@ class Coin extends CB_Controller
 
 		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
 
-		$getStock = $this -> Coin_model->getstockData();
+		//$getStock = $this -> Coin_model->getstockData();
 		$view['getStock'] = $getStock;
 
 		//CREATE COIN LIST FOR ADMIN
