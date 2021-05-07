@@ -1,6 +1,6 @@
 
 <div id="container-wrap">
-    <div id="contents" class="div-cont">
+    <div id="contents" class="div-cont mb-nopad">
         
         <!-- page start // -->
         <div class="member-wrap withdraw list">
