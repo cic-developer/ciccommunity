@@ -49,6 +49,7 @@ class Attendance extends CB_Controller
 			alert('이 웹사이트는 출석체크 기능을 사용하지 않습니다');
 		}
 
+		$_date = $this->input->get('date') ? $this->input->get('date') : cdate('Y-m-01');
 		$view = array();
 		$view['view'] = array();
 
