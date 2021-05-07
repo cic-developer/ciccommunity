@@ -164,15 +164,8 @@ class Coin_model extends CB_Model
 
         //convert json to php array or object
         $array = json_decode($response, true);
-        echo "<pre>";
-       // print_r($array);
-        echo "</pre>";
-       // $data = (object)array($array);
 
        for($i = 0; $i < count($array); $i++){
-       //     $array[$i]['market']
-       //     $array[$i]['korea_name']
-       //     $array[$i]['english_name']
             $kwr_market = $array[$i]['market'];
             if(strcmp(substr($kwr_market, 0, 1), "K")==0){
                 return $array;
