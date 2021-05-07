@@ -1,57 +1,57 @@
 <?php
     //**************************************************************************************************************
-    //NICE������ Copyright(c) KOREA INFOMATION SERVICE INC. ALL RIGHTS RESERVED
+    //NICE평가정보 Copyright(c) KOREA INFOMATION SERVICE INC. ALL RIGHTS RESERVED
     
-    //���񽺸� :  üũ�÷��� - �Ƚɺ������� ����
-    //�������� :  üũ�÷��� - ���� ȣ�� ������
+    //서비스명 :  체크플러스 - 안심본인인증 서비스
+    //페이지명 :  체크플러스 - 메인 호출 페이지
     
-    //������ ���� �����ص帮�� ������������ ���� ���� �� �������� ������ �ֽñ� �ٶ��ϴ�.
-    //��ȭ�� ���� : IP 121.131.196.215 , Port 80, 443     
+    //보안을 위해 제공해드리는 샘플페이지는 서비스 적용 후 서버에서 삭제해 주시기 바랍니다.
+    //방화벽 정보 : IP 121.131.196.215 , Port 80, 443     
     //**************************************************************************************************************
     
     session_start();
     
-    $sitecode = "BU370";			// NICE�κ��� �ο����� ����Ʈ �ڵ�
-    $sitepasswd = "nHmB3aEoHAiK";			// NICE�κ��� �ο����� ����Ʈ �н�����
+    $sitecode = "BU370";			// NICE로부터 부여받은 사이트 코드
+    $sitepasswd = "nHmB3aEoHAiK";			// NICE로부터 부여받은 사이트 패스워드
     
-    // Linux = /������/ , Window = D:\\������\\ , D:\������\
+    // Linux = /절대경로/ , Window = D:\\절대경로\\ , D:\절대경로\
     $cb_encode_path = "/home/bitnami/dev_ciccommunity/CPClient_64bit";
 	/*
-	�� cb_encode_path ������ ���� ����  ��������������������������������������������������������������������
-		��� ��μ�����, '/������/����' ���� ������ �ּž� �մϴ�.
+	┌ cb_encode_path 변수에 대한 설명  ──────────────────────────────────
+		모듈 경로설정은, '/절대경로/모듈명' 으로 정의해 주셔야 합니다.
 		
-		+ FTP �� ��� ���ε�� �������¸� 'binary' �� ������ �ֽð�, ������ 755 �� ������ �ּ���.
+		+ FTP 로 모듈 업로드시 전송형태를 'binary' 로 지정해 주시고, 권한은 755 로 설정해 주세요.
 		
-		+ ������ Ȯ�ι��
-		  1. Telnet �Ǵ� SSH ���� ��, cd ���ɾ �̿��Ͽ� ����� �����ϴ� ������ �̵��մϴ�.
-		  2. pwd ���ɾ��� �̿��ϸ� �����θ� Ȯ���Ͻ� �� �ֽ��ϴ�.
-		  3. Ȯ�ε� �����ο� '/����'�� �߰��� ������ �ּ���.
-	������������������������������������������������������������������������������������������������������������������������������������������
+		+ 절대경로 확인방법
+		  1. Telnet 또는 SSH 접속 후, cd 명령어를 이용하여 모듈이 존재하는 곳까지 이동합니다.
+		  2. pwd 명령어을 이용하면 절대경로를 확인하실 수 있습니다.
+		  3. 확인된 절대경로에 '/모듈명'을 추가로 정의해 주세요.
+	└────────────────────────────────────────────────────────────────────
 	*/
     
-    $authtype = "";      		// ������ �⺻ ����ȭ��, X: ����������, M: �ڵ���, C: ī�� (1������ ��� ����)
+    $authtype = "";      		// 없으면 기본 선택화면, X: 공인인증서, M: 핸드폰, C: 카드 (1가지만 사용 가능)
     	
-    $popgubun 	= "N";		//Y : ��ҹ�ư ���� / N : ��ҹ�ư ����
-    $customize 	= "";		//������ �⺻ �������� / Mobile : ����������� (default���� ��, ȯ�濡 �´� ȭ�� ����)
+    $popgubun 	= "N";		//Y : 취소버튼 있음 / N : 취소버튼 없음
+    $customize 	= "";		//없으면 기본 웹페이지 / Mobile : 모바일페이지 (default값은 빈값, 환경에 맞는 화면 제공)
     
-    $gender = "";      		// ������ �⺻ ����ȭ��, 0: ����, 1: ����
+    $gender = "";      		// 없으면 기본 선택화면, 0: 여자, 1: 남자
 	
-    $reqseq = "REQ_0123456789";     // ��û ��ȣ, �̴� ����/�����Ŀ� ���� ������ �ǵ����ְ� �ǹǷ�
-                                    // ��ü���� �����ϰ� �����Ͽ� ���ų�, �Ʒ��� ���� �����Ѵ�.
+    $reqseq = "REQ_0123456789";     // 요청 번호, 이는 성공/실패후에 같은 값으로 되돌려주게 되므로
+                                    // 업체에서 적절하게 변경하여 쓰거나, 아래와 같이 생성한다.
 									
-    // �������� �̱�����(`) �ܿ���, 'exec(), system(), shell_exec()' ��� �ͻ� ��å�� �°� ó���Ͻñ� �ٶ��ϴ�.
+    // 실행방법은 싱글쿼터(`) 외에도, 'exec(), system(), shell_exec()' 등등 귀사 정책에 맞게 처리하시기 바랍니다.
     $reqseq = `$cb_encode_path SEQ $sitecode`;
     
-    // CheckPlus(��������) ó�� ��, ��� ����Ÿ�� ���� �ޱ����� ���������� ���� http���� �Է��մϴ�.
-    // ����url�� ���� �� ������������ ȣ���ϱ� �� url�� �����ؾ� �մϴ�. ex) ���� �� url : http://www.~ ���� url : http://www.~
-    $returnurl = "https://dev.ciccommunity.com/checkplus_success";	// ������ �̵��� URL
-    $errorurl = "https://dev.ciccommunity.com/checkplus_fail";		// ���н� �̵��� URL
+    // CheckPlus(본인인증) 처리 후, 결과 데이타를 리턴 받기위해 다음예제와 같이 http부터 입력합니다.
+    // 리턴url은 인증 전 인증페이지를 호출하기 전 url과 동일해야 합니다. ex) 인증 전 url : http://www.~ 리턴 url : http://www.~
+    $returnurl = "https://dev.ciccommunity.com/checkplus_success";	// 성공시 이동될 URL
+    $errorurl = "https://dev.ciccommunity.com/checkplus_fail";		// 실패시 이동될 URL
 	
-    // reqseq���� ������������ �� ��� ������ ���Ͽ� ���ǿ� ��Ƶд�.
+    // reqseq값은 성공페이지로 갈 경우 검증을 위하여 세션에 담아둔다.
     
     $_SESSION["REQ_SEQ"] = $reqseq;
 
-    // �Էµ� plain ����Ÿ�� �����.
+    // 입력될 plain 데이타를 만든다.
     $plaindata = "7:REQ_SEQ" . strlen($reqseq) . ":" . $reqseq .
 				 "8:SITECODE" . strlen($sitecode) . ":" . $sitecode .
 				 "9:AUTH_TYPE" . strlen($authtype) . ":". $authtype .
@@ -67,22 +67,22 @@
 
     if( $enc_data == -1 )
     {
-        $returnMsg = "암호화 시스템 오류.";
+        $returnMsg = "암/복호화 시스템 오류입니다.";
         $enc_data = "";
     }
     else if( $enc_data== -2 )
     {
-        $returnMsg = "암호화 처리 오류 .";
+        $returnMsg = "암호화 처리 오류입니다.";
         $enc_data = "";
     }
     else if( $enc_data== -3 )
     {
-        $returnMsg = "암호화 데이터 오류 .";
+        $returnMsg = "암호화 데이터 오류 입니다.";
         $enc_data = "";
     }
     else if( $enc_data== -9 )
     {
-        $returnMsg = "입력 정보 오류 .";
+        $returnMsg = "입력값 오류 입니다.";
         $enc_data = "";
     }
 ?>
@@ -90,7 +90,7 @@
 
 <html>
 <head>
-	<title>NICE인증 - CheckPlus테스트</title>
+	<title>NICE평가정보 - CheckPlus 안심본인인증 테스트</title>
 	
 	<script language='javascript'>
 	window.name ="Parent_window";
@@ -105,14 +105,14 @@
 </head>
 <body>
 	<?= $returnMsg ?><br><br>
-	enc_data: [<?= $enc_data ?>]<br><br>
+	업체정보 암호화 데이타 : [<?= $enc_data ?>]<br><br>
 
-	<!-- �������� ���� �˾��� ȣ���ϱ� ���ؼ��� ������ ���� form�� �ʿ��մϴ�. -->
+	<!-- 본인인증 서비스 팝업을 호출하기 위해서는 다음과 같은 form이 필요합니다. -->
 	<form name="form_chk" method="post">
-		<input type="hidden" name="m" value="checkplusService">				<!-- �ʼ� ����Ÿ��, �����Ͻø� �ȵ˴ϴ�. -->
-		<input type="hidden" name="EncodeData" value="<?= $enc_data ?>">		<!-- ������ ��ü������ ��ȣȭ �� ����Ÿ�Դϴ�. -->
+		<input type="hidden" name="m" value="checkplusService">				<!-- 필수 데이타로, 누락하시면 안됩니다. -->
+		<input type="hidden" name="EncodeData" value="<?= $enc_data ?>">		<!-- 위에서 업체정보를 암호화 한 데이타입니다. -->
 	    
-		<a href="javascript:fnPopup();"> CheckPlus 테스트 Click</a>
+		<a href="javascript:fnPopup();"> CheckPlus 안심본인인증 Click</a>
 	</form>
 </body>
 </html>
