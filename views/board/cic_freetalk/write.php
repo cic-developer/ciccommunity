@@ -1,3 +1,6 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <div id="container-wrap">
 	<div id="contents" class="div-cont">
 		<?php
