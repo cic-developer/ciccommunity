@@ -38,31 +38,7 @@
                 <div class="fr">
                     <h4>실시간 인기 게시물</h4>
                     <ul>
-                    <?php
-                        }
-                    }
-                    if (element('poplist', element('data', element('list', $view)))) {
-                        foreach (element('list', element('data', element('list', $view))) as $result) {
-                    ?>
-                        <tr>
-                            <td>
-                                <div class="my-info">
-                                    <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30); ?>"
-                                            alt="<?php echo element('mlc_title', $result); ?>"></p>
-                                    <p class="rtxt"><?php echo html_escape(element('post_nickname', $result)); ?></p>
-                                </div>
-                            </td>
-                            <td class="l file">
-                                <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><?php echo html_escape(element('title', $result)); ?>
-                                    <span class="reply">(<?php echo element('post_comment_count', $result); ?>)</span>
-                                </a>
-                            </td>
-                            <td><?php echo element('display_datetime', $result); ?></td>
-                            <td><?php echo number_format(element('post_hit', $result)); ?></td>
-                            <td>
-                                <p class="cyellow"><?=number_format(element('post_like_point', $result)-element('post_dislike_point', $result))?></p>
-                            </td>
-                        </tr>
+                    
                         <!-- <li><a href="<?php echo base_url('post/5')?>">1. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
                         </li>
                         <li><a href="<?php echo base_url('post/5')?>">2. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
