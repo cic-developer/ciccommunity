@@ -347,6 +347,8 @@ class Board_post extends CB_Controller
 				($use_sideview_icon ? element('mem_icon', $dbmember) : ''),
 				($use_sideview ? 'Y' : 'N')
 			);
+			echo element('mem_level', $dbmember);
+			exit;
 			$level_where = array(
 				'mlc_level' => element('mem_level', $dbmember),
 				'mlc_enable' => 1,
