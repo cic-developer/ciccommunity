@@ -47,9 +47,12 @@
 						</ul>
 				</div>
 				<div class='box-table'>
-				<?php
+				
+					
+					<form>
+					<?php	
 					foreach($realtime_coin_info as $coin_info){
-					echo '<form>
+						echo '
 							<div class="form-group col-md-2">
 								<label for="inputCity">Market name</label>
 								<input type="text" class="form-control" id="myText" value = "'.$realtime_coin_info['market'].'">
@@ -74,9 +77,10 @@
 							</div>
 							<div class="btn-group pull-right" role="group" aria-label="...">
 								<button type="submit" class="btn btn-success btn-sm">update</button>        
-							</div>
-					</form>';
-				}?>	
+							</div>';
+						}?>		
+					</form>
+				
 
 						<?php echo form_close(); ?>
 		</div>

@@ -28,10 +28,10 @@
 							<div class="my-info">
 								<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt="">
 								</p>
-								<p class="rtxt">코린이1235</p>
+								<p class="rtxt"><?php echo element('post_nickname', element('post', $view)); ?></p>
 							</div>
 						</li>
-						<li>등록일 : 2020-08-25 </li>
+						<li>등록일 : <?php echo element('display_datetime', element('post', $view)); ?> </li>
 						<li>조회 : <?php echo number_format(element('post_hit', element('post', $view))); ?> </li>
 					</ul>
 					<div class="abr">
