@@ -107,9 +107,9 @@ class Attendance_model extends CB_Model
 			$result = $this->get('', '', $where);
 			$return = array();
 			foreach($result as $val){
-				
+				$return[] = (int)cdate('d', strtotime($val['att_date']));
 			}
-			return ;
+			return $return;
 		} else {
 			return array();
 		}

@@ -87,7 +87,7 @@ class Coin extends CB_Controller
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 				   
 					//print(1);
-				}else{print_r(1);}
+				}else{exit;}
 				
 
 			}	
