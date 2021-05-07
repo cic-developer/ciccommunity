@@ -128,6 +128,7 @@ class Coin extends CB_Controller
 		print_r($admincoin);
 		for($i = 0; $i < count($admincoin); $i++){
 			$marketdata[] = $admincoin[$i]['market'];
+			print_r($marketdata);
             if($marketdata){
 				$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
 			}else{
@@ -135,8 +136,8 @@ class Coin extends CB_Controller
 			}
 
 			foreach ($admincoin as $admincoin){
-				if($$admincoin['market']){
-					$marketdata[] = $$admincoin['market'];
+				if($admincoin['market']){
+					$marketdata[] = $admincoin['market'];
 				}else{
 					$marketdata[] = 0;
 				}
