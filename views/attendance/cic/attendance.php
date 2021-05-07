@@ -69,6 +69,12 @@
 											</div>
 										</td>
 
+									<?php } else if($n <= 1 && $k < $start_week) { ?>
+										<td class="before">
+											<div class="con">
+												<p class="day"><?php echo $after_date++; ?></p>
+											</div>
+										</td>
 									<?php } ?>
 							<?php } ?> 
 						</tr>
