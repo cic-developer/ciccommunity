@@ -103,9 +103,9 @@ public function index()
 					$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
 					$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
 				}
-				print_r();
-				exit;
 				$result['list'][$key]['category'] = '';
+				print_r($result);
+				exit;
 				if (element('post_category', $val)) {
 					$result['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
 				}

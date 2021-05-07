@@ -119,8 +119,6 @@ class Coin extends CB_Controller
 		}
 
 
-		echo 1;
-		exit;
        //GET MARKET 
 	    $admincoin = $this -> Coin_model_admin -> get_admin_coinList();
 		for($i = 0; $i < count($admincoin); $i++){
