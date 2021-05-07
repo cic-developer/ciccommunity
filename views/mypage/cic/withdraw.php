@@ -72,6 +72,7 @@
             <div class="paging-wrap">
 				<?php echo element('paging', $view); ?>
 			</div>
+            <h1 id="h1" title="툴팁테스트">Test</h1>
         </div>
         <!-- page end // -->
     </div>
