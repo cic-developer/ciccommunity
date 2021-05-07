@@ -163,16 +163,16 @@ class Coin_model extends CB_Model
 
         //convert json to php array or object
         $array = json_decode($response, true);
-
-        for($i = 0; $i < count($array); $i++){
-            $kwr_market = $array[$i]['market'];
-            print_r($kwr_market);
-            if(strcmp(substr($kwr_market, 0, 1), "K")==0){
+        return $array;
+        // for($i = 0; $i < count($array); $i++){
+        //     $kwr_market = $array[$i]['market'];
+        //     print_r($kwr_market);
+        //     if(strcmp(substr($kwr_market, 0, 1), "K")==0){
                 
-               // print_r($array[$i]);
-                return $array[$i];
-            }
-        }    
+        //        // print_r($array[$i]);
+        //         
+        //     }
+        // }    
 
         // foreach($array as $kwr_stocks => $value){
         //     print_r($kwr_market);

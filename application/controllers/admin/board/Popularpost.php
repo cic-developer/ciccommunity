@@ -53,7 +53,7 @@ class Popularpost extends CB_Controller
 public function index()
 	{
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_board_popularpost_index';
+		$eventname = 'event_admin_board_post_index';
 		$this->load->event($eventname);
 
 		$view = array();
@@ -67,28 +67,28 @@ public function index()
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = $this->input->get('findex') ? $this->input->get('findex') : $this->{$this->modelname}->primary_key;
-		$findex = 'post_like_point';
-		$forder = 'asc';$sfield = $this->input->get('sfield', null, '');
+		$findex = 'post_id';
+		$forder = 'desc';
+		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 
 		$per_page = admin_listnum();
 		$offset = ($page - 1) * $per_page;
-
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
 		$this->{$this->modelname}->allow_search_field = array('post_id', 'post_title', 'post_content', 'mem_id', 'post_username', 'post_nickname', 'post_email', 'post_homepage', 'post_datetime', 'post_ip', 'post_device'); // 검색이 가능한 필드
 		$this->{$this->modelname}->search_field_equal = array('post_id', 'mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->{$this->modelname}->allow_order_field = array('post_like_point'); // 정렬이 가능한 필드
+		$this->{$this->modelname}->allow_order_field = array('post_id'); // 정렬이 가능한 필드
 		$where = array(
-			'post.post_del' => 2,
+			'post_del <>' => 2,
 		);
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;
 		}
+		
 		$result = $this->{$this->modelname}
-		->get_popularpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->get_post_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		
 		if (element('list', $result)) {
@@ -121,7 +121,7 @@ public function index()
 		}
 		$view['view']['data'] = $result;
 
-		$select = 'brd_id, brd_name';		
+		$select = 'brd_id, brd_name';
 		$view['view']['boardlist'] = $this->Board_model->get_board_list();
 
 		/**
@@ -146,7 +146,8 @@ public function index()
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
-		$view['view']['list_update_url'] = admin_url($this->pagedir . '/listupdate/?' . $param->output());
+		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listdelete/?' . $param->output());
+		$view['view']['list_trash_url'] = admin_url($this->pagedir . '/listtrash/?' . $param->output());
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
