@@ -72,12 +72,14 @@ class Coin extends CB_Controller
 				'name_en' => $getList[$i]['korean_name'],
 			);
 		   // print_t($market);	
-		       			
+		    print_r($data);   			
 			if( $this->Coin_model->market_exist($exist)){	
 				if(isset($data) && !empty($data)){
 					$stock = $this->Coin_model->insertStockData($data);
+				    $view['view']['alert_message'] = '정상적으로 저장되었습니다';}
+				
 				}	
-					$view['view']['alert_message'] = '정상적으로 저장되었습니다';}
+					
 					
 		}
         
@@ -86,6 +88,13 @@ class Coin extends CB_Controller
 
 		$getStock = $this -> Coin_model->getstockData();
 		$view['getStock'] = $getStock;
+
+		// foreach($getStock as $kwr_stocks){
+		// 	$kwr_market = $kwr_stocks -> market;
+		// 	if(strcmp(substr($kwr_market, 0, 1), "K")==0){		
+		// 		$view['kwr_stocks'] = $kwr_stocks;
+		// 		print_r($kwr_stocks->market);
+		// 	}
 
 		// }
 				//CREATE COIN LIST FOR ADMIN
