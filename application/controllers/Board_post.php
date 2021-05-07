@@ -1445,7 +1445,7 @@ class Board_post extends CB_Controller
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		
 		if (element('poplist', $result)) {
-			foreach (element('list', $result) as $key => $val) {
+			foreach (element('poplist', $result) as $key => $val) {
 				$result['poplist'][$key]['post_display_name'] = display_username(
 					element('post_userid', $val),
 					element('post_nickname', $val)
