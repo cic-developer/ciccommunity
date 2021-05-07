@@ -79,6 +79,15 @@
 </div>
 
 <script>
+    $(function() {
+        $(document).tooltip();
+    });
+
+    // $(function() {
+    //     $("#show-tooltip").tooltip();
+    // });
+
+
     // 출금금액 validation
     function validateForm() {
         var x, text;

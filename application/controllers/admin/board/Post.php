@@ -87,7 +87,7 @@ class Post extends CB_Controller
 		}
 		
 		$result = $this->{$this->modelname}
-			->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->get_post_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		
 		if (element('list', $result)) {
