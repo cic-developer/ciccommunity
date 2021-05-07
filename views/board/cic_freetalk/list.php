@@ -114,7 +114,7 @@
                                 <div class="my-info">
                                     <p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>"
                                             alt=""></p>
-                                    <p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
+                                    <p class="rtxt"><?php echo html_escape(element('post_nickname', $result)); ?></p>
                                 </div>
                             </td>
                             <td class="l file">
