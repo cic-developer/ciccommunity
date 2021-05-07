@@ -69,7 +69,7 @@ public function index()
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
 		$findex = $this->input->get('findex') ? $this->input->get('findex') : $this->{$this->modelname}->primary_key;
 		$findex = 'post_like_point';
-		$forder = 'asc';
+		$forder = 'asc';$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 
 		$per_page = admin_listnum();
@@ -85,7 +85,7 @@ public function index()
 			'post.post_del' => 2,
 		);
 		if ($brdid = (int) $this->input->get('brd_id')) {
-			$where['post.brd_id'] = $brdid;
+			$where['brd_id'] = $brdid;
 		}
 		$result = $this->{$this->modelname}
 			->get_popularpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
