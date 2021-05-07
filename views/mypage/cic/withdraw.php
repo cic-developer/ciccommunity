@@ -11,7 +11,7 @@
             echo form_open(current_full_url(), $attributes);
             ?>
             <h3>출금요청</h3>
-            <div class="entry">s
+            <div class="entry">
                 <ul>
                     <li>
                         <p class="btxt">출금가능</p>
