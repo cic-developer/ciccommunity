@@ -72,19 +72,20 @@
             <div class="paging-wrap">
 				<?php echo element('paging', $view); ?>
 			</div>
-            <div class="container">
-                <h3>Tooltip Example</h3>
-                <a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>
-            </div>
+            <h1 id="h1" title="툴팁테스트">Test</h1>
         </div>
         <!-- page end // -->
     </div>
 </div>
 
 <script>
-    $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip();   
-        });
+    $(function() {
+        $(document).tooltip();
+    });
+
+    // $(function() {
+    //     $("#show-tooltip").tooltip();
+    // });
 
 
     // 출금금액 validation
