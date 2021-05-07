@@ -169,7 +169,7 @@ class Coin_model extends CB_Model
             print_r($kwr_market);
             if(strcmp(substr($kwr_market, 0, 1), "K")==0){
                 
-                print_r($array[$i]);
+               // print_r($array[$i]);
                 return $array[$i];
             }
         }    

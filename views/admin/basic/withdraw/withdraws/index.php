@@ -32,7 +32,7 @@
                     <thead>
                         <tr>
                             <th><a href="<?php echo element('wid_idx', element('sort', $view)); ?>">번호</a></th>
-                            <th><a href="<?php echo element('wid_userid', element('sort', $view)); ?>">유저아이디</a></th>
+                            <th><a href="<?php echo element('wid_userid', element('sort', $view)); ?>">회원아이디</a></th>
                             <th><a href="<?php echo element('wid_userip', element('sort', $view)); ?>">회원아이피</a></th>
                             <th><a href="<?php echo element('wid_nickname', element('sort', $view)); ?>">닉네임</a></th>
                             <th><a href="<?php echo element('wid_wallet_address', element('sort', $view)); ?>">지갑주소</a></th>
