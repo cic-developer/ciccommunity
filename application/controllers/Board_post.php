@@ -1433,7 +1433,7 @@ class Board_post extends CB_Controller
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		$where = array(
 			'post_exept_state' => 0,
-			'brd_id' => 2,
+			'brd_id' => 1,
 			'post_datetime >=' => $checktime,
 			'post_del <>' => 2,
 		);
