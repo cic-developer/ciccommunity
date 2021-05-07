@@ -169,7 +169,7 @@ class Coin_model extends CB_Model
             $kwr_market = $array[$i]['market'];
             print_r($kwr_market);
             if(strcmp(substr($kwr_market, 0, 1), "K")==0){
-                return $array[$i];
+                return $array;
             
             }
        }
