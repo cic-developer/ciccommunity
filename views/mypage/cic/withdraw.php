@@ -77,8 +77,14 @@
     </div>
 </div>
 
+<style>
+.test {
+    color:red;
+}
+</style>
+
 <div>
-    <span data-tooltip-text="THIS IS TOOLTIP!!">Hover over me</span>
+    <span class="test" data-tooltip-text="THIS IS TOOLTIP!!">Hover over me</span>
 </div>
 
 
