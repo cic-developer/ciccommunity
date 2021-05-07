@@ -28,7 +28,7 @@
 							<div class="my-info">
 								<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt="">
 								</p>
-								<p class="rtxt"><?php echo element('post_nickname', element('post', $view)); ?></p>
+								<p class="rtxt"><?php echo html_escape(element('post_nickname', element('post', $view))); ?></p>
 							</div>
 						</li>
 						<li>등록일 : <?php echo element('display_datetime', element('post', $view)); ?> </li>
@@ -39,7 +39,7 @@
 						if(element('level',element('post', $view))) {
 						?>
 						<p <?php echo (element('mlc_level',element('level',element('post', $view))) >= 0) ? 'style="color:#444;"' : '' ?>>
-							<?php echo element('mlc_level',element('level',element('post', $view))).' '.element('mlc_title',element('level',element('post', $view))); ?>
+							<?php echo element('mlc_level',element('level',element('post', $view))).' '.html_escape(element('mlc_title',element('level',element('post', $view)))); ?>
 						</p>
 						<?php 
 						} 

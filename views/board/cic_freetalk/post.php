@@ -42,7 +42,7 @@
 						if(element('level',element('post', $view))) {
 						?>
 						<p <?php echo (element('mlc_level',element('level',element('post', $view))) >= 0) ? 'style="color:#444;"' : '' ?>>
-							<?php echo element('mlc_level',element('level',element('post', $view))).' '.element('mlc_title',element('level',element('post', $view))); ?>
+							<?php echo element('mlc_level',element('level',element('post', $view))).' '.html_escape(element('mlc_title',element('level',element('post', $view)))); ?>
 						</p>
 						<?php 
 						} 
