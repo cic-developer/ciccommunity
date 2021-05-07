@@ -25,7 +25,7 @@
 				</ul>
 			</div>
 			<div class="lower">
-				<a href="javascript:void(0);" class="enter-btn" onclick="document.getElementById('fwrite').submit()"><span>등록하기</span></a>
+				<button type="submit" class="enter-btn"><span>등록하기</span></button>
 			</div>
 		</div>
 		<!-- page end // -->
