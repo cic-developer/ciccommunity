@@ -1,9 +1,9 @@
 
 <div id="container-wrap">
-    <div id="contents" class="div-cont mb-nopad">
+    <div id="contents" class="div-cont">
         
         <!-- page start // -->
-        <div class="member-wrap withdraw list">
+        <div class="member-wrap withdraw">
             <?php
             echo show_alert_message($this->session->flashdata('message'), '<script>alert("', '")</script>');
             $attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
