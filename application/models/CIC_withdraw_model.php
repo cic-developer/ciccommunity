@@ -56,7 +56,7 @@ class CIC_withdraw_model extends CB_Model
 		// $join[] = null;
 		$join[] = array();
 		
-		$result = $this->get_admin_list($limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
+		$result = $this->_get_list_common($select = '', $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
 
 		return $result;
 	}
