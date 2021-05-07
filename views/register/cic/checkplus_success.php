@@ -31,17 +31,17 @@
         echo "[plaindata]  " . $plaindata . "<br>";
 
         if ($plaindata == -1){
-            $returnMsg  = "복호화 시스템 오류";
+            $returnMsg  = "��/��ȣȭ �ý��� ����";
         }else if ($plaindata == -4){
-            $returnMsg  = "복호화 처리 오류";
+            $returnMsg  = "��ȣȭ ó�� ����";
         }else if ($plaindata == -5){
-            $returnMsg  = "복호화 해시 오류";
+            $returnMsg  = "HASH�� ����ġ - ��ȣȭ �����ʹ� ���ϵ�";
         }else if ($plaindata == -6){
-            $returnMsg  = "복호화 데이터 오류";
+            $returnMsg  = "��ȣȭ ������ ����";
         }else if ($plaindata == -9){
-            $returnMsg  = "입력 정보 오류";
+            $returnMsg  = "�Է°� ����";
         }else if ($plaindata == -12){
-            $returnMsg  = "CP 비밀번호 불일치 ";
+            $returnMsg  = "����Ʈ ��й�ȣ ����";
         }else{
             // ��ȣȭ�� �������� ��� �����͸� �Ľ��մϴ�.
             $ciphertime = `$cb_encode_path CTS $sitecode $sitepasswd $enc_data`;	// ��ȣȭ�� ��� ������ ���� (��ȣȭ�� �ð�ȹ��)
