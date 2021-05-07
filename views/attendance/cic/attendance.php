@@ -16,7 +16,7 @@
                         </p>
                     </div>
                     <a href="<?php echo base_url("attendance?date=".cdate('Y-m-d', strtotime('-1 month', strtotime($_date)))); ?>" class="cprev"><span class="blind">이전</span></a>
-                    <a href="#n" class="cnext"><span class="blind">다음</span></a>
+                    <a href="<?php echo base_url("attendance?date=".cdate('Y-m-d', strtotime('+1 month', strtotime($_date)))); ?>" class="cnext"><span class="blind">다음</span></a>
                 </div>
             </div>
             <div class="calendar">
