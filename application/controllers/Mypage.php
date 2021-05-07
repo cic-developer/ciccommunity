@@ -1246,10 +1246,10 @@ class Mypage extends CB_Controller
 			'path' => 'mypage',
 			'layout' => 'layout',
 			'skin' => 'withdraw',
-			'layout_dir' => 'cic_sub',
+			//'layout_dir' => 'cic_sub',
 			'mobile_layout_dir' => 'cic_sub',
 			'skin_dir' => 'cic',
-			//'mobile_skin_dir' => 'cic',
+			'mobile_skin_dir' => 'cic',
 			'page_title' => '출금신청',
 			
 		);	
