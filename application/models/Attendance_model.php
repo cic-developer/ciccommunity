@@ -102,7 +102,7 @@ class Attendance_model extends CB_Model
 		if($mem_id){
 			$where = array(
 				'mem_id' => $mem_id,
-				'att_date >=' => cdate('Y-m-01', strtotime($_date)),
+				'att_date >=' => $_date,
 			);
 			return $this->get('', '', $where);
 		} else {

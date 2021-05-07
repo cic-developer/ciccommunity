@@ -54,7 +54,8 @@ class Coin extends CB_Controller
 	{
         $eventname = 'event_stok';
         $this->load->event($eventname);
-
+		
+		
 		
 		$view = array();
 		$view['view'] = array();
@@ -89,7 +90,7 @@ class Coin extends CB_Controller
 
 			}		
 		}
-        
+        PRINT_r(1);
 
 		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
 
