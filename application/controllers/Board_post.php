@@ -1069,6 +1069,7 @@ class Board_post extends CB_Controller
 						($use_sideview_icon ? element('mem_icon', $val) : ''),
 						($use_sideview ? 'Y' : 'N')
 					);
+					$noticeresult[$key]['level'] = $this->member->item('level');
 				} else {
 					$noticeresult[$key]['display_name'] = '익명사용자';
 				}

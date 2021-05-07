@@ -1242,28 +1242,17 @@ class Mypage extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-		$page_title = $this->cbconfig->item('site_meta_title_mypage');
-		$meta_description = $this->cbconfig->item('site_meta_description_mypage');
-		$meta_keywords = $this->cbconfig->item('site_meta_keywords_mypage');
-		$meta_author = $this->cbconfig->item('site_meta_author_mypage');
-		$page_name = $this->cbconfig->item('site_page_name_mypage');
-
 		$layoutconfig = array(
 			'path' => 'mypage',
 			'layout' => 'layout',
-			'skin' => 'main',
-			'layout_dir' => $this->cbconfig->item('layout_mypage'),
-			'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_mypage'),
-			'use_sidebar' => $this->cbconfig->item('sidebar_mypage'),
-			'use_mobile_sidebar' => $this->cbconfig->item('mobile_sidebar_mypage'),
-			'skin_dir' => $this->cbconfig->item('skin_mypage'),
-			'mobile_skin_dir' => $this->cbconfig->item('mobile_skin_mypage'),
-			'page_title' => $page_title,
-			'meta_description' => $meta_description,
-			'meta_keywords' => $meta_keywords,
-			'meta_author' => $meta_author,
-			'page_name' => $page_name,
-		);
+			'skin' => 'withdraw',
+			'layout_dir' => 'cic_sub',
+			'mobile_layout_dir' => 'cic_sub',
+			'skin_dir' => 'cic',
+			'mobile_skin_dir' => 'cic',
+			'page_title' => '출금신청',
+			
+		);	
 
 		$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
