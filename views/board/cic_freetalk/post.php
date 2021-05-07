@@ -38,7 +38,9 @@
 						<li>조회 : <?php echo number_format(element('post_hit', element('post', $view))); ?> </li>
 					</ul>
 					<div class="abr">
-						<p>4 진정한 흑우</p>
+						<p>
+							4 진정한 흑우
+						</p>
 						<div class="vp-point">
 							<ul>
 								<li><a href="#n" class="up"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>
