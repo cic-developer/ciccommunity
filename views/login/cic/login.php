@@ -61,7 +61,7 @@
 			</div>
 			<?php } ?>
 			<!-- 여기에 소셜로그인을 등록!! -->
-			<a class="login-btn"><span>SIGN IN</span></a>
+			<button type="submit" class="login-btn"><span>SIGN IN</span></button>
 			<?php echo form_close(); ?>
 			<div class="other">
 				<ul>
