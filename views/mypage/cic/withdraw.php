@@ -124,7 +124,7 @@
 </style>
 
 <div>
-    <span class="test" data-tooltip-text="THIS IS TOOLTIP!!">Hover over me</span>
+    <span data-tooltip-text="THIS IS TOOLTIP!!">Hover over me</span>
 </div>
 
 

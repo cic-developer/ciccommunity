@@ -39,7 +39,7 @@
 					</ul>
 					<div class="abr">
 						<?php 
-						print_r($view);
+						print_r(element('post', $view));
 						exit;
 						if(element('level',element('post', $view))) {
 						?>
