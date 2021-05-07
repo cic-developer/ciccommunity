@@ -173,7 +173,7 @@ class Coin_model extends CB_Model
        //     $array[$i]['market']
        //     $array[$i]['korea_name']
        //     $array[$i]['english_name']
-            $$kwr_market = $array[$i]['market'];
+            $kwr_market = $array[$i]['market'];
             if(strcmp(substr($kwr_market, 0, 1), "K")==0){
                 return $array;
             
