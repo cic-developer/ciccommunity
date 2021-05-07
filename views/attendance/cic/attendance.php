@@ -313,21 +313,6 @@
 </div>
 <script type="text/javascript">
 //<![CDATA[
-// function view_attendance(id, date, page) {
-// 	var list_url = cb_url + '/attendance/dailylist/' + date + '?page=' + page;
-// 	$('#' + id).load(list_url);
-// }
-
-// $(document).on('click', '.datepick', function() {
-// 	// view_attendance('viewattendance', $(this).attr('data-attendance-date'), '1');
-// 	$('.date-navigation > li').removeClass("active");
-// 	$(this).addClass('active');
-// });
-
-// function attendance_page(date, page) {
-// 	view_attendance('viewattendance', date, page);
-// 	attendance_cur_page = page;
-// }
 
 var memos = new Array();
 <?php
@@ -339,16 +324,6 @@ if (element('default_memo', $view)) {
 	}
 }
 ?>
-
-function change_memo() {
-	var r = Math.floor(Math.random() * <?php echo count(element('default_memo', $view)); ?>);
-	if ($('#att_memo').val() == memos[r]) {
-		change_memo();
-		return;
-	}
-	$('#att_memo').val(memos[r]);
-}
-$(document).on('click', '#change_memo', change_memo);
 
 var is_submit_attendance = false;
 
