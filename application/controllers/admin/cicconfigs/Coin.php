@@ -151,31 +151,6 @@ class Coin extends CB_Controller
 			// print_r($realtime_coin_info);
 			// echo "</pre>";
 	}
-	public function coin_search(){
-		$this->load->view('search');
-			//skeyword
-		$data2['skeyword'] = $this->Coin_model->search_coin();
-       	$this->load->view('result', $data2);
-
-
-		}
-
-	public function getCoinList(){
-		
-		$this->load->view('CStock');
-		$getList = $this -> Coin_model->coin_list();
-        
-		print_r($getList);
-
-		$view['getList'] = $getList;
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
-		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-		$this->data = $view;
-		$this->layout = element('layout_skin_file', element('layout', $view));
-		$this->view = element('view_skin_file', element('layout', $view));
-
-		
-		}
 
 	
 }
