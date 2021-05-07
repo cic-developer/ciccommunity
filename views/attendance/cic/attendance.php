@@ -5,8 +5,7 @@
 	$total_day_lastmonth = cdate('t', strtotime('-1 month', strtotime($_date))); 		// 2. 현재 달의 총 날짜
 	$total_week = ceil(($total_day + $start_week) / 7); // 3. 현재 달의 총 주차
 	$after_date = 1;
-	print_r($start_week);
-	// exit;
+	$before_date = $total_day_lastmonth - $start_week + 1;
 ?>
 <div id="container-wrap">
     <div id="contents" class="div-cont">
@@ -74,7 +73,7 @@
 									<?php } else if($n <= 1 && $k < $start_week) { ?>
 										<td class="before">
 											<div class="con">
-												<p class="day"><?php echo $total_day_lastmonth; ?></p>
+												<p class="day"><?php echo $before_date++; ?></p>
 											</div>
 										</td>
 									<?php } ?>
