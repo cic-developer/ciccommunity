@@ -61,22 +61,28 @@ class Coin extends CB_Controller
         $view['view']['event']['before'] = Events::trigger('before', $eventname);
 		
 		$getList = $this -> Coin_model->get_coinlist();
+
+
 		//print_r($getList);
 		for($i=0; $i<count($getList); $i++){
-
+			
+			print_r ($getList);
 			//'market' => $getList[$i]['market']
 			$data = array(
 				'market' => $getList[$i]['market'],
 				'name_ko' => $getList[$i]['english_name'],
 				'name_en' => $getList[$i]['korean_name'],
 			);
-		   	
-			//if( $this->Coin_model->market_exist($exist)){	
-				if(isset($data) && !empty($data)){
-					$stock = $this->Coin_model->insertStockData($data);
-					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-				}
-			//}		
+
+			
+
+
+			// //if( $this->Coin_model->market_exist($exist)){	
+			// 	if(isset($data) && !empty($data)){
+			// 		$stock = $this->Coin_model->insertStockData($data);
+			// 		$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+			// 	}
+			// //}		
 		}
         
 
@@ -85,7 +91,7 @@ class Coin extends CB_Controller
 		$getStock = $this -> Coin_model->getstockData();
 		$view['getStock'] = $getStock;
 
-				//CREATE COIN LIST FOR ADMIN
+		//CREATE COIN LIST FOR ADMIN
 
 		$this->load->library('form_validation');
 
