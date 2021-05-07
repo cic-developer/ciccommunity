@@ -71,7 +71,7 @@ class Coin extends CB_Controller
 			if(strcmp(substr($market, 0, 1), "K")==0){
 				$coin_market = substr($market, 4);
 				echo "<br><pre>";
-				// print_r($coin_market);  
+				print_r($coin_market);  
 				echo "<pre>";
 			
 				//'market' => $getList[$i]['market']
@@ -81,14 +81,13 @@ class Coin extends CB_Controller
 					'name_en' => $getList[$i]['korean_name'],
 				);
 
-			}	
-
-
-			if( $this->Coin_model->market_exist($exist)){	
-				if(isset($data) && !empty($data)){
-					$stock = $this->Coin_model->insertStockData($data);
-					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+				if( $this->Coin_model->market_exist($exist)){	
+					if(isset($data) && !empty($data)){
+						$stock = $this->Coin_model->insertStockData($data);
+						$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+					}
 				}
+
 			}		
 		}
         
