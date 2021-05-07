@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 회원 가입과 관련된 controller 입니다.
  */
-class Checkplus_main extends CB_Controller
+class Checkplus_fail extends CB_Controller
 {
 
 	/**
@@ -45,7 +45,7 @@ class Checkplus_main extends CB_Controller
 	 */
 	public function index()
 	{
-		$this->load->view('register/cic/Checkplus_fail');
+		$this->load->view('register/cic/checkplus_fail');
 	}
 }
 
