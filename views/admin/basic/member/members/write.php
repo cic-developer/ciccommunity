@@ -68,6 +68,7 @@
 						<option value="<?php echo $i; ?>" <?php echo set_select('mem_level', $i, ((int) element('mem_level', element('data', $view)) === $i ? true : false)); ?>><?php echo $i; ?></option>
 					<?php } ?>
 					</select>
+					<p class="help-block">레벨을 수동으로 설정하여도 해당 유저의 명예포인트에 따라 자동으로 변동됩니다.</p>
 				</div>
 			</div>
 			<div class="form-group">
