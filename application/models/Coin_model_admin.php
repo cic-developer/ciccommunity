@@ -33,7 +33,7 @@ class Coin_model_admin extends CB_Model
 
     function get_admin_coinList(){
         $query = $this->db->get('cic_coin_admin')->row_array();
-        return $query->result(); 
+        return $query; 
     }
 
     // function getonerow(){
