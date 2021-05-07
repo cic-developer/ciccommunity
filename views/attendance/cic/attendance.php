@@ -51,24 +51,25 @@
 						<tr>
 							<!-- 1일부터 7일 (한 주) -->
 							<?php for ($k = 0; $k < 7; $k++){ ?>
-								<td>
 									<!-- 시작 요일부터 마지막 날짜까지만 날짜를 보여주도록 -->
 									<?php if ( ($n > 1 || $k >= $start_week) && ($total_day >= $n) ){ ?>
 									<!-- 현재 날짜를 보여주고 1씩 더해줌 -->
-
-									<div class="con">
-										<p class="day"><?php echo $n++ ?></p>
-										<a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
-									</div>
+									<td>
+										<div class="con">
+											<p class="day"><?php echo $n++ ?></p>
+											<a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+										</div>
+									</td>
 										
 									<?php } else if($total_day < $n){ ?>
+
 										<td class="after">
 											<div class="con">
 												<p class="day"><?php echo $after_date++; ?></p>
 											</div>
 										</td>
+										
 									<?php } ?>
-								</td>
 							<?php } ?> 
 						</tr>
 					<?php } ?>
