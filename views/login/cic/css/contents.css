@@ -254,6 +254,7 @@
 }
 
 .member-wrap.login .login-btn {
+    border: 0;
     margin-top: 35px;
     display: block;
     vertical-align: top;

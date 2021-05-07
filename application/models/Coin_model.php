@@ -163,7 +163,15 @@ class Coin_model extends CB_Model
 
         //convert json to php array or object
         $array = json_decode($response, true);
-        return $array;
+
+        foreach($array as $kwr_stocks){
+			$kwr_market = $kwr_stocks -> market;
+			if(strcmp(substr($kwr_market, 0, 1), "K")==0){		
+                return $array;
+			}
+
+		}
+    
     }
 
     function dropdown_list($data){
