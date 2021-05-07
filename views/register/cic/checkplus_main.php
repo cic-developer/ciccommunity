@@ -90,7 +90,7 @@
 
 <html>
 <head>
-	<title>NICE������ - CheckPlus �Ƚɺ������� �׽�Ʈ</title>
+	<title>NICE인증 - CheckPlus테스트</title>
 	
 	<script language='javascript'>
 	window.name ="Parent_window";

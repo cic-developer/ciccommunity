@@ -97,7 +97,13 @@ class Attendance_model extends CB_Model
 	}
 
 	public function get_this_month_attend(){
-		$this->member->is_member();
-		$this->get('', '', $where);
+		$this->load->library('member');
+		$mem_id = $this->member->is_member();
+		if($mem_id){
+
+			$this->get('', '', $where);
+		} else {
+			return [];
+		}
 	}
 }

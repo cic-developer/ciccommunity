@@ -76,7 +76,7 @@ class Coin extends CB_Controller
 			
 				//'market' => $getList[$i]['market']
 				$data = array(
-					'market' => $getList[$i]['market'],
+					'market' => $coin_market,
 					'name_ko' => $getList[$i]['english_name'],
 					'name_en' => $getList[$i]['korean_name'],
 				);
