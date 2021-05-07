@@ -38,6 +38,33 @@
                 <div class="fr">
                     <h4>실시간 인기 게시물</h4>
                     <ul>
+                    	<?php
+						if (element('poplist', element('data', $view))) {
+							foreach (element('poplist', element('data', $view)) as $result) {
+						?>
+							<tr>
+								<td>
+									<?php if (element('thumb_url', $result)) {?>
+										<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank">
+											<img src="<?php echo element('thumb_url', $result); ?>" alt="<?php echo html_escape(element('post_title', $result)); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" class="thumbnail mg0" style="width:80px;" />
+										</a>
+									<?php } ?>
+								</td>
+								<td>
+									<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><?php echo html_escape(element('post_title', $result)); ?></a>
+								</td>
+							</tr>
+						<?php
+							}
+						}
+						if ( ! element('list', element('data', $view))) {
+						?>
+							<tr>
+								<td colspan="12" class="nopost">자료가 없습니다</td>
+							</tr>
+						<?php
+						}
+						?>
                         <!-- <li><a href="<?php echo base_url('post/5')?>">1. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
                         </li>
                         <li><a href="<?php echo base_url('post/5')?>">2. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
