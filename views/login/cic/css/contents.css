@@ -383,6 +383,9 @@
     .member-wrap.login {
         padding: 40px 15px;
     }
+    .member-wrap.login .login-btn {
+        width: 332px;
+    }
 }
 
 
