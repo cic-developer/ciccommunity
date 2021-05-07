@@ -15,7 +15,7 @@
                             <input type="text" value="<?php echo cdate('Y-m')?>" autocomplete="off">
                         </p>
                     </div>
-                    <a href="base_url('attendance?date=<?php echo cdate('Y-m-d', strtotime('-1 month', strtotime($_date)));?>')" class="cprev"><span class="blind">이전</span></a>
+                    <a href="<?php echo base_url("attendance?date=".cdate('Y-m-d', strtotime('-1 month', strtotime($_date)))); ?>" class="cprev"><span class="blind">이전</span></a>
                     <a href="#n" class="cnext"><span class="blind">다음</span></a>
                 </div>
             </div>
