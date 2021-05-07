@@ -116,18 +116,6 @@ class Coin_model extends CB_Model
     
     }
 
-    function market_exist($market){
-        $this->db->where('market',$market);
-        $query = $this->db->get('cic_coin_stock');
-        if ($query->num_rows() > 0){
-            $result = $this->db->insert('cic_coin_stock', $data);
-            return $result;
-        }
-        else{
-            return false;
-        }
-    }
-
     function get_coinlist(){
         $curl = curl_init();
 
