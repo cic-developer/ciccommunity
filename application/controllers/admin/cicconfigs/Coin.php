@@ -29,7 +29,7 @@ class Coin extends CB_Controller
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
 	 */
-	protected $modelname = 'Coin_model';
+	protected $modelname = 'Coin_model', 'Coin_model_admin';
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -124,7 +124,7 @@ class Coin extends CB_Controller
        //GET MARKET PRICE 
 
 
-	    $admincoin = $this -> Coin_model_admin -> get_admin_coinLis();
+	    $admincoin = $this -> Coin_model_admin -> get_admin_coinList();
 		for($i = 0; $i < count($$admincoin); $i++){
 			$marketdata[] = $$admincoin[$i]->market;
             if($marketdata){
