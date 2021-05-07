@@ -34,8 +34,8 @@
 				<label class="col-sm-2 control-label">활성화 여부</label>
 				<div class="col-sm-10 form-inline">
                     <select name="mlc_enable" class="form-control">
-                        <option value="0" <?php echo element('mlc_level', element('data', $view)) == 0 ? 'selected':''?>>비활성</option>
-                        <option value="1" <?php echo element('mlc_level', element('data', $view)) == 1 ? 'selected':''?>>활성</option>
+                        <option value="0" <?php echo element('mlc_enable', element('data', $view)) == 0 ? 'selected':''?>>비활성</option>
+                        <option value="1" <?php echo element('mlc_enable', element('data', $view)) == 1 ? 'selected':''?>>활성</option>
                     </select>
 				</div>
 			</div>
