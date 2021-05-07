@@ -29,8 +29,6 @@ class Coin extends CB_Controller
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
 	 */
-	//protected $modelname = 'Coin_model';
-
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
@@ -64,33 +62,33 @@ class Coin extends CB_Controller
 		$getList = $this -> Coin_model->get_coinlist();
 
 
-		//print_r($getList);
-		// for($i=0; $i<count($getList); $i++){
+		print_r($getList);
+		for($i=0; $i<count($getList); $i++){
 			
-		// 	//print_r ($getList[$i]['market']);
-		// 	$market = $getList[$i]['market'];
-		// 	if(strcmp(substr($market, 0, 1), "K")==0){
-		// 		$coin_market = substr($market, 4);
-		// 		echo "<br><pre>";
-		// 		//print_r($coin_market);  
-		// 		echo "<pre>";
+			//print_r ($getList[$i]['market']);
+			$market = $getList[$i]['market'];
+			if(strcmp(substr($market, 0, 1), "K")==0){
+				$coin_market = substr($market, 4);
+				echo "<br><pre>";
+				//print_r($coin_market);  
+				echo "<pre>";
 			
-		// 		//'market' => $getList[$i]['market']
-		// 		$data = array(
-		// 			'market' => $coin_market,
-		// 			'name_ko' => $getList[$i]['english_name'],
-		// 			'name_en' => $getList[$i]['korean_name'],
-		// 		);
+				//'market' => $getList[$i]['market']
+				$data = array(
+					'market' => $coin_market,
+					'name_ko' => $getList[$i]['english_name'],
+					'name_en' => $getList[$i]['korean_name'],
+				);
 	
-		// 		if(isset($data) && !empty($data)){
-		// 			$stock = $this->Coin_model->insertStockData($data);
-		// 			$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-		// 		}
+				if(isset($data) && !empty($data)){
+					$stock = $this->Coin_model->insertStockData($data);
+					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+				}
 				
 
-		// 	}	
+			}	
 			
-		// }
+		}
 	
 		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
 
@@ -163,32 +161,6 @@ class Coin extends CB_Controller
 			// print_r($realtime_coin_info);
 			// echo "</pre>";
 	}
-
-	public function coin_search(){
-		$this->load->view('search');
-			//skeyword
-		$data2['skeyword'] = $this->Coin_model->search_coin();
-       	$this->load->view('result', $data2);
-
-
-		}
-
-	public function getCoinList(){
-		
-		$this->load->view('CStock');
-		$getList = $this -> Coin_model->coin_list();
-        
-		print_r($getList);
-
-		$view['getList'] = $getList;
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
-		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-		$this->data = $view;
-		$this->layout = element('layout_skin_file', element('layout', $view));
-		$this->view = element('view_skin_file', element('layout', $view));
-
-		
-		}
 
 	
 }
