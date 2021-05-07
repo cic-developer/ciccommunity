@@ -353,7 +353,7 @@ class Member extends CI_Controller
 			$this->CI->load->model('CIC_member_level_config_model');
 			$where = array(
 				'mlc_level' => $mem_level,
-				'mlc_enable' => 0,
+				'mlc_enable' => 1,
 			);
 			$result = $this->CI->CIC_member_level_config_model->get_one('', '', $where);
 

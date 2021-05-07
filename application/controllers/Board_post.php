@@ -349,7 +349,7 @@ class Board_post extends CB_Controller
 			);
 			$level_where = array(
 				'mlc_level' => element('mem_level', $dbmember),
-				'mlc_enable' => 0,
+				'mlc_enable' => 1,
 			);
 			$view['view']['post']['level'] = $this->CIC_member_level_config_model->get_one('', '', $level_where);
 		} else {
