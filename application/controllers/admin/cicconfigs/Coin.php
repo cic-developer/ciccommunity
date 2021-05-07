@@ -83,12 +83,12 @@ class Coin extends CB_Controller
 			
 
 
-			// //if( $this->Coin_model->market_exist($exist)){	
-			// 	if(isset($data) && !empty($data)){
-			// 		$stock = $this->Coin_model->insertStockData($data);
-			// 		$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-			// 	}
-			// //}		
+			if( $this->Coin_model->market_exist($exist)){	
+				if(isset($data) && !empty($data)){
+					$stock = $this->Coin_model->insertStockData($data);
+					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+				}
+			}		
 		}
         
 
@@ -120,7 +120,7 @@ class Coin extends CB_Controller
 			);
 			foreach($list as $l){
 				if(isset($l) && !empty($l)){
-					//$stock_ = $this->Coin_model->dropdown_list($l);
+					$stock_ = $this->Coin_model->dropdown_list($l);
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 					print_r($stock_);
 				}
