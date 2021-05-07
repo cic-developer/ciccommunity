@@ -5,15 +5,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php echo element('headercontent', element('board', $view)); ?>
 
-<div class="board">
-	<h3><?php echo html_escape(element('board_name', element('board', $view))); ?> 글쓰기</h3>
-	<?php
-	echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
-	echo show_alert_message(element('message', $view), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
-	$attributes = array('class' => 'form-horizontal', 'name' => 'fwrite', 'id' => 'fwrite', 'onsubmit' => 'return submitContents(this)');
-	echo form_open_multipart(current_full_url(), $attributes);
-	?>
+<div id="container-wrap">
+	<div id="contents" class="div-cont">
+		<?php
+			echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
+			echo show_alert_message(element('message', $view), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
+			$attributes = array('class' => 'form-horizontal', 'name' => 'fwrite', 'id' => 'fwrite', 'onsubmit' => 'return submitContents(this)');
+			echo form_open_multipart(current_full_url(), $attributes);
+		?>
 		<input type="hidden" name="<?php echo element('primary_key', $view); ?>"	value="<?php echo element(element('primary_key', $view), element('post', $view)); ?>" />
+		<!-- page start // -->
 		<div class="form-horizontal box-table">
 			<?php if (element('is_post_name', element('post', $view))) { ?>
 				<div class="form-group">
