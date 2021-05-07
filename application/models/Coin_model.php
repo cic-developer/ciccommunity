@@ -165,7 +165,7 @@ class Coin_model extends CB_Model
         //convert json to php array or object
         $array = json_decode($response, true);
         echo "<pre>";
-        print_r($array);
+       // print_r($array);
         echo "</pre>";
        // $data = (object)array($array);
 
@@ -173,7 +173,7 @@ class Coin_model extends CB_Model
        //     $array[$i]['market']
        //     $array[$i]['korea_name']
        //     $array[$i]['english_name']
-            $tempStock = $array[$i]['market']."[".$array[$i]['korea_name']."]<br />";
+            $tempStock = $array[$i]['market']." [".$array[$i]['korean_name']."]<br />";
             //print_r($array[$i]);
             echo $tempStock;
        }

@@ -76,7 +76,7 @@
             </div>
             <?php echo form_close(); ?>
             <div class="paging-wrap">
-				<?php echo element('paging', $view); ?>
+				<?php echo element('paging', element('list', $view)); ?>
 			</div>
         </div>
         <!-- page end // -->
