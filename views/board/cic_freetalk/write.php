@@ -9,6 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$attributes = array('class' => 'form-horizontal', 'name' => 'fwrite', 'id' => 'fwrite', 'onsubmit' => 'return submitContents(this)');
 			echo form_open_multipart(current_full_url(), $attributes);
 		?>
+		<input type="hidden" name="<?php echo element('primary_key', $view); ?>"	value="<?php echo element(element('primary_key', $view), element('post', $view)); ?>" />
 		<!-- page start // -->
 		<div class="board-wrap write">
 			<h3><?php echo html_escape(element('board_name', element('board', $view))); ?> 글쓰기</h3>
