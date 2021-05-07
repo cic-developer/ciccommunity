@@ -161,6 +161,7 @@ class Withdraws extends CB_Controller
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['approve_url'] = admin_url($this->pagedir . '/approve');
 		$view['view']['retire_url'] = admin_url($this->pagedir . '/retire');
+		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
