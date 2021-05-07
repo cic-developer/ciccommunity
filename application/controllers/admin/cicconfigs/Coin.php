@@ -88,9 +88,11 @@ class Coin extends CB_Controller
 				}
 				
 
-			}		
+			}	
+			
 		}
-        PRINT_r(1);
+     	   PRINT_r(1);
+		exit;
 
 		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
 
