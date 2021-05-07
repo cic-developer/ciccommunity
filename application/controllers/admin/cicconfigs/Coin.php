@@ -66,7 +66,7 @@ class Coin extends CB_Controller
 		//print_r($getList);
 		for($i=0; $i<count($getList); $i++){
 			
-			print_r ($getList);
+			print_r ($getList[$i]['market']);
 			//'market' => $getList[$i]['market']
 			$data = array(
 				'market' => $getList[$i]['market'],
