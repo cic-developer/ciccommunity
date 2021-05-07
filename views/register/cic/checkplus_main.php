@@ -15,7 +15,7 @@
     $sitepasswd = "nHmB3aEoHAiK";			// NICE�κ��� �ο����� ����Ʈ �н�����
     
     // Linux = /������/ , Window = D:\\������\\ , D:\������\
-    $cb_encode_path = "/������/CPClient";
+    $cb_encode_path = "/home/bitnami/dev_ciccommunity/CPClient";
 	/*
 	�� cb_encode_path ������ ���� ����  ��������������������������������������������������������������������
 		��� ��μ�����, '/������/����' ���� ������ �ּž� �մϴ�.
@@ -44,8 +44,8 @@
     
     // CheckPlus(��������) ó�� ��, ��� ����Ÿ�� ���� �ޱ����� ���������� ���� http���� �Է��մϴ�.
     // ����url�� ���� �� ������������ ȣ���ϱ� �� url�� �����ؾ� �մϴ�. ex) ���� �� url : http://www.~ ���� url : http://www.~
-    $returnurl = "http://localhost:81/php/scheckplus/php/checkplus_success.php";	// ������ �̵��� URL
-    $errorurl = "http://localhost:81/php/scheckplus/php/checkplus_fail.php";		// ���н� �̵��� URL
+    $returnurl = "https://dev.ciccommunity.com/checkplus_success.php";	// ������ �̵��� URL
+    $errorurl = "https://dev.ciccommunity.com/checkplus_fail.php";		// ���н� �̵��� URL
 	
     // reqseq���� ������������ �� ��� ������ ���Ͽ� ���ǿ� ��Ƶд�.
     
