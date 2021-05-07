@@ -267,7 +267,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<?php } ?>
 			<div class="border_button text-center mt20">
 				<button type="button" class="btn btn-default btn-sm btn-history-back">취소</button>
-				<button type="submit" class="btn btn-success btn-sm">작성완료</button>
+				<button type="submit" class="btn btn-success btn-sm">성완료</button>
 			</div>
 		</div>
 	<?php echo form_close(); ?>
