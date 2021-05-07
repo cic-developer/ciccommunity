@@ -26,10 +26,12 @@
 
     <?php echo $this->managelayout->display_css(); ?>
 
+    <!-- 임의 추가 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    
+    <!-- 임의 추가 -->
+
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery/jquery-1.11.3.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery/jquery.easing.1.3.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery/datepicker.min.js'); ?>"></script>
