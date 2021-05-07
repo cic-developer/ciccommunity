@@ -107,6 +107,16 @@ public function index()
 				if (element('post_category', $val)) {
 					$result['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
 				}
+				if (element('post_image', $val)) {
+					$imagewhere = array(
+						'post_id' => element('post_id', $val),
+						'pfi_is_image' => 1,
+					);
+					$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+					$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+				} else {
+					$result['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+				}
 			}
 		}
 		$view['view']['data'] = $result;
