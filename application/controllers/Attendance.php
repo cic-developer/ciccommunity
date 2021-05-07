@@ -56,8 +56,16 @@ class Attendance extends CB_Controller
 		$total_week = ceil(($total_day + $start_week) / 7); // 3. 현재 달의 총 주차
 		$after_date = 1;
 		$before_date = $total_day_lastmonth - $start_week + 1;
-		
-		$view = array();
+
+		//달력데이터
+		$view = array(
+			'start_week' => $start_week,
+			'total_day' => $total_day,
+			'total_day_lastmonth' => $total_day_lastmonth,
+			'total_week' => $total_week,
+			'after_date' => $after_date,
+			'before_date' => $before_date,
+		);
 		$view['view'] = array();
 
 		// 이벤트가 존재하면 실행합니다
