@@ -173,8 +173,9 @@ class Coin_model extends CB_Model
        //     $array[$i]['market']
        //     $array[$i]['korea_name']
        //     $array[$i]['english_name']
-
-            print_r($array[$i]);
+            $tempStock = $array[$i]['market']."[".$array[$i]['korea_name']."]<br />";
+            //print_r($array[$i]);
+            echo $tempStock;
        }
        
         // foreach($array as $kwr_stocks => $value){

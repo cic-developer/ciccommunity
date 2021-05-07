@@ -61,8 +61,8 @@
                             <td><?php echo html_escape(element('wid_transaction', $result)); ?></td>
                             <td>
                                 <?php echo html_escape(element('wid_state', $result)) != null ? (html_escape(element('wid_state', $result)) == 1 
-                                    ? '<span data-tooltip-text="'.html_escape(element('wid_content', $result)).'"><p class="cblue">승인</p></span' 
-                                    : '<p class="cred">반려</p>' ) 
+                                    ? '<span data-tooltip-text="'.html_escape(element('wid_content', $result)).'"><p class="cblue">승인</p></span>' 
+                                    : '<span data-tooltip-text="'.html_escape(element('wid_content', $result)).'"><p class="cred">반려</p></span>' ) 
                                     : '<p class="text-body">미처리</p>';
                                 ?>
                             </td>
