@@ -26,7 +26,7 @@
 					<ul>
 						<li>
 							<div class="my-info">
-								<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt="">
+								<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', element('post', $view))), 20, 20);?>" alt="">
 								</p>
 								<p class="rtxt"><?php echo html_escape(element('post_nickname', element('post', $view))); ?></p>
 							</div>

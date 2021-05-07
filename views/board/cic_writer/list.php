@@ -287,7 +287,7 @@
                             </div>
                             <div class="abr">
                                 <div class="photo">
-                                    <p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>"
+                                    <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30);?>"
                                             alt=""></p>
                                     <p class="rtxt">코알못259</p>
                                 </div>
