@@ -89,9 +89,9 @@ class Coin extends CB_Controller
 			$kwr_market = $kwr_stocks -> market;
 			if(strcmp(substr($kwr_market, 0, 1), "K")==0){		
 				$view['kwr_stocks'] = $kwr_stocks;
-				//print_r($kwr_stocks);
+				print_r($kwr_stocks->market);
 			}
-			
+
 		}
 				//CREATE COIN LIST FOR ADMIN
 
