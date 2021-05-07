@@ -71,14 +71,7 @@ class Coin_model extends CB_Model
 	}
     
     function insertStockData($data){
-        // if(empty($market)){
-        //     return false;
-        // }
-        // $data = array(
-        //     'market' => $this -> input -> post('market'),
-        //     'name_ko' => $this -> input -> post('name_ko'),
-        //     'name_en' => $this -> input -> post('name_en')
-        // );
+
         if(isset($data) && !empty($data)){
             $result = $this->db->insert('cic_stocks', $data);
             return $result;
@@ -137,9 +130,7 @@ class Coin_model extends CB_Model
 
     function get_coinlist(){
         $curl = curl_init();
-        // $market = "KRW-BTC";
-        //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-        //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://api.upbit.com/v1/market/all",
             CURLOPT_RETURNTRANSFER => true,
@@ -164,27 +155,6 @@ class Coin_model extends CB_Model
         //convert json to php array or object
         $array = json_decode($response, true);
         return $array;
-        // for($i = 0; $i < count($array); $i++){
-        //     $kwr_market = $array[$i]['market'];
-        //     print_r($kwr_market);
-        //     if(strcmp(substr($kwr_market, 0, 1), "K")==0){
-                
-        //        // print_r($array[$i]);
-        //         
-        //     }
-        // }    
-
-        // foreach($array as $kwr_stocks => $value){
-        //     print_r($kwr_market);
-        //     $tempStock = $kwr_stocks."[".$value."]";
-		// 	echo $tempStock;
-        //     //$kwr_market = $value['market'];
-            
-		// 	if(strcmp(substr($kwr_market, 0, 3), "K")==0){
-        //         return $kwr_stocks;
-		// 	}
-
-		// }
     
     }
 
