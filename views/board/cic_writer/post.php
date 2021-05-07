@@ -46,30 +46,23 @@
 						?>
 						<div class="vp-point">
 							<ul>
-								<li><a href="#n" class="up">50,151</a></li>
-								<li><a href="#n" class="down">152,358</a></li>
+								<li><a href="#n" class="up"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>
+								<li><a href="#n" class="down"><?php echo number_format(element('post_dislike_point', element('post', $view))); ?></a></li>
 							</ul>
 						</div>
 						
 					</div>
 				</div>
 				<div class="cons">
+					<!-- 본문 내용 시작 -->
 					<div class="txt">
-						<div class="img first"><img src="<?php echo base_url('assets/images/record-img.jpg')?>" alt=""
-								class="natural-img" onload="javascript:myWidth(this);" style="max-width: 727px;"></div>
-						<p>다들 얘기하는게 현재로서는 정황을 파악해야 하는데, 이게 엄청나게 힘든 일이다.</p>
-
-						<p class="mg20t">처벌은 가볍게 끝날 확률이 높다고들 하자나요. <br>100억에 50억 대출인데, 원금상환 들어오면 지들이 어찌 버팁니까.</p>
-
-						<p class="mg20t">다들 피박쓰고 나오게 만들어야, </p>
-
-						<p class="mg20t">법적인 처벌도 진행하고, 가장 중요한 이슈인 투기자들의 쩐을 아예, </p>
-						<p class="mg20t">박살내는게 더 손쉬울듯 하네요.</p>
+						<?php echo element('content', element('post', $view)); ?>
 					</div>
+					<!-- 본문 내용 끝 -->
 					<div class="vp-point">
 						<ul>
-							<li><a href="#n" class="up">50,151</a></li>
-							<li><a href="#n" class="down">152,358</a></li>
+							<li><a href="#n" class="up"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>
+							<li><a href="#n" class="down"><?php echo number_format(element('post_dislike_point', element('post', $view))); ?></a></li>
 						</ul>
 					</div>
 				</div>

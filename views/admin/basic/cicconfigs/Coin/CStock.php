@@ -47,40 +47,33 @@
 						</ul>
 				</div>
 				<div class='box-table'>
-				
-					
 					<form>
-					<?php	
-					foreach($realtime_coin_info as $coin_info){
-						echo '
 							<div class="form-group col-md-2">
 								<label for="inputCity">Market name</label>
-								<input type="text" class="form-control" id="myText" value = "'.$realtime_coin_info['market'].'">
+								<input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['market']; ?>'>
 							</div>
 
 							<div class="form-group col-md-2">
 								<label for="inputCity"> name in Korean</label>
-								<input type="text" class="form-control" id="myText" value = "'.$realtime_coin_info['market'].'">
+								<input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['market']; ?>'>
 							</div>
 
 							<div class="form-group col-md-2">
 								<label for="inputState">high-price</label>
-								<input type="text" class="form-control" id="myText" value = "'.$realtime_coin_info['high_price'].'">
+								<input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['high_price']; ?>'>
 							</div>
 							<div class="form-group col-md-2">
 								<label for="inputZip">low-price</label>
-								<input type="text" class="form-control" id="myText" value = "'.$realtime_coin_info['low_price'].'">
+								<input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['low_price']; ?>'>
 							</div>
 							<div class="form-group col-md-2">
 								<label for="inputZip">trade-price</label>
-								<input type="text" class="form-control" id="myText" value = "'.$realtime_coin_info['trade_price'].'">
+								<input type="text" class="form-control" id="myText" value = '<?php echo $realtime_coin_info['trade_price']; ?>'>
 							</div>
 							<div class="btn-group pull-right" role="group" aria-label="...">
 								<button type="submit" class="btn btn-success btn-sm">update</button>        
-							</div>';
-						}?>		
+							</div>
 					</form>
-				
 
 						<?php echo form_close(); ?>
 		</div>
