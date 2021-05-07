@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css'); ?>
-
-<?php echo element('headercontent', element('board', $view)); ?>
 
 <div id="container-wrap">
 	<div id="contents" class="div-cont">
@@ -97,10 +94,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<button type="submit" class="enter-btn"><span>등록하기</span></button>
 			</div>
 		</div>
-	<?php echo form_close(); ?>
+		<?php echo form_close(); ?>
+	</div>
 </div>
-
-<?php echo element('footercontent', element('board', $view)); ?>
 
 
 <script type="text/javascript">
