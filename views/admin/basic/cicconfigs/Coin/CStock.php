@@ -40,7 +40,7 @@
 
 			</form>	
 
-            <div class ='box'>
+            <div class ='box-table'>
 				<div class="box-header">
 						<ul class="nav nav-tabs">
 							<li role="presentation" class="active">update Coin stock</li>
