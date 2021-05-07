@@ -69,7 +69,7 @@
                 </table>
             </div>
             <?php echo form_close(); ?>
-            <div class="paging-wrap">
+            <div class="box-info">
 				<?php echo element('paging', $view); ?>
 			</div>
         </div>
