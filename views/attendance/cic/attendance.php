@@ -1,4 +1,6 @@
-
+<?php
+	$_date = $this->input->get('date');
+?>
 <div id="container-wrap">
     <div id="contents" class="div-cont">
         <!-- page start // -->

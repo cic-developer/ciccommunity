@@ -180,7 +180,7 @@ class Coin_model extends CB_Model
 		// 	echo $tempStock;
         //     //$kwr_market = $value['market'];
             
-		// 	if(strcmp(substr($kwr_market, 0, 1), "K")==0){
+		// 	if(strcmp(substr($kwr_market, 0, 3), "K")==0){
         //         return $kwr_stocks;
 		// 	}
 
