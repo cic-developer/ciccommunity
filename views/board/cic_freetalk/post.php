@@ -43,12 +43,12 @@
 							print_r(element('level',element('post', $view)));
 							if(element('mlc_level',element('level',element('post', $view))) >= 0){
 						?>
-							<p>
-								4 진정한 흑우
+							<p style="color:#2c3e50;">
+								<?=element('mlc_level',element('level',element('post', $view))).' '.element('mlc_title',element('level',element('post', $view))) ?>
 							</p>
 						<?php  } else { ?>
 							<p>
-								4 진정한 흑우
+								<?=element('mlc_level',element('level',element('post', $view))).' '.element('mlc_title',element('level',element('post', $view))) ?>
 							</p>
 						<?php 
 							}
