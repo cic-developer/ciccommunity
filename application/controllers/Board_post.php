@@ -1440,79 +1440,286 @@ class Board_post extends CB_Controller
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;
 		}
-		$result = $this->Postmodel
-			->get_popularpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		$result = $this->Post_model
+			->get_popularpost_list($per_page, $offset, $where, $category_id, $findex, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
-		
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
-				$result['list'][$key]['post_display_name'] = display_username(
-					element('post_userid', $val),
-					element('post_nickname', $val)
-				);
-				$result['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-				$result['list'][$key]['num'] = $list_num--;
-				if ($board) {
-					$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-					$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
-				}
-				$result['list'][$key]['category'] = '';
-				if (element('post_category', $val)) {
-					$result['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
-				}
-				if (element('post_image', $val)) {
-					$imagewhere = array(
-						'post_id' => element('post_id', $val),
-						'pfi_is_image' => 1,
-					);
-					$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-					$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+				$result['list'][$key]['post_url'] = post_url(element('brd_key', $board), element('post_id', $val));
+
+				$result['list'][$key]['meta'] = $meta
+					= $this->Post_meta_model
+					->get_all_meta(element('post_id', $val));
+
+				if ($this->cbconfig->get_device_view_type() === 'mobile') {
+					$result['list'][$key]['title'] = element('mobile_subject_length', $board)
+						? cut_str(element('post_title', $val), element('mobile_subject_length', $board))
+						: element('post_title', $val);
 				} else {
-					$result['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+					$result['list'][$key]['title'] = element('subject_length', $board)
+						? cut_str(element('post_title', $val), element('subject_length', $board))
+						: element('post_title', $val);
+				}
+				if (element('post_del', $val)) {
+					$result['list'][$key]['title'] = '게시물이 삭제 되었습니다';
+				}
+				$is_blind = (element('blame_blind_count', $board) > 0 && element('post_blame', $val) >= element('blame_blind_count', $board)) ? true : false;
+				if ($is_blind) {
+					$result['list'][$key]['title'] = '신고가 접수된 게시글입니다.';
+				}
+
+				if (element('mem_id', $val) >= 0) {
+					$result['list'][$key]['display_name'] = display_username(
+						element('post_userid', $val),
+						element('post_nickname', $val),
+						($use_sideview_icon ? element('mem_icon', $val) : ''),
+						($use_sideview ? 'Y' : 'N')
+					);
+				} else {
+					$result['list'][$key]['display_name'] = '익명사용자';
+				}
+
+				$result['list'][$key]['display_datetime'] = display_datetime(
+					element('post_datetime', $val),
+					$list_date_style,
+					$list_date_style_manual
+				);
+				$result['list'][$key]['category'] = '';
+				if (element('use_category', $board) && element('post_category', $val)) {
+					$result['list'][$key]['category']
+						= $this->Board_category_model
+						->get_category_info(element('brd_id', $val), element('post_category', $val));
+				}
+				if ($param->output()) {
+					$result['list'][$key]['post_url'] .= '?' . $param->output();
+				}
+				$result['list'][$key]['num'] = $list_num--;
+				$result['list'][$key]['is_hot'] = false;
+
+				$hot_icon_day = ($this->cbconfig->get_device_view_type() === 'mobile')
+					? element('mobile_hot_icon_day', $board)
+					: element('hot_icon_day', $board);
+
+				$hot_icon_hit = ($this->cbconfig->get_device_view_type() === 'mobile')
+					? element('mobile_hot_icon_hit', $board)
+					: element('hot_icon_hit', $board);
+
+				if ($hot_icon_day && ( ctimestamp() - strtotime(element('post_datetime', $val)) <= $hot_icon_day * 86400)) {
+					if ($hot_icon_hit && $hot_icon_hit <= element('post_hit', $val)) {
+						$result['list'][$key]['is_hot'] = true;
+					}
+				}
+				$result['list'][$key]['is_new'] = false;
+				$new_icon_hour = ($this->cbconfig->get_device_view_type() === 'mobile')
+					? element('mobile_new_icon_hour', $board)
+					: element('new_icon_hour', $board);
+
+				if ($new_icon_hour && ( ctimestamp() - strtotime(element('post_datetime', $val)) <= $new_icon_hour * 3600)) {
+					$result['list'][$key]['is_new'] = true;
+				}
+
+				$result['list'][$key]['title_color'] = ($use_subject_style && element('post_title_color', $meta)) ? element('post_title_color', $meta) : '';
+				$result['list'][$key]['title_font'] = ($use_subject_style && element('post_title_font', $meta)) ? element('post_title_font', $meta) : '';
+				$result['list'][$key]['title_bold'] = ($use_subject_style && element('post_title_bold', $meta)) ? element('post_title_bold', $meta) : '';
+				$result['list'][$key]['is_mobile'] = (element('post_device', $val) === 'mobile') ? true : false;
+
+				$result['list'][$key]['thumb_url'] = '';
+				$result['list'][$key]['origin_image_url'] = '';
+				if (element('use_gallery_list', $board)) {
+					if (element('post_image', $val)) {
+						$filewhere = array(
+							'post_id' => element('post_id', $val),
+							'pfi_is_image' => 1,
+						);
+						$file = $this->Post_file_model
+							->get_one('', '', $filewhere, '', '', 'pfi_id', 'ASC');
+						$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), $gallery_image_width, $gallery_image_height);
+						$result['list'][$key]['origin_image_url'] = thumb_url('post', element('pfi_filename', $file));
+					} else {
+						$thumb_url = get_post_image_url(element('post_content', $val), $gallery_image_width, $gallery_image_height);
+						$result['list'][$key]['thumb_url'] = $thumb_url
+							? $thumb_url
+							: thumb_url('', '', $gallery_image_width, $gallery_image_height);
+
+						$result['list'][$key]['origin_image_url'] = $thumb_url;
+					}
 				}
 			}
 		}
-		$view['view']['data'] = $result;
 
-		$select = 'brd_id, brd_name';
-		$view['view']['boardlist'] = $this->Board_model->get_board_list();
+		$return['data'] = $result;
+		$return['notice_list'] = $noticeresult;
+		if (empty($from_view)) {
+			$board['headercontent'] = ($this->cbconfig->get_device_view_type() === 'mobile')
+				? element('mobile_header_content', $board)
+				: element('header_content', $board);
+		}
+		$board['footercontent'] = ($this->cbconfig->get_device_view_type() === 'mobile')
+			? element('mobile_footer_content', $board)
+			: element('footer_content', $board);
+
+		$board['cat_display_style'] = ($this->cbconfig->get_device_view_type() === 'mobile')
+			? element('mobile_category_display_style', $board)
+			: element('category_display_style', $board);
+
+		$return['board'] = $board;
+
+		$return['point_info'] = '';
+		if ($this->cbconfig->item('use_point')
+			&& element('use_point', $board)
+			&& element('use_point_info', $board)) {
+
+			$point_info = '';
+			if (element('point_write', $board)) {
+				$point_info .= '원글작성 : ' . element('point_write', $board) . '<br />';
+			}
+			if (element('point_comment', $board)) {
+				$point_info .= '댓글작성 : ' . element('point_comment', $board) . '<br />';
+			}
+			if (element('point_fileupload', $board)) {
+				$point_info .= '파일업로드 : ' . element('point_fileupload', $board) . '<br />';
+			}
+			if (element('point_filedownload', $board)) {
+				$point_info .= '파일다운로드 : ' . element('point_filedownload', $board) . '<br />';
+			}
+			if (element('point_filedownload_uploader', $board)) {
+				$point_info .= '파일다운로드시업로더에게 : ' . element('point_filedownload_uploader', $board) . '<br />';
+			}
+			if (element('point_read', $board)) {
+				$point_info .= '게시글조회 : ' . element('point_read', $board) . '<br />';
+			}
+			if (element('point_post_like', $board)) {
+				$point_info .= '원글추천함 : ' . element('point_post_like', $board) . '<br />';
+			}
+			if (element('point_post_dislike', $board)) {
+				$point_info .= '원글비추천함 : ' . element('point_post_dislike', $board) . '<br />';
+			}
+			if (element('point_post_liked', $board)) {
+				$point_info .= '원글추천받음 : ' . element('point_post_liked', $board) . '<br />';
+			}
+			if (element('point_post_disliked', $board)) {
+				$point_info .= '원글비추천받음 : ' . element('point_post_disliked', $board) . '<br />';
+			}
+			if (element('point_comment_like', $board)) {
+				$point_info .= '댓글추천함 : ' . element('point_comment_like', $board) . '<br />';
+			}
+			if (element('point_comment_dislike', $board)) {
+				$point_info .= '댓글비추천함 : ' . element('point_comment_dislike', $board) . '<br />';
+			}
+			if (element('point_comment_liked', $board)) {
+				$point_info .= '댓글추천받음 : ' . element('point_comment_liked', $board) . '<br />';
+			}
+			if (element('point_comment_disliked', $board)) {
+				$point_info .= '댓글비추천받음 : ' . element('point_comment_disliked', $board) . '<br />';
+			}
+
+			$return['point_info'] = $point_info;
+		}
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['step2'] = Events::trigger('list_step2', $eventname);
+
 
 		/**
 		 * primary key 정보를 저장합니다
 		 */
-		$view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
+		$return['primary_key'] = $this->Post_model->primary_key;
+
+		$highlight_keyword = '';
+		if ($skeyword) {
+			if ( ! $this->session->userdata('skeyword_' . $skeyword)) {
+				$sfieldarray = array(
+					'post_title',
+					'post_content',
+					'post_both',
+				);
+				if (in_array($sfieldchk, $sfieldarray)) {
+					$this->load->model('Search_keyword_model');
+					$searchinsert = array(
+						'sek_keyword' => $skeyword,
+						'sek_datetime' => cdate('Y-m-d H:i:s'),
+						'sek_ip' => $this->input->ip_address(),
+						'mem_id' => $mem_id,
+					);
+					$this->Search_keyword_model->insert($searchinsert);
+					$this->session->set_userdata(
+						'skeyword_' . $skeyword,
+						1
+					);
+				}
+			}
+			$key_explode = explode(' ', $skeyword);
+			if ($key_explode) {
+				foreach ($key_explode as $seval) {
+					if ($highlight_keyword) {
+						$highlight_keyword .= ',';
+					}
+					$highlight_keyword .= '\'' . html_escape($seval) . '\'';
+				}
+			}
+		}
+		$return['highlight_keyword'] = $highlight_keyword;
 
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['base_url'] = board_url($brd_key) . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
+		$config['first_link'] = FALSE;
+		$config['last_link'] = FALSE;
+		$config['next_link'] = '다음';
+		$config['prev_link'] = '이전';
+		if ($this->cbconfig->get_device_view_type() === 'mobile') {
+			$config['num_links'] = element('mobile_page_count', $board)
+				? element('mobile_page_count', $board) : 3;
+		} else {
+			$config['num_links'] = element('page_count', $board)
+				? element('page_count', $board) : 5;
+		}
 		$this->pagination->initialize($config);
-		$view['view']['paging'] = $this->pagination->create_links();
-		$view['view']['page'] = $page;
+		$return['paging'] = $this->pagination->create_links();
+		$return['page'] = $page;
 
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('post_title' => '제목', 'post_content' => '내용', 'post_username' => '실명', 'post_nickname' => '닉네임', 'post_email' => '이메일', 'post_homepage' => '홈페이지', 'post_datetime' => '작성일', 'post_ip' => 'IP');
-		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
-		$view['view']['search_option'] = search_option($search_option, $sfield);
-		$view['view']['listall_url'] = admin_url($this->pagedir);
-		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listdelete/?' . $param->output());
-		$view['view']['list_trash_url'] = admin_url($this->pagedir . '/listtrash/?' . $param->output());
+		$search_option = array(
+			'post_title' => '제목',
+			'post_content' => '내용'
+		);
+		$return['search_option'] = search_option($search_option, $sfield);
+		if ($skeyword) {
+			$return['list_url'] = board_url(element('brd_key', $board));
+			$return['search_list_url'] = board_url(element('brd_key', $board) . '?' . $param->output());
+		} else {
+			$return['list_url'] = board_url(element('brd_key', $board) . '?' . $param->output());
+			$return['search_list_url'] = '';
+		}
 
-		// 이벤트가 존재하면 실행합니다
-		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+		$check = array(
+			'group_id' => element('bgr_id', $board),
+			'board_id' => element('brd_id', $board),
+		);
+		$can_write = $this->accesslevel->is_accessable(
+			element('access_write', $board),
+			element('access_write_level', $board),
+			element('access_write_group', $board),
+			$check
+		);
 
-		/**
-		 * 어드민 레이아웃을 정의합니다
-		 */
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'index');
-		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-		$this->data = $view;
-		$this->layout = element('layout_skin_file', element('layout', $view));
-		$this->view = element('view_skin_file', element('layout', $view));
+		$return['write_url'] = '';
+		if ($can_write === true) {
+			$return['write_url'] = write_url($brd_key);
+		} elseif ($this->cbconfig->get_device_view_type() !== 'mobile' && element('always_show_write_button', $board)) {
+			$return['write_url'] = 'javascript:alert(\'비회원은 글쓰기 권한이 없습니다.\\n\\n회원이시라면 로그인 후 이용해 보십시오.\');';
+		} elseif ($this->cbconfig->get_device_view_type() === 'mobile' && element('mobile_always_show_write_button', $board)) {
+			$return['write_url'] = 'javascript:alert(\'비회원은 글쓰기 권한이 없습니다.\\n\\n회원이시라면 로그인 후 이용해 보십시오.\');';
+		}
+
+		$return['list_delete_url'] = site_url('postact/listdelete/' . $brd_key . '?' . $param->output());
+
+		return $return;
 	}
 
 
