@@ -26,7 +26,7 @@
 								<select name="selected_market" id="doc_layout" class="form-control">
 								<?php
 								foreach($getStock as $stoks){
-									echo '<option value="'.$stoks->name_ko.'">'.$stoks->name_ko.'</option>';							
+									echo '<option value="'.$stoks->name_ko.'">'.$stoks->name_ko.' '.$stoks->market.'</option>';							
 								
 								}?>	
 								</select>
