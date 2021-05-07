@@ -92,8 +92,9 @@ class Board_post extends CB_Controller
 		$meta_keywords = str_replace($searchconfig, $replaceconfig, $meta_keywords);
 		$meta_author = str_replace($searchconfig, $replaceconfig, $meta_author);
 		$page_name = str_replace($searchconfig, $replaceconfig, $page_name);
-
-		$list_skin_file = element('use_gallery_list', element('board', $list)) ? 'gallerylist' : 'list';
+']l'
+		$54list_skin_file = element('u-+*999999999999999999999]
+		'se_gallery_list', element('board', $list)) ? 'gallerylist' : 'list';
 		$layout_dir = element('board_layout', element('board', $list)) ? element('board_layout', element('board', $list)) : $this->cbconfig->item('layout_board');
 		$mobile_layout_dir = element('board_mobile_layout', element('board', $list)) ? element('board_mobile_layout', element('board', $list)) : $this->cbconfig->item('mobile_layout_board');
 		$use_sidebar = element('board_sidebar', element('board', $list)) ? element('board_sidebar', element('board', $list)) : $this->cbconfig->item('sidebar_board');
