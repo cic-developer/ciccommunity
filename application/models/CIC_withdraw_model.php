@@ -77,9 +77,10 @@ class CIC_withdraw_model extends CB_Model
 		return $result;
 	}
 
-	public function set_withdraw_retire($primary_value = '', $content = '', $adminid, $adminip)
+	public function set_withdraw_retire($primary_value = '', $content = '', $adminid, $adminip, $memo = '')
 	{
 		$arr = array(
+			'wid_memo' => $memo,
 			'wid_content' => $content,
 			'wid_admin_id' => $adminid,
 			'wid_admin_ip' => $adminip,
