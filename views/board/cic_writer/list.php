@@ -265,6 +265,10 @@
             <div class="gap60"></div>
             <div class="list vimg vp">
                 <ul>
+                    <?php
+                        if (element('list', element('data', element('list', $view)))) {
+                            foreach (element('list', element('data', element('list', $view))) as $result) {
+                    ?>
                     <li>
                         <a href="<?php echo base_url('post/3')?>">
                             <div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt="">
@@ -275,7 +279,7 @@
                                     <p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ...
                                     </p>
                                     <p class="ctxt">
-                                        <span>블록미디어</span>
+                                        <span><?php echo element('post_nickname', $result); ?></span>
                                         <span>02:18</span>
                                         <span>조회 82</span>
                                     </p>
@@ -291,6 +295,10 @@
                             </div>
                         </a>
                     </li>
+                    <?php
+                        }
+                    }
+                    ?>
                 </ul>
                 <script>
                     $(function () {
