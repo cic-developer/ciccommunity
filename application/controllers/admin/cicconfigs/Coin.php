@@ -96,7 +96,6 @@ class Coin extends CB_Controller
 
 		$getStock = $this -> Coin_model->getstockData();
 		$view['getStock'] = $getStock;
-        print_r(1);
 		//CREATE COIN LIST FOR ADMIN
 
 		$this->load->library('form_validation');
