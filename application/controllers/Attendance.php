@@ -59,13 +59,14 @@ class Attendance extends CB_Controller
 
 		//달력데이터
 		$view = array(
-			'start_week' => $start_week,
-			'total_day' => $total_day,
-			'total_day_lastmonth' => $total_day_lastmonth,
-			'total_week' => $total_week,
-			'after_date' => $after_date,
-			'before_date' => $before_date,
+			'start_week' 			=> $start_week,
+			'total_day' 			=> $total_day,
+			'total_day_lastmonth' 	=> $total_day_lastmonth,
+			'total_week' 			=> $total_week,
+			'after_date' 			=> $after_date,
+			'before_date' 			=> $before_date,
 		);
+		
 		$view['view'] = array();
 
 		// 이벤트가 존재하면 실행합니다

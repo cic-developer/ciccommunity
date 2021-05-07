@@ -18,8 +18,8 @@ class Coin_model extends CB_Model
     /**
 	 * 테이블명
 	 */
-	public $_table = 'cic_stocks';
-    public $primary_key = 'stk_id';
+	public $_table = 'cic_coin_stock';
+    public $primary_key = 'coin_idx';
 
     function __construct()
     {
@@ -35,7 +35,7 @@ class Coin_model extends CB_Model
 	{
 
         
-        $query = $this->db->get('cic_stocks');
+        $query = $this->db->get('cic_coin_stock');
         // $query = $this->db->get('cic_stocks');
         $market_ = $query->result();
         
@@ -73,20 +73,20 @@ class Coin_model extends CB_Model
     function insertStockData($data){
 
         if(isset($data) && !empty($data)){
-            $result = $this->db->insert('cic_stocks', $data);
+            $result = $this->db->insert('cic_coin_stock', $data);
             return $result;
         }
     } 
 
 
     function getstockData(){
-        $query = $this->db->get('cic_stocks');
+        $query = $this->db->get('ccic_coin_stock');
         return $query->result(); 
     }
 
     function getonerow(){
         $this->db->where('stk_id', $id);
-        $query = $this->db->get('cic_stocks');
+        $query = $this->db->get('cic_coin_stock');
         return $query->row();
     }
 
@@ -118,9 +118,9 @@ class Coin_model extends CB_Model
 
     function market_exist($market){
         $this->db->where('market',$market);
-        $query = $this->db->get('cic_stocks');
+        $query = $this->db->get('cic_coin_stock');
         if ($query->num_rows() > 0){
-            $result = $this->db->insert('cic_stocks', $data);
+            $result = $this->db->insert('cic_coin_stock', $data);
             return $result;
         }
         else{
