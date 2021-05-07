@@ -38,6 +38,9 @@
 						<li>조회 : <?php echo number_format(element('post_hit', element('post', $view))); ?> </li>
 					</ul>
 					<div class="abr">
+						<?php 
+							print_r(element('level',element('post', $view)));
+						?>
 						<p>
 							4 진정한 흑우
 						</p>
