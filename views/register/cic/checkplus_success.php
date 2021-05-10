@@ -47,13 +47,10 @@
             $ciphertime = `$cb_encode_path CTS $sitecode $sitepasswd $enc_data`;	// 암호화된 결과 데이터 검증 (복호화한 시간획득)
         
             $requestnumber = GetValue($plaindata , "REQ_SEQ");
-
-            echo '<p>fdfsf</p>';
-            exit;
             $responsenumber = GetValue($plaindata , "RES_SEQ");
             $authtype = GetValue($plaindata , "AUTH_TYPE");
             $name = GetValue($plaindata , "NAME");
-            //$name = GetValue($plaindata , "UTF8_NAME"); //charset utf8 사용시 주석 해제 후 사용
+            // $name = GetValue($plaindata , "UTF8_NAME"); //charset utf8 사용시 주석 해제 후 사용
             $birthdate = GetValue($plaindata , "BIRTHDATE");
             $gender = GetValue($plaindata , "GENDER");
             $nationalinfo = GetValue($plaindata , "NATIONALINFO");	//내/외국인정보(사용자 매뉴얼 참조)
@@ -89,8 +86,6 @@
     function GetValue($str , $name) 
     {
         
-        echo '<p>fdfs22ss2f</p>';
-        exit;
         $pos1 = 0;  //length의 시작 위치
         $pos2 = 0;  //:의 위치
 

@@ -98,7 +98,7 @@ class Main extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
-	public function index()
+	public function popularpost()
 	{
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_board_post_index';
