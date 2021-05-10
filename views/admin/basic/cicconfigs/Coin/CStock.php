@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				echo "<tr>";
 				echo "<td>".$sno."</td>";
 				echo "<td><a href='".$stoks->market."' target='_blank'> ".$stoks->market."</a></td>";
-				echo "<td><a href='".$stoks->name_ko."' target='_blank'> ".$stoks->market. " - " .$stoks->name_ko."</a></td>";
+				echo "<td><a href='".$stoks->name_ko."' target='_blank'> ".$stoks->name_ko."</a></td>";
 				//echo "<td><button type="button" class="btn btn-info">Info</button></td>";
 				echo "</tr>";
 				$sno++;
