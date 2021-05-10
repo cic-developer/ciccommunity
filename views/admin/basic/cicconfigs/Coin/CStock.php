@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			//$content = substr($data['content'],0, 180)." ...";
 			echo "<tr>";
 			echo "<td>".$sno."</td>";
-			echo "<td><a href='".$stoks->name_ko."' target='_blank'>".$stoks->name_ko."</a></td>";
+			echo "<td><a href='".$stoks->name_ko."' target='_blank'> ".$stoks->name_ko."</a></td>";
 			//echo "<td>".$content."</td>";
 			echo "</tr>";
 			$sno++;
