@@ -60,11 +60,6 @@ class Register extends CB_Controller
 			
 			$view['view']['success'] = $this->checkplus->success($this->input->get("EncodeData"));
 		}
-		print_r($this->input->get("EncodeData"));
-		return;
-		
-		// print_f($view['view']['success']);
-		// return;
 
 		if ($this->member->is_member()
 			&& ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
