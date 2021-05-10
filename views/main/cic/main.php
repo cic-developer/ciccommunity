@@ -139,8 +139,8 @@
                         <div class="list">
 						<tbody>
 						<?php
-						if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result) {
+						if (element('view', $view)) {
+							foreach (element('view', $view) as $result) {
 						?>
 							<tr>
 								<td><?php echo number_format(element('num', $result)); ?></td>
@@ -157,7 +157,7 @@
 						<?php
 							}
 						}
-						if ( ! element('list', element('data', $view))) {
+						if ( ! element('view', $view)) {
 						?>
 							<tr>
 								<td colspan="12" class="nopost">자료가 없습니다</td>
