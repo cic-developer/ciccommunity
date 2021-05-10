@@ -9,6 +9,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Checkplus_main
 {
+	function __construct()
+	{
+		parent::__construct();
+
+		/**
+		 * 라이브러리를 로딩합니다
+		 */
+		$this->load->library(array('pagination', 'querystring'));
+	}
 
 	public function getCheckPlus()
 	{
