@@ -17,7 +17,7 @@
     // Linux = /절대경로/ , Window = D:\\절대경로\\ , D:\절대경로\
     $cb_encode_path = "/home/bitnami/dev_ciccommunity/CPClient_64bit";
 		
-    $enc_data = $_REQUEST("EncodeData");		// 암호화된 결과 데이타
+    $enc_data = $this->input->get("EncodeData");		// 암호화된 결과 데이타
 
 
 		//////////////////////////////////////////////// 문자열 점검///////////////////////////////////////////////
@@ -60,7 +60,7 @@
 			$mobileno = GetValue($plaindata , "MOBILE_NO");
             $mobileco = GetValue($plaindata , "MOBILE_CO");
 
-            if(strcmp($_SESSION["REQ_SEQ"], $requestnumber) != 0)
+            if(strcmp($this->session->userdata('REQ_SEQ'), $requestnumber) != 0)
             {
             	echo "세션값이 다릅니다. 올바른 경로로 접근하시기 바랍니다.<br>";
                 $requestnumber = "";
