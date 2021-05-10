@@ -10,7 +10,22 @@
 		한마디
 		<input type="text" name="memo" value="<?php echo html_escape(element(0, element('default_memo', $view))); ?>" id="att_memo" class="input" onClick="this.value='';" />
 		<button type="button" name="change_memo" class="btn btn-default" id="change_memo"><span class="fa fa-refresh"></span></button>
-		<button type="submit" name="submit" class="btn btn-success" id="add_attendance"><span>출첵하기</span></button>
+		<button type="submit" name="submit" class="btn btn-success" id="add_attendance"><span style="border: 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+    line-height: 40px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: #fff;
+    background: #333;
+    border-radius: 55px;
+    text-align: center;
+    -webkit-transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+    -moz-transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+    -o-transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+    transition: box-shadow 0.3s ease-out, background 0.3s ease-out;">출첵하기</span></button>
 	<?php echo form_close(); ?>
 	<button type="button" name="view_policy" class="btn btn-default btn-xs pull-right view_policy" >포인트정책보기</button>
 </div>

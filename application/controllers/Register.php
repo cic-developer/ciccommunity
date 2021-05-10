@@ -56,11 +56,8 @@ class Register extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		$view['view']['main'] = $this->checkplus->main();
-		if(!$view['view']['main']){
-			
-			$view['view']['success'] = $this->checkplus->success($view['view']['main']);
-
-			return;
+		if($this->input->get("EncodeData")){
+			$view['view']['success'] = $this->checkplus->success();
 		}
 		print_r($view['view']['main']);
 		
