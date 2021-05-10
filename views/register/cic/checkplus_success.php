@@ -49,8 +49,8 @@
             $requestnumber = GetValue($plaindata , "REQ_SEQ");
             $responsenumber = GetValue($plaindata , "RES_SEQ");
             $authtype = GetValue($plaindata , "AUTH_TYPE");
-            $name = GetValue($plaindata , "NAME");
-            // $name = GetValue($plaindata , "UTF8_NAME"); //charset utf8 사용시 주석 해제 후 사용
+            // $name = GetValue($plaindata , "NAME");
+            $name = GetValue($plaindata , "UTF8_NAME"); //charset utf8 사용시 주석 해제 후 사용
             $birthdate = GetValue($plaindata , "BIRTHDATE");
             $gender = GetValue($plaindata , "GENDER");
             $nationalinfo = GetValue($plaindata , "NATIONALINFO");	//내/외국인정보(사용자 매뉴얼 참조)
@@ -147,7 +147,7 @@
         </tr>
                 <tr>
             <td>성명</td>
-            <td><?= $name ?></td>
+            <td><?= urldecode($name) ?></td>
         </tr>
                 <tr>
             <td>생년월일(YYYYMMDD)</td>
