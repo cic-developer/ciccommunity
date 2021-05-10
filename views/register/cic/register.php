@@ -286,7 +286,7 @@
 							</form>
 						</div>
 					</div>
-				</div>
+				</div><?php echo element(element('enc_data', $view)); ?>
 			</div>
 			<?php echo form_close(); ?>
 		</div>
