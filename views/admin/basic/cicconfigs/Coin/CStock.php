@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<table border='1' width='100%' style='border-collapse: collapse;'>
 		<tr>
 			<th>S.no</th>
-			<th>Title</th>
+			<th>Market</th>
 			<th>Content</th>
 		</tr>
 		<?php 
