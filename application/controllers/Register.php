@@ -198,7 +198,7 @@ class Register extends CB_Controller
 
 		$view['view']['success'] = $this->checkplus->success();
 
-		print_f($view['view']['success']);
+		print_r($view['view']['success']);
 		return;
 
 		if ($this->member->is_member()
