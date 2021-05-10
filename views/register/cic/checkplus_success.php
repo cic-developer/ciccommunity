@@ -124,14 +124,14 @@
     <br>
     <br>@
     <br>
-    <?= $enc_data ?>
+    <?php $enc_data ?>
     <br>    
     <br>@
     <br>
     <table border=1>
         <tr>
             <td>복호화한 시간</td>
-            <td><?= $ciphertime ?> (YYMMDDHHMMSS)</td>
+            <td><?php $ciphertime ?> (YYMMDDHHMMSS)</td>
         </tr>
         <tr>
             <td>요청 번호</td>
