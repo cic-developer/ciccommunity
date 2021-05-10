@@ -17,7 +17,8 @@
     // Linux = /절대경로/ , Window = D:\\절대경로\\ , D:\절대경로\
     $cb_encode_path = "/home/bitnami/dev_ciccommunity/CPClient_64bit";
 		
-    $enc_data = $_REQUEST["EncodeData"];		// 암호화된 결과 데이타
+    // $enc_data = $_REQUEST["EncodeData"];		// 암호화된 결과 데이타
+    $enc_data = $_GET["EncodeData"];		// 암호화된 결과 데이타
 
 
 		//////////////////////////////////////////////// 문자열 점검///////////////////////////////////////////////
