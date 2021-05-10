@@ -591,7 +591,7 @@ class Post_model extends CB_Model
 
 	public function get_popularpost_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
-
+		exit;
 		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
 			$orderby = 'post_like_point desc';
 		}

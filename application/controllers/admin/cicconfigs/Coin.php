@@ -67,7 +67,7 @@ class Coin extends CB_Controller
 		// $view['view']['sort'] = array(
 		// 	'wid_idx' => $param->sort('wid_idx', 'asc'),
 		// );
-		$findex = $this->input->get('findex') ? $this->input->get('findex') : $this->CIC_vp_model->primary_key;
+		$findex = $this->input->get('findex') ? $this->input->get('findex') : $this->Coin_model->primary_key;
 		$forder = $this->input->get('forder', null, 'desc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
@@ -75,10 +75,50 @@ class Coin extends CB_Controller
 		$per_page = admin_listnum();
 		$offset = ($page - 1) * $per_page;
 
+		/**
+		 * 게시판 목록에 필요한 정보를 가져옵니다.
+		 */
+		// 'wid_admin_id', 'wid_admin_ip', 'wid_res_datetime', 'wid_content'
+		$this->Coin_model->allow_search_field = array(''); // 검색이 가능한 필드
 
+		$this->Coin_model->search_field_equal = array(''); // 검색중 like 가 아닌 = 검색을 하는 필드
+		
+		$this->Coin_model->allow_order_field = array(''); // 정렬이 가능한 필드
 
+		$where = array();
 
+		$result = $this->Coin_model->get_coinlist($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
+		if (element('list', $result)) {
+			foreach (element('list', $result) as $key => $val) {
+
+				$where = array(
+					'' => element('', $val),
+				);
+				
+				$result['list'][$key]['num'] = $list_num--;
+			}
+		}
+
+		$view['view']['data'] = $result;
+				// Pagination Configuration
+		/**
+		 * 페이지네이션을 생성합니다
+		 */
+
+		$getStock = $this -> Coin_model->getstockData();
+		$config['base_url'] = admin_url($this->pagedir).'?'. $param->replace('page');
+		$config['total_rows'] = $this->Coin_model->getrecord();
+		$config['per_page'] = $per_page;
+		$view['view']['paging'] = $this->pagination->create_links();
+		$view['view']['page'] = $page;
+		
+		$view['getStock'] = $getStock;
+		
+		// Initialize
+		$this->pagination->initialize($config);
+		$view['pagination'] = $this->pagination->create_links();
 
 
 		

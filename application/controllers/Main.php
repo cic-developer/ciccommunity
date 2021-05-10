@@ -61,6 +61,13 @@ class Main extends CB_Controller
 				$board_list[] = $this->board->item_all(element('brd_id', $val));
 			}
 		}
+
+		$popularpost = $this->Post_model
+			->get_popularpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+
+
+		$view['view']['popularpost'] = $popularpost;
+
 		$view['view']['board_list'] = $board_list;
 		$view['view']['canonical'] = site_url();
 
