@@ -288,11 +288,11 @@
 	<a href="./checkplus_main">테스트</a>
 
 <script>
-	$(document).ready(function(){
-		$("#submitButton").on('click',function(){
-			$("#fregisterform").submit();
-		});
-	});
+	// $(document).ready(function(){
+	// 	$("#submitButton").on('click',function(){
+	// 		$("#fregisterform").submit();
+	// 	});
+	// });
 </script>
 
 <script language='javascript'>
