@@ -104,11 +104,11 @@ class Main extends CB_Controller
 		$eventname = 'event_admin_board_post_index';
 		$this->load->event($eventname);
 
-		$view = array();
-		$view['view'] = array();
+		$popular = array();
+		$popular['popular'] = array();
 
 		// 이벤트가 존재하면 실행합니다
-		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		$popular['popular']['event']['before'] = Events::trigger('before', $eventname);
 
 		/**
 		 * 페이지에 숫자가 아닌 문자가 입력되거나 1보다 작은 숫자가 입력되면 에러 페이지를 보여줍니다.
@@ -170,15 +170,15 @@ class Main extends CB_Controller
 				}
 			}
 		}
-		$view['view']['data'] = $result;
+		$popular['popular']['data'] = $result;
 
 		$select = 'brd_id, brd_name';
-		$view['view']['boardlist'] = $this->Board_model->get_board_list();
+		$popular['popular']['boardlist'] = $this->Board_model->get_board_list();
 
 		/**
 		 * primary key 정보를 저장합니다
 		 */
-		$view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
+		$popular['popular']['primary_key'] = $this->{$this->modelname}->primary_key;
 
 		/**
 		 * 페이지네이션을 생성합니다
@@ -187,29 +187,29 @@ class Main extends CB_Controller
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
-		$view['view']['paging'] = $this->pagination->create_links();
-		$view['view']['page'] = $page;
+		$popular['popular']['paging'] = $this->pagination->create_links();
+		$popular['popular']['page'] = $page;
 
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
 		$search_option = array('post_title' => '제목', 'post_content' => '내용', 'post_username' => '실명', 'post_nickname' => '닉네임', 'post_email' => '이메일', 'post_homepage' => '홈페이지', 'post_datetime' => '작성일', 'post_ip' => 'IP');
-		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
-		$view['view']['search_option'] = search_option($search_option, $sfield);
-		$view['view']['listall_url'] = admin_url($this->pagedir);
-		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listdelete/?' . $param->output());
-		$view['view']['list_trash_url'] = admin_url($this->pagedir . '/listtrash/?' . $param->output());
+		$popular['popular']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
+		$popular['popular']['search_option'] = search_option($search_option, $sfield);
+		$popular['popular']['listall_url'] = admin_url($this->pagedir);
+		$popular['popular']['list_delete_url'] = admin_url($this->pagedir . '/listdelete/?' . $param->output());
+		$popular['popular']['list_trash_url'] = admin_url($this->pagedir . '/listtrash/?' . $param->output());
 
 		// 이벤트가 존재하면 실행합니다
-		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+		$popular['popular']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
 		/**
 		 * 어드민 레이아웃을 정의합니다
 		 */
 		$layoutconfig = array('layout' => 'layout', 'skin' => 'index');
-		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-		$this->data = $view;
-		$this->layout = element('layout_skin_file', element('layout', $view));
-		$this->view = element('view_skin_file', element('layout', $view));
+		$popular['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $popular;
+		$this->layout = element('layout_skin_file', element('layout', $popular));
+		$this->popular = element('view_skin_file', element('layout', $popular));
 	}
 }
