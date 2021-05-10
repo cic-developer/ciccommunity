@@ -137,7 +137,7 @@
                         <h3>실시간 인기 게시물</h3>
                         <a href="#n" class="more"><span>더보기</span></a>
                         <div class="list">
-                            <ol type = 'i'>
+                            <ul>
                                 <li>
                                     <a href="#n" class="new">
                                         <p class="num">1</p>
@@ -218,7 +218,7 @@
                                         </div>
                                     </a>
                                 </li>
-                            </ol>
+                            </ul>
                         </div>
                     </div>
                     <div class="fr tab-ov">
