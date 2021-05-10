@@ -32,7 +32,7 @@ class Register extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('querystring', 'form_validation', 'email', 'notelib', 'point', 'Checkplus_main'));
+		$this->load->library(array('querystring', 'form_validation', 'email', 'notelib', 'point'));
 
 		if ( ! function_exists('password_hash')) {
 			$this->load->helper('password');
@@ -56,6 +56,7 @@ class Register extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		// $this->checkplus_main();
+		// $this->Checkplus_main->checkplus_main();
 
 		if ($this->member->is_member()
 			&& ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
