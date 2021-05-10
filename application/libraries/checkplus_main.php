@@ -109,7 +109,12 @@ class Checkplus_main
 			$enc_data = "";
 		}
 
-		return false;
+		$data = array();
+
+		$data = $returnMsg;
+		$data = $enc_data;
+
+		return $data;
 	}
 
 }
