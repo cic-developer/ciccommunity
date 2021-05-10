@@ -38,30 +38,7 @@
                 <div class="fr">
                     <h4>실시간 인기 게시물</h4>
                     <ul>
-                    	<?php
-						if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result) {
-						?>
-							<tr>
-								<td>
-                                <td class="l file">
-                                    <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><?php echo html_escape(element('title', $result)); ?>
-                                        <span class="reply">(<?php echo element('post_comment_count', $result); ?>)</span>
-                                    </a>
-                                </td>
-							</tr>
-						<?php
-							}
-						}
-						if ( ! element('list', element('data', $view))) {
-						?>
-							<tr>
-								<td colspan="12" class="nopost">자료가 없습니다</td>
-							</tr>
-						<?php
-						}
-						?>
-                        <!-- <li><a href="<?php echo base_url('post/5')?>">1. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
+                        <li><a href="<?php echo base_url('post/5')?>">1. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
                         </li>
                         <li><a href="<?php echo base_url('post/5')?>">2. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
                         </li>
@@ -80,7 +57,7 @@
                         <li><a href="<?php echo base_url('post/5')?>">9. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
                         </li>
                         <li><a href="<?php echo base_url('post/5')?>">10. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
-                        </li> -->
+                        </li> 
                     </ul>
                 </div>
             </div>

@@ -137,18 +137,28 @@
                         <h3>실시간 인기 게시물</h3>
                         <a href="#n" class="more"><span>더보기</span></a>
                         <div class="list">
-                        <ul>
-                        <tbody>
+                            <ul>
+
 						<?php
+                        // print_r(element('popularpost', $view));
+                        // exit;
 						if (element('list',element('popularpost', $view))) {
 							foreach (element('list',element('popularpost', $view)) as $popularpost) {
 						?>
-                        <li><a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $popularpost)); ?></a></li>
-                        <td><a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_hit', $popularpost)); ?></a></td>
+							<tr>
+								<td>
+									<?php if (element('thumb_url', $popularpost)) {?>
+										<a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank">
+											<img src="<?php echo element('thumb_url', $popularpost); ?>" alt="<?php echo html_escape(element('post_title', $popularpost)); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" class="thumbnail mg0" style="width:80px;" />
+										</a>
+									<?php } ?>
+								</td>
+								<td><?php echo number_format(element('post_hit', $popularpost)); ?></td>
+							</tr>
 						<?php
 							}
 						}
-						if ( ! element('popularpost', $view)) {
+						if ( ! element('list', element('data', $view))) {
 						?>
 							<tr>
 								<td colspan="12" class="nopost">자료가 없습니다</td>
@@ -156,7 +166,6 @@
 						<?php
 						}
 						?>
-					</tbody>
                             </ul>
                         </div>
                     </div>

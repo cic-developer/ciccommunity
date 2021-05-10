@@ -68,7 +68,7 @@ class Main extends CB_Controller
 			'post_datetime >=' => $checktime,
 			'post_del <>' => 2,
 		);
-		$limit = 5;
+		$limit = 10;
 
 		$popularpost = $this->Post_model
 			->get_popularpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
