@@ -163,6 +163,57 @@ class Coin extends CB_Controller
 			// echo "</pre>";
 	}
 
+
+	public function loadRecord($rowno=0){
+
+		//admin search 
+		
+		$search_text = "";
+		if($this->input->post('submit') != NULL ){
+			$search_text = $this->input->post('search');
+			$this->session->set_userdata(array("search"=>$search_text));
+		}else{
+			if($this->session->userdata('search') != NULL)
+			{
+				$search_text = $this->session->userdata('search');
+			}
+
+
+
+		}
+		$rowperpage = 5;
+
+    // Row position
+		if($rowno != 0){
+		$rowno = ($rowno-1) * $rowperpage;
+		}
+	
+		// All records count
+		$allcount = $this->Main_model->getrecordCount($search_text);
+
+		// Get records
+		$users_record = $this->Main_model->getData($rowno,$rowperpage,$search_text);
+	
+		// Pagination Configuration
+		$config['base_url'] = base_url().'index.php/User/loadRecord';
+		$config['use_page_numbers'] = TRUE;
+		$config['total_rows'] = $allcount;
+		$config['per_page'] = $rowperpage;
+
+		// Initialize
+		$this->pagination->initialize($config);
+	
+		$data['pagination'] = $this->pagination->create_links();
+		$data['result'] = $users_record;
+		$data['row'] = $rowno;
+		$data['search'] = $search_text;
+
+		// Load view
+		$this->load->view('user_view',$data);
+	
+
+		}
+
 	
 }
 ?>
