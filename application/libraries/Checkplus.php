@@ -14,13 +14,6 @@ class Checkplus extends CI_Controller
 
 	function __construct()
 	{
-		parent::__construct();
-
-		/**
-		 * 라이브러리를 로딩합니다
-		 */
-		$this->load->library(array('session'));
-		
 		$this->CI = & get_instance();
 	}
 
@@ -37,8 +30,7 @@ class Checkplus extends CI_Controller
 		//**************************************************************************************************************
 		
 		// session_start();
-		$this->session;
-		// $this->load->library('session');
+		// $this->session;
 		
 		$sitecode = "BU370";			// NICE로부터 부여받은 사이트 코드
 		$sitepasswd = "nHmB3aEoHAiK";			// NICE로부터 부여받은 사이트 패스워드
