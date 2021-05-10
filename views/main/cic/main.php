@@ -140,25 +140,17 @@
                             <ul>
 
 						<?php
-                        // print_r(element('popularpost', $view));
-                        // exit;
 						if (element('list',element('popularpost', $view))) {
 							foreach (element('list',element('popularpost', $view)) as $popularpost) {
 						?>
-							<tr>
-								<td>
-									<?php if (element('thumb_url', $popularpost)) {?>
-										<a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank">
-											<img src="<?php echo element('thumb_url', $popularpost); ?>" alt="<?php echo html_escape(element('post_title', $popularpost)); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" class="thumbnail mg0" style="width:80px;" />
-										</a>
-									<?php } ?>
-								</td>
-								<td><?php echo number_format(element('post_hit', $popularpost)); ?></td>
-							</tr>
+							<li>
+								<?php if (element('category', $popularpost)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $popularpost))); ?></span><?php } ?>
+								<a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $popularpost)); ?></a>
+							</li>
 						<?php
 							}
 						}
-						if ( ! element('list', element('data', $view))) {
+						if ( ! element('list', element('popularpost', $view))) {
 						?>
 							<tr>
 								<td colspan="12" class="nopost">자료가 없습니다</td>
