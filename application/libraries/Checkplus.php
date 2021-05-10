@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *xpressengine 소스 참고
  */
 
-class Checkplus_main
+class Checkplus
 {
 	// function __construct()
 	// {
@@ -19,7 +19,7 @@ class Checkplus_main
 	// 	$this->load->library(array('session'));
 	// }
 
-	public function getCheckPlus()
+	public function main()
 	{
 		//**************************************************************************************************************
 		//NICE평가정보 Copyright(c) KOREA INFOMATION SERVICE INC. ALL RIGHTS RESERVED
