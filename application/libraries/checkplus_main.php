@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *xpressengine 소스 참고
  */
 
-class Ipfilter
+class Checkplus_main
 {
 
 	public function filter($ip_list = '', $ip = null)
