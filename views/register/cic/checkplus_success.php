@@ -9,7 +9,7 @@
     //인증 후 결과값이 null로 나오는 부분은 관리담당자에게 문의 바랍니다.	
     //**************************************************************************************************************
     
-    session_start();
+    // session_start();
 	
     $sitecode = "BU370";				// NICE로부터 부여받은 사이트 코드
     $sitepasswd = "nHmB3aEoHAiK";				// NICE로부터 부여받은 사이트 패스워드
@@ -17,7 +17,7 @@
     // Linux = /절대경로/ , Window = D:\\절대경로\\ , D:\절대경로\
     $cb_encode_path = "/home/bitnami/dev_ciccommunity/CPClient_64bit";
 		
-    $enc_data = $_REQUEST["EncodeData"];		// 암호화된 결과 데이타
+    $enc_data = $_REQUEST("EncodeData");		// 암호화된 결과 데이타
 
 
 		//////////////////////////////////////////////// 문자열 점검///////////////////////////////////////////////
