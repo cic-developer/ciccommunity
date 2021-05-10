@@ -210,11 +210,11 @@ class Checkplus
 		$data = $mobileno;
 		$data = $mobileco;
 
-		print_r("Hi");
+		print_r("Hi1");
 		pript_r($enc_data);
 		pript_r($plaindata);
 		pript_r($returnMsg);
-		print_r("Hi");
+		print_r("Hi2");
 
 		return $data;
 	}
