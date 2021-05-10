@@ -59,6 +59,9 @@
 			$mobileno = GetValue($plaindata , "MOBILE_NO");
             $mobileco = GetValue($plaindata , "MOBILE_CO");
 
+            print_r($requestnumber);
+            return;
+
             if(strcmp($_SESSION["REQ_SEQ"], $requestnumber) != 0)
             {
             	echo "세션값이 다릅니다. 올바른 경로로 접근하시기 바랍니다.<br>";
