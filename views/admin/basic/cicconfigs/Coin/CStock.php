@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				echo "<tr>";
 				echo "<td>".$sno."</td>";
 				echo "<td><a href='".$stoks->name_ko."' target='_blank'> ".$stoks->market. " - " .$stoks->name_ko."</a></td>";
-				//echo "<td>".$content."</td>";
+				echo "<td><button type="button" class="btn btn-info">Info</button></td>";
 				echo "</tr>";
 				$sno++;
 
@@ -45,10 +45,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div style='margin-top: 10px;'>
 	<?= $pagination; ?>
 	</div>
-
-
-
-
 </div>
 
 <script type="text/javascript">
