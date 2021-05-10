@@ -1120,6 +1120,24 @@ body {
         min-height: 680px;
         padding: 0 0 60px 0
     }
+    #container-wrap #contents .member-wrap .lower .enter-btn {
+        border: 0;
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        line-height: 50px;
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: -0.03em;
+        color: #fff;
+        background: #333;
+        border-radius: 55px;
+        text-align: center;
+        -webkit-transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+        -moz-transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+        -o-transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+        transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+    }
 }
 
 @media only screen and (max-width:680px) {
@@ -1127,9 +1145,46 @@ body {
         min-height: 560px;
         padding: 30px 15px 60px 15px
     }
+    #container-wrap #contents .member-wrap .lower .enter-btn {
+        border: 0;
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        line-height: 50px;
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: -0.03em;
+        color: #fff;
+        background: #333;
+        border-radius: 55px;
+        text-align: center;
+        -webkit-transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+        -moz-transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+        -o-transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+        transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+    }
 }
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width:480px) {
+    #container-wrap #contents .member-wrap .lower .enter-btn {
+        border: 0;
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        line-height: 50px;
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: -0.03em;
+        color: #fff;
+        background: #333;
+        border-radius: 55px;
+        text-align: center;
+        -webkit-transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+        -moz-transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+        -o-transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+        transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+    }
+}
 
 
 /* ======================================================

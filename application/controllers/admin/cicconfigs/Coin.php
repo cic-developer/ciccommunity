@@ -62,40 +62,28 @@ class Coin extends CB_Controller
 		$getList = $this -> Coin_model->get_coinlist();
 		for($i=0; $i<count($getList); $i++){
 			
-			//print_r ($getList[$i]['market']);
 			$market = $getList[$i]['market'];
 			if(strcmp(substr($market, 0, 1), "K")==0){
 				$coin_market = substr($market, 4);
-				// echo "<br><pre>";
-				// //print_r($coin_market);  
-				// echo "<pre>";
-			
-				//'market' => $getList[$i]['market']
 				$data = array(
 					'market' => $coin_market,
 					'name_ko' => $getList[$i]['english_name'],
 					'name_en' => $getList[$i]['korean_name'],
 				);
-			
-			
 			}   
-				//echo "<br><pre>";
-				//print_r($data);
-				//echo "<br><pre>";	
+
+
 				if(isset($data) && !empty($data)){
 					$stock = $this->Coin_model->insertStockData($data);
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 				}
 		}	
 
-				
-			
-		
-	
+
 		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
 
 		$getStock = $this -> Coin_model->getstockData();
-		$view['getStock'] = $getStock;
+		//$view['getStock'] = $getStock;
 		//CREATE COIN LIST FOR ADMIN
 
 		$this->load->library('form_validation');
@@ -202,6 +190,7 @@ class Coin extends CB_Controller
 		$view['view']['page'] = $page;
 		$getStock = $this -> Coin_model->getstockData();
 		$view['getStock'] = $getStock;
+		print_r(1);
 
 		// Initialize
 		$this->pagination->initialize($config);
