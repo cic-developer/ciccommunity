@@ -138,34 +138,35 @@
                         <a href="#n" class="more"><span>더보기</span></a>
                         <div class="list">
                             <ul>
-                            <?php
-                            $k = 0;
-                            $is_open = false;
-                            if (element('popularpost', $view)) {
-                            	foreach (element('popularpost', $view) as $key => $result) {
-                            		$config = array(
-                            			'skin' => 'basic',
-                            			'limit' => 5,
-                            			'length' => 40,
-                            			'cache_minute' => 1,
-                            		);
-                            		if ($k % 2 === 0) {
-                            			echo '<div>';
-                            			$is_open = true;
-                            		}
-                            		echo $this->board->latest($config);
-                            		if ($k % 2 === 1) {
-                            			echo '</div>';
-                            			$is_open = false;
-                            		}
-                            		$k++;
-                            	}
-                            }
-                            if ($is_open) {
-                            	echo '</div>';
-                            	$is_open = false;
-                            }
-                            ?>
+
+						<?php
+                        print_r(element('popularpost', $view));
+                        exit;
+						if (element('popularpost', $view)) {
+							foreach (element('popularpost', $view) as $popularpost) {
+						?>
+							<tr>
+								<td><?php echo number_format(element('num', $popularpost)); ?></td>
+								<td>
+									<?php if (element('thumb_url', $popularpost)) {?>
+										<a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank">
+											<img src="<?php echo element('thumb_url', $popularpost); ?>" alt="<?php echo html_escape(element('post_title', $popularpost)); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" class="thumbnail mg0" style="width:80px;" />
+										</a>
+									<?php } ?>
+								</td>
+								<td><?php echo number_format(element('post_hit', $popularpost)); ?></td>
+							</tr>
+						<?php
+							}
+						}
+						if ( ! element('list', element('data', $view))) {
+						?>
+							<tr>
+								<td colspan="12" class="nopost">자료가 없습니다</td>
+							</tr>
+						<?php
+						}
+						?>
                             </ul>
                         </div>
                     </div>

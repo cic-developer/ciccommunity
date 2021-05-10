@@ -87,31 +87,22 @@ class Coin extends CB_Controller
 		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
 
 		$getStock = $this -> Coin_model->getstockData();
-		$view['getStock'] = $getStock;
-
-		$result = $this->Coin_model->getstockData();
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
-
-		$view['view']['data'] = $result;
-				// Pagination Configuration
+		$view['view']['getStock'] = $getStock;
+		
+	
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-
-		//$getStock = $this -> Coin_model->getstockData();
 		$config['base_url'] = admin_url($this->pagedir).'?'. $param->replace('page');
-		//$config['total_rows'] = $this->Coin_model->getrecord();
+		//$config['total_rows'] = $getStock['total_rows'];
 		$config['per_page'] = $per_page;
+
+		$this->pagination->initialize($config);
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;
-		
-		$view['getStock'] = $getStock;
-		
 		// Initialize
-		$this->pagination->initialize($config);
-		$view['pagination'] = $this->pagination->create_links();
-
-
+		$view['view']['getStock'] = $getStock;
 		
 		$getList = $this -> Coin_model->get_coinlist();
 		for($i=0; $i<count($getList); $i++){

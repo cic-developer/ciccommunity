@@ -45,20 +45,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<?php 
 				$sno = $row+1;
 				foreach($getStock as $stocks){
-
-					//$content = substr($data['content'],0, 180)." ...";
 					echo "<tr>";
 					echo "<td>".$sno."</td>";
-					echo "<td><a href='".$stoks->market."' target='_blank'> ".$stoks->market."</a></td>";
-					echo "<td><a href='".$stoks->name_ko."' target='_blank'> ".$stoks->name_ko."</a></td>";
+					echo "<td><a href='".$stoks->market."' target='_blank'> ".$stocks->market."</a></td>";
+					echo "<td><a href='".$stoks->name_ko."' target='_blank'> ".$stocks->name_ko."</a></td>";
 					//echo "<td><button type="button" class="btn btn-info">Info</button></td>";
 					echo "</tr>";
 					$sno++;
-
-				
 				}
 				
-				if(count($result) == 0){
+				if(count($stocks) == 0){
 					echo "<tr>";
 					echo "<td colspan='3'>No record found.</td>";
 					echo "</tr>";

@@ -145,6 +145,8 @@ class Searchkeyword extends CB_Controller
 	 */
 	public function rank($export = '')
 	{
+		echo adte('Y-m-d');
+		exit;
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_stat_searchkeyword_rank';
 		$this->load->event($eventname);
