@@ -135,9 +135,9 @@
                 <div class="cont">
                     <div class="fl">
                         <h3>실시간 인기 게시물</h3>
-                        <a href="#n" class="more"><span>더보기</span></a>
                         <div class="list">
                             <ul>
+
                             </ul>
                         </div>
                     </div>
