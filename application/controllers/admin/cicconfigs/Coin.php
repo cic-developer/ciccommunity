@@ -153,7 +153,11 @@ class Coin extends CB_Controller
 
 
 	public function loadRecord(){
+		$view = array();
+		$view['view'] = array();
 
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 		//admin search 
 		
 		$search_text = "";
