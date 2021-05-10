@@ -302,11 +302,7 @@
 			$("#fregisterform").submit();
 		});
 	});
-</script>
 
-
-
-<script language='javascript'>
 	window.name ="Parent_window";
 	
 	function fnPopup(){
