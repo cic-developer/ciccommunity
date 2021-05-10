@@ -94,7 +94,7 @@ class Coin extends CB_Controller
 	
 		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
 
-		$getStock = $this -> Coin_model->getstockData();
+		// $getStock = $this -> Coin_model->getstockData();
 		$view['getStock'] = $getStock;
 		//CREATE COIN LIST FOR ADMIN
 
@@ -195,11 +195,14 @@ class Coin extends CB_Controller
 		$users_record = $this->Main_model->getData($rowno,$rowperpage,$search_text);
 	
 		// Pagination Configuration
-		$config['base_url'] = base_url().'/application/controllers/admin/cicconfigs/Coin/loadRecord';
-		$config['use_page_numbers'] = TRUE;
-		$config['total_rows'] = $allcount;
-		$config['per_page'] = $rowperpage;
-
+		/**
+		 * 페이지네이션을 생성합니다
+		 */
+		$config['base_url'] = admin_url($this->pagedir).'?'. $param->replace('page');
+		$config['total_rows'] = $this->Coin_model->getrecord();
+		$config['per_page'] = $per_page;
+		$view['view']['paging'] = $this->pagination->create_links();
+		$view['view']['page'] = $page;
 		// Initialize
 		$this->pagination->initialize($config);
 	
@@ -209,7 +212,7 @@ class Coin extends CB_Controller
 		$data['search'] = $search_text;
 
 		// Load view
-		$this->load->view('CStock',$data);
+		$this->load->view('CStock',$view);
 	
 
 		}
