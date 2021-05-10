@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
 		
 		<div class="table-responsive">
-			<table style='border-collapse: collapse;' class="table table-hover table-striped table-bordered">
+			<table class="table table-hover table-striped table-bordered">
 				<tr>
 					<th>S.no</th>
 					<th>마겟 명</th>
