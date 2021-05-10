@@ -27,7 +27,7 @@
 								<?php
 								foreach($getStock as $stoks){
 											
-									echo '<option value="'.$stoks->name_ko.'">'.$stoks->market.' : '.$stoks->name_ko.' </option>';							
+									echo '<option value="'.$stoks->name_ko.'">'.$stoks->market.' - '.$stoks->name_ko.' </option>';							
 									}
 								
 								?>	
@@ -77,8 +77,8 @@
 							</div>
 					</form>
 
-						<?php echo form_close(); ?>
-		</div>
+				<?php echo form_close(); ?>
+			</div>
     
 </div>
 
