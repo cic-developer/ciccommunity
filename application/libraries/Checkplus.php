@@ -16,6 +16,10 @@ class Checkplus extends CI_Controller
 	{
 		parent::__construct();
 
+		/**
+		 * 라이브러리를 로딩합니다
+		 */
+		$this->load->library(array('session'));
 		
 		$this->CI = & get_instance();
 	}
@@ -32,9 +36,9 @@ class Checkplus extends CI_Controller
 		//방화벽 정보 : IP 121.131.196.215 , Port 80, 443     
 		//**************************************************************************************************************
 		
-		session_start();
-		// $this->session;
-		$this->load->library('session');
+		// session_start();
+		$this->session;
+		// $this->load->library('session');
 		
 		$sitecode = "BU370";			// NICE로부터 부여받은 사이트 코드
 		$sitepasswd = "nHmB3aEoHAiK";			// NICE로부터 부여받은 사이트 패스워드

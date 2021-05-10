@@ -94,7 +94,7 @@ class Coin extends CB_Controller
 	
 		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
 
-		// $getStock = $this -> Coin_model->getstockData();
+		$getStock = $this -> Coin_model->getstockData();
 		//$view['getStock'] = $getStock;
 		//CREATE COIN LIST FOR ADMIN
 
@@ -164,7 +164,7 @@ class Coin extends CB_Controller
 	}
 
 
-	public function loadRecord($rowno=0){
+	public function loadRecord(){
 
 		//admin search 
 		
@@ -177,13 +177,10 @@ class Coin extends CB_Controller
 			{
 				$search_text = $this->session->userdata('search');
 			}
-
-
-
 		}
 		$rowperpage = 5;
 
-    // Row position
+    	// Row position
 		if($rowno != 0){
 		$rowno = ($rowno-1) * $rowperpage;
 		}
@@ -205,13 +202,10 @@ class Coin extends CB_Controller
 		$view['view']['page'] = $page;
 		$getStock = $this -> Coin_model->getstockData();
 		$view['getStock'] = $getStock;
-		
-		
 
 		// Initialize
 		$this->pagination->initialize($config);
-	
-		// $data['pagination'] = $this->pagination->create_links();
+		$view['pagination'] = $this->pagination->create_links();
 		// $data['result'] = $users_record;
 		// $data['row'] = $rowno;
 		// $data['search'] = $search_text;
