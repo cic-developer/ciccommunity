@@ -209,7 +209,7 @@ class Coin extends CB_Controller
 		$data['search'] = $search_text;
 
 		// Load view
-		$this->load->view('user_view',$data);
+		$this->load->view('CStock',$data);
 	
 
 		}
