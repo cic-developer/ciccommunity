@@ -195,7 +195,7 @@ class Coin extends CB_Controller
 		$users_record = $this->Main_model->getData($rowno,$rowperpage,$search_text);
 	
 		// Pagination Configuration
-		$config['base_url'] = base_url().'/home/bitnami/dev_ciccommunity/views/admin/basic/cicconfigs/Coin/CStock.php';
+		$config['base_url'] = base_url().'/application/controllers/admin/cicconfigs/Coin/loadRecord';
 		$config['use_page_numbers'] = TRUE;
 		$config['total_rows'] = $allcount;
 		$config['per_page'] = $rowperpage;
