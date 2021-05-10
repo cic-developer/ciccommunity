@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author CIBoard (develop@ciboard.co.kr)
  */
 
-/**
+/** 
  * 출석체크 담당하는 controller 입니다.
  */
 class Attendance extends CB_Controller
