@@ -17,7 +17,7 @@
     // Linux = /절대경로/ , Window = D:\\절대경로\\ , D:\절대경로\
     $cb_encode_path = "/home/bitnami/dev_ciccommunity/CPClient_64bit";
 		
-    $enc_data = $_REQUEST["EncodeData"];		// 암호화된 결과 데이타
+    $enc_data = 'AgAFQlUzNzDQJl8JnN4wuf5fsy9BaeY00ji2f/ZpKtSzFafmI16EAwo1SYysHdupxKMtqTMBGZIhi8m8Viw38W2ASCpOlmyd6OwXCgTdC8JnPlvt%2Bfph8di2XWrqfhwdf2Fco4rKsEx7Q03LuNMXomL%2Bu3Qe591r5De936ClIIbdH2UoUy/9BYV6neNTkciSSLr/fwnVsE/g/ZbtZIZOHyqunxDiOvKzreRF6W2aBSRtRKsUkrXdBqg1vO0yMpJPob39vGzZxXfbOkmvQR2/ufA/ExXY%2ByUQCf6tKdl/ZhAgWPEJUhJefcGHKHXoT1JKJvK0f8TVen%2BKKTWqQVcHWY4DXCorubmYrX4CR0Rx6qm342fnMtNMN1H3RzM4mpgHEygqnaMtnCTY4QiY3aCEzGhEt/uVKtaRzc5FUrXmIN4TMDAQcXzzpRAk3gMFIm50VtM5kr3yIMcltETrnZ4z54RhikCTXT9TjIQigPPFZYDzrIM6FeJBjpGBzOGiAjEWqRgdD0669A51ofoZrSY%2BkKEDF0T29uypwORwAhWNx/phtvKTuQmQXTIdRY20gxkVh%2B5ZciRbrg5cF4zMONnV5BStp2VV1Y4f';		// 암호화된 결과 데이타
 
 
 		//////////////////////////////////////////////// 문자열 점검///////////////////////////////////////////////
