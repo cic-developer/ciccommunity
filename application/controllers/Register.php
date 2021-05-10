@@ -32,7 +32,7 @@ class Register extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('querystring', 'form_validation', 'email', 'notelib', 'point'));
+		$this->load->library(array('querystring', 'form_validation', 'email', 'notelib', 'point', 'checkplus_main'));
 
 		if ( ! function_exists('password_hash')) {
 			$this->load->helper('password');
