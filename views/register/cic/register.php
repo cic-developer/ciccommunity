@@ -282,11 +282,11 @@
 								<input type="hidden" name="m" value="checkplusService">				<!-- 필수 데이타로, 누락하시면 안됩니다. -->
 								<input type="hidden" name="EncodeData" value="<?= $enc_data ?>">		<!-- 위에서 업체정보를 암호화 한 데이타입니다. -->
 								
-								<a href="javascript:fnPopup();"> CheckPlus 안심본인인증 Click</a>
+								<a href="javascript:fnPopup();"> CheckPlus 안심본인인증 Click<?php echo element('enc_data', element('check', $view)); ?></a>
 							</form>
 						</div>
 					</div>
-				</div><?php echo element(element('enc_data', $view)); ?>
+				</div>
 			</div>
 			<?php echo form_close(); ?>
 		</div>
