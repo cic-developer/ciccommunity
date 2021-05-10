@@ -203,16 +203,18 @@ class Coin extends CB_Controller
 		$config['per_page'] = $per_page;
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;
+		$getStock = $this -> Coin_model->getstockData();
+		$view['getStock'] = $getStock;
 		
 		
 
 		// Initialize
 		$this->pagination->initialize($config);
 	
-		$data['pagination'] = $this->pagination->create_links();
-		$data['result'] = $users_record;
-		$data['row'] = $rowno;
-		$data['search'] = $search_text;
+		// $data['pagination'] = $this->pagination->create_links();
+		// $data['result'] = $users_record;
+		// $data['row'] = $rowno;
+		// $data['search'] = $search_text;
 
 		// Load view
 		$this->load->view('CStock',$view);

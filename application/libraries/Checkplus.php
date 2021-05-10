@@ -7,17 +7,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *xpressengine 소스 참고
  */
 
-class Checkplus
+class Checkplus extends CI_Controller
 {
-	// function __construct()
-	// {
-	// 	parent::__construct();
 
-	// 	/**
-	// 	 * 라이브러리를 로딩합니다
-	// 	 */
-	// 	$this->load->library(array('session'));
-	// }
+	private $CI;
+
+	function __construct()
+	{
+		$this->CI = & get_instance();
+	}
 
 	public function main()
 	{
