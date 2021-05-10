@@ -137,7 +137,7 @@
                         <h3>실시간 인기 게시물</h3>
                         <div class="list">
                             <ul>
-
+                            
                             </ul>
                         </div>
                     </div>
