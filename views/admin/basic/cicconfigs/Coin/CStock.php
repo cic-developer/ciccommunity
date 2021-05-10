@@ -6,9 +6,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="box">
 <!-- Search form (start) -->
 	<div class ='box-table'>
-		<form method='post' action="<?= base_url() ?>index.php/User/loadRecord" >
-			<input type='text' name='search' value='<?= $search ?>'><input type='submit' name='submit' value='Submit'>
-		</form><br/> 
+		<div class='box-search'>
+			<form method='post' action="<?= base_url() ?>/application/controllers/admin/cicconfigs/Coin/loadRecord" >
+				<input type='text' name='search' value='<?= $search ?>'><input type='submit' name='submit' value='Submit'>
+			</form><br/> 
+		</div>
 	</div>
 
 	<div class ='box-table'>

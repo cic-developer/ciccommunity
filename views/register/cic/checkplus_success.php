@@ -19,7 +19,6 @@
 		
     $enc_data = $_REQUEST["EncodeData"];		// 암호화된 결과 데이타
 
-    print_r($enc_data);
 
 		//////////////////////////////////////////////// 문자열 점검///////////////////////////////////////////////
     if(preg_match('~[^0-9a-zA-Z+/=]~', $enc_data, $match)) {echo "입력 값 확인이 필요합니다 : ".$match[0]; exit;} // 문자열 점검 추가. 
@@ -122,6 +121,13 @@
     <center>
     <p><p><p><p>
     본인인증이 완료 되었습니다.<br>
+    <br>
+    <br>@
+    <br>
+    <?= $enc_data ?>
+    <br>    
+    <br>@
+    <br>
     <table border=1>
         <tr>
             <td>복호화한 시간</td>
