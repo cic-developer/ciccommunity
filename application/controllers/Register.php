@@ -56,12 +56,12 @@ class Register extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		$view['view']['main'] = $this->checkplus->main();
-		if($view['view']['main']){
+		if(!$view['view']['main']){
 			
 			$view['view']['success'] = $this->checkplus->success($view['view']['main']);
 
 			
-			// return;
+			return;
 		}
 
 		// print_f($view['view']['success']);
