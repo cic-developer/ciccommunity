@@ -294,7 +294,6 @@
 	</div>
 </div>
 
-							@@@@@@@@@<?php $_REQUEST["EncodeData"] ?>@@@@@@@@@
 	<a href="./checkplus_main">테스트</a>
 
 <script>

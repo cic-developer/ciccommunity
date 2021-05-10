@@ -53,8 +53,8 @@ class Search_keyword_model extends CB_Model
 	}
 
 	function get_main_rank(){
-		$start_date = cadte('Y-m-d', strtotime('-3 days'));
-		$end_date = cadte('Y-m-d');
+		$start_date = cdate('Y-m-d', strtotime('-3 days'));
+		$end_date = cdate('Y-m-d');
 		$result = $this->get_rank($start_date, $end_date);
 
 		$sum_count = 0;
@@ -77,7 +77,7 @@ class Search_keyword_model extends CB_Model
 			}
 		}
 
-		$view['view']['list'] = array();
+		$result = array();
 		$i = 0;
 		$k = 0;
 		$save_count = -1;
@@ -87,22 +87,22 @@ class Search_keyword_model extends CB_Model
 			arsort($arr);
 			foreach ($arr as $key => $value) {
 				$count = (int) $arr[$key];
-				$view['view']['list'][$k]['count'] = $count;
+				$result[$k]['count'] = $count;
 				$i++;
 				if ($save_count !== $count) {
 					$no = $i;
 					$save_count = $count;
 				}
-				$view['view']['list'][$k]['no'] = $no;
+				$result[$k]['no'] = $no;
 
-				$view['view']['list'][$k]['key'] = $key;
+				$result[$k]['key'] = $key;
 				$rate = ($count / $sum_count * 100);
-				$view['view']['list'][$k]['rate'] = $rate;
+				$result[$k]['rate'] = $rate;
 				$s_rate = number_format($rate, 1);
-				$view['view']['list'][$k]['s_rate'] = $s_rate;
+				$result[$k]['s_rate'] = $s_rate;
 
 				$bar = (int)($count / $max * 100);
-				$view['view']['list'][$k]['bar'] = $bar;
+				$result[$k]['bar'] = $bar;
 				$k++;
 			}
 
@@ -112,6 +112,6 @@ class Search_keyword_model extends CB_Model
 
 		$view['view']['start_date'] = $start_date;
 		$view['view']['end_date'] = $end_date;
-		return $view['view']['list'];
+		return $result;
 	}
 }

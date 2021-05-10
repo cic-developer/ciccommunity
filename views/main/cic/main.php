@@ -146,7 +146,7 @@
 							foreach (element('popularpost', $view) as $popularpost) {
 						?>
 							<tr>
-								<td><?php echo number_format(element('num', $popularpost)); ?></td>
+								<><?php echo number_format(element('num', $popularpost)); ?></>
 								<td>
 									<?php if (element('thumb_url', $popularpost)) {?>
 										<a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank">
@@ -181,6 +181,7 @@
                             </div>
                             <div class="list tab-con" id="rtab01">
                                 <ul>
+                                <?php print_r(element('searchrank', $view)); ?>
                                     <li><a href="#n"><span>1</span>비트코인</a></li>
                                     <li><a href="#n"><span>2</span>코박</a></li>
                                     <li><a href="#n"><span>3</span>코인원</a></li>

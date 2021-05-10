@@ -18,7 +18,7 @@ class Main extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Board', 'Post');
+	protected $models = array('Board', 'Post', 'Search_keyword');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -71,12 +71,13 @@ class Main extends CB_Controller
 		$limit = 5;
 
 		$popularpost = $this->Post_model
-			->get_popularpost_list($limit, $offset, $_where, '', $findex, $forder, $sfield, $skeyword);
+			->get_popularpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 
 
 			
 		$view['view']['board_list'] = $board_list;
 		$view['view']['canonical'] = site_url();		
+		$view['view']['searchrank'] = $this->Search_keyword_model->get_main_rank();
 		$view['view']['popularpost'] = $popularpost;
 
 		// 이벤트가 존재하면 실행합니다
