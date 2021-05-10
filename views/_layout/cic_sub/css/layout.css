@@ -1072,7 +1072,7 @@ body {
     border: 0;
     display: inline-block;
     vertical-align: top;
-    width: 200px;
+    width: 100%;
     line-height: 40px;
     font-size: 15px;
     font-weight: 500;
