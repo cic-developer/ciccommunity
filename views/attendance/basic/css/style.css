@@ -3,14 +3,82 @@
 */
 
 .wrapmemo {}
-.wrapmemo input {width:400px;}
 
-.attendance_box {background-color: #d9edf7;border: 1px solid #ddd;padding: 15px !important;border-radius: 3px;overflow: hidden;}
-.date-navigation {text-align: center;padding-bottom: 15px; }
-.date-navigation li{font-size: 12px;line-height: 20px;display: inline-block;background-image: -moz-linear-gradient(center top , #fff, #E0E0E0);border: 1px solid #ddd;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;padding: 0 4px;margin: 3px;cursor:pointer;}
-.date-navigation li.active {border: 1px solid #ddd;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;padding: 0 7px;margin: 0 2px;display: inline-block;line-height: 20px;background: #428bca;color: #fff;font-weight: bold;}
-.date-navigation li:hover{background: #428bca;color: #fff;}
+.wrapmemo input {
+    width: 400px;
+}
 
-.selected-date {text-align:center;padding-bottom:10px;font-size:14px;}
-.alert-point-policy {display:none; }
-.view_policy {margin-top:7px;}
+.attendance_box {
+    background-color: #d9edf7;
+    border: 1px solid #ddd;
+    padding: 15px !important;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.date-navigation {
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.date-navigation li {
+    font-size: 12px;
+    line-height: 20px;
+    display: inline-block;
+    background-image: -moz-linear-gradient(center top, #fff, #E0E0E0);
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+    padding: 0 4px;
+    margin: 3px;
+    cursor: pointer;
+}
+
+.date-navigation li.active {
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+    padding: 0 7px;
+    margin: 0 2px;
+    display: inline-block;
+    line-height: 20px;
+    background: #428bca;
+    color: #fff;
+    font-weight: bold;
+}
+
+.date-navigation li:hover {
+    background: #428bca;
+    color: #fff;
+}
+
+.wrapmemo.enter-btn {
+    border: 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+    line-height: 40px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: #fff;
+    background: #333;
+    border-radius: 55px;
+    text-align: center;
+    -webkit-transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+    -moz-transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+    -o-transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+    transition: box-shadow 0.3s ease-out, background 0.3s ease-out;
+}
+
+.selected-date {
+    text-align: center;
+    padding-bottom: 10px;
+    font-size: 14px;
+}
+
+.alert-point-policy {
+    display: none;
+}
+
+.view_policy {
+    margin-top: 7px;
+}
