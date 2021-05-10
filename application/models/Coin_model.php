@@ -167,5 +167,16 @@ class Coin_model extends CB_Model
             
     }
 
+
+    function reseach_coinAdmin($rowno, $rowperpage, $search=""){
+        $this->db->select('*');
+        $this->db->form('posts');
+
+        if($search != ''){
+            $this->db->like('market', $search);
+            $this->db->or_like('name_ko', $search);
+        }
+    }
+
 }
 ?>
