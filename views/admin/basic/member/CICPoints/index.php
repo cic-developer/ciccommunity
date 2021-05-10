@@ -27,6 +27,8 @@
 				ob_end_flush();
 				?>
 			</div>
+
+			
 			<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
 			<div class="table-responsive">
 				<table class="table table-hover table-striped table-bordered">
