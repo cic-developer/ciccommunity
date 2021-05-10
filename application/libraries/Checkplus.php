@@ -195,6 +195,22 @@ class Checkplus
 				}
 			}
 		}
+
+		$data = array();
+		$data = $ciphertime;
+		$data = $requestnumber;
+		$data = $responsenumber;
+		$data = $authtype;
+		$data = $name;
+		$data = $birthdate;
+		$data = $gender;
+		$data = $nationalinfo;
+		$data = $dupinfo;
+		$data = $conninfo;
+		$data = $mobileno;
+		$data = $mobileco;
+
+		return $data;
 	}
 
 	//********************************************************************************************
