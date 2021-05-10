@@ -56,6 +56,7 @@ class Register extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		$view['view']['check'] = $this->checkplus->main();
+		$view['view']['check'] = $this->checkplus->success();
 
 		if ($this->member->is_member()
 			&& ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
