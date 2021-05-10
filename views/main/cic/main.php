@@ -137,87 +137,35 @@
                         <h3>실시간 인기 게시물</h3>
                         <a href="#n" class="more"><span>더보기</span></a>
                         <div class="list">
-                            <ul>
-                                <li>
-                                    <a href="#n" class="new">
-                                        <p class="num">1</p>
-                                        <p class="btxt">
-                                            <span class="txt">업비트 싹 뺐습니다 지금 비트코인 어느정도 예상되는 어쩌고 텍스트 예시로 테스트 테스트 테스트 테스트
-                                            </span>
-                                            <span class="hit">(12)</span>
-                                        </p>
-                                        <div>
-                                            <p class="stxt">블로서리 <span><img
-                                                        src="<?php echo base_url('assets/images/like-popo.png') ?>"
-                                                        alt="" /></span></p>
-                                            <p class="date">204 <span>49분전</span></p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#n" class="new">
-                                        <p class="num">2</p>
-                                        <p class="btxt">
-                                            <span class="txt">업비트 싹 뺐습니다 지금 비트코인 어느정도 예상되는 어쩌고 텍스트 예시로 테스트 테스트 테스트 테스트
-                                            </span>
-                                            <span class="hit">(12)</span>
-                                        </p>
-                                        <div>
-                                            <p class="stxt">블로서리 <span><img
-                                                        src="<?php echo base_url('assets/images/like-popo.png') ?>"
-                                                        alt="" /></span></p>
-                                            <p class="date">204 <span>49분전</span></p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#n" class="new">
-                                        <p class="num">3</p>
-                                        <p class="btxt">
-                                            <span class="txt">업비트 싹 뺐습니다 지금 비트코인 어느정도 예상되는 어쩌고 텍스트 예시로 테스트 테스트 테스트 테스트
-                                            </span>
-                                            <span class="hit">(12)</span>
-                                        </p>
-                                        <div>
-                                            <p class="stxt">블로서리 <span><img
-                                                        src="<?php echo base_url('assets/images/like-popo.png') ?>"
-                                                        alt="" /></span></p>
-                                            <p class="date">204 <span>49분전</span></p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#n" class="new">
-                                        <p class="num">4</p>
-                                        <p class="btxt">
-                                            <span class="txt">업비트 싹 뺐습니다 지금 비트코인 어느정도 예상되는 어쩌고 텍스트 예시로 테스트 테스트 테스트 테스트
-                                            </span>
-                                            <span class="hit">(12)</span>
-                                        </p>
-                                        <div>
-                                            <p class="stxt">블로서리 <span><img
-                                                        src="<?php echo base_url('assets/images/like-popo.png') ?>"
-                                                        alt="" /></span></p>
-                                            <p class="date">204 <span>49분전</span></p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#n" class="new">
-                                        <p class="num">5</p>
-                                        <p class="btxt">
-                                            <span class="txt">업비트 싹 뺐습니다 지금 비트코인 어느정도 예상되는 어쩌고 텍스트 예시로 테스트 테스트 테스트 테스트
-                                            </span>
-                                            <span class="hit">(12)</span>
-                                        </p>
-                                        <div>
-                                            <p class="stxt">블로서리 <span><img
-                                                        src="<?php echo base_url('assets/images/like-popo.png') ?>"
-                                                        alt="" /></span></p>
-                                            <p class="date">204 <span>49분전</span></p>
-                                        </div>
-                                    </a>
-                                </li>
+						<tbody>
+						<?php
+						if (element('list', element('data', $view))) {
+							foreach (element('list', element('data', $view)) as $result) {
+						?>
+							<tr>
+								<td><?php echo number_format(element('num', $result)); ?></td>
+								<td><a href="?brd_id=<?php echo element('brd_id', $result); ?>"><?php echo html_escape(element('brd_name', element('board', $result))); ?></a> <a href="<?php echo goto_url(element('boardurl', $result)); ?>" target="_blank"><span class="fa fa-external-link"></span></a></td>
+								<td>
+									<?php if (element('thumb_url', $result)) {?>
+										<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank">
+											<img src="<?php echo element('thumb_url', $result); ?>" alt="<?php echo html_escape(element('post_title', $result)); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" class="thumbnail mg0" style="width:80px;" />
+										</a>
+									<?php } ?>
+								</td>
+                                <td><?php echo number_format(element('post_hit', $result)); ?></td>
+							</tr>
+						<?php
+							}
+						}
+						if ( ! element('list', element('data', $view))) {
+						?>
+							<tr>
+								<td colspan="12" class="nopost">자료가 없습니다</td>
+							</tr>
+						<?php
+						}
+						?>
+					</tbody>
                             </ul>
                         </div>
                     </div>

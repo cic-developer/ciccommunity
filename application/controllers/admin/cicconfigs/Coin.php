@@ -153,13 +153,15 @@ class Coin extends CB_Controller
 
 
 	public function loadRecord(){
+		
 		$view = array();
 		$view['view'] = array();
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 		//admin search 
-		
+		print_r(1);
+
 		$search_text = "";
 		if($this->input->post('submit') != NULL ){
 			$search_text = $this->input->post('search');
@@ -194,8 +196,7 @@ class Coin extends CB_Controller
 		$view['view']['page'] = $page;
 		$getStock = $this -> Coin_model->getstockData();
 		$view['getStock'] = $getStock;
-		print_r(1);
-
+		
 		// Initialize
 		$this->pagination->initialize($config);
 		$view['pagination'] = $this->pagination->create_links();
