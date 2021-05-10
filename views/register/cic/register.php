@@ -4,11 +4,7 @@
 		<!-- page start // -->
 		<div class="member-wrap join">
 			<h3>회원가입 약관 동의 (본인인증)</h3>
-			<?php 	
-				$attributes = array('class' => 'form-horizontal', 'name' => 'fregisterform', 'id' => 'fregisterform');
-				echo form_open(current_full_url(), $attributes);
-				
-			?>
+		
 			<div class="agrees">
 				<div class="item c01">
 					<h4>회원가입 약관 동의</h4>
@@ -268,7 +264,6 @@
 					<p class="chk-check"><input type="checkbox" id="jsel03"><label for="jsel03">개인정보 수집 및 이용에
 							동의합니다.</label></p>
 				</div>
-			<?php echo form_close(); ?>
 				<div class="item c04">
 					<h4>본인확인</h4>
 					<div class="txt">
