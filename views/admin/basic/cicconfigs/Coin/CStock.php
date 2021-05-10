@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<form method='post' action="<?= base_url() ?>index.php/User/loadRecord" >
     	<input type='text' name='search' value='<?= $search ?>'><input type='submit' name='submit' value='Submit'>
 	</form><br/> 
-
+	<div class ='box-table'>
 	<!-- Posts List -->
 	<table border='1' width='100%' style='border-collapse: collapse;'>
 		<tr>
@@ -36,6 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 		?>
 	</table>
+	</div>
 
 	<!-- Paginate -->
 	<div style='margin-top: 10px;'>
