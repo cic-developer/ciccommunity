@@ -269,6 +269,7 @@
 					<p class="chk-check"><input type="checkbox" id="jsel03"><label for="jsel03">개인정보 수집 및 이용에
 							동의합니다.</label></p>
 				</div>
+				<?php echo form_close(); ?>
 				<div class="item c04">
 					<h4>본인확인</h4>
 					<div class="txt">
@@ -288,7 +289,6 @@
 					</div>
 				</div>
 			</div>
-			<?php echo form_close(); ?>
 		</div>
 		<!-- page end // -->
 	</div>
