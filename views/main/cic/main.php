@@ -137,29 +137,25 @@
                         <h3>실시간 인기 게시물</h3>
                         <a href="#n" class="more"><span>더보기</span></a>
                         <div class="list">
-                            <ul>
-
+                        <ul>
+                        <tbody>
 						<?php
-                        print_r(element('popularpost', $view));
-                        exit;
 						if (element('popularpost', $view)) {
 							foreach (element('popularpost', $view) as $popularpost) {
 						?>
 							<tr>
-								<><?php echo number_format(element('num', $popularpost)); ?></>
-								<td>
-									<?php if (element('thumb_url', $popularpost)) {?>
-										<a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank">
-											<img src="<?php echo element('thumb_url', $popularpost); ?>" alt="<?php echo html_escape(element('post_title', $popularpost)); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" class="thumbnail mg0" style="width:80px;" />
-										</a>
-									<?php } ?>
-								</td>
-								<td><?php echo number_format(element('post_hit', $popularpost)); ?></td>
+								<li><?php echo number_format(element('num', $popularpost)); ?></li>
+								<li><a href="<?php echo goto_url(element('post_title', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $view)); ?></a></li>
+                                <li><a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $view)); ?></a></li>
+                                <li><a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $view)); ?></a></li>
+                                <li><a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $view)); ?></a></li>
+                                <li><?php echo goto_url(element('popularpost',element('post_title',$view))); ?></li>
+								<li><?php echo number_format(element('post_hit', $popularpost)); ?></li>
 							</tr>
 						<?php
 							}
 						}
-						if ( ! element('list', element('data', $view))) {
+						if ( ! element('popularpost', $view)) {
 						?>
 							<tr>
 								<td colspan="12" class="nopost">자료가 없습니다</td>
@@ -167,6 +163,7 @@
 						<?php
 						}
 						?>
+					</tbody>
                             </ul>
                         </div>
                     </div>
