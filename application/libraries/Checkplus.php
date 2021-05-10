@@ -133,7 +133,8 @@ class Checkplus extends CI_Controller
 		
 		// Linux = /절대경로/ , Window = D:\\절대경로\\ , D:\절대경로\
 		$cb_encode_path = "/home/bitnami/dev_ciccommunity/CPClient_64bit";
-			
+		print_r("test");
+		return;
 		$enc_data = $this->input->get("EncodeData");		// 암호화된 결과 데이타
 
 			//////////////////////////////////////////////// 문자열 점검///////////////////////////////////////////////
