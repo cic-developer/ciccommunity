@@ -139,18 +139,26 @@
                         <div class="list">
                             <ul>
                             <?php
-                            if (element('view', $view)) {
-                            	foreach (element('view', $view) as $key => $result) {
+                            $k = 0;
+                            $is_open = false;
+                            if (element('popularpost', $view)) {
+                            	foreach (element('popularpost', $view) as $key => $result) {
                             		$config = array(
                             			'skin' => 'basic',
-                            			'brd_key' => element('view', $view),
                             			'limit' => 5,
                             			'length' => 40,
-                            			'is_gallery' => '',
-                            			'image_width' => '',
-                            			'image_height' => '',
                             			'cache_minute' => 1,
                             		);
+                            		if ($k % 2 === 0) {
+                            			echo '<div>';
+                            			$is_open = true;
+                            		}
+                            		echo $this->board->latest($config);
+                            		if ($k % 2 === 1) {
+                            			echo '</div>';
+                            			$is_open = false;
+                            		}
+                            		$k++;
                             	}
                             }
                             if ($is_open) {
