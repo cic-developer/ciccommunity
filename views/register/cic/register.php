@@ -285,6 +285,7 @@
 								
 								<a href="javascript:fnPopup();"> CheckPlus 안심본인인증 Click</a>
 							</form>
+							@@@@@@@@@<?php $_REQUEST["EncodeData"] ?>@@@@@@@@@
 						</div>
 					</div>
 				</div>
