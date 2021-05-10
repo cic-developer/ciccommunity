@@ -182,5 +182,18 @@ class Coin_model extends CB_Model
         return $query-> result_array();
     }
 
+    function getrecord($search = ''){
+        $this->db->select('count(*) as allcount');
+        $this->db->form('post');
+        
+        if($search != ''){
+            $this->db->like('market', $search);
+            $this->db->or_like('name_ko', $search);
+        }
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result[0]['allcount'];
+        }
+
 }
 ?>
