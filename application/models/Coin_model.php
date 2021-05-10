@@ -176,6 +176,10 @@ class Coin_model extends CB_Model
             $this->db->like('market', $search);
             $this->db->or_like('name_ko', $search);
         }
+
+        $this -> db -> limit($rowperpage, $rowno);
+        $query = $this->db->get();
+        return $query-> result_array();
     }
 
 }
