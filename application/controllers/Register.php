@@ -187,7 +187,7 @@ class Register extends CB_Controller
 	public function checkplus_success()
 	{
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_register_index';
+		$eventname = 'event_register_checkplus_success';
 		$this->load->event($eventname);
 
 		$view = array();
