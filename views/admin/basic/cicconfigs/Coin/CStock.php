@@ -5,37 +5,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="box">
 <!-- Search form (start) -->
-	<form method='post' action="<?= base_url() ?>index.php/User/loadRecord" >
-    	<input type='text' name='search' value='<?= $search ?>'><input type='submit' name='submit' value='Submit'>
-	</form><br/> 
 	<div class ='box-table'>
-	<!-- Posts List -->
-	<table border='1' width='100%' style='border-collapse: collapse;'>
-		<tr>
-			<th>S.no</th>
-			<th>Market</th>
-			<th>Content</th>
-		</tr>
-		<?php 
-		$sno = $row+1;
-		foreach($getStock as $stoks){
+		<form method='post' action="<?= base_url() ?>index.php/User/loadRecord" >
+			<input type='text' name='search' value='<?= $search ?>'><input type='submit' name='submit' value='Submit'>
+		</form><br/> 
+	</div>
 
-			//$content = substr($data['content'],0, 180)." ...";
-			echo "<tr>";
-			echo "<td>".$sno."</td>";
-			echo "<td><a href='".$stoks->name_ko."' target='_blank'> ".$stoks->market. " - " .$stoks->name_ko."</a></td>";
-			//echo "<td>".$content."</td>";
-			echo "</tr>";
-			$sno++;
+	<div class ='box-table'>
+		<!-- Posts List -->
+		<table border='1' width='100%' style='border-collapse: collapse;'>
+			<tr>
+				<th>S.no</th>
+				<th>Market</th>
+				<th>Content</th>
+			</tr>
+			<?php 
+			$sno = $row+1;
+			foreach($getStock as $stoks){
 
-		}
-		if(count($result) == 0){
-			echo "<tr>";
-			echo "<td colspan='3'>No record found.</td>";
-			echo "</tr>";
-		}
-		?>
-	</table>
+				//$content = substr($data['content'],0, 180)." ...";
+				echo "<tr>";
+				echo "<td>".$sno."</td>";
+				echo "<td><a href='".$stoks->name_ko."' target='_blank'> ".$stoks->market. " - " .$stoks->name_ko."</a></td>";
+				//echo "<td>".$content."</td>";
+				echo "</tr>";
+				$sno++;
+
+			}
+			if(count($result) == 0){
+				echo "<tr>";
+				echo "<td colspan='3'>No record found.</td>";
+				echo "</tr>";
+			}
+			?>
+		</table>
 	</div>
 
 	<!-- Paginate -->
