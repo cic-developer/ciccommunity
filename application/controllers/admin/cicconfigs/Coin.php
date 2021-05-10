@@ -159,6 +159,8 @@ class Coin extends CB_Controller
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		
+		
 		//admin search 
 		print_r(1);
 
@@ -206,6 +208,17 @@ class Coin extends CB_Controller
 
 		// Load view
 		$this->load->view('CStock',$view);
+
+
+		
+		/**
+		 * 어드민 레이아웃을 정의합니다
+		 */
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
+		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
 	
 
 		}

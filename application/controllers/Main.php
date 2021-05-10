@@ -118,6 +118,9 @@ class Main extends CB_Controller
 		$result = $this->{$this->modelname}
 			->get_popularpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 
+		print_r($result);
+		exit;
+		
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
 		$layoutconfig = array(
