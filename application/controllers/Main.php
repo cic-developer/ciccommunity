@@ -18,7 +18,7 @@ class Main extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Board');
+	protected $models = array('Board', 'Post');
 
 	/**
 	 * 헬퍼를 로딩합니다
