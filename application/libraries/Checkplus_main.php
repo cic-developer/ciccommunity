@@ -9,15 +9,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Checkplus_main
 {
-	function __construct()
-	{
-		parent::__construct();
+	// function __construct()
+	// {
+	// 	parent::__construct();
 
-		/**
-		 * 라이브러리를 로딩합니다
-		 */
-		$this->load->library(array('session'));
-	}
+	// 	/**
+	// 	 * 라이브러리를 로딩합니다
+	// 	 */
+	// 	$this->load->library(array('session'));
+	// }
 
 	public function getCheckPlus()
 	{
@@ -32,7 +32,7 @@ class Checkplus_main
 		//**************************************************************************************************************
 		
 		session_start();
-		$this->session;
+		// $this->session;
 		
 		$sitecode = "BU370";			// NICE로부터 부여받은 사이트 코드
 		$sitepasswd = "nHmB3aEoHAiK";			// NICE로부터 부여받은 사이트 패스워드
