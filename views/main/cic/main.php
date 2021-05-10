@@ -137,7 +137,42 @@
                         <h3>실시간 인기 게시물</h3>
                         <div class="list">
                             <ul>
-                            
+                        <table class="table table-hover table-striped table-bordered">
+						<tbody>
+						<?php
+						if (element('list', element('data', $view))) {
+							foreach (element('list', element('data', $view)) as $result) {
+						?>
+							<tr>
+								<td><?php echo number_format(element('num', $result)); ?></td>
+								<td><a href="?brd_id=<?php echo element('brd_id', $result); ?>"><?php echo html_escape(element('brd_name', element('board', $result))); ?></a> <a href="<?php echo goto_url(element('boardurl', $result)); ?>" target="_blank"><span class="fa fa-external-link"></span></a></td>
+								<td>
+									<?php if (element('thumb_url', $result)) {?>
+										<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank">
+											<img src="<?php echo element('thumb_url', $result); ?>" alt="<?php echo html_escape(element('post_title', $result)); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" class="thumbnail mg0" style="width:80px;" />
+										</a>
+									<?php } ?>
+								</td>
+								<td>
+									<?php if (element('category', $result)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $result))); ?></span><?php } ?>
+									<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><?php echo html_escape(element('post_title', $result)); ?></a>
+								</td>
+								<td><?php echo element('post_display_name', $result); ?> <?php if (element('post_userid', $result)) { ?> ( <a href="?sfield=mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('post_userid', $result)); ?></a> ) <?php } ?></td>
+								<td><?php echo display_datetime(element('post_datetime', $result), 'full'); ?></td>
+							</tr>
+						<?php
+							}
+						}
+						if ( ! element('list', element('data', $view))) {
+						?>
+							<tr>
+								<td colspan="12" class="nopost">자료가 없습니다</td>
+							</tr>
+						<?php
+						}
+						?>
+					</tbody>
+				</table>
                             </ul>
                         </div>
                     </div>

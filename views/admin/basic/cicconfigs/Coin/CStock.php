@@ -8,13 +8,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class ='box-table'>
 		<form method='post' action="<?= base_url() ?>/application/controllers/admin/cicconfigs/Coin/loadRecord" >
 			<div class='box-search'>
-				<div class='input-group'>
-					<input type='text' name='search' value='<?= $search ?>'>
-					<span class = "input-group-btn">
-						<button type='submit' class="btn btn-default btn-sm" name='submit' value='검색'>검색!</button>
-					</span>
+				<div class='col-md-6 col-md-offset-3'>
+					<div class='input-group'>
+						<input type='text' class='form-control' name='search' value='<?= $search ?>'>
+						<span class = "input-group-btn">
+							<button type='submit' class="btn btn-default btn-sm" name='submit' value='검색'>검색!</button>
+						</span>
+					</div>
 				</div>
-			</div>	
+			</div>		
 		</form><br/> 
 		
 	</div>
