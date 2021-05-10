@@ -16,7 +16,7 @@ class Checkplus_main
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('pagination', 'querystring'));
+		$this->load->library(array('session'));
 	}
 
 	public function getCheckPlus()
