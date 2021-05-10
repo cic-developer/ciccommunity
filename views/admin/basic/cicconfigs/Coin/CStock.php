@@ -16,8 +16,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<table border='1' width='100%' style='border-collapse: collapse;'>
 			<tr>
 				<th>S.no</th>
-				<th>Market</th>
-				<th>Content</th>
+				<th>마겟 명</th>
+				<th>한국어 명</th>
 			</tr>
 			<?php 
 			$sno = $row+1;
