@@ -32,6 +32,7 @@ class Checkplus_main
 		//**************************************************************************************************************
 		
 		session_start();
+		$this->session;
 		
 		$sitecode = "BU370";			// NICE로부터 부여받은 사이트 코드
 		$sitepasswd = "nHmB3aEoHAiK";			// NICE로부터 부여받은 사이트 패스워드
