@@ -19,6 +19,8 @@
 		
     $enc_data = $_REQUEST["EncodeData"];		// 암호화된 결과 데이타
 
+    print_r($enc_data);
+
 		//////////////////////////////////////////////// 문자열 점검///////////////////////////////////////////////
     if(preg_match('~[^0-9a-zA-Z+/=]~', $enc_data, $match)) {echo "입력 값 확인이 필요합니다 : ".$match[0]; exit;} // 문자열 점검 추가. 
     if(base64_encode(base64_decode($enc_data))!=$enc_data) {echo "입력 값 확인이 필요합니다"; exit;}
