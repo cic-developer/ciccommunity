@@ -4,6 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 <div class="box">
+	<?php
+	echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
+	$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
+	echo form_open(current_full_url(), $attributes);
+	?>
+
+
+
 <!-- Search form (start) -->
 	<div class ='box-table'>
 		<form method='post' action="<?= base_url() ?>/application/controllers/admin/cicconfigs/Coin/loadRecord" >
@@ -20,9 +28,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</form><br/> 
 		
 	</div>
-
+	<!-- Posts List -->
 	<div class ='box-table'>
-		<!-- Posts List -->
+	<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
+		
 		<div class="table-responsive">
 			<table style='border-collapse: collapse;' class="table table-hover table-striped table-bordered">
 				<tr>
