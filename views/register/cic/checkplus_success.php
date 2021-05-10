@@ -47,7 +47,11 @@
             $ciphertime = `$cb_encode_path CTS $sitecode $sitepasswd $enc_data`;	// 암호화된 결과 데이터 검증 (복호화한 시간획득)
         
             echo '<p>fdfsf</p>';
+            exit;
             $requestnumber = GetValue($plaindata , "REQ_SEQ");
+
+            echo '<p>fdfsf</p>';
+            exit;
             $responsenumber = GetValue($plaindata , "RES_SEQ");
             $authtype = GetValue($plaindata , "AUTH_TYPE");
             $name = GetValue($plaindata , "NAME");
@@ -86,6 +90,9 @@
 	
     function GetValue($str , $name) 
     {
+        
+        echo '<p>fdfsf</p>';
+        exit;
         $pos1 = 0;  //length의 시작 위치
         $pos2 = 0;  //:의 위치
 
