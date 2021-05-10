@@ -55,6 +55,13 @@ var cb_board_url = <?php echo ( isset($view) && element('board_key', $view)) ? '
 var cb_device_type = "<?php echo $this->cbconfig->get_device_type() === 'mobile' ? 'mobile' : 'desktop' ?>";
 var cb_csrf_hash = "<?php echo $this->security->get_csrf_hash(); ?>";
 var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
+window.name ="Parent_window";
+function fnPopup(){
+		window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
+		document.form_chk.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+		document.form_chk.target = "popupChk";
+		document.form_chk.submit();
+	}
 </script>
 
 <!-- <script type="text/javascript" src="<?php //echo base_url('assets/js/common.js'); ?>"></script> -->
