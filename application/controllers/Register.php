@@ -61,7 +61,7 @@ class Register extends CB_Controller
 			$view['view']['success'] = $this->checkplus->success($view['view']['main']);
 
 			
-			return;
+			// return;
 		}
 
 		// print_f($view['view']['success']);
