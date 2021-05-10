@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<div class ='box-table'>
 		<!-- Posts List -->
-		<table border='1' width='100%' style='border-collapse: collapse;'>
+		<table border='1' width='100%' style='border-collapse: collapse;' class="table table-hover table-striped table-bordered">
 			<tr>
 				<th>S.no</th>
 				<th>마겟 명</th>
