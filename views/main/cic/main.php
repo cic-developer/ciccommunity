@@ -137,35 +137,39 @@
                         <h3>실시간 인기 게시물</h3>
                         <a href="#n" class="more"><span>더보기</span></a>
                         <div class="list">
-						<tbody>
-						<?php
-						if (element('view', $view)) {
-							foreach (element('view', $view) as $result) {
-						?>
-							<tr>
-								<td><?php echo number_format(element('num', $result)); ?></td>
-								<td><a href="?brd_id=<?php echo element('brd_id', $result); ?>"><?php echo html_escape(element('brd_name', element('board', $result))); ?></a> <a href="<?php echo goto_url(element('boardurl', $result)); ?>" target="_blank"><span class="fa fa-external-link"></span></a></td>
-								<td>
-									<?php if (element('thumb_url', $result)) {?>
-										<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank">
-											<img src="<?php echo element('thumb_url', $result); ?>" alt="<?php echo html_escape(element('post_title', $result)); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" class="thumbnail mg0" style="width:80px;" />
-										</a>
-									<?php } ?>
-								</td>
-                                <td><?php echo number_format(element('post_hit', $result)); ?></td>
-							</tr>
-						<?php
-							}
-						}
-						if ( ! element('view', $view)) {
-						?>
-							<tr>
-								<td colspan="12" class="nopost">자료가 없습니다</td>
-							</tr>
-						<?php
-						}
-						?>
-					</tbody>
+                            <ul>
+                            <?php
+                            $k = 0;
+                            $is_open = false;
+                            if (element('board_list', $view)) {
+                            	foreach (element('board_list', $view) as $key => $board) {
+                            		$config = array(
+                            			'skin' => 'basic',
+                            			'brd_key' => element('brd_key', $board),
+                            			'limit' => 5,
+                            			'length' => 40,
+                            			'is_gallery' => '',
+                            			'image_width' => '',
+                            			'image_height' => '',
+                            			'cache_minute' => 1,
+                            		);
+                            		if ($k % 2 === 0) {
+                            			echo '<div>';
+                            			$is_open = true;
+                            		}
+                            		echo $this->board->latest($config);
+                            		if ($k % 2 === 1) {
+                            			echo '</div>';
+                            			$is_open = false;
+                            		}
+                            		$k++;
+                            	}
+                            }
+                            if ($is_open) {
+                            	echo '</div>';
+                            	$is_open = false;
+                            }
+                            ?>
                             </ul>
                         </div>
                     </div>
