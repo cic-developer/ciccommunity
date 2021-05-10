@@ -46,8 +46,6 @@
             // 복호화가 정상적일 경우 데이터를 파싱합니다.
             $ciphertime = `$cb_encode_path CTS $sitecode $sitepasswd $enc_data`;	// 암호화된 결과 데이터 검증 (복호화한 시간획득)
         
-            echo '<p>fdfsf</p>';
-            exit;
             $requestnumber = GetValue($plaindata , "REQ_SEQ");
 
             echo '<p>fdfsf</p>';
@@ -83,7 +81,7 @@
     }
 ?>
 
-<?
+<?php 
     //********************************************************************************************
     //해당 함수에서 에러 발생 시$len => (int)$len 로 수정 후 사용하시기 바랍니다. (하기소스 참고)
     //********************************************************************************************
@@ -91,7 +89,7 @@
     function GetValue($str , $name) 
     {
         
-        echo '<p>fdfsf</p>';
+        echo '<p>fdfs22ss2f</p>';
         exit;
         $pos1 = 0;  //length의 시작 위치
         $pos2 = 0;  //:의 위치

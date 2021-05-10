@@ -10,7 +10,7 @@
 		한마디
 		<input type="text" name="memo" value="<?php echo html_escape(element(0, element('default_memo', $view))); ?>" id="att_memo" class="input" onClick="this.value='';" />
 		<button type="button" name="change_memo" class="btn btn-default" id="change_memo"><span class="fa fa-refresh"></span></button>
-		<button type="button" name="submit" class="btn btn-success" id="add_attendance">출ㅇㅇ첵하기</button>
+		<button type="button" name="submit" class="btn btn-success" id="add_attendance"><span>출첵하기</span></button>
 	<?php echo form_close(); ?>
 	<button type="button" name="view_policy" class="btn btn-default btn-xs pull-right view_policy" >포인트정책보기</button>
 </div>
