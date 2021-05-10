@@ -54,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			?>
 				<div class="form-group">
 					<div class="thumbnail"><img src="../assets/images/visual-img03.jpg" alt="썸네일"></div>
-					<label for="<?php echo $file_column; ?>" class="col-sm-2 control-label">대표이미지ㅇㅇ #</label>
+					<label for="<?php echo $file_column; ?>" class="col-sm-2 control-label">대표이미지 #</label>
 					<div class="col-sm-10">
 						<input type="file" class="form-control" name="<?php echo $file_column; ?>" id="<?php echo $file_column; ?>" />
 						<?php if ($download_link) { ?>

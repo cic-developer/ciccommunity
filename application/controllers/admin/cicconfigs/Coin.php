@@ -87,7 +87,7 @@ class Coin extends CB_Controller
 
 		$where = array();
 
-		$result = $this->Coin_model->get_coinlist($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		$result = $this->Coin_model->getstockData($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
@@ -107,9 +107,9 @@ class Coin extends CB_Controller
 		 * 페이지네이션을 생성합니다
 		 */
 
-		$getStock = $this -> Coin_model->getstockData();
+		//$getStock = $this -> Coin_model->getstockData();
 		$config['base_url'] = admin_url($this->pagedir).'?'. $param->replace('page');
-		$config['total_rows'] = $this->Coin_model->getrecord();
+		//$config['total_rows'] = $this->Coin_model->getrecord();
 		$config['per_page'] = $per_page;
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;

@@ -9,6 +9,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
 	echo form_open(current_full_url(), $attributes);
 	?>
+	<div class="box-table-header">
+		
+	</div>
 
 
 
@@ -41,18 +44,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</tr>
 				<?php 
 				$sno = $row+1;
-				foreach($getStock as $stoks){
+				if(element('list', element('data', $view))){
+					foreach(element('list', element('data', $view)) as $result){
+                ?>
 
-					//$content = substr($data['content'],0, 180)." ...";
-					echo "<tr>";
-					echo "<td>".$sno."</td>";
-					echo "<td><a href='".$stoks->market."' target='_blank'> ".$stoks->market."</a></td>";
-					echo "<td><a href='".$stoks->name_ko."' target='_blank'> ".$stoks->name_ko."</a></td>";
-					//echo "<td><button type="button" class="btn btn-info">Info</button></td>";
-					echo "</tr>";
-					$sno++;
-
+						<tr>
+							<td> <?php echo element('market', $result); ?> </td>
+						</tr>
+						<!--//$content = substr($data['content'],0, 180)." ...";
+						 <td></
+						echo "<tr>";
+						echo "<td>".$sno."</td>";
+						echo "<td><a href='".$stoks->market."' target='_blank'> ".$stoks->market."</a></td>";
+						echo "<td><a href='".$stoks->name_ko."' target='_blank'> ".$stoks->name_ko."</a></td>";
+						//echo "<td><button type="button" class="btn btn-info">Info</button></td>";
+						echo "</tr>";
+						$sno++; -->
+				<?php
+					
+					}
 				}
+				
 				if(count($result) == 0){
 					echo "<tr>";
 					echo "<td colspan='3'>No record found.</td>";
