@@ -392,12 +392,11 @@
 	});
 </script>
 
-<script language='javascript'>
-window.name ="Parent_window";
+
 
 <script language='javascript'>
 	window.name ="Parent_window";
-
+	
 	function fnPopup(){
 		window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
 		document.form_chk.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
