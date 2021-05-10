@@ -139,13 +139,11 @@
                         <div class="list">
                             <ul>
                             <?php
-                            $k = 0;
-                            $is_open = false;
-                            if (element('board_list', $view)) {
-                            	foreach (element('board_list', $view) as $key => $board) {
+                            if (element('view', $view)) {
+                            	foreach (element('view', $view) as $key => $result) {
                             		$config = array(
                             			'skin' => 'basic',
-                            			'brd_key' => element('brd_key', $board),
+                            			'brd_key' => element('view', $view),
                             			'limit' => 5,
                             			'length' => 40,
                             			'is_gallery' => '',
@@ -153,16 +151,6 @@
                             			'image_height' => '',
                             			'cache_minute' => 1,
                             		);
-                            		if ($k % 2 === 0) {
-                            			echo '<div>';
-                            			$is_open = true;
-                            		}
-                            		echo $this->board->latest($config);
-                            		if ($k % 2 === 1) {
-                            			echo '</div>';
-                            			$is_open = false;
-                            		}
-                            		$k++;
                             	}
                             }
                             if ($is_open) {
