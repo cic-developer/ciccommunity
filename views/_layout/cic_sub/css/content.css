@@ -6617,6 +6617,11 @@
         margin-bottom: 10px;
         line-height: 1.1em;
     }
+    .board-wrap.write .entry .thumbnail {
+        width: 100px;
+        height: 100px;
+        outline: 1px dotted red;
+    }
 }
 
 @media only screen and (max-width:680px) {

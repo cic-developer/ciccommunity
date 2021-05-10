@@ -62,8 +62,14 @@ class Main extends CB_Controller
 			}
 		}
 
+		$_where = array(
+			'post_exept_state' => 0,
+			'post_datetime >=' => $checktime,
+			'post_del <>' => 2,
+		);
+
 		$popularpost = $this->Post_model
-			->get_popularpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->get_popularpost_list($per_page, $offset, $_where, '', $findex, $forder, $sfield, $skeyword);
 
 
 		$view['view']['popularpost'] = $popularpost;
@@ -129,8 +135,6 @@ class Main extends CB_Controller
 	// 	$view['view']['popularpost'] = $popularpost;
 	// 	$view['view']['canonical'] = site_url();
 
-	// 	print_r($result);
-	// 	exit;
 
 	// 	$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 

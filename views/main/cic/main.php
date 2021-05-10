@@ -141,8 +141,6 @@
                             <?php
                             $k = 0;
                             $is_open = false;
-                            print_r(element('popularpost', $view));
-                            exit;
                             if (element('popularpost', $view)) {
                             	foreach (element('popularpost', $view) as $key => $result) {
                             		$config = array(

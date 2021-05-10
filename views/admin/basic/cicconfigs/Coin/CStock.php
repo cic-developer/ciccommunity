@@ -44,25 +44,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</tr>
 				<?php 
 				$sno = $row+1;
-				if(element('list', element('data', $view))){
-					foreach(element('list', element('data', $view)) as $result){
-                ?>
+				foreach($getStock as $stocks){
 
-						<tr>
-							<td> <?php echo element('market', $result); ?> </td>
-						</tr>
-						<!--//$content = substr($data['content'],0, 180)." ...";
-						 <td></
-						echo "<tr>";
-						echo "<td>".$sno."</td>";
-						echo "<td><a href='".$stoks->market."' target='_blank'> ".$stoks->market."</a></td>";
-						echo "<td><a href='".$stoks->name_ko."' target='_blank'> ".$stoks->name_ko."</a></td>";
-						//echo "<td><button type="button" class="btn btn-info">Info</button></td>";
-						echo "</tr>";
-						$sno++; -->
-				<?php
-					
-					}
+					//$content = substr($data['content'],0, 180)." ...";
+					echo "<tr>";
+					echo "<td>".$sno."</td>";
+					echo "<td><a href='".$stoks->market."' target='_blank'> ".$stoks->market."</a></td>";
+					echo "<td><a href='".$stoks->name_ko."' target='_blank'> ".$stoks->name_ko."</a></td>";
+					//echo "<td><button type="button" class="btn btn-info">Info</button></td>";
+					echo "</tr>";
+					$sno++;
+
+				
 				}
 				
 				if(count($result) == 0){

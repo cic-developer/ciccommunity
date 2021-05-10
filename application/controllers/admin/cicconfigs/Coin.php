@@ -64,9 +64,7 @@ class Coin extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		// $view['view']['sort'] = array(
-		// 	'wid_idx' => $param->sort('wid_idx', 'asc'),
-		// );
+
 		$findex = $this->input->get('findex') ? $this->input->get('findex') : $this->Coin_model->primary_key;
 		$forder = $this->input->get('forder', null, 'desc');
 		$sfield = $this->input->get('sfield', null, '');
@@ -86,20 +84,13 @@ class Coin extends CB_Controller
 		$this->Coin_model->allow_order_field = array(''); // 정렬이 가능한 필드
 
 		$where = array();
+		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
 
-		$result = $this->Coin_model->getstockData($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		$getStock = $this -> Coin_model->getstockData();
+		$view['getStock'] = $getStock;
+
+		$result = $this->Coin_model->getstockData();
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
-
-		if (element('list', $result)) {
-			foreach (element('list', $result) as $key => $val) {
-
-				$where = array(
-					'' => element('', $val),
-				);
-				
-				$result['list'][$key]['num'] = $list_num--;
-			}
-		}
 
 		$view['view']['data'] = $result;
 				// Pagination Configuration
@@ -142,11 +133,6 @@ class Coin extends CB_Controller
 				}
 		}	
 
-
-		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
-
-		$getStock = $this -> Coin_model->getstockData();
-		$view['getStock'] = $getStock;//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		//CREATE COIN LIST FOR ADMIN
 
 		$this->load->library('form_validation');
@@ -213,79 +199,6 @@ class Coin extends CB_Controller
 			// print_r($realtime_coin_info);
 			// echo "</pre>";
 	}
-
-
-	public function loadRecord(){
-		
-		$view = array();
-		$view['view'] = array();
-
-		// 이벤트가 존재하면 실행합니다
-		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-		
-		
-		//admin search 
-		print_r(1);
-
-		$search_text = "";
-		if($this->input->post('submit') != NULL ){
-			$search_text = $this->input->post('search');
-			$this->session->set_userdata(array("search"=>$search_text));
-		}else{
-			if($this->session->userdata('search') != NULL)
-			{
-				$search_text = $this->session->userdata('search');
-			}
-		}
-		$rowperpage = 5;
-
-    	// Row position
-		if($rowno != 0){
-		$rowno = ($rowno-1) * $rowperpage;
-		}
-	
-		// All records count
-		$allcount = $this->Main_model->getrecordCount($search_text);
-
-		// Get records
-		$users_record = $this->Main_model->getData($rowno,$rowperpage,$search_text);
-	
-		// Pagination Configuration
-		/**
-		 * 페이지네이션을 생성합니다
-		 */
-		$config['base_url'] = admin_url($this->pagedir).'?'. $param->replace('page');
-		$config['total_rows'] = $this->Coin_model->getrecord();
-		$config['per_page'] = $per_page;
-		$view['view']['paging'] = $this->pagination->create_links();
-		$view['view']['page'] = $page;
-		$getStock = $this -> Coin_model->getstockData();
-		$view['getStock'] = $getStock;
-		
-		// Initialize
-		$this->pagination->initialize($config);
-		$view['pagination'] = $this->pagination->create_links();
-		// $data['result'] = $users_record;
-		// $data['row'] = $rowno;
-		// $data['search'] = $search_text;
-
-		// Load view
-		$this->load->view('Coin/loadRecord', $view);
-
-
-		
-		/**
-		 * 어드민 레이아웃을 정의합니다
-		 */
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
-		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-		$this->data = $view;
-		$this->layout = element('layout_skin_file', element('layout', $view));
-		$this->view = element('view_skin_file', element('layout', $view));
-	
-
-		}
-
 	
 }
 ?>

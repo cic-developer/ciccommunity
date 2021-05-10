@@ -193,19 +193,22 @@ class Checkplus extends CI_Controller
 			}
 		}
 
-		$data = array();
-		$data = $ciphertime;
-		$data = $requestnumber;
-		$data = $responsenumber;
-		$data = $authtype;
-		$data = $name;
-		$data = $birthdate;
-		$data = $gender;
-		$data = $nationalinfo;
-		$data = $dupinfo;
-		$data = $conninfo;
-		$data = $mobileno;
-		$data = $mobileco;
+		$data = array(
+			'ciphertime' => $ciphertime,
+			'requestnumber' => $requestnumber,
+			'responsenumber' => $responsenumber,
+			'authtype' => $authtype,
+			'name' => $name,
+			'birthdate' => $birthdate,
+			'gender' => $gender,
+			'nationalinfo' => $nationalinfo,
+			'dupinfo' => $dupinfo,
+			'conninfo' => $conninfo,
+			'mobileno' => $mobileno,
+			'mobileco' => $mobileco,
+			
+		);
+		
 
 		print_r("Hi1");
 		pript_r($enc_data);
