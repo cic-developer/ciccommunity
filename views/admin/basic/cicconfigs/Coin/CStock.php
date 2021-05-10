@@ -18,33 +18,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<div class ='box-table'>
 		<!-- Posts List -->
-		<table border='1' width='100%' style='border-collapse: collapse;' class="table table-hover table-striped table-bordered">
-			<tr>
-				<th>S.no</th>
-				<th>마겟 명</th>
-				<th>한국어 명</th>
-			</tr>
-			<?php 
-			$sno = $row+1;
-			foreach($getStock as $stoks){
+		<div class="table-responsive">
+			<table style='border-collapse: collapse;' class="table table-hover table-striped table-bordered">
+				<tr>
+					<th>S.no</th>
+					<th>마겟 명</th>
+					<th>한국어 명</th>
+				</tr>
+				<?php 
+				$sno = $row+1;
+				foreach($getStock as $stoks){
 
-				//$content = substr($data['content'],0, 180)." ...";
-				echo "<tr>";
-				echo "<td>".$sno."</td>";
-				echo "<td><a href='".$stoks->market."' target='_blank'> ".$stoks->market."</a></td>";
-				echo "<td><a href='".$stoks->name_ko."' target='_blank'> ".$stoks->name_ko."</a></td>";
-				//echo "<td><button type="button" class="btn btn-info">Info</button></td>";
-				echo "</tr>";
-				$sno++;
+					//$content = substr($data['content'],0, 180)." ...";
+					echo "<tr>";
+					echo "<td>".$sno."</td>";
+					echo "<td><a href='".$stoks->market."' target='_blank'> ".$stoks->market."</a></td>";
+					echo "<td><a href='".$stoks->name_ko."' target='_blank'> ".$stoks->name_ko."</a></td>";
+					//echo "<td><button type="button" class="btn btn-info">Info</button></td>";
+					echo "</tr>";
+					$sno++;
 
-			}
-			if(count($result) == 0){
-				echo "<tr>";
-				echo "<td colspan='3'>No record found.</td>";
-				echo "</tr>";
-			}
-			?>
-		</table>
+				}
+				if(count($result) == 0){
+					echo "<tr>";
+					echo "<td colspan='3'>No record found.</td>";
+					echo "</tr>";
+				}
+				?>
+			</table>
 	</div>
 
 	<!-- Paginate -->
