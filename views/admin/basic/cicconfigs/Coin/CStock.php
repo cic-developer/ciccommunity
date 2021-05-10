@@ -18,13 +18,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</tr>
 		<?php 
 		$sno = $row+1;
-		foreach($result as $data){
+		foreach($getStock as $stoks){
 
-			$content = substr($data['content'],0, 180)." ...";
+			//$content = substr($data['content'],0, 180)." ...";
 			echo "<tr>";
 			echo "<td>".$sno."</td>";
-			echo "<td><a href='".$data['link']."' target='_blank'>".$data['title']."</a></td>";
-			echo "<td>".$content."</td>";
+			echo "<td><a href='"..$stoks->name_ko."' target='_blank'>".$stoks->name_ko."</a></td>";
+			//echo "<td>".$content."</td>";
 			echo "</tr>";
 			$sno++;
 
