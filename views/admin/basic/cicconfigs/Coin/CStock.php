@@ -1,11 +1,16 @@
-
-  
-<!-- <td><?php $realtime_coin_info; ?></td> -->
-<!-- <td> $realtime_coin_info['high_price']; ?> -->
-<!--  ------------------------------------PART 2------------------------------------------ -->      
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 
 
 <div class="box">
+   <!-- Search form (start) -->
+   	<form method='post' action="<?= base_url() ?>index.php/User/loadRecord" >
+     	<input type='text' name='search' value='<?= $search ?>'><input type='submit' name='submit' value='Submit'>
+  	</form>
+   	<br/>
+
+
 	<div class="box-header">
 		<ul class="nav nav-tabs">
 			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/CStock'); ?>" onclick="return check_form_changed();">코인 검색 설정</a></li>
