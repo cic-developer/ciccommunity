@@ -114,7 +114,7 @@ class Checkplus extends CI_Controller
 		return $enc_data;
 	}
 
-	public function success()
+	public function success($EncodeData)
 	{
 		//**************************************************************************************************************
 		//NICE평가정보 Copyright(c) KOREA INFOMATION SERVICE INC. ALL RIGHTS RESERVED
@@ -133,9 +133,8 @@ class Checkplus extends CI_Controller
 		
 		// Linux = /절대경로/ , Window = D:\\절대경로\\ , D:\절대경로\
 		$cb_encode_path = "/home/bitnami/dev_ciccommunity/CPClient_64bit";
-		print_r("test");
-		return;
-		$enc_data = $this->input->get("EncodeData");		// 암호화된 결과 데이타
+			
+		$enc_data = $EncodeData;		// 암호화된 결과 데이타
 
 			//////////////////////////////////////////////// 문자열 점검///////////////////////////////////////////////
 		if(preg_match('~[^0-9a-zA-Z+/=]~', $enc_data, $match)) {echo "입력 값 확인이 필요합니다 : ".$match[0]; exit;} // 문자열 점검 추가. 

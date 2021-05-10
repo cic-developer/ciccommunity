@@ -58,7 +58,7 @@ class Register extends CB_Controller
 		$view['view']['main'] = $this->checkplus->main();
 		if($this->input->get("EncodeData")){
 			
-			$view['view']['success'] = $this->checkplus->success();
+			$view['view']['success'] = $this->checkplus->success($this->input->get("EncodeData"));
 		}
 		print_r($this->input->get("EncodeData"));
 		return;
