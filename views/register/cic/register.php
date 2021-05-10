@@ -8,11 +8,10 @@
 				$attributes = array('class' => 'form-horizontal', 'name' => 'fregisterform', 'id' => 'fregisterform');
 				echo form_open(current_full_url(), $attributes);
 				
-				
 			?>
 			<div class="agrees">
 				<div class="item c01">
-					<h4>회원가입 약관 동의</h4>
+					<h4>회원가입 약관 동의current_full_url()</h4>
 					<div class="agree-txt">
 						<p>제 1 장 &nbsp;&nbsp;총 칙</p>
 						<p>&nbsp;</p>
