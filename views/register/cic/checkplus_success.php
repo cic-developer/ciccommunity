@@ -46,6 +46,7 @@
             // 복호화가 정상적일 경우 데이터를 파싱합니다.
             $ciphertime = `$cb_encode_path CTS $sitecode $sitepasswd $enc_data`;	// 암호화된 결과 데이터 검증 (복호화한 시간획득)
         
+            echo '<p>fdfsf</p>';
             $requestnumber = GetValue($plaindata , "REQ_SEQ");
             $responsenumber = GetValue($plaindata , "RES_SEQ");
             $authtype = GetValue($plaindata , "AUTH_TYPE");
@@ -76,8 +77,6 @@
             }
         }
     }
-    echo '<p>fdfsf</p>'
-    exit;
 ?>
 
 <?
