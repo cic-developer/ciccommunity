@@ -140,18 +140,11 @@
                         <ul>
                         <tbody>
 						<?php
-						if (element('popularpost', $view)) {
-							foreach (element('popularpost', $view) as $popularpost) {
+						if (element('list',element('popularpost', $view))) {
+							foreach (element('list',element('popularpost', $view)) as $popularpost) {
 						?>
-							<tr>
-								<li><?php echo number_format(element('num', $popularpost)); ?></li>
-								<li><a href="<?php echo goto_url(element('post_title', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $view)); ?></a></li>
-                                <li><a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $view)); ?></a></li>
-                                <li><a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $view)); ?></a></li>
-                                <li><a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $view)); ?></a></li>
-                                <li><?php echo goto_url(element('popularpost',element('post_title',$view))); ?></li>
-								<li><?php echo number_format(element('post_hit', $popularpost)); ?></li>
-							</tr>
+                        <li><a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $popularpost)); ?></a></li>
+                        <td><a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_hit', $popularpost)); ?></a></td>
 						<?php
 							}
 						}
