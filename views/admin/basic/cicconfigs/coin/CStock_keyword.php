@@ -1,8 +1,11 @@
 <div class="box">
 	<div class="box-table">
-		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/CStock'); ?>" onclick="return check_form_changed();">VP 설정</a></li>
-		</ul>
+		<div class="box-table-header">
+			<ul class="nav nav-pills">
+				<li role="presentation"><a href="<?php echo admin_url($this->pagedir.'/CStock')?>">Coin 관리</a></li>
+				<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/CStock_keyword'); ?>">검색키워드 설정</a></li>
+			</ul>
+		</div>
 		<?php
 		echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
 		echo show_alert_message(element('alert_message', $view), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');

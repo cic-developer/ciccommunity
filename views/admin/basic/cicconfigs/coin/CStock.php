@@ -3,7 +3,7 @@
 		<div class="box-table-header">
 			<ul class="nav nav-pills">
 				<li role="presentation"><a href="<?php echo admin_url($this->pagedir.'/CStock')?>">Coin 관리</a></li>
-				<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/CStock_keyword'); ?>">검색키워드 정리</a></li>
+				<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/CStock_keyword'); ?>">검색키워드 설정</a></li>
 			</ul>
 		</div>
 		<?php
@@ -47,7 +47,10 @@
 							<td><a href="?sfield=Coin.coin_idx&amp;skeyword=<?php echo element('coin_idx', $result); ?>"><?php echo html_escape(element('market', $result)); ?></a></td>
 							<td><?php echo element('name_ko', $result); ?></td>
 							<td><?php echo element('name_en', $result); ?></td>
-							<td><button  type="button" id="myBtn" name='selected_market' class="btn btn-link">Link</button></td>
+							<form action="post" name='selected_market'>
+								<td><button  type="button" id="myBtn" class="btn btn-link" onClick="document.location.href='https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword'">Link</button></td>
+								<?php echo element('coin_idx', $result); ?> 
+							</form>
 						</tr>
 					<?php
 						}
@@ -107,7 +110,7 @@ $(function () {
 	});
 })
 //]]>
-var btn = document.getElementById('myBtn');
+var btn = document.getElementById(id);
 btn.addEventListener('click', function() {
 	document.location.href = 'CStock_keyword';
 });
