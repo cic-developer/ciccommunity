@@ -913,9 +913,10 @@
 <script>
 	var reg_num = /^[0-9]*$/;
 	$('.up').on('click', function(){
-		vp_up();
+		update_vp('up');
 	});
-	function vp_up(){
+
+	function update_vp(type){
 		if(!is_member){
 			alert('로그인이 필요한 서비스입니다.');
 			return false;
@@ -935,6 +936,22 @@
 		}
 
 		const point = Number(_point);
+		
+		$.ajax({
+			url: cb_url + '/postact/filter_spam_keyword',
+			type: 'post',
+			data: {
+				title: '',
+				content: f.cmt_content.value,
+				csrf_test_name: cb_csrf_hash
+			},
+			dataType: 'json',
+			async: false,
+			cache: false,
+			success: function(data) {
+				content = data.content;
+			}
+		});
 		return true;
 	}
 </script>

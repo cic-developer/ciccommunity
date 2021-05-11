@@ -149,41 +149,6 @@ class Coin extends CB_Controller
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 				}
 		}	
-	
-		//CREATE COIN LIST FOR ADMIN
-
-		$this->load->library('form_validation');
-
-		$config = array(
-			array(
-				'field' => 'selected_market',
-				'rules'=>'required'
-			),
-
-		);
-	
-		$this->form_validation->set_rules($config);
-
-		if($this->form_validation -> run () == FALSE)
-		{
-			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-		}else{
-			$list = array(
-				'selected_market' => $this -> input -> post('selected_market')
-			);
-			foreach($list as $l){
-				if(isset($l) && !empty($l)){
-					$stock_ = $this->Coin_model->dropdown_list($l);
-					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-					//print_r($stock_);
-				}
-			}
-			
-			
-			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-		}
-
-
        	//GET MARKET 
 	    // $admincoin = $this -> Coin_model_admin -> get_admin_coinList();
 		// for($i = 0; $i < count($getStock); $i++){
@@ -240,16 +205,7 @@ class Coin extends CB_Controller
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
 
-			// 이벤트가 존재하면 실행합니다
-			// Events::trigger('after', $eventname);
 
-			// /**
-			//  * 게시물의 신규입력 또는 수정작업이 끝난 후 목록 페이지로 이동합니다
-			//  */
-			// $param =& $this->querystring;
-			// $redirecturl = admin_url($this->pagedir . '?' . $param->output());
-
-			// redirect($redirecturl);
 		}
 	
 }

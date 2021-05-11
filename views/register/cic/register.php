@@ -266,7 +266,7 @@
 							- 보존 근거 : 전자금융거래법<br>
 							- 보존 기간 : 5년</p>
 					</div>
-					<p class="chk-check"><input type="checkbox" id="jsel03"><label for="jsel03">개인정보 수집 및 이용에
+					<p class="chk-check"><input type="checkbox" id="jsel03" name="agree3" value="1"><label for="jsel03">개인정보 수집 및 이용에
 							동의합니다.</label></p>
 				</div>
 				<?php echo form_close(); ?>
@@ -305,10 +305,20 @@
 
 	
 	window.name ="Parent_window";
+
+
 	function fnPopup(){
-		window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
-		document.form_chk.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
-		document.form_chk.target = "popupChk";
-		document.form_chk.submit();
+		// 체크여부 확인
+		if( $("input:checkbox[name=agree]").is(":checked") == true 
+				&& $("input:checkbox[name=agree2]").is(":checked") == true
+					&& $("input:checkbox[name=agree]3").is(":checked") == true ) {
+			window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
+			document.form_chk.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+			document.form_chk.target = "popupChk";
+			document.form_chk.submit();
+		} else {
+			alert("이용약관을 확인해주세요")
+		}
 	}
+
 </script>

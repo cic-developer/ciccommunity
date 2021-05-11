@@ -36,33 +36,13 @@ class Coin_model_admin extends CB_Model
         return $query->result(); 
     }
 
-    // function getonerow(){
-    //     $this->db->where('stk_id', $id);
-    //     $query = $this->db->get('cic_stocks');
-    //     return $query->row();
-    // }
+    function insert_keyword($data){
 
-
-    // function search_coin($search){
-    // //     if(!empty($key)) {
-    // //         $this->db->where($_table, $key);
-    // //     }
-    // //     $search_ = "";
-    // //     if(preg_match('/\s/', $search_) > 0){
-    // //         $search_ = array_map('trim',array_filter(explode('', $search_)));
-    // //         foreach ($search_ as $key_=> $value){
-    // //             $this->db->or_like('foo_column', $value);
-    // //         }
-    // //     }else if($search_ !=''){
-    // //         $this->db->like('foo_column', $search_);
-    // //     }
-    // //     $query = $this->db->get('name_en');
-    // //     return $query->result();
-    //     $search = $this->input->GET('search', TRUE);
-    //     $data = $this->db->query("SELECT * from $_table where key_word like '%$search%' ");
-    //     return $data->result();
-
-    // }
+        if(isset($data) && !empty($data)){
+            $result = $this->db->insert('cic_coin_stock', $data);
+            return $result;
+        }
+    } 
 
 
 }

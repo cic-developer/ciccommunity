@@ -27,7 +27,7 @@
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail2">Keyword</label>
-						<input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+						<input type="email" class="form-control" id="exampleInputEmail2">
 					</div>
 					<div class="col-sm-2"><button type="button" class="btn btn-outline btn-primary btn-xs btn-add-rows">추가</button></div>
 				</form>

@@ -122,6 +122,11 @@ class Register extends CB_Controller
 				'label' => '개인정보취급방침',
 				'rules' => 'trim|required',
 			),
+			array(
+				'field' => 'agree3',
+				'label' => '개인정보 수집 및 이용',
+				'rules' => 'trim|required',
+			),
 		);
 		$this->form_validation->set_rules($config);
 
@@ -143,6 +148,7 @@ class Register extends CB_Controller
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 			$view['view']['recommend_id'] = $this->input->get('rcid');
+			$view['view']['main'] = $this->checkplus->main();
 
 			/**
 			 * 레이아웃을 정의합니다
@@ -202,7 +208,7 @@ class Register extends CB_Controller
 			$layoutconfig = array(
 				'path' => 'register',
 				'layout' => 'layout',
-				'skin' => 'register',
+				'skin' => 'checkplus_success',
 				'layout_dir' => $this->cbconfig->item('layout_register'),
 				'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_register'),
 				'use_sidebar' => $this->cbconfig->item('sidebar_register'),
@@ -228,34 +234,6 @@ class Register extends CB_Controller
 
 		}
 	}
-
-	public function checkplus_success()
-	{
-		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_register_index';
-		$this->load->event($eventname);
-
-		$view = array();
-		$view['view'] = array();
-
-		// 이벤트가 존재하면 실행합니다
-		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-
-		if ($this->member->is_member()
-			&& ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
-			redirect();
-		}
-
-		if($this->input->get("EncodeData")){
-			$this->checkplus->success($this->input->get("EncodeData"));
-			// echo("<script>self.close()</script>");
-			redirect("register/checkplus_success");
-		}//window.opener.parent.location.reload();
-
-		// 이벤트가 존재하면 실행합니다
-		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-	}
-
 
 	/**
 	 * 회원가입 폼 페이지입니다
