@@ -1,102 +1,80 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-
-
 <div class="box">
-	<?php
-	echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
-	$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
-	echo form_open(current_full_url(), $attributes);
-	?>
-	<div class="box-table-header">
-		
+	<div class="box-table">
+		<?php
+		echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
+		$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
+		echo form_open(current_full_url(), $attributes);
+		?>
+			<div class="box-table-header">
+				<?php
+				ob_start();
+				?>
+					<div class="btn-group pull-right" role="group" aria-label="...">
+						<a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a>
+					</div>
+				<?php
+				$buttons = ob_get_contents();
+				ob_end_flush();
+				?>
+			</div>
+			<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
+			<div class="table-responsive">
+				<table class="table table-hover table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>마켓명</th>
+							<th>한국어명</th>
+							<th>연어명</th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php
+					if (element('list', element('data', $view))) {
+						foreach (element('list', element('data', $view)) as $result) {
+					?>
+						<tr>
+							<td><?php echo number_format(element('num', $result)); ?></td>
+							<td><a href="?sfield=Coin.coin_idx&amp;skeyword=<?php echo element('coin_idx', $result); ?>"><?php echo html_escape(element('market', $result)); ?></a></td>
+							<td><?php echo element('name_ko', $result); ?></td>
+							<td><?php echo element('name_en', $result); ?></td>
+						</tr>
+					<?php
+						}
+					}
+					if ( ! element('list', element('data', $view))) {
+					?>
+						<tr>
+							<td colspan="8" class="nopost">자료가 없습니다</td>
+						</tr>
+					<?php
+					}
+					?>
+					</tbody>
+				</table>
+			</div>
+			<div class="box-info">
+				<?php echo element('paging', $view); ?>
+				<div class="pull-left ml20"><?php echo admin_listnum_selectbox();?></div>
+				<?php echo $buttons; ?>
+			</div>
+		<?php echo form_close(); ?>
 	</div>
-
-
-
-<!-- Search form (start) -->
-	<div class ='box-table'>
-		<form method='post' action="<?= base_url() ?>/application/controllers/admin/cicconfigs/Coin/loadRecord" >
-			<div class='box-search'>
-				<div class='col-md-6 col-md-offset-3'>
-					<div class='input-group'>
-						<input type='text' class='form-control' name='search' value='<?= $search ?>'>
-						<span class = "input-group-btn">
-							<button type='submit' class="btn btn-default btn-sm" name='submit' value='검색'>검색!</button>
+	<form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
+		<div class="box-search">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<select class="form-control" name="sfield" >
+						<?php echo element('search_option', $view); ?>
+					</select>
+					<div class="input-group">
+						<input type="text" class="form-control" name="skeyword" value="<?php echo html_escape(element('skeyword', $view)); ?>" placeholder="Search for..." />
+						<span class="input-group-btn">
+							<button class="btn btn-default btn-sm" name="search_submit" type="submit">검색!</button>
 						</span>
 					</div>
 				</div>
-			</div>		
-		</form><br/> 
-		
-	</div>
-	<!-- Posts List -->
-	<div class ='box-table'>
-	<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
-		
-		<div class="table-responsive">
-			<table class="table table-hover table-striped table-bordered">
-				<tr>
-					<th>S.no</th>
-					<th>마겟 명</th>
-					<th>한국어 명</th>
-				</tr>
-				<?php 
-				$sno = $row+1;
-				foreach($getStock as $stocks){
-					echo "<tr>";
-					echo "<td>".$sno."</td>";
-					echo "<td><a href='".$stocks->market."' target='_blank'> ".$stocks->market."</a></td>";
-					echo "<td><a href='".$stocks->name_ko."' target='_blank'> ".$stocks->name_ko."</a></td>";
-					//echo "<td><button type="button" class="btn btn-info">Info</button></td>";
-					echo "</tr>";
-					$sno++;
-				}
-				
-				if(count($stocks) == 0){
-					echo "<tr>";
-					echo "<td colspan='3'>No record found.</td>";
-					echo "</tr>";
-				}
-				?>
-			</table>
-		</div>	
-	</div>
-
-	<!-- Paginate -->
-	<div style='margin-top: 10px;'>
-	<?= $pagination; ?>
-	</div>
+			</div>
+		</div>
+	</form>
 </div>
-
-<script type="text/javascript">
-//<![CDATA[
-$(function() {
-	$('#fadminwrite').validate({
-		rules: {
-			point_register: {required :true, number:true},
-			point_login: {required :true, number:true},
-			point_recommended: {required :true, number:true},
-			point_recommender: {required :true, number:true}
-		}
-	});
-});
-
-var form_original_data = $('#fadminwrite').serialize();
-function check_form_changed() {
-	if ($('#fadminwrite').serialize() !== form_original_data) {
-		if (confirm('저장하지 않은 정보가 있습니다. 저장하지 않은 상태로 이동하시겠습니까?')) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	return true;
-}
-//]]>
-
-$("#CStock").parent('li').addClass('active');
-</script>
-
-

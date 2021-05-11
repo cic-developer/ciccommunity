@@ -24,7 +24,7 @@ class Coin extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Coin_model');
+	protected $models = array('Coin');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
@@ -84,13 +84,6 @@ class Coin extends CB_Controller
 
 		
 		$where = array();
-		if (is_numeric($this->input->get('mlh_from'))) {
-			$where['mlh_from'] = $this->input->get('mlh_from');
-		}
-		if (is_numeric($this->input->get('mlh_to'))) {
-			$where['mlh_to'] = $this->input->get('mlh_to');
-
-		}
 
 		$result = $this->{$this->modelname}
 		->getstockData();
@@ -98,16 +91,42 @@ class Coin extends CB_Controller
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
 				$result['list'][$key]['display_name'] = display_username(
-					element('mem_userid', $val),
-					element('mem_nickname', $val),
-					element('mem_icon', $val)
+					element('coin_idx', $val),
+					element('market', $val),
+					element('name_ko', $val),
+					element('name_en', $val)
 				);
 				$result['list'][$key]['num'] = $list_num--;
 			}
 		}
 		$view['view']['data'] = $result;
+
+		/**
+		 * primary key 정보를 저장합니다
+		 */
+		$view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
+
+		/**
+		 * 페이지네이션을 생성합니다
+		 */
+		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['total_rows'] = $result['total_rows'];
+		$config['per_page'] = $per_page;
+		$this->pagination->initialize($config);
+		$view['view']['paging'] = $this->pagination->create_links();
+		$view['view']['page'] = $page;
 		
-		
+		/**
+		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
+		 */
+		$search_option = array('market' => '마켓', 'name_ko' => '한국어명', 'name_en' => '영어명');
+		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
+		$view['view']['search_option'] = search_option($search_option, $sfield);
+		$view['view']['listall_url'] = admin_url($this->pagedir);
+		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listdelete/?' . $param->output());
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 		
 		
 		
@@ -197,9 +216,7 @@ class Coin extends CB_Controller
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
 		}
-			// echo "<br><pre>";
-			// print_r($realtime_coin_info);
-			// echo "</pre>";
+	
 	}
 	
 }

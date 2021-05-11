@@ -73,7 +73,20 @@ class Main extends CB_Controller
 		$popularpost = $this->Post_model
 			->get_popularpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 
-
+		if(element('list', $popularpost)){
+			foreach(element('list', $popularpost) as $key => $val){
+				$popularpost['list'][$key]['post_display_name'] = display_username(
+					element('post_userid', $val),
+					element('post_nickname', $val)
+				);
+				$popularpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+				$popularpost['list'][$key]['num'] = $list_num--;
+			}
+			if($board){
+				$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+				$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+			}
+		}
 			
 		$view['view']['board_list'] = $board_list;
 		$view['view']['canonical'] = site_url();		
