@@ -96,6 +96,14 @@ class Coin_model extends CB_Model
         return $query->row();
     }
 
+    function insert_admin_list($data){
+
+    $result = $this->db->insert('cic_coin_admins', $data);
+
+    return $result;
+        
+    }
+
 
     function search_coin($search){
     //     if(!empty($key)) {
