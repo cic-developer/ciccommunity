@@ -78,9 +78,9 @@ class Coin extends CB_Controller
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
-		$this->{$this->modelname}->allow_search_field = array('mlh_id', 'member_level_history.mem_id', 'member.mem_userid', 'member.mem_nickname', 'mlh_from', 'mlh_to', 'mll_datetime', 'mlh_reason', 'mlh_ip'); // 검색이 가능한 필드
-		$this->{$this->modelname}->search_field_equal = array('mlh_id', 'member_level_history.mem_id', 'mlh_from', 'mlh_to'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->{$this->modelname}->allow_order_field = array('mlh_id'); // 정렬이 가능한 필드
+		$this->{$this->modelname}->allow_search_field = array('coin_idx', 'market', 'name_ko', 'name_en'); // 검색이 가능한 필드
+		$this->{$this->modelname}->search_field_equal = array('coin_idx', 'market', 'name_ko', 'name_en'); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->{$this->modelname}->allow_order_field = array('coin_idx'); // 정렬이 가능한 필드
 
 		
 		$where = array();
@@ -93,7 +93,7 @@ class Coin extends CB_Controller
 		}
 
 		$result = $this->{$this->modelname}
-		->getstockData($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		->getstockData();
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
