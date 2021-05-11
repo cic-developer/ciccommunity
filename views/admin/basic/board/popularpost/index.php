@@ -8,6 +8,7 @@
 				<div class="box-table-header">
 					<ul class="nav nav-pills">
 						<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir); ?>">인기게시글목록</a></li>
+						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/bestpost'); ?>">베스트게시글목록</a></li>
 					</ul>
 					<?php
 					ob_start();
@@ -15,7 +16,7 @@
 						<div class="btn-group pull-right" role="group" aria-label="...">
 							<a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a>
 							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('list_update_url', $view); ?>" >선택제외</button>
-							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('list_bestpost_url', $view); ?>" >베스트게시물선정</button>
+							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('list_update_url', $view); ?>" >베스트게시물선정</button>
 						</div>
 					<?php
 					$buttons = ob_get_contents();

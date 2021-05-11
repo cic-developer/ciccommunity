@@ -202,7 +202,7 @@ class Coin extends CB_Controller
 
 		$config = array(
 			array(
-				'field' => 'key_idx',
+				'field' => 'coin_idx',
 				'rules'=>'required'
 			),
 			array(
@@ -223,20 +223,15 @@ class Coin extends CB_Controller
 				'keyword' => $this -> input -> post('keyword'),
 
 			);
-
-
-			foreach($list as $l){
-				if(isset($l) && !empty($l)){
-					$stock_ = $this->Coin_model_admin->insert_keyword($l);
+				if(isset($data) && !empty($data)){
+					print_r($data);
+					$stock_ = $this->Coin_model_admin->insert_keyword($data);
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 					//print_r($stock_);
 				}
 			}
-			
-			
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-		}
-
+		
 
 			
 			/**

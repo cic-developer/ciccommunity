@@ -18,7 +18,7 @@ class Coin_model_admin extends CB_Model
     /**
 	 * 테이블명
 	 */
-	public $_table = 'cic_coin_admin';
+	public $_table = 'cic_coin_admins';
     //public $primary_key = 'market';
 
     function __construct()
@@ -30,16 +30,10 @@ class Coin_model_admin extends CB_Model
 	/**
 	 * Get RealTime Coin Price
 	 */
-
-    function get_admin_coinList(){
-        $query = $this->db->get('cic_coin_admin');
-        return $query->result(); 
-    }
-
     function insert_keyword($data){
 
         if(isset($data) && !empty($data)){
-            $result = $this->db->insert('cic_coin_stock', $data);
+            $result = $this->db->insert('cic_coin_admins', $data);
             return $result;
         }
     } 

@@ -55,15 +55,23 @@ class Register extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
+		$this->session->set_userdata('registeragree', '1');
+
 		$view['view']['enc_data'] = $this->checkplus->main();
 		if($this->input->get("EncodeData")){
 			$this->checkplus->success($this->input->get("EncodeData"));
+			$this->session->set_userdata('registeragree', '1');
+			// echo("<script>$('input:checkbox[name=agree]').prop('checked', true);</script>");
+			// echo("<script>$('input:checkbox[name=agree1]').prop('checked', true);</script>");
+			// echo("<script>$('input:checkbox[name=agree2]').prop('checked', true);</script>");
 			echo("<script>window.opener.location.href='register/form';</script>");
 			echo("<script>self.close()</script>");
-		}//window.opener.parent.location.reload();
-		// $this->session->sess_destroy();
+		}
 		// $this->session->unset_userdata('dec_data');
+		print_r($this->session->userdata('registeragree'));
+		print_r("<br>");
 		print_r($this->session->userdata('dec_data'));
+		print_r("<br>");
 		
 
 		if ($this->member->is_member()

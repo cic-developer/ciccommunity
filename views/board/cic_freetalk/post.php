@@ -49,8 +49,8 @@
 						?>
 						<div class="vp-point">
 							<ul>
-								<li><a href="#n" class="up"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>
-								<li><a href="#n" class="down"><?php echo number_format(element('post_dislike_point', element('post', $view))); ?></a></li>
+								<li><a href="#n" class="up" data-contenttype="post"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>
+								<li><a href="#n" class="down" data-contenttype="post"><?php echo number_format(element('post_dislike_point', element('post', $view))); ?></a></li>
 							</ul>
 						</div>
 					</div>
@@ -63,8 +63,8 @@
 					<!-- 본문 내용 끝 -->
 					<div class="vp-point">
 						<ul>
-							<li><a href="#n" class="up"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>
-							<li><a href="#n" class="down"><?php echo number_format(element('post_dislike_point', element('post', $view))); ?></a></li>
+							<li><a href="#n" class="up" data-contenttype="post"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>
+							<li><a href="#n" class="down" data-contenttype="post"><?php echo number_format(element('post_dislike_point', element('post', $view))); ?></a></li>
 						</ul>
 					</div>
 					<!-- <div class="modify">
@@ -368,10 +368,10 @@
 									<div class="vp-point">
 										<ul>
 											<li>
-												<p class="up">12</p>
+												<p class="up" data-contenttype="comment" data-cmtidx="1">12</p>
 											</li>
 											<li>
-												<p class="down">35</p>
+												<p class="down" data-contenttype="comment" data-cmtidx="1">35</p>
 											</li>
 										</ul>
 
@@ -408,10 +408,10 @@
 									<div class="vp-point">
 										<ul>
 											<li>
-												<p class="up">12</p>
+												<p class="up" data-contenttype="comment" data-cmtidx="1">12</p>
 											</li>
 											<li>
-												<p class="down">35</p>
+												<p class="down" data-contenttype="comment" data-cmtidx="1">35</p>
 											</li>
 										</ul>
 									</div>
@@ -446,10 +446,10 @@
 									<div class="vp-point">
 										<ul>
 											<li>
-												<p class="up">12</p>
+												<p class="up" data-contenttype="comment" data-cmtidx="1">12</p>
 											</li>
 											<li>
-												<p class="down">35</p>
+												<p class="down" data-contenttype="comment" data-cmtidx="1">35</p>
 											</li>
 										</ul>
 									</div>
@@ -486,10 +486,10 @@
 									<div class="vp-point">
 										<ul>
 											<li>
-												<p class="up">12</p>
+												<p class="up" data-contenttype="comment" data-cmtidx="1">12</p>
 											</li>
 											<li>
-												<p class="down">35</p>
+												<p class="down" data-contenttype="comment" data-cmtidx="1">35</p>
 											</li>
 										</ul>
 									</div>
@@ -526,10 +526,10 @@
 									<div class="vp-point">
 										<ul>
 											<li>
-												<p class="up">12</p>
+												<p class="up" data-contenttype="comment" data-cmtidx="1">12</p>
 											</li>
 											<li>
-												<p class="down">35</p>
+												<p class="down" data-contenttype="comment" data-cmtidx="1">35</p>
 											</li>
 										</ul>
 									</div>
@@ -564,10 +564,10 @@
 									<div class="vp-point">
 										<ul>
 											<li>
-												<p class="up">12</p>
+												<p class="up" data-contenttype="comment" data-cmtidx="1">12</p>
 											</li>
 											<li>
-												<p class="down">35</p>
+												<p class="down" data-contenttype="comment" data-cmtidx="1">35</p>
 											</li>
 										</ul>
 									</div>
@@ -604,50 +604,10 @@
 									<div class="vp-point">
 										<ul>
 											<li>
-												<p class="up">12</p>
+												<p class="up" data-contenttype="comment" data-cmtidx="1">12</p>
 											</li>
 											<li>
-												<p class="down">35</p>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="vtxt">
-									<p>내 닉넴은 유니크한거라 바꿔준대도 싫음 </p>
-								</div>
-								<div class="ctrls">
-									<ul>
-										<li>
-											<p class="date">21. 03. 04 19:08</p>
-										</li>
-										<li><a href="#n" class="cmmt-btn"><span>답글</span></a></li>
-										<li><a href="#n" class="singo-btn"><span>신고</span></a></li>
-									</ul>
-								</div>
-								<div class="comment">
-									<textarea
-										placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
-									<div class="btns">
-										<a href="#n" class="write-btn"><span>답글등록</span></a>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="item vfm">
-							<div class="vcon">
-								<div class="info">
-									<a href="#n" class="nickname">
-										<p class="ico"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-												alt=""></p>
-										<p class="txt">힘을내포포</p>
-									</a>
-									<div class="vp-point">
-										<ul>
-											<li>
-												<p class="up">12</p>
-											</li>
-											<li>
-												<p class="down">35</p>
+												<p class="down" data-contenttype="comment" data-cmtidx="1">35</p>
 											</li>
 										</ul>
 									</div>
@@ -684,50 +644,10 @@
 									<div class="vp-point">
 										<ul>
 											<li>
-												<p class="up">12</p>
+												<p class="up" data-contenttype="comment" data-cmtidx="1">12</p>
 											</li>
 											<li>
-												<p class="down">35</p>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="vtxt">
-									<p>내 닉넴은 유니크한거라 바꿔준대도 싫음 </p>
-								</div>
-								<div class="ctrls">
-									<ul>
-										<li>
-											<p class="date">21. 03. 04 19:08</p>
-										</li>
-										<li><a href="#n" class="cmmt-btn"><span>답글</span></a></li>
-										<li><a href="#n" class="singo-btn"><span>신고</span></a></li>
-									</ul>
-								</div>
-								<div class="comment">
-									<textarea
-										placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
-									<div class="btns">
-										<a href="#n" class="write-btn"><span>답글등록</span></a>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="item vfm">
-							<div class="vcon">
-								<div class="info">
-									<a href="#n" class="nickname">
-										<p class="ico"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-												alt=""></p>
-										<p class="txt">힘을내포포</p>
-									</a>
-									<div class="vp-point">
-										<ul>
-											<li>
-												<p class="up">12</p>
-											</li>
-											<li>
-												<p class="down">35</p>
+												<p class="down" data-contenttype="comment" data-cmtidx="1">35</p>
 											</li>
 										</ul>
 									</div>
@@ -764,10 +684,90 @@
 									<div class="vp-point">
 										<ul>
 											<li>
-												<p class="up">12</p>
+												<p class="up" data-contenttype="comment" data-cmtidx="1">12</p>
 											</li>
 											<li>
-												<p class="down">35</p>
+												<p class="down" data-contenttype="comment" data-cmtidx="1">35</p>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="vtxt">
+									<p>내 닉넴은 유니크한거라 바꿔준대도 싫음 </p>
+								</div>
+								<div class="ctrls">
+									<ul>
+										<li>
+											<p class="date">21. 03. 04 19:08</p>
+										</li>
+										<li><a href="#n" class="cmmt-btn"><span>답글</span></a></li>
+										<li><a href="#n" class="singo-btn"><span>신고</span></a></li>
+									</ul>
+								</div>
+								<div class="comment">
+									<textarea
+										placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
+									<div class="btns">
+										<a href="#n" class="write-btn"><span>답글등록</span></a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="item vfm">
+							<div class="vcon">
+								<div class="info">
+									<a href="#n" class="nickname">
+										<p class="ico"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
+												alt=""></p>
+										<p class="txt">힘을내포포</p>
+									</a>
+									<div class="vp-point">
+										<ul>
+											<li>
+												<p class="up" data-contenttype="comment" data-cmtidx="1">12</p>
+											</li>
+											<li>
+												<p class="down" data-contenttype="comment" data-cmtidx="1">35</p>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="vtxt">
+									<p>내 닉넴은 유니크한거라 바꿔준대도 싫음 </p>
+								</div>
+								<div class="ctrls">
+									<ul>
+										<li>
+											<p class="date">21. 03. 04 19:08</p>
+										</li>
+										<li><a href="#n" class="cmmt-btn"><span>답글</span></a></li>
+										<li><a href="#n" class="singo-btn"><span>신고</span></a></li>
+									</ul>
+								</div>
+								<div class="comment">
+									<textarea
+										placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
+									<div class="btns">
+										<a href="#n" class="write-btn"><span>답글등록</span></a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="item vfm">
+							<div class="vcon">
+								<div class="info">
+									<a href="#n" class="nickname">
+										<p class="ico"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
+												alt=""></p>
+										<p class="txt">힘을내포포</p>
+									</a>
+									<div class="vp-point">
+										<ul>
+											<li>
+												<p class="up" data-contenttype="comment" data-cmtidx="1">12</p>
+											</li>
+											<li>
+												<p class="down" data-contenttype="comment" data-cmtidx="1">35</p>
 											</li>
 										</ul>
 									</div>
@@ -912,21 +912,26 @@
 </div>
 <script>
 	var reg_num = /^[0-9]*$/;
+	var post_id = "<?php echo element('post_title', element('post', $view)); ?>"
 
 	$('.up').on('click', function(){
-		update_vp('up');
+		const content_type = $(this).attr('data-contenttype');
+		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmt_idx');
+		update_vp(content_idx, content_type, 'up');
 	});
 	
 	$('.down').on('click', function(){
-		update_vp('down');
+		const content_type = $(this).attr('data-contenttype');
+		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmt_idx');
+		update_vp(content_idx, content_type, 'down');
 	});
 
-	function update_vp(type){
+	function update_vp(content_idx, content_type, like_type){
 		if(!is_member){
 			alert('로그인이 필요한 서비스입니다.');
 			return false;
 		}
-		const title = 'VP를 '+ (type === 'up' ? 'UP' :'DOWN') + ' 합니다.';
+		const title = 'VP를 '+ (like_type === 'up' ? 'UP' :'DOWN') + ' 합니다.';
 		const _point = prompt(title, 0);
 
 		//취소버튼 누를시
@@ -940,21 +945,21 @@
 			return false;
 		}
 
-		const point = Number(_point);
-		
 		$.ajax({
-			url: cb_url + '/postact/filter_spam_keyword',
-			type: 'post',
+			url: cb_url + '/postact/post_like/'+post_id+'/'+(like_type === 'up' ? '1' :'2'),
+			type: 'get',
 			data: {
-				title: '',
-				content: f.cmt_content.value,
-				csrf_test_name: cb_csrf_hash
+				usePoint: _point,
 			},
 			dataType: 'json',
 			async: false,
 			cache: false,
 			success: function(data) {
-				content = data.content;
+				if(data.error){
+					alert(data.error);
+				} else {
+					alert('성공적으로 처리되었습니다.');
+				}
 			}
 		});
 		return true;

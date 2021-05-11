@@ -172,14 +172,10 @@ if (typeof COMMON_JS === "undefined") {
             return;
         if (
             acttype === "update" &&
-            !confirm("선택한 자료를 정말 제외 하시겠습니까?")
+            !confirm("선택한 자료를 정말 업데이트 하시겠습니까?")
         )
             return;
-        if (
-            acttype === "update" &&
-            !confirm("선택한 자료를 정말 제외 하시겠습니까?")
-        )
-            return;
+
         if (
             acttype === "recover" &&
             !confirm("선택한 자료를 정말 복원 하시겠습니까?")
