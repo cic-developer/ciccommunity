@@ -13,6 +13,9 @@
 						$attributes = array('class' => 'search_box', 'name' => 'searchForm', 'id' => 'searchForm', 'method' => 'get');
 						echo form_open(base_url('/search'), $attributes);
 					?>
+                    <input type="hidden" name="group_id" value="" />
+                    <input type="hidden" name="sfield" value="post_both" />
+                    <input type="hidden" name="sop" value="OR" />
                     <p class="chk-input"><input type="text" placeholder="검색어를 입력해주세요" autocomplete="off" name="skeyword" /></p>
                     <button class="enter"><span class="blind">검색</span></button>
                     <?php echo form_close(); ?>
@@ -185,31 +188,30 @@
                             </div>
                             <div class="list tab-con" id="rtab01">
                                 <ul>
-                                <?php print_r(element('searchrank', $view)); ?>
-                                    <li><a href="#n"><span>1</span>비트코인</a></li>
-                                    <li><a href="#n"><span>2</span>코박</a></li>
-                                    <li><a href="#n"><span>3</span>코인원</a></li>
-                                    <li><a href="#n"><span>4</span>이더리움</a></li>
-                                    <li><a href="#n"><span>5</span>로제떡볶이</a></li>
-                                    <li><a href="#n"><span>6</span>지드래곤</a></li>
-                                    <li><a href="#n"><span>7</span>YG</a></li>
-                                    <li><a href="#n"><span>8</span>불구속심사</a></li>
-                                    <li><a href="#n"><span>9</span>클레이튼</a></li>
-                                    <li><a href="#n"><span>10</span>CIC</a></li>
+                                    <?php 
+                                    if(element('searchrank', $view)){
+                                        for($i = 0; $i < 10; $i++){
+                                            $val = element($i, element('searchrank', $view));
+                                    ?>
+                                        <li><a href="/search?group_id=&sfield=post_both&skeyword=<?php echo element('key', $val); ?>&sop=OR"><span><?php echo $i + 1; ?></span><?php echo element('key', $val); ?></a></li>
+                                    <?php 
+                                        }
+                                    }
+                                    ?>
                                 </ul>
                             </div>
                             <div class="list tab-con hide" id="rtab02">
                                 <ul>
-                                    <li><a href="#n"><span>11</span>비트코인</a></li>
-                                    <li><a href="#n"><span>12</span>코박</a></li>
-                                    <li><a href="#n"><span>13</span>코인원</a></li>
-                                    <li><a href="#n"><span>14</span>이더리움</a></li>
-                                    <li><a href="#n"><span>15</span>로제떡볶이</a></li>
-                                    <li><a href="#n"><span>16</span>지드래곤</a></li>
-                                    <li><a href="#n"><span>17</span>YG</a></li>
-                                    <li><a href="#n"><span>18</span>불구속심사</a></li>
-                                    <li><a href="#n"><span>19</span>클레이튼</a></li>
-                                    <li><a href="#n"><span>20</span>CIC</a></li>
+                                    <?php 
+                                    if(element('searchrank', $view)){
+                                        for($i = 10; $i < 20; $i++){
+                                            $val = element($i, element('searchrank', $view));
+                                    ?>
+                                        <li><a href="#n"><span><?php echo $i + 1; ?></span><?php echo element('key', $val); ?></a></li>
+                                    <?php 
+                                        }
+                                    }
+                                    ?>
                                 </ul>
                             </div>
                         </div>

@@ -183,9 +183,20 @@ class Register extends CB_Controller
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
 			if(!$this->session->userdata('enc_data')){
-				$rcid = $this->input->post('recommend_id');
-				$this->session->set_userdata('registeragree', '1');
-				anchor_popup("https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb");
+				// $rcid = $this->input->post('recommend_id');
+				// $this->session->set_userdata('registeragree', '1');
+
+				// anchor_popup("https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb");
+				// anchor_popup("https://www.naver.com", '휴대폰인증', false);
+
+				// redirect("https://www.naver.com");
+				
+				// echo("<script>self.close()</script>");
+				echo("<script>window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');</script>");
+				echo("<script>document.form_chk.action = 'https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb';</script>");
+				echo("<script>document.form_chk.target = 'popupChk';</script>");
+				echo("<script>document.form_chk.submit();</script>");
+				return;
 			}
 
 			$rcid = $this->input->post('recommend_id');

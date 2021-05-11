@@ -18,7 +18,7 @@ class Coin extends CB_Controller
 	 * 관리자 페이지 상의 현재 디렉토리입니다
 	 * 페이지 이동시 필요한 정보입니다
 	 */
-	public $pagedir = 'cicconfigs/coin';
+	public $pagedir = 'cicconfigs/coin/CStock_keyword';
 
 	
 	/**
@@ -49,7 +49,11 @@ class Coin extends CB_Controller
 
     public function CStock_keyword(){
 
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_keyword';
+        $this->load->event($eventname);
 
+        $this->load->view('CStock_keyword');
 
 
 
