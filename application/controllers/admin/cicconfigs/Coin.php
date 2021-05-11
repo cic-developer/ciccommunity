@@ -129,11 +129,8 @@ class Coin extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 		
-	
-		
-		
-		
-		// $view['getStock'] = $getStock;
+
+    //Load data to second db
 		
 		$getList = $this -> Coin_model->get_coinlist();
 		for($i=0; $i<count($getList); $i++){
@@ -146,9 +143,7 @@ class Coin extends CB_Controller
 					'name_ko' => $getList[$i]['english_name'],
 					'name_en' => $getList[$i]['korean_name'],
 				);
-			}   
-
-
+			}
 				if(isset($data) && !empty($data)){
 					$stock = $this->Coin_model->insertStockData($data);
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
@@ -218,7 +213,33 @@ class Coin extends CB_Controller
 			$this->view = element('view_skin_file', element('layout', $view));
 		}
 	
-	//}
+		public function CStock_keyword(){
+
+			// 이벤트 라이브러리를 로딩합니다
+			$eventname = 'event_keyword';
+			$this->load->event($eventname);
+	
+	
+			// 이벤트가 존재하면 실행합니다
+			$view['view']['event']['before'] = Events::trigger('before', $eventname);
+	
+//			$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+			
+			$view = array();
+			$view['view'] = array();
+	
+			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
+			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+			$this->data = $view;
+			$this->layout = element('layout_skin_file', element('layout', $view));
+			$this->view = element('view_skin_file', element('layout', $view));
+
+
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+
+			redirect($redirecturl);
+		}
 	
 }
 ?>
