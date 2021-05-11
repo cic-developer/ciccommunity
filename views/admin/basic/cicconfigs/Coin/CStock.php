@@ -25,32 +25,13 @@
 							<th>번호</th>
 							<th>마켓명</th>
 							<th>한국어명</th>
-							<th>연어명</th>
+							<th>영문명</th>
 							
 						</tr>
 					</thead>
 					<tbody>
 					<?php 
-				$sno = $row+1;
-				foreach($result as $stocks){
-					echo "<tr>";
-					echo "<td>".$sno."</td>";
-					echo "<td><a href='".$stocks->market."' target='_blank'> ".$stocks->market."</a></td>";
-					echo "<td><a href='".$stocks->name_ko."' target='_blank'> ".$stocks->name_ko."</a></td>";
-					//echo "<td><button type="button" class="btn btn-info">Info</button></td>";
-					echo "</tr>";
-					$sno++;
-				}
-				
-				if(count($stocks) == 0){
-					echo "<tr>";
-					echo "<td colspan='3'>No record found.</td>";
-					echo "</tr>";
-				}
 				?>
-
-
-
 					<?php
 					if (element('list', element('data', $view))) {
 						foreach (element('list', element('data', $view)) as $result) {
@@ -60,7 +41,6 @@
 							<td><a href="?sfield=Coin.coin_idx&amp;skeyword=<?php echo element('coin_idx', $result); ?>"><?php echo html_escape(element('market', $result)); ?></a></td>
 							<td><?php echo element('name_ko', $result); ?></td>
 							<td><?php echo element('name_en', $result); ?></td>
-							<?php echo "hello"; ?>
 						</tr>
 					<?php
 						}
