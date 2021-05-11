@@ -210,7 +210,7 @@ class Checkplus extends CI_Controller
 			
 		);
 
-		$this->CI->session->set_userdata($enc_data);
+		$this->CI->session->set_userdata('enc_data', $enc_data);
 	}
 
 	function fail($EncodeData) 

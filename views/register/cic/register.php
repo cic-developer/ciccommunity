@@ -276,7 +276,7 @@
 						<div class="vc">
 							<p>휴대폰으로 본인인증하기</p>
 							<!-- 휴대폰 본인 인증 후 submit 되고 핸드폰 인증해서 얻은 정보들 저장 부탁해요-->
-							<a id="submitButton" ><span>휴대폰 본인 인증</span></a>
+							<a id="submitButton"><span>휴대폰 본인 인증</span></a>
 							
 							<!-- 본인인증 서비스 팝업을 호출하기 위해서는 다음과 같은 form이 필요합니다. -->
 							<form name="form_chk" method="post">

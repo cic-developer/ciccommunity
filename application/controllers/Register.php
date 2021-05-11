@@ -62,7 +62,7 @@ class Register extends CB_Controller
 			// echo("<script>window.opener.parent.location.href(http://www.naver.com/);</script>");
 		}//window.opener.parent.location.reload();
 		// $this->session->sess_destroy();
-		// print_r($this->session->userdata('REQ_SEQ'));
+		print_r($this->session->userdata('enc_data'));
 
 		if ($this->member->is_member()
 			&& ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
@@ -181,10 +181,16 @@ class Register extends CB_Controller
 
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+
+			if(!$this->session->userdata('enc_data')){
+				$rcid = $this->input->post('recommend_id');
+				$this->session->set_userdata('registeragree', '1');
+				anchor_popup("https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb");
+			}
+
 			$rcid = $this->input->post('recommend_id');
 			$this->session->set_userdata('registeragree', '1');
 			redirect('register/form/'.$rcid);
-			// redirect("https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb");
 		}
 	}
 
