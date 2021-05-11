@@ -12,12 +12,6 @@
 		$attributes = array('class' => 'form-horizontal', 'name' => 'flist', 'id' => 'flist');
 		echo form_open(current_full_url(), $attributes);
 		?>
-			<input type="hidden" name="s" value="1" />
-			<div class="box-table-header">
-				<div class="btn-group pull-right" role="group" aria-label="...">
-					<button type="submit" class="btn btn-outline btn-danger btn-sm">저장하기</button>
-				</div>
-			</div>
 			<div class="list-group">
 				<form class="form-inline">
 					<?php $myId = $_GET['id']; ?>
@@ -45,36 +39,36 @@
 				</div>
 			<div class="table-responsive">
 				<form method = 'post'>	
-				<table class="table table-hover table-striped table-bordered">
-				<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-					<tr>
-						<th>S.no</th>
-						<th>마겟 명</th>
-						<th>한국어 명</th>
-						<th>Delete</th>
-						<th>Update</th>
-					</tr>
-					<?php 
-					$sno = $row+1;
-					foreach($keylist as $stocks){ ?>
-					<tr>
-						<td><?php echo $sno; ?></td>
-						<td><?php echo $stocks['market']. " - " .$stocks['name_ko']; ?></td>
-						<td><?php echo $stocks['keyword']; ?></td>
-						<td><input type="checkbox" name="d_id[]" value="<?php echo $stocks['idx']; ?>"></td>
-						<td><input type="checkbox" name="u_id[]" value="<?php echo $stocks['idx']; ?>"></td>
-					</tr>
-					<?php
-						$sno++;
-					}
-					
-					if(count($keylist) == 0){
-						echo "<tr>";
-						echo "<td colspan='3'>No record found.</td>";
-						echo "</tr>";
-					}
-					?>
-				</table>
+					<table class="table table-hover table-striped table-bordered">
+					<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+						<tr>
+							<th>S.no</th>
+							<th>마겟 명</th>
+							<th>한국어 명</th>
+							<th>Delete</th>
+							<th>Update</th>
+						</tr>
+						<?php 
+						$sno = $row+1;
+						foreach($keylist as $stocks){ ?>
+						<tr>
+							<td><?php echo $sno; ?></td>
+							<td><?php echo $stocks['market']. " - " .$stocks['name_ko']; ?></td>
+							<td><?php echo $stocks['keyword']; ?></td>
+							<td><input type="checkbox" name="d_id[]" value="<?php echo $stocks['idx']; ?>"></td>
+							<td><input type="checkbox" name="u_id[]" value="<?php echo $stocks['idx']; ?>"></td>
+						</tr>
+						<?php
+							$sno++;
+						}
+						
+						if(count($keylist) == 0){
+							echo "<tr>";
+							echo "<td colspan='3'>No record found.</td>";
+							echo "</tr>";
+						}
+						?>
+					</table>
 				</form>
 			</div>	
 		</div>

@@ -11,7 +11,7 @@
 		<input type="hidden" name="cmt_page" value="" id="cmt_page" />
 		<textarea class="form-control" name="cmt_content" id="cmt_content" accesskey="c" placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."<?php if ( ! element('can_comment_write', element('comment', $view))) {echo 'onClick="alert(\'' . html_escape(element('can_comment_write_message', element('comment', $view))) . '\');return false;"';} ?>><?php echo set_value('cmt_content', element('cmt_content', element('comment', $view))); ?></textarea>
 		<div class="btns">
-			<button type="button" class="write-btn" id="cmt_btn_submit"onClick="<?php if ( ! element('can_comment_write', element('comment', $view))) {echo 'alert(\'' . html_escape(element('can_comment_write_message', element('comment', $view))) . '\');return false;"';} else { ?>add_comment(this.form, '<?php echo element('post_id', element('post', $view)); ?>');<?php } ?> "><span>댓글등록</span></a>
+			<button type="button" class="write-btn" id="cmt_btn_submit"onClick="<?php if ( ! element('can_comment_write', element('comment', $view))) {echo 'alert(\'' . html_escape(element('can_comment_write_message', element('comment', $view))) . '\');return false;"';} else { ?>add_comment(this.form, '<?php echo element('post_id', element('post', $view)); ?>', this);<?php } ?> "><span>댓글등록</span></a>
 		</div>
 	<?php echo form_close(); ?>
 </div>

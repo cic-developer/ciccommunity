@@ -33,17 +33,20 @@ if (typeof(COMMENT_JS) === 'undefined') {
         document.location.href = comment_url;
     }
 
-    function add_comment(f, post_id) {
+    /* CIC customized*/
+    function add_comment(f, post_id, _this) {
 
         if (is_submit_comment === true) {
             return false;
         }
 
         is_submit_comment = true;
-
+        const tripple_parent_id = $(_this).parent().parent().parent().attr('id');
+        const split_length = tripple_parent_id.split('_').length;
+        const cmt_content_id = split_length == 2 ? tripple_parent_id + ' .cmt_content' : 'cmt_content';
         if ($('#char_count')) {
             if (char_min > 0 || char_max > 0) {
-                var cnt = parseInt(check_byte('cmt_content', 'char_count'));
+                var cnt = parseInt(check_byte(cmt_content_id, 'char_count'));
                 if (char_min > 0 && char_min > cnt) {
                     alert('내용은 ' + char_min + '글자 이상 쓰셔야 합니다.');
                     f.cmt_content.focus();
@@ -109,7 +112,7 @@ if (typeof(COMMENT_JS) === 'undefined') {
                     view_comment('viewcomment', post_id, '', '')
                     if ($('#char_count')) {
                         if (char_min > 0 || char_max > 0) {
-                            check_byte('cmt_content', 'char_count');
+                            check_byte(cmt_content_id, 'char_count');
                         }
                     }
                     init_comment_box();

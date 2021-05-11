@@ -508,6 +508,7 @@ class Register extends CB_Controller
 		}
 
 		$registerform = $this->cbconfig->item('registerform');
+		print_r($registerform);
 		$form = json_decode($registerform, true);
 
 		$config = array();

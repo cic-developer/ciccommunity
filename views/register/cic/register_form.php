@@ -4,9 +4,28 @@
 		<div class="member-wrap join">
 			<h2><span class="blind">cic community</span></h2>
 			<?php
+			echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
+			echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
 			$attributes = array('class' => 'form-horizontal', 'name' => 'fregisterform', 'id' => 'fregisterform');
 			echo form_open_multipart(current_full_url(), $attributes);
 			?>
+
+
+				<?php
+				foreach (element('html_content', $view) as $key => $value) {
+				?>
+					<li>
+						<span><?php echo element('display_name', $value); ?></span>
+						<div class="form-text text-primary group">
+							<?php echo element('input', $value); ?>
+							<?php if (element('description', $value)) { ?>
+								<p class="help-block"><?php echo element('description', $value); ?></p>
+							<?php } ?>
+						</div>
+					</li>
+				<?php
+				}
+				?>
 			<div class="entry">
 				<ul>
 					<li>
