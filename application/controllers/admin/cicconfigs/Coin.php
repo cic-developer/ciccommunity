@@ -148,26 +148,41 @@ class Coin extends CB_Controller
 					$stock = $this->Coin_model->insertStockData($data);
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 				}
+				
 		}	
 
        	//GET MARKET PRICE
 	    $getStock = $this -> Coin_model->getstockData();
+
+
+
+
+		//if()
 		// print_r($getStock);
+
 		for($i = 0; $i < count($getStock); $i++){
-			$marketdata[] = $getStock[$i]->market;
+			
+			$marketdata[] = $getStock[$i]['market'];
+			$coin_id[] = $getStock[$i]['coin_idx'];
+			
+			// if($coin_id){
+			// 	echo "<br><pre>";
+			// 		print_r($marketdata);
+			// 	echo "</pre>";
+			// }
 
             if($marketdata){
 				$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
 				// echo "<br><pre>";
-				// print_r($marketdata);
+				// print_r($getStock);
 				// echo "</pre>";
 			}else{
 				$realtime_coin_info = 0;
 			}
 
 			foreach ($getStock as $getstoks){
-				if($getstoks-> market){
-					$marketdata[] = $getstoks->market;
+				if($getstoks['market']){
+					$marketdata[] = $getstoks['market'];
 					//print_r($getStock);
 				}else{
 					$marketdata[] = 0;
@@ -260,8 +275,14 @@ class Coin extends CB_Controller
 			// print_r(1);}
 			/**
 		 	* 어드민 레이아웃을 정의합니다
+
 		 	*/
+			//$getlist = $this -> Coin_model-> getstockData();
 			
+			echo '<br><pre>';
+			///print_r($getlist);
+			echo '</pre>';
+
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
 			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 			$this->data = $view;
@@ -269,11 +290,6 @@ class Coin extends CB_Controller
 			$this->view = element('view_skin_file', element('layout', $view));
 
 
-			$getlist = $this -> Coin_model-> getstockData();
-			
-			echo '<br><pre>';
-			print_r($getlist);
-			echo '</pre>';
 
 
 		}

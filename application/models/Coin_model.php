@@ -81,7 +81,7 @@ class Coin_model extends CB_Model
 
     function getstockData(){
         $result = $this->db->get('cic_coin_stock');
-        return $result->result(); 
+        return $result; 
     }
 
     function get_coin_list($limit ='', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR'){
