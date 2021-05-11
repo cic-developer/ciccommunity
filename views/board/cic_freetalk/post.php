@@ -910,3 +910,17 @@
 		</div>
 	</div>
 </div>
+<script>
+	$('.up').on('click', function(){
+		vp_up();
+	});
+	function vp_up(){
+		if(!is_member){
+			alert('로그인이 필요한 서비스입니다.');
+			return false;
+		}
+		
+		const _point = prompt('타이틀', 0);
+		return true;
+	}
+</script>

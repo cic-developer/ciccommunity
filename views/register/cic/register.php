@@ -302,6 +302,7 @@
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){
 			// fnPopup();
+
 			// if(){
 
 				$("#fregisterform").submit();

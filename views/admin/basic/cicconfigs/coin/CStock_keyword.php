@@ -33,14 +33,7 @@
 					if (element('list', element('data', $view))) {
 						foreach (element('list', element('data', $view)) as $result) {
 					?>
-						<div class="form-group list-group-item">
-							<div class="col-sm-1"><div class="fa fa-arrows" style="cursor:pointer;"></div><input type="hidden" name="mgr_id[<?php echo element('mgr_id', $result); ?>]" value="<?php echo element('mgr_id', $result); ?>" /></div>
-							<div class="col-sm-3"><input type="text" class="form-control" name="mgr_title[<?php echo element('mgr_id', $result); ?>]" value="<?php echo html_escape(element('mgr_title', $result)); ?>"/></div>
-							<div class="col-sm-4"><input type="text" class="form-control" name="mgr_description[<?php echo element('mgr_id', $result); ?>]" value="<?php echo html_escape(element('mgr_description', $result)); ?>" /></div>
-							<div class="col-sm-1"><input type="checkbox" name="mgr_is_default[<?php echo element('mgr_id', $result); ?>]" value="1" <?php echo element('mgr_is_default', $result) ? ' checked="checked" ' : ''; ?> /></div>
-							<div class="col-sm-1"><?php echo element('member_count', $result); ?></div>
-							<div class="col-sm-2"><button type="button" class="btn btn-outline btn-default btn-xs btn-delete-row" >삭제</button></div>
-						</div>
+							<?php echo element('coin_idx', $result); ?> 
 					<?php
 						}
 					}

@@ -124,12 +124,15 @@ class Register extends CB_Controller
 		);
 		$this->form_validation->set_rules($config);
 
-		$view['view']['check'] = false;
-		if($this->session->userdata('enc_data')){
-			$view['view']['check'] = true;
-		}
-		print_r($view['view']['check']);
-		print_r("!!!!!!!!!!!!");
+		// $view['view']['check'] = 'false';
+		// if($this->session->userdata('enc_data')){
+		// 	$view['view']['check'] = 'true';
+		// 	$rcid = $this->input->post('recommend_id');
+		// 	$this->session->set_userdata('registeragree', '1');
+		// 	redirect('register/form/'.$rcid);
+		// }
+		// print_r($view['view']['check']);
+		// print_r("!!!!!!!!!!!!");
 
 		/**
 		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.

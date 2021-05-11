@@ -11,7 +11,8 @@
 <body>
 <script>
     $(document).ready(function(){
-        window.opener.location.href="register/form";
+        // window.opener.location.href="register/form";
+        window.opener.location.href="https://www.naver.com/";
     });
 
 
