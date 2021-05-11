@@ -59,6 +59,7 @@ class Register extends CB_Controller
 		if($this->input->get("EncodeData")){
 			$this->checkplus->success($this->input->get("EncodeData"));
 			echo("<script>self.close()</script>");
+			// echo("<script>opener.window.location.href(http://www.naver.com/);</script>");
 		}
 		// $this->session->sess_destroy();
 		// print_r($this->session->userdata('REQ_SEQ'));
@@ -182,7 +183,8 @@ class Register extends CB_Controller
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 			$rcid = $this->input->post('recommend_id');
 			$this->session->set_userdata('registeragree', '1');
-			redirect('register/form/'.$rcid);
+			// redirect('register/form/'.$rcid);
+			redirect('https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb');
 		}
 	}
 

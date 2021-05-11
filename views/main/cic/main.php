@@ -144,8 +144,21 @@
 							foreach (element('list',element('popularpost', $view)) as $popularpost) {
 						?>
 							<li>
-								<?php if (element('category', $popularpost)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $popularpost))); ?></span><?php } ?>
-								<a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $popularpost)); ?> <span class="text-right"><?php echo number_format(element('post_like_point', $popularpost)); ?></span></a>
+                                <a href="<?php echo goto_url(element('posturl', $popularpost)); ?>">
+                                    <p class="num"><?php echo number_format(element('num', $popularpost)); ?></p>
+                                    <p class="btxt">
+                                        <span class="txt">
+                                            <?php echo html_escape(element('post_title', $popularpost)); ?>
+                                        </span>
+                                        <span class="hit">(12)</span>
+                                    </p>
+                                    <div>
+                                        <p class="stxt">블로서리 <span><img
+                                                    src="<?php echo base_url('assets/images/like-popo.png') ?>"
+                                                    alt="" /></span></p>
+                                        <p class="date"><?php echo number_format(element('post_like_point', $popularpost)); ?> <span>49분전</span></p>
+                                    </div>                        
+                                </a>
 							</li>
 						<?php
 							}

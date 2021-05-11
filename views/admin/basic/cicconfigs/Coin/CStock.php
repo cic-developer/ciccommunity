@@ -41,7 +41,7 @@
 							<td><a href="?sfield=Coin.coin_idx&amp;skeyword=<?php echo element('coin_idx', $result); ?>"><?php echo html_escape(element('market', $result)); ?></a></td>
 							<td><?php echo element('name_ko', $result); ?></td>
 							<td><?php echo element('name_en', $result); ?></td>
-							<td><button type="button" name='selected_market' class="btn btn-link">Link</button></td>
+							<td><button  type="button" id="myBtn" name='selected_market' class="btn btn-link">Link</button></td>
 						</tr>
 					<?php
 						}
@@ -80,6 +80,30 @@
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</form>
 </div>
+
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+$(document).on('click', '.btn-add-rows', function() {
+	$('#sortable').append(' <div class="form-group list-group-item"><div class="col-sm-1"><div class="fa fa-arrows" style="cursor:pointer;"></div><input type="hidden" name="mgr_id[]" /></div><div class="col-sm-3"><input type="text" class="form-control" name="mgr_title[]"/></div><div class="col-sm-4"><input type="text" class="form-control" name="mgr_description[]"/></div><div class="col-sm-1"><input type="checkbox" name="mgr_is_default[]" value="1" /></div><div class="col-sm-1"></div><div class="col-sm-2"><button type="button" class="btn btn-outline btn-default btn-xs btn-delete-row" >삭제</button></div></div>');
+});
+$(document).on('click', '.btn-delete-row', function() {
+	$(this).parents('div.list-group-item').remove();
+});
+$(function () {
+	$('#sortable').sortable({
+		handle:'.fa-arrows'
+	});
+})
+//]]>
+var btn = document.getElementById('myBtn');
+btn.addEventListener('click', function() {
+	document.location.href = 'CStock_keyword';
+});
+</script>
+
