@@ -597,7 +597,7 @@ class Postact extends CB_Controller
 			)
 		);
 
-		$select = 'post_id, brd_id, mem_id, post_del';
+		$select = 'post_id, brd_id, mem_id, post_del, post_like_point, post_dislike_point';
 		$post = $this->Post_model->get_one($post_id, $select);
 		if ( ! element('post_id', $post)) {
 			$result = array('error' => '존재하지 않는 게시물입니다');
@@ -977,7 +977,7 @@ class Postact extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		$select = 'post_id, brd_id, mem_id, post_del';
+		$select = 'post_id, brd_id, mem_id, post_del, cmt_like_point, cmt_dislike_point';
 		$post = $this->Post_model->get_one(element('post_id', $comment), $select);
 
 		if ( ! $this->session->userdata('post_id_' . element('post_id', $comment))) {

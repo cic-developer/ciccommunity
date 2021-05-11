@@ -38,15 +38,17 @@ class Coin_model_admin extends CB_Model
         }
     }
     
-    function get_keyword(){
+    function get_keyword($limit ='', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR'){
         $this->db->select('cic_coin_stock.*');
+        $this->db->select('cic_coin_admins.*');
          //$this->db->('market');
         $this->db->from('cic_coin_admins');
         $this->db->join('cic_coin_stock', 'cic_coin_stock.coin_idx = cic_coin_admins.coin_idx');
 
         $query = $this->db->get();
-        $result = $query->result_array();
+        $select = $query->result_array();
 
+        $result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
         return $result;
     }
 

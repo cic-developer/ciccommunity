@@ -64,7 +64,7 @@ class Checkplus extends CI_Controller
 		
 		// CheckPlus(본인인증) 처리 후, 결과 데이타를 리턴 받기위해 다음예제와 같이 http부터 입력합니다.
 		// 리턴url은 인증 전 인증페이지를 호출하기 전 url과 동일해야 합니다. ex) 인증 전 url : http://www.~ 리턴 url : http://www.~
-		$returnurl = "https://dev.ciccommunity.com/register";	// 성공시 이동될 URL
+		$returnurl = "https://dev.ciccommunity.com/register/success";	// 성공시 이동될 URL
 		$errorurl = "https://dev.ciccommunity.com/checkplus_fail";		// 실패시 이동될 URL
 		
 		// reqseq값은 성공페이지로 갈 경우 검증을 위하여 세션에 담아둔다.
