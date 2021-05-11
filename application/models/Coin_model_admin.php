@@ -18,7 +18,7 @@ class Coin_model_admin extends CB_Model
     /**
 	 * 테이블명
 	 */
-	public $_table = 'cic_coin_admins';
+	public $_table = '';
     //public $primary_key = 'market';
 
     function __construct()
@@ -76,8 +76,7 @@ class Coin_model_admin extends CB_Model
     }
 
     function save_defaut_keyword(){
-        $this->db->where('stk_id', $id);
-        $query = $this->db->get('cic_coin_stock');
+        $query = $this->db->get('cic_coin_admins');
         return $query->row();
     }
 

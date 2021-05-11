@@ -151,8 +151,8 @@ class Coin extends CB_Controller
 		}	
 
        	//GET MARKET PRICE
-	    $getStock = $this -> Coin_model-> getstockData();
-			//print_r($getStock);
+	    $getStock = $this -> Coin_model->getstockData();
+		// print_r($getStock);
 		for($i = 0; $i < count($getStock); $i++){
 			$marketdata[] = $getStock[$i]->market;
 
@@ -267,6 +267,13 @@ class Coin extends CB_Controller
 			$this->data = $view;
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
+
+
+			$getlist = $this -> Coin_model-> getstockData();
+			
+			echo '<br><pre>';
+			print_r($getlist);
+			echo '</pre>';
 
 
 		}
