@@ -38,26 +38,27 @@
                 <div class="fr">
                     <h4>실시간 인기 게시물</h4>
                     <ul>
-                        <li><a href="<?php echo base_url('post/5')?>">1. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">2. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">3. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">4. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">5. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">6. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">7. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">8. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">9. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">10. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
-                        </li> 
+                        <!-- <li><a href="<?php echo base_url('post/5')?>">1. [스압] 월급루팡이 만들어지는 과정 (5) <span>28</span></a>
+                        </li> -->
+                        <?php
+						if (element('list',element('popularpost', $view))) {
+							foreach (element('list',element('popularpost', $view)) as $popularpost) {
+						?>
+							<li>
+								<?php if (element('category', $popularpost)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $popularpost))); ?></span><?php } ?>
+								<a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $popularpost)); ?> <span class="text-right"><?php echo number_format(element('post_like_point', $popularpost)); ?></span></a>
+							</li>
+						<?php
+							}
+						}
+						if ( ! element('list', element('popularpost', $view))) {
+						?>
+							<tr>
+								<td colspan="12" class="nopost">자료가 없습니다</td>
+							</tr>
+						<?php
+						}
+						?>
                     </ul>
                 </div>
             </div>

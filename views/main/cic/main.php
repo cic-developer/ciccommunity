@@ -145,7 +145,7 @@
 						?>
 							<li>
 								<?php if (element('category', $popularpost)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $popularpost))); ?></span><?php } ?>
-								<a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $popularpost)); ?></a>
+								<a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $popularpost)); ?> <span class="text-right"><?php echo number_format(element('post_like_point', $popularpost)); ?></span></a>
 							</li>
 						<?php
 							}

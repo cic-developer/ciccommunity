@@ -57,12 +57,11 @@ class Register extends CB_Controller
 
 		$view['view']['main'] = $this->checkplus->main();
 		if($this->input->get("EncodeData")){
-
 			$this->checkplus->success($this->input->get("EncodeData"));
-
-
 			echo("<script>self.close()</script>");
 		}
+		// $this->session->sess_destroy();
+		// print_r($this->session->userdata('REQ_SEQ'));
 
 		if ($this->member->is_member()
 			&& ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
@@ -73,7 +72,7 @@ class Register extends CB_Controller
 
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['before_block_layout'] = Events::trigger('before_block_layout', $eventname);
-
+			
 			/**
 			 * 레이아웃을 정의합니다
 			 */

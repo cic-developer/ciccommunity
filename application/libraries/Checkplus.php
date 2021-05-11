@@ -69,7 +69,8 @@ class Checkplus extends CI_Controller
 		
 		// reqseq값은 성공페이지로 갈 경우 검증을 위하여 세션에 담아둔다.
 		
-		$_SESSION["REQ_SEQ"] = $reqseq;
+		// $_SESSION["REQ_SEQ"] = $reqseq;
+		$this->CI->session->set_userdata('REQ_SEQ', $reqseq);
 
 		// 입력될 plain 데이타를 만든다.
 		$plaindata = "7:REQ_SEQ" . strlen($reqseq) . ":" . $reqseq .
@@ -175,9 +176,6 @@ class Checkplus extends CI_Controller
 				$mobileno = $this->GetValue($plaindata , "MOBILE_NO");
 				$mobileco = $this->GetValue($plaindata , "MOBILE_CO");
 
-				print_r("<p>hi</p>");
-				print_r($this->CI->session->userdata('REQ_SEQ'));
-				print_r("<p>hi</p>");
 				if(strcmp($this->CI->session->userdata('REQ_SEQ'), $requestnumber) != 0)
 				{
 					echo "세션값이 다릅니다. 올바른 경로로 접근하시기 바랍니다.<br>";

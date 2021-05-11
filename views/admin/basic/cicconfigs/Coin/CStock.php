@@ -27,7 +27,6 @@
 							<th>한국어명</th>
 							<th>영문명</th>
 							<th>add Keyword<th>
-							
 						</tr>
 					</thead>
 					<tbody>
