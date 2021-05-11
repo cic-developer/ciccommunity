@@ -26,6 +26,7 @@
 							<th>마켓명</th>
 							<th>한국어명</th>
 							<th>영문명</th>
+							<th>add Keyword<th>
 							
 						</tr>
 					</thead>
@@ -41,6 +42,7 @@
 							<td><a href="?sfield=Coin.coin_idx&amp;skeyword=<?php echo element('coin_idx', $result); ?>"><?php echo html_escape(element('market', $result)); ?></a></td>
 							<td><?php echo element('name_ko', $result); ?></td>
 							<td><?php echo element('name_en', $result); ?></td>
+							<td><button type="button" name='selected_market' class="btn btn-link">Link</button></td>
 						</tr>
 					<?php
 						}

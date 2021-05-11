@@ -61,7 +61,7 @@ class Register extends CB_Controller
 			$this->checkplus->success($this->input->get("EncodeData"));
 
 
-			redirect('https://www.naver.com/');
+			echo("<script>self.close()</script>");
 		}
 
 		if ($this->member->is_member()
