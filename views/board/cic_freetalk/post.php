@@ -345,7 +345,6 @@
 		<div class="cmmt-wrap">
 			<div class="comment">
 				<h4>댓글 <span>49</span></h4>
-				<div class="ov">
 					<?php
 						$this->load->view(element('view_skin_path', $layout) . '/comment_write');
 					?>
@@ -353,13 +352,12 @@
 					<div class="btns">
 						<a href="#n" class="write-btn"><span>댓글등록</span></a>
 					</div> -->
-				</div>
 			</div>
 			<div class="cmmt">
 				<!-- <p class="total">댓글 <span>49</span></p> -->
 				
 				<div class="list">
-					<ul>
+					<ul id="viewcomment">
 						<li class="item">
 							<div class="vcon">
 								<div class="info">

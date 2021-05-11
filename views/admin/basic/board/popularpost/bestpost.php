@@ -10,6 +10,7 @@
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir); ?>">인기게시글 목록</a></li>
 						<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/bestpost'); ?>">베스트게시글 목록</a></li>
 					</ul>
+					</div>
 					<?php
 					echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
 					echo show_alert_message(element('alert_message', $view), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');

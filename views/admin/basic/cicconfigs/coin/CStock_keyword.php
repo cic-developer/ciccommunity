@@ -22,16 +22,15 @@
 				<form class="form-inline">
 					<?php $myId = $_GET['id']; ?>
 					<div class="form-group">
-						<label for="exampleInputName2">Market id</label>
+						<label>Market id</label>
 						<input type="text"  class="form-control" name = "coin_idx" value='<?php echo $myId ?>'>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail2">Keyword</label>
+						<label>Keyword</label>
 						<input type="text" class="form-control" name = "keyword">
 					</div>
 					<div class="col-sm-2"><button type="button" class="btn btn-outline btn-primary btn-xs btn-add-rows">추가</button></div>
 				</form>
-				<div class="col-sm-2"><button type="submit" class="btn btn-primary">추가</button></div>
 				</div>
 				<div id="sortable">
 					<?php
@@ -44,8 +43,34 @@
 					}
 					?>
 				</div>
+				<div class="table-responsive">
+			<table class="table table-hover table-striped table-bordered">
+				<tr>
+					<th>S.no</th>
+					<th>마겟 명</th>
+					<th>한국어 명</th>
+				</tr>
+				<?php 
+				$sno = $row+1;
+				foreach($keylist as $stocks){
+					echo "<tr>";
+					echo "<td>".$sno."</td>";
+					echo "<td><a href='".$stocks['market']."' target='_blank'> ".$stocks['market']."</a></td>";
+					echo "<td><a href='".$stocks['keyword']."' target='_blank'> ".$stocks['keyword']."</a></td>";
+					//echo "<td><button type="button" class="btn btn-info">Info</button></td>";
+					echo "</tr>";
+					$sno++;
+				}
+				
+				if(count($keylist) == 0){
+					echo "<tr>";
+					echo "<td colspan='3'>No record found.</td>";
+					echo "</tr>";
+				}
+				?>
+			</table>
+		</div>	
 			</div>
-			<div class="row">기본그룹에 체크하시면, 회원가입시 해당 그룹에 자동으로 추가됩니다. 그룹삭제시, 복구가 불가하므로 주의하여 주시기 바랍니다.</div>
 		<?php echo form_close(); ?>
 	</div>
 </div>

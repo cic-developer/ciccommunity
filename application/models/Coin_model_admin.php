@@ -19,7 +19,7 @@ class Coin_model_admin extends CB_Model
 	 * 테이블명
 	 */
 	public $_table = 'cic_coin_admins';
-    public $primary_key = 'coin_idx';
+    //public $primary_key = 'market';
 
     function __construct()
     {
@@ -38,7 +38,7 @@ class Coin_model_admin extends CB_Model
         }
     }
     
-    function get_keyword($limit ='', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR'){
+    function get_keyword(){
         $this->db->select('cic_coin_stock.*');
         $this->db->select('cic_coin_admins.*');
          //$this->db->('market');
@@ -46,11 +46,11 @@ class Coin_model_admin extends CB_Model
         $this->db->join('cic_coin_stock', 'cic_coin_stock.coin_idx = cic_coin_admins.coin_idx');
 
         $query = $this->db->get();
-        $select = $query->result_array();
+        $result = $query->result_array();
 
-        $list = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
-        return $lib_list;
-
+        return $result;
     }
+
+
 }
 ?>
