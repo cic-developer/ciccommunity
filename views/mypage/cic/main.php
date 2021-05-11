@@ -22,7 +22,7 @@
                                 <p> <?= $member['mem_phone'] ?></p>
                             </li>
                             <li>
-                                <p class="point"><?= $member['mem_point'] ?></p>   
+                                <p class="point"><?= number_format($member['mem_point']) ?></p>   
                             </li>
                         </ul>
                     </div>
@@ -30,10 +30,10 @@
                 <div class="fr">
                     <ul>
                         <li>
-                            <p> <?= $member['mem_cp'] ?></p>
+                            <p> <?= number_format($member['mem_cp'],2) ?></p>
                         </li>
                         <li>
-                            <p> <?= $member['mem_vp'] ?></p>
+                            <p> <?= number_format($member['mem_vp']) ?></p>
                         </li>
                     </ul>
                 </div>
@@ -45,7 +45,7 @@
                         <div class="txt">
                             <p class="btxt">출석체크 <span>하기</span></p>
                             <p class="stxt">소중한 내 VP! <br>출석체크 하고 <span>VP 보상</span> 받자 </p>
-                            <a href="#n"><span>바로가기</span></a>
+                            <a href="/attendance"><span>바로가기</span></a>
                         </div>
                     </li>
                     <li>

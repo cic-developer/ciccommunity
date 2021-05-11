@@ -595,7 +595,7 @@ class Post_model extends CB_Model
 			'post_id' => $post_id,
 		);
 		$updatedata = array(
-			'post_best_state' => 1,
+			$this->db->select_max('post_best_state') => + 1,
 		);
 		$this->db->where($where);
 		$this->db->set($updatedata);

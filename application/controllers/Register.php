@@ -62,7 +62,8 @@ class Register extends CB_Controller
 		// 	echo("<script>window.opener.parent.location.href(http://www.naver.com/);</script>");
 		// }//window.opener.parent.location.reload();
 		// $this->session->sess_destroy();
-		print_r($this->session->userdata('enc_data'));
+		// print_r($this->session->userdata('enc_data'));
+		
 
 		if ($this->member->is_member()
 			&& ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
@@ -124,16 +125,6 @@ class Register extends CB_Controller
 		);
 		$this->form_validation->set_rules($config);
 
-		// $view['view']['check'] = 'false';
-		// if($this->session->userdata('enc_data')){
-		// 	$view['view']['check'] = 'true';
-		// 	$rcid = $this->input->post('recommend_id');
-		// 	$this->session->set_userdata('registeragree', '1');
-		// 	redirect('register/form/'.$rcid);
-		// }
-		// print_r($view['view']['check']);
-		// print_r("!!!!!!!!!!!!");
-
 		/**
 		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
 		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
@@ -192,14 +183,7 @@ class Register extends CB_Controller
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
-			// $view['view']['agrees'] = true;
-			// $view['view']['check'] = false;
-			// if($this->session->userdata('enc_data')){
-			// 	$view['view']['check'] = true;
-			// }
-			
-
-			// if(!$this->session->userdata('enc_data')){
+			if(!$this->session->userdata('enc_data')){
 				// $rcid = $this->input->post('recommend_id');
 				// $this->session->set_userdata('registeragree', '1');
 
@@ -216,13 +200,10 @@ class Register extends CB_Controller
 				// echo("<script>document.form_chk.submit();</script>");
 			// }else{
 
-				// $rcid = $this->input->post('recommend_id');
-				// $this->session->set_userdata('registeragree', '1');
-				// redirect('register/form/'.$rcid);
-			// }
-			$rcid = $this->input->post('recommend_id');
-			$this->session->set_userdata('registeragree', '1');
-			redirect('register/form/'.$rcid);
+				$rcid = $this->input->post('recommend_id');
+				$this->session->set_userdata('registeragree', '1');
+				redirect('register/form/'.$rcid);
+			}
 
 		}
 	}

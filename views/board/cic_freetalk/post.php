@@ -911,6 +911,7 @@
 	</div>
 </div>
 <script>
+	var reg_num = /^[0-9]*$/;
 	$('.up').on('click', function(){
 		vp_up();
 	});
@@ -921,6 +922,19 @@
 		}
 		
 		const _point = prompt('타이틀', 0);
+
+		//취소버튼 누를시
+		if(_point === null){
+			return false;
+		}
+
+		//숫자를 잘 입력했나 검증
+		if(!reg_num.test(_point)){
+			alert('숫자만 입력할 수 있습니다.');
+			return false;
+		}
+
+		const point = Number(_point);
 		return true;
 	}
 </script>

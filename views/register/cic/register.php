@@ -269,44 +269,37 @@
 					<p class="chk-check"><input type="checkbox" id="jsel03"><label for="jsel03">개인정보 수집 및 이용에
 							동의합니다.</label></p>
 				</div>
+				<?php echo form_close(); ?>
 				<div class="item c04">
 					<h4>본인확인</h4>
 					<div class="txt">
 						<div class="vc">
 							<p>휴대폰으로 본인인증하기</p>
 							<!-- 휴대폰 본인 인증 후 submit 되고 핸드폰 인증해서 얻은 정보들 저장 부탁해요-->
-							<a id="submitButton"><span>휴대폰 본인 인증</span></a>
+							<a id="submitButton" ><span>휴대폰 본인 인증</span></a>
 							
 							<!-- 본인인증 서비스 팝업을 호출하기 위해서는 다음과 같은 form이 필요합니다. -->
-							<!-- <form name="form_chk" method="post"> -->
+							<form name="form_chk" method="post">
 								<input type="hidden" name="m" value="checkplusService">				<!-- 필수 데이타로, 누락하시면 안됩니다. -->
 								<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('main', $view)); ?>">		<!-- 위에서 업체정보를 암호화 한 데이타입니다. -->
 								
 								<a href="javascript:fnPopup();"> CheckPlus 안심본인인증 Click</a>
-							<!-- </form> -->
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-			<?php echo form_close(); ?>
 		</div>
 		<!-- page end // -->
 	</div>
-<h1>hi</h1>
-
 </div>
 
-	<a href="./checkplus_main">테스트</a>
+	<a href="./checkplus_main">테스트<?php echo html_escape(element('main', $view)); ?></a>
 
 <script>
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){
-			// fnPopup();
-
-			// if(){
-
-				$("#fregisterform").submit();
-			// }
+			$("#fregisterform").submit();
 		});
 	});
 
@@ -314,8 +307,8 @@
 	window.name ="Parent_window";
 	function fnPopup(){
 		window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
-		document.fregisterform.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
-		document.fregisterform.target = "popupChk";
-		document.fregisterform.submit();
+		document.form_chk.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+		document.form_chk.target = "popupChk";
+		document.form_chk.submit();
 	}
 </script>

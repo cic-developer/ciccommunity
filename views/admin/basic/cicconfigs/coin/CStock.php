@@ -25,7 +25,10 @@
 			</div>
 			<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
 			<div class="table-responsive">
+				<form action="post" name='selected_market'>
 				<table class="table table-hover table-striped table-bordered">
+
+				
 					<thead>
 						<tr>
 							<th>번호</th>
@@ -47,10 +50,8 @@
 							<td><a href="?sfield=Coin.coin_idx&amp;skeyword=<?php echo element('coin_idx', $result); ?>"><?php echo html_escape(element('market', $result)); ?></a></td>
 							<td><?php echo element('name_ko', $result); ?></td>
 							<td><?php echo element('name_en', $result); ?></td>
-							<form action="post" name='selected_market'>
-								<td><button  type="button" id="myBtn" class="btn btn-link" onClick="document.location.href='https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword'">Link</button></td>
-								<?php echo element('coin_idx', $result); ?> 
-							</form>
+
+							<td><button  type="button" id="myBtn" class="btn btn-link" onClick="document.location.href='https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo element('coin_idx', $result); ?>'">Link</button></td>
 						</tr>
 					<?php
 						}
@@ -66,6 +67,7 @@
 					?>
 					</tbody>
 				</table>
+				</form>
 			</div>
 			<div class="box-info">
 				<?php echo element('paging', $view); ?>

@@ -20,12 +20,12 @@
 			</div>
 			<div class="row"><?php echo element('total_rows', element('data', $view), 0); ?>개의 그룹이 존재합니다</div>
 			<div class="list-group">
-				<div class="form-group list-group-item">
-					<div class="col-sm-1">순서변경</div>
-					<div class="col-sm-3">그룹명</div>
-					<div class="col-sm-4">설명</div>
-					<div class="col-sm-1">기본그룹</div>
-					<div class="col-sm-1">회원수</div>
+				<form>
+					<?php $myId = $_GET['id']; 
+						echo $myId;
+					?>
+					<input value="$myId"></input>
+				</form>
 					<div class="col-sm-2"><button type="button" class="btn btn-outline btn-primary btn-xs btn-add-rows">추가</button></div>
 				</div>
 				<div id="sortable">
