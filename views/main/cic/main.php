@@ -153,7 +153,7 @@
                                         <span class="hit">(12)</span>
                                     </p>
                                     <div>
-                                        <p class="stxt">블로서리 <span><img
+                                        <p class="stxt"><?php echo element('post_userid', $popularpost); ?><span><img
                                                     src="<?php echo base_url('assets/images/like-popo.png') ?>"
                                                     alt="" /></span></p>
                                         <p class="date"><?php echo number_format(element('post_like_point', $popularpost)); ?> <span>49분전</span></p>

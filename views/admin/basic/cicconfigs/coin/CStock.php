@@ -1,5 +1,11 @@
 <div class="box">
 	<div class="box-table">
+		<div class="box-table-header">
+			<ul class="nav nav-pills">
+				<li role="presentation"><a href="<?php echo admin_url($this->pagedir.'/CStock')?>">Coin 관리</a></li>
+				<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/CStock_keyword'); ?>">검색키워드 정리</a></li>
+			</ul>
+		</div>
 		<?php
 		echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
 		$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');

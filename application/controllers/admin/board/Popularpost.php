@@ -101,7 +101,8 @@ public function index()
 					element('post_nickname', $val)
 				);
 				$result['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-				$result['list'][$key]['num'] = $list_num--;
+				// $result['list'][$key]['num'] = $list_num--;
+				// $list_num = $list_num -1;
 				if ($board) {
 					$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
 					$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
