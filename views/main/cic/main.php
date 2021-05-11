@@ -51,7 +51,7 @@
             <div class="msec-01">
                 <div class="tab">
                     <ul>
-                        <li class="active"><a href="#n"><span>BTC </span></a></li>
+                        <li class="active"><a href="#n"><span>BTC</span></a></li>
                         <li><a href="#n"><span>ETH</span></a></li>
                         <li><a href="#n"><span>LTC</span></a></li>
                         <li><a href="#n"><span>ETC</span></a></li>
