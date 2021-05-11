@@ -187,7 +187,7 @@ if (typeof(COMMENT_JS) === 'undefined') {
         }
 
         if (save_before !== el_id) {
-            if (save_before) {
+            if (save_before && save_before != 'comment_write_box') {
                 $('#' + save_before).css('display', 'none');
                 $('#' + save_before).html('');
             }

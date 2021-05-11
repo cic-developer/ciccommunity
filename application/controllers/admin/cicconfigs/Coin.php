@@ -155,9 +155,12 @@ class Coin extends CB_Controller
 			//print_r($getStock);
 		for($i = 0; $i < count($getStock); $i++){
 			$marketdata[] = $getStock[$i]->market;
-			print_r($marketdata);
+
             if($marketdata){
 				$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
+				// echo "<br><pre>";
+				// print_r($marketdata);
+				// echo "</pre>";
 			}else{
 				$realtime_coin_info = 0;
 			}
@@ -174,13 +177,15 @@ class Coin extends CB_Controller
 			// print_r($realtime_coin_info);
 			// echo "</pre>";
 		}
-		}	
-		$view['realtime_coin_info'] = $realtime_coin_info;
+			
+			$view['realtime_coin_info'] = $realtime_coin_info;
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
 			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 			$this->data = $view;
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
+
+		}	
 		}
 	
 		public function CStock_keyword(){

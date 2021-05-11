@@ -12,6 +12,7 @@
 		$attributes = array('class' => 'form-horizontal', 'name' => 'flist', 'id' => 'flist');
 		echo form_open(current_full_url(), $attributes);
 		?>
+
 			<div class="list-group">
 				<form class="form-inline">
 					<?php $myId = $_GET['id']; ?>
@@ -23,7 +24,7 @@
 						<label>Keyword</label>
 						<input type="text" class="form-control" name = "keyword">
 					</div>
-					<div class="col-sm-2"><button type="button" class="btn btn-primary btn-xs btn-add-rows">추가</button></div>
+					<div class="col-sm-2"><button type="submit" class="btn btn-primary btn-xs btn-add-rows">추가</button></div>
 				</form>
 				</div>
 				<div id="sortable">
@@ -79,9 +80,7 @@
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 <script type="text/javascript">
 //<![CDATA[
-$(document).on('click', '.btn-add-rows', function() {
-	$('#sortable').append(' <div class="form-group list-group-item"><div class="col-sm-1"><div class="fa fa-arrows" style="cursor:pointer;"></div><input type="hidden" name="mgr_id[]" /></div><div class="col-sm-3"><input type="text" class="form-control" name="mgr_title[]"/></div><div class="col-sm-4"><input type="text" class="form-control" name="mgr_description[]"/></div><div class="col-sm-1"><input type="checkbox" name="mgr_is_default[]" value="1" /></div><div class="col-sm-1"></div><div class="col-sm-2"><button type="button" class="btn btn-outline btn-default btn-xs btn-delete-row" >삭제</button></div></div>');
-});
+
 $(document).on('click', '.btn-delete-row', function() {
 	$(this).parents('div.list-group-item').remove();
 });

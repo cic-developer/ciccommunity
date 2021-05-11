@@ -100,7 +100,7 @@
 
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 //<![CDATA[
 $('.datepicker').datepicker({
 	format: 'yyyy-mm-dd',
@@ -122,4 +122,4 @@ $(function() {
 	});
 });
 //]]>
-</script>
+</script> -->
