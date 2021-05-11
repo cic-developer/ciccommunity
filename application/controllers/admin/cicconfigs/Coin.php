@@ -144,6 +144,8 @@ class Coin extends CB_Controller
 					'name_en' => $getList[$i]['korean_name'],
 				);
 			}
+
+			
 			// echo '<br><pre>';
 			// 	print_r($data);
 			// echo '</pre>';
@@ -152,7 +154,7 @@ class Coin extends CB_Controller
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 				}
 				
-		}	
+		}
 
        	//GET MARKET PRICE
 	    $getStock = $this -> Coin_model->getstockData();
@@ -167,10 +169,55 @@ class Coin extends CB_Controller
 
 
 	//===================================
-	 
+		for($i=0; $i<count($getList); $i++){
+			
+			$market = $getList[$i]['market'];
+			if(strcmp(substr($market, 0, 1), "K")==0){
+				$coin_market = substr($market, 4);
+				// $data = array(
+				// 	'market' => $coin_market,
+				// 	'name_ko' => $getList[$i]['english_name'],
+				// 	'name_en' => $getList[$i]['korean_name'],
+				// );
+				$data =array(
+					array(
+						'coin_idx'=> $coin_market,
+						'keyword'=>$getList[$i]['korean_name']
+					),
+					array(
+						'coin_idx'=> $coin_market,
+						'keyword'=>$getList[$i]['english_name']
+					),
+					array(
+						'coin_idx'=> $coin_market,
+						'keyword'=> $coin_market
+					),
+					
+			
+				);
+				if(isset($data) && !empty($data)){	
+					for($j = 0; $j < count($data); $j++) {
+					
+						$this->Coin_model -> insert_admin_list($data[$j]);
+					}
+				}	
+			
+			}
+
+		
+		// echo '<br><pre>';
+		// 	print_r($data);
+		// echo '</pre>';
+			if(isset($data) && !empty($data)){
+				$stock = $this->Coin_model->insertStockData($data);
+				$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+			}
+			
+	}
+/*
 	$data =array(
 		array(
-			'coin_idx'=>"market",
+			'coin_idx'=>"marker",
 			'keyword'=> "korean",
 		),
 		array(
@@ -187,6 +234,7 @@ class Coin extends CB_Controller
 	for($i = 0; $i < count($data); $i++) {
 	    $this->Coin_model -> insert_admin_list($data[$i]);
 	}
+*/
 
 
 		//if()
