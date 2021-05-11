@@ -99,6 +99,7 @@ class Coin extends CB_Controller
 			}
 		}
 		$view['view']['data'] = $result;
+		//$view['result'] = $result;
 		
 
 		/**

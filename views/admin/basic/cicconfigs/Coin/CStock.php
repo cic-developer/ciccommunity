@@ -30,6 +30,27 @@
 						</tr>
 					</thead>
 					<tbody>
+					<?php 
+				$sno = $row+1;
+				foreach($result as $stocks){
+					echo "<tr>";
+					echo "<td>".$sno."</td>";
+					echo "<td><a href='".$stocks->market."' target='_blank'> ".$stocks->market."</a></td>";
+					echo "<td><a href='".$stocks->name_ko."' target='_blank'> ".$stocks->name_ko."</a></td>";
+					//echo "<td><button type="button" class="btn btn-info">Info</button></td>";
+					echo "</tr>";
+					$sno++;
+				}
+				
+				if(count($stocks) == 0){
+					echo "<tr>";
+					echo "<td colspan='3'>No record found.</td>";
+					echo "</tr>";
+				}
+				?>
+
+
+
 					<?php
 					if (element('list', element('data', $view))) {
 						foreach (element('list', element('data', $view)) as $result) {

@@ -84,6 +84,12 @@ class Coin_model extends CB_Model
         return $result->result(); 
     }
 
+    function get_coin_list($limit ='', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR'){
+        $select = 'cic_coin_stock.*';
+        $result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
+        return $result;
+    }
+
     function getonerow(){
         $this->db->where('stk_id', $id);
         $query = $this->db->get('cic_coin_stock');

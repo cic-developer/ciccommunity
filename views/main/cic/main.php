@@ -142,8 +142,6 @@
 						<?php
 						if (element('list',element('popularpost', $view))) {
 							foreach (element('list',element('popularpost', $view)) as $popularpost) {
-                                print_r(element('posturl', $popularpost));
-                                exit;
 						?>
 							<li>
 								<?php if (element('category', $popularpost)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $popularpost))); ?></span><?php } ?>

@@ -162,20 +162,23 @@ class Checkplus extends CI_Controller
 				// 복호화가 정상적일 경우 데이터를 파싱합니다.
 				$ciphertime = `$cb_encode_path CTS $sitecode $sitepasswd $enc_data`;	// 암호화된 결과 데이터 검증 (복호화한 시간획득)
 			
-				$requestnumber = GetValue($plaindata , "REQ_SEQ");
-				$responsenumber = GetValue($plaindata , "RES_SEQ");
-				$authtype = GetValue($plaindata , "AUTH_TYPE");
-				// $name = GetValue($plaindata , "NAME");
-				$name = GetValue($plaindata , "UTF8_NAME"); //charset utf8 사용시 주석 해제 후 사용
-				$birthdate = GetValue($plaindata , "BIRTHDATE");
-				$gender = GetValue($plaindata , "GENDER");
-				$nationalinfo = GetValue($plaindata , "NATIONALINFO");	//내/외국인정보(사용자 매뉴얼 참조)
-				$dupinfo = GetValue($plaindata , "DI");
-				$conninfo = GetValue($plaindata , "CI");
-				$mobileno = GetValue($plaindata , "MOBILE_NO");
-				$mobileco = GetValue($plaindata , "MOBILE_CO");
+				$requestnumber = $this->GetValue($plaindata , "REQ_SEQ");
+				$responsenumber = $this->GetValue($plaindata , "RES_SEQ");
+				$authtype = $this->GetValue($plaindata , "AUTH_TYPE");
+				// $name =$this-> GetValue($plaindata , "NAME");
+				$name = $this->GetValue($plaindata , "UTF8_NAME"); //charset utf8 사용시 주석 해제 후 사용
+				$birthdate = $this->GetValue($plaindata , "BIRTHDATE");
+				$gender = $this->GetValue($plaindata , "GENDER");
+				$nationalinfo = $this->GetValue($plaindata , "NATIONALINFO");	//내/외국인정보(사용자 매뉴얼 참조)
+				$dupinfo = $this->GetValue($plaindata , "DI");
+				$conninfo = $this->GetValue($plaindata , "CI");
+				$mobileno = $this->GetValue($plaindata , "MOBILE_NO");
+				$mobileco = $this->GetValue($plaindata , "MOBILE_CO");
 
-				if(strcmp($this->session->userdata('REQ_SEQ'), $requestnumber) != 0)
+				print_r("<p>hi</p>");
+				print_r($this->CI->session->userdata('REQ_SEQ'));
+				print_r("<p>hi</p>");
+				if(strcmp($this->CI->session->userdata('REQ_SEQ'), $requestnumber) != 0)
 				{
 					echo "세션값이 다릅니다. 올바른 경로로 접근하시기 바랍니다.<br>";
 					$requestnumber = "";
@@ -209,8 +212,7 @@ class Checkplus extends CI_Controller
 			
 		);
 
-		$this->session->set_userdata($enc_data);
-	
+		$this->CI->session->set_userdata($enc_data);
 	}
 
 	function fail($EncodeData) 
