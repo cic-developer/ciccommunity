@@ -237,27 +237,45 @@ class Register extends CB_Controller
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
-		$this->load->library('form_validation');
+		// $this->load->library('form_validation');
 		
-		$config = array(
-			array(
-				'field' => 'money',
-				'label' => '금액',
-				'rules' => 'trim|required|is_natural_no_zero|less_than_equal_to['.$member_info['mem_cp'].']',
-			),
-		);
-		$this->form_validation->set_rules($config);
-		$form_validation = $this->form_validation->run();
+		// $config = array(
+		// 	array(
+		// 		'field' => 'email',
+		// 		'label' => '이메일',
+		// 		'rules' => 'trim|required|valid_email|max_length[50]|is_unique[a]', //callback__mem_email_chec
+		// 	),
+		// 	array(
+		// 		'field' => 'passowrd',
+		// 		'label' => '비밀번호',
+		// 		'rules' => 'trim|required|min_length[8]', //callback__mem_password_check,
+		// 	),
+		// 	array(
+		// 		'field' => 'passowrd2',
+		// 		'label' => '비밀번호확인',
+		// 		'rules' => 'trim|required|min_length[8]|matches[passowrd]',
+		// 	),
+		// 	array(
+		// 		'field' => 'nickname',
+		// 		'label' => '닉네임',
+		// 		'rules' => 'trim|required|min_length[2]|max_length[20]|', // callback__mem_nickname_check
+		// 	),
+		// 	array(
+		// 		'field' => 'per_address',
+		// 		'label' => '퍼지갑주소',
+		// 		'rules' => 'trim|required|is_natural_no_zero|is_unique[b]',
+		// 	),
+		// );
+		// $this->form_validation->set_rules($config);
+		// $form_validation = $this->form_validation->run();
 
 
 
+		// if( !$form_validation ) {
+		// 	// redirect("https://www.naver.com/");
+		// } else {
 
-
-
-
-
-
-
+		// }
 
 
 

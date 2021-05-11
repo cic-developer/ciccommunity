@@ -236,6 +236,13 @@ class Coin extends CB_Controller
 			$keylist = $this -> Coin_model_admin->get_keyword();
 
 			$view['keylist'] = $keylist;
+
+
+
+			//delete keyword
+            $key_id = $this->input->post('d_id');
+
+			$key_delete = $this->Coin_model_admin->delete_keyword($key_id);
 			
 			/**
 		 	* 어드민 레이아웃을 정의합니다

@@ -152,7 +152,7 @@ public function index()
 		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listdelete/?' . $param->output());
 		$view['view']['list_trash_url'] = admin_url($this->pagedir . '/listtrash/?' . $param->output());
 		$view['view']['list_update_url'] = admin_url($this->pagedir . '/listupdate/?' . $param->output());
-		$view['view']['list_bestpost_url'] = admin_url($this->pagedir . '/bestpost/?' . $param->output());
+		$view['view']['list_bestpost_url'] = admin_url($this->pagedir . '/bestpostupdate/?' . $param->output());
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
@@ -267,6 +267,7 @@ public function index()
 		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listdelete/?' . $param->output());
 		$view['view']['list_trash_url'] = admin_url($this->pagedir . '/listtrash/?' . $param->output());
 		$view['view']['list_update_url'] = admin_url($this->pagedir . '/listupdate/?' . $param->output());
+		$view['view']['list_bestpost_exept_url'] = admin_url($this->pagedir . '/bestpostexept/?' . $param->output());
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
@@ -274,7 +275,7 @@ public function index()
 		/**
 		 * 어드민 레이아웃을 정의합니다
 		 */
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'index');
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'bestpost');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
@@ -317,7 +318,7 @@ public function index()
 		redirect($redirecturl);
 	}
 
-		public function bestpostupdate()
+	public function bestpostupdate()
 	{
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_board_post_bestpost';
@@ -345,6 +346,40 @@ public function index()
 		$this->session->set_flashdata(
 			'message',
 			'베스트 게시물로 선정되었습니다'
+		);
+		$param =& $this->querystring;
+		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+		redirect($redirecturl);
+	}
+
+	public function bestpostexept()
+	{
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_admin_board_post_bestpost';
+		$this->load->event($eventname);
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+		/**
+		 * 체크한 게시물의 삭제를 실행합니다
+		 */
+		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
+			foreach ($this->input->post('chk') as $val) {
+				if ($val) {
+					$this->Post_model->upadte_post_best_state_exept($val);
+				}
+			}
+		}
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('after', $eventname);
+
+		/**
+		 * 삭제가 끝난 후 목록페이지로 이동합니다
+		 */
+		$this->session->set_flashdata(
+			'message',
+			'베스트 게시물에서 제외되었습니다'
 		);
 		$param =& $this->querystring;
 		$redirecturl = admin_url($this->pagedir . '?' . $param->output());

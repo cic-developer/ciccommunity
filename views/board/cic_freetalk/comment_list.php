@@ -34,13 +34,13 @@
 						<li>
 							<p class="date"><?php echo cdate('Y. m. d H:i' ,strtotime(element('cmt_datetime', $result))); ?></p>
 						</li>
-						<li><a href="#n" class="cmmt-btn"><span>답글</span></a></li>
+						<li><a href="javascript:;" class="cmmt-btn" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'c'); return false;"><span>답글</span></a></li>
 						<li><a href="#n" class="singo-btn"><span>신고</span></a></li>
 					</ul>
 				</div>
-				<div class="comment" id="edit_<?php echo element('cmt_id', $result); ?>"> -->
+				<div class="comment" id="edit_<?php echo element('cmt_id', $result); ?>">
 				</div>
-				<div class="comment" id="reply_<?php echo element('cmt_id', $result); ?>"> -->
+				<div class="comment" id="reply_<?php echo element('cmt_id', $result); ?>">
 				</div>
 			</div>
 			<!-- <div class="reply cdepth1">
@@ -163,7 +163,7 @@
 		var istotal = $('.cmmt').find('.item').length;
 		var ischk = (istotal / 2) + 1
 		$('.cmmt').find('.item:nth-child(n+' + ischk + ')').addClass('vfm');
-		$('.ctrls').find('.cmmt-btn').click(function () {
+		/*$('.ctrls').find('.cmmt-btn').click(function () {
 			$('.cmmt-wrap').find('.singo-btn').removeClass('active');
 			if ($(this).hasClass('active')) {
 				$(this).removeClass('active');
@@ -186,7 +186,7 @@
 					$('.cmmt').find('.cread').removeClass('cread')
 				},
 			}).close();
-		});
+		});*/
 		$('.cmmt-wrap').find('.singo-btn').click(function () {
 			$('.cmmt-wrap').find('.singo-btn').removeClass('active');
 			$(this).addClass('active');

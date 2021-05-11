@@ -60,8 +60,8 @@
 					<td><?php echo $sno; ?></td>
 					<td><?php echo $stocks['market']. " - " .$stocks['name_ko']; ?></td>
 					<td><?php echo $stocks['keyword']; ?></td>
-					<td><div class="col-sm-6"><button type="button" class="btn btn-light">삭제</button></div></td>
-					<td><div class="col-sm-6"><button type="button" class="btn btn-light"><i class="fas fa-pen-alt"></i></button></div></td>
+					<td><input type="checkbox" name="d_id[]" value="<?php echo $stocks['idx']; ?>"></td>
+					<td><input type="checkbox" name="u_id[]" value="<?php echo $stocks['idx']; ?>"></td>
 				</tr>
 				<?php
 					$sno++;

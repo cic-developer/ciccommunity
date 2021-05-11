@@ -607,6 +607,24 @@ class Post_model extends CB_Model
 		return $this->db->update($this->_table);
 	}
 
+		public function upadte_post_best_state_exept($post_id)
+	{
+		$where = array(
+			'post_id' => $post_id,
+		);
+		// $hello = $this->db->select_max($where['post_best_state']);
+
+		// print_r($where);
+		// exit;
+		$updatedata = array(
+			'post_best_state' => 0,
+		);
+		$this->db->where($where);
+		$this->db->set($updatedata);
+
+		return $this->db->update($this->_table);
+	}
+
 	public function get_popularpost_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
 		if ( ! in_array(strtolower($orderby), $this->allow_order)) {

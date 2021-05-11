@@ -51,6 +51,23 @@ class Coin_model_admin extends CB_Model
         return $result;
     }
 
+    function delete_keyword($id){
+        $this->db->select('cic_coin_stock.*');
+        $this->db->select('cic_coin_admins.*');
+         //$this->db->('market');
+        $this->db->from('cic_coin_admins');
+        $this->db->join('cic_coin_stock', 'cic_coin_stock.coin_idx = cic_coin_admins.coin_idx');
+        
+        if(is_array($id)){
+            $this->db->where_in('id', '$ids');
+        }
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }
+        else
+            return false;
+    }
+
 
 }
 ?>
