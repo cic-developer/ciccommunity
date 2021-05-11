@@ -65,3 +65,7 @@
 	</div><a href="#" class="join-btn">
 	</a>
 </div>
+
+<script>
+	
+</script>

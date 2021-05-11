@@ -50,7 +50,7 @@ class CIC_cp_model extends CB_Model
 		$result = $this->db->get('cic_cp');
 		$result = $result->row_array();
 
-		return $result['cp_point'];
+		return $result['cp_point'] ? $result['cp_point'] : 0;
 	}
 
 

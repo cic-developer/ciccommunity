@@ -7,8 +7,8 @@
 			?>
 				<div class="box-table-header">
 					<ul class="nav nav-pills">
-						<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir); ?>">인기게시글목록</a></li>
-						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/bestpost'); ?>">베스트게시글목록</a></li>
+				<li role="presentation"><a href="<?php echo admin_url($this->pagedir); ?>">인기게시글 목록</a></li>
+				<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/bestpost'); ?>">베스트게시글 목록</a></li>
 					</ul>
 					<?php
 					ob_start();

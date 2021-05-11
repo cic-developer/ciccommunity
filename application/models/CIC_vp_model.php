@@ -49,8 +49,8 @@ class CIC_vp_model extends CB_Model
 		$this->db->where(array('mem_id' => $mem_id));
 		$result = $this->db->get('cic_vp');
 		$result = $result->row_array();
-
-		return $result['vp_point'];
+		
+		return $result['vp_point'] ? $result['vp_point'] : 0;
 	}
 
 

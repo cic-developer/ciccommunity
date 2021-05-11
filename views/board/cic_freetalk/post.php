@@ -972,7 +972,7 @@
 			async: false,
 			cache: false,
 			success: function(data) {
-				if(data.error){
+				if(data.error !== undefined){
 					alert(data.error);
 				} else {
 					alert('성공적으로 처리되었습니다.');

@@ -287,7 +287,7 @@ public function index()
 		redirect($redirecturl);
 	}
 
-	public function bestpostupdate()
+	public function bestpost()
 	{
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_board_bestpost_index';
@@ -319,7 +319,7 @@ public function index()
 		$this->{$this->modelname}->allow_order_field = array('post_id'); // 정렬이 가능한 필드
 
 		$where = array(
-			'post_best_state' => ! 0,
+			'post_best_state >' =>  0,
 		);
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;
@@ -403,8 +403,4 @@ public function index()
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
-	public function bestpost()
-	{
-
-	}
 }
