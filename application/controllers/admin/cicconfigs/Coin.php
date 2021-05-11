@@ -144,6 +144,9 @@ class Coin extends CB_Controller
 					'name_en' => $getList[$i]['korean_name'],
 				);
 			}
+			echo '<br><pre>';
+				print_r($data);
+			echo '</pre>';
 				if(isset($data) && !empty($data)){
 					$stock = $this->Coin_model->insertStockData($data);
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
@@ -161,7 +164,6 @@ class Coin extends CB_Controller
 				echo '</pre>';
 			}
 		}
-		print_r($getStock[0]['market']);
 
 
 		//if()
