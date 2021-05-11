@@ -51,36 +51,36 @@
 								<th class="text-center">조회</th>
 								<th class="text-center" class="text-center">상태</th>
 								<th class="text-center"><input type="checkbox" name="chkall" id="chkall" /></th>
-								<th class="text-center">베스트 게시물 선정</th>
+								<th class="text-center">베스트 게시물 제외</th>
 							</tr>
 						</thead>
 						<tbody>
 						<?php
 						if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result) {
+							foreach (element('list', element('data', $view)) as $bestpost) {
 						?>
 							<tr>
-								<td class="text-center"><?php echo number_format(element('num', $result)); ?></td>
-								<td class="text-center"><a href="?brd_id=<?php echo element('brd_id', $result); ?>"><?php echo html_escape(element('brd_name', element('board', $result))); ?></a> <a href="<?php echo goto_url(element('boardurl', $result)); ?>" target="_blank"><span class="fa fa-external-link"></span></a></td>
+								<td class="text-center"><?php echo number_format(element('num', $bestpost)); ?></td>
+								<td class="text-center"><a href="?brd_id=<?php echo element('brd_id', $bestpost); ?>"><?php echo html_escape(element('brd_name', element('board', $bestpost))); ?></a> <a href="<?php echo goto_url(element('boardurl', $bestpost)); ?>" target="_blank"><span class="fa fa-external-link"></span></a></td>
 								<td class="text-center">
-									<?php if (element('thumb_url', $result)) {?>
-										<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank">
-											<img src="<?php echo element('thumb_url', $result); ?>" alt="<?php echo html_escape(element('post_title', $result)); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" class="thumbnail mg0" style="width:80px;" />
+									<?php if (element('thumb_url', $bestpost)) {?>
+										<a href="<?php echo goto_url(element('posturl', $bestpost)); ?>" target="_blank">
+											<img src="<?php echo element('thumb_url', $bestpost); ?>" alt="<?php echo html_escape(element('post_title', $bestpost)); ?>" title="<?php echo html_escape(element('post_title', $bestpost)); ?>" class="thumbnail mg0" style="width:80px;" />
 										</a>
 									<?php } ?>
 								</td>
 								<td class="text-center">
-									<?php if (element('category', $result)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $result))); ?></span><?php } ?>
-									<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><?php echo html_escape(element('post_title', $result)); ?></a>
+									<?php if (element('category', $bestpost)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $bestpost))); ?></span><?php } ?>
+									<a href="<?php echo goto_url(element('posturl', $bestpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $bestpost)); ?></a>
 								</td>
-								<td class="text-center"><?php echo element('post_display_name', $result); ?> <?php if (element('post_userid', $result)) { ?> ( <a href="?sfield=mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('post_userid', $result)); ?></a> ) <?php } ?></td>
-								<td class="text-center"><?php echo display_datetime(element('post_datetime', $result), 'full'); ?></td>
-								<td class="text-center"><?php echo number_format(element('post_like_point', $result)); ?></td>
-								<td class="text-center"><?php echo number_format(element('post_dislike_point', $result)); ?></td>
-								<td class="text-center"><?php echo number_format(element('post_hit', $result)); ?></td>
-								<td class="text-center"><?php echo element('post_secret', $result) === '1' ? '비밀' : '공개'; ?></td>
-								<td class="text-center"><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
-								<td class="text-center"><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
+								<td class="text-center"><?php echo element('post_display_name', $bestpost); ?> <?php if (element('post_userid', $bestpost)) { ?> ( <a href="?sfield=mem_id&amp;skeyword=<?php echo element('mem_id', $bestpost); ?>"><?php echo html_escape(element('post_userid', $bestpost)); ?></a> ) <?php } ?></td>
+								<td class="text-center"><?php echo display_datetime(element('post_datetime', $bestpost), 'full'); ?></td>
+								<td class="text-center"><?php echo number_format(element('post_like_point', $bestpost)); ?></td>
+								<td class="text-center"><?php echo number_format(element('post_dislike_point', $bestpost)); ?></td>
+								<td class="text-center"><?php echo number_format(element('post_hit', $bestpost)); ?></td>
+								<td class="text-center"><?php echo element('post_secret', $bestpost) === '1' ? '비밀' : '공개'; ?></td>
+								<td class="text-center"><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $bestpost); ?>" /></td>
+								<td class="text-center"><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $bestpost); ?>" /></td>
 							</tr>
 						<?php
 							}

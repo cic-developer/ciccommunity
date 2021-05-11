@@ -325,26 +325,26 @@ public function index()
 			$where['brd_id'] = $brdid;
 		}
 		
-		$result = $this->{$this->modelname}
+		$bestpost = $this->{$this->modelname}
 			->get_popularpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
+		$list_num = $bestpost['total_rows'] - ($page - 1) * $per_page;
 		
-		if (element('list', $result)) {
-			foreach (element('list', $result) as $key => $val) {
-				$result['list'][$key]['post_display_name'] = display_username(
+		if (element('list', $bestpost)) {
+			foreach (element('list', $bestpost) as $key => $val) {
+				$bestpost['list'][$key]['post_display_name'] = display_username(
 					element('post_userid', $val),
 					element('post_nickname', $val)
 				);
-				$result['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+				$bestpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
 				// $result['list'][$key]['num'] = $list_num--;
 				// $list_num = $list_num -1;
 				if ($board) {
-					$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-					$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+					$bestpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+					$bestpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
 				}
-				$result['list'][$key]['category'] = '';
+				$bestpost['list'][$key]['category'] = '';
 				if (element('post_category', $val)) {
-					$result['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+					$bestpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
 				}
 				if (element('post_image', $val)) {
 					$imagewhere = array(
@@ -352,13 +352,13 @@ public function index()
 						'pfi_is_image' => 1,
 					);
 					$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-					$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+					$bestpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
 				} else {
-					$result['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+					$bestpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
 				}
 			}
 		}
-		$view['view']['data'] = $result;
+		$view['view']['data'] = $bestpost;
 
 		$select = 'brd_id, brd_name';
 		$view['view']['boardlist'] = $this->Board_model->get_board_list();

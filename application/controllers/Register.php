@@ -58,12 +58,7 @@ class Register extends CB_Controller
 		$this->session->set_userdata('registeragree', '');
 
 		$view['view']['enc_data'] = $this->checkplus->main();
-		if($this->input->get("EncodeData")){
-			$this->checkplus->success($this->input->get("EncodeData"));
-			$this->session->set_userdata('registeragree', '1');
-			echo("<script>window.opener.location.href='register/form';</script>");
-			echo("<script>self.close()</script>");
-		}
+		
 		// $this->session->unset_userdata('dec_data');
 		// print_r($this->session->userdata('registeragree'));
 		// print_r("<br>");
@@ -145,7 +140,7 @@ class Register extends CB_Controller
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 
-			// $this->session->set_userdata('registeragree', '');
+			$this->session->set_userdata('registeragree', '');
 
 			$view['view']['member_register_policy1'] = $this->cbconfig->item('member_register_policy1');
 			$view['view']['member_register_policy2'] = $this->cbconfig->item('member_register_policy2');
@@ -192,35 +187,24 @@ class Register extends CB_Controller
 			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
 			 */
 			// 이벤트가 존재하면 실행합니다
-			// $view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-			// if(!$this->session->userdata('enc_data')){
-			// $layoutconfig = array(
-			// 	'path' => 'register',
-			// 	'layout' => 'layout',
-			// 	'skin' => 'checkplus_success',
-			// 	'layout_dir' => $this->cbconfig->item('layout_register'),
-			// 	'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_register'),
-			// 	'use_sidebar' => $this->cbconfig->item('sidebar_register'),
-			// 	'use_mobile_sidebar' => $this->cbconfig->item('mobile_sidebar_register'),
-			// 	'skin_dir' => $this->cbconfig->item('skin_register'),
-			// 	'mobile_skin_dir' => $this->cbconfig->item('mobile_skin_register'),
-			// 	'page_title' => $page_title,
-			// 	'meta_description' => $meta_description,
-			// 	'meta_keywords' => $meta_keywords,
-			// 	'meta_author' => $meta_author,
-			// 	'page_name' => $page_name,
-			// );
-			// $view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
-			// $this->data = $view;
-			// 	$this->layout = element('layout_skin_file', element('layout', $view));
-			// 	$this->view = element('view_skin_file', element('layout', $view));
-			// }else{
-			// }
-
+			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+			
 			$rcid = $this->input->post('recommend_id');
-			// $this->session->set_userdata('registeragree', '1');
+			$this->session->set_userdata('registeragree', '1');
 			redirect('register/form/'.$rcid);
+		}
+	}
 
+	public function auth_success(){
+		if($this->input->get("EncodeData")){
+			$this->checkplus->success($this->input->get("EncodeData"));
+			
+			// echo("<script>window.opener.location.href='/register/form';</script>");
+			echo("<script>window.opener.fregisterform.submit();</script>");
+			echo("<script>self.close()</script>");
+		} else {
+			echo("<script>alert('비정상적인 접근입니다.')</script>");
+			echo("<script>self.close()</script>");
 		}
 	}
 
