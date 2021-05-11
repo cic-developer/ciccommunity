@@ -32,9 +32,9 @@
 						<p class="btxt">E-mail (ID)</p>
 						<div class="field">
 							<p class="chk-input">
-								<input name="email" type="text" value="dltngh2236@naver.com" autocomplete="off">
+								<input id="mem_email" name="mem_email" type="text" value="dltngh2236@naver.com" autocomplete="off">
 							</p>
-							<a href="#n" class="cerfity-btn"><span>인증하기</span></a>
+							<a id="ath_email" class="cerfity-btn"><span>인증하기</span></a>
 						</div>
 						<p class="rtxt mg10t">승인이 완료되었습니다</p>
 					</li>
@@ -96,6 +96,20 @@
 			$("#fregisterform").submit();
 		});
 	});
+
+	$(document).ready(function(){
+		$("#ath_email").on('click', function(){
+			var email = $("#mem_email").val();
+			alert(email);
+		})
+	})
+
+	$.ajax({
+        url: "myname.php",
+        type: "post",
+    }).done(function(data) {
+        $('#name').text(data);
+    });
 </script>
 
 
