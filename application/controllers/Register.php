@@ -182,7 +182,7 @@ class Register extends CB_Controller
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
-			if(!$this->session->userdata('enc_data')){
+			// if(!$this->session->userdata('enc_data')){
 				// $rcid = $this->input->post('recommend_id');
 				// $this->session->set_userdata('registeragree', '1');
 
@@ -192,17 +192,20 @@ class Register extends CB_Controller
 				// redirect("https://www.naver.com");
 				
 				// echo("<script>self.close()</script>");
-				echo("<script>window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');</script>");
-				echo("<script>document.form_chk.action = 'https://www.naver.com';</script>");
+				// echo("<script>window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');</script>");
+				// echo("<script>document.form_chk.action = 'https://www.naver.com';</script>");
 				// echo("<script>document.form_chk.action = 'https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb';</script>");
-				echo("<script>document.form_chk.target = 'popupChk';</script>");
-				echo("<script>document.form_chk.submit();</script>");
-			}else{
+				// echo("<script>document.form_chk.target = 'popupChk';</script>");
+				// echo("<script>document.form_chk.submit();</script>");
+			// }else{
 
-				$rcid = $this->input->post('recommend_id');
-				$this->session->set_userdata('registeragree', '1');
-				redirect('register/form/'.$rcid);
-			}
+				// $rcid = $this->input->post('recommend_id');
+				// $this->session->set_userdata('registeragree', '1');
+				// redirect('register/form/'.$rcid);
+			// }
+			$rcid = $this->input->post('recommend_id');
+			$this->session->set_userdata('registeragree', '1');
+			redirect('register/form/'.$rcid);
 
 		}
 	}
@@ -210,8 +213,19 @@ class Register extends CB_Controller
 	public function checkplus_success()
 	{
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_register_checkplus_success';
+		$eventname = 'event_register_index';
 		$this->load->event($eventname);
+
+		$view = array();
+		$view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		if ($this->member->is_member()
+			&& ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
+			redirect();
+		}
 
 		if($this->input->get("EncodeData")){
 			$this->checkplus->success($this->input->get("EncodeData"));

@@ -44,6 +44,7 @@ class Coin_keyword extends CB_Controller
 		 * 라이브러리를 로딩합니다
 		 */
         parent::__construct();
+        $this->load->view('CStock_keyword');
         $this->load->helper('url');
 		$this->load->library(array('pagination', 'querystring', 'form_validation', 'session'));
 		$this->load->model(array('coin_model', 'Coin_model_admin'));
@@ -59,8 +60,7 @@ class Coin_keyword extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
         $config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
-        $this->load->view('CStock_keyword');
-
+        
 
 
         $view['realtime_coin_info'] = $realtime_coin_info;
