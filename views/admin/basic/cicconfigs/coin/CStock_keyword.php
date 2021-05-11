@@ -3,8 +3,8 @@
 		<div class="box-table-header">
 				<input type="hidden" name="pointType" value="<?php echo $_pointType?>">
 				<ul class="nav nav-pills">
-					<li role="presentation" <?php echo $_pointType === 'cp' ? '': 'class="active"'?>><a href="<?php echo admin_url($this->pagedir.'/CStock_keyword')?>">검색키워드 관리</a></li>
-					<li role="presentation" <?php echo $_pointType === 'cp' ? 'class="active"': ''?>><a href="<?php echo admin_url($this->pagedir.'CStock')?>">Coin 관리</a></li>
+					<li role="presentation" <?php echo $_pointType === 'CStock' ? 'class="active"': ''?>><a href="<?php echo admin_url($this->pagedir.'/CStock')?>">Coin 관리</a></li>
+					<li role="presentation" <?php echo $_pointType === 'CStock' ? '': 'class="active"'?>><a href="<?php echo admin_url($this->pagedir.'/CStock_keyword')?>">검색키워드 관리</a></li>
 				</ul>
 
 				<?php

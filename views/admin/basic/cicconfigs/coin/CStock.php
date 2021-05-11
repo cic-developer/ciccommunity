@@ -1,17 +1,12 @@
 <div class="box">
 	<div class="box-table">
 		<div class="box-table-header">
-			<ul class="nav nav-pills">
-				<li role="presentation"><a href="<?php echo admin_url($this->pagedir.'/CStock')?>">Coin 관리</a></li>
-				<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/CStock_keyword'); ?>">검색키워드 설정</a></li>
-			</ul>
-		</div>
-		<?php
-		echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
-		$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
-		echo form_open(current_full_url(), $attributes);
-		?>
-			<div class="box-table-header">
+				<input type="hidden" name="pointType" value="<?php echo $_pointType?>">
+				<ul class="nav nav-pills">
+					<li role="presentation" <?php echo $_pointType === 'CStock' ? 'class="active"': ''?>><a href="<?php echo admin_url($this->pagedir.'/CStock')?>">Coin 관리</a></li>
+					<li role="presentation" <?php echo $_pointType === 'CStock' ? '': 'class="active"'?>><a href="<?php echo admin_url($this->pagedir.'/CStock_keyword')?>">검색키워드 관리</a></li>
+				</ul>
+
 				<?php
 				ob_start();
 				?>
@@ -22,13 +17,16 @@
 				$buttons = ob_get_contents();
 				ob_end_flush();
 				?>
-			</div>
+		</div>
+		<?php
+		echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
+		$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
+		echo form_open(current_full_url(), $attributes);
+		?>
 			<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
 			<div class="table-responsive">
 				<form action="post" name='selected_market'>
 				<table class="table table-hover table-striped table-bordered">
-
-				
 					<thead>
 						<tr>
 							<th>번호</th>
@@ -50,7 +48,6 @@
 							<td><a href="?sfield=Coin.coin_idx&amp;skeyword=<?php echo element('coin_idx', $result); ?>"><?php echo html_escape(element('market', $result)); ?></a></td>
 							<td><?php echo element('name_ko', $result); ?></td>
 							<td><?php echo element('name_en', $result); ?></td>
-
 							<td><button  type="button" id="myBtn" class="btn btn-link" onClick="document.location.href='https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo element('coin_idx', $result); ?>'">Link</button></td>
 						</tr>
 					<?php
@@ -59,9 +56,6 @@
 					if ( ! element('list', element('data', $view))) {
 						//echo "hello";
 					?>
-						<tr>
-							<td colspan="8" class="nopost">자료가 없습니다</td>
-						</tr>
 					<?php
 					}
 					?>
