@@ -505,7 +505,7 @@ class Members extends CB_Controller
 			 */
 			$view['view']['primary_key'] = $primary_key;
 
-			$html_content = '';
+			$html_content = [];
 			$k = 0;
 			if ($form && is_array($form)) {
 				foreach ($form as $key => $value) {
