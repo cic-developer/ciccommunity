@@ -26,6 +26,7 @@
 							<th>마켓명</th>
 							<th>한국어명</th>
 							<th>연어명</th>
+							
 						</tr>
 					</thead>
 					<tbody>
@@ -38,11 +39,13 @@
 							<td><a href="?sfield=Coin.coin_idx&amp;skeyword=<?php echo element('coin_idx', $result); ?>"><?php echo html_escape(element('market', $result)); ?></a></td>
 							<td><?php echo element('name_ko', $result); ?></td>
 							<td><?php echo element('name_en', $result); ?></td>
+							<?php echo "hello"; ?>
 						</tr>
 					<?php
 						}
 					}
 					if ( ! element('list', element('data', $view))) {
+						//echo "hello";
 					?>
 						<tr>
 							<td colspan="8" class="nopost">자료가 없습니다</td>

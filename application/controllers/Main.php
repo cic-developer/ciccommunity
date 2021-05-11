@@ -73,20 +73,38 @@ class Main extends CB_Controller
 		$popularpost = $this->Post_model
 			->get_popularpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 
-		if(element('list', $popularpost)){
-			foreach(element('list', $popularpost) as $key => $val){
+		if (element('list', $popularpost)) {
+			foreach (element('list', $popularpost) as $key => $val) {
 				$popularpost['list'][$key]['post_display_name'] = display_username(
 					element('post_userid', $val),
 					element('post_nickname', $val)
 				);
 				$popularpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
 				$popularpost['list'][$key]['num'] = $list_num--;
-			}
-			if($board){
-				$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-				$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+				if ($board) {
+					$popularpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+					$popularpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+				}
+				$popularpost['list'][$key]['category'] = '';
+				if (element('post_category', $val)) {
+					$popularpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+				}
+				if (element('post_image', $val)) {
+					$imagewhere = array(
+						'post_id' => element('post_id', $val),
+						'pfi_is_image' => 1,
+					);
+					$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+					$popularpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+				} else {
+					$popularpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+				}
 			}
 		}
+		$view['view']['data'] = $popularpost;
+
+		$select = 'brd_id, brd_name';
+		$view['view']['boardlist'] = $this->Board_model->get_board_list();
 			
 		$view['view']['board_list'] = $board_list;
 		$view['view']['canonical'] = site_url();		

@@ -82,9 +82,8 @@ class Coin extends CB_Controller
 		$this->{$this->modelname}->search_field_equal = array('coin_idx', 'market', 'name_ko', 'name_en'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('coin_idx'); // 정렬이 가능한 필드
 
-		
 		$where = array();
-
+ 	
 		$result = $this->{$this->modelname}
 		->getstockData();
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
@@ -100,12 +99,13 @@ class Coin extends CB_Controller
 			}
 		}
 		$view['view']['data'] = $result;
+		
 
 		/**
 		 * primary key 정보를 저장합니다
 		 */
 		$view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
-
+		
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
@@ -128,11 +128,11 @@ class Coin extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 		
+	
 		
 		
 		
-		
-		$view['getStock'] = $getStock;
+		// $view['getStock'] = $getStock;
 		
 		$getList = $this -> Coin_model->get_coinlist();
 		for($i=0; $i<count($getList); $i++){
@@ -153,7 +153,7 @@ class Coin extends CB_Controller
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 				}
 		}	
-
+	
 		//CREATE COIN LIST FOR ADMIN
 
 		$this->load->library('form_validation');
@@ -190,25 +190,25 @@ class Coin extends CB_Controller
 
        	//GET MARKET 
 	    // $admincoin = $this -> Coin_model_admin -> get_admin_coinList();
-		for($i = 0; $i < count($getStock); $i++){
-			$marketdata[] = $getStock[$i]->market;
-            if($marketdata){
-				$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
-			}else{
-				$realtime_coin_info = 0;
-			}
+		// for($i = 0; $i < count($getStock); $i++){
+		// 	$marketdata[] = $getStock[$i]->market;
+        //     if($marketdata){
+		// 		$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
+		// 	}else{
+		// 		$realtime_coin_info = 0;
+		// 	}
 
-			foreach ($getStock as $getstoks){
-				if($getstoks-> market){
-					$marketdata[] = $getstoks->market;
-				}else{
-					$marketdata[] = 0;
-				}
-			}
+		// 	foreach ($getStock as $getstoks){
+		// 		if($getstoks-> market){
+		// 			$marketdata[] = $getstoks->market;
+		// 		}else{
+		// 			$marketdata[] = 0;
+		// 		}
+		// 	}
 			// echo "<br><pre>";
 			// print_r($realtime_coin_info);
 			// echo "</pre>";
-			
+			//print_r($result);
 			$view['realtime_coin_info'] = $realtime_coin_info;
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
 			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
@@ -217,7 +217,7 @@ class Coin extends CB_Controller
 			$this->view = element('view_skin_file', element('layout', $view));
 		}
 	
-	}
+	//}
 	
 }
 ?>
