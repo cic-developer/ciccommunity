@@ -224,15 +224,15 @@ class Coin extends CB_Controller
 
 			);
 				if(isset($data) && !empty($data)){
-					print_r($data);
-					$stock_ = $this->Coin_model_admin->insert_keyword($data);
+					$this->Coin_model_admin->insert_keyword($data);
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 					//print_r($stock_);
 				}
 			}
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 		
-
+			$list = $this->Coin_model_admin->get_keyword();
+			print_r($list);
 			
 			/**
 		 	* 어드민 레이아웃을 정의합니다

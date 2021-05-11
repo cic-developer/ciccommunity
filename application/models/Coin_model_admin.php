@@ -36,7 +36,15 @@ class Coin_model_admin extends CB_Model
             $result = $this->db->insert('cic_coin_admins', $data);
             return $result;
         }
-    } 
+    }
+    
+    function get_keyword(){
+        $this->db->select('*');
+        $this->db->from('cic_coin_admins');
+        $this->db->join('cic_coin_stock', 'cic_coin_stock.coin_idx = cic_coin_admins.coin_idx');
+
+        $result = $this->db->get();
+    }
 
 
 }

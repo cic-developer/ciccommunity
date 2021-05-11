@@ -912,7 +912,7 @@
 </div>
 <script>
 	var reg_num = /^[0-9]*$/;
-	var post_id = "<?php echo element('post_title', element('post', $view)); ?>"
+	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
 
 	$('.up').on('click', function(){
 		const content_type = $(this).attr('data-contenttype');
@@ -931,6 +931,24 @@
 			alert('로그인이 필요한 서비스입니다.');
 			return false;
 		}
+		const allowed_content_type = ['post', 'comment'];
+		const allowed_like_type = ['up', 'down'];
+
+		if(allowed_content_type.indexOf(content_type) == -1){
+			alert('비정상적인 시도입니다.1');
+			return false;
+		}
+		
+		if(!reg_num.test(content_idx)){
+			alert('비정상적인 시도입니다.2');
+			return false;
+		}
+
+		if(allowed_like_type.indexOf(like_type) == -1){
+			alert('비정상적인 시도입니다.3');
+			return false;
+		}
+
 		const title = 'VP를 '+ (like_type === 'up' ? 'UP' :'DOWN') + ' 합니다.';
 		const _point = prompt(title, 0);
 
@@ -944,12 +962,11 @@
 			alert('숫자만 입력할 수 있습니다.');
 			return false;
 		}
-
 		$.ajax({
-			url: cb_url + '/postact/post_like/'+post_id+'/'+(like_type === 'up' ? '1' :'2'),
+			url: cb_url + '/postact/'+content_type+'_like/'+content_idx+'/'+(like_type === 'up' ? '1' :'2'),
 			type: 'get',
 			data: {
-				usePoint: _point,
+				usePoint: Number(_point),
 			},
 			dataType: 'json',
 			async: false,
@@ -960,6 +977,9 @@
 				} else {
 					alert('성공적으로 처리되었습니다.');
 				}
+			},
+			error: function(){
+				alert('에러가 발생했습니다.');
 			}
 		});
 		return true;
