@@ -68,6 +68,19 @@ class Coin_model_admin extends CB_Model
             return false;
     }
 
+    function research_coin($keyword){
+        $this->db->select('cic_coin_admins.*');
+        $this->db->from('cic_coin_admins');
+        $this->db->join('cic_coin_stock', 'cic_coin_stock.coin_idx = cic_coin_admins.coin_idx');
+        $this->db->get_where('cic_coin_admins', array('keyword' => $keyword ));
+    }
+
+    function save_defaut_keyword(){
+        $this->db->where('stk_id', $id);
+        $query = $this->db->get('cic_coin_stock');
+        return $query->row();
+    }
+
 
 }
 ?>
