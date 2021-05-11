@@ -7,18 +7,17 @@
 			?>
 				<div class="box-table-header">
 					<ul class="nav nav-pills">
-						<li role="presentation"><a href="<?php echo admin_url($this->pagedir); ?>">인기게시글 목록</a></li>
-						<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/bestpost'); ?>">베스트게시글 목록</a></li>
+						<li role="presentation"><a href="<?php echo admin_url($this->pagedir); ?>">인기게시글목록</a></li>
+						<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/bestpost'); ?>">베스트게시글목록</a></li>
 					</ul>
-					</div>
 					<?php
-					echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
-					echo show_alert_message(element('alert_message', $view), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
+							echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
+		echo show_alert_message(element('alert_message', $view), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
 					?>
 						<div class="btn-group pull-right" role="group" aria-label="...">
 							<a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a>
 							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('list_update_url', $view); ?>" >선택제외</button>
-							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('list_update_url', $view); ?>" >베스트게시물선정</button>
+							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('list_bestpost_url', $view); ?>" >베스트게시물선정</button>
 						</div>
 					<?php
 					$buttons = ob_get_contents();
@@ -41,46 +40,44 @@
 						<thead>
 							<tr>
 								<th><a href="<?php echo element('post_id', element('sort', $view)); ?>">번호</a></th>
-								<th class="text-center">게시판</th>
-								<th class="text-center">이미지</th>
-								<th class="text-center">제목</th>
-								<th class="text-center">작성자</th>
-								<th class="text-center">작성일</th>
-								<th class="text-center">추천수</th>
-								<th class="text-center">비추천수</th>
-								<th class="text-center">조회</th>
-								<th class="text-center" class="text-center">상태</th>
-								<th class="text-center"><input type="checkbox" name="chkall" id="chkall" /></th>
-								<th class="text-center">베스트 게시물 제외</th>
+								<th>게시판</th>
+								<th>이미지</th>
+								<th>제목</th>
+								<th>작성자</th>
+								<th>작성일</th>
+								<th>추천수</th>
+								<th>비추천수</th>
+								<th>조회</th>
+								<th>상태</th>
+								<th><input type="checkbox" name="chkall" id="chkall" /></th>
 							</tr>
 						</thead>
 						<tbody>
 						<?php
 						if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $bestpost) {
+							foreach (element('list', element('data', $view)) as $result) {
 						?>
 							<tr>
-								<td class="text-center"><?php echo number_format(element('num', $bestpost)); ?></td>
-								<td class="text-center"><a href="?brd_id=<?php echo element('brd_id', $bestpost); ?>"><?php echo html_escape(element('brd_name', element('board', $bestpost))); ?></a> <a href="<?php echo goto_url(element('boardurl', $bestpost)); ?>" target="_blank"><span class="fa fa-external-link"></span></a></td>
-								<td class="text-center">
-									<?php if (element('thumb_url', $bestpost)) {?>
-										<a href="<?php echo goto_url(element('posturl', $bestpost)); ?>" target="_blank">
-											<img src="<?php echo element('thumb_url', $bestpost); ?>" alt="<?php echo html_escape(element('post_title', $bestpost)); ?>" title="<?php echo html_escape(element('post_title', $bestpost)); ?>" class="thumbnail mg0" style="width:80px;" />
+								<td><?php echo number_format(element('num', $result)); ?></td>
+								<td><a href="?brd_id=<?php echo element('brd_id', $result); ?>"><?php echo html_escape(element('brd_name', element('board', $result))); ?></a> <a href="<?php echo goto_url(element('boardurl', $result)); ?>" target="_blank"><span class="fa fa-external-link"></span></a></td>
+								<td>
+									<?php if (element('thumb_url', $result)) {?>
+										<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank">
+											<img src="<?php echo element('thumb_url', $result); ?>" alt="<?php echo html_escape(element('post_title', $result)); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" class="thumbnail mg0" style="width:80px;" />
 										</a>
 									<?php } ?>
 								</td>
-								<td class="text-center">
-									<?php if (element('category', $bestpost)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $bestpost))); ?></span><?php } ?>
-									<a href="<?php echo goto_url(element('posturl', $bestpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $bestpost)); ?></a>
+								<td>
+									<?php if (element('category', $result)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $result))); ?></span><?php } ?>
+									<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><?php echo html_escape(element('post_title', $result)); ?></a>
 								</td>
-								<td class="text-center"><?php echo element('post_display_name', $bestpost); ?> <?php if (element('post_userid', $bestpost)) { ?> ( <a href="?sfield=mem_id&amp;skeyword=<?php echo element('mem_id', $bestpost); ?>"><?php echo html_escape(element('post_userid', $bestpost)); ?></a> ) <?php } ?></td>
-								<td class="text-center"><?php echo display_datetime(element('post_datetime', $bestpost), 'full'); ?></td>
-								<td class="text-center"><?php echo number_format(element('post_like_point', $bestpost)); ?></td>
-								<td class="text-center"><?php echo number_format(element('post_dislike_point', $bestpost)); ?></td>
-								<td class="text-center"><?php echo number_format(element('post_hit', $bestpost)); ?></td>
-								<td class="text-center"><?php echo element('post_secret', $bestpost) === '1' ? '비밀' : '공개'; ?></td>
-								<td class="text-center"><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $bestpost); ?>" /></td>
-								<td class="text-center"><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $bestpost); ?>" /></td>
+								<td><?php echo element('post_display_name', $result); ?> <?php if (element('post_userid', $result)) { ?> ( <a href="?sfield=mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('post_userid', $result)); ?></a> ) <?php } ?></td>
+								<td><?php echo display_datetime(element('post_datetime', $result), 'full'); ?></td>
+								<td><?php echo number_format(element('post_like_point', $result)); ?></td>
+								<td><?php echo number_format(element('post_dislike_point', $result)); ?></td>
+								<td><?php echo number_format(element('post_hit', $result)); ?></td>
+								<td><?php echo element('post_secret', $result) === '1' ? '비밀' : '공개'; ?></td>
+								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
 							</tr>
 						<?php
 							}

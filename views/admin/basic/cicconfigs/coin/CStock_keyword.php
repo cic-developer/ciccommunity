@@ -29,7 +29,7 @@
 						<label>Keyword</label>
 						<input type="text" class="form-control" name = "keyword">
 					</div>
-					<div class="col-sm-2"><button type="button" class="btn btn-outline btn-primary btn-xs btn-add-rows">추가</button></div>
+					<div class="col-sm-2"><button type="button" class="btn btn-primary btn-xs btn-add-rows">추가</button></div>
 				</form>
 				</div>
 				<div id="sortable">
@@ -49,16 +49,20 @@
 					<th>S.no</th>
 					<th>마겟 명</th>
 					<th>한국어 명</th>
+					<th>Delete</th>
+					<th>Update</th>
 				</tr>
 				<?php 
 				$sno = $row+1;
-				foreach($keylist as $stocks){
-					echo "<tr>";
-					echo "<td>".$sno."</td>";
-					echo "<td><a href='".$stocks['market']."' target='_blank'> ".$stocks['market']."</a></td>";
-					echo "<td><a href='".$stocks['keyword']."' target='_blank'> ".$stocks['keyword']."</a></td>";
-					//echo "<td><button type="button" class="btn btn-info">Info</button></td>";
-					echo "</tr>";
+				foreach($keylist as $stocks){ ?>
+				<tr>
+					<td><?php echo $sno; ?></td>
+					<td><?php echo $stocks['market']; ?></td>
+					<td><?php $stocks['keyword']; ?></td>
+					<td><div class="col-sm-2"><button type="button" class="btn btn-primary"><i class="far fa-trash-alt"></i></button></div></td>
+					<td><div class="col-sm-2"><button type="button" class="btn btn-primary"><i class="far fa-trash-alt"></i></button></div></td>
+				</tr>
+				<?php
 					$sno++;
 				}
 				
