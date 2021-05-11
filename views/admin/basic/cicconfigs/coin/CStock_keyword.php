@@ -45,6 +45,7 @@
 				</div>
 				<div class="table-responsive">
 			<table class="table table-hover table-striped table-bordered">
+			<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 				<tr>
 					<th>S.no</th>
 					<th>마겟 명</th>
@@ -57,10 +58,10 @@
 				foreach($keylist as $stocks){ ?>
 				<tr>
 					<td><?php echo $sno; ?></td>
-					<td><?php echo $stocks['market']; ?></td>
-					<td><?php $stocks['keyword']; ?></td>
-					<td><div class="col-sm-2"><button type="button" class="btn btn-primary"><i class="far fa-trash-alt"></i></button></div></td>
-					<td><div class="col-sm-2"><button type="button" class="btn btn-primary"><i class="far fa-trash-alt"></i></button></div></td>
+					<td><?php echo $stocks['market']. " - " .$stocks['name_ko']; ?></td>
+					<td><?php echo $stocks['keyword']; ?></td>
+					<td><div class="col-sm-6"><button type="button" class="btn btn-light">삭제</button></div></td>
+					<td><div class="col-sm-6"><button type="button" class="btn btn-light"><i class="fas fa-pen-alt"></i></button></div></td>
 				</tr>
 				<?php
 					$sno++;

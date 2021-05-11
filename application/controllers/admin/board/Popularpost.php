@@ -170,7 +170,7 @@ public function index()
 	public function bestpost()
 	{
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_board_bestpost_index';
+		$eventname = 'event_admin_board_bestpost';
 		$this->load->event($eventname);
 
 		$view = array();

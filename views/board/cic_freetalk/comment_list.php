@@ -16,10 +16,10 @@
 					<div class="vp-point">
 						<ul>
 							<li>
-								<p class="up" data-contenttype="comment" data-cmtidx="1">12</p>
+								<p class="up" data-contenttype="comment" data-cmtidx="<?php echo element('cmt_id', $result); ?>"><?php echo element('cmt_like_point', $result); ?></p>
 							</li>
 							<li>
-								<p class="down" data-contenttype="comment" data-cmtidx="1">35</p>
+								<p class="down" data-contenttype="comment" data-cmtidx="<?php echo element('cmt_id', $result); ?>"><?php echo element('cmt_dislike_point', $result); ?></p>
 							</li>
 						</ul>
 
@@ -32,21 +32,18 @@
 				<div class="ctrls">
 					<ul>
 						<li>
-							<p class="date">21. 03. 04 19:08</p>
+							<p class="date"><?php echo cdate('Y. m. d H:i' ,strtotime(element('cmt_datetime', $result))); ?></p>
 						</li>
 						<li><a href="#n" class="cmmt-btn"><span>답글</span></a></li>
 						<li><a href="#n" class="singo-btn"><span>신고</span></a></li>
 					</ul>
 				</div>
-				<div class="comment">
-					<textarea
-						placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
-					<div class="btns">
-						<a href="#n" class="write-btn"><span>답글등록</span></a>
-					</div>
+				<div class="comment" id="edit_<?php echo element('cmt_id', $result); ?>"> -->
+				</div>
+				<div class="comment" id="reply_<?php echo element('cmt_id', $result); ?>"> -->
 				</div>
 			</div>
-			<div class="reply cdepth1">
+			<!-- <div class="reply cdepth1">
 				<div class="info">
 					<a href="#n" class="nickname">
 						<p class="ico"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
@@ -121,7 +118,7 @@
 						<a href="#n" class="write-btn"><span>답글등록</span></a>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</li>
 	<?php
 		}

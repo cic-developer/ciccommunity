@@ -214,6 +214,8 @@ class Register extends CB_Controller
 	 */
 	public function form($recommend_userid = '')
 	{
+
+		// print_r($this->input->post("email"));
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_register_form';
 		$this->load->event($eventname);
@@ -231,6 +233,44 @@ class Register extends CB_Controller
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+		
+		$config = array(
+			array(
+				'field' => 'money',
+				'label' => '금액',
+				'rules' => 'trim|required|is_natural_no_zero|less_than_equal_to['.$member_info['mem_cp'].']',
+			),
+		);
+		$this->form_validation->set_rules($config);
+		$form_validation = $this->form_validation->run();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		if ($this->cbconfig->item('use_register_block')) {
 
