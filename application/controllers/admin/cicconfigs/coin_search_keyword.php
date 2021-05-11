@@ -12,13 +12,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 관리자>페이지설정>배너관리 controller 입니다.
  */
-class Coin extends CB_Controller
+class Coin_keyword extends CB_Controller
 {
 	/**
 	 * 관리자 페이지 상의 현재 디렉토리입니다
 	 * 페이지 이동시 필요한 정보입니다
 	 */
-	public $pagedir = 'cicconfigs/coin/CStock_keyword';
+	public $pagedir = 'cicconfigs/coin';
 
 	
 	/**
@@ -43,6 +43,8 @@ class Coin extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
+        parent::__construct();
+        $this->load->helper('url');
 		$this->load->library(array('pagination', 'querystring', 'form_validation', 'session'));
 		$this->load->model(array('coin_model', 'Coin_model_admin'));
 	}
