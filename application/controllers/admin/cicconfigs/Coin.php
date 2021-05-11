@@ -77,18 +77,18 @@ class Coin extends CB_Controller
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
 		// 'wid_admin_id', 'wid_admin_ip', 'wid_res_datetime', 'wid_content'
-		$this->Coin_model->allow_search_field = array(''); // 검색이 가능한 필드
+		// $this->Coin_model->allow_search_field = array(''); // 검색이 가능한 필드
 
-		$this->Coin_model->search_field_equal = array(''); // 검색중 like 가 아닌 = 검색을 하는 필드
+		// $this->Coin_model->search_field_equal = array(''); // 검색중 like 가 아닌 = 검색을 하는 필드
 		
-		$this->Coin_model->allow_order_field = array(''); // 정렬이 가능한 필드
+		// $this->Coin_model->allow_order_field = array(''); // 정렬이 가능한 필드
 
-		$where = array();
+		// $where = array();
 		//GET COIN MARKET INFORMATION FOR DROPDOWN LIST
 
 		$getStock = $this -> Coin_model->getstockData();
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
-		$view['view']['getStock'] = $getStock;
+		$view['getStock'] = $getStock;
 		
 	
 		/**

@@ -47,8 +47,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				foreach($getStock as $stocks){
 					echo "<tr>";
 					echo "<td>".$sno."</td>";
-					echo "<td><a href='".$stoks->market."' target='_blank'> ".$stocks->market."</a></td>";
-					echo "<td><a href='".$stoks->name_ko."' target='_blank'> ".$stocks->name_ko."</a></td>";
+					echo "<td><a href='".$stocks->market."' target='_blank'> ".$stocks->market."</a></td>";
+					echo "<td><a href='".$stocks->name_ko."' target='_blank'> ".$stocks->name_ko."</a></td>";
 					//echo "<td><button type="button" class="btn btn-info">Info</button></td>";
 					echo "</tr>";
 					$sno++;
