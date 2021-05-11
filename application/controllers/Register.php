@@ -55,14 +55,15 @@ class Register extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		$view['view']['main'] = $this->checkplus->main();
+		$view['view']['enc_data'] = $this->checkplus->main();
 		if($this->input->get("EncodeData")){
 			$this->checkplus->success($this->input->get("EncodeData"));
-		// 	// echo("<script>self.close()</script>");
-			echo("<script>window.opener.location.href(http://www.naver.com/);</script>");
+			echo("<script>window.opener.location.href='register/form';</script>");
+			echo("<script>self.close()</script>");
 		}//window.opener.parent.location.reload();
 		// $this->session->sess_destroy();
-		print_r($this->session->userdata('enc_data'));
+		// $this->session->unset_userdata('dec_data');
+		print_r($this->session->userdata('dec_data'));
 		
 
 		if ($this->member->is_member()
@@ -148,7 +149,7 @@ class Register extends CB_Controller
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 			$view['view']['recommend_id'] = $this->input->get('rcid');
-			$view['view']['main'] = $this->checkplus->main();
+			$view['view']['enc_data'] = $this->checkplus->main();
 
 			/**
 			 * 레이아웃을 정의합니다
@@ -187,50 +188,38 @@ class Register extends CB_Controller
 			 */
 
 			// 이벤트가 존재하면 실행합니다
-			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+			// $view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
-			if(!$this->session->userdata('enc_data')){
-				// $rcid = $this->input->post('recommend_id');
-				// $this->session->set_userdata('registeragree', '1');
+			// if(!$this->session->userdata('enc_data')){
+			// $layoutconfig = array(
+			// 	'path' => 'register',
+			// 	'layout' => 'layout',
+			// 	'skin' => 'checkplus_success',
+			// 	'layout_dir' => $this->cbconfig->item('layout_register'),
+			// 	'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_register'),
+			// 	'use_sidebar' => $this->cbconfig->item('sidebar_register'),
+			// 	'use_mobile_sidebar' => $this->cbconfig->item('mobile_sidebar_register'),
+			// 	'skin_dir' => $this->cbconfig->item('skin_register'),
+			// 	'mobile_skin_dir' => $this->cbconfig->item('mobile_skin_register'),
+			// 	'page_title' => $page_title,
+			// 	'meta_description' => $meta_description,
+			// 	'meta_keywords' => $meta_keywords,
+			// 	'meta_author' => $meta_author,
+			// 	'page_name' => $page_name,
+			// );
+			
+			// $view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+			// $this->data = $view;
+			// 	$this->layout = element('layout_skin_file', element('layout', $view));
+			// 	$this->view = element('view_skin_file', element('layout', $view));
+			// }else{
 
-				// anchor_popup("https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb");
-				// anchor_popup("https://www.naver.com", '휴대폰인증', false);
-
-				// redirect("https://www.naver.com");
 				
-				// echo("<script>self.close()</script>");
-				// echo("<script>window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');</script>");
-				// echo("<script>document.form_chk.action = 'https://www.naver.com';</script>");
-				// echo("<script>document.form_chk.action = 'https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb';</script>");
-				// echo("<script>document.form_chk.target = 'popupChk';</script>");
-				// echo("<script>document.form_chk.submit();</script>");
-				
-			$layoutconfig = array(
-				'path' => 'register',
-				'layout' => 'layout',
-				'skin' => 'checkplus_success',
-				'layout_dir' => $this->cbconfig->item('layout_register'),
-				'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_register'),
-				'use_sidebar' => $this->cbconfig->item('sidebar_register'),
-				'use_mobile_sidebar' => $this->cbconfig->item('mobile_sidebar_register'),
-				'skin_dir' => $this->cbconfig->item('skin_register'),
-				'mobile_skin_dir' => $this->cbconfig->item('mobile_skin_register'),
-				'page_title' => $page_title,
-				'meta_description' => $meta_description,
-				'meta_keywords' => $meta_keywords,
-				'meta_author' => $meta_author,
-				'page_name' => $page_name,
-			);
-			$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
-			$this->data = $view;
-				$this->layout = element('layout_skin_file', element('layout', $view));
-				$this->view = element('view_skin_file', element('layout', $view));
-			}else{
+			// }
 
-				$rcid = $this->input->post('recommend_id');
-				$this->session->set_userdata('registeragree', '1');
-				redirect('register/form/'.$rcid);
-			}
+			$rcid = $this->input->post('recommend_id');
+			$this->session->set_userdata('registeragree', '1');
+			redirect('register/form/'.$rcid);
 
 		}
 	}

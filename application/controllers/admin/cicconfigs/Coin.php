@@ -149,6 +149,7 @@ class Coin extends CB_Controller
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 				}
 		}	
+
        	//GET MARKET 
 	    // $admincoin = $this -> Coin_model_admin -> get_admin_coinList();
 		// for($i = 0; $i < count($getStock); $i++){
@@ -194,6 +195,49 @@ class Coin extends CB_Controller
 			$view['view'] = array();
 	
 			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+		//CREATE COIN KEYWORD LIST FOR ADMIN
+
+		$this->load->library('form_validation');
+
+		$config = array(
+			array(
+				'field' => 'key_idx',
+				'rules'=>'required'
+			),
+			array(
+				'field' => 'keyword',
+				'rules'=>'required'
+			),
+
+		);
+	
+		$this->form_validation->set_rules($config);
+
+		if($this->form_validation -> run () == FALSE)
+		{
+			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+		}else{
+			$data = array(
+				'coin_idx' => $this -> input -> post('coin_idx'),
+				'keyword' => $this -> input -> post('keyword'),
+
+			);
+
+
+			foreach($list as $l){
+				if(isset($l) && !empty($l)){
+					$stock_ = $this->Coin_model_admin->insert_keyword($l);
+					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+					//print_r($stock_);
+				}
+			}
+			
+			
+			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+		}
+
+
 			
 			/**
 		 	* 어드민 레이아웃을 정의합니다

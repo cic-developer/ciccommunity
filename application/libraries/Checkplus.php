@@ -194,7 +194,7 @@ class Checkplus extends CI_Controller
 			}
 		}
 
-		$enc_data = array(
+		$dec_data = array(
 			'ciphertime' => $ciphertime,
 			'requestnumber' => $requestnumber,
 			'responsenumber' => $responsenumber,
@@ -210,7 +210,7 @@ class Checkplus extends CI_Controller
 			
 		);
 
-		$this->CI->session->set_userdata('enc_data', $enc_data);
+		$this->CI->session->set_userdata('dec_data', $dec_data);
 	}
 
 	function fail($EncodeData) 

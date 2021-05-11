@@ -281,7 +281,7 @@
 							<!-- 본인인증 서비스 팝업을 호출하기 위해서는 다음과 같은 form이 필요합니다. -->
 							<form name="form_chk" method="post">
 								<input type="hidden" name="m" value="checkplusService">				<!-- 필수 데이타로, 누락하시면 안됩니다. -->
-								<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('main', $view)); ?>">		<!-- 위에서 업체정보를 암호화 한 데이타입니다. -->
+								<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('enc_data', $view)); ?>">		<!-- 위에서 업체정보를 암호화 한 데이타입니다. -->
 								
 								<a href="javascript:fnPopup();"> CheckPlus 안심본인인증 Click</a>
 							</form>
@@ -311,7 +311,7 @@
 		// 체크여부 확인
 		if( $("input:checkbox[name=agree]").is(":checked") == true 
 				&& $("input:checkbox[name=agree2]").is(":checked") == true
-					&& $("input:checkbox[name=agree]3").is(":checked") == true ) {
+					&& $("input:checkbox[name=agree3]").is(":checked") == true ) {
 			window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
 			document.form_chk.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
 			document.form_chk.target = "popupChk";

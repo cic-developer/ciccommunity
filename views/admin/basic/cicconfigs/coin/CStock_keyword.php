@@ -23,14 +23,15 @@
 					<?php $myId = $_GET['id']; ?>
 					<div class="form-group">
 						<label for="exampleInputName2">Market id</label>
-						<input type="text"  class="form-control" id="exampleInputName2" value='<?php echo $myId ?>'>
+						<input type="text"  class="form-control" name = "coin_idx" value='<?php echo $myId ?>'>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail2">Keyword</label>
-						<input type="email" class="form-control" id="exampleInputEmail2">
+						<input type="email" class="form-control" name = "keyword">
 					</div>
 					<div class="col-sm-2"><button type="button" class="btn btn-outline btn-primary btn-xs btn-add-rows">추가</button></div>
 				</form>
+				<div class="col-sm-2"><button type="submit" class="btn btn-primary">추가</button></div>
 				</div>
 				<div id="sortable">
 					<?php

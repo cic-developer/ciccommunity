@@ -912,8 +912,13 @@
 </div>
 <script>
 	var reg_num = /^[0-9]*$/;
+
 	$('.up').on('click', function(){
 		update_vp('up');
+	});
+	
+	$('.down').on('click', function(){
+		update_vp('down');
 	});
 
 	function update_vp(type){
@@ -921,8 +926,8 @@
 			alert('로그인이 필요한 서비스입니다.');
 			return false;
 		}
-		
-		const _point = prompt('타이틀', 0);
+		const title = 'VP를 '+ (type === 'up' ? 'UP' :'DOWN') + ' 합니다.';
+		const _point = prompt(title, 0);
 
 		//취소버튼 누를시
 		if(_point === null){
