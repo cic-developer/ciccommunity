@@ -215,8 +215,9 @@ class Register extends CB_Controller
 
 		if($this->input->get("EncodeData")){
 			$this->checkplus->success($this->input->get("EncodeData"));
-			redirect("checkplus_success");
-		}
+			// echo("<script>self.close()</script>");
+			redirect("register/checkplus_success");
+		}//window.opener.parent.location.reload();
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);

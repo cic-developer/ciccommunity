@@ -55,6 +55,10 @@ class Coin_keyword extends CB_Controller
         $eventname = 'event_keyword';
         $this->load->event($eventname);
 
+        // 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+        $config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
         $this->load->view('CStock_keyword');
 
 
