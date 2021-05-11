@@ -368,6 +368,31 @@ class Register extends CB_Controller
 		}
 		$password_description .= '합니다';
 
+		$configbasic['email'] = array(
+			'field' => 'email',
+			'label' => '이메일',
+			'rules' => 'trim|required|valid_email|max_length[50]|is_unique[a]', //callback__mem_email_chec
+		);
+		$configbasic['passowrd'] = array(
+			'field' => 'passowrd',
+			'label' => '비밀번호',
+			'rules' => 'trim|required|min_length[8]', //callback__mem_password_check,
+		);
+		$configbasic['passowrd2'] = array(
+			'field' => 'passowrd2',
+			'label' => '비밀번호확인',
+			'rules' => 'trim|required|min_length[8]|matches[passowrd]',
+		);
+		$configbasic['nickname'] = array(
+			'field' => 'nickname',
+			'label' => '닉네임',
+			'rules' => 'trim|required|min_length[2]|max_length[20]|', // callback__mem_nickname_check
+		);
+		$configbasic['per_address'] = array(
+			'field' => 'per_address',
+			'label' => '퍼지갑주소',
+			'rules' => 'trim|required|is_natural_no_zero|is_unique[b]',
+		);
 		$configbasic['mem_password'] = array(
 			'field' => 'mem_password',
 			'label' => '패스워드',
@@ -386,13 +411,13 @@ class Register extends CB_Controller
 		);
 		$configbasic['mem_nickname'] = array(
 			'field' => 'mem_nickname',
-			'label' => '닉네임',
+			'label' => '닉네임x',
 			'rules' => 'trim|required|min_length[2]|max_length[20]|callback__mem_nickname_check',
 			'description' => '공백없이 한글, 영문, 숫자만 입력 가능 2글자 이상' . $nickname_description,
 		);
 		$configbasic['mem_email'] = array(
 			'field' => 'mem_email',
-			'label' => '이메일',
+			'label' => '이메일x',
 			'rules' => 'trim|required|valid_email|max_length[50]|is_unique[member.mem_email]|callback__mem_email_check',
 			'description' => $email_description,
 		);

@@ -4570,9 +4570,14 @@
     display: block;
 }
 
-.cmmt-wrap .vcon .comment {
+
+/* .cmmt-wrap .vcon .comment {
     border: 1px solid #ccc;
     display: none;
+} */
+
+.cmmt-wrap .vcon .comment form {
+    border: 1px solid #ccc;
 }
 
 .cmmt-wrap .vcon.active .comment {
