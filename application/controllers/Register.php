@@ -56,13 +56,13 @@ class Register extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		$view['view']['main'] = $this->checkplus->main();
-		// if($this->input->get("EncodeData")){
-		// 	$this->checkplus->success($this->input->get("EncodeData"));
+		if($this->input->get("EncodeData")){
+			$this->checkplus->success($this->input->get("EncodeData"));
 		// 	// echo("<script>self.close()</script>");
-		// 	echo("<script>window.opener.parent.location.href(http://www.naver.com/);</script>");
-		// }//window.opener.parent.location.reload();
+			echo("<script>window.opener.location.href(http://www.naver.com/);</script>");
+		}//window.opener.parent.location.reload();
 		// $this->session->sess_destroy();
-		// print_r($this->session->userdata('enc_data'));
+		print_r($this->session->userdata('enc_data'));
 		
 
 		if ($this->member->is_member()
@@ -198,7 +198,28 @@ class Register extends CB_Controller
 				// echo("<script>document.form_chk.action = 'https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb';</script>");
 				// echo("<script>document.form_chk.target = 'popupChk';</script>");
 				// echo("<script>document.form_chk.submit();</script>");
-			// }else{
+				
+			$layoutconfig = array(
+				'path' => 'register',
+				'layout' => 'layout',
+				'skin' => 'register',
+				'layout_dir' => $this->cbconfig->item('layout_register'),
+				'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_register'),
+				'use_sidebar' => $this->cbconfig->item('sidebar_register'),
+				'use_mobile_sidebar' => $this->cbconfig->item('mobile_sidebar_register'),
+				'skin_dir' => $this->cbconfig->item('skin_register'),
+				'mobile_skin_dir' => $this->cbconfig->item('mobile_skin_register'),
+				'page_title' => $page_title,
+				'meta_description' => $meta_description,
+				'meta_keywords' => $meta_keywords,
+				'meta_author' => $meta_author,
+				'page_name' => $page_name,
+			);
+			$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+			$this->data = $view;
+				$this->layout = element('layout_skin_file', element('layout', $view));
+				$this->view = element('view_skin_file', element('layout', $view));
+			}else{
 
 				$rcid = $this->input->post('recommend_id');
 				$this->session->set_userdata('registeragree', '1');

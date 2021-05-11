@@ -18,15 +18,19 @@
 					<button type="submit" class="btn btn-outline btn-danger btn-sm">저장하기</button>
 				</div>
 			</div>
-			<div class="row"><?php echo element('total_rows', element('data', $view), 0); ?>개의 그룹이 존재합니다</div>
 			<div class="list-group">
-				<form>
-					<?php $myId = $_GET['id']; 
-						echo $myId;
-					?>
-					<input value="$myId"></input>
-				</form>
+				<form class="form-inline">
+					<?php $myId = $_GET['id']; ?>
+					<div class="form-group">
+						<label for="exampleInputName2">Market id</label>
+						<input type="text"  class="form-control" id="exampleInputName2" value='<?php echo $myId ?>'>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail2">Keyword</label>
+						<input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+					</div>
 					<div class="col-sm-2"><button type="button" class="btn btn-outline btn-primary btn-xs btn-add-rows">추가</button></div>
+				</form>
 				</div>
 				<div id="sortable">
 					<?php
