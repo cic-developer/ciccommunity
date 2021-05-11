@@ -250,4 +250,9 @@ public function index()
 		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
 		redirect($redirecturl);
 	}
+
+	public function bestpost()
+	{
+		
+	}
 }

@@ -1,5 +1,8 @@
 <div class="box">
 	<div class="box-table">
+		<ul class="nav nav-tabs">
+			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/CStock'); ?>" onclick="return check_form_changed();">VP 설정</a></li>
+		</ul>
 		<?php
 		echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
 		echo show_alert_message(element('alert_message', $view), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');

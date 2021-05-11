@@ -216,29 +216,40 @@ class Coin extends CB_Controller
 		public function CStock_keyword(){
 
 			// 이벤트 라이브러리를 로딩합니다
-			$eventname = 'event_keyword';
+			$eventname = 'event_amdmin_coin_keyword';
 			$this->load->event($eventname);
 	
 	
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['before'] = Events::trigger('before', $eventname);
 	
-//			$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+			//$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
 			
 			$view = array();
 			$view['view'] = array();
 	
+			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+			
+			/**
+		 	* 어드민 레이아웃을 정의합니다
+		 	*/
+			
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
 			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 			$this->data = $view;
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
 
+			// 이벤트가 존재하면 실행합니다
+			// Events::trigger('after', $eventname);
 
-			$param =& $this->querystring;
-			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+			// /**
+			//  * 게시물의 신규입력 또는 수정작업이 끝난 후 목록 페이지로 이동합니다
+			//  */
+			// $param =& $this->querystring;
+			// $redirecturl = admin_url($this->pagedir . '?' . $param->output());
 
-			redirect($redirecturl);
+			// redirect($redirecturl);
 		}
 	
 }
