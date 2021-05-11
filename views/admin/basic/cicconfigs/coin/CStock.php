@@ -3,8 +3,8 @@
 		<div class="box-table-header">
 				<input type="hidden" name="pointType" value="<?php echo $_pointType?>">
 				<ul class="nav nav-pills">
-					<li role="presentation" <?php echo $_pointType === 'CStock' ? 'class="active"': ''?>><a href="<?php echo admin_url($this->pagedir.'/CStock')?>">Coin 관리</a></li>
-					<li role="presentation" <?php echo $_pointType === 'CStock' ? '': 'class="active"'?>><a href="<?php echo admin_url($this->pagedir.'/CStock_keyword')?>">검색키워드 관리</a></li>
+					<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir.'/CStock')?>">Coin 관리</a></li>
+					<li role="presentation" ><a href="<?php echo admin_url($this->pagedir.'/CStock_keyword')?>">검색키워드 관리</a></li>
 				</ul>
 
 				<?php
@@ -26,41 +26,41 @@
 			<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
 			<div class="table-responsive">
 				<form action="post" name='selected_market'>
-				<table class="table table-hover table-striped table-bordered">
-					<thead>
-						<tr>
-							<th>번호</th>
-							<th>마켓명</th>
-							<th>한국어명</th>
-							<th>영문명</th>
-							<th>add Keyword<th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php 
-				?>
-					<?php
-					if (element('list', element('data', $view))) {
-						foreach (element('list', element('data', $view)) as $result) {
+					<table class="table table-hover table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th>마켓명</th>
+								<th>한국어명</th>
+								<th>영문명</th>
+								<th>add Keyword<th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php 
 					?>
-						<tr>
-							<td><?php echo number_format(element('num', $result)); ?></td>
-							<td><a href="?sfield=Coin.coin_idx&amp;skeyword=<?php echo element('coin_idx', $result); ?>"><?php echo html_escape(element('market', $result)); ?></a></td>
-							<td><?php echo element('name_ko', $result); ?></td>
-							<td><?php echo element('name_en', $result); ?></td>
-							<td><button  type="button" id="myBtn" class="btn btn-link" onClick="document.location.href='https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo element('coin_idx', $result); ?>'">Link</button></td>
-						</tr>
-					<?php
+						<?php
+						if (element('list', element('data', $view))) {
+							foreach (element('list', element('data', $view)) as $result) {
+						?>
+							<tr>
+								<td><?php echo number_format(element('num', $result)); ?></td>
+								<td><a href="?sfield=Coin.coin_idx&amp;skeyword=<?php echo element('coin_idx', $result); ?>"><?php echo html_escape(element('market', $result)); ?></a></td>
+								<td><?php echo element('name_ko', $result); ?></td>
+								<td><?php echo element('name_en', $result); ?></td>
+								<td><button  type="button" id="myBtn" class="btn btn-link" onClick="document.location.href='https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo element('coin_idx', $result); ?>'">Link</button></td>
+							</tr>
+						<?php
+							}
 						}
-					}
-					if ( ! element('list', element('data', $view))) {
-						//echo "hello";
-					?>
-					<?php
-					}
-					?>
-					</tbody>
-				</table>
+						if ( ! element('list', element('data', $view))) {
+							//echo "hello";
+						?>
+						<?php
+						}
+						?>
+						</tbody>
+					</table>
 				</form>
 			</div>
 			<div class="box-info">

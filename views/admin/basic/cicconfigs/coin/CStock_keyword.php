@@ -3,8 +3,8 @@
 		<div class="box-table-header">
 				<input type="hidden" name="pointType" value="<?php echo $_pointType?>">
 				<ul class="nav nav-pills">
-					<li role="presentation" <?php echo $_pointType === 'CStock' ? 'class="active"': ''?>><a href="<?php echo admin_url($this->pagedir.'/CStock')?>">Coin 관리</a></li>
-					<li role="presentation" <?php echo $_pointType === 'CStock' ? '': 'class="active"'?>><a href="<?php echo admin_url($this->pagedir.'/CStock_keyword')?>">검색키워드 관리</a></li>
+					<li role="presentation"><a href="<?php echo admin_url($this->pagedir.'/CStock')?>">Coin 관리</a></li>
+					<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir.'/CStock_keyword')?>">검색키워드 관리</a></li>
 				</ul>
 
 				<?php
@@ -12,8 +12,6 @@
 				?>
 					<div class="btn-group pull-right" role="group" aria-label="...">
 						<a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a>
-						<button type="button" class="btn btn-outline btn-default btn-sm btn-list-delete btn-list-selected disabled" data-list-delete-url = "<?php echo element('list_delete_url', $view); ?>" >선택삭제</button>
-						<a href="<?php echo element('write_url', $view); ?>" class="btn btn-outline btn-danger btn-sm">포인트추가</a>
 					</div>
 				<?php
 				$buttons = ob_get_contents();
