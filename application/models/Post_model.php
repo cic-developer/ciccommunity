@@ -594,12 +594,13 @@ class Post_model extends CB_Model
 		$where = array(
 			'post_id' => $post_id,
 		);
-		// $hello = $this->db->select_max($where['post_best_state']);
+		$result = array(
+		$this->db->select_max('post_best_state'),
+		$this->db->get('post'),
+		);
 
-		// print_r($where);
-		// exit;
 		$updatedata = array(
-			'post_best_state' => 1,
+			'post_best_state' => $result + 1,
 		);
 		$this->db->where($where);
 		$this->db->set($updatedata);

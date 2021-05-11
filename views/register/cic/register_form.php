@@ -97,3 +97,29 @@
 		});
 	});
 </script>
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+$('.datepicker').datepicker({
+	format: 'yyyy-mm-dd',
+	language: 'kr',
+	autoclose: true,
+	todayHighlight: true
+});
+$(function() {
+	$('#fregisterform').validate({
+		onkeyup: false,
+		onclick: false,
+		rules: {
+			email: {required :true, email:true, is_email_available:true},
+			password: {required :true, is_password_available:true},
+			password2 : {required: true, equalTo : '#mem_password' },
+			nickname: {required :true, is_nickname_available:true}
+		},
+		
+	});
+});
+//]]>
+</script>

@@ -150,28 +150,32 @@ class Coin extends CB_Controller
 				}
 		}	
 
-       	//GET MARKET 
-	    // $admincoin = $this -> Coin_model_admin -> get_admin_coinList();
-		// for($i = 0; $i < count($getStock); $i++){
-		// 	$marketdata[] = $getStock[$i]->market;
-        //     if($marketdata){
-		// 		$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
-		// 	}else{
-		// 		$realtime_coin_info = 0;
-		// 	}
+       	//GET MARKET PRICE
+	    $getStock = $this -> Coin_model-> getstockData();
+			//print_r($getStock);
+		for($i = 0; $i < count($getStock); $i++){
+			$marketdata[] = $getStock[$i]->market;
+			print_r($marketdata);
+            if($marketdata){
+				$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
+			}else{
+				$realtime_coin_info = 0;
+			}
 
-		// 	foreach ($getStock as $getstoks){
-		// 		if($getstoks-> market){
-		// 			$marketdata[] = $getstoks->market;
-		// 		}else{
-		// 			$marketdata[] = 0;
-		// 		}
-		// 	}
+			foreach ($getStock as $getstoks){
+				if($getstoks-> market){
+					$marketdata[] = $getstoks->market;
+					//print_r($getStock);
+				}else{
+					$marketdata[] = 0;
+				}
+			
 			// echo "<br><pre>";
 			// print_r($realtime_coin_info);
 			// echo "</pre>";
-			//print_r($result);
-			$view['realtime_coin_info'] = $realtime_coin_info;
+		}
+		}	
+		$view['realtime_coin_info'] = $realtime_coin_info;
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
 			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 			$this->data = $view;
