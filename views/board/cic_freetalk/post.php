@@ -346,10 +346,13 @@
 			<div class="comment">
 				<h4>댓글 <span>49</span></h4>
 				<div class="ov">
-					<textarea placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
+					<?php
+						$this->load->view(element('view_skin_path', $layout) . '/comment_write');
+					?>
+					<!-- <textarea placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
 					<div class="btns">
 						<a href="#n" class="write-btn"><span>댓글등록</span></a>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<div class="cmmt">
@@ -976,6 +979,7 @@
 					alert(data.error);
 				} else {
 					alert('성공적으로 처리되었습니다.');
+					location.reload();
 				}
 			},
 			error: function(){

@@ -3,6 +3,10 @@
 		<!-- page start // -->
 		<div class="member-wrap join">
 			<h2><span class="blind">cic community</span></h2>
+			<?php 	
+				$attributes = array('class' => 'form-horizontal', 'name' => 'fsignupform', 'id' => 'fsignupform');
+				echo form_open(current_full_url(), $attributes);	
+			?>
 			<div class="entry">
 				<ul>
 					<li>
@@ -55,10 +59,11 @@
 						<p class="rtxt mg10t">PER 지갑주소 입력은 선택사항 입니다. <br>지갑주소를 등록하여 다양한 혜택을 즐겨보세요.</p>
 					</li>
 				</ul>
-				<a href="#" class="join-btn"><span>가입하기</span>
+				<a id class="join-btn"><span>가입하기</span>
 				</a>
 			</div><a href="#" class="join-btn">
 			</a>
+			<?php echo form_close(); ?>
 		</div><a href="#" class="join-btn">
 			<!-- page end // -->
 		</a>
@@ -67,5 +72,9 @@
 </div>
 
 <script>
-	
+	$(document).ready(function(){
+		$("#submitButton").on('click',function(){
+			$("#fsignupform").submit();
+		});
+	});
 </script>
