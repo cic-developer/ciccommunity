@@ -44,7 +44,6 @@ if (typeof(CIC_COMMENT_JS) === 'undefined') {
     }
 
     function add_comment(f, post_id) {
-
         if (is_submit_comment === true) {
             return false;
         }
@@ -69,8 +68,8 @@ if (typeof(CIC_COMMENT_JS) === 'undefined') {
             }
         }
 
-        $('#fcomment').validate();
-        if ($('#fcomment').valid()) // check if form is valid
+        $(f).validate();
+        if ($(f).valid()) // check if form is valid
         {
             // do some stuff
         } else {
@@ -106,17 +105,19 @@ if (typeof(CIC_COMMENT_JS) === 'undefined') {
             url: cb_url + '/comment_write/update',
             type: 'POST',
             cache: false,
-            data: $('#fcomment').serialize(),
+            data: $(f).serialize(),
             dataType: 'json',
             success: function(data) {
                 is_submit_comment = false;
                 if (data.error) {
-                    $('.alert-comment-message-content').html(data.error);
-                    $('.alert-comment-message').addClass('alert-warning').removeClass('alert-success').show(0).delay(2500).hide(0);
+                    alert('댓글등록 중 에러가 발생했습니다.');
+                    // $('.alert-comment-message-content').html(data.error);
+                    // $('.alert-comment-message').addClass('alert-warning').removeClass('alert-success').show(0).delay(2500).hide(0);
                     return false;
                 } else if (data.success) {
-                    $('.alert-comment-message-content').html(data.success);
-                    $('.alert-comment-message').addClass('alert-success').removeClass('alert-warning').show(0).delay(2500).hide(0);
+                    alert('성공적으로 댓글을 등록하였습니다.');
+                    // $('.alert-comment-message-content').html(data.success);
+                    // $('.alert-comment-message').addClass('alert-success').removeClass('alert-warning').show(0).delay(2500).hide(0);
                     view_comment('viewcomment', post_id, '', '')
                         // if ($('#char_count')) {
                         //     if (char_min > 0 || char_max > 0) {

@@ -1,12 +1,16 @@
 <div class="list">
 	<ul>
 	<?php
+	$_is_depth = false;
 	if (element('list', element('data', $view))) {
 		foreach (element('list', element('data', $view)) as $result) {
+			$_cmt_depth = element('cmt_depth', $result)/30;
+			$_classname = $_cmt_depth > 0 ? 'reply cdepth'.$_cmt_depth : 'vcon';
 	?>
 
 		<li class="item" id="comment_<?php echo element('cmt_id', $result); ?>">
-			<div class="vcon">
+			<?= $_cmt_depth.$_classname.($_cmt_depth > 0) ?>
+			<div class="<?php echo $_classname; ?>">
 				<div class="info">
 					<a href="#n" class="nickname">
 						<p class="ico"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"

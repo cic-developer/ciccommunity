@@ -1508,6 +1508,9 @@ class Register extends CB_Controller
 
 	public function ajax_email_check()
 	{
+
+		print_r("hi");
+		return;
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_register_ajax_email_check';
 		$this->load->event($eventname);

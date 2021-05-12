@@ -155,16 +155,23 @@
 	$(document).ready(function(){
 		$("#ath_email").on('click', function(){
 			var email = $("#mem_email").val();
-			alert(email);
+			// alert(email);
+
+			$.ajax({
+            url: 'register/ajax_email_check',
+            type: 'post',
+            data: {
+                mem_email: email,
+            },
+            dataType: 'json',
+            async: false,
+            cache: false,
+            success: function(data) {
+                // content = data.content;
+            }
+        });
 		})
 	})
-
-	$.ajax({
-        url: "myname.php",
-        type: "post",
-    }).done(function(data) {
-        $('#name').text(data);
-    });
 </script>
 
 
