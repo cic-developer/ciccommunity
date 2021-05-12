@@ -269,14 +269,15 @@ class Coin extends CB_Controller
 
 			$view['keylist'] = $keylist;
 			//DELETE
-            $key_id = (int) $this->input->get('id');
-			echo gettype($key_id);
+            $key_id = (int)$this->input->get('id');
+			$view['key_id'] = $key_id; 
 			//$data['key'] = $this-> Coin_model_admin->getById($key_id);
 			//$view['data'] = $data;
 
 			$deleted = $this->Coin_model_admin->delete_keyword($key_id);
 			if($deleted == true){
 				$this->session->set_flashdata('success', '삭제되었습니다');
+				$view['key_id'] = $key_id; 
 			}
 			
 			
@@ -288,7 +289,7 @@ class Coin extends CB_Controller
 		 	* 어드민 레이아웃을 정의합니다
 
 		 	*/
-
+			$layoutconfig = array('layout' => 'layout', 'skin' => 'delete_keyword');
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
 			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 			$this->data = $view;
