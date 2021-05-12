@@ -298,8 +298,46 @@
 	// });
 
 	//예전 jQuery라면 on이 아니라 bind나 live 
-	$("#mem_password").on("propertychange blur keyup paste input", function() {
-		alert("id name 값이 변경되었습니다.");
+	oldVal1 = '';
+	$("#mem_password").on("propertychange change keyup paste input", function() {
+		var currentVal = $(this).val();
+		if(currentVal == oldVal1) {
+			return;
+		}
+		
+		password2 = $("#mem_password_re").val();
+		if(password2 != currentVal){
+			$('.agree-password').remove();
+			html = '<p class="agree-password" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
+			$('.mem_password_re').append(html);
+		} else{
+			$('.agree-password').remove();
+			html = '<p class="agree-password" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
+			$('.mem_password_re').append(html);
+		}
+		
+		oldVal1 = currentVal;
+	});
+
+	oldVal2 = '';
+	$("#mem_password_re").on("propertychange change keyup paste input", function() {
+		var currentVal = $(this).val();
+		if(currentVal == oldVal2) {
+			return;
+		}
+		
+		password1 = $("#mem_password").val();
+		if(password1 != currentVal){
+			$('.agree-password').remove();
+			html = '<p class="agree-password" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
+			$('.mem_password_re').append(html);
+		} else{
+			$('.agree-password').remove();
+			html = '<p class="agree-password" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
+			$('.mem_password_re').append(html);
+		}
+		
+		oldVal2 = currentVal;
 	});
 
 	// $("#mem_password").change(function(){
