@@ -269,7 +269,8 @@ class Coin extends CB_Controller
 
 			$view['keylist'] = $keylist;
 			//DELETE
-            $key_id = $this->input->get('id');
+            $key_id = (int) $this->input->get('id');
+			echo gettype($key_id);
 			//$data['key'] = $this-> Coin_model_admin->getById($key_id);
 			//$view['data'] = $data;
 
