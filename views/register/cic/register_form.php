@@ -147,6 +147,12 @@
 <script>
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){
+
+			email = $("#mem_email").val();
+			password1 = $("#mem_password").val();
+			password2 = $("#mem_password_re").val();
+			nickname = $("#mem_nickname").val();
+
 			$("#fregisterform").submit();
 		});
 	});
@@ -200,6 +206,7 @@
 
 				alert(message);
 
+				$('.success-email').remove();
 				$('.con-mail').remove();
 				if(state == 1){
 					html = '';
@@ -240,6 +247,8 @@
 
 		if(result == 1) {
 			$('.con-mail').remove();
+			html = '<p class="success-email rtxt mg10t">승인이 완료되었습니다</p>';
+			$('.mem_email').append(html);
 			// $('#ath_email').remove();
 			// $("#mem_email").attr("readonly", true);
 			// $("#mem_email").attr("disabled", true);
@@ -278,6 +287,26 @@
 			}
 		})
 	})
+
+	// $(document).ready(function(){
+	// 	_password1 = $(".mem_password").val();
+	// 	_password2 = $(".mem_password_re").val();
+
+	// 	if(_password1 != _password2){
+	// 		alert("ho");
+	// 	}
+	// });
+
+	//예전 jQuery라면 on이 아니라 bind나 live 
+	$("#mem_password").on("propertychange blur keyup paste input", function() {
+		alert("id name 값이 변경되었습니다.");
+	});
+
+	// $("#mem_password").change(function(){
+	// 	alert("id name 값이 변경되었습니다.");
+	// });
+
+
 </script>
 
 

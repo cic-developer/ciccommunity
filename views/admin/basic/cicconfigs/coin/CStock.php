@@ -13,11 +13,11 @@
 					<div class="btn-group pull-right" role="group" aria-label="...">
 						<a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a>
 						<form action='post'>
-								<input type="submit" id = "refresh" name="refresh" class="btn btn-outline btn-default btn-sm" value="Rafresh">
+								<input type="submit" id = "refresh" name="refresh" class="btn btn-default btn-sm" value="새로고침">
 						</form>	
 					</div>
 				<?php
-				$buttons = ob_get_contents();
+				
 				ob_end_flush();
 				?>
 			</div>

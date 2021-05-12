@@ -52,9 +52,9 @@
 				<form method = 'post'>	
 					<table class="table table-hover table-striped table-bordered">
 						<colgroup>
-							<col style="width:70%;" />
-							<col style="width:15%;" />
-							<col style="width:15%;" />
+							<col style="width:60%;" />
+							<col style="width:20%;" />
+							<col style="width:20%;" />
 						</colgroup>
 						<tr>
 							<th>키워드</th>
