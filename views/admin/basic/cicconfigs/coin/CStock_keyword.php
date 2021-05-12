@@ -70,13 +70,15 @@
 						$sno = $row+1;
 						foreach($keylist as $stocks){ ?>
 						<?php $myId = $_GET['id']; ?> 
-						<tr>
-							<td><?php echo $sno; ?></td>
-							<td><?php echo $stocks['myId']. " - " .$stocks['myId']; ?></td>
-							<td><?php echo $stocks['keyword']; ?></td>
-							<td><input type="checkbox" name="d_id[]" value="<?php echo $stocks['market']; ?>"></td>
-							<td><input type="checkbox" name="u_id[]" value="<?php echo $stocks['market']; ?>"></td>
-						</tr>
+							<?php if($myId == $stocks['market']) { ?>
+							<tr>
+								<td><?php echo $sno; ?></td>
+								<td><?php echo $stocks['market']; ?></td>
+								<td><?php echo $stocks['keyword']; ?></td>
+								<td><input type="checkbox" name="d_id[]" value="<?php echo $stocks['market']; ?>"></td>
+								<td><input type="checkbox" name="u_id[]" value="<?php echo $stocks['market']; ?>"></td> 
+							</tr>
+							<?php } ?>	
 						<?php
 							$sno++;
 						}
