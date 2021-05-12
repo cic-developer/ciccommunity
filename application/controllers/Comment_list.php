@@ -416,7 +416,23 @@ class Comment_list extends CB_Controller
 			$skindir = 'basic';
 		}
 		$skin = 'board/' . $skindir . '/comment_list';
-
+		$layoutconfig = array(
+			'path' => 'board',
+			'layout' => 'layout',
+			'skin' => 'post',
+			'layout_dir' => $layout_dir,
+			'mobile_layout_dir' => $mobile_layout_dir,
+			'use_sidebar' => $use_sidebar,
+			'use_mobile_sidebar' => $use_mobile_sidebar,
+			'skin_dir' => $skin_dir,
+			'mobile_skin_dir' => $mobile_skin_dir,
+			'page_title' => $page_title,
+			'meta_description' => $meta_description,
+			'meta_keywords' => $meta_keywords,
+			'meta_author' => $meta_author,
+			'page_name' => $page_name,
+		);
+		$view['layout'] = $this->managelayout->front(array(), $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->view = $skin;
 	}

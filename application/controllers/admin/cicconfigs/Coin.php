@@ -271,7 +271,7 @@ class Coin extends CB_Controller
 			//DELETE
             $key_id = $this->input->get('id');
 			if($key_id){
-				$this->Coin_model_admin->delete_keyword($key_id);
+				$this->Coin_model_admin->delete_keyword($key_id, $keylist);
 			}
 			
 

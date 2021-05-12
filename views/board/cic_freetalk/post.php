@@ -270,7 +270,15 @@
 
 		<div class="gap60"></div>
 		<!-- s: cmmt -->
-		<div class="cmmt-wrap" id="viewcomment">
+		<div class="cmmt-wrap">
+			<div class="comment">
+				<h4>댓글 <span><?php echo number_format(element('post_comment_count', element('post', $view))); ?></span></h4>
+				<?php
+					$this->load->view(element('view_skin_path', $layout) . '/comment_write');
+				?>
+			</div>
+			<div class="cmmt" id="viewcomment">
+			</div>
 		</div>
 		<!-- e: cmmt -->
 		<!-- page end // -->

@@ -2,6 +2,7 @@
 <div class="comment">
 	<h4>댓글 <span><?php echo number_format(element('post_comment_count', element('post', $view))); ?></span></h4>
 	<?php 
+	print_r($layout);
 		$this->load->view(element('view_skin_path', $layout) . '/comment_write');
 	?>
 </div>
