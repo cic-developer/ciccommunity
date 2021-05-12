@@ -326,9 +326,11 @@ class Coin extends CB_Controller
 			$key_id = $_GET['id'];
 
 			$deleted = $this->Coin_model_admin->delete_keyword($key_id);
-			print_r($deleted);
-			// redirect('https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=ZRX');
-							
+			if($deleted == 1){
+				$this->session->set_flashdata('success', '삭제되었습니다');
+				redirect('https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=ZRX');
+			}
+
 			
 			$layoutconfig2 = array('layout' => 'layout', 'skin' => 'delete_keyword');
 			// $layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
