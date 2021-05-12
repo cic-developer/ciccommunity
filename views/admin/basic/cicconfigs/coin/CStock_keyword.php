@@ -35,25 +35,26 @@
 					<div class="form-group">
 						<label><?php echo $myId ?></label>
 					</div>
-					<div class="form-group">
-						<label>Keyword</label>
-						<input type="text" class="form-control col-lg-2" name = "keyword">
-						<div class="col-sm-2"><button type="submit" class="btn btn-primary btn-xs btn-add-rows">추가</button></div>
+					<div class="input-group">
+						<input type="text" class="form-control rounded " name = "keyword" placeholder = "Keyword">
+						<span class=input-group-btn>
+							<button type="submit" class="btn btn-outline-primary" >추가</button>
+						</span>			
 					</div>
 					
 				</form>
-				</div>
-				<div id="sortable">
-					<?php
+			</div>
+			<div id="sortable">
+				<?php
 					if (element('list', element('data', $view))) {
 						foreach (element('list', element('data', $view)) as $result) {
-					?>
-							<?php echo element('coin_idx', $result); ?> 
+				?>
+					<?php echo element('market', $result); ?> 
 					<?php
 						}
 					}
 					?>
-				</div>
+			</div>
 			<div class="table-responsive">
 				<form method = 'post'>	
 					<table class="table table-hover table-striped table-bordered">
