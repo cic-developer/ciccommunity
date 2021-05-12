@@ -112,7 +112,7 @@
 				<div class="fl">
 					<h4>BEST VP UP</h4>
 					<ul>
-						<li>
+						<!-- <li>
 							<a href="#n">
 								<span class="num">1</span>
 								<div class="my-info">
@@ -123,7 +123,7 @@
 								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
 								<span class="vp">102,522</span>
 							</a>
-						</li>
+						</li> -->
 						<?php
 						if (element('list',element('bestpost', $view))) {
 							foreach (element('list',element('bestpost', $view)) as $bestpost) {

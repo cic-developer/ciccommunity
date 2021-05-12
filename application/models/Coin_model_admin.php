@@ -68,6 +68,12 @@ class Coin_model_admin extends CB_Model
             return false;
     }
 
+
+    function update_keyword($id, $data){
+        $this->db->where('coin_market', $id);
+        $this->db->update('cic_coin_admins', $data);
+    }
+
     function research_coin($keyword){
         $this->db->select('cic_coin_admins.*');
         $this->db->from('cic_coin_admins');
