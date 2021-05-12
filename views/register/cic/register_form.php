@@ -200,12 +200,12 @@
 
 				alert(message);
 
-				$('.con_mail').remove();
+				$('.con-mail').remove();
 				if(state == 1){
 					html = '';
-					html += '<div class="con_mail">'
+					html += '<div class="con-mail">'
 					html += '<input type="text" id="ath_num" name="ath_num" class="" required />'
-					html += '<button class="con_mail_btn" id="con_mail_btn">메일인증 확인</button>'
+					html += '<a class="con-mail-btn cerfity-btn" id="con-mail-btn">메일인증 확인</a>'
 					html += '</div>'
 					$('.mem_email').append(html);
 				}
@@ -214,7 +214,7 @@
 	})
 
 	$(document).ready(function(){
-		$("#con_mail_btn").on('click',function(){
+		$("#con-mail-btn").on('click',function(){
 			var ath_num = $("#ath_num").val();
 
 
@@ -236,12 +236,14 @@
 				}
 			});
 
+			alert(result);
 			if(result == 0){
 				alert(reason);
 			}
 
 			if(result == 1) {
-				$('.con_mail').remove();
+				$('.con-mail').remove();
+				$('#ath_email').append('<i class="fas fa-check"></i>');
 				$('#ath_email').remove();
 			}
 		});

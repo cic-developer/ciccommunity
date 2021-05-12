@@ -68,16 +68,19 @@ class Coin_model_admin extends CB_Model
         return $query->row();
     }
     
-function search_coin($search){
-    $this->db->select('*');
-    $this->db->from('cic_coin_admins');
-    $this->db->where('keyword', $search);
+    function search_coin($search, $keyword, ){
+        $this->db->select('*');
+        $this->db->from('cic_coin_admins');
+        $this->db->where('keyword', $search);
 
-    $query = $this->db->get();
+        if($search == market)
 
-    return $query -> result_array();
 
-}
+        $query = $this->db->get();
+
+        return $query -> result_array();
+
+    }
 
 
 }

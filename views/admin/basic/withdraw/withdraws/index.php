@@ -469,7 +469,7 @@
         }
 
         // 메모
-        $("#myModal-result .modal-footer #cp_content3").val( memo ); 
+        $("#cp_content3").val( memo ); 
 	});
 
 

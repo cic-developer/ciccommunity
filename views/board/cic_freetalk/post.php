@@ -149,12 +149,18 @@
 						<?php
 						}
 						?> -->
-						<li>
-						<a href="#n">
 						<?php
 						if (element('list',element('bestpost', $view))) {
 							foreach (element('list',element('bestpost', $view)) as $bestpost) {
-						?>
+								?>
+								<li>
+								<span class="num"><?php echo number_format(element('num', $bestpost)); ?></span>
+								<div class="my-info">
+									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
+											alt=""></p>
+									<p class="rtxt"><?php echo html_escape(element('post_userid', $bestpost)); ?></p>
+								</div>
+								<span class="txt"><a href="<?php echo goto_url(element('posturl', $bestpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $bestpost)); ?></a></span>
 						<?php
 							}
 						}
@@ -166,7 +172,6 @@
 						<?php
 						}
 						?>
-						</a>
 						</li>
 					</ul>
 				</div>

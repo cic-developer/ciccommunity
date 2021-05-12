@@ -18,7 +18,7 @@ class Coin extends CB_Controller
 	 * 관리자 페이지 상의 현재 디렉토리입니다
 	 * 페이지 이동시 필요한 정보입니다
 	 */
-	public $pagedir = 'cicconfigs/coin';
+	public $pagedir = 'cicconfigs/coin/CStock';
 
 	
 	/**
@@ -270,17 +270,11 @@ class Coin extends CB_Controller
 			$view['keylist'] = $keylist;
 			//DELETE
             $key_id = $this->input->get('id');
-			
+			print_r($key_id);
 			if($key_id){
 				$this->Coin_model_admin->delete_keyword($key_id, $keylist);
 			}
 			
-
-
-
-			
-			$update = $get['update'];
-			print_r($update);
 			/**
 		 	* 어드민 레이아웃을 정의합니다
 
