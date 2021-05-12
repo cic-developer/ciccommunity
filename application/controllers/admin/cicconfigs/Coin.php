@@ -181,50 +181,25 @@ class Coin extends CB_Controller
 
        	//GET MARKET PRICE
 	    $getStock = $this -> Coin_model_admin->get_keyword();
-        
-		for($i = 0; $i<count($getStock); $i++){
-				echo '<br><pre>';
-				print_r($getStock[$i]['market']);
-				echo '</pre>';
+    
+
+		for($i = 0; $i < count($getStock); $i++){
+			
+			$marketdata[] = $getStock[$i]['market'];
+
+            if($marketdata){
+				$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
+				// echo "<br><pre>";
+				// print_r($marketdata);
+				// echo "</pre>";
+			}else{
+				$realtime_coin_info = 0;
 			}
-
-
-
-		//if()
-		// print_r($getStock);
-
-		// for($i = 0; $i < count($getStock); $i++){
-			
-		// 	$marketdata[] = $getStock[$i]['market'];
-		// 	$coin_id[] = $getStock[$i]['coin_idx'];
-			
-		// 	// if($coin_id){
-		// 	// 	echo "<br><pre>";
-		// 	// 		print_r($marketdata);
-		// 	// 	echo "</pre>";
-		// 	// }
-
-        //     if($marketdata){
-		// 		$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
-		// 		// echo "<br><pre>";
-		// 		// print_r($getStock);
-		// 		// echo "</pre>";
-		// 	}else{
-		// 		$realtime_coin_info = 0;
-		// 	}
-
-		// 	foreach ($getStock as $getstoks){
-		// 		if($getstoks['market']){
-		// 			$marketdata[] = $getstoks['market'];
-		// 			//print_r($getStock);
-		// 		}else{
-		// 			$marketdata[] = 0;
-		// 		}
-			
-		// 	// echo "<br><pre>";
-		// 	// print_r($realtime_coin_info);
-		// 	// echo "</pre>";
-		// }
+	
+			// echo "<br><pre>";
+			// print_r($realtime_coin_info);
+			// echo "</pre>";
+		}
 			
 			$view['realtime_coin_info'] = $realtime_coin_info;
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
@@ -233,8 +208,9 @@ class Coin extends CB_Controller
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
 
-		//}	
+	
 		}
+		
 	
 		public function CStock_keyword(){
 
