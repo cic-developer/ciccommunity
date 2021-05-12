@@ -273,10 +273,10 @@ class Coin extends CB_Controller
 			//$data['key'] = $this-> Coin_model_admin->getById($key_id);
 			//$view['data'] = $data;
 
-				if($this->Coin_model_admin->delete_keyword($key_id)){
-					$this->session->set_flashdata('success', '삭제되었습니다');
-				    // redirect('admin/cicconfigs/coin/CStock');
-				}
+			$this->Coin_model_admin->delete_keyword($key_id);
+			$this->session->set_flashdata('success', '삭제되었습니다');
+			//redirect($pagedir, 'refresh');
+	
 				
 			
 			/**
