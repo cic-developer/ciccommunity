@@ -131,6 +131,9 @@ class Coin extends CB_Controller
 		
 
     //Load data to second db
+
+		$refresh = $this -> input -> post('resfresh');
+		print_r($refresh);
 		
 		$getList = $this -> Coin_model->retrieve_api();
 		for($i=0; $i<count($getList); $i++){
@@ -292,39 +295,6 @@ class Coin extends CB_Controller
 			$keylist = $this -> Coin_model_admin->get_keyword();
 
 			$view['keylist'] = $keylist;
-
-		// 	for($i=0; $i<count($getList); $i++){
-			
-		// 		$market = $getList[$i]['market'];
-		// 		if(strcmp(substr($market, 0, 1), "K")==0){
-		// 			$coin_market = substr($market, 4);
-		// 			$data =array(
-		// 				array(
-		// 					'coin_market'=> $coin_market,
-		// 					'keyword'=>$getList[$i]['korean_name']
-		// 				),
-		// 				array(
-		// 					'coin_market'=> $coin_market,
-		// 					'keyword'=>$getList[$i]['english_name']
-		// 				),
-		// 				array(
-		// 					'coin_market'=> $coin_market,
-		// 					'keyword'=> $coin_market
-		// 				),
-						
-				
-		// 			);
-		// 			if(isset($data) && !empty($data)){	
-		// 				for($j = 0; $j < count($data); $j++) {
-						
-		// 					$this->Coin_model -> insert_admin_list($data[$j]);
-		// 				}
-		// 			}	
-				
-		// 		}
-				
-		// }
-
 			//delete keyword
             $key_id = $this->input->post('d_id');
 			print_r($key_id);

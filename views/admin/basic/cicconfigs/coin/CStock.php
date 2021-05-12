@@ -25,11 +25,13 @@
 		?>
 			
 			<div class="table-responsive">
-			<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
+			
 				<form action="post" name='selected_market'>
+				
 					<table class="table table-hover table-striped table-bordered">
+						<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
 						<div class="btn-group pull-right" role="group" aria-label="...">
-							<input type="submit" name = "refresh" class="btn btn-outline btn-default btn-sm" value="Rafresh">
+							<input type="submit" id = "refresh" name="refresh" class="btn btn-outline btn-default btn-sm" value="Rafresh">
 						</div>	
 						<thead>
 							<tr>
@@ -108,6 +110,23 @@ $(function () {
 var btn = document.getElementById(id);
 btn.addEventListener('click', function() {
 	document.location.href = 'CStock_keyword';
+});
+
+//Buton to rafresh pasge
+$(".btn-sm").on('click', function(e){
+    e.preventDefault(); // this will prevent the defualt behavior of the button
+
+    // find which button was clicked
+    butId = $(this).attr('id');
+
+    $.ajax({
+        method: "POST",
+        url: "/controllerDummy/run/",
+        data: { button: butId }
+    })
+    .done(function( msg ) {
+        // do something
+    });        
 });
 </script>
 

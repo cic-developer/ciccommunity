@@ -153,22 +153,30 @@
 
 	$(document).ready(function(){
 		$("#ath_email").on('click', function(){
-			var email = $("#mem_email").val();
+			var _email = $("#mem_email").val();
 			// alert(email);
 
 			$.ajax({
 				url: cb_url + '/register/ajax_email_check',
 				type: 'POST',
 				data: {
-					mem_email: email
+					email: _email,
+					csrf_test_name : cb_csrf_hash
 				},
 				dataType: 'json',
 				async: false,
 				cache: false,
 				success: function(data) {
-					// title = data.title;
-					// content = data.content;
+					result = data.result;
+					reason = data.reason;
+
+					alert(result);
+					alert(reason);
 				}
+
+				alert(result);
+
+				// alert(email);
 			});
 		})
 	})
