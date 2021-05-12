@@ -28,8 +28,8 @@
 			<div class="list-group">
 				<form class="form-inline">
 					<?php 
-					$myId = $_GET['market']; 
-					$myKeyword = $_GET['keyword'];
+					$myId = $_GET['id']; 
+					$myKeyword = $keyword['myId'];
 					echo $myKeyword;
 					?>
 					<div class="form-group">
@@ -69,9 +69,10 @@
 						<?php 
 						$sno = $row+1;
 						foreach($keylist as $stocks){ ?>
+						<?php $myId = $_GET['id']; ?> 
 						<tr>
 							<td><?php echo $sno; ?></td>
-							<td><?php echo $stocks['market']. " - " .$stocks['name_ko']; ?></td>
+							<td><?php echo $stocks['myId']. " - " .$stocks['myId']; ?></td>
 							<td><?php echo $stocks['keyword']; ?></td>
 							<td><input type="checkbox" name="d_id[]" value="<?php echo $stocks['market']; ?>"></td>
 							<td><input type="checkbox" name="u_id[]" value="<?php echo $stocks['market']; ?>"></td>
