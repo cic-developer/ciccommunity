@@ -376,11 +376,13 @@ class Register extends CB_Controller
 			'field' => 'mem_email',
 			'label' => '이메일',
 			'rules' => 'trim|required|valid_email|max_length[50]|is_unique[a]', //callback__mem_email_chec
+			'description' => $email_description,
 		);
-		$configbasic['mem_passowrd'] = array(
-			'field' => 'mem_passowrd',
+		$configbasic['mem_password'] = array(
+			'field' => 'mem_password',
 			'label' => '비밀번호',
 			'rules' => 'trim|required|min_length[8]', //callback__mem_password_check,
+			'description' => $password_description,
 		);
 		$configbasic['mem_password_re'] = array(
 			'field' => 'mem_password_re',
@@ -390,7 +392,9 @@ class Register extends CB_Controller
 		$configbasic['mem_nickname'] = array(
 			'field' => 'mem_nickname',
 			'label' => '닉네임',
-			'rules' => 'trim|required|min_length[2]|max_length[20]|', // callback__mem_nickname_check
+			'rules' => 'trim|required|min_length[2]|max_length[20]|callback__mem_nickname_check',
+			'description' => '공백없이 한글, 영문, 숫자만 입력 가능 2글자 이상' . '<p class="rtxt nec mg10t">적합하지 않은 별명의 경우 임의 변경될 수 있습니다.</p>',
+			// 'description' => '공백없이 한글, 영문, 숫자만 입력 가능 2글자 이상' . $nickname_description,
 		);
 		$configbasic['mem_wallet_address'] = array(
 			'field' => 'mem_wallet_address',
@@ -1737,7 +1741,7 @@ class Register extends CB_Controller
 		$_ath_num = trim($this->input->post('ath_num'));
 		if (empty($_ath_num)) {
 			$result = array(
-				'result' => 'no',
+				'result' => '0',
 				'reason' => '인증번호가 넘어오지 않았습니다',
 			);
 			exit(json_encode($result));

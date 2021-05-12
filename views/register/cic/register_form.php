@@ -47,7 +47,7 @@
 									if(element('field_name', $value) == "mem_nickname"){
 								?>
 									<!-- 굳이 닉네임 확인안하고 비동기로 체크해도 될거같습니다. -->
-									<a href="ath_nickname" class="chk-btn"><span>닉네임 확인</span></a>
+									<a id="ath_nickname" class="chk-btn"><span>닉네임 확인</span></a>
 								<?php
 									}
 								?>
@@ -234,7 +234,6 @@
 			}
 		});
 
-		alert(result);
 		if(result == 0){
 			alert(reason);
 		}
@@ -247,6 +246,38 @@
 		}
 	});
 
+
+	$(document).ready(function(){
+		$("#ath_nickname").on('click', function(){
+			var _nickname = $("#mem_nickname").val();
+			// alert(email);
+
+			var result = '';
+			var reason = '';
+			$.ajax({
+				url: cb_url + '/register/ajax_nickname_check',
+				type: 'POST',
+				data: {
+					nickname: _nickname,
+					csrf_test_name : cb_csrf_hash
+				},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				success: function(data) {
+					result = data.result;
+					reason = data.reason;
+				}
+			});
+			if(result == "no"){
+				alert(reason);
+			}
+
+			if(result == "available"){
+				alert(reason);
+			}
+		})
+	})
 </script>
 
 

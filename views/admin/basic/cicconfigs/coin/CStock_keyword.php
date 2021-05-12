@@ -48,10 +48,14 @@
 					}
 					?>
 			</div>
-			<div class="table-responsive">
+			<div class="table-responsive text-center">
 				<form method = 'post'>	
 					<table class="table table-hover table-striped table-bordered">
-					<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+						<colgroup>
+							<col style="width:70%;" />
+							<col style="width:15%;" />
+							<col style="width:15%;" />
+						</colgroup>
 						<tr>
 							<th>키워드</th>
 							<th>삭제</th>
