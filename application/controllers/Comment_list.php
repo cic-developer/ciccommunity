@@ -18,7 +18,7 @@ class Comment_list extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Post', 'Comment', 'Comment_meta');
+	protected $models = array('Post', 'Comment', 'Comment_meta', 'CIC_member_level_config');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -291,7 +291,7 @@ class Comment_list extends CB_Controller
 						'mlc_level' => element('mem_level', $val),
 						'mlc_enable' => 1,
 					);
-					$view['view']['post']['level'] = $this->CIC_member_level_config_model->get_one('', '', $level_where);
+					$result['list'][$key]['level'] = $this->CIC_member_level_config_model->get_one('', '', $level_where);
 				} else {
 					$result['list'][$key]['display_name'] = '익명사용자';
 				}

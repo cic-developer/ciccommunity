@@ -125,101 +125,28 @@
 							</a>
 						</li>
 						<li>
-							<a href="#n">
-								<span class="num">2</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/like-popo.png') ?>"
-											alt="">
-									</p>
-									<p class="rtxt">가즈아</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
+						<a href="#n">
+						<?php
+						if (element('list',element('bestpost', $view))) {
+							foreach (element('list',element('bestpost', $view)) as $bestpost) {
+						?>
+						<span><?php echo number_format(element('num', $bestpost)); ?></span>
 						<li>
-							<a href="#n">
-								<span class="num">3</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-											alt=""></p>
-									<p class="rtxt">코린이1235</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
+							<?php if (element('category', $bestpost)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $bestpost))); ?></span><?php } ?>
+							<a href="<?php echo goto_url(element('posturl', $bestpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $bestpost)); ?> <span class="text-right"><?php echo number_format(element('post_like_point', $bestpost)); ?></span></a>
 						</li>
-						<li>
-							<a href="#n">
-								<span class="num">4</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-											alt=""></p>
-									<p class="rtxt">코린이1235</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">5</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-											alt=""></p>
-									<p class="rtxt">코알못259</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">6</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-											alt=""></p>
-									<p class="rtxt">코린이1235</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">7</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-											alt=""></p>
-									<p class="rtxt">코알못259</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">8</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-											alt=""></p>
-									<p class="rtxt">코알못259</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">9</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-											alt=""></p>
-									<p class="rtxt">코알못259</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
+						<?php
+							}
+						}
+						if ( ! element('list', element('bestpost', $view))) {
+						?>
+							<tr>
+								<td colspan="12" class="nopost">자료가 없습니다</td>
+							</tr>
+						<?php
+						}
+						?>
+						</a>
 						</li>
 					</ul>
 				</div>

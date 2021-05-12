@@ -1,6 +1,4 @@
-<?php $_pointType  = ($this->uri->segment(4,0) === 'cp' ?  'cp': 'vp')?>
 <div class="box">
-
 	<div class="box-table">
 		<?php
 		echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
@@ -14,27 +12,21 @@
 				?>
 					<div class="btn-group pull-right" role="group" aria-label="...">
 						<a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a>
+						<form action='post'>
+								<input type="submit" id = "refresh" name="refresh" class="btn btn-outline btn-default btn-sm" value="Rafresh">
+						</form>	
 					</div>
 				<?php
 				$buttons = ob_get_contents();
 				ob_end_flush();
 				?>
 			</div>
-		<?php
-		echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
-		$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
-		echo form_open(current_full_url(), $attributes);
-		?>
-			
 			<div class="table-responsive">
 			
 				<form action="post" name='selected_market'>
 				
 					<table class="table table-hover table-striped table-bordered">
 						<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
-						<div class="btn-group pull-right" role="group" aria-label="...">
-							<input type="submit" id = "refresh" name="refresh" class="btn btn-outline btn-default btn-sm" value="Rafresh">
-						</div>	
 						<thead>
 							<tr>
 								<th>번호</th>

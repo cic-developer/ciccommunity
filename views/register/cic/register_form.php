@@ -158,6 +158,7 @@
 
 			var result = '';
 			var reason = '';
+			var message = '';
 			$.ajax({
 				url: cb_url + '/register/ajax_email_check',
 				type: 'POST',
@@ -179,6 +180,23 @@
 
 			if(result == "available"){
 				alert(reason);
+
+				$.ajax({
+					url: cb_url + '/register/ajax_email_send',
+					type: 'POST',
+					data: {
+						email: _email,
+						csrf_test_name : cb_csrf_hash
+					},
+					dataType: 'json',
+					async: false,
+					cache: false,
+					success: function(data) {
+						message = data.message;
+					}
+				});
+
+				alert(message);
 			}
 		})
 	})

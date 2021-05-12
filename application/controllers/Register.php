@@ -1670,18 +1670,15 @@ class Register extends CB_Controller
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_register_ajax_email_send';
 		$this->load->event($eventname);
-
-		$result = array();
+		
 		$this->output->set_content_type('application/json');
 
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('before', $eventname);
-		print_r("@@@@@@@@@@@@");
-		$member_info = $this->Member_model->get_one(1);
-		print_r($member_info['mem_email']);
-		print_r($member_info['mem_nickname']);
-		print_r("@@@@@@@@@@@@");
 
+		$rand_num = sprintf('%06d',rand(000000,999999));
+		$this->session->set_userdata('ath_num', $rand_num);
+		
 		$member_info = $this->Member_model->get_one(1);
 
 		// 메일 발송
@@ -1689,16 +1686,21 @@ class Register extends CB_Controller
 		$this->email->from($member_info['mem_email'], $member_info['mem_nickname']);
 		$this->email->to($this->input->post('email'));
 
-		$this->email->subject($this->input->post('title'));
+		$this->email->subject('cic 회원가입 이메일 인증');
 		$content_type = $this->cbconfig->item('use_formmail_dhtml') ? 1 : 0;
 		$this->email->message(display_html_content(
-			$this->input->post('content'),
+			$rand_num,
 			$content_type,
 			800
 		));
 		$this->email->send();
 
-		alert_close(element('mem_nickname', $member) . ' 님에게 메일을 발송하였습니다. ');
+		$result = array(
+			'message' => '해당 이메일로 인증 번호를 발송하였습니다.',
+		);
+		exit(json_encode($result));
+
+		// alert_close(element('mem_nickname', $member) . ' 님에게 메일을 발송하였습니다. ');
 	}
 
 

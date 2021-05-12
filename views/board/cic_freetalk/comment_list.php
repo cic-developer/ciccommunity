@@ -17,7 +17,7 @@
 			<div class="<?php echo $_classname; ?>">
 				<div class="info">
 					<a href="#n" class="nickname">
-						<p class="ico"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
+						<p class="ico"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', $result)), 35, 35); ?>"
 								alt=""></p>
 						<p class="txt"><?php echo element('cmt_nickname', $result); ?></p>
 					</a>
