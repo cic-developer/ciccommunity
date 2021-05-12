@@ -27,7 +27,7 @@
 				
 					<table class="table table-hover table-striped table-bordered">
 						<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
-						<thead>
+						<thead >
 							<tr>
 								<th>번호</th>
 								<th>마켓명</th>
