@@ -132,8 +132,8 @@ class Coin extends CB_Controller
 
     //Load data to second db
 
-		$refresh = $this -> input -> post('resfresh');
-		print_r($refresh);
+		$refresh = $this -> input -> post('refresh');
+		echo "hi" .$refresh;
 		
 		$getList = $this -> Coin_model->retrieve_api();
 		for($i=0; $i<count($getList); $i++){

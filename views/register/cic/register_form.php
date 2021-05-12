@@ -47,7 +47,7 @@
 									if(element('field_name', $value) == "mem_nickname"){
 								?>
 									<!-- 굳이 닉네임 확인안하고 비동기로 체크해도 될거같습니다. -->
-									<a href="#n" class="chk-btn"><span>닉네임 확인</span></a>
+									<a href="ath_nickname" class="chk-btn"><span>닉네임 확인</span></a>
 								<?php
 									}
 								?>
@@ -156,6 +156,8 @@
 			var _email = $("#mem_email").val();
 			// alert(email);
 
+			var result = '';
+			var reason = '';
 			$.ajax({
 				url: cb_url + '/register/ajax_email_check',
 				type: 'POST',
@@ -169,15 +171,15 @@
 				success: function(data) {
 					result = data.result;
 					reason = data.reason;
-
-					alert(result);
-					alert(reason);
 				}
-
-				alert(result);
-
-				// alert(email);
 			});
+			if(result == "no"){
+				alert(reason);
+			}
+
+			if(result == "available"){
+				alert(reason);
+			}
 		})
 	})
 </script>
