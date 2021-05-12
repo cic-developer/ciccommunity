@@ -73,8 +73,9 @@
 									?>
 								
 								</td>
-								<td><a href=" Coin/delete_keyword/?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs">삭제 </a></td>
-								<td><a href=" update_keyword/?id=<?php echo $stocks['idx']; ?>" class="btn btn-info btn-xs">수정 </a></td> 
+								<td><a href="delete_keyword/?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs">삭제 </a></td>
+								<!-- <td><a href="<?php echo site_url('admin/cicconfigs/Coin/delete_keyword/'.$stocks['idx']) ?> ">delete<a></td> -->
+								<td><a href="update_keyword/?id=<?php echo $stocks['idx']; ?>" class="btn btn-info btn-xs">수정 </a></td> 
 							</tr>
 							<?php } ?>	
 						<?php
@@ -119,3 +120,6 @@ $(".btn-sm").on('click', function(e){
 });
 //]]>
 </script>
+
+
+
