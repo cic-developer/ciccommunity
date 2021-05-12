@@ -53,10 +53,6 @@ class Managelayout extends CI_Controller
 		if (uri_string() !== config_item('uri_segment_admin')) {
 			
 			list($data['menu_dir1'], $data['menu_dir2']) = explode('/', str_replace(config_item('uri_segment_admin') . '/', '', uri_string()));
-			print_r(element('admin_page_menu', $data));
-			print_r($data['menu_dir1']);
-
-			exit;
 			$data['menu_title'] = element(0, element(element('menu_dir2', $data), element('menu', element(element('menu_dir1', $data), element('admin_page_menu', $data)))));
 		} else {
 			$data['menu_dir1'] = '';

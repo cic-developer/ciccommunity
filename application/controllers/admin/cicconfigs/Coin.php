@@ -18,7 +18,7 @@ class Coin extends CB_Controller
 	 * 관리자 페이지 상의 현재 디렉토리입니다
 	 * 페이지 이동시 필요한 정보입니다
 	 */
-	public $pagedir = 'cicconfigs/coin/CStock';
+	public $pagedir = 'cicconfigs/coin';
 
 	
 	/**
@@ -202,8 +202,6 @@ class Coin extends CB_Controller
 
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
 			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-			print_r($view['layout']);
-			exit;
 			$this->data = $view;
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));

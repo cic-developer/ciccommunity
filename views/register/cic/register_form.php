@@ -240,9 +240,9 @@
 
 		if(result == 1) {
 			$('.con-mail').remove();
-			$('#ath_email').remove();
-			$("#mem_email").attr("readonly", true);
-			$("#mem_email").attr("disabled", true);
+			// $('#ath_email').remove();
+			// $("#mem_email").attr("readonly", true);
+			// $("#mem_email").attr("disabled", true);
 		}
 	});
 
