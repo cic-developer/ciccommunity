@@ -32,11 +32,11 @@
 					$myKeyword = $keyword['myId'];
 					echo $myKeyword;
 					?>
-					<div class="form-group">
+					<div class="form-group col-md-6">
 						<label><?php echo $myId ?></label>
 					</div>
-					<div class="input-group">
-						<input type="text" class="form-control rounded " name = "keyword" placeholder = "Keyword">
+					<div class="input-group col-md-6">
+						<input type="text" class="form-control rounded  " name = "keyword" placeholder = "Keyword">
 						<span class=input-group-btn>
 							<button type="submit" class="btn btn-outline-primary" >추가</button>
 						</span>			
@@ -60,8 +60,6 @@
 					<table class="table table-hover table-striped table-bordered">
 					<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 						<tr>
-							<th>S.no</th>
-							<th>마겟 명</th>
 							<th>한국어 명</th>
 							<th>Delete</th>
 							<th>Update</th>
@@ -72,21 +70,17 @@
 						<?php $myId = $_GET['id']; ?> 
 							<?php if($myId == $stocks['market']) { ?>
 							<tr>
-								<td><?php echo $sno; ?></td>
-								<td><?php echo $stocks['market']; ?></td>
-								<td><?php echo $stocks['keyword']; ?></td>
+								<td>
+									<?php 
+									echo $stocks['keyword'];
+									?>
+								
+								</td>
 								<td><input type="checkbox" name="d_id[]" value="<?php echo $stocks['market']; ?>"></td>
 								<td><input type="checkbox" name="u_id[]" value="<?php echo $stocks['market']; ?>"></td> 
 							</tr>
 							<?php } ?>	
 						<?php
-							$sno++;
-						}
-						
-						if(count($keylist) == 0){
-							echo "<tr>";
-							echo "<td colspan='3'>No record found.</td>";
-							echo "</tr>";
 						}
 						?>
 					</table>

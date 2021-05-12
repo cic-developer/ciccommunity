@@ -19,7 +19,7 @@ class Coin_model_admin extends CB_Model
 	 * 테이블명
 	 */
 	public $_table = 'cic_coin_admins';
-    public $primary_key = 'coin_market';
+    public $primary_key = 'idx';
 
     function __construct()
     {

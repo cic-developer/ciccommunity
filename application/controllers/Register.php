@@ -342,12 +342,12 @@ class Register extends CB_Controller
 				. $this->cbconfig->item('change_nickname_date') . '일 이내에는 변경할 수 없습니다';
 		}
 
-		$configbasic['mem_userid'] = array(
-			'field' => 'mem_userid',
-			'label' => '아이디',
-			'rules' => 'trim|required|alphanumunder|min_length[3]|max_length[20]|is_unique[member_userid.mem_userid]|callback__mem_userid_check',
-			'description' => '영문자, 숫자, _ 만 입력 가능. 최소 3자이상 입력하세요',
-		);
+		// $configbasic['mem_userid'] = array(
+		// 	'field' => 'mem_userid',
+		// 	'label' => '아이디',
+		// 	'rules' => 'trim|required|alphanumunder|min_length[3]|max_length[20]|is_unique[member_userid.mem_userid]|callback__mem_userid_check',
+		// 	'description' => '영문자, 숫자, _ 만 입력 가능. 최소 3자이상 입력하세요',
+		// );
 
 		$password_description = '비밀번호는 ' . $password_length . '자리 이상이어야 ';
 		if ($this->cbconfig->item('password_uppercase_length')
@@ -720,8 +720,10 @@ class Register extends CB_Controller
 							$html_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input datepicker" value="' . set_value(element('field_name', $value)) . '" readonly="readonly" ' . $required . ' />';
 						} elseif (element('field_type', $value) === 'phone') {
 							$html_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value)) . '" ' . $required . ' />';
+						} elseif(element('field_name', $value) === 'mem_userid'){
+							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
 						} else {
-							$html_content[$k]['input'] .= '<input type="' . element('field_type', $value) . '" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>';
+							$html_content[$k]['input'] .= '<input type="' . element('field_type', $value) . '" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
 						}
 					} elseif (element('field_type', $value) === 'textarea') {
 						$html_content[$k]['input'] .= '<textarea id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input" ' . $required . '>' . set_value(element('field_name', $value)) . '</textarea>';
