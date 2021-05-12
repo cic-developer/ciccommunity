@@ -78,23 +78,53 @@ class Board_post extends CB_Controller
 
 		$popularpost = $this->Post_model
 			->get_popularpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			if (element('list', $popularpost)) {
+				foreach (element('list', $popularpost) as $key => $val) {
+					$popularpost['list'][$key]['post_display_name'] = display_username(
+						element('post_userid', $val),
+						element('post_nickname', $val)
+					);
+					$popularpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+					$popularpost['list'][$key]['num'] = $list_num--;
+					if ($board) {
+						$popularpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+						$popularpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+					}
+					$popularpost['list'][$key]['category'] = '';
+					if (element('post_category', $val)) {
+						$popularpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+					}
+					if (element('post_image', $val)) {
+						$imagewhere = array(
+							'post_id' => element('post_id', $val),
+							'pfi_is_image' => 1,
+						);
+						$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+						$popularpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+					} else {
+						$popularpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+					}
+				}
+			}
+			
+			$bestpost = $this->Post_model
+				->get_bestpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 
-		
-		if (element('list', $popularpost)) {
-			foreach (element('list', $popularpost) as $key => $val) {
-				$popularpost['list'][$key]['post_display_name'] = display_username(
+			if (element('list', $bestpost)) {
+			foreach (element('list', $bestpost) as $key => $val) {
+				$bestpost['list'][$key]['post_display_name'] = display_username(
 					element('post_userid', $val),
 					element('post_nickname', $val)
 				);
-				$popularpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-				$popularpost['list'][$key]['num'] = $list_num--;
+				$bestpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+				$bestpost['list'][$key]['num'] = $list_num--;
 				if ($board) {
-					$popularpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-					$popularpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+					$bestpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+					$bestpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
 				}
-				$popularpost['list'][$key]['category'] = '';
+				$bestpost['list'][$key]['category'] = '';
 				if (element('post_category', $val)) {
-					$popularpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+					$bestpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
 				}
 				if (element('post_image', $val)) {
 					$imagewhere = array(
@@ -102,15 +132,16 @@ class Board_post extends CB_Controller
 						'pfi_is_image' => 1,
 					);
 					$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-					$popularpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+					$bestpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
 				} else {
-					$popularpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+					$bestpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
 				}
 			}
 		}
 		// $view['view']['data'] = $popularpost;
+		
 		$view['view']['popularpost'] = $popularpost;
-
+		$view['view']['bestpost'] = $bestpost;
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
