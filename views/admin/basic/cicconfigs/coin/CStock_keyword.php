@@ -70,7 +70,7 @@
 								
 								</td>
 								<td><input type="submit" name=delete class="btn btn-outline btn-default btn-sm" value="삭체"></td>
-								<td><input type="submit" name="update" value="Update" class="btn btn-outline btn-default btn-sm" ></td> 
+								<td><input type="submit" name="update" value="update" class="btn btn-outline btn-default btn-sm" ></td> 
 							</tr>
 							<?php } ?>	
 						<?php
