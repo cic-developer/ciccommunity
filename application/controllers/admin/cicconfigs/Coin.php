@@ -189,19 +189,20 @@ class Coin extends CB_Controller
 
             if($marketdata){
 				$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
-				// echo "<br><pre>";
-				// print_r($marketdata);
-				// echo "</pre>";
 			}else{
 				$realtime_coin_info = 0;
 			}
-	
+
+		
 			// echo "<br><pre>";
 			// print_r($realtime_coin_info);
 			// echo "</pre>";
-		}
 			
 			$view['realtime_coin_info'] = $realtime_coin_info;
+
+
+		}
+
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
 			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 			$this->data = $view;

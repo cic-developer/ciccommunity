@@ -45,7 +45,7 @@ class Coin_model extends CB_Model
         //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.upbit.com/v1/ticker?market=KRW-BTC",
+            CURLOPT_URL => "https://api.upbit.com/v1/ticker?markets=KRW-".$market,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",
@@ -67,7 +67,6 @@ class Coin_model extends CB_Model
 
         //convert json to php array or object
         $array = json_decode($response, true);
-        print_r($array);
         return $array[0];
 	}
     

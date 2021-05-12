@@ -13,26 +13,9 @@
                 <div class="fl">
                     <h4>베스트 게시물</h4>
                     <ul>
-                        <li><a href="<?php echo base_url('post/5')?>">1. [스압] 월급루팡이 만들어지는 과정 (5) <span>18</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">2. [스압] 월급루팡이 만들어지는 과정 (5) <span>18</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">3. [스압] 월급루팡이 만들어지는 과정 (5) <span>18</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">4. [스압] 월급루팡이 만들어지는 과정 (5) <span>18</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">5. [스압] 월급루팡이 만들어지는 과정 (5) <span>18</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">6. [스압] 월급루팡이 만들어지는 과정 (5) <span>18</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">7. [스압] 월급루팡이 만들어지는 과정 (5) <span>18</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">8. [스압] 월급루팡이 만들어지는 과정 (5) <span>18</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">9. [스압] 월급루팡이 만들어지는 과정 (5) <span>18</span></a>
-                        </li>
-                        <li><a href="<?php echo base_url('post/5')?>">10. [스압] 월급루팡이 만들어지는 과정 (5) <span>18</span></a>
-                        </li>
+                        <!-- <li><a href="<?php echo base_url('post/5')?>">1. [스압] 월급루팡이 만들어지는 과정 (5) <span>18</span></a>
+                        </li> -->
+
                     </ul>
                 </div>
                 <div class="fr">
