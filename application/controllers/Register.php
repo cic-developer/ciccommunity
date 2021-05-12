@@ -368,59 +368,59 @@ class Register extends CB_Controller
 		}
 		$password_description .= '합니다';
 
-		$configbasic['email'] = array(
+		$configbasic['mem_email'] = array(
 			'field' => 'email',
 			'label' => '이메일',
 			'rules' => 'trim|required|valid_email|max_length[50]|is_unique[a]', //callback__mem_email_chec
 		);
-		$configbasic['passowrd'] = array(
+		$configbasic['mem_passowrd'] = array(
 			'field' => 'passowrd',
 			'label' => '비밀번호',
 			'rules' => 'trim|required|min_length[8]', //callback__mem_password_check,
 		);
-		$configbasic['passowrd2'] = array(
+		$configbasic['mem_password_re'] = array(
 			'field' => 'passowrd2',
 			'label' => '비밀번호확인',
 			'rules' => 'trim|required|min_length[8]|matches[passowrd]',
 		);
-		$configbasic['nickname'] = array(
+		$configbasic['mem_nickname'] = array(
 			'field' => 'nickname',
 			'label' => '닉네임',
 			'rules' => 'trim|required|min_length[2]|max_length[20]|', // callback__mem_nickname_check
 		);
-		$configbasic['per_address'] = array(
+		$configbasic['mem_per_address'] = array(
 			'field' => 'per_address',
 			'label' => '퍼지갑주소',
 			'rules' => 'trim|required|is_natural_no_zero|is_unique[b]',
 		);
-		$configbasic['mem_password'] = array(
-			'field' => 'mem_password',
-			'label' => '패스워드',
-			'rules' => 'trim|required|min_length[' . $password_length . ']|callback__mem_password_check',
-			'description' => $password_description,
-		);
-		$configbasic['mem_password_re'] = array(
-			'field' => 'mem_password_re',
-			'label' => '패스워드 확인',
-			'rules' => 'trim|required|min_length[' . $password_length . ']|matches[mem_password]',
-		);
+		// $configbasic['mem_password'] = array(
+		// 	'field' => 'mem_password',
+		// 	'label' => '패스워드',
+		// 	'rules' => 'trim|required|min_length[' . $password_length . ']|callback__mem_password_check',
+		// 	'description' => $password_description,
+		// );
+		// $configbasic['mem_password_re'] = array(
+		// 	'field' => 'mem_password_re',
+		// 	'label' => '패스워드 확인',
+		// 	'rules' => 'trim|required|min_length[' . $password_length . ']|matches[mem_password]',
+		// );
 		$configbasic['mem_username'] = array(
 			'field' => 'mem_username',
 			'label' => '이름',
 			'rules' => 'trim|min_length[2]|max_length[20]',
 		);
-		$configbasic['mem_nickname'] = array(
-			'field' => 'mem_nickname',
-			'label' => '닉네임x',
-			'rules' => 'trim|required|min_length[2]|max_length[20]|callback__mem_nickname_check',
-			'description' => '공백없이 한글, 영문, 숫자만 입력 가능 2글자 이상' . $nickname_description,
-		);
-		$configbasic['mem_email'] = array(
-			'field' => 'mem_email',
-			'label' => '이메일x',
-			'rules' => 'trim|required|valid_email|max_length[50]|is_unique[member.mem_email]|callback__mem_email_check',
-			'description' => $email_description,
-		);
+		// $configbasic['mem_nickname'] = array(
+		// 	'field' => 'mem_nickname',
+		// 	'label' => '닉네임x',
+		// 	'rules' => 'trim|required|min_length[2]|max_length[20]|callback__mem_nickname_check',
+		// 	'description' => '공백없이 한글, 영문, 숫자만 입력 가능 2글자 이상' . $nickname_description,
+		// );
+		// $configbasic['mem_email'] = array(
+		// 	'field' => 'mem_email',
+		// 	'label' => '이메일x',
+		// 	'rules' => 'trim|required|valid_email|max_length[50]|is_unique[member.mem_email]|callback__mem_email_check',
+		// 	'description' => $email_description,
+		// );
 		$configbasic['mem_homepage'] = array(
 			'field' => 'mem_homepage',
 			'label' => '홈페이지',

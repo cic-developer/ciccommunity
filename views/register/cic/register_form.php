@@ -11,24 +11,31 @@
 			?>
 
 
-				<?php
-				foreach (element('html_content', $view) as $key => $value) {
-				?>
-					<li>
-						<span><?php echo element('display_name', $value); ?></span>
-						<div class="form-text text-primary group">
-							<?php echo element('input', $value); ?>
-							<?php if (element('description', $value)) { ?>
-								<p class="help-block"><?php echo element('description', $value); ?></p>
-							<?php } ?>
-						</div>
-					</li>
-				<?php
-				}
-				?>
+				
 			<div class="entry">
 				<ul>
-					<li>
+
+					<?php
+					foreach (element('html_content', $view) as $key => $value) {
+					?>
+						<li>
+							<p class="btxt"><?php echo element('display_name', $value); ?></p>
+							<div class="field">
+								<p class="chk-input">
+									<?php echo element('input', $value); ?>
+								</p>
+								<a id="ath_email" class="cerfity-btn"><span>인증하기</span></a>
+							</div>
+							<p class="rtxt mg10t">
+								<?php if (element('description', $value)) { ?>
+									<p class="help-block"><?php echo element('description', $value); ?></p>
+								<?php } ?>
+							</p>
+						</li>
+					<?php
+					}
+					?>
+					<!-- <li>
 						<p class="btxt">E-mail (ID)</p>
 						<div class="field">
 							<p class="chk-input">
@@ -61,9 +68,9 @@
 						<div class="field nick">
 							<p class="chk-input">
 								<input name="nickname" type="text" value="코린이1253" autocomplete="off">
-							</p>
+							</p> -->
 							<!-- 굳이 닉네임 확인안하고 비동기로 체크해도 될거같습니다. -->
-							<a href="#n" class="chk-btn"><span>닉네임 확인</span></a>
+							<!-- <a href="#n" class="chk-btn"><span>닉네임 확인</span></a>
 						</div>
 						<p class="rtxt mg10t">공백없이 한글, 영문, 숫자만 입력 가능 2글자 이상 <br>닉네임 설정 시 변경이 불가능합니다.</p>
 						<p class="rtxt nec mg10t">적합하지 않은 별명의 경우 임의 변경될 수 있습니다.</p>
@@ -76,7 +83,7 @@
 							</p>
 						</div>
 						<p class="rtxt mg10t">PER 지갑주소 입력은 선택사항 입니다. <br>지갑주소를 등록하여 다양한 혜택을 즐겨보세요.</p>
-					</li>
+					</li> -->
 				</ul>
 				<a id="submitButton" class="join-btn"><span>가입하기</span>
 				</a>

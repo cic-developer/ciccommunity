@@ -33,15 +33,14 @@
 					echo $myKeyword;
 					?>
 					<div class="form-group">
-						<label>Market id</label>
-						
-						<input type="text"  class="form-control" name = "coin_idx" value='<?php echo $myId ?>'>
+						<label><?php echo $myId ?></label>
 					</div>
 					<div class="form-group">
 						<label>Keyword</label>
-						<input type="text" class="form-control" name = "keyword">
+						<input type="text" class="form-control col-lg-2" name = "keyword">
+						<div class="col-sm-2"><button type="submit" class="btn btn-primary btn-xs btn-add-rows">추가</button></div>
 					</div>
-					<div class="col-sm-2"><button type="submit" class="btn btn-primary btn-xs btn-add-rows">추가</button></div>
+					
 				</form>
 				</div>
 				<div id="sortable">
