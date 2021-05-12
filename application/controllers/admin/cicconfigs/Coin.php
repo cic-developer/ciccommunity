@@ -306,14 +306,30 @@ class Coin extends CB_Controller
 
 		function delete_keyword(){
 
+						// 이벤트 라이브러리를 로딩합니다
+						$eventname = 'event_amdmin_coin_delete';
+						$this->load->event($eventname);
+				
+				
+						// 이벤트가 존재하면 실행합니다
+						$view['view']['event']['before'] = Events::trigger('before', $eventname);
+				
+						//$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+						
+						$view = array();
+			$view['view'] = array();
+				
+						
+			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+			print_r ($_GET);
+						
+			$key_id = $_GET['id'];
 
 			$deleted = $this->Coin_model_admin->delete_keyword($key_id);
-			if($deleted == true){
-				$this->session->set_flashdata('success', '삭제되었습니다');
-				
-			}
-
-
+			print_r($deleted);
+			// redirect('https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=ZRX');
+							
+			
 			$layoutconfig2 = array('layout' => 'layout', 'skin' => 'delete_keyword');
 			// $layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
 			$view['layout'] = $this->managelayout->admin($layoutconfig2, $this->cbconfig->get_device_view_type());

@@ -57,7 +57,7 @@ class Coin_model_admin extends CB_Model
 
     function delete_keyword($id){
 
-        $this->db->delete('id', $id);
+        $this->db->where('id', $id);
         $this->db->delete('cic_coin_admins');
         return true;
     }
@@ -66,6 +66,7 @@ class Coin_model_admin extends CB_Model
     function update_keyword($id, $data){
         $this->db->where('coin_market', $id);
         $this->db->update('cic_coin_admins', $data);
+
     }
 
     function save_defaut_keyword(){
