@@ -48,7 +48,7 @@
 								<td><a href='https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo element('market', $result); ?>'><?php echo html_escape(element('market', $result)); ?></a></td>
 								<td><?php echo element('name_ko', $result); ?></td>
 								<td><?php echo element('name_en', $result); ?></td>
-								<td><button  type="button" id="myBtn" class="btn btn" onClick="document.location.href='https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo element('market', $result); ?>'">키워드 추가</button></td>
+								<td><button  type="button" id="myBtn" class="btn btn" onClick="document.location.href='https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo element('market', $result); ?>'">Link</button></td>
 							</tr>
 						<?php
 							}

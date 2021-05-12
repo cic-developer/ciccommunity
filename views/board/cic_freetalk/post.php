@@ -125,8 +125,8 @@
 							</a>
 						</li> -->
 						<?php
-						if (element('lists',element('bestpost', $view))) {
-							foreach (element('lists',element('bestpost', $view)) as $bestpost) {
+						if (element('list',element('bestpost', $view))) {
+							foreach (element('list',element('bestpost', $view)) as $bestpost) {
 						?>
 						<li>
 						<span class="num"><?php echo number_format(element('num', $bestpost)); ?></span>
@@ -141,7 +141,7 @@
 						<?php
 							}
 						}
-						if ( ! element('lists', element('bestpost', $view))) {
+						if ( ! element('list', element('bestpost', $view))) {
 						?>
 							<tr>
 								<td colspan="12" class="nopost">자료가 없습니다</td>

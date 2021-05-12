@@ -69,8 +69,8 @@
 									?>
 								
 								</td>
-								<td><button><a href=" delete_keyword/?id=<?php echo $stocks['idx']; ?>">Delete </a></button></td>
-								<td><button><a href=" update_keyword/?id=<?php echo $stocks['idx']; ?>">update </a></button></td> 
+								<td><button class="btn btn-danger"><a href=" delete_keyword/?id=<?php echo $stocks['idx']; ?>" class="link-secondary">삭제 </a></button></td>
+								<td><button class="btn btn-secondary"><a href=" update_keyword/?id=<?php echo $stocks['idx']; ?>" class="link-secondary">update </a></button></td> 
 							</tr>
 							<?php } ?>	
 						<?php
