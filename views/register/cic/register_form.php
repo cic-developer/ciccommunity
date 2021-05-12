@@ -158,6 +158,7 @@
 
 			var result = '';
 			var reason = '';
+			var state = '';
 			var message = '';
 			$.ajax({
 				url: cb_url + '/register/ajax_email_check',
@@ -192,6 +193,7 @@
 					async: false,
 					cache: false,
 					success: function(data) {
+						state = data.state;
 						message = data.message;
 					}
 				});

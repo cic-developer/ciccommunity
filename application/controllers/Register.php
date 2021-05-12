@@ -1677,101 +1677,45 @@ class Register extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
+		$rand_num = sprintf('%06d',rand(000000,999999));
+		$this->session->set_userdata('ath_num', $rand_num);
+
 		$getdata['webmaster_email'] = $this->cbconfig->item('webmaster_email');
 		$getdata['webmaster_name'] = $this->cbconfig->item('webmaster_name');
 		$getdata['site_title'] = $this->cbconfig->item('site_title');
 
-		/**
-		 * Validation 라이브러리를 가져옵니다
-		 */
-		$this->load->library('form_validation');
-
-		/**
-		 * 전송된 데이터의 유효성을 체크합니다
-		 */
-		$config = array(
-			array(
-				'field' => 'email',
-				'label' => '이메일',
-				'rules' => 'trim|required|valid_email',
-			),
-		);
-		$this->form_validation->set_rules($config);
-
-		/**
-		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
-		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
-		 */
-		if ($this->form_validation->run() === false) {
-
-			// 이벤트가 존재하면 실행합니다
-			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-
-		} else {
-			/**
-			 * 유효성 검사를 통과한 경우입니다.
-			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
-			 */
-
-			// 이벤트가 존재하면 실행합니다
-			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-
-			$this->load->library('email');
-			$this->email->from(element('webmaster_email', $getdata), element('webmaster_name', $getdata));
-			$this->email->to($this->input->post('email'));
-
-			$this->email->subject('cic 회원가입 인증 이메일입니다.');
-			$emailform['emailform'] = $getdata;
-			$message = $this->load->view('admin/' . ADMIN_SKIN . '/' . 'register' . '/email_form', $emailform, true);
-			$this->email->message($message);
-
-			if ($this->email->send() === false) {
-				$view['view']['alert_message'] = '이메일을 발송하지 못하였습니다. 메일 설정을 확인하여주세요';
-			} else {
-				$view['view']['alert_message'] = '이메일을 발송하였습니다';
-			}
-			// echo $this->email->print_debugger();
-
-		}
-	}
-
-	public function ajax_email_send1() {
-		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_register_ajax_email_send';
-		$this->load->event($eventname);
-		
-		$this->output->set_content_type('application/json');
 
 		// 이벤트가 존재하면 실행합니다
-		Events::trigger('before', $eventname);
+		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
-		$rand_num = sprintf('%06d',rand(000000,999999));
-		$this->session->set_userdata('ath_num', $rand_num);
-		
-		$member_info = $this->Member_model->get_one(1);
-
-		// 메일 발송
 		$this->load->library('email');
-		// $this->email->from($member_info['mem_email'], $member_info['mem_nickname']);
+		$this->email->from(element('webmaster_email', $getdata), element('webmaster_name', $getdata));
 		$this->email->to($this->input->post('email'));
 
-		$this->email->subject('cic 회원가입 이메일 인증');
+		$this->email->subject('cic 회원가입 인증 이메일입니다.');
 		$content_type = $this->cbconfig->item('use_formmail_dhtml') ? 1 : 0;
 		$this->email->message(display_html_content(
 			$rand_num,
 			$content_type,
 			800
 		));
-		$this->email->send();
 
-		$result = array(
-			'message' => '해당 이메일로 인증 번호를 발송하였습니다.',
-		);
-		exit(json_encode($result));
+		if ($this->email->send() === false) {
+			$result = array(
+				'state' => '0',
+				'message' => '이메일을 발송하지 못하였습니다. 메일 설정을 확인하여주세요',
+			);
+			exit(json_encode($result));
+		} else {
+			$result = array(
+				'state' => '1',
+				'message' => '해당 이메일로 인증 번호를 발송하였습니다',
+			);
+			exit(json_encode($result));
+		}
+		// echo $this->email->print_debugger();
 
-		// alert_close(element('mem_nickname', $member) . ' 님에게 메일을 발송하였습니다. ');
 	}
-
 
 	/**
 	 * 회원가입시 회원아이디를 체크하는 함수입니다

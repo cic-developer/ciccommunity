@@ -78,9 +78,9 @@ class Coin extends CB_Controller
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
-		$this->{$this->modelname}->allow_search_field = array('coin_idx', 'market', 'name_ko', 'name_en'); // 검색이 가능한 필드
-		$this->{$this->modelname}->search_field_equal = array('coin_idx', 'market', 'name_ko', 'name_en'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->{$this->modelname}->allow_order_field = array('coin_idx'); // 정렬이 가능한 필드
+		$this->{$this->modelname}->allow_search_field = array('market', 'name_ko', 'name_en'); // 검색이 가능한 필드
+		$this->{$this->modelname}->search_field_equal = array(); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->{$this->modelname}->allow_order_field = array('market'); // 정렬이 가능한 필드
 
 		$where = array();
  	
@@ -90,7 +90,6 @@ class Coin extends CB_Controller
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
 				$result['list'][$key]['display_name'] = display_username(
-					element('coin_idx', $val),
 					element('market', $val),
 					element('name_ko', $val),
 					element('name_en', $val)
@@ -125,6 +124,7 @@ class Coin extends CB_Controller
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
 		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listdelete/?' . $param->output());
+		$view['view']['list_trash_url'] = admin_url($this->pagedir . '/listtrash/?' . $param->output());
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
@@ -270,6 +270,7 @@ class Coin extends CB_Controller
 			$view['keylist'] = $keylist;
 			//DELETE
             $key_id = $this->input->get('id');
+			
 			if($key_id){
 				$this->Coin_model_admin->delete_keyword($key_id, $keylist);
 			}
