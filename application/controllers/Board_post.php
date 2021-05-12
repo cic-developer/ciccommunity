@@ -107,9 +107,12 @@ class Board_post extends CB_Controller
 				}
 			}
 			
+			$where = array(
+				'post_best_state >' => 0
+			);
+
 			$bestpost = $this->Post_model
 				->get_bestpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-
 			if (element('list', $bestpost)) {
 			foreach (element('list', $bestpost) as $key => $val) {
 				$bestpost['list'][$key]['post_display_name'] = display_username(
@@ -138,7 +141,6 @@ class Board_post extends CB_Controller
 				}
 			}
 		}
-		// $view['view']['data'] = $popularpost;
 		
 		$view['view']['popularpost'] = $popularpost;
 		$view['view']['bestpost'] = $bestpost;
@@ -277,6 +279,8 @@ class Board_post extends CB_Controller
 				'group_id' => element('bgr_id', $board)
 			)
 		);
+		
+		$view['view']['list'] = $list = $this->_get_list($brd_key);
 		$view['view']['board_key'] = element('brd_key', $board);
 
 		if (element('use_personal', $board) && $this->member->is_member() === false) {

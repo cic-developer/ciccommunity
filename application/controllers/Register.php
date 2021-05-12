@@ -18,7 +18,7 @@ class Register extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Member_nickname', 'Member_meta', 'Member_auth_email', 'Member_userid');
+	protected $models = array('Member_nickname', 'Member_meta', 'Member_auth_email', 'Member_userid', 'Member');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -279,7 +279,11 @@ class Register extends CB_Controller
 
 
 
-
+			print_r("@@@@@@@@@@@@");
+			$member_info = $this->Member_model->get_one(1);
+			print_r($member_info['mem_email']);
+			print_r($member_info['mem_nickname']);
+			print_r("@@@@@@@@@@@@");
 
 
 
@@ -1660,6 +1664,41 @@ class Register extends CB_Controller
 			'reason' => '사용 가능한 닉네임입니다',
 		);
 		exit(json_encode($result));
+	}
+
+	public function ajax_email_send() {
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_register_ajax_email_send';
+		$this->load->event($eventname);
+
+		$result = array();
+		$this->output->set_content_type('application/json');
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+		print_r("@@@@@@@@@@@@");
+		$member_info = $this->Member_model->get_one(1);
+		print_r($member_info['mem_email']);
+		print_r($member_info['mem_nickname']);
+		print_r("@@@@@@@@@@@@");
+
+		$member_info = $this->Member_model->get_one(1);
+
+		// 메일 발송
+		$this->load->library('email');
+		$this->email->from($member_info['mem_email'], $member_info['mem_nickname']);
+		$this->email->to($this->input->post('email'));
+
+		$this->email->subject($this->input->post('title'));
+		$content_type = $this->cbconfig->item('use_formmail_dhtml') ? 1 : 0;
+		$this->email->message(display_html_content(
+			$this->input->post('content'),
+			$content_type,
+			800
+		));
+		$this->email->send();
+
+		alert_close(element('mem_nickname', $member) . ' 님에게 메일을 발송하였습니다. ');
 	}
 
 

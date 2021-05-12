@@ -15,7 +15,7 @@
                     <ul>
                         <!-- <li><a href="<?php echo base_url('post/5')?>">1. [스압] 월급루팡이 만들어지는 과정 (5) <span>18</span></a>
                         </li> -->
-                                                <?php
+                        <?php
 						if (element('list',element('bestpost', $view))) {
 							foreach (element('list',element('bestpost', $view)) as $bestpost) {
 						?>

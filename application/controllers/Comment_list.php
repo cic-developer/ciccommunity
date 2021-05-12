@@ -287,6 +287,11 @@ class Comment_list extends CB_Controller
 						($use_sideview_icon ? element('mem_icon', $val) : ''),
 						($use_sideview ? 'Y' : 'N')
 					);
+					$level_where = array(
+						'mlc_level' => element('mem_level', $val),
+						'mlc_enable' => 1,
+					);
+					$view['view']['post']['level'] = $this->CIC_member_level_config_model->get_one('', '', $level_where);
 				} else {
 					$result['list'][$key]['display_name'] = '익명사용자';
 				}
