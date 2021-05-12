@@ -393,6 +393,9 @@ class Board_post extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['step1'] = Events::trigger('step1', $eventname);
 
+		// $view = array();
+		// $view['view'] = array();
+
 		$this->_stat_count_board(element('brd_id', $board)); // stat_count_board ++
 
 		// 세션 생성
@@ -403,6 +406,84 @@ class Board_post extends CB_Controller
 				'1'
 			);
 		}
+		// $checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+		// $where = array(
+		// 	'post_exept_state' => 0,
+		// 	'post_datetime >=' => $checktime,
+		// 	'post_del <>' => 2,
+		// );
+		// $limit = 10;
+
+		// $popularpost = $this->Post_model
+		// 	->get_popularpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		// 	$list_num = 1;
+		// 	if (element('list', $popularpost)) {
+		// 		foreach (element('list', $popularpost) as $key => $val) {
+		// 			$popularpost['list'][$key]['post_display_name'] = display_username(
+		// 				element('post_userid', $val),
+		// 				element('post_nickname', $val)
+		// 			);
+		// 			$popularpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+		// 			$popularpost['list'][$key]['num'] = $list_num++;
+		// 			if ($board) {
+		// 				$popularpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+		// 				$popularpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+		// 			}
+		// 			$popularpost['list'][$key]['category'] = '';
+		// 			if (element('post_category', $val)) {
+		// 				$popularpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+		// 			}
+		// 			if (element('post_image', $val)) {
+		// 				$imagewhere = array(
+		// 					'post_id' => element('post_id', $val),
+		// 					'pfi_is_image' => 1,
+		// 				);
+		// 				$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+		// 				$popularpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+		// 			} else {
+		// 				$popularpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+		// 			}
+		// 		}
+		// 	}
+			
+		// 	$where = array(
+		// 		'post_best_state >' => 0
+		// 	);
+
+		// 	$bestpost = $this->Post_model
+		// 		->get_bestpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		// 	$list_num = 1;
+		// 	if (element('list', $bestpost)) {
+		// 	foreach (element('list', $bestpost) as $key => $val) {
+		// 		$bestpost['list'][$key]['post_display_name'] = display_username(
+		// 			element('post_userid', $val),
+		// 			element('post_nickname', $val)
+		// 		);
+		// 		$bestpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+		// 		$bestpost['list'][$key]['num'] = $list_num++;
+		// 		if ($board) {
+		// 			$bestpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+		// 			$bestpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+		// 		}
+		// 		$bestpost['list'][$key]['category'] = '';
+		// 		if (element('post_category', $val)) {
+		// 			$bestpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+		// 		}
+		// 		if (element('post_image', $val)) {
+		// 			$imagewhere = array(
+		// 				'post_id' => element('post_id', $val),
+		// 				'pfi_is_image' => 1,
+		// 			);
+		// 			$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+		// 			$bestpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+		// 		} else {
+		// 			$bestpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+		// 		}
+		// 	}
+		// }
+		// $view['view']['popularpost'] = $popularpost;
+		// $view['view']['bestpost'] = $bestpost;
+		
 
 		$use_sideview = ($this->cbconfig->get_device_view_type() === 'mobile')
 			? element('use_mobile_sideview', $board)
@@ -770,7 +851,6 @@ class Board_post extends CB_Controller
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['step2'] = Events::trigger('step2', $eventname);
-
 
 		$view['view']['next_post'] = '';
 		$view['view']['prev_post'] = '';

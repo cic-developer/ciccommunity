@@ -69,7 +69,7 @@
 									?>
 								
 								</td>
-								<td><input type="submit" name=delete class="btn btn-outline btn-default btn-sm" value="삭체"></td>
+								<td><input type="submit" name="delete" class="btn btn-outline btn-default btn-sm" value=<?php echo $stocks['idx'] ?>></td>
 								<td><input type="submit" name="update" value="update" class="btn btn-outline btn-default btn-sm" ></td> 
 							</tr>
 							<?php } ?>	
@@ -96,5 +96,22 @@ $(function () {
 		handle:'.fa-arrows'
 	});
 })
+
+//Buton to rafresh pasge
+$(".btn-sm").on('click', function(e){
+    e.preventDefault(); // this will prevent the defualt behavior of the button
+
+    // find which button was clicked
+    butId = $(this).attr('id');
+
+    $.ajax({
+        method: "POST",
+        url: "/controllerDummy/run/",
+        data: { button: butId }
+    })
+    .done(function( msg ) {
+        // do something
+    });        
+});
 //]]>
 </script>

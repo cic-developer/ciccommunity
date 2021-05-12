@@ -73,6 +73,8 @@ $config['email_smtp_pass'] = 'rs00mk@@';
 $config['email_smtp_port'] = '465';
 $config['email_smtp_crypto'] = 'ssl'; // SMTP Encryption. Can be null, tls or ssl.
 
+// 465 ssl
+// 587 tls
 
 /**
  * CiBoard 주 : 캐시 기능 사용시, 우선순위를 결정합니다
