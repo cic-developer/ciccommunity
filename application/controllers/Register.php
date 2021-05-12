@@ -1683,7 +1683,7 @@ class Register extends CB_Controller
 
 		// 메일 발송
 		$this->load->library('email');
-		$this->email->from($member_info['mem_email'], $member_info['mem_nickname']);
+		// $this->email->from($member_info['mem_email'], $member_info['mem_nickname']);
 		$this->email->to($this->input->post('email'));
 
 		$this->email->subject('cic 회원가입 이메일 인증');

@@ -24,10 +24,10 @@
 					<div class="vp-point">
 						<ul>
 							<li>
-								<p class="up" data-contenttype="comment" data-cmtidx="<?php echo element('cmt_id', $result); ?>"><?php echo element('cmt_like_point', $result); ?></p>
+								<p class="up" data-contenttype="comment" data-cmtidx="<?php echo element('cmt_id', $result); ?>" style="cursor:pointer;"><?php echo element('cmt_like_point', $result); ?></p>
 							</li>
 							<li>
-								<p class="down" data-contenttype="comment" data-cmtidx="<?php echo element('cmt_id', $result); ?>"><?php echo element('cmt_dislike_point', $result); ?></p>
+								<p class="down" data-contenttype="comment" data-cmtidx="<?php echo element('cmt_id', $result); ?>" style="cursor:pointer;"><?php echo element('cmt_dislike_point', $result); ?></p>
 							</li>
 						</ul>
 

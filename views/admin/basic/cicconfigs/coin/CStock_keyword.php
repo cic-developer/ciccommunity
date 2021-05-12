@@ -69,8 +69,8 @@
 									?>
 								
 								</td>
-								<td><buton><i class="fas fa-trash-alt"></i></button></td>
-								<td><input type="checkbox" name="u_id[]" value="<?php echo $stocks['market']; ?>"></td> 
+								<td><input type="submit" name=delete class="btn btn-outline btn-default btn-sm" value="삭체"></td>
+								<td><input type="submit" name="update" value="Update" class="btn btn-outline btn-default btn-sm" ></td> 
 							</tr>
 							<?php } ?>	
 						<?php

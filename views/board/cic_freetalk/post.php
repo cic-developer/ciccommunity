@@ -124,12 +124,11 @@
 								<span class="vp">102,522</span>
 							</a>
 						</li>
-						<li>
-						<a href="#n">
 						<?php
 						if (element('list',element('bestpost', $view))) {
 							foreach (element('list',element('bestpost', $view)) as $bestpost) {
 						?>
+						<li>
 						<span class="num"><?php echo number_format(element('num', $bestpost)); ?></span>
 						<div class="my-info">
 							<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
@@ -137,6 +136,8 @@
 							<p class="rtxt"><?php echo html_escape(element('post_userid', $bestpost)); ?></p>
 						</div>
 						<span class="txt"><a href="<?php echo goto_url(element('posturl', $bestpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $bestpost)); ?></a></span>
+						<sapn class="vp"><?php echo number_format(element('post_like_point', $bestpost)); ?></sapn>
+						</li>
 						<?php
 							}
 						}
@@ -148,8 +149,6 @@
 						<?php
 						}
 						?>
-						</a>
-						</li>
 					</ul>
 				</div>
 				<div class="fr">
@@ -293,15 +292,15 @@
 	var reg_num = /^[0-9]*$/;
 	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
 
-	$(document).on('click', '.up', function(){
+	$('.up').on('click', function(){
 		const content_type = $(this).attr('data-contenttype');
-		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
+		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmt_idx');
 		update_vp(content_idx, content_type, 'up');
 	});
 	
-	$(document).on('click', '.down', function(){
+	$('.down').on('click', function(){
 		const content_type = $(this).attr('data-contenttype');
-		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
+		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmt_idx');
 		update_vp(content_idx, content_type, 'down');
 	});
 
