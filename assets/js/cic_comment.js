@@ -208,14 +208,14 @@ if (typeof(CIC_COMMENT_JS) === 'undefined') {
             $('#' + el_id).html(save_html);
             // 댓글 수정
             if (work === 'cu') {
-                $('#cmt_content').val($('#save_comment_' + cmt_id).val());
-                if (typeof char_count !== 'undefined') {
-                    cic_check_byte('#cmt_content', '#char_count');
-                }
+                $('#' + el_id + ' #cmt_content').val($('#save_comment_' + cmt_id).val());
+                // if (typeof char_count !== 'undefined') {
+                //     cic_check_byte('#cmt_content', '#char_count');
+                // }
                 if ($('#secret_comment_' + cmt_id).val() === '1') {
-                    $('#cmt_secret').prop('checked', true);
+                    $('#' + el_id + ' #cmt_secret').prop('checked', true);
                 } else {
-                    $('#cmt_secret').prop('checked', false);
+                    $('#' + el_id + ' #cmt_secret').prop('checked', false);
                 }
             }
 

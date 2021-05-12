@@ -23,10 +23,14 @@
 		$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
 		echo form_open(current_full_url(), $attributes);
 		?>
-			<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
+			
 			<div class="table-responsive">
+			<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
 				<form action="post" name='selected_market'>
 					<table class="table table-hover table-striped table-bordered">
+						<div class="btn-group pull-right" role="group" aria-label="...">
+							<input type="submit" name = "refresh" class="btn btn-outline btn-default btn-sm" value="Rafresh">
+						</div>	
 						<thead>
 							<tr>
 								<th>번호</th>

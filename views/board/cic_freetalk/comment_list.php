@@ -42,6 +42,17 @@
 						<li>
 							<p class="date"><?php echo cdate('Y. m. d H:i' ,strtotime(element('cmt_datetime', $result))); ?></p>
 						</li>
+						
+						<?php if (element('can_update', $result)) { ?>
+						<li>
+							<a href="javascript:;" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'cu'); return false;">수정</a>
+						</li>
+						<?php } ?>
+						<?php if (element('can_delete', $result)) { ?>
+						<li>
+							<a href="javascript:;" onClick="delete_comment('<?php echo element('cmt_id', $result); ?>', '<?php echo element('post_id', $result); ?>', '<?php echo element('page', $view); ?>');">삭제</a>
+						</li>
+						<?php } ?>
 						<li><a href="javascript:;" class="cmmt-btn" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'c'); return false;"><span>답글</span></a></li>
 						<li><a href="#n" class="singo-btn"><span>신고</span></a></li>
 					</ul>
@@ -50,6 +61,8 @@
 				</div>
 				<div class="comment" id="reply_<?php echo element('cmt_id', $result); ?>">
 				</div>
+				<input type="hidden" value="<?php echo element('cmt_secret', $result); ?>" id="secret_comment_<?php echo element('cmt_id', $result); ?>" />
+				<textarea id="save_comment_<?php echo element('cmt_id', $result); ?>" style="display:none"><?php echo html_escape(element('cmt_content', $result)); ?></textarea>
 			</div>
 	<?php
 		}

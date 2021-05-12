@@ -11,7 +11,6 @@
 			?>
 
 
-				
 			<div class="entry">
 				<ul>
 
@@ -158,18 +157,19 @@
 			// alert(email);
 
 			$.ajax({
-            url: 'register/ajax_email_check',
-            type: 'post',
-            data: {
-                mem_email: email,
-            },
-            dataType: 'json',
-            async: false,
-            cache: false,
-            success: function(data) {
-                // content = data.content;
-            }
-        });
+				url: cb_url + '/register/ajax_email_check',
+				type: 'POST',
+				data: {
+					mem_email: email
+				},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				success: function(data) {
+					// title = data.title;
+					// content = data.content;
+				}
+			});
 		})
 	})
 </script>
