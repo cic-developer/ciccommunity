@@ -7,9 +7,13 @@
 			$_cmt_depth = element('cmt_depth', $result)/30;
 			$_classname = $_cmt_depth > 0 ? 'reply cdepth'.$_cmt_depth : 'vcon';
 	?>
-
+		<?php
+		if($_cmt_depth == 0){
+		?>
 		<li class="item" id="comment_<?php echo element('cmt_id', $result); ?>">
-			<?= $_cmt_depth.$_classname.($_cmt_depth > 0) ?>
+		<?php
+		}
+		?>
 			<div class="<?php echo $_classname; ?>">
 				<div class="info">
 					<a href="#n" class="nickname">
@@ -47,85 +51,11 @@
 				<div class="comment" id="reply_<?php echo element('cmt_id', $result); ?>">
 				</div>
 			</div>
-			<!-- <div class="reply cdepth1">
-				<div class="info">
-					<a href="#n" class="nickname">
-						<p class="ico"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-								alt=""></p>
-						<p class="txt">힘을내포포</p>
-					</a>
-					<div class="vp-point">
-						<ul>
-							<li>
-								<p class="up" data-contenttype="comment" data-cmtidx="1">12</p>
-							</li>
-							<li>
-								<p class="down" data-contenttype="comment" data-cmtidx="1">35</p>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="vtxt">
-					<p>머야 준다는건가용? 사랑합니당 </p>
-				</div>
-				<div class="ctrls">
-					<ul>
-						<li>
-							<p class="date">21. 03. 04 19:08</p>
-						</li>
-						<li><a href="#n" class="cmmt-btn"><span>답글</span></a></li>
-						<li><a href="#n" class="singo-btn"><span>신고</span></a></li>
-					</ul>
-				</div>
-				<div class="comment">
-					<textarea
-						placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
-					<div class="btns">
-						<a href="#n" class="write-btn"><span>답글등록</span></a>
-					</div>
-				</div>
-			</div>
-			<div class="reply cdepth2">
-				<div class="info">
-					<a href="#n" class="nickname">
-						<p class="ico"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-								alt=""></p>
-						<p class="txt">힘을내포포</p>
-					</a>
-					<div class="vp-point">
-						<ul>
-							<li>
-								<p class="up" data-contenttype="comment" data-cmtidx="1">12</p>
-							</li>
-							<li>
-								<p class="down" data-contenttype="comment" data-cmtidx="1">35</p>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="vtxt">
-					<p>회원님께서는 이미 답글 컨텐츠의 긍정적인 영향을 미친 회원으로 선정되어 최초 1회에 한해 보상을 받으신것으로 확인됩니다.^^;;; </p>
-				</div>
-				<div class="ctrls">
-					<ul>
-						<li>
-							<p class="date">21. 03. 04 19:08</p>
-						</li>
-						<li><a href="#n" class="cmmt-btn"><span>답글</span></a></li>
-						<li><a href="#n" class="singo-btn"><span>신고</span></a></li>
-					</ul>
-				</div>
-				<div class="comment">
-					<textarea
-						placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
-					<div class="btns">
-						<a href="#n" class="write-btn"><span>답글등록</span></a>
-					</div>
-				</div>
-			</div> -->
-		</li>
 	<?php
 		}
+	?>
+	</li>
+	<?php
 	}
 	?>
 	</ul>

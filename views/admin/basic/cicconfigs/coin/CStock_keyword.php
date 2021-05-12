@@ -29,13 +29,12 @@
 				<form class="form-inline">
 					<?php 
 					$myId = $_GET['id']; 
-					$myKeyword = $keyword['myId'];
-					echo $myKeyword;
 					?>
 					<div class="form-group col-md-6">
 						<label><?php echo $myId ?></label>
 					</div>
 					<div class="input-group col-md-6">
+						<input type="hidden" name="coin_market" value = "<?php echo $myId; ?>" >
 						<input type="text" class="form-control rounded  " name = "keyword" placeholder = "Keyword">
 						<span class=input-group-btn>
 							<button type="submit" class="btn btn-outline-primary" >추가</button>

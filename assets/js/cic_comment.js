@@ -219,8 +219,8 @@ if (typeof(CIC_COMMENT_JS) === 'undefined') {
                 }
             }
 
-            $('#cmt_id').val(cmt_id);
-            $('#mode').val(work);
+            $('#' + el_id + ' #cmt_id').val(cmt_id);
+            $('#' + el_id + ' #mode').val(work);
 
             if (save_before) {
                 $('#captcha').trigger('click');

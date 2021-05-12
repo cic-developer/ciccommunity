@@ -144,11 +144,7 @@ class Coin extends CB_Controller
 					'name_en' => $getList[$i]['korean_name'],
 				);
 			}
-
-			
-			// echo '<br><pre>';
-			// 	print_r($data);
-			// echo '</pre>';
+			   //For rafreshing admin page
 				if(isset($data) && !empty($data)){
 					$stock = $this->Coin_model->insertStockData($data);
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
@@ -167,27 +163,6 @@ class Coin extends CB_Controller
 			}
 		}
 
-/*
-	$data =array(
-		array(
-			'coin_idx'=>"marker",
-			'keyword'=> "korean",
-		),
-		array(
-			'coin_idx'=>"marker",
-			'keyword'=> "english"
-		),
-		array(
-			'coin_idx'=>"marker",
-			'keyword'=> "market"
-		),
-		
-
-	);
-	for($i = 0; $i < count($data); $i++) {
-	    $this->Coin_model -> insert_admin_list($data[$i]);
-	}
-*/
 
 
 		//if()
@@ -259,7 +234,7 @@ class Coin extends CB_Controller
 
 		$config = array(
 			array(
-				'field' => 'coin_idx',
+				'field' => 'coin_market',
 				'rules'=>'required'
 			),
 			array(
@@ -277,7 +252,7 @@ class Coin extends CB_Controller
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 		}else{
 			$data = array(
-				'coin_idx' => $this -> input -> post('coin_idx'),
+				'coin_market' => $this -> input -> post('coin_market'),
 				'keyword' => $this -> input -> post('keyword'),
 
 			);
@@ -323,15 +298,6 @@ class Coin extends CB_Controller
 						}
 					}	
 				
-				}
-	
-			
-			// echo '<br><pre>';
-			// 	print_r($data);
-			// echo '</pre>';
-				if(isset($data) && !empty($data)){
-					$stock = $this->Coin_model->insertStockData($data);
-					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 				}
 				
 		}
