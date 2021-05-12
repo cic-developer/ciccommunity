@@ -27,9 +27,14 @@
 
 			<div class="list-group">
 				<form class="form-inline">
-					<?php $myId = $_GET['id']; ?>
+					<?php 
+					$myId = $_GET['market']; 
+					$myKeyword = $_GET['keyword'];
+					echo $myKeyword;
+					?>
 					<div class="form-group">
 						<label>Market id</label>
+						
 						<input type="text"  class="form-control" name = "coin_idx" value='<?php echo $myId ?>'>
 					</div>
 					<div class="form-group">
@@ -68,8 +73,8 @@
 							<td><?php echo $sno; ?></td>
 							<td><?php echo $stocks['market']. " - " .$stocks['name_ko']; ?></td>
 							<td><?php echo $stocks['keyword']; ?></td>
-							<td><input type="checkbox" name="d_id[]" value="<?php echo $stocks['idx']; ?>"></td>
-							<td><input type="checkbox" name="u_id[]" value="<?php echo $stocks['idx']; ?>"></td>
+							<td><input type="checkbox" name="d_id[]" value="<?php echo $stocks['market']; ?>"></td>
+							<td><input type="checkbox" name="u_id[]" value="<?php echo $stocks['market']; ?>"></td>
 						</tr>
 						<?php
 							$sno++;

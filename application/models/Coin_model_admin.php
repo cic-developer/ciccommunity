@@ -19,7 +19,7 @@ class Coin_model_admin extends CB_Model
 	 * 테이블명
 	 */
 	public $_table = 'cic_coin_admins';
-    //public $primary_key = 'market';
+    public $primary_key = 'coin_market';
 
     function __construct()
     {
@@ -43,7 +43,7 @@ class Coin_model_admin extends CB_Model
         $this->db->select('cic_coin_admins.*');
          //$this->db->('market');
         $this->db->from('cic_coin_admins');
-        $this->db->join('cic_coin_stock', 'cic_coin_stock.coin_idx = cic_coin_admins.coin_idx');
+        $this->db->join('cic_coin_stock', 'cic_coin_stock.market = cic_coin_admins.coin_market');
 
         $query = $this->db->get();
         $result = $query->result_array();
@@ -56,7 +56,7 @@ class Coin_model_admin extends CB_Model
         $this->db->select('cic_coin_admins.*');
          //$this->db->('market');
         $this->db->from('cic_coin_admins');
-        $this->db->join('cic_coin_stock', 'cic_coin_stock.market = cic_coin_admins.coin_idx');
+        $this->db->join('cic_coin_stock', 'cic_coin_stock.market = cic_coin_admins.coin_market');
         
         if(is_array($id)){
             $this->db->where_in('id', '$ids');
@@ -71,7 +71,7 @@ class Coin_model_admin extends CB_Model
     function research_coin($keyword){
         $this->db->select('cic_coin_admins.*');
         $this->db->from('cic_coin_admins');
-        $this->db->join('cic_coin_stock', 'cic_coin_stock.coin_idx = cic_coin_admins.coin_idx');
+        $this->db->join('cic_coin_stock', 'cic_coin_stock.market = cic_coin_admins.coin_market');
         $this->db->get_where('cic_coin_admins', array('keyword' => $keyword ));
     }
 

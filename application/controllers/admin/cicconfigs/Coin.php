@@ -300,22 +300,17 @@ class Coin extends CB_Controller
 				$market = $getList[$i]['market'];
 				if(strcmp(substr($market, 0, 1), "K")==0){
 					$coin_market = substr($market, 4);
-					// $data = array(
-					// 	'market' => $coin_market,
-					// 	'name_ko' => $getList[$i]['english_name'],
-					// 	'name_en' => $getList[$i]['korean_name'],
-					// );
 					$data =array(
 						array(
-							'coin_idx'=> $coin_market,
+							'coin_market'=> $coin_market,
 							'keyword'=>$getList[$i]['korean_name']
 						),
 						array(
-							'coin_idx'=> $coin_market,
+							'coin_market'=> $coin_market,
 							'keyword'=>$getList[$i]['english_name']
 						),
 						array(
-							'coin_idx'=> $coin_market,
+							'coin_market'=> $coin_market,
 							'keyword'=> $coin_market
 						),
 						

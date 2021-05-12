@@ -19,7 +19,7 @@ class Coin_model extends CB_Model
 	 * 테이블명
 	 */
 	public $_table = 'cic_coin_stock';
-    public $primary_key = 'coin_idx';
+    public $primary_key = 'market';
 
     function __construct()
     {
