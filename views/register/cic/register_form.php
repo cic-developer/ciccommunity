@@ -213,40 +213,39 @@
 		})
 	})
 
-	$(document).ready(function(){
-		$("#con-mail-btn").on('click',function(){
-			var ath_num = $("#ath_num").val();
+	$(document).on('click', "#con-mail-btn", function(){
+		var ath_num = $("#ath_num").val();
+		alert(ath_num);
 
 
-			var result = '';
-			var reason = '';
-			$.ajax({
-				url: cb_url + '/register/ajax_email_send',
-				type: 'POST',
-				data: {
-					ath_num: ath_num,
-					csrf_test_name : cb_csrf_hash
-				},
-				dataType: 'json',
-				async: false,
-				cache: false,
-				success: function(data) {
-					result = data.result;
-					reason = data.reason;
-				}
-			});
-
-			alert(result);
-			if(result == 0){
-				alert(reason);
-			}
-
-			if(result == 1) {
-				$('.con-mail').remove();
-				$('#ath_email').append('<i class="fas fa-check"></i>');
-				$('#ath_email').remove();
+		var result = '';
+		var reason = '';
+		$.ajax({
+			url: cb_url + '/register/ajax_email_ath',
+			type: 'POST',
+			data: {
+				ath_num: ath_num,
+				csrf_test_name : cb_csrf_hash
+			},
+			dataType: 'json',
+			async: false,
+			cache: false,
+			success: function(data) {
+				result = data.result;
+				reason = data.reason;
 			}
 		});
+
+		alert(result);
+		if(result == 0){
+			alert(reason);
+		}
+
+		if(result == 1) {
+			$('.con-mail').remove();
+			$('#ath_email').append('<i class="fas fa-check"></i>');
+			$('#ath_email').remove();
+		}
 	});
 
 </script>
