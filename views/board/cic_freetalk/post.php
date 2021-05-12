@@ -130,11 +130,13 @@
 						if (element('list',element('bestpost', $view))) {
 							foreach (element('list',element('bestpost', $view)) as $bestpost) {
 						?>
-						<span><?php echo number_format(element('num', $bestpost)); ?></span>
-						<li>
-							<?php if (element('category', $bestpost)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $bestpost))); ?></span><?php } ?>
-							<a href="<?php echo goto_url(element('posturl', $bestpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $bestpost)); ?> <span class="text-right"><?php echo number_format(element('post_like_point', $bestpost)); ?></span></a>
-						</li>
+						<span class="num"><?php echo number_format(element('num', $bestpost)); ?></span>
+						<div class="my-info">
+							<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
+									alt=""></p>
+							<p class="rtxt"><?php echo html_escape(element('post_userid', $bestpost)); ?></p>
+						</div>
+						<span class="txt"><a href="<?php echo goto_url(element('posturl', $bestpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $bestpost)); ?></a></span>
 						<?php
 							}
 						}
@@ -291,15 +293,15 @@
 	var reg_num = /^[0-9]*$/;
 	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
 
-	$('.up').on('click', function(){
+	$(document).on('click', '.up', function(){
 		const content_type = $(this).attr('data-contenttype');
-		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmt_idx');
+		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
 		update_vp(content_idx, content_type, 'up');
 	});
 	
-	$('.down').on('click', function(){
+	$(document).on('click', '.down', function(){
 		const content_type = $(this).attr('data-contenttype');
-		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmt_idx');
+		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
 		update_vp(content_idx, content_type, 'down');
 	});
 

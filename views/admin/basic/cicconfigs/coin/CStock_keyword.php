@@ -69,7 +69,7 @@
 									?>
 								
 								</td>
-								<td><input type="checkbox" name="d_id[]" value="<?php echo $stocks['market']; ?>"></td>
+								<td><buton><i class="fas fa-trash-alt"></i></button></td>
 								<td><input type="checkbox" name="u_id[]" value="<?php echo $stocks['market']; ?>"></td> 
 							</tr>
 							<?php } ?>	
