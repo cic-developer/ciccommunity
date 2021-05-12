@@ -182,23 +182,25 @@ class Coin extends CB_Controller
        	//GET MARKET PRICE
 	    $getStock = $this -> Coin_model_admin->get_keyword();
     
+		if($refresh){
+			for($i = 0; $i < count($getStock); $i++){
+				
+				$marketdata[] = $getStock[$i]['market'];
 
-		for($i = 0; $i < count($getStock); $i++){
+				if($marketdata){
+					$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
+				}else{
+					$realtime_coin_info = 0;
+				}
+
 			
-			$marketdata[] = $getStock[$i]['market'];
-
-            if($marketdata){
-				$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
-			}else{
-				$realtime_coin_info = 0;
+				echo "<br><pre>";
+				print_r($realtime_coin_info);
+				echo "</pre>";
+				$refresh = $this -> input -> post('refresh');
+				
+					$view['realtime_coin_info'] = $realtime_coin_info;
 			}
-
-		
-			// echo "<br><pre>";
-			// print_r($realtime_coin_info);
-			// echo "</pre>";
-			
-			$view['realtime_coin_info'] = $realtime_coin_info;
 
 
 		}
