@@ -130,29 +130,28 @@ class Coin extends CB_Controller
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 		
 
-    //Load data to second db
+    	//Load data to second db
 
 		$refresh = $this -> input -> post('refresh');
 		
-		$getList = $this -> Coin_model->retrieve_api();
-		for($i=0; $i<count($getList); $i++){
-			
-			$market = $getList[$i]['market'];
-			if(strcmp(substr($market, 0, 1), "K")==0){
-				$coin_market = substr($market, 4);
-				$data = array(
-					'market' => $coin_market,
-					'name_ko' => $getList[$i]['english_name'],
-					'name_en' => $getList[$i]['korean_name'],
-				);
-				if($refresh){
-			   //For rafreshing admin page
+		if($refresh){
+			$getList = $this -> Coin_model->retrieve_api();
+			for($i=0; $i<count($getList); $i++){
+				$market = $getList[$i]['market'];
+				if(strcmp(substr($market, 0, 1), "K")==0){
+					$coin_market = substr($market, 4);
+					$data = array(
+						'market' => $coin_market,
+						'name_ko' => $getList[$i]['english_name'],
+						'name_en' => $getList[$i]['korean_name'],
+					);
+					//For rafreshing admin page
 					if(isset($data) && !empty($data)){
 						$stock = $this->Coin_model->insertStockData($data);
 						$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 					}
 
-					$data =array(
+					$data = array(
 						array(
 							'coin_market'=> $coin_market,
 							'keyword'=>$getList[$i]['korean_name']
@@ -165,45 +164,41 @@ class Coin extends CB_Controller
 							'coin_market'=> $coin_market,
 							'keyword'=> $coin_market
 						),
-							
-					
 					);
 					if(isset($data) && !empty($data)){	
 						for($j = 0; $j < count($data); $j++) {
-
 							$this->Coin_model -> insert_admin_list($data[$j]);
-							}
-						}	
+						}
+					}	
 				}
 			}
-				
 		}
 
        	//GET MARKET PRICE
-	    $getStock = $this -> Coin_model_admin->get_keyword();
+	    // $getStock = $this -> Coin_model_admin->get_keyword();
     
-		if($refresh){
-			for($i = 0; $i < count($getStock); $i++){
+		// if($refresh){
+		// 	for($i = 0; $i < count($getStock); $i++){
 				
-				$marketdata[] = $getStock[$i]['market'];
+		// 		$marketdata[] = $getStock[$i]['market'];
 
-				if($marketdata){
-					$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
-				}else{
-					$realtime_coin_info = 0;
-				}
+		// 		if($marketdata){
+		// 			$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
+		// 		}else{
+		// 			$realtime_coin_info = 0;
+		// 		}
 
 			
-				echo "<br><pre>";
-				print_r($realtime_coin_info);
-				echo "</pre>";
-				$refresh = $this -> input -> post('refresh');
+		// 		echo "<br><pre>";
+		// 		print_r($realtime_coin_info);
+		// 		echo "</pre>";
+		// 		$refresh = $this -> input -> post('refresh');
 				
-					$view['realtime_coin_info'] = $realtime_coin_info;
-			}
+		// 			$view['realtime_coin_info'] = $realtime_coin_info;
+		// 	}
 
 
-		}
+		// }
 
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
 			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
