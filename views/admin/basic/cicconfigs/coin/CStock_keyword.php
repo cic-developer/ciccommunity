@@ -60,8 +60,8 @@
 					<table class="table table-hover table-striped table-bordered">
 					<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 						<tr>
-							<th>한국어 명</th>
-							<th>Delete</th>
+							<th>키워드</th>
+							<th>삭제</th>
 							<th>Update</th>
 						</tr>
 						<?php 

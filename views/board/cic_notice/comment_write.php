@@ -112,7 +112,7 @@ $(function() {
 });
 <?php } ?>
 </script>
-<script type="text/javascript" src="<?php echo base_url('assets/js/comment.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/cic_comment.js'); ?>"></script>
 
 <script type="text/javascript">
 $(document).ready(function($) {

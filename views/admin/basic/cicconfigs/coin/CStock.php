@@ -27,18 +27,14 @@
 			<div class="table-responsive">
 				<form action="post" name='selected_market'>
 					<table class="table table-hover table-striped table-bordered">
-						<thead>
 							<tr>
 								<th>번호</th>
 								<th>마켓명</th>
 								<th>한국어명</th>
 								<th>영문명</th>
-								<th>add Keyword<th>
+								<th>키워드 추가<th>
 							</tr>
-						</thead>
-						<tbody>
-						<?php 
-					?>
+						
 						<?php
 						if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) {
@@ -53,13 +49,7 @@
 						<?php
 							}
 						}
-						if ( ! element('list', element('data', $view))) {
-							//echo "hello";
 						?>
-						<?php
-						}
-						?>
-						</tbody>
 					</table>
 				</form>
 			</div>

@@ -369,29 +369,30 @@ class Register extends CB_Controller
 		$password_description .= '합니다';
 
 		$configbasic['mem_email'] = array(
-			'field' => 'email',
+			'field' => 'mem_email',
 			'label' => '이메일',
 			'rules' => 'trim|required|valid_email|max_length[50]|is_unique[a]', //callback__mem_email_chec
 		);
 		$configbasic['mem_passowrd'] = array(
-			'field' => 'passowrd',
+			'field' => 'mem_passowrd',
 			'label' => '비밀번호',
 			'rules' => 'trim|required|min_length[8]', //callback__mem_password_check,
 		);
 		$configbasic['mem_password_re'] = array(
-			'field' => 'passowrd2',
+			'field' => 'mem_password_re',
 			'label' => '비밀번호확인',
-			'rules' => 'trim|required|min_length[8]|matches[passowrd]',
+			'rules' => 'trim|required|min_length[8]|matches[mem_passowrd]',
 		);
 		$configbasic['mem_nickname'] = array(
-			'field' => 'nickname',
+			'field' => 'mem_nickname',
 			'label' => '닉네임',
 			'rules' => 'trim|required|min_length[2]|max_length[20]|', // callback__mem_nickname_check
 		);
-		$configbasic['mem_per_address'] = array(
-			'field' => 'per_address',
-			'label' => '퍼지갑주소',
+		$configbasic['mem_wallet_address'] = array(
+			'field' => 'mem_wallet_address',
+			'label' => 'PER 지갑주소',
 			'rules' => 'trim|required|is_natural_no_zero|is_unique[b]',
+			'description' => 'PER 지갑주소 입력은 선택사항 입니다. <br>지갑주소를 등록하여 다양한 혜택을 즐겨보세요.</p>',
 		);
 		// $configbasic['mem_password'] = array(
 		// 	'field' => 'mem_password',
