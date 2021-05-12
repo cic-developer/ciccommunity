@@ -69,8 +69,8 @@
 									?>
 								
 								</td>
-								<td><a href= "delete_keyword/?id=<?php echo $stocks['idx']); ?>">Delete</td>
-								<td><input type="submit" name="update" value="update" class="btn btn-outline btn-default btn-sm" ></td> 
+								<td><button><a href=" delete_keyword/?id=<?php echo $stocks['idx']; ?>">Delete </a></button></td>
+								<td><button><a href=" update_keyword/?id=<?php echo $stocks['idx']; ?>">update </a></button></td> 
 							</tr>
 							<?php } ?>	
 						<?php

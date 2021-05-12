@@ -215,7 +215,9 @@ class Board_post extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		/**
+		// $view['view']['lists'] = $lists = $this->_get_list($brd_key);
+		$view['view']['board_key'] = element('brd_key', element('board', $list));
+		/*
 		 * 프라이머리키에 숫자형이 입력되지 않으면 에러처리합니다
 		 */
 		$post_id = (int) $post_id;
@@ -406,83 +408,83 @@ class Board_post extends CB_Controller
 				'1'
 			);
 		}
-		// $checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-		// $where = array(
-		// 	'post_exept_state' => 0,
-		// 	'post_datetime >=' => $checktime,
-		// 	'post_del <>' => 2,
-		// );
-		// $limit = 10;
+		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+		$where = array(
+			'post_exept_state' => 0,
+			'post_datetime >=' => $checktime,
+			'post_del <>' => 2,
+		);
+		$limit = 10;
 
-		// $popularpost = $this->Post_model
-		// 	->get_popularpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-		// 	$list_num = 1;
-		// 	if (element('list', $popularpost)) {
-		// 		foreach (element('list', $popularpost) as $key => $val) {
-		// 			$popularpost['list'][$key]['post_display_name'] = display_username(
-		// 				element('post_userid', $val),
-		// 				element('post_nickname', $val)
-		// 			);
-		// 			$popularpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-		// 			$popularpost['list'][$key]['num'] = $list_num++;
-		// 			if ($board) {
-		// 				$popularpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-		// 				$popularpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
-		// 			}
-		// 			$popularpost['list'][$key]['category'] = '';
-		// 			if (element('post_category', $val)) {
-		// 				$popularpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
-		// 			}
-		// 			if (element('post_image', $val)) {
-		// 				$imagewhere = array(
-		// 					'post_id' => element('post_id', $val),
-		// 					'pfi_is_image' => 1,
-		// 				);
-		// 				$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-		// 				$popularpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
-		// 			} else {
-		// 				$popularpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
-		// 			}
-		// 		}
-		// 	}
+		$popularpost = $this->Post_model
+			->get_popularpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			$list_num = 1;
+			if (element('lists', $popularpost)) {
+				foreach (element('lists', $popularpost) as $key => $val) {
+					$popularpost['lists'][$key]['post_display_name'] = display_username(
+						element('post_userid', $val),
+						element('post_nickname', $val)
+					);
+					$popularpost['lists'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+					$popularpost['lists'][$key]['num'] = $list_num++;
+					if ($board) {
+						$popularpost['lists'][$key]['boardurl'] = board_url(element('brd_key', $board));
+						$popularpost['lists'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+					}
+					$popularpost['lists'][$key]['category'] = '';
+					if (element('post_category', $val)) {
+						$popularpost['lists'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+					}
+					if (element('post_image', $val)) {
+						$imagewhere = array(
+							'post_id' => element('post_id', $val),
+							'pfi_is_image' => 1,
+						);
+						$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+						$popularpost['lists'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+					} else {
+						$popularpost['lists'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+					}
+				}
+			}
 			
-		// 	$where = array(
-		// 		'post_best_state >' => 0
-		// 	);
+			$where = array(
+				'post_best_state >' => 0
+			);
 
-		// 	$bestpost = $this->Post_model
-		// 		->get_bestpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-		// 	$list_num = 1;
-		// 	if (element('list', $bestpost)) {
-		// 	foreach (element('list', $bestpost) as $key => $val) {
-		// 		$bestpost['list'][$key]['post_display_name'] = display_username(
-		// 			element('post_userid', $val),
-		// 			element('post_nickname', $val)
-		// 		);
-		// 		$bestpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-		// 		$bestpost['list'][$key]['num'] = $list_num++;
-		// 		if ($board) {
-		// 			$bestpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-		// 			$bestpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
-		// 		}
-		// 		$bestpost['list'][$key]['category'] = '';
-		// 		if (element('post_category', $val)) {
-		// 			$bestpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
-		// 		}
-		// 		if (element('post_image', $val)) {
-		// 			$imagewhere = array(
-		// 				'post_id' => element('post_id', $val),
-		// 				'pfi_is_image' => 1,
-		// 			);
-		// 			$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-		// 			$bestpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
-		// 		} else {
-		// 			$bestpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
-		// 		}
-		// 	}
-		// }
-		// $view['view']['popularpost'] = $popularpost;
-		// $view['view']['bestpost'] = $bestpost;
+			$bestpost = $this->Post_model
+				->get_bestpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			$list_num = 1;
+			if (element('lists', $bestpost)) {
+			foreach (element('lists', $bestpost) as $key => $val) {
+				$bestpost['lists'][$key]['post_display_name'] = display_username(
+					element('post_userid', $val),
+					element('post_nickname', $val)
+				);
+				$bestpost['lists'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+				$bestpost['lists'][$key]['num'] = $list_num++;
+				if ($board) {
+					$bestpost['lists'][$key]['boardurl'] = board_url(element('brd_key', $board));
+					$bestpost['lists'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+				}
+				$bestpost['lists'][$key]['category'] = '';
+				if (element('post_category', $val)) {
+					$bestpost['lists'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+				}
+				if (element('post_image', $val)) {
+					$imagewhere = array(
+						'post_id' => element('post_id', $val),
+						'pfi_is_image' => 1,
+					);
+					$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+					$bestpost['lists'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+				} else {
+					$bestpost['lists'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+				}
+			}
+		}
+		$view['view']['popularpost'] = $popularpost;
+		$view['view']['bestpost'] = $bestpost;
 		
 
 		$use_sideview = ($this->cbconfig->get_device_view_type() === 'mobile')
@@ -934,6 +936,7 @@ class Board_post extends CB_Controller
 			? element('mobile_comment_default_content', $board)
 			: element('comment_default_content', $board);
 
+		//메모
 		if ($show_list_from_view) {
 			$view['view']['list'] = $list = $this->_get_list(element('brd_key', $board), 1);
 		}

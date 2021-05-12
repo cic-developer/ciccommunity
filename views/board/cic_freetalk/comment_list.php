@@ -1,117 +1,107 @@
-
-<div class="comment">
-	<h4>댓글 <span><?php echo number_format(element('post_comment_count', element('post', $view))); ?></span></h4>
-	<?php 
-	print_r($layout);
-		$this->load->view(element('view_skin_path', $layout) . '/comment_write');
+<div class="list">
+	<ul>
+	<?php
+	$_is_depth = false;
+	if (element('list', element('data', $view))) {
+		foreach (element('list', element('data', $view)) as $result) {
+			$_cmt_depth = element('cmt_depth', $result)/30;
+			$_classname = $_cmt_depth > 0 ? 'reply cdepth'.$_cmt_depth : 'vcon';
 	?>
-</div>
-<div class="cmmt">
-	<div class="list">
-		<ul>
 		<?php
-		$_is_depth = false;
-		if (element('list', element('data', $view))) {
-			foreach (element('list', element('data', $view)) as $result) {
-				$_cmt_depth = element('cmt_depth', $result)/30;
-				$_classname = $_cmt_depth > 0 ? 'reply cdepth'.$_cmt_depth : 'vcon';
+		if($_cmt_depth == 0){
 		?>
-			<?php
-			if($_cmt_depth == 0){
-			?>
-			<li class="item" id="comment_<?php echo element('cmt_id', $result); ?>">
-			<?php
-			}
-			?>
-				<div class="<?php echo $_classname; ?>">
-					<div class="info">
-						<a href="#n" class="nickname">
-							<p class="ico"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', $result)), 35, 35); ?>"
-									alt=""></p>
-							<p class="txt"><?php echo element('cmt_nickname', $result); ?></p>
-						</a>
-						<div class="vp-point">
-							<ul>
-								<li>
-									<p class="up" data-contenttype="comment" data-cmtidx="<?php echo element('cmt_id', $result); ?>" style="cursor:pointer;"><?php echo element('cmt_like_point', $result); ?></p>
-								</li>
-								<li>
-									<p class="down" data-contenttype="comment" data-cmtidx="<?php echo element('cmt_id', $result); ?>" style="cursor:pointer;"><?php echo element('cmt_dislike_point', $result); ?></p>
-								</li>
-							</ul>
-
-						</div>
-						
-					</div>
-					<div class="vtxt">
-						<?php echo element('content', $result); ?>
-					</div>
-					<div class="ctrls">
-						<ul>
-							<li>
-								<p class="date"><?php echo cdate('Y. m. d H:i' ,strtotime(element('cmt_datetime', $result))); ?></p>
-							</li>
-							
-							<?php if (element('can_update', $result)) { ?>
-							<li>
-								<a href="javascript:;" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'cu'); return false;">수정</a>
-							</li>
-							<?php } ?>
-							<?php if (element('can_delete', $result)) { ?>
-							<li>
-								<a href="javascript:;" onClick="delete_comment('<?php echo element('cmt_id', $result); ?>', '<?php echo element('post_id', $result); ?>', '<?php echo element('page', $view); ?>');">삭제</a>
-							</li>
-							<?php } ?>
-							<li><a href="javascript:;" class="cmmt-btn" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'c'); return false;"><span>답글</span></a></li>
-							<li><a href="#n" class="singo-btn"><span>신고</span></a></li>
-						</ul>
-					</div>
-					<div class="comment" id="edit_<?php echo element('cmt_id', $result); ?>">
-					</div>
-					<div class="comment" id="reply_<?php echo element('cmt_id', $result); ?>">
-					</div>
-					<input type="hidden" value="<?php echo element('cmt_secret', $result); ?>" id="secret_comment_<?php echo element('cmt_id', $result); ?>" />
-					<textarea id="save_comment_<?php echo element('cmt_id', $result); ?>" style="display:none"><?php echo html_escape(element('cmt_content', $result)); ?></textarea>
-				</div>
-		<?php
-			}
-		?>
-		</li>
+		<li class="item" id="comment_<?php echo element('cmt_id', $result); ?>">
 		<?php
 		}
 		?>
-		</ul>
-	</div>
-	<!-- e: paging-wrap -->
-	<div class="paging-wrap">
-		<?php echo element('paging', $view); ?>
-	</div>
-	<!-- e: paging-wrap -->
-	<!-- s: layer-wrap.singo -->
-	<div class="layer-wrap singo">
-		<div class="is-top">
-			<h2>신고하기</h2>
-			<a href="#n" class="close singo-close"><span class="blind">닫기</span></a>
-		</div>
-		<div class="is-con">
-			<div class="sel">
-				<p class="chk-radio">
-					<input type="radio" name="jselGroup" id="jsel01" checked=""><label
-						for="jsel01">욕설/비방</label>
-				</p>
-				<p class="chk-radio">
-					<input type="radio" name="jselGroup" id="jsel02"><label for="jsel02">홍보/상업성</label>
-				</p>
-				<p class="chk-radio">
-					<input type="radio" name="jselGroup" id="jsel03"><label for="jsel03">기타</label>
-				</p>
+			<div class="<?php echo $_classname; ?>">
+				<div class="info">
+					<a href="#n" class="nickname">
+						<p class="ico"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', $result)), 35, 35); ?>"
+								alt=""></p>
+						<p class="txt"><?php echo element('cmt_nickname', $result); ?></p>
+					</a>
+					<div class="vp-point">
+						<ul>
+							<li>
+								<p class="up" data-contenttype="comment" data-cmtidx="<?php echo element('cmt_id', $result); ?>" style="cursor:pointer;"><?php echo element('cmt_like_point', $result); ?></p>
+							</li>
+							<li>
+								<p class="down" data-contenttype="comment" data-cmtidx="<?php echo element('cmt_id', $result); ?>" style="cursor:pointer;"><?php echo element('cmt_dislike_point', $result); ?></p>
+							</li>
+						</ul>
+
+					</div>
+					
+				</div>
+				<div class="vtxt">
+					<?php echo element('content', $result); ?>
+				</div>
+				<div class="ctrls">
+					<ul>
+						<li>
+							<p class="date"><?php echo cdate('Y. m. d H:i' ,strtotime(element('cmt_datetime', $result))); ?></p>
+						</li>
+						
+						<?php if (element('can_update', $result)) { ?>
+						<li>
+							<a href="javascript:;" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'cu'); return false;">수정</a>
+						</li>
+						<?php } ?>
+						<?php if (element('can_delete', $result)) { ?>
+						<li>
+							<a href="javascript:;" onClick="delete_comment('<?php echo element('cmt_id', $result); ?>', '<?php echo element('post_id', $result); ?>', '<?php echo element('page', $view); ?>');">삭제</a>
+						</li>
+						<?php } ?>
+						<li><a href="javascript:;" class="cmmt-btn" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'c'); return false;"><span>답글</span></a></li>
+						<li><a href="#n" class="singo-btn"><span>신고</span></a></li>
+					</ul>
+				</div>
+				<div class="comment" id="edit_<?php echo element('cmt_id', $result); ?>">
+				</div>
+				<div class="comment" id="reply_<?php echo element('cmt_id', $result); ?>">
+				</div>
+				<input type="hidden" value="<?php echo element('cmt_secret', $result); ?>" id="secret_comment_<?php echo element('cmt_id', $result); ?>" />
+				<textarea id="save_comment_<?php echo element('cmt_id', $result); ?>" style="display:none"><?php echo html_escape(element('cmt_content', $result)); ?></textarea>
 			</div>
-			<textarea placeholder="신고내용을 작성해주세요"></textarea>
+	<?php
+		}
+	?>
+	</li>
+	<?php
+	}
+	?>
+	</ul>
+</div>
+<!-- e: paging-wrap -->
+<div class="paging-wrap">
+	<?php echo element('paging', $view); ?>
+</div>
+<!-- e: paging-wrap -->
+<!-- s: layer-wrap.singo -->
+<div class="layer-wrap singo">
+	<div class="is-top">
+		<h2>신고하기</h2>
+		<a href="#n" class="close singo-close"><span class="blind">닫기</span></a>
+	</div>
+	<div class="is-con">
+		<div class="sel">
+			<p class="chk-radio">
+				<input type="radio" name="jselGroup" id="jsel01" checked=""><label
+					for="jsel01">욕설/비방</label>
+			</p>
+			<p class="chk-radio">
+				<input type="radio" name="jselGroup" id="jsel02"><label for="jsel02">홍보/상업성</label>
+			</p>
+			<p class="chk-radio">
+				<input type="radio" name="jselGroup" id="jsel03"><label for="jsel03">기타</label>
+			</p>
 		</div>
-		<div class="is-btm">
-			<a href="#n" class="enter-btn singo-close"><span>확인</span></a>
-			<a href="#n" class="cancel-btn singo-close"><span>취소</span></a>
-		</div>
+		<textarea placeholder="신고내용을 작성해주세요"></textarea>
+	</div>
+	<div class="is-btm">
+		<a href="#n" class="enter-btn singo-close"><span>확인</span></a>
+		<a href="#n" class="cancel-btn singo-close"><span>취소</span></a>
 	</div>
 </div>
 <!-- s: layer-wrap.singo -->
