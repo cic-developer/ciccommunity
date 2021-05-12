@@ -200,17 +200,53 @@
 
 				alert(message);
 
+				$('.con_mail').remove();
 				if(state == 1){
 					html = '';
-					html += '<div class="ath-mail">'
+					html += '<div class="con_mail">'
 					html += '<input type="text" id="ath_num" name="ath_num" class="" required />'
-					html += '<button class="ath-mail-btn" id="ath-mail-btn">메일인증 확인</button>'
+					html += '<button class="con_mail_btn" id="con_mail_btn">메일인증 확인</button>'
 					html += '</div>'
 					$('.mem_email').append(html);
 				}
 			}
 		})
 	})
+
+	$(document).ready(function(){
+		$("#con_mail_btn").on('click',function(){
+			var ath_num = $("#ath_num").val();
+
+
+			var result = '';
+			var reason = '';
+			$.ajax({
+				url: cb_url + '/register/ajax_email_send',
+				type: 'POST',
+				data: {
+					ath_num: ath_num,
+					csrf_test_name : cb_csrf_hash
+				},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				success: function(data) {
+					result = data.result;
+					reason = data.reason;
+				}
+			});
+
+			if(result == 0){
+				alert(reason);
+			}
+
+			if(result == 1) {
+				$('.con_mail').remove();
+				$('#ath_email').remove();
+			}
+		});
+	});
+
 </script>
 
 

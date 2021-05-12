@@ -55,9 +55,6 @@ class Coin_model_admin extends CB_Model
         $this->db->where('id', $id);
         $this->db->delete('cic_coin_admins', $data);
         return true;
-
-
-
     }
 
 
@@ -66,17 +63,21 @@ class Coin_model_admin extends CB_Model
         $this->db->update('cic_coin_admins', $data);
     }
 
-    function research_coin($keyword){
-        $this->db->select('cic_coin_admins.*');
-        $this->db->from('cic_coin_admins');
-        $this->db->join('cic_coin_stock', 'cic_coin_stock.market = cic_coin_admins.coin_market');
-        $this->db->get_where('cic_coin_admins', array('keyword' => $keyword ));
-    }
-
     function save_defaut_keyword(){
         $query = $this->db->get('cic_coin_admins');
         return $query->row();
     }
+    
+function search_coin($search){
+    $this->db->select('*');
+    $this->db->from('cic_coin_admins');
+    $this->db->where('keyword', $search);
+
+    $query = $this->db->get();
+
+    return $query -> result_array();
+
+}
 
 
 }
