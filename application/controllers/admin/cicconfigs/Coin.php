@@ -133,7 +133,6 @@ class Coin extends CB_Controller
     //Load data to second db
 
 		$refresh = $this -> input -> post('refresh');
-		echo "hi" .$refresh;
 		
 		$getList = $this -> Coin_model->retrieve_api();
 		for($i=0; $i<count($getList); $i++){
@@ -181,15 +180,13 @@ class Coin extends CB_Controller
 		}
 
        	//GET MARKET PRICE
-	    $getStock = $this -> Coin_model->getstockData();
+	    $getStock = $this -> Coin_model_admin->get_keyword();
         
 		for($i = 0; $i<count($getStock); $i++){
-			if(strcmp($getStock[$i]['coin_idx'], 120) == 0){
 				echo '<br><pre>';
 				print_r($getStock[$i]['market']);
 				echo '</pre>';
 			}
-		}
 
 
 
