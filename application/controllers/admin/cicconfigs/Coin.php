@@ -132,7 +132,7 @@ class Coin extends CB_Controller
 
     //Load data to second db
 		
-		$getList = $this -> Coin_model->get_coinlist();
+		$getList = $this -> Coin_model->retrieve_api();
 		for($i=0; $i<count($getList); $i++){
 			
 			$market = $getList[$i]['market'];
@@ -143,11 +143,34 @@ class Coin extends CB_Controller
 					'name_ko' => $getList[$i]['english_name'],
 					'name_en' => $getList[$i]['korean_name'],
 				);
-			}
 			   //For rafreshing admin page
 				if(isset($data) && !empty($data)){
 					$stock = $this->Coin_model->insertStockData($data);
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+				}
+
+				$data =array(
+					array(
+						'coin_market'=> $coin_market,
+						'keyword'=>$getList[$i]['korean_name']
+					),
+					array(
+						'coin_market'=> $coin_market,
+						'keyword'=>$getList[$i]['english_name']
+					),
+					array(
+						'coin_market'=> $coin_market,
+						'keyword'=> $coin_market
+					),
+						
+				
+				);
+				if(isset($data) && !empty($data)){	
+					for($j = 0; $j < count($data); $j++) {
+						$this->Coin_model -> insert_admin_list($data[$j]);
+						}
+					}	
+				
 				}
 				
 		}
@@ -243,7 +266,7 @@ class Coin extends CB_Controller
 			),
 
 		);
-		$getList = $this -> Coin_model->get_coinlist();
+		$getList = $this -> Coin_model->retrieve_api();
 	
 		$this->form_validation->set_rules($config);
 
@@ -270,37 +293,37 @@ class Coin extends CB_Controller
 
 			$view['keylist'] = $keylist;
 
-			for($i=0; $i<count($getList); $i++){
+		// 	for($i=0; $i<count($getList); $i++){
 			
-				$market = $getList[$i]['market'];
-				if(strcmp(substr($market, 0, 1), "K")==0){
-					$coin_market = substr($market, 4);
-					$data =array(
-						array(
-							'coin_market'=> $coin_market,
-							'keyword'=>$getList[$i]['korean_name']
-						),
-						array(
-							'coin_market'=> $coin_market,
-							'keyword'=>$getList[$i]['english_name']
-						),
-						array(
-							'coin_market'=> $coin_market,
-							'keyword'=> $coin_market
-						),
+		// 		$market = $getList[$i]['market'];
+		// 		if(strcmp(substr($market, 0, 1), "K")==0){
+		// 			$coin_market = substr($market, 4);
+		// 			$data =array(
+		// 				array(
+		// 					'coin_market'=> $coin_market,
+		// 					'keyword'=>$getList[$i]['korean_name']
+		// 				),
+		// 				array(
+		// 					'coin_market'=> $coin_market,
+		// 					'keyword'=>$getList[$i]['english_name']
+		// 				),
+		// 				array(
+		// 					'coin_market'=> $coin_market,
+		// 					'keyword'=> $coin_market
+		// 				),
 						
 				
-					);
-					if(isset($data) && !empty($data)){	
-						for($j = 0; $j < count($data); $j++) {
+		// 			);
+		// 			if(isset($data) && !empty($data)){	
+		// 				for($j = 0; $j < count($data); $j++) {
 						
-							$this->Coin_model -> insert_admin_list($data[$j]);
-						}
-					}	
+		// 					$this->Coin_model -> insert_admin_list($data[$j]);
+		// 				}
+		// 			}	
 				
-				}
+		// 		}
 				
-		}
+		// }
 
 			//delete keyword
             $key_id = $this->input->post('d_id');

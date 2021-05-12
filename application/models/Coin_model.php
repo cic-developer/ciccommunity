@@ -130,7 +130,7 @@ class Coin_model extends CB_Model
     
     }
 
-    function get_coinlist(){
+    function retrieve_api(){
         $curl = curl_init();
 
         curl_setopt_array($curl, array(

@@ -110,12 +110,12 @@ if (typeof(CIC_COMMENT_JS) === 'undefined') {
             success: function(data) {
                 is_submit_comment = false;
                 if (data.error) {
-                    alert('댓글등록 중 에러가 발생했습니다.');
+                    alert(data.error);
                     // $('.alert-comment-message-content').html(data.error);
                     // $('.alert-comment-message').addClass('alert-warning').removeClass('alert-success').show(0).delay(2500).hide(0);
                     return false;
                 } else if (data.success) {
-                    alert('성공적으로 댓글을 등록하였습니다.');
+                    alert(data.success);
                     // $('.alert-comment-message-content').html(data.success);
                     // $('.alert-comment-message').addClass('alert-success').removeClass('alert-warning').show(0).delay(2500).hide(0);
                     view_comment('viewcomment', post_id, '', '')
