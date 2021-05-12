@@ -26,7 +26,7 @@
 					?>
 						
 						<!-- 기본 회원가입 폼 엘리먼트 그리기 -->
-						<li class="<?php element('field_name', $value) ?>">
+						<li class="<?php echo element('field_name', $value) ?>">
 							<p class="btxt"><?php echo element('display_name', $value); ?></p>
 							<div class="field">
 								<p class="chk-input">
@@ -199,6 +199,15 @@
 				});
 
 				alert(message);
+
+				if(state == 1){
+					html = '';
+					html += '<div class="ath-mail">'
+					html += '<input type="text" id="ath_num" name="ath_num" class="" required />'
+					html += '<button class="ath-mail-btn" id="ath-mail-btn">메일인증 확인</button>'
+					html += '</div>'
+					$('.mem_email').append(html);
+				}
 			}
 		})
 	})
