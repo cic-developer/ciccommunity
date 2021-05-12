@@ -69,7 +69,7 @@
 									?>
 								
 								</td>
-								<td><input type="submit" name="delete" class="btn btn-outline btn-default btn-sm" value=<?php echo $stocks['idx'] ?>></td>
+								<td><a href="delete/?id=<?php echo $stocks['idx'] ?>">Delete</td>
 								<td><input type="submit" name="update" value="update" class="btn btn-outline btn-default btn-sm" ></td> 
 							</tr>
 							<?php } ?>	

@@ -270,19 +270,7 @@
 
 		<div class="gap60"></div>
 		<!-- s: cmmt -->
-		<div class="cmmt-wrap">
-			<div class="comment">
-				<h4>댓글 <span>49</span></h4>
-					<?php
-						$this->load->view(element('view_skin_path', $layout) . '/comment_write');
-					?>
-					<!-- <textarea placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
-					<div class="btns">
-						<a href="#n" class="write-btn"><span>댓글등록</span></a>
-					</div> -->
-			</div>
-			<div class="cmmt" id="viewcomment">
-			</div>
+		<div class="cmmt-wrap" id="viewcomment">
 		</div>
 		<!-- e: cmmt -->
 		<!-- page end // -->
@@ -292,13 +280,13 @@
 	var reg_num = /^[0-9]*$/;
 	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
 
-	$('.up').on('click', function(){
+	$(document).on('click', '.up', function(){
 		const content_type = $(this).attr('data-contenttype');
 		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmt_idx');
 		update_vp(content_idx, content_type, 'up');
 	});
 	
-	$('.down').on('click', function(){
+	$(document).on('click', '.down', function(){
 		const content_type = $(this).attr('data-contenttype');
 		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmt_idx');
 		update_vp(content_idx, content_type, 'down');

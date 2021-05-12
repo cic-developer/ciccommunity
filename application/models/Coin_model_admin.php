@@ -53,8 +53,8 @@ class Coin_model_admin extends CB_Model
 
     function delete_keyword($id){
         $this->db->where('id', $id);
-        $response = $this->db->delete('cic_coin_admins');
-        return $response;
+        $this->db->delete('cic_coin_admins');
+        return true;
 
 
 

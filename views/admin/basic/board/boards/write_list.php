@@ -260,7 +260,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">갤러리 목록 사용</label>
 						<div class="col-sm-8">
-							<label for="use_gallery_list" class="checkbox-inline">
+							<label for="" class="checkbox-inline">
 								<input type="checkbox" name="use_gallery_list" id="use_gallery_list" value="1" <?php echo set_checkbox('use_gallery_list', '1', (element('use_gallery_list', element('data', $view)) ? true : false)); ?> /> 사용합니다
 							</label>
 							<span class="help-inline"> 설정하시면 스킨 디렉토리에 list.php 대신에 gallerylist.php 를 사용합니다.</span>

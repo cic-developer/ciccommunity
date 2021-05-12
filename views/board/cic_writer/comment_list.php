@@ -1,125 +1,175 @@
-<div class="alert alert-auto-close alert-dismissible alert-comment-list-message" style="display:none;"><button type="button" class="close alertclose">×</button><span class="alert-comment-list-message-content"></span></div>
+<div class="list">
+	<ul>
+	<?php
+	$_is_depth = false;
+	if (element('list', element('data', $view))) {
+		foreach (element('list', element('data', $view)) as $result) {
+			$_cmt_depth = element('cmt_depth', $result)/30;
+			$_classname = $_cmt_depth > 0 ? 'reply cdepth'.$_cmt_depth : 'vcon';
+	?>
+		<?php
+		if($_cmt_depth == 0){
+		?>
+		<li class="item" id="comment_<?php echo element('cmt_id', $result); ?>">
+		<?php
+		}
+		?>
+			<div class="<?php echo $_classname; ?>">
+				<div class="info">
+					<a href="#n" class="nickname">
+						<p class="ico"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', $result)), 35, 35); ?>"
+								alt=""></p>
+						<p class="txt"><?php echo element('cmt_nickname', $result); ?></p>
+					</a>
+					<div class="vp-point">
+						<ul>
+							<li>
+								<p class="up" data-contenttype="comment" data-cmtidx="<?php echo element('cmt_id', $result); ?>" style="cursor:pointer;"><?php echo element('cmt_like_point', $result); ?></p>
+							</li>
+							<li>
+								<p class="down" data-contenttype="comment" data-cmtidx="<?php echo element('cmt_id', $result); ?>" style="cursor:pointer;"><?php echo element('cmt_dislike_point', $result); ?></p>
+							</li>
+						</ul>
 
-<?php
-if (element('best_list', $view)) {
-	foreach (element('best_list', $view) as $result) {
-?>
-	<div class="media" id="comment_<?php echo element('cmt_id', $result); ?>">
-		<?php if (element('use_comment_profile', element('board', $view))) { ?>
-			<div class="media-left">
-				<img class="media-object member-photo" src="<?php echo element('member_photo_url', $result); ?>" width="64" height="64" alt="<?php echo html_escape(element('cmt_nickname', $result)); ?>" title="<?php echo html_escape(element('cmt_nickname', $result)); ?>" />
-			</div>
-		<?php } ?>
-		<div class="media-body">
-			<h4 class="media-heading">
-				<?php if (element('is_admin', $view)) { ?><input type="checkbox" name="chk_comment_id[]" value="<?php echo element('cmt_id', $result); ?>" /><?php } ?>
-				<span class="label label-warning">베플</span>
-				<?php echo element('display_name', $result); ?>
-					<span class="time"><i class="fa fa-clock-o"></i> <?php echo element('display_datetime', $result); ?></span>
-				<?php if (element('display_ip', $result)) { ?>
-					<span class="ip"><i class="fa fa-map-marker"></i> <?php echo element('display_ip', $result); ?></span>
-				<?php } ?>
-				<?php if (element('is_mobile', $result)) { ?><i class="fa fa-wifi"></i><?php } ?>
-				<?php
-				if ( ! element('post_del', element('post', $view))) {
-				?>
-					<span class="reply">
-						<?php if (element('use_comment_like', element('board', $view))) { ?>
-							<a class="good" href="javascript:;" id="btn-comment-like-<?php echo element('cmt_id', $result); ?>" onClick="comment_like('<?php echo element('cmt_id', $result); ?>', '1', 'comment-like-<?php echo element('cmt_id', $result); ?>');" title="추천하기"><i class="fa fa-thumbs-o-up fa-xs"></i> 추천 <span class="comment-like-<?php echo element('cmt_id', $result); ?>"><?php echo number_format(element('cmt_like', $result)); ?></span></a>
-						<?php } ?>
-						<?php if (element('use_comment_dislike', element('board', $view))) { ?>
-							<a class="bad" href="javascript:;" id="btn-comment-dislike-<?php echo element('cmt_id', $result); ?>" onClick="comment_like('<?php echo element('cmt_id', $result); ?>', '2', 'comment-dislike-<?php echo element('cmt_id', $result); ?>');" title="비추하기"><i class="fa fa-thumbs-o-down fa-xs"></i> 비추 <span class="comment-dislike-<?php echo element('cmt_id', $result); ?>"><?php echo number_format(element('cmt_dislike', $result)); ?></span></a>
-						<?php } ?>
-						<?php if (element('use_comment_blame', element('board', $view)) && ( ! element('comment_blame_blind_count', element('board', $view)) OR element('cmt_blame', $result) < element('comment_blame_blind_count', element('board', $view)))) { ?>
-							<a href="javascript:;" id="btn-blame" onClick="comment_blame('<?php echo element('cmt_id', $result); ?>', 'comment-blame-<?php echo element('cmt_id', $result); ?>');" title="신고하기"><i class="fa fa-bell fa-xs"></i><span class="comment-blame-<?php echo element('cmt_id', $result); ?>"><?php echo element('cmt_blame', $result) ? '+' . number_format(element('cmt_blame', $result)) : ''; ?></span></a>
-						<?php } ?>
-						<?php
-						if (element('is_admin', $view) && element('use_comment_secret', element('board', $view))) {
-							if (element('cmt_secret', $result)) {
-						?>
-							<a href="javascript:;" onClick="post_action('comment_secret', '<?php echo element('cmt_id', $result); ?>', '0');" title="비밀글 해제하기"><i class="fa fa-lock"></i></a>
-						<?php } else { ?>
-							<a href="javascript:;" onClick="post_action('comment_secret', '<?php echo element('cmt_id', $result); ?>', '1');" title="비밀글로 설정하기"><i class="fa fa-unlock"></i></a>
-						<?php
-							}
-						}
-						?>
-					</span>
-				<?php } ?>
-			</h4>
-			<div class="bg-success" style="padding:10px 5px;"><?php echo element('content', $result); ?></div>
-		</div>
-	</div>
-<?php
-	}
-}
-if (element('list', element('data', $view))) {
-	foreach (element('list', element('data', $view)) as $result) {
-?>
-
-	<div class="media" id="comment_<?php echo element('cmt_id', $result); ?>" style="padding-left:<?php echo element('cmt_depth', $result); ?>px;">
-		<?php if (element('use_comment_profile', element('board', $view))) { ?>
-			<div class="media-left">
-				<img class="media-object member-photo" src="<?php echo element('member_photo_url', $result); ?>" width="64" height="64" alt="<?php echo html_escape(element('cmt_nickname', $result)); ?>" title="<?php echo html_escape(element('cmt_nickname', $result)); ?>" />
-			</div>
-		<?php } ?>
-		<div class="media-body">
-			<h4 class="media-heading">
-				<?php if (element('is_admin', $view)) { ?><input type="checkbox" name="chk_comment_id[]" value="<?php echo element('cmt_id', $result); ?>" /><?php } ?>
-				<?php echo element('display_name', $result); ?>
-				<span class="time"><i class="fa fa-clock-o"></i> <?php echo element('display_datetime', $result); ?></span>
-				<?php if (element('display_ip', $result)) { ?>
-					<span class="ip"><i class="fa fa-map-marker"></i> <?php echo element('display_ip', $result); ?></span>
-				<?php } ?>
-				<?php if (element('is_mobile', $result)) { ?><i class="fa fa-wifi"></i><?php } ?>
-				<?php
-				if ( ! element('post_del', element('post', $view)) && ! element('cmt_del', $result)) {
-				?>
-					<span class="reply">
-						<?php if (element('use_comment_like', element('board', $view))) { ?>
-							<a class="good" href="javascript:;" id="btn-comment-like-<?php echo element('cmt_id', $result); ?>" onClick="comment_like('<?php echo element('cmt_id', $result); ?>', '1', 'comment-like-<?php echo element('cmt_id', $result); ?>');" title="추천하기"><i class="fa fa-thumbs-o-up fa-xs"></i> 추천 <span class="comment-like-<?php echo element('cmt_id', $result); ?>"><?php echo number_format(element('cmt_like', $result)); ?></span></a>
-						<?php } ?>
-						<?php if (element('use_comment_dislike', element('board', $view))) { ?>
-							<a class="bad" href="javascript:;" id="btn-comment-dislike-<?php echo element('cmt_id', $result); ?>" onClick="comment_like('<?php echo element('cmt_id', $result); ?>', '2', 'comment-dislike-<?php echo element('cmt_id', $result); ?>');" title="비추하기"><i class="fa fa-thumbs-o-down fa-xs"></i> 비추 <span class="comment-dislike-<?php echo element('cmt_id', $result); ?>"><?php echo number_format(element('cmt_dislike', $result)); ?></span></a>
-						<?php } ?>
-						<?php if (element('use_comment_blame', element('board', $view)) && ( ! element('comment_blame_blind_count', element('board', $view)) OR element('cmt_blame', $result) < element('comment_blame_blind_count', element('board', $view)))) { ?>
-							<a href="javascript:;" id="btn-blame" onClick="comment_blame('<?php echo element('cmt_id', $result); ?>', 'comment-blame-<?php echo element('cmt_id', $result); ?>');" title="신고하기"><i class="fa fa-bell fa-xs"></i><span class="comment-blame-<?php echo element('cmt_id', $result); ?>"><?php echo element('cmt_blame', $result) ? '+' . number_format(element('cmt_blame', $result)) : ''; ?></span></a>
-						<?php } ?>
-						<?php if (element('can_reply', $result)) { ?>
-							<a href="javascript:;" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'c'); return false;">답변</a>
-						<?php } ?>
+					</div>
+					
+				</div>
+				<div class="vtxt">
+					<?php echo element('content', $result); ?>
+				</div>
+				<div class="ctrls">
+					<ul>
+						<li>
+							<p class="date"><?php echo cdate('Y. m. d H:i' ,strtotime(element('cmt_datetime', $result))); ?></p>
+						</li>
+						
 						<?php if (element('can_update', $result)) { ?>
+						<li>
 							<a href="javascript:;" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'cu'); return false;">수정</a>
+						</li>
 						<?php } ?>
 						<?php if (element('can_delete', $result)) { ?>
+						<li>
 							<a href="javascript:;" onClick="delete_comment('<?php echo element('cmt_id', $result); ?>', '<?php echo element('post_id', $result); ?>', '<?php echo element('page', $view); ?>');">삭제</a>
+						</li>
 						<?php } ?>
-						<?php
-						if (element('is_admin', $view) && element('use_comment_secret', element('board', $view))) {
-							if (element('cmt_secret', $result)) {
-						?>
-								<a href="javascript:;" onClick="post_action('comment_secret', '<?php echo element('cmt_id', $result); ?>', '0');"><i class="fa fa-lock"></i></a>
-						<?php } else { ?>
-								<a href="javascript:;" onClick="post_action('comment_secret', '<?php echo element('cmt_id', $result); ?>', '1');"><i class="fa fa-unlock"></i></a>
-						<?php
-							}
-						}
-						?>
-					</span>
-				<?php
-				}
-				?>
-			</h4>
-			<?php echo element('content', $result); ?>
-			<?php if (element('lucky', $result)) { ?><div class="lucky"><i class="fa fa-star"></i> <?php echo element('lucky', $result); ?></div><?php } ?>
-			<span id="edit_<?php echo element('cmt_id', $result); ?>"></span><!-- 수정 -->
-			<span id="reply_<?php echo element('cmt_id', $result); ?>"></span><!-- 답변 -->
-			<input type="hidden" value="<?php echo element('cmt_secret', $result); ?>" id="secret_comment_<?php echo element('cmt_id', $result); ?>" />
-			<textarea id="save_comment_<?php echo element('cmt_id', $result); ?>" style="display:none"><?php echo html_escape(element('cmt_content', $result)); ?></textarea>
-		</div>
-	</div>
-<?php
+						<li><a href="javascript:;" class="cmmt-btn" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'c'); return false;"><span>답글</span></a></li>
+						<li><a href="#n" class="singo-btn"><span>신고</span></a></li>
+					</ul>
+				</div>
+				<div class="comment" id="edit_<?php echo element('cmt_id', $result); ?>">
+				</div>
+				<div class="comment" id="reply_<?php echo element('cmt_id', $result); ?>">
+				</div>
+				<input type="hidden" value="<?php echo element('cmt_secret', $result); ?>" id="secret_comment_<?php echo element('cmt_id', $result); ?>" />
+				<textarea id="save_comment_<?php echo element('cmt_id', $result); ?>" style="display:none"><?php echo html_escape(element('cmt_content', $result)); ?></textarea>
+			</div>
+	<?php
+		}
+	?>
+	</li>
+	<?php
 	}
-}
-?>
-<nav><?php echo element('paging', $view); ?></nav>
+	?>
+	</ul>
+</div>
+<!-- e: paging-wrap -->
+<div class="paging-wrap">
+	<?php echo element('paging', $view); ?>
+</div>
+<!-- e: paging-wrap -->
+<!-- s: layer-wrap.singo -->
+<div class="layer-wrap singo">
+	<div class="is-top">
+		<h2>신고하기</h2>
+		<a href="#n" class="close singo-close"><span class="blind">닫기</span></a>
+	</div>
+	<div class="is-con">
+		<div class="sel">
+			<p class="chk-radio">
+				<input type="radio" name="jselGroup" id="jsel01" checked=""><label
+					for="jsel01">욕설/비방</label>
+			</p>
+			<p class="chk-radio">
+				<input type="radio" name="jselGroup" id="jsel02"><label for="jsel02">홍보/상업성</label>
+			</p>
+			<p class="chk-radio">
+				<input type="radio" name="jselGroup" id="jsel03"><label for="jsel03">기타</label>
+			</p>
+		</div>
+		<textarea placeholder="신고내용을 작성해주세요"></textarea>
+	</div>
+	<div class="is-btm">
+		<a href="#n" class="enter-btn singo-close"><span>확인</span></a>
+		<a href="#n" class="cancel-btn singo-close"><span>취소</span></a>
+	</div>
+</div>
+<!-- s: layer-wrap.singo -->
+<script>
+	$(function () {
+		var istotal = $('.cmmt').find('.item').length;
+		var ischk = (istotal / 2) + 1
+		$('.cmmt').find('.item:nth-child(n+' + ischk + ')').addClass('vfm');
+		/*$('.ctrls').find('.cmmt-btn').click(function () {
+			$('.cmmt-wrap').find('.singo-btn').removeClass('active');
+			if ($(this).hasClass('active')) {
+				$(this).removeClass('active');
+				$(this).closest('.vcon').removeClass('active');
+				$(this).closest('.reply').removeClass('active');
+				$(this).closest('.ctrls').removeClass('active');
+			} else {
+				$(this).addClass('active');
+				$(this).closest('.vcon').addClass('active');
+				$(this).closest('.reply').addClass('active');
+				$(this).closest('.ctrls').addClass('active');
+			}
+			$('.layer-wrap.singo').bPopup({
+				speed: 0,
+				follow: [false, false],
+				position: [false, false],
+				modalColor: false,
+				modal: false,
+				onClose: function () {
+					$('.cmmt').find('.cread').removeClass('cread')
+				},
+			}).close();
+		});*/
+		$('.cmmt-wrap').find('.singo-btn').click(function () {
+			$('.cmmt-wrap').find('.singo-btn').removeClass('active');
+			$(this).addClass('active');
+			$('.layer-wrap.singo').bPopup({
+				speed: 0,
+				follow: [false, false],
+				position: [false, false],
+				modalColor: false,
+				modal: false,
+				onClose: function () {
+					$('.cmmt').find('.cread').removeClass('cread')
+				},
+			}).close();
+			var obj = $(this).position();
+			var abj = $(this).position();
+			var thispar = $(this).closest('.ctrls');
+			$(this).closest('.ctrls').parent().addClass('cread');
+			$(this).closest('.ctrls').parent().parent('li').addClass('cread');
+			$('.layer-wrap.singo').css({
+				'top': obj.top,
+				'left': obj.left,
+				'margin-top': '20px',
+				'margin-left': '0'
+			});
+			$('.layer-wrap.singo').bPopup({
+				closeClass: "singo-close",
+				speed: 0,
+				appendTo: $(thispar),
+				onClose: function () {
+					$('.cmmt').find('.cread').removeClass('cread')
+				},
+				follow: [false, false],
+				position: [false, false],
+				modalColor: false,
+				modal: false,
+			});
+		});
+	})
+</script>
