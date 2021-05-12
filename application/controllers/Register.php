@@ -1678,7 +1678,11 @@ class Register extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		$rand_num = sprintf('%06d',rand(000000,999999));
+		$email = $this->input->post('email');
+		// 세션에 인증번호 저장
 		$this->session->set_userdata('ath_num', $rand_num);
+		// 세션에 인증에 이용한 이메일 저장
+		$this->session->set_userdata('ath_email', $email);
 
 		$getdata['webmaster_email'] = $this->cbconfig->item('webmaster_email');
 		$getdata['webmaster_name'] = $this->cbconfig->item('webmaster_name');
@@ -1690,7 +1694,7 @@ class Register extends CB_Controller
 
 		$this->load->library('email');
 		$this->email->from(element('webmaster_email', $getdata), element('webmaster_name', $getdata));
-		$this->email->to($this->input->post('email'));
+		$this->email->to($email);
 
 		$this->email->subject('cic 회원가입 인증 이메일입니다.');
 		$content_type = $this->cbconfig->item('use_formmail_dhtml') ? 1 : 0;
@@ -1731,7 +1735,7 @@ class Register extends CB_Controller
 		Events::trigger('before', $eventname);
 
 		$_ath_num = trim($this->input->post('ath_num'));
-		if (empty($email)) {
+		if (empty($_ath_num)) {
 			$result = array(
 				'result' => 'no',
 				'reason' => '인증번호가 넘어오지 않았습니다',
@@ -1741,8 +1745,10 @@ class Register extends CB_Controller
 
 		$ath_num = $this->session->userdata('ath_num');
 
+		// 세션에 저장한 인증번호 == 입력한 인증번호
 		if($ath_num == $_ath_num){
-			$this->session->unset_userdata('ath_num');
+			// $this->session->unset_userdata('ath_num');
+			// 인증결과 세션 저장
 			$this->session->set_userdata('ath_mail_result', '1');
 
 			$result = array(
@@ -1751,6 +1757,7 @@ class Register extends CB_Controller
 			);
 			exit(json_encode($result));
 		} else{
+			// 인증결과 세션 저장
 			$this->session->set_userdata('ath_mail_result', '');
 
 			$result = array(

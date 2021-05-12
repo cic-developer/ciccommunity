@@ -55,7 +55,7 @@
 						<tr>
 							<th>키워드</th>
 							<th>삭제</th>
-							<th>Update</th>
+							<th>수정</th>
 						</tr>
 						<?php 
 						$sno = $row+1;
@@ -69,8 +69,8 @@
 									?>
 								
 								</td>
-								<td><button class="btn btn-danger" data-toggle="modal"><a href=" delete_keyword/?id=<?php echo $stocks['idx']; ?>" class="link-secondary">삭제 </a></button></td>
-								<td><button class="btn btn-secondary"><a href=" update_keyword/?id=<?php echo $stocks['idx']; ?>" class="link-secondary">update </a></button></td> 
+								<td><a href=" delete_keyword/?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs">삭제 </a></td>
+								<td><a href=" update_keyword/?id=<?php echo $stocks['idx']; ?>" class="btn btn-info btn-xs">수정 </a></td> 
 							</tr>
 							<?php } ?>	
 						<?php

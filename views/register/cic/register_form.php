@@ -215,8 +215,6 @@
 
 	$(document).on('click', "#con-mail-btn", function(){
 		var ath_num = $("#ath_num").val();
-		alert(ath_num);
-
 
 		var result = '';
 		var reason = '';
@@ -243,8 +241,9 @@
 
 		if(result == 1) {
 			$('.con-mail').remove();
-			$('#ath_email').append('<i class="fas fa-check"></i>');
 			$('#ath_email').remove();
+			$("#mem_email").attr("readonly", true);
+			$("#mem_email").attr("disabled", true);
 		}
 	});
 

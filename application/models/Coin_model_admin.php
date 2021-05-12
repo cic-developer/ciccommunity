@@ -68,7 +68,7 @@ class Coin_model_admin extends CB_Model
         return $query->row();
     }
     
-    function search_coin($search, $keyword, ){
+    function search_coin($search, $keyword ){
         $this->db->select('*');
         $this->db->from('cic_coin_admins');
         $this->db->where('keyword', $search);

@@ -112,43 +112,6 @@
 				<div class="fl">
 					<h4>BEST VP UP</h4>
 					<ul>
-						<!-- <li>
-							<a href="#n">
-								<span class="num">1</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-											alt=""></p>
-									<p class="rtxt">코린이1235</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li> -->
-						<!-- <?php
-						if (element('list',element('bestpost', $view))) {
-							foreach (element('list',element('bestpost', $view)) as $bestpost) {
-						?>
-						<li>
-						<span class="num"><?php echo number_format(element('num', $bestpost)); ?></span>
-						<div class="my-info">
-							<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-									alt=""></p>
-							<p class="rtxt"><?php echo html_escape(element('post_userid', $bestpost)); ?></p>
-						</div>
-						<span class="txt"><a href="<?php echo goto_url(element('posturl', $bestpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $bestpost)); ?></a></span>
-						<sapn class="vp"><?php echo number_format(element('post_like_point', $bestpost)); ?></sapn>
-						</li>
-						<?php
-							}
-						}
-						if ( ! element('list', element('bestpost', $view))) {
-						?>
-							<tr>
-								<td colspan="12" class="nopost">자료가 없습니다</td>
-							</tr>
-						<?php
-						}
-						?> -->
 						<?php
 						if (element('list',element('bestpost', $view))) {
 							foreach (element('list',element('bestpost', $view)) as $bestpost) {
@@ -160,7 +123,9 @@
 											alt=""></p>
 									<p class="rtxt"><?php echo html_escape(element('post_userid', $bestpost)); ?></p>
 								</div>
-								<span class="txt"><a href="<?php echo goto_url(element('posturl', $bestpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $bestpost)); ?></a></span>
+								<span class="txt"><?php echo html_escape(element('post_title', $bestpost)); ?></a></span>
+								<a href="<?php echo goto_url(element('posturl', $bestpost)); ?>">
+								<sapn class="vp"><?php echo number_format(element('post_like_point', $bestpost)); ?></sapn>
 						<?php
 							}
 						}
