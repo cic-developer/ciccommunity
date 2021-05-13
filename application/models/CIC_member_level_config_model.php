@@ -27,7 +27,7 @@ class CIC_member_level_config_model extends CB_Model
 		parent::__construct();
 	}
 
-	function get_by_pointSum($pointSum)
+	function get_by_pointSum($pointSum = 0)
 	{
 		if($pointSum >= 0){
 			$this->db->where('mlc_target_point <=', $pointSum);

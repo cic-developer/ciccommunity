@@ -74,20 +74,6 @@ class CIC_Coin_Keyword_model extends CB_Model
         return $query->row();
     }
     
-    function search_coin($search, $keyword ){
-        $this->db->select('*');
-        $this->db->from('cic_coin_admins');
-        $this->db->where('keyword', $search);
-
-        if($search == market)
-
-
-        $query = $this->db->get();
-
-        return $query -> result_array();
-
-    }
-
 
     function getCoin_join( $limit = '', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR'){
         $select = 'name_ko';
@@ -98,7 +84,7 @@ class CIC_Coin_Keyword_model extends CB_Model
 
     
 
-    function reseach_coinAdmin($search){
+    function search_Coin ($search){
         if (empty($search)) {
 			return false;
 		}

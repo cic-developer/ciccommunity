@@ -693,8 +693,7 @@ class Register extends CB_Controller
 		 */
 		if ($form_validation === false OR $file_error !== '' OR $file_error2 !== '') {
 			if($this->form_validation->error_string()){
-				echo '<script>alert("에러");</script>';
-				echo '<script>alert("'.$this->form_validation->error_string().'");</script>';
+				exit('에러발생');
 			}
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
@@ -917,7 +916,8 @@ class Register extends CB_Controller
 			// 	$insertdata['mem_sex'] = $this->input->post('mem_sex', null, '');
 			// }
 			// ciboard 있던것
-
+			print_r($metadata);
+/*
 			// 위의 ciboard원본에서 cic로 변경된 부분
 			if (isset($form['mem_username']['use']) && $form['mem_username']['use']) {
 				$insertdata['mem_username'] = $this->input->post('mem_username', null, '');
@@ -948,7 +948,6 @@ class Register extends CB_Controller
 				$insertdata['mem_use_note'] = $this->input->post('mem_use_note') ? 1 : 0;
 				$metadata['meta_use_note_datetime'] = cdate('Y-m-d H:i:s');
 			}
-			print_r($metadata);
 			$insertdata['mem_receive_sms'] = $this->input->post('mem_receive_sms') ? 1 : 0;
 			$insertdata['mem_open_profile'] = $this->input->post('mem_open_profile') ? 1 : 0;
 			$metadata['meta_open_profile_datetime'] = cdate('Y-m-d H:i:s');
@@ -981,7 +980,7 @@ class Register extends CB_Controller
 				'mem_userid' => $this->input->post('mem_userid'),
 			);
 			$this->Member_userid_model->insert($useridinsertdata);
-
+*/
 			// ciboard 있던것
 			// if ($selfcert_meta) {
 			// 	foreach ($selfcert_meta as $certkey => $certvalue) {
@@ -1438,7 +1437,7 @@ class Register extends CB_Controller
 			// 	);
 			// }
 			// cic에서 추가된 부분
-
+/*
 			$this->session->set_flashdata(
 				'nickname',
 				$this->input->post('mem_nickname')
@@ -1449,7 +1448,7 @@ class Register extends CB_Controller
 					'mem_id',
 					$mem_id
 				);
-			}
+			}*/
 			echo '<script>alert("gg");</script>';
 			// redirect('register/result');
 		}

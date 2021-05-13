@@ -271,7 +271,7 @@ class Coin extends CB_Controller
 			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 						
 			$key_id = $_GET['search'];
-			$key_search = $this-> CIC_Coin_Keyword_model -> reseach_coinAdmin($key_id);
+			$key_search = $this-> CIC_Coin_Keyword_model -> seach_coin($key_id);
 			
 
 

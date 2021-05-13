@@ -237,6 +237,7 @@ class Board_post extends CB_Controller
 		if($post['brd_id'] == 1){
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 			$where = array(
+				'brd_id' => 1,
 				'post_exept_state' => 0,
 				'post_datetime >=' => $checktime,
 				'post_del <>' => 2,
@@ -245,8 +246,6 @@ class Board_post extends CB_Controller
 			$list_num = 1;
 			$like_point_ranking_freetalk = $this->Post_model
 				->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-				print_r($like_point_ranking_freetalk);
-				exit;
 					if (element('list', $like_point_ranking_freetalk)) {
 						foreach (element('list', $like_point_ranking_freetalk) as $key => $val) {
 							$like_point_ranking_freetalk['list'][$key]['post_display_name'] = display_username(
@@ -276,15 +275,16 @@ class Board_post extends CB_Controller
 								}
 							}
 						}
-			// $checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-			// $where = array(
-			// 	'brd_id' => 1,
-			// 	'post_exept_state' => 0,
-			// 	'post_datetime >=' => $checktime,
-			// 	'post_del <>' => 2,
-			// );
-			// $limit = 10;
-			// $list_num = 1;
+						print_r('hello');
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+			$where = array(
+				'brd_id' => 1,
+				'post_exept_state' => 0,
+				'post_datetime >=' => $checktime,
+				'post_del <>' => 2,
+			);
+			$limit = 10;
+			$list_num = 1;
 			$dislike_point_ranking_freetalk = $this->Post_model
 				->get_dislike_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 					if (element('list', $dislike_point_ranking_freetalk)) {

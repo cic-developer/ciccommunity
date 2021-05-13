@@ -18,7 +18,7 @@ class Search extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Board', 'Board_group', 'Post', 'Post_file', 'Search_keyword', 'CIC_coin', 'CIC_Coin_Keyword');
+	protected $models = array('Board', 'Board_group', 'Post', 'Post_file', 'Search_keyword', 'CIC_Coin', 'CIC_Coin_Keyword');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -205,6 +205,27 @@ class Search extends CB_Controller
 			}
 		}
 		$view['view']['highlight_keyword'] = $highlight_keyword;
+
+		//코인 가격 검색 시작
+		
+
+		$key_search = $this-> CIC_Coin_Keyword_model -> seach_coin($skeyword);
+
+		$market = $key_search['market'];
+		$api_result = $this->CIC_Coin_model -> get_price($market);
+		$korean = $key_search['name_ko'];
+		$high = $api_result['high_price'];
+		$low =$api_result['low_price'];
+		$trade = $api_result['trade_price'];
+
+		$view['korean'] = $korean;
+		$view['low'] = $low;
+		$view['high'] = $high;
+		$view['trade'] = $trade;
+		print_r(1);
+
+
+		// 코인 검색 여기까지 
 
 		/**
 		 * primary key 정보를 저장합니다
