@@ -303,26 +303,42 @@ class Coin extends CB_Controller
 						
 			$key_id = $_GET['search'];
 			$key_search = $this-> Coin_model_admin -> reseach_coinAdmin($key_id);
-			foreach($key_search as $keys){
+			
 
 
-				$market = $keys['market'];
-				$api_result = $this->Coin_model -> get_price($market);
-				$korean = $keys['name_ko'];
-				$high = $api_result['high_price'];
-				$low =$api_result['low_price'];
-				$trade = $api_result['trade_price'];
+			$market = $key_search['market'];
+			$api_result = $this->Coin_model -> get_price($market);
+			$korean = $key_search['name_ko'];
+			$high = $api_result['high_price'];
+			$low =$api_result['low_price'];
+			$trade = $api_result['trade_price'];
 
 
 
-				$view['korean'] = $korean;
-				$view['low'] = $low;
-				$view['high'] = $high;
-				$view['trade'] = $trade;
-				// print_r("￦".$api_result);
+			$view['korean'] = $korean;
+			$view['low'] = $low;
+			$view['high'] = $high;
+			$view['trade'] = $trade;
+			// foreach($key_search as $keys){
 
 
-}
+			// 	$market = $keys['market'];
+			// 	$api_result = $this->Coin_model -> get_price($market);
+			// 	$korean = $keys['name_ko'];
+			// 	$high = $api_result['high_price'];
+			// 	$low =$api_result['low_price'];
+			// 	$trade = $api_result['trade_price'];
+
+
+
+			// 	$view['korean'] = $korean;
+			// 	$view['low'] = $low;
+			// 	$view['high'] = $high;
+			// 	$view['trade'] = $trade;
+			// 	// print_r("￦".$api_result);
+
+
+			// }
 
 
 			// $deleted = $this->Coin_model_admin->delete_keyword($key_id);
