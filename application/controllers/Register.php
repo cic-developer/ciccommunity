@@ -421,7 +421,7 @@ class Register extends CB_Controller
 		$configbasic['mem_birthday'] = array(
 			'field' => 'mem_birthday',
 			'label' => '생년월일',
-			'rules' => 'trim|exact_length[8]',
+			'rules' => 'trim|exact_length[10]',
 		);
 		$configbasic['mem_sex'] = array(
 			'field' => 'mem_sex',
