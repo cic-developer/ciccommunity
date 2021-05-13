@@ -570,19 +570,19 @@ class Register extends CB_Controller
 			}
 		}
 
-		if ($this->cbconfig->item('use_recaptcha')) {
-			$config[] = array(
-				'field' => 'g-recaptcha-response',
-				'label' => '자동등록방지문자',
-				'rules' => 'trim|required|callback__check_recaptcha',
-			);
-		} else {
-			$config[] = array(
-				'field' => 'captcha_key',
-				'label' => '자동등록방지문자',
-				'rules' => 'trim|required|callback__check_captcha',
-			);
-		}
+		// if ($this->cbconfig->item('use_recaptcha')) {
+		// 	$config[] = array(
+		// 		'field' => 'g-recaptcha-response',
+		// 		'label' => '자동등록방지문자',
+		// 		'rules' => 'trim|required|callback__check_recaptcha',
+		// 	);
+		// } else {
+		// 	$config[] = array(
+		// 		'field' => 'captcha_key',
+		// 		'label' => '자동등록방지문자',
+		// 		'rules' => 'trim|required|callback__check_captcha',
+		// 	);
+		// }
 		$this->form_validation->set_rules($config);
 
 		$form_validation = $this->form_validation->run();

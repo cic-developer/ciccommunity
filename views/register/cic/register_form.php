@@ -1,30 +1,74 @@
-<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css'); ?>
-
-<div class="register">
-	<div class="table-box">
-		<div class="table-heading">회원 가입</div>
-		<div class="table-body">
+<div id="container-wrap">
+	<div id="contents" class="div-cont">
+		<!-- page start // -->
+		<div class="member-wrap join">
+			<h2><span class="blind">cic community</span></h2>
 			<?php
 			echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
 			echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
 			$attributes = array('class' => 'form-horizontal', 'name' => 'fregisterform', 'id' => 'fregisterform');
 			echo form_open_multipart(current_full_url(), $attributes);
 			?>
-				<ol class="registerform">
+			<div class="entry">
+				<ul>
 				<?php
 				foreach (element('html_content', $view) as $key => $value) {
+
+					// userid 히든으로 숨기기
+					if(element('field_name', $value) == "mem_userid" ||
+							element('field_name', $value) == "mem_username" ||
+								element('field_name', $value) == "mem_sex"||
+									element('field_name', $value) == "mem_phone"||
+										element('field_name', $value) == "mem_birthday"){
 				?>
-					<li>
-						<span><?php echo element('display_name', $value); ?></span>
-						<div class="form-text text-primary group">
-							<?php echo element('input', $value); ?>
+					<?php echo element('input', $value); ?>
+				<?php
+					} else {
+				?>
+					
+					<!-- 기본 회원가입 폼 엘리먼트 그리기 -->
+					<li class="<?php echo element('field_name', $value) ?>">
+						<p class="btxt"><?php echo element('display_name', $value); ?></p>
+						<div class="field">
+							<p class="chk-input">
+								<?php echo element('input', $value); ?>
+							</p>
+
+							<!-- 이메일 인증 버튼 -->
+							<?php
+								if(element('field_name', $value) == "mem_email"){
+							?>
+								<a id="ath_email" class="cerfity-btn"><span>인증하기</span></a>
+							<?php
+								}
+							?>
+
+							<!-- 닉네임 확인 버튼 -->
+							<?php
+								if(element('field_name', $value) == "mem_nickname"){
+							?>
+								<!-- 굳이 닉네임 확인안하고 비동기로 체크해도 될거같습니다. -->
+								<a id="ath_nickname" class="chk-btn"><span>닉네임 확인</span></a>
+							<?php
+								}
+							?>
+
+							
+
+
+						</div>
+						<p class="rtxt mg10t">
 							<?php if (element('description', $value)) { ?>
 								<p class="help-block"><?php echo element('description', $value); ?></p>
 							<?php } ?>
-						</div>
+						</p>
 					</li>
 				<?php
+					}
 				}
+				?>
+
+				<?php
 				if ($this->cbconfig->item('use_member_photo') && $this->cbconfig->item('member_photo_width') > 0 && $this->cbconfig->item('member_photo_height') > 0) {
 				?>
 					<li>
@@ -60,14 +104,14 @@
 							<?php } ?>
 						</div>
 					</li> -->
-					<?php if ($this->cbconfig->item('use_note')) { ?>
+					<!-- <?php if ($this->cbconfig->item('use_note')) { ?>
 						<li>
 							<span>쪽지기능사용</span>
 							<div class="form-text text-primary group">
 								<div class="checkbox">
-									<label for="mem_use_note">
-										<input type="checkbox" name="mem_use_note" id="mem_use_note" value="1" <?php echo set_checkbox('mem_use_note', '1', true); ?> />
-										쪽지를 주고 받을 수 있습니다.
+									<label for="mem_use_note"> -->
+										<input type="hidden" name="mem_use_note" id="mem_use_note" value="1" <?php echo set_checkbox('mem_use_note', '1', true); ?> />
+										<!-- 쪽지를 주고 받을 수 있습니다.
 									</label>
 									<?php if (element('use_note_description', $view)) { ?>
 										<p class="help-block"><?php echo element('use_note_description', $view); ?></p>
@@ -75,28 +119,30 @@
 								</div>
 							</div>
 						</li>
-					<?php } ?>
-					<li>
+					<?php } ?> -->
+					<!-- <li>
 						<span>이메일수신여부</span>
 						<div class="form-text text-primary group">
 							<div class="checkbox">
-								<label for="mem_receive_email" >
-									<input type="checkbox" name="mem_receive_email" id="mem_receive_email" value="1" <?php echo set_checkbox('mem_receive_email', '1', true); ?> /> 수신
-								</label>
+								<label for="mem_receive_email" > -->
+									<input type="hidden" name="mem_receive_email" id="mem_receive_email" value="1" <?php echo set_checkbox('mem_receive_email', '1', true); ?> /> 
+									<!-- 수신 -->
+								<!-- </label>
 							</div>
 						</div>
-					</li>
-					<li>
+					</li> -->
+					<!-- <li>
 						<span>SMS 문자수신</span>
 						<div class="form-text text-primary group">
 							<div class="checkbox">
-								<label for="mem_receive_sms">
-									<input type="checkbox" name="mem_receive_sms" id="mem_receive_sms" value="1" <?php echo set_checkbox('mem_receive_sms', '1', true); ?> /> 수신
-								</label>
+								<label for="mem_receive_sms"> -->
+									<input type="hidden" name="mem_receive_sms" id="mem_receive_sms" value="1" <?php echo set_checkbox('mem_receive_sms', '1', true); ?> /> 
+									<!-- 수신 -->
+								<!-- </label>
 							</div>
 						</div>
-					</li>
-					<li>
+					</li> -->
+					<!-- <li>
 						<?php if ($this->cbconfig->item('use_recaptcha')) { ?>
 							<span></span>
 							<div class="form-text text-primary group captcha" id="recaptcha"><button type="button" id="captcha"></button></div>
@@ -108,18 +154,25 @@
 								<p class="help-block">좌측에 보이는 문자를 입력해주세요</p>
 							</div>
 						<?php } ?>
-					</li>
-					<li>
+					</li> -->
+					<!-- <li>
 						<span></span>
 						<div class="group">
 							<button type="submit" class="btn btn-success">회원가입</button>
 							<a href="<?php echo site_url(); ?>" class="btn btn-default">취소</a>
 						</div>
-					</li>
-				</ol>
+					</li> -->
+				</ul>
+				<a id="submitButton" class="join-btn"><span>가입하기</span></a>
 			<?php echo form_close(); ?>
+			</div>
+			<a href="#" class="join-btn"></a>
 		</div>
+		<a href="#" class="join-btn">
+			<!-- page end // -->
+		</a>
 	</div>
+	<a href="#" class="join-btn"></a>
 </div>
 
 <?php
