@@ -47,8 +47,9 @@
 			<!-- HERE THE PRICE -->
 			<div class="result">
 				<p class="btxt"><span style="color:red" ><?php echo $korean; ?></span></p>
-				<p class="stxt"> <?php echo $trade; ?></p>
-				<p class="stxt"> <?php echo $high; ?></p>
+				<p class="stxt display-4"> <?php echo $trade; ?></p>
+				<p class="stxt"> <?php echo $low; ?></p>
+				<p class="stxt"> <?php echo $high; ?></p>				
 			</div>
 
 			<!-- PRICE UNTIL HERE -->
