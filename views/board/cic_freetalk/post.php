@@ -113,18 +113,18 @@
 					<h4>BEST VP UP</h4>
 					<ul>
 						<?php
-						if (element('list',element('popularpost', $view))) {
-							foreach (element('list',element('popularpost', $view)) as $popularpost) {
+						if (element('list',element('liskepoint_ranking_freetalk', $view))) {
+							foreach (element('list',element('liskepoint_ranking_freetalk', $view)) as $liskepoint_ranking_freetalk) {
 								?>
 								<li>
-									<a href="<?php echo goto_url(element('posturl', $popularpost)); ?>">
-										<span class="num"><?php echo number_format(element('num', $popularpost)); ?></span>
+									<a href="<?php echo goto_url(element('posturl', $liskepoint_ranking_freetalk)); ?>">
+										<span class="num"><?php echo number_format(element('num', $liskepoint_ranking_freetalk)); ?></span>
 										<div class="my-info">
 											<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>" alt=""></p>
-											<p class="rtxt"><?php echo html_escape(element('post_userid', $popularpost)); ?></p>
+											<p class="rtxt"><?php echo html_escape(element('post_userid', $liskepoint_ranking_freetalk)); ?></p>
 										</div>
-										<span class="txt"><?php echo html_escape(element('post_title', $popularpost)); ?></span>
-										<span class="vp"><?php echo number_format(element('post_like_point', $popularpost)); ?></span>
+										<span class="txt"><?php echo html_escape(element('post_title', $liskepoint_ranking_freetalk)); ?></span>
+										<span class="vp"><?php echo number_format(element('post_like_point', $liskepoint_ranking_freetalk)); ?></span>
 									</a>
 								</li>
 						<?php

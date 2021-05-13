@@ -71,7 +71,7 @@ class Main extends CB_Controller
 		$limit = 10;
 
 		$popularpost = $this->Post_model
-			->get_popularpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 
 		$list_num = 1;
 		

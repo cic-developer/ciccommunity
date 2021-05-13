@@ -78,7 +78,7 @@ class Board_post extends CB_Controller
 
 		$list_num = 1;
 		$popularpost = $this->Post_model
-			->get_popularpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 			if (element('list', $popularpost)) {
 				foreach (element('list', $popularpost) as $key => $val) {
 					$popularpost['list'][$key]['post_display_name'] = display_username(
@@ -115,7 +115,7 @@ class Board_post extends CB_Controller
 
 			$list_num = 1;
 			$bestpost = $this->Post_model
-				->get_bestpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+				->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 			if (element('list', $bestpost)) {
 			foreach (element('list', $bestpost) as $key => $val) {
 				$bestpost['list'][$key]['post_display_name'] = display_username(
@@ -245,24 +245,24 @@ class Board_post extends CB_Controller
 			'post_del <>' => 2,
 		);
 		$limit = 10;
-		$popularpost = $this->Post_model
-			->get_popularpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		$liskepoint_ranking_freetalk = $this->Post_model
+			->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 			$list_num = 1;
-			if (element('list', $popularpost)) {
-				foreach (element('list', $popularpost) as $key => $val) {
-					$popularpost['list'][$key]['post_display_name'] = display_username(
+			if (element('list', $liskepoint_ranking_freetalk)) {
+				foreach (element('list', $liskepoint_ranking_freetalk) as $key => $val) {
+					$liskepoint_ranking_freetalk['list'][$key]['post_display_name'] = display_username(
 						element('post_userid', $val),
 						element('post_nickname', $val)
 					);
-					$popularpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-					$popularpost['list'][$key]['num'] = $list_num++;
+					$liskepoint_ranking_freetalk['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+					$liskepoint_ranking_freetalk['list'][$key]['num'] = $list_num++;
 					if ($board) {
-						$popularpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-						$popularpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+						$liskepoint_ranking_freetalk['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+						$liskepoint_ranking_freetalk['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
 					}
-					$popularpost['list'][$key]['category'] = '';
+					$liskepoint_ranking_freetalk['list'][$key]['category'] = '';
 					if (element('post_category', $val)) {
-						$popularpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+						$liskepoint_ranking_freetalk['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
 					}
 					if (element('post_image', $val)) {
 						$this->load->model('Post_file_model');
@@ -271,9 +271,9 @@ class Board_post extends CB_Controller
 							'pfi_is_image' => 1,
 						);
 						$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-						$popularpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+						$liskepoint_ranking_freetalk['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
 					} else {
-						$popularpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+						$liskepoint_ranking_freetalk['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
 					}
 				}
 			}
@@ -284,24 +284,24 @@ class Board_post extends CB_Controller
 				'post_best_state >' => 0
 			);
 
-			$bestpost = $this->Post_model
-				->get_bestpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			$liskepoint_ranking_writer = $this->Post_model
+				->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 			$list_num = 1;
-			if (element('list', $bestpost)) {
-			foreach (element('list', $bestpost) as $key => $val) {
-				$bestpost['list'][$key]['post_display_name'] = display_username(
+			if (element('list', $liskepoint_ranking_writer)) {
+			foreach (element('list', $liskepoint_ranking_writer) as $key => $val) {
+				$liskepoint_ranking_writer['list'][$key]['post_display_name'] = display_username(
 					element('post_userid', $val),
 					element('post_nickname', $val)
 				);
-				$bestpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-				$bestpost['list'][$key]['num'] = $list_num++;
+				$liskepoint_ranking_writer['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+				$liskepoint_ranking_writer['list'][$key]['num'] = $list_num++;
 				if ($board) {
-					$bestpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-					$bestpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+					$liskepoint_ranking_writer['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+					$liskepoint_ranking_writer['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
 				}
-				$bestpost['list'][$key]['category'] = '';
+				$liskepoint_ranking_writer['list'][$key]['category'] = '';
 				if (element('post_category', $val)) {
-					$bestpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+					$liskepoint_ranking_writer['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
 				}
 				if (element('post_image', $val)) {
 					$imagewhere = array(
@@ -309,15 +309,15 @@ class Board_post extends CB_Controller
 						'pfi_is_image' => 1,
 					);
 					$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-					$bestpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+					$liskepoint_ranking_writer['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
 				} else {
-					$bestpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+					$liskepoint_ranking_writer['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
 				}
 			}
 		}
 		}
-		$view['view']['popularpost'] = $popularpost;
-		$view['view']['bestpost'] = $bestpost;
+		$view['view']['liskepoint_ranking_freetalk'] = $liskepoint_ranking_freetalk;
+		$view['view']['liskepoint_ranking_writer'] = $liskepoint_ranking_writer;
 
 		$mem_id = (int) $this->member->item('mem_id');
 

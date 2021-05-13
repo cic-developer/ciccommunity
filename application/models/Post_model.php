@@ -622,7 +622,7 @@ class Post_model extends CB_Model
 		return $this->db->update($this->_table);
 	}
 
-	public function get_popularpost_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
+	public function get_like_point_ranking_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
 		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
 			$orderby = 'post_like_point desc';
@@ -762,144 +762,143 @@ class Post_model extends CB_Model
 		return $result;
 	}
 
-	
-	// public function get_bestpost_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
-	// {
-	// 	if ( ! in_array(strtolower($orderby), $this->allow_order)) {
-	// 		$orderby = 'post_like_point desc';
-	// 	}
-	// 	$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
-	// 	if (empty($sfield)) {
-	// 		$sfield = array('post_title', 'post_content');
-	// 	}
-	// 	$search_where = array();
-	// 	$search_like = array();
-	// 	$search_or_like = array();
-	// 	if ($sfield && is_array($sfield)) {
-	// 		foreach ($sfield as $skey => $sval) {
-	// 			$ssf = $sval;
-	// 			if ($skeyword && $ssf && in_array($ssf, $this->allow_search_field)) {
-	// 				if (in_array($ssf, $this->search_field_equal)) {
-	// 					$search_where[$ssf] = $skeyword;
-	// 				} else {
-	// 					$swordarray = explode(' ', $skeyword);
-	// 					foreach ($swordarray as $str) {
-	// 						if (empty($ssf)) {
-	// 							continue;
-	// 						}
-	// 						if ($sop === 'AND') {
-	// 							$search_like[] = array($ssf => $str);
-	// 						} else {
-	// 							$search_or_like[] = array($ssf => $str);
-	// 						}
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-	// 	} else {
-	// 		$ssf = $sfield;
-	// 		if ($skeyword && $ssf && in_array($ssf, $this->allow_search_field)) {
-	// 			if (in_array($ssf, $this->search_field_equal)) {
-	// 				$search_where[$ssf] = $skeyword;
-	// 			} else {
-	// 				$swordarray = explode(' ', $skeyword);
-	// 				foreach ($swordarray as $str) {
-	// 					if (empty($ssf)) {
-	// 						continue;
-	// 					}
-	// 					if ($sop === 'AND') {
-	// 						$search_like[] = array($ssf => $str);
-	// 					} else {
-	// 						$search_or_like[] = array($ssf => $str);
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-	// 	}
+	public function get_dislike_point_ranking_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
+	{
+		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
+			$orderby = 'post_dislike_point desc';
+		}
+		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
+		if (empty($sfield)) {
+			$sfield = array('post_title', 'post_content');
+		}
+		$search_where = array();
+		$search_like = array();
+		$search_or_like = array();
+		if ($sfield && is_array($sfield)) {
+			foreach ($sfield as $skey => $sval) {
+				$ssf = $sval;
+				if ($skeyword && $ssf && in_array($ssf, $this->allow_search_field)) {
+					if (in_array($ssf, $this->search_field_equal)) {
+						$search_where[$ssf] = $skeyword;
+					} else {
+						$swordarray = explode(' ', $skeyword);
+						foreach ($swordarray as $str) {
+							if (empty($ssf)) {
+								continue;
+							}
+							if ($sop === 'AND') {
+								$search_like[] = array($ssf => $str);
+							} else {
+								$search_or_like[] = array($ssf => $str);
+							}
+						}
+					}
+				}
+			}
+		} else {
+			$ssf = $sfield;
+			if ($skeyword && $ssf && in_array($ssf, $this->allow_search_field)) {
+				if (in_array($ssf, $this->search_field_equal)) {
+					$search_where[$ssf] = $skeyword;
+				} else {
+					$swordarray = explode(' ', $skeyword);
+					foreach ($swordarray as $str) {
+						if (empty($ssf)) {
+							continue;
+						}
+						if ($sop === 'AND') {
+							$search_like[] = array($ssf => $str);
+						} else {
+							$search_or_like[] = array($ssf => $str);
+						}
+					}
+				}
+			}
+		}
 
-	// 	$this->db->select('post.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point');
-	// 	$this->db->from($this->_table);
-	// 	$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
+		$this->db->select('post.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point');
+		$this->db->from($this->_table);
+		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
 
-	// 	if ($where) {
-	// 		$this->db->where($where);
-	// 	}
-	// 	if ($search_where) {
-	// 		$this->db->where($search_where);
-	// 	}
-	// 	if ($category_id) {
-	// 		if (strpos($category_id, '.')) {
-	// 			$this->db->like('post_category', $category_id . '', 'after');
-	// 		} else {
-	// 			$this->db->group_start();
-	// 			$this->db->where('post_category', $category_id);
-	// 			$this->db->or_like('post_category', $category_id . '.', 'after');
-	// 			$this->db->group_end();
-	// 		}
-	// 	}
-	// 	if ($search_like) {
-	// 		foreach ($search_like as $item) {
-	// 			foreach ($item as $skey => $sval) {
-	// 				$this->db->like($skey, $sval);
-	// 			}
-	// 		}
-	// 	}
-	// 	if ($search_or_like) {
-	// 		$this->db->group_start();
-	// 		foreach ($search_or_like as $item) {
-	// 			foreach ($item as $skey => $sval) {
-	// 				$this->db->or_like($skey, $sval);
-	// 			}
-	// 		}
-	// 		$this->db->group_end();
-	// 	}
+		if ($where) {
+			$this->db->where($where);
+		}
+		if ($search_where) {
+			$this->db->where($search_where);
+		}
+		if ($category_id) {
+			if (strpos($category_id, '.')) {
+				$this->db->like('post_category', $category_id . '', 'after');
+			} else {
+				$this->db->group_start();
+				$this->db->where('post_category', $category_id);
+				$this->db->or_like('post_category', $category_id . '.', 'after');
+				$this->db->group_end();
+			}
+		}
+		if ($search_like) {
+			foreach ($search_like as $item) {
+				foreach ($item as $skey => $sval) {
+					$this->db->like($skey, $sval);
+				}
+			}
+		}
+		if ($search_or_like) {
+			$this->db->group_start();
+			foreach ($search_or_like as $item) {
+				foreach ($item as $skey => $sval) {
+					$this->db->or_like($skey, $sval);
+				}
+			}
+			$this->db->group_end();
+		}
 
-	// 	$this->db->order_by($orderby);
-	// 	if ($limit) {
-	// 		$this->db->limit($limit, $offset);
-	// 	}
-	// 	$qry = $this->db->get();
-	// 	$result['list'] = $qry->result_array();
+		$this->db->order_by($orderby);
+		if ($limit) {
+			$this->db->limit($limit, $offset);
+		}
+		$qry = $this->db->get();
+		$result['list'] = $qry->result_array();
 
-	// 	$this->db->select('count(*) as rownum');
-	// 	$this->db->from($this->_table);
-	// 	$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
-	// 	if ($where) {
-	// 		$this->db->where($where);
-	// 	}
-	// 	if ($search_where) {
-	// 		$this->db->where($search_where);
-	// 	}
-	// 	if ($category_id) {
-	// 		if (strpos($category_id, '.')) {
-	// 			$this->db->like('post_category', $category_id . '', 'after');
-	// 		} else {
-	// 			$this->db->group_start();
-	// 			$this->db->where('post_category', $category_id);
-	// 			$this->db->or_like('post_category', $category_id . '.', 'after');
-	// 			$this->db->group_end();
-	// 		}
-	// 	}
-	// 	if ($search_like) {
-	// 		foreach ($search_like as $item) {
-	// 			foreach ($item as $skey => $sval) {
-	// 				$this->db->like($skey, $sval);
-	// 			}
-	// 		}
-	// 	}
-	// 	if ($search_or_like) {
-	// 		$this->db->group_start();
-	// 		foreach ($search_or_like as $item) {
-	// 			foreach ($item as $skey => $sval) {
-	// 				$this->db->or_like($skey, $sval);
-	// 			}
-	// 		}
-	// 		$this->db->group_end();
-	// 	}
-	// 	$qry = $this->db->get();
-	// 	$rows = $qry->row_array();
-	// 	$result['total_rows'] = $rows['rownum'];
+		$this->db->select('count(*) as rownum');
+		$this->db->from($this->_table);
+		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
+		if ($where) {
+			$this->db->where($where);
+		}
+		if ($search_where) {
+			$this->db->where($search_where);
+		}
+		if ($category_id) {
+			if (strpos($category_id, '.')) {
+				$this->db->like('post_category', $category_id . '', 'after');
+			} else {
+				$this->db->group_start();
+				$this->db->where('post_category', $category_id);
+				$this->db->or_like('post_category', $category_id . '.', 'after');
+				$this->db->group_end();
+			}
+		}
+		if ($search_like) {
+			foreach ($search_like as $item) {
+				foreach ($item as $skey => $sval) {
+					$this->db->like($skey, $sval);
+				}
+			}
+		}
+		if ($search_or_like) {
+			$this->db->group_start();
+			foreach ($search_or_like as $item) {
+				foreach ($item as $skey => $sval) {
+					$this->db->or_like($skey, $sval);
+				}
+			}
+			$this->db->group_end();
+		}
+		$qry = $this->db->get();
+		$rows = $qry->row_array();
+		$result['total_rows'] = $rows['rownum'];
 
-	// 	return $result;
-	// }
+		return $result;
+	}
 }

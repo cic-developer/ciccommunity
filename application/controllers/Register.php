@@ -356,13 +356,22 @@ class Register extends CB_Controller
 			'label' => '패스워드 확인',
 			'rules' => 'trim|required|min_length[' . $password_length . ']|matches[mem_password]',
 		);
-		if ( ! $selfcert_username) {
-			$configbasic['mem_username'] = array(
-				'field' => 'mem_username',
-				'label' => '이름',
-				'rules' => 'trim|min_length[2]|max_length[20]',
-			);
-		}
+		// ciboard 있던것
+		// if ( ! $selfcert_username) {
+		// 	$configbasic['mem_username'] = array(
+		// 		'field' => 'mem_username',
+		// 		'label' => '이름',
+		// 		'rules' => 'trim|min_length[2]|max_length[20]',
+		// 	);
+		// }
+		// ciboard 있던것
+		// 위의 ciboard원본에서 cic로 변경된 부분
+		$configbasic['mem_username'] = array(
+			'field' => 'mem_username',
+			'label' => '이름',
+			'rules' => 'trim|min_length[2]|max_length[20]',
+		);
+		// 위의 ciboard원본에서 cic로 변경된 부분
 		$configbasic['mem_nickname'] = array(
 			'field' => 'mem_nickname',
 			'label' => '닉네임',
@@ -380,27 +389,46 @@ class Register extends CB_Controller
 			'label' => '홈페이지',
 			'rules' => 'prep_url|valid_url',
 		);
-		if ( ! $selfcert_phone) {
-			$configbasic['mem_phone'] = array(
-				'field' => 'mem_phone',
-				'label' => '전화번호',
-				'rules' => 'trim|valid_phone',
-			);
-		}
-		if ( ! $selfcert_birthday) {
-			$configbasic['mem_birthday'] = array(
-				'field' => 'mem_birthday',
-				'label' => '생년월일',
-				'rules' => 'trim|exact_length[10]',
-			);
-		}
-		if ( ! $selfcert_sex) {
-			$configbasic['mem_sex'] = array(
-				'field' => 'mem_sex',
-				'label' => '성별',
-				'rules' => 'trim|exact_length[1]',
-			);
-		}
+		// ciboard 있던것
+		// if ( ! $selfcert_phone) {
+		// 	$configbasic['mem_phone'] = array(
+		// 		'field' => 'mem_phone',
+		// 		'label' => '전화번호',
+		// 		'rules' => 'trim|valid_phone',
+		// 	);
+		// }
+		// if ( ! $selfcert_birthday) {
+		// 	$configbasic['mem_birthday'] = array(
+		// 		'field' => 'mem_birthday',
+		// 		'label' => '생년월일',
+		// 		'rules' => 'trim|exact_length[10]',
+		// 	);
+		// }
+		// if ( ! $selfcert_sex) {
+		// 	$configbasic['mem_sex'] = array(
+		// 		'field' => 'mem_sex',
+		// 		'label' => '성별',
+		// 		'rules' => 'trim|exact_length[1]',
+		// 	);
+		// }
+		// ciboard 있던것
+		// 위의 ciboard원본에서 cic로 변경된 부분
+		$configbasic['mem_phone'] = array(
+			'field' => 'mem_phone',
+			'label' => '전화번호',
+			'rules' => 'trim|valid_phone',
+		);
+		$configbasic['mem_birthday'] = array(
+			'field' => 'mem_birthday',
+			'label' => '생년월일',
+			'rules' => 'trim|exact_length[8]',
+		);
+		$configbasic['mem_sex'] = array(
+			'field' => 'mem_sex',
+			'label' => '성별',
+			'rules' => 'trim|exact_length[1]',
+		);
+		// 위의 ciboard원본에서 cic로 변경된 부분
 		$configbasic['mem_zipcode'] = array(
 			'field' => 'mem_zipcode',
 			'label' => '우편번호',
@@ -1020,31 +1048,31 @@ class Register extends CB_Controller
 			}
 
 			// cic에서 추가된 부분
-			// $this->load->model(array('CIC_vp_config_model', 'CIC_cp_config_model', 'CIC_vp_model', 'CIC_cp_model'));
-			// $_vpConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 1 AND vpc_enable = 1 AND vpc_value > 0");
-			// $_cpConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 1 AND cpc_enable = 1 AND cpc_value > 0");
+			$this->load->model(array('CIC_vp_config_model', 'CIC_cp_config_model', 'CIC_vp_model', 'CIC_cp_model'));
+			$_vpConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 1 AND vpc_enable = 1 AND vpc_value > 0");
+			$_cpConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 1 AND cpc_enable = 1 AND cpc_value > 0");
 
-			// if($_vpConfig){
-			// 	$this->point->insert_vp(
-			// 		$mem_id,
-			// 		element('vpc_value', $_vpConfig),
-			// 		'회원가입을 축하합니다',
-			// 		'member',
-			// 		$mem_id,
-			// 		'회원가입 VP 지급'
-			// 	);	
-			// }
+			if($_vpConfig){
+				$this->point->insert_vp(
+					$mem_id,
+					element('vpc_value', $_vpConfig),
+					'회원가입을 축하합니다',
+					'member',
+					$mem_id,
+					'회원가입 VP 지급'
+				);	
+			}
 			
-			// if($_cpConfig){
-			// 	$this->point->insert_cp(
-			// 		$mem_id,
-			// 		element('cpc_value', $_cpConfig),
-			// 		'회원가입을 축하합니다',
-			// 		'member',
-			// 		$mem_id,
-			// 		'회원가입 CP 지급'
-			// 	);	
-			// }
+			if($_cpConfig){
+				$this->point->insert_cp(
+					$mem_id,
+					element('cpc_value', $_cpConfig),
+					'회원가입을 축하합니다',
+					'member',
+					$mem_id,
+					'회원가입 CP 지급'
+				);	
+			}
 			// cic에서 추가된 부분
 
 			$this->point->insert_point(
@@ -1357,53 +1385,53 @@ class Register extends CB_Controller
 			}
 
 			// cic에서 추가된 부분
-			// if ($recommend_userid){
-			// 	$recommend_user = $this->member_model->get_by_userid($recommend_userid);
-			// 	$signid_user = $this->member_model->get_by_memid($mem_id);
+			if ($recommend_userid){
+				$recommend_user = $this->member_model->get_by_userid($recommend_userid);
+				$signid_user = $this->member_model->get_by_memid($mem_id);
 
-			// 	$_vpRecommendConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 4 AND vpc_enable = 1 AND vpc_value > 0");
-			// 	$_cpRecommendConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 4 AND cpc_enable = 1 AND cpc_value > 0");
-			// 	$_vpSigninConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 5 AND vpc_enable = 1 AND vpc_value > 0");
-			// 	$_cpSigninConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 5 AND cpc_enable = 1 AND cpc_value > 0");
+				$_vpRecommendConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 4 AND vpc_enable = 1 AND vpc_value > 0");
+				$_cpRecommendConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 4 AND cpc_enable = 1 AND cpc_value > 0");
+				$_vpSigninConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 5 AND vpc_enable = 1 AND vpc_value > 0");
+				$_cpSigninConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 5 AND cpc_enable = 1 AND cpc_value > 0");
 				
-			// 	if($recommend_user){
-			// 		$this->point->insert_vp(
-			// 			element('mem_id', $recommend_user),
-			// 			element('vpc_value', $_vpRecommendConfig),
-			// 			element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
-			// 			'recommeded',
-			// 			$mem_id,
-			// 			'Supercommunity 홍보 VP 보상'
-			// 		);
+				if($recommend_user){
+					$this->point->insert_vp(
+						element('mem_id', $recommend_user),
+						element('vpc_value', $_vpRecommendConfig),
+						element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
+						'recommeded',
+						$mem_id,
+						'Supercommunity 홍보 VP 보상'
+					);
 
-			// 		$this->point->insert_cp(
-			// 			element('mem_id', $recommend_user),
-			// 			element('cpc_value', $_cpRecommendConfig),
-			// 			element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
-			// 			'recommeded',
-			// 			$mem_id,
-			// 			'Supercommunity 홍보 CP 보상'
-			// 		);
-			// 	}
+					$this->point->insert_cp(
+						element('mem_id', $recommend_user),
+						element('cpc_value', $_cpRecommendConfig),
+						element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
+						'recommeded',
+						$mem_id,
+						'Supercommunity 홍보 CP 보상'
+					);
+				}
 
-			// 	$this->point->insert_vp(
-			// 		$mem_id,
-			// 		element('vpc_value', $_vpSigninConfig),
-			// 		element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
-			// 		'recommed',
-			// 		element('mem_id', $recommend_user),
-			// 		'추천인 등록 VP 보상'
-			// 	);
+				$this->point->insert_vp(
+					$mem_id,
+					element('vpc_value', $_vpSigninConfig),
+					element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
+					'recommed',
+					element('mem_id', $recommend_user),
+					'추천인 등록 VP 보상'
+				);
 
-			// 	$this->point->insert_cp(
-			// 		$mem_id,
-			// 		element('cpc_value', $_cpSigninConfig),
-			// 		element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
-			// 		'recommed',
-			// 		element('mem_id', $recommend_user),
-			// 		'추천인 등록 CP 보상'
-			// 	);
-			// }
+				$this->point->insert_cp(
+					$mem_id,
+					element('cpc_value', $_cpSigninConfig),
+					element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
+					'recommed',
+					element('mem_id', $recommend_user),
+					'추천인 등록 CP 보상'
+				);
+			}
 			// cic에서 추가된 부분
 
 			$this->session->set_flashdata(

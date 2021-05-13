@@ -91,7 +91,7 @@ public function index()
 		}
 		
 		$result = $this->{$this->modelname}
-			->get_popularpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->get_like_point_ranking_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		
 		if (element('list', $result)) {
@@ -206,7 +206,7 @@ public function index()
 		}
 		
 		$result = $this->{$this->modelname}
-		->get_bestpost_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		->get_like_point_ranking_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		
 		if (element('list', $result)) {
