@@ -99,9 +99,9 @@ class Coin_model_admin extends CB_Model
     
 
     function reseach_coinAdmin($search){
-        // if (empty($search)) {
-		// 	echo 'field is empty';
-		// }
+        if (empty($search)) {
+			return result_array();
+		}
 		$this->db->select('name_ko');
 		$this->db->join('cic_coin_admins', 'cic_coin_admins.coin_market = cic_coin_stock.market', 'inner');
 		$this->db->where('cic_coin_admins.keyword', $search);
