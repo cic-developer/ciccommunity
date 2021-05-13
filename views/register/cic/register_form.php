@@ -1,7 +1,7 @@
-<div id="container-wrap">
-	<div id="contents" class="div-cont">
+<div id="container-wrap" class="register">
+	<div id="contents" class="div-cont table-box">
 		<!-- page start // -->
-		<div class="member-wrap join">
+		<div class="member-wrap join table-body">
 			<h2><span class="blind">cic community</span></h2>
 			<?php
 			echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
@@ -10,9 +10,9 @@
 			echo form_open_multipart(current_full_url(), $attributes);
 			?>
 			<div class="entry">
-				<ul>
+				<ul class="registerform">
 
-				<?php
+				<!-- <?php
 				foreach (element('html_content', $view) as $key => $value) {
 				?>
 					<li>
@@ -26,7 +26,7 @@
 					</li>
 				<?php
 				}
-				?>
+				?> -->
 			
 
 				<!--  -->
@@ -73,13 +73,12 @@
 							?>
 
 						</div>
-						
-					</li>
-					<p class="rtxt mg10t">
+						<p class="rtxt mg10t">
 							<?php if (element('description', $value)) { ?>
 								<p class="help-block"><?php echo element('description', $value); ?></p>
 							<?php } ?>
 						</p>
+					</li>
 				<?php
 					}
 				}

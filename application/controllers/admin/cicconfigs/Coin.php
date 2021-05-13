@@ -220,10 +220,7 @@ class Coin extends CB_Controller
 		$view['keylist'] = $keylist;
 
 		//DELETE KEYWORD
-		$key_id = $_GET['id'];
-		print_r($key_id);
-		//$deleted = $this->CIC_Coin_Keyword->delete_keyword($key_id);
-		
+
 		/**
 		* 어드민 레이아웃을 정의합니다
 		*/
@@ -235,47 +232,37 @@ class Coin extends CB_Controller
 	}
 
 
-	// function delete_keyword(){
+	function delete_keyword(){
 
-	// 	// 이벤트 라이브러리를 로딩합니다
-	// 	$eventname = 'event_amdmin_coin_delete';
-	// 	$this->load->event($eventname);
-	// 	// 이벤트가 존재하면 실행합니다
-	// 	$view['view']['event']['before'] = Events::trigger('before', $eventname);
-	// 	//$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
-	// 	$view = array();
-	// 	$view['view'] = array();			
-	// 	$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-
-	// 	// foreach($key_search as $keys){
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_amdmin_coin_delete';
+		$this->load->event($eventname);
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		//$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$view = array();
+		$view['view'] = array();			
+		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
 
-	// 	// 	$market = $keys['market'];
-	// 	// 	$api_result = $this->CIC_Coin -> get_price($market);
-	// 	// 	$korean = $keys['name_ko'];
-	// 	// 	$high = $api_result['high_price'];
-	// 	// 	$low =$api_result['low_price'];
-	// 	// 	$trade = $api_result['trade_price'];
-	// 	// 	$view['korean'] = $korean;
-	// 	// 	$view['low'] = $low;
-	// 	// 	$view['high'] = $high;
-	// 	// 	$view['trade'] = $trade;
-	// 	// 	// print_r("￦".$api_result);
-	// // }
-	// 	// $deleted = $this->CIC_Coin_Keyword->delete_keyword($key_id);
-	// 	// if($deleted == 1){
-	// 	// 	$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-	// 	// 	//redirect('https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=ZRX');
-	// 	// }
+		//DELETE KEYWORD
+		$key_id = (int)$_GET['id'];
+		print_r($key_id);
+		$deleted = $this->CIC_Coin_Keyword_model->delete_keyword($key_id);
+		print_r($deleted);
+		if($deleted == 1){
+			echo "Data deleted successfully !";;
+			redirect('https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=ZRX');
+		}
 
-	// 	$layoutconfig2 = array('layout' => 'layout', 'skin' => 'delete_keyword');
-	// 	//$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
-	// 	$view['layout'] = $this->managelayout->admin($layoutconfig2, $this->cbconfig->get_device_view_type());
-	// 	$this->data = $view;
-	// 	$this->layout = element('layout_skin_file', element('layout', $view));
-	// 	$this->view = element('view_skin_file', element('layout', $view));
+		$layoutconfig2 = array('layout' => 'layout', 'skin' => 'delete_keyword');
+		//$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
+		$view['layout'] = $this->managelayout->admin($layoutconfig2, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
 
-	// }
+	}
 	
 }
 ?>
