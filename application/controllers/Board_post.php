@@ -274,31 +274,34 @@ class Board_post extends CB_Controller
 								}
 							}
 						}
-			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-			$where = array(
-				'post_exept_state' => 0,
-				'post_datetime >=' => $checktime,
-				'post_del <>' => 2,
-			);
-			$limit = 10;
-			$list_num = 1;
-			$dislikepoint_ranking_freetalk = $this->Post_model
+			// $checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+			// $where = array(
+			// 	'brd_id' => 1,
+			// 	'post_exept_state' => 0,
+			// 	'post_datetime >=' => $checktime,
+			// 	'post_del <>' => 2,
+			// );
+			// $limit = 10;
+			// $list_num = 1;
+			$dislike_point_ranking_freetalk = $this->Post_model
 				->get_dislike_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-					if (element('list', $dislikepoint_ranking_freetalk)) {
-						foreach (element('list', $dislikepoint_ranking_freetalk) as $key => $val) {
-							$dislikepoint_ranking_freetalk['list'][$key]['post_display_name'] = display_username(
+				print_r($dislike_point_ranking_freetalk);
+				exit;
+					if (element('list', $dislike_point_ranking_freetalk)) {
+						foreach (element('list', $dislike_point_ranking_freetalk) as $key => $val) {
+							$dislike_point_ranking_freetalk['list'][$key]['post_display_name'] = display_username(
 								element('post_userid', $val),
 								element('post_nickname', $val)
 							);
-							$dislikepoint_ranking_freetalk['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-							$dislikepoint_ranking_freetalk['list'][$key]['num'] = $list_num++;
+							$dislike_point_ranking_freetalk['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+							$dislike_point_ranking_freetalk['list'][$key]['num'] = $list_num++;
 							if ($board) {
-								$dislikepoint_ranking_freetalk['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-								$dislikepoint_ranking_freetalk['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+								$dislike_point_ranking_freetalk['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+								$dislike_point_ranking_freetalk['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
 							}
-							$dislikepoint_ranking_freetalk['list'][$key]['category'] = '';
+							$dislike_point_ranking_freetalk['list'][$key]['category'] = '';
 							if (element('post_category', $val)) {
-								$dislikepoint_ranking_freetalk['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+								$dislike_point_ranking_freetalk['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
 							}
 							if (element('post_image', $val)) {
 								$this->load->model('Post_file_model');
@@ -307,9 +310,9 @@ class Board_post extends CB_Controller
 									'pfi_is_image' => 1,
 								);
 								$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-								$dislikepoint_ranking_freetalk['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+								$dislike_point_ranking_freetalk['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
 							} else {
-								$dislikepoint_ranking_freetalk['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+								$dislike_point_ranking_freetalk['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
 								}
 							}
 						}
@@ -354,7 +357,7 @@ class Board_post extends CB_Controller
 		}
 		$view['view']['like_point_ranking_freetalk'] = $like_point_ranking_freetalk;
 		$view['view']['liskepoint_ranking_writer'] = $liskepoint_ranking_writer;
-		$view['view']['dislikepoint_ranking_freetalk'] = $dislikepoint_ranking_freetalk;
+		$view['view']['dislike_point_ranking_freetalk'] = $dislike_point_ranking_freetalk;
 		$view['view']['dislikepoint_ranking_writer'] = $dislikepoint_ranking_writer;
 		$mem_id = (int) $this->member->item('mem_id');
 

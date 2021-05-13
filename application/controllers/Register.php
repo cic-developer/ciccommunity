@@ -1007,7 +1007,7 @@ class Register extends CB_Controller
 				'mni_start_datetime' => cdate('Y-m-d H:i:s'),
 			);
 			$this->Member_nickname_model->insert($nickinsert);
-
+/*
 			$extradata = array();
 			if ($form && is_array($form)) {
 				$this->load->model('Member_extra_vars_model');
@@ -1022,7 +1022,7 @@ class Register extends CB_Controller
 				}
 				$this->Member_extra_vars_model->save($mem_id, $extradata);
 			}
-/*
+
 			$levelhistoryinsert = array(
 				'mem_id' => $mem_id,
 				'mlh_from' => 0,

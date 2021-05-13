@@ -26,11 +26,7 @@ class Coin extends CB_Controller
 	 */
 	protected $models = array('CIC_Coin', 'CIC_Coin_Keyword');
 
-	/**
-	 * 이 컨트롤러의 메인 모델 이름입니다
-	 */
-	protected $modelname = 'CIC_Coin';
-
+	protected $modelname = 'CIC_Coin_model';
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
@@ -53,7 +49,7 @@ class Coin extends CB_Controller
 	public function CStock()
 	{
 		// 이벤트 라이브러리를 로딩합니다
-        $eventname = 'event_stok';
+        $eventname = 'event_stock';
         $this->load->event($eventname);
 		
 		$view = array();
@@ -295,7 +291,7 @@ class Coin extends CB_Controller
 
 
 			// 	$market = $keys['market'];
-			// 	$api_result = $this->CIC_Coin_model -> get_price($market);
+			// 	$api_result = $this->CIC_Coin -> get_price($market);
 			// 	$korean = $keys['name_ko'];
 			// 	$high = $api_result['high_price'];
 			// 	$low =$api_result['low_price'];
@@ -313,7 +309,7 @@ class Coin extends CB_Controller
 			// }
 
 
-			// $deleted = $this->CIC_Coin_Keyword_model->delete_keyword($key_id);
+			// $deleted = $this->CIC_Coin_Keyword->delete_keyword($key_id);
 			// if($deleted == 1){
 			// 	$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 			// 	//redirect('https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=ZRX');
