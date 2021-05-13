@@ -44,6 +44,13 @@
 				<p class="btxt"><span>“리플”</span>에 대한 통합검색 총</p>
 				<p class="stxt">2,547건</p>
 			</div>
+			<!-- HERE THE PRICE -->
+			<div class="result">
+				<p class="btxt"><span></span><?php echo $korean; ?></p>
+				<p class="stxt"><?php echo $trade; ?></p>
+			</div>
+
+			<!-- PRICE UNTIL HERE -->
 			<div class="gap35"></div>
 			<div class="cont">
 				<div class="tits">

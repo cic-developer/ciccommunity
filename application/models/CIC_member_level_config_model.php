@@ -29,6 +29,7 @@ class CIC_member_level_config_model extends CB_Model
 
 	function get_by_pointSum($pointSum = 0)
 	{
+		exit(is_null($pointSum));
 		if($pointSum >= 0){
 			$this->db->where('mlc_target_point <=', $pointSum);
 			$this->db->where('mlc_enable', 1);

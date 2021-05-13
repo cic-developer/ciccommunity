@@ -217,7 +217,7 @@ class Register extends CB_Controller
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_register_form';
 		$this->load->event($eventname);
-
+		
 		if ($this->member->is_member() && ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
 			redirect();
 		}
@@ -1440,7 +1440,7 @@ class Register extends CB_Controller
 				'nickname',
 				$this->input->post('mem_nickname')
 			);
-			
+
 			if ( ! $this->cbconfig->item('use_register_email_auth')) {
 				$this->session->set_userdata(
 					'mem_id',
