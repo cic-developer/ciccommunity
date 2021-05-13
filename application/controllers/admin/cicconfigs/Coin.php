@@ -24,12 +24,12 @@ class Coin extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_Coin');
+	protected $models = array('CIC_Coin', 'CIC_Coin_Keyword');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
 	 */
-	protected $modelname = 'CIC_Coin_model';
+	protected $modelname = 'CIC_Coin';
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -44,7 +44,7 @@ class Coin extends CB_Controller
 		 * 라이브러리를 로딩합니다
 		 */
 		$this->load->library(array('pagination', 'querystring', 'form_validation', 'session'));
-		$this->load->model(array('coin_model', 'CIC_Coin_Keyword_model'));
+
 	}
 
     /**
@@ -175,39 +175,11 @@ class Coin extends CB_Controller
 			}
 		}
 
-       	//GET MARKET PRICE
-	    // $getStock = $this -> CIC_Coin_Keyword_model->get_keyword();
-    
-		// if($refresh){
-		// 	for($i = 0; $i < count($getStock); $i++){
-				
-		// 		$marketdata[] = $getStock[$i]['market'];
-
-		// 		if($marketdata){
-		// 			$realtime_coin_info = $this->CIC_Coin_model->get_price($marketdata[$i]);
-		// 		}else{
-		// 			$realtime_coin_info = 0;
-		// 		}
-
-			
-		// 		echo "<br><pre>";
-		// 		print_r($realtime_coin_info);
-		// 		echo "</pre>";
-		// 		$refresh = $this -> input -> post('refresh');
-				
-		// 			$view['realtime_coin_info'] = $realtime_coin_info;
-		// 	}
-
-
-		// }
-
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
 			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 			$this->data = $view;
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
-
-	
 		}
 		
 	

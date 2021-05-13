@@ -692,7 +692,10 @@ class Register extends CB_Controller
 		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
 		 */
 		if ($form_validation === false OR $file_error !== '' OR $file_error2 !== '') {
-
+			if($this->form_validation->error_string()){
+				echo '<script>alert("에러");</script>';
+				echo '<script>alert("'.$this->form_validation->error_string().'");</script>';
+			}
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 
@@ -874,7 +877,7 @@ class Register extends CB_Controller
 			 * 유효성 검사를 통과한 경우입니다.
 			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
 			 */
-/*
+
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
@@ -888,7 +891,7 @@ class Register extends CB_Controller
 			$insertdata['mem_nickname'] = $this->input->post('mem_nickname');
 			$metadata['meta_nickname_datetime'] = cdate('Y-m-d H:i:s');
 			$insertdata['mem_level'] = 0;// 시작 레벨은 무조건 0 // => ciboard원본 $mem_level;
-*/
+
 			// ciboard 있던것
 			// if ($selfcert_username) {
 			// 	$insertdata['mem_username'] = $selfcert_username;
@@ -914,7 +917,7 @@ class Register extends CB_Controller
 			// 	$insertdata['mem_sex'] = $this->input->post('mem_sex', null, '');
 			// }
 			// ciboard 있던것
-/*
+
 			// 위의 ciboard원본에서 cic로 변경된 부분
 			if (isset($form['mem_username']['use']) && $form['mem_username']['use']) {
 				$insertdata['mem_username'] = $this->input->post('mem_username', null, '');
@@ -977,7 +980,7 @@ class Register extends CB_Controller
 				'mem_userid' => $this->input->post('mem_userid'),
 			);
 			$this->Member_userid_model->insert($useridinsertdata);
-*/
+
 			// ciboard 있던것
 			// if ($selfcert_meta) {
 			// 	foreach ($selfcert_meta as $certkey => $certvalue) {
@@ -995,7 +998,7 @@ class Register extends CB_Controller
 			// 	$this->Member_selfcert_history_model->update('', $selfcertupdatedata, $selfcertwhere);
 			// }
 			// ciboard 있던것
-/*
+
 			$this->Member_meta_model->save($mem_id, $metadata);
 
 			$nickinsert = array(
@@ -1019,7 +1022,7 @@ class Register extends CB_Controller
 				}
 				$this->Member_extra_vars_model->save($mem_id, $extradata);
 			}
-
+/*
 			$levelhistoryinsert = array(
 				'mem_id' => $mem_id,
 				'mlh_from' => 0,
@@ -1445,8 +1448,8 @@ class Register extends CB_Controller
 					$mem_id
 				);
 			}
-
-			redirect('register/result');
+			echo '<script>alert("gg");</script>';
+			// redirect('register/result');
 		}
 	}
 

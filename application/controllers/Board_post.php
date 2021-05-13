@@ -355,6 +355,7 @@ class Board_post extends CB_Controller
 		$view['view']['like_point_ranking_freetalk'] = $like_point_ranking_freetalk;
 		$view['view']['liskepoint_ranking_writer'] = $liskepoint_ranking_writer;
 		$view['view']['dislikepoint_ranking_freetalk'] = $dislikepoint_ranking_freetalk;
+		$view['view']['dislikepoint_ranking_writer'] = $dislikepoint_ranking_writer;
 		$mem_id = (int) $this->member->item('mem_id');
 
 		if ( ! element('post_id', $post)) {

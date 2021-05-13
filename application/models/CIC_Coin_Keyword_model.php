@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 권한이 있는지 없는지 판단하는 class 입니다.
  */
-class CIC_Coin_Keyword extends CB_Model
+class CIC_Coin_Keyword_model extends CB_Model
 {
 
     /**
@@ -90,10 +90,10 @@ class CIC_Coin_Keyword extends CB_Model
 
 
     function getCoin_join( $limit = '', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR'){
-       $select = 'name_ko';
-       $join[] = array('table' => 'cic_coin_admins', 'on' => 'cic_coin_admins.coin_market = cic_coin_stock.market');
-       $result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
-       return $result;
+        $select = 'name_ko';
+        $join[] = array('table' => 'cic_coin_admins', 'on' => 'cic_coin_admins.coin_market = cic_coin_stock.market');
+        $result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
+        return $result;
     }
 
     

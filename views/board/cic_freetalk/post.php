@@ -155,18 +155,18 @@
 							</a>
 						</li> -->
 						<?php
-						if (element('list',element('dislikepoint_ranking_freetalk', $view))) {
-							foreach (element('list',element('dislikepoint_ranking_freetalk', $view)) as $dislikepoint_ranking_freetalk) {
+						if (element('list',element('like_point_ranking_freetalk', $view))) {
+							foreach (element('list',element('like_point_ranking_freetalk', $view)) as $like_point_ranking_freetalk) {
 								?>
 								<li>
-									<a href="<?php echo goto_url(element('posturl', $dislikepoint_ranking_freetalk)); ?>">
-										<span class="num"><?php echo number_format(element('num', $dislikepoint_ranking_freetalk)); ?></span>
+									<a href="<?php echo goto_url(element('posturl', $like_point_ranking_freetalk)); ?>">
+										<span class="num"><?php echo number_format(element('num', $like_point_ranking_freetalk)); ?></span>
 										<div class="my-info">
 											<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>" alt=""></p>
-											<p class="rtxt"><?php echo html_escape(element('post_userid', $dislikepoint_ranking_freetalk)); ?></p>
+											<p class="rtxt"><?php echo html_escape(element('post_userid', $like_point_ranking_freetalk)); ?></p>
 										</div>
-										<span class="txt"><?php echo html_escape(element('post_title', $dislikepoint_ranking_freetalk)); ?></span>
-										<span class="vp"><?php echo number_format(element('post_like_point', $dislikepoint_ranking_freetalk)); ?></span>
+										<span class="txt"><?php echo html_escape(element('post_title', $like_point_ranking_freetalk)); ?></span>
+										<span class="vp"><?php echo number_format(element('post_like_point', $like_point_ranking_freetalk)); ?></span>
 									</a>
 								</li>
 						<?php
