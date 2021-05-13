@@ -141,7 +141,7 @@
                         <a href="#n" class="more"><span>더보기</span></a>
                         <div class="list">
                             <ul>
-                                <li>
+                                <!-- <li>
                                     <a href="#n" class="new">
                                         <p class="num">4</p>
                                         <p class="btxt">
@@ -153,7 +153,7 @@
                                             <p class="date">204 <span>49분전</span></p>
                                         </div>
                                     </a>
-                                </li>
+                                </li> -->
 						<?php
 						if (element('list',element('popularpost', $view))) {
 							foreach (element('list',element('popularpost', $view)) as $popularpost) {
@@ -162,16 +162,12 @@
                                 <a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" class="new">
                                     <p class="num"><?php echo number_format(element('num', $popularpost)); ?></p>
                                     <p class="btxt">
-                                        <span class="btxt">
-                                            <?php echo html_escape(element('post_title', $popularpost)); ?>
-                                        </span>
+                                        <span class="btxt"><?php echo html_escape(element('post_title', $popularpost)); ?></span>
                                         <span class="hit">(<?php echo number_format(element('post_hit', $popularpost)); ?>)</span>
                                     </p>
                                     <div>
-                                        <p class="stxt"><?php echo element('post_userid', $popularpost); ?><span><img
-                                                    src="<?php echo base_url('assets/images/like-popo.png') ?>"
-                                                    alt="" /></span></p>
-                                        <p class="date"><?php echo number_format(element('post_like_point', $popularpost)); ?>
+                                        <p class="stxt"><?php echo element('post_userid', $popularpost); ?><span><img src="<?php echo base_url('assets/images/like-popo.png') ?>"alt="" /></span></p>
+                                        <p class="date"><?php echo number_format(element('post_comment_count', $popularpost)); ?>
                                         <span><?php echo display_datetime(element('post_datetime', $popularpost), 'full'); ?></span></p>
                                     </div>                        
                                 </a>

@@ -1014,6 +1014,7 @@ class Board_post extends CB_Controller
 			$use_mobile_sidebar = element('board_mobile_sidebar', $board) ? element('board_mobile_sidebar', $board) : $this->cbconfig->item('mobile_sidebar_board');
 			$skin_dir = element('board_skin', $board) ? element('board_skin', $board) : $this->cbconfig->item('skin_board');
 			$mobile_skin_dir = element('board_mobile_skin', $board) ? element('board_mobile_skin', $board) : $this->cbconfig->item('mobile_skin_board');
+			exit(element('board_skin', $board));
 			$layoutconfig = array(
 				'path' => 'board',
 				'layout' => 'layout',

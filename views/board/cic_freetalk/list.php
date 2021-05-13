@@ -82,7 +82,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
                     <?php
                     if (element('notice_list', element('list', $view))) {
                         foreach (element('notice_list', element('list', $view)) as $result) {

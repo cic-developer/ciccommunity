@@ -309,10 +309,11 @@ class Coin extends CB_Controller
 				$market = $keys['market'];
 				$api_result = $this->Coin_model -> get_price($market);
 				$korean = $keys['name_ko'];
+				$low =$api_result['low_price'];
 
 
-				$view['keys'] = $keys;
-				$view['api_result'] = $api_result;
+				$view['korean'] = $korean;
+				// $view['low'] = $low;
 				// print_r("￦".$api_result);
 
 
