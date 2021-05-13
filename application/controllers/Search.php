@@ -18,7 +18,7 @@ class Search extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Board', 'Board_group', 'Post', 'Post_file', 'Search_keyword');
+	protected $models = array('Board', 'Board_group', 'Post', 'Post_file', 'Search_keyword', 'CIC_coin', 'CIC_Coin_Keyword');
 
 	/**
 	 * 헬퍼를 로딩합니다

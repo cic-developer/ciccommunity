@@ -948,6 +948,7 @@ class Register extends CB_Controller
 				$insertdata['mem_use_note'] = $this->input->post('mem_use_note') ? 1 : 0;
 				$metadata['meta_use_note_datetime'] = cdate('Y-m-d H:i:s');
 			}
+			print_r($metadata);
 			$insertdata['mem_receive_sms'] = $this->input->post('mem_receive_sms') ? 1 : 0;
 			$insertdata['mem_open_profile'] = $this->input->post('mem_open_profile') ? 1 : 0;
 			$metadata['meta_open_profile_datetime'] = cdate('Y-m-d H:i:s');
@@ -998,16 +999,17 @@ class Register extends CB_Controller
 			// 	$this->Member_selfcert_history_model->update('', $selfcertupdatedata, $selfcertwhere);
 			// }
 			// ciboard 있던것
-
+			/*
 			$this->Member_meta_model->save($mem_id, $metadata);
-
+*/
+/*
 			$nickinsert = array(
 				'mem_id' => $mem_id,
 				'mni_nickname' => $this->input->post('mem_nickname'),
 				'mni_start_datetime' => cdate('Y-m-d H:i:s'),
 			);
 			$this->Member_nickname_model->insert($nickinsert);
-/*
+
 			$extradata = array();
 			if ($form && is_array($form)) {
 				$this->load->model('Member_extra_vars_model');

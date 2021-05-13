@@ -245,6 +245,8 @@ class Board_post extends CB_Controller
 			$list_num = 1;
 			$like_point_ranking_freetalk = $this->Post_model
 				->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+				print_r($like_point_ranking_freetalk);
+				exit;
 					if (element('list', $like_point_ranking_freetalk)) {
 						foreach (element('list', $like_point_ranking_freetalk) as $key => $val) {
 							$like_point_ranking_freetalk['list'][$key]['post_display_name'] = display_username(
@@ -285,8 +287,6 @@ class Board_post extends CB_Controller
 			// $list_num = 1;
 			$dislike_point_ranking_freetalk = $this->Post_model
 				->get_dislike_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-				print_r($dislike_point_ranking_freetalk);
-				exit;
 					if (element('list', $dislike_point_ranking_freetalk)) {
 						foreach (element('list', $dislike_point_ranking_freetalk) as $key => $val) {
 							$dislike_point_ranking_freetalk['list'][$key]['post_display_name'] = display_username(

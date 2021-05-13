@@ -40,6 +40,7 @@ class Coin extends CB_Controller
 		 * 라이브러리를 로딩합니다
 		 */
 		$this->load->library(array('pagination', 'querystring', 'form_validation', 'session'));
+		$this->load->model(array('CIC_Coin_model', 'CIC_Coin_Keyword_model'));
 
 	}
 

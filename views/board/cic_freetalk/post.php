@@ -147,7 +147,7 @@
 							foreach (element('list',element('dislike_point_ranking_freetalk', $view)) as $dislike_point_ranking_freetalk) {
 								?>
 								<li>
-									<a href="<?php echo goto_url(element('posturl', $dislikepoint_ranking_dislike_point_ranking_freetalkfreetalk)); ?>">
+									<a href="<?php echo goto_url(element('posturl', $dislike_point_ranking_freetalk)); ?>">
 										<span class="num"><?php echo number_format(element('num', $dislike_point_ranking_freetalk)); ?></span>
 										<div class="my-info">
 											<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>" alt=""></p>
