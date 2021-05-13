@@ -11,6 +11,10 @@
 			?>
 			<div class="entry">
 				<ul>
+
+			
+
+				<!--  -->
 				<?php
 				foreach (element('html_content', $view) as $key => $value) {
 
