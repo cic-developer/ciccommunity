@@ -87,6 +87,12 @@
 		</div>
 		<?php echo form_close(); ?>
 	</div>
+<!-- search -->
+	<form class="example" action="post">
+		<input type="text" id="search" placeholder="Search.." name="search">
+		<button type="submit"><i class="fa fa-search"></i></button>
+	</form>
+
 </div>
 
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
