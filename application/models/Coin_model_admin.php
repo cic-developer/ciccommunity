@@ -89,5 +89,31 @@ class Coin_model_admin extends CB_Model
     }
 
 
+    function getCoin_join( $limit = '', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR'){
+       $select = 'name_ko';
+       $join[] = array('table' => 'cic_coin_admins', 'on' => 'cic_coin_admins.coin_market = cic_coin_stock.market');
+       $result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
+       return $result;
+    }
+
+    
+
+    function reseach_coinAdmin($search){
+        // if (empty($limit)) {
+		// 	$limit = 100;
+		// }
+		$this->db->select('name_ko');
+		$this->db->join('cic_coin_admins', 'cic_coin_admins.coin_market = cic_coin_stock.market', 'inner');
+		$this->db->where('cic_coin_admins.keyword', $search);
+		$this->db->or_like('cic_coin_admins.keyword', $search);
+		$this->db->order_by('cp_point', 'ASC');
+		$this->db->limit(1);
+		$qry = $this->db->get('cic_admins');
+		$result = $qry->result_array();
+
+		return $result;
+    }
+
+
 }
 ?>

@@ -10,6 +10,21 @@
 			echo form_open_multipart(current_full_url(), $attributes);
 			?>
 
+<?php
+				foreach (element('html_content', $view) as $key => $value) {
+				?>
+					<li>
+						<span><?php echo element('display_name', $value); ?></span>
+						<div class="form-text text-primary group">
+							<?php echo element('input', $value); ?>
+							<?php if (element('description', $value)) { ?>
+								<p class="help-block"><?php echo element('description', $value); ?></p>
+							<?php } ?>
+						</div>
+					</li>
+				<?php
+				}?>
+
 
 			<div class="entry">
 				<ul>

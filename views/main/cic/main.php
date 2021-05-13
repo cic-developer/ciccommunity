@@ -159,7 +159,8 @@
                                         <p class="stxt"><?php echo element('post_userid', $popularpost); ?><span><img
                                                     src="<?php echo base_url('assets/images/like-popo.png') ?>"
                                                     alt="" /></span></p>
-                                        <p class="date"><?php echo number_format(element('post_like_point', $popularpost)); ?> <span>49분전</span></p>
+                                        <p class="date"><?php echo number_format(element('post_like_point', $popularpost)); ?>
+                                        <span><?php echo display_datetime(element('post_datetime', $popularpost), 'full'); ?></span></p>
                                     </div>                        
                                 </a>
 							</li>

@@ -468,16 +468,16 @@ class Register extends CB_Controller
 			'label' => '전화번호',
 			'rules' => 'trim|valid_phone',
 		);
-		// $configbasic['mem_birthday'] = array(
-		// 	'field' => 'mem_birthday',
-		// 	'label' => '생년월일',
-		// 	'rules' => 'trim|exact_length[10]',
-		// );
-		// $configbasic['mem_sex'] = array(
-		// 	'field' => 'mem_sex',
-		// 	'label' => '성별',
-		// 	'rules' => 'trim|exact_length[1]',
-		// );
+		$configbasic['mem_birthday'] = array(
+			'field' => 'mem_birthday',
+			'label' => '생년월일',
+			'rules' => 'trim|exact_length[10]',
+		);
+		$configbasic['mem_sex'] = array(
+			'field' => 'mem_sex',
+			'label' => '성별',
+			'rules' => 'trim|exact_length[1]',
+		);
 		// $configbasic['mem_zipcode'] = array(
 		// 	'field' => 'mem_zipcode',
 		// 	'label' => '우편번호',
@@ -545,7 +545,6 @@ class Register extends CB_Controller
 		}
 
 		$registerform = $this->cbconfig->item('registerform');
-		// print_r($registerform);
 		$form = json_decode($registerform, true);
 
 		$config = array();
@@ -558,17 +557,17 @@ class Register extends CB_Controller
 
 					if ($key === 'mem_address') {
 						if (element('required', $value) === '1') {
-							$configbasic['mem_zipcode']['rules'] = $configbasic['mem_zipcode']['rules'] . '|required';
+							// $configbasic['mem_zipcode']['rules'] = $configbasic['mem_zipcode']['rules'] . '|required';
 						}
-						$config[] = $configbasic['mem_zipcode'];
+						// $config[] = $configbasic['mem_zipcode'];
 						if (element('required', $value) === '1') {
-							$configbasic['mem_address1']['rules'] = $configbasic['mem_address1']['rules'] . '|required';
+							// $configbasic['mem_address1']['rules'] = $configbasic['mem_address1']['rules'] . '|required';
 						}
-						$config[] = $configbasic['mem_address1'];
+						// $config[] = $configbasic['mem_address1'];
 						if (element('required', $value) === '1') {
-							$configbasic['mem_address2']['rules'] = $configbasic['mem_address2']['rules'] . '|required';
+							// $configbasic['mem_address2']['rules'] = $configbasic['mem_address2']['rules'] . '|required';
 						}
-						$config[] = $configbasic['mem_address2'];
+						// $config[] = $configbasic['mem_address2'];
 					} else {
 						if (element('required', $value) === '1') {
 							$configbasic[$value['field_name']]['rules'] = $configbasic[$value['field_name']]['rules'] . '|required';
@@ -599,6 +598,18 @@ class Register extends CB_Controller
 				}
 			}
 		}
+
+		// print_r('<br>');
+		// print_r('<br>');
+		// print_r('<br>');
+		// print_r('<br>');
+		// print_r('<br>');
+		// print_r($config);
+		// print_r('<br>');
+		// print_r('<br>');
+		// print_r('<br>');
+		// print_r('<br>');
+		// print_r('<br>');
 
 		// if ($this->cbconfig->item('use_recaptcha')) {
 		// 	$config[] = array(
@@ -760,6 +771,8 @@ class Register extends CB_Controller
 						} elseif (element('field_type', $value) === 'phone') {
 							$html_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value)) . '" ' . $required . ' />';
 						} elseif(element('field_name', $value) === 'mem_userid'){
+							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
+						} elseif(element('field_name', $value) === 'mem_username'){
 							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
 						} else {
 							$html_content[$k]['input'] .= '<input type="' . element('field_type', $value) . '" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
