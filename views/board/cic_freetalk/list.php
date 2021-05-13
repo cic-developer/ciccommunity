@@ -20,8 +20,7 @@
 							foreach (element('list',element('bestpost', $view)) as $bestpost) {
 						?>
 							<li>
-                                <!-- <span class="num"><?php echo number_format(element("num",$bestpost));?></span> -->
-								<a href="<?php echo goto_url(element('posturl', $bestpost)); ?>"><span class="num"><?php echo number_format(element("num",$bestpost));?></span><?php echo html_escape(element('post_title', $bestpost)); ?><span class="text-right"><?php echo number_format(element('post_like_point', $bestpost)); ?></span></a>
+								<a href="<?php echo goto_url(element('posturl', $bestpost)); ?>"><?php echo number_format(element("num",$bestpost));?>. <?php echo html_escape(element('post_title', $bestpost)); ?><span class="text-right"><?php echo number_format(element('post_like_point', $bestpost)); ?></span></a>
 							</li>
 						<?php
 							}

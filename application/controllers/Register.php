@@ -214,8 +214,6 @@ class Register extends CB_Controller
 	 */
 	public function form($recommend_userid = '')
 	{
-
-		// print_r($this->input->post("email"));
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_register_form';
 		$this->load->event($eventname);
@@ -660,7 +658,6 @@ class Register extends CB_Controller
 							foreach ($options as $okey => $oval) {
 								$radiovalue = (element('field_name', $value) === 'mem_sex') ? $okey : $oval;
 								$html_content[$k]['input'] .= '<label for="' . element('field_name', $value) . '_' . $i . '"><input type="radio" name="' . element('field_name', $value) . '" id="' . element('field_name', $value) . '_' . $i . '" value="' . $radiovalue . '" ' . set_radio(element('field_name', $value), $radiovalue) . ' /> ' . $oval . ' </label> ';
-								break;
 								$i++;
 							}
 						}

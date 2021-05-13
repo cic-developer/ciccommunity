@@ -76,6 +76,7 @@ class Board_post extends CB_Controller
 		);
 		$limit = 10;
 
+		$list_num = 1;
 		$popularpost = $this->Post_model
 			->get_popularpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 			if (element('list', $popularpost)) {
@@ -85,7 +86,7 @@ class Board_post extends CB_Controller
 						element('post_nickname', $val)
 					);
 					$popularpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-					$popularpost['list'][$key]['num'] = $list_num--;
+					$popularpost['list'][$key]['num'] = $list_num++;
 					if ($board) {
 						$popularpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
 						$popularpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
@@ -112,6 +113,7 @@ class Board_post extends CB_Controller
 				'post_best_state >' => 0
 			);
 
+			$list_num = 1;
 			$bestpost = $this->Post_model
 				->get_bestpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 			if (element('list', $bestpost)) {
@@ -121,7 +123,7 @@ class Board_post extends CB_Controller
 					element('post_nickname', $val)
 				);
 				$bestpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-				$bestpost['list'][$key]['num'] = $list_num--;
+				$bestpost['list'][$key]['num'] = $list_num++;
 				if ($board) {
 					$bestpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
 					$bestpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
@@ -234,8 +236,8 @@ class Board_post extends CB_Controller
 		// print_r($post['brd_id']);
 		// exit;
 
-		// if($post['brd_id'] = 1)
-		// {
+		if($post['brd_id'] = 1)
+		{
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		$where = array(
 			'post_exept_state' => 0,
@@ -311,7 +313,7 @@ class Board_post extends CB_Controller
 				}
 			}
 		}
-	// }
+	}
 		$view['view']['popularpost'] = $popularpost;
 		$view['view']['bestpost'] = $bestpost;
 

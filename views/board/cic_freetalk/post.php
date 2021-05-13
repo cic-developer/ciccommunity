@@ -114,17 +114,17 @@
 					<ul>
 						<?php
 						if (element('list',element('bestpost', $view))) {
-							foreach (element('list',element('bestpost', $view)) as $bestpost) {
+							foreach (element('list',element('bestpost', $view)) as $popularpost) {
 								?>
 								<li>
-									<a href="<?php echo goto_url(element('posturl', $bestpost)); ?>">
-										<span class="num"><?php echo number_format(element('num', $bestpost)); ?></span>
+									<a href="<?php echo goto_url(element('posturl', $popularpost)); ?>">
+										<span class="num"><?php echo number_format(element('num', $popularpost)); ?></span>
 										<div class="my-info">
 											<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>" alt=""></p>
-											<p class="rtxt"><?php echo html_escape(element('post_userid', $bestpost)); ?></p>
+											<p class="rtxt"><?php echo html_escape(element('post_userid', $popularpost)); ?></p>
 										</div>
-										<span class="txt"><?php echo html_escape(element('post_title', $bestpost)); ?></span>
-										<span class="vp"><?php echo number_format(element('post_like_point', $bestpost)); ?></span>
+										<span class="txt"><?php echo html_escape(element('post_title', $popularpost)); ?></span>
+										<span class="vp"><?php echo number_format(element('post_like_point', $popularpost)); ?></span>
 									</a>
 								</li>
 						<?php
