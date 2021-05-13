@@ -102,10 +102,10 @@ class Coin_model_admin extends CB_Model
         // if (empty($search)) {
 		// 	return false;
 		// }
-		$this->db->select('*');
+		$this->db->select('cic_coin_admins.coin_market');
 		$this->db->join('cic_coin_admins', 'cic_coin_admins.coin_market = cic_coin_stock.market', 'inner');
 		$this->db->where('cic_coin_admins.keyword', $search);
-		$this->db->or_like('cic_coin_admins.keyword', $search);
+		// $this->db->or_like('cic_coin_admins.keyword', $search);
 		$this->db->order_by('cic_coin_stock.name_ko', 'ASC');
 		$this->db->limit(1);
 		$qry = $this->db->get('cic_coin_admins');

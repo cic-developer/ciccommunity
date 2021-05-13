@@ -291,9 +291,7 @@ class Register extends CB_Controller
 			print_r('<br>');
 			print_r($data['authtype']);
 			print_r('<br>');
-			print_r(iconv('EUC-KR','UTF-8',$data['name']));
-			print_r('<br>');
-			print_r(iconv("UTF-8", "EUC-KR", $data['name']));
+			print_r($data['name']);
 			print_r('<br>');
 			print_r($data['birthdate']);
 			print_r('<br>');
@@ -473,7 +471,7 @@ class Register extends CB_Controller
 		$configbasic['mem_birthday'] = array(
 			'field' => 'mem_birthday',
 			'label' => '생년월일',
-			'rules' => 'trim|exact_length[10]',
+			'rules' => 'trim|exact_length[8]',
 		);
 		$configbasic['mem_sex'] = array(
 			'field' => 'mem_sex',
@@ -779,7 +777,7 @@ class Register extends CB_Controller
 						} elseif(element('field_name', $value) === 'mem_userid'){
 							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
 						} elseif(element('field_name', $value) === 'mem_username'){
-							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . $data['name'] . '" ' . $required . '/>'; // form-control input
+							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . urldecode($data['name']) . '" ' . $required . '/>'; // form-control input
 						} else {
 							$html_content[$k]['input'] .= '<input type="' . element('field_type', $value) . '" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
 						}
@@ -800,7 +798,7 @@ class Register extends CB_Controller
 							foreach ($options as $okey => $oval) {
 								$radiovalue = (element('field_name', $value) === 'mem_sex') ? $okey : $oval;
 								// $html_content[$k]['input'] .= '<label for="' . element('field_name', $value) . '_' . $i . '"><input type="radio" name="' . element('field_name', $value) . '" id="' . element('field_name', $value) . '_' . $i . '" value="' . $radiovalue . '" ' . set_radio(element('field_name', $value), $radiovalue) . ' /> ' . $oval . ' </label> ';
-								$html_content[$k]['input'] .= '<input type="hidden" name="' . element('field_name', $value) . '" id="' . element('field_name', $value) . '_' . $i . '" value="' . iconv("UTF-8","EUC-KR",$data['gender']) . '" ' . set_radio(element('field_name', $value), $radiovalue) . ' /> ';
+								$html_content[$k]['input'] .= '<input type="hidden" name="' . element('field_name', $value) . '" id="' . element('field_name', $value) . '_' . $i . '" value="' . $data['gender'] . '" ' . set_radio(element('field_name', $value), $radiovalue) . ' /> ';
 								break;
 								$i++;
 							}
