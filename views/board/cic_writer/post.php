@@ -13,7 +13,7 @@
 				<div class="binfo">
 					<h4><span>Writer</span> 입니다.</h4>
 					<p>유저들의 의견을 자유롭게 공유할 수 있는 공간입니다. 단, 사이트 내에 명시 된 ‘운영정책’ 을 따릅니다. </p>
-					<p>게시글에 대해서 up / down으로 의견을 표출할 수 있습니다. 작성자는 보팅에 따라 지급 포인트를 받습니다.</p>
+					<p>게시글에 대해서 up / down으로 의견을 표출할 수 있습니다. 작성자는 참여에 따라 지급 포인트를 받습니다.</p>
 				</div>
 				<div class="gap30"></div>
 				<div class="upper r"><a href="<?php echo element('list_url', $view); ?>" class="bw-btn"><span>목록</span></a>

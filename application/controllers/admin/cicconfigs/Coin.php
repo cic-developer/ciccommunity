@@ -301,9 +301,12 @@ class Coin extends CB_Controller
 			$deleted = $this->Coin_model_admin->delete_keyword($key_id);
 			if($deleted == 1){
 				$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-				//redirect(current_url());
+				redirect('https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock', 'rafresh');
 			}
 
+			
+			$layoutconfig2 = array('layout' => 'layout', 'skin' => 'delete_keyword');
+			//$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
 			$view['layout'] = $this->managelayout->admin($layoutconfig2, $this->cbconfig->get_device_view_type());
 			$this->data = $view;
 			$this->layout = element('layout_skin_file', element('layout', $view));
