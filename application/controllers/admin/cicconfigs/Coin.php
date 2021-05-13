@@ -35,13 +35,11 @@ class Coin extends CB_Controller
 	function __construct()
 	{
 		parent::__construct();
-		
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
 		$this->load->library(array('pagination', 'querystring', 'form_validation', 'session'));
 		$this->load->model(array('CIC_Coin_model', 'CIC_Coin_Keyword_model'));
-
 	}
 
     /**
@@ -80,7 +78,6 @@ class Coin extends CB_Controller
 		$this->{$this->modelname}->allow_order_field = array('market'); // 정렬이 가능한 필드
 
 		$where = array();
- 	
 		$result = $this->{$this->modelname}
 		->get_coin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
@@ -95,9 +92,6 @@ class Coin extends CB_Controller
 			}
 		}
 		$view['view']['data'] = $result;
-		//$view['result'] = $result;
-		
-
 		/**
 		 * primary key 정보를 저장합니다
 		 */
@@ -112,7 +106,6 @@ class Coin extends CB_Controller
 		$this->pagination->initialize($config);
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;
-		
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
@@ -123,15 +116,10 @@ class Coin extends CB_Controller
 		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listdelete/?' . $param->output());
 		$view['view']['list_trash_url'] = admin_url($this->pagedir . '/listtrash/?' . $param->output());
 
-		// 이벤트가 존재하면 실행합니다
+		//이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-		
-
-    	//Load data to second db
-
+    	//RAFRESH DATA FROM DB
 		$refresh = $this -> input -> post('refresh');
-		// print_r($refresh);
-		
 		if($refresh){
 			$getList = $this -> CIC_Coin_model->retrieve_api();
 			for($i=0; $i<count($getList); $i++){
@@ -177,153 +165,117 @@ class Coin extends CB_Controller
 			$this->data = $view;
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
-		}
+	}
 		
 	
-		public function CStock_keyword(){
+	public function CStock_keyword(){
 
-			// 이벤트 라이브러리를 로딩합니다
-			$eventname = 'event_amdmin_coin_keyword';
-			$this->load->event($eventname);
-	        $this->load->helper('url');
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_amdmin_coin_keyword';
+		$this->load->event($eventname);
+	    $this->load->helper('url');
 	
-			// 이벤트가 존재하면 실행합니다
-			$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 	
-			//$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
-			
-			$view = array();
-			$view['view'] = array();
+		//$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$view = array();
+		$view['view'] = array();
 	
-			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-			//CREATE COIN KEYWORD LIST FOR ADMIN
+		//CREATE COIN KEYWORD LIST FOR ADMIN
 
-			$this->load->library('form_validation');
+		$this->load->library('form_validation');
+		$config = array(
+			array(
+				'field' => 'coin_market',
+				'rules'=>'required'
+			),
+			array(
+				'field' => 'keyword',
+				'rules'=>'required'
+			),
 
-			$config = array(
-				array(
-					'field' => 'coin_market',
-					'rules'=>'required'
-				),
-				array(
-					'field' => 'keyword',
-					'rules'=>'required'
-				),
+		);
+		$getList = $this -> CIC_Coin_model->retrieve_api();
+		$this->form_validation->set_rules($config);
+		if($this->form_validation -> run () == FALSE){
+			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+		}else{
+			$data = array(
+				'coin_market' => $this -> input -> post('coin_market'),
+				'keyword' => $this -> input -> post('keyword'),
 
 			);
-			$getList = $this -> CIC_Coin_model->retrieve_api();
-		
-			$this->form_validation->set_rules($config);
-
-			if($this->form_validation -> run () == FALSE)
-			{
-				$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-			}else{
-				$data = array(
-					'coin_market' => $this -> input -> post('coin_market'),
-					'keyword' => $this -> input -> post('keyword'),
-
-				);
-				if(isset($data) && !empty($data)){
-					$this->CIC_Coin_Keyword_model->insert_keyword($data);
-					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-				}
+			if(isset($data) && !empty($data)){
+				$this->CIC_Coin_Keyword_model->insert_keyword($data);
+				$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 			}
-			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-			//SHOWING LIST TO VIEW
-			$keylist = $this -> CIC_Coin_Keyword_model->get_keyword();
-			$view['keylist'] = $keylist;
-
-
-  //search  DEBUGG
-        //    print_r($_GET['id']);
-			// $search = $this -> input -> post('search');	
-			// // $key_search = $this-> CIC_Coin_Keyword_model -> reseach_coinAdmin($search);
-			// print_r($search);
-
-
-
-
-
-			/**
-			* 어드민 레이아웃을 정의합니다
-			*/
-			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
-			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-			$this->data = $view;
-			$this->layout = element('layout_skin_file', element('layout', $view));
-			$this->view = element('view_skin_file', element('layout', $view));
-
 		}
-
-
-		function delete_keyword(){
-
-			// 이벤트 라이브러리를 로딩합니다
-			$eventname = 'event_amdmin_coin_delete';
-			$this->load->event($eventname);
-			// 이벤트가 존재하면 실행합니다
-			$view['view']['event']['before'] = Events::trigger('before', $eventname);
-			//$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
-			$view = array();
-			$view['view'] = array();			
-			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-						
-			$key_id = $_GET['search'];
-			$key_search = $this-> CIC_Coin_Keyword_model -> seach_coin($key_id);
+		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 			
+		//SHOWING LIST TO VIEW KEYWORD TO LIST
+		$keylist = $this -> CIC_Coin_Keyword_model->get_keyword();
+		$view['keylist'] = $keylist;
+
+		//DELETE KEYWORD
+		$key_id = $_GET['id'];
+		print_r($key_id);
+		//$deleted = $this->CIC_Coin_Keyword->delete_keyword($key_id);
+		
+		/**
+		* 어드민 레이아웃을 정의합니다
+		*/
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
+		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
+	}
 
 
-			$market = $key_search['market'];
-			$api_result = $this->CIC_Coin_model -> get_price($market);
-			$korean = $key_search['name_ko'];
-			$high = $api_result['high_price'];
-			$low =$api_result['low_price'];
-			$trade = $api_result['trade_price'];
+	// function delete_keyword(){
+
+	// 	// 이벤트 라이브러리를 로딩합니다
+	// 	$eventname = 'event_amdmin_coin_delete';
+	// 	$this->load->event($eventname);
+	// 	// 이벤트가 존재하면 실행합니다
+	// 	$view['view']['event']['before'] = Events::trigger('before', $eventname);
+	// 	//$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+	// 	$view = array();
+	// 	$view['view'] = array();			
+	// 	$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+	// 	// foreach($key_search as $keys){
 
 
+	// 	// 	$market = $keys['market'];
+	// 	// 	$api_result = $this->CIC_Coin -> get_price($market);
+	// 	// 	$korean = $keys['name_ko'];
+	// 	// 	$high = $api_result['high_price'];
+	// 	// 	$low =$api_result['low_price'];
+	// 	// 	$trade = $api_result['trade_price'];
+	// 	// 	$view['korean'] = $korean;
+	// 	// 	$view['low'] = $low;
+	// 	// 	$view['high'] = $high;
+	// 	// 	$view['trade'] = $trade;
+	// 	// 	// print_r("￦".$api_result);
+	// // }
+	// 	// $deleted = $this->CIC_Coin_Keyword->delete_keyword($key_id);
+	// 	// if($deleted == 1){
+	// 	// 	$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+	// 	// 	//redirect('https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=ZRX');
+	// 	// }
 
-			$view['korean'] = $korean;
-			$view['low'] = $low;
-			$view['high'] = $high;
-			$view['trade'] = $trade;
-			// foreach($key_search as $keys){
+	// 	$layoutconfig2 = array('layout' => 'layout', 'skin' => 'delete_keyword');
+	// 	//$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
+	// 	$view['layout'] = $this->managelayout->admin($layoutconfig2, $this->cbconfig->get_device_view_type());
+	// 	$this->data = $view;
+	// 	$this->layout = element('layout_skin_file', element('layout', $view));
+	// 	$this->view = element('view_skin_file', element('layout', $view));
 
-
-			// 	$market = $keys['market'];
-			// 	$api_result = $this->CIC_Coin -> get_price($market);
-			// 	$korean = $keys['name_ko'];
-			// 	$high = $api_result['high_price'];
-			// 	$low =$api_result['low_price'];
-			// 	$trade = $api_result['trade_price'];
-
-
-
-			// 	$view['korean'] = $korean;
-			// 	$view['low'] = $low;
-			// 	$view['high'] = $high;
-			// 	$view['trade'] = $trade;
-			// 	// print_r("￦".$api_result);
-
-
-			// }
-
-
-			// $deleted = $this->CIC_Coin_Keyword->delete_keyword($key_id);
-			// if($deleted == 1){
-			// 	$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-			// 	//redirect('https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=ZRX');
-			// }
-
-			$layoutconfig2 = array('layout' => 'layout', 'skin' => 'delete_keyword');
-			//$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
-			$view['layout'] = $this->managelayout->admin($layoutconfig2, $this->cbconfig->get_device_view_type());
-			$this->data = $view;
-			$this->layout = element('layout_skin_file', element('layout', $view));
-			$this->view = element('view_skin_file', element('layout', $view));
-
-		}
+	// }
 	
 }
 ?>

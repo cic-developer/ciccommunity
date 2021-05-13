@@ -12,6 +12,21 @@
 			<div class="entry">
 				<ul>
 
+				<?php
+				foreach (element('html_content', $view) as $key => $value) {
+				?>
+					<li>
+						<span><?php echo element('display_name', $value); ?></span>
+						<div class="form-text text-primary group">
+							<?php echo element('input', $value); ?>
+							<?php if (element('description', $value)) { ?>
+								<p class="help-block"><?php echo element('description', $value); ?></p>
+							<?php } ?>
+						</div>
+					</li>
+				<?php
+				}
+				?>
 			
 
 				<!--  -->
@@ -57,16 +72,14 @@
 								}
 							?>
 
-							
-
-
 						</div>
-						<p class="rtxt mg10t">
+						
+					</li>
+					<p class="rtxt mg10t">
 							<?php if (element('description', $value)) { ?>
 								<p class="help-block"><?php echo element('description', $value); ?></p>
 							<?php } ?>
 						</p>
-					</li>
 				<?php
 					}
 				}
