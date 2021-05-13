@@ -222,7 +222,6 @@ class Search extends CB_Controller
 		$view['low'] = $low;
 		$view['high'] = $high;
 		$view['trade'] = $trade;
-		print_r($skeyword);
 
 
 		// 코인 검색 여기까지 

@@ -363,6 +363,9 @@ class Member extends CI_Controller
 				$this->CI->load->library('point');
 				$this->CI->point->setUserLevel($this->is_member());
 				$member = $this->CI->Member_model->get_by_memid($this->is_member());
+				if(!$member){
+					return false;
+				}
 				return $this->get_member_level(element('mem_level', $member));
 			}
 		} else {

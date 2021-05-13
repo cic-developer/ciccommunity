@@ -459,7 +459,7 @@ class Point extends CI_Controller
 	{
 		$this->CI->load->model(array('Member_level_history_model', 'CIC_member_level_config_model', 'Member_model', 'Point_model'));
 		$memberInfo = $this->CI->Member_model->get_by_memid($mem_id);
-		if(! ($memberInfo && element('mem_is_admin', $memberInfo)) ){
+		if( $memberInfo && !element('mem_is_admin', $memberInfo) ){
 			$pointSum = element('mem_point', $memberInfo);
 			$_levelConfig = $this->CI->CIC_member_level_config_model->get_by_pointSum($pointSum);
 			if($_levelConfig)
