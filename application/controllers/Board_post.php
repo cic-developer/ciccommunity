@@ -217,7 +217,7 @@ class Board_post extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		// $view['view']['lists'] = $lists = $this->_get_list($brd_key);
-		$view['view']['board_key'] = element('brd_key', element('board', $list));
+		// $view['view']['board_key'] = element('brd_key', element('board', $slist));
 		/*
 		 * 프라이머리키에 숫자형이 입력되지 않으면 에러처리합니다
 		 */
@@ -231,6 +231,11 @@ class Board_post extends CB_Controller
 		$post['extravars'] = $this->Post_extra_vars_model->get_all_meta($post_id);
 		$view['view']['post'] = $post;
 
+		// print_r($post['brd_id']);
+		// exit;
+
+		// if($post['brd_id'] = 1)
+		// {
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		$where = array(
 			'post_exept_state' => 0,
@@ -238,7 +243,6 @@ class Board_post extends CB_Controller
 			'post_del <>' => 2,
 		);
 		$limit = 10;
-
 		$popularpost = $this->Post_model
 			->get_popularpost_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 			$list_num = 1;
@@ -307,6 +311,7 @@ class Board_post extends CB_Controller
 				}
 			}
 		}
+	// }
 		$view['view']['popularpost'] = $popularpost;
 		$view['view']['bestpost'] = $bestpost;
 

@@ -617,7 +617,6 @@ class Register extends CB_Controller
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 
 			$html_content = array();
-			
 			$k = 0;
 			if ($form && is_array($form)) {
 				foreach ($form as $key => $value) {
