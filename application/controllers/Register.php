@@ -311,6 +311,9 @@ class Register extends CB_Controller
 			// print_r($member_info['mem_nickname']);
 			print_r('<br>');
 			print_r("@@@@@@@@@@@@");
+			print_r($this->input->get('mem_password'));
+			print_r($this->input->get('mem_password_re'));
+			print_r("@@@@@@@@@@@@");
 
 
 
@@ -414,7 +417,7 @@ class Register extends CB_Controller
 		$configbasic['mem_password_re'] = array(
 			'field' => 'mem_password_re',
 			'label' => '비밀번호확인',
-			'rules' => 'trim|required|min_length[8]|matches[mem_passowrd]',
+			'rules' => 'trim|required|min_length[8]|matches[mem_password]',
 		);
 		$configbasic['mem_nickname'] = array(
 			'field' => 'mem_nickname',
@@ -599,19 +602,19 @@ class Register extends CB_Controller
 			}
 		}
 
-		if ($this->cbconfig->item('use_recaptcha')) {
-			$config[] = array(
-				'field' => 'g-recaptcha-response',
-				'label' => '자동등록방지문자',
-				'rules' => 'trim|required|callback__check_recaptcha',
-			);
-		} else {
-			$config[] = array(
-				'field' => 'captcha_key',
-				'label' => '자동등록방지문자',
-				'rules' => 'trim|required|callback__check_captcha',
-			);
-		}
+		// if ($this->cbconfig->item('use_recaptcha')) {
+		// 	$config[] = array(
+		// 		'field' => 'g-recaptcha-response',
+		// 		'label' => '자동등록방지문자',
+		// 		'rules' => 'trim|required|callback__check_recaptcha',
+		// 	);
+		// } else {
+		// 	$config[] = array(
+		// 		'field' => 'captcha_key',
+		// 		'label' => '자동등록방지문자',
+		// 		'rules' => 'trim|required|callback__check_captcha',
+		// 	);
+		// }
 		$this->form_validation->set_rules($config);
 
 		$form_validation = $this->form_validation->run();

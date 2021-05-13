@@ -117,6 +117,7 @@
 							foreach (element('list',element('bestpost', $view)) as $bestpost) {
 								?>
 								<li>
+								<a href="#n">
 								<span class="num"><?php echo number_format(element('num', $bestpost)); ?></span>
 								<div class="my-info">
 									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
@@ -130,10 +131,11 @@
 							}
 						}
 						if ( ! element('list', element('bestpost', $view))) {
-						?>
+							?>
 							<tr>
 								<td colspan="12" class="nopost">자료가 없습니다</td>
 							</tr>
+							</a>
 						<?php
 						}
 						?>
