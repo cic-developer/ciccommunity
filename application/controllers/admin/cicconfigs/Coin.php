@@ -201,10 +201,6 @@ class Coin extends CB_Controller
 
 		// }
 
-			$search = $this -> input -> get('searcher');	
-			// $key_search = $this-> Coin_model_admin -> reseach_coinAdmin($search);
-			print_r($search);
-
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
 			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 			$this->data = $view;
@@ -273,9 +269,9 @@ class Coin extends CB_Controller
 
   //search  DEBUGG
         //    print_r($_GET['id']);
-			$search = $this -> input -> post('search');	
-			// $key_search = $this-> Coin_model_admin -> reseach_coinAdmin($search);
-			print_r($search);
+			// $search = $this -> input -> post('search');	
+			// // $key_search = $this-> Coin_model_admin -> reseach_coinAdmin($search);
+			// print_r($search);
 
 
 
@@ -305,7 +301,11 @@ class Coin extends CB_Controller
 			$view['view'] = array();			
 			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 						
-			$key_id = $_GET['id'];
+			$key_id = $_GET['search'];
+			$key_search = $this-> Coin_model_admin -> reseach_coinAdmin($key_id);
+			print_r($key_serach);
+
+
 
 			// $deleted = $this->Coin_model_admin->delete_keyword($key_id);
 			// if($deleted == 1){

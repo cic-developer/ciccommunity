@@ -90,7 +90,7 @@
 	<!-- search -->
 	<form method="post">
 		<input type="text" id="search" placeholder="Search.." name="searcher">
-		<button type="submit">search</button>
+		<button type="submit" value='Search'>search</button>
 	</form>
 
 </div>

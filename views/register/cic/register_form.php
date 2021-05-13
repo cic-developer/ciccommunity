@@ -10,22 +10,6 @@
 			echo form_open_multipart(current_full_url(), $attributes);
 			?>
 
-<?php
-				foreach (element('html_content', $view) as $key => $value) {
-				?>
-					<li>
-						<span><?php echo element('display_name', $value); ?></span>
-						<div class="form-text text-primary group">
-							<?php echo element('input', $value); ?>
-							<?php if (element('description', $value)) { ?>
-								<p class="help-block"><?php echo element('description', $value); ?></p>
-							<?php } ?>
-						</div>
-					</li>
-				<?php
-				}?>
-
-
 			<div class="entry">
 				<ul>
 
@@ -167,10 +151,10 @@
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){
 
-			email = $("#mem_email").val();
-			password1 = $("#mem_password").val();
-			password2 = $("#mem_password_re").val();
-			nickname = $("#mem_nickname").val();
+			// email = $("#mem_email").val();
+			// password1 = $("#mem_password").val();
+			// password2 = $("#mem_password_re").val();
+			// nickname = $("#mem_nickname").val();
 
 			$("#fregisterform").submit();
 		});
@@ -179,7 +163,6 @@
 	$(document).ready(function(){
 		$("#ath_email").on('click', function(){
 			var _email = $("#mem_email").val();
-			// alert(email);
 
 			var result = '';
 			var reason = '';
@@ -239,6 +222,7 @@
 		})
 	})
 
+	// 이메일 인증
 	$(document).on('click', "#con-mail-btn", function(){
 		var ath_num = $("#ath_num").val();
 
@@ -265,8 +249,11 @@
 		}
 
 		if(result == 1) {
+			var _email = $("#mem_email").val();
+			var html = '<p class="success-email rtxt mg10t">승인이 완료되었습니다</p>';
+
 			$('.con-mail').remove();
-			html = '<p class="success-email rtxt mg10t">승인이 완료되었습니다</p>';
+			$("#mem_userid").val(_email);
 			$('.mem_email').append(html);
 			// $('#ath_email').remove();
 			// $("#mem_email").attr("readonly", true);

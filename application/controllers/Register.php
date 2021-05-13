@@ -971,13 +971,13 @@ class Register extends CB_Controller
 			// 	$insertdata['mem_profile_content'] = $this->input->post('mem_profile_content', null, '');
 			// }
 
-			// if ($this->cbconfig->item('use_register_email_auth')) {
-			// 	$insertdata['mem_email_cert'] = 0;
-			// 	$metadata['meta_email_cert_datetime'] = '';
-			// } else {
-			// 	$insertdata['mem_email_cert'] = 1;
-			// 	$metadata['meta_email_cert_datetime'] = cdate('Y-m-d H:i:s');
-			// }
+			if ($this->cbconfig->item('use_register_email_auth')) {
+				$insertdata['mem_email_cert'] = 0;
+				$metadata['meta_email_cert_datetime'] = '';
+			} else {
+				$insertdata['mem_email_cert'] = 1;
+				$metadata['meta_email_cert_datetime'] = cdate('Y-m-d H:i:s');
+			}
 
 			// if ($updatephoto) {
 			// 	$insertdata['mem_photo'] = $updatephoto;
@@ -1343,90 +1343,90 @@ class Register extends CB_Controller
 				'mrg_useragent' => $this->agent->agent_string(),
 				'mrg_referer' => $this->session->userdata('site_referer'),
 			);
-			$recommended = '';
-			if ($this->input->post('mem_recommend')) {
-				$recommended = $this->Member_model->get_by_userid($this->input->post('mem_recommend'), 'mem_id');
-				if (element('mem_id', $recommended)) {
-					$member_register_data['mrg_recommend_mem_id'] = element('mem_id', $recommended);
-				} else {
-					$recommended['mem_id'] = 0;
-				}
-			}
+			// $recommended = '';
+			// if ($this->input->post('mem_recommend')) {
+			// 	$recommended = $this->Member_model->get_by_userid($this->input->post('mem_recommend'), 'mem_id');
+			// 	if (element('mem_id', $recommended)) {
+			// 		$member_register_data['mrg_recommend_mem_id'] = element('mem_id', $recommended);
+			// 	} else {
+			// 		$recommended['mem_id'] = 0;
+			// 	}
+			// }
 			$this->load->model('Member_register_model');
 			$this->Member_register_model->insert($member_register_data);
 
-			if ($this->input->post('mem_recommend')) {
-				if ($this->cbconfig->item('point_recommended')) {
-					// 추천인이 존재할 경우 추천된 사람
-					$this->point->insert_point(
-						element('mem_id', $recommended),
-						$this->cbconfig->item('point_recommended'),
-						$this->input->post('mem_nickname') . ' 님이 회원가입시 추천함',
-						'member_recommended',
-						$mem_id,
-						'회원가입추천'
-					);
-				}
-				if ($this->cbconfig->item('point_recommender')) {
-					// 추천인이 존재할 경우 가입자에게
-					$this->point->insert_point(
-						$mem_id,
-						$this->cbconfig->item('point_recommender'),
-						'회원가입 추천인존재',
-						'member_recommender',
-						$mem_id,
-						'회원가입추천인존재'
-					);
-				}
-			}
+			// if ($this->input->post('mem_recommend')) {
+			// 	if ($this->cbconfig->item('point_recommended')) {
+			// 		// 추천인이 존재할 경우 추천된 사람
+			// 		$this->point->insert_point(
+			// 			element('mem_id', $recommended),
+			// 			$this->cbconfig->item('point_recommended'),
+			// 			$this->input->post('mem_nickname') . ' 님이 회원가입시 추천함',
+			// 			'member_recommended',
+			// 			$mem_id,
+			// 			'회원가입추천'
+			// 		);
+			// 	}
+			// 	if ($this->cbconfig->item('point_recommender')) {
+			// 		// 추천인이 존재할 경우 가입자에게
+			// 		$this->point->insert_point(
+			// 			$mem_id,
+			// 			$this->cbconfig->item('point_recommender'),
+			// 			'회원가입 추천인존재',
+			// 			'member_recommender',
+			// 			$mem_id,
+			// 			'회원가입추천인존재'
+			// 		);
+			// 	}
+			// }
 
-			if ($recommend_userid){
-				$recommend_user = $this->member_model->get_by_userid($recommend_userid);
-				$signid_user = $this->member_model->get_by_memid($mem_id);
+			// if ($recommend_userid){
+			// 	$recommend_user = $this->member_model->get_by_userid($recommend_userid);
+			// 	$signid_user = $this->member_model->get_by_memid($mem_id);
 
-				$_vpRecommendConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 4 AND vpc_enable = 1 AND vpc_value > 0");
-				$_cpRecommendConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 4 AND cpc_enable = 1 AND cpc_value > 0");
-				$_vpSigninConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 5 AND vpc_enable = 1 AND vpc_value > 0");
-				$_cpSigninConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 5 AND cpc_enable = 1 AND cpc_value > 0");
+			// 	$_vpRecommendConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 4 AND vpc_enable = 1 AND vpc_value > 0");
+			// 	$_cpRecommendConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 4 AND cpc_enable = 1 AND cpc_value > 0");
+			// 	$_vpSigninConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 5 AND vpc_enable = 1 AND vpc_value > 0");
+			// 	$_cpSigninConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 5 AND cpc_enable = 1 AND cpc_value > 0");
 				
-				if($recommend_user){
-					$this->point->insert_vp(
-						element('mem_id', $recommend_user),
-						element('vpc_value', $_vpRecommendConfig),
-						element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
-						'recommeded',
-						$mem_id,
-						'Supercommunity 홍보 VP 보상'
-					);
+			// 	if($recommend_user){
+			// 		$this->point->insert_vp(
+			// 			element('mem_id', $recommend_user),
+			// 			element('vpc_value', $_vpRecommendConfig),
+			// 			element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
+			// 			'recommeded',
+			// 			$mem_id,
+			// 			'Supercommunity 홍보 VP 보상'
+			// 		);
 
-					$this->point->insert_cp(
-						element('mem_id', $recommend_user),
-						element('cpc_value', $_cpRecommendConfig),
-						element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
-						'recommeded',
-						$mem_id,
-						'Supercommunity 홍보 CP 보상'
-					);
-				}
+			// 		$this->point->insert_cp(
+			// 			element('mem_id', $recommend_user),
+			// 			element('cpc_value', $_cpRecommendConfig),
+			// 			element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
+			// 			'recommeded',
+			// 			$mem_id,
+			// 			'Supercommunity 홍보 CP 보상'
+			// 		);
+			// 	}
 
-				$this->point->insert_vp(
-					$mem_id,
-					element('vpc_value', $_vpSigninConfig),
-					element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
-					'recommed',
-					element('mem_id', $recommend_user),
-					'추천인 등록 VP 보상'
-				);
+			// 	$this->point->insert_vp(
+			// 		$mem_id,
+			// 		element('vpc_value', $_vpSigninConfig),
+			// 		element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
+			// 		'recommed',
+			// 		element('mem_id', $recommend_user),
+			// 		'추천인 등록 VP 보상'
+			// 	);
 
-				$this->point->insert_cp(
-					$mem_id,
-					element('cpc_value', $_cpSigninConfig),
-					element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
-					'recommed',
-					element('mem_id', $recommend_user),
-					'추천인 등록 CP 보상'
-				);
-			}
+			// 	$this->point->insert_cp(
+			// 		$mem_id,
+			// 		element('cpc_value', $_cpSigninConfig),
+			// 		element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
+			// 		'recommed',
+			// 		element('mem_id', $recommend_user),
+			// 		'추천인 등록 CP 보상'
+			// 	);
+			// }
 
 			$this->session->set_flashdata(
 				'nickname',
