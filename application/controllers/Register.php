@@ -382,7 +382,7 @@ class Register extends CB_Controller
 			'field' => 'mem_nickname',
 			'label' => '닉네임',
 			'rules' => 'trim|required|min_length[2]|max_length[20]|callback__mem_nickname_check',
-			'description' => '공백없이 한글, 영문, 숫자만 입력 가능 2글자 이상' . $nickname_description,
+			'description' => '공백없이 한글, 영문, 숫자만 입력 가능 2글자 이상' . '<p class="rtxt nec mg10t">적합하지 않은 별명의 경우 임의 변경될 수 있습니다.</p>' . $nickname_description,
 		);
 		$configbasic['mem_email'] = array(
 			'field' => 'mem_email',
@@ -395,6 +395,14 @@ class Register extends CB_Controller
 			'label' => '홈페이지',
 			'rules' => 'prep_url|valid_url',
 		);
+		// 추가한 것
+		$configbasic['mem_wallet_address'] = array(
+			'field' => 'mem_wallet_address',
+			'label' => 'PER 지갑주소',
+			'rules' => 'trim|required|is_natural_no_zero|is_unique[b]',
+			'description' => 'PER 지갑주소 입력은 선택사항 입니다. <br>지갑주소를 등록하여 다양한 혜택을 즐겨보세요.</p>',
+		);
+		// 추가한 것
 		// ciboard 있던것
 		// if ( ! $selfcert_phone) {
 		// 	$configbasic['mem_phone'] = array(

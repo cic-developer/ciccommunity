@@ -251,16 +251,19 @@ class Coin extends CB_Controller
 		$deleted = $this->CIC_Coin_Keyword_model->delete_keyword($key_id);
 		print_r($deleted);
 		if($deleted == 1){
-			echo "Data deleted successfully !";;
+			echo "Data deleted successfully !";
 			redirect('https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=ZRX');
 		}
+		else{
 
-		$layoutconfig2 = array('layout' => 'layout', 'skin' => 'delete_keyword');
-		//$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
-		$view['layout'] = $this->managelayout->admin($layoutconfig2, $this->cbconfig->get_device_view_type());
-		$this->data = $view;
-		$this->layout = element('layout_skin_file', element('layout', $view));
-		$this->view = element('view_skin_file', element('layout', $view));
+		}echo "Error !";
+
+		// $layoutconfig2 = array('layout' => 'layout', 'skin' => 'delete_keyword');
+		// //$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
+		// $view['layout'] = $this->managelayout->admin($layoutconfig2, $this->cbconfig->get_device_view_type());
+		// $this->data = $view;
+		// $this->layout = element('layout_skin_file', element('layout', $view));
+		// $this->view = element('view_skin_file', element('layout', $view));
 
 	}
 	
