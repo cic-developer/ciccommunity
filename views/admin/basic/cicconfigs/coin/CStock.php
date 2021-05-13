@@ -83,6 +83,16 @@
 
 		</div>
 	</form>
+
+
+
+
+	<!-- search -->
+	<form action="post" method="post">
+		<input type="text" id="search" placeholder="Search.." name="search">
+		<button type="submit" onClick="<?php $_GET['search']?>"><a href =""></button>
+	</form>
+
 </div>
 
 

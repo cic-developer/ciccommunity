@@ -767,16 +767,14 @@ class Register extends CB_Controller
 						OR element('field_type', $value) === 'phone'
 						OR element('field_type', $value) === 'date') {
 						if (element('field_type', $value) === 'date') {
-							$html_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input datepicker" value="' . set_value(element('field_name', $value)) . '" readonly="readonly" ' . $required . ' />';
+							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input datepicker" value="' . set_value(element('field_name', $value)) . '" readonly="readonly" ' . $required . ' />';
 						} elseif (element('field_type', $value) === 'phone') {
-							$html_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value)) . '" ' . $required . ' />';
+							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value)) . '" ' . $required . ' />';
 						} elseif(element('field_name', $value) === 'mem_userid'){
 							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
 						} elseif(element('field_name', $value) === 'mem_username'){
 							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
-						} elseif(element('field_name', $value) === 'mem_birthday'){
-							// $html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
-						}else {
+						} else {
 							$html_content[$k]['input'] .= '<input type="' . element('field_type', $value) . '" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
 						}
 					} elseif (element('field_type', $value) === 'textarea') {
