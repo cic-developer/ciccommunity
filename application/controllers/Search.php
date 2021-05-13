@@ -209,7 +209,7 @@ class Search extends CB_Controller
 		//코인 가격 검색 시작
 		
 
-		$key_search = $this-> CIC_Coin_Keyword_model -> seach_coin($skeyword);
+		$key_search = $this-> CIC_Coin_Keyword_model -> search_coin($skeyword);
 
 		$market = $key_search['market'];
 		$api_result = $this->CIC_Coin_model -> get_price($market);
@@ -222,7 +222,7 @@ class Search extends CB_Controller
 		$view['low'] = $low;
 		$view['high'] = $high;
 		$view['trade'] = $trade;
-		print_r(1);
+		print_r($skeyword);
 
 
 		// 코인 검색 여기까지 
