@@ -53,7 +53,7 @@ class Board_post extends CB_Controller
 		$view['view'] = array();
 
 		// 이벤트가 존재하면 실행합니다
-		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+	$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		$view['view']['list'] = $list = $this->_get_list($brd_key);
 		$view['view']['board_key'] = element('brd_key', element('board', $list));
@@ -236,7 +236,7 @@ class Board_post extends CB_Controller
 		// print_r($post['brd_id']);
 		// exit;
 
-		if($post['brd_id'] = 1)
+		if($post['brd_id'] == 1)
 		{
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		$where = array(
@@ -279,7 +279,7 @@ class Board_post extends CB_Controller
 			}
 		}
 		
-		if($post['brd_id'] = 2){
+		if($post['brd_id'] == 2){
 			$where = array(
 				'post_best_state >' => 0
 			);
@@ -1014,7 +1014,6 @@ class Board_post extends CB_Controller
 			$use_mobile_sidebar = element('board_mobile_sidebar', $board) ? element('board_mobile_sidebar', $board) : $this->cbconfig->item('mobile_sidebar_board');
 			$skin_dir = element('board_skin', $board) ? element('board_skin', $board) : $this->cbconfig->item('skin_board');
 			$mobile_skin_dir = element('board_mobile_skin', $board) ? element('board_mobile_skin', $board) : $this->cbconfig->item('mobile_skin_board');
-			exit(element('board_skin', $board));
 			$layoutconfig = array(
 				'path' => 'board',
 				'layout' => 'layout',
