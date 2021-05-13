@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 권한이 있는지 없는지 판단하는 class 입니다.
  */
-class Coin_model extends CB_Model
+class CIC_Coin_model extends CB_Model
 {
 
     /**
@@ -33,13 +33,6 @@ class Coin_model extends CB_Model
 
 	function get_price($market)
 	{
-
-        
-        $query = $this->db->get('cic_coin_stock');
-        // $query = $this->db->get('cic_stocks');
-        $market_ = $query->result();
-        
-
         $curl = curl_init();
         // $market = "KRW-BTC";
         //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
@@ -137,21 +130,6 @@ class Coin_model extends CB_Model
         $array = json_decode($response, true);
         return $array;
     
-    }
-
-
-    function reseach_coinAdmin($rowno, $rowperpage, $search=""){
-        $this->db->select('*');
-        $this->db->form('posts');
-
-        if($search != ''){
-            $this->db->like('market', $search);
-            $this->db->or_like('name_ko', $search);
-        }
-
-        $this -> db -> limit($rowperpage, $rowno);
-        $query = $this->db->get();
-        return $query-> result_array();
     }
 
 }

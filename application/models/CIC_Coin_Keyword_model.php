@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 권한이 있는지 없는지 판단하는 class 입니다.
  */
-class Coin_model_admin extends CB_Model
+class CIC_Coin_Keyword extends CB_Model
 {
 
     /**

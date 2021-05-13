@@ -874,7 +874,7 @@ class Register extends CB_Controller
 			 * 유효성 검사를 통과한 경우입니다.
 			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
 			 */
-
+/*
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
@@ -888,7 +888,7 @@ class Register extends CB_Controller
 			$insertdata['mem_nickname'] = $this->input->post('mem_nickname');
 			$metadata['meta_nickname_datetime'] = cdate('Y-m-d H:i:s');
 			$insertdata['mem_level'] = 0;// 시작 레벨은 무조건 0 // => ciboard원본 $mem_level;
-
+*/
 			// ciboard 있던것
 			// if ($selfcert_username) {
 			// 	$insertdata['mem_username'] = $selfcert_username;
@@ -914,7 +914,7 @@ class Register extends CB_Controller
 			// 	$insertdata['mem_sex'] = $this->input->post('mem_sex', null, '');
 			// }
 			// ciboard 있던것
-
+/*
 			// 위의 ciboard원본에서 cic로 변경된 부분
 			if (isset($form['mem_username']['use']) && $form['mem_username']['use']) {
 				$insertdata['mem_username'] = $this->input->post('mem_username', null, '');
@@ -977,7 +977,7 @@ class Register extends CB_Controller
 				'mem_userid' => $this->input->post('mem_userid'),
 			);
 			$this->Member_userid_model->insert($useridinsertdata);
-
+*/
 			// ciboard 있던것
 			// if ($selfcert_meta) {
 			// 	foreach ($selfcert_meta as $certkey => $certvalue) {
@@ -995,7 +995,7 @@ class Register extends CB_Controller
 			// 	$this->Member_selfcert_history_model->update('', $selfcertupdatedata, $selfcertwhere);
 			// }
 			// ciboard 있던것
-
+/*
 			$this->Member_meta_model->save($mem_id, $metadata);
 
 			$nickinsert = array(
@@ -1045,36 +1045,36 @@ class Register extends CB_Controller
 						$this->Member_group_member_model->insert($gminsert);
 					}
 				}
-			}
+			}*/
 
 			// cic에서 추가된 부분
-			$this->load->model(array('CIC_vp_config_model', 'CIC_cp_config_model', 'CIC_vp_model', 'CIC_cp_model'));
-			$_vpConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 1 AND vpc_enable = 1 AND vpc_value > 0");
-			$_cpConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 1 AND cpc_enable = 1 AND cpc_value > 0");
+			// $this->load->model(array('CIC_vp_config_model', 'CIC_cp_config_model', 'CIC_vp_model', 'CIC_cp_model'));
+			// $_vpConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 1 AND vpc_enable = 1 AND vpc_value > 0");
+			// $_cpConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 1 AND cpc_enable = 1 AND cpc_value > 0");
 
-			if($_vpConfig){
-				$this->point->insert_vp(
-					$mem_id,
-					element('vpc_value', $_vpConfig),
-					'회원가입을 축하합니다',
-					'member',
-					$mem_id,
-					'회원가입 VP 지급'
-				);	
-			}
+			// if($_vpConfig){
+			// 	$this->point->insert_vp(
+			// 		$mem_id,
+			// 		element('vpc_value', $_vpConfig),
+			// 		'회원가입을 축하합니다',
+			// 		'member',
+			// 		$mem_id,
+			// 		'회원가입 VP 지급'
+			// 	);	
+			// }
 			
-			if($_cpConfig){
-				$this->point->insert_cp(
-					$mem_id,
-					element('cpc_value', $_cpConfig),
-					'회원가입을 축하합니다',
-					'member',
-					$mem_id,
-					'회원가입 CP 지급'
-				);	
-			}
+			// if($_cpConfig){
+			// 	$this->point->insert_cp(
+			// 		$mem_id,
+			// 		element('cpc_value', $_cpConfig),
+			// 		'회원가입을 축하합니다',
+			// 		'member',
+			// 		$mem_id,
+			// 		'회원가입 CP 지급'
+			// 	);	
+			// }
 			// cic에서 추가된 부분
-
+/*
 			$this->point->insert_point(
 				$mem_id,
 				$this->cbconfig->item('point_register'),
@@ -1382,56 +1382,56 @@ class Register extends CB_Controller
 						'회원가입추천인존재'
 					);
 				}
-			}
+			}*/
 
 			// cic에서 추가된 부분
-			if ($recommend_userid){
-				$recommend_user = $this->member_model->get_by_userid($recommend_userid);
-				$signid_user = $this->member_model->get_by_memid($mem_id);
+			// if ($recommend_userid){
+			// 	$recommend_user = $this->member_model->get_by_userid($recommend_userid);
+			// 	$signid_user = $this->member_model->get_by_memid($mem_id);
 
-				$_vpRecommendConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 4 AND vpc_enable = 1 AND vpc_value > 0");
-				$_cpRecommendConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 4 AND cpc_enable = 1 AND cpc_value > 0");
-				$_vpSigninConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 5 AND vpc_enable = 1 AND vpc_value > 0");
-				$_cpSigninConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 5 AND cpc_enable = 1 AND cpc_value > 0");
+			// 	$_vpRecommendConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 4 AND vpc_enable = 1 AND vpc_value > 0");
+			// 	$_cpRecommendConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 4 AND cpc_enable = 1 AND cpc_value > 0");
+			// 	$_vpSigninConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 5 AND vpc_enable = 1 AND vpc_value > 0");
+			// 	$_cpSigninConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 5 AND cpc_enable = 1 AND cpc_value > 0");
 				
-				if($recommend_user){
-					$this->point->insert_vp(
-						element('mem_id', $recommend_user),
-						element('vpc_value', $_vpRecommendConfig),
-						element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
-						'recommeded',
-						$mem_id,
-						'Supercommunity 홍보 VP 보상'
-					);
+			// 	if($recommend_user){
+			// 		$this->point->insert_vp(
+			// 			element('mem_id', $recommend_user),
+			// 			element('vpc_value', $_vpRecommendConfig),
+			// 			element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
+			// 			'recommeded',
+			// 			$mem_id,
+			// 			'Supercommunity 홍보 VP 보상'
+			// 		);
 
-					$this->point->insert_cp(
-						element('mem_id', $recommend_user),
-						element('cpc_value', $_cpRecommendConfig),
-						element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
-						'recommeded',
-						$mem_id,
-						'Supercommunity 홍보 CP 보상'
-					);
-				}
+			// 		$this->point->insert_cp(
+			// 			element('mem_id', $recommend_user),
+			// 			element('cpc_value', $_cpRecommendConfig),
+			// 			element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
+			// 			'recommeded',
+			// 			$mem_id,
+			// 			'Supercommunity 홍보 CP 보상'
+			// 		);
+			// 	}
 
-				$this->point->insert_vp(
-					$mem_id,
-					element('vpc_value', $_vpSigninConfig),
-					element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
-					'recommed',
-					element('mem_id', $recommend_user),
-					'추천인 등록 VP 보상'
-				);
+			// 	$this->point->insert_vp(
+			// 		$mem_id,
+			// 		element('vpc_value', $_vpSigninConfig),
+			// 		element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
+			// 		'recommed',
+			// 		element('mem_id', $recommend_user),
+			// 		'추천인 등록 VP 보상'
+			// 	);
 
-				$this->point->insert_cp(
-					$mem_id,
-					element('cpc_value', $_cpSigninConfig),
-					element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
-					'recommed',
-					element('mem_id', $recommend_user),
-					'추천인 등록 CP 보상'
-				);
-			}
+			// 	$this->point->insert_cp(
+			// 		$mem_id,
+			// 		element('cpc_value', $_cpSigninConfig),
+			// 		element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
+			// 		'recommed',
+			// 		element('mem_id', $recommend_user),
+			// 		'추천인 등록 CP 보상'
+			// 	);
+			// }
 			// cic에서 추가된 부분
 
 			$this->session->set_flashdata(

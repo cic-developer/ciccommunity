@@ -142,7 +142,7 @@
 				<div class="fr">
 					<h4>BEST VP DOWN</h4>
 					<ul>
-						<li>
+						<!-- <li>
 							<a href="#n">
 								<span class="num">1</span>
 								<div class="my-info">
@@ -153,104 +153,32 @@
 								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
 								<span class="vp">102,522</span>
 							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">2</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/like-popo.png') ?>"
-											alt="">
-									</p>
-									<p class="rtxt">가즈아</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">3</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-											alt=""></p>
-									<p class="rtxt">코린이1235</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">4</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-											alt=""></p>
-									<p class="rtxt">코린이1235</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">5</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-											alt=""></p>
-									<p class="rtxt">코알못259</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">6</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-											alt=""></p>
-									<p class="rtxt">코린이1235</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">7</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-											alt=""></p>
-									<p class="rtxt">코알못259</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">8</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-											alt=""></p>
-									<p class="rtxt">코알못259</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">9</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>"
-											alt=""></p>
-									<p class="rtxt">코알못259</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
+						</li> -->
+						<?php
+						if (element('list',element('dislikepoint_ranking_freetalk', $view))) {
+							foreach (element('list',element('dislikepoint_ranking_freetalk', $view)) as $dislikepoint_ranking_freetalk) {
+								?>
+								<li>
+									<a href="<?php echo goto_url(element('posturl', $dislikepoint_ranking_freetalk)); ?>">
+										<span class="num"><?php echo number_format(element('num', $dislikepoint_ranking_freetalk)); ?></span>
+										<div class="my-info">
+											<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>" alt=""></p>
+											<p class="rtxt"><?php echo html_escape(element('post_userid', $dislikepoint_ranking_freetalk)); ?></p>
+										</div>
+										<span class="txt"><?php echo html_escape(element('post_title', $dislikepoint_ranking_freetalk)); ?></span>
+										<span class="vp"><?php echo number_format(element('post_like_point', $dislikepoint_ranking_freetalk)); ?></span>
+									</a>
+								</li>
+						<?php
+							}
+						} else {
+						?>
+							<li>
+								<span class="nopost">자료가 없습니다</span>
+							</li>
+						<?php
+						}
+						?>
 					</ul>
 				</div>
 			</div>

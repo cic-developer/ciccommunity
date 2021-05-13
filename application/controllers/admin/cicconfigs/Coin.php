@@ -24,12 +24,12 @@ class Coin extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Coin');
+	protected $models = array('CIC_Coin');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
 	 */
-	protected $modelname = 'Coin_model';
+	protected $modelname = 'CIC_Coin_model';
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -44,7 +44,7 @@ class Coin extends CB_Controller
 		 * 라이브러리를 로딩합니다
 		 */
 		$this->load->library(array('pagination', 'querystring', 'form_validation', 'session'));
-		$this->load->model(array('coin_model', 'Coin_model_admin'));
+		$this->load->model(array('coin_model', 'CIC_Coin_Keyword_model'));
 	}
 
     /**
@@ -136,7 +136,7 @@ class Coin extends CB_Controller
 		// print_r($refresh);
 		
 		if($refresh){
-			$getList = $this -> Coin_model->retrieve_api();
+			$getList = $this -> CIC_Coin_model->retrieve_api();
 			for($i=0; $i<count($getList); $i++){
 				$market = $getList[$i]['market'];
 				if(strcmp(substr($market, 0, 1), "K")==0){
@@ -148,7 +148,7 @@ class Coin extends CB_Controller
 					);
 					//For rafreshing admin page
 					if(isset($data) && !empty($data)){
-						$stock = $this->Coin_model->insertStockData($data);
+						$stock = $this->CIC_Coin_model->insertStockData($data);
 						$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 					}
 
@@ -168,7 +168,7 @@ class Coin extends CB_Controller
 					);
 					if(isset($data) && !empty($data)){	
 						for($j = 0; $j < count($data); $j++) {
-							$this->Coin_model -> insert_admin_list($data[$j]);
+							$this->CIC_Coin_model -> insert_admin_list($data[$j]);
 						}
 					}	
 				}
@@ -176,7 +176,7 @@ class Coin extends CB_Controller
 		}
 
        	//GET MARKET PRICE
-	    // $getStock = $this -> Coin_model_admin->get_keyword();
+	    // $getStock = $this -> CIC_Coin_Keyword_model->get_keyword();
     
 		// if($refresh){
 		// 	for($i = 0; $i < count($getStock); $i++){
@@ -184,7 +184,7 @@ class Coin extends CB_Controller
 		// 		$marketdata[] = $getStock[$i]['market'];
 
 		// 		if($marketdata){
-		// 			$realtime_coin_info = $this->Coin_model->get_price($marketdata[$i]);
+		// 			$realtime_coin_info = $this->CIC_Coin_model->get_price($marketdata[$i]);
 		// 		}else{
 		// 			$realtime_coin_info = 0;
 		// 		}
@@ -243,7 +243,7 @@ class Coin extends CB_Controller
 				),
 
 			);
-			$getList = $this -> Coin_model->retrieve_api();
+			$getList = $this -> CIC_Coin_model->retrieve_api();
 		
 			$this->form_validation->set_rules($config);
 
@@ -257,20 +257,20 @@ class Coin extends CB_Controller
 
 				);
 				if(isset($data) && !empty($data)){
-					$this->Coin_model_admin->insert_keyword($data);
+					$this->CIC_Coin_Keyword_model->insert_keyword($data);
 					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 				}
 			}
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 			//SHOWING LIST TO VIEW
-			$keylist = $this -> Coin_model_admin->get_keyword();
+			$keylist = $this -> CIC_Coin_Keyword_model->get_keyword();
 			$view['keylist'] = $keylist;
 
 
   //search  DEBUGG
         //    print_r($_GET['id']);
 			// $search = $this -> input -> post('search');	
-			// // $key_search = $this-> Coin_model_admin -> reseach_coinAdmin($search);
+			// // $key_search = $this-> CIC_Coin_Keyword_model -> reseach_coinAdmin($search);
 			// print_r($search);
 
 
@@ -302,12 +302,12 @@ class Coin extends CB_Controller
 			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 						
 			$key_id = $_GET['search'];
-			$key_search = $this-> Coin_model_admin -> reseach_coinAdmin($key_id);
+			$key_search = $this-> CIC_Coin_Keyword_model -> reseach_coinAdmin($key_id);
 			
 
 
 			$market = $key_search['market'];
-			$api_result = $this->Coin_model -> get_price($market);
+			$api_result = $this->CIC_Coin_model -> get_price($market);
 			$korean = $key_search['name_ko'];
 			$high = $api_result['high_price'];
 			$low =$api_result['low_price'];
@@ -323,7 +323,7 @@ class Coin extends CB_Controller
 
 
 			// 	$market = $keys['market'];
-			// 	$api_result = $this->Coin_model -> get_price($market);
+			// 	$api_result = $this->CIC_Coin_model -> get_price($market);
 			// 	$korean = $keys['name_ko'];
 			// 	$high = $api_result['high_price'];
 			// 	$low =$api_result['low_price'];
@@ -341,7 +341,7 @@ class Coin extends CB_Controller
 			// }
 
 
-			// $deleted = $this->Coin_model_admin->delete_keyword($key_id);
+			// $deleted = $this->CIC_Coin_Keyword_model->delete_keyword($key_id);
 			// if($deleted == 1){
 			// 	$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 			// 	//redirect('https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=ZRX');
