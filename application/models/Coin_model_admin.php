@@ -99,8 +99,8 @@ class Coin_model_admin extends CB_Model
     
 
     function reseach_coinAdmin($search){
-        // if (empty($limit)) {
-		// 	$limit = 100;
+        // if (empty($search)) {
+		// 	echo 'field is empty';
 		// }
 		$this->db->select('name_ko');
 		$this->db->join('cic_coin_admins', 'cic_coin_admins.coin_market = cic_coin_stock.market', 'inner');

@@ -95,6 +95,7 @@ class Board_post extends CB_Controller
 						$popularpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
 					}
 					if (element('post_image', $val)) {
+						$this->load->model('Post_file_model');
 						$imagewhere = array(
 							'post_id' => element('post_id', $val),
 							'pfi_is_image' => 1,
@@ -258,6 +259,7 @@ class Board_post extends CB_Controller
 						$popularpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
 					}
 					if (element('post_image', $val)) {
+						$this->load->model('Post_file_model');
 						$imagewhere = array(
 							'post_id' => element('post_id', $val),
 							'pfi_is_image' => 1,

@@ -297,10 +297,12 @@ class Coin extends CB_Controller
 			// 	//redirect('https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=ZRX');
 			// }
 
+			 
 
-			$search = $this -> input -> post('search');		
+			$search = $this -> input -> post('search');	
+			$key_search = $this-> Coin_model_admin -> reseach_coinAdmin($search);
 
-			print_r(1);
+			print_r($key_search);
 			$layoutconfig2 = array('layout' => 'layout', 'skin' => 'delete_keyword');
 			//$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
 			$view['layout'] = $this->managelayout->admin($layoutconfig2, $this->cbconfig->get_device_view_type());

@@ -33,7 +33,9 @@
 					foreach (element('html_content', $view) as $key => $value) {
 
 						// userid 히든으로 숨기기
-						if(element('field_name', $value) == "mem_userid"){
+						if(element('field_name', $value) == "mem_userid" ||
+								element('field_name', $value) == "mem_username" ||
+									element('field_name', $value) == "mem_sex"){
 					?>
 						<?php echo element('input', $value); ?>
 					<?php

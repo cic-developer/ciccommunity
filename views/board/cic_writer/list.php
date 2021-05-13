@@ -268,6 +268,8 @@
                     <?php
                         if (element('list', element('data', element('list', $view)))) {
                             foreach (element('list', element('data', element('list', $view))) as $result) {
+                                print_r($result);
+                                exit;
                     ?>
                     <li>
                         <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>">
