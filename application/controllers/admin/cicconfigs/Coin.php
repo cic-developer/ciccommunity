@@ -220,7 +220,8 @@ class Coin extends CB_Controller
 		$view['keylist'] = $keylist;
 
 		//DELETE KEYWORD
-
+		$deleted = $this->input->get('delete');
+		print_r($deleted);
 		/**
 		* 어드민 레이아웃을 정의합니다
 		*/

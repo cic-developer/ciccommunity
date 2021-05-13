@@ -73,10 +73,9 @@
 									?>
 								
 								</td>
-								<td><input type = 'submit' value="삭제" class="btn btn-danger btn-xs" name='delete'></input></td>
-								<!-- <td><a href="delete_keyword?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs">삭제 </a></td> -->
+								<td><a href="delete_keyword?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td>
 								<!-- <td><a href="<?php echo site_url('admin/cicconfigs/Coin/delete_keyword/'.$stocks['idx']) ?> ">delete<a></td> -->
-								<td><button type='submit't><a href="update_keyword/?id=<?php echo $stocks['idx']; ?>" class="btn btn-info btn-xs">수정 </a></td> 
+								<td><a href="update_keyword/?id=<?php echo $stocks['idx']; ?>" class="btn btn-info btn-xs">수정 </a></td> 
 							</tr>
 							<?php } ?>	
 						<?php

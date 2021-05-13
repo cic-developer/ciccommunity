@@ -191,7 +191,7 @@
 	<a href="#" class="join-btn"></a>
 </div>
 
-<?php
+<!-- <?php
 $this->managelayout->add_css(base_url('assets/css/datepicker3.css'));
 $this->managelayout->add_js('http://dmaps.daum.net/map_js_init/postcode.v2.js');
 $this->managelayout->add_js(base_url('assets/js/bootstrap-datepicker.js'));
@@ -235,4 +235,225 @@ $(function() {
 	});
 });
 //]]>
+</script> -->
+
+<script>
+	$(document).ready(function(){
+		$("#submitButton").on('click',function(){
+
+			// email = $("#mem_email").val();
+			// password1 = $("#mem_password").val();
+			// password2 = $("#mem_password_re").val();
+			// nickname = $("#mem_nickname").val();
+
+			$("#fregisterform").submit();
+		});
+	});
+
+	$(document).ready(function(){
+		$("#ath_email").on('click', function(){
+			var _email = $("#mem_email").val();
+
+			var result = '';
+			var reason = '';
+			var state = '';
+			var message = '';
+			$.ajax({
+				url: cb_url + '/register/ajax_email_check',
+				type: 'POST',
+				data: {
+					email: _email,
+					csrf_test_name : cb_csrf_hash
+				},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				success: function(data) {
+					result = data.result;
+					reason = data.reason;
+				}
+			});
+			if(result == "no"){
+				alert(reason);
+			}
+
+			if(result == "available"){
+				alert(reason);
+
+				$.ajax({
+					url: cb_url + '/register/ajax_email_send',
+					type: 'POST',
+					data: {
+						email: _email,
+						csrf_test_name : cb_csrf_hash
+					},
+					dataType: 'json',
+					async: false,
+					cache: false,
+					success: function(data) {
+						state = data.state;
+						message = data.message;
+					}
+				});
+
+				alert(message);
+
+				$('.success-email').remove();
+				$('.con-mail').remove();
+				if(state == 1){
+					html = '';
+					html += '<div class="con-mail">'
+					html += '<input type="text" id="ath_num" name="ath_num" class="" required />'
+					html += '<a class="con-mail-btn cerfity-btn" id="con-mail-btn">메일인증 확인</a>'
+					html += '</div>'
+					$('.mem_email').append(html);
+				}
+			}
+		})
+	})
+
+	// 이메일 인증
+	$(document).on('click', "#con-mail-btn", function(){
+		var ath_num = $("#ath_num").val();
+
+		var result = '';
+		var reason = '';
+		$.ajax({
+			url: cb_url + '/register/ajax_email_ath',
+			type: 'POST',
+			data: {
+				ath_num: ath_num,
+				csrf_test_name : cb_csrf_hash
+			},
+			dataType: 'json',
+			async: false,
+			cache: false,
+			success: function(data) {
+				result = data.result;
+				reason = data.reason;
+			}
+		});
+
+		if(result == 0){
+			alert(reason);
+		}
+
+		if(result == 1) {
+			var _email = $("#mem_email").val();
+			var html = '<p class="success-email rtxt mg10t">승인이 완료되었습니다</p>';
+
+			$('.con-mail').remove();
+			$("#mem_userid").val(_email);
+			$('.mem_email').append(html);
+			// $('#ath_email').remove();
+			// $("#mem_email").attr("readonly", true);
+			// $("#mem_email").attr("disabled", true);
+		}
+	});
+
+
+	$(document).ready(function(){
+		$("#ath_nickname").on('click', function(){
+			var _nickname = $("#mem_nickname").val();
+			// alert(email);
+
+			var result = '';
+			var reason = '';
+			$.ajax({
+				url: cb_url + '/register/ajax_nickname_check',
+				type: 'POST',
+				data: {
+					nickname: _nickname,
+					csrf_test_name : cb_csrf_hash
+				},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				success: function(data) {
+					result = data.result;
+					reason = data.reason;
+				}
+			});
+			if(result == "no"){
+				alert(reason);
+			}
+
+			if(result == "available"){
+				alert(reason);
+			}
+		})
+	})
+
+	// $(document).ready(function(){
+	// 	_password1 = $(".mem_password").val();
+	// 	_password2 = $(".mem_password_re").val();
+
+	// 	if(_password1 != _password2){
+	// 		alert("ho");
+	// 	}
+	// });
+
+	//예전 jQuery라면 on이 아니라 bind나 live 
+	oldVal1 = '';
+	$("#mem_password").on("propertychange change keyup paste input", function() {
+		var currentVal = $(this).val();
+		if(currentVal == oldVal1) {
+			return;
+		}
+		
+		password2 = $("#mem_password_re").val();
+		if(password2 != currentVal){
+			$('.agree-password').remove();
+			html = '<p class="agree-password" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
+			$('.mem_password_re').append(html);
+		} else{
+			$('.agree-password').remove();
+			html = '<p class="agree-password" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
+			$('.mem_password_re').append(html);
+		}
+		
+		oldVal1 = currentVal;
+	});
+
+	oldVal2 = '';
+	$("#mem_password_re").on("propertychange change keyup paste input", function() {
+		var currentVal = $(this).val();
+		if(currentVal == oldVal2) {
+			return;
+		}
+		
+		password1 = $("#mem_password").val();
+		if(password1 != currentVal){
+			$('.agree-password').remove();
+			html = '<p class="agree-password" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
+			$('.mem_password_re').append(html);
+		} else{
+			$('.agree-password').remove();
+			html = '<p class="agree-password" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
+			$('.mem_password_re').append(html);
+		}
+		
+		oldVal2 = currentVal;
+	});
+
+	$("#mem_email").on("propertychange change keyup paste input", function() {
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		var currentVal = $(this).val();
+		// if(currentVal == oldVal1) {
+		// 	return;
+		// }
+		
+		if (currentVal == '' || !re.test(currentVal)) {
+			alert("올바른 이메일 주소를 입력하세요")
+		return false;
+		}
+
+		oldVal1 = currentVal;
+	});
+
+	// $("#mem_password").change(function(){
+	// 	alert("id name 값이 변경되었습니다.");
+	// });
+
+
 </script>
