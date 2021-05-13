@@ -303,7 +303,8 @@ class Coin extends CB_Controller
 						
 			$key_id = $_GET['search'];
 			$key_search = $this-> Coin_model_admin -> reseach_coinAdmin($key_id);
-			print_r($key_serach);
+			print_r($key_search);
+			print_r($key_id);
 
 
 

@@ -141,7 +141,7 @@
                         <a href="#n" class="more"><span>더보기</span></a>
                         <div class="list">
                             <ul>
-                                 <li>
+                                <li>
                                     <a href="#n" class="new">
                                         <p class="num">4</p>
                                         <p class="btxt">
