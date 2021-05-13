@@ -311,8 +311,6 @@ class Register extends CB_Controller
 			// print_r($member_info['mem_nickname']);
 			print_r('<br>');
 			print_r("@@@@@@@@@@@@");
-			print_r($this->input->get('mem_password'));
-			print_r($this->input->get('mem_password_re'));
 			print_r("@@@@@@@@@@@@");
 
 
@@ -443,11 +441,11 @@ class Register extends CB_Controller
 		// 	'label' => '패스워드 확인',
 		// 	'rules' => 'trim|required|min_length[' . $password_length . ']|matches[mem_password]',
 		// );
-		$configbasic['mem_username'] = array(
-			'field' => 'mem_username',
-			'label' => '이름',
-			'rules' => 'trim|min_length[2]|max_length[20]',
-		);
+		// $configbasic['mem_username'] = array(
+		// 	'field' => 'mem_username',
+		// 	'label' => '이름',
+		// 	'rules' => 'trim|min_length[2]|max_length[20]',
+		// );
 		// $configbasic['mem_nickname'] = array(
 		// 	'field' => 'mem_nickname',
 		// 	'label' => '닉네임x',
@@ -460,83 +458,83 @@ class Register extends CB_Controller
 		// 	'rules' => 'trim|required|valid_email|max_length[50]|is_unique[member.mem_email]|callback__mem_email_check',
 		// 	'description' => $email_description,
 		// );
-		$configbasic['mem_homepage'] = array(
-			'field' => 'mem_homepage',
-			'label' => '홈페이지',
-			'rules' => 'prep_url|valid_url',
-		);
-		$configbasic['mem_phone'] = array(
-			'field' => 'mem_phone',
-			'label' => '전화번호',
-			'rules' => 'trim|valid_phone',
-		);
-		$configbasic['mem_birthday'] = array(
-			'field' => 'mem_birthday',
-			'label' => '생년월일',
-			'rules' => 'trim|exact_length[10]',
-		);
-		$configbasic['mem_sex'] = array(
-			'field' => 'mem_sex',
-			'label' => '성별',
-			'rules' => 'trim|exact_length[1]',
-		);
-		$configbasic['mem_zipcode'] = array(
-			'field' => 'mem_zipcode',
-			'label' => '우편번호',
-			'rules' => 'trim|min_length[5]|max_length[7]',
-		);
-		$configbasic['mem_address1'] = array(
-			'field' => 'mem_address1',
-			'label' => '기본주소',
-			'rules' => 'trim',
-		);
-		$configbasic['mem_address2'] = array(
-			'field' => 'mem_address2',
-			'label' => '상세주소',
-			'rules' => 'trim',
-		);
-		$configbasic['mem_address3'] = array(
-			'field' => 'mem_address3',
-			'label' => '참고항목',
-			'rules' => 'trim',
-		);
-		$configbasic['mem_address4'] = array(
-			'field' => 'mem_address4',
-			'label' => '지번',
-			'rules' => 'trim',
-		);
-		$configbasic['mem_profile_content'] = array(
-			'field' => 'mem_profile_content',
-			'label' => '자기소개',
-			'rules' => 'trim',
-		);
-		$configbasic['mem_open_profile'] = array(
-			'field' => 'mem_open_profile',
-			'label' => '정보공개',
-			'rules' => 'trim|exact_length[1]',
-		);
-		if ($this->cbconfig->item('use_note')) {
-			$configbasic['mem_use_note'] = array(
-				'field' => 'mem_use_note',
-				'label' => '쪽지사용',
-				'rules' => 'trim|exact_length[1]',
-			);
-		}
-		$configbasic['mem_receive_email'] = array(
-			'field' => 'mem_receive_email',
-			'label' => '이메일수신여부',
-			'rules' => 'trim|exact_length[1]',
-		);
-		$configbasic['mem_receive_sms'] = array(
-			'field' => 'mem_receive_sms',
-			'label' => 'SMS 문자수신여부',
-			'rules' => 'trim|exact_length[1]',
-		);
-		$configbasic['mem_recommend'] = array(
-			'field' => 'mem_recommend',
-			'label' => '추천인아이디',
-			'rules' => 'trim|alphanumunder|min_length[3]|max_length[20]|callback__mem_recommend_check',
-		);
+		// $configbasic['mem_homepage'] = array(
+		// 	'field' => 'mem_homepage',
+		// 	'label' => '홈페이지',
+		// 	'rules' => 'prep_url|valid_url',
+		// );
+		// $configbasic['mem_phone'] = array(
+		// 	'field' => 'mem_phone',
+		// 	'label' => '전화번호',
+		// 	'rules' => 'trim|valid_phone',
+		// );
+		// $configbasic['mem_birthday'] = array(
+		// 	'field' => 'mem_birthday',
+		// 	'label' => '생년월일',
+		// 	'rules' => 'trim|exact_length[10]',
+		// );
+		// $configbasic['mem_sex'] = array(
+		// 	'field' => 'mem_sex',
+		// 	'label' => '성별',
+		// 	'rules' => 'trim|exact_length[1]',
+		// );
+		// $configbasic['mem_zipcode'] = array(
+		// 	'field' => 'mem_zipcode',
+		// 	'label' => '우편번호',
+		// 	'rules' => 'trim|min_length[5]|max_length[7]',
+		// );
+		// $configbasic['mem_address1'] = array(
+		// 	'field' => 'mem_address1',
+		// 	'label' => '기본주소',
+		// 	'rules' => 'trim',
+		// );
+		// $configbasic['mem_address2'] = array(
+		// 	'field' => 'mem_address2',
+		// 	'label' => '상세주소',
+		// 	'rules' => 'trim',
+		// );
+		// $configbasic['mem_address3'] = array(
+		// 	'field' => 'mem_address3',
+		// 	'label' => '참고항목',
+		// 	'rules' => 'trim',
+		// );
+		// $configbasic['mem_address4'] = array(
+		// 	'field' => 'mem_address4',
+		// 	'label' => '지번',
+		// 	'rules' => 'trim',
+		// );
+		// $configbasic['mem_profile_content'] = array(
+		// 	'field' => 'mem_profile_content',
+		// 	'label' => '자기소개',
+		// 	'rules' => 'trim',
+		// );
+		// $configbasic['mem_open_profile'] = array(
+		// 	'field' => 'mem_open_profile',
+		// 	'label' => '정보공개',
+		// 	'rules' => 'trim|exact_length[1]',
+		// );
+		// if ($this->cbconfig->item('use_note')) {
+		// 	$configbasic['mem_use_note'] = array(
+		// 		'field' => 'mem_use_note',
+		// 		'label' => '쪽지사용',
+		// 		'rules' => 'trim|exact_length[1]',
+		// 	);
+		// }
+		// $configbasic['mem_receive_email'] = array(
+		// 	'field' => 'mem_receive_email',
+		// 	'label' => '이메일수신여부',
+		// 	'rules' => 'trim|exact_length[1]',
+		// );
+		// $configbasic['mem_receive_sms'] = array(
+		// 	'field' => 'mem_receive_sms',
+		// 	'label' => 'SMS 문자수신여부',
+		// 	'rules' => 'trim|exact_length[1]',
+		// );
+		// $configbasic['mem_recommend'] = array(
+		// 	'field' => 'mem_recommend',
+		// 	'label' => '추천인아이디',
+		// 	'rules' => 'trim|alphanumunder|min_length[3]|max_length[20]|callback__mem_recommend_check',
+		// );
 
 		if ($this->member->is_admin() === false && ! $this->session->userdata('registeragree')) {
 			$this->session->set_flashdata(
@@ -623,107 +621,107 @@ class Register extends CB_Controller
 		$file_error2 = '';
 		$updateicon = '';
 
-		if ($form_validation) {
-			$this->load->library('upload');
-			if ($this->cbconfig->item('use_member_photo') && $this->cbconfig->item('member_photo_width') > 0 && $this->cbconfig->item('member_photo_height') > 0) {
-				if (isset($_FILES) && isset($_FILES['mem_photo']) && isset($_FILES['mem_photo']['name']) && $_FILES['mem_photo']['name']) {
-					$upload_path = config_item('uploads_dir') . '/member_photo/';
-					if (is_dir($upload_path) === false) {
-						mkdir($upload_path, 0707);
-						$file = $upload_path . 'index.php';
-						$f = @fopen($file, 'w');
-						@fwrite($f, '');
-						@fclose($f);
-						@chmod($file, 0644);
-					}
-					$upload_path .= cdate('Y') . '/';
-					if (is_dir($upload_path) === false) {
-						mkdir($upload_path, 0707);
-						$file = $upload_path . 'index.php';
-						$f = @fopen($file, 'w');
-						@fwrite($f, '');
-						@fclose($f);
-						@chmod($file, 0644);
-					}
-					$upload_path .= cdate('m') . '/';
-					if (is_dir($upload_path) === false) {
-						mkdir($upload_path, 0707);
-						$file = $upload_path . 'index.php';
-						$f = @fopen($file, 'w');
-						@fwrite($f, '');
-						@fclose($f);
-						@chmod($file, 0644);
-					}
+		// if ($form_validation) {
+		// 	$this->load->library('upload');
+		// 	if ($this->cbconfig->item('use_member_photo') && $this->cbconfig->item('member_photo_width') > 0 && $this->cbconfig->item('member_photo_height') > 0) {
+		// 		if (isset($_FILES) && isset($_FILES['mem_photo']) && isset($_FILES['mem_photo']['name']) && $_FILES['mem_photo']['name']) {
+		// 			$upload_path = config_item('uploads_dir') . '/member_photo/';
+		// 			if (is_dir($upload_path) === false) {
+		// 				mkdir($upload_path, 0707);
+		// 				$file = $upload_path . 'index.php';
+		// 				$f = @fopen($file, 'w');
+		// 				@fwrite($f, '');
+		// 				@fclose($f);
+		// 				@chmod($file, 0644);
+		// 			}
+		// 			$upload_path .= cdate('Y') . '/';
+		// 			if (is_dir($upload_path) === false) {
+		// 				mkdir($upload_path, 0707);
+		// 				$file = $upload_path . 'index.php';
+		// 				$f = @fopen($file, 'w');
+		// 				@fwrite($f, '');
+		// 				@fclose($f);
+		// 				@chmod($file, 0644);
+		// 			}
+		// 			$upload_path .= cdate('m') . '/';
+		// 			if (is_dir($upload_path) === false) {
+		// 				mkdir($upload_path, 0707);
+		// 				$file = $upload_path . 'index.php';
+		// 				$f = @fopen($file, 'w');
+		// 				@fwrite($f, '');
+		// 				@fclose($f);
+		// 				@chmod($file, 0644);
+		// 			}
 
-					$uploadconfig = array();
-					$uploadconfig['upload_path'] = $upload_path;
-					$uploadconfig['allowed_types'] = 'jpg|jpeg|png|gif';
-					$uploadconfig['max_size'] = '2000';
-					$uploadconfig['max_width'] = '1000';
-					$uploadconfig['max_height'] = '1000';
-					$uploadconfig['encrypt_name'] = true;
+		// 			$uploadconfig = array();
+		// 			$uploadconfig['upload_path'] = $upload_path;
+		// 			$uploadconfig['allowed_types'] = 'jpg|jpeg|png|gif';
+		// 			$uploadconfig['max_size'] = '2000';
+		// 			$uploadconfig['max_width'] = '1000';
+		// 			$uploadconfig['max_height'] = '1000';
+		// 			$uploadconfig['encrypt_name'] = true;
 
-					$this->upload->initialize($uploadconfig);
+		// 			$this->upload->initialize($uploadconfig);
 
-					if ($this->upload->do_upload('mem_photo')) {
-						$img = $this->upload->data();
-						$updatephoto = cdate('Y') . '/' . cdate('m') . '/' . $img['file_name'];
-					} else {
-						$file_error = $this->upload->display_errors();
+		// 			if ($this->upload->do_upload('mem_photo')) {
+		// 				$img = $this->upload->data();
+		// 				$updatephoto = cdate('Y') . '/' . cdate('m') . '/' . $img['file_name'];
+		// 			} else {
+		// 				$file_error = $this->upload->display_errors();
 
-					}
-				}
-			}
+		// 			}
+		// 		}
+		// 	}
 
-			if ($this->cbconfig->item('use_member_icon') && $this->cbconfig->item('member_icon_width') > 0 && $this->cbconfig->item('member_icon_height') > 0) {
-				if (isset($_FILES) && isset($_FILES['mem_icon']) && isset($_FILES['mem_icon']['name']) && $_FILES['mem_icon']['name']) {
-					$upload_path = config_item('uploads_dir') . '/member_icon/';
-					if (is_dir($upload_path) === false) {
-						mkdir($upload_path, 0707);
-						$file = $upload_path . 'index.php';
-						$f = @fopen($file, 'w');
-						@fwrite($f, '');
-						@fclose($f);
-						@chmod($file, 0644);
-					}
-					$upload_path .= cdate('Y') . '/';
-					if (is_dir($upload_path) === false) {
-						mkdir($upload_path, 0707);
-						$file = $upload_path . 'index.php';
-						$f = @fopen($file, 'w');
-						@fwrite($f, '');
-						@fclose($f);
-						@chmod($file, 0644);
-					}
-					$upload_path .= cdate('m') . '/';
-					if (is_dir($upload_path) === false) {
-						mkdir($upload_path, 0707);
-						$file = $upload_path . 'index.php';
-						$f = @fopen($file, 'w');
-						@fwrite($f, '');
-						@fclose($f);
-						@chmod($file, 0644);
-					}
+		// 	if ($this->cbconfig->item('use_member_icon') && $this->cbconfig->item('member_icon_width') > 0 && $this->cbconfig->item('member_icon_height') > 0) {
+		// 		if (isset($_FILES) && isset($_FILES['mem_icon']) && isset($_FILES['mem_icon']['name']) && $_FILES['mem_icon']['name']) {
+		// 			$upload_path = config_item('uploads_dir') . '/member_icon/';
+		// 			if (is_dir($upload_path) === false) {
+		// 				mkdir($upload_path, 0707);
+		// 				$file = $upload_path . 'index.php';
+		// 				$f = @fopen($file, 'w');
+		// 				@fwrite($f, '');
+		// 				@fclose($f);
+		// 				@chmod($file, 0644);
+		// 			}
+		// 			$upload_path .= cdate('Y') . '/';
+		// 			if (is_dir($upload_path) === false) {
+		// 				mkdir($upload_path, 0707);
+		// 				$file = $upload_path . 'index.php';
+		// 				$f = @fopen($file, 'w');
+		// 				@fwrite($f, '');
+		// 				@fclose($f);
+		// 				@chmod($file, 0644);
+		// 			}
+		// 			$upload_path .= cdate('m') . '/';
+		// 			if (is_dir($upload_path) === false) {
+		// 				mkdir($upload_path, 0707);
+		// 				$file = $upload_path . 'index.php';
+		// 				$f = @fopen($file, 'w');
+		// 				@fwrite($f, '');
+		// 				@fclose($f);
+		// 				@chmod($file, 0644);
+		// 			}
 
-					$uploadconfig = array();
-					$uploadconfig['upload_path'] = $upload_path;
-					$uploadconfig['allowed_types'] = 'jpg|jpeg|png|gif';
-					$uploadconfig['max_size'] = '2000';
-					$uploadconfig['max_width'] = '1000';
-					$uploadconfig['max_height'] = '1000';
-					$uploadconfig['encrypt_name'] = true;
+		// 			$uploadconfig = array();
+		// 			$uploadconfig['upload_path'] = $upload_path;
+		// 			$uploadconfig['allowed_types'] = 'jpg|jpeg|png|gif';
+		// 			$uploadconfig['max_size'] = '2000';
+		// 			$uploadconfig['max_width'] = '1000';
+		// 			$uploadconfig['max_height'] = '1000';
+		// 			$uploadconfig['encrypt_name'] = true;
 
-					$this->upload->initialize($uploadconfig);
+		// 			$this->upload->initialize($uploadconfig);
 
-					if ($this->upload->do_upload('mem_icon')) {
-						$img = $this->upload->data();
-						$updateicon = cdate('Y') . '/' . cdate('m') . '/' . $img['file_name'];
-					} else {
-						$file_error2 = $this->upload->display_errors();
-					}
-				}
-			}
-		}
+		// 			if ($this->upload->do_upload('mem_icon')) {
+		// 				$img = $this->upload->data();
+		// 				$updateicon = cdate('Y') . '/' . cdate('m') . '/' . $img['file_name'];
+		// 			} else {
+		// 				$file_error2 = $this->upload->display_errors();
+		// 			}
+		// 		}
+		// 	}
+		// }
 
 		/**
 		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
@@ -736,6 +734,8 @@ class Register extends CB_Controller
 
 			$html_content = array();
 
+			print_r('<br>');
+			print_r($form);
 			$k = 0;
 			if ($form && is_array($form)) {
 				foreach ($form as $key => $value) {
