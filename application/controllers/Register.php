@@ -916,12 +916,28 @@ class Register extends CB_Controller
 			$insertdata = array();
 			$metadata = array();
 
+			// 이메일 인증 여부
+			$ath_result = $this->session->userdata('ath_mail_result');
+			// 인증에 이용한 이메일
+			$ath_email = $this->session->userdata('ath_email');
+			// 발급한 인증번호
+			$ath_num = $this->session->userdata('ath_num');
+
+			if( ! $ath_result 
+				|| ($ath_email != $this->input->post('mem_email')) 
+					||  $ath_num != $this->input->post('ath_num')){
+						
+						redirect();
+						return;
+			}
+
 			$insertdata['mem_userid'] = $this->input->post('mem_userid');
 			$insertdata['mem_email'] = $this->input->post('mem_email');
 			$insertdata['mem_password'] = password_hash($this->input->post('mem_password'), PASSWORD_BCRYPT);
 			$insertdata['mem_nickname'] = $this->input->post('mem_nickname');
 			$metadata['meta_nickname_datetime'] = cdate('Y-m-d H:i:s');
 			$insertdata['mem_level'] = 0;// 시작 레벨은 무조건 0 // => ciboard원본 $mem_level;
+
 
 			// ciboard 있던것
 			// if ($selfcert_username) {

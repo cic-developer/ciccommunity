@@ -121,9 +121,9 @@ $(".btn-sm").on('click', function(e){
 });
 //]]>
 function myFunction() {
-  var r = confirm("Press a button!");
+  var r = confirm("Do you want to delete?");
   if(r == true){
-	  window.location=" https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id="<?php $_GET['id'];?>;
+	window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo $_GET['id'];?>");
   }
 }
 
