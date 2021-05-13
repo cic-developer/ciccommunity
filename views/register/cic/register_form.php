@@ -302,9 +302,13 @@ $(function() {
 				$('.con-mail').remove();
 				if(state == 1){
 					html = '';
-					html += '<div class="con-mail">'
+					html += '<div class="field con-mail">'
+					html += '<p class="chk-input">'
 					html += '<input type="text" id="ath_num" name="ath_num" class="" required />'
+					html += '<p class="rtxt mg10t">'
 					html += '<a class="con-mail-btn cerfity-btn" id="con-mail-btn">메일인증 확인</a>'
+					html += '</p>'
+					html += '</p>'
 					html += '</div>'
 					$('.mem_email').append(html);
 				}
@@ -434,21 +438,6 @@ $(function() {
 		}
 		
 		oldVal2 = currentVal;
-	});
-
-	$("#mem_email").on("propertychange change keyup paste input", function() {
-		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		var currentVal = $(this).val();
-		// if(currentVal == oldVal1) {
-		// 	return;
-		// }
-		
-		if (currentVal == '' || !re.test(currentVal)) {
-			alert("올바른 이메일 주소를 입력하세요")
-		return false;
-		}
-
-		oldVal1 = currentVal;
 	});
 
 	// $("#mem_password").change(function(){

@@ -1768,6 +1768,8 @@ class Register extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
+		// 세션에 기존 인증된 내역 삭제
+		$this->session->set_userdata('ath_mail_result', '');
 		$rand_num = sprintf('%06d',rand(000000,999999));
 		$email = $this->input->post('email');
 		// 세션에 인증번호 저장
