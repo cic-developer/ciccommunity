@@ -441,11 +441,11 @@ class Register extends CB_Controller
 		// 	'label' => '패스워드 확인',
 		// 	'rules' => 'trim|required|min_length[' . $password_length . ']|matches[mem_password]',
 		// );
-		// $configbasic['mem_username'] = array(
-		// 	'field' => 'mem_username',
-		// 	'label' => '이름',
-		// 	'rules' => 'trim|min_length[2]|max_length[20]',
-		// );
+		$configbasic['mem_username'] = array(
+			'field' => 'mem_username',
+			'label' => '이름',
+			'rules' => 'trim|min_length[2]|max_length[20]',
+		);
 		// $configbasic['mem_nickname'] = array(
 		// 	'field' => 'mem_nickname',
 		// 	'label' => '닉네임x',
@@ -463,11 +463,11 @@ class Register extends CB_Controller
 		// 	'label' => '홈페이지',
 		// 	'rules' => 'prep_url|valid_url',
 		// );
-		// $configbasic['mem_phone'] = array(
-		// 	'field' => 'mem_phone',
-		// 	'label' => '전화번호',
-		// 	'rules' => 'trim|valid_phone',
-		// );
+		$configbasic['mem_phone'] = array(
+			'field' => 'mem_phone',
+			'label' => '전화번호',
+			'rules' => 'trim|valid_phone',
+		);
 		// $configbasic['mem_birthday'] = array(
 		// 	'field' => 'mem_birthday',
 		// 	'label' => '생년월일',
