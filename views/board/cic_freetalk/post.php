@@ -113,8 +113,8 @@
 					<h4>BEST VP UP</h4>
 					<ul>
 						<?php
-						if (element('list',element('bestpost', $view))) {
-							foreach (element('list',element('bestpost', $view)) as $popularpost) {
+						if (element('list',element('popularpost', $view))) {
+							foreach (element('list',element('popularpost', $view)) as $popularpost) {
 								?>
 								<li>
 									<a href="<?php echo goto_url(element('posturl', $popularpost)); ?>">

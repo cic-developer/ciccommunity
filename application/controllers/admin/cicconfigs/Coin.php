@@ -304,10 +304,18 @@ class Coin extends CB_Controller
 			$key_id = $_GET['search'];
 			$key_search = $this-> Coin_model_admin -> reseach_coinAdmin($key_id);
 			foreach($key_search as $keys){
+
+
 				$market = $keys['market'];
 				$api_result = $this->Coin_model -> get_price($market);
 				$korean = $keys['name_ko'];
-				print_r("￦".$api_result['trade_price']);
+
+
+				$view['keys'] = $keys;
+				$view['api_result'] = $api_result;
+				// print_r("￦".$api_result);
+
+
 }
 
 

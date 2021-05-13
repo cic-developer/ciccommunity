@@ -5,8 +5,8 @@
 </form>
 <div>
     <?php 
-    $search = $_GET['search']; 
-    print_r($search);
+      print_r($keys);
+      print_r($api_result);
     ?>
     
 <div>

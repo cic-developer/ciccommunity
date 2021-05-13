@@ -277,7 +277,9 @@ class Board_post extends CB_Controller
 					}
 				}
 			}
-			
+		}
+		
+		if($post['brd_id'] = 2){
 			$where = array(
 				'post_best_state >' => 0
 			);
@@ -313,7 +315,7 @@ class Board_post extends CB_Controller
 				}
 			}
 		}
-	}
+		}
 		$view['view']['popularpost'] = $popularpost;
 		$view['view']['bestpost'] = $bestpost;
 

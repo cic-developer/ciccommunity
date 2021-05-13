@@ -265,6 +265,46 @@ class Register extends CB_Controller
 			return false;
 		}
 
+		// ciboard 있던것 추가
+		if ($this->cbconfig->item('use_selfcert') && $this->cbconfig->item('use_selfcert_required') && ! $this->session->userdata('selfcertinfo')) {
+			if ( ! $this->session->userdata('selfcertinfo')) {
+				$this->session->set_flashdata(
+					'message',
+					'본인 확인 후에 회원가입이 가능합니다.'
+				);
+				redirect('register');
+			}
+		}
+
+		$selfcert_phone = $selfcert_username = $selfcert_birthday = $selfcert_sex = '';
+		$selfcert_meta = '';
+
+		if ($this->cbconfig->item('use_selfcert') && $this->session->userdata('selfcertinfo')) {
+			$selfcertinfo = $this->session->userdata('selfcertinfo');
+			if (element('selfcert_type', $selfcertinfo) == 'phone') {
+				if ($this->cbconfig->item('use_selfcert_phone') == 'kcb' OR $this->cbconfig->item('use_selfcert_phone') == 'kcp') {
+					$selfcert_phone = element('selfcert_phone', $selfcertinfo);
+					$selfcert_username = element('selfcert_username', $selfcertinfo);
+					$selfcert_birthday = element('selfcert_birthday', $selfcertinfo);
+					$selfcert_sex = element('selfcert_sex', $selfcertinfo);
+					$selfcert_key = element('selfcert_key', $selfcertinfo);
+					$selfcert_local_code = element('selfcert_local_code', $selfcertinfo);
+					$selfcert_meta = array(
+						'selfcert_type' => element('selfcert_type', $selfcertinfo),
+						'selfcert_company' => $this->cbconfig->item('use_selfcert_phone'),
+						'selfcert_comm_id' => element('selfcert_comm_id', $selfcertinfo),
+						'selfcert_phone' => $selfcert_phone,
+						'selfcert_username' => $selfcert_username,
+						'selfcert_birthday' => $selfcert_birthday,
+						'selfcert_sex' => $selfcert_sex,
+						'selfcert_key' => $selfcert_key,
+						'selfcert_local_code' => $selfcert_local_code,
+					);
+				}
+			}
+		}
+		// ciboard 있던것 추가
+
 		$password_length = $this->cbconfig->item('password_length');
 		$email_description = '';
 		if ($this->cbconfig->item('use_register_email_auth')) {
@@ -437,6 +477,20 @@ class Register extends CB_Controller
 					continue;
 				}
 				if (element('func', $value) === 'basic') {
+					// ciboard 있던것 추가
+					if ($key == 'mem_username' && $selfcert_username) {
+						continue;
+					}
+					if ($key == 'mem_phone' && $selfcert_phone) {
+						continue;
+					}
+					if ($key == 'mem_birthday' && $selfcert_birthday) {
+						continue;
+					}
+					if ($key == 'mem_sex' && $selfcert_sex) {
+						continue;
+					}
+					// ciboard 있던것 추가
 
 					if ($key === 'mem_address') {
 						if (element('required', $value) === '1') {
@@ -621,6 +675,20 @@ class Register extends CB_Controller
 					if ( ! element('use', $value)) {
 						continue;
 					}
+					// ciboard 있던것 추가
+					if (element('field_name', $value) === 'mem_username' && $selfcert_username) {
+						continue;
+					}
+					if (element('field_name', $value) === 'mem_phone' && $selfcert_phone) {
+						continue;
+					}
+					if (element('field_name', $value) === 'mem_birthday' && $selfcert_birthday) {
+						continue;
+					}
+					if (element('field_name', $value) === 'mem_sex' && $selfcert_sex) {
+						continue;
+					}
+					// ciboard 있던것 추가
 
 					$required = element('required', $value) ? 'required' : '';
 
@@ -791,7 +859,33 @@ class Register extends CB_Controller
 			$insertdata['mem_password'] = password_hash($this->input->post('mem_password'), PASSWORD_BCRYPT);
 			$insertdata['mem_nickname'] = $this->input->post('mem_nickname');
 			$metadata['meta_nickname_datetime'] = cdate('Y-m-d H:i:s');
-			$insertdata['mem_level'] = 0;// 시작 레벨은 무조건 0 $mem_level;
+			$insertdata['mem_level'] = 0;// 시작 레벨은 무조건 0 // => ciboard원본 $mem_level;
+
+			// ciboard 원본
+			// if ($selfcert_username) {
+			// 	$insertdata['mem_username'] = $selfcert_username;
+			// } else if (isset($form['mem_username']['use']) && $form['mem_username']['use']) {
+			// 	$insertdata['mem_username'] = $this->input->post('mem_username', null, '');
+			// }
+			// if (isset($form['mem_homepage']['use']) && $form['mem_homepage']['use']) {
+			// 	$insertdata['mem_homepage'] = $this->input->post('mem_homepage', null, '');
+			// }
+			// if ($selfcert_phone) {
+			// 	$insertdata['mem_phone'] = $selfcert_phone;
+			// } else if (isset($form['mem_phone']['use']) && $form['mem_phone']['use']) {
+			// 	$insertdata['mem_phone'] = $this->input->post('mem_phone', null, '');
+			// }
+			// if ($selfcert_birthday) {
+			// 	$insertdata['mem_birthday'] = $selfcert_birthday;
+			// } else if (isset($form['mem_birthday']['use']) && $form['mem_birthday']['use']) {
+			// 	$insertdata['mem_birthday'] = $this->input->post('mem_birthday', null, '');
+			// }
+			// if ($selfcert_sex) {
+			// 	$insertdata['mem_sex'] = $selfcert_sex;
+			// } else if (isset($form['mem_sex']['use']) && $form['mem_sex']['use']) {
+			// 	$insertdata['mem_sex'] = $this->input->post('mem_sex', null, '');
+			// }
+			// ciboard 원본
 
 			if (isset($form['mem_username']['use']) && $form['mem_username']['use']) {
 				$insertdata['mem_username'] = $this->input->post('mem_username', null, '');
@@ -852,6 +946,24 @@ class Register extends CB_Controller
 				'mem_userid' => $this->input->post('mem_userid'),
 			);
 			$this->Member_userid_model->insert($useridinsertdata);
+
+			// ciboard 원본
+			// if ($selfcert_meta) {
+			// 	foreach ($selfcert_meta as $certkey => $certvalue) {
+			// 		$metadata[$certkey] = $certvalue;
+			// 	}
+
+			// 	$selfcertupdatedata = array(
+			// 		'mem_id' => $mem_id
+			// 	);
+			// 	$selfcertwhere = array(
+			// 		'msh_cert_key' => $selfcert_key,
+			// 	);
+
+			// 	$this->load->model('Member_selfcert_history_model');
+			// 	$this->Member_selfcert_history_model->update('', $selfcertupdatedata, $selfcertwhere);
+			// }
+			// ciboard 원본
 
 			$this->Member_meta_model->save($mem_id, $metadata);
 
