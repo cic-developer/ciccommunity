@@ -761,15 +761,22 @@ class Register extends CB_Controller
 					} elseif (element('field_type', $value) === 'radio') {
 						$html_content[$k]['input'] .= '<div class="checkbox">';
 						if (element('field_name', $value) === 'mem_sex') {
-							$options = array(
-								'1' => '남성',
-								'2' => '여성',
-							);
+							// $options = array(
+							// 	'1' => '남성',
+							// 	'2' => '여성',
+							// );
+								if($data['gender'] == 0){
+									$html_content[$k]['input'] .= '<input type="hidden" name="' . element('field_name', $value) . '" id="' . element('field_name', $value) . '" value="' . $data['gender'] . '" ' . set_value(element('field_name', $value)) . ' /> ';
+								}
+								if($data['gender'] == 1){
+									$html_content[$k]['input'] .= '<input type="hidden" name="' . element('field_name', $value) . '" id="' . element('field_name', $value) . '" value="' . $data['gender'] . '" ' . set_value(element('field_name', $value)) . ' /> ';
+								}
+						
 						} else {
 							$options = explode("\n", element('options', $value));
 						}
 						$i =1;
-						if ($options) {
+						if ($options && element('field_name', $value) != 'mem_sex') {
 							foreach ($options as $okey => $oval) {
 								$radiovalue = (element('field_name', $value) === 'mem_sex') ? $okey : $oval;
 								$html_content[$k]['input'] .= '<label for="' . element('field_name', $value) . '_' . $i . '"><input type="radio" name="' . element('field_name', $value) . '" id="' . element('field_name', $value) . '_' . $i . '" value="' . $radiovalue . '" ' . set_radio(element('field_name', $value), $radiovalue) . ' /> ' . $oval . ' </label> ';

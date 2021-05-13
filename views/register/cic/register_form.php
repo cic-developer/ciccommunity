@@ -48,18 +48,18 @@
 					<?php
 					}
 					?>
-					<li>
+					<!-- <li>
 						<span>정보공개</span>
 						<div class="form-text text-primary group">
-							<label for="mem_open_profile">
-								<input type="checkbox" name="mem_open_profile" id="mem_open_profile" value="1" <?php echo set_checkbox('mem_open_profile', '1', true); ?> />
-								다른분들이 나의 정보를 볼 수 있도록 합니다.
+							<label for="mem_open_profile"> -->
+								<input type="hidden" name="mem_open_profile" id="mem_open_profile" value="1" <?php echo set_checkbox('mem_open_profile', '1', true); ?> />
+								<!-- 다른분들이 나의 정보를 볼 수 있도록 합니다.
 							</label>
 							<?php if (element('open_profile_description', $view)) { ?>
 								<p class="help-block"><?php echo element('open_profile_description', $view); ?></p>
 							<?php } ?>
 						</div>
-					</li>
+					</li> -->
 					<?php if ($this->cbconfig->item('use_note')) { ?>
 						<li>
 							<span>쪽지기능사용</span>
