@@ -51,12 +51,8 @@ class CIC_Coin_Keyword_model extends CB_Model
         return $result;
     }
 
-    function getById($id){
-        return $this->db->get_where('cic_coin_admins', array('id'=>$id))->row();
-    }
 
     function delete_keyword($id){
-
         $this->db->where('idx', $id);
         $this->db->delete('cic_coin_admins');
         return true;
@@ -68,21 +64,6 @@ class CIC_Coin_Keyword_model extends CB_Model
         $this->db->update('cic_coin_admins', $data);
 
     }
-
-    function save_defaut_keyword(){
-        $query = $this->db->get('cic_coin_admins');
-        return $query->row();
-    }
-    
-
-    function getCoin_join( $limit = '', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR'){
-        $select = 'name_ko';
-        $join[] = array('table' => 'cic_coin_admins', 'on' => 'cic_coin_admins.coin_market = cic_coin_stock.market');
-        $result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
-        return $result;
-    }
-
-    
 
     function search_Coin ($search){
         if (empty($search)) {

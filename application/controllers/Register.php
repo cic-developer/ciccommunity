@@ -62,6 +62,12 @@ class Register extends CB_Controller
 			&& ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
 			redirect();
 		}
+		
+
+		// if(!$this->session->userdata('dec_data')){
+		// 	redirect();
+		// }
+		$data = $this->session->userdata('dec_data');
 
 		if ($this->cbconfig->item('use_register_block')) {
 

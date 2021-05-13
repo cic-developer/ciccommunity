@@ -84,17 +84,7 @@
 		</div>
 	</form>
 
-
-
-
-	<!-- search -->
-	<form method="post">
-		<input type="text" id="search" placeholder="Search.." name="searcher">
-		<button type="submit" value='Search'>search</button>
-	</form>
-
 </div>
-
 
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 <script type="text/javascript">
