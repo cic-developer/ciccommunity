@@ -36,7 +36,8 @@
 						if(element('field_name', $value) == "mem_userid" ||
 								element('field_name', $value) == "mem_username" ||
 									element('field_name', $value) == "mem_sex"||
-										element('field_name', $value) == "mem_phone"){
+										element('field_name', $value) == "mem_phone"||
+											element('field_name', $value) == "mem_birthday"){
 					?>
 						<?php echo element('input', $value); ?>
 					<?php

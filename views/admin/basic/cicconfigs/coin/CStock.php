@@ -88,9 +88,9 @@
 
 
 	<!-- search -->
-	<form action="post" method="post">
-		<input type="text" id="search" placeholder="Search.." name="search">
-		<button type="submit" onClick="<?php $_GET['search']?>"><a href =""></button>
+	<form method="post">
+		<input type="text" id="search" placeholder="Search.." name="searcher">
+		<button type="submit">search</button>
 	</form>
 
 </div>

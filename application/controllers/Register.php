@@ -766,10 +766,14 @@ class Register extends CB_Controller
 						OR element('field_type', $value) === 'email'
 						OR element('field_type', $value) === 'phone'
 						OR element('field_type', $value) === 'date') {
-						if (element('field_type', $value) === 'date') {
-							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input datepicker" value="' . set_value(element('field_name', $value)) . '" readonly="readonly" ' . $required . ' />';
-						} elseif (element('field_type', $value) === 'phone') {
-							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value)) . '" ' . $required . ' />';
+						if (element('field_type', $value) === 'date' && element('field_name', $value) != 'mem_birthday') {
+							$html_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input datepicker" value="' . set_value(element('field_name', $value)) . '" readonly="readonly" ' . $required . ' />';
+						} elseif (element('field_type', $value) === 'phone' && element('field_name', $value) != 'mem_phone') {
+							$html_content[$k]['input'] .= '<input type="phone" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value)) . '" ' . $required . ' />';
+						} elseif(element('field_name', $value) === 'mem_birthday'){
+							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
+						} elseif(element('field_name', $value) === 'mem_phone'){
+							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
 						} elseif(element('field_name', $value) === 'mem_userid'){
 							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
 						} elseif(element('field_name', $value) === 'mem_username'){
@@ -864,15 +868,15 @@ class Register extends CB_Controller
 			}
 
 			$view['view']['html_content'] = $html_content;
-			$view['view']['open_profile_description'] = '';
-			if ($this->cbconfig->item('change_open_profile_date')) {
-				$view['view']['open_profile_description'] = '정보공개 설정은 ' . $this->cbconfig->item('change_open_profile_date') . '일 이내에는 변경할 수 없습니다';
-			}
+			// $view['view']['open_profile_description'] = '';
+			// if ($this->cbconfig->item('change_open_profile_date')) {
+			// 	$view['view']['open_profile_description'] = '정보공개 설정은 ' . $this->cbconfig->item('change_open_profile_date') . '일 이내에는 변경할 수 없습니다';
+			// }
 
 			$view['view']['use_note_description'] = '';
-			if ($this->cbconfig->item('change_use_note_date')) {
-				$view['view']['use_note_description'] = '쪽지 기능 사용 설정은 ' . $this->cbconfig->item('change_use_note_date') . '일 이내에는 변경할 수 없습니다';
-			}
+			// if ($this->cbconfig->item('change_use_note_date')) {
+			// 	$view['view']['use_note_description'] = '쪽지 기능 사용 설정은 ' . $this->cbconfig->item('change_use_note_date') . '일 이내에는 변경할 수 없습니다';
+			// }
 
 			$view['view']['canonical'] = site_url('register/form');
 
@@ -933,9 +937,9 @@ class Register extends CB_Controller
 			if (isset($form['mem_username']['use']) && $form['mem_username']['use']) {
 				$insertdata['mem_username'] = $this->input->post('mem_username', null, '');
 			}
-			if (isset($form['mem_homepage']['use']) && $form['mem_homepage']['use']) {
-				$insertdata['mem_homepage'] = $this->input->post('mem_homepage', null, '');
-			}
+			// if (isset($form['mem_homepage']['use']) && $form['mem_homepage']['use']) {
+			// 	$insertdata['mem_homepage'] = $this->input->post('mem_homepage', null, '');
+			// }
 			if (isset($form['mem_phone']['use']) && $form['mem_phone']['use']) {
 				$insertdata['mem_phone'] = $this->input->post('mem_phone', null, '');
 			}
@@ -945,42 +949,42 @@ class Register extends CB_Controller
 			if (isset($form['mem_sex']['use']) && $form['mem_sex']['use']) {
 				$insertdata['mem_sex'] = $this->input->post('mem_sex', null, '');
 			}
-			if (isset($form['mem_address']['use']) && $form['mem_address']['use']) {
-				$insertdata['mem_zipcode'] = $this->input->post('mem_zipcode', null, '');
-				$insertdata['mem_address1'] = $this->input->post('mem_address1', null, '');
-				$insertdata['mem_address2'] = $this->input->post('mem_address2', null, '');
-				$insertdata['mem_address3'] = $this->input->post('mem_address3', null, '');
-				$insertdata['mem_address4'] = $this->input->post('mem_address4', null, '');
-			}
-			$insertdata['mem_receive_email'] = $this->input->post('mem_receive_email') ? 1 : 0;
-			if ($this->cbconfig->item('use_note')) {
-				$insertdata['mem_use_note'] = $this->input->post('mem_use_note') ? 1 : 0;
-				$metadata['meta_use_note_datetime'] = cdate('Y-m-d H:i:s');
-			}
-			$insertdata['mem_receive_sms'] = $this->input->post('mem_receive_sms') ? 1 : 0;
-			$insertdata['mem_open_profile'] = $this->input->post('mem_open_profile') ? 1 : 0;
+			// if (isset($form['mem_address']['use']) && $form['mem_address']['use']) {
+			// 	$insertdata['mem_zipcode'] = $this->input->post('mem_zipcode', null, '');
+			// 	$insertdata['mem_address1'] = $this->input->post('mem_address1', null, '');
+			// 	$insertdata['mem_address2'] = $this->input->post('mem_address2', null, '');
+			// 	$insertdata['mem_address3'] = $this->input->post('mem_address3', null, '');
+			// 	$insertdata['mem_address4'] = $this->input->post('mem_address4', null, '');
+			// }
+			// $insertdata['mem_receive_email'] = $this->input->post('mem_receive_email') ? 1 : 0;
+			// if ($this->cbconfig->item('use_note')) {
+			// 	$insertdata['mem_use_note'] = $this->input->post('mem_use_note') ? 1 : 0;
+			// 	$metadata['meta_use_note_datetime'] = cdate('Y-m-d H:i:s');
+			// }
+			// $insertdata['mem_receive_sms'] = $this->input->post('mem_receive_sms') ? 1 : 0;
+			// $insertdata['mem_open_profile'] = $this->input->post('mem_open_profile') ? 1 : 0;
 			$metadata['meta_open_profile_datetime'] = cdate('Y-m-d H:i:s');
 			$insertdata['mem_register_datetime'] = cdate('Y-m-d H:i:s');
 			$insertdata['mem_register_ip'] = $this->input->ip_address();
 			$metadata['meta_change_pw_datetime'] = cdate('Y-m-d H:i:s');
-			if (isset($form['mem_profile_content']['use']) && $form['mem_profile_content']['use']) {
-				$insertdata['mem_profile_content'] = $this->input->post('mem_profile_content', null, '');
-			}
+			// if (isset($form['mem_profile_content']['use']) && $form['mem_profile_content']['use']) {
+			// 	$insertdata['mem_profile_content'] = $this->input->post('mem_profile_content', null, '');
+			// }
 
-			if ($this->cbconfig->item('use_register_email_auth')) {
-				$insertdata['mem_email_cert'] = 0;
-				$metadata['meta_email_cert_datetime'] = '';
-			} else {
-				$insertdata['mem_email_cert'] = 1;
-				$metadata['meta_email_cert_datetime'] = cdate('Y-m-d H:i:s');
-			}
+			// if ($this->cbconfig->item('use_register_email_auth')) {
+			// 	$insertdata['mem_email_cert'] = 0;
+			// 	$metadata['meta_email_cert_datetime'] = '';
+			// } else {
+			// 	$insertdata['mem_email_cert'] = 1;
+			// 	$metadata['meta_email_cert_datetime'] = cdate('Y-m-d H:i:s');
+			// }
 
-			if ($updatephoto) {
-				$insertdata['mem_photo'] = $updatephoto;
-			}
-			if ($updateicon) {
-				$insertdata['mem_icon'] = $updateicon;
-			}
+			// if ($updatephoto) {
+			// 	$insertdata['mem_photo'] = $updatephoto;
+			// }
+			// if ($updateicon) {
+			// 	$insertdata['mem_icon'] = $updateicon;
+			// }
 
 			$mem_id = $this->Member_model->insert($insertdata);
 
@@ -1093,9 +1097,9 @@ class Register extends CB_Controller
 			$mem_nickname = $this->input->post('mem_nickname', null, '');
 			$mem_username = $this->input->post('mem_username', null, '');
 			$mem_email = $this->input->post('mem_email', null, '');
-			$receive_email = $this->input->post('mem_receive_email') ? '동의' : '거부';
-			$receive_note = $this->input->post('mem_use_note') ? '동의' : '거부';
-			$receive_sms = $this->input->post('mem_receive_sms') ? '동의' : '거부';
+			// $receive_email = $this->input->post('mem_receive_email') ? '동의' : '거부';
+			// $receive_note = $this->input->post('mem_use_note') ? '동의' : '거부';
+			// $receive_sms = $this->input->post('mem_receive_sms') ? '동의' : '거부';
 			$replaceconfig = array(
 				$this->cbconfig->item('site_title'),
 				$this->cbconfig->item('company_name'),
@@ -1104,9 +1108,9 @@ class Register extends CB_Controller
 				$mem_nickname,
 				$mem_username,
 				$mem_email,
-				$receive_email,
-				$receive_note,
-				$receive_sms,
+				// $receive_email,
+				// $receive_note,
+				// $receive_sms,
 				$this->input->ip_address(),
 			);
 			$replaceconfig_escape = array(
@@ -1117,9 +1121,9 @@ class Register extends CB_Controller
 				html_escape($mem_nickname),
 				html_escape($mem_username),
 				html_escape($mem_email),
-				$receive_email,
-				$receive_note,
-				$receive_sms,
+				// $receive_email,
+				// $receive_note,
+				// $receive_sms,
 				$this->input->ip_address(),
 			);
 

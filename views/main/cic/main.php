@@ -141,7 +141,19 @@
                         <a href="#n" class="more"><span>더보기</span></a>
                         <div class="list">
                             <ul>
-
+                                 <li>
+                                    <a href="#n" class="new">
+                                        <p class="num">4</p>
+                                        <p class="btxt">
+                                            <span class="txt">업비트 싹 뺐습니다 지금 비트코인 어느정도 예상되는 어쩌고 텍스트 예시로 테스트 테스트 테스트 테스트</span>
+                                            <span class="hit">(12)</span>
+                                        </p>
+                                        <div>
+                                            <p class="stxt">블로서리 <span><img src="<?php echo base_url('assets/images/like-popo.png') ?>" alt="" /></span></p>
+                                            <p class="date">204 <span>49분전</span></p>
+                                        </div>
+                                    </a>
+                                </li>
 						<?php
 						if (element('list',element('popularpost', $view))) {
 							foreach (element('list',element('popularpost', $view)) as $popularpost) {

@@ -133,6 +133,7 @@ class Coin extends CB_Controller
     	//Load data to second db
 
 		$refresh = $this -> input -> post('refresh');
+		// print_r($refresh);
 		
 		if($refresh){
 			$getList = $this -> Coin_model->retrieve_api();
@@ -200,7 +201,7 @@ class Coin extends CB_Controller
 
 		// }
 
-			$search = $this -> input -> post('search');	
+			$search = $this -> input -> get('searcher');	
 			// $key_search = $this-> Coin_model_admin -> reseach_coinAdmin($search);
 			print_r($search);
 

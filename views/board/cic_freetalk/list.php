@@ -13,15 +13,15 @@
                 <div class="fl">
                     <h4>베스트 게시물</h4>
                     <ul>
-                        <!-- <li><a href="<?php echo base_url('post/5')?>">1. [스압] 월급루팡이 만들어지는 과정 (5) <span>18</span></a>
-                        </li> -->
+                        <li><a href="<?php echo base_url('post/5')?>">1. [스압] 월급루팡이 만들어지는 과정 (5) <span>18</span></a>
+                        </li>
                         <?php
 						if (element('list',element('bestpost', $view))) {
 							foreach (element('list',element('bestpost', $view)) as $bestpost) {
 						?>
 							<li>
-								<?php if (element('category', $bestpost)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $bestpost))); ?></span><?php } ?>
-								<a href="<?php echo goto_url(element('posturl', $bestpost)); ?>" target="_blank"><?php echo html_escape(element('post_title', $bestpost)); ?> <span class="text-right"><?php echo number_format(element('post_like_point', $bestpost)); ?></span></a>
+                            <!-- <span class="num"><?php echo number_format(element('num', $bestpost)); ?></span> -->
+								<a href="<?php echo goto_url(element('posturl', $bestpost)); ?>"><span class="num"><?php echo number_format(element('num', $bestpost)); ?></span><?php echo html_escape(element('post_title', $bestpost)); ?> <span class="text-right"><?php echo number_format(element('post_like_point', $bestpost)); ?></span></a>
 							</li>
 						<?php
 							}
