@@ -224,15 +224,36 @@ $(function() {
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){
 
-			// email = $("#mem_email").val();
-			// password1 = $("#mem_password").val();
-			// password2 = $("#mem_password_re").val();
-			// nickname = $("#mem_nickname").val();
+			var email = $("#mem_email").val();
+			var password = $("#mem_password").val();
+			var password_re = $("#mem_password_re").val();
+			var nickname = $("#mem_nickname").val();
+			// var csrf = $("#csrf_test_name").val();
+			var userid = $("#mem_userid").val();
+			var username = $("#mem_username").val();
+			var phone = $("#mem_phone").val();
+			var birthday = $("#mem_birthday").val();
+			var sex = $("#mem_sex").val();
+
+			if(email.length == 0) {alert('이메일을 입력해주세요'); return;}
+			if(password.length == 0) {alert('비밀번호를 입력해주세요'); return;}
+			if(password.length < 4) {alert('비밀번호를 4자리 이상 입력해주세요'); return;}
+			if(password != password_re ) {alert('비밀번호가 일치하지 않습니다'); return;}
+			if(password_re.length == 0) {alert('비밀번호 확인을 입력해주세요'); return;}
+			if(nickname.length == 0) {alert('닉네임을 입력해주세요'); return;}
+			// if(csrf.length == 0) {alert('(csrf 오류) 휴대폰 재인증이 필요합니다'); return;}
+			if(userid.length == 0) {alert('(Id 오류) 이메일 인증이 필요합니다'); return;}
+			if(username.length == 0) {alert('(name 오류) 휴대폰 재인증이 필요합니다'); return;}
+			if(phone.length == 0) {alert('(phone 오류) 휴대폰 재인증이 필요합니다'); return;}
+			if(birthday.length == 0) {alert('(birtyday 오류) 휴대폰 재인증이 필요합니다'); return;}
+			if(sex.length == 0) {alert('(gender 오류) 휴대폰 재인증이 필요합니다'); return;}
+			
 
 			$("#fregisterform").submit();
 		});
 	});
 
+	// 이메일 인증번호 보내기 + 인증폼 띄우기
 	$(document).ready(function(){
 		$("#ath_email").on('click', function(){
 			var _email = $("#mem_email").val();
