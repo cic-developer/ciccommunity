@@ -29,13 +29,9 @@
 				<!--  -->
 				<?php
 				foreach (element('html_content', $view) as $key => $value) {
-
+					$hidden_field_name = array("mem_userid" ,"mem_username" ,"mem_sex" ,"mem_phone" ,"mem_birthday");
 					// userid 히든으로 숨기기
-					if(element('field_name', $value) == "mem_userid" ||
-							element('field_name', $value) == "mem_username" ||
-								element('field_name', $value) == "mem_sex"||
-									element('field_name', $value) == "mem_phone"||
-										element('field_name', $value) == "mem_birthday"){
+					if(in_array(element('field_name', $value), $hidden_field_name)){
 				?>
 					<?php echo element('input', $value); ?>
 				<?php

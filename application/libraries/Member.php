@@ -356,8 +356,6 @@ class Member extends CI_Controller
 				'mlc_enable' => 1,
 			);
 			$result = $this->CI->CIC_member_level_config_model->get_one('', '', $where);
-
-			exit('여기??');
 			if($result){
 				return $result;
 			} else {

@@ -29,7 +29,6 @@ class CIC_member_level_config_model extends CB_Model
 
 	function get_by_pointSum($pointSum = 0)
 	{
-		exit(is_null($pointSum));
 		if($pointSum >= 0){
 			$this->db->where('mlc_target_point <=', $pointSum);
 			$this->db->where('mlc_enable', 1);
@@ -39,9 +38,9 @@ class CIC_member_level_config_model extends CB_Model
 			$this->db->where('mlc_enable', 1);
 			$this->db->order_by('mlc_target_point','ASC');
 		}
-
-		$result = $this->db->get('cic_member_level_config');
-		return element(0 ,$result);
+		$this->db->limit(1);
+		$result = $this->db->get('cic_member_level_config')->row_array();
+		return $result;
 	}
 }
 
