@@ -965,7 +965,7 @@ class Postact extends CB_Controller
 
 		$this->load->model(array('Comment_model', 'Like_model'));
 
-		$select = 'cmt_id, post_id, mem_id, cmt_del';
+		$select = 'cmt_id, post_id, mem_id, cmt_del, cmt_like_point, cmt_dislike_point';
 		$comment = $this->Comment_model->get_one($cmt_id, $select);
 
 		if ( ! element('cmt_id', $comment)) {
@@ -977,7 +977,7 @@ class Postact extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		$select = 'post_id, brd_id, mem_id, post_del, cmt_like_point, cmt_dislike_point';
+		$select = 'post_id, brd_id, mem_id, post_del';
 		$post = $this->Post_model->get_one(element('post_id', $comment), $select);
 
 		if ( ! $this->session->userdata('post_id_' . element('post_id', $comment))) {

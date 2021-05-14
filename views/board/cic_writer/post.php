@@ -260,13 +260,13 @@
 
 	$(document).on('click', '.up', function(){
 		const content_type = $(this).attr('data-contenttype');
-		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmt_idx');
+		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
 		update_vp(content_idx, content_type, 'up');
 	});
 	
 	$(document).on('click', '.down', function(){
 		const content_type = $(this).attr('data-contenttype');
-		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmt_idx');
+		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
 		update_vp(content_idx, content_type, 'down');
 	});
 
@@ -323,7 +323,7 @@
 					location.reload();
 				}
 			},
-			error: function(){
+			error: function(err){
 				alert('에러가 발생했습니다.');
 			}
 		});
