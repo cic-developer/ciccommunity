@@ -930,7 +930,7 @@ class Register extends CB_Controller
 			$ath_email = $this->session->userdata('ath_email');
 			// 발급한 인증번호
 			$ath_num = $this->session->userdata('ath_num');
-
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			if( $ath_result != '1' // 이메일 인증 결과
 				|| ($ath_email != $this->input->post('mem_email')) // 이메일 인증에 사용된 이메일
 					||  $ath_num != $this->input->post('ath_num') // 이메일 인증 번호
