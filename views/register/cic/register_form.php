@@ -253,7 +253,7 @@ $(function() {
 		});
 	});
 
-	// 이메일 인증번호 보내기 + 인증폼 띄우기
+	// 이메일 확인 + 인증번호 보내기
 	$(document).ready(function(){
 		$("#ath_email").on('click', function(){
 			var _email = $("#mem_email").val();
@@ -320,7 +320,7 @@ $(function() {
 		})
 	})
 
-	// 이메일 인증
+	// 이메일 인증 하기
 	$(document).on('click', "#con-mail-btn", function(){
 		var ath_num = $("#ath_num").val();
 
@@ -348,11 +348,12 @@ $(function() {
 
 		if(result == 1) {
 			var _email = $("#mem_email").val();
-			var html = '<p class="success-email rtxt mg10t">승인이 완료되었습니다</p>';
+			_email = _email.split('@');
+			var html = '<p class="success-email rtxt mg10t cblue">승인이 완료되었습니다</p>';
 			html += '<input type="hidden" id="ath_num" name="ath_num" class="" required value="'+ ath_num +'" />'
 
 			$('.con-mail').remove();
-			$("#mem_userid").val(_email);
+			$("#mem_userid").val(_email[0]);
 			$('.mem_email').append(html);
 			// $('#ath_email').remove();
 			// $("#mem_email").attr("readonly", true);
@@ -360,7 +361,7 @@ $(function() {
 		}
 	});
 
-
+	// 닉네임 확인
 	$(document).ready(function(){
 		$("#ath_nickname").on('click', function(){
 			var _nickname = $("#mem_nickname").val();
@@ -393,16 +394,7 @@ $(function() {
 		})
 	})
 
-	// $(document).ready(function(){
-	// 	_password1 = $(".mem_password").val();
-	// 	_password2 = $(".mem_password_re").val();
-
-	// 	if(_password1 != _password2){
-	// 		alert("ho");
-	// 	}
-	// });
-
-	//예전 jQuery라면 on이 아니라 bind나 live 
+	// 비밀번호 == 비밀번호 확인 check
 	oldVal1 = '';
 	$("#mem_password").on("propertychange change keyup paste input", function() {
 		var currentVal = $(this).val();
@@ -413,11 +405,11 @@ $(function() {
 		password2 = $("#mem_password_re").val();
 		if(password2 != currentVal){
 			$('.agree-password').remove();
-			html = '<p class="agree-password" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
+			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
 			$('.mem_password_re').append(html);
 		} else{
 			$('.agree-password').remove();
-			html = '<p class="agree-password" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
+			html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
 			$('.mem_password_re').append(html);
 		}
 		
@@ -434,20 +426,15 @@ $(function() {
 		password1 = $("#mem_password").val();
 		if(password1 != currentVal){
 			$('.agree-password').remove();
-			html = '<p class="agree-password" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
+			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
 			$('.mem_password_re').append(html);
 		} else{
 			$('.agree-password').remove();
-			html = '<p class="agree-password" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
+			html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
 			$('.mem_password_re').append(html);
 		}
 		
 		oldVal2 = currentVal;
 	});
-
-	// $("#mem_password").change(function(){
-	// 	alert("id name 값이 변경되었습니다.");
-	// });
-
 
 </script>

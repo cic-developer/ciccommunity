@@ -931,13 +931,18 @@ class Register extends CB_Controller
 			// 발급한 인증번호
 			$ath_num = $this->session->userdata('ath_num');
 
-			if( ! $ath_result 
-				|| ($ath_email != $this->input->post('mem_email')) 
-					||  $ath_num != $this->input->post('ath_num')){
+			// $this->session->unset_userdata('dec_data'); // 휴대폰 인증 데이터
+			// $this->session->unset_userdata('ath_num'); // 이메일 인증 번호
+			// $this->session->unset_userdata('ath_email'); // 이메일 인증에 사용된 이메일
+			// $this->session->unset_userdata('ath_mail_result'); // 이메일 인증 결과
+//////////////////////////////////////////////////////>>>>>>>>>>>>>>>>>>>>>>>
+			// if( ! $ath_result 
+			// 	|| ($ath_email != $this->input->post('mem_email')) 
+			// 		||  $ath_num != $this->input->post('ath_num')){
 						
-						redirect();
-						return;
-			}
+			// 			redirect();
+			// 			return;
+			// }
 
 			$insertdata['mem_userid'] = $this->input->post('mem_userid');
 			$insertdata['mem_email'] = $this->input->post('mem_email');
@@ -1502,8 +1507,8 @@ class Register extends CB_Controller
 					$mem_id
 				);
 			}
-			echo '<script>alert("gg");</script>';
-			// redirect('register/result');
+			// echo '<script>alert("gg");</script>';
+			redirect('register/result');
 		}
 	}
 
@@ -1525,6 +1530,10 @@ class Register extends CB_Controller
 
 		$this->session->keep_flashdata('nickname');
 		$this->session->keep_flashdata('email_auth_message');
+		$this->session->unset_userdata('dec_data'); // 휴대폰 인증 데이터
+		$this->session->unset_userdata('ath_num'); // 이메일 인증 번호
+		$this->session->unset_userdata('ath_email'); // 이메일 인증에 사용된 이메일
+		$this->session->unset_userdata('ath_mail_result'); // 이메일 인증 결과
 
 		if ( ! $this->session->flashdata('nickname')) {
 			redirect();
@@ -1806,6 +1815,8 @@ class Register extends CB_Controller
 		$getdata['rand_num'] = $rand_num;
 		$getdata['name'] = urldecode($data['name']);
 		$getdata['site_title'] = $this->cbconfig->item('site_title');
+		$getdata['webmaster_email'] = $this->cbconfig->item('webmaster_email');
+		$getdata['webmaster_name'] = $this->cbconfig->item('webmaster_name');
 		
 		// $this->load->library('email');
 		$emailform['emailform'] = $getdata;
