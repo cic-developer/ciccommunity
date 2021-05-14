@@ -62,12 +62,6 @@ class Register extends CB_Controller
 			&& ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
 			redirect();
 		}
-		
-
-		// if(!$this->session->userdata('dec_data')){
-		// 	redirect();
-		// }
-		// $data = $this->session->userdata('dec_data');
 
 		if ($this->cbconfig->item('use_register_block')) {
 
@@ -226,6 +220,10 @@ class Register extends CB_Controller
 		
 		if ($this->member->is_member() && ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
 			redirect();
+		}
+
+		if(!$this->session->userdata('dec_data')){
+			redirect('register');
 		}
 
 		$view = array();
@@ -499,6 +497,11 @@ class Register extends CB_Controller
 			'field' => 'mem_recommend',
 			'label' => '추천인아이디',
 			'rules' => 'trim|alphanumunder|min_length[3]|max_length[20]|callback__mem_recommend_check',
+		);
+		$configbasic['ath_num'] = array(
+			'field' => 'mem_recommend',
+			'label' => '이메일 인증 번호',
+			'rules' => 'trim|matches['.$this->session->userdata('ath_num').']',
 		);
 
 		if ($this->member->is_admin() === false && ! $this->session->userdata('registeragree')) {
@@ -1946,6 +1949,59 @@ class Register extends CB_Controller
 	 * 회원가입시 이메일을 체크하는 함수입니다
 	 */
 	public function _mem_email_check($str)
+	{
+		list($emailid, $emaildomain) = explode('@', $str);
+		$denied_list = explode(',', $this->cbconfig->item('denied_email_list'));
+		$emaildomain = trim($emaildomain);
+		$denied_list = array_map('trim', $denied_list);
+		if (in_array($emaildomain, $denied_list)) {
+			$this->form_validation->set_message(
+				'_mem_email_check',
+				$emaildomain . ' 은(는) 사용하실 수 없는 이메일입니다'
+			);
+			return false;
+		}
+
+		// 이메일 인증 여부
+		$ath_result = $this->session->userdata('ath_mail_result');
+		// 인증에 이용한 이메일
+		$ath_email = $this->session->userdata('ath_email');
+		// 발급한 인증번호
+		$ath_num = $this->session->userdata('ath_num');
+		// 모바일 인증 데이터
+		$data = $this->session->userdata('dec_data');
+
+		if( $ath_result != '1' ){
+			$this->form_validation->set_message(
+				'_mem_email_check',
+				'이메일 인증 오류!'
+			);
+			return false;
+		}
+
+		if( ! $data ){
+			$this->form_validation->set_message(
+				'_mem_email_check',
+				'모바일 인증 오류!'
+			);
+			return false;
+		}
+
+		if($ath_email != $str){
+			$this->form_validation->set_message(
+				'_mem_email_check',
+				'이메일 인증 오류!'
+			);
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * 이메일 인증시 이메일을 체크하는 함수입니다.
+	 */
+	public function _mem_email_check_to_ath($str)
 	{
 		list($emailid, $emaildomain) = explode('@', $str);
 		$denied_list = explode(',', $this->cbconfig->item('denied_email_list'));
