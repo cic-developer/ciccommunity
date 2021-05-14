@@ -228,6 +228,21 @@ class Register extends CB_Controller
 			redirect();
 		}
 
+		$title = str_replace(
+			$searchconfig,
+			$replaceconfig,
+			$this->cbconfig->item('send_email_register_user_title')
+		);
+		$content = str_replace(
+			$searchconfig,
+			$replaceconfig_escape,
+			$this->cbconfig->item('send_email_register_user_content')
+		);
+
+		print_r($title);
+		print_r('<br>');
+		print_r($content);
+
 		$view = array();
 		$view['view'] = array();
 
@@ -1182,7 +1197,7 @@ class Register extends CB_Controller
 
 			if ( ! $this->cbconfig->item('use_register_email_auth')) {
 				if (($this->cbconfig->item('send_email_register_user') && $this->input->post('mem_receive_email'))
-					OR $this->cbconfig->item('send_email_register_alluser')) {
+				OR $this->cbconfig->item('send_email_register_alluser')) {
 					$title = str_replace(
 						$searchconfig,
 						$replaceconfig,
@@ -1802,16 +1817,45 @@ class Register extends CB_Controller
 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
 		$this->load->library('email');
+		// $this->email->from(element('webmaster_email', $getdata), element('webmaster_name', $getdata));
+		// $this->email->to($email);
+
+		// $this->email->subject('cic 회원가입 인증 이메일입니다.');
+		// $content_type = $this->cbconfig->item('use_formmail_dhtml') ? 1 : 0;
+		// $this->email->message(display_html_content(
+		// 	$rand_num,
+		// 	$content_type,
+		// 	800
+		// ));
+		$searchconfig = array(
+			'{홈페이지명}',
+			'{회사명}',
+			'{홈페이지주소}',
+			'{회원아이디}',
+			'{회원닉네임}',
+			'{회원실명}',
+			'{회원이메일}',
+			'{메일수신여부}',
+			'{쪽지수신여부}',
+			'{문자수신여부}',
+			'{회원아이피}',
+		);
+
+		$title = str_replace(
+			$searchconfig,
+			$replaceconfig,
+			$this->cbconfig->item('send_email_register_user_title')
+		);
+		$content = str_replace(
+			$searchconfig,
+			$replaceconfig_escape,
+			$this->cbconfig->item('send_email_register_user_content')
+		);
 		$this->email->from(element('webmaster_email', $getdata), element('webmaster_name', $getdata));
 		$this->email->to($email);
-
-		$this->email->subject('cic 회원가입 인증 이메일입니다.');
-		$content_type = $this->cbconfig->item('use_formmail_dhtml') ? 1 : 0;
-		$this->email->message(display_html_content(
-			$rand_num,
-			$content_type,
-			800
-		));
+		$this->email->subject($title);
+		$this->email->message($content);
+		// $this->email->send();
 
 		if ($this->email->send() === false) {
 			$result = array(
