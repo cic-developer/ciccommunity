@@ -209,6 +209,28 @@ class Register extends CB_Controller
 		}
 	}
 
+	public function auth_fail(){
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_register_auth_fail';
+		$this->load->event($eventname);
+
+		$view = array();
+		$view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		if($this->input->get("EncodeData")){
+			$this->checkplus->fail($this->input->get("EncodeData"));
+			
+			echo("<script>alert('인증에 실패하였습니다!');</script>");
+			echo("<script>self.close()</script>");
+		} 
+
+		echo("<script>alert('인증에 실패하였습니다!');</script>");
+		echo("<script>self.close()</script>");
+	}
+
 	/**
 	 * 회원가입 폼 페이지입니다
 	 */
