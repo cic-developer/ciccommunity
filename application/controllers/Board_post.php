@@ -1433,6 +1433,26 @@ class Board_post extends CB_Controller
 						$result['list'][$key]['origin_image_url'] = $thumb_url;
 					}
 				}
+				// if (element('use_gallery_list', $board)) {
+				// 	$this->load->model('Post_file_model');
+				// 	if (element('post_image', $val)) {
+				// 		$filewhere = array(
+				// 			'post_id' => element('post_id', $val),
+				// 			'pfi_is_image' => 1,
+				// 		);
+				// 		$file = $this->Post_file_model
+				// 			->get_one('', '', $filewhere, '', '', 'pfi_id', 'ASC');
+				// 		$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), $gallery_image_width, $gallery_image_height);
+				// 		$result['list'][$key]['origin_image_url'] = thumb_url('post', element('pfi_filename', $file));
+				// 	} else {
+				// 		$thumb_url = get_post_image_url(element('post_content', $val), $gallery_image_width, $gallery_image_height);
+				// 		$result['list'][$key]['thumb_url'] = $thumb_url
+				// 			? $thumb_url
+				// 			: thumb_url('', '', $gallery_image_width, $gallery_image_height);
+
+				// 		$result['list'][$key]['origin_image_url'] = $thumb_url;
+				// 	}
+				// }
 			}
 		}
 

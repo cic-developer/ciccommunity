@@ -469,7 +469,7 @@ class Point extends CI_Controller
 				if($_mlclevel != $_memLevel)
 				{
 					$this->CI->Member_model->update($mem_id, array('mem_level' => $_mlclevel));
-					$_checkHis = $this->Member_level_history_model->get_one('','', array('mlh_to' => $_mlclevel, 'mem_id' => $mem_id));
+					$_checkHis = $this->CI->Member_level_history_model->get_one('','', array('mlh_to' => $_mlclevel, 'mem_id' => $mem_id));
 					$levelhistoryinsert = array(
 						'mem_id' => $mem_id,
 						'mlh_from' => $_memLevel,
@@ -478,7 +478,7 @@ class Point extends CI_Controller
 						'mlh_reason' => '명예포인트 변경으로 인한 레벨 변화',
 						'mlh_ip' => $this->CI->input->ip_address(),
 					);
-					$this->Member_level_history_model->insert($levelhistoryinsert);
+					$this->CI->Member_level_history_model->insert($levelhistoryinsert);
 
 					if($_mlclevel > $_memLevel && !$_checkHis){
 						return $_mlclevel;

@@ -222,9 +222,9 @@ class Register extends CB_Controller
 			redirect();
 		}
 
-		if(!$this->session->userdata('dec_data')){
-			redirect('register');
-		}
+		// if(!$this->session->userdata('dec_data')){
+		// 	redirect('register');
+		// }
 
 		$view = array();
 		$view['view'] = array();
@@ -498,11 +498,11 @@ class Register extends CB_Controller
 			'label' => '추천인아이디',
 			'rules' => 'trim|alphanumunder|min_length[3]|max_length[20]|callback__mem_recommend_check',
 		);
-		$configbasic['ath_num'] = array(
-			'field' => 'mem_recommend',
-			'label' => '이메일 인증 번호',
-			'rules' => 'trim|matches['.$this->session->userdata('ath_num').']',
-		);
+		// $configbasic['ath_num'] = array(
+		// 	'field' => 'ath_num',
+		// 	'label' => '이메일 인증 번호',
+		// 	'rules' => 'trim|matches['.$this->session->userdata('ath_num').']',
+		// );
 
 		if ($this->member->is_admin() === false && ! $this->session->userdata('registeragree')) {
 			$this->session->set_flashdata(
@@ -1501,8 +1501,6 @@ class Register extends CB_Controller
 	 */
 	public function result()
 	{
-		// echo '<script>alert("gg");</script>';
-		// exit();
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_register_result';
 		$this->load->event($eventname);
@@ -1512,9 +1510,7 @@ class Register extends CB_Controller
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-		$this->session->keep_flashdata('nickname');
-		// print_r('@@@@@@@@@@@@@@@@@@@@');
-		// print_r($this->session->keep_flashdata('nickname'));
+
 		$this->session->keep_flashdata('email_auth_message');
 		$this->session->unset_userdata('dec_data'); // 휴대폰 인증 데이터
 		$this->session->unset_userdata('ath_num'); // 이메일 인증 번호
@@ -1663,7 +1659,7 @@ class Register extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		if ($this->_mem_email_check($email) === false) {
+		if ($this->_mem_email_check_to_ath($email) === false) {
 			$result = array(
 				'result' => 'no',
 				'reason' => $email . '은(는) 예약어로 사용하실 수 없는 이메일입니다',
@@ -1967,7 +1963,7 @@ class Register extends CB_Controller
 		// 인증에 이용한 이메일
 		$ath_email = $this->session->userdata('ath_email');
 		// 발급한 인증번호
-		$ath_num = $this->session->userdata('ath_num');
+		// $ath_num = $this->session->userdata('ath_num');
 		// 모바일 인증 데이터
 		$data = $this->session->userdata('dec_data');
 
