@@ -703,6 +703,12 @@ class Register extends CB_Controller
 
 
 		$data = $this->session->userdata('dec_data');
+		$birthday = $data['birthdate'];
+		$year = substr($birthday, 0,4);
+		$month = substr($birthday, 4,2);
+		$day = substr($birthday, 6,2);
+		$birthday = $year . '-' . $month . '-' . $day;
+
 		/**
 		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
 		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
@@ -713,7 +719,7 @@ class Register extends CB_Controller
 			// 	echo $this->form_validation->error_string().'<br/>';
 			// 	exit('에러발생');
 			// }
-			
+
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 
@@ -756,7 +762,7 @@ class Register extends CB_Controller
 						} elseif (element('field_type', $value) === 'phone' && element('field_name', $value) != 'mem_phone') {
 							$html_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value)) . '" ' . $required . ' />';
 						} elseif(element('field_name', $value) === 'mem_birthday'){
-							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . $data['birthdate'] . '" ' . $required . '/>'; // form-control input
+							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . $birthday . '" ' . $required . '/>'; // form-control input
 						} elseif(element('field_name', $value) === 'mem_phone'){
 							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . $data['mobileno'] . '" ' . $required . '/>'; // form-control input
 						} elseif(element('field_name', $value) === 'mem_userid'){
