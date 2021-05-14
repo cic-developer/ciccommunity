@@ -67,7 +67,7 @@ class Register extends CB_Controller
 		// if(!$this->session->userdata('dec_data')){
 		// 	redirect();
 		// }
-		$data = $this->session->userdata('dec_data');
+		// $data = $this->session->userdata('dec_data');
 
 		if ($this->cbconfig->item('use_register_block')) {
 
@@ -701,51 +701,19 @@ class Register extends CB_Controller
 			}
 		}
 
+
+		$data = $this->session->userdata('dec_data');
 		/**
 		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
 		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
 		 */
-
-		$data = $this->session->userdata('dec_data');
-		print_r($data);
-		print_r("@@@@@@@@@@@@");
-		print_r('<br>');
-		print_r($data['ciphertime']);
-		print_r('<br>');
-		print_r($data['requestnumber']);
-		print_r('<br>');
-		print_r($data['responsenumber']);
-		print_r('<br>');
-		print_r($data['authtype']);
-		print_r('<br>');
-		print_r($data['name']);
-		print_r('<br>');
-		print_r($data['birthdate']);
-		print_r('<br>');
-		print_r($data['gender']);
-		print_r('<br>');
-		print_r($data['nationalinfo']);
-		print_r('<br>');
-		print_r($data['dupinfo']);
-		print_r('<br>');
-		print_r($data['conninfo']);
-		print_r('<br>');
-		print_r($data['mobileno']);
-		print_r('<br>');
-		print_r($data['mobileco']);
-		// $member_info = $this->Member_model->get_one(1);
-		// print_r($member_info['mem_email']);
-		// print_r($member_info['mem_nickname']);
-		print_r('<br>');
-		print_r("@@@@@@@@@@@@");
-		print_r("@@@@@@@@@@@@");
 		if ($form_validation === false OR $file_error !== '' OR $file_error2 !== '') {
 
 			// if($this->form_validation->error_string()){
 			// 	echo $this->form_validation->error_string().'<br/>';
 			// 	exit('에러발생');
 			// }
-
+			
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 
@@ -788,7 +756,7 @@ class Register extends CB_Controller
 						} elseif (element('field_type', $value) === 'phone' && element('field_name', $value) != 'mem_phone') {
 							$html_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value)) . '" ' . $required . ' />';
 						} elseif(element('field_name', $value) === 'mem_birthday'){
-							$html_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . $data['birthdate'] . '" ' . $required . '/>'; // form-control input
+							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . $data['birthdate'] . '" ' . $required . '/>'; // form-control input
 						} elseif(element('field_name', $value) === 'mem_phone'){
 							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . $data['mobileno'] . '" ' . $required . '/>'; // form-control input
 						} elseif(element('field_name', $value) === 'mem_userid'){
