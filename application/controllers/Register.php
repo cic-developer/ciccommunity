@@ -924,22 +924,6 @@ class Register extends CB_Controller
 			$insertdata = array();
 			$metadata = array();
 
-			// 이메일 인증 여부
-			$ath_result = $this->session->userdata('ath_mail_result');
-			// 인증에 이용한 이메일
-			$ath_email = $this->session->userdata('ath_email');
-			// 발급한 인증번호
-			$ath_num = $this->session->userdata('ath_num');
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-			if( $ath_result != '1' // 이메일 인증 결과
-				|| ($ath_email != $this->input->post('mem_email')) // 이메일 인증에 사용된 이메일
-					||  $ath_num != $this->input->post('ath_num') // 이메일 인증 번호
-						||  !$data){ // 휴대폰 인증 데이터
-						
-						// redirect();
-						// return;
-			}
-
 			$insertdata['mem_userid'] = $this->input->post('mem_userid');
 			$insertdata['mem_email'] = $this->input->post('mem_email');
 			$insertdata['mem_password'] = password_hash($this->input->post('mem_password'), PASSWORD_BCRYPT);
