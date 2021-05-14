@@ -125,7 +125,7 @@
                             <td><?php echo element('display_datetime', $result); ?></td>
                             <td><?php echo number_format(element('post_hit', $result)); ?></td>
                             <td>
-                                <p class="cyellow"><?=number_format(element('post_like_point', $result)-element('post_dislike_point', $result))?></p>
+                                <p class="cyellow"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p>
                             </td>
                         </tr>
                     <?php

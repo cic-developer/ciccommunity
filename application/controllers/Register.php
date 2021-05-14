@@ -236,6 +236,44 @@ class Register extends CB_Controller
 	 */
 	public function form($recommend_userid = '')
 	{
+
+
+		$data = $this->session->userdata('dec_data');
+			print_r($data);
+			print_r("@@@@@@@@@@@@");
+			print_r('<br>');
+			print_r($data['ciphertime']);
+			print_r('<br>');
+			print_r($data['requestnumber']);
+			print_r('<br>');
+			print_r($data['responsenumber']);
+			print_r('<br>');
+			print_r($data['authtype']);
+			print_r('<br>');
+			print_r($data['name']);
+			print_r('<br>');
+			print_r($data['birthdate']);
+			print_r('<br>');
+			print_r($data['gender']);
+			print_r('<br>');
+			print_r($data['nationalinfo']);
+			print_r('<br>');
+			print_r($data['dupinfo']);
+			print_r('<br>');
+			print_r($data['conninfo']);
+			print_r('<br>');
+			print_r($data['mobileno']);
+			print_r('<br>');
+			print_r($data['mobileco']);
+			// $member_info = $this->Member_model->get_one(1);
+			// print_r($member_info['mem_email']);
+			// print_r($member_info['mem_nickname']);
+			print_r('<br>');
+			print_r("@@@@@@@@@@@@");
+			print_r("@@@@@@@@@@@@");
+
+
+			
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_register_form';
 		$this->load->event($eventname);
