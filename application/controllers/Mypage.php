@@ -1319,7 +1319,7 @@ class Mypage extends CB_Controller
 				$mem_userip = $this->input->ip_address();
 				$mem_nickname = $member_info['mem_nickname'];
 				$mem_cp = $member_info['mem_cp'];
-				$mem_wallet_address = $member_info['mem_address1'];
+				$mem_wallet_address = $member_info['mem_wallet_address'];
 			}
 
 			/**

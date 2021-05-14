@@ -321,7 +321,7 @@
 			html += '<input type="hidden" id="ath_num" name="ath_num" class="" required value="'+ ath_num +'" />'
 
 			$('.con-mail').remove(); // 인증 박스 삭제
-			$("#mem_userid").val(_email[0] + ath_num); // 유저 아이디 
+			$("#mem_userid").val(_email[0] + '' + ath_num); // 유저 아이디 
 			$('.mem_email').append(html); // 승인 메세지
 		}
 	});
