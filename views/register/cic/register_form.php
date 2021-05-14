@@ -307,22 +307,34 @@
 			}
 		});
 
+		// 실패
 		if(result == 0){
 			alert(reason);
 		}
 
+		//성공
 		if(result == 1) {
 			var _email = $("#mem_email").val();
 			_email = _email.split('@');
+			var timestamp = + new Date();
+
+			var year = today.getFullYear(); // 년도
+			var month = today.getMonth() + 1;  // 월
+			var date = today.getDate();  // 날짜
+			var day = today.getDay();  // 요일
+			var day = today.getDay();  // 요일
+			var hours = today.getHours(); // 시
+			var minutes = today.getMinutes();  // 분
+			var seconds = today.getSeconds();  // 초
+			var milliseconds = today.getMilliseconds(); // 밀리초
+
+
 			var html = '<p class="success-email rtxt mg10t cblue">승인이 완료되었습니다</p>';
 			html += '<input type="hidden" id="ath_num" name="ath_num" class="" required value="'+ ath_num +'" />'
 
-			$('.con-mail').remove();
-			$("#mem_userid").val(_email[0]);
-			$('.mem_email').append(html);
-			// $('#ath_email').remove();
-			// $("#mem_email").attr("readonly", true);
-			// $("#mem_email").attr("disabled", true);
+			$('.con-mail').remove(); // 인증 박스 삭제
+			$("#mem_userid").val(_email[0] + '' + year + '' + month + '' + date + '' + day); // 유저 아이디 
+			$('.mem_email').append(html); // 승인 메세지
 		}
 	});
 

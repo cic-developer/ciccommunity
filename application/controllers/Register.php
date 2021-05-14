@@ -222,9 +222,9 @@ class Register extends CB_Controller
 			redirect();
 		}
 
-		// if(!$this->session->userdata('dec_data')){
-		// 	redirect('register');
-		// }
+		if(!$this->session->userdata('dec_data')){
+			redirect('register');
+		}
 
 		$view = array();
 		$view['view'] = array();
@@ -995,6 +995,7 @@ class Register extends CB_Controller
 			$metadata['meta_open_profile_datetime'] = cdate('Y-m-d H:i:s');
 			$insertdata['mem_register_datetime'] = cdate('Y-m-d H:i:s');
 			$insertdata['mem_register_ip'] = $this->input->ip_address();
+			$insertdata['mem_wallet_address'] = $this->input->post('mem_wallet_address', null, '');
 			$metadata['meta_change_pw_datetime'] = cdate('Y-m-d H:i:s');
 			if (isset($form['mem_profile_content']['use']) && $form['mem_profile_content']['use']) {
 				$insertdata['mem_profile_content'] = $this->input->post('mem_profile_content', null, '');

@@ -268,12 +268,10 @@
                     <?php
                         if (element('list', element('data', element('list', $view)))) {
                             foreach (element('list', element('data', element('list', $view))) as $result) {
-                                print_r($result);
-                                exit;
                     ?>
                     <li>
                         <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>">
-                            <div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt="">
+                            <div class="img"><img src="<?php echo element('thumb_url',$result)?>" alt="">
                             </div>
                             <div class="txt">
                                 <div class="vc">
