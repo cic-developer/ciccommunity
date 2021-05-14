@@ -56,7 +56,7 @@ class Register extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		$view['view']['enc_data'] = $this->checkplus->main();
-		$view['view']['dec_data'] = $this->session->userdata('dec_data');
+		// $view['view']['dec_data'] = $this->session->userdata('dec_data');
 
 		if ($this->member->is_member()
 			&& ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
@@ -67,7 +67,7 @@ class Register extends CB_Controller
 		// if(!$this->session->userdata('dec_data')){
 		// 	redirect();
 		// }
-		$data = $this->session->userdata('dec_data');
+		$dec_data = $this->session->userdata('dec_data');
 
 		if ($this->cbconfig->item('use_register_block')) {
 
@@ -227,21 +227,6 @@ class Register extends CB_Controller
 		if ($this->member->is_member() && ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
 			redirect();
 		}
-
-		$title = str_replace(
-			$searchconfig,
-			$replaceconfig,
-			$this->cbconfig->item('send_email_register_user_title')
-		);
-		$content = str_replace(
-			$searchconfig,
-			$replaceconfig_escape,
-			$this->cbconfig->item('send_email_register_user_content')
-		);
-
-		print_r($title);
-		print_r('<br>');
-		print_r($content);
 
 		$view = array();
 		$view['view'] = array();
@@ -769,13 +754,13 @@ class Register extends CB_Controller
 						} elseif (element('field_type', $value) === 'phone' && element('field_name', $value) != 'mem_phone') {
 							$html_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value)) . '" ' . $required . ' />';
 						} elseif(element('field_name', $value) === 'mem_birthday'){
-							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . $data['birthdate'] . '" ' . $required . '/>'; // form-control input
+							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . $dec_data['birthdate'] . '" ' . $required . '/>'; // form-control input
 						} elseif(element('field_name', $value) === 'mem_phone'){
-							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . $data['mobileno'] . '" ' . $required . '/>'; // form-control input
+							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . $dec_data['mobileno'] . '" ' . $required . '/>'; // form-control input
 						} elseif(element('field_name', $value) === 'mem_userid'){
 							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
 						} elseif(element('field_name', $value) === 'mem_username'){
-							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . urldecode($data['name']) . '" ' . $required . '/>'; // form-control input
+							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . urldecode($dec_data['name']) . '" ' . $required . '/>'; // form-control input
 						}else {
 							$html_content[$k]['input'] .= '<input type="' . element('field_type', $value) . '" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>';
 						}
@@ -789,10 +774,10 @@ class Register extends CB_Controller
 							// 	'2' => '여성',
 							// );
 								if($data['gender'] == 0){
-									$html_content[$k]['input'] .= '<input type="hidden" name="' . element('field_name', $value) . '" id="' . element('field_name', $value) . '" value="' . $data['gender'] . '" ' . set_value(element('field_name', $value)) . ' /> ';
+									$html_content[$k]['input'] .= '<input type="hidden" name="' . element('field_name', $value) . '" id="' . element('field_name', $value) . '" value="' . $dec_data['gender'] . '" ' . set_value(element('field_name', $value)) . ' /> ';
 								}
 								if($data['gender'] == 1){
-									$html_content[$k]['input'] .= '<input type="hidden" name="' . element('field_name', $value) . '" id="' . element('field_name', $value) . '" value="' . $data['gender'] . '" ' . set_value(element('field_name', $value)) . ' /> ';
+									$html_content[$k]['input'] .= '<input type="hidden" name="' . element('field_name', $value) . '" id="' . element('field_name', $value) . '" value="' . $dec_data['gender'] . '" ' . set_value(element('field_name', $value)) . ' /> ';
 								}
 						
 						} else {
@@ -1816,7 +1801,7 @@ class Register extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
-		$this->load->library('email');
+		// $this->load->library('email');
 		// $this->email->from(element('webmaster_email', $getdata), element('webmaster_name', $getdata));
 		// $this->email->to($email);
 
@@ -1827,6 +1812,9 @@ class Register extends CB_Controller
 		// 	$content_type,
 		// 	800
 		// ));
+
+		$dec_data = $this->session->userdata('dec_data');
+
 		$searchconfig = array(
 			'{홈페이지명}',
 			'{회사명}',
@@ -1839,6 +1827,20 @@ class Register extends CB_Controller
 			'{쪽지수신여부}',
 			'{문자수신여부}',
 			'{회원아이피}',
+		);
+		// urldecode($dec_data['name'])
+		$replaceconfig = array(
+			$this->cbconfig->item('site_title'),
+			$this->cbconfig->item('company_name'),
+			site_url(),
+			$mem_userid,
+			$mem_nickname,
+			$mem_username,
+			$mem_email,
+			$receive_email,
+			$receive_note,
+			$receive_sms,
+			$this->input->ip_address(),
 		);
 
 		$title = str_replace(

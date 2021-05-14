@@ -345,7 +345,7 @@ $(function() {
 		if(result == 1) {
 			var _email = $("#mem_email").val();
 			var html = '<p class="success-email rtxt mg10t">승인이 완료되었습니다</p>';
-			html += '<input type="hidden" id="ath_num" name="ath_num" class="" required value="'. ath_num .'" />'
+			html += '<input type="hidden" id="ath_num" name="ath_num" class="" required value="'+ ath_num +'" />'
 
 			$('.con-mail').remove();
 			$("#mem_userid").val(_email);
