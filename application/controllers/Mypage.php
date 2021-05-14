@@ -1302,7 +1302,7 @@ class Mypage extends CB_Controller
 			array(
 				'field' => 'money',
 				'label' => '금액',
-				'rules' => 'trim|required|is_natural_no_zero|less_than_equal_to['.$member_info['mem_cp'].']',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to['.$member_info['mem_cp'].']',
 			),
 		);
 		$this->form_validation->set_rules($config);

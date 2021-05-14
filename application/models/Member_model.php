@@ -125,7 +125,7 @@ class Member_model extends CB_Model
 	public function set_user_point($primary_value = '', $money, $mem_cp)
 	{
 		$arr = array(
-			'mem_cp' => $mem_cp-$money,
+			'mem_cp' => (double)$mem_cp-(double)$money,
 		);
 
 		$result = $this->update($primary_value, $arr);

@@ -123,7 +123,7 @@
         btn = document.getElementById("withdraw-request");
 
         // // If x is Not a Number or less than one or greater than 10
-        if (isNumeric(x) || x < 1 || x > mem_cp) {
+        if (!isNumeric(x) || x < 1 || x > Number(mem_cp)) {
             text = "금액을 올바르게 입력해주세요.";
         } else {
             // text = "Input OK";
