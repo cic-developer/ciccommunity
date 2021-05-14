@@ -275,7 +275,6 @@ class Board_post extends CB_Controller
 								}
 							}
 						}
-						print_r('hello');
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 			$where = array(
 				'brd_id' => 1,
