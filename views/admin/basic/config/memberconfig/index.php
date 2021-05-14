@@ -39,14 +39,14 @@
 					</label>
 				</div>
 			</div>
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label class="col-sm-2 control-label">회원가입시 메일인증사용</label>
 				<div class="col-sm-10">
 					<label for="use_register_email_auth" class="checkbox-inline">
 						<input type="checkbox" name="use_register_email_auth" id="use_register_email_auth" value="1" <?php echo set_checkbox('use_register_email_auth', '1', (element('use_register_email_auth', element('data', $view)) ? true : false)); ?> /> 입력된 메일 주소로 인증 메일을 보내어 회원가입을 확인합니다
 					</label>
 				</div>
-			</div>
+			</div> -->
 			<div class="form-group">
 				<label class="col-sm-2 control-label">비밀번호 보안수준</label>
 				<div class="col-sm-10">
