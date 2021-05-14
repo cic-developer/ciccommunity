@@ -1801,120 +1801,19 @@ class Register extends CB_Controller
 		// 세션에 인증에 이용한 이메일 저장
 		$this->session->set_userdata('ath_email', $email);
 
-		$getdata['webmaster_email'] = $this->cbconfig->item('webmaster_email');
-		$getdata['webmaster_name'] = $this->cbconfig->item('webmaster_name');
+		// 이메일에 포함될 데이터
+		$data = $this->session->userdata('dec_data');
+		$getdata['rand_num'] = $rand_num;
+		$getdata['name'] = urldecode($data['name']);
 		$getdata['site_title'] = $this->cbconfig->item('site_title');
-
-
-		// 이벤트가 존재하면 실행합니다
-		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-
+		
 		// $this->load->library('email');
+		$emailform['emailform'] = $getdata;
+		$message = $this->load->view('register/cic/email_form', $emailform, true);
 		$this->email->from(element('webmaster_email', $getdata), element('webmaster_name', $getdata));
 		$this->email->to($email);
-
 		$this->email->subject('[CIC Community] 회원가입 이메일 인증 안내메일입니다');
-
-		$html = '';
-		$html += '<table width="600" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;">';
-		$html += '<tr>';
-		$html += '<td width="101" style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">CIC Community</td>';
-		$html += '<td width="497" style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><span style="font-size:14px;font-weight:bold;color:rgb(0,0,0)">안녕하세요 관리자님,</span><br />이것은 메일발송테스트를 통해 발송된 이메일입니다';
-		$html += '</td>';
-		$html += '</tr>';
-		$html += '<tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;">';
-		$html += '<td colspan="2" style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">';
-		$html += '<p>안녕하세요,</p>';
-		$html += '<p>이 메일을 받으셨다면 메일 서버는 정상적으로 작동하고 있는 것입니다.</p>';
-		$html += '<p>감사합니다.</p>';
-		$html += '</td>';
-		$html += '</tr>';
-		$html += '</table>';
-
-		// $content_type = $this->cbconfig->item('use_formmail_dhtml') ? 1 : 0;
-		// $this->email->message(display_html_content(
-		// 	$rand_num,
-		// 	$content_type,
-		// 	800
-		// ));
-		// $this->email->message(display_html_content(
-		// 	$rand_num,
-		// 	$content_type,
-		// 	800
-		// ));
-
-		$searchconfig = array(
-			'{홈페이지명}',
-			'{회사명}',
-			'{홈페이지주소}',
-			'{회원아이디}',
-			'{회원닉네임}',
-			'{회원실명}',
-			'{회원이메일}',
-			'{메일수신여부}',
-			'{쪽지수신여부}',
-			'{문자수신여부}',
-			'{회원아이피}',
-		);
-		// $mem_userid = $this->input->post('mem_userid', null, '');
-		// $mem_nickname = $this->input->post('mem_nickname', null, '');
-		// $mem_username = $this->input->post('mem_username', null, ''); //ciboard 원본 =>  $mem_username = $selfcert_username ? $selfcert_username : $this->input->post('mem_username', null, '');
-		// $mem_email = $this->input->post('mem_email', null, '');
-		// $receive_email = $this->input->post('mem_receive_email') ? '동의' : '거부';
-		// $receive_note = $this->input->post('mem_use_note') ? '동의' : '거부';
-		// $receive_sms = $this->input->post('mem_receive_sms') ? '동의' : '거부';
-		// $replaceconfig = array(
-		// 	$this->cbconfig->item('site_title'),
-		// 	$this->cbconfig->item('company_name'),
-		// 	site_url(),
-		// 	$mem_userid,
-		// 	$mem_nickname,
-		// 	$mem_username,
-		// 	$mem_email,
-		// 	$receive_email,
-		// 	$receive_note,
-		// 	$receive_sms,
-		// 	$this->input->ip_address(),
-		// );
-		// $title = str_replace(
-		// 	$searchconfig,
-		// 	$replaceconfig,
-		// 	$this->cbconfig->item('send_email_register_user_title')
-		// );
-		$replaceconfig_escape = array(
-			html_escape($this->cbconfig->item('site_title')),
-			html_escape($this->cbconfig->item('company_name')),
-			site_url(),
-			html_escape($mem_userid),
-			html_escape($mem_nickname),
-			html_escape($mem_username),
-			html_escape($mem_email),
-			$receive_email,
-			$receive_note,
-			$receive_sms,
-			$this->input->ip_address(),
-		);
-		$content = str_replace(
-			$searchconfig,
-			$replaceconfig_escape,
-			$this->cbconfig->item('send_email_resendverify_user_content')
-		);
-		// $this->email->from($this->cbconfig->item('webmaster_email'), $this->cbconfig->item('webmaster_name'));
-		// $this->email->to($this->input->post('mem_email'));
-		// $this->email->subject('[CIC Community] 회원가입 이메일 인증 안내메일입니다'); // $title
-		// $this->email->message($message);
-		// $this->email->send();
-
-		$getdata['webmaster_email'] = $this->cbconfig->item('webmaster_email');
-		$getdata['webmaster_name'] = $this->cbconfig->item('webmaster_name');
-		$getdata['site_title'] = $this->cbconfig->item('site_title');
-
-		$emailform['emailform'] = $getdata;
-		$message = $this->load->view('admin/' . ADMIN_SKIN . '/' . $this->pagedir . '/email_form', $emailform, true);
 		$this->email->message($message);
-
-		// urldecode($data['name'])
-		// $data = $this->session->userdata('dec_data');
 
 		if ($this->email->send() === false) {
 			$result = array(
