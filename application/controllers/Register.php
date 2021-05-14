@@ -1814,26 +1814,48 @@ class Register extends CB_Controller
 		$this->email->to($email);
 
 		$this->email->subject('[CIC Community] 회원가입 이메일 인증 안내메일입니다');
-		$content_type = $this->cbconfig->item('use_formmail_dhtml') ? 1 : 0;
-		$this->email->message(display_html_content(
-			$rand_num,
-			$content_type,
-			800
-		));
 
-		// $searchconfig = array(
-		// 	'{홈페이지명}',
-		// 	'{회사명}',
-		// 	'{홈페이지주소}',
-		// 	'{회원아이디}',
-		// 	'{회원닉네임}',
-		// 	'{회원실명}',
-		// 	'{회원이메일}',
-		// 	'{메일수신여부}',
-		// 	'{쪽지수신여부}',
-		// 	'{문자수신여부}',
-		// 	'{회원아이피}',
-		// );
+		$html = '';
+		$html += '<table width="600" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;">';
+		$html += '<tr>';
+		$html += '<td width="101" style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">CIC Community</td>';
+		$html += '<td width="497" style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><span style="font-size:14px;font-weight:bold;color:rgb(0,0,0)">안녕하세요 관리자님,</span><br />이것은 메일발송테스트를 통해 발송된 이메일입니다';
+		$html += '</td>';
+		$html += '</tr>';
+		$html += '<tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;">';
+		$html += '<td colspan="2" style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">';
+		$html += '<p>안녕하세요,</p>';
+		$html += '<p>이 메일을 받으셨다면 메일 서버는 정상적으로 작동하고 있는 것입니다.</p>';
+		$html += '<p>감사합니다.</p>';
+		$html += '</td>';
+		$html += '</tr>';
+		$html += '</table>';
+
+		// $content_type = $this->cbconfig->item('use_formmail_dhtml') ? 1 : 0;
+		// $this->email->message(display_html_content(
+		// 	$rand_num,
+		// 	$content_type,
+		// 	800
+		// ));
+		// $this->email->message(display_html_content(
+		// 	$rand_num,
+		// 	$content_type,
+		// 	800
+		// ));
+
+		$searchconfig = array(
+			'{홈페이지명}',
+			'{회사명}',
+			'{홈페이지주소}',
+			'{회원아이디}',
+			'{회원닉네임}',
+			'{회원실명}',
+			'{회원이메일}',
+			'{메일수신여부}',
+			'{쪽지수신여부}',
+			'{문자수신여부}',
+			'{회원아이피}',
+		);
 		// $mem_userid = $this->input->post('mem_userid', null, '');
 		// $mem_nickname = $this->input->post('mem_nickname', null, '');
 		// $mem_username = $this->input->post('mem_username', null, ''); //ciboard 원본 =>  $mem_username = $selfcert_username ? $selfcert_username : $this->input->post('mem_username', null, '');
@@ -1859,18 +1881,38 @@ class Register extends CB_Controller
 		// 	$replaceconfig,
 		// 	$this->cbconfig->item('send_email_register_user_title')
 		// );
-		// $content = str_replace(
-		// 	$searchconfig,
-		// 	$replaceconfig_escape,
-		// 	$this->cbconfig->item('send_email_register_user_content')
-		// );
+		$replaceconfig_escape = array(
+			html_escape($this->cbconfig->item('site_title')),
+			html_escape($this->cbconfig->item('company_name')),
+			site_url(),
+			html_escape($mem_userid),
+			html_escape($mem_nickname),
+			html_escape($mem_username),
+			html_escape($mem_email),
+			$receive_email,
+			$receive_note,
+			$receive_sms,
+			$this->input->ip_address(),
+		);
+		$content = str_replace(
+			$searchconfig,
+			$replaceconfig_escape,
+			$this->cbconfig->item('send_email_resendverify_user_content')
+		);
 		// $this->email->from($this->cbconfig->item('webmaster_email'), $this->cbconfig->item('webmaster_name'));
 		// $this->email->to($this->input->post('mem_email'));
 		// $this->email->subject('[CIC Community] 회원가입 이메일 인증 안내메일입니다'); // $title
-		// $this->email->message($content);
+		// $this->email->message($message);
 		// $this->email->send();
 
-		// $message = $this->load->view('register/', '', true);
+		$getdata['webmaster_email'] = $this->cbconfig->item('webmaster_email');
+		$getdata['webmaster_name'] = $this->cbconfig->item('webmaster_name');
+		$getdata['site_title'] = $this->cbconfig->item('site_title');
+
+		$emailform['emailform'] = $getdata;
+		$message = $this->load->view('admin/' . ADMIN_SKIN . '/' . $this->pagedir . '/email_form', $emailform, true);
+		$this->email->message($message);
+
 		// urldecode($data['name'])
 		// $data = $this->session->userdata('dec_data');
 
