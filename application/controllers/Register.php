@@ -1514,8 +1514,8 @@ class Register extends CB_Controller
 	 */
 	public function result()
 	{
-		echo '<script>alert("gg");</script>';
-		exit();
+		// echo '<script>alert("gg");</script>';
+		// exit();
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_register_result';
 		$this->load->event($eventname);

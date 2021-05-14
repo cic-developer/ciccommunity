@@ -4,7 +4,8 @@
 		<div class="member-wrap join table-body">
 			<h2><span class="blind">cic community</span></h2>
 			<?php
-			echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
+			
+			echo validation_errors('<table width="600" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><span style="font-size:14px;font-weight:bold;color:rgb(0,0,0)">Error Message</span></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td colspan="2" style="padding:10px 10px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">', '</td></tr>');
 			echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
 			$attributes = array('class' => 'form-horizontal', 'name' => 'fregisterform', 'id' => 'fregisterform');
 			echo form_open_multipart(current_full_url(), $attributes);
@@ -235,18 +236,18 @@ $(function() {
 			var birthday = $("#mem_birthday").val();
 			var sex = $("#mem_sex").val();
 
-			if(email.length == 0) {alert('이메일을 입력해주세요'); return;}
-			if(password.length == 0) {alert('비밀번호를 입력해주세요'); return;}
-			if(password.length < 4) {alert('비밀번호를 4자리 이상 입력해주세요'); return;}
-			if(password != password_re ) {alert('비밀번호가 일치하지 않습니다'); return;}
-			if(password_re.length == 0) {alert('비밀번호 확인을 입력해주세요'); return;}
-			if(nickname.length == 0) {alert('닉네임을 입력해주세요'); return;}
-			// if(csrf.length == 0) {alert('(csrf 오류) 휴대폰 재인증이 필요합니다'); return;}
-			if(userid.length == 0) {alert('(Id 오류) 이메일 인증이 필요합니다'); return;}
-			if(username.length == 0) {alert('(name 오류) 휴대폰 재인증이 필요합니다'); return;}
-			if(phone.length == 0) {alert('(phone 오류) 휴대폰 재인증이 필요합니다'); return;}
-			if(birthday.length == 0) {alert('(birtyday 오류) 휴대폰 재인증이 필요합니다'); return;}
-			if(sex.length == 0) {alert('(gender 오류) 휴대폰 재인증이 필요합니다'); return;}
+			// if(email.length == 0) {alert('이메일을 입력해주세요'); return;}
+			// if(password.length == 0) {alert('비밀번호를 입력해주세요'); return;}
+			// if(password.length < 4) {alert('비밀번호를 4자리 이상 입력해주세요'); return;}
+			// if(password != password_re ) {alert('비밀번호가 일치하지 않습니다'); return;}
+			// if(password_re.length == 0) {alert('비밀번호 확인을 입력해주세요'); return;}
+			// if(nickname.length == 0) {alert('닉네임을 입력해주세요'); return;}
+			// // if(csrf.length == 0) {alert('(csrf 오류) 휴대폰 재인증이 필요합니다'); return;}
+			// if(userid.length == 0) {alert('(Id 오류) 이메일 인증이 필요합니다'); return;}
+			// if(username.length == 0) {alert('(name 오류) 휴대폰 재인증이 필요합니다'); return;}
+			// if(phone.length == 0) {alert('(phone 오류) 휴대폰 재인증이 필요합니다'); return;}
+			// if(birthday.length == 0) {alert('(birtyday 오류) 휴대폰 재인증이 필요합니다'); return;}
+			// if(sex.length == 0) {alert('(gender 오류) 휴대폰 재인증이 필요합니다'); return;}
 			
 
 			$("#fregisterform").submit();
