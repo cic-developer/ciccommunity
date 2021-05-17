@@ -331,6 +331,11 @@ class Coin extends CB_Controller
 		$view['view'] = array();			
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
+		$id = $_GET['id'];
+		$getKey = $this->CIC_Coin_Keyword_model -> getKeywordRow($id);
+
+		echo json_encode($getKey);
+        print_r($getKey);
 
 	}
 

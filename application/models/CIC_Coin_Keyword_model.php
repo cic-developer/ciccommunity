@@ -77,6 +77,12 @@ class CIC_Coin_Keyword_model extends CB_Model
 
     }
 
+    function getKeywordRow($id){
+        $this->db->where('idx', $id);
+        $query = $this->db->get('cic_coin_keyword');
+        return $query->row_array();
+    }
+
     function search_Coin ($search){
         if (empty($search)) {
 			return false;
