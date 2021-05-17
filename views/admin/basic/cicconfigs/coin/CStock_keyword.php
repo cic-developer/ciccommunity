@@ -98,23 +98,23 @@
                                         <div class="modal-header">
                                             <h4 class="modal-title">입력해주세요 <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
                                         </div>
-
+										<form method="POST" action="https://dev.ciccommunity.com/admin/cicconfigs/coin/get_keyword">
                                         <!-- Modal body -->
                                         <div class="modal-body">
                                                 <!-- <label for="usr"></label> -->
+
                                                 <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
                                                 <div class="form-group">
                                                     <label for="cp_content1">키워드:</label>
                                                     <input class="form-control" rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요">
 												</div>
-                                        </div>
-                                        
-                                        <!-- Modal footer -->
+                                        </div> 
+										<!-- Modal footer -->
                                         <div class="modal-footer">
                                             <h6 class="pull-left">* 필수값</h6>
-                                            <button type="button" class="btn btn-success btn-approve" data-one-modal-url="<?php echo element("approve_url", $view); ?>">수정</button>
+                                            <button type="submit" class="btn btn-success btn-approve" data-one-modal-url="<?php echo element("approve_url", $view); ?>">수정</button>
                                         </div>
-
+										</form>                                     
                                 </div>
                             </div>
                         </div>
@@ -170,9 +170,10 @@ $('.modal_open1').click(function() {
 		result = JSON.parse(result);
 		//{"idx":"51776","coin_market":"ZRX","coin_keyword":"0x Protocol"}
 		console.log(result.idx);
-		$("#cp_content1").val(result.coin_keyword);
+		$("#cp_content1").val(result.coin_keyword); //wid_idx1
+		$("#wid_idx1").val(result.idx);
 		$('#myModal-approve').modal({backdrop: false, keyboard: false});
- 	}
+}
 
     })      
 });

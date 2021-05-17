@@ -335,6 +335,11 @@ class Coin extends CB_Controller
 		$getKey = $this->CIC_Coin_Keyword_model -> getKeywordRow($id);
 
 		echo json_encode($getKey);
+		
+		if(isset($_POST) && !empty($_POST)){
+			$this->CIC_Coin_Keyword_model-> update_keyword($_POST['wid_idx1'], $_POST['cp_content1']);
+			redirect( "https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_GET['pageId']."");
+		}
 
 	}
 
