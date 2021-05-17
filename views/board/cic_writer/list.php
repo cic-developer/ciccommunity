@@ -35,8 +35,8 @@
                             <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
                                 <div class="item">
                                     <a href="<?php echo base_url('post/3')?>">
-                                        <div class="img"><img
-                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        <div class="img">
+                                        <img src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
                                         </div>
                                         <div class="txt">
                                             <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
@@ -47,6 +47,29 @@
                                     </a>
                                 </div>
                             </div>
+
+                            <!-- <?php
+						    if (element('list',element('dislike_point_ranking_freetalk', $view))) {
+							    foreach (element('list',element('dislike_point_ranking_freetalk', $view)) as $dislike_point_ranking_freetalk) {
+							?>
+                            <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url(elemetn('thum_url',))?>">
+                                        <div class="img">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+						<?php
+							}
+						} else {
+						?>
+							<li>
+								<span class="nopost">자료가 없습니다</span>
+							</li>
+						<?php
+						}
+						?> -->
                         </div>
                     </div>
                     <div class="owl-nav disabled">
