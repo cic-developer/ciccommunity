@@ -2,15 +2,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Banner class
+ * Coin class
  *
- * Copyright (c) CIBoard <www.ciboard.co.kr>
+ * Copyright (c) CIBoard <www.rs-team.com>
  *
- * @author CIBoard (develop@ciboard.co.kr)
+ * @author CIBoard (develop@rs-team.com)
  */
 
 /**
- * 관리자>페이지설정>배너관리 controller 입니다.
+ * 관리자>페이지설정>검색 코인관리 controller 입니다.
  */
 class Coin extends CB_Controller
 {

@@ -76,7 +76,7 @@
 								<td><a href="delete_keyword?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs" onclick="myFunction()" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
 								<td>
 									<button type="button" class="btn btn-info btn-xs modal_open1" data-toggle="modal" 
-                                            data-idx="<?php $stocks['idx']?>"; ?>수정</button>
+                                            data-idx="$stocks['idx'"; ?>수정</button>
 								
 								</td>
 							</tr>
@@ -107,12 +107,19 @@
                                                 <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
                                                 <div class="form-group">
                                                     <label for="cp_content1">키워드:</label>
-													<?php foreach($keylist as $stocks){ ?>
-														<?php $myId = $_GET['id']; ?> 
-														<?php if($myId == $stocks['market']) { ?>
-                                                    <input class="form-control" value='<?php echo $stocks['keyword'] ?> ' rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요">
-													<?php } ?>
-													<?php } ?>	
+													<?php
+														if (element('list', element('data', $view))) {
+															foreach (element('list', element('data', $view)) as $result) {
+														?>
+																<?php $myId = $_GET['id']; ?> 
+																<?php if($myId == element('coin_market', $result)) { ?>
+																	<input class="form-control" value='<?php echo element('keyword', $result) ?> ' rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요">
+																	<?php } ?>
+														<?php 
+															} 
+														}
+													
+													?>	
 												</div>
                                         </div>
                                         
@@ -177,7 +184,7 @@ $('.modal_open1').on('click', function(){
     $(document).on('click', '.modal_open1', function() {
 		var widIdx = $(this).data('idx');
         $("#myModal-approve .modal-body #wid_idx1").val( widIdx ); 
-		alert(widIdx);
+		alert();
 	});
 	$(document).on('click', '.modal_open1', function() {
 		var widIdx = $(this).data('idx');

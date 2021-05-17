@@ -18,7 +18,7 @@ class CIC_Coin_Keyword_model extends CB_Model
     /**
 	 * 테이블명
 	 */
-	public $_table = 'cic_coin_admins';
+	public $_table = 'cic_coin_keyword';
     public $primary_key = 'idx';
 
     function __construct()
@@ -33,17 +33,17 @@ class CIC_Coin_Keyword_model extends CB_Model
     function insert_keyword($data){
 
         if(isset($data) && !empty($data)){
-            $result = $this->db->insert('cic_coin_admins', $data);
+            $result = $this->db->insert('cic_coin_keyword', $data);
             return $result;
         }
     }
     
     function get_keyword(){
-        $this->db->select('cic_coin_stock.*');
-        $this->db->select('cic_coin_admins.*');
+        $this->db->select('cic_coin_list.*');
+        $this->db->select('cic_coin_keyword.*');
          //$this->db->('market');
-        $this->db->from('cic_coin_admins');
-        $this->db->join('cic_coin_stock', 'cic_coin_stock.market = cic_coin_admins.coin_market');
+        $this->db->from('cic_coin_keyword');
+        $this->db->join('cic_coin_list', 'cic_coin_list.market = cic_coin_keyword.coin_market');
 
         $query = $this->db->get();
         $result = $query->result_array();
@@ -56,22 +56,22 @@ class CIC_Coin_Keyword_model extends CB_Model
         $search_where = array();
 		$search_like = array();
 		$search_or_like = array();
-        $select = 'cic_coin_admins.*';
+        $select = 'cic_coin_keyword.*';
         $result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
-        return $result
+        return $result;
     }
 
 
     function delete_keyword($id){
         $this->db->where('idx', $id);
-        $this->db->delete('cic_coin_admins');
+        $this->db->delete('cic_coin_keyword');
         return true;
     }
 
 
     function update_keyword($id, $data){
         $this->db->where('coin_market', $id);
-        $this->db->update('cic_coin_admins', $data);
+        $this->db->update('cic_coin_keyword', $data);
 
     }
 
@@ -80,9 +80,9 @@ class CIC_Coin_Keyword_model extends CB_Model
 			return false;
 		}
 		$this->db->select('*');
-		$this->db->join('cic_coin_admins', 'cic_coin_admins.coin_market = cic_coin_stock.market', 'inner');
-		$this->db->where('cic_coin_admins.keyword', $search);
-		$result = $this->db->get('cic_coin_stock')->row_array();
+		$this->db->join('cic_coin_keyword', 'cic_coin_keyword.coin_market = cic_coin_list.market', 'inner');
+		$this->db->where('cic_coin_keyword.keyword', $search);
+		$result = $this->db->get('cic_coin_list')->row_array();
         return $result;
 
     }

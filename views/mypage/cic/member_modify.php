@@ -37,7 +37,7 @@
 								<input type="text" placeholder=""
 									value="<?php echo $this->member->item('mem_phone'); ?>" readonly="">
 							</p>
-							<a href="#n" class="modify-btn"><span>핸드폰번호변경</span></a>
+							<a href="javascript:void(0);" class="modify-btn modal_open_phones"><span>핸드폰번호변경</span></a>
 						</div>
 					</li>
 					<!-- <li>
@@ -77,3 +77,11 @@
 		<!-- page end // -->
 	</div>
 </div>
+
+
+<script>
+	// modal options
+    $('.modal_open_phone').on('click', function(){
+        $('#myModal-phone').modal({backdrop: false, keyboard: false});
+    })
+</script>
