@@ -130,23 +130,6 @@
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 <script type="text/javascript">
 
-//Buton to rafresh pasge
-$(".btn-sm").on('click', function(e){
-    e.preventDefault(); // this will prevent the defualt behavior of the button
-
-    // find which button was clicked
-    butId = $(this).attr('id');
-
-    $.ajax({
-        method: "POST",
-        url: "/controllerDummy/run/",
-        data: { button: butId }
-    })
-    .done(function( msg ) {
-        // do something
-    });        
-});
-//]]>
 function deleteKeyword() {
 	if(confirm("Do you want to delete?")){
 		
@@ -167,7 +150,9 @@ $('.modal_open1').click(function() {
         url: "https://dev.ciccommunity.com/admin/cicconfigs/coin/get_keyword",
         data: { id: widIdx }, 
 		success: function(result){
-   		//$("#div1").html(result); 
+   		//$("#div1").html(result);
+		console.log(result);
+		console.log(typeof result);
 		result = JSON.parse(result);
 		//{"idx":"51776","coin_market":"ZRX","coin_keyword":"0x Protocol"}
 		console.log(result.idx);

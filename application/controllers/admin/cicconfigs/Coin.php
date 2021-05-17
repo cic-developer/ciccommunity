@@ -331,20 +331,34 @@ class Coin extends CB_Controller
 		$view['view'] = array();			
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-		if(isset($_GET) && !empty($_GET)){
+		if(isset($_GET['id']) && !empty($_GET['id'])){
 		$id = $_GET['id'];
 		$getKey = $this->CIC_Coin_Keyword_model -> getKeywordRow($id);
 		echo json_encode($getKey);
     	}
 
 		//echo json_encode($getKey);
-		print_r($_POST);
+		// 
 		// die();
 		if(isset($_POST) && !empty($_POST)){
-			$this->CIC_Coin_Keyword_model-> update_keyword($_POST['wid_idx1'], $_POST['cp_content1']);
+			//print_r($_POST['wid_idx1']);
+			$this->CIC_Coin_Keyword_model-> update_keyword(52425, 'hello');
 			redirect("https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_POST['pageId']."");
 		}
 
+	}
+	function update_keyword(){
+				// 이벤트 라이브러리를 로딩합니다
+				$eventname = 'event_amdmin_coin_update';
+				$this->load->event($eventname);
+				// 이벤트가 존재하면 실행합니다
+				$view['view']['event']['before'] = Events::trigger('before', $eventname);
+				$view = array();
+				$view['view'] = array();			
+				$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+
+				print_r('Hello');
 	}
 
 }
