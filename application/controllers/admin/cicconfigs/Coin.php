@@ -18,7 +18,7 @@ class Coin extends CB_Controller
 	 * 관리자 페이지 상의 현재 디렉토리입니다
 	 * 페이지 이동시 필요한 정보입니다
 	 */
-	public $pagedir = 'cicconfigs/coin/CStock';
+	public $pagedir = 'cicconfigs/coin';
 
 	
 	/**
@@ -45,7 +45,7 @@ class Coin extends CB_Controller
     /**
 	 * 목록을 가져오는 메소드입니다
 	 */
-	public function CStock()
+	public function index()
 	{
 		// 이벤트 라이브러리를 로딩합니다
         $eventname = 'event_stock';
@@ -100,7 +100,7 @@ class Coin extends CB_Controller
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-		$config['base_url'] = admin_url($this->pagedir) . '/CStock' . '?' . $param->replace('page');
+		$config['base_url'] = admin_url($this->pagedir) . '/' . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
@@ -221,7 +221,7 @@ class Coin extends CB_Controller
 
 		//DELETE KEYWORD
 		$deleted = $this->input->post('delete');
-		print_r($deleted);
+		
 		/**
 		* 어드민 레이아웃을 정의합니다
 		*/

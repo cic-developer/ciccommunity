@@ -147,7 +147,7 @@ var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
 								<a href="<?php echo base_url('board/notice')?>" class="mn_a1"><span>공지사항</span></a>
 							</li>
 							<li class="mn_l1 is-cloose" style="width: auto;">
-								<a href="#n" class="mn_a1"><span>뉴스</span></a>
+								<a href="<?php echo base_url('/news')?>" class="mn_a1"><span>뉴스</span></a>
 
 							</li>
 						</ul>
