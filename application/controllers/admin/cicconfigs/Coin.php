@@ -178,7 +178,6 @@ class Coin extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 	
-		//$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
 		$view = array();
 		$view['view'] = array();
 	
@@ -216,8 +215,8 @@ class Coin extends CB_Controller
 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 			
 		//SHOWING LIST TO VIEW KEYWORD TO LIST
-		// $keylist = $this -> CIC_Coin_Keyword_model->get_keyword();
-		// $view['keylist'] = $keylist;
+		$keylist = $this -> CIC_Coin_Keyword_model->get_keyword();
+		$view['keylist'] = $keylist;
 
 
 		//SHOW LIST

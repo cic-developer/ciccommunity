@@ -29,7 +29,7 @@
 					</div>
 					<div class="input-group col-md-6">
 						<input type="hidden" name="coin_market" value = "<?php echo $myId; ?>" >
-						<input type="text" class="form-control rounded  " name ="keyword" placeholder = "Keyword">
+						<input type="text" class="form-control rounded  " name = "keyword" placeholder = "Keyword">
 						<span class=input-group-btn>
 							<button type="submit" class="btn btn-outline-primary" >추가</button>
 						</span>			
@@ -38,6 +38,15 @@
 				</form>
 			</div>
 			<div id="sortable">
+				<?php
+					if (element('list', element('data', $view))) {
+						foreach (element('list', element('data', $view)) as $result) {
+				?>
+					<?php echo element('market', $result); ?> 
+					<?php
+						}
+					}
+					?>
 			</div>
 			<div class="table-responsive text-center">
 				<form method = 'post'>	
@@ -53,32 +62,35 @@
 							<th>수정</th>
 						</tr>
 						<?php 
-						if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result){ ?>
-							    <?php print_r($element('coin_market', $result)); ?>
-								<?php $myId = $_GET['id']; ?> 
-									<?php if($myId == element('coin_market', $result)) { ?>
-								<tr>
+						$sno = $row+1;
+						foreach($keylist as $stocks){ ?>
+						<?php $myId = $_GET['id']; ?> 
+							<?php if($myId == $stocks['coin_market']) { ?>
+							<tr>
 								<td>
 									<?php 
-									echo element('coin_keyword', $result);
+									echo $stocks['coin_keyword'];
 									?>
 								
 								</td>
-								<td><a href="delete_keyword?id=<?php echo element('idx', $result); ?>" class="btn btn-danger btn-xs" onclick="myFunction()" name='deleted' value = "<?php echo element('idx', $result); ?>">삭제 </a></td> 
+								<td><a href="delete_keyword?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs" onclick="myFunction()" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
 								<td>
 									<button type="button" class="btn btn-info btn-xs modal_open1" data-toggle="modal" 
                                             data-idx="$stocks['idx'"; ?>수정</button>
 								
 								</td>
 							</tr>
+
+
+							
 							<?php } ?>	
 						<?php
 						}
-					}
 						?>
 					</table>
 				</form>
+
+
                         <!-- The Modal approve -->
                         <div class="modal fade" id="myModal-approve">
                             <div class="modal-dialog">
@@ -95,6 +107,12 @@
                                                 <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
                                                 <div class="form-group">
                                                     <label for="cp_content1">키워드:</label>
+													<?php foreach($keylist as $stocks){ ?>
+														<?php $myId = $_GET['id']; ?> 
+														<?php if($myId == $stocks['coin_market']) { ?>
+                                                    <input class="form-control" value='<?php echo $stocks['coin_keyword'] ?> ' rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요">
+													<?php } ?>
+													<?php } ?>	
 												</div>
                                         </div>
                                         
@@ -158,8 +176,7 @@ $('.modal_open1').on('click', function(){
 // set modal data
     $(document).on('click', '.modal_open1', function() {
 		var widIdx = $(this).data('idx');
-        $("#myModal-approve .modal-body #wid_idx1").val( widIdx ); 
-		alert();
+        $("#myModal-approve .modal-body #wid_idx1").val( widIdx );
 	});
 	$(document).on('click', '.modal_open1', function() {
 		var widIdx = $(this).data('idx');
