@@ -463,6 +463,9 @@ class Board_post extends CB_Controller
 					/**
 					 * 레이아웃을 정의합니다
 					 */
+        //2 
+
+
 					$view['view']['info'] = '비밀글 열람을 위한 패스워드 입력페이지입니다.<br />패스워드를 입력하시면 비밀글 열람이 가능합니다';
 					$page_title = element('board_name', $board) . ' 글열람';
 					$layout_dir = element('board_layout', $board) ? element('board_layout', $board) : $this->cbconfig->item('layout_board');
@@ -483,6 +486,7 @@ class Board_post extends CB_Controller
 						'mobile_skin_dir' => $mobile_skin_dir,
 						'page_title' => $page_title,
 					);
+
 					$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
 					$this->data = $view;
 					$this->layout = element('layout_skin_file', element('layout', $view));

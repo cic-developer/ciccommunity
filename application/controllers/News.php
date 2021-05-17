@@ -41,7 +41,6 @@ class News extends CB_Controller
 	 */
 	public function index()
 	{
-        echo $this->cbconfig->item('layout_main');
         $page_title = $this->cbconfig->item('site_meta_title_main');
 		$meta_description = $this->cbconfig->item('site_meta_description_main');
 		$meta_keywords = $this->cbconfig->item('site_meta_keywords_main');
@@ -52,8 +51,9 @@ class News extends CB_Controller
 			'path' => 'main',
 			'layout' => 'layout',
 			'skin' => 'main',
-			'layout_dir' => $this->cbconfig->item('layout_main'),
-			'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_main'),
+			// 'layout_dir' => $this->cbconfig->item('layout_main'),
+			'layout_dir' => 'cic_sub',
+			'mobile_layout_dir' =>'cic_sub',
 			'use_sidebar' => $this->cbconfig->item('sidebar_main'),
 			'use_mobile_sidebar' => $this->cbconfig->item('mobile_sidebar_main'),
 			'skin_dir' => $this->cbconfig->item('skin_main'),

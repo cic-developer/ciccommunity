@@ -73,9 +73,8 @@
 									?>
 								
 								</td>
-								<td>
-								<td><a href="delete_keyword?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs" onclick="return deleteKeyword()" name='deleted'>삭제 </a></td>
-								<!-- <td><a href="<?php// echo site_url('admin/cicconfigs/Coin/delete_keyword/'.$stocks['idx']) ?> ">delete<a></td> -->
+								<td><a href="delete_keyword?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs" onclick="myFunction()" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td>
+								<!-- <td><a href="<?php echo site_url('admin/cicconfigs/Coin/delete_keyword/'.$stocks['idx']) ?> ">delete<a></td> -->
 								<td><a href="update_keyword/?id=<?php echo $stocks['idx']; ?>" class="btn btn-info btn-xs">수정 </a></td> 
 							</tr>
 							<?php } ?>	
@@ -105,31 +104,29 @@ $(function () {
 })
 
 //Buton to rafresh pasge
-// $(".btn-sm").on('click', function(e){
-//     e.preventDefault(); // this will prevent the defualt behavior of the button
+$(".btn-sm").on('click', function(e){
+    e.preventDefault(); // this will prevent the defualt behavior of the button
 
-//     // find which button was clicked
-//     butId = $(this).attr('id');
+    // find which button was clicked
+    butId = $(this).attr('id');
 
-//     $.ajax({
-//         method: "POST",
-//         url: "/controllerDummy/run/",
-//         data: { button: butId }
-//     })
-//     .done(function( msg ) {
-//         // do something
-//     });        
-// });
+    $.ajax({
+        method: "POST",
+        url: "/controllerDummy/run/",
+        data: { button: butId }
+    })
+    .done(function( msg ) {
+        // do something
+    });        
+});
 //]]>
-function deleteKeyword() {
-  //var r = confirm("Do you want to delete?");
-  if(confirm("Do you want to delete?")){
-	window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo $_GET['id'];?>", "_self", false);
-  }
-  else{
-	window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo $_GET['id'];?>");
+function myFunction() {
+	if(confirm("Do you want to delete?")){
+		window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo $_GET['id'];?>");
+	} 	
+	else{
 	return false;
-  }
+	}
 }
 
 </script>
