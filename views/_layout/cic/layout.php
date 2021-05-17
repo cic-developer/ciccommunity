@@ -95,12 +95,7 @@
                         <li><a href="<?php echo site_url('login?url=' . urlencode(current_full_url())); ?>"
                             class="login-btn"><span>LOGIN</span></a></li>
                     <?php }?>
-                    
-                    <!-- 관리자 페이지 버튼 만들기 -->
-                    <!--<?php var_dump($_SESSION);?>-->
-                    <li><a href="<?php echo base_url('/mypage'); ?>"
-                    class="login-btn"><span>관리자페이지</span></a></li>
-                    <!-- 관리자 페이지 버튼 만들기 -->
+    
 				</ul>
                 
 				<!-- <ul class="language">
