@@ -357,8 +357,48 @@ class Coin extends CB_Controller
 				$view['view'] = array();			
 				$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
+				
+				$this->load->library('form_validation');
+				$config = array(
+					array(
+						'field' => 'wid_idx1',
+						'rules'=>'required'
+					),
+					array(
+						'field' => 'cp_content1',
+						'rules'=>'required'
+					),
 
-				print_r('Hello');
+				);
+
+
+				if($this->form_validation -> run () == FALSE){
+					$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+				}else{
+					$data = array(
+						'idx' => $this -> input -> post('wid_idx1'),
+						'coin_keyword' => $this -> input -> post('cp_content1'),
+		
+					);
+					if(isset($data) && !empty($data)){
+						$this->CIC_Coin_Keyword_model-> update_keyword($data);
+						$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+					}
+				}
+				print_r($data);
+
+
+				
+				// $name = $this -> input -> get('cp_content1');
+				// print_r($name);
+				// die();
+				// print_r($_POST);
+				// if(isset($_POST) && !empty($_POST)){
+				// 	//print_r($_POST['wid_idx1']);
+				// 	$this->CIC_Coin_Keyword_model-> update_keyword(52425, 'hello');
+				// 	redirect("https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_POST['pageId']."");
+				// }
+				// print_r('Hello');
 	}
 
 }
