@@ -133,4 +133,13 @@ class Member_model extends CB_Model
 		return $result;
 	}
 
+	public function get_by_memDI($DI, $select = '')
+	{
+		if (empty($DI)) {
+			return false;
+		}
+		$where = array('mem_dup_info' => $DI);
+		return $this->get_one('', $select, $where);
+	}
+
 }

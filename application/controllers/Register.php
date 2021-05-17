@@ -192,11 +192,18 @@ class Register extends CB_Controller
 		$eventname = 'event_register_auth_success';
 		$this->load->event($eventname);
 
+		$test = $this->Member_model->get_by_memDI('MC0GCCqGSIb3DQIJAyEAtonfQuH352/KCB0yrjiwSQcnDQTS7ff5UcT4ievX8HM=', '');
+
+		print_r($test);
+		exit;
+
 		$view = array();
 		$view['view'] = array();
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		
+		// $this->member->get_by_memDI('MC0GCCqGSIb3DQIJAyEAtonfQuH352/KCB0yrjiwSQcnDQTS7ff5UcT4ievX8HM=');
 
 		if($this->input->get("EncodeData")){
 			$this->checkplus->success($this->input->get("EncodeData"));

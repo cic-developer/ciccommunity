@@ -29,7 +29,7 @@
 					</div>
 					<div class="input-group col-md-6">
 						<input type="hidden" name="coin_market" value = "<?php echo $myId; ?>" >
-						<input type="text" class="form-control rounded  " name = "keyword" placeholder = "Keyword">
+						<input type="text" class="form-control rounded" id ="show" name = "keyword" placeholder = "Keyword">
 						<span class=input-group-btn>
 							<button type="submit" class="btn btn-outline-primary" >추가</button>
 						</span>			
@@ -75,7 +75,7 @@
 								</td>
 								<td><a href="<?php echo admin_url($this->pagedir); ?>/delete_keyword/<?php $stocks['idx']; ?>" class="btn btn-danger btn-xs" onclick="myFunction()" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td>
 								<!-- <td><a href="<?php echo site_url('admin/cicconfigs/Coin/delete_keyword/'.$stocks['idx']) ?> ">delete<a></td> -->
-								<td><a href="<?php echo admin_url($this->pagedir); ?>/CStock_keyword/<?php $stocks['idx']; ?>" name="send" id="send"  class="btn btn-info btn-xs">수정 </a></td> 
+								<td><a href="<?php echo admin_url($this->pagedir); ?>/CStock_keyword/<?php $stocks['idx']; ?>" name="send" id="send" onclick="update()"  class="btn btn-info btn-xs">수정 </a></td> 
 							</tr>
 							<?php } ?>	
 						<?php
@@ -131,12 +131,8 @@ function myFunction() {
 	}
 }
 
-
-window.onload = function(){
-	document.getElementById('send').onclick = function(e){
-    	alert(document.getElementById("textfield").value);
-    	return false;
-	}
+function update(){
+	documernt.getElementById("show").value="hello"?>
 }
 
 </script>
