@@ -106,7 +106,7 @@ class CIC_Coin_list_model extends CB_Model
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.upbit.com/v1/clist_market/all",
+            CURLOPT_URL => "https://api.upbit.com/v1/market/all",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",

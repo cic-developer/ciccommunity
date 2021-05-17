@@ -55,6 +55,7 @@
 						<?php 
 						if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result){ ?>
+							    <?php print_r($element('coin_market', $result)); ?>
 								<?php $myId = $_GET['id']; ?> 
 									<?php if($myId == element('coin_market', $result)) { ?>
 								<tr>

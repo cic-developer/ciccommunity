@@ -125,30 +125,30 @@ class Coin extends CB_Controller
 			for($i=0; $i<count($getList); $i++){
 				$market = $getList[$i]['clist_market'];
 				if(strcmp(substr($market, 0, 1), "K")==0){
-					$coin_market = substr($market, 4);
+					$market = substr($market, 4);
 					$data = array(
-						'clist_market' => $coin_market,
+						'clist_market' => $market,
 						'clist_name_ko' => $getList[$i]['english_name'],
 						'clist_name_en' => $getList[$i]['korean_name'],
 					);
 					//For rafreshing admin page
 					if(isset($data) && !empty($data)){
-						$stock = $this->CIC_Coin_Keyword_model->insertStockData($data);
+						$stock = $this->CIC_Coin_list_model->insertStockData($data);
 						$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 					}
 
 					$data = array(
 						array(
-							'coin_market'=> $coin_market,
+							'coin_market'=> $market,
 							'coin_keyword'=>$getList[$i]['korean_name']
 						),
 						array(
-							'coin_market'=> $coin_market,
+							'coin_market'=> $market,
 							'coin_keyword'=>$getList[$i]['english_name']
 						),
 						array(
-							'coin_market'=> $coin_market,
-							'coin_keyword'=> $coin_market
+							'coin_market'=> $market,
+							'coin_keyword'=> $market
 						),
 					);
 					if(isset($data) && !empty($data)){	
@@ -204,7 +204,7 @@ class Coin extends CB_Controller
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 		}else{
 			$data = array(
-				'coin_market' => $this -> input -> post('coin_market'),
+				'coin_market' => $this -> input -> post('market'),
 				'keyword' => $this -> input -> post('keyword'),
 
 			);

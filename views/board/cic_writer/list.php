@@ -32,11 +32,11 @@
                                     </a>
                                 </div>
                             </div> -->
-                            <!-- <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
+                            <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
                                 <div class="item">
                                     <a href="<?php echo base_url('post/3')?>">
-                                        <div class="img">
-                                        <img src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
                                         </div>
                                         <div class="txt">
                                             <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
@@ -46,28 +46,25 @@
                                         </div>
                                     </a>
                                 </div>
-                            </div> -->
-
+                            </div>
                             <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
-                                <div class="item">
-                        <?php
-						if (element('list',element('writerbest', $view))) {
-							foreach (element('list',element('writerbest', $view)) as $writerbest) {
-                                // print_r(element('list',element('writerbest', $view)));
-                                // exit;
-						?>
-                                    <a href="<?php echo thumb_url('list',element('writerbest', $view)); ?>">
-                                        <div class="img">
-                                        <img src="<?php echo base_url(element('post_url',$writerbest))?>" alt="">
+                                <?php
+						        if (element('list',element('writerbest', $view))) {
+							        foreach (element('list',element('writerbest', $view)) as $writerbest) {
+							    ?>
+								<div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
                                         </div>
                                         <div class="txt">
-                                            <p class="btxt"<?php echo number_format(element('post_title', $writerbest)); ?>></p>
-                                            <p class="stxt"><?php echo number_format(element('post_content', $writerbest)); ?></p>
-                                            <p class="ctxt vp"><?php echo number_format(element('post_dislike_point', $writerbest)); ?></p>
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt vp">15369 VP</p>
                                         </div>
                                     </a>
                                 </div>
-                            </div>
 						<?php
 							}
 						} else {
@@ -78,7 +75,8 @@
 						<?php
 						}
 						?>
-                        </div> 
+                            </div>
+                        </div>
                     </div>
                     <div class="owl-nav disabled">
                         <button type="button" role="presentation" class="owl-prev">

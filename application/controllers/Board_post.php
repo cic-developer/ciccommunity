@@ -67,10 +67,8 @@ class Board_post extends CB_Controller
 				'group_id' => element('bgr_id', element('board', $list)),
 			)
 		);
-		// print_r($list['board']['brd_id']);
-		// exit;
 
-		if($list['board']['brd_id'] = 1){
+		
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		$where = array(
 			'post_exept_state' => 0,
@@ -111,9 +109,9 @@ class Board_post extends CB_Controller
 					}
 				}
 			}
-		}
+		
 	
-		if($list['board']['brd_id'] = 1){
+
 			$where = array(
 				'post_best_state >' => 0
 			);
@@ -148,44 +146,42 @@ class Board_post extends CB_Controller
 					}
 				}
 			}
-		}
 		
-		$where = array(
-			'brd_id' => 2,
-			'post_best_state >' => 0
-		);
 
-		$list_num = 1;
-		$writerbest = $this->Post_model
-			->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-		if (element('list', $writerbest)) {
-			foreach (element('list', $writerbest) as $key => $val) {
-				$writerbest['list'][$key]['post_display_name'] = display_username(
-					element('post_userid', $val),
-					element('post_nickname', $val)
-				);
-				$writerbest['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-				$writerbest['list'][$key]['num'] = $list_num++;
-				if ($board) {
-					$writerbest['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-					$writerbest['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
-				}
-				$writerbest['list'][$key]['category'] = '';
-				if (element('post_category', $val)) {
-					$writerbest['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
-				}
-				if (element('post_image', $val)) {
-					$imagewhere = array(
-						'post_id' => element('post_id', $val),
-						'pfi_is_image' => 1,
+			$where = array(
+				'brd_id' => 2
+			);
+			$list_num = 1;
+			$writerbest = $this->Post_model
+				->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			if (element('list', $writerbest)) {
+				foreach (element('list', $writerbest) as $key => $val) {
+					$writerbest['list'][$key]['post_display_name'] = display_username(
+						element('post_userid', $val),
+						element('post_nickname', $val)
 					);
-					$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-					$writerbest['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
-				} else {
-					$writerbest['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+					$writerbest['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+					$writerbest['list'][$key]['num'] = $list_num++;
+					if ($board) {
+						$writerbest['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+						$writerbest['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+					}
+					$writerbest['list'][$key]['category'] = '';
+					if (element('post_category', $val)) {
+						$writerbest['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+					}
+					if (element('post_image', $val)) {
+						$imagewhere = array(
+							'post_id' => element('post_id', $val),
+							'pfi_is_image' => 1,
+						);
+						$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+						$writerbest['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+					} else {
+						$writerbest['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+					}
 				}
 			}
-		}
 		
 		$view['view']['popularpost'] = $popularpost;
 		$view['view']['bestpost'] = $bestpost;
@@ -274,8 +270,6 @@ class Board_post extends CB_Controller
 		$post['extravars'] = $this->Post_extra_vars_model->get_all_meta($post_id);
 		$view['view']['post'] = $post;
 
-		// print_r($post['brd_id']);
-		// exit;
 
 		if($post['brd_id'] == 1){
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);

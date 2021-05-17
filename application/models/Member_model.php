@@ -141,5 +141,13 @@ class Member_model extends CB_Model
 		$where = array('mem_dup_info' => $DI);
 		return $this->get_one('', $select, $where);
 	}
-
+	
+	public function get_by_memPhone($mem_phone, $select = '')
+	{
+		if (empty($mem_phone)) {
+			return false;
+		}
+		$where = array('mem_phone' => $mem_phone);
+		return $this->get_one('', $select, $where);
+	}
 }

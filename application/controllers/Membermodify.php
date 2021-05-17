@@ -2093,7 +2093,26 @@ class Membermodify extends CB_Controller
 		// 세션에 인증번호 저장
 		$this->session->set_userdata('ath_num', $rand_num);
 		// 세션에 인증에 이용한 이메일 저장
-		$this->session->set_userdata('ath_email', $email);
+		// $this->session->set_userdata('ath_email', $email);
+
+		if($this->input->get('mem_phone') == $member_info['mem_phone']){
+			$result = array(
+				'state' => '0',
+				'message' => '기존과 동일한 번호는 등록할수 없습니다',
+			);
+			exit(json_encode($result));
+		}
+
+		$isPhone = $this->Member_model->mem_phone($this->input->get('mem_phone'), '');
+
+		if(count($isPhone) > 0){ // 중복 이면
+			$result = array(
+				'state' => '0',
+				'message' => '이미 사용중인 번호입니다',
+			);
+			exit(json_encode($result));
+		}
+
 
 		// 이메일에 포함될 데이터
 		$getdata['rand_num'] = $rand_num;
