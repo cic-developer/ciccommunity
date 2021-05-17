@@ -79,7 +79,7 @@ class CIC_Coin_Keyword_model extends CB_Model
 
 
 
-    function search_Coin($limit = '', $offset = '', $where = '', $like = '', $board_id = 0, $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR') {
+    function search_Coin_($limit = '', $offset = '', $where = '', $like = '', $board_id = 0, $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR') {
         $search_where = array();
         if ($sfield && is_array($sfield)) {
 			foreach ($sfield as $skey => $sval) {
