@@ -165,12 +165,15 @@ $('.modal_open1').click(function() {
 	$.ajax({
         method: "GET",
         url: "https://dev.ciccommunity.com/admin/cicconfigs/coin/get_keyword",
-        data: { id= widIdx }, 
+        data: { id: widIdx }, 
 		success: function(result){
    		//$("#div1").html(result); 
-		console.log(result);
+		//{"idx":"51776","coin_market":"ZRX","coin_keyword":"0x Protocol"}
+		console.log(result.idx);
+		$('#myModal-approve').modal({backdrop: false, keyboard: false});
  	}
-    });      
+
+    })      
 });
 </script>
 
