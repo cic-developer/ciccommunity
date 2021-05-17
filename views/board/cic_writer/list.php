@@ -48,7 +48,7 @@
                                 </div>
                             </div>
 
-                            <!-- <?php
+                            <?php
 						    if (element('list',element('dislike_point_ranking_freetalk', $view))) {
 							    foreach (element('list',element('dislike_point_ranking_freetalk', $view)) as $dislike_point_ranking_freetalk) {
 							?>
@@ -56,6 +56,7 @@
                                 <div class="item">
                                     <a href="<?php echo base_url(elemetn('thum_url',))?>">
                                         <div class="img">
+                                        <img src="<?php echo base_url(element('',))?>" alt="">
                                         </div>
                                     </a>
                                 </div>
@@ -69,7 +70,7 @@
 							</li>
 						<?php
 						}
-						?> -->
+						?>
                         </div>
                     </div>
                     <div class="owl-nav disabled">

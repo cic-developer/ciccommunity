@@ -290,7 +290,7 @@
 										<a id="submitButton"> <span>회원 가입</span></a>
 									<?php } else{ ?>
 										<a href="javascript:fnPopup();"> <span>휴대폰 본인 인증</span></a>
-										<button type="button" id="submitButton"> <span>hipass</span></button>
+										<!-- <button type="button" id="submitButton"> <span>hipass</span></button> -->
 									<?php
 									} ?>
 							</div>

@@ -56,9 +56,7 @@ class Register extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		$view['view']['enc_data'] = $this->checkplus->main();
-		print_r($view['view']['dec_data']);
 		$view['view']['dec_data'] = $this->session->userdata('dec_data');
-		
 
 		if ($this->member->is_member()
 			&& ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
@@ -189,6 +187,22 @@ class Register extends CB_Controller
 		}
 	}
 
+	public function auth_duplicate(){
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_register_auth_duplicate';
+		$this->load->event($eventname);
+
+		$view = array();
+		$view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		$this->session->unset_userdata('dec_data');
+
+		redirect('register');
+	}
+
 	public function auth_success(){
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_register_auth_success';
@@ -200,9 +214,9 @@ class Register extends CB_Controller
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
 
 		if(count($isDI) > 0){ // 중복 이면
-			$this->session->unset_userdata('dec_data');
-			echo("<script>window.opener.alert('이미 가입된 회원입니다');</script>");
-			echo("<script>window.opener.location.replace('/register');</script>");
+			// $this->session->unset_userdata('dec_data');
+			echo("<script>alert('이미 가입된 회원입니다');</script>");
+			echo("<script>window.opener.location.replace('/register/auth_duplicate');</script>");
 			echo("<script>self.close()</script>");
 		}
 

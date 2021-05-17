@@ -75,11 +75,8 @@
 								</td>
 								<td><a href="delete_keyword?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs" onclick="myFunction()" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
 								<td>
-								<button type="button" class="btn btn-info modal_open2" data-toggle="modal" 
-                                            data-idx="$stocks['idx'"; ?>" 
-                                        >
-										수정
-                                        </button>
+									<button type="button" class="btn btn-info btn-xs modal_open2" data-toggle="modal" 
+                                            data-idx="$stocks['idx'"; ?>수정</button>
 								
 								</td>
 							</tr>
@@ -89,6 +86,50 @@
 						?>
 					</table>
 				</form>
+
+
+                        <!-- The Modal approve -->
+                        <div class="modal fade" id="myModal-approve">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">출금 승인 <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                                <!-- <label for="usr"></label> -->
+                                                <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
+                                                <div class="form-group">
+                                                    <label for="cp_transaction">트랜잭션*:</label>
+                                                    <textarea class="form-control" rows="1" cols="75" id="cp_transaction" name="cp_transaction" placeholder="트랜잭션을 입력해주세요" required style="width:100%;"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="cp_percoin">퍼코인*:</label>
+                                                    <textarea class="form-control" rows="1" cols="75" id="cp_percoin" name="cp_percoin" placeholder="퍼코인을 입력해주세요" required style="width:100%;"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="cp_content1">사유*:</label>
+                                                    <textarea class="form-control" rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요" required style="width:100%;"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="cp_memo">메모:</label>
+                                                    <textarea class="form-control" rows="5" cols="75" id="cp_memo" name="cp_memo" placeholder="메모" style="width:100%;"></textarea>
+                                                </div>
+                                        </div>
+                                        
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <h6 class="pull-left">* 필수값</h6>
+                                            <button type="button" class="btn btn-success btn-approve" data-one-modal-url="<?php echo element("approve_url", $view); ?>">승인</button>
+                                        </div>
+
+                                </div>
+                            </div>
+                        </div>>
+
 			</div>	
 		</div>
 		<?php echo form_close(); ?>
@@ -127,11 +168,20 @@ $(".btn-sm").on('click', function(e){
 });
 //]]>
 function myFunction() {
-  var r = confirm("Do you want to delete?");
-  if(r == true){
-	window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo $_GET['id'];?>");
-  }
+	var r = confirm("Do you want to delete?");
+	if(r == true){
+		window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo $_GET['id'];?>");
+	}
 }
+
+$('.modal_open1').on('click', function(){
+        $('#myModal-approve').modal({backdrop: false, keyboard: false});
+})
+// set modal data
+    $(document).on('click', '.modal_open1', function() {
+		var widIdx = $(this).data('idx');
+        $("#myModal-approve .modal-body #wid_idx1").val( widIdx ); 
+	});
 
 </script>
 
