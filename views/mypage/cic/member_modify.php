@@ -174,65 +174,41 @@ $(document).ready(function(){
 	$("#ath_email").on('click', function(){
 		var _phone = $("#new_phone").val();
 
-		var result = '';
-		var reason = '';
 		var state = '';
 		var message = '';
 		$.ajax({
-			url: cb_url + '/register/ajax_email_check',
+			url: cb_url + '/membermodify/ajax_email_send',
 			type: 'POST',
 			data: {
-				email: _email,
+				mem_phone: _phone,
 				csrf_test_name : cb_csrf_hash
 			},
 			dataType: 'json',
 			async: false,
 			cache: false,
 			success: function(data) {
-				result = data.result;
-				reason = data.reason;
+				state = data.state;
+				message = data.message;
 			}
 		});
-		if(result == "no"){
-			alert(reason);
-		}
 
-		if(result == "available"){
-			alert(reason);
+		alert(message);
 
-			$.ajax({
-				url: cb_url + '/register/ajax_email_send',
-				type: 'POST',
-				data: {
-					email: _email,
-					csrf_test_name : cb_csrf_hash
-				},
-				dataType: 'json',
-				async: false,
-				cache: false,
-				success: function(data) {
-					state = data.state;
-					message = data.message;
-				}
-			});
-
-			alert(message);
-
-			$('.success-email').remove();
-			$('.con-mail').remove();
-			if(state == 1){
-				html = '';
-				html += '<div class="field con-mail">'
-				html += '<p class="chk-input">'
-				html += '<input type="text" id="ath_num" name="ath_num" class="" required />'
-				html += '<p class="rtxt mg10t">'
-				html += '<a class="con-mail-btn cerfity-btn" id="con-mail-btn">메일인증 확인</a>'
-				html += '</p>'
-				html += '</p>'
-				html += '</div>'
-				$('.mem_email').append(html);
-			}
-		}
+		// 	$('.success-email').remove();
+		// 	$('.con-mail').remove();
+		// 	if(state == 1){
+		// 		html = '';
+		// 		html += '<div class="field con-mail">'
+		// 		html += '<p class="chk-input">'
+		// 		html += '<input type="text" id="ath_num" name="ath_num" class="" required />'
+		// 		html += '<p class="rtxt mg10t">'
+		// 		html += '<a class="con-mail-btn cerfity-btn" id="con-mail-btn">메일인증 확인</a>'
+		// 		html += '</p>'
+		// 		html += '</p>'
+		// 		html += '</div>'
+		// 		$('.mem_email').append(html);
+		// 	}
+		// }
 	})
 })
 </script>

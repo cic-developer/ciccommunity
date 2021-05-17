@@ -133,7 +133,7 @@ class Coin extends CB_Controller
 					);
 					//For rafreshing admin page
 					if(isset($data) && !empty($data)){
-						$stock = $this->CIC_Coin_list_model->insertStockData($data);
+						$stock = $this->CIC_Coin_Keyword_model->insertStockData($data);
 						$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 					}
 

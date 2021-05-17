@@ -38,15 +38,6 @@
 				</form>
 			</div>
 			<div id="sortable">
-				<?php
-					if (element('list', element('data', $view))) {
-						foreach (element('list', element('data', $view)) as $result) {
-				?>
-					<?php echo element('coin_market', $result); ?> 
-					<?php
-						}
-					}
-					?>
 			</div>
 			<div class="table-responsive text-center">
 				<form method = 'post'>	
@@ -62,11 +53,10 @@
 							<th>수정</th>
 						</tr>
 						<?php 
-
 						if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result){ ?>
 								<?php $myId = $_GET['id']; ?> 
-									<?php if($myId == element('coin_market', $result) { 
+									<?php if($myId == element('coin_market', $result)) { ?>
 								<tr>
 								<td>
 									<?php 
@@ -81,17 +71,13 @@
 								
 								</td>
 							</tr>
-
-
-							
 							<?php } ?>	
 						<?php
 						}
+					}
 						?>
 					</table>
 				</form>
-
-
                         <!-- The Modal approve -->
                         <div class="modal fade" id="myModal-approve">
                             <div class="modal-dialog">
@@ -108,19 +94,6 @@
                                                 <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
                                                 <div class="form-group">
                                                     <label for="cp_content1">키워드:</label>
-													<?php
-														if (element('list', element('data', $view))) {
-															foreach (element('list', element('data', $view)) as $result) {
-														?>
-																<?php $myId = $_GET['id']; ?> 
-																<?php if($myId == element('coin_market', $result)) { ?>
-																	<input class="form-control" value='<?php echo element('coin_keyword', $result) ?> ' rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요">
-																	<?php } ?>
-														<?php 
-															} 
-														}
-													
-													?>	
 												</div>
                                         </div>
                                         

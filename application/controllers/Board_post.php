@@ -149,6 +149,7 @@ class Board_post extends CB_Controller
 				}
 			}
 		}
+		
 		$where = array(
 			'brd_id' => 2,
 			'post_best_state >' => 0

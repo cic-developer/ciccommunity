@@ -50,10 +50,12 @@
 
                             <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
                                 <div class="item">
-                                    <?php
-						            if (element('list',element('writerbest', $view))) {
-							        foreach (element('list',element('writerbest', $view)) as $writerbest) {
-							        ?>
+                        <?php
+						if (element('list',element('writerbest', $view))) {
+							foreach (element('list',element('writerbest', $view)) as $writerbest) {
+                                // print_r(element('list',element('writerbest', $view)));
+                                // exit;
+						?>
                                     <a href="<?php echo thumb_url('list',element('writerbest', $view)); ?>">
                                         <div class="img">
                                         <img src="<?php echo base_url(element('post_url',$writerbest))?>" alt="">
