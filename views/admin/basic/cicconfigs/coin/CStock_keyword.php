@@ -158,9 +158,10 @@ $('.modal_open1').on('click', function(){
         $('#myModal-approve').modal({backdrop: false, keyboard: false});
 });
 // set modal data
-$(document).on('click', '.modal_open1', function() {
+$('.modal_open1').click(function() {
 	var widIdx = $(this).data('idx');
-    $("#myModal-approve .modal-body #wid_idx1").val( widIdx );
+   // $("#myModal-approve .modal-body #wid_idx1").val( widIdx );
+	alert(widIdx);
 });
 </script>
 

@@ -314,10 +314,26 @@ class Coin extends CB_Controller
 		$deleted = $this->CIC_Coin_Keyword_model->delete_keyword($key_id);
 		if($deleted == 1){
 			redirect( "https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_GET['pageId']."");
-		    //print_r($_GET);
 		}
 
 	}
+
+
+	
+	function get_keyword(){
+
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_amdmin_coin_get';
+		$this->load->event($eventname);
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		$view = array();
+		$view['view'] = array();			
+		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+
+	}
+
 	
 }
 ?>
