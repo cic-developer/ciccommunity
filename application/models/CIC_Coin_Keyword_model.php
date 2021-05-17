@@ -73,6 +73,7 @@ class CIC_Coin_Keyword_model extends CB_Model
     function update_keyword($id, $data){
         $this->db->where('coin_market', $id);
         $this->db->update('cic_coin_keyword', $data);
+        return true;
 
     }
 

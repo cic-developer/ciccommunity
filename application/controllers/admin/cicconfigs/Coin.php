@@ -313,8 +313,8 @@ class Coin extends CB_Controller
 
 		$deleted = $this->CIC_Coin_Keyword_model->delete_keyword($key_id);
 		if($deleted == 1){
-			//redirect( "https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_GET['pageId']."");
-			print_r($_GET);
+			redirect( "https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_GET['pageId']."");
+		    //print_r($_GET);
 		}
 
 	}
