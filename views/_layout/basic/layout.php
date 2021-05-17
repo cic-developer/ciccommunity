@@ -91,7 +91,6 @@ var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
 				<?php } ?>
 			</ul>
 		</div>
-		관리자 페이지
 	</header>
 	<!-- header end -->
 
