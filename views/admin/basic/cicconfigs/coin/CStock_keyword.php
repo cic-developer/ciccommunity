@@ -83,6 +83,16 @@
 						?>
 					</table>
 				</form>
+				<!-- Edit Keyword -->
+				<div class="input-group col-md-6">
+					<form>
+						<input type="text" class="form-control rounded  " name = "keyword" placeholder = "Keyword" value="<?php $stocks['keyword'] ?>">
+						<span class=input-group-btn>
+							<button type="submit" class="btn btn-outline-primary" >수정</button>
+						</span>			
+					</form>
+					</div>
+					
 			</div>	
 		</div>
 		<?php echo form_close(); ?>
