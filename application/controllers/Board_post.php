@@ -275,47 +275,49 @@ class Board_post extends CB_Controller
 								}
 							}
 						}
-			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-			$where = array(
-				'brd_id' => 1,
-				'post_exept_state' => 0,
-				'post_datetime >=' => $checktime,
-				'post_del <>' => 2,
-			);
-			$limit = 10;
-			$list_num = 1;
-			$dislike_point_ranking_freetalk = $this->Post_model
-				->get_dislike_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-					if (element('list', $dislike_point_ranking_freetalk)) {
-						foreach (element('list', $dislike_point_ranking_freetalk) as $key => $val) {
-							$dislike_point_ranking_freetalk['list'][$key]['post_display_name'] = display_username(
-								element('post_userid', $val),
-								element('post_nickname', $val)
+
+		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+		$where = array(
+			'brd_id' => 1,
+			'post_exept_state' => 0,
+			'post_datetime >=' => $checktime,
+			'post_del <>' => 2,
+		);
+		$limit = 10;
+		$list_num = 1;
+		$dislike_point_ranking_freetalk = $this->Post_model
+			->get_dislike_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+				if (element('list', $dislike_point_ranking_freetalk)) {
+					foreach (element('list', $dislike_point_ranking_freetalk) as $key => $val) {
+						$dislike_point_ranking_freetalk['list'][$key]['post_display_name'] = display_username(
+							element('post_userid', $val),
+							element('post_nickname', $val)
+						);
+						$dislike_point_ranking_freetalk['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+						$dislike_point_ranking_freetalk['list'][$key]['num'] = $list_num++;
+						if ($board) {
+							$dislike_point_ranking_freetalk['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+							$dislike_point_ranking_freetalk['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+						}
+						$dislike_point_ranking_freetalk['list'][$key]['category'] = '';
+						if (element('post_category', $val)) {
+							$dislike_point_ranking_freetalk['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+						}
+						if (element('post_image', $val)) {
+							$this->load->model('Post_file_model');
+							$imagewhere = array(
+								'post_id' => element('post_id', $val),
+								'pfi_is_image' => 1,
 							);
-							$dislike_point_ranking_freetalk['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-							$dislike_point_ranking_freetalk['list'][$key]['num'] = $list_num++;
-							if ($board) {
-								$dislike_point_ranking_freetalk['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-								$dislike_point_ranking_freetalk['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
-							}
-							$dislike_point_ranking_freetalk['list'][$key]['category'] = '';
-							if (element('post_category', $val)) {
-								$dislike_point_ranking_freetalk['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
-							}
-							if (element('post_image', $val)) {
-								$this->load->model('Post_file_model');
-								$imagewhere = array(
-									'post_id' => element('post_id', $val),
-									'pfi_is_image' => 1,
-								);
-								$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-								$dislike_point_ranking_freetalk['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
-							} else {
-								$dislike_point_ranking_freetalk['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
-								}
+							$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+							$dislike_point_ranking_freetalk['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+						} else {
+							$dislike_point_ranking_freetalk['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
 							}
 						}
 					}
+					print_r($where);
+				}
 		
 		if($post['brd_id'] == 2){
 			$where = array(
