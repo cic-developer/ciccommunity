@@ -154,22 +154,23 @@ function deleteKeyword() {
 	}
 }
 
-$('.modal_open1').on('click', function(){
-        $('#myModal-approve').modal({backdrop: false, keyboard: false});
-});
+// $('.modal_open1').on('click', function(){
+//         $('#myModal-approve').modal({backdrop: false, keyboard: false});
+// });
 // set modal data
 $('.modal_open1').click(function() {
 	var widIdx = $(this).data('idx');
    // $("#myModal-approve .modal-body #wid_idx1").val( widIdx );
-	alert(widIdx);
 	$.ajax({
         method: "GET",
         url: "https://dev.ciccommunity.com/admin/cicconfigs/coin/get_keyword",
         data: { id: widIdx }, 
 		success: function(result){
    		//$("#div1").html(result); 
+		result = JSON.parse(result);
 		//{"idx":"51776","coin_market":"ZRX","coin_keyword":"0x Protocol"}
 		console.log(result.idx);
+		$("#cp_content1").val(result.coin_keyword);
 		$('#myModal-approve').modal({backdrop: false, keyboard: false});
  	}
 
