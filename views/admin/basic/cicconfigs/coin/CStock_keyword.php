@@ -73,7 +73,7 @@
 									?>
 								
 								</td>
-								<td><a href="delete_keyword?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs" onclick="deleteKeyword()" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
+								<td><a href="delete_keyword?id=<?php echo $stocks['idx'];?>& pageId = <?php echo $_GET['id'];?> " class="btn btn-danger btn-xs" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
 								<td>
 									<button type="button" class="btn btn-info btn-xs modal_open1" data-toggle="modal" 
                                             data-idx="$stocks['idx'"; ?>수정</button>
@@ -89,8 +89,6 @@
 						?>
 					</table>
 				</form>
-
-
                         <!-- The Modal approve -->
                         <div class="modal fade" id="myModal-approve">
                             <div class="modal-dialog">
@@ -150,7 +148,7 @@ $(".btn-sm").on('click', function(e){
 //]]>
 function deleteKeyword() {
 	if(confirm("Do you want to delete?")){
-		// window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo $_GET['id'];?>");
+		
 	}else{
 		return false;
 	}

@@ -218,7 +218,6 @@ class Coin extends CB_Controller
 		$keylist = $this -> CIC_Coin_Keyword_model->get_keyword();
 		$view['keylist'] = $keylist;
 
-
 		//SHOW LIST
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
@@ -285,7 +284,6 @@ class Coin extends CB_Controller
 
 		//SHOW LIST
 		//DELETE KEYWORD
-		$deleted = $this->input->post('delete');
 		
 		/**
 		* 어드민 레이아웃을 정의합니다
@@ -314,6 +312,10 @@ class Coin extends CB_Controller
 		$key_id = (int)$_GET['id'];
 
 		$deleted = $this->CIC_Coin_Keyword_model->delete_keyword($key_id);
+		if($deleted == 1){
+			//redirect( "https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_GET['pageId']."");
+			print_r($_GET);
+		}
 
 	}
 	
