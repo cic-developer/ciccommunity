@@ -1,16 +1,46 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-class News extends CI_Controller
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+/**
+ * Board_post class
+ *
+ * Copyright (c) CIBoard <www.ciboard.co.kr>
+ *
+ * @author CIBoard (develop@ciboard.co.kr)
+ */
+
+/**
+ * 게시판 목록과 게시물 열람 페이지에 관한 controller 입니다.
+ */
+class News extends CB_Controller
 {
-    function __construct()
-    {
-        parent::__construct();
-    }
-    function index()
-    {
-        echo 'ㅋ';
-    }
-    function get(){
-        echo 'ㅋ';
+
+	/**
+	 * 모델을 로딩합니다
+	 */
+	protected $models = array('Post', 'Post_meta', 'Post_extra_vars', 'CIC_member_level_config');
+
+	/**
+	 * 헬퍼를 로딩합니다
+	 */
+	protected $helpers = array('form', 'array', 'number');
+
+	function __construct()
+	{
+		parent::__construct();
+
+		/**
+		 * 라이브러리를 로딩합니다
+		 */
+		$this->load->library(array('pagination', 'querystring', 'accesslevel', 'videoplayer', 'point'));
+	}
+
+
+	/**
+	 * 게시판 목록입니다.
+	 */
+	public function index()
+	{
+        echo 'zz';
     }
 }
-?>

@@ -104,21 +104,21 @@ $(function () {
 })
 
 //Buton to rafresh pasge
-$(".btn-sm").on('click', function(e){
-    e.preventDefault(); // this will prevent the defualt behavior of the button
+// $(".btn-sm").on('click', function(e){
+//     e.preventDefault(); // this will prevent the defualt behavior of the button
 
-    // find which button was clicked
-    butId = $(this).attr('id');
+//     // find which button was clicked
+//     butId = $(this).attr('id');
 
-    $.ajax({
-        method: "POST",
-        url: "/controllerDummy/run/",
-        data: { button: butId }
-    })
-    .done(function( msg ) {
-        // do something
-    });        
-});
+//     $.ajax({
+//         method: "POST",
+//         url: "/controllerDummy/run/",
+//         data: { button: butId }
+//     })
+//     .done(function( msg ) {
+//         // do something
+//     });        
+// });
 //]]>
 function deleteKeyword() {
   var r = confirm("Do you want to delete?");
@@ -126,7 +126,8 @@ function deleteKeyword() {
 	window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo $_GET['id'];?>");
   }
   else{
-
+	window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo $_GET['id'];?>");
+	return false;
   }
 }
 

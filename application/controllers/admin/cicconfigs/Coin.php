@@ -119,7 +119,7 @@ class Coin extends CB_Controller
 		//이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
     	//RAFRESH DATA FROM DB
-		$refresh = $this -> input -> post('refresh');
+		$refresh = $this -> input -> post('refresh');//
 		if($refresh){
 			$getList = $this -> CIC_Coin_model->retrieve_api();
 			for($i=0; $i<count($getList); $i++){
@@ -247,16 +247,7 @@ class Coin extends CB_Controller
 
 		//DELETE KEYWORD
 		$key_id = (int)$_GET['id'];
-		print_r($key_id);
 		$deleted = $this->CIC_Coin_Keyword_model->delete_keyword($key_id);
-		print_r($deleted);
-		if($deleted == 1){
-			echo "Data deleted successfully !";
-			//redirect('https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=ZRX');
-		}
-		else{
-			echo "Error !";	
-		}
 
 	}
 	
