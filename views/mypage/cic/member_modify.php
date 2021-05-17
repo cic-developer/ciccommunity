@@ -76,14 +76,21 @@
 
 			<!-- The Modal - phone -->
 			<div id="myModal_phone" class="modal">
-				<!-- Modal head -->
-				<div class="modal-head">
-					<span class="close">&times;</span>                                                               
-					<!-- <p>Some text in the Modal..</p> -->
-				</div>
-				<div class="modal-content">
-					<label for="new_number">새 핸드폰번호</label>
-					<input type="text" name="mem_phone" id="new_number" value="" />
+				<!-- Modal content -->
+				<div class="modal-content entry">
+					<span class="close"></span>
+					<!-- &times; -->
+					<ul>
+						<li>
+							<p class="btxt">새 핸드폰번호</p>
+							<div class="field modify">
+								<p class="chk-input w380">
+									<input type="text" placeholder="" id="new_phone" name="new_phone" value="">
+								</p>
+								<a href="javascript:void(0);" id="ath_email" class="modify-btn"><span>이메일인증</span></a>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
 			<?php echo form_close(); ?>
@@ -109,7 +116,7 @@
 }
 
 /* Modal Content/Box */
-.modal-head {
+.modal-content {
 	background-color: #fefefe;
 	margin: 15% auto; /* 15% from the top and centered */
 	padding: 20px;
@@ -160,5 +167,72 @@ window.onclick = function(event) {
 		modal.style.display = "none";
 	}
 }
+/*****************************************************************************/
 
+// 이메일 확인 + 인증번호 보내기
+$(document).ready(function(){
+	$("#ath_email").on('click', function(){
+		var _phone = $("#new_phone").val();
+
+		var result = '';
+		var reason = '';
+		var state = '';
+		var message = '';
+		$.ajax({
+			url: cb_url + '/register/ajax_email_check',
+			type: 'POST',
+			data: {
+				email: _email,
+				csrf_test_name : cb_csrf_hash
+			},
+			dataType: 'json',
+			async: false,
+			cache: false,
+			success: function(data) {
+				result = data.result;
+				reason = data.reason;
+			}
+		});
+		if(result == "no"){
+			alert(reason);
+		}
+
+		if(result == "available"){
+			alert(reason);
+
+			$.ajax({
+				url: cb_url + '/register/ajax_email_send',
+				type: 'POST',
+				data: {
+					email: _email,
+					csrf_test_name : cb_csrf_hash
+				},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				success: function(data) {
+					state = data.state;
+					message = data.message;
+				}
+			});
+
+			alert(message);
+
+			$('.success-email').remove();
+			$('.con-mail').remove();
+			if(state == 1){
+				html = '';
+				html += '<div class="field con-mail">'
+				html += '<p class="chk-input">'
+				html += '<input type="text" id="ath_num" name="ath_num" class="" required />'
+				html += '<p class="rtxt mg10t">'
+				html += '<a class="con-mail-btn cerfity-btn" id="con-mail-btn">메일인증 확인</a>'
+				html += '</p>'
+				html += '</p>'
+				html += '</div>'
+				$('.mem_email').append(html);
+			}
+		}
+	})
+})
 </script>

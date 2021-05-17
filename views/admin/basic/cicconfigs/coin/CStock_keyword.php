@@ -66,7 +66,7 @@
 						if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result){ ?>
 								<?php $myId = $_GET['id']; ?> 
-									<?php if($myId == element('market', $result) { ?>
+									<?php if($myId == element('coin_market', $result) { 
 								<tr>
 								<td>
 									<?php 

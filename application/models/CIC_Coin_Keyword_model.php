@@ -53,14 +53,14 @@ class CIC_Coin_Keyword_model extends CB_Model
     }
 
 
-    // function getKeyword($limit ='', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR'){
-    //     $search_where = array();
-	// 	$search_like = array();
-	// 	$search_or_like = array();
-    //     $select = 'cic_coin_keyword.*';
-    //     $result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
-    //     return $result;
-    // }
+    function getKeyword($limit ='', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR'){
+        $search_where = array();
+		$search_like = array();
+		$search_or_like = array();
+        $select = 'cic_coin_keyword.*';
+        $result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
+        return $result;
+    }
 
 
     function delete_keyword($id){
