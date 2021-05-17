@@ -392,11 +392,11 @@ class Coin extends CB_Controller
 				// $name = $this -> input -> get('cp_content1');
 				// print_r($name);
 				// die();
-				print_r($_GET);
+				//print_r($_GET);
 				if(isset($_GET) && !empty($_GET)){
 					//print_r($_POST['wid_idx1']);
-					// print_r($_GET);
-					$this->CIC_Coin_Keyword_model-> update_keyword(52425, 'hello');
+					print_r($_GET);
+					$this->CIC_Coin_Keyword_model->update_keyword($_GET['wid_idx1'], $_GET['cp_content1']);
 					redirect("https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_GET['pageId']."");
 				}
 				// print_r('Hello');
