@@ -4,9 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Maincoin class
  *
- * Copyright (c) CIBoard <www.rs-team.com>
+ * Copyright (c) RSTEAM <www.rs-team.com>
  *
- * @author CIBoard (develop@rs-team.com)
+ * @author RSTEAM (developer@rs-team.com)
  */
 
 /**
@@ -23,12 +23,12 @@ class Maincoin extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_Banner');
+	protected $models = array('CIC_maincoin_exchange');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
 	 */
-	protected $modelname = 'CIC_Banner_model';
+	protected $modelname = 'CIC_maincoin_exchange_model';
 
 	/**
 	 * 헬퍼를 로딩합니다

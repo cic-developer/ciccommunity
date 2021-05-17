@@ -100,7 +100,7 @@ class Coin extends CB_Controller
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-		$config['base_url'] = admin_url($this->pagedir) . '/CStock_keyword' . '?' . $param->replace('page');
+		$config['base_url'] = admin_url($this->pagedir) . '/' . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
@@ -109,7 +109,7 @@ class Coin extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('keyword' => 'coin_keyword');
+		$search_option = array('clist_market' => '마켓', 'clist_name_ko' => '한국어명', 'clist_name_en' => '영어명');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
@@ -193,7 +193,7 @@ class Coin extends CB_Controller
 				'rules'=>'required'
 			),
 			array(
-				'field' => 'coin_keyword',
+				'field' => 'keyword',
 				'rules'=>'required'
 			),
 
@@ -205,7 +205,7 @@ class Coin extends CB_Controller
 		}else{
 			$data = array(
 				'coin_market' => $this -> input -> post('coin_market'),
-				'coin_keyword' => $this -> input -> post('keyword'),
+				'keyword' => $this -> input -> post('keyword'),
 
 			);
 			if(isset($data) && !empty($data)){

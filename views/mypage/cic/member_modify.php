@@ -37,7 +37,8 @@
 								<input type="text" placeholder=""
 									value="<?php echo $this->member->item('mem_phone'); ?>" readonly="">
 							</p>
-							<a href="#n" class="modify-btn"><span>핸드폰번호변경</span></a>
+							<!-- <a href="#n" class="modify-btn"><span>핸드폰번호변경</span></a> -->
+							<a href="javascript:void(0);" id="modal_btn_phone" class="modify-btn"><span>핸드폰번호변경</span></a>
 						</div>
 					</li>
 					<!-- <li>
@@ -72,22 +73,22 @@
 				<a href="#n" class="update-btn"><span>정보업데이트</span></a>
 				<a href="#n" class="leave-btn"><span>회원탈퇴</span></a>
 			</div>
+
+			<!-- The Modal - phone -->
+			<div id="myModal_phone" class="modal">
+				<!-- Modal head -->
+				<div class="modal-head">
+					<span class="close">&times;</span>                                                               
+					<!-- <p>Some text in the Modal..</p> -->
+				</div>
+				<div class="modal-content">
+					<label for="new_number">새 핸드폰번호</label>
+					<input type="text" name="mem_phone" id="new_number" value="" />
+				</div>
+			</div>
 			<?php echo form_close(); ?>
 		</div>
 	 	<!-- page end // -->
-
-		
-		<!-- Trigger/Open The Modal -->
-		<button id="myBtn">Open Modal</button>
-		<!-- The Modal -->
-		<div id="myModal" class="modal">
-			<!-- Modal content -->
-			<div class="modal-content">
-				<span class="close">&times;</span>                                                               
-				<p>Some text in the Modal..</p>
-			</div>
-		</div>
-
 	</div>
 </div>
 
@@ -108,7 +109,7 @@
 }
 
 /* Modal Content/Box */
-.modal-content {
+.modal-head {
 	background-color: #fefefe;
 	margin: 15% auto; /* 15% from the top and centered */
 	padding: 20px;
@@ -135,10 +136,10 @@
 
 <script>
 // Get the modal
-var modal = document.getElementById('myModal');
+var modal = document.getElementById('myModal_phone');
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+var btn = document.getElementById("modal_btn_phone");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];                                          

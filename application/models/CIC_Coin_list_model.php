@@ -30,7 +30,7 @@ class CIC_Coin_list_model extends CB_Model
 	/**
 	 * Get RealTime Coin Price
 	 */
-   
+
 	function get_price($clist_market)
 	{
         $curl = curl_init();

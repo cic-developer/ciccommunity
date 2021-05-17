@@ -37,14 +37,14 @@ class CIC_Coin_Keyword_model extends CB_Model
             return $result;
         }
     }
-    exit();
+
     
     function get_keyword(){
         $this->db->select('cic_coin_list.*');
         $this->db->select('cic_coin_keyword.*');
          //$this->db->('market');
         $this->db->from('cic_coin_keyword');
-        $this->db->join('cic_coin_list', 'cic_coin_list.market = cic_coin_keyword.coin_market');
+        $this->db->join('cic_coin_list', 'cic_coin_list.clist_market = cic_coin_keyword.coin_market');
 
         $query = $this->db->get();
         $result = $query->result_array();
@@ -53,14 +53,14 @@ class CIC_Coin_Keyword_model extends CB_Model
     }
 
 
-    function getKeyword($limit ='', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR'){
-        $search_where = array();
-		$search_like = array();
-		$search_or_like = array();
-        $select = 'cic_coin_keyword.*';
-        $result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
-        return $result;
-    }
+    // function getKeyword($limit ='', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR'){
+    //     $search_where = array();
+	// 	$search_like = array();
+	// 	$search_or_like = array();
+    //     $select = 'cic_coin_keyword.*';
+    //     $result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
+    //     return $result;
+    // }
 
 
     function delete_keyword($id){

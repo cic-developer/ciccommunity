@@ -53,10 +53,8 @@
                                     <?php
 						            if (element('list',element('writerbest', $view))) {
 							        foreach (element('list',element('writerbest', $view)) as $writerbest) {
-                                        print_r(element('list',element('writerbest', $view)));
-                                        exit;
 							        ?>
-                                    <a href="<?php echo base_url(elemetn('thum_url',$writerbest))?>">
+                                    <a href="<?php echo thumb_url('list',element('writerbest', $view)); ?>">
                                         <div class="img">
                                         <img src="<?php echo base_url(element('post_url',$writerbest))?>" alt="">
                                         </div>
