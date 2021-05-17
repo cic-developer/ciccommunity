@@ -32,7 +32,7 @@
                                     </a>
                                 </div>
                             </div> -->
-                            <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
+                            <!-- <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
                                 <div class="item">
                                     <a href="<?php echo base_url('post/3')?>">
                                         <div class="img">
@@ -46,24 +46,26 @@
                                         </div>
                                     </a>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <!-- <?php
-						    if (element('list',element('dislike_point_ranking_freetalk', $view))) {
-							    foreach (element('list',element('dislike_point_ranking_freetalk', $view)) as $dislike_point_ranking_freetalk) {
-							?>
                             <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
                                 <div class="item">
-                                    <a href="<?php echo base_url(elemetn('thum_url',$dislike_point_ranking_freetalk))?>">
+                                    <?php
+						            if (element('list',element('writerbest', $view))) {
+							        foreach (element('list',element('writerbest', $view)) as $writerbest) {
+                                        print_r(element('list',element('writerbest', $view)));
+                                        exit;
+							        ?>
+                                    <a href="<?php echo base_url(elemetn('thum_url',$writerbest))?>">
                                         <div class="img">
-                                        <img src="<?php echo base_url(element('post_url',$dislike_point_ranking_freetalk))?>" alt="">
+                                        <img src="<?php echo base_url(element('post_url',$writerbest))?>" alt="">
                                         </div>
                                         <div class="txt">
-                                            <p class="btxt"<?php echo number_format(element('post_title', $dislike_point_ranking_freetalk)); ?>></p>
-                                            <p class="stxt"><?php echo number_format(element('post_content', $dislike_point_ranking_freetalk)); ?></p>
-                                            <p class="ctxt vp"><?php echo number_format(element('post_dislike_point', $dislike_point_ranking_freetalk)); ?></p>
+                                            <p class="btxt"<?php echo number_format(element('post_title', $writerbest)); ?>></p>
+                                            <p class="stxt"><?php echo number_format(element('post_content', $writerbest)); ?></p>
+                                            <p class="ctxt vp"><?php echo number_format(element('post_dislike_point', $writerbest)); ?></p>
                                         </div>
-                                </a>
+                                    </a>
                                 </div>
                             </div>
 						<?php
@@ -75,7 +77,7 @@
 							</li>
 						<?php
 						}
-						?>-->
+						?>
                         </div> 
                     </div>
                     <div class="owl-nav disabled">

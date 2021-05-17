@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 
 /**
- * 관리자>CIC 설정>검색 코인관리 controller 입니다.
+ * 관리자>페이지설정>검색 코인관리 controller 입니다.
  */
 class Coin extends CB_Controller
 {
@@ -73,9 +73,9 @@ class Coin extends CB_Controller
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
-		$this->{$this->modelname}->allow_search_field = array('market', 'name_ko', 'name_en'); // 검색이 가능한 필드
+		$this->{$this->modelname}->allow_search_field = array('clist_market', 'clist_name_ko', 'clist_name_en'); // 검색이 가능한 필드
 		$this->{$this->modelname}->search_field_equal = array(); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->{$this->modelname}->allow_order_field = array('market'); // 정렬이 가능한 필드
+		$this->{$this->modelname}->allow_order_field = array('clist_market'); // 정렬이 가능한 필드
 
 		$where = array();
 		$result = $this->{$this->modelname}
@@ -84,9 +84,9 @@ class Coin extends CB_Controller
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
 				$result['list'][$key]['display_name'] = display_username(
-					element('market', $val),
-					element('name_ko', $val),
-					element('name_en', $val)
+					element('clist_market', $val),
+					element('clist_name_ko', $val),
+					element('clist_name_en', $val)
 				);
 				$result['list'][$key]['num'] = $list_num--;
 			}
@@ -100,7 +100,7 @@ class Coin extends CB_Controller
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-		$config['base_url'] = admin_url($this->pagedir) . '/' . '?' . $param->replace('page');
+		$config['base_url'] = admin_url($this->pagedir) . '/CStock_keyword' . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
@@ -109,7 +109,7 @@ class Coin extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('market' => '마켓', 'name_ko' => '한국어명', 'name_en' => '영어명');
+		$search_option = array('keyword' => 'coin_keyword');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
@@ -123,13 +123,13 @@ class Coin extends CB_Controller
 		if($refresh){
 			$getList = $this -> CIC_Coin_list_model->retrieve_api();
 			for($i=0; $i<count($getList); $i++){
-				$market = $getList[$i]['market'];
+				$market = $getList[$i]['clist_market'];
 				if(strcmp(substr($market, 0, 1), "K")==0){
 					$coin_market = substr($market, 4);
 					$data = array(
-						'market' => $coin_market,
-						'name_ko' => $getList[$i]['english_name'],
-						'name_en' => $getList[$i]['korean_name'],
+						'clist_market' => $coin_market,
+						'clist_name_ko' => $getList[$i]['english_name'],
+						'clist_name_en' => $getList[$i]['korean_name'],
 					);
 					//For rafreshing admin page
 					if(isset($data) && !empty($data)){
@@ -140,15 +140,15 @@ class Coin extends CB_Controller
 					$data = array(
 						array(
 							'coin_market'=> $coin_market,
-							'keyword'=>$getList[$i]['korean_name']
+							'coin_keyword'=>$getList[$i]['korean_name']
 						),
 						array(
 							'coin_market'=> $coin_market,
-							'keyword'=>$getList[$i]['english_name']
+							'coin_keyword'=>$getList[$i]['english_name']
 						),
 						array(
 							'coin_market'=> $coin_market,
-							'keyword'=> $coin_market
+							'coin_keyword'=> $coin_market
 						),
 					);
 					if(isset($data) && !empty($data)){	
@@ -193,7 +193,7 @@ class Coin extends CB_Controller
 				'rules'=>'required'
 			),
 			array(
-				'field' => 'keyword',
+				'field' => 'coin_keyword',
 				'rules'=>'required'
 			),
 
@@ -205,7 +205,7 @@ class Coin extends CB_Controller
 		}else{
 			$data = array(
 				'coin_market' => $this -> input -> post('coin_market'),
-				'keyword' => $this -> input -> post('keyword'),
+				'coin_keyword' => $this -> input -> post('keyword'),
 
 			);
 			if(isset($data) && !empty($data)){

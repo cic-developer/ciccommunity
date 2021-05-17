@@ -145,8 +145,46 @@ class Board_post extends CB_Controller
 			}
 		}
 		
+		$where = array(
+			'brd_id' => 2,
+			'post_best_state >' => 0
+		);
+
+		$list_num = 1;
+		$writerbest = $this->Post_model
+			->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		if (element('list', $writerbest)) {
+			foreach (element('list', $writerbest) as $key => $val) {
+				$writerbest['list'][$key]['post_display_name'] = display_username(
+					element('post_userid', $val),
+					element('post_nickname', $val)
+				);
+				$writerbest['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+				$writerbest['list'][$key]['num'] = $list_num++;
+				if ($board) {
+					$writerbest['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+					$writerbest['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+				}
+				$writerbest['list'][$key]['category'] = '';
+				if (element('post_category', $val)) {
+					$writerbest['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+				}
+				if (element('post_image', $val)) {
+					$imagewhere = array(
+						'post_id' => element('post_id', $val),
+						'pfi_is_image' => 1,
+					);
+					$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+					$writerbest['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+				} else {
+					$writerbest['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+				}
+			}
+		}
+		
 		$view['view']['popularpost'] = $popularpost;
 		$view['view']['bestpost'] = $bestpost;
+		$view['view']['writerbest'] = $writerbest;
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

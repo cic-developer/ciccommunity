@@ -37,6 +37,7 @@ class CIC_Coin_Keyword_model extends CB_Model
             return $result;
         }
     }
+    exit();
     
     function get_keyword(){
         $this->db->select('cic_coin_list.*');
