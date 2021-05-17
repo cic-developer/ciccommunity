@@ -12,14 +12,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 권한이 있는지 없는지 판단하는 class 입니다.
  */
-class CIC_Coin_model extends CB_Model
+class CIC_Coin_list_model extends CB_Model
 {
 
     /**
 	 * 테이블명
 	 */
-	public $_table = 'cic_coin_stock';
-    public $primary_key = 'market';
+	public $_table = 'cic_coin_list';
+    public $primary_key = 'clist_market';
 
     function __construct()
     {
@@ -31,14 +31,14 @@ class CIC_Coin_model extends CB_Model
 	 * Get RealTime Coin Price
 	 */
 
-	function get_price($market)
+	function get_price($clist_market)
 	{
         $curl = curl_init();
-        // $market = "KRW-BTC";
+        // $clist_market = "KRW-BTC";
         //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.upbit.com/v1/ticker?markets=KRW-".$market,
+            CURLOPT_URL => "https://api.upbit.com/v1/ticker?clist_markets=KRW-".$clist_market,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",
@@ -66,14 +66,14 @@ class CIC_Coin_model extends CB_Model
     function insertStockData($data){
 
         if(isset($data) && !empty($data)){
-            $result = $this->db->insert('cic_coin_stock', $data);
+            $result = $this->db->insert('cic_coin_list', $data);
             return $result;
         }
     } 
 
 
     function getstockData(){
-        $result = $this->db->get('cic_coin_stock');
+        $result = $this->db->get('cic_coin_list');
         return $result->result_array(); 
     }
 
@@ -81,21 +81,21 @@ class CIC_Coin_model extends CB_Model
         $search_where = array();
 		$search_like = array();
 		$search_or_like = array();
-        $select = 'cic_coin_stock.*';
+        $select = 'cic_coin_list.*';
         $result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
         return $result;
     }
 
     function getonerow(){
-        $this->db->where('market', $id);
-        $query = $this->db->get('cic_coin_stock');
+        $this->db->where('clist_market', $id);
+        $query = $this->db->get('cic_coin_list');
         return $query->row();
     }
     
     
     function insert_admin_list($data){
 
-    $result = $this->db->insert('cic_coin_admins', $data);
+    $result = $this->db->insert('cic_coin_keyword', $data);
 
     return $result;
         
@@ -106,7 +106,7 @@ class CIC_Coin_model extends CB_Model
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.upbit.com/v1/market/all",
+            CURLOPT_URL => "https://api.upbit.com/v1/clist_market/all",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",

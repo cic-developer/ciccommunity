@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 
 /**
- * 관리자>페이지설정>검색 코인관리 controller 입니다.
+ * 관리자>CIC 설정>검색 코인관리 controller 입니다.
  */
 class Coin extends CB_Controller
 {
@@ -24,9 +24,9 @@ class Coin extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_Coin', 'CIC_Coin_Keyword');
+	protected $models = array('CIC_Coin_list', 'CIC_Coin_Keyword');
 
-	protected $modelname = 'CIC_Coin_model';
+	protected $modelname = 'CIC_Coin_list_model';
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
@@ -39,7 +39,7 @@ class Coin extends CB_Controller
 		 * 라이브러리를 로딩합니다
 		 */
 		$this->load->library(array('pagination', 'querystring', 'form_validation', 'session'));
-		$this->load->model(array('CIC_Coin_model', 'CIC_Coin_Keyword_model'));
+		$this->load->model(array('CIC_Coin_list_model', 'CIC_Coin_Keyword_model'));
 	}
 
     /**
@@ -121,7 +121,7 @@ class Coin extends CB_Controller
     	//RAFRESH DATA FROM DB
 		$refresh = $this -> input -> post('refresh');//
 		if($refresh){
-			$getList = $this -> CIC_Coin_model->retrieve_api();
+			$getList = $this -> CIC_Coin_list_model->retrieve_api();
 			for($i=0; $i<count($getList); $i++){
 				$market = $getList[$i]['market'];
 				if(strcmp(substr($market, 0, 1), "K")==0){
@@ -133,7 +133,7 @@ class Coin extends CB_Controller
 					);
 					//For rafreshing admin page
 					if(isset($data) && !empty($data)){
-						$stock = $this->CIC_Coin_model->insertStockData($data);
+						$stock = $this->CIC_Coin_list_model->insertStockData($data);
 						$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 					}
 
@@ -153,7 +153,7 @@ class Coin extends CB_Controller
 					);
 					if(isset($data) && !empty($data)){	
 						for($j = 0; $j < count($data); $j++) {
-							$this->CIC_Coin_model -> insert_admin_list($data[$j]);
+							$this->CIC_Coin_list_model -> insert_admin_list($data[$j]);
 						}
 					}	
 				}
@@ -198,7 +198,7 @@ class Coin extends CB_Controller
 			),
 
 		);
-		$getList = $this -> CIC_Coin_model->retrieve_api();
+		$getList = $this -> CIC_Coin_list_model->retrieve_api();
 		$this->form_validation->set_rules($config);
 		if($this->form_validation -> run () == FALSE){
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);

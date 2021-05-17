@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 
 /**
- * 관리자>환경설정>기본환경설정 controller 입니다.
+ * 관리자>CIC 설정>기본환경설정 controller 입니다.
  */
 class Point extends CB_Controller
 {

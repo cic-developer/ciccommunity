@@ -2,23 +2,23 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Banner class
+ * Maincoin class
  *
- * Copyright (c) CIBoard <www.ciboard.co.kr>
+ * Copyright (c) CIBoard <www.rs-team.com>
  *
- * @author CIBoard (develop@ciboard.co.kr)
+ * @author CIBoard (develop@rs-team.com)
  */
 
 /**
- * 관리자>CIC 설정>배너관리 controller 입니다.
+ * 관리자>CIC 설정>메인코인관리 controller 입니다.
  */
-class Banner extends CB_Controller
+class Maincoin extends CB_Controller
 {
 	/**
 	 * 관리자 페이지 상의 현재 디렉토리입니다
 	 * 페이지 이동시 필요한 정보입니다
 	 */
-	public $pagedir = 'cicconfigs/banner';
+	public $pagedir = 'cicconfigs/maincoin';
 
 	/**
 	 * 모델을 로딩합니다

@@ -74,6 +74,46 @@
 			</div>
 			<?php echo form_close(); ?>
 		</div>
-		<!-- page end // -->
+	 	<!-- page end // -->
 	</div>
 </div>
+
+<style>
+
+	button{
+		all:unset;
+		background-color:steelblue;
+		color:white;
+		padding:5px 20px;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	
+	.modal {
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		width: 100%;
+		height: 100%;height: 100%;
+	}
+	.modal__overlay{
+		background-color:rgb(0,0,0, 0.6);
+
+	}
+</style>
+
+<button>Open Modal</button>
+<div class="modal">
+	<div class="modal__overlay"></div>
+	<div class="modal__content">
+		<h2>hihihi~~~</h2>
+		<button>X</button>
+	</div>
+</div>
+
+
+<script>
+
+</script>
