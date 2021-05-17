@@ -335,7 +335,6 @@ class Coin extends CB_Controller
 		$getKey = $this->CIC_Coin_Keyword_model -> getKeywordRow($id);
 
 		echo json_encode($getKey);
-        print_r($getKey);
 
 	}
 

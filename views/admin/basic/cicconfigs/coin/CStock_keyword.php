@@ -162,6 +162,15 @@ $('.modal_open1').click(function() {
 	var widIdx = $(this).data('idx');
    // $("#myModal-approve .modal-body #wid_idx1").val( widIdx );
 	alert(widIdx);
+	$.ajax({
+        method: "GET",
+        url: "https://dev.ciccommunity.com/admin/cicconfigs/coin/get_keyword",
+        data: { id= widIdx }, 
+		success: function(result){
+   		//$("#div1").html(result); 
+		console.log(result);
+ 	}
+    });      
 });
 </script>
 
