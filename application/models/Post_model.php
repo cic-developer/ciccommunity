@@ -767,7 +767,7 @@ class Post_model extends CB_Model
 		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
 			$orderby = 'post_dislike_point desc';
 		}
-		print_r('hello');
+		print_r($orderby);
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
 		if (empty($sfield)) {
 			$sfield = array('post_title', 'post_content');

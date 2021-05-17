@@ -282,6 +282,7 @@ class Board_post extends CB_Controller
 			'post_exept_state' => 0,
 			'post_datetime >=' => $checktime,
 			'post_del <>' => 2,
+			'post_dislike_point desc',
 		);
 		$limit = 10;
 		$list_num = 1;
@@ -316,7 +317,6 @@ class Board_post extends CB_Controller
 							}
 						}
 					}
-					print_r($where);
 				}
 		
 		if($post['brd_id'] == 2){
