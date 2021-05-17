@@ -50,7 +50,7 @@ class News extends CB_Controller
 		$layoutconfig = array(
 			'path' => 'news',
 			'layout' => 'layout',
-			'skin' => 'sub05',
+			'skin' => 'news',
 			// 'layout_dir' => $this->cbconfig->item('layout_main'),
 			'layout_dir' => 'cic_sub',
 			'mobile_layout_dir' =>'cic_sub',

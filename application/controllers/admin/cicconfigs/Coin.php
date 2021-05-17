@@ -221,7 +221,6 @@ class Coin extends CB_Controller
 
 		//DELETE KEYWORD
 		$deleted = $this->input->post('delete');
-		print_r($deleted);
 		
 		/**
 		* 어드민 레이아웃을 정의합니다
@@ -248,7 +247,16 @@ class Coin extends CB_Controller
 
 		//DELETE KEYWORD
 		$key_id = (int)$_GET['id'];
+
 		$deleted = $this->CIC_Coin_Keyword_model->delete_keyword($key_id);
+		print_r($deleted);
+		if($deleted == 1){
+			echo "Data deleted successfully !";
+			//redirect('https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=ZRX');
+		}
+		else{
+			echo "Error !";	
+		}
 
 	}
 	
