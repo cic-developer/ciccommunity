@@ -4,6 +4,8 @@
   <button type="submit"><i class="fa fa-search"></i></button>
 </form>
 <div>
-      <h3><?php echo $korean;?> </h3> <h1> ￦<?php echo $trade; ?></h1> <h1>￦<?php echo $low; ?></h1>
-      <h1> ￦<?php echo $high; ?></h1> 
+</h1> <?php $new_id = $_GET['id'] 
+       echo $new_id 
+
+?></h1> 
 <div>

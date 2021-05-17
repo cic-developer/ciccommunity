@@ -29,7 +29,7 @@
 					</div>
 					<div class="input-group col-md-6">
 						<input type="hidden" name="coin_market" value = "<?php echo $myId; ?>" >
-						<input type="text" class="form-control rounded" id ="show" name = "keyword" placeholder = "Keyword">
+						<input type="text" class="form-control rounded  " name = "keyword" placeholder = "Keyword">
 						<span class=input-group-btn>
 							<button type="submit" class="btn btn-outline-primary" >추가</button>
 						</span>			
@@ -73,9 +73,9 @@
 									?>
 								
 								</td>
-								<td><a href="<?php echo admin_url($this->pagedir); ?>/delete_keyword/<?php $stocks['idx']; ?>" class="btn btn-danger btn-xs" onclick="myFunction()" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td>
+								<td><a href="delete_keyword?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs" onclick="myFunction()" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td>
 								<!-- <td><a href="<?php echo site_url('admin/cicconfigs/Coin/delete_keyword/'.$stocks['idx']) ?> ">delete<a></td> -->
-								<td><a href="<?php echo admin_url($this->pagedir); ?>/CStock_keyword/<?php $stocks['idx']; ?>" name="send" id="send" onclick="update()"  class="btn btn-info btn-xs">수정 </a></td> 
+								<td class="btn btn-info btn-xs" onClick="document.location.href='https://dev.ciccommunity.com/admin/cicconfigs/coin/delete_keyword?id=<?php echo $stocks['idx']; ?>'">>수정 </td> 
 							</tr>
 							<?php } ?>	
 						<?php
@@ -83,8 +83,6 @@
 						?>
 					</table>
 				</form>
-
-					
 			</div>	
 		</div>
 		<?php echo form_close(); ?>
@@ -123,16 +121,10 @@ $(".btn-sm").on('click', function(e){
 });
 //]]>
 function myFunction() {
-	if(confirm("Do you want to delete?")){
-		window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo $_GET['id'];?>");
-	} 	
-	else{
-	return false;
-	}
-}
-
-function update(){
-	documernt.getElementById("show").value="hello"?>
+  var r = confirm("Do you want to delete?");
+  if(r == true){
+	window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo $_GET['id'];?>");
+  }
 }
 
 </script>

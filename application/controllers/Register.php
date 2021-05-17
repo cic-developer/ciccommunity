@@ -192,10 +192,16 @@ class Register extends CB_Controller
 		$eventname = 'event_register_auth_success';
 		$this->load->event($eventname);
 
-		$test = $this->Member_model->get_by_memDI('MC0GCCqGSIb3DQIJAyEAtonfQuH352/KCB0yrjiwSQcnDQTS7ff5UcT4ievX8HM=', '');
+		$data = $this->session->userdata('dec_data');
+		$DI = $data['dupinfo'];
 
-		print_r($test);
-		exit;
+		$isDI = $this->Member_model->get_by_memDI($DI, '');
+
+		if($isDI){ // 중복 이면
+			echo("<script>self.close()</script>");
+			echo("<script>window.opener.location.replace('/register');</script>");
+			echo("<script>window.opener.alert('이미 가입된 회원입니다');</script>");
+		}
 
 		$view = array();
 		$view['view'] = array();
