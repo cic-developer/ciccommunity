@@ -81,7 +81,7 @@ class CIC_Coin_Keyword_model extends CB_Model
 		}
 		$this->db->select('*');
 		$this->db->join('cic_coin_keyword', 'cic_coin_keyword.coin_market = cic_coin_list.market', 'inner');
-		$this->db->where('cic_coin_keyword.keyword', $search);
+		$this->db->where('cic_coin_keyword.coin_keyword', $search);
 		$result = $this->db->get('cic_coin_list')->row_array();
         return $result;
 

@@ -29,7 +29,7 @@
 					</div>
 					<div class="input-group col-md-6">
 						<input type="hidden" name="coin_market" value = "<?php echo $myId; ?>" >
-						<input type="text" class="form-control rounded  " name = "keyword" placeholder = "Keyword">
+						<input type="text" class="form-control rounded  " name ="keyword" placeholder = "Keyword">
 						<span class=input-group-btn>
 							<button type="submit" class="btn btn-outline-primary" >추가</button>
 						</span>			
@@ -42,7 +42,7 @@
 					if (element('list', element('data', $view))) {
 						foreach (element('list', element('data', $view)) as $result) {
 				?>
-					<?php echo element('market', $result); ?> 
+					<?php echo element('coin_market', $result); ?> 
 					<?php
 						}
 					}
@@ -62,18 +62,19 @@
 							<th>수정</th>
 						</tr>
 						<?php 
-						$sno = $row+1;
-						foreach($keylist as $stocks){ ?>
-						<?php $myId = $_GET['id']; ?> 
-							<?php if($myId == $stocks['market']) { ?>
-							<tr>
+
+						if (element('list', element('data', $view))) {
+							foreach (element('list', element('data', $view)) as $result){ ?>
+								<?php $myId = $_GET['id']; ?> 
+									<?php if($myId == element('market', $result) { ?>
+								<tr>
 								<td>
 									<?php 
-									echo $stocks['keyword'];
+									echo element('coin_keyword', $result);
 									?>
 								
 								</td>
-								<td><a href="delete_keyword?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs" onclick="myFunction()" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
+								<td><a href="delete_keyword?id=<?php echo element('idx', $result); ?>" class="btn btn-danger btn-xs" onclick="myFunction()" name='deleted' value = "<?php echo element('idx', $result); ?>">삭제 </a></td> 
 								<td>
 									<button type="button" class="btn btn-info btn-xs modal_open1" data-toggle="modal" 
                                             data-idx="$stocks['idx'"; ?>수정</button>
@@ -113,7 +114,7 @@
 														?>
 																<?php $myId = $_GET['id']; ?> 
 																<?php if($myId == element('coin_market', $result)) { ?>
-																	<input class="form-control" value='<?php echo element('keyword', $result) ?> ' rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요">
+																	<input class="form-control" value='<?php echo element('coin_keyword', $result) ?> ' rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요">
 																	<?php } ?>
 														<?php 
 															} 
