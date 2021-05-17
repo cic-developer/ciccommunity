@@ -78,5 +78,65 @@ class CIC_Coin_Keyword_model extends CB_Model
     }
 
 
+
+    function search_Coin($limit = '', $offset = '', $where = '', $like = '', $board_id = 0, $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR') {
+        $search_where = array();
+        if ($sfield && is_array($sfield)) {
+			foreach ($sfield as $skey => $sval) {
+				$ssf = $sval;
+				if ($skeyword && $ssf && in_array($ssf, $this->allow_search_field)) {
+					if (in_array($ssf, $this->search_field_equal)) {
+						$search_where[$ssf] = $skeyword;
+					} else {
+						$swordarray = explode(' ', $skeyword);
+						foreach ($swordarray as $str) {
+							if (empty($ssf)) {
+								continue;
+							}
+							if ($sop === 'AND') {
+								$search_like[] = array($ssf => $str);
+							} else {
+								$search_or_like[] = array($ssf => $str);
+							}
+						}
+					}
+				}
+			}
+		} else {
+			$ssf = $sfield;
+			if ($skeyword && $ssf && in_array($ssf, $this->allow_search_field)) {
+				if (in_array($ssf, $this->search_field_equal)) {
+					$search_where[$ssf] = $skeyword;
+				} else {
+					$swordarray = explode(' ', $skeyword);
+					foreach ($swordarray as $str) {
+						if (empty($ssf)) {
+							continue;
+						}
+						if ($sop === 'AND') {
+							$search_like[] = array($ssf => $str);
+						} else {
+							$search_or_like[] = array($ssf => $str);
+						}
+					}
+				}
+			}
+		}
+
+
+        $this->db->select('*');
+		$this->db->join('cic_coin_admins', 'cic_coin_admins.coin_market = cic_coin_stock.market', 'inner');
+		$this->db->where('cic_coin_admins.keyword', $skeyword);
+
+        $this->db->where($where);
+        if ($search_where) {
+            $this->db->where($search_where);
+        } 
+
+        $result = $this->db->get('cic_coin_stock')->row_array();
+        return $result;
+    }
+    
+
 }
 ?>
