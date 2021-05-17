@@ -48,9 +48,9 @@ class News extends CB_Controller
 		$page_name = $this->cbconfig->item('site_page_name_main');
         
 		$layoutconfig = array(
-			'path' => 'main',
+			'path' => 'news',
 			'layout' => 'layout',
-			'skin' => 'main',
+			'skin' => 'sub05',
 			// 'layout_dir' => $this->cbconfig->item('layout_main'),
 			'layout_dir' => 'cic_sub',
 			'mobile_layout_dir' =>'cic_sub',
