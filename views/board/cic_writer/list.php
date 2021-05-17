@@ -48,17 +48,22 @@
                                 </div>
                             </div>
 
-                            <?php
+                            <!-- <?php
 						    if (element('list',element('dislike_point_ranking_freetalk', $view))) {
 							    foreach (element('list',element('dislike_point_ranking_freetalk', $view)) as $dislike_point_ranking_freetalk) {
 							?>
                             <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
                                 <div class="item">
-                                    <a href="<?php echo base_url(elemetn('thum_url',))?>">
+                                    <a href="<?php echo base_url(elemetn('thum_url',$dislike_point_ranking_freetalk))?>">
                                         <div class="img">
-                                        <img src="<?php echo base_url(element('',))?>" alt="">
+                                        <img src="<?php echo base_url(element('post_url',$dislike_point_ranking_freetalk))?>" alt="">
                                         </div>
-                                    </a>
+                                        <div class="txt">
+                                            <p class="btxt"<?php echo number_format(element('post_title', $dislike_point_ranking_freetalk)); ?>></p>
+                                            <p class="stxt"><?php echo number_format(element('post_content', $dislike_point_ranking_freetalk)); ?></p>
+                                            <p class="ctxt vp"><?php echo number_format(element('post_dislike_point', $dislike_point_ranking_freetalk)); ?></p>
+                                        </div>
+                                </a>
                                 </div>
                             </div>
 						<?php
@@ -70,8 +75,8 @@
 							</li>
 						<?php
 						}
-						?>
-                        </div>
+						?>-->
+                        </div> 
                     </div>
                     <div class="owl-nav disabled">
                         <button type="button" role="presentation" class="owl-prev">
