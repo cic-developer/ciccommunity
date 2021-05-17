@@ -104,6 +104,7 @@
                                                 <!-- <label for="usr"></label> -->
 
                                                 <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
+												<input type="hidden" name="pageId" id="pageId" value="<?php echo $_GET['id']; ?>" />
                                                 <div class="form-group">
                                                     <label for="cp_content1">키워드:</label>
                                                     <input class="form-control" rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요">

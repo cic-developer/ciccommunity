@@ -331,18 +331,21 @@ class Coin extends CB_Controller
 		$view['view'] = array();			
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
+		if(isset($_GET) && !empty($_GET)){
 		$id = $_GET['id'];
 		$getKey = $this->CIC_Coin_Keyword_model -> getKeywordRow($id);
-
 		echo json_encode($getKey);
-		
+    	}
+
+		//echo json_encode($getKey);
+		print_r($_POST);
+		// die();
 		if(isset($_POST) && !empty($_POST)){
 			$this->CIC_Coin_Keyword_model-> update_keyword($_POST['wid_idx1'], $_POST['cp_content1']);
-			redirect( "https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_GET['pageId']."");
+			redirect("https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_POST['pageId']."");
 		}
 
 	}
 
-	
 }
 ?>
