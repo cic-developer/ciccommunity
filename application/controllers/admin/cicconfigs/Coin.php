@@ -123,7 +123,7 @@ class Coin extends CB_Controller
 		if($refresh){
 			$getList = $this -> CIC_Coin_list_model->retrieve_api();
 			for($i=0; $i<count($getList); $i++){
-				$market = $getList[$i]['clist_market'];
+				$market = $getList[$i]['market'];
 				if(strcmp(substr($market, 0, 1), "K")==0){
 					$market = substr($market, 4);
 					$data = array(

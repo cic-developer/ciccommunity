@@ -2096,8 +2096,11 @@ class Membermodify extends CB_Controller
 		// 세션에 인증에 이용한 이메일 저장
 		// $this->session->set_userdata('ath_email', $email);
 
-		$new_phone = $this->input->get('mem_phone');
+		$new_phone = $this->input->post('mem_phone');
 		$isPhone = $this->Member_model->get_by_memPhone($new_phone, '');
+
+		// 폼 벨리데이션 하기
+		// 하이푼에 대해서...
 
 		if(strlen($new_phone) < 1){
 			$result = array(
