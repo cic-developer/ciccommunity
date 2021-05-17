@@ -395,11 +395,28 @@ class Coin extends CB_Controller
 				//print_r($_GET);
 				if(isset($_GET) && !empty($_GET)){
 					//print_r($_POST['wid_idx1']);
+					$data = [$_GET['coin_market'], $_GET['cp_content1']];
 					print_r($_GET);
-					$this->CIC_Coin_Keyword_model->update_keyword($_GET['wid_idx1'], $_GET['cp_content1']);
-					redirect("https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_GET['pageId']."");
+					$this->CIC_Coin_Keyword_model->update_keyword($_GET['wid_idx1'], $data);
+					// redirect("https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_GET['pageId']."");
 				}
 				// print_r('Hello');
+
+				$data = array(
+					'table_name' => 'cic_coin_keyword', // pass the real table name
+					'idx' => $_GET['wid_idx1'],
+					'coin_keyword' => $this->input->post('title')
+				);
+			
+				$this->load->model('Updmodel'); // load the model first
+				if($this->Updmodel->upddata($data)) // call the method from the model
+				{
+					// update successful
+				}
+				else
+				{
+					// update not successful
+				}
 	}
 
 }

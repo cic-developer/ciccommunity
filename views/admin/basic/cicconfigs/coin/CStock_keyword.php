@@ -104,6 +104,7 @@
                                                 <!-- <label for="usr"></label> -->
 
                                                 <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
+												<input type="hidden" name="coin_market" id="coin_market" value="" />
 												<input type="hidden" name="pageId" id="pageId" value="<?php echo $_GET['id']; ?>" />
                                                 <div class="form-group">
                                                     <label for="cp_content1">키워드:</label>
@@ -158,6 +159,7 @@ $('.modal_open1').click(function() {
 		console.log(result.idx);
 		$("#cp_content1").val(result.coin_keyword); //wid_idx1
 		$("#wid_idx1").val(result.idx);
+		$("#coin_market").val(result.coin_market);
 		$('#myModal-approve').modal({backdrop: false, keyboard: false});
 }
 
