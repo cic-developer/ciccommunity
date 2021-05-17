@@ -203,8 +203,8 @@ class Coin extends CB_Controller
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 		}else{
 			$data = array(
-				'coin_market' => $this -> input -> post('market'),
-				'keyword' => $this -> input -> post('keyword'),
+				'coin_market' => $this -> input -> post('coin_market'),
+				'coin_keyword' => $this -> input -> post('keyword'),
 
 			);
 			if(isset($data) && !empty($data)){
@@ -314,14 +314,6 @@ class Coin extends CB_Controller
 		$key_id = (int)$_GET['id'];
 
 		$deleted = $this->CIC_Coin_Keyword_model->delete_keyword($key_id);
-		print_r($deleted);
-		if($deleted == 1){
-			echo "Data deleted successfully !";
-			//redirect('https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=ZRX');
-		}
-		else{
-			echo "Error !";	
-		}
 
 	}
 	

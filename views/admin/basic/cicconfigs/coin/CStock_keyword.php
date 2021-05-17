@@ -57,9 +57,9 @@
 							<col style="width:20%;" />
 						</colgroup>
 						<tr>
-							<th>키워드</th>
-							<th>삭제</th>
-							<th>수정</th>
+							<th class="text-center">키워드</th>
+							<th class="text-center">삭제</th>
+							<th class="text-center">수정</th>
 						</tr>
 						<?php 
 						$sno = $row+1;
@@ -73,7 +73,7 @@
 									?>
 								
 								</td>
-								<td><a href="delete_keyword?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs" onclick="myFunction()" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
+								<td><a href="delete_keyword?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs" onclick="deleteKeyword()" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
 								<td>
 									<button type="button" class="btn btn-info btn-xs modal_open1" data-toggle="modal" 
                                             data-idx="$stocks['idx'"; ?>수정</button>
@@ -135,16 +135,6 @@
 
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 <script type="text/javascript">
-//<![CDATA[
-
-$(document).on('click', '.btn-delete-row', function() {
-	$(this).parents('div.list-group-item').remove();
-});
-$(function () {
-	$('#sortable').sortable({
-		handle:'.fa-arrows'
-	});
-})
 
 //Buton to rafresh pasge
 $(".btn-sm").on('click', function(e){
@@ -163,10 +153,11 @@ $(".btn-sm").on('click', function(e){
     });        
 });
 //]]>
-function myFunction() {
-	var r = confirm("Do you want to delete?");
-	if(r == true){
-		window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo $_GET['id'];?>");
+function deleteKeyword() {
+	if(confirm("Do you want to delete?");){
+		window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/delete_keyword?id=<?php echo $_GET['id'];?>");
+	}else{
+		return false;
 	}
 }
 
@@ -174,17 +165,10 @@ $('.modal_open1').on('click', function(){
         $('#myModal-approve').modal({backdrop: false, keyboard: false});
 })
 // set modal data
-    $(document).on('click', '.modal_open1', function() {
-		var widIdx = $(this).data('idx');
-        $("#myModal-approve .modal-body #wid_idx1").val( widIdx );
-	});
-	$(document).on('click', '.modal_open1', function() {
-		var widIdx = $(this).data('idx');
-        $("#myModal-approve .modal-body #wid_idx1").val( widIdx ); 
-	});
-
-
-
+$(document).on('click', '.modal_open1', function() {
+	var widIdx = $(this).data('idx');
+    $("#myModal-approve .modal-body #wid_idx1").val( widIdx );
+});
 </script>
 
 

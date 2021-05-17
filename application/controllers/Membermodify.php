@@ -2099,7 +2099,13 @@ class Membermodify extends CB_Controller
 		$new_phone = $this->input->get('mem_phone');
 		$isPhone = $this->Member_model->get_by_memPhone($new_phone, '');
 
-		print_r($isPhone);
+		if(strlen($new_phone) < 1){
+			$result = array(
+				'state' => '0',
+				'message' => '번호를 입력해주세요',
+			);
+			exit(json_encode($result));
+		}
 
 		if(count($isPhone) > 0){ // 중복 이면
 			$result = array(
