@@ -73,8 +73,8 @@
 									?>
 								
 								</td>
-								<td><a href="delete_keyword?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs" onclick="deleteKeyword()" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td>
-								<!-- <td><a href="<?php echo site_url('admin/cicconfigs/Coin/delete_keyword/'.$stocks['idx']) ?> ">delete<a></td> -->
+								<td><a href="delete_keyword?id=<?php echo $stocks['idx']; ?>" class="btn btn-danger btn-xs" onclick="return deleteKeyword()" name='deleted'>삭제 </a></td>
+								<!-- <td><a href="<?php// echo site_url('admin/cicconfigs/Coin/delete_keyword/'.$stocks['idx']) ?> ">delete<a></td> -->
 								<td><a href="update_keyword/?id=<?php echo $stocks['idx']; ?>" class="btn btn-info btn-xs">수정 </a></td> 
 							</tr>
 							<?php } ?>	
@@ -121,8 +121,8 @@ $(function () {
 // });
 //]]>
 function deleteKeyword() {
-  var r = confirm("Do you want to delete?");
-  if(r == true){
+  //var r = confirm("Do you want to delete?");
+  if(confirm("Do you want to delete?")){
 	window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo $_GET['id'];?>");
   }
   else{
