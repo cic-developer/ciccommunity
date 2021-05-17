@@ -98,7 +98,7 @@
                                         <div class="modal-header">
                                             <h4 class="modal-title">입력해주세요 <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
                                         </div>
-										<form method="POST" action="https://dev.ciccommunity.com/admin/cicconfigs/coin/update_keyword">
+										<form method="get" action="https://dev.ciccommunity.com/admin/cicconfigs/coin/update_keyword">
                                         <!-- Modal body -->
                                         <div class="modal-body">
                                                 <!-- <label for="usr"></label> -->
