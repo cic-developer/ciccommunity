@@ -75,7 +75,7 @@
 								</td>
 								<td><a href="<?php echo admin_url($this->pagedir); ?>/delete_keyword/<?php $stocks['idx']; ?>" class="btn btn-danger btn-xs" onclick="myFunction()" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td>
 								<!-- <td><a href="<?php echo site_url('admin/cicconfigs/Coin/delete_keyword/'.$stocks['idx']) ?> ">delete<a></td> -->
-								<td><a href="<?php echo admin_url($this->pagedir); ?>/delete_keyword/<?php $stocks['idx']; ?>" class="btn btn-info btn-xs">수정 </a></td> 
+								<td><a href="<?php echo admin_url($this->pagedir); ?>/CStock_keyword/<?php $stocks['idx']; ?>" name="send" id="send"  class="btn btn-info btn-xs">수정 </a></td> 
 							</tr>
 							<?php } ?>	
 						<?php
@@ -83,15 +83,7 @@
 						?>
 					</table>
 				</form>
-				<!-- Edit Keyword -->
-				<div class="input-group col-md-6">
-					<form>
-						<input type="text" class="form-control rounded  " name = "keyword" placeholder = "Keyword" value="<?php $stocks['keyword'] ?>">
-						<span class=input-group-btn>
-							<button type="submit" class="btn btn-outline-primary" >수정</button>
-						</span>			
-					</form>
-					</div>
+
 					
 			</div>	
 		</div>
@@ -136,6 +128,14 @@ function myFunction() {
 	} 	
 	else{
 	return false;
+	}
+}
+
+
+window.onload = function(){
+	document.getElementById('send').onclick = function(e){
+    	alert(document.getElementById("textfield").value);
+    	return false;
 	}
 }
 

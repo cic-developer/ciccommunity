@@ -154,7 +154,7 @@
 											<p class="rtxt"><?php echo html_escape(element('post_userid', $dislike_point_ranking_freetalk)); ?></p>
 										</div>
 										<span class="txt"><?php echo html_escape(element('post_title', $dislike_point_ranking_freetalk)); ?></span>
-										<span class="vp"><?php echo number_format(element('post_like_point', $dislike_point_ranking_freetalk)); ?></span>
+										<span class="vp"><?php echo number_format(element('post_dislike_point', $dislike_point_ranking_freetalk)); ?></span>
 									</a>
 								</li>
 						<?php
