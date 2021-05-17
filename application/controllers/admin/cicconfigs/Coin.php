@@ -221,6 +221,7 @@ class Coin extends CB_Controller
 
 		//DELETE KEYWORD
 		$deleted = $this->input->post('delete');
+		print_r($deleted);
 		
 		/**
 		* 어드민 레이아웃을 정의합니다
