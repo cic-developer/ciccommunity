@@ -107,9 +107,7 @@
                                                 <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
                                                 <div class="form-group">
                                                     <label for="cp_content1">키워드:</label>
-	
                                                     <input class="form-control" rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요">
-
 												</div>
                                         </div>
                                         
@@ -152,7 +150,7 @@ $(".btn-sm").on('click', function(e){
 //]]>
 function deleteKeyword() {
 	if(confirm("Do you want to delete?")){
-		window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/delete_keyword?id=<?php echo $_GET['id'];?>");
+		// window.open(" https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=<?php echo $_GET['id'];?>");
 	}else{
 		return false;
 	}
