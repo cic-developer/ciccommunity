@@ -2190,7 +2190,7 @@ class Membermodify extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('before', $eventname);
 
-		$_ath_num = trim($this->input->post('ath_num1'));
+		$_ath_num = trim($this->input->post('ath_num'));
 		if (empty($_ath_num)) {
 			$result = array(
 				'result' => '0',
@@ -2361,7 +2361,7 @@ class Membermodify extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('before', $eventname);
 
-		$_ath_num = trim($this->input->post('ath_num2'));
+		$_ath_num = trim($this->input->post('ath_num'));
 		if (empty($_ath_num)) {
 			$result = array(
 				'result' => '0',

@@ -26,6 +26,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<li class="no-pad">
 						<?php echo display_dhtml_editor('post_content', set_value('post_content', element('post_content', element('post', $view))), $classname = 'form-control dhtmleditor', $is_dhtml_editor = element('use_dhtml', element('board', $view)), $editor_type = $this->cbconfig->item('post_editor_type')); ?>
 					</li>
+					<div class="main-check">
+					<label><input type="checkbox" name="color" value="blue"> Blue</label>
+					</div>
 				</ul>
 			</div>
 			<div class="lower">

@@ -312,7 +312,7 @@ $(document).on('click', "#con_phone_mail_btn", function(){
 		html += '</div>'
 		html += '</li>'
 
-		$('.con-mail').remove(); // 인증 박스 삭제		
+		$('.con-mail1').remove(); // 인증 박스 삭제		
 		$('.new-phone-box').append(html); // 승인 메세지
 		$("#mem_phone").val(phone_num);
 	}
@@ -335,7 +335,7 @@ $("#new_password").on("propertychange change keyup paste input", function() {
 	}
 	
 	password2 = $("#new_password_re").val();
-	if(password2 != currentVal ) // && currentVal.length > 0){
+	if(password2 != currentVal ){ // && currentVal.length > 0){
 		$('.agree-password').remove();
 		html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
 		$('.new-password-re').append(html);
@@ -356,7 +356,7 @@ $("#new_password_re").on("propertychange change keyup paste input", function() {
 	}
 	
 	password1 = $("#new_password").val();
-	if(password1 != currentVal ) // && currentVal.length > 0){
+	if(password1 != currentVal ){ // && currentVal.length > 0){
 		$('.agree-password').remove();
 		html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
 		$('.new-password-re').append(html);
@@ -375,6 +375,7 @@ var password = '';
 $(document).ready(function(){
 	$("#send_email2").on('click', function(){
 		var _password = $("#new_password").val();
+		var _password_re = $("#new_password_re").val();
 		password = _password;
 		var state = '';
 		var message = '';
@@ -382,7 +383,8 @@ $(document).ready(function(){
 			url: cb_url + '/membermodify/ajax_password_modify_email_send',
 			type: 'POST',
 			data: {
-				mem_password: _password,
+				new_password: _password,
+				new_password_re: _password_re,
 				csrf_test_name : cb_csrf_hash
 			},
 			dataType: 'json',
@@ -451,7 +453,7 @@ $(document).on('click', "#ccon_password_mail_btn", function(){
 		html += '</div>'
 		html += '</li>'
 
-		$('.con-mail').remove(); // 인증 박스 삭제		
+		$('.con-mail2').remove(); // 인증 박스 삭제		
 		$('.new-password-box').append(html); // 승인 메세지
 		$("#mem_password").val(password);
 	}
