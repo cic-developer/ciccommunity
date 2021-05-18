@@ -6485,7 +6485,17 @@
 }
 
 .board-wrap.write .entry .main-check {
-    font-size: 15px;
+    font-size: 14px;
+    margin-left: 14px;
+}
+
+.board-wrap.write .entry .main-check label {
+    margin-bottom: 3px;
+}
+
+.board-wrap.write .entry .main-check label p {
+    display: inline;
+    margin-bottom: 3px;
 }
 
 .board-wrap.write .entry .main-check label input[type=checkbox] {
@@ -6496,19 +6506,11 @@
     display: none;
 }
 
-.checkbox+.checkbox-label {
-    display: inline-block;
-    cursor: pointer;
+label input[type="checkbox"] {
+    display: inline;
     width: 20px;
-    height: 20px;
-    border: 1px solid #000000;
-}
-
-
-/* check되었을 때 스타일 */
-
-.checkbox:checked+.checkbox-label {
-    background-color: blue;
+    height: 18px;
+    margin-top: 5px;
 }
 
 .board-wrap.write .entry li .btxt {

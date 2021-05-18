@@ -96,7 +96,8 @@
 			</div>
 
 			<!-- 비밀번호 변경 -->
-			<div id="myModal_password" class="modal">
+			<div id="myModal_password" class="modal"> 
+			<?php echo show_alert_message($this->session->flashdata('_mem_password_check'), '<script>alert(', ');</script>'); ?>
 				<!-- Modal content -->
 				<div class="modal-content entry">
 					<span class="close"></span>

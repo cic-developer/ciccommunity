@@ -176,13 +176,14 @@ class Searchcoin extends CB_Controller
 						'coin_keyword'=> $market
 					),
 				);
+				//print_r($data[0]['coin_keyword']);
 				if(isset($data) && !empty($data)){
 					foreach($data as $thisData){
 						if(in_array($thisData['coin_keyword'], $keyword_arr)){	
 							continue;
 						}
 						else{
-							print_r($keyword_arr);
+							
 							$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
 						}	
 					} 

@@ -2293,12 +2293,13 @@ class Membermodify extends CB_Controller
 		 * Validation 라이브러리를 가져옵니다
 		 */
 		$this->load->library('form_validation');
+		$password_length = $this->cbconfig->item('password_length');
 
 		$config = array(
 			array(
 				'field' => 'new_password',
 				'label' => '새비번',
-				'rules' => 'trim|required|min_length[' . $password_length . ']',
+				'rules' => 'trim|required|min_length[' . $password_length . ']|callback__mem_password_check',
 			),
 			array(
 				'field' => 'new_password_re',
@@ -2311,9 +2312,13 @@ class Membermodify extends CB_Controller
 		$form_validation = $this->form_validation->run();
 
 		if(!$form_validation){
+			$this->form_validation->set_message(
+				'_mem_password_check',
+				'hi'
+			);
 			$result = array(
 				'state' => '0',
-				'message' => '변경할 비밀번호를 정확히 입력해주세요',
+				'message' => $this->form_validation->error_string(),
 			);
 			exit(json_encode($result));
 		}
