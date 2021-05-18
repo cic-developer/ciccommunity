@@ -32,7 +32,7 @@ class Membermodify extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('querystring', 'form_validation', 'email', 'notelib'));
+		$this->load->library(array('querystring', 'form_validation', 'email', 'notelib', 'checkplus'));
 	}
 
 
@@ -55,6 +55,8 @@ class Membermodify extends CB_Controller
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		$view['view']['enc_data'] = $this->checkplus->main();
 
 		$mem_id = (int) $this->member->item('mem_id');
 
@@ -2092,7 +2094,7 @@ class Membermodify extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		// 세션에 기존 인증된 내역 삭제
-		$this->session->set_userdata('phone_modify_ath_mail_result', '');
+		$this->session->unset_userdata('phone_modify_ath_mail_result');
 		$rand_num = sprintf('%06d',rand(000000,999999));
 		// 로그인한 회원 정보
 		$member_info = $this->member->get_member();
@@ -2244,7 +2246,7 @@ class Membermodify extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		// 세션에 기존 인증된 내역 삭제
-		$this->session->set_userdata('password_modify_ath_mail_result', '');
+		$this->session->unset_userdata('password_modify_ath_mail_result');
 		$rand_num = sprintf('%06d',rand(000000,999999));
 		// 로그인한 회원 정보
 		$member_info = $this->member->get_member();

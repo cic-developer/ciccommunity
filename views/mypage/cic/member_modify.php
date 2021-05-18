@@ -97,7 +97,6 @@
 
 			<!-- 비밀번호 변경 -->
 			<div id="myModal_password" class="modal"> 
-			<!-- <?php echo show_alert_message($this->session->flashdata('_mem_password_check1'), '<script>alert(', ');</script>'); ?> -->
 				<!-- Modal content -->
 				<div class="modal-content entry">
 					<span class="close"></span>
@@ -309,7 +308,7 @@ $(document).on('click', "#con_phone_mail_btn", function(){
 		html += '<li class="success-email-box">'
 		html += '<p class="btxt"></p>'
 		html += '<div class="">'
-		html += '<p class="success-email rtxt mg10t cblue">인증이 완료되었습니다</p>'
+		html += '<p class="success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
 		html += '</div>'
 		html += '</li>'
 
@@ -455,11 +454,15 @@ $(document).on('click', "#con_password_mail_btn", function(){
 		html = '';
 		html += '<li class="success-email-box">'
 		html += '<p class="btxt"></p>'
-		html += '<div class="">'
-		html += '<p class="success-email rtxt mg10t cblue">인증이 완료되었습니다</p>'
+		html += '<div class="" style="display:inline-block;">'
+		html += '<p class="success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
 		html += '</div>'
-		html += '<div>'
-		html += '<a href="javascript:void(0);" id="con_password_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
+		html += '<div style="display: inline-block; float: right;">'
+		html += '<form name="form_chk" method="post">'
+		html += '<input type="hidden" name="m" value="checkplusService">'
+		html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('enc_data', $view)); ?>">'
+		html += '<a href="javascript:fnPopup();" id="con_password_mail_btn" class="modify-btn"><span>휴대폰 인증</span></a>'
+		html += '</form>'
 		html += '</div>'
 		html += '</li>'
 
@@ -470,6 +473,29 @@ $(document).on('click', "#con_password_mail_btn", function(){
 });
 /**
  * 비밀번호변경 끝
+ */
+
+/********************************************************/
+
+/**
+ * 나이스 휴대폰 인증 시작
+ */
+window.name ="Parent_window";
+function fnPopup(){
+		// 체크여부 확인
+		// if( $("input:checkbox[name=agree]").is(":checked") == true 
+		// 		&& $("input:checkbox[name=agree2]").is(":checked") == true
+		// 			&& $("input:checkbox[name=agree3]").is(":checked") == true ) {
+			window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
+			document.form_chk.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+			document.form_chk.target = "popupChk";
+			document.form_chk.submit();
+		// } else {
+		// 	alert("이용약관을 확인해주세요")
+		// }
+	}
+/**
+ * 나이스 휴대폰 인증 끝
  */
 
 
