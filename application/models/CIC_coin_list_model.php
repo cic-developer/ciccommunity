@@ -64,10 +64,11 @@ class CIC_Coin_list_model extends CB_Model
 	}
     
     function insertStockData($data){
-
+        $query = $this->db->get('cic_coin_list');
         if(isset($data) && !empty($data)){
-            $result = $this->db->insert('cic_coin_list', $data);
-            return $result;
+            return $query->num_rows() == 0 ? $this->db->insert('cic_coin_list', $data) : false; 
+            // $result = $this->db->insert('cic_coin_list', $data);
+            // return $result;
         }
     } 
 
@@ -94,10 +95,9 @@ class CIC_Coin_list_model extends CB_Model
     
     
     function insert_admin_list($data){
-
-    $result = $this->db->insert('cic_coin_keyword', $data);
-
-    return $result;
+    $query = $this->db->get('cic_coin_keyword'); 
+    return $query->num_rows() == 0 ? $this->db->insert('cic_coin_keyword', $data) : false; 
+    //$result = $this->db->insert('cic_coin_keyword', $data);
         
     }
 

@@ -2102,6 +2102,29 @@ class Membermodify extends CB_Controller
 		// 폼 벨리데이션 하기
 		// 하이푼에 대해서...
 
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+
+		$config = array(
+			array(
+				'field' => 'mem_phone',
+				'label' => '새번호',
+				'rules' => 'trim|valid_phone',
+			),
+		);
+		$this->form_validation->set_rules($config);
+		$form_validation = $this->form_validation->run();
+
+		if(!$form_validation){
+			$result = array(
+				'state' => '0',
+				'message' => '1111',
+			);
+			exit(json_encode($result));
+		}
+
 		if(strlen($new_phone) < 1){
 			$result = array(
 				'state' => '0',
