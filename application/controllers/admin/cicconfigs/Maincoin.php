@@ -168,6 +168,7 @@ class Maincoin extends CB_Controller
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir . '/exchange');
 		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/exchange_listdelete/?' . $param->output());
+		$view['view']['write_url'] = admin_url($this->pagedir . '/exchange_write/?' . $param->output());
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
