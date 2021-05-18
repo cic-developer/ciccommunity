@@ -151,8 +151,7 @@ class Searchcoin extends CB_Controller
 				);
 				if(isset($data) && !empty($data)){
 					foreach($data as $coinData){
-						print_r($coinData['clist_market']);
-						if(in_array($coinData['clist_market'], $coin_arr)){
+						if(in_array($coinData, $coin_arr)){
 							continue;
 						}
 						else{

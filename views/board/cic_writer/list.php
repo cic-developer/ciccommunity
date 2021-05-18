@@ -28,8 +28,8 @@
                                                             src="<?php echo element('thumb_url', $writerbest); ?>" alt="">
                                                     </div>
                                                     <div class="txt">
-                                                        <p class="btxt"><?php echo html_escape(element('post_title', $writerbest)); ?></p>
-                                                        <p class="stxt"><?php echo html_escape(element('post_content', $writerbest)); ?></p>
+                                                        <p class="btxt"><?php echo html_escape(cut_str(strip_tags(element('post_title', $writerbest)), 15)); ?></p>
+                                                        <p class="stxt"><?php echo html_escape(cut_str(strip_tags(element('post_content', $writerbest)), 20)); ?></p>
                                                         <p class="ctxt vp"><?php echo number_format(element("post_like_point",$writerbest))?></p>
                                                     </div>
                                                 </a>

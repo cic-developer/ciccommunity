@@ -131,8 +131,8 @@ class Comment_write extends CB_Controller
 				$result = array('error' => '삭제된 글에는 답변을 입력하실 수 없습니다');
 				exit(json_encode($result));
 			}
-			if (strlen(element('cmt_reply', $origin)) >= 5) {
-				$result = array('error' => '더 이상 답변하실 수 없습니다.\\n답변은 5단계 까지만 가능합니다');
+			if (strlen(element('cmt_reply', $origin)) >= 4) {
+				$result = array('error' => '더 이상 답변하실 수 없습니다.\\n답변은 4단계 까지만 가능합니다');
 				exit(json_encode($result));
 			}
 
