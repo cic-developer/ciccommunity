@@ -9,6 +9,7 @@
         <div class="img"><img src="<?php echo base_url('assets/images/top-vis03.jpg')?>" alt=""></div>
     </div>
     <div id="contents" class="div-cont">
+        <!-- page start // -->
         <div class="board-wrap list">
             <div class="list vnews">
                 <h3>BEST</h3>
@@ -16,35 +17,231 @@
                     <div class="owl-stage-outer">
                         <div class="owl-stage"
                             style="transform: translate3d(-1040px, 0px, 0px); transition: all 0s ease 0s; width: 3900px;">
-                                <?php
-                                if (element('list',element('writerbest', $view))) {
-                                    foreach (element('list',element('writerbest', $view)) as $writerbest) {
-                                        ?>
-                                        <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
-                                        <div class="item">
-                                            <a href="<?php echo base_url(element('posturl', $writerbest))?>">
-                                                <div class="img"><img
-                                                        src="<?php echo element('thumb_url', $writerbest); ?>" alt="">
-                                                </div>
-                                                <div class="txt">
-                                                    <p class="btxt"><?php echo html_escape(element('post_title', $writerbest)); ?></p>
-                                                    <p class="stxt"><?php echo html_escape(element('post_content', $writerbest)); ?></p>
-                                                    <p class="ctxt vp"><?php echo number_format(element("post_like_point",$writerbest))?></p>
-                                                </div>
-                                            </a>
+                            <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
                                         </div>
+                                        <div class="txt">
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt vp">15369 VP</p>
                                         </div>
-                                <?php
-                                    }
-                                }
-                                if ( ! element('list', element('bestpost', $view))) {
-                                    ?>
-                                    <tr>
-                                        <td colspan="12" class="nopost">자료가 없습니다</td>
-                                    </tr>
-                                <?php
-                                }
-                                ?>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt vp">15369 VP</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item active" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt vp">15369 VP</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item active" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt vp">15369 VP</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item active" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt vp">15369 VP</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item active" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt vp">15369 VP</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt vp">15369 VP</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt vp">15369 VP</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt vp">15369 VP</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt vp">15369 VP</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
+                                <div class="item">
+                                    <a href="<?php echo base_url('post/3')?>">
+                                        <div class="img"><img
+                                                src="<?php echo base_url('assets/images/news-img01.png')?>" alt="">
+                                        </div>
+                                        <div class="txt">
+                                            <p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+                                            <p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트 예시
+                                                입니다 ...</p>
+                                            <p class="ctxt vp">15369 VP</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="owl-nav disabled">
@@ -55,6 +252,14 @@
                             <span aria-label="Next">›</span>
                         </button>
                     </div>
+                    <!-- <div class="owl-dots">
+                        <button role="button" class="owl-dot active">
+                            <span></span>
+                        </button>
+                        <button role="button" class="owl-dot">
+                            <span></span>
+                        </button>
+                    </div> -->
                 </div>
             </div>
             <div class="gap60"></div>
@@ -66,7 +271,7 @@
                     ?>
                     <li>
                         <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>">
-                            <div class="img"><img src="<?php echo element('thumb_url',$result)?>" alt="">
+                            <div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt="">
                             </div>
                             <div class="txt">
                                 <div class="vc">
@@ -86,7 +291,7 @@
                                             alt="<?php echo element('mlc_title', $result); ?>"></p>
                                     <p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
                                 </div>
-                                <p class="vp"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?> VP</p>
+                                <p class="vp">256 VP</p>
                             </div>
                         </a>
                     </li>

@@ -160,11 +160,14 @@ class Searchcoin extends CB_Controller
 					print_r($data[$j]['coin_keyword']);
 					for($j = 0; $j < count($data); $j++) {
 						//$keyword = $keyword_arr['coin_keyword'][$j];
-						if(in_array($keyword, $data[$j])){
-							$this->CIC_coin_keyword_model -> updatekey($data[$j]);
+						if(in_array($keyword['coin_keyword'], $data)){
+							echo "YES";
+							//$this->CIC_coin_keyword_model->updatekey($data[$j]);
+							
 						}
 						else{
-							$this->CIC_coin_keyword_model -> updatekey($data[$j]);
+							echo "NO";
+							//$this->CIC_coin_keyword_model->insert_keyword_list($data[$j]);
 						}
 						
 					} 

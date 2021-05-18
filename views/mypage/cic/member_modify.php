@@ -102,11 +102,20 @@
 					<span class="close"></span>
 					<!-- &times; -->
 					<ul class="new-password-box">
-						<li>
+						<li class="new-password">
 							<p class="btxt">새 비밀번호</p>
 							<div class="field modify">
 								<p class="chk-input w380">
-									<input type="text" placeholder="" id="new_password" name="new_password" value="">
+									<input type="password" placeholder="" id="new_password" name="new_password" value="">
+								</p>
+								<!-- <a href="javascript:void(0);" id="send_email2" class="modify-btn"><span>이메일인증</span></a> -->
+							</div>
+						</li>
+						<li class="new-password-re">
+							<p class="btxt">새 비밀번호 확인</p>
+							<div class="field modify">
+								<p class="chk-input w380">
+									<input type="password" placeholder="" id="new_password_re" name="new_password_re" value="">
 								</p>
 								<a href="javascript:void(0);" id="send_email2" class="modify-btn"><span>이메일인증</span></a>
 							</div>
@@ -317,6 +326,50 @@ $(document).on('click', "#con_phone_mail_btn", function(){
 /**
  * 비밀번호변경 시작
  */
+// 비밀번호 == 비밀번호 확인 check
+oldVal1 = '';
+$("#new_password").on("propertychange change keyup paste input", function() {
+	var currentVal = $(this).val();
+	if(currentVal == oldVal1) {
+		return;
+	}
+	
+	password2 = $("#new_password_re").val();
+	if(password2 != currentVal){
+		$('.agree-password').remove();
+		html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
+		$('.new-password-re').append(html);
+	} else{
+		$('.agree-password').remove();
+		html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
+		$('.new-password-re').append(html);
+	}
+	
+	oldVal1 = currentVal;
+});
+
+oldVal2 = '';
+$("#new_password_re").on("propertychange change keyup paste input", function() {
+	var currentVal = $(this).val();
+	if(currentVal == oldVal2) {
+		return;
+	}
+	
+	password1 = $("#new_password").val();
+	if(password1 != currentVal){
+		$('.agree-password').remove();
+		html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
+		$('.new-password-re').append(html);
+	} else{
+		$('.agree-password').remove();
+		html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
+		$('.new-password-re').append(html);
+	}
+	
+	oldVal2 = currentVal;
+});
+
+
 var password = '';
 // 이메일 확인 + 인증번호 보내기
 $(document).ready(function(){
