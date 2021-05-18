@@ -168,7 +168,9 @@ window.onclick = function(event) {
 	}
 }
 /*****************************************************************************/
-
+/**
+ * 휴대폰번호변경 시작
+ */
 function inputPhoneNumber(obj) { 
 	var number = obj.value.replace(/[^0-9]/g, ""); 
 	var phone = ""; 
@@ -204,7 +206,7 @@ $(document).ready(function(){
 		var state = '';
 		var message = '';
 		$.ajax({
-			url: cb_url + '/membermodify/ajax_email_send',
+			url: cb_url + '/membermodify/ajax_phone_modify_email_send',
 			type: 'POST',
 			data: {
 				mem_phone: _phone,
@@ -244,7 +246,7 @@ $(document).on('click', "#con_mail_btn", function(){
 	var result = '';
 	var reason = '';
 	$.ajax({
-		url: cb_url + '/membermodify/ajax_email_ath',
+		url: cb_url + '/membermodify/ajax_phone_modify_ath_mail',
 		type: 'POST',
 		data: {
 			ath_num: ath_num,
@@ -279,50 +281,11 @@ $(document).on('click', "#con_mail_btn", function(){
 		$("#phone_num").val(phone_num);
 	}
 });
-
+/**
+ * 휴대폰번호변경 끝
+ */
 
 /********************************************************/
-// function test(imageName) {
-//     LoadingWithMask('your site\'s image path');
-//     setTimeout("closeLoadingWithMask()", 3000);
-// }
 
-
-// function LoadingWithMask() {
-//     //화면의 높이와 너비를 구합니다.
-//     var maskHeight = $(document).height();
-//     var maskWidth  = window.document.body.clientWidth;
-
-//     //화면에 출력할 마스크를 설정해줍니다.
-//     var mask       ="<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
-//     var loadingImg ='';
-	
-//     loadingImg +="<div id='loadingImg'>";
-//     loadingImg +=" <img src='pngwing.com.png' style='position: relative; display: block; margin: 0px auto;'/>";
-//     loadingImg +="</div>"; 
-
-//     //화면에 레이어 추가
-//     $('body')
-//         .append(mask)
-//         .append(loadingImg)
-        
-//     //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
-//     $('#mask').css({
-//             'width' : maskWidth
-//             ,'height': maskHeight
-//             ,'opacity' :'0.3'
-//     });
-
-//     //마스크 표시
-//     $('#mask').show();  
-
-//     //로딩중 이미지 표시
-//     $('#loadingImg').show();
-// }
-
-// function closeLoadingWithMask() {
-//     $('#mask, #loadingImg').hide();
-//     $('#mask, #loadingImg').remove();  
-// }
 
 </script>

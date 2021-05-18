@@ -2072,10 +2072,12 @@ class Membermodify extends CB_Controller
 		}
 		return true;
 	}
-
-	public function ajax_email_send() {
+/**
+ * 휴대폰번호변경 시작
+ */
+	public function ajax_phone_modify_email_send() {
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_membermodify_ajax_email_send';
+		$eventname = 'event_membermodify_ajax_phone_modify_email_send';
 		$this->load->event($eventname);
 
 		$view = array();
@@ -2085,7 +2087,7 @@ class Membermodify extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		// 세션에 기존 인증된 내역 삭제
-		$this->session->set_userdata('ath_mail_result', '');
+		$this->session->set_userdata('phone_modify_ath_mail_result', '');
 		$rand_num = sprintf('%06d',rand(000000,999999));
 		// 로그인한 회원 정보
 		$member_info = $this->member->get_member();
@@ -2174,10 +2176,10 @@ class Membermodify extends CB_Controller
 	}
 
 
-	public function ajax_email_ath()
+	public function ajax_phone_modify_ath_mail()
 	{
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_membermodify_ajax_email_ath';
+		$eventname = 'event_membermodify_ajax_phone_modify_ath_mail';
 		$this->load->event($eventname);
 
 		$result = array();
@@ -2201,7 +2203,7 @@ class Membermodify extends CB_Controller
 		if($ath_num == $_ath_num){
 			// $this->session->unset_userdata('ath_num');
 			// 인증결과 세션 저장
-			$this->session->set_userdata('ath_mail_result', '1');
+			$this->session->set_userdata('phone_modify_ath_mail_result', '1');
 
 			$result = array(
 				'result' => '1',
@@ -2210,7 +2212,7 @@ class Membermodify extends CB_Controller
 			exit(json_encode($result));
 		} else{
 			// 인증결과 세션 저장
-			$this->session->set_userdata('ath_mail_result', '');
+			$this->session->set_userdata('phone_modify_ath_mail_result', '');
 
 			$result = array(
 				'result' => '0',
@@ -2220,5 +2222,16 @@ class Membermodify extends CB_Controller
 		}
 		
 	}
+/**
+ * 휴대폰번호변경 끝
+ */
 
+/**
+ * 비밀번호변경 시작
+ */
+
+ 
+/**
+ * 비밀번호변경 끝
+ */
 }
