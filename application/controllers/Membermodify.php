@@ -2379,8 +2379,10 @@ class Membermodify extends CB_Controller
 
 	public function auth_success(){
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_register_auth_success';
+		$eventname = 'event_membermodify_auth_success';
 		$this->load->event($eventname);
+
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		$data = $this->session->userdata('dec_data');
 		$DI = $data['dupinfo'];
@@ -2389,28 +2391,31 @@ class Membermodify extends CB_Controller
 
 		if(count($isDI) > 0){ // 중복 이면
 			// $this->session->unset_userdata('dec_data');
-			echo("<script>alert('이미 가입된 회원입니다');</script>");
-			echo("<script>window.opener.location.replace('/register/auth_duplicate');</script>");
+			echo("<script>alert('인증되었습니다');</script>");
+			// echo("<script>window.opener.location.replace('/register/auth_duplicate');</script>");
+			echo("<script>window.opener.document.getElementById('nice_phone_ath_box').attr('display', 'none');</script>");
 			echo("<script>self.close()</script>");
 		}
 
-		$view = array();
-		$view['view'] = array();
+		echo("<script>alert('인증에 실패하였습니다');</script>");
+		echo("<script>self.close()</script>");
+
+		// $view = array();
+		// $view['view'] = array();
 
 		// 이벤트가 존재하면 실행합니다
-		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 		
 		// $this->member->get_by_memDI('MC0GCCqGSIb3DQIJAyEAtonfQuH352/KCB0yrjiwSQcnDQTS7ff5UcT4ievX8HM=');
 
-		if($this->input->get("EncodeData")){
-			$this->checkplus->success($this->input->get("EncodeData"));
+		// if($this->input->get("EncodeData")){
+		// 	$this->checkplus->success($this->input->get("EncodeData"));
 			
-			echo("<script>window.opener.fregisterform.submit();</script>");
-			echo("<script>self.close()</script>");
-		} else {
-			echo("<script>alert('비정상적인 접근입니다.')</script>");
-			echo("<script>self.close()</script>");
-		}
+		// 	echo("<script>window.opener.fregisterform.submit();</script>");
+		// 	echo("<script>self.close()</script>");
+		// } else {
+		// 	echo("<script>alert('비정상적인 접근입니다.')</script>");
+		// 	echo("<script>self.close()</script>");
+		// }
 	}
 /**
  * 휴대폰 인증 끝

@@ -50,7 +50,7 @@ class Popularpost extends CB_Controller
 	/**
 	 * 목록을 가져오는 메소드입니다
 	 */
-public function index()
+	public function index()
 	{
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_board_post_index';

@@ -272,7 +272,6 @@ class Board_post extends CB_Controller
 		$view['view']['post'] = $post;
 
 
-		if($post['brd_id'] == 1){
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 			$where = array(
 				'brd_id' => 1,
@@ -352,11 +351,16 @@ class Board_post extends CB_Controller
 						$dislike_point_ranking_freetalk['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
 					}
 				}
+				
+						print_r($dislike_point_ranking_freetalk['list']['num']);
+						exit;
 			}
-		}
 		
-		if($post['brd_id'] = 2){
+		
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 			$where = array(
+				'brd_id' => 2,
+				'post_datetime >=' => $checktime,
 			);
 			$limit = 10;
 			$list_num = 1;
@@ -391,7 +395,10 @@ class Board_post extends CB_Controller
 								}
 							}
 						}
+				$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 				$where = array(
+					'brd_id' => 2,
+					'post_datetime >=' => $checktime,
 				);
 				$limit = 10;
 				$list_num = 1;
@@ -426,12 +433,11 @@ class Board_post extends CB_Controller
 					}
 				}
 			}
-		}
 		
 		$view['view']['like_point_ranking_freetalk'] = $like_point_ranking_freetalk;
 		$view['view']['dislike_point_ranking_freetalk'] = $dislike_point_ranking_freetalk;
-		// $view['view']['like_point_ranking_writer'] = $like_point_ranking_writer;
-		// $view['view']['dislike_point_ranking_writer'] = $dislike_point_ranking_writer;
+		$view['view']['like_point_ranking_writer'] = $like_point_ranking_writer;
+		$view['view']['dislike_point_ranking_writer'] = $dislike_point_ranking_writer;
 		
 		$mem_id = (int) $this->member->item('mem_id');
 

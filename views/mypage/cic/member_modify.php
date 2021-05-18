@@ -457,7 +457,7 @@ $(document).on('click', "#con_password_mail_btn", function(){
 		html += '<div class="" style="display:inline-block;">'
 		html += '<p class="success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
 		html += '</div>'
-		html += '<div class="nice-phone-ath-box" style="display: inline-block; float: right;">'
+		html += '<div class="nice-phone-ath-box" id="nice_phone_ath_box" style="display: inline-block; float: right;">'
 		html += '<form name="form_chk" method="post">'
 		html += '<input type="hidden" name="m" value="checkplusService">'
 		html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('enc_data', $view)); ?>">'

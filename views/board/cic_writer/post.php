@@ -96,18 +96,18 @@
 							</a>
 						</li> -->
 						<?php
-						if (element('list',element('bestpost', $view))) {
-							foreach (element('list',element('bestpost', $view)) as $bestpost) {
+						if (element('list',element('like_point_ranking_writer', $view))) {
+							foreach (element('list',element('like_point_ranking_writer', $view)) as $like_point_ranking_writer) {
 								?>
 								<li>
-									<a href="<?php echo goto_url(element('posturl', $bestpost)); ?>">
-										<span class="num"><?php echo number_format(element('num', $bestpost)); ?></span>
+									<a href="<?php echo goto_url(element('posturl', $like_point_ranking_writer)); ?>">
+										<span class="num"><?php echo number_format(element('num', $like_point_ranking_writer)); ?></span>
 										<div class="my-info">
 											<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>" alt=""></p>
-											<p class="rtxt"><?php echo html_escape(element('post_userid', $bestpost)); ?></p>
+											<p class="rtxt"><?php echo html_escape(element('post_userid', $like_point_ranking_writer)); ?></p>
 										</div>
-										<span class="txt"><?php echo html_escape(element('post_title', $bestpost)); ?></span>
-										<span class="vp"><?php echo number_format(element('post_like_point', $bestpost)); ?></span>
+										<span class="txt"><?php echo html_escape(element('post_title', $like_point_ranking_writer)); ?></span>
+										<span class="vp"><?php echo number_format(element('post_like_point', $like_point_ranking_writer)); ?></span>
 									</a>
 								</li>
 						<?php
@@ -120,120 +120,36 @@
 						<?php
 						}
 						?>
-					
 					</ul>
 				</div>
 				<div class="fr">
 					<h4>BEST VP DOWN</h4>
 					<ul>
-						<li>
-							<a href="#n">
-								<span class="num">1</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>"
-											alt=""></p>
-									<p class="rtxt">코린이1235</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">2</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/like-popo.png')?>"
-											alt=""></p>
-									<p class="rtxt">가즈아</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">3</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>"
-											alt=""></p>
-									<p class="rtxt">코린이1235</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">4</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>"
-											alt=""></p>
-									<p class="rtxt">코린이1235</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">5</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>"
-											alt=""></p>
-									<p class="rtxt">코알못259</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">6</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>"
-											alt=""></p>
-									<p class="rtxt">코린이1235</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">7</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>"
-											alt=""></p>
-									<p class="rtxt">코알못259</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">8</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>"
-											alt=""></p>
-									<p class="rtxt">코알못259</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<span class="num">9</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>"
-											alt=""></p>
-									<p class="rtxt">코알못259</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li>
+						<?php
+						if (element('list',element('dislike_point_ranking_writer', $view))) {
+							foreach (element('list',element('dislike_point_ranking_writer', $view)) as $dislike_point_ranking_writer) {
+								?>
+								<li>
+									<a href="<?php echo goto_url(element('posturl', $dislike_point_ranking_writer)); ?>">
+										<span class="num"><?php echo number_format(element('num', $dislike_point_ranking_writer)); ?></span>
+										<div class="my-info">
+											<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>" alt=""></p>
+											<p class="rtxt"><?php echo html_escape(element('post_userid', $dislike_point_ranking_writer)); ?></p>
+										</div>
+										<span class="txt"><?php echo html_escape(element('post_title', $dislike_point_ranking_writer)); ?></span>
+										<span class="vp"><?php echo number_format(element('post_dislike_point', $dislike_point_ranking_writer)); ?></span>
+									</a>
+								</li>
+						<?php
+							}
+						} else {
+						?>
+							<li>
+								<span class="nopost">자료가 없습니다</span>
+							</li>
+						<?php
+						}
+						?>
 					</ul>
 				</div>
 			</div>
