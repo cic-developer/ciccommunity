@@ -4,8 +4,6 @@
   <button type="submit"><i class="fa fa-search"></i></button>
 </form>
 <div>
-</h1> <?php $new_id = $_GET['id'] 
-       echo $new_id 
-
-?></h1> 
+</h1> 
+</h1> 
 <div>

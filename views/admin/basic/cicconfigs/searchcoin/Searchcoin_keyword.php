@@ -62,7 +62,6 @@
 							<th class="text-center">수정</th>
 						</tr>
 						<?php 
-						$sno = $row+1;
 						foreach($keylist as $stocks){ ?>
 						<?php $myId = $_GET['id']; ?> 
 							<?php if($myId == $stocks['coin_market']) { ?>
@@ -76,13 +75,9 @@
 								<td><a href="delete_keyword?id=<?php echo $stocks['idx'];?>&pageId=<?php echo $_GET['id'];?> " class="btn btn-danger btn-xs" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
 								<td>
 									<button type="button" class="btn btn-info btn-xs modal_open1" data-toggle="modal" 
-                                            data-idx="<?php echo $stocks['idx']; ?>" id="<?php echo $stocks['idx']; ?>" >수정</button>
-								
+                                            data-idx="<?php echo $stocks['idx']; ?>" id="<?php echo $stocks['idx']; ?>" >수정</button>								
 								</td>
-							</tr>
-
-
-							
+							</tr>	
 							<?php } ?>	
 						<?php
 						}

@@ -85,7 +85,7 @@
 							<p class="btxt">새 핸드폰번호</p>
 							<div class="field modify">
 								<p class="chk-input w380">
-									<input type="text" placeholder="" id="new_phone" name="new_phone" value="">
+									<input type="text" onKeyup="inputPhoneNumber(this);" placeholder="" id="new_phone" name="new_phone" value="">
 								</p>
 								<a href="javascript:void(0);" id="ath_email" class="modify-btn"><span>이메일인증</span></a>
 							</div>
@@ -169,9 +169,38 @@ window.onclick = function(event) {
 }
 /*****************************************************************************/
 
+function inputPhoneNumber(obj) { 
+	var number = obj.value.replace(/[^0-9]/g, ""); 
+	var phone = ""; 
+	if(number.length < 4) { 
+		return number; 
+	} else if(number.length < 7) { 
+		phone += number.substr(0, 3); 
+		phone += "-"; 
+		phone += number.substr(3); 
+	} else if(number.length < 11) { 
+		phone += number.substr(0, 3); 
+		phone += "-"; 
+		phone += number.substr(3, 3);
+		phone += "-"; 
+		phone += number.substr(6); 
+	} else { 
+		phone += number.substr(0, 3); 
+		phone += "-"; 
+		phone += number.substr(3, 4); 
+		phone += "-"; 
+		phone += number.substr(7); 
+	} 
+	
+	obj.value = phone; 
+}
+
+
 // 이메일 확인 + 인증번호 보내기
 $(document).ready(function(){
 	$("#ath_email").on('click', function(){
+
+		LoadingWithMask();
 		var _phone = $("#new_phone").val();
 
 		var state = '';
@@ -191,7 +220,6 @@ $(document).ready(function(){
 				message = data.message;
 			}
 		});
-
 		alert(message);
 
 		// 	$('.success-email').remove();
@@ -211,4 +239,50 @@ $(document).ready(function(){
 		// }
 	})
 })
+
+
+/********************************************************/
+function test(imageName) {
+    LoadingWithMask('your site\'s image path');
+    setTimeout("closeLoadingWithMask()", 3000);
+}
+
+
+function LoadingWithMask() {
+    //화면의 높이와 너비를 구합니다.
+    var maskHeight = $(document).height();
+    var maskWidth  = window.document.body.clientWidth;
+
+    //화면에 출력할 마스크를 설정해줍니다.
+    var mask       ="<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
+    var loadingImg ='';
+	
+    loadingImg +="<div id='loadingImg'>";
+    // loadingImg +=" <img src='pngwing.com.png' style='position: relative; display: block; margin: 0px auto;'/>";
+    loadingImg +="</div>"; 
+
+    //화면에 레이어 추가
+    $('body')
+        .append(mask)
+        .append(loadingImg)
+        
+    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
+    $('#mask').css({
+            'width' : maskWidth
+            ,'height': maskHeight
+            ,'opacity' :'0.3'
+    });
+
+    //마스크 표시
+    $('#mask').show();  
+
+    //로딩중 이미지 표시
+    $('#loadingImg').show();
+}
+
+function closeLoadingWithMask() {
+    $('#mask, #loadingImg').hide();
+    $('#mask, #loadingImg').remove();  
+}
+
 </script>

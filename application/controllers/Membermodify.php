@@ -2120,7 +2120,7 @@ class Membermodify extends CB_Controller
 		if(!$form_validation){
 			$result = array(
 				'state' => '0',
-				'message' => '1111',
+				'message' => '번호를 정확히 입력해주세요',
 			);
 			exit(json_encode($result));
 		}
