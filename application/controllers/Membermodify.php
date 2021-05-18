@@ -2393,12 +2393,12 @@ class Membermodify extends CB_Controller
 		if(count($isDI) > 0){ // 중복 이면
 			$this->session->set_userdata('password_modify_ath_nice_phone_result', '1');
 
-			// $html = '';
-			// $html .= '<p class="password-success-phone rtxt mg10t cblue">핸드폰 인증이 완료되었습니다</p>';
+			$html = '<p class="password-success-phone rtxt mg10t cblue">핸드폰 인증이 완료되었습니다</p>';
 
 			echo("<script>alert('인증되었습니다');</script>");
 			// echo("<script>window.opener.document.getElementById('nice_phone_ath_box').attr('display', 'none');</script>");
-			// echo("<script>window.opener.element.getElementsByClassName('success-message-box').append(.".$html."</script>");
+			// echo("<script>window.opener.element.getElementsByClassName('success-message-box').append(".$html.")</script>");
+			echo("<script>window.opener.document.getElementById('success_message_box').append(".$html.")</script>");
 			echo("<script>self.close()</script>");
 		}
 

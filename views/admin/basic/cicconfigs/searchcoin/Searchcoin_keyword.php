@@ -19,6 +19,7 @@
 
 		ob_end_flush();
 		?>
+		</div>
 
 			<div class="list-group">
 				<form class="form-inline">
