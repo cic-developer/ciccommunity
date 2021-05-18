@@ -199,9 +199,7 @@ function inputPhoneNumber(obj) {
 // 이메일 확인 + 인증번호 보내기
 $(document).ready(function(){
 	$("#send_email").on('click', function(){
-		
 		var _phone = $("#new_phone").val();
-
 		var state = '';
 		var message = '';
 		$.ajax({
@@ -219,42 +217,69 @@ $(document).ready(function(){
 				message = data.message;
 			}
 		});
-
 		alert(message);
-
 		// $('.success-email').remove();
-		$('.ath-email-box').remove();
+		$('.con-mail').remove();
 		if(state == 1){
 			html = '';
-			html += '<li class="ath-email-box">'
+			html += '<li class="con-mail">'
 			html += '<p class="btxt">이메일 인증</p>'
 			html += '<div class="field modify">'
 			html += '<p class="chk-input w380">'
 			html += '<input type="text" placeholder="" id="ath_num" name="ath_num" value="">'
 			html += '</p>'
-			html += '<a href="javascript:void(0);" id="ath_email" class="modify-btn"><span>인증번호 확인</span></a>'
+			html += '<a href="javascript:void(0);" id="con_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
 			html += '</div>'
 			html += '</li>'
 			$('.new-phone-box').append(html);
 		}
-
-		// 	$('.success-email').remove();
-		// 	$('.con-mail').remove();
-		// 	if(state == 1){
-		// 		html = '';
-		// 		html += '<div class="field con-mail">'
-		// 		html += '<p class="chk-input">'
-		// 		html += '<input type="text" id="ath_num" name="ath_num" class="" required />'
-		// 		html += '<p class="rtxt mg10t">'
-		// 		html += '<a class="con-mail-btn cerfity-btn" id="con-mail-btn">메일인증 확인</a>'
-		// 		html += '</p>'
-		// 		html += '</p>'
-		// 		html += '</div>'
-		// 		$('.mem_email').append(html);
-		// 	}
-		// }
 	})
 })
+
+// 이메일 인증 하기
+$(document).on('click', "#con_mail_btn", function(){
+	var ath_num = $("#ath_num").val();
+
+	var result = '';
+	var reason = '';
+	$.ajax({
+		url: cb_url + '/membermodify/ajax_email_ath',
+		type: 'POST',
+		data: {
+			ath_num: ath_num,
+			csrf_test_name : cb_csrf_hash
+		},
+		dataType: 'json',
+		async: false,
+		cache: false,
+		success: function(data) {
+			result = data.result;
+			reason = data.reason;
+		}
+	});
+
+	// 실패
+	if(result == 0){
+		alert(reason);
+	}
+
+	//성공
+	if(result == 1) {
+		html = '';
+		html += '<li class="success-email-box">'
+		html += '<p class="btxt"></p>'
+		html += '<div class="field modify">'
+		html += '<p class="chk-input w380">'
+		html += '<input type="text" placeholder="" id="ath_num" name="ath_num" value="">'
+		html += '</p>'
+		html += '<a href="javascript:void(0);" id="con_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
+		html += '</div>'
+		html += '</li>'
+
+		$('.con-mail').remove(); // 인증 박스 삭제		
+		$('.new-phone-box').append(html); // 승인 메세지
+	}
+});
 
 
 /********************************************************/
