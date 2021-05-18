@@ -97,7 +97,7 @@
 
 			<!-- 비밀번호 변경 -->
 			<div id="myModal_password" class="modal"> 
-			<?php echo show_alert_message($this->session->flashdata('_mem_password_check'), '<script>alert(', ');</script>'); ?>
+			<!-- <?php echo show_alert_message($this->session->flashdata('_mem_password_check1'), '<script>alert(', ');</script>'); ?> -->
 				<!-- Modal content -->
 				<div class="modal-content entry">
 					<span class="close"></span>
@@ -375,6 +375,8 @@ var password = '';
 // 이메일 확인 + 인증번호 보내기
 $(document).ready(function(){
 	$("#send_email2").on('click', function(){
+		$('.new-password-box > p').remove();
+
 		var _password = $("#new_password").val();
 		var _password_re = $("#new_password_re").val();
 		password = _password;
@@ -397,7 +399,11 @@ $(document).ready(function(){
 			}
 		});
 
-		alert(message);
+		if(state != -1){
+			alert(message);
+		} else {
+			$('.new-password-box').append(message); // 승인 메세지
+		}
 		
 		// $('.success-email').remove();
 		$('.con-mail2').remove();
@@ -418,7 +424,7 @@ $(document).ready(function(){
 })
 
 // 이메일 인증 하기
-$(document).on('click', "#ccon_password_mail_btn", function(){
+$(document).on('click', "#con_password_mail_btn", function(){
 	var ath_num = $("#ath_num2").val();
 
 	var result = '';
@@ -451,6 +457,9 @@ $(document).on('click', "#ccon_password_mail_btn", function(){
 		html += '<p class="btxt"></p>'
 		html += '<div class="">'
 		html += '<p class="success-email rtxt mg10t cblue">인증이 완료되었습니다</p>'
+		html += '</div>'
+		html += '<div>'
+		html += '<a href="javascript:void(0);" id="con_password_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
 		html += '</div>'
 		html += '</li>'
 

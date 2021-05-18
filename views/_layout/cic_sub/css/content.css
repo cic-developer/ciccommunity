@@ -6487,6 +6487,7 @@
 .board-wrap.write .entry .main-check {
     font-size: 14px;
     margin-left: 14px;
+    margin-bottom: 16px;
 }
 
 .board-wrap.write .entry .main-check label {
@@ -6495,11 +6496,12 @@
 
 .board-wrap.write .entry .main-check label p {
     display: inline;
-    margin-bottom: 3px;
+    margin-left: 5px;
 }
 
 .board-wrap.write .entry .main-check label input[type=checkbox] {
     -webkit-appearance: checkbox;
+    vertical-align: -3px;
 }
 
 .board-wrap.write .entry .main-check label input[type=checkbox]:before {
@@ -6510,7 +6512,6 @@ label input[type="checkbox"] {
     display: inline;
     width: 20px;
     height: 18px;
-    margin-top: 5px;
 }
 
 .board-wrap.write .entry li .btxt {

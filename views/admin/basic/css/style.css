@@ -939,3 +939,7 @@ ul.de_pg_tab li.tab-current a {
         display: none;
     }
 }
+
+.input-group-btn>.btn {
+    padding: 4px 12px;
+}
