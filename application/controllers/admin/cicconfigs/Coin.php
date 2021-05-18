@@ -358,18 +358,14 @@ class Coin extends CB_Controller
 				$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
 				
-				// $this->load->library('form_validation');
-				// $config = array(
-				// 	array(
-				// 		'field' => 'wid_idx1',
-				// 		'rules'=>'required'
-				// 	),
-				// 	array(
-				// 		'field' => 'cp_content1',
-				// 		'rules'=>'required'
-				// 	),
+				$this->load->library('form_validation');
+				$config = array(
+					array(
+						'field' => 'cp_content1',
+						'rules'=>'required'
+					),
 
-				// );
+				);
 
 
 				// if($this->form_validation -> run () == FALSE){
@@ -385,39 +381,27 @@ class Coin extends CB_Controller
 				// 		$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 				// 	}
 				// }
-				// print_r($data);
-
-
+				if($this->form_validation -> run () == FALSE){
+					$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+				}else{
+					$data = array(
+						'_table' => 'cic_coin_keyword', // pass the real table name
+						'id' => $_GET['wid_idx1'],
+						'coin_keyword' => $_GET['cp_content1']
+					);
 				
-				// $name = $this -> input -> get('cp_content1');
-				// print_r($name);
-				// die();
-				//print_r($_GET);
-				// if(isset($_GET) && !empty($_GET)){
-				// 	//print_r($_POST['wid_idx1']);
-				// 	$data = [$_GET['coin_market'], $_GET['cp_content1']];
-				// 	print_r($_GET);
-				// 	$this->CIC_Coin_Keyword_model->update_keyword($_GET['wid_idx1'], $data);
-				// 	// redirect("https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_GET['pageId']."");
-				// }
-				// print_r('Hello');
-
-				$data = array(
-					'_table' => 'cic_coin_keyword', // pass the real table name
-					'id' => $_GET['wid_idx1'],
-					'coin_keyword' => $_GET['cp_content1']
-				);
+					$update = $this->CIC_Coin_Keyword_model->update_keyword($data);
+					if($update) // call the method from the model
+					{
+						redirect("https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_GET['pageId']."");
+					}
+					else
+					{
+						echo "fail";
+						// update not successful
+					}
+				}	
 			
-				$update = $this->CIC_Coin_Keyword_model->update_keyword($data);
-				if($update) // call the method from the model
-				{
-					redirect("https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_GET['pageId']."");
-				}
-				else
-				{
-					echo "fail";
-					// update not successful
-				}
 	}
 
 }
