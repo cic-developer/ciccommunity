@@ -41,7 +41,7 @@ class CIC_Coin_keyword_model extends CB_Model
     function get_keyword_row(){
 
         $result = $this->db->get('cic_coin_keyword');
-        return $result->row();
+        return $result->result_array();
     }
     
     function get_keyword(){

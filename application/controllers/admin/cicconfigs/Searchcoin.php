@@ -79,7 +79,7 @@ class Searchcoin extends CB_Controller
 
 		$where = array();
 		$result = $this->{$this->modelname}
-		->get_coin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		->get_coin_list($select, $join,$per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
@@ -155,18 +155,17 @@ class Searchcoin extends CB_Controller
 					// 통째로 가져온 테이블에서 keyword 만 담은 array() 만들어
 
 					$keyword_arr = $this->CIC_coin_keyword_model->get_keyword_row();
-					print_r($keyword_arr);
-
 					foreach ($keyword_arr as $key){
+						//print_r($key['coin_keyword']);
 						$keyword = $key['keyword'];
-						if($keyword ==  ){
-
-						}
+						if(in_array($keyword, $key)){
+							for($j = 0; $j < count($data); $j++) {
+								$this->CIC_coin_keyword_model -> insert_keyword_list($data[$j]);
+							}
+						}else { return false;}
 					
 					}
-					for($j = 0; $j < count($data); $j++) {
-						$this->CIC_coin_keyword_model -> insert_keyword_list($data[$j]);
-					}
+					
 				}	
 			}
 		}

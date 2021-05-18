@@ -75,7 +75,7 @@ class CIC_Coin_list_model extends CB_Model
         $result = $this->db->get('cic_coin_list');
         return $result->result_array(); 
     }
-
+   
     function get_coin_list($limit ='', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR'){
         $search_where = array();
 		$search_like = array();
@@ -90,17 +90,6 @@ class CIC_Coin_list_model extends CB_Model
         $query = $this->db->get('cic_coin_list');
         return $query->row();
     }
-    
-    
-    function insert_admin_list($data){
-        $this-> db -> where('coin_keyword', $coin_keyword);
-        $query = $this->db->get('cic_coin_keyword');
-        if($query -> num_rows() > 0){ 
-            $result = $this->db->insert('cic_coin_keyword', $data);
-            return $result;   
-        }
-    }
-
 
     function retrieve_api(){
         $curl = curl_init();
