@@ -78,7 +78,7 @@
 
                             <!-- Modal Header -->
                             <div class="modal-header">
-                                <h4 class="modal-title">검색키워드 수정하십시오 <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+                                <h4 class="modal-title text-left">검색키워드 수정 <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
                             </div>
 							<form method="get" action="https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/update_keyword">
                             <!-- Modal body -->
@@ -88,7 +88,7 @@
 									<input type="hidden" name="coin_market" id="coin_market" value="" />
 									<input type="hidden" name="pageId" id="pageId" value="<?php echo $_GET['id']; ?>" />
                                     <div class="form-group">
-                                        <label for="cp_content1">키워드:</label>
+                                        <label for="cp_content1">키워드</label>
                                             <input class="form-control" rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요">
 									</div>
                                 </div> 

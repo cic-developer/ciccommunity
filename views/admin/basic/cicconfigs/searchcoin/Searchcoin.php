@@ -13,27 +13,25 @@
 					<div class="btn-group pull-right" role="group" aria-label="...">
 						<a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a>
 						<form action='post'>
-								<input type="submit" id = "refresh" name="refresh" class="btn btn-default btn-sm" value="새로고침">
+								<input type="submit" id = "refresh" name="refresh" class="btn btn-default btn-sm" value="코인목록 갱신">
 						</form>	
 					</div>
 				<?php
 				
 				ob_end_flush();
 				?>
-			</div>
-			<div class="table-responsive">
-			
-				<form action="post" name='selected_market'>
-				
-					<table class="table table-hover table-striped table-bordered">
-						<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
+		</div>
+		<div class="table-responsive">
+			<form action="post" name='selected_market'>
+				<table class="table table-hover table-striped table-bordered">
+					<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
 						<thead >
 							<tr>
 								<th>번호</th>
 								<th>마켓명</th>
 								<th>한국어명</th>
 								<th>영문명</th>
-								<th>키워드 성정</th>
+								<th>키워드 설정</th>
 							</tr>
 						</thead>
 						
@@ -48,16 +46,17 @@
 								<td><a href='https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=<?php echo element('clist_market', $result); ?>'><?php echo html_escape(element('clist_market', $result)); ?></a></td>
 								<td><?php echo element('clist_name_ko', $result); ?></td>
 								<td><?php echo element('clist_name_en', $result); ?></td>
-								<td><button  type="button" id="myBtn" class="btn btn-default btn-xs" onClick="document.location.href='https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=<?php echo element('clist_market', $result); ?>'">키워드 성정</button></td>
+								<td><button  type="button" id="myBtn" class="btn btn-default btn-xs" onClick="document.location.href='https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=<?php echo element('clist_market', $result); ?>'">키워드 설정</button></td>
 							</tr>
 						<?php
 							}
 						}
 						?>
 						</tbody>
-					</table>
-				</form>
-			</div>
+					</div>	
+				</table>
+			</form>
+		</div>
 			<div class="box-info">
 				<?php echo element('paging', $view); ?>
 				<div class="pull-left ml20"><?php echo admin_listnum_selectbox();?></div>

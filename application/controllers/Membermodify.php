@@ -56,8 +56,6 @@ class Membermodify extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		$view['view']['enc_data'] = $this->checkplus->main();
-
 		$mem_id = (int) $this->member->item('mem_id');
 
 		if ( ! $this->member->item('mem_password')) {
@@ -179,6 +177,9 @@ class Membermodify extends CB_Controller
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		$view['view']['enc_data'] = $this->checkplus->main2();
+		// $view['view']['dec_data'] = $this->session->userdata('dec_data');
 
 		$email_description = '';
 		if ($this->cbconfig->item('use_register_email_auth')) {
@@ -2370,5 +2371,48 @@ class Membermodify extends CB_Controller
 	}
 /**
  * 비밀번호변경 끝
+ */
+
+/**
+ * 휴대폰 인증 시작
+ */
+
+	public function auth_success(){
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_register_auth_success';
+		$this->load->event($eventname);
+
+		$data = $this->session->userdata('dec_data');
+		$DI = $data['dupinfo'];
+
+		$isDI = $this->Member_model->get_by_memDI($DI, '');
+
+		if(count($isDI) > 0){ // 중복 이면
+			// $this->session->unset_userdata('dec_data');
+			echo("<script>alert('이미 가입된 회원입니다');</script>");
+			echo("<script>window.opener.location.replace('/register/auth_duplicate');</script>");
+			echo("<script>self.close()</script>");
+		}
+
+		$view = array();
+		$view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		
+		// $this->member->get_by_memDI('MC0GCCqGSIb3DQIJAyEAtonfQuH352/KCB0yrjiwSQcnDQTS7ff5UcT4ievX8HM=');
+
+		if($this->input->get("EncodeData")){
+			$this->checkplus->success($this->input->get("EncodeData"));
+			
+			echo("<script>window.opener.fregisterform.submit();</script>");
+			echo("<script>self.close()</script>");
+		} else {
+			echo("<script>alert('비정상적인 접근입니다.')</script>");
+			echo("<script>self.close()</script>");
+		}
+	}
+/**
+ * 휴대폰 인증 끝
  */
 }
