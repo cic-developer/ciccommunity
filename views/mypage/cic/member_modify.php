@@ -454,7 +454,7 @@ $(document).on('click', "#con_password_mail_btn", function(){
 		html = '';
 		html += '<li class="password-success-email-box">'
 		html += '<p class="btxt"></p>'
-		html += '<div class="success-message-box" style="display:inline-block;">'
+		html += '<div class="password-success-message-box" id="password_success_message_box" style="display:inline-block;">'
 		html += '<p class="password-success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
 		html += '</div>'
 		html += '<div class="nice-phone-ath-box" id="nice_phone_ath_box" style="display: inline-block; float: right;">'

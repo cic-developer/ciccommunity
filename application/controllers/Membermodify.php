@@ -2396,9 +2396,11 @@ class Membermodify extends CB_Controller
 			$html = '<p class="password-success-phone rtxt mg10t cblue">핸드폰 인증이 완료되었습니다</p>';
 
 			echo("<script>alert('인증되었습니다');</script>");
+			// echo("<script>window.opener.location.replace('http://www.naver.com/');</script>");
 			// echo("<script>window.opener.document.getElementById('nice_phone_ath_box').attr('display', 'none');</script>");
-			// echo("<script>window.opener.element.getElementsByClassName('success-message-box').append(".$html.")</script>");
-			echo("<script>window.opener.document.getElementById('success_message_box').append(".$html.")</script>");
+			echo("<script>window.opener.element.getElementsByClassName('password-success-message-box').append(".$html.");</script>");
+			// echo("<script>window.opener.document.getElementById('password_success_message_box').append(".$html.");</script>");
+			echo("<script>$(opener.document).find('#password_success_message_box').append(".$html.");</script>");
 			echo("<script>self.close()</script>");
 		}
 

@@ -24,8 +24,7 @@
                                         <div class="owl-item" style="width: 240px; margin-right: 20px;">
                                             <div class="item">
                                                 <a href="<?php echo goto_url(element('posturl', $writerbest)); ?>">
-                                                    <div class="img"><img
-                                                            src="<?php echo element('thumb_url', $writerbest); ?>" alt="">
+                                                    <div class="img"><img src="<?php echo element('thumb_url',$writerbest)?>" alt="">
                                                     </div>
                                                     <div class="txt">
                                                         <p class="btxt"><?php echo html_escape(cut_str(strip_tags(element('post_title', $writerbest)), 15)); ?></p>
@@ -35,6 +34,16 @@
                                                 </a>
                                             </div>
                                         </div>
+                                        <script>
+                                            $(function () {
+                                            $('owl-stage').find('div.item').each(function () {
+                                            var chkimg = $(this).find('.img').length;
+                                            if (chkimg < 1) {
+                                            $(this).addClass('no-img');
+                                                }
+                                            })
+                                        })
+                                    </script>
                                 <?php
                                     }
                                 }

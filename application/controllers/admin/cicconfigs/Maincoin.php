@@ -98,7 +98,7 @@ class Maincoin extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = 'cme_idx';
+		$findex = 'cme_orderby';
 		$forder = 'desc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
@@ -108,9 +108,9 @@ class Maincoin extends CB_Controller
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
-		$this->{$this->modelname}->allow_search_field = array('post_id', 'post_title', 'post_content', 'mem_id', 'post_username', 'post_nickname', 'post_email', 'post_homepage', 'post_datetime', 'post_ip', 'post_device'); // 검색이 가능한 필드
-		$this->{$this->modelname}->search_field_equal = array('post_id', 'mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->{$this->modelname}->allow_order_field = array('post_id'); // 정렬이 가능한 필드
+		$this->{$this->modelname}->allow_search_field = array('cme_id', 'cme_english_nm', 'cme_korean_nm'); // 검색이 가능한 필드
+		$this->{$this->modelname}->search_field_equal = array('cme_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->{$this->modelname}->allow_order_field = array('cme_orderby'); // 정렬이 가능한 필드
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		$where = array(
 			'cme_del <>' => 1,
@@ -163,14 +163,11 @@ class Maincoin extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('post_title' => '제목', 'post_content' => '내용', 'post_username' => '실명', 'post_nickname' => '닉네임', 'post_email' => '이메일', 'post_homepage' => '홈페이지', 'post_datetime' => '작성일', 'post_ip' => 'IP');
+		$search_option = array('cme_korean_nm' => '거래소명(한글)', 'cme_english_nm' => '거래소명(영어)');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
-		$view['view']['listall_url'] = admin_url($this->pagedir);
-		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listdelete/?' . $param->output());
-		$view['view']['list_trash_url'] = admin_url($this->pagedir . '/listtrash/?' . $param->output());
-		$view['view']['list_update_url'] = admin_url($this->pagedir . '/listupdate/?' . $param->output());
-		$view['view']['list_bestpost_url'] = admin_url($this->pagedir . '/bestpostupdate/?' . $param->output());
+		$view['view']['listall_url'] = admin_url($this->pagedir . '/exchange');
+		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/exchange_listdelete/?' . $param->output());
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

@@ -39,16 +39,12 @@
 					<table class="table table-hover table-striped table-bordered">
 						<thead>
 							<tr>
-								<th><a href="<?php echo element('post_id', element('sort', $view)); ?>">번호</a></th>
-								<th>게시판</th>
-								<th>이미지</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>작성일</th>
-								<th>추천수</th>
-								<th>비추천수</th>
-								<th>조회</th>
-								<th>상태</th>
+								<th><a href="<?php echo element('cme_orderby', element('sort', $view)); ?>">번호</a></th>
+								<th>거래소 명</th>
+								<th>api</th>
+								<th>기본값설정</th>
+								<th>순서변경</th>
+								<th>수정</th>
 								<th><input type="checkbox" name="chkall" id="chkall" /></th>
 							</tr>
 						</thead>
@@ -59,24 +55,11 @@
 						?>
 							<tr>
 								<td><?php echo number_format(element('num', $result)); ?></td>
-								<td><a href="?brd_id=<?php echo element('brd_id', $result); ?>"><?php echo html_escape(element('brd_name', element('board', $result))); ?></a> <a href="<?php echo goto_url(element('boardurl', $result)); ?>" target="_blank"><span class="fa fa-external-link"></span></a></td>
-								<td>
-									<?php if (element('thumb_url', $result)) {?>
-										<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank">
-											<img src="<?php echo element('thumb_url', $result); ?>" alt="<?php echo html_escape(element('post_title', $result)); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" class="thumbnail mg0" style="width:80px;" />
-										</a>
-									<?php } ?>
-								</td>
-								<td>
-									<?php if (element('category', $result)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $result))); ?></span><?php } ?>
-									<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><?php echo html_escape(element('post_title', $result)); ?></a>
-								</td>
-								<td><?php echo element('post_display_name', $result); ?> <?php if (element('post_userid', $result)) { ?> ( <a href="?sfield=mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('post_userid', $result)); ?></a> ) <?php } ?></td>
-								<td><?php echo display_datetime(element('post_datetime', $result), 'full'); ?></td>
-								<td><?php echo number_format(element('post_like_point', $result)); ?></td>
-								<td><?php echo number_format(element('post_dislike_point', $result)); ?></td>
-								<td><?php echo number_format(element('post_hit', $result)); ?></td>
-								<td><?php echo element('post_secret', $result) === '1' ? '비밀' : '공개'; ?></td>
+								<td><img src="<?php echo element('cme_logo', $result); ?>" alt="거래소 로고" style="height:20px; width:auto;"/>  <?php echo html_escape(element('cme_korean_nm', $result)); ?></td>
+								<td><?php echo html_escape(element('cme_api', $result)); ?></td>
+								<td><?php echo (element('cme_default', $result) == 1) ? '기본' : ''; ?></td>
+								<td>업 / 다운</td>
+								<td><a href="<?php echo admin_url($this->pagedir); ?>/exchange_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
 								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
 							</tr>
 						<?php
