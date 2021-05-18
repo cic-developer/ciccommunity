@@ -34,7 +34,7 @@
 						<p class="btxt">핸드폰</p>
 						<div class="field modify">
 							<p class="chk-input w380 readonly">
-								<input type="text" placeholder=""
+								<input type="text" id=".33333333333333" placeholder=""
 									value="<?php echo $this->member->item('mem_phone'); ?>" readonly="">
 							</p>
 							<!-- <a href="#n" class="modify-btn"><span>핸드폰번호변경</span></a> -->

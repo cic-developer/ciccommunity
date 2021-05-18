@@ -88,7 +88,7 @@ class CIC_Coin_list_model extends CB_Model
     function getonerow(){
         $this->db->where('clist_market', $id);
         $query = $this->db->get('cic_coin_list');
-        return $query->row();
+        return $query->row_array();
     }
 
     function retrieve_api(){
