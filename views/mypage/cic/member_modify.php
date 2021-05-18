@@ -199,28 +199,33 @@ function inputPhoneNumber(obj) {
 // 이메일 확인 + 인증번호 보내기
 $(document).ready(function(){
 	$("#ath_email").on('click', function(){
-
-		LoadingWithMask();
 		var _phone = $("#new_phone").val();
 
 		var state = '';
 		var message = '';
-		$.ajax({
-			url: cb_url + '/membermodify/ajax_email_send',
-			type: 'POST',
-			data: {
-				mem_phone: _phone,
-				csrf_test_name : cb_csrf_hash
-			},
-			dataType: 'json',
-			async: false,
-			cache: false,
-			success: function(data) {
-				state = data.state;
-				message = data.message;
-			}
-		});
-		alert(message);
+
+		if(LoadingWithMask()){
+			$.ajax({
+				url: cb_url + '/membermodify/ajax_email_send',
+				type: 'POST',
+				data: {
+					mem_phone: _phone,
+					csrf_test_name : cb_csrf_hash
+				},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				success: function(data) {
+					state = data.state;
+					message = data.message;
+				}
+			});
+		}
+
+		if(state){
+			alert(message);
+			closeLoadingWithMask();
+		}
 
 		// 	$('.success-email').remove();
 		// 	$('.con-mail').remove();
@@ -278,6 +283,8 @@ function LoadingWithMask() {
 
     //로딩중 이미지 표시
     $('#loadingImg').show();
+
+	return true;
 }
 
 function closeLoadingWithMask() {

@@ -152,7 +152,7 @@ class Searchcoin extends CB_Controller
 				);
 				if(isset($data) && !empty($data)){	
 					for($j = 0; $j < count($data); $j++) {
-						$this->CIC_coin_list_model -> insert_admin_list($data[$j]);
+						$this->CIC_coin_keyword_model -> insert_keyword_list($data[$j]);
 					}
 				}	
 			}
@@ -164,10 +164,8 @@ class Searchcoin extends CB_Controller
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
-		
-	
-	public function CStock_keyword(){
 
+	public function CStock_keyword(){
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_amdmin_coin_keyword';
 		$this->load->event($eventname);

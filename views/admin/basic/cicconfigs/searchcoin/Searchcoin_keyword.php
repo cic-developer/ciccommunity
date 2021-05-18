@@ -1,17 +1,5 @@
 <div class="box">
 	<div class="box-table">
-		<div class="box-table-header">
-				<?php
-				ob_start();
-				?>
-					<div class="btn-group pull-right" role="group" aria-label="...">
-						<a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a>
-					</div>
-				<?php
-				$buttons = ob_get_contents();
-				ob_end_flush();
-				?>
-			</div>
 		<?php
 		echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
 		echo show_alert_message(element('alert_message', $view), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
@@ -29,9 +17,9 @@
 					</div>
 					<div class="input-group col-md-6">
 						<input type="hidden" name="coin_market" value = "<?php echo $myId; ?>" >
-						<input type="text" class="form-control rounded  " name = "keyword" placeholder = "Keyword">
+						<input type="text" class="form-control" name = "keyword" placeholder = "Keyword">
 						<span class=input-group-btn>
-							<button type="submit" class="btn btn-outline-primary" >추가</button>
+							<input type="submit" class="btn btn-primary" value='추가'>
 						</span>			
 					</div>
 					
@@ -70,7 +58,6 @@
 									<?php 
 									echo $stocks['coin_keyword'];
 									?>
-								
 								</td>
 								<td><a href="delete_keyword?id=<?php echo $stocks['idx'];?>&pageId=<?php echo $_GET['id'];?> " class="btn btn-danger btn-xs" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
 								<td>
@@ -84,38 +71,36 @@
 						?>
 					</table>
 				</form>
-                        <!-- The Modal approve -->
-                        <div class="modal fade" id="myModal-approve">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
+                <!-- The Modal approve -->
+                <div class="modal fade" id="myModal-approve">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
 
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">입력해주세요 <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
-                                        </div>
-										<form method="get" action="https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/update_keyword">
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                                <!-- <label for="usr"></label> -->
-
-                                                <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
-												<input type="hidden" name="coin_market" id="coin_market" value="" />
-												<input type="hidden" name="pageId" id="pageId" value="<?php echo $_GET['id']; ?>" />
-                                                <div class="form-group">
-                                                    <label for="cp_content1">키워드:</label>
-                                                    <input class="form-control" rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요">
-												</div>
-                                        </div> 
-										<!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <h6 class="pull-left">* 필수값</h6>
-                                            <button type="submit" class="btn btn-success btn-approve" data-one-modal-url="<?php echo element("approve_url", $view); ?>">수정</button>
-                                        </div>
-										</form>                                     
-                                </div>
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">입력해주세요 <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
                             </div>
+							<form method="get" action="https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/update_keyword">
+                            <!-- Modal body -->
+                                <div class="modal-body">
+                                <!-- <label for="usr"></label> -->
+                                    <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
+									<input type="hidden" name="coin_market" id="coin_market" value="" />
+									<input type="hidden" name="pageId" id="pageId" value="<?php echo $_GET['id']; ?>" />
+                                    <div class="form-group">
+                                        <label for="cp_content1">키워드:</label>
+                                            <input class="form-control" rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요">
+									</div>
+                                </div> 
+								<!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <h6 class="pull-left">* 필수값</h6>
+                                    <button type="submit" class="btn btn-success btn-approve" data-one-modal-url="<?php echo element("approve_url", $view); ?>">수정</button>
+                                </div>
+							</form>                                     
                         </div>
-
+                    </div>
+                </div>
 			</div>	
 		</div>
 		<?php echo form_close(); ?>
@@ -134,30 +119,21 @@ function deleteKeyword() {
 	}
 }
 
-// $('.modal_open1').on('click', function(){
-//         $('#myModal-approve').modal({backdrop: false, keyboard: false});
-// });
+
 // set modal data
 $('.modal_open1').click(function() {
 	var widIdx = $(this).data('idx');
-   // $("#myModal-approve .modal-body #wid_idx1").val( widIdx );
 	$.ajax({
         method: "GET",
         url: "https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/get_keyword",
         data: { id: widIdx }, 
 		success: function(result){
-   		//$("#div1").html(result);
-		console.log(result);
-		console.log(typeof result);
 		result = JSON.parse(result);
-		//{"idx":"51776","coin_market":"ZRX","coin_keyword":"0x Protocol"}
-		console.log(result.idx);
 		$("#cp_content1").val(result.coin_keyword); //wid_idx1
 		$("#wid_idx1").val(result.idx);
 		$("#coin_market").val(result.coin_market);
 		$('#myModal-approve').modal({backdrop: false, keyboard: false});
 }
-
     })      
 });
 </script>

@@ -14,7 +14,7 @@
                 <h3>BEST</h3>
                 <div class="vnews-slide owl-loaded owl-drag">
                 
-                    <!-- <div class="owl-stage-outer">
+                    <div class="owl-stage-outer">
                         <div class="owl-stage"
                             style="transform: translate3d(-1040px, 0px, 0px); transition: all 0s ease 0s; width: 3900px;">
 
@@ -34,15 +34,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
 
+                    <!-- <div class="owl-stage-outer">
+                        <div class="owl-stage"
+                            style="transform: translate3d(-1040px, 0px, 0px); transition: all 0s ease 0s; width: 3900px;">
                     <?php
 						if (element('list',element('writerbest', $view))) {
 							foreach (element('list',element('writerbest', $view)) as $writerbest) {
 						?>
-                        <div class="owl-stage-outer">
-                            <div class="owl-stage"
-                                style="transform: translate3d(-1040px, 0px, 0px); transition: all 0s ease 0s; width: 3900px;">
                                 <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
                                     <div class="item">
                                         <a href="<?php echo base_url(element('posturl', $writerbest))?>">
@@ -57,8 +57,6 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 						<?php
 							}
 						}
@@ -70,6 +68,8 @@
 						<?php
 						}
                         ?>
+                        </div>
+                    </div> -->
                         <div class="owl-nav disabled">
                             <button type="button" role="presentation" class="owl-prev">
                                 <span aria-label="Previous">‹</span>
