@@ -18,21 +18,22 @@
                             style="transform: translate3d(-1040px, 0px, 0px); transition: all 0s ease 0s; width: 3900px;">
                                 <?php
                                 if (element('list',element('writerbest', $view))) {
+                                    $i = 1;
                                     foreach (element('list',element('writerbest', $view)) as $writerbest) {
                                         ?>
-                                        <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
-                                        <div class="item">
-                                            <a href="<?php echo goto_url(element('posturl', $writerbest)); ?>">
-                                                <div class="img"><img
-                                                        src="<?php echo element('thumb_url', $writerbest); ?>" alt="">
-                                                </div>
-                                                <div class="txt">
-                                                    <p class="btxt"><?php echo html_escape(element('post_title', $writerbest)); ?></p>
-                                                    <p class="stxt"><?php echo html_escape(element('post_content', $writerbest)); ?></p>
-                                                    <p class="ctxt vp"><?php echo number_format(element("post_like_point",$writerbest))?></p>
-                                                </div>
-                                            </a>
-                                        </div>
+                                        <div class="owl-item" style="width: 240px; margin-right: 20px;">
+                                            <div class="item">
+                                                <a href="<?php echo goto_url(element('posturl', $writerbest)); ?>">
+                                                    <div class="img"><img
+                                                            src="<?php echo element('thumb_url', $writerbest); ?>" alt="">
+                                                    </div>
+                                                    <div class="txt">
+                                                        <p class="btxt"><?php echo html_escape(element('post_title', $writerbest)); ?></p>
+                                                        <p class="stxt"><?php echo html_escape(element('post_content', $writerbest)); ?></p>
+                                                        <p class="ctxt vp"><?php echo number_format(element("post_like_point",$writerbest))?></p>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
                                 <?php
                                     }

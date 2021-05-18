@@ -154,7 +154,6 @@ class Board_post extends CB_Controller
 			$list_num = 1;
 			$writerbest = $this->Post_model
 				->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-				print_r(count($writerbest));
 			if (element('list', $writerbest)) {
 				foreach (element('list', $writerbest) as $key => $val) {
 					$writerbest['list'][$key]['post_display_name'] = display_username(

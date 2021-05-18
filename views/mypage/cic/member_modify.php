@@ -393,7 +393,9 @@ $(document).ready(function(){
 				message = data.message;
 			}
 		});
-		alert(message);
+		if(state != -1){
+			alert(message);
+		}
 		// $('.success-email').remove();
 		$('.con-mail2').remove();
 		if(state == 1){

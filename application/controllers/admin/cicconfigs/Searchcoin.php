@@ -128,9 +128,17 @@ class Searchcoin extends CB_Controller
 			$keyword_arr[] = element('coin_keyword', $value);
 		}
 
+
+		$coin_list = $this->CIC_coin_list_model->getstockData();
+     
+		// 통째로 가져온 테이블에서 keyword 만 담은 array() 만든다.
+		$coin_arr = array();
+		foreach($coin_list as $value){
+			$coin_arr[] = element('clist_market', $value);
+		}
+
 		//getting coin list from api
 		$getList = $this -> CIC_coin_list_model->retrieve_api();
-		
 		for($i=0; $i<count($getList); $i++){
 			$market = $getList[$i]['market'];
 			//Getting only coin starting with K	
@@ -142,8 +150,16 @@ class Searchcoin extends CB_Controller
 					'clist_name_en' => $getList[$i]['korean_name'],
 				);
 				if(isset($data) && !empty($data)){
-					$stock = $this->CIC_coin_list_model->insertStockData($data);
-					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+					foreach($data as $coinData){
+						print_r($coinData['clist_market']);
+						if(in_array($coinData['clist_market'], $coin_arr)){
+							continue;
+						}
+						else{
+							$stock = $this->CIC_coin_list_model->insertStockData($data);
+							$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+						}
+					}
 				}
 
 				$data = array(
@@ -162,7 +178,6 @@ class Searchcoin extends CB_Controller
 				);
 				if(isset($data) && !empty($data)){
 					foreach($data as $thisData){
-
 						if(in_array($thisData['coin_keyword'], $keyword_arr)){	
 							continue;
 						}

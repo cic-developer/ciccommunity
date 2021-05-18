@@ -2262,6 +2262,7 @@ class Membermodify extends CB_Controller
 		 */
 		$this->load->library('form_validation');
 
+
 		// $configbasic['new_password'] = array(
 		// 	'field' => 'new_password',
 		// 	'label' => '패스워드',
@@ -2282,7 +2283,7 @@ class Membermodify extends CB_Controller
 				'rules' => 'trim|required|min_length[' . $password_length . ']|callback__mem_password_check',
 			),
 			array(
-				'field' => 'new_password',
+				'field' => 'new_password_re',
 				'label' => '새비번 확인',
 				'rules' => 'trim|required|min_length[' . $password_length . ']|matches[new_password]',
 			),
@@ -2292,8 +2293,12 @@ class Membermodify extends CB_Controller
 		$form_validation = $this->form_validation->run();
 
 		if(!$form_validation){
+			// $this->session->set_flashdata(
+			// 	'message',
+			// 	'정보를 정확히 작성해주세요.'
+			// );
 			$result = array(
-				'state' => '0',
+				'state' => '-1',
 				'message' => $password_description,
 			);
 			exit(json_encode($result));
