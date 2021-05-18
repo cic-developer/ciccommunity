@@ -76,6 +76,13 @@ class CIC_Coin_keyword_model extends CB_Model
         return $query->row();
     }
 
+    function updatekey($data){
+        $this-> db -> where('coin_keyword', $coin_keyword);
+        $query = $this->db->get('cic_coin_keyword');
+        $result = $this->db->update('cic_coin_keyword', $data);
+        return $result;
+    }
+
     function search_coin ($search){
         if (empty($search)) {
 			return false;

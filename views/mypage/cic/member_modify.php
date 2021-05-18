@@ -55,7 +55,8 @@
 							<p class="chk-input w380 readonly">
 								<input type="password" placeholder="" value="**************" readonly="">
 							</p>
-							<a href="#n" class="modify-btn"><span>비밀번호변경</span></a>
+							<!-- <a href="#n" class="modify-btn"><span>비밀번호변경</span></a> -->
+							<a href="javascript:void(0);" id="modal_btn_password" class="modify-btn"><span>비밀번호변경</span></a>
 						</div>
 					</li>
 					<li>
@@ -74,7 +75,7 @@
 				<a href="#n" class="leave-btn"><span>회원탈퇴</span></a>
 			</div>
 
-			<!-- The Modal - phone -->
+			<!-- 핸드폰번호 변경 -->
 			<div id="myModal_phone" class="modal">
 				<!-- Modal content -->
 				<div class="modal-content entry">
@@ -87,7 +88,27 @@
 								<p class="chk-input w380">
 									<input type="text" onKeyup="inputPhoneNumber(this);" placeholder="" id="new_phone" name="new_phone" value="">
 								</p>
-								<a href="javascript:void(0);" id="send_email" class="modify-btn"><span>이메일인증</span></a>
+								<a href="javascript:void(0);" id="send_email1" class="modify-btn"><span>이메일인증</span></a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- 비밀번호 변경 -->
+			<div id="myModal_password" class="modal">
+				<!-- Modal content -->
+				<div class="modal-content entry">
+					<span class="close"></span>
+					<!-- &times; -->
+					<ul class="new-password-box">
+						<li>
+							<p class="btxt">새 비밀번호</p>
+							<div class="field modify">
+								<p class="chk-input w380">
+									<input type="text" placeholder="" id="new_password" name="new_password" value="">
+								</p>
+								<a href="javascript:void(0);" id="send_email2" class="modify-btn"><span>이메일인증</span></a>
 							</div>
 						</li>
 					</ul>
@@ -139,32 +160,38 @@
 
 </style>
 
-
-
 <script>
 // Get the modal
-var modal = document.getElementById('myModal_phone');
+var modal1 = document.getElementById('myModal_phone');
+var modal2 = document.getElementById('myModal_password');
 
 // Get the button that opens the modal
-var btn = document.getElementById("modal_btn_phone");
+var btn1 = document.getElementById("modal_btn_phone");
+var btn2 = document.getElementById("modal_btn_password");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];                                          
+// var span = document.getElementsByClassName("close")[0];                                          
 
 // When the user clicks on the button, open the modal 
-btn.onclick = function() {
-	modal.style.display = "block";
+btn1.onclick = function() {
+	modal1.style.display = "block";
+}
+btn2.onclick = function() {
+	modal2.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-	modal.style.display = "none";
-}
+// span.onclick = function() {
+// 	modal.style.display = "none";
+// }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-	if (event.target == modal) {
-		modal.style.display = "none";
+	if (event.target == modal1) {
+		modal1.style.display = "none";
+	}
+	if (event.target == modal2) {
+		modal2.style.display = "none";
 	}
 }
 /*****************************************************************************/
@@ -200,7 +227,7 @@ function inputPhoneNumber(obj) {
 var phone_num = '';
 // 이메일 확인 + 인증번호 보내기
 $(document).ready(function(){
-	$("#send_email").on('click', function(){
+	$("#send_email1").on('click', function(){
 		var _phone = $("#new_phone").val();
 		phone_num = _phone;
 		var state = '';
@@ -222,16 +249,16 @@ $(document).ready(function(){
 		});
 		alert(message);
 		// $('.success-email').remove();
-		$('.con-mail').remove();
+		$('.con-mail1').remove();
 		if(state == 1){
 			html = '';
-			html += '<li class="con-mail">'
+			html += '<li class="con-mail1">'
 			html += '<p class="btxt">이메일 인증</p>'
 			html += '<div class="field modify">'
 			html += '<p class="chk-input w380">'
-			html += '<input type="text" placeholder="" id="ath_num" name="ath_num" value="">'
+			html += '<input type="text" placeholder="" id="ath_num1" name="ath_num1" value="">'
 			html += '</p>'
-			html += '<a href="javascript:void(0);" id="con_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
+			html += '<a href="javascript:void(0);" id="con_phone_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
 			html += '</div>'
 			html += '</li>'
 			$('.new-phone-box').append(html);
@@ -240,8 +267,8 @@ $(document).ready(function(){
 })
 
 // 이메일 인증 하기
-$(document).on('click', "#con_mail_btn", function(){
-	var ath_num = $("#ath_num").val();
+$(document).on('click', "#con_phone_mail_btn", function(){
+	var ath_num = $("#ath_num1").val();
 
 	var result = '';
 	var reason = '';
@@ -286,6 +313,97 @@ $(document).on('click', "#con_mail_btn", function(){
  */
 
 /********************************************************/
+
+/**
+ * 비밀번호변경 시작
+ */
+var password = '';
+// 이메일 확인 + 인증번호 보내기
+$(document).ready(function(){
+	$("#send_email2").on('click', function(){
+		var _password = $("#new_password").val();
+		password = _password;
+		var state = '';
+		var message = '';
+		$.ajax({
+			url: cb_url + '/membermodify/ajax_password_modify_email_send',
+			type: 'POST',
+			data: {
+				mem_password: _password,
+				csrf_test_name : cb_csrf_hash
+			},
+			dataType: 'json',
+			async: false,
+			cache: false,
+			success: function(data) {
+				state = data.state;
+				message = data.message;
+			}
+		});
+		alert(message);
+		// $('.success-email').remove();
+		$('.con-mail2').remove();
+		if(state == 1){
+			html = '';
+			html += '<li class="con-mail2">'
+			html += '<p class="btxt">이메일 인증</p>'
+			html += '<div class="field modify">'
+			html += '<p class="chk-input w380">'
+			html += '<input type="text" placeholder="" id="ath_num2" name="ath_num2" value="">'
+			html += '</p>'
+			html += '<a href="javascript:void(0);" id="con_password_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
+			html += '</div>'
+			html += '</li>'
+			$('.new-password-box').append(html);
+		}
+	})
+})
+
+// 이메일 인증 하기
+// $(document).on('click', "#con_mail_btn", function(){
+// 	var ath_num = $("#ath_num").val();
+
+// 	var result = '';
+// 	var reason = '';
+// 	$.ajax({
+// 		url: cb_url + '/membermodify/ajax_phone_modify_ath_mail',
+// 		type: 'POST',
+// 		data: {
+// 			ath_num: ath_num,
+// 			csrf_test_name : cb_csrf_hash
+// 		},
+// 		dataType: 'json',
+// 		async: false,
+// 		cache: false,
+// 		success: function(data) {
+// 			result = data.result;
+// 			reason = data.reason;
+// 		}
+// 	});
+
+// 	// 실패
+// 	if(result == 0){
+// 		alert(reason);
+// 	}
+
+// 	//성공
+// 	if(result == 1) {
+// 		html = '';
+// 		html += '<li class="success-email-box">'
+// 		html += '<p class="btxt"></p>'
+// 		html += '<div class="">'
+// 		html += '<p class="success-email rtxt mg10t cblue">인증이 완료되었습니다</p>'
+// 		html += '</div>'
+// 		html += '</li>'
+
+// 		$('.con-mail').remove(); // 인증 박스 삭제		
+// 		$('.new-phone-box').append(html); // 승인 메세지
+// 		$("#phone_num").val(phone_num);
+// 	}
+// });
+/**
+ * 비밀번호변경 끝
+ */
 
 
 </script>

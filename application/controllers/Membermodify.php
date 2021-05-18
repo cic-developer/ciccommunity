@@ -2101,9 +2101,6 @@ class Membermodify extends CB_Controller
 		$new_phone = $this->input->post('mem_phone');
 		$isPhone = $this->Member_model->get_by_memPhone($new_phone, '');
 
-		// 폼 벨리데이션 하기
-		// 하이푼에 대해서...
-
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
@@ -2229,8 +2226,102 @@ class Membermodify extends CB_Controller
 /**
  * 비밀번호변경 시작
  */
+public function ajax_password_modify_email_send() {
+	// 이벤트 라이브러리를 로딩합니다
+	$eventname = 'event_membermodify_ajax_password_modify_email_send';
+	$this->load->event($eventname);
 
- 
+	$view = array();
+	$view['view'] = array();
+
+	// 이벤트가 존재하면 실행합니다
+	$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+	// 세션에 기존 인증된 내역 삭제
+	$this->session->set_userdata('password_modify_ath_mail_result', '');
+	$rand_num = sprintf('%06d',rand(000000,999999));
+	// 로그인한 회원 정보
+	$member_info = $this->member->get_member();
+	$email = $member_info['mem_email'];
+	// $phone = $member_info['mem_phone'];
+	// 세션에 인증번호 저장
+	$this->session->set_userdata('ath_num', $rand_num);
+	// 세션에 인증에 이용한 이메일 저장
+	// $this->session->set_userdata('ath_email', $email);
+
+	$new_phone = $this->input->post('mem_password');
+	$isPhone = $this->Member_model->get_by_memPhone($new_phone, '');
+
+	/**
+	 * Validation 라이브러리를 가져옵니다
+	 */
+	$this->load->library('form_validation');
+
+	$config = array(
+		array(
+			'field' => 'mem_phone',
+			'label' => '새번호',
+			'rules' => 'trim|valid_phone',
+		),
+	);
+	$this->form_validation->set_rules($config);
+	$form_validation = $this->form_validation->run();
+
+	if(!$form_validation){
+		$result = array(
+			'state' => '0',
+			'message' => '번호를 정확히 입력해주세요',
+		);
+		exit(json_encode($result));
+	}
+
+	if(strlen($new_phone) < 1){
+		$result = array(
+			'state' => '0',
+			'message' => '번호를 입력해주세요',
+		);
+		exit(json_encode($result));
+	}
+
+	if(count($isPhone) > 0){ // 중복 이면
+		$result = array(
+			'state' => '0',
+			'message' => '이미 사용중인 번호입니다',
+		);
+		exit(json_encode($result));
+	}
+
+
+	// 이메일에 포함될 데이터
+	$getdata['rand_num'] = $rand_num;
+	$getdata['name'] = $member_info['mem_username'];
+	$getdata['site_title'] = $this->cbconfig->item('site_title');
+	$getdata['webmaster_email'] = $this->cbconfig->item('webmaster_email');
+	$getdata['webmaster_name'] = $this->cbconfig->item('webmaster_name');
+	
+	// $this->load->library('email');
+	$emailform['emailform'] = $getdata;
+	$message = $this->load->view('mypage/cic/email_form', $emailform, true);
+	$this->email->from(element('webmaster_email', $getdata), element('webmaster_name', $getdata));
+	$this->email->to($email);
+	$this->email->subject('[CIC Community] 핸드폰번호변경 이메일 인증 안내메일입니다');
+	$this->email->message($message);
+
+	if ($this->email->send() === false) {
+		$result = array(
+			'state' => '0',
+			'message' => '이메일을 발송하지 못하였습니다. 메일 설정을 확인하여주세요',
+		);
+		exit(json_encode($result));
+	} else {
+		$result = array(
+			'state' => '1',
+			'message' => '해당 이메일로 인증 번호를 발송하였습니다',
+		);
+		exit(json_encode($result));
+	}
+	// echo $this->email->print_debugger();
+}
 /**
  * 비밀번호변경 끝
  */
