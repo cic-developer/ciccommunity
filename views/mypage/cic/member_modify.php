@@ -34,7 +34,7 @@
 						<p class="btxt">핸드폰</p>
 						<div class="field modify">
 							<p class="chk-input w380 readonly">
-								<input type="text" id=".33333333333333" placeholder=""
+								<input type="text" id="phone_num" placeholder=""
 									value="<?php echo $this->member->item('mem_phone'); ?>" readonly="">
 							</p>
 							<!-- <a href="#n" class="modify-btn"><span>핸드폰번호변경</span></a> -->
@@ -195,11 +195,12 @@ function inputPhoneNumber(obj) {
 	obj.value = phone; 
 }
 
-
+var phone_num = '';
 // 이메일 확인 + 인증번호 보내기
 $(document).ready(function(){
 	$("#send_email").on('click', function(){
 		var _phone = $("#new_phone").val();
+		phone_num = _phone;
 		var state = '';
 		var message = '';
 		$.ajax({
@@ -275,6 +276,7 @@ $(document).on('click', "#con_mail_btn", function(){
 
 		$('.con-mail').remove(); // 인증 박스 삭제		
 		$('.new-phone-box').append(html); // 승인 메세지
+		$("#phone_num").val(phone_num);
 	}
 });
 

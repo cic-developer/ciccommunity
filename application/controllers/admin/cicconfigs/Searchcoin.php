@@ -155,20 +155,22 @@ class Searchcoin extends CB_Controller
 					// 통째로 가져온 테이블에서 keyword 만 담은 array() 만들어
 
 					$keyword_arr = $this->CIC_coin_keyword_model->get_keyword_row();
-					foreach ($keyword_arr as $key){
-						//print_r($key['coin_keyword']);
-						$keyword = $key['keyword'];
-						if(in_array($keyword, $key)){
-							echo "does not";
-							// $view['view']['alert_message'] = '정상적으로 저장 안되었습니다';
-						}else { 
-							echo "works";							
-							// for($j = 0; $j < count($data); $j++) {
-							// $this->CIC_coin_keyword_model -> insert_keyword_list($data[$j]);
-							// } 
-						}
+
+					print_r($keyword_arr -> coin_keyword);
+					// foreach ($keyword_arr as $key){
+					// 	//print_r($key['coin_keyword']);
+					// 	$keyword = $key['keyword'];
+					// 	if(in_array($keyword, $key)){
+					// 		echo "does not";
+					// 		// $view['view']['alert_message'] = '정상적으로 저장 안되었습니다';
+					// 	}else { 
+					// 		echo "works";							
+					// 		// for($j = 0; $j < count($data); $j++) {
+					// 		// $this->CIC_coin_keyword_model -> insert_keyword_list($data[$j]);
+					// 		// } 
+					// 	}
 					
-					}
+					// }
 					
 				}	
 			}
