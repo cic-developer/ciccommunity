@@ -13,12 +13,11 @@
             <div class="list vnews">
                 <h3>BEST</h3>
                 <div class="vnews-slide owl-loaded owl-drag">
-                
                     <div class="owl-stage-outer">
                         <div class="owl-stage"
                             style="transform: translate3d(-1040px, 0px, 0px); transition: all 0s ease 0s; width: 3900px;">
-
                             <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
+
                                 <div class="item">
                                     <a href="<?php echo base_url('post/3')?>">
                                         <div class="img"><img
@@ -33,51 +32,17 @@
                                     </a>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
-
-                    <!-- <div class="owl-stage-outer">
-                        <div class="owl-stage"
-                            style="transform: translate3d(-1040px, 0px, 0px); transition: all 0s ease 0s; width: 3900px;">
-                    <?php
-						if (element('list',element('writerbest', $view))) {
-							foreach (element('list',element('writerbest', $view)) as $writerbest) {
-						?>
-                                <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
-                                    <div class="item">
-                                        <a href="<?php echo base_url(element('posturl', $writerbest))?>">
-                                            <div class="img"><img
-                                                    src="<?php echo base_url(element('thum_url',$writerbest))?>" alt="">
-                                            </div>
-                                            <div class="txt">
-                                                <p class="btxt"><?php echo html_escape(element('post_title', $writerbest)); ?></p>
-                                                <p class="stxt"><?php echo html_escape(element('post_content', $writerbest)); ?></p>
-                                                <p class="ctxt vp"><?php echo number_format(element('post_like_point', $writerbest)); ?></p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-						<?php
-							}
-						}
-						if ( ! element('list', element('bestpost', $view))) {
-                            ?>
-							<tr>
-								<td colspan="12" class="nopost">자료가 없습니다</td>
-							</tr>
-						<?php
-						}
-                        ?>
-                        </div>
-                    </div> -->
-                        <div class="owl-nav disabled">
-                            <button type="button" role="presentation" class="owl-prev">
-                                <span aria-label="Previous">‹</span>
-                            </button>
-                            <button type="button" role="presentation" class="owl-next">
-                                <span aria-label="Next">›</span>
-                            </button>
-                        </div>
+                    <div class="owl-nav disabled">
+                        <button type="button" role="presentation" class="owl-prev">
+                            <span aria-label="Previous">‹</span>
+                        </button>
+                        <button type="button" role="presentation" class="owl-next">
+                            <span aria-label="Next">›</span>
+                        </button>
+                    </div>
                     <!-- <div class="owl-dots">
                         <button role="button" class="owl-dot active">
                             <span></span>

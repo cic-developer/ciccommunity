@@ -78,7 +78,7 @@
 
                             <!-- Modal Header -->
                             <div class="modal-header">
-                                <h4 class="modal-title">입력해주세요 <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+                                <h4 class="modal-title">검색키워드 수정하십시오 <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
                             </div>
 							<form method="get" action="https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/update_keyword">
                             <!-- Modal body -->
@@ -94,7 +94,6 @@
                                 </div> 
 								<!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <h6 class="pull-left">* 필수값</h6>
                                     <button type="submit" class="btn btn-success btn-approve" data-one-modal-url="<?php echo element("approve_url", $view); ?>">수정</button>
                                 </div>
 							</form>                                     
