@@ -128,6 +128,7 @@ $('.modal_open1').click(function() {
         data: { id: widIdx }, 
 		success: function(result){
 		result = JSON.parse(result);
+		console.log(result);
 		$("#cp_content1").val(result.coin_keyword); //wid_idx1
 		$("#wid_idx1").val(result.idx);
 		$("#coin_market").val(result.coin_market);

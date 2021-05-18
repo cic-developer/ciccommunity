@@ -103,7 +103,7 @@ $(function () {
 //]]>
 var btn = document.getElementById(id);
 btn.addEventListener('click', function() {
-	document.location.href = 'Searchcoin_keyword';
+	document.location.href = 'CStock_keyword';
 });
 
 </script>

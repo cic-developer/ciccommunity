@@ -2190,7 +2190,7 @@ class Membermodify extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('before', $eventname);
 
-		$_ath_num = trim($this->input->post('ath_num'));
+		$_ath_num = trim($this->input->post('ath_num1'));
 		if (empty($_ath_num)) {
 			$result = array(
 				'result' => '0',
@@ -2206,6 +2206,7 @@ class Membermodify extends CB_Controller
 			// $this->session->unset_userdata('ath_num');
 			// 인증결과 세션 저장
 			$this->session->set_userdata('phone_modify_ath_mail_result', '1');
+			$this->session->unset_userdata('ath_num');
 
 			$result = array(
 				'result' => '1',
@@ -2346,6 +2347,54 @@ class Membermodify extends CB_Controller
 			exit(json_encode($result));
 		}
 		// echo $this->email->print_debugger();
+	}
+
+	public function ajax_password_modify_ath_mail()
+	{
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_membermodify_ajax_password_modify_ath_mail';
+		$this->load->event($eventname);
+
+		$result = array();
+		$this->output->set_content_type('application/json');
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+
+		$_ath_num = trim($this->input->post('ath_num2'));
+		if (empty($_ath_num)) {
+			$result = array(
+				'result' => '0',
+				'reason' => '인증번호가 넘어오지 않았습니다',
+			);
+			exit(json_encode($result));
+		}
+
+		$ath_num = $this->session->userdata('ath_num');
+
+		// 세션에 저장한 인증번호 == 입력한 인증번호
+		if($ath_num == $_ath_num){
+			// $this->session->unset_userdata('ath_num');
+			// 인증결과 세션 저장
+			$this->session->set_userdata('password_modify_ath_mail_result', '1');
+			$this->session->unset_userdata('ath_num');
+
+			$result = array(
+				'result' => '1',
+				'reason' => '인증 되었습니다',
+			);
+			exit(json_encode($result));
+		} else{
+			// 인증결과 세션 저장
+			$this->session->set_userdata('password_modify_ath_mail_result', '');
+
+			$result = array(
+				'result' => '0',
+				'reason' => '인증번호를 확인해주세요',
+			);
+			exit(json_encode($result));
+		}
+		
 	}
 /**
  * 비밀번호변경 끝

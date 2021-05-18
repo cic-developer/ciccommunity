@@ -34,7 +34,7 @@
 						<p class="btxt">핸드폰</p>
 						<div class="field modify">
 							<p class="chk-input w380 readonly">
-								<input type="text" id="phone_num" placeholder=""
+								<input type="text" id="mem_phone" placeholder=""
 									value="<?php echo $this->member->item('mem_phone'); ?>" readonly="">
 							</p>
 							<!-- <a href="#n" class="modify-btn"><span>핸드폰번호변경</span></a> -->
@@ -53,7 +53,7 @@
 						<p class="btxt">비밀번호</p>
 						<div class="field modify">
 							<p class="chk-input w380 readonly">
-								<input type="password" placeholder="" value="**************" readonly="">
+								<input type="password" id="mem_password" placeholder="" value="**************" readonly="">
 							</p>
 							<!-- <a href="#n" class="modify-btn"><span>비밀번호변경</span></a> -->
 							<a href="javascript:void(0);" id="modal_btn_password" class="modify-btn"><span>비밀번호변경</span></a>
@@ -314,7 +314,7 @@ $(document).on('click', "#con_phone_mail_btn", function(){
 
 		$('.con-mail').remove(); // 인증 박스 삭제		
 		$('.new-phone-box').append(html); // 승인 메세지
-		$("#phone_num").val(phone_num);
+		$("#mem_phone").val(phone_num);
 	}
 });
 /**
@@ -335,7 +335,7 @@ $("#new_password").on("propertychange change keyup paste input", function() {
 	}
 	
 	password2 = $("#new_password_re").val();
-	if(password2 != currentVal){
+	if(password2 != currentVal ) // && currentVal.length > 0){
 		$('.agree-password').remove();
 		html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
 		$('.new-password-re').append(html);
@@ -356,7 +356,7 @@ $("#new_password_re").on("propertychange change keyup paste input", function() {
 	}
 	
 	password1 = $("#new_password").val();
-	if(password1 != currentVal){
+	if(password1 != currentVal ) // && currentVal.length > 0){
 		$('.agree-password').remove();
 		html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
 		$('.new-password-re').append(html);
@@ -415,47 +415,47 @@ $(document).ready(function(){
 })
 
 // 이메일 인증 하기
-// $(document).on('click', "#con_mail_btn", function(){
-// 	var ath_num = $("#ath_num").val();
+$(document).on('click', "#ccon_password_mail_btn", function(){
+	var ath_num = $("#ath_num2").val();
 
-// 	var result = '';
-// 	var reason = '';
-// 	$.ajax({
-// 		url: cb_url + '/membermodify/ajax_phone_modify_ath_mail',
-// 		type: 'POST',
-// 		data: {
-// 			ath_num: ath_num,
-// 			csrf_test_name : cb_csrf_hash
-// 		},
-// 		dataType: 'json',
-// 		async: false,
-// 		cache: false,
-// 		success: function(data) {
-// 			result = data.result;
-// 			reason = data.reason;
-// 		}
-// 	});
+	var result = '';
+	var reason = '';
+	$.ajax({
+		url: cb_url + '/membermodify/ajax_phone_modify_ath_mail',
+		type: 'POST',
+		data: {
+			ath_num: ath_num,
+			csrf_test_name : cb_csrf_hash
+		},
+		dataType: 'json',
+		async: false,
+		cache: false,
+		success: function(data) {
+			result = data.result;
+			reason = data.reason;
+		}
+	});
 
-// 	// 실패
-// 	if(result == 0){
-// 		alert(reason);
-// 	}
+	// 실패
+	if(result == 0){
+		alert(reason);
+	}
 
-// 	//성공
-// 	if(result == 1) {
-// 		html = '';
-// 		html += '<li class="success-email-box">'
-// 		html += '<p class="btxt"></p>'
-// 		html += '<div class="">'
-// 		html += '<p class="success-email rtxt mg10t cblue">인증이 완료되었습니다</p>'
-// 		html += '</div>'
-// 		html += '</li>'
+	//성공
+	if(result == 1) {
+		html = '';
+		html += '<li class="success-email-box">'
+		html += '<p class="btxt"></p>'
+		html += '<div class="">'
+		html += '<p class="success-email rtxt mg10t cblue">인증이 완료되었습니다</p>'
+		html += '</div>'
+		html += '</li>'
 
-// 		$('.con-mail').remove(); // 인증 박스 삭제		
-// 		$('.new-phone-box').append(html); // 승인 메세지
-// 		$("#phone_num").val(phone_num);
-// 	}
-// });
+		$('.con-mail').remove(); // 인증 박스 삭제		
+		$('.new-password-box').append(html); // 승인 메세지
+		$("#mem_password").val(password);
+	}
+});
 /**
  * 비밀번호변경 끝
  */

@@ -311,13 +311,13 @@ class Searchcoin extends CB_Controller
 		$view['view'] = array();			
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-		$this->load->library('form_validation');
-		$config = array(
-			array(
-				'field' => 'cp_content1',
-				'rules'=>'required'
-			),
-		);
+		// $this->load->library('form_validation');
+		// $config = array(
+		// 	array(
+		// 		'field' => 'cp_content1',
+		// 		'rules'=>'required'
+		// 	),
+		// );
 
 
 				// if($this->form_validation -> run () == FALSE){
