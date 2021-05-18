@@ -2248,6 +2248,7 @@ class Membermodify extends CB_Controller
 
 		// 세션에 기존 인증된 내역 삭제
 		$this->session->unset_userdata('password_modify_ath_mail_result');
+		$this->session->unset_userdata('password_modify_ath_nice_phone_result');
 		$rand_num = sprintf('%06d',rand(000000,999999));
 		// 로그인한 회원 정보
 		$member_info = $this->member->get_member();
@@ -2390,10 +2391,14 @@ class Membermodify extends CB_Controller
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
 
 		if(count($isDI) > 0){ // 중복 이면
-			// $this->session->unset_userdata('dec_data');
+			$this->session->set_userdata('password_modify_ath_nice_phone_result', '1');
+
+			// $html = '';
+			// $html .= '<p class="password-success-phone rtxt mg10t cblue">핸드폰 인증이 완료되었습니다</p>';
+
 			echo("<script>alert('인증되었습니다');</script>");
-			// echo("<script>window.opener.location.replace('/register/auth_duplicate');</script>");
-			echo("<script>window.opener.document.getElementById('nice_phone_ath_box').attr('display', 'none');</script>");
+			// echo("<script>window.opener.document.getElementById('nice_phone_ath_box').attr('display', 'none');</script>");
+			// echo("<script>window.opener.element.getElementsByClassName('success-message-box').append(.".$html."</script>");
 			echo("<script>self.close()</script>");
 		}
 

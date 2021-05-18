@@ -257,7 +257,7 @@ $(document).ready(function(){
 			}
 		});
 		alert(message);
-		// $('.success-email').remove();
+		$('.phone-success-email').remove();
 		$('.con-mail1').remove();
 		if(state == 1){
 			html = '';
@@ -305,10 +305,10 @@ $(document).on('click', "#con_phone_mail_btn", function(){
 	//성공
 	if(result == 1) {
 		html = '';
-		html += '<li class="success-email-box">'
+		html += '<li class="phone-success-email-box">'
 		html += '<p class="btxt"></p>'
 		html += '<div class="">'
-		html += '<p class="success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
+		html += '<p class="phone-success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
 		html += '</div>'
 		html += '</li>'
 
@@ -404,7 +404,7 @@ $(document).ready(function(){
 			$('.new-password-box').append(message); // 승인 메세지
 		}
 		
-		// $('.success-email').remove();
+		$('.password-success-email-box').remove();
 		$('.con-mail2').remove();
 		if(state == 1){
 			html = '';
@@ -452,10 +452,10 @@ $(document).on('click', "#con_password_mail_btn", function(){
 	//성공
 	if(result == 1) {
 		html = '';
-		html += '<li class="success-email-box">'
+		html += '<li class="password-success-email-box">'
 		html += '<p class="btxt"></p>'
-		html += '<div class="" style="display:inline-block;">'
-		html += '<p class="success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
+		html += '<div class="success-message-box" style="display:inline-block;">'
+		html += '<p class="password-success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
 		html += '</div>'
 		html += '<div class="nice-phone-ath-box" id="nice_phone_ath_box" style="display: inline-block; float: right;">'
 		html += '<form name="form_chk" method="post">'

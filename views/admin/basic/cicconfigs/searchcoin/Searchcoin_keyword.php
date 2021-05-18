@@ -7,6 +7,19 @@
 		echo form_open(current_full_url(), $attributes);
 		?>
 
+		<div class="box-table-header">
+
+		<?php
+		ob_start();
+		?>
+			<div class="btn-group pull-right" role="group" aria-label="...">
+				<a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a>
+			</div>
+		<?php
+
+		ob_end_flush();
+		?>
+
 			<div class="list-group">
 				<form class="form-inline">
 					<?php 
@@ -64,7 +77,7 @@
 									<button type="button" class="btn btn-info btn-xs modal_open1" data-toggle="modal" 
                                             data-idx="<?php echo $stocks['idx']; ?>" id="<?php echo $stocks['idx']; ?>" >수정</button>								
 								</td>
-								<td><a onclick="deleteKeyword()" href="delete_keyword?id=<?php echo $stocks['idx'];?>&pageId=<?php echo $_GET['id'];?>"  class="btn btn-danger btn-xs" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
+								<td><a onclick="deleteKeyword()" href="delete_keyword?id=<?php echo $stocks['idx'];?>&pageId=<?php echo $_GET['id'];?>"  class="btn btn-danger btn-xs bdelete" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
 							</tr>	
 							<?php } ?>	
 						<?php
@@ -111,13 +124,15 @@
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 <script type="text/javascript">
 
-function deleteKeyword() {
-	if(confirm("Do you want to delete?")){
-		return false;
-	}else{
-		return true;
-	}
-}
+$(document).ready(function(){
+    $("a.bdelete").click(function(e){
+        if(!confirm('정말 삭제 하시겠습니까 ?')){
+            e.preventDefault();
+            return false;
+        }
+        return true;
+    });
+});
 
 
 // set modal data

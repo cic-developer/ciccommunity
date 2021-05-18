@@ -241,7 +241,7 @@ class Searchcoin extends CB_Controller
 			);
 			if(isset($data) && !empty($data)){
 				$this->CIC_coin_keyword_model->insert_keyword($data);
-				$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+				$view['view']['alert_message'] = '수정 완료되었습니다';
 			}
 		}
 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
@@ -284,6 +284,9 @@ class Searchcoin extends CB_Controller
 		if($deleted == 1){
 			redirect( "https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=".$_GET['pageId']."");
 		}
+		else{
+			redirect( "https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=".$_GET['pageId']."");
+		}
 
 	}
 	function get_keyword(){
@@ -314,29 +317,13 @@ class Searchcoin extends CB_Controller
 		$view['view'] = array();			
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-		// $this->load->library('form_validation');
-		// $config = array(
-		// 	array(
-		// 		'field' => 'cp_content1',
-		// 		'rules'=>'required'
-		// 	),
-		// );
-
-
-				// if($this->form_validation -> run () == FALSE){
-				// 	$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-				// }else{
-				// 	$data = array(
-				// 		'idx' => $this -> input -> post('wid_idx1'),
-				// 		'coin_keyword' => $this -> input -> post('cp_content1'),
-		
-				// 	);
-				// 	if(isset($data) && !empty($data)){
-				// 		$this->CIC_Coin_Keyword_model-> update_keyword($data);
-				// 		$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-				// 	}
-				// }
-
+		$this->load->library('form_validation');
+		$config = array(
+			array(
+				'field' => 'cp_content1',
+				'rules'=>'required'
+			),
+		);
 		$data = array(
 			'_table' => 'cic_coin_keyword', // pass the real table name
 			'id' => $_GET['wid_idx1'],

@@ -98,7 +98,7 @@ class Maincoin extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = 'post_id';
+		$findex = 'cme_idx';
 		$forder = 'desc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
@@ -117,41 +117,33 @@ class Maincoin extends CB_Controller
 		);
 		
 		$result = $this->{$this->modelname}
-			->get_like_point_ranking_list($per_page, $offset, $where, '', $findex, '', $forder, $sfield, $skeyword);
+			->get_admin_list($per_page, $offset, $where, '', $findex, '', $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
-				$result['list'][$key]['post_display_name'] = display_username(
-					element('post_userid', $val),
-					element('post_nickname', $val)
-				);
-				$result['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
 				$result['list'][$key]['num'] = $list_num--;
-				if ($board) {
-					$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-					$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
-				}
-				$result['list'][$key]['category'] = '';
-				if (element('post_category', $val)) {
-					$result['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
-				}
-				if (element('post_image', $val)) {
-					$imagewhere = array(
-						'post_id' => element('post_id', $val),
-						'pfi_is_image' => 1,
-					);
-					$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-					$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
-				} else {
-					$result['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
-				}
+				// if ($board) {
+				// 	$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+				// 	$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+				// }
+				// $result['list'][$key]['category'] = '';
+				// if (element('post_category', $val)) {
+				// 	$result['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+				// }
+				// if (element('post_image', $val)) {
+				// 	$imagewhere = array(
+				// 		'post_id' => element('post_id', $val),
+				// 		'pfi_is_image' => 1,
+				// 	);
+				// 	$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+				// 	$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+				// } else {
+				// 	$result['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+				// }
 			}
 		}
 		$view['view']['data'] = $result;
-
-		$select = 'brd_id, brd_name';
-		$view['view']['boardlist'] = $this->Board_model->get_board_list();
 
 		/**
 		 * primary key 정보를 저장합니다

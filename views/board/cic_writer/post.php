@@ -95,6 +95,7 @@
 								<span class="vp">102,522</span>
 							</a>
 						</li> -->
+						
 						<?php
 						if (element('list',element('like_point_ranking_writer', $view))) {
 							foreach (element('list',element('like_point_ranking_writer', $view)) as $like_point_ranking_writer) {
