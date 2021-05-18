@@ -152,29 +152,17 @@ class Searchcoin extends CB_Controller
 				);
 				if(isset($data) && !empty($data)){	
 					// keyword 테이블을 통째로 불러와
-					// 통째로 가져온 테이블에서 keyword 만 담은 array() 만들어
+					// 통째로 가져온 테이블에서 keyword 만 담은 array() 만들
 
-					$keyword_arr = $this->CIC_coin_keyword_model->get_keyword_row();
-
-					print_r($keyword_arr -> coin_keyword);
-					// foreach ($keyword_arr as $key){
-					// 	//print_r($key['coin_keyword']);
-					// 	$keyword = $key['keyword'];
-					// 	if(in_array($keyword, $key)){
-					// 		echo "does not";
-					// 		// $view['view']['alert_message'] = '정상적으로 저장 안되었습니다';
-					// 	}else { 
-					// 		echo "works";							
-					// 		// for($j = 0; $j < count($data); $j++) {
-					// 		// $this->CIC_coin_keyword_model -> insert_keyword_list($data[$j]);
-					// 		// } 
-					// 	}
+					for($j = 0; $j < count($data); $j++) {
+						$this->CIC_coin_keyword_model -> insert_keyword_list($data[$j]);
+					} 
+				}
 					
-					// }
-					
-				}	
 			}
-		}
+					
+		}	
+	
 
 		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
