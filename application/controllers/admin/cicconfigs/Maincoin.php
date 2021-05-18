@@ -184,12 +184,12 @@ class Maincoin extends CB_Controller
 	}
 
 	/**
-	 * 게시판 글쓰기 또는 수정 페이지를 가져오는 메소드입니다
+	 * 거래소 추가 또는 수정 페이지를 가져오는 메소드입니다
 	 */
 	public function exchange_write($cme_idx = 0)
 	{
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_board_boards_write';
+		$eventname = 'event_admin_ciccinfigs_maincoin_exchange_write';
 		$this->load->event($eventname);
 
 		$view = array();
