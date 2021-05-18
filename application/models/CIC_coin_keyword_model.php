@@ -38,6 +38,11 @@ class CIC_Coin_keyword_model extends CB_Model
         }
     }
 
+    function get_keyword_row(){
+
+        $result = $this->db->get('cic_coin_keyword');
+        return $result->row();
+    }
     
     function get_keyword(){
         $this->db->select('cic_coin_list.*');
@@ -51,17 +56,6 @@ class CIC_Coin_keyword_model extends CB_Model
 
         return $result;
     }
-
-
-    function getKeyword($limit ='', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR'){
-        $search_where = array();
-		$search_like = array();
-		$search_or_like = array();
-        $select = 'cic_coin_keyword.*';
-        $result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
-        return $result;
-    }
-
 
     function delete_keyword($id){
         $this->db->where('idx', $id);
@@ -96,10 +90,10 @@ class CIC_Coin_keyword_model extends CB_Model
     function insert_keyword_list($data){
         $this-> db -> where('coin_keyword', $coin_keyword);
         $query = $this->db->get('cic_coin_keyword');
-        // if($query -> num_rows() > 0){ 
+        if($query -> num_rows() > 0){ 
             $result = $this->db->insert('cic_coin_keyword', $data);
             return $result;   
-        // }
+        }
     }
 
     

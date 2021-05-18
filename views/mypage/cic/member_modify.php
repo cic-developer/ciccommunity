@@ -268,11 +268,8 @@ $(document).on('click', "#con_mail_btn", function(){
 		html = '';
 		html += '<li class="success-email-box">'
 		html += '<p class="btxt"></p>'
-		html += '<div class="field modify">'
-		html += '<p class="chk-input w380">'
-		html += '<input type="text" placeholder="" id="ath_num" name="ath_num" value="">'
-		html += '</p>'
-		html += '<a href="javascript:void(0);" id="con_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
+		html += '<div class="">'
+		html += '<p class="success-email rtxt mg10t cblue">인증이 완료되었습니다</p>'
 		html += '</div>'
 		html += '</li>'
 

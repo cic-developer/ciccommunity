@@ -151,6 +151,19 @@ class Searchcoin extends CB_Controller
 					),
 				);
 				if(isset($data) && !empty($data)){	
+					// keyword 테이블을 통째로 불러와
+					// 통째로 가져온 테이블에서 keyword 만 담은 array() 만들어
+
+					$keyword_arr = $this->CIC_coin_keyword_model->get_keyword_row();
+					print_r($keyword_arr);
+
+					foreach ($keyword_arr as $key){
+						$keyword = $key['keyword'];
+						if($keyword ==  ){
+
+						}
+					
+					}
 					for($j = 0; $j < count($data); $j++) {
 						$this->CIC_coin_keyword_model -> insert_keyword_list($data[$j]);
 					}
