@@ -96,7 +96,7 @@ class Main extends CB_Controller
 						'post_id' => element('post_id', $val),
 						'pfi_is_image' => 1,
 					);
-					$popularpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+					$popularpost['list'][$key][''] = thumb_url('post', element('pfi_filename', $file), 80);
 				} else {
 					$popularpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
 				}

@@ -80,14 +80,14 @@
 				<div class="modal-content entry">
 					<span class="close"></span>
 					<!-- &times; -->
-					<ul>
+					<ul class="new-phone-box">
 						<li>
 							<p class="btxt">새 핸드폰번호</p>
 							<div class="field modify">
 								<p class="chk-input w380">
 									<input type="text" onKeyup="inputPhoneNumber(this);" placeholder="" id="new_phone" name="new_phone" value="">
 								</p>
-								<a href="javascript:void(0);" id="ath_email" class="modify-btn"><span>이메일인증</span></a>
+								<a href="javascript:void(0);" id="send_email" class="modify-btn"><span>이메일인증</span></a>
 							</div>
 						</li>
 					</ul>
@@ -198,7 +198,8 @@ function inputPhoneNumber(obj) {
 
 // 이메일 확인 + 인증번호 보내기
 $(document).ready(function(){
-	$("#ath_email").on('click', function(){
+	$("#send_email").on('click', function(){
+		
 		var _phone = $("#new_phone").val();
 
 		var state = '';
@@ -220,6 +221,22 @@ $(document).ready(function(){
 		});
 
 		alert(message);
+
+		// $('.success-email').remove();
+		$('.ath-email-box').remove();
+		if(state == 1){
+			html = '';
+			html += '<li class="ath-email-box">'
+			html += '<p class="btxt">이메일 인증</p>'
+			html += '<div class="field modify">'
+			html += '<p class="chk-input w380">'
+			html += '<input type="text" placeholder="" id="ath_num" name="ath_num" value="">'
+			html += '</p>'
+			html += '<a href="javascript:void(0);" id="ath_email" class="modify-btn"><span>인증번호 확인</span></a>'
+			html += '</div>'
+			html += '</li>'
+			$('.new-phone-box').append(html);
+		}
 
 		// 	$('.success-email').remove();
 		// 	$('.con-mail').remove();

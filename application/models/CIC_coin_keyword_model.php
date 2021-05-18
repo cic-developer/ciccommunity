@@ -82,7 +82,7 @@ class CIC_Coin_keyword_model extends CB_Model
         return $query->row_array();
     }
 
-    function search_Coin ($search){
+    function search_coin ($search){
         if (empty($search)) {
 			return false;
 		}
