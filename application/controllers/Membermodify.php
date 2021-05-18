@@ -2293,7 +2293,6 @@ class Membermodify extends CB_Controller
 		 */
 		$this->load->library('form_validation');
 
-
 		$config = array(
 			array(
 				'field' => 'new_password',
