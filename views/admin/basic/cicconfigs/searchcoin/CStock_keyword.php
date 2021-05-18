@@ -98,7 +98,7 @@
                                         <div class="modal-header">
                                             <h4 class="modal-title">입력해주세요 <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
                                         </div>
-										<form method="get" action="https://dev.ciccommunity.com/admin/cicconfigs/coin/update_keyword">
+										<form method="get" action="https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/update_keyword">
                                         <!-- Modal body -->
                                         <div class="modal-body">
                                                 <!-- <label for="usr"></label> -->
@@ -148,7 +148,7 @@ $('.modal_open1').click(function() {
    // $("#myModal-approve .modal-body #wid_idx1").val( widIdx );
 	$.ajax({
         method: "GET",
-        url: "https://dev.ciccommunity.com/admin/cicconfigs/coin/get_keyword",
+        url: "https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/get_keyword",
         data: { id: widIdx }, 
 		success: function(result){
    		//$("#div1").html(result);

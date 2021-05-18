@@ -12,13 +12,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 관리자>페이지설정>검색 코인관리 controller 입니다.
  */
-class Coin extends CB_Controller
+class Searchcoin extends CB_Controller
 {
 	/**
 	 * 관리자 페이지 상의 현재 디렉토리입니다
 	 * 페이지 이동시 필요한 정보입니다
 	 */
-	public $pagedir = 'cicconfigs/coin';
+	public $pagedir = 'cicconfigs/searchcoin';
 
 	
 	/**
@@ -121,9 +121,11 @@ class Coin extends CB_Controller
     	//RAFRESH DATA FROM DB
 		$refresh = $this -> input -> post('refresh');//
 		if($refresh){
+			//getting coin list from api
 			$getList = $this -> CIC_Coin_list_model->retrieve_api();
 			for($i=0; $i<count($getList); $i++){
 				$market = $getList[$i]['market'];
+			//Getting only coin starting with K	
 				if(strcmp(substr($market, 0, 1), "K")==0){
 					$market = substr($market, 4);
 					$data = array(
@@ -131,7 +133,6 @@ class Coin extends CB_Controller
 						'clist_name_ko' => $getList[$i]['english_name'],
 						'clist_name_en' => $getList[$i]['korean_name'],
 					);
-					//For rafreshing admin page
 					if(isset($data) && !empty($data)){
 						$stock = $this->CIC_Coin_list_model->insertStockData($data);
 						$view['view']['alert_message'] = '정상적으로 저장되었습니다';
@@ -160,11 +161,11 @@ class Coin extends CB_Controller
 			}
 		}
 
-			$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
-			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-			$this->data = $view;
-			$this->layout = element('layout_skin_file', element('layout', $view));
-			$this->view = element('view_skin_file', element('layout', $view));
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
+		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
 	}
 		
 	
@@ -250,7 +251,7 @@ class Coin extends CB_Controller
 
 		$deleted = $this->CIC_Coin_Keyword_model->delete_keyword($key_id);
 		if($deleted == 1){
-			redirect( "https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_GET['pageId']."");
+			redirect( "https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=".$_GET['pageId']."");
 		}
 
 	}
@@ -313,7 +314,7 @@ class Coin extends CB_Controller
 			
 		$update = $this->CIC_Coin_Keyword_model->update_keyword($data);
 		if($update){
-			redirect("https://dev.ciccommunity.com/admin/cicconfigs/coin/CStock_keyword?id=".$_GET['pageId']."");
+			redirect("https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=".$_GET['pageId']."");
 			$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 		}
 		else{
