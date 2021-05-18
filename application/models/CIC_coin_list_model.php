@@ -126,10 +126,11 @@ class CIC_Coin_list_model extends CB_Model
             echo "cUrl Error :" . $err;
         }
         $refresh = $this -> input -> post('refresh');
-        print_r($refresh);
+        if($refresh){
         //convert json to php array or object
-        $array = json_decode($response, true);
-        return $array;
+            $array = json_decode($response, true);
+            return $array;
+    }
     
     }
 

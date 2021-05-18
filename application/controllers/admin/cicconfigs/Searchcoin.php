@@ -118,50 +118,47 @@ class Searchcoin extends CB_Controller
 
 		//이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-    	//RAFRESH DATA FROM DB
-		$refresh = $this -> input -> post('refresh');//
-		if($refresh){
-			//getting coin list from api
-			$getList = $this -> CIC_coin_list_model->retrieve_api();
-			for($i=0; $i<count($getList); $i++){
-				$market = $getList[$i]['market'];
-			//Getting only coin starting with K	
-				if(strcmp(substr($market, 0, 1), "K")==0){
-					$market = substr($market, 4);
-					$data = array(
-						'clist_market' => $market,
-						'clist_name_ko' => $getList[$i]['english_name'],
-						'clist_name_en' => $getList[$i]['korean_name'],
-					);
-					if(isset($data) && !empty($data)){
-						$stock = $this->CIC_coin_list_model->insertStockData($data);
-						$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-					}
 
-					$data = array(
-						array(
-							'coin_market'=> $market,
-							'coin_keyword'=>$getList[$i]['korean_name']
-						),
-						array(
-							'coin_market'=> $market,
-							'coin_keyword'=>$getList[$i]['english_name']
-						),
-						array(
-							'coin_market'=> $market,
-							'coin_keyword'=> $market
-						),
-					);
-					if(isset($data) && !empty($data)){	
-						for($j = 0; $j < count($data); $j++) {
-							$this->CIC_coin_list_model -> insert_admin_list($data[$j]);
-						}
-					}	
+		//getting coin list from api
+		$getList = $this -> CIC_coin_list_model->retrieve_api();
+		for($i=0; $i<count($getList); $i++){
+			$market = $getList[$i]['market'];
+			//Getting only coin starting with K	
+			if(strcmp(substr($market, 0, 1), "K")==0){
+				$market = substr($market, 4);
+				$data = array(
+					'clist_market' => $market,
+					'clist_name_ko' => $getList[$i]['english_name'],
+					'clist_name_en' => $getList[$i]['korean_name'],
+				);
+				if(isset($data) && !empty($data)){
+					$stock = $this->CIC_coin_list_model->insertStockData($data);
+					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 				}
+
+				$data = array(
+					array(
+						'coin_market'=> $market,
+						'coin_keyword'=>$getList[$i]['korean_name']
+					),
+					array(
+						'coin_market'=> $market,
+						'coin_keyword'=>$getList[$i]['english_name']
+					),
+					array(
+						'coin_market'=> $market,
+						'coin_keyword'=> $market
+					),
+				);
+				if(isset($data) && !empty($data)){	
+					for($j = 0; $j < count($data); $j++) {
+						$this->CIC_coin_list_model -> insert_admin_list($data[$j]);
+					}
+				}	
 			}
 		}
 
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock');
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
@@ -226,7 +223,7 @@ class Searchcoin extends CB_Controller
 		/**
 		* 어드민 레이아웃을 정의합니다
 		*/
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'CStock_keyword');
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin_keyword');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
