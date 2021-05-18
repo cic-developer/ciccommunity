@@ -119,8 +119,18 @@ class Searchcoin extends CB_Controller
 		//이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
+		// keyword 테이블을 통째로 불러온다.
+		$keyword_list = $this->CIC_coin_keyword_model->get_keyword_row();
+
+		// 통째로 가져온 테이블에서 keyword 만 담은 array() 만든다.
+		$keyword_arr = array();
+		foreach($keyword_list as $value){
+			$keyword_arr[] = element('coin_keyword', $value);
+		}
+
 		//getting coin list from api
 		$getList = $this -> CIC_coin_list_model->retrieve_api();
+		
 		for($i=0; $i<count($getList); $i++){
 			$market = $getList[$i]['market'];
 			//Getting only coin starting with K	
@@ -150,29 +160,15 @@ class Searchcoin extends CB_Controller
 						'coin_keyword'=> $market
 					),
 				);
-				// print_r($data);
-				print_r($data[0]['coin_keyword']);
-				exit();
 				if(isset($data) && !empty($data)){
-					
-					
-					// keyword 테이블을 통째로 불러와
-					// 통째로 가져온 테이블에서 keyword 만 담은 array() 만들
-					print_r($data['coin_keyword'] );
-					$keyword_arr = $this->CIC_coin_keyword_model->get_keyword_row();
-					for($j = 0; $j < count($data); $j++) {
-						
-						//$keyword = $keyword_arr['coin_keyword'][$j];
-						if(in_array($keyword['coin_keyword'], $data)){
-							// echo "YES";
-							//$this->CIC_coin_keyword_model->updatekey($data[$j]);
-							
+					foreach($data as $thisData){
+
+						if(in_array($thisData['coin_keyword'], $keyword_arr)){	
+							continue;
 						}
 						else{
-							// echo "NO";
-							//$this->CIC_coin_keyword_model->insert_keyword_list($data[$j]);
-						}
-						
+							$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
+						}	
 					} 
 				}
 					

@@ -22,7 +22,7 @@
                                         ?>
                                         <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
                                         <div class="item">
-                                            <a href="<?php echo base_url(element('posturl', $writerbest))?>">
+                                            <a href="<?php echo goto_url(element('posturl', $writerbest)); ?>">
                                                 <div class="img"><img
                                                         src="<?php echo element('thumb_url', $writerbest); ?>" alt="">
                                                 </div>

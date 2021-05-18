@@ -2064,16 +2064,16 @@ class Membermodify extends CB_Controller
 			}
 			$description .= '를 포함해야 합니다';
 
-			// $this->form_validation->set_message(
-			// 	'_mem_password_check',
-			// 	$description
-			// );
-			// return false;
-			$result = array(
-				'state' => '0',
-				'message' => $description,
+			$this->form_validation->set_message(
+				'_mem_password_check',
+				$description
 			);
-			exit(json_encode($result));
+			return false;
+			// $result = array(
+			// 	'state' => '0',
+			// 	'message' => $description,
+			// );
+			// exit(json_encode($result));
 		}
 		return true;
 	}
@@ -2262,11 +2262,24 @@ class Membermodify extends CB_Controller
 		 */
 		$this->load->library('form_validation');
 
+		// $configbasic['new_password'] = array(
+		// 	'field' => 'new_password',
+		// 	'label' => '패스워드',
+		// 	'rules' => 'trim|required|min_length[' . $password_length . ']|callback__mem_password_check',
+		// 	'description' => $password_description,
+		// );
+		// $configbasic['new_password_re'] = array(
+		// 	'field' => 'new_password_re',
+		// 	'label' => '패스워드 확인',
+		// 	'rules' => 'trim|required|min_length[' . $password_length . ']|matches[new_password]',
+		// );
+
+
 		$config = array(
 			array(
 				'field' => 'new_password',
 				'label' => '새비번',
-				'rules' => 'trim|required|min_length[' . $password_length . ']',
+				'rules' => 'trim|required|min_length[' . $password_length . ']|callback__mem_password_check',
 			),
 			array(
 				'field' => 'new_password',
@@ -2281,7 +2294,7 @@ class Membermodify extends CB_Controller
 		if(!$form_validation){
 			$result = array(
 				'state' => '0',
-				'message' => '111',
+				'message' => $password_description,
 			);
 			exit(json_encode($result));
 		}
