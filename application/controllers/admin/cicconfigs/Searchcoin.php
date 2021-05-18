@@ -120,13 +120,16 @@ class Searchcoin extends CB_Controller
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
 		// keyword 테이블을 통째로 불러온다.
-		$keyword_list = $this->CIC_coin_keyword_model->get_keyword_row();
+		$keyword_list = $this->CIC_coin_keyword_model->get_keyword();
+		// print_r($keyword_list);
 
 		// 통째로 가져온 테이블에서 keyword 만 담은 array() 만든다.
 		$keyword_arr = array();
 		foreach($keyword_list as $value){
 			$keyword_arr[] = element('coin_keyword', $value);
+			// print_r($keyword_arr);
 		}
+
 
 		//$coin_list = $this->CIC_coin_list_model->getstockData();
 		// 통째로 가져온 테이블에서 keyword 만 담은 array() 만든다.
@@ -176,9 +179,10 @@ class Searchcoin extends CB_Controller
 				if(isset($data) && !empty($data)){
 					foreach($data as $thisData){
 						if(in_array($thisData['coin_keyword'], $keyword_arr)){	
-							break;
+							continue;
 						}
 						else{
+							print_r($keyword_arr);
 							$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
 						}	
 					} 

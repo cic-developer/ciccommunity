@@ -6484,6 +6484,33 @@
     border-top: 1px solid #eaeaea;
 }
 
+.board-wrap.write .entry .main-check {
+    font-size: 15px;
+}
+
+.board-wrap.write .entry .main-check label input[type=checkbox] {
+    -webkit-appearance: checkbox;
+}
+
+.board-wrap.write .entry .main-check label input[type=checkbox]:before {
+    display: none;
+}
+
+.checkbox+.checkbox-label {
+    display: inline-block;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000000;
+}
+
+
+/* check되었을 때 스타일 */
+
+.checkbox:checked+.checkbox-label {
+    background-color: blue;
+}
+
 .board-wrap.write .entry li .btxt {
     font-size: 15px;
     font-weight: 500;

@@ -2259,35 +2259,35 @@ class Membermodify extends CB_Controller
 		$new_password = $this->input->post('mem_password');
 		
 		// 비밀번호 검사
-		$uppercase = $this->cbconfig->item('password_uppercase_length');
-		$number = $this->cbconfig->item('password_numbers_length');
-		$specialchar = $this->cbconfig->item('password_specialchars_length');
+		// $uppercase = $this->cbconfig->item('password_uppercase_length');
+		// $number = $this->cbconfig->item('password_numbers_length');
+		// $specialchar = $this->cbconfig->item('password_specialchars_length');
 
-		$this->load->helper('chkstring');
-		$str_uc = count_uppercase($new_password);
-		$str_num = count_numbers($new_password);
-		$str_spc = count_specialchars($new_password);
+		// $this->load->helper('chkstring');
+		// $str_uc = count_uppercase($new_password);
+		// $str_num = count_numbers($new_password);
+		// $str_spc = count_specialchars($new_password);
 
-		if ($str_uc < $uppercase OR $str_num < $number OR $str_spc < $specialchar) {
+		// if ($str_uc < $uppercase OR $str_num < $number OR $str_spc < $specialchar) {
 
-			$description = '비밀번호는 ';
-			if ($str_uc < $uppercase) {
-				$description .= ' ' . $uppercase . '개 이상의 대문자';
-			}
-			if ($str_num < $number) {
-				$description .= ' ' . $number . '개 이상의 숫자';
-			}
-			if ($str_spc < $specialchar) {
-				$description .= ' ' . $specialchar . '개 이상의 특수문자';
-			}
-			$description .= '를 포함해야 합니다';
+		// 	$description = '비밀번호는 ';
+		// 	if ($str_uc < $uppercase) {
+		// 		$description .= ' ' . $uppercase . '개 이상의 대문자';
+		// 	}
+		// 	if ($str_num < $number) {
+		// 		$description .= ' ' . $number . '개 이상의 숫자';
+		// 	}
+		// 	if ($str_spc < $specialchar) {
+		// 		$description .= ' ' . $specialchar . '개 이상의 특수문자';
+		// 	}
+		// 	$description .= '를 포함해야 합니다';
 
-			$result = array(
-				'state' => '0',
-				'message' => $description,
-			);
-			exit(json_encode($result));
-		}
+		// 	$result = array(
+		// 		'state' => '0',
+		// 		'message' => $description,
+		// 	);
+		// 	exit(json_encode($result));
+		// }
 
 		/**
 		 * Validation 라이브러리를 가져옵니다
