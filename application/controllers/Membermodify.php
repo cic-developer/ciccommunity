@@ -2064,11 +2064,16 @@ class Membermodify extends CB_Controller
 			}
 			$description .= '를 포함해야 합니다';
 
-			$this->form_validation->set_message(
-				'_mem_password_check',
-				$description
+			// $this->form_validation->set_message(
+			// 	'_mem_password_check',
+			// 	$description
+			// );
+			// return false;
+			$result = array(
+				'state' => '0',
+				'message' => $description,
 			);
-			return false;
+			exit(json_encode($result));
 		}
 		return true;
 	}
@@ -2256,75 +2261,30 @@ class Membermodify extends CB_Controller
 		 * Validation 라이브러리를 가져옵니다
 		 */
 		$this->load->library('form_validation');
-		
-		$password_length = $this->cbconfig->item('password_length');
-
-		$password_description = '비밀번호는 ' . $password_length . '자리 이상이어야 ';
-		if ($this->cbconfig->item('password_uppercase_length')
-			OR $this->cbconfig->item('password_numbers_length')
-			OR $this->cbconfig->item('password_specialchars_length')) {
-
-			$password_description .= '하며 ';
-			if ($this->cbconfig->item('password_uppercase_length')) {
-				$password_description .= ', ' . $this->cbconfig->item('password_uppercase_length') . '개의 대문자';
-			}
-			if ($this->cbconfig->item('password_numbers_length')) {
-				$password_description .= ', ' . $this->cbconfig->item('password_numbers_length') . '개의 숫자';
-			}
-			if ($this->cbconfig->item('password_specialchars_length')) {
-				$password_description .= ', ' . $this->cbconfig->item('password_specialchars_length') . '개의 특수문자';
-			}
-			$password_description .= '를 포함해야 ';
-		}
-		$password_description .= '합니다';
-
-		$configbasic['new_password'] = array(
-			'field' => 'new_password',
-			'label' => '패스워드',
-			'rules' => 'trim|required|min_length[' . $password_length . ']|callback__mem_password_check',
-			'description' => $password_description,
-		);
-		$configbasic['new_password_re'] = array(
-			'field' => 'new_password_re',
-			'label' => '패스워드 확인',
-			'rules' => 'trim|required|min_length[' . $password_length . ']|matches[new_password]',
-		);
-
 
 		$config = array(
 			array(
-				'field' => 'mem_phone',
-				'label' => '새번호',
-				'rules' => 'trim|valid_phone',
+				'field' => 'new_password',
+				'label' => '새비번',
+				'rules' => 'trim|required|min_length[' . $password_length . ']',
+			),
+			array(
+				'field' => 'new_password',
+				'label' => '새비번 확인',
+				'rules' => 'trim|required|min_length[' . $password_length . ']|matches[new_password]',
 			),
 		);
+		// password_description
 		$this->form_validation->set_rules($config);
 		$form_validation = $this->form_validation->run();
 
 		if(!$form_validation){
 			$result = array(
 				'state' => '0',
-				'message' => '번호를 정확히 입력해주세요',
+				'message' => '111',
 			);
 			exit(json_encode($result));
 		}
-
-		if(strlen($new_phone) < 1){
-			$result = array(
-				'state' => '0',
-				'message' => '번호를 입력해주세요',
-			);
-			exit(json_encode($result));
-		}
-
-		if(count($isPhone) > 0){ // 중복 이면
-			$result = array(
-				'state' => '0',
-				'message' => '이미 사용중인 번호입니다',
-			);
-			exit(json_encode($result));
-		}
-
 
 		// 이메일에 포함될 데이터
 		$getdata['rand_num'] = $rand_num;
@@ -2338,7 +2298,7 @@ class Membermodify extends CB_Controller
 		$message = $this->load->view('mypage/cic/email_form', $emailform, true);
 		$this->email->from(element('webmaster_email', $getdata), element('webmaster_name', $getdata));
 		$this->email->to($email);
-		$this->email->subject('[CIC Community] 핸드폰번호변경 이메일 인증 안내메일입니다');
+		$this->email->subject('[CIC Community] 비밀번호변경 이메일 인증 안내메일입니다');
 		$this->email->message($message);
 
 		if ($this->email->send() === false) {
@@ -2355,45 +2315,6 @@ class Membermodify extends CB_Controller
 			exit(json_encode($result));
 		}
 		// echo $this->email->print_debugger();
-	}
-
-	/**
-	 * 회원가입시 패스워드가 올바른 규약에 의해 입력되었는지를 체크하는 함수입니다
-	 */
-	public function _mem_password_check($str)
-	{
-		$uppercase = $this->cbconfig->item('password_uppercase_length');
-		$number = $this->cbconfig->item('password_numbers_length');
-		$specialchar = $this->cbconfig->item('password_specialchars_length');
-
-		$this->load->helper('chkstring');
-		$str_uc = count_uppercase($str);
-		$str_num = count_numbers($str);
-		$str_spc = count_specialchars($str);
-
-		if ($str_uc < $uppercase OR $str_num < $number OR $str_spc < $specialchar) {
-
-			$description = '비밀번호는 ';
-			if ($str_uc < $uppercase) {
-				$description .= ' ' . $uppercase . '개 이상의 대문자';
-			}
-			if ($str_num < $number) {
-				$description .= ' ' . $number . '개 이상의 숫자';
-			}
-			if ($str_spc < $specialchar) {
-				$description .= ' ' . $specialchar . '개 이상의 특수문자';
-			}
-			$description .= '를 포함해야 합니다';
-
-			$this->form_validation->set_message(
-				'_mem_password_check',
-				$description
-			);
-			return false;
-
-		}
-
-		return true;
 	}
 /**
  * 비밀번호변경 끝
