@@ -376,7 +376,7 @@
 			// html += '</ul>';
 
 			var html = '';
-			html += '<form name="form_chk" method="post">'
+			html += '<form name="form_chk" method="post" id="password_form_chk">'
 			html += '<input type="hidden" name="m" value="checkplusService">'
 			html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">'
 			html += '<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn"><span>휴대폰 인증</span></a>'
@@ -508,6 +508,33 @@
 		oldVal2 = currentVal;
 	});
 
+	function createPasswordModify(){
+		var html = '';
+		html += '<div class="modal-content entry">';
+		html += '<ul class="password-modify-box">';
+		html += '<li class="password-modify-content">';
+		html += '<p class="btxt">새 비밀번호</p>';
+		html += '<div class="field modify">';
+		html += '<p class="chk-input w380">';
+		html += '<input type="password" placeholder="" id="new_password" name="new_password" value="">';
+		html += '</p>';
+		html += '</div>';
+		html += '</li>';
+		html += '<li class="password-re-modify-content">';
+		html += '<p class="btxt">새 비밀번호 확인</p>';
+		html += '<div class="field modify">';
+		html += '<p class="chk-input w380">';
+		html += '<input type="password" placeholder="" id="new_password_re" name="new_password_re" value="">';
+		html += '</p>';
+		html += '<a href="javascript:void(0);" id="password_modify_btn" class="modify-btn"><span>이메일인증</span></a>';
+		html += '</div>';
+		html += '</li>';
+		html += '</ul>';
+		html += '</div>';
+
+		$('#password_form_chk').remove(); // 휴대폰 인증 박스 삭제		
+		$('#myModal_password').append(html); 
+	}
 
 	var password = '';
 	// 이메일 확인 + 인증번호 보내기

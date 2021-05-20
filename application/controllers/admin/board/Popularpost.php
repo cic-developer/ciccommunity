@@ -202,8 +202,12 @@ class Popularpost extends CB_Controller
 		$this->{$this->modelname}->search_field_equal = array('post_id', 'mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('post_id'); // 정렬이 가능한 필드
 		
+		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		$where = array(
-			'post_exept_state >' =>  0,
+			'brd_id' => 1,
+			'post_exept_state >' => 0,
+			'post_datetime >=' => $checktime,
+			'post_del <>' => 2,
 		);
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;
@@ -274,6 +278,7 @@ class Popularpost extends CB_Controller
 		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listdelete/?' . $param->output());
 		$view['view']['list_trash_url'] = admin_url($this->pagedir . '/listtrash/?' . $param->output());
 		$view['view']['list_update_url'] = admin_url($this->pagedir . '/listupdate/?' . $param->output());
+		$view['view']['list_return_url'] = admin_url($this->pagedir . '/listreturn/?' . $param->output());
 		$view['view']['list_bestpost_exept_url'] = admin_url($this->pagedir . '/bestpostexept/?' . $param->output());
 		
 		// 이벤트가 존재하면 실행합니다
@@ -305,7 +310,7 @@ class Popularpost extends CB_Controller
 		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
 			foreach ($this->input->post('chk') as $val) {
 				if ($val) {
-					$this->Post_model->upadte_post_exept_state($val);
+					$this->Post_model->upadte_post_exept_state_1($val);
 				}
 			}
 		}
@@ -325,7 +330,7 @@ class Popularpost extends CB_Controller
 		redirect($redirecturl);
 	}
 
-	public function bestpostupdate()
+	public function listreturn()
 	{
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_board_post_bestpost';
@@ -339,7 +344,7 @@ class Popularpost extends CB_Controller
 		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
 			foreach ($this->input->post('chk') as $val) {
 				if ($val) {
-					$this->Post_model->upadte_post_best_state($val);
+					$this->Post_model->upadte_post_exept_state_0($val);
 				}
 			}
 		}
@@ -352,7 +357,7 @@ class Popularpost extends CB_Controller
 		 */
 		$this->session->set_flashdata(
 			'message',
-			'베스트 게시물로 선정되었습니다'
+			'제외 해지 되었습니다.'
 		);
 		$param =& $this->querystring;
 		$redirecturl = admin_url($this->pagedir . '?' . $param->output());

@@ -575,13 +575,27 @@ class Post_model extends CB_Model
 		return $post_num;
 	}
 
-	public function upadte_post_exept_state($post_id)
+	public function upadte_post_exept_state_1($post_id)
 	{
 		$where = array(
 			'post_id' => $post_id,
 		);
 		$updatedata = array(
 			'post_exept_state' => 1,
+		);
+		$this->db->where($where);
+		$this->db->set($updatedata);
+
+		return $this->db->update($this->_table);
+	}
+
+	public function upadte_post_exept_state_0($post_id)
+	{
+		$where = array(
+			'post_id' => $post_id,
+		);
+		$updatedata = array(
+			'post_exept_state' => 0,
 		);
 		$this->db->where($where);
 		$this->db->set($updatedata);

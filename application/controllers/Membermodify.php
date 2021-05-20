@@ -2621,15 +2621,9 @@ class Membermodify extends CB_Controller
 			$html = '<p class="password-success-phone rtxt mg10t cblue">핸드폰 인증이 완료되었습니다</p>';
 
 			echo("<script>");
-			echo("alert('인증되었습니다');"); // 인증완료 문구
+			echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
 			echo("var elm = window.opener.document.getElementById('password_success_message_box');");
-			echo("elm.removeChild(elm.lastChild);"); // 최근(마지막) 인증 문구 제거
-			echo("var p = document.createElement('p');"); // 인증 문구 텍스트 생성 ~
-			echo("p.className = 'password-success-phone rtxt mg10t cblue';"); // ~
-			echo("p.textContent = '핸드폰 인증이 완료되었습니다';"); // ~
-			echo("window.opener.document.getElementById('password_success_message_box').appendChild(p);"); // ~ 휴대폰 인증 텍스트 적용
-			echo("var new_password = window.opener.document.getElementById('new_password').value;"); // 새 비밀번호 불러오기
-			echo("window.opener.document.getElementById('mem_password').value = new_password;"); // 새 비밀번호 저장
+			echo("window.opener.createPasswordModify();"); // 패스워드 변경 폼 생성
 			echo("self.close();");
 			echo("</script>");
 			exit;

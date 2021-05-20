@@ -15,7 +15,7 @@
 					?>
 						<div class="btn-group pull-right" role="group" aria-label="...">
 							<a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a>
-							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('list_bestpost_exept_url', $view); ?>" >베스트게시물해제</button>
+							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('list_return_url', $view); ?>" >제외 해지</button>
 						</div>
 					<?php
 					$buttons = ob_get_contents();
