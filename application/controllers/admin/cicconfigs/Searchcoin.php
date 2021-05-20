@@ -239,7 +239,7 @@ class Searchcoin extends CB_Controller
 		$keylist = $this -> CIC_coin_keyword_model->get_keyword();
 		$view['keylist'] = $keylist;
 
-		//INSERTING KEY WORD IN
+
 		$coin_list = $this->CIC_coin_list_model->getstockData();
 		$view['coin_list'] = $coin_list;
 

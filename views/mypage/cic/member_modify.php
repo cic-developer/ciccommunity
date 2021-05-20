@@ -72,7 +72,7 @@
 				</ul>
 			</div>
 			<div class="lower">
-				<a href="#n" class="update-btn"><span>정보업데이트</span></a>
+				<a href="javascript:fnPopup();" id="submitButton" class="update-btn"><span>정보업데이트</span></a>
 				<a href="#n" class="leave-btn"><span>회원탈퇴</span></a>
 			</div>
 
@@ -160,6 +160,12 @@
 </style>
 
 <script>
+	$(document).ready(function(){
+		$("#submitButton").on('click',function(){
+			$("#fregisterform").submit();
+		});
+	});
+
 	// Get the modal
 	var modal1 = document.getElementById('myModal_phone');
 	var modal2 = document.getElementById('myModal_password');

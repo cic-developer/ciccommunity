@@ -2609,6 +2609,14 @@ class Membermodify extends CB_Controller
 		
 		$result = $this->Member_model->set_user_modify($member_info['mem_id'], $new_phone, $new_password, $new_wallet);
 
+		if($result == 0){
+			echo("<script>alert('정보수정에 실패하였습니다 (관리자문의)');</script>");
+			redirect('membermodify/modify');
+		}
 
+		if($result == 1){
+			echo("<script>alert('정보수정이 완료되었습니다');</script>");
+			redirect('membermodify');
+		}
 	}
 }
