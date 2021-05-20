@@ -150,7 +150,10 @@
 								</div>	
 							</a>
 						</li>
-						
+					<?php	
+							}
+						}	
+					?>	
 					</ul>
 					<script>
 						$(function(){

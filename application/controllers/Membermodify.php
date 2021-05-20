@@ -2319,6 +2319,57 @@ class Membermodify extends CB_Controller
 /**
  * 비밀번호변경 시작
  */
+	public function ajax_password_confirm() {
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_membermodify_ajax_password_confirm';
+		$this->load->event($eventname);
+
+		$view = array();
+		$view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		
+		$new_phone = $this->input->post('new_phone');
+		$isPhone = $this->Member_model->get_by_memPhone($new_phone, '');
+
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+		$password_length = $this->cbconfig->item('password_length');
+
+		$config = array(
+			array(
+				'field' => 'new_password',
+				'label' => '새 비밀번호',
+				'rules' => 'trim|required|min_length[' . $password_length . ']|callback__mem_password_check',
+			),
+			array(
+				'field' => 'new_password_re',
+				'label' => '새 비밀번호 확인',
+				'rules' => 'trim|required|min_length[' . $password_length . ']|matches[new_password]',
+			),
+		);
+		// password_description
+		$this->form_validation->set_rules($config);
+		$form_validation = $this->form_validation->run();
+
+		if(!$form_validation){
+			$result = array(
+				'state' => '0',
+				'message' => $this->form_validation->error_string(),
+			);
+			exit(json_encode($result));
+		}
+
+		$result = array(
+			'state' => '1',
+			'message' => '사용 가능한 비밀번호입니다',
+		);
+			exit(json_encode($result));
+	}
+
 	public function ajax_password_modify_email_send() {
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_membermodify_ajax_password_modify_email_send';
