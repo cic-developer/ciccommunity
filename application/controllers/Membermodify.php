@@ -2614,6 +2614,9 @@ class Membermodify extends CB_Controller
  */
 /********************************************************/
 
+	/**
+	 * 회원정보 업데이트
+	 */
 	public function update() {
 		
 		// 이벤트 라이브러리를 로딩합니다
@@ -2638,7 +2641,7 @@ class Membermodify extends CB_Controller
 		$password_nice_ath_result = $this->session->userdata('password_modify_ath_nice_phone_result'); // 비밀번호수정 휴대폰 인증 결과
 		$wallet_nice_ath_result = $this->session->userdata('wallet_modify_ath_nice_phone_result'); // 지갑주소수정 휴대폰 인증 결과
 
-		$mem_id = $this->member->item('mem_id');
+		$mem_id = (int) $this->member->item('mem_id');
 		$new_phone =  $this->member->item('mem_phone');;
 		$new_password =  $this->member->item('mem_password');
 		$new_wallet = $this->member->item('mem_wallet_address');
@@ -2683,5 +2686,33 @@ class Membermodify extends CB_Controller
 			echo("<script>alert('정보수정이 완료되었습니다');</script>"); // alet가 안됨
 			redirect('membermodify');
 		}
+	}
+
+	/**
+	 * 회원탈퇴
+	 */
+	public function userdelete()
+	{
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_membermodify_userdelete';
+		$this->load->event($eventname);
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+
+		/**
+		 * 회원 삭제를 실행합니다
+		 */
+		$mem_id = (int) $this->member->item('mem_id');
+		$this->member->delete_member($mem_id);
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('after', $eventname);
+
+		/**
+		 * 삭제가 끝난 후 메인페이지로 이동됩니다
+		 */
+		// echo ("<script>alert('');</script>");
+		redirect('/');
 	}
 }

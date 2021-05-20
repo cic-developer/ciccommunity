@@ -24,7 +24,8 @@
 				</ul>
 			</div>
 			<div class="lower">
-				<a href="#n" class="leave-btn"><span>뒤로가기</span></a>
+				<a href="javascript:fconfirmpassword.submit();" class="leave-btn"><span>확인</span></a>
+				<a href="javascript:history.back();" class="leave-btn"><span>뒤로가기</span></a>
 			</div>
 			<?php echo form_close(); ?>
 		</div>

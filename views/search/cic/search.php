@@ -4,7 +4,7 @@
 		<div class="search-wrap list">
 			<div class="filter">
 				<div class="sel-box c01">
-					<a href="<?php echo base_url('/search')?>" class="sel-btn"><span>통합검색</span></a>
+					<a href="#n" class="sel-btn"><span>통합검색</span></a>
 					<ul>
 						<li class="active"><a href="#n"><span>통합검색</span></a></li>
 						<li><a href="#n"><span>제목</span></a></li>

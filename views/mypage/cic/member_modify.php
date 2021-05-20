@@ -73,7 +73,7 @@
 			</div>
 			<div class="lower">
 				<a href="javascript:fnPopup();" id="submitButton" class="update-btn"><span>정보업데이트</span></a>
-				<a href="#n" class="leave-btn"><span>회원탈퇴</span></a>
+				<a href="/membermodify/userdelete" class="leave-btn"><span>회원탈퇴</span></a>
 			</div>
 
 			<!-- 핸드폰번호 변경 -->
