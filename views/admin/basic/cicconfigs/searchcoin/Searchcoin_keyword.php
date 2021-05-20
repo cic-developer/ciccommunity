@@ -13,12 +13,7 @@
 		ob_start();
 		?>
 			<div class="btn-group pull-right" role="group" aria-label="...">
-				
-				<form action='post'>
-					<a href="<?php echo element('listall_url', $view); ?>">
-						<input type="submit" id = "refresh" name="refresh_" class="btn btn-default btn-sm" value = '전체목록'>
-					</a>
-				</form>
+				<a href="<?php echo element('listall_url', $view); ?>" value = "rafresh_" name = "rafresh_" class="btn btn-outline btn-default btn-sm">전체목록</a>
 			</div>
 		<?php
 

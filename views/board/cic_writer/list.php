@@ -18,7 +18,6 @@
                             style="transform: translate3d(-1040px, 0px, 0px); transition: all 0s ease 0s; width: 3900px;">
                                 <?php
                                 if (element('list',element('writerbest', $view))) {
-                                    $i = 1;
                                     foreach (element('list',element('writerbest', $view)) as $writerbest) {
                                         ?>
                                         <div class="owl-item" style="width: 240px; margin-right: 20px;">

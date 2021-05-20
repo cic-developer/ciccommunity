@@ -150,6 +150,9 @@ class Membermodify extends CB_Controller
 	public function modify()
 	{
 
+		print_r($this->member->item('mem_wallet_address'));
+		exit;
+
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_membermodify_modify';
 		$this->load->event($eventname);
@@ -2092,6 +2095,11 @@ class Membermodify extends CB_Controller
 		$eventname = 'event_membermodify_ajax_modify_email_send';
 		$this->load->event($eventname);
 
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+		
 		$view = array();
 		$view['view'] = array();
 
@@ -2153,6 +2161,11 @@ class Membermodify extends CB_Controller
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_membermodify_ajax_modify_ath_mail';
 		$this->load->event($eventname);
+		
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
 
 		$result = array();
 		$this->output->set_content_type('application/json');
@@ -2270,6 +2283,11 @@ class Membermodify extends CB_Controller
 		$eventname = 'event_membermodify_ajax_phone_confirm';
 		$this->load->event($eventname);
 
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+
 		$view = array();
 		$view['view'] = array();
 
@@ -2337,6 +2355,11 @@ class Membermodify extends CB_Controller
 		$eventname = 'event_membermodify_ajax_password_confirm';
 		$this->load->event($eventname);
 
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+
 		$view = array();
 		$view['view'] = array();
 
@@ -2393,6 +2416,11 @@ class Membermodify extends CB_Controller
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_membermodify_ajax_wallet_confirm';
 		$this->load->event($eventname);
+
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
 
 		$view = array();
 		$view['view'] = array();
@@ -2456,6 +2484,11 @@ class Membermodify extends CB_Controller
 		$eventname = 'event_membermodify_password_auth_phone_success';
 		$this->load->event($eventname);
 
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		$data = $this->session->userdata('dec_data');
@@ -2490,6 +2523,11 @@ class Membermodify extends CB_Controller
 		$eventname = 'event_membermodify_wallet_auth_wallet_success';
 		$this->load->event($eventname);
 
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		$data = $this->session->userdata('dec_data');
@@ -2523,6 +2561,11 @@ class Membermodify extends CB_Controller
 		$eventname = 'event_membermodify_password_auth_phone_fail';
 		$this->load->event($eventname);
 
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+
 		$view = array();
 		$view['view'] = array();
 
@@ -2546,6 +2589,11 @@ class Membermodify extends CB_Controller
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_membermodify_wallet_auth_phone_fail';
 		$this->load->event($eventname);
+
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
 
 		$view = array();
 		$view['view'] = array();
@@ -2574,6 +2622,11 @@ class Membermodify extends CB_Controller
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_membermodify_update';
 		$this->load->event($eventname);
+
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
 
 		$view = array();
 		$view['view'] = array();

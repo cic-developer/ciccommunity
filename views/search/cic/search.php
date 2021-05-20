@@ -45,12 +45,12 @@
 				<p class="stxt"><?php echo $total_rows; ?>건</p>
 			</div>
 			<!-- HERE THE PRICE -->
-			<div class="result list txt" style="height: 170px;">
-				<div>
+			<div class="result list txt content-heading" style="height: 170px;">
+				<div style="float:left">
 					<p class="pimg">
-						<img class="img" src="https://static.upbit.com/logos/BTC.png"></img>
+						<img class="img pull-left" src="https://static.upbit.com/logos/BTC.png"></img>
 					</p>
-					<p class="btxt"><span style="color:red" ><strong><?php echo $korean; ?></strong></span></p>
+					<p class="btxt pull-right"><span style="color:red" ><strong><?php echo $korean; ?></strong></span></p>
 					<span class="symbole"></span>
 				</div>
 				<p class="stxt display-4"> <?php echo $trade; ?></p>
