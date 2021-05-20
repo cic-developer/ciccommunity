@@ -230,6 +230,7 @@
 				url: cb_url + '/membermodify/ajax_modify_email_send',
 				type: 'POST',
 				data: {
+					type: type,
 					csrf_test_name : cb_csrf_hash
 				},
 				dataType: 'json',
@@ -334,7 +335,7 @@
 			html += '</ul>';
 
 			$('.phone-modal-content > .ath-email-box').remove(); // 이메일 인증 박스 삭제		
-			$('.phone-modal-content').append(html); // 승인 메세지
+			$('.phone-modal-content').append(html); // 수정 박스 생성
 		}
 
 		if(result == 2){
@@ -347,7 +348,7 @@
 			html += '</form>'
 
 			$('.password-modal-content').remove(); // 이메일 인증 박스 삭제		
-			$('#myModal_password').append(html); // 승인 메세지
+			$('#myModal_password').append(html); // 수정 박스 생성
 		}
 
 		if(result == 3){
@@ -360,7 +361,7 @@
 			html += '</form>'
 
 			$('.wallet-modal-content').remove(); // 이메일 인증 박스 삭제		
-			$('#myModal_wallet').append(html); // 승인 메세지
+			$('#myModal_wallet').append(html); // 수정 박스 생성
 		}
 	});
 
@@ -553,7 +554,7 @@
 		html += '<div class="modal-content entry">';
 		html += '<ul class="wallet-modify-box">';
 		html += '<li class="wallet-modify-content">';
-		html += '<p class="btxt">새 비밀번호 확인</p>';
+		html += '<p class="btxt">새 지갑주소 확인</p>';
 		html += '<div class="field modify">';
 		html += '<p class="chk-input w380">';
 		html += '<input type="text" placeholder="" id="new_wallet" name="new_wallet" value="">';
@@ -595,7 +596,7 @@
 		if(state == 1){
 			alert(message);
 			$("#mem_wallet").val(wallet);
-			modal2.style.display = "none";
+			modal3.style.display = "none";
 		}
 		if(state == 0){
 			// $('.wallet-modify-box').append(message);

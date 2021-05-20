@@ -178,8 +178,8 @@ class Membermodify extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		$view['view']['phone_enc_data'] = $this->checkplus->main('membermodify', 'password_auth_phone_success', '');
-		$view['view']['wallet_enc_data'] = $this->checkplus->main('membermodify', 'wallet_auth_phone_success', '');
+		$view['view']['phone_enc_data'] = $this->checkplus->main('membermodify', 'password_auth_phone_success', 'password_auth_phone_fail');
+		$view['view']['wallet_enc_data'] = $this->checkplus->main('membermodify', 'wallet_auth_phone_success', 'wallet_auth_phone_fail');
 		// $view['view']['dec_data'] = $this->session->userdata('dec_data');
 
 		$email_description = '';
@@ -2502,6 +2502,50 @@ class Membermodify extends CB_Controller
 		$this->session->unset_userdata('dec_data');
 
 		echo("<script>alert('인증에 실패하였습니다');</script>");
+		echo("<script>self.close()</script>");
+	}
+
+	public function password_auth_phone_fail(){
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_membermodify_password_auth_phone_fail';
+		$this->load->event($eventname);
+
+		$view = array();
+		$view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		if($this->input->get("EncodeData")){
+			$this->checkplus->fail($this->input->get("EncodeData"));
+			
+			echo("<script>alert('인증에 실패하였습니다!');</script>");
+			echo("<script>self.close()</script>");
+		} 
+
+		echo("<script>alert('인증에 실패하였습니다!');</script>");
+		echo("<script>self.close()</script>");
+	}
+
+	public function wallet_auth_phone_fail(){
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_membermodify_wallet_auth_phone_fail';
+		$this->load->event($eventname);
+
+		$view = array();
+		$view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		if($this->input->get("EncodeData")){
+			$this->checkplus->fail($this->input->get("EncodeData"));
+			
+			echo("<script>alert('인증에 실패하였습니다!');</script>");
+			echo("<script>self.close()</script>");
+		} 
+
+		echo("<script>alert('인증에 실패하였습니다!');</script>");
 		echo("<script>self.close()</script>");
 	}
 /**

@@ -24,11 +24,13 @@
 			<div class="list-group">
 				<form class="form-inline">
 					<?php 
-					$myId = $_GET['id']; 
-					?>
+					$myId = $_GET['id'];
+					foreach($coin_list as $clists) { 
+						if($myId == $clists['clist_market']) {?>
 					<div class="form-group col-md-6">
-						<label><?php echo $myId ?></label>
+						<label><?php echo $clists['clist_market']. " - " .$clists['clist_name_ko']; ?></label>
 					</div>
+					<?php } }?>
 					<div class="input-group col-md-6">
 						<input type="hidden" name="coin_market" value = "<?php echo $myId; ?>" >
 						<input type="text" class="form-control" name = "keyword" placeholder = "Keyword">

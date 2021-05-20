@@ -158,7 +158,7 @@ class Member_model extends CB_Model
 		if (empty($mem_wallet)) {
 			return false;
 		}
-		$where = array('mem_wallet' => $mem_wallet);
+		$where = array('mem_wallet_address' => $mem_wallet);
 		return $this->get_one('', $select, $where);
 	}
 }

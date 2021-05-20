@@ -242,7 +242,6 @@ class Searchcoin extends CB_Controller
 
 		$coin_list = $this->CIC_coin_list_model->getstockData();
 		$view['coin_list'] = $coin_list;
-		print_r($coin_list);
 
 
 		//이벤트가 존재하면 실행합니다
