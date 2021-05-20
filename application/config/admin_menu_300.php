@@ -21,6 +21,7 @@ $config['admin_page_menu']['board'] =
 			'trash_comment'			=> array('휴지통', '', 'hide'),
 			'posthistory'			=> array('게시물변경로그', ''),
 			'popularpost'			=> array('인기게시물관리', ''),
+			'bestpost'				=> array('베스트게시물관리', ''),
 			// 'naversyndilog'			=> array('네이버신디케이션로그', ''),
 			'post'					=> array('게시물관리', ''),
 			'comment'				=> array('댓글관리', ''),

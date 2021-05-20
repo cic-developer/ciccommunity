@@ -2248,6 +2248,7 @@ class Membermodify extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		// 세션에 기존 인증된 내역 삭제
+		// 이메일을 보내는 순간 기존, 이메일 인증 + 휴대폰 인증이 삭제됩니다.
 		$this->session->unset_userdata('password_modify_ath_mail_result');
 		$this->session->unset_userdata('password_modify_ath_nice_phone_result');
 		$rand_num = sprintf('%06d',rand(000000,999999));
@@ -2390,7 +2391,9 @@ class Membermodify extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		// 세션에 기존 인증된 내역 삭제
+		// 이메일을 보내는 순간 기존, 이메일 인증 + 휴대폰 인증이 삭제됩니다.
 		$this->session->unset_userdata('wallet_modify_ath_mail_result');
+		$this->session->unset_userdata('wallet_modify_ath_nice_phone_result');
 		$rand_num = sprintf('%06d',rand(000000,999999));
 		// 로그인한 회원 정보
 		$member_info = $this->member->get_member();
@@ -2509,7 +2512,6 @@ class Membermodify extends CB_Controller
 * 지갑주소변경 끝
 */
 
-
 /**
  * 휴대폰 인증 시작
  */
@@ -2528,7 +2530,10 @@ class Membermodify extends CB_Controller
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
 
 		if(count($isDI) > 0){ // 중복 이면
+			// 휴대폰 인증 결과 저장
 			$this->session->set_userdata('password_modify_ath_nice_phone_result', '1');
+			// 휴대폰 인증 데이터 삭제
+			$this->session->unset_userdata('dec_data');
 
 			$html = '<p class="password-success-phone rtxt mg10t cblue">핸드폰 인증이 완료되었습니다</p>';
 
@@ -2547,29 +2552,15 @@ class Membermodify extends CB_Controller
 			exit;
 		}
 
+		// 휴대폰 인증 데이터 삭제
+		$this->session->unset_userdata('dec_data');
+
 		echo("<script>alert('인증에 실패하였습니다');</script>");
 		echo("<script>self.close()</script>");
-
-		// $view = array();
-		// $view['view'] = array();
-
-		// 이벤트가 존재하면 실행합니다
-		
-		// $this->member->get_by_memDI('MC0GCCqGSIb3DQIJAyEAtonfQuH352/KCB0yrjiwSQcnDQTS7ff5UcT4ievX8HM=');
-
-		// if($this->input->get("EncodeData")){
-		// 	$this->checkplus->success($this->input->get("EncodeData"));
-			
-		// 	echo("<script>window.opener.fregisterform.submit();</script>");
-		// 	echo("<script>self.close()</script>");
-		// } else {
-		// 	echo("<script>alert('비정상적인 접근입니다.')</script>");
-		// 	echo("<script>self.close()</script>");
-		// }
 	}
 
 	// 지갑주소 변경
-	public function wallet_auth_wallet_success(){
+	public function wallet_auth_phone_success(){
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_membermodify_wallet_auth_wallet_success';
 		$this->load->event($eventname);
@@ -2582,44 +2573,33 @@ class Membermodify extends CB_Controller
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
 
 		if(count($isDI) > 0){ // 중복 이면
-			$this->session->set_userdata('password_modify_ath_nice_phone_result', '1');
+			// 휴대폰 인증 결과 저장
+			$this->session->set_userdata('wallet_modify_ath_nice_phone_result', '1');
+			// 휴대폰 인증 데이터 삭제
+			$this->session->unset_userdata('dec_data');
 
 			$html = '<p class="password-success-phone rtxt mg10t cblue">핸드폰 인증이 완료되었습니다</p>';
 
 			echo("<script>");
 			echo("alert('인증되었습니다');"); // 인증완료 문구
-			echo("var elm = window.opener.document.getElementById('password_success_message_box');");
+			echo("var elm = window.opener.document.getElementById('wallet_success_message_box');");
 			echo("elm.removeChild(elm.lastChild);"); // 최근(마지막) 인증 문구 제거
 			echo("var p = document.createElement('p');"); // 인증 문구 텍스트 생성 ~
 			echo("p.className = 'password-success-phone rtxt mg10t cblue';"); // ~
 			echo("p.textContent = '핸드폰 인증이 완료되었습니다';"); // ~
-			echo("window.opener.document.getElementById('password_success_message_box').appendChild(p);"); // ~ 휴대폰 인증 텍스트 적용
-			echo("var new_password = window.opener.document.getElementById('new_password').value;"); // 새 비밀번호 불러오기
-			echo("window.opener.document.getElementById('mem_password').value = new_password;"); // 새 비밀번호 저장
+			echo("window.opener.document.getElementById('wallet_success_message_box').appendChild(p);"); // ~ 휴대폰 인증 텍스트 적용
+			echo("var new_wallet = window.opener.document.getElementById('new_wallet').value;"); // 새 지갑주소 불러오기
+			echo("window.opener.document.getElementById('mem_wallet').value = new_wallet;"); // 새 지갑주소 저장
 			echo("self.close();");
 			echo("</script>");
 			exit;
 		}
 
+		// 휴대폰 인증 데이터 삭제
+		$this->session->unset_userdata('dec_data');
+
 		echo("<script>alert('인증에 실패하였습니다');</script>");
 		echo("<script>self.close()</script>");
-
-		// $view = array();
-		// $view['view'] = array();
-
-		// 이벤트가 존재하면 실행합니다
-		
-		// $this->member->get_by_memDI('MC0GCCqGSIb3DQIJAyEAtonfQuH352/KCB0yrjiwSQcnDQTS7ff5UcT4ievX8HM=');
-
-		// if($this->input->get("EncodeData")){
-		// 	$this->checkplus->success($this->input->get("EncodeData"));
-			
-		// 	echo("<script>window.opener.fregisterform.submit();</script>");
-		// 	echo("<script>self.close()</script>");
-		// } else {
-		// 	echo("<script>alert('비정상적인 접근입니다.')</script>");
-		// 	echo("<script>self.close()</script>");
-		// }
 	}
 /**
  * 휴대폰 인증 끝

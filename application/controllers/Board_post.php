@@ -105,7 +105,9 @@ class Board_post extends CB_Controller
 						$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
 						$popularpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
 					} else {
-						$popularpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+						$thumb_url = base_url('assets/images/news-img01.png');
+						$popularpost['list'][$key]['thumb_url'] = $thumb_url;
+						$popularpost['list'][$key]['origin_image_url'] = $thumb_url;
 					}
 				}
 			}
@@ -143,13 +145,16 @@ class Board_post extends CB_Controller
 						$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
 						$bestpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
 					} else {
-						$bestpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+						$thumb_url = base_url('assets/images/news-img01.png');
+						$bestpost['list'][$key]['thumb_url'] = $thumb_url;
+							$bestpost['list'][$key]['origin_image_url'] = $thumb_url;
 					}
 				}
 			}
 		}
 
 		if(element('brd_id', element('board', $list)) == 2){
+			$limit = 8;
 			$where = array(
 				'post_best_state >' => 0
 			);
@@ -180,7 +185,9 @@ class Board_post extends CB_Controller
 						$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
 						$writerbest['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
 					} else {
-						$writerbest['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+						$thumb_url = base_url('assets/images/news-img01.png');
+						$writerbest['list'][$key]['thumb_url'] = $thumb_url;
+						$writerbest['list'][$key]['origin_image_url'] = $thumb_url;
 					}
 				}
 			}
