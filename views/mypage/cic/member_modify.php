@@ -92,21 +92,6 @@
 			<div id="myModal_wallet" class="modal"> 
 				<!-- Modal content -->
 				<a href="javascript:void(0);" class="ath-email modify-btn modal-btn" data-type="wallet"><span>이메일인증</span></a>
-				<!-- <div class="modal-content entry">
-					<span class="close"></span>
-					
-					<ul class="new-wallet-box">
-						<li class="new-wallet">
-							<p class="btxt">새 지갑주소</p>
-							<div class="field modify">
-								<p class="chk-input w380">
-									<input type="text" placeholder="" id="new_wallet" name="new_wallet" value="">
-								</p>
-								<a href="javascript:void(0);" id="send_email3" class="modify-btn"><span>이메일인증</span></a>
-							</div>
-						</li>
-					</ul>
-				</div> -->
 			</div>
 			<?php echo form_close(); ?>
 		</div>
