@@ -2403,7 +2403,7 @@ class Membermodify extends CB_Controller
 			echo("p.className = 'password-success-phone rtxt mg10t cblue';");
 			echo("p.textContent = '핸드폰 인증이 완료되었습니다';");
 			echo("window.opener.document.getElementById('password_success_message_box').appendChild(p);");
-			echo("self.close();");
+			// echo("self.close();");
 			echo("</script>");
 			exit;
 		}

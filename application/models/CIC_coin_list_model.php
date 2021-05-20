@@ -38,7 +38,7 @@ class CIC_Coin_list_model extends CB_Model
         //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.upbit.com/v1/ticker?clist_markets=KRW-".$clist_market,
+            CURLOPT_URL => "https://api.upbit.com/v1/ticker?markets=KRW-".$clist_market,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",

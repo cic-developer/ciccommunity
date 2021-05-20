@@ -56,6 +56,16 @@
                                 }
                                 ?>
                         </div>
+                            <script>
+                                $(function () {
+                                    $('.list.vimg').find('li').each(function () {
+                                    var chkimg = $(this).find('.img').length;
+                                    if (chkimg < 1) {
+                                    $(this).addClass('no-img');
+                                }
+                            })
+                        })
+                        </script>
                     </div>
                     <div class="owl-nav disabled">
                         <button type="button" role="presentation" class="owl-prev">
