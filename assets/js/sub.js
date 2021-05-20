@@ -3,7 +3,8 @@ $(function() {
     $('.vnews-slide').owlCarousel({
         items: 4,
         autoHeight: false,
-        loop: true,
+        loop: ($('.vnews-slide .owl-item').length > 4),
+        // loop: true,
         margin: 15,
         mouseDrag: true,
         touchDrag: true,
@@ -14,25 +15,29 @@ $(function() {
         autoplayHoverPause: false,
         autoWidth: false,
         responsiveRefreshRate: 5,
-        // responsive: {
-        //     0: {
-        //         items: 1,
-        //         margin: 20,
-        //     },
-        //     480: {
-        //         items: 2,
-        //         margin: 20,
-        //     },
-        //     780: {
-        //         items: 3,
-        //         margin: 20,
-        //     },
-        //     999: {
-        //         items: 4,
-        //         margin: 20,
-        //     },
-        // }
+        responsive: {
+            0: {
+                items: 1,
+                margin: 20,
+            },
+            480: {
+                items: 2,
+                margin: 20,
+            },
+            780: {
+                items: 3,
+                margin: 20,
+            },
+            999: {
+                items: 4,
+                margin: 20,
+            },
+        }
     });
+
+    function owlInitialized() {
+        alert('hoho');
+    }
 
     $('.board-wrap').find('.list.notice').find('tbody > tr.notice').each(function() {
         var firstTH = $(this).find('td:first-child > span').outerWidth();
