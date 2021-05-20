@@ -42,10 +42,14 @@
 			</div>
 			<div class="result">
 				<?php
-
+					if (element('highlight_keyword', $view)) {
+						echo "hi";
 				?>
-				<p class="btxt"><span> “ <?php echo $korean; ?>”</span> 에 대한 통합검색 총</p>
+				<p class="btxt"><span> “ <?php echo element('highlight_keyword', $highlight_keyword);?>”</span> 에 대한 통합검색 총</p>
 				<p class="stxt">2,547건</p>
+				<?php		
+					}			
+				?>
 			</div>
 			<!-- HERE THE PRICE -->
 			<div class="result">
@@ -95,8 +99,8 @@
 											<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
 										</div>
 									</td>
-									<td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>"><span
-                                        class="cate">공지</span><?php echo html_escape(element('post_title', $result)); ?></a></td>
+									<td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>">
+										<?php echo html_escape(element('post_title', $result)); ?></a></td>
 									<td><?php echo element('display_datetime', $result); ?></td>
 									<td><?php echo number_format(element('post_hit', $result)); ?></td>
 									<td>

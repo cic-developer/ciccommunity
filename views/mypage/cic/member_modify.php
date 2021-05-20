@@ -84,7 +84,7 @@
 					<!-- &times; -->
 					<!-- <div class="modal-content-btn"> -->
 					
-						<a href="javascript:void(0);" id="send_email1" class="modify-btn modal-btn"><span>이메일인증</span></a>
+						<a href="javascript:void(0);" id="ath_email" class="modify-btn modal-btn"><span>이메일인증</span></a>
 						
 					<!-- </div> -->
 				<!-- </div> -->
@@ -168,10 +168,6 @@
 	border: 1px solid #888;
 	width: 50%; /* Could be more or less, depending on screen size */                          
 }
-.modal-content-btn {
-	background-color: #fefefe;
-	position:relative;
-}
 
 /* The Close Button */
 .close {
@@ -191,8 +187,8 @@
 	line-height: 35px;
     border-radius: 35px;
     font-size: 14px;
-    color: #fff;
-    background: #111;
+    color: #111;
+    background: #efefefef;
     font-weight: 500;
     display: inline-block;
     vertical-align: top;
@@ -200,10 +196,10 @@
     min-width: 120px;
     text-align: center;
     box-sizing: border-box;
-	background-color:pink;
 	position:absolute;
 	left:50%;
 	top:50%;
+	transform: translatex(-50%) translatey(-50%);
 }
 
 </style>
@@ -284,41 +280,46 @@
 	// 이메일 확인 + 인증번호 보내기
 	$(document).ready(function(){
 		$("#send_email1").on('click', function(){
-			var _phone = $("#new_phone").val();
-			phone_num = _phone;
-			var state = '';
-			var message = '';
-			$.ajax({
-				url: cb_url + '/membermodify/ajax_phone_modify_email_send',
-				type: 'POST',
-				data: {
-					new_phone: _phone,
-					csrf_test_name : cb_csrf_hash
-				},
-				dataType: 'json',
-				async: false,
-				cache: false,
-				success: function(data) {
-					state = data.state;
-					message = data.message;
-				}
-			});
-			alert(message);
-			$('.phone-success-email').remove();
-			$('.con-mail1').remove();
-			if(state == 1){
+			// var _phone = $("#new_phone").val();
+			// phone_num = _phone;
+			// var state = '';
+			// var message = '';
+			// $.ajax({
+			// 	url: cb_url + '/membermodify/ajax_phone_modify_email_send',
+			// 	type: 'POST',
+			// 	data: {
+			// 		new_phone: _phone,
+			// 		csrf_test_name : cb_csrf_hash
+			// 	},
+			// 	dataType: 'json',
+			// 	async: false,
+			// 	cache: false,
+			// 	success: function(data) {
+			// 		state = data.state;
+			// 		message = data.message;
+			// 	}
+			// });
+			// alert(message);
+			// $('.phone-success-email').remove();
+			$('#ath_email').remove();
+			// if(state == 1){
 				html = '';
-				html += '<li class="con-mail1">'
-				html += '<p class="btxt">이메일 인증</p>'
-				html += '<div class="field modify">'
-				html += '<p class="chk-input w380">'
-				html += '<input type="text" placeholder="" id="ath_num1" name="ath_num1" value="">'
-				html += '</p>'
-				html += '<a href="javascript:void(0);" id="con_phone_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
-				html += '</div>'
-				html += '</li>'
-				$('.new-phone-box').append(html);
-			}
+				html += '<div class="modal-content entry">';
+				html += '<ul class="ath-email-box">';
+				html += '<li class="ath-email-content">';
+				html += '<p class="btxt">이메일 인증</p>';
+				html += '<div class="field modify">';
+				html += '<p class="chk-input w380">';
+				html += '<input type="text" placeholder="" id="ath_num1" name="ath_num1" value="">';
+				html += '</p>';
+				html += '<a href="javascript:void(0);" id="ath_mail_btn" class="modify-btn"><span>인증번호 확인</span></a>';
+				html += '</div>';
+				html += '</li>';
+				html += '</ul>';
+				html += '</div>';
+				$('#myModal_phone').append(html);
+				// $('.new-phone-box').append(html);
+			// }
 		})
 	})
 
