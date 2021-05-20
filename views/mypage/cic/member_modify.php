@@ -79,13 +79,15 @@
 			<!-- 핸드폰번호 변경 -->
 			<div id="myModal_phone" class="modal">
 				<!-- Modal content -->
-				<div class="modal-content entry">
+				<!-- <div class="modal-content entry"> -->
 					<!-- <span class="close"></span> -->
 					<!-- &times; -->
+					<div class="modal-content-btn">
 					
 						<a href="javascript:void(0);" id="send_email1" class="modify-btn modal-btn"><span>이메일인증</span></a>
 						
-				</div>
+					</div>
+				<!-- </div> -->
 			</div>
 
 			<!-- 비밀번호 변경 -->
@@ -164,9 +166,16 @@
 	margin: 15% auto; /* 15% from the top and centered */
 	padding: 20px;
 	border: 1px solid #888;
-	width: 20%; /* Could be more or less, depending on screen size */  
-	text-align: center;                        
+	width: 50%; /* Could be more or less, depending on screen size */                          
 }
+.modal-content-btn {
+	/* background-color: #fefefe; */
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 50%; /* Could be more or less, depending on screen size */        
+}
+
 /* The Close Button */
 .close {
 	color: #aaa;

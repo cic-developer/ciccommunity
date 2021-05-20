@@ -183,9 +183,9 @@ class Search extends CB_Controller
 		// print_r($grouplist);
 		// echo "</pre>";
 		// 
-		// echo "<pre> <br>";
-		// print_r($result);
-		// echo "</pre>";
+		echo "<pre> <br>";
+		print_r($result);
+		echo "</pre>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
 			$sfieldarray = array('post_title', 'post_content', 'post_both');

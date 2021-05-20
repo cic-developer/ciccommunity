@@ -81,9 +81,8 @@
 						<tbody>
 							<?php
 
-							if (element('list', element('data', element('list', $view)))) {
-								foreach (element('list', element('data', element('list', $view))) as $result) {
-									echo "hi";
+							if (element('list', element('data', $view))) {
+								foreach (element('list', element('data', $view)) as $result) {
 							?>
 								<tr>
 									<td>
@@ -104,7 +103,7 @@
 							<?php
 								}
 							}
-							if ( !element('list', element('data', element('list', $view)))) {
+							if (!element('list', element('data', $view)))  {
 							?>
 								<tr>
 									<td colspan="5" class="nopost">게시물이 없습니다</td>
