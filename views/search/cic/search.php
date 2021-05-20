@@ -4,7 +4,7 @@
 		<div class="search-wrap list">
 			<div class="filter">
 				<div class="sel-box c01">
-					<a href="#n" class="sel-btn"><span>통합검색</span></a>
+					<a href="<?php echo base_url('/search')?>" class="sel-btn"><span>통합검색</span></a>
 					<ul>
 						<li class="active"><a href="#n"><span>통합검색</span></a></li>
 						<li><a href="#n"><span>제목</span></a></li>
@@ -50,7 +50,7 @@
 					<div class="txt" >
 						<div class="vc" style="float:left">
 							<p class="stxt pimg"><img src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img></p>
-							<p class="btxt"> <strong><?php echo $korean; ?></strong></span> </p>
+							<p class="btxt center"> <strong><?php echo $korean; ?></strong></span> </p>
 						</div><br>
 					</div>
 					<p class="btxt" style="float:left"> ￦ <span style="color:blue" ><?php echo $trade; ?></p>

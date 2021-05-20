@@ -2669,15 +2669,19 @@ class Membermodify extends CB_Controller
 		$this->session->unset_userdata('wallet_modify_ath_mail_result');
 		$this->session->unset_userdata('password_modify_ath_nice_phone_result');
 		$this->session->unset_userdata('wallet_modify_ath_nice_phone_result');
-
+		
 		if($result == 0){
 			echo("<script>alert('정보수정에 실패하였습니다 (관리자문의)');</script>");
 			redirect('membermodify/modify');
 		}
-
+		
 		if($result == 1){
+			$this->session->set_userdata(
+				'membermodify',
+				''
+			);
 			echo("<script>alert('정보수정이 완료되었습니다');</script>"); // alet가 안됨
-			redirect('membermodify/modify');
+			redirect('membermodify');
 		}
 	}
 }
