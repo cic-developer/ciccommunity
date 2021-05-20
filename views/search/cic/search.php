@@ -41,15 +41,8 @@
 				
 			</div>
 			<div class="result">
-				<?php
-					if (element('highlight_keyword', $view)) {
-						echo "hi";
-				?>
-				<p class="btxt"><span> “ <?php echo element('highlight_keyword', $highlight_keyword);?>”</span> 에 대한 통합검색 총</p>
+				<p class="btxt"><span> <?php echo element('highlight_keyword', $view);?></span> 에 대한 통합검색 총</p>
 				<p class="stxt">2,547건</p>
-				<?php		
-					}			
-				?>
 			</div>
 			<!-- HERE THE PRICE -->
 			<div class="result">
@@ -118,6 +111,9 @@
 							<?php } ?>
 						</tbody>
 					</table>
+					<div class="paging-wrap">
+						<?php echo element('paging', $view); ?>
+					</div>
 				</div>
 				<div class="gap75"></div>
 				<div class="tits">

@@ -168,10 +168,10 @@ class Popularpost extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
-	public function bestpost()
+	public function exeptpost()
 	{
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_board_bestpost';
+		$eventname = 'event_admin_board_exeptpost';
 		$this->load->event($eventname);
 
 		$view = array();
@@ -200,7 +200,7 @@ class Popularpost extends CB_Controller
 		$this->{$this->modelname}->allow_order_field = array('post_id'); // 정렬이 가능한 필드
 		
 		$where = array(
-			'post_exept_state >' =>  0,
+			'post_exept_state >' =>  1,
 		);
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;
@@ -276,7 +276,7 @@ class Popularpost extends CB_Controller
 		/**
 		 * 어드민 레이아웃을 정의합니다
 		 */
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'bestpost');
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'exeptpost');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));

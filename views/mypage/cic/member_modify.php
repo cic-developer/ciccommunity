@@ -279,27 +279,26 @@
 	var phone_num = '';
 	// 이메일 확인 + 인증번호 보내기
 	$(document).ready(function(){
-		$("#send_email1").on('click', function(){
+		$("#ath_email").on('click', function(){
 			// var _phone = $("#new_phone").val();
 			// phone_num = _phone;
 			// var state = '';
 			// var message = '';
-			// $.ajax({
-			// 	url: cb_url + '/membermodify/ajax_phone_modify_email_send',
-			// 	type: 'POST',
-			// 	data: {
-			// 		new_phone: _phone,
-			// 		csrf_test_name : cb_csrf_hash
-			// 	},
-			// 	dataType: 'json',
-			// 	async: false,
-			// 	cache: false,
-			// 	success: function(data) {
-			// 		state = data.state;
-			// 		message = data.message;
-			// 	}
-			// });
-			// alert(message);
+			$.ajax({
+				url: cb_url + '/membermodify/ajax_modify_email_send',
+				type: 'POST',
+				data: {
+					csrf_test_name : cb_csrf_hash
+				},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				success: function(data) {
+					state = data.state;
+					message = data.message;
+				}
+			});
+			alert(message);
 			// $('.phone-success-email').remove();
 			$('#ath_email').remove();
 			// if(state == 1){
@@ -307,10 +306,14 @@
 				html += '<div class="modal-content entry">';
 				html += '<ul class="ath-email-box">';
 				html += '<li class="ath-email-content">';
-				html += '<p class="btxt">이메일 인증</p>';
+				html += '<p class="btxt">';
+				html += '이메일 인증';
+				html += '<i class="fas fa-recycle"></i>';
+				html += '</p>';
 				html += '<div class="field modify">';
 				html += '<p class="chk-input w380">';
-				html += '<input type="text" placeholder="" id="ath_num1" name="ath_num1" value="">';
+				html += '<input type="text" placeholder="" id="ath_num" name="ath_num" value="">';
+				html += '<input type="hidden" id="modify_type" name="modify_type" value="phone">';
 				html += '</p>';
 				html += '<a href="javascript:void(0);" id="ath_mail_btn" class="modify-btn"><span>인증번호 확인</span></a>';
 				html += '</div>';
@@ -324,16 +327,18 @@
 	})
 
 	// 이메일 인증 하기
-	$(document).on('click', "#con_phone_mail_btn", function(){
-		var ath_num = $("#ath_num1").val();
+	$(document).on('click', "#ath_mail_btn", function(){
+		var ath_num = $("#ath_num").val();
+		var modify_type = $("#modify_type").val();
 
 		var result = '';
 		var reason = '';
 		$.ajax({
-			url: cb_url + '/membermodify/ajax_phone_modify_ath_mail',
+			url: cb_url + '/membermodify/ajax_modify_ath_mail',
 			type: 'POST',
 			data: {
 				ath_num: ath_num,
+				modify_type: modify_type,
 				csrf_test_name : cb_csrf_hash
 			},
 			dataType: 'json',
