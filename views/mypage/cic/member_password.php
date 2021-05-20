@@ -33,7 +33,7 @@
 </div>
 
 <style>
-/* 보류 */
+/* 보류 : ciboard error가 보이지 않는 부분 style은 문의해보기 (memo) */
 .error{
 	background-color:pink;
 	color:black;
