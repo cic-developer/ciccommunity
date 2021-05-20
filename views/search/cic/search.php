@@ -41,8 +41,8 @@
 				
 			</div>
 			<div class="result">
-				<p class="btxt"><span> <?php echo element('highlight_keyword', $view);?></span> 에 대한 통합검색 총</p>
-				<p class="stxt">2,547건</p>
+				<p class="btxt"><span><?php echo element('highlight_keyword', $view);?></span> 에 대한 통합검색 총</p>
+				<p class="stxt"><?php echo element('total_rows', $result); ?>건</p>
 			</div>
 			<!-- HERE THE PRICE -->
 			<div class="result">

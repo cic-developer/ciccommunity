@@ -86,7 +86,7 @@ class Bestpost extends CB_Controller
 			'post_exept_state' => 0,
 			'post_datetime >=' => $checktime,
 			'post_del <>' => 2,
-			'post_best_state >'=> 0,
+			// 'post_best_state >'=> 0,
 		);
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;

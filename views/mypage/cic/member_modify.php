@@ -280,10 +280,7 @@
 	// 이메일 확인 + 인증번호 보내기
 	$(document).ready(function(){
 		$("#ath_email").on('click', function(){
-			// var _phone = $("#new_phone").val();
-			// phone_num = _phone;
-			// var state = '';
-			// var message = '';
+
 			$.ajax({
 				url: cb_url + '/membermodify/ajax_modify_email_send',
 				type: 'POST',
@@ -298,12 +295,17 @@
 					message = data.message;
 				}
 			});
+			
 			alert(message);
-			// $('.phone-success-email').remove();
-			$('#ath_email').remove();
-			// if(state == 1){
+
+			// 실패
+			if(state == 0){}
+
+			// 성공
+			if(state == 1){
+				$('#ath_email').remove(); // 이메일 인증 실행 버튼 삭제
 				html = '';
-				html += '<div class="modal-content entry">';
+				html += '<div class="modal-content modal-phone-content entry">';
 				html += '<ul class="ath-email-box">';
 				html += '<li class="ath-email-content">';
 				html += '<p class="btxt">';
@@ -321,8 +323,7 @@
 				html += '</ul>';
 				html += '</div>';
 				$('#myModal_phone').append(html);
-				// $('.new-phone-box').append(html);
-			// }
+			}
 		})
 	})
 
@@ -350,24 +351,28 @@
 			}
 		});
 
+		alert(reason);
+
 		// 실패
-		if(result == 0){
-			alert(reason);
-		}
+		if(result == 0){}
 
 		//성공
 		if(result == 1) {
 			html = '';
-			html += '<li class="phone-success-email-box">'
-			html += '<p class="btxt"></p>'
-			html += '<div class="">'
-			html += '<p class="phone-success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
-			html += '</div>'
-			html += '</li>'
+			html += '<ul class="phone-modify-box">';
+			html += '<li class="phone-modify-content">';
+			html += '<p class="btxt">새 핸드폰번호</p>';
+			html += '<div class="field modify">';
+			html += '<p class="chk-input w380">';
+			html += '<input type="text" placeholder="" onKeydown="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="">';
+			html += '</p>';
+			html += '<a href="javascript:void(0);" id="phone_modify_btn" class="modify-btn"><span>완료</span></a>';
+			html += '</div>';
+			html += '</li>';
+			html += '</ul>';
 
-			$('.con-mail1').remove(); // 인증 박스 삭제		
-			$('.new-phone-box').append(html); // 승인 메세지
-			$("#mem_phone").val(phone_num);
+			$('.ath-email-box').remove(); // 이메일 인증 박스 삭제		
+			$('.modal-phone-content').append(html); // 승인 메세지
 		}
 	});
 /**
