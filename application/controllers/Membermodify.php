@@ -2082,7 +2082,7 @@ class Membermodify extends CB_Controller
 		return true;
 	}
 /**
- * 휴대폰번호변경 시작
+ * 이메일 인증 시작
  */
 	public function ajax_modify_email_send() {
 		// 이벤트 라이브러리를 로딩합니다
@@ -2103,54 +2103,6 @@ class Membermodify extends CB_Controller
 		$email = $member_info['mem_email'];
 		// 세션에 인증번호 저장
 		$this->session->set_userdata('ath_num', $rand_num);
-
-
-
-		// 세션에 인증에 이용한 이메일 저장
-		// $this->session->set_userdata('ath_email', $email);
-
-		// $new_phone = $this->input->post('new_phone');
-		// $isPhone = $this->Member_model->get_by_memPhone($new_phone, '');
-
-		/**
-		 * Validation 라이브러리를 가져옵니다
-		 */
-		// $this->load->library('form_validation');
-
-		// $config = array(
-		// 	array(
-		// 		'field' => 'new_phone',
-		// 		'label' => '새번호',
-		// 		'rules' => 'trim|valid_phone',
-		// 	),
-		// );
-		// $this->form_validation->set_rules($config);
-		// $form_validation = $this->form_validation->run();
-
-		// if(!$form_validation){
-		// 	$result = array(
-		// 		'state' => '0',
-		// 		'message' => '번호를 정확히 입력해주세요',
-		// 	);
-		// 	exit(json_encode($result));
-		// }
-
-		// if(strlen($new_phone) < 1){
-		// 	$result = array(
-		// 		'state' => '0',
-		// 		'message' => '번호를 입력해주세요',
-		// 	);
-		// 	exit(json_encode($result));
-		// }
-
-		// if(count($isPhone) > 0){ // 중복 이면
-		// 	$result = array(
-		// 		'state' => '0',
-		// 		'message' => '이미 사용중인 번호입니다',
-		// 	);
-		// 	exit(json_encode($result));
-		// }
-
 
 		// 이메일에 포함될 데이터
 		$getdata['rand_num'] = $rand_num;
@@ -2180,7 +2132,6 @@ class Membermodify extends CB_Controller
 			);
 			exit(json_encode($result));
 		}
-		// echo $this->email->print_debugger();
 	}
 
 
@@ -2239,20 +2190,85 @@ class Membermodify extends CB_Controller
 			// exit(json_encode($result));
 		} else{
 			// 인증결과 세션 저장
-			$this->session->set_userdata('phone_modify_ath_mail_result', '');
 
-			$result = array(
-				'result' => '0',
-				'reason' => '인증번호를 확인해주세요',
-			);
-			exit(json_encode($result));
+			if($modify_type == 'phone'){
+				$this->session->set_userdata('phone_modify_ath_mail_result', '');
+
+				$result = array(
+					'result' => '0',
+					'reason' => '인증번호를 확인해주세요',
+				);
+				exit(json_encode($result));
+			}
+			
 		}
 		
 	}
 /**
- * 휴대폰번호변경 끝
+ * 이메일 인증 끝
  */
+/*****************************************************************************/
+/**
+ * 핸드폰번호변경 시작
+ */
+	public function ajax_phone_confirm() {
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_membermodify_ajax_phone_confirm';
+		$this->load->event($eventname);
 
+		$view = array();
+		$view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		
+		$new_phone = $this->input->post('new_phone');
+		$isPhone = $this->Member_model->get_by_memPhone($new_phone, '');
+
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+
+		$config = array(
+			array(
+				'field' => 'new_phone',
+				'label' => '새번호',
+				'rules' => 'trim|valid_phone',
+			),
+		);
+		$this->form_validation->set_rules($config);
+		$form_validation = $this->form_validation->run();
+
+		if(!$form_validation){
+			$result = array(
+				'state' => '0',
+				'message' => '번호를 정확히 입력해주세요',
+			);
+			exit(json_encode($result));
+		}
+
+		if(strlen($new_phone) < 1){
+			$result = array(
+				'state' => '0',
+				'message' => '번호를 입력해주세요',
+			);
+			exit(json_encode($result));
+		}
+
+		if(count($isPhone) > 0){ // 중복 이면
+			$result = array(
+				'state' => '0',
+				'message' => '이미 사용중인 번호입니다',
+			);
+			exit(json_encode($result));
+		}
+	}
+
+/**
+ * 핸드폰번호 변경 끝
+ */
+/*****************************************************************************/
 /**
  * 비밀번호변경 시작
  */

@@ -83,8 +83,8 @@
 					<!-- <span class="close"></span> -->
 					<!-- &times; -->
 					<!-- <div class="modal-content-btn"> -->
-					
-						<a href="javascript:void(0);" id="ath_email" class="modify-btn modal-btn"><span>이메일인증</span></a>
+
+						<a href="javascript:void(0);" id="ath_email" class="ath-email modify-btn modal-btn" data-type="phone"><span>이메일인증</span></a>
 						
 					<!-- </div> -->
 				<!-- </div> -->
@@ -248,38 +248,13 @@
 	}
 /*****************************************************************************/
 /**
- * 휴대폰번호변경 시작
+ * 이메일 인증 시작
  */
-	function inputPhoneNumber(obj) { 
-		var number = obj.value.replace(/[^0-9]/g, ""); 
-		var phone = ""; 
-		if(number.length < 4) { 
-			return number; 
-		} else if(number.length < 7) { 
-			phone += number.substr(0, 3); 
-			phone += "-"; 
-			phone += number.substr(3); 
-		} else if(number.length < 11) { 
-			phone += number.substr(0, 3); 
-			phone += "-"; 
-			phone += number.substr(3, 3);
-			phone += "-"; 
-			phone += number.substr(6); 
-		} else { 
-			phone += number.substr(0, 3); 
-			phone += "-"; 
-			phone += number.substr(3, 4); 
-			phone += "-"; 
-			phone += number.substr(7); 
-		} 
-		
-		obj.value = phone; 
-	}
 
-	var phone_num = '';
 	// 이메일 확인 + 인증번호 보내기
 	$(document).ready(function(){
-		$("#ath_email").on('click', function(){
+		$(".ath-email").on('click', function(){
+			var type = $(this).data('type');
 
 			$.ajax({
 				url: cb_url + '/membermodify/ajax_modify_email_send',
@@ -315,7 +290,7 @@
 				html += '<div class="field modify">';
 				html += '<p class="chk-input w380">';
 				html += '<input type="text" placeholder="" id="ath_num" name="ath_num" value="">';
-				html += '<input type="hidden" id="modify_type" name="modify_type" value="phone">';
+				html += '<input type="hidden" id="modify_type" name="modify_type" value="' + type + '">';
 				html += '</p>';
 				html += '<a href="javascript:void(0);" id="ath_mail_btn" class="modify-btn"><span>인증번호 확인</span></a>';
 				html += '</div>';
@@ -375,6 +350,69 @@
 			$('.modal-phone-content').append(html); // 승인 메세지
 		}
 	});
+
+/**
+ * 이메일 인증 끝
+ */
+/*****************************************************************************/
+/**
+ * 휴대폰번호변경 시작
+ */
+	function inputPhoneNumber(obj) { 
+		var number = obj.value.replace(/[^0-9]/g, ""); 
+		var phone = ""; 
+		if(number.length < 4) { 
+			return number; 
+		} else if(number.length < 7) { 
+			phone += number.substr(0, 3); 
+			phone += "-"; 
+			phone += number.substr(3); 
+		} else if(number.length < 11) { 
+			phone += number.substr(0, 3); 
+			phone += "-"; 
+			phone += number.substr(3, 3);
+			phone += "-"; 
+			phone += number.substr(6); 
+		} else { 
+			phone += number.substr(0, 3); 
+			phone += "-"; 
+			phone += number.substr(3, 4); 
+			phone += "-"; 
+			phone += number.substr(7); 
+		} 
+		
+		obj.value = phone; 
+	}
+
+	var phone = '';
+	$(document).on('click', "#phone_modify_btn", function(){
+
+		var _phone = $("#new_phone").val();
+		phone = _phone;
+		var state = '';
+		var message = '';
+		$.ajax({
+			url: cb_url + '/membermodify/ajax_wallet_modify_email_send',
+			type: 'POST',
+			data: {
+				new_wallet: _wallet,
+				csrf_test_name : cb_csrf_hash
+			},
+			dataType: 'json',
+			async: false,
+			cache: false,
+			success: function(data) {
+				state = data.state;
+				message = data.message;
+			}
+		});
+	})
+
+/**
+ * 휴대폰번호변경 끝
+ */
+
+	
 /**
  * 휴대폰번호변경 끝
  */

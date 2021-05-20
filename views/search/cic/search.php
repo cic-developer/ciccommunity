@@ -42,7 +42,7 @@
 			</div>
 			<div class="result">
 				<p class="btxt"><span><?php echo element('highlight_keyword', $view);?></span> 에 대한 통합검색 총</p>
-				<p class="stxt"><?php echo element('total_rows', $result); ?>건</p>
+				<p class="stxt"><?php echo $total_rows; ?>건</p>
 			</div>
 			<!-- HERE THE PRICE -->
 			<div class="result">
@@ -83,6 +83,7 @@
 
 							if (element('list', element('data', $view))) {
 								foreach (element('list', element('data', $view)) as $result) {
+									echo element('total_rows', $result['total_rows']);
 							?>
 								<tr>
 									<td>

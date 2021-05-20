@@ -175,6 +175,8 @@ class Search extends CB_Controller
 
 		$view['view']['boardlist'] = $boardlist;
 		$view['view']['grouplist'] = $grouplist;
+		$total_rows = $result['total_rows'];
+		$view['total_rows'] = $total_rows;
 		// echo "<pre> <br>";
 		// print_r($boardlist);
 		// echo "</pre>";
@@ -183,9 +185,9 @@ class Search extends CB_Controller
 		// print_r($grouplist);
 		// echo "</pre>";
 		// 
-		echo "<pre> <br>";
-		print_r($result['total_rows']);
-		echo "</pre>";
+		// echo "<pre> <br>";
+		// print_r($result['total_rows']);
+		// echo "</pre>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
 			$sfieldarray = array('post_title', 'post_content', 'post_both');
