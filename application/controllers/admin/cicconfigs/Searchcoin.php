@@ -121,17 +121,19 @@ class Searchcoin extends CB_Controller
 
 		// keyword 테이블을 통째로 불러온다.
 		$keyword_list = $this->CIC_coin_keyword_model->get_keyword();
-
+		$coin_list = $this->CIC_coin_list_model->getstockData();
 		// 통째로 가져온 테이블에서 keyword 만 담은 array() 만든다.
 		$keyword_arr = array();
-		$coin_arr = array();
+		
 		foreach($keyword_list as $value){
 			$keyword_arr[] = element('coin_keyword', $value);
-			$coin_arr[] = element('clist_market', $value);
-		
 		}
-
-
+		
+		// 통째로 가져온 테이블에서 keyword 만 담은 array() 만든다.
+		$coin_arr = array();
+		foreach($coin_list as $value){
+			$coin_arr[] = element('clist_market', $value);
+		}
 		//getting coin list from api
 		$getList = $this -> CIC_coin_list_model->retrieve_api();
 		for($i=0; $i<count($getList); $i++){
@@ -146,7 +148,7 @@ class Searchcoin extends CB_Controller
 				);
 				if(isset($data) && !empty($data)){
 					foreach($data as $coinData){
-						if(in_array($coinData['clist_market'], $coin_arr)){
+						if(in_array($coinData, $coin_arr)){
 							continue;
 						}
 						else{
@@ -155,7 +157,6 @@ class Searchcoin extends CB_Controller
 						}
 					}
 				}
-
 				$data = array(
 					array(
 						'coin_market'=> $market,
@@ -176,17 +177,12 @@ class Searchcoin extends CB_Controller
 							continue;
 						}
 						else{
-							
 							$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
 						}	
 					} 
 				}
-					
 			}
-					
 		}	
-	
-
 		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;

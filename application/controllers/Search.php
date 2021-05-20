@@ -18,7 +18,7 @@ class Search extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Board', 'Board_group', 'Post', 'Post_file', 'Search_keyword', 'CIC_Coin', 'CIC_coin_keyword');
+	protected $models = array('Board', 'Board_group', 'Post', 'Post_file', 'Search_keyword', 'CIC_coin_list', 'CIC_coin_keyword');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -207,8 +207,6 @@ class Search extends CB_Controller
 		$view['view']['highlight_keyword'] = $highlight_keyword;
 
 		//코인 가격 검색 시작
-		
-
 		$key_search = $this-> CIC_coin_keyword_model -> search_coin($skeyword);
 
 		$market = $key_search['market'];
@@ -222,8 +220,6 @@ class Search extends CB_Controller
 		$view['low'] = $low;
 		$view['high'] = $high;
 		$view['trade'] = $trade;
-
-
 		// 코인 검색 여기까지 
 
 		/**

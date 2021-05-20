@@ -51,8 +51,9 @@
 				<p class="stxt"> <?php echo $low; ?></p>
 				<p class="stxt"> <?php echo $high; ?></p>				
 			</div>
-
 			<!-- PRICE UNTIL HERE -->
+
+
 			<div class="gap35"></div>
 			<div class="cont">
 				<div class="tits">
