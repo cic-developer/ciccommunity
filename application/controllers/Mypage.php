@@ -1320,6 +1320,16 @@ class Mypage extends CB_Controller
 			$mem_cp = $member_info['mem_cp'];
 			$mem_wallet_address = $member_info['mem_wallet_address'];
 
+			if(!$mem_wallet_address){
+				$this->session->set_flashdata(
+					'message',
+					'지갑주소를 설정해주세요'
+				);
+				// 이벤트가 존재하면 실행합니다
+				Events::trigger('after', $eventname);
+				redirect('mypage/withdraw');
+			}
+
 			/**
 			 * 포인트 차감
 			 * member
@@ -1337,6 +1347,7 @@ class Mypage extends CB_Controller
 				 * 출금 신청
 				 * cic_withdraw
 				 */
+
 				$result = $this->CIC_withdraw_model->set_withdraw($mem_id, $mem_userid, $mem_userip, $mem_nickname, $mem_wallet_address, $money);
 
 				if($result == 0 ){
@@ -1344,8 +1355,9 @@ class Mypage extends CB_Controller
 					 * 출금 신청 실패로 인한, 차감포인트 리셋
 					 * member
 					 */
-					$this->Member_model->get_user_point($mem_id);
-					// $result = $this->Member_model->set_user_point($mem_id, -$money, $new_mem_cp);
+					// 차감 후의 포인트 가져오기
+					$new_mem_cp = $this->Member_model->get_by_memid($mem_id, 'mem_cp');
+					$result = $this->Member_model->set_user_point($mem_id, -$money, $new_mem_cp['mem_cp']);
 
 					if($result != 1){
 						$this->session->set_flashdata(

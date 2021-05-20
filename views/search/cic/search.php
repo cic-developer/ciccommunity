@@ -79,39 +79,35 @@
 							</tr>
 						</thead>
 						<tbody>
-						<?php
-                    if (element('list', element('data', element('list', $view)))) {
-                        foreach (element('list', element('data', element('list', $view))) as $result) {
-                    ?>
-                        <tr>
-                            <td>
-                                <div class="my-info">
-                                    <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30); ?>"
-                                            alt="<?php echo element('mlc_title', $result); ?>"></p>
-                                    <p class="rtxt"><?php echo html_escape(element('post_nickname', $result)); ?></p>
-                                </div>
-                            </td>
-                            <td class="l file">
-                                <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><?php echo html_escape(element('title', $result)); ?>
-                                    <span class="reply">(<?php echo element('post_comment_count', $result); ?>)</span>
-                                </a>
-                            </td>
-                            <td><?php echo element('display_datetime', $result); ?></td>
-                            <td><?php echo number_format(element('post_hit', $result)); ?></td>
-                            <td>
-                                <p class="cyellow"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p>
-                            </td>
-                        </tr>
-                    <?php
-                        }
-                    }
-                    if ( ! element('notice_list', element('list', $view)) && ! element('list', element('data', element('list', $view)))) {
-                    ?>
-                        <tr>
-                            <td colspan="5" class="nopost">게시물이 없습니다</td>
-                        </tr>
-                    <?php } ?>
-                    </tbody>
+							<?php
+							if (element('list', element('data', element('list', $view)))) {
+								foreach (element('list', element('data', element('list', $view))) as $result) {
+							?>
+								<tr>
+									<td>
+										<div class="my-info">
+											<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>"
+													alt=""></p>
+											<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
+										</div>
+									</td>
+									<td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><span
+												class="cate">공지</span><?php echo html_escape(element('title', $result)); ?></a></td>
+									<td><?php echo element('display_datetime', $result); ?></td>
+									<td><?php echo number_format(element('post_hit', $result)); ?></td>
+									<td>
+										<p class="cyellow"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p>
+									</td>
+								</tr>
+							<?php
+								}
+							}
+							if ( ! element('notice_list', element('list', $view)) && ! element('list', element('data', element('list', $view)))) {
+							?>
+								<tr>
+									<td colspan="5" class="nopost">게시물이 없습니다</td>
+								</tr>
+							<?php } ?>
 						</tbody>
 					</table>
 				</div>

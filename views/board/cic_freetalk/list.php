@@ -131,7 +131,7 @@
                     <?php
                         }
                     }
-                    if ( ! element('notice_list', element('list', $view)) && ! element('list', element('data', element('list', $view)))) {
+                    if ( ! element('list', element('data', element('list', $view)))) {
                     ?>
                         <tr>
                             <td colspan="5" class="nopost">게시물이 없습니다</td>

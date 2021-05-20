@@ -84,13 +84,13 @@
 					<!-- &times; -->
 					<ul class="new-phone-box">
 						<li>
-							<p class="btxt">새 핸드폰번호</p>
-							<div class="field modify">
-								<p class="chk-input w380">
+							<p class="btxt"></p>
+							<!-- <div class="field modify"> -->
+								<!-- <p class="chk-input w380">
 									<input type="text" onKeyup="inputPhoneNumber(this);" placeholder="" id="new_phone" name="new_phone" value="">
-								</p>
+								</p> -->
 								<a href="javascript:void(0);" id="send_email1" class="modify-btn"><span>이메일인증</span></a>
-							</div>
+							<!-- </div> -->
 						</li>
 					</ul>
 				</div>

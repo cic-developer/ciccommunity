@@ -135,17 +135,6 @@ class Member_model extends CB_Model
 		return $result;
 	}
 
-	public function get_user_point($memid = 0)
-	{
-		$memid = (int) $memid;
-		if (empty($memid) OR $memid < 1) {
-			return false;
-		}
-		$where = array('mem_id' => $memid);
-		
-		return $this->get_one('', 'mem_cp', $where);
-	}
-
 	public function get_by_memDI($DI, $select = '')
 	{
 		if (empty($DI)) {

@@ -184,7 +184,7 @@ class Search extends CB_Controller
 		// echo "</pre>";
 		// 
 		echo "<pre> <br>";
-		print_r($result['display_datetime']);
+		print_r($result);
 		echo "</pre>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
@@ -216,9 +216,6 @@ class Search extends CB_Controller
 			}
 		}
 		$view['view']['highlight_keyword'] = $highlight_keyword;
-		// echo "<br>";
-		print_r($highlight_keyword);
-		//코인 가격 검색 시작
 		$key_search = $this-> CIC_coin_keyword_model -> search_coin($skeyword);
 		$market = $key_search['clist_market'];
 		$api_result = $this->CIC_coin_list_model -> get_price($market);
