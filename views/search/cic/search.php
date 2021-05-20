@@ -41,6 +41,9 @@
 				
 			</div>
 			<div class="result">
+				<?php
+
+				?>
 				<p class="btxt"><span> “ <?php echo $korean; ?>”</span> 에 대한 통합검색 총</p>
 				<p class="stxt">2,547건</p>
 			</div>
@@ -92,8 +95,8 @@
 											<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
 										</div>
 									</td>
-									<td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><span
-												class="cate">공지</span><?php echo html_escape(element('title', $result)); ?></a></td>
+									<td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>"><span
+                                        class="cate">공지</span><?php echo html_escape(element('post_title', $result)); ?></a></td>
 									<td><?php echo element('display_datetime', $result); ?></td>
 									<td><?php echo number_format(element('post_hit', $result)); ?></td>
 									<td>

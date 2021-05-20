@@ -82,11 +82,11 @@
 				<!-- <div class="modal-content entry"> -->
 					<!-- <span class="close"></span> -->
 					<!-- &times; -->
-					<div class="modal-content-btn">
+					<!-- <div class="modal-content-btn"> -->
 					
 						<a href="javascript:void(0);" id="send_email1" class="modify-btn modal-btn"><span>이메일인증</span></a>
 						
-					</div>
+					<!-- </div> -->
 				<!-- </div> -->
 			</div>
 
@@ -169,11 +169,8 @@
 	width: 50%; /* Could be more or less, depending on screen size */                          
 }
 .modal-content-btn {
-	/* background-color: #fefefe; */
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 50%; /* Could be more or less, depending on screen size */        
+	background-color: #fefefe;
+	position:relative;
 }
 
 /* The Close Button */
@@ -203,6 +200,10 @@
     min-width: 120px;
     text-align: center;
     box-sizing: border-box;
+	background-color:pink;
+	position:absolute;
+	left:50%;
+	top:50%;
 }
 
 </style>

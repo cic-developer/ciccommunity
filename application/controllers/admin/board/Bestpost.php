@@ -82,9 +82,11 @@ class Bestpost extends CB_Controller
 		$this->{$this->modelname}->allow_order_field = array('post_id'); // 정렬이 가능한 필드
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		$where = array(
+			'brd_id <' => 3,
 			'post_exept_state' => 0,
 			'post_datetime >=' => $checktime,
 			'post_del <>' => 2,
+			'post_best_state >'=> 0,
 		);
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;
