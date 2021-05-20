@@ -80,19 +80,11 @@
 			<div id="myModal_phone" class="modal">
 				<!-- Modal content -->
 				<div class="modal-content entry">
-					<span class="close"></span>
+					<!-- <span class="close"></span> -->
 					<!-- &times; -->
-					<ul class="new-phone-box">
-						<li>
-							<p class="btxt"></p>
-							<!-- <div class="field modify"> -->
-								<!-- <p class="chk-input w380">
-									<input type="text" onKeyup="inputPhoneNumber(this);" placeholder="" id="new_phone" name="new_phone" value="">
-								</p> -->
-								<a href="javascript:void(0);" id="send_email1" class="modify-btn"><span>이메일인증</span></a>
-							<!-- </div> -->
-						</li>
-					</ul>
+					
+						<a href="javascript:void(0);" id="send_email1" class="modify-btn modal-btn"><span>이메일인증</span></a>
+						
 				</div>
 			</div>
 
@@ -172,7 +164,8 @@
 	margin: 15% auto; /* 15% from the top and centered */
 	padding: 20px;
 	border: 1px solid #888;
-	width: 50%; /* Could be more or less, depending on screen size */                          
+	width: 20%; /* Could be more or less, depending on screen size */  
+	text-align: center;                        
 }
 /* The Close Button */
 .close {
@@ -186,6 +179,21 @@
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+.modal-btn {
+	line-height: 35px;
+    border-radius: 35px;
+    font-size: 14px;
+    color: #fff;
+    background: #111;
+    font-weight: 500;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 15px;
+    min-width: 120px;
+    text-align: center;
+    box-sizing: border-box;
 }
 
 </style>
