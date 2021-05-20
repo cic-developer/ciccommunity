@@ -183,9 +183,9 @@ class Search extends CB_Controller
 		// print_r($grouplist);
 		// echo "</pre>";
 		// 
-		echo "<pre> <br>";
-		print_r($result);
-		echo "</pre>";
+		// echo "<pre> <br>";
+		// print_r($result);
+		// echo "</pre>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
 			$sfieldarray = array('post_title', 'post_content', 'post_both');
@@ -216,6 +216,8 @@ class Search extends CB_Controller
 			}
 		}
 		$view['view']['highlight_keyword'] = $highlight_keyword;
+
+		//코인 값 검색
 		$key_search = $this-> CIC_coin_keyword_model -> search_coin($skeyword);
 		$market = $key_search['clist_market'];
 		$api_result = $this->CIC_coin_list_model -> get_price($market);
