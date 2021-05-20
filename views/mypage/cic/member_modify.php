@@ -85,7 +85,7 @@
 			<!-- 비밀번호 변경 -->
 			<div id="myModal_password" class="modal"> 
 				<!-- Modal content -->
-				<a href="javascript:void(0);" id="ath_email" class="ath-email modify-btn modal-btn" data-type="email"><span>이메일인증</span></a>
+				<a href="javascript:void(0);" id="ath_email" class="ath-email modify-btn modal-btn" data-type="password"><span>이메일인증</span></a>
 				<!-- <div class="modal-content entry">
 					<span class="close"></span>
 					<ul class="new-password-box">
@@ -269,8 +269,13 @@
 
 			// 성공
 			if(state == 1){
-				$('#ath_email').remove(); // 이메일 인증 실행 버튼 삭제
-				html = '';
+				if(type == 'phone'){
+					$('#myModal_phone > #ath_email').remove(); // 이메일 인증 실행 버튼 삭제
+				}
+				if(type == 'password'){
+					$('#myModal_password > #ath_email').remove(); // 이메일 인증 실행 버튼 삭제
+				}
+				var html = '';
 				html += '<div class="modal-content ' + type + '-modal-content entry">';
 				html += '<ul class="ath-email-box">';
 				html += '<li class="ath-email-content">';
@@ -288,7 +293,14 @@
 				html += '</li>';
 				html += '</ul>';
 				html += '</div>';
-				$('#myModal_phone').append(html);
+
+				if(type == 'phone'){
+					$('#myModal_phone').append(html); // 이메일 인증박스 추가
+				}
+				if(type == 'password'){
+					$('#myModal_password').append(html); // 이메일 인증박스 추가
+				}
+				
 			}
 		})
 	})
@@ -324,7 +336,7 @@
 
 		//성공
 		if(result == 1) {
-			html = '';
+			var html = '';
 			html += '<ul class="phone-modify-box">';
 			html += '<li class="phone-modify-content">';
 			html += '<p class="btxt">새 핸드폰번호</p>';
@@ -342,21 +354,36 @@
 		}
 
 		if(result == 2){
-			html = '';
-			html += '<ul class="password-modify-box">';
-			html += '<li class="password-modify-content">';
-			html += '<p class="btxt">새 비밀번호</p>';
-			html += '<div class="field modify">';
-			html += '<p class="chk-input w380">';
-			html += '<input type="text" placeholder="" onKeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="">';
-			html += '</p>';
-			html += '<a href="javascript:void(0);" id="phone_modify_btn" class="modify-btn"><span>완료</span></a>';
-			html += '</div>';
-			html += '</li>';
-			html += '</ul>';
+			// html = '';
+			// html += '<ul class="password-modify-box">';
+			// html += '<li class="password-modify-content">';
+			// html += '<p class="btxt">새 비밀번호</p>';
+			// html += '<div class="field modify">';
+			// html += '<p class="chk-input w380">';
+			// html += '<input type="password" placeholder="" id="new_password" name="new_password" value="">';
+			// html += '</p>';
+			// html += '</div>';
+			// html += '</li>';
+			// html += '<li class="password-re-modify-content">';
+			// html += '<p class="btxt">새 비밀번호 확인</p>';
+			// html += '<div class="field modify">';
+			// html += '<p class="chk-input w380">';
+			// html += '<input type="password" placeholder="" id="new_password_re" name="new_password_re" value="">';
+			// html += '</p>';
+			// html += '<a href="javascript:void(0);" id="password_modify_btn" class="modify-btn"><span>이메일인증</span></a>';
+			// html += '</div>';
+			// html += '</li>';
+			// html += '</ul>';
 
-			$('.password-modal-content > .ath-email-box').remove(); // 이메일 인증 박스 삭제		
-			$('.password-modal-content').append(html); // 승인 메세지
+			var html = '';
+			html += '<form name="form_chk" method="post">'
+			html += '<input type="hidden" name="m" value="checkplusService">'
+			html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">'
+			html += '<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn"><span>휴대폰 인증</span></a>'
+			html += '</form>'
+
+			$('.password-modal-content').remove(); // 이메일 인증 박스 삭제		
+			$('#myModal_password').append(html); // 승인 메세지
 		}
 	});
 
@@ -569,11 +596,11 @@
 			html += '<div class="password-success-message-box" id="password_success_message_box" style="display:inline-block;">'
 			html += '<p class="password-success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
 			html += '</div>'
-			html += '<div class="nice-phone-ath-box" id="nice_phone_ath_box" style="display: inline-block; float: right;">'
+			html += '<div class="nice-phone-ath-box" id="ath_nice_phone_box" style="display: inline-block; float: right;">'
 			html += '<form name="form_chk" method="post">'
 			html += '<input type="hidden" name="m" value="checkplusService">'
 			html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">'
-			html += '<a href="javascript:fnPopup();" id="nice_phone_ath" class="modify-btn"><span>휴대폰 인증</span></a>'
+			html += '<a href="javascript:fnPopup();" id="ath_nice_phone" class="modify-btn"><span>휴대폰 인증</span></a>'
 			html += '</form>'
 			html += '</div>'
 			html += '</li>'
@@ -673,11 +700,11 @@
 			html += '<div class="wallet-success-message-box" id="wallet_success_message_box" style="display:inline-block;">'
 			html += '<p class="wallet-success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
 			html += '</div>'
-			html += '<div class="nice-phone-ath-box" id="nice_phone_ath_box" style="display: inline-block; float: right;">'
+			html += '<div class="nice-phone-ath-box" id="ath_nice_phone_box" style="display: inline-block; float: right;">'
 			html += '<form name="form_chk" method="post">'
 			html += '<input type="hidden" name="m" value="checkplusService">'
 			html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">'
-			html += '<a href="javascript:fnPopup();" id="nice_phone_ath" class="modify-btn"><span>휴대폰 인증</span></a>'
+			html += '<a href="javascript:fnPopup();" id="ath_nice_phone" class="modify-btn"><span>휴대폰 인증</span></a>'
 			html += '</form>'
 			html += '</div>'
 			html += '</li>'

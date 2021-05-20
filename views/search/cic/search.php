@@ -123,6 +123,10 @@
 				</div>
 				<div class="list vimg vp">
 					<ul>
+					<?php
+                        if (element('list', element('data', element('list', $view)))) {
+                            foreach (element('list', element('data', element('list', $view))) as $result) {
+                    ?>		
 						<li>
 							<a href="#n">
 								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>

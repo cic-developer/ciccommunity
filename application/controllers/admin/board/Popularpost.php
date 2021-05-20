@@ -126,7 +126,10 @@ class Popularpost extends CB_Controller
 		$view['view']['data'] = $result;
 
 		$select = 'brd_id, brd_name';
-		$view['view']['boardlist'] = $this->Board_model->get_board_list();
+		$where = array(
+			'brd_id' => 1
+		);
+		$view['view']['boardlist'] = $this->Board_model->get_board_list($where);
 
 		/**
 		 * primary key 정보를 저장합니다
@@ -200,7 +203,7 @@ class Popularpost extends CB_Controller
 		$this->{$this->modelname}->allow_order_field = array('post_id'); // 정렬이 가능한 필드
 		
 		$where = array(
-			'post_exept_state >' =>  1,
+			'post_exept_state >' =>  0,
 		);
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;
@@ -241,7 +244,10 @@ class Popularpost extends CB_Controller
 		$view['view']['data'] = $result;
 
 		$select = 'brd_id, brd_name';
-		$view['view']['boardlist'] = $this->Board_model->get_board_list();
+		$where = array(
+			'brd_id' => 1
+		);
+		$view['view']['boardlist'] = $this->Board_model->get_board_list($where);
 
 		/**
 		 * primary key 정보를 저장합니다

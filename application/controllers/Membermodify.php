@@ -2181,7 +2181,7 @@ class Membermodify extends CB_Controller
 			}
 
 			// 이메일
-			if($modify_type == 'email'){
+			if($modify_type == 'password'){
 				// 인증결과 세션 저장
 				$this->session->set_userdata('email_modify_ath_mail_result', '1');
 				// 세션에 저장 되어있던 인증번호 삭제
@@ -2222,7 +2222,7 @@ class Membermodify extends CB_Controller
 			}
 
 			// 이메일
-			if($modify_type == 'email'){
+			if($modify_type == 'password'){
 				$this->session->set_userdata('email_modify_ath_mail_result', '');
 
 				$result = array(

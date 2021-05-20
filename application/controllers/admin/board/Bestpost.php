@@ -86,7 +86,7 @@ class Bestpost extends CB_Controller
 			'post_exept_state' => 0,
 			'post_datetime >=' => $checktime,
 			'post_del <>' => 2,
-			// 'post_best_state >'=> 0,
+			'post_best_state <'=> 1,
 		);
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;
@@ -127,7 +127,6 @@ class Bestpost extends CB_Controller
 		$view['view']['data'] = $result;
 
 		$select = 'brd_id, brd_name';
-		//메모
 		$where = array(
 			'brd_id <' => 3
 		);
@@ -246,7 +245,10 @@ class Bestpost extends CB_Controller
 		$view['view']['data'] = $result;
 
 		$select = 'brd_id, brd_name';
-		$view['view']['boardlist'] = $this->Board_model->get_board_list();
+		$where = array(
+			'brd_id <' => 3
+		);
+		$view['view']['boardlist'] = $this->Board_model->get_board_list($where);
 
 		/**
 		 * primary key 정보를 저장합니다
