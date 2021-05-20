@@ -460,7 +460,7 @@ $(document).on('click', "#con_password_mail_btn", function(){
 		html += '<div class="nice-phone-ath-box" id="nice_phone_ath_box" style="display: inline-block; float: right;">'
 		html += '<form name="form_chk" method="post">'
 		html += '<input type="hidden" name="m" value="checkplusService">'
-		html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('enc_data', $view)); ?>">'
+		html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">'
 		html += '<a href="javascript:fnPopup();" id="nice_phone_ath" class="modify-btn"><span>휴대폰 인증</span></a>'
 		html += '</form>'
 		html += '</div>'
