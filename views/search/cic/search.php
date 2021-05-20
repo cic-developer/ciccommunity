@@ -48,14 +48,14 @@
 			<div class="result list txt content-heading" style="height: 170px;">
 				<div class="txt" >
                     <div class="vc" style="float:left">
-                        <p class="stxt"><img class="img display-6 pull-left" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img></p>
-                        <p class="btxt"> <span style="color:red" ><strong><?php echo $korean; ?></strong></span> </p></br>
-                        <p class="ctxt"> </p>
-                    </div>
+                        <p class="stxt pimg"><img src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img></p>
+                        <p class="btxt"> <span style="color:blue" ><strong><?php echo $korean; ?></strong></span> </p>
+                    </div><br>
                 </div>
-				<p class="btxt"> <?php echo $trade; ?></p>
-				<p class="stxt"> <?php echo $low; ?></p>
-				<p class="stxt"> <?php echo $high; ?></p>				
+				<p class="btxt"> ￦ <?php echo $trade; ?></p>
+				<p class="stxt"> 고가 <span style="color:blue"> ￦ <?php echo $high; ?> </span></p>
+				<p class="stxt"> 저가<span style="color:red"> ￦ <?php echo $low; ?> </span></p>
+				
 			</div>
 			<!-- PRICE UNTIL HERE -->
 

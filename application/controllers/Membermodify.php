@@ -2638,34 +2638,39 @@ class Membermodify extends CB_Controller
 		$password_nice_ath_result = $this->session->userdata('password_modify_ath_nice_phone_result'); // 비밀번호수정 휴대폰 인증 결과
 		$wallet_nice_ath_result = $this->session->userdata('wallet_modify_ath_nice_phone_result'); // 지갑주소수정 휴대폰 인증 결과
 
-		$new_phone =  $this->member->item('mem_phone');
+
+		print_r('hi');
+		print_r('<br>');
+		print_r($password_mail_ath_resul);
+		print_r('<br>');
+		print_r($password_nice_ath_result);
+		print_r('<br>');
+		print_r($this->input->post('mem_password'));
+		exit;
+
+		$mem_id = $this->member->item('mem_id');
+		$new_phone =  $this->member->item('mem_phone');;
 		$new_password =  $this->member->item('mem_password');
 		$new_wallet = $this->member->item('mem_wallet_address');
-
-		print_r('<br>');
-		print_r($new_phone);
-		print_r('<br>');
-		print_r($new_password);
-		print_r('<br>');
-		print_r($new_wallet);
-		exit;
 		// 수정할 데이터 가져오기
 		if($phone_mail_ath_result == '1'){
-			$new_phone = $this->input->get('mem_phone');
+			$new_phone = $this->input->post('mem_phone');
 		}
 		if($password_mail_ath_result == '1'
 			&&  $password_nice_ath_result == '1'){
-			$new_password = $this->input->get('mem_password');
+			$new_password = $this->input->post('mem_password');
 		}
 		if($wallet_mail_ath_result == '1'
 			&& $wallet_nice_ath_result == '1'){
-			$new_wallet = $this->input->get('mem_wallet');
+			$new_wallet = $this->input->post('mem_wallet');
 		}
 
-		// 로그인한 회원 정보 가져오기
-		$member_info = $this->member->get_member();
-		
-		$result = $this->Member_model->set_user_modify($member_info['mem_id'], $new_phone, $new_password, $new_wallet);
+		$data = array(
+			'mem_wallet_address' => '2222',
+		);
+
+		$this->Member_extra_vars_model->save($mem_id, $data); // memo: return 값이 없다
+		$result = $this->Member_model->set_user_modify($mem_id, $new_phone, $new_password, $new_wallet);
 
 		if($result == 0){
 			echo("<script>alert('정보수정에 실패하였습니다 (관리자문의)');</script>");
@@ -2673,8 +2678,8 @@ class Membermodify extends CB_Controller
 		}
 
 		if($result == 1){
-			echo("<script>alert('정보수정이 완료되었습니다');</script>");
-			redirect('membermodify');
+			echo("<script>alert('정보수정이 완료되었습니다');</script>"); // alet가 안됨
+			redirect('membermodify/modify');
 		}
 	}
 }
