@@ -46,14 +46,14 @@
 			</div>
 			<!-- HERE THE PRICE -->
 			<div class="result list txt content-heading" style="height: 170px;">
-				<div style="float:left">
-					<p class="pimg">
-						<img class="img display-6 pull-left" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
-					</p>
-					<p class="btxt pull-right"><span style="color:red" ><strong><?php echo $korean; ?></strong></span></p>
-					<span class="symbole"></span>
-				</div>
-				<p class="stxt display-4"> <?php echo $trade; ?></p>
+				<div class="txt" >
+                    <div class="vc" style="float:left">
+                        <p class="stxt"><img class="img display-6 pull-left" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img></p>
+                        <p class="btxt"> <span style="color:red" ><strong><?php echo $korean; ?></strong></span> </p></br>
+                        <p class="ctxt"> </p>
+                    </div>
+                </div>
+				<p class="btxt"> <?php echo $trade; ?></p>
 				<p class="stxt"> <?php echo $low; ?></p>
 				<p class="stxt"> <?php echo $high; ?></p>				
 			</div>

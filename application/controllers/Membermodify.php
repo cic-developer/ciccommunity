@@ -149,10 +149,6 @@ class Membermodify extends CB_Controller
 	 */
 	public function modify()
 	{
-
-		print_r($this->member->item('mem_wallet_address'));
-		exit;
-
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_membermodify_modify';
 		$this->load->event($eventname);
@@ -2619,6 +2615,7 @@ class Membermodify extends CB_Controller
 /********************************************************/
 
 	public function update() {
+		
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_membermodify_update';
 		$this->load->event($eventname);
@@ -2641,9 +2638,17 @@ class Membermodify extends CB_Controller
 		$password_nice_ath_result = $this->session->userdata('password_modify_ath_nice_phone_result'); // 비밀번호수정 휴대폰 인증 결과
 		$wallet_nice_ath_result = $this->session->userdata('wallet_modify_ath_nice_phone_result'); // 지갑주소수정 휴대폰 인증 결과
 
-		$new_phone = '';
-		$new_password = '';
-		$new_wallet = '';
+		$new_phone =  $this->member->item('mem_phone');
+		$new_password =  $this->member->item('mem_password');
+		$new_wallet = $this->member->item('mem_wallet_address');
+
+		print_r('<br>');
+		print_r($new_phone);
+		print_r('<br>');
+		print_r($new_password);
+		print_r('<br>');
+		print_r($new_wallet);
+		exit;
 		// 수정할 데이터 가져오기
 		if($phone_mail_ath_result == '1'){
 			$new_phone = $this->input->get('mem_phone');
