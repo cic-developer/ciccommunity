@@ -2160,11 +2160,13 @@ class Membermodify extends CB_Controller
 			exit(json_encode($result));
 		}
 
+		// 이메일 발송시, 세션에 저장한 랜덤인증번호
 		$ath_num = $this->session->userdata('ath_num');
 
 		// 세션에 저장한 인증번호 == 입력한 인증번호
 		if($ath_num == $_ath_num){
 
+			// 핸드폰
 			if($modify_type == 'phone'){
 				// 인증결과 세션 저장
 				$this->session->set_userdata('phone_modify_ath_mail_result', '1');
@@ -2178,19 +2180,37 @@ class Membermodify extends CB_Controller
 				exit(json_encode($result));
 			}
 
-			// $this->session->unset_userdata('ath_num');
-			// 인증결과 세션 저장
-			// $this->session->set_userdata('phone_modify_ath_mail_result', '1');
-			// $this->session->unset_userdata('ath_num');
+			// 이메일
+			if($modify_type == 'email'){
+				// 인증결과 세션 저장
+				$this->session->set_userdata('email_modify_ath_mail_result', '1');
+				// 세션에 저장 되어있던 인증번호 삭제
+				$this->session->unset_userdata('ath_num');
 
-			// $result = array(
-			// 	'result' => '1',
-			// 	'reason' => '인증 되었습니다',
-			// );
-			// exit(json_encode($result));
+				$result = array(
+					'result' => '2',
+					'reason' => '인증 되었습니다',
+				);
+				exit(json_encode($result));
+			}
+
+			// 지갑
+			if($modify_type == 'wallet'){
+				// 인증결과 세션 저장
+				$this->session->set_userdata('wallet_modify_ath_mail_result', '1');
+				// 세션에 저장 되어있던 인증번호 삭제
+				$this->session->unset_userdata('ath_num');
+
+				$result = array(
+					'result' => '3',
+					'reason' => '인증 되었습니다',
+				);
+				exit(json_encode($result));
+			}
+
 		} else{
-			// 인증결과 세션 저장
 
+			// 핸드폰
 			if($modify_type == 'phone'){
 				$this->session->set_userdata('phone_modify_ath_mail_result', '');
 
@@ -2200,7 +2220,28 @@ class Membermodify extends CB_Controller
 				);
 				exit(json_encode($result));
 			}
+
+			// 이메일
+			if($modify_type == 'email'){
+				$this->session->set_userdata('email_modify_ath_mail_result', '');
+
+				$result = array(
+					'result' => '0',
+					'reason' => '인증번호를 확인해주세요',
+				);
+				exit(json_encode($result));
+			}
 			
+			// 지갑
+			if($modify_type == 'wallet'){
+				$this->session->set_userdata('wallet_modify_ath_mail_result', '');
+
+				$result = array(
+					'result' => '0',
+					'reason' => '인증번호를 확인해주세요',
+				);
+				exit(json_encode($result));
+			}
 		}
 		
 	}
@@ -2263,6 +2304,12 @@ class Membermodify extends CB_Controller
 			);
 			exit(json_encode($result));
 		}
+
+		$result = array(
+			'state' => '1',
+			'message' => '사용 가능한 번호입니다',
+		);
+		exit(json_encode($result));
 	}
 
 /**

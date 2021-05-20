@@ -127,7 +127,11 @@ class Bestpost extends CB_Controller
 		$view['view']['data'] = $result;
 
 		$select = 'brd_id, brd_name';
-		$view['view']['boardlist'] = $this->Board_model->get_board_list();
+		//메모
+		$where = array(
+			'brd_id <' => 3
+		);
+		$view['view']['boardlist'] = $this->Board_model->get_board_list($where);
 
 		/**
 		 * primary key 정보를 저장합니다

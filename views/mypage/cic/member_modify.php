@@ -79,23 +79,15 @@
 			<!-- 핸드폰번호 변경 -->
 			<div id="myModal_phone" class="modal">
 				<!-- Modal content -->
-				<!-- <div class="modal-content entry"> -->
-					<!-- <span class="close"></span> -->
-					<!-- &times; -->
-					<!-- <div class="modal-content-btn"> -->
-
-						<a href="javascript:void(0);" id="ath_email" class="ath-email modify-btn modal-btn" data-type="phone"><span>이메일인증</span></a>
-						
-					<!-- </div> -->
-				<!-- </div> -->
+				<a href="javascript:void(0);" id="ath_email" class="ath-email modify-btn modal-btn" data-type="phone"><span>이메일인증</span></a>
 			</div>
 
 			<!-- 비밀번호 변경 -->
 			<div id="myModal_password" class="modal"> 
 				<!-- Modal content -->
-				<div class="modal-content entry">
+				<a href="javascript:void(0);" id="ath_email" class="ath-email modify-btn modal-btn" data-type="email"><span>이메일인증</span></a>
+				<!-- <div class="modal-content entry">
 					<span class="close"></span>
-					<!-- &times; -->
 					<ul class="new-password-box">
 						<li class="new-password">
 							<p class="btxt">새 비밀번호</p>
@@ -103,7 +95,6 @@
 								<p class="chk-input w380">
 									<input type="password" placeholder="" id="new_password" name="new_password" value="">
 								</p>
-								<!-- <a href="javascript:void(0);" id="send_email2" class="modify-btn"><span>이메일인증</span></a> -->
 							</div>
 						</li>
 						<li class="new-password-re">
@@ -116,7 +107,7 @@
 							</div>
 						</li>
 					</ul>
-				</div>
+				</div> -->
 			</div>
 
 			<!-- 지갑주소 변경 -->
@@ -280,7 +271,7 @@
 			if(state == 1){
 				$('#ath_email').remove(); // 이메일 인증 실행 버튼 삭제
 				html = '';
-				html += '<div class="modal-content modal-phone-content entry">';
+				html += '<div class="modal-content ' + type + '-modal-content entry">';
 				html += '<ul class="ath-email-box">';
 				html += '<li class="ath-email-content">';
 				html += '<p class="btxt">';
@@ -339,15 +330,33 @@
 			html += '<p class="btxt">새 핸드폰번호</p>';
 			html += '<div class="field modify">';
 			html += '<p class="chk-input w380">';
-			html += '<input type="text" placeholder="" onKeydown="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="">';
+			html += '<input type="text" placeholder="" onKeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="">';
 			html += '</p>';
 			html += '<a href="javascript:void(0);" id="phone_modify_btn" class="modify-btn"><span>완료</span></a>';
 			html += '</div>';
 			html += '</li>';
 			html += '</ul>';
 
-			$('.ath-email-box').remove(); // 이메일 인증 박스 삭제		
-			$('.modal-phone-content').append(html); // 승인 메세지
+			$('.phone-modal-content > .ath-email-box').remove(); // 이메일 인증 박스 삭제		
+			$('.phone-modal-content').append(html); // 승인 메세지
+		}
+
+		if(result == 2){
+			html = '';
+			html += '<ul class="password-modify-box">';
+			html += '<li class="password-modify-content">';
+			html += '<p class="btxt">새 비밀번호</p>';
+			html += '<div class="field modify">';
+			html += '<p class="chk-input w380">';
+			html += '<input type="text" placeholder="" onKeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="">';
+			html += '</p>';
+			html += '<a href="javascript:void(0);" id="phone_modify_btn" class="modify-btn"><span>완료</span></a>';
+			html += '</div>';
+			html += '</li>';
+			html += '</ul>';
+
+			$('.password-modal-content > .ath-email-box').remove(); // 이메일 인증 박스 삭제		
+			$('.password-modal-content').append(html); // 승인 메세지
 		}
 	});
 
@@ -392,10 +401,10 @@
 		var state = '';
 		var message = '';
 		$.ajax({
-			url: cb_url + '/membermodify/ajax_wallet_modify_email_send',
+			url: cb_url + '/membermodify/ajax_phone_confirm',
 			type: 'POST',
 			data: {
-				new_wallet: _wallet,
+				new_phone: _phone,
 				csrf_test_name : cb_csrf_hash
 			},
 			dataType: 'json',
@@ -406,8 +415,15 @@
 				message = data.message;
 			}
 		});
-	})
 
+		alert(message);
+
+		if(state == 1){
+			$("#mem_phone").val(phone);
+			modal1.style.display = "none";
+		}
+
+	})
 /**
  * 휴대폰번호변경 끝
  */
