@@ -45,18 +45,24 @@
 				<p class="stxt"><?php echo $total_rows; ?>건</p>
 			</div>
 			<!-- HERE THE PRICE -->
-			<div class="result list txt content-heading" style="height: 170px;">
-				<div class="txt" >
-                    <div class="vc" style="float:left">
-                        <p class="stxt pimg"><img src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img></p>
-                        <p class="btxt"> <span style="color:blue" ><strong><?php echo $korean; ?></strong></span> </p>
-                    </div><br>
-                </div>
-				<p class="btxt"> ￦ <?php echo $trade; ?></p>
-				<p class="stxt"> 고가 <span style="color:blue"> ￦ <?php echo $high; ?> </span></p>
-				<p class="stxt"> 저가<span style="color:red"> ￦ <?php echo $low; ?> </span></p>
-				
-			</div>
+			<?php if($trade){ ?>
+				<div class="result list txt content-heading" style="height: 170px;">
+					<div class="txt" >
+						<div class="vc" style="float:left">
+							<p class="stxt pimg"><img src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img></p>
+							<p class="btxt"> <strong><?php echo $korean; ?></strong></span> </p>
+						</div><br>
+					</div>
+					<p class="btxt" style="float:left"> ￦ <span style="color:blue" ><?php echo $trade; ?></p>
+					<p class="stxt"> 고가 <span style="color:blue"> ￦ <?php echo $high; ?> </span></p>
+					<p class="stxt"> 저가<span style="color:red"> ￦ <?php echo $low; ?> </span></p>
+					
+				</div>
+			<?php
+			}
+			if(!$trade){?>
+				<div></div>
+			<?php } ?>	
 			<!-- PRICE UNTIL HERE -->
 
 

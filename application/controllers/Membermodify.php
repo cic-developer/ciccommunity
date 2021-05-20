@@ -2205,7 +2205,7 @@ class Membermodify extends CB_Controller
 			// 이메일
 			if($modify_type == 'password'){
 				// 인증결과 세션 저장
-				$this->session->set_userdata('email_modify_ath_mail_result', '1');
+				$this->session->set_userdata('password_modify_ath_mail_result', '1');
 				// 세션에 저장 되어있던 인증번호 삭제
 				$this->session->unset_userdata('ath_num');
 
@@ -2245,7 +2245,7 @@ class Membermodify extends CB_Controller
 
 			// 이메일
 			if($modify_type == 'password'){
-				$this->session->set_userdata('email_modify_ath_mail_result', '');
+				$this->session->set_userdata('password_modify_ath_mail_result', '');
 
 				$result = array(
 					'result' => '0',
@@ -2638,16 +2638,6 @@ class Membermodify extends CB_Controller
 		$password_nice_ath_result = $this->session->userdata('password_modify_ath_nice_phone_result'); // 비밀번호수정 휴대폰 인증 결과
 		$wallet_nice_ath_result = $this->session->userdata('wallet_modify_ath_nice_phone_result'); // 지갑주소수정 휴대폰 인증 결과
 
-
-		print_r('hi');
-		print_r('<br>');
-		print_r($password_mail_ath_resul);
-		print_r('<br>');
-		print_r($password_nice_ath_result);
-		print_r('<br>');
-		print_r($this->input->post('mem_password'));
-		exit;
-
 		$mem_id = $this->member->item('mem_id');
 		$new_phone =  $this->member->item('mem_phone');;
 		$new_password =  $this->member->item('mem_password');
@@ -2658,7 +2648,8 @@ class Membermodify extends CB_Controller
 		}
 		if($password_mail_ath_result == '1'
 			&&  $password_nice_ath_result == '1'){
-			$new_password = $this->input->post('mem_password');
+			$new_password = password_hash($this->input->post('mem_password'), PASSWORD_BCRYPT);
+			
 		}
 		if($wallet_mail_ath_result == '1'
 			&& $wallet_nice_ath_result == '1'){
@@ -2666,11 +2657,18 @@ class Membermodify extends CB_Controller
 		}
 
 		$data = array(
-			'mem_wallet_address' => '2222',
+			'mem_wallet_address' => $new_wallet,
 		);
 
 		$this->Member_extra_vars_model->save($mem_id, $data); // memo: return 값이 없다
-		$result = $this->Member_model->set_user_modify($mem_id, $new_phone, $new_password, $new_wallet);
+		$result = $this->Member_model->set_user_modify($mem_id, $new_phone, $new_password);
+
+		// 세션데이터 지우기
+		$this->session->unset_userdata('phone_modify_ath_mail_result');
+		$this->session->unset_userdata('password_modify_ath_mail_result');
+		$this->session->unset_userdata('wallet_modify_ath_mail_result');
+		$this->session->unset_userdata('password_modify_ath_nice_phone_result');
+		$this->session->unset_userdata('wallet_modify_ath_nice_phone_result');
 
 		if($result == 0){
 			echo("<script>alert('정보수정에 실패하였습니다 (관리자문의)');</script>");
