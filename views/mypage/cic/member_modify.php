@@ -249,13 +249,13 @@
 			// 성공
 			if(state == 1){
 				if(type == 'phone'){
-					$('#myModal_phone > .ath_email').remove(); // 이메일 인증 실행 버튼 삭제
+					$('#myModal_phone > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
 				}
 				if(type == 'password'){
-					$('#myModal_password > .ath_email').remove(); // 이메일 인증 실행 버튼 삭제
+					$('#myModal_password > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
 				}
 				if(type == 'wallet'){
-					$('#myModal_wallet > .ath_email').remove(); // 이메일 인증 실행 버튼 삭제
+					$('#myModal_wallet > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
 				}
 				var html = '';
 				html += '<div class="modal-content ' + type + '-modal-content entry">';
@@ -359,8 +359,8 @@
 			html += '<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn"><span>휴대폰 인증</span></a>'
 			html += '</form>'
 
-			$('.password-modal-content').remove(); // 이메일 인증 박스 삭제		
-			$('#myModal_password').append(html); // 승인 메세지
+			$('.wallet-modal-content').remove(); // 이메일 인증 박스 삭제		
+			$('#myModal_wallet').append(html); // 승인 메세지
 		}
 	});
 
@@ -568,100 +568,38 @@
 		$('#myModal_wallet').append(html); 
 	}
 
-
 	var wallet = '';
-	// 이메일 확인 + 인증번호 보내기
-	$(document).ready(function(){
-		$("#send_email3").on('click', function(){
-			// $('.new-password-box > p').remove();
+	$(document).on('click', "#wallet_modify_btn", function(){
+		$('.wallet-modify-box > p').remove();
 
-			var _wallet = $("#new_wallet").val();
-			wallet = _wallet;
-			var state = '';
-			var message = '';
-			$.ajax({
-				url: cb_url + '/membermodify/ajax_wallet_modify_email_send',
-				type: 'POST',
-				data: {
-					new_wallet: _wallet,
-					csrf_test_name : cb_csrf_hash
-				},
-				dataType: 'json',
-				async: false,
-				cache: false,
-				success: function(data) {
-					state = data.state;
-					message = data.message;
-				}
-			});
-
-			alert(message);			
-			
-			$('.wallet-success-email-box').remove();
-			$('.con-mail2').remove();
-			if(state == 1){
-				html = '';
-				html += '<li class="con-mail2">'
-				html += '<p class="btxt">이메일 인증</p>'
-				html += '<div class="field modify">'
-				html += '<p class="chk-input w380">'
-				html += '<input type="text" placeholder="" id="ath_num3" name="ath_num3" value="">'
-				html += '</p>'
-				html += '<a href="javascript:void(0);" id="con_wallet_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
-				html += '</div>'
-				html += '</li>'
-				$('.new-wallet-box').append(html);
-			}
-		})
-	})
-
-	// 이메일 인증 하기
-	$(document).on('click', "#con_wallet_mail_btn", function(){
-		var ath_num = $("#ath_num3").val();
-
-		var result = '';
-		var reason = '';
+		var _wallet = $("#new_wallet").val();
+		wallet = _wallet;
+		var state = '';
+		var message = '';
 		$.ajax({
-			url: cb_url + '/membermodify/ajax_wallet_modify_ath_mail',
+			url: cb_url + '/membermodify/ajax_wallet_confirm',
 			type: 'POST',
 			data: {
-				ath_num: ath_num,
+				new_wallet: _wallet,
 				csrf_test_name : cb_csrf_hash
 			},
 			dataType: 'json',
 			async: false,
 			cache: false,
 			success: function(data) {
-				result = data.result;
-				reason = data.reason;
+				state = data.state;
+				message = data.message;
 			}
 		});
 
-		// 실패
-		if(result == 0){
-			alert(reason);
+		if(state == 1){
+			alert(message);
+			$("#mem_wallet").val(wallet);
+			modal2.style.display = "none";
 		}
-
-		//성공
-		if(result == 1) {
-			html = '';
-			html += '<li class="wallet-success-email-box">'
-			html += '<p class="btxt"></p>'
-			html += '<div class="wallet-success-message-box" id="wallet_success_message_box" style="display:inline-block;">'
-			html += '<p class="wallet-success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
-			html += '</div>'
-			html += '<div class="nice-phone-ath-box" id="ath_nice_phone_box" style="display: inline-block; float: right;">'
-			html += '<form name="form_chk" method="post">'
-			html += '<input type="hidden" name="m" value="checkplusService">'
-			html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">'
-			html += '<a href="javascript:fnPopup();" id="ath_nice_phone" class="modify-btn"><span>휴대폰 인증</span></a>'
-			html += '</form>'
-			html += '</div>'
-			html += '</li>'
-
-			$('.con-mail2').remove(); // 인증 박스 삭제		
-			$('.new-wallet-box').append(html); // 승인 메세지
-			// $("#mem_wallet").val(wallet);
+		if(state == 0){
+			// $('.wallet-modify-box').append(message);
+			alert(message);
 		}
 	});
 /**

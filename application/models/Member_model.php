@@ -152,4 +152,13 @@ class Member_model extends CB_Model
 		$where = array('mem_phone' => $mem_phone);
 		return $this->get_one('', $select, $where);
 	}
+
+	public function get_by_memWallet($mem_wallet, $select = '')
+	{
+		if (empty($mem_wallet)) {
+			return false;
+		}
+		$where = array('mem_wallet' => $mem_wallet);
+		return $this->get_one('', $select, $where);
+	}
 }

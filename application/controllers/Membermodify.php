@@ -2376,9 +2376,9 @@ class Membermodify extends CB_Controller
 /**
  * 지갑주소변경 시작
  */
-	public function ajax_wallet_modify_email_send() {
+	public function ajax_wallet_confirm() {
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_membermodify_ajax_wallet_modify_email_send';
+		$eventname = 'event_membermodify_ajax_wallet_confirm';
 		$this->load->event($eventname);
 
 		$view = array();
@@ -2386,35 +2386,24 @@ class Membermodify extends CB_Controller
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-
-		// 세션에 기존 인증된 내역 삭제
-		// 이메일을 보내는 순간 기존, 이메일 인증 + 휴대폰 인증이 삭제됩니다.
-		$this->session->unset_userdata('wallet_modify_ath_mail_result');
-		$this->session->unset_userdata('wallet_modify_ath_nice_phone_result');
-		$rand_num = sprintf('%06d',rand(000000,999999));
-		// 로그인한 회원 정보
-		$member_info = $this->member->get_member();
-		$email = $member_info['mem_email'];
-		// $phone = $member_info['mem_phone'];
-		// 세션에 인증번호 저장
-		$this->session->set_userdata('ath_num', $rand_num);
-		// 세션에 인증에 이용한 이메일 저장
-		// $this->session->set_userdata('ath_email', $email);
-
+		
 		$new_wallet = $this->input->post('new_wallet');
+		$isWallet = $this->Member_model->get_by_memWallet($new_wallet, '');
 
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
 		$this->load->library('form_validation');
+		$password_length = $this->cbconfig->item('password_length');
 
 		$config = array(
 			array(
 				'field' => 'new_wallet',
-				'label' => '새지갑주소',
+				'label' => '새 지갑주소',
 				'rules' => 'trim|required',
 			),
 		);
+		
 		$this->form_validation->set_rules($config);
 		$form_validation = $this->form_validation->run();
 
@@ -2426,84 +2415,19 @@ class Membermodify extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		// 이메일에 포함될 데이터
-		$getdata['rand_num'] = $rand_num;
-		$getdata['name'] = $member_info['mem_username'];
-		$getdata['site_title'] = $this->cbconfig->item('site_title');
-		$getdata['webmaster_email'] = $this->cbconfig->item('webmaster_email');
-		$getdata['webmaster_name'] = $this->cbconfig->item('webmaster_name');
-		
-		// $this->load->library('email');
-		$emailform['emailform'] = $getdata;
-		$message = $this->load->view('mypage/cic/email_form', $emailform, true);
-		$this->email->from(element('webmaster_email', $getdata), element('webmaster_name', $getdata));
-		$this->email->to($email);
-		$this->email->subject('[CIC Community] 지갑주소변경 이메일 인증 안내메일입니다');
-		$this->email->message($message);
-
-		if ($this->email->send() === false) {
+		if(count($isWallet) > 0){ // 중복 이면
 			$result = array(
 				'state' => '0',
-				'message' => '이메일을 발송하지 못하였습니다. 메일 설정을 확인하여주세요',
-			);
-			exit(json_encode($result));
-		} else {
-			$result = array(
-				'state' => '1',
-				'message' => '해당 이메일로 인증 번호를 발송하였습니다',
-			);
-			exit(json_encode($result));
-		}
-		// echo $this->email->print_debugger();
-	}
-
-
-	public function ajax_wallet_modify_ath_mail()
-	{
-		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_membermodify_ajax_wallet_modify_ath_mail';
-		$this->load->event($eventname);
-
-		$result = array();
-		$this->output->set_content_type('application/json');
-
-		// 이벤트가 존재하면 실행합니다
-		Events::trigger('before', $eventname);
-
-		$_ath_num = trim($this->input->post('ath_num'));
-		if (empty($_ath_num)) {
-			$result = array(
-				'result' => '0',
-				'reason' => '인증번호가 넘어오지 않았습니다',
+				'message' => '이미 사용중인 지갑주소입니다',
 			);
 			exit(json_encode($result));
 		}
 
-		$ath_num = $this->session->userdata('ath_num');
-
-		// 세션에 저장한 인증번호 == 입력한 인증번호
-		if($ath_num == $_ath_num){
-			// $this->session->unset_userdata('ath_num');
-			// 인증결과 세션 저장
-			$this->session->set_userdata('wallet_modify_ath_mail_result', '1');
-			$this->session->unset_userdata('ath_num');
-
-			$result = array(
-				'result' => '1',
-				'reason' => '인증 되었습니다',
-			);
+		$result = array(
+			'state' => '1',
+			'message' => '사용 가능한 지갑주소입니다',
+		);
 			exit(json_encode($result));
-		} else{
-			// 인증결과 세션 저장
-			$this->session->set_userdata('wallet_modify_ath_mail_result', '');
-
-			$result = array(
-				'result' => '0',
-				'reason' => '인증번호를 확인해주세요',
-			);
-			exit(json_encode($result));
-		}
-		
 	}
 /**
 * 지갑주소변경 끝
@@ -2534,7 +2458,6 @@ class Membermodify extends CB_Controller
 
 			echo("<script>");
 			echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
-			echo("var elm = window.opener.document.getElementById('password_success_message_box');");
 			echo("window.opener.createPasswordModify();"); // 패스워드 변경 폼 생성
 			echo("self.close();");
 			echo("</script>");
@@ -2567,18 +2490,9 @@ class Membermodify extends CB_Controller
 			// 휴대폰 인증 데이터 삭제
 			$this->session->unset_userdata('dec_data');
 
-			$html = '<p class="password-success-phone rtxt mg10t cblue">핸드폰 인증이 완료되었습니다</p>';
-
 			echo("<script>");
-			echo("alert('인증되었습니다');"); // 인증완료 문구
-			echo("var elm = window.opener.document.getElementById('wallet_success_message_box');");
-			echo("elm.removeChild(elm.lastChild);"); // 최근(마지막) 인증 문구 제거
-			echo("var p = document.createElement('p');"); // 인증 문구 텍스트 생성 ~
-			echo("p.className = 'password-success-phone rtxt mg10t cblue';"); // ~
-			echo("p.textContent = '핸드폰 인증이 완료되었습니다';"); // ~
-			echo("window.opener.document.getElementById('wallet_success_message_box').appendChild(p);"); // ~ 휴대폰 인증 텍스트 적용
-			echo("var new_wallet = window.opener.document.getElementById('new_wallet').value;"); // 새 지갑주소 불러오기
-			echo("window.opener.document.getElementById('mem_wallet').value = new_wallet;"); // 새 지갑주소 저장
+			echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
+			echo("window.opener.createWalletModify();"); // 지갑주소 변경 폼 생성
 			echo("self.close();");
 			echo("</script>");
 			exit;

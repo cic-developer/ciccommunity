@@ -39,17 +39,6 @@
 					
 				</form>
 			</div>
-			<div id="sortable">
-				<?php
-					if (element('list', element('data', $view))) {
-						foreach (element('list', element('data', $view)) as $result) {
-				?>
-					<?php echo element('market', $result); ?> 
-					<?php
-						}
-					}
-					?>
-			</div>
 			<div class="table-responsive text-center">
 				<form method = 'post'>	
 					<table class="table table-hover table-striped table-bordered">
