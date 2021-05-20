@@ -48,7 +48,7 @@
 			<div class="result list txt content-heading" style="height: 170px;">
 				<div style="float:left">
 					<p class="pimg">
-						<img class="img pull-left" src="https://static.upbit.com/logos/BTC.png"></img>
+						<img class="img display-6 pull-left" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
 					</p>
 					<p class="btxt pull-right"><span style="color:red" ><strong><?php echo $korean; ?></strong></span></p>
 					<span class="symbole"></span>

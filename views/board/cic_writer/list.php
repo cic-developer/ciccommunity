@@ -36,8 +36,47 @@
                                 <?php
                                     }
                                 }
-                                if ( ! element('list', element('bestpost', $view))) {
+                                if (count(element('list', element('bestpost', $view))) < 4) {
                                     ?>
+                                    <div class="owl-item" style="width: 240px; margin-right: 20px;">
+                                        <div class="item">
+                                            <a>
+                                                <div class="img"><img src="https://dev.ciccommunity.com/assets/images/news-img01.png" alt="">
+                                                </div>
+                                                <div class="txt">
+                                                    <p class="btxt">선택된 자료가 없습니다.</p>
+                                                    <p class="stxt">선택된 자료가 없습니다.</p>
+                                                    <p class="ctxt vp"><?php echo number_format(element("post_like_point",$writerbest))?></p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 240px; margin-right: 20px;">
+                                        <div class="item">
+                                            <a>
+                                                <div class="img"><img src="https://dev.ciccommunity.com/assets/images/news-img01.png" alt="">
+                                                </div>
+                                                <div class="txt">
+                                                    <p class="btxt">선택된 자료가 없습니다.</p>
+                                                    <p class="stxt">선택된 자료가 없습니다.</p>
+                                                    <p class="ctxt vp"><?php echo number_format(element("post_like_point",$writerbest))?></p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                                                        <div class="owl-item" style="width: 240px; margin-right: 20px;">
+                                        <div class="item">
+                                            <a>
+                                                <div class="img"><img src="https://dev.ciccommunity.com/assets/images/news-img01.png" alt="">
+                                                </div>
+                                                <div class="txt">
+                                                    <p class="btxt">선택된 자료가 없습니다.</p>
+                                                    <p class="stxt">선택된 자료가 없습니다.</p>
+                                                    <p class="ctxt vp"><?php echo number_format(element("post_like_point",$writerbest))?></p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
                                     <div class="owl-item" style="width: 240px; margin-right: 20px;">
                                         <div class="item">
                                             <a>
