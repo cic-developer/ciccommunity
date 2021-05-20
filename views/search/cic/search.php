@@ -79,222 +79,39 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>
-									<div class="my-info">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코알못259</p>
-									</div>
-								</td>
-								<td class="l">
-									<a href="#n">한국인은 <span class="yellow-bg">리플</span> 안 나오는데 외국인은 80% 해주고 외국인 건물주 논 ... 
-										<span class="reply">(10)</span>
-									</a>
-								</td>
-								<td>13:33:59</td>
-								<td>43246</td>
-								<td><p class="cyellow">12</p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="my-info">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코린이</p>
-									</div>
-								</td>
-								<td class="l file">
-									<a href="#n">한국인은 <span class="yellow-bg">리플</span> 안 나오는데 외국인은 80% 해주고 외국인 건물주 논 ... 
-										<span class="reply">(10)</span>
-										<span class="fimg"><img src="<?php echo base_url('assets/images/list-file.png')?>" alt=""></span>
-									</a>
-								</td>
-								<td>13:33:59</td>
-								<td>43246</td>
-								<td><p class="cyellow">12</p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="my-info">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코린이</p>
-									</div>
-								</td>
-								<td class="l">
-									<a href="#n"><span class="yellow-bg">리플</span>을 작성하기 위해, 기계식키보드 샀어요~... 
-										<span class="reply">(7)</span>
-									</a>
-								</td>
-								<td>13:33:59</td>
-								<td>43246</td>
-								<td><p class="cyellow">12</p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="my-info">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">퍼퍼s22</p>
-									</div>
-								</td>
-								<td class="l file">
-									<a href="#n">"내 힘으로 아들 의대 교수 만들었다" 자랑한 <span class="yellow-bg">리플</span> 의학자.jpg ...
-										<span class="reply">(7)</span>
-										<span class="fimg"><img src="<?php echo base_url('assets/images/list-file.png')?>" alt=""></span>
-									</a>
-								</td>
-								<td>13:33:59</td>
-								<td>43246</td>
-								<td><p class="cyellow">0</p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="my-info">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코린이</p>
-									</div>
-								</td>
-								<td class="l file">
-									<a href="#n">한국인은 <span class="yellow-bg">리플</span>은 안 나오는데 외국인은 80% 해주고 외국인 건물주 논 ... 
-										<span class="reply">(10)</span>
-										<span class="fimg"><img src="<?php echo base_url('assets/images/list-file.png')?>" alt=""></span>
-									</a>
-								</td>
-								<td>13:33:59</td>
-								<td>43246</td>
-								<td><p class="cyellow">1200</p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="my-info">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코린이</p>
-									</div>
-								</td>
-								<td class="l">
-									<a href="#n">기계식키보드 샀어요~... 
-										<span class="reply">(7)</span>
-									</a>
-								</td>
-								<td>13:33:59</td>
-								<td>43246</td>
-								<td><p class="cyellow">12</p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="my-info">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코린이</p>
-									</div>
-								</td>
-								<td class="l file">
-									<a href="#n">"내 힘으로 아들 의대 교수 만들었다" 자랑한 <span class="yellow-bg">리플</span> 의학자.jpg ...
-										<span class="reply">(7)</span>
-										<span class="fimg"><img src="<?php echo base_url('assets/images/list-file.png')?>" alt=""></span>
-									</a>
-								</td>
-								<td>13:33:59</td>
-								<td>43246</td>
-								<td><p class="cyellow">12</p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="my-info">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">퍼퍼s22</p>
-									</div>
-								</td>
-								<td class="l file">
-									<a href="#n">한국인은 대출 안 나오는데 외국인은 80% 해주고 외국인 건물주 논 ... 
-										<span class="reply">(10)</span>
-										<span class="fimg"><img src="<?php echo base_url('assets/images/list-file.png')?>" alt=""></span>
-									</a>
-								</td>
-								<td>13:33:59</td>
-								<td>43246</td>
-								<td><p class="cyellow">12</p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="my-info">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코린이</p>
-									</div>
-								</td>
-								<td class="l">
-									<a href="#n">기계식키보드 샀어요~... 
-										<span class="reply">(7)</span>
-									</a>
-								</td>
-								<td>13:33:59</td>
-								<td>43246</td>
-								<td><p class="cyellow">500</p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="my-info">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">퍼퍼s22</p>
-									</div>
-								</td>
-								<td class="l file">
-									<a href="#n">"내 힘으로 아들 의대 교수 만들었다" 자랑한 유명 의학자.jpg ...
-										<span class="reply">(7)</span>
-										<span class="fimg"><img src="<?php echo base_url('assets/images/list-file.png')?>" alt=""></span>
-									</a>
-								</td>
-								<td>13:33:59</td>
-								<td>43246</td>
-								<td><p class="cyellow">12</p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="my-info">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코린이</p>
-									</div>
-								</td>
-								<td class="l file">
-									<a href="#n">한국인은 대출 안 나오는데 외국인은 80% 해주고 외국인 건물주 논 ... 
-										<span class="reply">(10)</span>
-										<span class="fimg"><img src="<?php echo base_url('assets/images/list-file.png')?>" alt=""></span>
-									</a>
-								</td>
-								<td>13:33:59</td>
-								<td>43246</td>
-								<td><p class="cyellow">1232</p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="my-info">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코린이</p>
-									</div>
-								</td>
-								<td class="l">
-									<a href="#n">기계식키보드 샀어요~... 
-										<span class="reply">(7)</span>
-									</a>
-								</td>
-								<td>13:33:59</td>
-								<td>43246</td>
-								<td><p class="cyellow">12</p></td>
-							</tr>
-							<tr>
-								<td>
-									<div class="my-info">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코린이</p>
-									</div>
-								</td>
-								<td class="l file">
-									<a href="#n">"내 힘으로 아들 의대 교수 만들었다" 자랑한 유명 의학자.jpg ...
-										<span class="reply">(7)</span>
-										<span class="fimg"><img src="<?php echo base_url('assets/images/list-file.png')?>" alt=""></span>
-									</a>
-								</td>
-								<td>13:33:59</td>
-								<td>43246</td>
-								<td><p class="cyellow">12</p></td>
-							</tr>
+						<?php
+                    if (element('list', element('data', element('list', $view)))) {
+                        foreach (element('list', element('data', element('list', $view))) as $result) {
+                    ?>
+                        <tr>
+                            <td>
+                                <div class="my-info">
+                                    <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30); ?>"
+                                            alt="<?php echo element('mlc_title', $result); ?>"></p>
+                                    <p class="rtxt"><?php echo html_escape(element('post_nickname', $result)); ?></p>
+                                </div>
+                            </td>
+                            <td class="l file">
+                                <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><?php echo html_escape(element('title', $result)); ?>
+                                    <span class="reply">(<?php echo element('post_comment_count', $result); ?>)</span>
+                                </a>
+                            </td>
+                            <td><?php echo element('display_datetime', $result); ?></td>
+                            <td><?php echo number_format(element('post_hit', $result)); ?></td>
+                            <td>
+                                <p class="cyellow"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p>
+                            </td>
+                        </tr>
+                    <?php
+                        }
+                    }
+                    if ( ! element('notice_list', element('list', $view)) && ! element('list', element('data', element('list', $view)))) {
+                    ?>
+                        <tr>
+                            <td colspan="5" class="nopost">게시물이 없습니다</td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
 						</tbody>
 					</table>
 				</div>
