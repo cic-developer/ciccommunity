@@ -120,9 +120,14 @@ class Searchcoin extends CB_Controller
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
 		// keyword 테이블을 통째로 불러온다.
+		$keyword_list = $this->CIC_coin_keyword_model->get_keyword();
 		$coin_list = $this->CIC_coin_list_model->getstockData();
 		// 통째로 가져온 테이블에서 keyword 만 담은 array() 만든다.
 		$keyword_arr = array();
+		
+		foreach($keyword_list as $value){
+			$keyword_arr[] = element('coin_keyword', $value);
+		}
 		
 		// 통째로 가져온 테이블에서 keyword 만 담은 array() 만든다.
 		$coin_arr = array();
@@ -152,30 +157,30 @@ class Searchcoin extends CB_Controller
 						}
 					}
 				}
-			// 	$data = array(
-			// 		array(
-			// 			'coin_market'=> $market,
-			// 			'coin_keyword'=>$getList[$i]['korean_name']
-			// 		),
-			// 		array(
-			// 			'coin_market'=> $market,
-			// 			'coin_keyword'=>$getList[$i]['english_name']
-			// 		),
-			// 		array(
-			// 			'coin_market'=> $market,
-			// 			'coin_keyword'=> $market
-			// 		),
-			// 	);
-			// 	if(isset($data) && !empty($data)){
-			// 		foreach($data as $thisData){
-			// 			if(in_array($thisData['coin_keyword'], $keyword_arr)){	
-			// 				continue;
-			// 			}
-			// 			else{
-			// 				$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
-			// 			}	
-			// 		} 
-			// 	}
+				$data = array(
+					array(
+						'coin_market'=> $market,
+						'coin_keyword'=>$getList[$i]['korean_name']
+					),
+					array(
+						'coin_market'=> $market,
+						'coin_keyword'=>$getList[$i]['english_name']
+					),
+					array(
+						'coin_market'=> $market,
+						'coin_keyword'=> $market
+					),
+				);
+				if(isset($data) && !empty($data)){
+					foreach($data as $thisData){
+						if(in_array($thisData['coin_keyword'], $keyword_arr)){	
+							continue;
+						}
+						else{
+							$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
+						}	
+					} 
+				}
 			}
 		}	
 		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');
@@ -229,52 +234,16 @@ class Searchcoin extends CB_Controller
 			}
 		}
 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-
-
-
-		$rafresh_ = $this -> input -> post('keyword'),
 			
 		//SHOWING LIST TO VIEW KEYWORD TO LIST
 		$keylist = $this -> CIC_coin_keyword_model->get_keyword();
 		$view['keylist'] = $keylist;
 
-		//INSERTING KEY WORD IN DEB
+		//INSERTING KEY WORD IN
 		$coin_list = $this->CIC_coin_list_model->getstockData();
 		$view['coin_list'] = $coin_list;
 
-		$keyword_arr = array();
-		foreach($keylist as $value){
-			$keyword_arr[] = element('coin_keyword', $value);
-		}
-		
-		for($i=0; $i<count($coin_list); $i++){
-			$data = array(
-				array(
-					'coin_market'=> $coin_list[$i]['clist_market'],
-					'coin_keyword'=>$coin_list[$i]['clist_name_ko']
-				),
-				array(
-					'coin_market'=> $coin_list[$i]['clist_market'],
-					'coin_keyword'=>$coin_list[$i]['english_name']
-				),
-				array(
-					'coin_market'=> $coin_list[$i]['clist_market'],
-					'coin_keyword'=> $coin_list[$i]['clist_market']
-				),
-			);
 
-			if(isset($data) && !empty($data) && $rafresh_){
-				foreach($data as $thisData){
-					if(in_array($thisData['coin_keyword'], $keyword_arr)){	
-						continue;
-					}
-					else{
-						$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
-					}	
-				} 
-			}
-
-		}
 		//이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 

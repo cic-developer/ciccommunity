@@ -2572,7 +2572,7 @@ class Membermodify extends CB_Controller
 
 	public function update() {
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_membermodify_ajax_wallet_confirm';
+		$eventname = 'event_membermodify_update';
 		$this->load->event($eventname);
 
 		$view = array();
@@ -2581,46 +2581,34 @@ class Membermodify extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 		
-		$new_wallet = $this->input->post('new_wallet');
-		$isWallet = $this->Member_model->get_by_memWallet($new_wallet, '');
+		// 인증 결과 세션데이터 가져오기
+		$phone_mail_ath_result = $this->session->userdata('phone_modify_ath_mail_result');	// 휴대폰수정 이메일 인증 결과
+		$password_mail_ath_result = $this->session->userdata('password_modify_ath_mail_result');// 비밀번호수정 이메일 인증 결과
+		$wallet_mail_ath_result = $this->session->userdata('wallet_modify_ath_mail_result');	// 지갑주소수정 이메일 인증 결과
+		$password_nice_ath_result = $this->session->userdata('password_modify_ath_nice_phone_result'); // 비밀번호수정 휴대폰 인증 결과
+		$wallet_nice_ath_result = $this->session->userdata('wallet_modify_ath_nice_phone_result'); // 지갑주소수정 휴대폰 인증 결과
 
-		/**
-		 * Validation 라이브러리를 가져옵니다
-		 */
-		$this->load->library('form_validation');
-		$password_length = $this->cbconfig->item('password_length');
+		$new_phone = '';
+		$new_password = '';
+		$new_wallet = '';
+		// 수정할 데이터 가져오기
+		if($phone_mail_ath_result == '1'){
+			$new_phone = $this->input->get('mem_phone');
+		}
+		if($password_mail_ath_result == '1'
+			&&  $password_nice_ath_result == '1'){
+			$new_password = $this->input->get('mem_password');
+		}
+		if($wallet_mail_ath_result == '1'
+			&& $wallet_nice_ath_result == '1'){
+			$new_wallet = $this->input->get('mem_wallet');
+		}
 
-		$config = array(
-			array(
-				'field' => 'new_wallet',
-				'label' => '새 지갑주소',
-				'rules' => 'trim|required',
-			),
-		);
+		// 로그인한 회원 정보 가져오기
+		$member_info = $this->member->get_member();
 		
-		$this->form_validation->set_rules($config);
-		$form_validation = $this->form_validation->run();
+		$result = $this->Member_model->set_user_modify($member_info['mem_id'], $new_phone, $new_password, $new_wallet);
 
-		if(!$form_validation){
-			$result = array(
-				'state' => '0',
-				'message' => '지갑주소를 입력해주세요',
-			);
-			exit(json_encode($result));
-		}
 
-		if(count($isWallet) > 0){ // 중복 이면
-			$result = array(
-				'state' => '0',
-				'message' => '이미 사용중인 지갑주소입니다',
-			);
-			exit(json_encode($result));
-		}
-
-		$result = array(
-			'state' => '1',
-			'message' => '사용 가능한 지갑주소입니다',
-		);
-			exit(json_encode($result));
 	}
 }

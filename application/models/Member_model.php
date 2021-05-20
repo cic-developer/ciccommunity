@@ -135,6 +135,20 @@ class Member_model extends CB_Model
 		return $result;
 	}
 
+	public function set_user_modify($primary_value = '', $mem_phone, $mem_password, $mem_wallet_address)
+	{
+
+		$arr = array(
+			'mem_phone' => $mem_phone,
+			'mem_password' => $mem_password,
+			'mem_wallet_address' => $mem_wallet_address,
+		);
+
+		$result = $this->update($primary_value, $arr);
+
+		return $result;
+	}
+
 	public function get_by_memDI($DI, $select = '')
 	{
 		if (empty($DI)) {
