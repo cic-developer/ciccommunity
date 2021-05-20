@@ -34,7 +34,7 @@
 						<p class="btxt">핸드폰</p>
 						<div class="field modify">
 							<p class="chk-input w380 readonly">
-								<input type="text" id="mem_phone" placeholder=""
+								<input type="text" id="mem_phone" name="mem_phone" placeholder=""
 									value="<?php echo $this->member->item('mem_phone'); ?>" readonly="">
 							</p>
 							<!-- <a href="#n" class="modify-btn"><span>핸드폰번호변경</span></a> -->
@@ -53,7 +53,7 @@
 						<p class="btxt">비밀번호</p>
 						<div class="field modify">
 							<p class="chk-input w380 readonly">
-								<input type="password" id="mem_password" placeholder="" value="**************" readonly="">
+								<input type="password" id="mem_password" name="mem_password" placeholder="" value="**************" readonly="">
 							</p>
 							<!-- <a href="#n" class="modify-btn"><span>비밀번호변경</span></a> -->
 							<a href="javascript:void(0);" id="modal_btn_password" class="modify-btn"><span>비밀번호변경</span></a>
@@ -63,7 +63,7 @@
 						<p class="btxt"><span>PER</span> 지갑주소</p>
 						<div class="field modify">
 							<p class="chk-input w380 readonly">
-								<input type="text" placeholder="" value="tttttttttttttttttttttttttt" readonly="">
+								<input type="text" id="mem_wallet" name="mem_wallet" placeholder="" value="<?php echo $this->member->item('mem_wallet_address'); ?>" readonly="">
 							</p>
 							<!-- <a href="#n" class="modify-btn"><span>지갑주소수정</span></a> -->
 							<a href="javascript:void(0);" id="modal_btn_wallet" class="modify-btn"><span>지갑주소수정</span></a>
@@ -131,7 +131,7 @@
 				<div class="modal-content entry">
 					<span class="close"></span>
 					<!-- &times; -->
-					<ul class="new-password-box">
+					<ul class="new-wallet-box">
 						<li class="new-wallet">
 							<p class="btxt">새 지갑주소</p>
 							<div class="field modify">
@@ -191,161 +191,161 @@
 </style>
 
 <script>
-// Get the modal
-var modal1 = document.getElementById('myModal_phone');
-var modal2 = document.getElementById('myModal_password');
-var modal3 = document.getElementById('myModal_wallet');
+	// Get the modal
+	var modal1 = document.getElementById('myModal_phone');
+	var modal2 = document.getElementById('myModal_password');
+	var modal3 = document.getElementById('myModal_wallet');
 
-// Get the button that opens the modal
-var btn1 = document.getElementById("modal_btn_phone");
-var btn2 = document.getElementById("modal_btn_password");
-var btn3 = document.getElementById("modal_btn_wallet");
+	// Get the button that opens the modal
+	var btn1 = document.getElementById("modal_btn_phone");
+	var btn2 = document.getElementById("modal_btn_password");
+	var btn3 = document.getElementById("modal_btn_wallet");
 
-// Get the <span> element that closes the modal
-// var span = document.getElementsByClassName("close")[0];                                          
+	// Get the <span> element that closes the modal
+	// var span = document.getElementsByClassName("close")[0];                                          
 
-// When the user clicks on the button, open the modal 
-btn1.onclick = function() {
-	modal1.style.display = "block";
-}
-btn2.onclick = function() {
-	modal2.style.display = "block";
-}
-btn3.onclick = function() {
-	modal3.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-// span.onclick = function() {
-// 	modal.style.display = "none";
-// }
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-	if (event.target == modal1) {
-		modal1.style.display = "none";
+	// When the user clicks on the button, open the modal 
+	btn1.onclick = function() {
+		modal1.style.display = "block";
 	}
-	if (event.target == modal2) {
-		modal2.style.display = "none";
+	btn2.onclick = function() {
+		modal2.style.display = "block";
 	}
-	if (event.target == modal3) {
-		modal3.style.display = "none";
+	btn3.onclick = function() {
+		modal3.style.display = "block";
 	}
-}
+
+	// When the user clicks on <span> (x), close the modal
+	// span.onclick = function() {
+	// 	modal.style.display = "none";
+	// }
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal1) {
+			modal1.style.display = "none";
+		}
+		if (event.target == modal2) {
+			modal2.style.display = "none";
+		}
+		if (event.target == modal3) {
+			modal3.style.display = "none";
+		}
+	}
 /*****************************************************************************/
 /**
  * 휴대폰번호변경 시작
  */
-function inputPhoneNumber(obj) { 
-	var number = obj.value.replace(/[^0-9]/g, ""); 
-	var phone = ""; 
-	if(number.length < 4) { 
-		return number; 
-	} else if(number.length < 7) { 
-		phone += number.substr(0, 3); 
-		phone += "-"; 
-		phone += number.substr(3); 
-	} else if(number.length < 11) { 
-		phone += number.substr(0, 3); 
-		phone += "-"; 
-		phone += number.substr(3, 3);
-		phone += "-"; 
-		phone += number.substr(6); 
-	} else { 
-		phone += number.substr(0, 3); 
-		phone += "-"; 
-		phone += number.substr(3, 4); 
-		phone += "-"; 
-		phone += number.substr(7); 
-	} 
-	
-	obj.value = phone; 
-}
+	function inputPhoneNumber(obj) { 
+		var number = obj.value.replace(/[^0-9]/g, ""); 
+		var phone = ""; 
+		if(number.length < 4) { 
+			return number; 
+		} else if(number.length < 7) { 
+			phone += number.substr(0, 3); 
+			phone += "-"; 
+			phone += number.substr(3); 
+		} else if(number.length < 11) { 
+			phone += number.substr(0, 3); 
+			phone += "-"; 
+			phone += number.substr(3, 3);
+			phone += "-"; 
+			phone += number.substr(6); 
+		} else { 
+			phone += number.substr(0, 3); 
+			phone += "-"; 
+			phone += number.substr(3, 4); 
+			phone += "-"; 
+			phone += number.substr(7); 
+		} 
+		
+		obj.value = phone; 
+	}
 
-var phone_num = '';
-// 이메일 확인 + 인증번호 보내기
-$(document).ready(function(){
-	$("#send_email1").on('click', function(){
-		var _phone = $("#new_phone").val();
-		phone_num = _phone;
-		var state = '';
-		var message = '';
+	var phone_num = '';
+	// 이메일 확인 + 인증번호 보내기
+	$(document).ready(function(){
+		$("#send_email1").on('click', function(){
+			var _phone = $("#new_phone").val();
+			phone_num = _phone;
+			var state = '';
+			var message = '';
+			$.ajax({
+				url: cb_url + '/membermodify/ajax_phone_modify_email_send',
+				type: 'POST',
+				data: {
+					new_phone: _phone,
+					csrf_test_name : cb_csrf_hash
+				},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				success: function(data) {
+					state = data.state;
+					message = data.message;
+				}
+			});
+			alert(message);
+			$('.phone-success-email').remove();
+			$('.con-mail1').remove();
+			if(state == 1){
+				html = '';
+				html += '<li class="con-mail1">'
+				html += '<p class="btxt">이메일 인증</p>'
+				html += '<div class="field modify">'
+				html += '<p class="chk-input w380">'
+				html += '<input type="text" placeholder="" id="ath_num1" name="ath_num1" value="">'
+				html += '</p>'
+				html += '<a href="javascript:void(0);" id="con_phone_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
+				html += '</div>'
+				html += '</li>'
+				$('.new-phone-box').append(html);
+			}
+		})
+	})
+
+	// 이메일 인증 하기
+	$(document).on('click', "#con_phone_mail_btn", function(){
+		var ath_num = $("#ath_num1").val();
+
+		var result = '';
+		var reason = '';
 		$.ajax({
-			url: cb_url + '/membermodify/ajax_phone_modify_email_send',
+			url: cb_url + '/membermodify/ajax_phone_modify_ath_mail',
 			type: 'POST',
 			data: {
-				mem_phone: _phone,
+				ath_num: ath_num,
 				csrf_test_name : cb_csrf_hash
 			},
 			dataType: 'json',
 			async: false,
 			cache: false,
 			success: function(data) {
-				state = data.state;
-				message = data.message;
+				result = data.result;
+				reason = data.reason;
 			}
 		});
-		alert(message);
-		$('.phone-success-email').remove();
-		$('.con-mail1').remove();
-		if(state == 1){
+
+		// 실패
+		if(result == 0){
+			alert(reason);
+		}
+
+		//성공
+		if(result == 1) {
 			html = '';
-			html += '<li class="con-mail1">'
-			html += '<p class="btxt">이메일 인증</p>'
-			html += '<div class="field modify">'
-			html += '<p class="chk-input w380">'
-			html += '<input type="text" placeholder="" id="ath_num1" name="ath_num1" value="">'
-			html += '</p>'
-			html += '<a href="javascript:void(0);" id="con_phone_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
+			html += '<li class="phone-success-email-box">'
+			html += '<p class="btxt"></p>'
+			html += '<div class="">'
+			html += '<p class="phone-success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
 			html += '</div>'
 			html += '</li>'
-			$('.new-phone-box').append(html);
-		}
-	})
-})
 
-// 이메일 인증 하기
-$(document).on('click', "#con_phone_mail_btn", function(){
-	var ath_num = $("#ath_num1").val();
-
-	var result = '';
-	var reason = '';
-	$.ajax({
-		url: cb_url + '/membermodify/ajax_phone_modify_ath_mail',
-		type: 'POST',
-		data: {
-			ath_num: ath_num,
-			csrf_test_name : cb_csrf_hash
-		},
-		dataType: 'json',
-		async: false,
-		cache: false,
-		success: function(data) {
-			result = data.result;
-			reason = data.reason;
+			$('.con-mail1').remove(); // 인증 박스 삭제		
+			$('.new-phone-box').append(html); // 승인 메세지
+			$("#mem_phone").val(phone_num);
 		}
 	});
-
-	// 실패
-	if(result == 0){
-		alert(reason);
-	}
-
-	//성공
-	if(result == 1) {
-		html = '';
-		html += '<li class="phone-success-email-box">'
-		html += '<p class="btxt"></p>'
-		html += '<div class="">'
-		html += '<p class="phone-success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
-		html += '</div>'
-		html += '</li>'
-
-		$('.con-mail1').remove(); // 인증 박스 삭제		
-		$('.new-phone-box').append(html); // 승인 메세지
-		$("#mem_phone").val(phone_num);
-	}
-});
 /**
  * 휴대폰번호변경 끝
  */
@@ -355,151 +355,151 @@ $(document).on('click', "#con_phone_mail_btn", function(){
 /**
  * 비밀번호변경 시작
  */
-// 비밀번호 == 비밀번호 확인 check
-oldVal1 = '';
-$("#new_password").on("propertychange change keyup paste input", function() {
-	var currentVal = $(this).val();
-	if(currentVal == oldVal1) {
-		return;
-	}
-	
-	password2 = $("#new_password_re").val();
-	if(password2 != currentVal ){ // && currentVal.length > 0){
-		$('.agree-password').remove();
-		html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
-		$('.new-password-re').append(html);
-	} else{
-		$('.agree-password').remove();
-		html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
-		$('.new-password-re').append(html);
-	}
-	
-	oldVal1 = currentVal;
-});
+	// 비밀번호 == 비밀번호 확인 check
+	oldVal1 = '';
+	$("#new_password").on("propertychange change keyup paste input", function() {
+		var currentVal = $(this).val();
+		if(currentVal == oldVal1) {
+			return;
+		}
+		
+		password2 = $("#new_password_re").val();
+		if(password2 != currentVal ){ // && currentVal.length > 0){
+			$('.agree-password').remove();
+			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
+			$('.new-password-re').append(html);
+		} else{
+			$('.agree-password').remove();
+			html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
+			$('.new-password-re').append(html);
+		}
+		
+		oldVal1 = currentVal;
+	});
 
-oldVal2 = '';
-$("#new_password_re").on("propertychange change keyup paste input", function() {
-	var currentVal = $(this).val();
-	if(currentVal == oldVal2) {
-		return;
-	}
-	
-	password1 = $("#new_password").val();
-	if(password1 != currentVal ){ // && currentVal.length > 0){
-		$('.agree-password').remove();
-		html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
-		$('.new-password-re').append(html);
-	} else{
-		$('.agree-password').remove();
-		html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
-		$('.new-password-re').append(html);
-	}
-	
-	oldVal2 = currentVal;
-});
+	oldVal2 = '';
+	$("#new_password_re").on("propertychange change keyup paste input", function() {
+		var currentVal = $(this).val();
+		if(currentVal == oldVal2) {
+			return;
+		}
+		
+		password1 = $("#new_password").val();
+		if(password1 != currentVal ){ // && currentVal.length > 0){
+			$('.agree-password').remove();
+			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
+			$('.new-password-re').append(html);
+		} else{
+			$('.agree-password').remove();
+			html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
+			$('.new-password-re').append(html);
+		}
+		
+		oldVal2 = currentVal;
+	});
 
 
-var password = '';
-// 이메일 확인 + 인증번호 보내기
-$(document).ready(function(){
-	$("#send_email2").on('click', function(){
-		$('.new-password-box > p').remove();
+	var password = '';
+	// 이메일 확인 + 인증번호 보내기
+	$(document).ready(function(){
+		$("#send_email2").on('click', function(){
+			$('.new-password-box > p').remove();
 
-		var _password = $("#new_password").val();
-		var _password_re = $("#new_password_re").val();
-		password = _password;
-		var state = '';
-		var message = '';
+			var _password = $("#new_password").val();
+			var _password_re = $("#new_password_re").val();
+			password = _password;
+			var state = '';
+			var message = '';
+			$.ajax({
+				url: cb_url + '/membermodify/ajax_password_modify_email_send',
+				type: 'POST',
+				data: {
+					new_password: _password,
+					new_password_re: _password_re,
+					csrf_test_name : cb_csrf_hash
+				},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				success: function(data) {
+					state = data.state;
+					message = data.message;
+				}
+			});
+
+			if(state != -1){
+				alert(message);
+			} else {
+				$('.new-password-box').append(message); // 승인 메세지
+			}
+			
+			$('.password-success-email-box').remove();
+			$('.con-mail2').remove();
+			if(state == 1){
+				html = '';
+				html += '<li class="con-mail2">'
+				html += '<p class="btxt">이메일 인증</p>'
+				html += '<div class="field modify">'
+				html += '<p class="chk-input w380">'
+				html += '<input type="text" placeholder="" id="ath_num2" name="ath_num2" value="">'
+				html += '</p>'
+				html += '<a href="javascript:void(0);" id="con_password_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
+				html += '</div>'
+				html += '</li>'
+				$('.new-password-box').append(html);
+			}
+		})
+	})
+
+	// 이메일 인증 하기
+	$(document).on('click', "#con_password_mail_btn", function(){
+		var ath_num = $("#ath_num2").val();
+
+		var result = '';
+		var reason = '';
 		$.ajax({
-			url: cb_url + '/membermodify/ajax_password_modify_email_send',
+			url: cb_url + '/membermodify/ajax_phone_modify_ath_mail',
 			type: 'POST',
 			data: {
-				new_password: _password,
-				new_password_re: _password_re,
+				ath_num: ath_num,
 				csrf_test_name : cb_csrf_hash
 			},
 			dataType: 'json',
 			async: false,
 			cache: false,
 			success: function(data) {
-				state = data.state;
-				message = data.message;
+				result = data.result;
+				reason = data.reason;
 			}
 		});
 
-		if(state != -1){
-			alert(message);
-		} else {
-			$('.new-password-box').append(message); // 승인 메세지
+		// 실패
+		if(result == 0){
+			alert(reason);
 		}
-		
-		$('.password-success-email-box').remove();
-		$('.con-mail2').remove();
-		if(state == 1){
+
+		//성공
+		if(result == 1) {
 			html = '';
-			html += '<li class="con-mail2">'
-			html += '<p class="btxt">이메일 인증</p>'
-			html += '<div class="field modify">'
-			html += '<p class="chk-input w380">'
-			html += '<input type="text" placeholder="" id="ath_num2" name="ath_num2" value="">'
-			html += '</p>'
-			html += '<a href="javascript:void(0);" id="con_password_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
+			html += '<li class="password-success-email-box">'
+			html += '<p class="btxt"></p>'
+			html += '<div class="password-success-message-box" id="password_success_message_box" style="display:inline-block;">'
+			html += '<p class="password-success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
+			html += '</div>'
+			html += '<div class="nice-phone-ath-box" id="nice_phone_ath_box" style="display: inline-block; float: right;">'
+			html += '<form name="form_chk" method="post">'
+			html += '<input type="hidden" name="m" value="checkplusService">'
+			html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">'
+			html += '<a href="javascript:fnPopup();" id="nice_phone_ath" class="modify-btn"><span>휴대폰 인증</span></a>'
+			html += '</form>'
 			html += '</div>'
 			html += '</li>'
-			$('.new-password-box').append(html);
-		}
-	})
-})
 
-// 이메일 인증 하기
-$(document).on('click', "#con_password_mail_btn", function(){
-	var ath_num = $("#ath_num2").val();
-
-	var result = '';
-	var reason = '';
-	$.ajax({
-		url: cb_url + '/membermodify/ajax_phone_modify_ath_mail',
-		type: 'POST',
-		data: {
-			ath_num: ath_num,
-			csrf_test_name : cb_csrf_hash
-		},
-		dataType: 'json',
-		async: false,
-		cache: false,
-		success: function(data) {
-			result = data.result;
-			reason = data.reason;
+			$('.con-mail2').remove(); // 인증 박스 삭제		
+			$('.new-password-box').append(html); // 승인 메세지
+			// $("#mem_password").val(password);
 		}
 	});
-
-	// 실패
-	if(result == 0){
-		alert(reason);
-	}
-
-	//성공
-	if(result == 1) {
-		html = '';
-		html += '<li class="password-success-email-box">'
-		html += '<p class="btxt"></p>'
-		html += '<div class="password-success-message-box" id="password_success_message_box" style="display:inline-block;">'
-		html += '<p class="password-success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
-		html += '</div>'
-		html += '<div class="nice-phone-ath-box" id="nice_phone_ath_box" style="display: inline-block; float: right;">'
-		html += '<form name="form_chk" method="post">'
-		html += '<input type="hidden" name="m" value="checkplusService">'
-		html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">'
-		html += '<a href="javascript:fnPopup();" id="nice_phone_ath" class="modify-btn"><span>휴대폰 인증</span></a>'
-		html += '</form>'
-		html += '</div>'
-		html += '</li>'
-
-		$('.con-mail2').remove(); // 인증 박스 삭제		
-		$('.new-password-box').append(html); // 승인 메세지
-		$("#mem_password").val(password);
-	}
-});
 /**
  * 비밀번호변경 끝
  */
@@ -509,106 +509,105 @@ $(document).on('click', "#con_password_mail_btn", function(){
 /**
  * 지갑주소변경 시작
  */
-var wallet = '';
-// 이메일 확인 + 인증번호 보내기
-$(document).ready(function(){
-	$("#send_email3").on('click', function(){
-		// $('.new-password-box > p').remove();
+	var wallet = '';
+	// 이메일 확인 + 인증번호 보내기
+	$(document).ready(function(){
+		$("#send_email3").on('click', function(){
+			// $('.new-password-box > p').remove();
 
-		var _wallet = $("#new_wallet").val();
-		wallet = _wallet;
-		var state = '';
-		var message = '';
+			var _wallet = $("#new_wallet").val();
+			wallet = _wallet;
+			var state = '';
+			var message = '';
+			$.ajax({
+				url: cb_url + '/membermodify/ajax_wallet_modify_email_send',
+				type: 'POST',
+				data: {
+					new_wallet: _wallet,
+					csrf_test_name : cb_csrf_hash
+				},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				success: function(data) {
+					state = data.state;
+					message = data.message;
+				}
+			});
+
+			if(state != -1){
+				alert(message);
+			} else {
+				$('.new-wallet-box').append(message); // 승인 메세지
+			}
+			
+			$('.wallet-success-email-box').remove();
+			$('.con-mail2').remove();
+			if(state == 1){
+				html = '';
+				html += '<li class="con-mail2">'
+				html += '<p class="btxt">이메일 인증</p>'
+				html += '<div class="field modify">'
+				html += '<p class="chk-input w380">'
+				html += '<input type="text" placeholder="" id="ath_num2" name="ath_num2" value="">'
+				html += '</p>'
+				html += '<a href="javascript:void(0);" id="con_wallet_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
+				html += '</div>'
+				html += '</li>'
+				$('.new-wallet-box').append(html);
+			}
+		})
+	})
+
+	// 이메일 인증 하기
+	$(document).on('click', "#con_wallet_mail_btn", function(){
+		var ath_num = $("#ath_num2").val();
+
+		var result = '';
+		var reason = '';
 		$.ajax({
-			url: cb_url + '/membermodify/ajax_password_modify_email_send',
+			url: cb_url + '/membermodify/ajax_wallet_modify_email_send',
 			type: 'POST',
 			data: {
-				new_password: _password,
-				new_password_re: _password_re,
+				ath_num: ath_num,
 				csrf_test_name : cb_csrf_hash
 			},
 			dataType: 'json',
 			async: false,
 			cache: false,
 			success: function(data) {
-				state = data.state;
-				message = data.message;
+				result = data.result;
+				reason = data.reason;
 			}
 		});
 
-		if(state != -1){
-			alert(message);
-		} else {
-			$('.new-password-box').append(message); // 승인 메세지
+		// 실패
+		if(result == 0){
+			alert(reason);
 		}
-		
-		$('.password-success-email-box').remove();
-		$('.con-mail2').remove();
-		if(state == 1){
+
+		//성공
+		if(result == 1) {
 			html = '';
-			html += '<li class="con-mail2">'
-			html += '<p class="btxt">이메일 인증</p>'
-			html += '<div class="field modify">'
-			html += '<p class="chk-input w380">'
-			html += '<input type="text" placeholder="" id="ath_num2" name="ath_num2" value="">'
-			html += '</p>'
-			html += '<a href="javascript:void(0);" id="con_password_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
+			html += '<li class="wallet-success-email-box">'
+			html += '<p class="btxt"></p>'
+			html += '<div class="wallet-success-message-box" id="wallet_success_message_box" style="display:inline-block;">'
+			html += '<p class="wallet-success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
+			html += '</div>'
+			html += '<div class="nice-phone-ath-box" id="nice_phone_ath_box" style="display: inline-block; float: right;">'
+			html += '<form name="form_chk" method="post">'
+			html += '<input type="hidden" name="m" value="checkplusService">'
+			html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">'
+			html += '<a href="javascript:fnPopup();" id="nice_phone_ath" class="modify-btn"><span>휴대폰 인증</span></a>'
+			html += '</form>'
 			html += '</div>'
 			html += '</li>'
-			$('.new-password-box').append(html);
-		}
-	})
-})
 
-// 이메일 인증 하기
-$(document).on('click', "#con_password_mail_btn", function(){
-	var ath_num = $("#ath_num2").val();
-
-	var result = '';
-	var reason = '';
-	$.ajax({
-		url: cb_url + '/membermodify/ajax_phone_modify_ath_mail',
-		type: 'POST',
-		data: {
-			ath_num: ath_num,
-			csrf_test_name : cb_csrf_hash
-		},
-		dataType: 'json',
-		async: false,
-		cache: false,
-		success: function(data) {
-			result = data.result;
-			reason = data.reason;
+			$('.con-mail2').remove(); // 인증 박스 삭제		
+			$('.new-wallet-box').append(html); // 승인 메세지
+			// $("#mem_wallet").val(wallet);
 		}
 	});
-
-	// 실패
-	if(result == 0){
-		alert(reason);
-	}
-
-	//성공
-	if(result == 1) {
-		html = '';
-		html += '<li class="password-success-email-box">'
-		html += '<p class="btxt"></p>'
-		html += '<div class="password-success-message-box" id="password_success_message_box" style="display:inline-block;">'
-		html += '<p class="password-success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>'
-		html += '</div>'
-		html += '<div class="nice-phone-ath-box" id="nice_phone_ath_box" style="display: inline-block; float: right;">'
-		html += '<form name="form_chk" method="post">'
-		html += '<input type="hidden" name="m" value="checkplusService">'
-		html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">'
-		html += '<a href="javascript:fnPopup();" id="nice_phone_ath" class="modify-btn"><span>휴대폰 인증</span></a>'
-		html += '</form>'
-		html += '</div>'
-		html += '</li>'
-
-		$('.con-mail2').remove(); // 인증 박스 삭제		
-		$('.new-password-box').append(html); // 승인 메세지
-		$("#mem_password").val(password);
-	}
-});
 /**
  * 비밀번호변경 끝
  */
