@@ -32,11 +32,12 @@ $(function() {
                 items: 4,
                 margin: 20,
             },
-        }
+        },
+        onInitialized: owlInitialized
     });
 
     function owlInitialized() {
-        alert('hoho');
+        $(".owl-dots").removeClass('disabled');
     }
 
     $('.board-wrap').find('.list.notice').find('tbody > tr.notice').each(function() {

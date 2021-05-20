@@ -45,7 +45,7 @@
 				<p class="stxt"><?php echo $total_rows; ?>건</p>
 			</div>
 			<!-- HERE THE PRICE -->
-			<div class="list" style="height: 170px;">
+			<div class="result list txt" style="height: 170px;">
 				<div>
 					<p class="pimg">
 						<img class="img" src="https://static.upbit.com/logos/BTC.png"></img>

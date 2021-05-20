@@ -31,7 +31,7 @@
 								<th>마켓명</th>
 								<th>한국어명</th>
 								<th>영문명</th>
-								<th>키워드 설정</th>
+								<th>설정</th>
 							</tr>
 						</thead>
 						
@@ -46,7 +46,7 @@
 								<td><a href='https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=<?php echo element('clist_market', $result); ?>'><?php echo html_escape(element('clist_market', $result)); ?></a></td>
 								<td><?php echo element('clist_name_ko', $result); ?></td>
 								<td><?php echo element('clist_name_en', $result); ?></td>
-								<td><button  type="button" id="myBtn" class="btn btn-default btn-xs" onClick="document.location.href='https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=<?php echo element('clist_market', $result); ?>'">키워드 설정</button></td>
+								<td><button  type="button" id="myBtn" class="btn btn-default btn-xs" onClick="document.location.href='https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=<?php echo element('clist_market', $result); ?>'">설정</button></td>
 							</tr>
 						<?php
 							}

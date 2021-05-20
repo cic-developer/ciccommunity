@@ -39,23 +39,13 @@
                                 }
                                 if ( ! element('list', element('bestpost', $view))) {
                                     ?>
-                                    <tr>
-                                        <td colspan="12" class="nopost">자료가 없습니다</td>
-                                    </tr>
+                                    <div>
+                                        <p class="btxt" class="nopost">자료가 없습니다</p>
+                                </div>
                                 <?php
                                 }
                                 ?>
                         </div>
-                            <script>
-                                $(function () {
-                                    $('.list.vimg').find('li').each(function () {
-                                    var chkimg = $(this).find('.img').length;
-                                    if (chkimg < 1) {
-                                    $(this).addClass('no-img');
-                                }
-                            })
-                        })
-                        </script>
                     </div>
                     <div class="owl-nav disabled">
                         <button type="button" role="presentation" class="owl-prev">

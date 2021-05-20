@@ -254,6 +254,9 @@
 				if(type == 'password'){
 					$('#myModal_password > .ath_email').remove(); // 이메일 인증 실행 버튼 삭제
 				}
+				if(type == 'wallet'){
+					$('#myModal_wallet > .ath_email').remove(); // 이메일 인증 실행 버튼 삭제
+				}
 				var html = '';
 				html += '<div class="modal-content ' + type + '-modal-content entry">';
 				html += '<ul class="ath-email-box">';
@@ -279,7 +282,9 @@
 				if(type == 'password'){
 					$('#myModal_password').append(html); // 이메일 인증박스 추가
 				}
-				
+				if(type == 'wallet'){
+					$('#myModal_wallet').append(html); // 이메일 인증박스 추가
+				}
 			}
 		})
 	})
@@ -338,6 +343,19 @@
 			html += '<form name="form_chk" method="post" id="password_form_chk">'
 			html += '<input type="hidden" name="m" value="checkplusService">'
 			html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">'
+			html += '<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn"><span>휴대폰 인증</span></a>'
+			html += '</form>'
+
+			$('.password-modal-content').remove(); // 이메일 인증 박스 삭제		
+			$('#myModal_password').append(html); // 승인 메세지
+		}
+
+		if(result == 3){
+
+			var html = '';
+			html += '<form name="form_chk" method="post" id="wallet_form_chk">'
+			html += '<input type="hidden" name="m" value="checkplusService">'
+			html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">'
 			html += '<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn"><span>휴대폰 인증</span></a>'
 			html += '</form>'
 
@@ -488,58 +506,6 @@
 		$('#myModal_password').append(html); 
 	}
 
-	// var password = '';
-	// // 이메일 확인 + 인증번호 보내기
-	// $(document).ready(function(){
-	// 	$("#send_email2").on('click', function(){
-			
-
-	// 		var _password = $("#new_password").val();
-	// 		var _password_re = $("#new_password_re").val();
-	// 		password = _password;
-	// 		var state = '';
-	// 		var message = '';
-	// 		$.ajax({
-	// 			url: cb_url + '/membermodify/ajax_password_modify_email_send',
-	// 			type: 'POST',
-	// 			data: {
-	// 				new_password: _password,
-	// 				new_password_re: _password_re,
-	// 				csrf_test_name : cb_csrf_hash
-	// 			},
-	// 			dataType: 'json',
-	// 			async: false,
-	// 			cache: false,
-	// 			success: function(data) {
-	// 				state = data.state;
-	// 				message = data.message;
-	// 			}
-	// 		});
-
-	// 		if(state != -1){
-	// 			alert(message);
-	// 		} else {
-	// 			$('.new-password-box').append(message); // 승인 메세지
-	// 		}
-			
-	// 		$('.password-success-email-box').remove();
-	// 		$('.con-mail2').remove();
-	// 		if(state == 1){
-	// 			html = '';
-	// 			html += '<li class="con-mail2">'
-	// 			html += '<p class="btxt">이메일 인증</p>'
-	// 			html += '<div class="field modify">'
-	// 			html += '<p class="chk-input w380">'
-	// 			html += '<input type="text" placeholder="" id="ath_num2" name="ath_num2" value="">'
-	// 			html += '</p>'
-	// 			html += '<a href="javascript:void(0);" id="con_password_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
-	// 			html += '</div>'
-	// 			html += '</li>'
-	// 			$('.new-password-box').append(html);
-	// 		}
-	// 	})
-	// })
-
 	var password = '';
 	$(document).on('click', "#password_modify_btn", function(){
 		$('.password-modify-box > p').remove();
@@ -578,12 +544,31 @@
 /**
  * 비밀번호변경 끝
  */
-
 /********************************************************/
-
 /**
  * 지갑주소변경 시작
  */
+	function createWalletModify(){
+		var html = '';
+		html += '<div class="modal-content entry">';
+		html += '<ul class="wallet-modify-box">';
+		html += '<li class="wallet-modify-content">';
+		html += '<p class="btxt">새 비밀번호 확인</p>';
+		html += '<div class="field modify">';
+		html += '<p class="chk-input w380">';
+		html += '<input type="text" placeholder="" id="new_wallet" name="new_wallet" value="">';
+		html += '</p>';
+		html += '<a href="javascript:void(0);" id="wallet_modify_btn" class="modify-btn"><span>확인</span></a>';
+		html += '</div>';
+		html += '</li>';
+		html += '</ul>';
+		html += '</div>';
+
+		$('#wallet_form_chk').remove(); // 휴대폰 인증 박스 삭제		
+		$('#myModal_wallet').append(html); 
+	}
+
+
 	var wallet = '';
 	// 이메일 확인 + 인증번호 보내기
 	$(document).ready(function(){
