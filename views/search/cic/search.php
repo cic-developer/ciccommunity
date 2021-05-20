@@ -41,11 +41,7 @@
 				
 			</div>
 			<div class="result">
-				<?php
-					if (element('list', element('highlight_keyword', $view))) {
-						foreach (element('list', element('highlight_keyword', $view)) as $highlight_keyword) {
-				?>
-				<p class="btxt"><span>“리플” <?php echo element('highlight_keyword', $highlight_keyword);?></span>에 대한 통합검색 총</p>
+				<p class="btxt"><span>“리플” <?php echo $highlight_keyword ?></span>에 대한 통합검색 총</p>
 				<p class="stxt">2,547건</p>
 			</div>
 			<!-- HERE THE PRICE -->

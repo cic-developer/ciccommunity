@@ -148,8 +148,8 @@ class Board_post extends CB_Controller
 				}
 			}
 		}
-		
-		element('brd_id', element('board', $list) == 2 ){
+
+		if(element('brd_id', element('board', $list)) == 2){
 			$where = array(
 				'post_best_state >' => 0
 			);
@@ -167,7 +167,6 @@ class Board_post extends CB_Controller
 					if ($board) {
 						$writerbest['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
 						$writerbest['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
-						print_r($writerbest['list']['posturl']);
 					}
 					$writerbest['list'][$key]['category'] = '';
 					if (element('post_category', $val)) {
@@ -186,6 +185,8 @@ class Board_post extends CB_Controller
 				}
 			}
 		}
+		
+
 		
 		$view['view']['popularpost'] = $popularpost;
 		$view['view']['bestpost'] = $bestpost;

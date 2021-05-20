@@ -535,11 +535,7 @@
 				}
 			});
 
-			if(state != -1){
-				alert(message);
-			} else {
-				$('.new-wallet-box').append(message); // 승인 메세지
-			}
+			alert(message);			
 			
 			$('.wallet-success-email-box').remove();
 			$('.con-mail2').remove();
@@ -549,7 +545,7 @@
 				html += '<p class="btxt">이메일 인증</p>'
 				html += '<div class="field modify">'
 				html += '<p class="chk-input w380">'
-				html += '<input type="text" placeholder="" id="ath_num2" name="ath_num2" value="">'
+				html += '<input type="text" placeholder="" id="ath_num3" name="ath_num3" value="">'
 				html += '</p>'
 				html += '<a href="javascript:void(0);" id="con_wallet_mail_btn" class="modify-btn"><span>메일인증 확인</span></a>'
 				html += '</div>'
@@ -561,12 +557,12 @@
 
 	// 이메일 인증 하기
 	$(document).on('click', "#con_wallet_mail_btn", function(){
-		var ath_num = $("#ath_num2").val();
+		var ath_num = $("#ath_num3").val();
 
 		var result = '';
 		var reason = '';
 		$.ajax({
-			url: cb_url + '/membermodify/ajax_wallet_modify_email_send',
+			url: cb_url + '/membermodify/ajax_wallet_modify_ath_mail',
 			type: 'POST',
 			data: {
 				ath_num: ath_num,
@@ -597,7 +593,7 @@
 			html += '<div class="nice-phone-ath-box" id="nice_phone_ath_box" style="display: inline-block; float: right;">'
 			html += '<form name="form_chk" method="post">'
 			html += '<input type="hidden" name="m" value="checkplusService">'
-			html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">'
+			html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">'
 			html += '<a href="javascript:fnPopup();" id="nice_phone_ath" class="modify-btn"><span>휴대폰 인증</span></a>'
 			html += '</form>'
 			html += '</div>'

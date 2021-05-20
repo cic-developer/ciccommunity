@@ -178,8 +178,8 @@ class Membermodify extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		$view['view']['phone_enc_data'] = $this->checkplus->main('membermodify', 'auth_phone_success', '');
-		$view['view']['wallet_enc_data'] = $this->checkplus->main('membermodify', 'auth_wallet_success', '');
+		$view['view']['phone_enc_data'] = $this->checkplus->main('membermodify', 'password_auth_phone_success', '');
+		$view['view']['wallet_enc_data'] = $this->checkplus->main('membermodify', 'wallet_auth_phone_success', '');
 		// $view['view']['dec_data'] = $this->session->userdata('dec_data');
 
 		$email_description = '';
@@ -2397,7 +2397,7 @@ class Membermodify extends CB_Controller
 		$email = $member_info['mem_email'];
 		// $phone = $member_info['mem_phone'];
 		// 세션에 인증번호 저장
-		// $this->session->set_userdata('ath_num', $rand_num);
+		$this->session->set_userdata('ath_num', $rand_num);
 		// 세션에 인증에 이용한 이메일 저장
 		// $this->session->set_userdata('ath_email', $email);
 
@@ -2458,10 +2458,10 @@ class Membermodify extends CB_Controller
 	}
 
 
-	public function ajax_phone_modify_ath_mail()
+	public function ajax_wallet_modify_ath_mail()
 	{
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_membermodify_ajax_phone_modify_ath_mail';
+		$eventname = 'event_membermodify_ajax_wallet_modify_ath_mail';
 		$this->load->event($eventname);
 
 		$result = array();
@@ -2485,7 +2485,7 @@ class Membermodify extends CB_Controller
 		if($ath_num == $_ath_num){
 			// $this->session->unset_userdata('ath_num');
 			// 인증결과 세션 저장
-			$this->session->set_userdata('phone_modify_ath_mail_result', '1');
+			$this->session->set_userdata('wallet_modify_ath_mail_result', '1');
 			$this->session->unset_userdata('ath_num');
 
 			$result = array(
@@ -2495,7 +2495,7 @@ class Membermodify extends CB_Controller
 			exit(json_encode($result));
 		} else{
 			// 인증결과 세션 저장
-			$this->session->set_userdata('phone_modify_ath_mail_result', '');
+			$this->session->set_userdata('wallet_modify_ath_mail_result', '');
 
 			$result = array(
 				'result' => '0',
@@ -2514,9 +2514,64 @@ class Membermodify extends CB_Controller
  * 휴대폰 인증 시작
  */
 
-	public function auth_phone_success(){
+	// 비밀번호 변경
+	public function password_auth_phone_success(){
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_membermodify_auth_success';
+		$eventname = 'event_membermodify_password_auth_phone_success';
+		$this->load->event($eventname);
+
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		$data = $this->session->userdata('dec_data');
+		$DI = $data['dupinfo'];
+
+		$isDI = $this->Member_model->get_by_memDI($DI, '');
+
+		if(count($isDI) > 0){ // 중복 이면
+			$this->session->set_userdata('password_modify_ath_nice_phone_result', '1');
+
+			$html = '<p class="password-success-phone rtxt mg10t cblue">핸드폰 인증이 완료되었습니다</p>';
+
+			echo("<script>");
+			echo("alert('인증되었습니다');"); // 인증완료 문구
+			echo("var elm = window.opener.document.getElementById('password_success_message_box');");
+			echo("elm.removeChild(elm.lastChild);"); // 최근(마지막) 인증 문구 제거
+			echo("var p = document.createElement('p');"); // 인증 문구 텍스트 생성 ~
+			echo("p.className = 'password-success-phone rtxt mg10t cblue';"); // ~
+			echo("p.textContent = '핸드폰 인증이 완료되었습니다';"); // ~
+			echo("window.opener.document.getElementById('password_success_message_box').appendChild(p);"); // ~ 휴대폰 인증 텍스트 적용
+			echo("var new_password = window.opener.document.getElementById('new_password').value;"); // 새 비밀번호 불러오기
+			echo("window.opener.document.getElementById('mem_password').value = new_password;"); // 새 비밀번호 저장
+			echo("self.close();");
+			echo("</script>");
+			exit;
+		}
+
+		echo("<script>alert('인증에 실패하였습니다');</script>");
+		echo("<script>self.close()</script>");
+
+		// $view = array();
+		// $view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		
+		// $this->member->get_by_memDI('MC0GCCqGSIb3DQIJAyEAtonfQuH352/KCB0yrjiwSQcnDQTS7ff5UcT4ievX8HM=');
+
+		// if($this->input->get("EncodeData")){
+		// 	$this->checkplus->success($this->input->get("EncodeData"));
+			
+		// 	echo("<script>window.opener.fregisterform.submit();</script>");
+		// 	echo("<script>self.close()</script>");
+		// } else {
+		// 	echo("<script>alert('비정상적인 접근입니다.')</script>");
+		// 	echo("<script>self.close()</script>");
+		// }
+	}
+
+	// 지갑주소 변경
+	public function wallet_auth_wallet_success(){
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_membermodify_wallet_auth_wallet_success';
 		$this->load->event($eventname);
 
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
