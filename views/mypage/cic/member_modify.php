@@ -465,9 +465,12 @@
 /**
  * 비밀번호변경 시작
  */
+// $(document).on("click","#btn",function(){
+
 	// 비밀번호 == 비밀번호 확인 check
 	oldVal1 = '';
-	$("#new_password").on("propertychange change keyup paste input", function() {
+	$(document).on("propertychange change keyup paste input","#new_password",function(){
+	// $("#new_password").on("propertychange change keyup paste input", function() {
 		var currentVal = $(this).val();
 		if(currentVal == oldVal1) {
 			return;
@@ -488,7 +491,8 @@
 	});
 
 	oldVal2 = '';
-	$("#new_password_re").on("propertychange change keyup paste input", function() {
+	$(document).on("propertychange change keyup paste input","#new_password_re",function(){
+	// $("#new_password_re").on("propertychange change keyup paste input", function() {
 		var currentVal = $(this).val();
 		if(currentVal == oldVal2) {
 			return;

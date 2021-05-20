@@ -83,7 +83,6 @@
 
 							if (element('list', element('data', $view))) {
 								foreach (element('list', element('data', $view)) as $result) {
-									echo element('total_rows', $result['total_rows']);
 							?>
 								<tr>
 									<td>
@@ -124,146 +123,34 @@
 				<div class="list vimg vp">
 					<ul>
 					<?php
-                        if (element('list', element('data', element('list', $view)))) {
-                            foreach (element('list', element('data', element('list', $view))) as $result) {
-                    ?>		
+						if (element('list', element('data', $view))) {
+							foreach (element('list', element('data', $view)) as $result) {
+					?>		
 						<li>
-							<a href="#n">
+							<a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>">
 								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
 								<div class="txt">
 									<div class="vc">
-										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 <span class="yellow-bg">리플</span>수사 <span>(5)</span></p>	
-										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
+										<p class="btxt"><?php echo html_escape(element('post_title', $result)); ?><span class="yellow-bg"><?php echo element('highlight_keyword', $view);?></span> 
+											<span>(<?php echo element('post_comment_count', $result); ?>)</span></p>
+											<p class="stxt"><?php echo html_escape(cut_str(strip_tags(element('post_content', $result)), 60)); ?></p>
 										<p class="ctxt">
-											<span>블록미디어</span>
-											<span>02:18</span>
-											<span>조회 82</span>
+											<span><?php echo html_escape(element('post_nickname', $result)); ?></span>
+											<span><?php echo element('display_datetime', $result); ?></span>
+											<span>조회 <?php echo number_format(element('post_hit', $result));?></span>
 										</p>
 									</div>
 								</div>
 								<div class="abr">
 									<div class="photo">
 										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코알못259</p>
+										<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
 									</div>
-									<p class="vp">256 VP</p>
+									<p class="vp"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?> VP</p>
 								</div>	
 							</a>
 						</li>
-						<li>
-							<a href="#n">
-								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
-								<div class="txt">
-									<div class="vc">
-										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-										<p class="ctxt">
-											<span>블록미디어</span>
-											<span>02:18</span>
-											<span>조회 82</span>
-										</p>
-									</div>
-								</div>
-								<div class="abr">
-									<div class="photo">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코알못259</p>
-									</div>
-									<p class="vp">256 VP</p>
-								</div>	
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
-								<div class="txt">
-									<div class="vc">
-										<p class="btxt">김창룡 경찰청장 “공직자 <span class="yellow-bg">리플</span> 투기는 구속수사 <span>(5)</span></p>	
-										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-										<p class="ctxt">
-											<span>블록미디어</span>
-											<span>02:18</span>
-											<span>조회 82</span>
-										</p>
-									</div>
-								</div>
-								<div class="abr">
-									<div class="photo">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코알못259</p>
-									</div>
-									<p class="vp">256 VP</p>
-								</div>	
-							</a>
-						</li>
-						<li class="no-img">
-							<a href="#n">
-								<div class="txt">
-									<div class="vc">
-										<p class="btxt">김창룡 경찰청장 “공직자 부동산 <span class="yellow-bg">리플</span>은 구속수사 <span>(5)</span></p>	
-										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-										<p class="ctxt">
-											<span>블록미디어</span>
-											<span>02:18</span>
-											<span>조회 82</span>
-										</p>
-									</div>
-								</div>
-								<div class="abr">
-									<div class="photo">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코알못259</p>
-									</div>
-									<p class="vp">256 VP</p>
-								</div>	
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
-								<div class="txt">
-									<div class="vc">
-										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-										<p class="ctxt">
-											<span>블록미디어</span>
-											<span>02:18</span>
-											<span>조회 82</span>
-										</p>
-									</div>
-								</div>
-								<div class="abr">
-									<div class="photo">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코알못259</p>
-									</div>
-									<p class="vp">256 VP</p>
-								</div>	
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
-								<div class="txt">
-									<div class="vc">
-										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-										<p class="ctxt">
-											<span>블록미디어</span>
-											<span>02:18</span>
-											<span>조회 82</span>
-										</p>
-									</div>
-								</div>
-								<div class="abr">
-									<div class="photo">
-										<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt=""></p>
-										<p class="rtxt">코알못259</p>
-									</div>
-									<p class="vp">256 VP</p>
-								</div>	
-							</a>
-						</li>
+						
 					</ul>
 					<script>
 						$(function(){
