@@ -1197,7 +1197,7 @@ class Mypage extends CB_Controller
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 
-		$per_page = admin_listnum();
+		$per_page = 10;
 		$offset = ($page - 1) * $per_page;
 
 		// 회원 정보를 가져옵니다
@@ -1312,16 +1312,16 @@ class Mypage extends CB_Controller
 		if ($form_validation) {
 
 			// 회원정보 가져오기
-			if($member_info){
-				$money = $this->input->post('money');
-				$mem_id = $member_info['mem_id'];
-				$mem_userid = $member_info['mem_userid'];
-				$mem_userip = $this->input->ip_address();
-				$mem_nickname = $member_info['mem_nickname'];
-				$mem_cp = $member_info['mem_cp'];
-				$mem_wallet_address = $member_info['mem_wallet_address'];
-			}
+			$money = $this->input->post('money');
+			$mem_id = $member_info['mem_id'];
+			$mem_userid = $member_info['mem_userid'];
+			$mem_userip = $this->input->ip_address();
+			$mem_nickname = $member_info['mem_nickname'];
+			$mem_cp = $member_info['mem_cp'];
+			$mem_wallet_address = $member_info['mem_wallet_address'];
 
+			print_r("hi");
+			
 			/**
 			 * 포인트 차감
 			 * member
@@ -1341,6 +1341,18 @@ class Mypage extends CB_Controller
 				$result = $this->CIC_withdraw_model->set_withdraw($mem_id, $mem_userid, $mem_userip, $mem_nickname, $mem_wallet_address, $money);
 
 				if($result == 0 ){
+					/**
+					 * 출금 신청 실패로 인한, 차감포인트 리셋
+					 * member
+					 */
+					$result = $this->Member_model->set_user_point($mem_id, -$money, $mem_cp);
+					if($result != 1){
+						$this->session->set_flashdata(
+							'message',
+							'포인트 차감후 신청 및 포인트 리셋에 실패하였습니다 (관리자문의)'
+						);
+					} 
+
 					$this->session->set_flashdata(
 						'message',
 						'포인트 차감후 신청에 실패하였습니다 (관리자 문의)'

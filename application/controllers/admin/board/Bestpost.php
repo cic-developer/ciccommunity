@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 관리자>게시판설정>게시물관리 controller 입니다.
  */
-class Popularpost extends CB_Controller
+class Bestpost extends CB_Controller
 {
 
 	/**
@@ -39,7 +39,7 @@ class Popularpost extends CB_Controller
 
 	function __construct()
 	{
-    parent::__construct();
+		parent::__construct();
 
 		/**
 		 * 라이브러리를 로딩합니다

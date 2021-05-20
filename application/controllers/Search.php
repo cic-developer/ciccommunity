@@ -175,7 +175,9 @@ class Search extends CB_Controller
 
 		$view['view']['boardlist'] = $boardlist;
 		$view['view']['grouplist'] = $grouplist;
-		//print_r($boardlist);
+		echo "<pre> <br>";
+		print_r($boardlist);
+		echo "</pre>";
 		// print_r($grouplist);
 		// print_r($result);
 
