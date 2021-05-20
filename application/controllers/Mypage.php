@@ -1321,12 +1321,25 @@ class Mypage extends CB_Controller
 			$mem_wallet_address = $member_info['mem_wallet_address'];
 
 			print_r("hi");
-			
+			print_r("<br>");
 			/**
 			 * 포인트 차감
 			 * member
 			 */
+			print_r("기존 회원 포인트: ");
+			print_r($mem_cp);
+
 			$result = $this->Member_model->set_user_point($mem_id, $money, $mem_cp);
+
+			$member_info3 = $this->member->get_member();
+			$mem_cp3 = $member_info3['mem_cp'];
+
+			print_r("<br>");
+			print_r("포인트차감 결과 : ");
+			print_r($result);
+			print_r("<br>");
+			print_r($mem_cp3);
+			print_r("<br>");
 
 			if($result != 1){
 				$this->session->set_flashdata(
@@ -1340,12 +1353,26 @@ class Mypage extends CB_Controller
 				 */
 				$result = $this->CIC_withdraw_model->set_withdraw($mem_id, $mem_userid, $mem_userip, $mem_nickname, $mem_wallet_address, $money);
 
+				print_r("출금신청 결과 : ");
+				print_r($result);
+				print_r("<br>");
+
 				if($result == 0 ){
 					/**
 					 * 출금 신청 실패로 인한, 차감포인트 리셋
 					 * member
 					 */
-					$result = $this->Member_model->set_user_point($mem_id, -$money, $mem_cp);
+					$member_info2 = $this->member->get_member();
+					$mem_cp2 = $member_info2['mem_cp'];
+					$result = $this->Member_model->set_user_point($mem_id, -$money, $mem_cp2);
+					
+					print_r("출금리셋 후 포인트 : ");
+					print_r($mem_cp2);
+					print_r("<br>");
+					print_r("출금리셋 결과 : ");
+					print_r($result);
+					print_r("<br>");
+
 					if($result != 1){
 						$this->session->set_flashdata(
 							'message',
@@ -1353,6 +1380,7 @@ class Mypage extends CB_Controller
 						);
 					} 
 
+					exit;
 					$this->session->set_flashdata(
 						'message',
 						'포인트 차감후 신청에 실패하였습니다 (관리자 문의)'

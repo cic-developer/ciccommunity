@@ -124,6 +124,14 @@ class Member_model extends CB_Model
 
 	public function set_user_point($primary_value = '', $money, $mem_cp)
 	{
+		print_r("<br>");
+		print_r("<br>");
+		print_r($money);
+		print_r("<= 신청 : 원래포인트 =>");
+		print_r($mem_cp);
+		print_r("<br>");
+		print_r((double)$mem_cp-(double)$money);
+		print_r("<br>");
 		$arr = array(
 			'mem_cp' => (double)$mem_cp-(double)$money,
 		);
@@ -132,6 +140,17 @@ class Member_model extends CB_Model
 
 		return $result;
 	}
+
+	public function get_by_memPoint($memid = 0, $select = '')
+	{
+		$memid = (int) $memid;
+		if (empty($memid) OR $memid < 1) {
+			return false;
+		}
+		$where = array('mem_id' => $memid);
+		return $this->get_one('', $select, $where);
+	}
+
 
 	public function get_by_memDI($DI, $select = '')
 	{
