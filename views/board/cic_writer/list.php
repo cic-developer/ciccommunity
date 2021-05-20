@@ -34,16 +34,6 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <!-- <script>
-                                            $(function () {
-                                            $('.list.vimg').find('div').each(function () {
-                                            var chkimg = $(this).find('.img').length;
-                                            if (chkimg < 1) {
-                                            $(this).addClass('no-img');
-                                                }
-                                            })
-                                        })
-                                    </script> -->
                                 <?php
                                     }
                                 }

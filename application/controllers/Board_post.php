@@ -103,9 +103,14 @@ class Board_post extends CB_Controller
 							'pfi_is_image' => 1,
 						);
 						$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-						$popularpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+						$popularpost['list'][$key]['thumb_url'] = thumb_url(element('post_content', $val), $gallery_image_width, $gallery_image_height);
 					} else {
-						$popularpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+						$popularpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), $gallery_image_width, $gallery_image_height);
+						$popularpost['list'][$key]['thumb_url'] = $thumb_url
+							? $thumb_url
+							: thumb_url('', '', $gallery_image_width, $gallery_image_height);
+
+						$popularpost['list'][$key]['origin_image_url'] = $thumb_url;
 					}
 				}
 			}
@@ -140,9 +145,14 @@ class Board_post extends CB_Controller
 							'pfi_is_image' => 1,
 						);
 						$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-						$bestpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+						$bestpost['list'][$key]['thumb_url'] = thumb_url(element('post_content', $val), $gallery_image_width, $gallery_image_height);
 					} else {
-						$bestpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+						$bestpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), $gallery_image_width, $gallery_image_height);
+						$bestpost['list'][$key]['thumb_url'] = $thumb_url
+							? $thumb_url
+							: thumb_url('', '', $gallery_image_width, $gallery_image_height);
+
+						$bestpost['list'][$key]['origin_image_url'] = $thumb_url;
 					}
 				}
 			}
@@ -177,9 +187,14 @@ class Board_post extends CB_Controller
 							'pfi_is_image' => 1,
 						);
 						$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-						$writerbest['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+						$writerbest['list'][$key]['thumb_url'] = thumb_url(element('post_content', $val), $gallery_image_width, $gallery_image_height);
 					} else {
-						$writerbest['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+						$writerbest['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), $gallery_image_width, $gallery_image_height);
+						$writerbest['list'][$key]['thumb_url'] = $thumb_url
+							? $thumb_url
+							: thumb_url('', '', $gallery_image_width, $gallery_image_height);
+
+						$writerbest['list'][$key]['origin_image_url'] = $thumb_url;
 					}
 				}
 			}

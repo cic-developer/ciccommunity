@@ -178,8 +178,8 @@ class Membermodify extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		$view['view']['phone_enc_data'] = $this->checkplus->main_for_phone();
-		$view['view']['wallet_enc_data'] = $this->checkplus->main_for_wallet();
+		$view['view']['phone_enc_data'] = $this->checkplus->main('membermodify', 'auth_phone_success', '');
+		$view['view']['wallet_enc_data'] = $this->checkplus->main('membermodify', 'auth_wallet_success', '');
 		// $view['view']['dec_data'] = $this->session->userdata('dec_data');
 
 		$email_description = '';
