@@ -212,7 +212,7 @@ class Search extends CB_Controller
 		$key_search = $this-> CIC_coin_keyword_model -> search_coin($skeyword);
 
 		$market = $key_search['market'];
-		$api_result = $this->CIC_Coin_model -> get_price($market);
+		$api_result = $this->CIC_coin_list_model -> get_price($market);
 		$korean = $key_search['name_ko'];
 		$high = $api_result['high_price'];
 		$low =$api_result['low_price'];

@@ -121,22 +121,16 @@ class Searchcoin extends CB_Controller
 
 		// keyword 테이블을 통째로 불러온다.
 		$keyword_list = $this->CIC_coin_keyword_model->get_keyword();
-		// print_r($keyword_list);
 
 		// 통째로 가져온 테이블에서 keyword 만 담은 array() 만든다.
 		$keyword_arr = array();
+		$coin_arr = array();
 		foreach($keyword_list as $value){
 			$keyword_arr[] = element('coin_keyword', $value);
-			// print_r($keyword_arr);
+			$coin_arr[] = element('clist_market', $value);
+		
 		}
 
-
-		//$coin_list = $this->CIC_coin_list_model->getstockData();
-		// 통째로 가져온 테이블에서 keyword 만 담은 array() 만든다.
-		// $coin_arr = array();
-		// foreach($coin_list as $value){
-		// 	$coin_arr[] = element('clist_market', $value);
-		// }
 
 		//getting coin list from api
 		$getList = $this -> CIC_coin_list_model->retrieve_api();
@@ -151,15 +145,15 @@ class Searchcoin extends CB_Controller
 					'clist_name_en' => $getList[$i]['korean_name'],
 				);
 				if(isset($data) && !empty($data)){
-					// foreach($data as $coinData){
-					// 	if(in_array($coinData, $coin_arr)){
-					// 		continue;
-					// 	}
-					// 	else{
+					foreach($data as $coinData){
+						if(in_array($coinData['clist_market'], $coin_arr)){
+							continue;
+						}
+						else{
 							$stock = $this->CIC_coin_list_model->insertStockData($data);
 							$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-						//}
-					//}
+						}
+					}
 				}
 
 				$data = array(
@@ -176,7 +170,6 @@ class Searchcoin extends CB_Controller
 						'coin_keyword'=> $market
 					),
 				);
-				//print_r($data[0]['coin_keyword']);
 				if(isset($data) && !empty($data)){
 					foreach($data as $thisData){
 						if(in_array($thisData['coin_keyword'], $keyword_arr)){	
@@ -266,7 +259,6 @@ class Searchcoin extends CB_Controller
 
 
 	function delete_keyword(){
-
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_amdmin_coin_delete';
 		$this->load->event($eventname);
@@ -333,7 +325,6 @@ class Searchcoin extends CB_Controller
 		$update = $this->CIC_coin_keyword_model->update_keyword($data);
 		if($update){
 			redirect("https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=".$_GET['pageId']."");
-			$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 		}
 		else{
 			return false;
