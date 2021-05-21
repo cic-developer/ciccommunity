@@ -22,7 +22,7 @@
 				</div>
 				<div class="field search">
                     <?php 
-						$attributes = array('class' => 'search_box', 'name' => 'searchForm', 'id' => 'searchForm', 'action' => base_url('/search'));
+						$attributes = array('class' => 'search_box', 'name' => 'searchForm', 'id' => 'searchForm', 'method'=> 'get', 'action' => base_url('/search'));
 						echo form_open(current_full_url(), $attributes);
 					?>
 					<p class="chk-input"><input type="text" placeholder="검색어를 입력해주세요" autocomplete="off"></p>
@@ -59,14 +59,15 @@
 						<div class="vc">
 						
 							<div>
-								<em class="stxt pimg" style="float: left"><img style= "width: 30px" style= "height: 30px"; style= "float: left"; src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
-								<strong  class="btxt center" style= "width: 100px"; style= "height: 700px"> <?php echo $korean; ?></strong><em>
+								<em class="stxt pimg" style="float: left">
+									<img style= "width: 30px" style= "height: 30px"; style= "float: left"; src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
+									<strong  class="btxt center" style= "width: 100px"; style= "height: 700px"> <?php echo $korean; ?></strong>
+								<em>
 								<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p>
 							</div>
 							<canvas class="text-center" id="canvas"></canvas>
 						</div>
 
-						
 					</div>
 					<div style= "float: right">
 						<p class="btxt"> ￦ <span style="color:blue" ><?php echo $trade; ?></p>
