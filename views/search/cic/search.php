@@ -328,7 +328,7 @@ labels: ['', '', ''],
 datasets: [{
 	 
 	label: 'Bitcoin',
-    data: [opening_price, prev_price, trade],
+    data: [trade,  prev_price, opening_price],
 	backgroundColor: "white",
 	borderColor: "#3e95cd"
     }]
