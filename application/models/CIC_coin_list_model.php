@@ -31,37 +31,51 @@ class CIC_Coin_list_model extends CB_Model
 	 * Get RealTime Coin Price
 	 */
 
-	function get_price($clist_market)
-	{
-        $curl = curl_init();
-        // $clist_market = "KRW-BTC";
-        //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-        //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.bithumb.com/public/ticker/BTC_KRW",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 90,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET"   
+function get_price($clist_market){
+$api_url = 'https://api.bithumb.com/public/ticker/BTC_KRW';
+
+// Read JSON file
+$json_data = file_get_contents($api_url);
+$response_data = json_decode($json_data);
+$user_data = $response_data->data;
+foreach ($user_data as $user) {
+	echo "name: ".$user;
+	echo "<br />";
+
+}
+
+
+
+
+        // $curl = curl_init();
+        // // $clist_market = "KRW-BTC";
+        // //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        // //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        // curl_setopt_array($curl, array(
+        //     CURLOPT_URL => "https://api.bithumb.com/public/ticker/BTC_KRW",
+        //     CURLOPT_RETURNTRANSFER => true,
+        //     CURLOPT_FOLLOWLOCATION => true,
+        //     CURLOPT_ENCODING => "",
+        //     CURLOPT_MAXREDIRS => 10,
+        //     CURLOPT_TIMEOUT => 90,
+        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //     CURLOPT_CUSTOMREQUEST => "GET"   
             
-        ));
+        // ));
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+        // $response = curl_exec($curl);
+        // $err = curl_error($curl);
 
-        curl_close($curl);
+        // curl_close($curl);
 
-        if($err){
-            echo "cUrl Error :" . $err;
-        }
+        // if($err){
+        //     echo "cUrl Error :" . $err;
+        // }
 
-        //convert json to php array or object
-        $array = json_decode($response, true);
-        print_r($array);
-        return $array[0];
+        // //convert json to php array or object
+        // $array = json_decode($response, true);
+        // print_r($array);
+        // return $array[0];
 	}
     
     function insertStockData($data){

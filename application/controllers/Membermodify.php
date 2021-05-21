@@ -2133,7 +2133,15 @@ class Membermodify extends CB_Controller
 		$message = $this->load->view('mypage/cic/email_form', $emailform, true);
 		$this->email->from(element('webmaster_email', $getdata), element('webmaster_name', $getdata));
 		$this->email->to($email);
-		$this->email->subject('[CIC Community] 핸드폰번호변경 이메일 인증 안내메일입니다');
+		if($type == 'phone'){
+			$this->email->subject('[CIC Community] 핸드폰번호변경 이메일 인증 안내메일입니다');
+		}
+		if($type == 'password'){
+			$this->email->subject('[CIC Community] 비밀번호변경 이메일 인증 안내메일입니다');
+		}
+		if($type == 'wallet'){
+			$this->email->subject('[CIC Community] 지갑주소변경 이메일 인증 안내메일입니다');
+		}
 		$this->email->message($message);
 
 		if ($this->email->send() === false) {

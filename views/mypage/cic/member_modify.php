@@ -277,54 +277,58 @@
 				success: function(data) {
 					state = data.state;
 					message = data.message;
+					
+			
+					alert(message);
+
+					// 실패
+					if(state == 0){}
+
+					// 성공
+					if(state == 1){
+						if(type == 'phone'){
+							$('#myModal_phone > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
+						}
+						if(type == 'password'){
+							$('#myModal_password > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
+						}
+						if(type == 'wallet'){
+							$('#myModal_wallet > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
+						}
+						var html = '';
+						html += '<div class="modal-content ' + type + '-modal-content entry">';
+						html += '<ul class="ath-email-box">';
+						html += '<li class="ath-email-content">';
+						html += '<p class="btxt">';
+						html += '이메일 인증';
+						html += '<i class="fas fa-recycle"></i>';
+						html += '</p>';
+						html += '<div class="field modify">';
+						html += '<p class="chk-input w380">';
+						html += '<input type="text" placeholder="" id="ath_num" name="ath_num" value="">';
+						html += '<input type="hidden" id="modify_type" name="modify_type" value="' + type + '">';
+						html += '</p>';
+						html += '<a href="javascript:void(0);" id="ath_mail_btn" class="modify-btn"><span>인증번호 확인</span></a>';
+						html += '</div>';
+						html += '</li>';
+						html += '</ul>';
+						html += '</div>';
+
+						if(type == 'phone'){
+							$('#myModal_phone').append(html); // 이메일 인증박스 추가
+						}
+						if(type == 'password'){
+							$('#myModal_password').append(html); // 이메일 인증박스 추가
+						}
+						if(type == 'wallet'){
+							$('#myModal_wallet').append(html); // 이메일 인증박스 추가
+						}
+					}
+				},
+				error: function(){
+					alert('에러가 발생했습니다.');
 				}
 			});
-			
-			alert(message);
-
-			// 실패
-			if(state == 0){}
-
-			// 성공
-			if(state == 1){
-				if(type == 'phone'){
-					$('#myModal_phone > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
-				}
-				if(type == 'password'){
-					$('#myModal_password > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
-				}
-				if(type == 'wallet'){
-					$('#myModal_wallet > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
-				}
-				var html = '';
-				html += '<div class="modal-content ' + type + '-modal-content entry">';
-				html += '<ul class="ath-email-box">';
-				html += '<li class="ath-email-content">';
-				html += '<p class="btxt">';
-				html += '이메일 인증';
-				html += '<i class="fas fa-recycle"></i>';
-				html += '</p>';
-				html += '<div class="field modify">';
-				html += '<p class="chk-input w380">';
-				html += '<input type="text" placeholder="" id="ath_num" name="ath_num" value="">';
-				html += '<input type="hidden" id="modify_type" name="modify_type" value="' + type + '">';
-				html += '</p>';
-				html += '<a href="javascript:void(0);" id="ath_mail_btn" class="modify-btn"><span>인증번호 확인</span></a>';
-				html += '</div>';
-				html += '</li>';
-				html += '</ul>';
-				html += '</div>';
-
-				if(type == 'phone'){
-					$('#myModal_phone').append(html); // 이메일 인증박스 추가
-				}
-				if(type == 'password'){
-					$('#myModal_password').append(html); // 이메일 인증박스 추가
-				}
-				if(type == 'wallet'){
-					$('#myModal_wallet').append(html); // 이메일 인증박스 추가
-				}
-			}
 		})
 	})
 
@@ -456,15 +460,18 @@
 			success: function(data) {
 				state = data.state;
 				message = data.message;
-			}
+
+				alert(message);
+
+				if(state == 1){
+					$("#mem_phone").val(phone);
+					modal1.style.display = "none";
+				}
+			},
+				error: function(){
+					alert('에러가 발생했습니다.');
+				}
 		});
-
-		alert(message);
-
-		if(state == 1){
-			$("#mem_phone").val(phone);
-			modal1.style.display = "none";
-		}
 
 	})
 /**
@@ -475,7 +482,7 @@
  * 비밀번호변경 시작
  */
 	// 비밀번호 == 비밀번호 확인 check
-	oldVal1 = '';
+	var oldVal1 = '';
 	$(document).on("propertychange change keyup paste input","#new_password",function(){
 		var currentVal = $(this).val();
 		if(currentVal == oldVal1) {
@@ -496,7 +503,7 @@
 		oldVal1 = currentVal;
 	});
 
-	oldVal2 = '';
+	var oldVal2 = '';
 	$(document).on("propertychange change keyup paste input","#new_password_re",function(){
 		var currentVal = $(this).val();
 		if(currentVal == oldVal2) {
