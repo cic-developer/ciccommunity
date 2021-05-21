@@ -25,9 +25,19 @@ class News extends CI_Controller
         } else {
             return false;
         }
+    }
 
-        if(element('news_id', $news)){
-            $this->
+    public function delete_news($news_id = 0)
+    {
+        $news_id = (int) $news_id;
+        if(empty($news_id) OR $news_id < 1){
+            return false;
         }
+
+        $this->CI->laod->model(
+            array(
+
+            )
+        );
     }
 }

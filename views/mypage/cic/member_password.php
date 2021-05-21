@@ -36,68 +36,39 @@
 
 
 <script type="text/javascript">
-	// $.validator.setDefaults({
-	// 	onkeyup:false,
-	// 	onclick:false,
-	// 	onfocusout:false,
-	// 	showErrors:function(errorMap, errorList){
-	// 		if(this.numberOfInvalids()) {
-	// 			alert(errorList[0].message);
-	// 		}
-	// 	}
-	// });
+	$.validator.setDefaults({
+		onkeyup:false,
+		onclick:false,
+		onfocusout:false,
+		// showErrors:function(errorMap, errorList){
+		// 	if(this.numberOfInvalids()) {
+		// 		alert(errorList[0].message);
+		// 	}
+		// }
+		showErrors:function(errorMap, errorList){
+			if(this.numberOfInvalids()) {
+
+				var el = $('#mem_password');
+
+				el.dataset.tooltip-text = errorList[0].message;
+				
+				// alert(errorList[0].message);
+			}
+		}
+	});
 
 	//<![CDATA[
 	$(function () {
-		$('#fconfirmpassword1').validate({
+		$('#fconfirmpassword').validate({
 			rules: {
 				mem_password: {
-					digits:true
 					required: true,
 					minlength: 4
-				},
-				tooltip_options: {
-					thefield: { placement: 'left' }
 				}
 			}
 		});
 	});
 	//]]>
-
-	$.validator.setDefaults({
-        focusInvalid: true,
-        focusCleanup: true, 
-        onkeyup: false,
-        showErrors: function(errorMap, errorList) {
-            // Clean up any tooltips for valid elements
-            $.each(this.validElements(), function (index, element) {
-                var $element = $('#fconfirmpassword');
-    
-                $element.removeData("title") // Clear the title - there is no error associated anymore
-                    .tooltip("destroy");
-                
-                $element.closest('.form-group').removeClass('has-error').addClass('has-success');
-            });
-    
-            // Create new tooltips for invalid elements
-            $.each(errorList, function (index, error) {
-                var $element = $(error.element);
-    
-                if(!$element.data('title')){
-                    $element.data("title", error.message)
-                        .tooltip({trigger: 'manual'}) // Create a new tooltip based on the error messsage we just set in the title
-                        .tooltip('show'); // tooltip show
-                }else if($element.data('title') != error.message){
-                    $element.attr('data-original-title', error.message).data("title", error.message) // change title
-                        .tooltip('show');
-                }
-                
-                $element.closest('.form-group').removeClass('has-success').addClass('has-error');
-            });
-        },        
-    });
-
-	
 
 	$(document).on('click', '.go-btn',function(){
 		var password = $('#mem_password').val();

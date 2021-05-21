@@ -228,6 +228,8 @@ class Search extends CB_Controller
 		$low =$api_result['low_price'];
 		$trade = $api_result['trade_price'];
 		$symbole = $key_search['clist_market'];
+
+		print_r($api_result);
         
 		//Send to view
 		$view['symbole'] = $symbole;
