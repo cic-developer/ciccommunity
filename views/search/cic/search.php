@@ -48,15 +48,15 @@
 			<?php if($trade){ ?>
 				<div class="result list txt content-heading" style="height: 170px;">
 					<div class="txt" >
-						<div class="vc" style="float:left">
+						<div class="vc">
 							<div>
-								<canvas id="canvas"></canvas>
+								<canvas id="canvas" width="100" height="100"><a href='#'></a></canvas>
 							</div>
 							<p class="stxt pimg"><img src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img></p>
 							<p class="btxt center"> <strong><?php echo $korean; ?></strong></span> </p>
 						</div><br>
 					</div>
-					<p class="btxt" style="float:left"> ￦ <span style="color:blue" ><?php echo $trade; ?></p>
+					<p class="btxt"> ￦ <span style="color:blue" ><?php echo $trade; ?></p>
 					<p class="stxt"> 고가 <span style="color:blue"> ￦ <?php echo $high; ?> </span></p>
 					<p class="stxt"> 저가<span style="color:red"> ￦ <?php echo $low; ?> </span></p>
 					
@@ -305,32 +305,19 @@
 	</div>
 	<!-- e: #container-wrap //-->
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script>
 <script>
 var ctx = document.getElementById('canvas').getContext('2d');
 var myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
-            label: '# of Votes',
+            label: 'Bitcoin',
             data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
+            backgroundColor: 'transparent',
+            borderColor: red,
+            borderWidth: 4
         }]
     },
     options: {
