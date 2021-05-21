@@ -322,10 +322,10 @@ var trade = <?php echo $trade ?>;
 ctx.width = 200; 
 // ctx.heigh = 100;
 var data = {
-labels: ['', '', ''],
+labels: ['', '', '', '', '', ''],
 datasets: [{
 	label: 'Bitcoin',
-    data: [trade,  prev_price, opening_price],
+    data: [trade, prev_price, opening_price, trade,  prev_price, opening_price ],
 	backgroundColor: "white",
 	borderColor: "#3e95cd"
     }]
@@ -333,6 +333,11 @@ datasets: [{
 var option = {
 	responsive: false,
     maintainAspectRatio: false,
+	elements: {
+        line: {
+            tension: 0.4 // disables bezier curves
+        }
+	},
 	legend: {
         display: false
     },

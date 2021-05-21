@@ -195,7 +195,7 @@
 		loadingBarImage += " <img src='../../../assets/images/Spinner-1s-200px.gif'/>"; //로딩 바 이미지
 		loadingBarImage += "</div>";
 		$('.entry').append(backGroundCover).append(loadingBarImage);
-		$('#back').css({ 'width': backWidth, 'height': backHeight, 'opacity': '0.3' });
+		$('#back').css({ 'width': backWidth, 'height': backHeight, 'opacity': '0' });
 		$('#back').show();
 		$('#loadingBar').show();
 	}
@@ -304,6 +304,7 @@
 	// 이메일 확인 + 인증번호 보내기
 	$(document).ready(function(){
 		$(".ath-email").on('click', function(){
+			FunLoadingBarStart(); // 로딩바 생성
 			var type = $(this).data('type');
 
 			$.ajax({
@@ -319,7 +320,6 @@
 				success: function(data) {
 					state = data.state;
 					message = data.message;
-					FunLoadingBarStart(); // 로딩바 생성
 				}
 			});
 			
