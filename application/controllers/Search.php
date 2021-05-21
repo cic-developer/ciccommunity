@@ -239,7 +239,7 @@ class Search extends CB_Controller
 		$view['korean'] = $korean;
 		$view['low'] = $low;
 		$view['high'] = $high;
-		$view['trade'] = $trade;
+		$view['trade'] = 5;
 		$view['prev_price'] = $prev_price;
 		$view['opening_price'] = $opening_price;
 		// 코인 검색 여기까지 
