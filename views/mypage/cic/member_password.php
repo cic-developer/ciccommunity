@@ -7,7 +7,7 @@
 		<div class="member-wrap modify">
 
 		<?php
-			echo validation_errors('<script>alert("', '");</script>');
+			// echo validation_errors('<script>alert("', '");</script>');
 			echo show_alert_message($this->session->flashdata('message'), '<script>alert("', '");</script>');
 			$attributes = array('class' => 'form-horizontal', 'name' => 'fconfirmpassword', 'id' => 'fconfirmpassword');
 			echo form_open(current_url(), $attributes);
@@ -47,64 +47,57 @@
 	// 	}
 	// });
 
-	$.validator.setDefaults({
-
-showErrors: function(map, list) {
-
-		// there's probably a way to simplify this
-
-		var focussed = document.activeElement;
-
-		if (focussed && $(focussed).is("input, textarea")) {
-
-			   $(this.currentForm).tooltip("close", {
-
-					   currentTarget: focussed
-
-			   }, true)
-
-		}
-
-		var className = "ui-state-highlight"; //error시 변경될 class
-
-	   
-
-		this.currentElements.removeAttr("title").removeClass(className);
-
-		$.each(list, function(index, error) {
-
-			   $(error.element).attr("title", error.message).addClass(className);
-
-		});
-
-		/* tooltip 자동 open
-
-		if (focussed && $(focussed).is("input, textarea")) {
-
-			   $(this.currentForm).tooltip("open", {
-
-					   target: focussed
-
-			   });
-
-		}*/
-
-},
-
-
-
 	//<![CDATA[
 	$(function () {
-		$('#fconfirmpassword').validate({
+		$('#fconfirmpassword1').validate({
 			rules: {
 				mem_password: {
+					digits:true
 					required: true,
 					minlength: 4
+				},
+				tooltip_options: {
+					thefield: { placement: 'left' }
 				}
 			}
 		});
 	});
 	//]]>
+
+	$.validator.setDefaults({
+        focusInvalid: true,
+        focusCleanup: true, 
+        onkeyup: false,
+        showErrors: function(errorMap, errorList) {
+            // Clean up any tooltips for valid elements
+            $.each(this.validElements(), function (index, element) {
+                var $element = $('#fconfirmpassword');
+    
+                $element.removeData("title") // Clear the title - there is no error associated anymore
+                    .tooltip("destroy");
+                
+                $element.closest('.form-group').removeClass('has-error').addClass('has-success');
+            });
+    
+            // Create new tooltips for invalid elements
+            $.each(errorList, function (index, error) {
+                var $element = $(error.element);
+    
+                if(!$element.data('title')){
+                    $element.data("title", error.message)
+                        .tooltip({trigger: 'manual'}) // Create a new tooltip based on the error messsage we just set in the title
+                        .tooltip('show'); // tooltip show
+                }else if($element.data('title') != error.message){
+                    $element.attr('data-original-title', error.message).data("title", error.message) // change title
+                        .tooltip('show');
+                }
+                
+                $element.closest('.form-group').removeClass('has-success').addClass('has-error');
+            });
+        },        
+    });
+
+	
 
 	$(document).on('click', '.go-btn',function(){
 		var password = $('#mem_password').val();

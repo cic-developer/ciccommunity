@@ -49,21 +49,19 @@
 				<div class="result" style="height: 100px">
 					<div class="txt" >
 						<div class="vc">
-							<div>
 								<em class="stxt pimg" style="float: left"><img style= "width: 30px" style= "height: 30px"; style= "float: left"; src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
-								<strong  class="btxt center" style= "width: 100px"; style= "height: 700px"> <?php echo $korean; ?></strong><em><br>
+								<strong  class="btxt center" style= "width: 100px"; style= "height: 700px"> <?php echo $korean; ?></strong>
 								<p class="stxt"><span> <?php echo $symbole; ?> </span></p>
-							</div><br>
-							
+							<em>
 						</div>
 
 						
 					</div>
-					<div>
-						<canvas class="text-center" id="canvas"></canvas>
-						<p class="btxt"> ￦ <span style="color:blue" ><?php echo $trade; ?></p>
-						<p class="stxt"> 고가 <span style="color:blue"> ￦ <?php echo $high; ?> </span></p>
-						<p class="stxt"> 저가<span style="color:red"> ￦ <?php echo $low; ?> </span></p>
+					<div class="text-center">
+						<p ><canvas  id="canvas"></canvas>
+						<span class="btxt" style="color:blue" >￦ <?php echo $trade; ?>
+						<span class="stxt" style="color:blue">고가 ￦ <?php echo $high; ?> </span>
+						<span class="stxt" style="color:red">저가 ￦ <?php echo $low; ?> </span></p>
 					</div>	
 					
 				</div>
