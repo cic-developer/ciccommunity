@@ -171,23 +171,10 @@ class Search extends CB_Controller
 		}
 
 		$view['view']['data'] = $result;
-		
-
 		$view['view']['boardlist'] = $boardlist;
 		$view['view']['grouplist'] = $grouplist;
 		$total_rows = $result['total_rows'];
 		$view['total_rows'] = $total_rows;
-		// echo "<pre> <br>";
-		// print_r($boardlist);
-		// echo "</pre>";
-
-		// echo "<pre> <br>";
-		// print_r($grouplist);
-		// echo "</pre>";
-		// 
-		// echo "<pre> <br>";
-		// print_r($result);
-		// echo "</pre>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
 			$sfieldarray = array('post_title', 'post_content', 'post_both');
@@ -225,16 +212,11 @@ class Search extends CB_Controller
 		$api_result = $this->CIC_coin_list_model -> get_price($market);
 		$act_price = $this->CIC_coin_list_model -> act_price($market);
 		$korean = $key_search['clist_name_ko'];
-
-		// $trade = $act_price['price'];
 		$symbole = $key_search['clist_market'];
-		// $prev_price = $api_result['prev_closing_price'];
-		// $opening_price = $api_result['opening_price'];
 
 		foreach($act_price as $act){
 			$trade = (float)$act[0]['price'];
 			$view['trade'] = $trade;
-			echo gettype($trade);
 		}
 
 		foreach($api_result as $result_price){
@@ -243,12 +225,9 @@ class Search extends CB_Controller
 			$view['low'] = $low;
 			$view['high'] = $high;
 		}
-	
         //Send to view
 		$view['symbole'] = $symbole;
 		$view['korean'] = $korean;
-
-
 		// 코인 검색 여기까지 
 
 		/**
