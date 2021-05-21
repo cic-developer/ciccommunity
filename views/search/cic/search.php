@@ -54,16 +54,16 @@
 			</div>
 			<!-- HERE THE PRICE -->
 			<?php if($trade){ ?>
-				<div class="result" style="height: 150px">
-					<div style="float: left">
-						<img style= "width: 30px" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
-						<strong  class="btxt"> <?php echo $korean; ?></strong>
-						<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p></br>
+				<div class="result" style="height: 180px">
+					<div style="border-bottom: 1px solid #aaa;">
+						<br><img style= "width: 30px" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
+						<strong  class="btxt"><?php echo $korean; ?></strong>
+						<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p>
 					</div>
-					<p class="stxt"> <span style="color:blue">고가  ￦ <?php echo $high; ?> </span>
+					<p class="stxt" style="float: right"> <span style="color:blue">고가  ￦ <?php echo $high; ?> </span></br></br>
 					<span style="color:red">저가 ￦ <?php echo $low; ?> </span></p>		
 					<!-- TradingView Widget BEGIN -->
-					<div class="text-center" style="float: right">
+					<div class="text-center" style="float: left">
 						<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
 						{
 							"symbol": "BITHUMB:<?php echo $symbole ?>KRW",
@@ -192,7 +192,7 @@
 					if (!element('list', element('data', $view)))  {		
 					?>
 						<tr>
-							<td colspan="5" class="nopost text-center">게시물이 없습니다</td>
+							<td colspan="5" class="nopost center">게시물이 없습니다</td>
 						</tr>
 					<?php } ?>	
 					</ul>
