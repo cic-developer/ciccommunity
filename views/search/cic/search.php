@@ -58,29 +58,28 @@
 					<img style= "width: 30px" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
 					<strong  class="btxt"> <?php echo $korean; ?></strong>
 					<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p></br>
-						<p class="btxt text-center" > ￦ <span style="color:blue" ><?php echo $trade; ?></p>
-						<p class="stxt" style="float:right"> <span style="color:blue">고가  ￦ <?php echo $high; ?> </span>
+						<p class="stxt"> <span style="color:blue">고가  ￦ <?php echo $high; ?> </span>
 							<span style="color:red">저가 ￦ <?php echo $low; ?> </span>
-						</p>
-				<!-- TradingView Widget BEGIN -->
-				<div class="tradingview-widget-container">
-					<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-					{
-						"symbol": "BITHUMB:<?php echo $symbole ?>KRW",
-						"width": 250,
-						"height": 150,
-						"locale": "en",
-						"dateRange": "12M",
-						"colorTheme": "light",
-						"trendLineColor": "#37a6ef",
-						"underLineColor": "#E3F2FD",
-						"isTransparent": false,
-						"autosize": false,
-						"largeChartUrl": ""
-					}
-					</script>
-				</div>
-				<!-- TradingView Widget END -->
+						
+					<!-- TradingView Widget BEGIN -->
+					<div class="tradingview-widget-container text-center">
+						<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+						{
+							"symbol": "BITHUMB:<?php echo $symbole ?>KRW",
+							"width": 300,
+							"height": 150,
+							"locale": "en",
+							"dateRange": "12M",
+							"colorTheme": "light",
+							"trendLineColor": "#37a6ef",
+							"underLineColor": "#E3F2FD",
+							"isTransparent": false,
+							"autosize": false,
+							"largeChartUrl": ""
+						}
+						</script>
+					</div></p>
+					<!-- TradingView Widget END -->
 				</div>
 			<?php
 			}
