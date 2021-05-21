@@ -232,7 +232,7 @@ class Search extends CB_Controller
 		// $prev_price = $api_result['prev_closing_price'];
 		// $opening_price = $api_result['opening_price'];
 		
-		print_r($market);
+		print_r($act_price);
         
 		//Send to view
 		$view['symbole'] = $symbole;

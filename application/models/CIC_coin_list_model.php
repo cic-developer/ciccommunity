@@ -72,7 +72,7 @@ class CIC_Coin_list_model extends CB_Model
         //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.bithumb.com/public/transaction_history/{$clist_market}_KRW",
+            CURLOPT_URL => "https://api.bithumb.com/public/transaction_history/" .$clist_market. "_KRW",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",
