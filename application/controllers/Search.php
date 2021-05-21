@@ -218,40 +218,36 @@ class Search extends CB_Controller
 			}
 		}
 		$view['view']['highlight_keyword'] = $highlight_keyword;
-		
-		$act_price = $this->CIC_coin_list_model -> act_price($market);
-		$api_result = $this->CIC_coin_list_model -> get_price($market);
-		$key_search = $this-> CIC_coin_keyword_model -> search_coin($skeyword);
-		foreach($act_price as $act){
-			$low = $act;
-			echo "<pre><br>";
-			print_r($low);
-			echo "</pre>";
-		
-		}
-		
-	
-		//코인 값 검색
 
+		//코인 값 검색
+		$key_search = $this-> CIC_coin_keyword_model -> search_coin($skeyword);
 		$market = $key_search['clist_market'];
+		$api_result = $this->CIC_coin_list_model -> get_price($market);
+		$act_price = $this->CIC_coin_list_model -> act_price($market);
 		$korean = $key_search['clist_name_ko'];
-		$high = $api_result['max_price'];
-		$low =$api_result['min_price'];
-		$trade = $act_price['price'];
+
+		// $trade = $act_price['price'];
 		$symbole = $key_search['clist_market'];
 		// $prev_price = $api_result['prev_closing_price'];
 		// $opening_price = $api_result['opening_price'];
 
+		foreach($act_price as $act){
+			$trade = $act[0]['price'];
+			$view['trade'] = $trade;
+		}
+
+		foreach($api_result as $result_price){
+			$high = $result_price['max_price'];
+			$low =$result_price['min_price'];
+			$view['low'] = $low;
+			$view['high'] = $high;
+		}
 	
-        
-		//Send to view
+        //Send to view
 		$view['symbole'] = $symbole;
 		$view['korean'] = $korean;
-		$view['low'] = $low;
-		$view['high'] = $high;
-		$view['trade'] = $trade;
-		$view['prev_price'] = $prev_price;
-		$view['opening_price'] = $opening_price;
+
+
 		// 코인 검색 여기까지 
 
 		/**
