@@ -21,5 +21,6 @@ $config['admin_page_menu']['cicconfigs'] =
 			'maincoin'           	=> array('메인페이지 코인 설정', ''),
 			'Point/config'			=> array('명예포인트 설정', 'id="POIconfig"'),
 			'banner'				=> array('배너 설정', ''),
+			'news'					=> array('뉴스 설정', ''),
 		),
 	);

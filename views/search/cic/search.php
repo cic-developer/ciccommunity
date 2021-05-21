@@ -25,7 +25,7 @@
 						$attributes = array('class' => 'search_box', 'name' => 'searchForm', 'id' => 'searchForm', 'method'=> 'get', 'action' => base_url('/search'));
 						echo form_open(current_full_url(), $attributes);
 					?>
-					<p class="chk-input"><input type="text" placeholder="검색어를 입력해주세요" autocomplete="off"></p>
+					<p class="chk-input"><input type="text" placeholder="검색어를 입력해주세요" autocomplete="off" name="skeyword"></p>
 					<button class="enter"><span class="blind">검색</span></button>
                     <?php echo form_close(); ?>
 				</div>
@@ -55,26 +55,21 @@
 			<!-- HERE THE PRICE -->
 			<?php if($trade){ ?>
 				<div class="result" style="height: 100px">
-					<div class="txt" >
-						<div class="vc">
+					<div class="vc">
 						
-							<div>
-								<em class="stxt pimg" style="float: left">
-									<img style= "width: 30px" style= "height: 30px"; style= "float: left"; src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
-									<strong  class="btxt center" style= "width: 100px"; style= "height: 700px"> <?php echo $korean; ?></strong>
-								<em>
+							<em class="stxt pimg" style="float: left">
+								<img style= "width: 30px" style= "height: 30px"; style= "float: left"; src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
+								<strong  class="btxt center" style= "width: 100px"; style= "height: 700px"> <?php echo $korean; ?></strong>
 								<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p>
-							</div>
+	
 							<canvas class="text-center" id="canvas"></canvas>
 						</div>
-
-					</div>
-					<div style= "float: right">
+						<div style= "float: right">
 						<p class="btxt"> ￦ <span style="color:blue" ><?php echo $trade; ?></p>
 						<p class="stxt"> 고가 <span style="color:blue"> ￦ <?php echo $high; ?> </span></p>
 						<p class="stxt"> 저가<span style="color:red"> ￦ <?php echo $low; ?> </span></p>
 					</div>	
-					
+					</em>
 				</div>
 			<?php
 			}
