@@ -5,19 +5,27 @@
 			<div class="filter">
 				<div class="sel-box c01">
 					<a href="#n" class="sel-btn"><span>통합검색</span></a>
+					<?php
+					if (element('grouplist', $view)) {
+						foreach (element('grouplist', $view) as $key => $value) {
+					?>
 					<ul>
-						<li class="active"><a href="#n"><span>통합검색</span></a></li>
+						<li class="active"><a href="<?php base_url('/search') ?>"><span>통합검색</span></a></li>
 						<li><a href="#n"><span>제목</span></a></li>
 						<li><a href="#n"><span>내용</span></a></li>
 						<li><a href="#n"><span>작성자</span></a></li>
 					</ul>
+					<?php
+					}
+						}		
+					?>
 				</div>
 				<div class="field search">
                     <?php 
 						$attributes = array('class' => 'search_box', 'name' => 'searchForm', 'id' => 'searchForm', 'action' => base_url('/search'));
 						echo form_open(current_full_url(), $attributes);
 					?>
-					<p class="chk-input"><input type="text" placeholder="검색어를 입력해주세요" autocomplete="off" name="skeyword"></p>
+					<p class="chk-input"><input type="text" placeholder="검색어를 입력해주세요" autocomplete="off"></p>
 					<button class="enter"><span class="blind">검색</span></button>
                     <?php echo form_close(); ?>
 				</div>
