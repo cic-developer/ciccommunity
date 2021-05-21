@@ -13,10 +13,10 @@ class News_model extends CB_Model
 {
     public $_table = 'news';
 
+    public $primary_key = 'news_id';
+    
     public $cache_prefix = 'news/news-model-get-';
 
-    public $primary_key = 'news_id';
-    	
     public $cache_time = 86400;
 
     function __construct()
@@ -32,6 +32,25 @@ class News_model extends CB_Model
         return $result;
     }
 
+    public function get_one($primary_value = '', $select = '', $where = '')
+    {
+        $use_cache = false;
+        if($primary_value && empty($select) && empty($where)){
+            $use_cache = true;
+        }
+
+        if($use_cache) {
+            $cachename = $this->cache_prefix . $primary_value;
+            if( ! $result = $this->cache->get($cachename)){
+                $result = parent::get_one($primary_value);
+                $this->cache->save($cachename, $result, $this->cache_time);
+            }
+        }else{
+            $result = parent::get_one($primary_value, $select, $where);
+        }
+        return $result;
+    }
+
     public function delete($primary_value = '', $where = '')
     {
         if( empty($primary_value)){
@@ -42,9 +61,16 @@ class News_model extends CB_Model
         return $result;
     }
 
-    public function get_one($primary_value = '', $select = '', $where = '')
+    public function update($primary_value = '', $updatedata = '', $where = '')
     {
-        $use_cache = false;
+        if (empty($primary_value)){
+            return false;
+        }
+
+        $result = parent::update($primary_value, $updatedata);
+        if($result) {
+            $this->cache->delete($this->cache_prefix . $primary_value);
+        }
+        return $result;
     }
-    
 }

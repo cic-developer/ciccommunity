@@ -315,7 +315,8 @@
 <script>
 var ctx = document.getElementById('canvas');
 var contex = ctx.getContext("2d");
-var r = 3;
+var high = <?php echo $high ?>;
+var low = <?php echo $low ?>; 
 var r_ = 17;
 var r__ = 6;
 ctx.width = 200; 
@@ -337,12 +338,16 @@ var option = {
         display: false
     },
 	scales: {
-		yAxes:{
-    		stacked:false,
+		yAxes:[{
+    		stacked:true,
+			ticks: {			
+				max: 5,
+				min: 0
+			},
         	gridLines: {
-        		display:false,
+        		display:true,
             }
-    	},
+    	}],
 		xAxes:{
 			gridLines: {
 				display:false
