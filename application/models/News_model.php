@@ -16,6 +16,8 @@ class News_model extends CB_Model
     public $cache_prefix = 'news/news-model-get-';
 
     public $primary_key = 'news_id';
+    	
+    public $cache_time = 86400;
 
     function __construct()
     {
@@ -40,5 +42,9 @@ class News_model extends CB_Model
         return $result;
     }
 
+    public function get_one($primary_value = '', $select = '', $where = '')
+    {
+        $use_cache = false;
+    }
     
 }

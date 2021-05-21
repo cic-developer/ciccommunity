@@ -49,6 +49,7 @@
 				<div class="result" style="height: 100px">
 					<div class="txt" >
 						<div class="vc">
+						
 							<div>
 								<em class="stxt pimg" style="float: left"><img style= "width: 30px" style= "height: 30px"; style= "float: left"; src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
 								<strong  class="btxt center" style= "width: 100px"; style= "height: 700px"> <?php echo $korean; ?></strong><em>
@@ -314,13 +315,17 @@
 <script>
 var ctx = document.getElementById('canvas');
 var contex = ctx.getContext("2d");
+var r = 3;
+var r_ = 17;
+var r__ = 6;
 ctx.width = 200; 
 ctx.heigh = 70;
 var data = {
-labels: ['', '', '', '', '', '', ''],
+labels: ['', '', '', ''],
 datasets: [{
+	 
 	label: 'Bitcoin',
-    data: [12],
+    data: [12, r, r_,r__],
 	backgroundColor: "white",
 	borderColor: "#3e95cd"
     }]

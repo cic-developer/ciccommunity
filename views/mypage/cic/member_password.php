@@ -40,19 +40,9 @@
 		onkeyup:false,
 		onclick:false,
 		onfocusout:false,
-		// showErrors:function(errorMap, errorList){
-		// 	if(this.numberOfInvalids()) {
-		// 		alert(errorList[0].message);
-		// 	}
-		// }
 		showErrors:function(errorMap, errorList){
 			if(this.numberOfInvalids()) {
-
-				var el = $('#mem_password');
-
-				el.dataset.tooltip-text = errorList[0].message;
-				
-				// alert(errorList[0].message);
+				alert(errorList[0].message);
 			}
 		}
 	});
@@ -70,12 +60,12 @@
 	});
 	//]]>
 
-	$(document).on('click', '.go-btn',function(){
-		var password = $('#mem_password').val();
+	// $(document).on('click', '.go-btn',function(){
+	// 	var password = $('#mem_password').val();
 	
 
 		// if((password.trim()).length < 4){
 		// 	alert('비밀번호를 4자 이상 입력해주세요');
 		// }
-	})
+	// })
 </script>

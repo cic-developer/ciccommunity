@@ -101,65 +101,110 @@
 
 <style>
 
-/* The Modal (background) */
-.modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0,0,0); /* Fallback color */
-	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+	/* The Modal (background) */
+	.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 1; /* Sit on top */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	}
 
-/* Modal Content/Box */
-.modal-content {
-	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 50%; /* Could be more or less, depending on screen size */                          
-}
+	/* Modal Content/Box */
+	.modal-content {
+		background-color: #fefefe;
+		margin: 15% auto; /* 15% from the top and centered */
+		padding: 20px;
+		border: 1px solid #888;
+		width: 50%; /* Could be more or less, depending on screen size */                          
+	}
 
-/* The Close Button */
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
-.close:hover,
-.close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
+	/* The Close Button */
+	.close {
+		color: #aaa;
+		float: right;
+		font-size: 28px;
+		font-weight: bold;
+	}
+	.close:hover,
+	.close:focus {
+		color: black;
+		text-decoration: none;
+		cursor: pointer;
+	}
 
-.modal-btn {
-	line-height: 35px;
-    border-radius: 35px;
-    font-size: 14px;
-    color: #111;
-    background: #efefefef;
-    font-weight: 500;
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 15px;
-    min-width: 120px;
-    text-align: center;
-    box-sizing: border-box;
-	position:absolute;
-	left:50%;
-	top:50%;
-	transform: translatex(-50%) translatey(-50%);
-}
+	.modal-btn {
+		line-height: 35px;
+		border-radius: 35px;
+		font-size: 14px;
+		color: #111;
+		background: #efefefef;
+		font-weight: 500;
+		display: inline-block;
+		vertical-align: top;
+		margin-left: 15px;
+		min-width: 120px;
+		text-align: center;
+		box-sizing: border-box;
+		position:absolute;
+		left:50%;
+		top:50%;
+		transform: translatex(-50%) translatey(-50%);
+	}
+
+	#back{
+		position: absolute;
+		z-index: 100;
+		background-color: #000000;
+		display:none;
+		left:0;
+		top:0;
+	}
+	#loadingBar{
+		position:absolute;
+		left:50%;
+		top: 40%;
+		display:none;
+		z-index:200;
+	}
+
 
 </style>
 
 <script>
+	/*
+	** 로딩바 시작
+	*/
+
+	function FunLoadingBarStart() {
+		var backHeight = $(document).height(); //뒷 배경의 상하 폭
+		var backWidth = window.document.body.clientWidth; //뒷 배경의 좌우 폭
+		var backGroundCover = "<div id='back'></div>"; //뒷 배경을 감쌀 커버
+		var loadingBarImage = ''; //가운데 띄워 줄 이미지
+		loadingBarImage += "<div id='loadingBar'>";
+		loadingBarImage += " <img src='../img/loadingbar.gif'/>"; //로딩 바 이미지
+		loadingBarImage += "</div>";
+		$('body').append(backGroundCover).append(loadingBarImage);
+		$('#back').css({ 'width': backWidth, 'height': backHeight, 'opacity': '0.3' });
+		$('#back').show();
+		$('#loadingBar').show();
+	}
+
+	function FunLoadingBarEnd() {
+		$('#back, #loadingBar').hide();
+		$('#back, #loadingBar').remove();
+	}
+
+
+	/*
+	** 로딩바 끝
+	*/
+
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){
 			$("#fregisterform").submit();
@@ -230,6 +275,7 @@
 				success: function(data) {
 					state = data.state;
 					message = data.message;
+					FunLoadingBarStart(); // 로딩바 생성
 				}
 			});
 			
@@ -240,6 +286,8 @@
 
 			// 성공
 			if(state == 1){
+				FunLoadingBarEnd(); // 로딩바 제거
+
 				if(type == 'phone'){
 					$('#myModal_phone > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
 				}
@@ -605,17 +653,10 @@
  */
 window.name ="Parent_window";
 function fnPopup(){
-		// 체크여부 확인
-		// if( $("input:checkbox[name=agree]").is(":checked") == true 
-		// 		&& $("input:checkbox[name=agree2]").is(":checked") == true
-		// 			&& $("input:checkbox[name=agree3]").is(":checked") == true ) {
-			window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
-			document.form_chk.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
-			document.form_chk.target = "popupChk";
-			document.form_chk.submit();
-		// } else {
-		// 	alert("이용약관을 확인해주세요")
-		// }
+		window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
+		document.form_chk.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+		document.form_chk.target = "popupChk";
+		document.form_chk.submit();
 	}
 /**
  * 나이스 휴대폰 인증 끝

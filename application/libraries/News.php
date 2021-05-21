@@ -36,8 +36,10 @@ class News extends CI_Controller
 
         $this->CI->laod->model(
             array(
-
+                'News_model',
             )
         );
+
+        $news = $this->CI->News_model->get_one($news_id);
     }
 }
