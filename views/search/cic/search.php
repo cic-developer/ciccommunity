@@ -54,22 +54,23 @@
 			</div>
 			<!-- HERE THE PRICE -->
 			<?php if($trade){ ?>
-				<div class="result" style="height: 100px">
+				<div class="result">
 					<div class="vc">
-						
-							<em class="stxt pimg" style="float: left">
-								<img style= "width: 30px" style= "height: 30px"; style= "float: left"; src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
-								<strong  class="btxt center" style= "width: 100px"; style= "height: 700px"> <?php echo $korean; ?></strong>
-								<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p>
+						<em>
+							<img style= "width: 30px" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
+							<strong  class="btxt"> <?php echo $korean; ?></strong>
+							<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p>
+							<div>
+							<p class="btxt"> ￦ <span style="color:blue" ><?php echo $trade; ?></p>
+							<p class="stxt"> 고가 <span style="color:blue"> ￦ <?php echo $high; ?> </span></p>
+							<p class="stxt"> 저가<span style="color:red"> ￦ <?php echo $low; ?> </span></p>
+							</div>
+						</em>
+					
+					</div>
+						<canvas id="canvas"></canvas>
 	
-							<canvas class="text-center" id="canvas"></canvas>
-						</div>
-						<div style= "float: right">
-						<p class="btxt"> ￦ <span style="color:blue" ><?php echo $trade; ?></p>
-						<p class="stxt"> 고가 <span style="color:blue"> ￦ <?php echo $high; ?> </span></p>
-						<p class="stxt"> 저가<span style="color:red"> ￦ <?php echo $low; ?> </span></p>
-					</div>	
-					</em>
+					
 				</div>
 			<?php
 			}
