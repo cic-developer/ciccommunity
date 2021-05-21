@@ -64,25 +64,23 @@
 						</p>
 				<!-- TradingView Widget BEGIN -->
 				<div class="tradingview-widget-container">
-				<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-				{
-					"symbol": "BITHUMB:ETHKRW",
-					"width": 350,
-					"height": 220,
-					"locale": "en",
-					"dateRange": "12M",
-					"colorTheme": "light",
-					"trendLineColor": "#37a6ef",
-					"underLineColor": "#E3F2FD",
-					"isTransparent": false,
-					"autosize": false,
-					"largeChartUrl": ""
-				}
-				</script>
+					<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+					{
+						"symbol": "BITHUMB:<?php echo $symbole ?>KRW",
+						"width": 250,
+						"height": 150,
+						"locale": "en",
+						"dateRange": "12M",
+						"colorTheme": "light",
+						"trendLineColor": "#37a6ef",
+						"underLineColor": "#E3F2FD",
+						"isTransparent": false,
+						"autosize": false,
+						"largeChartUrl": ""
+					}
+					</script>
 				</div>
 				<!-- TradingView Widget END -->
-
-
 				</div>
 			<?php
 			}

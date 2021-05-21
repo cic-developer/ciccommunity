@@ -38,7 +38,7 @@ class CIC_Coin_list_model extends CB_Model
         //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.upbit.com/v1/ticker?markets=KRW-".$clist_market,
+            CURLOPT_URL => "https://api.bithumb.com/public/ticker/BTC_KRW",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",
@@ -60,6 +60,7 @@ class CIC_Coin_list_model extends CB_Model
 
         //convert json to php array or object
         $array = json_decode($response, true);
+        print_r($array);
         return $array[0];
 	}
     
@@ -116,7 +117,7 @@ class CIC_Coin_list_model extends CB_Model
         }
         $refresh = $this -> input -> post('refresh');
         if($refresh){
-        //convert json to php array or object
+        // convert json to php array or object
             $array = json_decode($response, true);
             return $array;
     }
