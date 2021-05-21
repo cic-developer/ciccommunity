@@ -17,7 +17,7 @@
 						$attributes = array('class' => 'search_box', 'name' => 'searchForm', 'id' => 'searchForm', 'action' => base_url('/search'));
 						echo form_open(current_full_url(), $attributes);
 					?>
-					<p class="chk-input"><input type="text" placeholder="검색어를 입력해주세요" autocomplete="off"></p>
+					<p class="chk-input"><input type="text" placeholder="검색어를 입력해주세요" autocomplete="off" name="skeyword"></p>
 					<button class="enter"><span class="blind">검색</span></button>
                     <?php echo form_close(); ?>
 				</div>

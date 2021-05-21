@@ -183,7 +183,7 @@
 	** 로딩바 시작
 	*/
 	$('#test').on('click', function() {
-		LoadingWithMask();
+		FunLoadingBarStart();
 	})
 
 	function FunLoadingBarStart() {
@@ -192,7 +192,7 @@
 		var backGroundCover = "<div id='back'></div>"; //뒷 배경을 감쌀 커버
 		var loadingBarImage = '/pngwing.com.png'; //가운데 띄워 줄 이미지
 		loadingBarImage += "<div id='loadingBar'>";
-		loadingBarImage += " <img src='../img/loadingbar.gif'/>"; //로딩 바 이미지
+		loadingBarImage += " <img src='../../../assets/images/Spinner-1s-200px.gif'/>"; //로딩 바 이미지
 		loadingBarImage += "</div>";
 		$('.entry').append(backGroundCover).append(loadingBarImage);
 		$('#back').css({ 'width': backWidth, 'height': backHeight, 'opacity': '0.3' });
@@ -216,7 +216,7 @@
 		var loadingImg ='';
 		
 		loadingImg +="<div id='loadingImg'>";
-		loadingImg +=" <img src='../../../assets/images/pngwing.png' style='position: relative; display: block; margin: 0px auto;'/>";
+		loadingImg +=" <img src='../../../assets/images/Spinner-1s-200px.gif' style='position: relative; display: block; margin: 0px auto;'/>";
 		loadingImg +="</div>"; 
 		
 		//화면에 레이어 추가
