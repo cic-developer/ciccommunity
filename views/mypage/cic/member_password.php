@@ -19,6 +19,7 @@
 						<div class="field">
 							<p class="chk-input w210">
 								<input id="mem_password" name="mem_password" type="password" placeholder="비밀번호 입력" value="">
+								<?php echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>'); ?>
 							</p>
 						</div>
 					</li>
