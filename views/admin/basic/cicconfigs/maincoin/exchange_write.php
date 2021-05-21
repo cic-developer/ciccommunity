@@ -10,52 +10,28 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">거래소 id</label>
 				<div class="col-sm-10 form-inline">
-					<input type="text" class="form-control" name="cme_id" value="<?php echo set_value('mem_userid', element('mem_userid', element('data', $view))); ?>" />
+					<input type="text" class="form-control" name="cme_id" value="<?php echo set_value('cme_id', element('cme_id', element('data', $view))); ?>" />
 					<p class="help-block">고유한 거래소 id입니다. Coingecko API를 사용하는 경우 거래소 구분자로 활용됩니다.</p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">거래소명 - 한글</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="cme_korean_nm" value="" />
+					<input type="text" class="form-control" name="cme_korean_nm" value="<?php echo set_value('cme_korean_nm', element('cme_korean_nm', element('data', $view))); ?>" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">거래소명 - 영문</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="cme_english_nm" value="<?php echo set_value('mem_username', element('mem_username', element('data', $view))); ?>" />
+					<input type="text" class="form-control" name="cme_english_nm" value="<?php echo set_value('cme_english_nm', element('cme_english_nm', element('data', $view))); ?>" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">닉네임</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" name="mem_nickname" value="<?php echo set_value('mem_nickname', element('mem_nickname', element('data', $view))); ?>" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">회원그룹</label>
-				<div class="col-sm-10">
-					<?php
-					if (element('mgroup', element('data', $view))) {
-						foreach (element('mgroup', element('data', $view)) as $gkey => $gval) {
-							$chkvalue = is_array(element('member_group_member', element('data', $view))) && in_array(element('mgr_id', $gval), element('member_group_member', element('data', $view))) ? element('mgr_id', $gval) : '';
-					?>
-						<label for="member_group_<?php echo element('mgr_id', $gval); ?>" class="checkbox-inline">
-							<input type="checkbox" name="member_group[]" id="member_group_<?php echo element('mgr_id', $gval); ?>" value="<?php echo element('mgr_id', $gval); ?>" <?php echo set_checkbox('member_group[]', element('mgr_id', $gval), ($chkvalue ? true : false)); ?> /> <?php echo element('mgr_title', $gval); ?>
-						</label>
-					<?php
-						}
-					}
-					?>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">레벨</label>
+				<label class="col-sm-2 control-label">API 선택</label>
 				<div class="col-sm-10 form-inline">
-					<select name="mem_level" class="form-control">
-					<?php for ($i = 1; $i <= element('config_max_level', element('data', $view)); $i++) { ?>
-						<option value="<?php echo $i; ?>" <?php echo set_select('mem_level', $i, ((int) element('mem_level', element('data', $view)) === $i ? true : false)); ?>><?php echo $i; ?></option>
-					<?php } ?>
+					<select name="cme_api" class="form-control">
+						<option value="coingecko" <?php echo set_select('cme_api', 'coingecko', element('cme_api', element('data', $view) === $i ? true : false)); ?>>Coingecko</option>
+						<option value="hotbit_korea" <?php echo set_select('cme_api', 'hotbit_korea', element('cme_api', element('data', $view) === $i ? true : false)); ?>>핫빗코리아</option>
 					</select>
 					<p class="help-block">레벨을 수동으로 설정하여도 해당 유저의 명예포인트에 따라 자동으로 변동됩니다.</p>
 				</div>

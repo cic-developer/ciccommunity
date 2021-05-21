@@ -11,7 +11,7 @@
 					?>
 					<ul>
 						<li class="active"><a href="<?php base_url('/search') ?>"><span>통합검색</span></a></li>
-						<li><a href="<?php base_url() ?>/<?php echo $post_title ?>"><span>제목</span></a></li>
+						<li><a href="<?php base_url('/search') ?>/search?group_id=<?php echo $bgr_name ?>"><span>제목</span></a></li>
 						<li><a href="#n"><span>내용</span></a></li>
 						<li><a href="#n"><span>작성자</span></a></li>
 					</ul>
@@ -311,7 +311,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script>
 var ctx = document.getElementById('canvas');
-var contex = ctx.getContext("2d");
+var context = ctx.getContext("2d");
+
 var high = <?php echo $high ?>;
 var low = <?php echo $low ?>; 
 var opening_price = <?php echo $opening_price ?>;
@@ -323,7 +324,6 @@ ctx.width = 200;
 var data = {
 labels: ['', '', ''],
 datasets: [{
-	 
 	label: 'Bitcoin',
     data: [trade,  prev_price, opening_price],
 	backgroundColor: "white",
