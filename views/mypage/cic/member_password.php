@@ -6,9 +6,10 @@
 		<!-- page start // -->
 		<div class="member-wrap modify">
 
-			<?php
-		$attributes = array('class' => 'form-horizontal', 'name' => 'fconfirmpassword', 'id' => 'fconfirmpassword');
-		echo form_open(current_url(), $attributes);
+		<?php
+			echo show_alert_message($this->session->flashdata('message'), '<script>alert("', '");</script>');
+			$attributes = array('class' => 'form-horizontal', 'name' => 'fconfirmpassword', 'id' => 'fconfirmpassword');
+			echo form_open(current_url(), $attributes);
 		?>
 			<h3>회원 비밀번호 확인</h3>
 			<div class="entry">

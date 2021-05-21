@@ -23,7 +23,7 @@ class Membermodify extends CB_Controller
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
-	protected $helpers = array('form', 'array', 'string', 'rs_basic');
+	protected $helpers = array('form', 'array', 'string');
 
 	function __construct()
 	{
@@ -2683,7 +2683,7 @@ class Membermodify extends CB_Controller
 				'membermodify',
 				''
 			);
-			// echo("<script>alert('정보수정이 완료되었습니다');</script>"); // alet가 안됨
+			$this->session->set_flashdata('message', '정보수정이 완료되었습니다');
 			redirect('membermodify');
 		}
 	}

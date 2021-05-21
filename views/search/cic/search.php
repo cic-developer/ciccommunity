@@ -49,12 +49,9 @@
 				<div class="result list txt content-heading" style="height: 170px;">
 					<div class="txt" >
 						<div class="vc">
-						<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-							<div class="col-xs-12">
-								<canvas id="canvas" style="width: 140px" style= "heigh: 50px"></canvas>
-							</div>
-							<p class="stxt pimg"><img src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img></p>
-							<p class="btxt center"> <strong><?php echo $korean; ?></strong></span> </p>
+							<canvas  style="float: left" id="canvas"></canvas>
+							<p class="stxt pimg text-center"><img style= "width: 30px" style= "height: 30px" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img></p>
+							<p class="btxt center"> <strong> <?php echo $korean; ?></strong></span> </p>
 						</div><br>
 					</div>
 					<p class="btxt"> ￦ <span style="color:blue" ><?php echo $trade; ?></p>
@@ -306,12 +303,16 @@
 	</div>
 	<!-- e: #container-wrap //-->
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script>
 var ctx = document.getElementById('canvas');
 var contex = ctx.getContext("2d");
+ctx.width = 200; 
+ctx.heigh = 70;
 var data = {
 labels: ['', '', '', '', '', '', ''],
 datasets: [{
+	label: 'Bitcoin',
     data: [12, 19, 3, 17, 6, 3, 7],
 	backgroundColor: "white",
 	borderColor: "#3e95cd"
