@@ -317,10 +317,11 @@ var ctx = document.getElementById('canvas');
 var contex = ctx.getContext("2d");
 var high = <?php echo $high ?>;
 var low = <?php echo $low ?>; 
+var r = 3;
 var r_ = 17;
 var r__ = 6;
-ctx.width = 200; 
-ctx.heigh = 70;
+ctx.width = 250; 
+ctx.heigh = 100;
 var data = {
 labels: ['', '', '', ''],
 datasets: [{
@@ -341,16 +342,17 @@ var option = {
 		yAxes:[{
     		stacked:true,
 			ticks: {			
-				max: 5,
-				min: 0
+				max: high,
+				min: low
+				
 			},
         	gridLines: {
-        		display:true,
+        		display:false,
             }
     	}],
 		xAxes:{
 			gridLines: {
-				display:false
+				display: true,
 			}
     	}
     }
