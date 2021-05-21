@@ -11,7 +11,7 @@
 					?>
 					<ul>
 						<li class="active"><a href="<?php base_url('/search') ?>"><span>통합검색</span></a></li>
-						<li><a href="#n"><span>제목</span></a></li>
+						<li><a href="<?php base_url() ?>/<?php echo $post_title ?>"><span>제목</span></a></li>
 						<li><a href="#n"><span>내용</span></a></li>
 						<li><a href="#n"><span>작성자</span></a></li>
 					</ul>
@@ -57,11 +57,10 @@
 				<div class="result">
 					<img style= "width: 30px" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
 					<strong  class="btxt"> <?php echo $korean; ?></strong>
-					<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p><br>
+					<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p></br>
 						<p class="btxt text-center" > ￦ <span style="color:blue" ><?php echo $trade; ?></p>
-						<p class="stxt" style="float:right"> <span style="color:blue">고가  ￦ <?php echo $high; ?> </span><br>
+						<p class="stxt" style="float:right"> <span style="color:blue">고가  ￦ <?php echo $high; ?> </span>
 							<span style="color:red">저가 ￦ <?php echo $low; ?> </span>
-							
 						</p>
 					<canvas id="canvas"></canvas>
 				</div>

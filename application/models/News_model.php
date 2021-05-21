@@ -26,9 +26,13 @@ class News_model extends CB_Model
         check_cache_dir('news');
     }
 
-    public function get_news_list($where = '')
+    public function get_news_list($limit ='', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR')
     {
-        $result = $this->get('','', $where, '', 0 , 'new_order', 'ASC');
+        $search_where = array();
+		$search_like = array();
+		$search_or_like = array();
+        $select = 'cic_coin_list.*';
+        $result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
         return $result;
     }
 

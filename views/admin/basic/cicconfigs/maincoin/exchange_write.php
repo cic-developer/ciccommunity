@@ -1,301 +1,225 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
 <div class="box">
-<?php
-if (element('brd_id', element('data', $view))) {
-?>
-	<div class="box-header">
-		<h4 class="pb10 pull-left"><?php echo html_escape($this->board->item_id('brd_name', element('brd_id', element('data', $view)))); ?> <a href="<?php echo goto_url(board_url(html_escape($this->board->item_id('brd_key', element('brd_id', element('data', $view)))))); ?>" class="btn-xs" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a></h4>
-		<?php if (element('boardlist', $view)) { ?>
-		<div class="pull-right">
-			<select name="brd_id" class="form-control" onChange="location.href='<?php echo admin_url($this->pagedir . '/write'); ?>/' + this.value;">
-				<?php foreach (element('boardlist', $view) as $key => $value) { ?>
-					<option value="<?php echo element('brd_id', $value); ?>" <?php echo set_select('brd_id', element('brd_id', $value), (element('brd_id', element('data', $view)) === element('brd_id', $value) ? true : false)); ?>><?php echo html_escape(element('brd_name', $value)); ?></option>
-				<?php } ?>
-			</select>
-		</div>
-		<?php } ?>
-		<div class="clearfix"></div>
-		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/write/' . element('brd_id', element('data', $view))); ?>" onclick="return check_form_changed();">기본정보</a></li>
-			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_list/' . element('brd_id', element('data', $view))); ?>" onclick="return check_form_changed();">목록페이지</a></li>
-			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_post/' . element('brd_id', element('data', $view))); ?>" onclick="return check_form_changed();">게시물열람</a></li>
-			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_write/' . element('brd_id', element('data', $view))); ?>" onclick="return check_form_changed();">게시물작성</a></li>
-			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_category/' . element('brd_id', element('data', $view))); ?>" onclick="return check_form_changed();">카테고리</a></li>
-			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_comment/' . element('brd_id', element('data', $view))); ?>" onclick="return check_form_changed();">댓글기능</a></li>
-			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_general/' . element('brd_id', element('data', $view))); ?>" onclick="return check_form_changed();">일반기능</a></li>
-			<!-- <li role="presentation"><a href="<?php //echo admin_url($this->pagedir . '/write_point/' . element('brd_id', element('data', $view))); ?>" onclick="return check_form_changed();">포인트기능</a></li> -->
-			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_alarm/' . element('brd_id', element('data', $view))); ?>" onclick="return check_form_changed();">메일/쪽지/문자</a></li>
-			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_rss/' . element('brd_id', element('data', $view))); ?>" onclick="return check_form_changed();">RSS/사이트맵 설정</a></li>
-			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_access/' . element('brd_id', element('data', $view))); ?>" onclick="return check_form_changed();">권한관리</a></li>
-			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_extravars/' . element('brd_id', element('data', $view))); ?>" onclick="return check_form_changed();">사용자정의</a></li>
-			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/write_admin/' . element('brd_id', element('data', $view))); ?>" onclick="return check_form_changed();">게시판관리자</a></li>
-		</ul>
-	</div>
-<?php
-} else {
-?>
-	<div class="box-header">
-		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a href="javascript:;" >기본정보</a></li>
-			<li role="presentation"><a href="javascript:;" onClick="alert('기본정보를 저장하신 후에 다른 정보 수정이 가능합니다');">목록페이지</a></li>
-			<li role="presentation"><a href="javascript:;" onClick="alert('기본정보를 저장하신 후에 다른 정보 수정이 가능합니다');">게시물열람</a></li>
-			<li role="presentation"><a href="javascript:;" onClick="alert('기본정보를 저장하신 후에 다른 정보 수정이 가능합니다');">게시물작성</a></li>
-			<li role="presentation"><a href="javascript:;" onClick="alert('기본정보를 저장하신 후에 다른 정보 수정이 가능합니다');">카테고리</a></li>
-			<li role="presentation"><a href="javascript:;" onClick="alert('기본정보를 저장하신 후에 다른 정보 수정이 가능합니다');">댓글기능</a></li>
-			<li role="presentation"><a href="javascript:;" onClick="alert('기본정보를 저장하신 후에 다른 정보 수정이 가능합니다');">일반기능</a></li>
-			<li role="presentation"><a href="javascript:;" onClick="alert('기본정보를 저장하신 후에 다른 정보 수정이 가능합니다');">포인트기능</a></li>
-			<li role="presentation"><a href="javascript:;" onClick="alert('기본정보를 저장하신 후에 다른 정보 수정이 가능합니다');">메일/쪽지/문자</a></li>
-			<li role="presentation"><a href="javascript:;" onClick="alert('기본정보를 저장하신 후에 다른 정보 수정이 가능합니다');">RSS/사이트맵 설정</a></li>
-			<li role="presentation"><a href="javascript:;" onClick="alert('기본정보를 저장하신 후에 다른 정보 수정이 가능합니다');">권한관리</a></li>
-			<li role="presentation"><a href="javascript:;" onClick="alert('기본정보를 저장하신 후에 다른 정보 수정이 가능합니다');">사용자정의</a></li>
-			<li role="presentation"><a href="javascript:;" onClick="alert('기본정보를 저장하신 후에 다른 정보 수정이 가능합니다');">게시판관리자</a></li>
-		</ul>
-	</div>
-<?php
-}
-?>
 	<div class="box-table">
 		<?php
 		echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
-		echo show_alert_message(element('alert_message', $view), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
-		echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
+		echo show_alert_message(element('message', $view), '<div class="alert alert-warning">', '</div>');
 		$attributes = array('class' => 'form-horizontal', 'name' => 'fadminwrite', 'id' => 'fadminwrite');
-		echo form_open(current_full_url(), $attributes);
+		echo form_open_multipart(current_full_url(), $attributes);
 		?>
-			<input type="hidden" name="is_submit" value="1" />
 			<input type="hidden" name="<?php echo element('primary_key', $view); ?>"	value="<?php echo element(element('primary_key', $view), element('data', $view)); ?>" />
 			<div class="form-group">
-				<label class="col-sm-2 control-label">게시판주소(KEY)</label>
-				<div class="col-sm-8 form-inline">
-					<?php echo board_url(); ?> <input type="text" class="form-control" name="brd_key" value="<?php echo set_value('brd_key', element('brd_key', element('data', $view))); ?>" /> <span class="help-inline">페이지주소를 입력해주세요</span>
+				<label class="col-sm-2 control-label">거래소 id</label>
+				<div class="col-sm-10 form-inline">
+					<input type="text" class="form-control" name="cme_id" value="<?php echo set_value('mem_userid', element('mem_userid', element('data', $view))); ?>" />
+					<p class="help-block">고유한 거래소 id입니다. Coingecko API를 사용하는 경우 거래소 구분자로 활용됩니다.</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">거래소명 - 한글</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="cme_korean_nm" value="" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">거래소명 - 영문</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="cme_english_nm" value="<?php echo set_value('mem_username', element('mem_username', element('data', $view))); ?>" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">닉네임</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="mem_nickname" value="<?php echo set_value('mem_nickname', element('mem_nickname', element('data', $view))); ?>" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">회원그룹</label>
+				<div class="col-sm-10">
 					<?php
-					if (element('brd_key', element('data', $view))) {
+					if (element('mgroup', element('data', $view))) {
+						foreach (element('mgroup', element('data', $view)) as $gkey => $gval) {
+							$chkvalue = is_array(element('member_group_member', element('data', $view))) && in_array(element('mgr_id', $gval), element('member_group_member', element('data', $view))) ? element('mgr_id', $gval) : '';
 					?>
-						<a href="<?php echo goto_url(board_url(html_escape(element('brd_key', element('data', $view))))); ?>" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>
+						<label for="member_group_<?php echo element('mgr_id', $gval); ?>" class="checkbox-inline">
+							<input type="checkbox" name="member_group[]" id="member_group_<?php echo element('mgr_id', $gval); ?>" value="<?php echo element('mgr_id', $gval); ?>" <?php echo set_checkbox('member_group[]', element('mgr_id', $gval), ($chkvalue ? true : false)); ?> /> <?php echo element('mgr_title', $gval); ?>
+						</label>
 					<?php
+						}
 					}
 					?>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">게시판 이름</label>
-				<div class="col-sm-8">
-					PC - <input type="text" class="form-control per30" name="brd_name" value="<?php echo set_value('brd_name', element('brd_name', element('data', $view))); ?>" />,
-					모바일 - <input type="text" class="form-control per30" name="brd_mobile_name" value="<?php echo set_value('brd_mobile_name', element('brd_mobile_name', element('data', $view))); ?>" />
-					<span class="help-block">모바일용 제목을 입력하지 않으시면, 모바일에서 PC 용 제목이 보이게 됩니다</span>
+				<label class="col-sm-2 control-label">레벨</label>
+				<div class="col-sm-10 form-inline">
+					<select name="mem_level" class="form-control">
+					<?php for ($i = 1; $i <= element('config_max_level', element('data', $view)); $i++) { ?>
+						<option value="<?php echo $i; ?>" <?php echo set_select('mem_level', $i, ((int) element('mem_level', element('data', $view)) === $i ? true : false)); ?>><?php echo $i; ?></option>
+					<?php } ?>
+					</select>
+					<p class="help-block">레벨을 수동으로 설정하여도 해당 유저의 명예포인트에 따라 자동으로 변동됩니다.</p>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">게시판 유형</label>
-				<div class="col-sm-8 form-inline">
-					<select name="board_extra_type" id="board_extra_type" class="form-control" >
-						<option value="0" selected>기본 게시판</option>
-						<option value="1" <?php echo element('board_extra_type', element('data', $view)) == 1 ? 'selected':''  ?>>포럼형 게시판</option>
-						<option value="2" <?php echo element('board_extra_type', element('data', $view)) == 2 ? 'selected':''  ?>>QnA형 게시판</option>
+				<label class="col-sm-2 control-label">홈페이지</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="mem_homepage" value="<?php echo set_value('mem_homepage', element('mem_homepage', element('data', $view))); ?>" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">생일</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="mem_birthday" value="<?php echo set_value('mem_birthday', element('mem_birthday', element('data', $view))); ?>" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">전화번호</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="mem_phone" value="<?php echo set_value('mem_phone', element('mem_phone', element('data', $view))); ?>" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">성별</label>
+				<div class="col-sm-10">
+					<div class="input-group">
+						<input type="radio" name="mem_sex" value="1" <?php echo set_radio('mem_sex', '1', (element('mem_sex', element('data', $view)) === '1' ? true : false)); ?> /> 남성
+						<input type="radio" name="mem_sex" value="2" <?php echo set_radio('mem_sex', '2', (element('mem_sex', element('data', $view)) === '2' ? true : false)); ?> /> 여성
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">주소</label>
+				<div class="col-sm-10">
+					<label for="mem_zipcode">우편번호</label>
+					<label>
+						<input type="text" name="mem_zipcode" value="<?php echo set_value('mem_zipcode', element('mem_zipcode', element('data', $view))); ?>" id="mem_zipcode" class="form-control" size="7" maxlength="7" />
+					</label>
+					<label>
+						<button type="button" class="btn btn-black btn-sm" style="margin-top:0px;" onclick="win_zip('fadminwrite', 'mem_zipcode', 'mem_address1', 'mem_address2', 'mem_address3', 'mem_address4');">주소 검색</button>
+					</label>
+					<div class="addr-line">
+						<label for="mem_address1">기본주소</label>
+						<input type="text" name="mem_address1" value="<?php echo set_value('mem_address1', element('mem_address1', element('data', $view))); ?>" id="mem_address1" class="form-control" size="50" placeholder="기본주소" />
+					</div>
+					<div class="addr-line">
+						<label for="mem_address2">상세주소</label>
+						<input type="text" name="mem_address2" value="<?php echo set_value('mem_address2', element('mem_address2', element('data', $view))); ?>" id="mem_address2" class="form-control" size="50" placeholder="상세주소" />
+					</div>
+					<label for="mem_address3">참고항목</label>
+					<input type="text" name="mem_address3" value="<?php echo set_value('mem_address3', element('mem_address3', element('data', $view))); ?>" id="mem_address3" class="form-control" size="50" readonly="readonly" placeholder="참고항목" />
+					<input type="hidden" name="mem_address4" value="<?php echo set_value('mem_address4', element('mem_address4', element('data', $view))); ?>" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">프로필사진</label>
+				<div class="col-sm-10">
+					<?php
+					if (element('mem_photo', element('data', $view))) {
+					?>
+						<img src="<?php echo member_photo_url(element('mem_photo', element('data', $view))); ?>" alt="회원 사진" title="회원 사진" />
+						<label for="mem_photo_del">
+							<input type="checkbox" name="mem_photo_del" id="mem_photo_del" value="1" <?php echo set_checkbox('mem_photo_del', '1'); ?> /> 삭제
+						</label>
+					<?php
+					}
+					?>
+					<input type="file" name="mem_photo" id="mem_photo" />
+					<p class="help-block">가로길이 : <?php echo $this->cbconfig->item('member_photo_width'); ?>px, 세로길이 : <?php echo $this->cbconfig->item('member_photo_height'); ?>px 에 최적화되어있습니다, gif, jpg, png 파일 업로드가 가능합니다</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">회원아이콘</label>
+				<div class="col-sm-10">
+					<?php
+					if (element('mem_icon', element('data', $view))) {
+					?>
+						<img src="<?php echo member_icon_url(element('mem_icon', element('data', $view))); ?>" alt="회원 아이콘" title="회원 아이콘" />
+						<label for="mem_icon_del">
+							<input type="checkbox" name="mem_icon_del" id="mem_icon_del" value="1" <?php echo set_checkbox('mem_icon_del', '1'); ?> /> 삭제
+						</label>
+					<?php
+					}
+					?>
+					<input type="file" name="mem_icon" id="mem_icon" />
+					<p class="help-block">가로길이 : <?php echo $this->cbconfig->item('member_icon_width'); ?>px, 세로길이 : <?php echo $this->cbconfig->item('member_icon_height'); ?>px 에 최적화되어있습니다, gif, jpg, png 파일 업로드가 가능합니다</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">메일받기</label>
+				<div class="col-sm-10">
+					<label for="mem_receive_email" class="checkbox-inline">
+						<input type="checkbox" name="mem_receive_email" id="mem_receive_email" value="1" <?php echo set_checkbox('mem_receive_email', '1', (element('mem_receive_email', element('data', $view)) ? true : false)); ?> /> 사용합니다
+					</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">쪽지사용</label>
+				<div class="col-sm-10">
+					<label for="mem_use_note" class="checkbox-inline">
+						<input type="checkbox" name="mem_use_note" id="mem_use_note" value="1" <?php echo set_checkbox('mem_use_note', '1', (element('mem_use_note', element('data', $view)) ? true : false)); ?> /> 사용합니다
+					</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">SMS 문자받기</label>
+				<div class="col-sm-10">
+					<label for="mem_receive_sms" class="checkbox-inline">
+						<input type="checkbox" name="mem_receive_sms" id="mem_receive_sms" value="1" <?php echo set_checkbox('mem_receive_sms', '1', (element('mem_receive_sms', element('data', $view)) ? true : false)); ?> /> 사용합니다
+					</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">프로필공개</label>
+				<div class="col-sm-10">
+					<label for="mem_open_profile" class="checkbox-inline">
+						<input type="checkbox" name="mem_open_profile" id="mem_open_profile" value="1" <?php echo set_checkbox('mem_open_profile', '1', (element('mem_open_profile', element('data', $view)) ? true : false)); ?> /> 공개합니다
+					</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">승인상태</label>
+				<div class="col-sm-10 form-inline">
+					<select name="mem_denied" class="form-control">
+						<option value="0" <?php echo set_select('mem_denied', '0', ( ! element('mem_denied', element('data', $view)) ? true : false)); ?>>승인</option>
+						<option value="1" <?php echo set_select('mem_denied', '1', (element('mem_denied', element('data', $view)) ? true : false)); ?>>차단</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">그룹명</label>
-				<div class="col-sm-8 form-inline">
-					<select name="bgr_id" id="bgr_id" class="form-control" >
-						<?php echo element('group_option', element('data', $view)); ?>
-					</select>
-					<div class="help-inline"><a href="<?php echo admin_url('board/boardgroup'); ?>">그룹생성하러 가기</a></div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">레이아웃</label>
-				<div class="col-sm-8 form-inline">
-					<select name="board_layout" id="board_layout" class="form-control" >
-						<?php echo element('board_layout_option', element('data', $view)); ?>
+				<label class="col-sm-2 control-label">최고관리자</label>
+				<div class="col-sm-10 form-inline">
+					<select name="mem_is_admin" class="form-control">
+						<option value="0" <?php echo set_select('mem_is_admin', '0', (element('mem_is_admin', element('data', $view)) !== '1' ? true : false)); ?>>아닙니다</option>
+						<option value="1" <?php echo set_select('mem_is_admin', '1', (element('mem_is_admin', element('data', $view)) === '1' ? true : false)); ?>>최고관리자입니다</option>
 					</select>
 				</div>
-				<div class="col-sm-2">
-					<label for="grp_board_layout" class="checkbox-inline">
-						<input type="checkbox" name="grp[board_layout]" id="grp_board_layout" value="1" /> 그룹적용
-					</label>
-					<label for="all_board_layout" class="checkbox-inline">
-						<input type="checkbox" name="all[board_layout]" id="all_board_layout" value="1" /> 전체적용
-					</label>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">프로필</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" rows="5" name="mem_profile_content"><?php echo set_value('mem_profile_content', element('mem_profile_content', element('data', $view))); ?></textarea>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">레이아웃에 사이드바 사용</label>
-				<div class="col-sm-8 form-inline">
-					<select class="form-control" name="board_sidebar" id="board_sidebar">
-						<option value="">기본설정따름</option>
-						<option value="1" <?php echo set_select('board_sidebar', '1', (element('board_sidebar', element('data', $view)) === '1' ? true : false)); ?> >사용</option>
-						<option value="2" <?php echo set_select('board_sidebar', '2', (element('board_sidebar', element('data', $view)) === '2' ? true : false)); ?> >사용하지않음</option>
-					</select>
-				</div>
-				<div class="col-sm-2">
-					<label for="grp_board_sidebar" class="checkbox-inline">
-						<input type="checkbox" name="grp[board_sidebar]" id="grp_board_sidebar" value="1" /> 그룹적용
-					</label>
-					<label for="all_board_sidebar" class="checkbox-inline">
-						<input type="checkbox" name="all[board_sidebar]" id="all_board_sidebar" value="1" /> 전체적용
-					</label>
+				<label class="col-sm-2 control-label">관리자용 메모</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" rows="5" name="mem_adminmemo"><?php echo set_value('mem_adminmemo', element('mem_adminmemo', element('data', $view))); ?></textarea>
 				</div>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">모바일 레이아웃</label>
-				<div class="col-sm-8 form-inline">
-					<select name="board_mobile_layout" id="board_mobile_layout" class="form-control" >
-						<?php echo element('board_mobile_layout_option', element('data', $view)); ?>
-					</select>
+			<?php
+			if (element('html_content', $view)) {
+				foreach (element('html_content', $view) as $key => $value) {
+			?>
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="<?php echo element('field_name', $value); ?>"><?php echo element('display_name', $value); ?></label>
+					<div class="col-sm-10"><?php echo element('input', $value); ?></div>
 				</div>
-				<div class="col-sm-2">
-					<label for="grp_board_mobile_layout" class="checkbox-inline">
-						<input type="checkbox" name="grp[board_mobile_layout]" id="grp_board_mobile_layout" value="1" /> 그룹적용
-					</label>
-					<label for="all_board_mobile_layout" class="checkbox-inline">
-						<input type="checkbox" name="all[board_mobile_layout]" id="all_board_mobile_layout" value="1" /> 전체적용
-					</label>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">모바일레이아웃에 사이드바 사용</label>
-				<div class="col-sm-8 form-inline">
-					<select class="form-control" name="board_mobile_sidebar" id="board_mobile_sidebar">
-						<option value="">기본설정따름</option>
-						<option value="1" <?php echo set_select('board_mobile_sidebar', '1', (element('board_mobile_sidebar', element('data', $view)) === '1' ? true : false)); ?> >사용</option>
-						<option value="2" <?php echo set_select('board_mobile_sidebar', '2', (element('board_mobile_sidebar', element('data', $view)) === '2' ? true : false)); ?> >사용하지않음</option>
-					</select>
-				</div>
-				<div class="col-sm-2">
-					<label for="grp_board_mobile_sidebar" class="checkbox-inline">
-						<input type="checkbox" name="grp[board_mobile_sidebar]" id="grp_board_mobile_sidebar" value="1" /> 그룹적용
-					</label>
-					<label for="all_board_mobile_sidebar" class="checkbox-inline">
-						<input type="checkbox" name="all[board_mobile_sidebar]" id="all_board_mobile_sidebar" value="1" /> 전체적용
-					</label>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">스킨</label>
-				<div class="col-sm-8 form-inline">
-					<select name="board_skin" id="board_skin" class="form-control" >
-						<?php echo element('board_skin_option', element('data', $view)); ?>
-					</select>
-				</div>
-				<div class="col-sm-2">
-					<label for="grp_board_skin" class="checkbox-inline">
-						<input type="checkbox" name="grp[board_skin]" id="grp_board_skin" value="1" /> 그룹적용
-					</label>
-					<label for="all_board_skin" class="checkbox-inline">
-						<input type="checkbox" name="all[board_skin]" id="all_board_skin" value="1" /> 전체적용
-					</label>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">모바일스킨</label>
-				<div class="col-sm-8 form-inline">
-					<select name="board_mobile_skin" id="board_mobile_skin" class="form-control" >
-						<?php echo element('board_mobile_skin_option', element('data', $view)); ?>
-					</select>
-				</div>
-				<div class="col-sm-2">
-					<label for="grp_board_mobile_skin" class="checkbox-inline">
-						<input type="checkbox" name="grp[board_mobile_skin]" id="grp_board_mobile_skin" value="1" /> 그룹적용
-					</label>
-					<label for="all_board_mobile_skin" class="checkbox-inline">
-						<input type="checkbox" name="all[board_mobile_skin]" id="all_board_mobile_skin" value="1" /> 전체적용
-					</label>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">상단 내용</label>
-				<div class="col-sm-8">
-					<textarea class="form-control" rows="5" name="header_content"><?php echo set_value('header_content', element('header_content', element('data', $view))); ?></textarea>
-				</div>
-				<div class="col-sm-2">
-					<label for="grp_header_content" class="checkbox-inline">
-						<input type="checkbox" name="grp[header_content]" id="grp_header_content" value="1" /> 그룹적용
-					</label>
-					<label for="all_header_content" class="checkbox-inline">
-						<input type="checkbox" name="all[header_content]" id="all_header_content" value="1" /> 전체적용
-					</label>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">하단 내용</label>
-				<div class="col-sm-8">
-					<textarea class="form-control" rows="5" name="footer_content"><?php echo set_value('footer_content', element('footer_content', element('data', $view))); ?></textarea>
-				</div>
-				<div class="col-sm-2">
-					<label for="grp_footer_content" class="checkbox-inline">
-						<input type="checkbox" name="grp[footer_content]" id="grp_footer_content" value="1" /> 그룹적용
-					</label>
-					<label for="all_footer_content" class="checkbox-inline">
-						<input type="checkbox" name="all[footer_content]" id="all_footer_content" value="1" /> 전체적용
-					</label>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">모바일 상단 내용</label>
-				<div class="col-sm-8">
-					<textarea class="form-control" rows="5" name="mobile_header_content"><?php echo set_value('mobile_header_content', element('mobile_header_content', element('data', $view))); ?></textarea>
-				</div>
-				<div class="col-sm-2">
-					<label for="grp_mobile_header_content" class="checkbox-inline">
-						<input type="checkbox" name="grp[mobile_header_content]" id="grp_mobile_header_content" value="1" /> 그룹적용
-					</label>
-					<label for="all_mobile_header_content" class="checkbox-inline">
-						<input type="checkbox" name="all[mobile_header_content]" id="all_mobile_header_content" value="1" /> 전체적용
-					</label>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">모바일 하단 내용</label>
-				<div class="col-sm-8">
-					<textarea class="form-control" rows="5" name="mobile_footer_content"><?php echo set_value('mobile_footer_content', element('mobile_footer_content', element('data', $view))); ?></textarea>
-				</div>
-				<div class="col-sm-2">
-					<label for="grp_mobile_footer_content" class="checkbox-inline">
-						<input type="checkbox" name="grp[mobile_footer_content]" id="grp_mobile_footer_content" value="1" /> 그룹적용
-					</label>
-					<label for="all_mobile_footer_content" class="checkbox-inline">
-						<input type="checkbox" name="all[mobile_footer_content]" id="all_mobile_footer_content" value="1" /> 전체적용
-					</label>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">정렬순서</label>
-				<div class="col-sm-8">
-					<input type="number" class="form-control" name="brd_order" value="<?php echo set_value('brd_order', (int) element('brd_order', element('data', $view))); ?>" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">검색여부</label>
-				<div class="col-sm-8">
-					<label for="brd_search" class="checkbox-inline">
-						<input type="checkbox" name="brd_search" id="brd_search" value="1" <?php echo set_checkbox('brd_search', '1', (element('brd_search', element('data', $view)) ? true : false)); ?> /> 사용합니다
-					</label>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">캡챠 사용</label>
-				<div class="col-sm-8">
-					<label for="board_use_captcha" class="checkbox-inline">
-						<input type="checkbox" name="board_use_captcha" id="board_use_captcha" value="1" <?php echo set_checkbox('board_use_captcha', '1', (element('board_use_captcha', element('data', $view)) ? true : false)); ?> /> 사용합니다
-					</label>
-					<span class="help-block">체크하면 글 작성시 캡챠를 무조건 사용합니다.( 회원 + 비회원 모두 )</span>
-					<span class="help-block">미 체크하면 비회원에게만 캡챠를 사용합니다.</span>
-				</div>
-				<div class="col-sm-2">
-					<label for="grp_board_use_captcha" class="checkbox-inline">
-						<input type="checkbox" name="grp[board_use_captcha]" id="grp_board_use_captcha" value="1" /> 그룹적용
-					</label>
-					<label for="all_board_use_captcha" class="checkbox-inline">
-						<input type="checkbox" name="all[board_use_captcha]" id="all_board_use_captcha" value="1" /> 전체적용
-					</label>
-				</div>
-			</div>
+			<?php
+				}
+			}
+			?>
 			<div class="btn-group pull-right" role="group" aria-label="...">
-				<a href="<?php echo admin_url($this->pagedir); ?>" class="btn btn-default btn-sm">목록으로</a>
+				<button type="button" class="btn btn-default btn-sm btn-history-back" >취소하기</button>
 				<button type="submit" class="btn btn-success btn-sm">저장하기</button>
 			</div>
 		<?php echo form_close(); ?>
@@ -307,23 +231,13 @@ if (element('brd_id', element('data', $view))) {
 $(function() {
 	$('#fadminwrite').validate({
 		rules: {
-			brd_key: {required :true, alpha_dash:true, minlength:3, maxlength:50 },
-			brd_name: {required :true },
-			bgr_id: {required :true },
-			brd_order: {required :true, number:true, min:0, max:10000}
+			mem_userid: { required: true, minlength:3, maxlength:20 },
+			mem_username: {minlength:2, maxlength:20 },
+			mem_nickname: {required :true, minlength:2, maxlength:20 },
+			mem_email: {required :true, email:true },
+			mem_password: {minlength :4 }
 		}
 	});
 });
-var form_original_data = $('#fadminwrite').serialize();
-function check_form_changed() {
-	if ($('#fadminwrite').serialize() !== form_original_data) {
-		if (confirm('저장하지 않은 정보가 있습니다. 저장하지 않은 상태로 이동하시겠습니까?')) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	return true;
-}
 //]]>
 </script>

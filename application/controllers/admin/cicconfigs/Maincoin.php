@@ -215,13 +215,8 @@ class Maincoin extends CB_Controller
 		$getdata = array();
 		if ($cme_idx) {
 			$getdata = $this->{$this->modelname}->get_one($cme_idx);
-			$board_meta = $this->Board_meta_model->get_all_meta(element('brd_id', $getdata));
-			if (is_array($board_meta)) {
-				$getdata = array_merge($getdata, $board_meta);
-			}
 		} else {
 			// 기본값 설정
-			$getdata['brd_search'] = 1;
 		}
 
 		/**
@@ -352,12 +347,6 @@ class Maincoin extends CB_Controller
 
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-
-			$this->load->model('Board_group_model');
-			$group_cnt = $this->Board_group_model->count_by();
-			if ($group_cnt === 0) {
-				alert('최소 1개 그룹이 생성되어야 합니다. 그룹관리 페이지로 이동합니다', admin_url('board/boardgroup'));
-			}
 
 		} else {
 			/**
@@ -554,8 +543,6 @@ class Maincoin extends CB_Controller
 		}
 
 		$view['view']['data'] = $getdata;
-		$view['view']['data']['group_option'] = $this->{$this->modelname}
-		->get_group_select(set_value('bgr_id', element('bgr_id', $getdata)));
 		$view['view']['data']['board_layout_option'] = get_skin_name(
 			'_layout',
 			set_value('board_layout', element('board_layout', $getdata)),
@@ -581,7 +568,6 @@ class Maincoin extends CB_Controller
 		 * primary key 정보를 저장합니다
 		 */
 		$view['view']['primary_key'] = $primary_key;
-		$view['view']['boardlist'] = $this->Board_model->get_board_list();
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
