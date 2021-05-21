@@ -49,8 +49,9 @@
 				<div class="result list txt content-heading" style="height: 170px;">
 					<div class="txt" >
 						<div class="vc">
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 							<div>
-								<canvas id="canvas" width="100" height="100"><a href='#'></a></canvas>
+								<canvas id="canvas" style= "width: 2.5px" style = "height: 2.5px"></canvas>
 							</div>
 							<p class="stxt pimg"><img src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img></p>
 							<p class="btxt center"> <strong><?php echo $korean; ?></strong></span> </p>
@@ -305,27 +306,41 @@
 	</div>
 	<!-- e: #container-wrap //-->
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script>
 <script>
-var ctx = document.getElementById('canvas').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: 'Bitcoin',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: 'transparent',
-            borderColor: red,
-            borderWidth: 4
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
+var canvas = document.getElementById('canvas');
+
+var data = {
+labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+datasets: [{
+    label: 'apples',
+    data: [12, 19, 3, 17, 6, 3, 7],
+	backgroundColor: "rgba(153,255,51,0.4)"
+    }, 
+	{
+    label: 'oranges',
+    data: [2, 29, 5, 5, 2, 3, 10],
+    backgroundColor: "rgba(255,153,0,0.4)"
+    }]
+};
+var option = {
+	scales: {
+		yAxes:[{
+    		stacked:true,
+        	gridLines: {
+        		display:true,
+          		color:"rgba(255,99,132,0.2)"
             }
+    }],
+    xAxes:[{
+    	gridLines: {
+        	display:true
         }
+    }]
     }
+};
+
+var myBarChart = Chart.Line(canvas,{
+	data:data,
+  	options:option
 });
 </script>
