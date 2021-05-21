@@ -70,6 +70,10 @@ class Searchcoin extends CB_Controller
 		$per_page = admin_listnum();
 		$offset = ($page - 1) * $per_page;
 
+		$zil = 'ZIL';
+        $get_price = $this->CIC_coin_list_model->get_price($zil);
+		print_r($get_price);
+
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */

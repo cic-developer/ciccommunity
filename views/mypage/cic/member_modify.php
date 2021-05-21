@@ -259,11 +259,11 @@
  * 이메일 인증 시작
  */
 
-	// 이메일 확인 + 인증번호 보내기
+	// 인증번호 이메일 발송
 	$(document).ready(function(){
 		$(".ath-email").on('click', function(){
 			var type = $(this).data('type');
-
+            
 			$.ajax({
 				url: cb_url + '/membermodify/ajax_modify_email_send',
 				type: 'POST',
@@ -278,20 +278,24 @@
 					state = data.state;
 					message = data.message;
 					
-			
+			        
 					alert(message);
-
+                    
 					// 실패
 					if(state == 0){}
-
+                    
 					// 성공
 					if(state == 1){
+                        
+						// 핸드폰번호변경 이메일 인증
 						if(type == 'phone'){
 							$('#myModal_phone > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
 						}
+						// 비밀번호변경 이메일 인증
 						if(type == 'password'){
 							$('#myModal_password > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
 						}
+						// 지갑주소변경 이메일 인증
 						if(type == 'wallet'){
 							$('#myModal_wallet > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
 						}
@@ -313,13 +317,16 @@
 						html += '</li>';
 						html += '</ul>';
 						html += '</div>';
-
+                        
+						// 핸드폰번호변경 이메일 인증
 						if(type == 'phone'){
 							$('#myModal_phone').append(html); // 이메일 인증박스 추가
 						}
+						// 비밀번호변경 이메일 인증
 						if(type == 'password'){
 							$('#myModal_password').append(html); // 이메일 인증박스 추가
 						}
+						// 지갑주소변경 이메일 인증
 						if(type == 'wallet'){
 							$('#myModal_wallet').append(html); // 이메일 인증박스 추가
 						}
@@ -336,7 +343,7 @@
 	$(document).on('click', "#ath_mail_btn", function(){
 		var ath_num = $("#ath_num").val();
 		var modify_type = $("#modify_type").val();
-
+        
 		var result = '';
 		var reason = '';
 		$.ajax({
@@ -353,58 +360,65 @@
 			success: function(data) {
 				result = data.result;
 				reason = data.reason;
-			}
+                
+				alert(reason);
+                
+				// 실패
+				if(result == 0){}
+                
+				//성공
+				//// => 핸드폰변경 박스
+				if(result == 1) {
+					
+					var html = '';
+					html += '<ul class="phone-modify-box">';
+					html += '<li class="phone-modify-content">';
+					html += '<p class="btxt">새 핸드폰번호</p>';
+					html += '<div class="field modify">';
+					html += '<p class="chk-input w380">';
+					html += '<input type="text" placeholder="" onKeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="">';
+					html += '</p>';
+					html += '<a href="javascript:void(0);" id="phone_modify_btn" class="modify-btn"><span>완료</span></a>';
+					html += '</div>';
+					html += '</li>';
+					html += '</ul>';
+                    
+					$('.phone-modal-content > .ath-email-box').remove(); // 이메일 인증 박스 삭제		
+					$('.phone-modal-content').append(html); // 수정 박스 생성
+				}
+                
+				//// => 비밀번호변경 휴대폰인증 버튼
+				if(result == 2){
+                    
+					var html = '';
+					html += '<form name="form_chk" method="post" id="password_form_chk">'
+					html += '<input type="hidden" name="m" value="checkplusService">'
+					html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">'
+					html += '<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn"><span>휴대폰 인증</span></a>'
+					html += '</form>'
+					
+					$('.password-modal-content').remove(); // 이메일 인증 박스 삭제		
+					$('#myModal_password').append(html); // 수정 박스 생성
+				}
+				
+				//// => 지갑주소변경 휴대폰인증 버튼
+				if(result == 3){
+					
+					var html = '';
+					html += '<form name="form_chk" method="post" id="wallet_form_chk">'
+					html += '<input type="hidden" name="m" value="checkplusService">'
+					html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">'
+					html += '<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn"><span>휴대폰 인증</span></a>'
+					html += '</form>'
+                    
+					$('.wallet-modal-content').remove(); // 이메일 인증 박스 삭제		
+					$('#myModal_wallet').append(html); // 수정 박스 생성
+				}
+			},
+				error: function(){
+					alert('에러가 발생했습니다.');
+				}
 		});
-
-		alert(reason);
-
-		// 실패
-		if(result == 0){}
-
-		//성공
-		if(result == 1) {
-			var html = '';
-			html += '<ul class="phone-modify-box">';
-			html += '<li class="phone-modify-content">';
-			html += '<p class="btxt">새 핸드폰번호</p>';
-			html += '<div class="field modify">';
-			html += '<p class="chk-input w380">';
-			html += '<input type="text" placeholder="" onKeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="">';
-			html += '</p>';
-			html += '<a href="javascript:void(0);" id="phone_modify_btn" class="modify-btn"><span>완료</span></a>';
-			html += '</div>';
-			html += '</li>';
-			html += '</ul>';
-
-			$('.phone-modal-content > .ath-email-box').remove(); // 이메일 인증 박스 삭제		
-			$('.phone-modal-content').append(html); // 수정 박스 생성
-		}
-
-		if(result == 2){
-
-			var html = '';
-			html += '<form name="form_chk" method="post" id="password_form_chk">'
-			html += '<input type="hidden" name="m" value="checkplusService">'
-			html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">'
-			html += '<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn"><span>휴대폰 인증</span></a>'
-			html += '</form>'
-
-			$('.password-modal-content').remove(); // 이메일 인증 박스 삭제		
-			$('#myModal_password').append(html); // 수정 박스 생성
-		}
-
-		if(result == 3){
-
-			var html = '';
-			html += '<form name="form_chk" method="post" id="wallet_form_chk">'
-			html += '<input type="hidden" name="m" value="checkplusService">'
-			html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">'
-			html += '<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn"><span>휴대폰 인증</span></a>'
-			html += '</form>'
-
-			$('.wallet-modal-content').remove(); // 이메일 인증 박스 삭제		
-			$('#myModal_wallet').append(html); // 수정 박스 생성
-		}
 	});
 
 /**
@@ -414,6 +428,7 @@
 /**
  * 휴대폰번호변경 시작
  */
+	// 핸드폰번호 하이푼 자동 생성
 	function inputPhoneNumber(obj) { 
 		var number = obj.value.replace(/[^0-9]/g, ""); 
 		var phone = ""; 
@@ -440,11 +455,11 @@
 		obj.value = phone; 
 	}
 
-	var phone = '';
+	// 핸드폰번호 validation and 사용가능여부 check
 	$(document).on('click', "#phone_modify_btn", function(){
-
+        
 		var _phone = $("#new_phone").val();
-		phone = _phone;
+		var phone = _phone;
 		var state = '';
 		var message = '';
 		$.ajax({
@@ -460,19 +475,18 @@
 			success: function(data) {
 				state = data.state;
 				message = data.message;
-
+                
 				alert(message);
-
+                
 				if(state == 1){
 					$("#mem_phone").val(phone);
 					modal1.style.display = "none";
 				}
 			},
-				error: function(){
-					alert('에러가 발생했습니다.');
-				}
+			error: function(){
+				alert('에러가 발생했습니다.');
+			}
 		});
-
 	})
 /**
  * 휴대폰번호변경 끝
@@ -503,6 +517,7 @@
 		oldVal1 = currentVal;
 	});
 
+	// 비밀번호 확인 == 비밀번호 check
 	var oldVal2 = '';
 	$(document).on("propertychange change keyup paste input","#new_password_re",function(){
 		var currentVal = $(this).val();
@@ -524,6 +539,7 @@
 		oldVal2 = currentVal;
 	});
 
+	// 비밀번호변경 박스 생성하기
 	function createPasswordModify(){
 		var html = '';
 		html += '<div class="modal-content entry">';
@@ -547,18 +563,18 @@
 		html += '</li>';
 		html += '</ul>';
 		html += '</div>';
-
-		$('#password_form_chk').remove(); // 휴대폰 인증 박스 삭제		
-		$('#myModal_password').append(html); 
+        
+		$('#password_form_chk').remove(); // 휴대폰 인증 버튼 삭제			
+		$('#myModal_password').append(html); // 비밀번호변경 박스 생성
 	}
 
-	var password = '';
+	// 비밀번호 validation
 	$(document).on('click', "#password_modify_btn", function(){
 		$('.password-modify-box > p').remove();
 
 		var _password = $("#new_password").val();
 		var _password_re = $("#new_password_re").val();
-		password = _password;
+		var password = _password;
 		var state = '';
 		var message = '';
 		$.ajax({
@@ -575,17 +591,21 @@
 			success: function(data) {
 				state = data.state;
 				message = data.message;
+
+				if(state == 1){
+					alert(message); // 성공 메세지 출력
+					$("#mem_password").val(password); // 유저에게 보이는(readonly input tag)부분에 값 변경: 해당 값은 최종 정보업데이트 시 post로 넘어갑니다
+					modal2.style.display = "none"; // 인증 modal 종료
+				}
+				if(state == 0){
+					// validation 메세지 append (해당 메세지는 여러개가 생성될수 있기때문에 append를 하였습니다.)
+					$('.password-modify-box').append(message);
+				}
+			},
+			error: function(){
+				alert('에러가 발생했습니다.');
 			}
 		});
-
-		if(state == 1){
-			alert(message);
-			$("#mem_password").val(password);
-			modal2.style.display = "none";
-		}
-		if(state == 0){
-			$('.password-modify-box').append(message);
-		}
 	});
 /**
  * 비밀번호변경 끝
@@ -594,6 +614,7 @@
 /**
  * 지갑주소변경 시작
  */
+	// 지갑주소변경 박스 생성하기
 	function createWalletModify(){
 		var html = '';
 		html += '<div class="modal-content entry">';
@@ -609,17 +630,16 @@
 		html += '</li>';
 		html += '</ul>';
 		html += '</div>';
-
-		$('#wallet_form_chk').remove(); // 휴대폰 인증 박스 삭제		
-		$('#myModal_wallet').append(html); 
+        
+		$('#wallet_form_chk').remove(); // 휴대폰 인증 버튼 삭제		
+		$('#myModal_wallet').append(html);  // 지갑주소변경 박스 생성
 	}
 
-	var wallet = '';
 	$(document).on('click', "#wallet_modify_btn", function(){
 		$('.wallet-modify-box > p').remove();
-
+        
 		var _wallet = $("#new_wallet").val();
-		wallet = _wallet;
+		var wallet = _wallet;
 		var state = '';
 		var message = '';
 		$.ajax({
@@ -635,18 +655,21 @@
 			success: function(data) {
 				state = data.state;
 				message = data.message;
+
+				if(state == 1){
+					alert(message); // 성공 메세지 출력
+					$("#mem_wallet").val(wallet); // 유저에게 보이는(readonly input tag)부분에 값 변경: 해당 값은 최종 정보업데이트 시 post로 넘어갑니다
+					modal3.style.display = "none"; // 인증 modal 종료
+				}
+				if(state == 0){
+					// $('.wallet-modify-box').append(message);
+					alert(message); // 실패 메세지 출력
+				}
+			},
+			error: function(){
+				alert('에러가 발생했습니다.');
 			}
 		});
-
-		if(state == 1){
-			alert(message);
-			$("#mem_wallet").val(wallet);
-			modal3.style.display = "none";
-		}
-		if(state == 0){
-			// $('.wallet-modify-box').append(message);
-			alert(message);
-		}
 	});
 /**
  * 비밀번호변경 끝
