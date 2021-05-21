@@ -55,22 +55,15 @@
 			<!-- HERE THE PRICE -->
 			<?php if($trade){ ?>
 				<div class="result">
-					<div class="vc">
-						<em>
-							<img style= "width: 30px" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
-							<strong  class="btxt"> <?php echo $korean; ?></strong>
-							<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p>
-							<div>
-							<p class="btxt"> ￦ <span style="color:blue" ><?php echo $trade; ?></p>
-							<p class="stxt"> 고가 <span style="color:blue"> ￦ <?php echo $high; ?> </span></p>
-							<p class="stxt"> 저가<span style="color:red"> ￦ <?php echo $low; ?> </span></p>
-							</div>
-						</em>
-					
-					</div>
-						<canvas id="canvas"></canvas>
-	
-					
+					<img style= "width: 30px" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
+					<strong  class="btxt"> <?php echo $korean; ?></strong>
+					<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p><br>
+						<p class="btxt text-center" > ￦ <span style="color:blue" ><?php echo $trade; ?></p>
+						<p class="stxt" style="float:right"> <span style="color:blue">고가  ￦ <?php echo $high; ?> </span><br>
+							<span style="color:red">저가 ￦ <?php echo $low; ?> </span>
+							
+						</p>
+					<canvas id="canvas"></canvas>
 				</div>
 			<?php
 			}
@@ -326,8 +319,8 @@ var opening_price = <?php echo $opening_price ?>;
 var prev_price = <?php echo $prev_price ?>;
 var trade = <?php echo $trade ?>;
 
-ctx.width = 250; 
-ctx.heigh = 100;
+ctx.width = 200; 
+// ctx.heigh = 100;
 var data = {
 labels: ['', '', ''],
 datasets: [{
