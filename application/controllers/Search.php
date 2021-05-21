@@ -231,7 +231,7 @@ class Search extends CB_Controller
 		$prev_price = $api_result['prev_closing_price'];
 		$opening_price = $api_result['opening_price'];
 		
-		print_r($api_result);
+		// print_r($api_result);
         
 		//Send to view
 		$view['symbole'] = $symbole;
