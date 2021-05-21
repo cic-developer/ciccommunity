@@ -11,5 +11,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class News_model extends CB_Model
 {
+    public $_table = 'news';
+
+    public $cache_prefix = 'news/news-model-get-';
+
+    public $primary_key = 'news_id';
+
+    function __construct()
+    {
+        parent::__construct();
+
+        check_cache_dir('news');
+    }
+
+    public function get_news_list($where = '')
+    {
+        $result = $this->get('','', $where, '', 0 , 'new_order', 'ASC');
+        return $result;
+    }
+
+    public function delete($primary_value = '', $where = '')
+    {
+        if( empty($primary_value)){
+            return false;
+        }
+        $result = parent::delete($primary_value);
+        $this->cache->delete($this->cache_prefix . $primary_value);
+        return $result;
+    }
+
     
 }

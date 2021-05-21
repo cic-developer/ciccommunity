@@ -50,8 +50,8 @@
 					<div class="txt" >
 						<div class="vc">
 						<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-							<div>
-								<canvas id="canvas" style= "width: 2.5px" style = "height: 2.5px"></canvas>
+							<div class="col-xs-12">
+								<canvas id="canvas"></canvas>
 							</div>
 							<p class="stxt pimg"><img src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img></p>
 							<p class="btxt center"> <strong><?php echo $korean; ?></strong></span> </p>
@@ -307,28 +307,25 @@
 	<!-- e: #container-wrap //-->
 </div>
 <script>
-var canvas = document.getElementById('canvas');
-
+var ctx = document.getElementById('canvas');
 var data = {
 labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
 datasets: [{
-    label: 'apples',
+    label: 'bitcoin',
     data: [12, 19, 3, 17, 6, 3, 7],
-	backgroundColor: "rgba(153,255,51,0.4)"
-    }, 
-	{
-    label: 'oranges',
-    data: [2, 29, 5, 5, 2, 3, 10],
-    backgroundColor: "rgba(255,153,0,0.4)"
+	backgroundColor: "white",
+	borderColor: "#3e95cd"
     }]
 };
 var option = {
+	responsive: true,
+    maintainAspectRatio: false,
 	scales: {
 		yAxes:[{
     		stacked:true,
         	gridLines: {
         		display:true,
-          		color:"rgba(255,99,132,0.2)"
+          		color:"white"
             }
     }],
     xAxes:[{
