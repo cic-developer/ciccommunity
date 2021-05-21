@@ -87,7 +87,6 @@ class News extends CB_Controller
     }
 
     public function delete_news(){
-
         $eventname = 'event_admin_news_delete';
         $this->load->event($eventname);
 
@@ -111,5 +110,32 @@ class News extends CB_Controller
         redirect($redirecturl);
     }
 
+    public function update_news_enable_0()
+    {
+        $where = array(
+            'news_id' => $news_id,
+        );
+        $updatedata = array(
+            'news_enable' => 0,
+        );
+        $this->db->where($where);
+        $this->db->set($updatedata);
+
+        return $this->db->update($this->_table);
+    }
+
+    public function update_news_enable_1()
+    {
+        $where = array(
+            'news_id' => $news_id,
+        );
+        $updatedata = array(
+            'news_enable' => 1,
+        );
+        $this->db->where($where);
+        $this->db->set($updatedata);
+
+        return $this->db->update($this->_table);
+    }
 
 }

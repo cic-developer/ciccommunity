@@ -73,9 +73,9 @@
 			</div>
 			<div class="lower">
 				<a href="javascript:fnPopup();" id="submitButton" class="update-btn"><span>정보업데이트</span></a>
-				<a href="/membermodify/userdelete" class="leave-btn"><span>회원탈퇴</span></a>
+				<a href="javascript:void(0);" id="submitUserDelete" class="leave-btn"><span>회원탈퇴</span></a>
 			</div>
-
+			
 			<!-- 핸드폰번호 변경 -->
 			<div id="myModal_phone" class="modal">
 				<!-- Modal content -->
@@ -96,7 +96,7 @@
 
 			<!-- 로딩바 -->
 			<!-- <div id = "Progress_Loading">
-				<img src="../../../assets/images/11.gif"/>
+				<img src="../../../assets/images/ajax-loader.gif"/>
 			</div> -->
 			<?php echo form_close(); ?>
 		</div>
@@ -185,6 +185,25 @@
 	// .ajaxStop(function(){
 	// 	$('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
 	// });
+
+	/*
+	** 회원탈퇴/membermodify/userdelete / submitUserDelete
+	*/
+	$(document).on('click', '#submitUserDelete', function(){
+		alert('회원탈퇴시 vp/cp 및 정보를 복구하실 수 없습니다.');
+		var isDelete = confirm('정말로 탈퇴하시겠습니까?');
+
+		if( isDelete ){
+			location.href = "userdelete";
+			return;
+		}
+
+	})
+
+	/*
+	** 회원탈퇴
+	*/
+
 	
 
 	$(document).ready(function(){
