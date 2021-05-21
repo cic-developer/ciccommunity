@@ -62,7 +62,26 @@
 						<p class="stxt" style="float:right"> <span style="color:blue">고가  ￦ <?php echo $high; ?> </span>
 							<span style="color:red">저가 ￦ <?php echo $low; ?> </span>
 						</p>
-					<canvas id="canvas"></canvas>
+					<!-- TradingView Widget BEGIN -->
+				<div class="tradingview-widget-container">
+					<div class="tradingview-widget-container__widget"></div>
+					<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+					{
+					"symbol": "BITHUMB:BTCKRW",
+					"width": "250",
+					"height": "200",
+					"locale": "en",
+					"dateRange": "12M",
+					"colorTheme": "light",
+					"trendLineColor": "#37a6ef",
+					"underLineColor": "#E3F2FD",
+					"isTransparent": false,
+					"autosize": false,
+					"largeChartUrl": ""
+					}
+					</script>
+				</div>
+<!-- TradingView Widget END -->
 				</div>
 			<?php
 			}

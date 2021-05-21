@@ -192,20 +192,55 @@ class Withdraws extends CB_Controller
 		 */
 		$widIdx = (int)$this->input->post('wid_idx1');
 		if (empty($widIdx) OR $widIdx < 1) {
-			show_404();
+			$this->session->set_flashdata(
+				'message',
+				'존재하지 않는 출금요청 정보입니다.'
+			);
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+			redirect($redirecturl);
+			// show_404();
 		}
 		$primary_key = $this->{$this->modelname}->primary_key;
 
 		// 해당 출금요청 정보 불러오기
 		$getdata = $this->{$this->modelname}->get_one($widIdx);
 		if(!$getdata){
-			show_404();
+			$this->session->set_flashdata(
+				'message',
+				'존재하지 않는 출금요청 정보입니다.'
+			);
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+			redirect($redirecturl);
+			// show_404();
+		}
+		$memIdx = $getdata['wid_mem_idx'];
+
+		// 해당 출금요청 유저 정보 불러오기
+		$member_info = $this->Member_model->get_one($memIdx);
+		if(!$member_info){
+			$this->session->set_flashdata(
+				'message',
+				'탈퇴 및 계정삭제에 의한 존재하지않는 계정의 신청정보입니다.'
+			);
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+			redirect($redirecturl);
+			// show_404();
 		}
 
 		// 로그인한 관리자 정보 불라오기
 		$member_info = $this->member->get_member();
 		if(!$member_info){
-			show_404();
+			$this->session->set_flashdata(
+				'message',
+				'관리자 정보 에러'
+			);
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+			redirect($redirecturl);
+			// show_404();
 		}
 
 		/**
@@ -294,14 +329,28 @@ class Withdraws extends CB_Controller
 		 */
 		$widIdx = (int)$this->input->post('wid_idx2');
 		if (empty($widIdx) OR $widIdx < 1) {
-			show_404();
+			$this->session->set_flashdata(
+				'message',
+				'존재하지 않는 출금요청 정보입니다.'
+			);
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+			redirect($redirecturl);
+			// show_404();
 		}
 		$primary_key = $this->{$this->modelname}->primary_key;
 
 		// 해당 출금요청 정보 불러오기
 		$getdata = $this->{$this->modelname}->get_one($widIdx);
 		if(!$getdata){
-			show_404();
+			$this->session->set_flashdata(
+				'message',
+				'존재하지 않는 출금요청 정보입니다.'
+			);
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+			redirect($redirecturl);
+			// show_404();
 		}
 		if($getdata['wid_mem_idx'] && $getdata['wid_req_money']){
 			$memIdx = $getdata['wid_mem_idx'];
@@ -327,7 +376,14 @@ class Withdraws extends CB_Controller
 		// 로그인한 관리자 정보 불라오기
 		$member_info = $this->member->get_member();
 		if(!$member_info){
-			show_404();
+			$this->session->set_flashdata(
+				'message',
+				'관리자 정보 에러'
+			);
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+			redirect($redirecturl);
+			// show_404();
 		}
 		if($member_info['mem_userid'] && $this->input->ip_address()){
 			$adminid = $member_info['mem_userid'];
