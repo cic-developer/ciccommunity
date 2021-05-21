@@ -2661,6 +2661,7 @@ class Membermodify extends CB_Controller
 
 		$data = array(
 			'mem_wallet_address' => $new_wallet,
+			// 'mem_wallet_address' => '123123123',
 		);
 
 		$this->Member_extra_vars_model->save($mem_id, $data); // memo: return 값이 없다

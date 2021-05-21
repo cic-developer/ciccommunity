@@ -311,7 +311,14 @@ class Withdraws extends CB_Controller
 		// 해당 출금요청 유저 정보 불러오기
 		$member_info = $this->Member_model->get_one($memIdx);
 		if(!$member_info){
-			show_404();
+			$this->session->set_flashdata(
+				'message',
+				'탈퇴 및 계정삭제에 의한 존재하지않는 계정의 신청정보입니다.'
+			);
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+			redirect($redirecturl);
+			// show_404();
 		}
 		if($member_info['mem_cp']){
 			$mem_cp = $member_info['mem_cp'];

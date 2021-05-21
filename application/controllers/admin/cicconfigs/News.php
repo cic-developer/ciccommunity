@@ -138,4 +138,32 @@ class News extends CB_Controller
         return $this->db->update($this->_table);
     }
 
+    public function update_news_show_0()
+    {
+        $where = array(
+            'news_id' => $news_id,
+        );
+        $updatedata = array(
+            'news_show' => 0,
+        );
+        $this->db->where($where);
+        $this->db->set($updatedata);
+
+        return $this->db->update($this->_table);
+    }
+
+    public function update_news_show_1()
+    {
+        $where = array(
+            'news_id' => $news_id,
+        );
+        $updatedata = array(
+            'news_show' => 1,
+        );
+        $this->db->where($where);
+        $this->db->set($updatedata);
+
+        return $this->db->update($this->_table);
+    }
+
 }
