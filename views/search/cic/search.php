@@ -310,9 +310,8 @@
 var ctx = document.getElementById('canvas');
 var contex = ctx.getContext("2d");
 var data = {
-labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+labels: ['', '', '', '', '', '', ''],
 datasets: [{
-    label: 'bitcoin',
     data: [12, 19, 3, 17, 6, 3, 7],
 	backgroundColor: "white",
 	borderColor: "#3e95cd"
@@ -326,7 +325,6 @@ var option = {
     		stacked:true,
         	gridLines: {
         		display:true,
-          		color:"white"
             }
     }],
     xAxes:[{
