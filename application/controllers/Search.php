@@ -228,7 +228,9 @@ class Search extends CB_Controller
 		$low =$api_result['low_price'];
 		$trade = $api_result['trade_price'];
 		$symbole = $key_search['clist_market'];
-
+		$prev_price = $api_result['prev_closing_price'];
+		$opening_price = $api_result['opening_price'];
+		
 		print_r($api_result);
         
 		//Send to view
@@ -237,6 +239,8 @@ class Search extends CB_Controller
 		$view['low'] = $low;
 		$view['high'] = $high;
 		$view['trade'] = $trade;
+		$view['prev_price'] = $prev_price;
+		$view['opening_price'] = $opening_price;
 		// 코인 검색 여기까지 
 
 		/**

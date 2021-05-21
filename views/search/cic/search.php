@@ -317,17 +317,18 @@ var ctx = document.getElementById('canvas');
 var contex = ctx.getContext("2d");
 var high = <?php echo $high ?>;
 var low = <?php echo $low ?>; 
-var r = 3;
-var r_ = 17;
-var r__ = 6;
+var opening_price = <?php echo $opening_price ?>;
+var prev_price = <?php echo $prev_price ?>;
+var trade = <?php echo $trade ?>;
+
 ctx.width = 250; 
 ctx.heigh = 100;
 var data = {
-labels: ['', '', '', ''],
+labels: ['', '', ''],
 datasets: [{
 	 
 	label: 'Bitcoin',
-    data: [12, r, r_,r__],
+    data: [opening_price, prev_price, trade],
 	backgroundColor: "white",
 	borderColor: "#3e95cd"
     }]
