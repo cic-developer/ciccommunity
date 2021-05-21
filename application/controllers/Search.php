@@ -231,6 +231,10 @@ class Search extends CB_Controller
 		$symbole = $key_search['clist_market'];
 		// $prev_price = $api_result['prev_closing_price'];
 		// $opening_price = $api_result['opening_price'];
+
+		foreach($act_price as $act){
+			print_r($act);
+		}
 		
 		print_r($act_price);
         

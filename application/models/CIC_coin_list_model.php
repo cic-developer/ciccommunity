@@ -31,14 +31,14 @@ class CIC_Coin_list_model extends CB_Model
 	 * Get RealTime Coin Price
 	 */
 
-	function get_price($clist_market)
+	function get_price($market)
 	{
         $curl = curl_init();
         // $clist_market = "KRW-BTC";
         //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.bithumb.com/public/ticker/{$clist_market}_KRW",
+            CURLOPT_URL => "https://api.bithumb.com/public/ticker/{$market}_KRW",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",
@@ -94,6 +94,7 @@ class CIC_Coin_list_model extends CB_Model
      
         //convert json to php array or object
         $array = json_decode($response, true);
+       // print_r($array);
         return $array[0];
 	}
     
