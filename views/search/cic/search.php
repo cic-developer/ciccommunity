@@ -326,21 +326,23 @@ datasets: [{
 var option = {
 	responsive: false,
     maintainAspectRatio: false,
+	legend: {
+        display: false
+    },
 	scales: {
-		yAxes:[{
-    		stacked:true,
+		yAxes:{
+    		stacked:false,
         	gridLines: {
-        		display:true,
+        		display:false,
             }
-    }],
-    xAxes:[{
-    	gridLines: {
-        	display:true
-        }
-    }]
+    	},
+		xAxes:{
+			gridLines: {
+				display:false
+			}
+    	}
     }
 };
-
 var myBarChart = Chart.Line(canvas,{
 	data:data,
   	options:option

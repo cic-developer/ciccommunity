@@ -26,8 +26,8 @@
 				</ul>
 			</div>
 			<div class="lower">
-				<a href="javascript:fconfirmpassword.submit();" class="leave-btn go-btn"><span>확인</span></a>
-				<a href="javascript:history.back();" class="leave-btn"><span>뒤로가기</span></a>
+				<button type="submit" class="leave-btn go-btn"><span>확인</span></button>
+				<button type="button" class="leave-btn"><span>뒤로가기</span></button>
 			</div>
 			<?php echo form_close(); ?>
 		</div>
@@ -51,6 +51,10 @@
 
 
 <script type="text/javascript">
+	$(document).on('click', '.leave-btn', function(){
+		history.back();
+	});
+
 	//<![CDATA[
 	$(function () {
 		$('#fconfirmpassword').validate({
