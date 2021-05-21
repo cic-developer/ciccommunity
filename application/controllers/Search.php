@@ -223,15 +223,16 @@ class Search extends CB_Controller
 		$key_search = $this-> CIC_coin_keyword_model -> search_coin($skeyword);
 		$market = $key_search['clist_market'];
 		$api_result = $this->CIC_coin_list_model -> get_price($market);
+		$act_price = $this->CIC_coin_list_model -> act_price($market);
 		$korean = $key_search['clist_name_ko'];
 		$high = $api_result['max_price'];
 		$low =$api_result['min_price'];
-		$trade = $api_result['opening_price'];
+		$trade = $act_price['price'];
 		$symbole = $key_search['clist_market'];
 		// $prev_price = $api_result['prev_closing_price'];
 		// $opening_price = $api_result['opening_price'];
 		
-		// print_r($api_result);
+		print_r($market);
         
 		//Send to view
 		$view['symbole'] = $symbole;
