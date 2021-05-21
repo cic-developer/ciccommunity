@@ -51,7 +51,7 @@
 						<div class="vc">
 						<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 							<div class="col-xs-12">
-								<canvas id="canvas"></canvas>
+								<canvas id="canvas" style="width: 140px" style= "heigh: 50px"></canvas>
 							</div>
 							<p class="stxt pimg"><img src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img></p>
 							<p class="btxt center"> <strong><?php echo $korean; ?></strong></span> </p>
@@ -308,6 +308,7 @@
 </div>
 <script>
 var ctx = document.getElementById('canvas');
+var contex = ctx.getContext("2d");
 var data = {
 labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
 datasets: [{
@@ -318,7 +319,7 @@ datasets: [{
     }]
 };
 var option = {
-	responsive: true,
+	responsive: false,
     maintainAspectRatio: false,
 	scales: {
 		yAxes:[{
