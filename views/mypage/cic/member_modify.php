@@ -94,9 +94,10 @@
 				<a href="javascript:void(0);" class="ath-email modify-btn modal-btn" data-type="wallet"><span>이메일인증</span></a>
 			</div>
 
-			<div id = "Progress_Loading"><!-- 로딩바 -->
-				<img src="../../../assets/images/22.gif"/>
-			</div>
+			<!-- 로딩바 -->
+			<!-- <div id = "Progress_Loading">
+				<img src="../../../assets/images/11.gif"/>
+			</div> -->
 			<?php echo form_close(); ?>
 		</div>
 	 	<!-- page end // -->
@@ -161,7 +162,7 @@
 	transform: translatex(-50%) translatey(-50%);
 }
 
-#Progress_Loading
+/* #Progress_Loading
 {
 	position: fixed;
 	left: 50%;
@@ -169,25 +170,22 @@
 	background: #ffffff;
 	z-index:99;
 	transform: translatex(-40%) translatey(-50%);
-}
+} */
 
 </style>
 
 <script>
 
-	$(document).ready(function(){
-		// $('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
-	})
-	.ajaxStart(function(){
-		$('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
-	})
-	.ajaxStop(function(){
-		$('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
-	});
+	// $(document).ready(function(){
+	// 	$('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
+	// })
+	// .ajaxStart(function(){
+	// 	$('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
+	// })
+	// .ajaxStop(function(){
+	// 	$('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
+	// });
 	
-
-
-// 
 
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){

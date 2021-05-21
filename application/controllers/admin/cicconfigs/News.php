@@ -16,7 +16,7 @@ class News extends CB_Controller
     {
         parent::__construct();
 
-        $this->load->library(array('paginagion', 'querystring', 'form_validation','session'));
+        $this->load->library(array('paginagion', 'querystring', 'session','news'));
         $this->load->model(array('News_model'));
     }
 
@@ -96,11 +96,20 @@ class News extends CB_Controller
         if ($this->input->news('chk') && is_array($this->input->news('chk'))) {
             foreach ($this->input->news('chk') as $val) {
                 if ($val) {
-                    $this->News_model->delete($val);
+                    $this->news->delete_news($val);
                 }
             }
         }
+        Events::trigger('after', $eventname);
+
+        $this->session->set_flashdata(
+            'message',
+            '정상적으로 삭제되었습니다.'
+        );
+        $param =& $this->querystring;
+        $redirecturl = admin_url($this->pagedir . '?' . $param->output());
+        redirect($redirecturl);
     }
-    
+
 
 }

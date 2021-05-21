@@ -65,16 +65,14 @@ class News_model extends CB_Model
         return $result;
     }
 
-    public function update($primary_value = '', $updatedata = '', $where = '')
+    public function update($news_id)
     {
-        if (empty($primary_value)){
-            return false;
-        }
+        $where = array(
+            'news_id' => $news_id,
+        );
+        $this->db->where($where);
+        $this->db->set($updatedata);
 
-        $result = parent::update($primary_value, $updatedata);
-        if($result) {
-            $this->cache->delete($this->cache_prefix . $primary_value);
-        }
-        return $result;
+        return $this->db->update($this->_table);
     }
 }
