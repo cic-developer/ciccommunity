@@ -84,7 +84,7 @@
 				</div>
 			<?php
 			}
-			if(!$trade){?>
+			if(!$trade || is_string($trade)){?>
 				<div></div>
 			<?php } ?>	
 			<!-- PRICE UNTIL HERE -->

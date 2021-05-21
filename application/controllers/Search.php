@@ -232,8 +232,9 @@ class Search extends CB_Controller
 		// $opening_price = $api_result['opening_price'];
 
 		foreach($act_price as $act){
-			$trade = $act[0]['price'];
+			$trade = (float)$act[0]['price'];
 			$view['trade'] = $trade;
+			echo gettype($trade);
 		}
 
 		foreach($api_result as $result_price){
