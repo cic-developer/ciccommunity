@@ -1319,7 +1319,20 @@ class Mypage extends CB_Controller
 			$mem_nickname = $member_info['mem_nickname'];
 			$mem_cp = $member_info['mem_cp'];
 			$mem_wallet_address = $member_info['mem_wallet_address'];
+			$mem_wallet_address2 = $this->member->item('mem_wallet_address');
 
+			print_r("gogo1");
+			print_r('<br>');
+			print_r($member_info);
+			print_r('<br>');
+			print_r("gogo2");
+			print_r('<br>');
+			print_r($mem_wallet_address);
+			print_r('<br>');
+			print_r($mem_wallet_address2);
+			print_r('<br>');
+			print_r("stop");
+			exit;
 			if(!$mem_wallet_address){
 				$this->session->set_flashdata(
 					'message',

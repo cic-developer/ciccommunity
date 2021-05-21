@@ -185,27 +185,25 @@
 	// .ajaxStop(function(){
 	// 	$('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
 	// });
-
+/*****************************************************************************/
 	/*
-	** 회원탈퇴/membermodify/userdelete / submitUserDelete
+	** 회원탈퇴 시작
 	*/
 	$(document).on('click', '#submitUserDelete', function(){
 		alert('회원탈퇴시 vp/cp 및 정보를 복구하실 수 없습니다.');
 		var isDelete = confirm('정말로 탈퇴하시겠습니까?');
-
 		if( isDelete ){
 			location.href = "userdelete";
 			return;
 		}
-
 	})
-
 	/*
-	** 회원탈퇴
+	** 회원탈퇴 끝
 	*/
-
-	
-
+/*****************************************************************************/
+	/*
+	** 모달 시작
+	*/
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){
 			$("#fregisterform").submit();
@@ -253,6 +251,9 @@
 			modal3.style.display = "none";
 		}
 	}
+/**
+ * 모달 끝
+ */
 /*****************************************************************************/
 /**
  * 이메일 인증 시작
