@@ -93,161 +93,101 @@
 				<!-- Modal content -->
 				<a href="javascript:void(0);" class="ath-email modify-btn modal-btn" data-type="wallet"><span>이메일인증</span></a>
 			</div>
+
+			<div id = "Progress_Loading"><!-- 로딩바 -->
+				<img src="../../../assets/images/22.gif"/>
+			</div>
 			<?php echo form_close(); ?>
 		</div>
 	 	<!-- page end // -->
 	</div>
 </div>
 
-<div id="test">test</div>
-
 <style>
 
-	/* The Modal (background) */
-	.modal {
-		display: none; /* Hidden by default */
-		position: fixed; /* Stay in place */
-		z-index: 1; /* Sit on top */
-		left: 0;
-		top: 0;
-		width: 100%; /* Full width */
-		height: 100%; /* Full height */
-		overflow: auto; /* Enable scroll if needed */
-		background-color: rgb(0,0,0); /* Fallback color */
-		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-	}
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
-	/* Modal Content/Box */
-	.modal-content {
-		background-color: #fefefe;
-		margin: 15% auto; /* 15% from the top and centered */
-		padding: 20px;
-		border: 1px solid #888;
-		width: 50%; /* Could be more or less, depending on screen size */                          
-	}
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 50%; /* Could be more or less, depending on screen size */                          
+}
 
-	/* The Close Button */
-	.close {
-		color: #aaa;
-		float: right;
-		font-size: 28px;
-		font-weight: bold;
-	}
-	.close:hover,
-	.close:focus {
-		color: black;
-		text-decoration: none;
-		cursor: pointer;
-	}
+/* The Close Button */
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+.close:hover,
+.close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
 
-	.modal-btn {
-		line-height: 35px;
-		border-radius: 35px;
-		font-size: 14px;
-		color: #111;
-		background: #efefefef;
-		font-weight: 500;
-		display: inline-block;
-		vertical-align: top;
-		margin-left: 15px;
-		min-width: 120px;
-		text-align: center;
-		box-sizing: border-box;
-		position:absolute;
-		left:50%;
-		top:50%;
-		transform: translatex(-50%) translatey(-50%);
-	}
+.modal-btn {
+	line-height: 35px;
+    border-radius: 35px;
+    font-size: 14px;
+    color: #111;
+    background: #efefefef;
+    font-weight: 500;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 15px;
+    min-width: 120px;
+    text-align: center;
+    box-sizing: border-box;
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform: translatex(-50%) translatey(-50%);
+}
 
-	#back{
-		position: absolute;
-		z-index: 100;
-		background-color: #000000;
-		display:none;
-		left:0;
-		top:0;
-	}
-	#loadingBar{
-		position:absolute;
-		left:50%;
-		top: 40%;
-		display:none;
-		z-index:200;
-	}
-
+#Progress_Loading
+{
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	background: #ffffff;
+	z-index:99;
+	transform: translatex(-40%) translatey(-50%);
+}
 
 </style>
 
 <script>
-	/*
-	** 로딩바 시작
-	*/
-	$('#test').on('click', function() {
-		FunLoadingBarStart();
+
+	$(document).ready(function(){
+		// $('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
 	})
-
-	function FunLoadingBarStart() {
-		var backHeight = $(document).height(); //뒷 배경의 상하 폭
-		var backWidth = window.document.body.clientWidth; //뒷 배경의 좌우 폭
-		var backGroundCover = "<div id='back'></div>"; //뒷 배경을 감쌀 커버
-		var loadingBarImage = '/pngwing.com.png'; //가운데 띄워 줄 이미지
-		loadingBarImage += "<div id='loadingBar'>";
-		loadingBarImage += " <img src='../../../assets/images/Spinner-1s-200px.gif'/>"; //로딩 바 이미지
-		loadingBarImage += "</div>";
-		$('.entry').append(backGroundCover).append(loadingBarImage);
-		$('#back').css({ 'width': backWidth, 'height': backHeight, 'opacity': '0' });
-		$('#back').show();
-		$('#loadingBar').show();
-	}
-
-	function FunLoadingBarEnd() {
-		$('#back, #loadingBar').hide();
-		$('#back, #loadingBar').remove();
-	}
-
-	//
-	function LoadingWithMask() {
-		//화면의 높이와 너비를 구합니다.
-		var maskHeight = $(document).height();
-		var maskWidth  = window.document.body.clientWidth;
-		
-		//화면에 출력할 마스크를 설정해줍니다.
-		var mask       ="<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
-		var loadingImg ='';
-		
-		loadingImg +="<div id='loadingImg'>";
-		loadingImg +=" <img src='../../../assets/images/Spinner-1s-200px.gif' style='position: relative; display: block; margin: 0px auto;'/>";
-		loadingImg +="</div>"; 
-		
-		//화면에 레이어 추가
-		$('body')
-			.append(mask)
-			.append(loadingImg)
-			
-		//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
-		$('#mask').css({
-				'width' : maskWidth
-				,'height': maskHeight
-				,'opacity' :'0.3'
-		});
-		
-		//마스크 표시
-		$('#mask').show();  
-		
-		//로딩중 이미지 표시
-		$('#loadingImg').show();
-	}	
-
-	function closeLoadingWithMask() {
-		$('#mask, #loadingImg').hide();
-		$('#mask, #loadingImg').remove();  
-	}
+	.ajaxStart(function(){
+		$('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
+	})
+	.ajaxStop(function(){
+		$('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
+	});
+	
 
 
-
-	/*
-	** 로딩바 끝
-	*/
+// 
 
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){
@@ -304,7 +244,6 @@
 	// 이메일 확인 + 인증번호 보내기
 	$(document).ready(function(){
 		$(".ath-email").on('click', function(){
-			FunLoadingBarStart(); // 로딩바 생성
 			var type = $(this).data('type');
 
 			$.ajax({
@@ -330,8 +269,6 @@
 
 			// 성공
 			if(state == 1){
-				FunLoadingBarEnd(); // 로딩바 제거
-
 				if(type == 'phone'){
 					$('#myModal_phone > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
 				}

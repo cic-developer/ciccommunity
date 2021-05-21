@@ -43,5 +43,64 @@ class News extends CB_Controller
         $this->{$this->modelname}->allow_search_field = array('news_id', 'news_title', 'news_content', 'comp_id');
         $this->{$this->modelname}->search_field_equal = array();
         $this->{$this->modelname}->allow_order_field = array();
+
+        $where = array();
+        $result = $this->{$this->modelname}
+        ->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+        $list_num = $result['total_rows'] = ($page - 1) * $per_page;
+        if(element('list', $result)){
+            foreach (element('list', $result) as $key => $val) {
+                $result['list'][$key]['display_name'] = display_username(
+                    element('news_title',$val),
+                    element('news_content',$val),
+                    element('comp_id',$val)
+                );
+                $result['list'][$key]['num'] = $list_num--;
+            }
+        }
+        $view['view']['data'] = $result;
+
+        $view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
+
+        $config['base_url'] = admin_url($this->pagedir) . '/' . '?' . $param->replace('page');
+		$config['total_rows'] = $result['total_rows'];
+		$config['per_page'] = $per_page;
+		$this->pagination->initialize($config);
+		$view['view']['paging'] = $this->pagination->create_links();
+		$view['view']['page'] = $page;
+
+
+        $search_option = array('news_title' => '제목', 'news_content' => '본문', 'comp_id' => '신문사');
+		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
+		$view['view']['search_option'] = search_option($search_option, $sfield);
+		$view['view']['listall_url'] = admin_url($this->pagedir);
+		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listdelete/?' . $param->output());
+		$view['view']['list_trash_url'] = admin_url($this->pagedir . '/listtrash/?' . $param->output());
+        
+        $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+        $layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');
+		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
     }
+
+    public function delete_news(){
+
+        $eventname = 'event_admin_news_delete';
+        $this->load->event($eventname);
+
+        Events::trigger('before', $eventname);
+
+        if ($this->input->news('chk') && is_array($this->input->news('chk'))) {
+            foreach ($this->input->news('chk') as $val) {
+                if ($val) {
+                    $this->News_model->delete($val);
+                }
+            }
+        }
+    }
+    
+
 }

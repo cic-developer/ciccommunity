@@ -149,7 +149,7 @@
 								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
 								<div class="txt">
 									<div class="vc">
-										<p class="btxt"><?php echo html_escape(element('post_title', $result)); ?><span class="yellow-bg"><?php echo element('highlight_keyword', $view);?></span> 
+										<p class="btxt"><?php echo html_escape(element('post_title', $result)); ?><span class="yellow-bg"></span> 
 											<span>(<?php echo element('post_comment_count', $result); ?>)</span></p>
 											<p class="stxt"><?php echo html_escape(cut_str(strip_tags(element('post_content', $result)), 60)); ?></p>
 										<p class="ctxt">
@@ -170,8 +170,13 @@
 						</li>
 					<?php	
 							}
-						}	
-					?>	
+						}
+					if (!element('list', element('data', $view)))  {		
+					?>
+						<tr>
+							<td colspan="5" class="nopost text-center">게시물이 없습니다</td>
+						</tr>
+					<?php } ?>	
 					</ul>
 					<script>
 						$(function(){
