@@ -233,17 +233,18 @@ class Search extends CB_Controller
 		// $opening_price = $api_result['opening_price'];
 
 		foreach($act_price as $act){
-			print_r($act);
+			echo "<pre><br>";
+			print_r($act[0]['price']);
+			echo "</pre>";
 		}
-		
-		print_r($act_price);
+	
         
 		//Send to view
 		$view['symbole'] = $symbole;
 		$view['korean'] = $korean;
 		$view['low'] = $low;
 		$view['high'] = $high;
-		$view['trade'] = 5;
+		$view['trade'] = $trade;
 		$view['prev_price'] = $prev_price;
 		$view['opening_price'] = $opening_price;
 		// 코인 검색 여기까지 

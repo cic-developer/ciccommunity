@@ -61,7 +61,7 @@ class CIC_Coin_list_model extends CB_Model
         //convert json to php array or object
         $array = json_decode($response, true);
         // print_r($array);
-        return $array[0];
+        return $array;
 	}
 
 
@@ -95,7 +95,7 @@ class CIC_Coin_list_model extends CB_Model
         //convert json to php array or object
         $array = json_decode($response, true);
        // print_r($array);
-        return $array[0];
+        return $array;
 	}
     
     function insertStockData($data){
