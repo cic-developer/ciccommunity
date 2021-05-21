@@ -1,5 +1,6 @@
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css'); ?>
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
+<script type="text/javascript" src="<?php echo base_url('assets/js/member_modify.js'); ?>"></script>
 
 <div id="container-wrap">
 	<div id="contents" class="div-cont">
@@ -262,7 +263,7 @@
 	// 인증번호 이메일 발송
 	$(document).ready(function(){
 		$(".ath-email").on('click', function(){
-			var type = $(this).data('type');
+			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.
             
 			$.ajax({
 				url: cb_url + '/membermodify/ajax_modify_email_send',
@@ -277,15 +278,11 @@
 				success: function(data) {
 					state = data.state;
 					message = data.message;
-					
-			        
-					alert(message);
-                    
-					// 실패
-					if(state == 0){}
                     
 					// 성공
 					if(state == 1){
+						// 성공 메세지
+                        alert(message);
                         
 						// 핸드폰번호변경 이메일 인증
 						if(type == 'phone'){
@@ -330,6 +327,11 @@
 						if(type == 'wallet'){
 							$('#myModal_wallet').append(html); // 이메일 인증박스 추가
 						}
+					}
+					// 실패
+					if(state == 0){
+						// 실패 메세지
+						alert(message);
 					}
 				},
 				error: function(){
@@ -458,7 +460,7 @@
 	// 핸드폰번호 validation and 사용가능여부 check
 	$(document).on('click', "#phone_modify_btn", function(){
         
-		var _phone = $("#new_phone").val();
+		var _phone = $("#new_phone").val(); // 입력한 핸드폰번호
 		var phone = _phone;
 		var state = '';
 		var message = '';
@@ -476,11 +478,15 @@
 				state = data.state;
 				message = data.message;
                 
-				alert(message);
                 
 				if(state == 1){
-					$("#mem_phone").val(phone);
-					modal1.style.display = "none";
+					alert(message); // 성공 메세지 출력
+					$("#mem_phone").val(phone); // 유저에게 보이는(readonly input tag)부분에 값 변경: 해당 값은 최종 정보업데이트 시 post로 넘어갑니다
+					modal1.style.display = "none"; // modal 종료
+				}
+				if(state == 0){
+					// 실패 메세지 출력
+					alert(message);
 				}
 			},
 			error: function(){
@@ -570,10 +576,10 @@
 
 	// 비밀번호 validation
 	$(document).on('click', "#password_modify_btn", function(){
-		$('.password-modify-box > p').remove();
+		$('.password-modify-box > p').remove(); // append된 validation 메세지 일괄 삭제
 
-		var _password = $("#new_password").val();
-		var _password_re = $("#new_password_re").val();
+		var _password = $("#new_password").val(); // 입력한 비밀번호
+		var _password_re = $("#new_password_re").val(); // 입력한 비밀번호 확인
 		var password = _password;
 		var state = '';
 		var message = '';
@@ -591,11 +597,11 @@
 			success: function(data) {
 				state = data.state;
 				message = data.message;
-
+                
 				if(state == 1){
 					alert(message); // 성공 메세지 출력
 					$("#mem_password").val(password); // 유저에게 보이는(readonly input tag)부분에 값 변경: 해당 값은 최종 정보업데이트 시 post로 넘어갑니다
-					modal2.style.display = "none"; // 인증 modal 종료
+					modal2.style.display = "none"; // modal 종료
 				}
 				if(state == 0){
 					// validation 메세지 append (해당 메세지는 여러개가 생성될수 있기때문에 append를 하였습니다.)
@@ -636,9 +642,8 @@
 	}
 
 	$(document).on('click', "#wallet_modify_btn", function(){
-		$('.wallet-modify-box > p').remove();
         
-		var _wallet = $("#new_wallet").val();
+		var _wallet = $("#new_wallet").val(); // 입력한 지갑주소
 		var wallet = _wallet;
 		var state = '';
 		var message = '';
@@ -659,7 +664,7 @@
 				if(state == 1){
 					alert(message); // 성공 메세지 출력
 					$("#mem_wallet").val(wallet); // 유저에게 보이는(readonly input tag)부분에 값 변경: 해당 값은 최종 정보업데이트 시 post로 넘어갑니다
-					modal3.style.display = "none"; // 인증 modal 종료
+					modal3.style.display = "none"; // modal 종료
 				}
 				if(state == 0){
 					// $('.wallet-modify-box').append(message);
