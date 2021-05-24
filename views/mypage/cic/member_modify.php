@@ -647,11 +647,11 @@
 		if(password2 != currentVal ){ // && currentVal.length > 0){
 			$('.agree-password').remove();
 			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
-			$('.password-modify-content').append(html);
+			$('#confirm_password_number').before(html);
 		} else{
 			$('.agree-password').remove();
 			html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
-			$('.password-modify-content').append(html);
+			$('#confirm_password_number').before(html);
 		}
 		
 		oldVal1 = currentVal;
@@ -669,11 +669,11 @@
 		if(password1 != currentVal ){ // && currentVal.length > 0){
 			$('.agree-password').remove();
 			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
-			$('.password-modify-content').append(html);
+			$('#confirm_password_number').before(html);
 		} else{
 			$('.agree-password').remove();
 			html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
-			$('.password-modify-content').append(html);
+			$('#confirm_password_number').before(html);
 		}
 		
 		oldVal2 = currentVal;
@@ -710,7 +710,7 @@
 				}
 				if(state == 0){
 					// validation 메세지 append (해당 메세지는 여러개가 생성될수 있기때문에 append를 하였습니다.)
-					$('#myModal_password .modify-box > p').append(message);
+					$('#myModal_password .modify-box').append(message);
 				}
 			},
 			error: function(){
