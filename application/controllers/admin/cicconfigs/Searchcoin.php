@@ -137,7 +137,7 @@ class Searchcoin extends CB_Controller
 		$coinId = array();
 		$get_apiList = $this -> CIC_coin_list_model->get_apiList();
 		foreach($get_apiList as $apiId){
-			$coinId[] = $apiId['id'];
+			$coinId = $apiId['id'];
 		}
 		print_r($coinId);
 		for($i=0; $i< count($get_apiList); $i++){
@@ -160,7 +160,7 @@ class Searchcoin extends CB_Controller
 				// echo "</pre></br>";
 				if(isset($data) && !empty($data)){
 					foreach($data as $coinData){
-						// print_r($coinData);
+						print_r($coinData);
 						$stock = $this->CIC_coin_list_model->insertStockData($coinData);
 						$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 					

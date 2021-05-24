@@ -212,7 +212,7 @@ class CIC_Coin_list_model extends CB_Model
         // convert json to php array or object
         $array = json_decode($response, true);
         if(is_array($array)){
-            print_r($array);
+            // print_r($array);
             return $array;
         }
         

@@ -155,7 +155,7 @@ class Level extends CB_Controller
             array(
                 'field' => 'mlc_level',
                 'label' => '등급 레벨',
-                'rules' => 'required|numeric',
+                'rules' => 'required|numeric|callback__active_check['.$level_id.']',
             ),
             array(
                 'field' => 'mlc_target_point',
@@ -294,6 +294,31 @@ class Level extends CB_Controller
 			$redirecturl = admin_url($this->pagedir. '?' . $param->output());
 			redirect($redirecturl);
 		}
+	}
+
+
+	/**
+	 * 해당 레벨에 이미 활성화 되어있는지 확인
+	 */
+	public function _active_check($level, $level_id)
+	{
+		$set_active = $this->input->post('mlc_enable');
+		if($set_active == 0) return true;
+		$where = array(
+			'mlc_level' => $level,
+			'mlc_enable'=> 1,
+			'mlc_id <>' => $level_id,
+		);
+		$result = $this->{$this->modelname}->get_one('', '', $where);
+		
+		if ($result) {
+			$this->form_validation->set_message(
+				'_active_check',
+				'해당레벨은 이미 활성화되어있습니다.'
+			);
+			return false;
+		}
+		return true;
 	}
 
 }

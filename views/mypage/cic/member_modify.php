@@ -633,7 +633,7 @@
 					html += '<form name="form_chk1" method="post" id="password_form_chk">';
 					html += '<input type="hidden" name="m" value="checkplusService">';
 					html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('password_enc_data', $view)); ?>">';
-					html += '<a href="javascript:fnPopup1();" id="ath_nice_phone" class="modify-btn"><span>휴대폰 인증</span></a>';
+					html += '<a href="javascript:fnPopup1();" id="ath_nice_phone" class="modify-btn"><span>핸드폰 인증</span></a>';
 					html += '</form>';
 					html += '</div>';
 
@@ -646,7 +646,7 @@
 					html += '<form name="form_chk2" method="post" id="wallet_form_chk">';
 					html += '<input type="hidden" name="m" value="checkplusService">';
 					html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">';
-					html += '<a href="javascript:fnPopup2();" id="ath_nice_phone" class="modify-btn"><span>휴대폰 인증</span></a>';
+					html += '<a href="javascript:fnPopup2();" id="ath_nice_phone" class="modify-btn"><span>핸드폰 인증</span></a>';
 					html += '</form>';
 					html += '</div>';
 
@@ -754,7 +754,7 @@
  */
 /*****************************************************************************/
 /**
- * 휴대폰번호변경 시작
+ * 핸드폰번호변경 시작
  */
 	// 핸드폰번호 하이푼 자동 생성
 	function inputPhoneNumber(obj) { 
@@ -821,7 +821,7 @@
 		});
 	})
 /**
- * 휴대폰번호변경 끝
+ * 핸드폰번호변경 끝
  */
 /*****************************************************************************/
 /**
@@ -958,7 +958,7 @@
  */
 /********************************************************/
 /**
- * 나이스 휴대폰 인증 시작
+ * 나이스 핸드폰 인증 시작
  */
 	window.name ="Parent_window";
 	function fnPopup1(){
@@ -983,7 +983,7 @@
 		isAgreeForModify(type);
 	}
 /**
- * 나이스 휴대폰 인증 끝
+ * 나이스 핸드폰 인증 끝
  */
 
 
