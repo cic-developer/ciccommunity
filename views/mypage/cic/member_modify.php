@@ -797,6 +797,46 @@
 		
 		oldVal2 = currentVal;
 	});
+
+	// 비밀번호 validation
+	$(document).on('click', "#confirm_password", function(){
+		$('#myModal_password .modify-box > p').remove(); // append된 validation 메세지 일괄 삭제
+
+		var _password = $("#new_password").val(); // 입력한 비밀번호
+		var _password_re = $("#new_password_re").val(); // 입력한 비밀번호 확인
+		var password = _password;
+		var state = '';
+		var message = '';
+		$.ajax({
+			url: cb_url + '/membermodify/ajax_password_confirm',
+			type: 'POST',
+			data: {
+				new_password: _password,
+				new_password_re: _password_re,
+				csrf_test_name : cb_csrf_hash
+			},
+			dataType: 'json',
+			async: false,
+			cache: false,
+			success: function(data) {
+				state = data.state;
+				message = data.message;
+                
+				if(state == 1){
+					alert(message); // 성공 메세지 출력
+					$("#mem_password").val(password); // 유저에게 보이는(readonly input tag)부분에 값 변경: 해당 값은 최종 정보업데이트 시 post로 넘어갑니다
+					modal2.style.display = "none"; // modal 종료
+				}
+				if(state == 0){
+					// validation 메세지 append (해당 메세지는 여러개가 생성될수 있기때문에 append를 하였습니다.)
+					$('#myModal_password .modify-box').append(message);
+				}
+			},
+			error: function(){
+				alert('에러가 발생했습니다.');
+			}
+		});
+	});
 /**
  * 비밀번호변경 끝
  */
@@ -927,10 +967,10 @@
 	}
 
 	var successNice = function(type){
-		$('#myModal_' + type + ' .ath-nice-box .all-nice-box').attr('style', "display:none");
-		$('#myModal_' + type + ' .ath-nice-box .success').attr('style', "display:block");
+		$('#myModal_' + type + ' > .modal-content > .ath-nice-box .all-nice-box').attr('style', "display:none");
+		$('#myModal_' + type + ' > .modal-content > .ath-nice-box .success').attr('style', "display:block");
         
-		$('#myModal_' + type + ' .ath-nice-box').addClass("agree") // 인증 완료 표식
+		$('#myModal_' + type + ' > .modal-content > .ath-nice-box').addClass("agree") // 인증 완료 표식
         
 		isAgreeForModify(type);
 	}

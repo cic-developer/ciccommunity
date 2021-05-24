@@ -125,11 +125,11 @@ class CIC_Coin_list_model extends CB_Model
         return $query->row_array();
     }
 
-    function retrieve_api(){
+    function retrieve_api($coinName){
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/bitcoin?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
+            CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/{$coinName}?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
             // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/bitcoin?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
@@ -152,7 +152,9 @@ class CIC_Coin_list_model extends CB_Model
         $refresh = $this -> input -> post('refresh');
         foreach($array as $arr){
             echo '<pre><br>';
-            print_r($arr['localization']);
+            print_r($array['localization']['ko']);
+            print_r($array['symbol']);
+            print_r($array['name']);
             echo '</pre></br>';
         }
         if($refresh){
@@ -197,8 +199,12 @@ class CIC_Coin_list_model extends CB_Model
         $refresh = $this -> input -> post('refresh');
         // convert json to php array or object
         $array = json_decode($response, true);
+        $listId = array();
         if(is_array($array)){
-            return $array;
+            foreach($array as $arr){
+                $listId = $arr['id'];
+            }
+            return $listId;
         }
         
     }
