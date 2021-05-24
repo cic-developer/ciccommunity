@@ -1,4 +1,8 @@
 <div class="box">
+	<div class="box-header">
+		<h4 class="pb10 pull-left">거래소 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>
+		<div class="clearfix"></div>
+	</div>
 	<div class="box-table">
 		<?php
 		echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');

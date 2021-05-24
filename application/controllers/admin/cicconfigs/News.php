@@ -34,7 +34,7 @@ class News extends CB_Controller
 
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = 'news_reviews';
+		$findex = 'news_id';
 		$forder = 'desc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
@@ -50,9 +50,10 @@ class News extends CB_Controller
         // $where = array();
         $result = $this->{$this->modelname}
             ->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+
+            // print_r($result);
+            // exit;
         $list_num = $result['total_rows'] = ($page - 1) * $per_page;
-        print_r($result);
-        exit;
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
 				$result['list'][$key]['post_display_name'] = display_username(

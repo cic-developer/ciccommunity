@@ -181,7 +181,7 @@ class Membermodify extends CB_Controller
 		$this->session->unset_userdata('password_modify_ath_nice_phone_result');
 		$this->session->unset_userdata('wallet_modify_ath_nice_phone_result');
 
-		$view['view']['phone_enc_data'] = $this->checkplus->main('membermodify', 'password_auth_phone_success', 'password_auth_phone_fail');
+		$view['view']['password_enc_data'] = $this->checkplus->main('membermodify', 'password_auth_phone_success', 'password_auth_phone_fail');
 		$view['view']['wallet_enc_data'] = $this->checkplus->main('membermodify', 'wallet_auth_phone_success', 'wallet_auth_phone_fail');
 		// $view['view']['dec_data'] = $this->session->userdata('dec_data');
 

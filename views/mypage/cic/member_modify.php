@@ -158,12 +158,12 @@
 									</a>
 									
 								</div>
-								<div class="resend" style="display:none;">
+								<div class="password-resend-email" style="display:none;">
 									<a href="javascript:void(0);" data-type="password" class="modify-btn resend-ath-email" style="display:block;">
 										<span>인증번호 재전송</span>
 									</a>	
 								</div>
-								<div class="timer-box" style="display:none;">
+								<div class="password-timer-box" style="display:none;">
 									<span id="postTestMin">00</span><!-- 분 -->
 									<span>:</span>
 									<span id="postTestSec">10</span><!--초-->
@@ -179,14 +179,14 @@
 							<div class="all-nice-box">
 								<form name="form_chk" method="post" id="password_form_chk">
 									<input type="hidden" name="m" value="checkplusService">
-									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">
+									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('password_enc_data', $view)); ?>">
 									<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
 										<span>핸드폰인증</span>
 									</a>
 								</form>
 								<form name="form_chk" method="post" id="password_form_chk" style="display:none;">
 									<input type="hidden" name="m" value="checkplusService">
-									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">
+									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('password_enc_data', $view)); ?>">
 									<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
 										<span>핸드폰인증x</span>
 									</a>
@@ -196,7 +196,6 @@
 						</li>
 					</ul>
 				</div>
-				
 			</div>
 
 			<!-- 비밀번호 변경 -->
@@ -204,6 +203,81 @@
 				<!-- Modal content -->
 				<!-- <a href="javascript:void(0);" class="ath-email modify-btn modal-btn" data-type="password"><span>이메일인증</span></a>
 			</div> -->
+
+			<!-- 새 지갑주소 modal -->
+			<div id="myModal_wallet" class="modal">
+				<div class="modal-content">
+					<ul class="entry modify-box">
+						<li class="wallet-modify-content">
+							<p class="btxt">새 비밀번호</p>
+							<div class="field modify">
+								<p class="chk-input w380">
+									<input type="text" placeholder="비밀번호" id="new_wallet" name="new_wallet" value="" readonly disabled style="background-color:#efefef;">
+								</p>
+								<a href="javascript:void(0);" data-type="wallet" class="modify-btn view_ath_box">
+									<span>이메일+핸드폰인증</span>
+								</a>
+							</div>
+							<a href="javascript:void(0);" id="confirm_wallet_number" class="modify-btn confirm-btn" style="display:none;">
+								<span>확인</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="entry ath-email-box" style="display:none;">
+						<li class="">
+							<p class="btxt">이메일인증</p>
+							<div class="all-email-box">
+								<div class="field modify">
+									<p class="chk-input w380">
+										<input type="text" placeholder="인증번호를 입력해주세요" class="ath_num" name="ath_num" value="">
+									</p>
+									<a href="javascript:void(0);" data-type="wallet" class="modify-btn send-ath-email">
+										<span>이메일인증</span>
+									</a>
+									<a href="javascript:void(0);" data-type="wallet" class="modify-btn confirm-ath-email" style="display:none;">
+										<span>확인</span>
+									</a>
+									
+								</div>
+								<div class="wallet-resend-email" style="display:none;">
+									<a href="javascript:void(0);" data-type="wallet" class="modify-btn resend-ath-email" style="display:block;">
+										<span>인증번호 재전송</span>
+									</a>	
+								</div>
+								<div class="wallet-timer-box" style="display:none;">
+									<span id="postTestMin">00</span><!-- 분 -->
+									<span>:</span>
+									<span id="postTestSec">10</span><!--초-->
+									<!-- <span id="postTestMilisec">00</span>밀리초 -->
+								</div>
+							</div>
+							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
+						</li>
+					</ul>
+					<ul class="entry ath-nice-box" style="display:none;">
+						<li>
+							<p class="btxt">핸드폰인증</p>
+							<div class="all-nice-box">
+								<form name="form_chk" method="post" id="wallet_form_chk">
+									<input type="hidden" name="m" value="checkplusService">
+									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">
+									<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
+										<span>핸드폰인증</span>
+									</a>
+								</form>
+								<form name="form_chk" method="post" id="wallet_form_chk" style="display:none;">
+									<input type="hidden" name="m" value="checkplusService">
+									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">
+									<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
+										<span>핸드폰인증x</span>
+									</a>
+								</form>
+							</div>
+							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
+						</li>
+					</ul>
+				</div>
+			</div>
 
 			<!-- 지갑주소 변경 -->
 			<div id="myModal_wallet" class="modal"> 
@@ -376,29 +450,56 @@
  * 이메일 재전송 시작
  */
 
-	var stTime
-	var timerStart
-
-	var startTime = function(){
-		if(! stTime) {
-			stTime = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
+	var stTime1;
+	var timerStart1;
+	var stTime2;
+	var timerStart2;
+    
+	var startTime = function(type){
+        
+		if(type == "password"){
+			if(! stTime1) {
+				stTime1 = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
+			}
+            
+			timerStart1 = setInterval(function() {
+				var nowTime = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
+				var newTime = new Date(nowTime - stTime1) //(nowTime - stTime)을 new Date()에 넣는다
+				var min = newTime.getMinutes() //분
+				var sec = newTime.getSeconds() //초
+				var milisec = Math.floor(newTime.getMilliseconds() / 10) //밀리초
+				document.getElementById('postTestMin').innerText = addZero(min)
+				document.getElementById('postTestSec').innerText = addZero(10- sec)
+				// document.getElementById('postTestMilisec').innerText = addZero(milisec)
+					if((addZero(10 - sec)) == 0){
+						clearTime();
+						$('.' + type + '-timer-box').attr('style', "display:none;");
+						$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
+					}
+			}, 1000)
 		}
-
-		timerStart = setInterval(function() {
-			var nowTime = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
-			var newTime = new Date(nowTime - stTime) //(nowTime - stTime)을 new Date()에 넣는다
-			var min = newTime.getMinutes() //분
-			var sec = newTime.getSeconds() //초
-			var milisec = Math.floor(newTime.getMilliseconds() / 10) //밀리초
-			document.getElementById('postTestMin').innerText = addZero(min)
-			document.getElementById('postTestSec').innerText = addZero(10- sec)
-			// document.getElementById('postTestMilisec').innerText = addZero(milisec)
-				if((addZero(10 - sec)) == 0){
-					clearTime();
-					$('.timer-box').attr('style', "display:none;");
-					$('.resend').attr('style', "display:block; margin-top: 20px;");
-				}
-		}, 1000)
+        
+		if(type == "wallet"){
+			if(! stTime2) {
+				stTime2 = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
+			}
+            
+			timerStart2 = setInterval(function() {
+				var nowTime = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
+				var newTime = new Date(nowTime - stTime2) //(nowTime - stTime)을 new Date()에 넣는다
+				var min = newTime.getMinutes() //분
+				var sec = newTime.getSeconds() //초
+				var milisec = Math.floor(newTime.getMilliseconds() / 10) //밀리초
+				document.getElementById('postTestMin').innerText = addZero(min)
+				document.getElementById('postTestSec').innerText = addZero(10- sec)
+				// document.getElementById('postTestMilisec').innerText = addZero(milisec)
+					if((addZero(10 - sec)) == 0){
+						clearTime();
+						$('.' + type + '-timer-box').attr('style', "display:none;");
+						$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
+					}
+			}, 1000)
+		}
 	}
 
 	var clearTime = function(){
@@ -411,10 +512,11 @@
 		return (num < 10 ? '0'+num : ''+num)
 	}
 
-	var waitResend = function() {
-		$('.timer-box').attr('style', "display:block;");
-		$('.resend').attr('style', "display:none;");
-		startTime();
+	var waitResend = function(type) {
+		$('.' + type + '-timer-box').attr('style', "display:block;");
+		$('.' + type + '-resend-email').attr('style', "display:none;");
+
+		startTime(type);
 	}
 
 	$(document).ready(function(){
@@ -452,7 +554,7 @@
 						alert(message);
 					}
 
-					waitResend();
+					waitResend(type);
 				},
 				error: function() {
 					alert("에러가 발생했습니다");
@@ -494,7 +596,7 @@
                         
 						$('#myModal_' + type + ' .ath-email-box .send-ath-email').attr('style', "display:none;"); // 이메일 전송 버튼 제거
 						$('#myModal_' + type + ' .ath-email-box .confirm-ath-email').attr('style', "display:block;"); // 이메일 인증 버튼 생성					}
-						$('#myModal_' + type + ' .ath-email-box .resend').attr('style', "display:block; margin-top: 20px;"); // 이메일 인증 버튼 생성					}
+						$('#myModal_' + type + ' .ath-email-box .' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;"); // 이메일 인증 버튼 생성					}
 					}
 					// 실패
 					if(state == 0){
