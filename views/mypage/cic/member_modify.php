@@ -450,19 +450,27 @@
 			}
             
 			timerStart1 = setInterval(function() {
-				var nowTime1 = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
-				var newTime1 = new Date(nowTime1 - stTime1) //(nowTime - stTime)을 new Date()에 넣는다
-				var min1 = newTime1.getMinutes() //분
-				var sec1 = newTime1.getSeconds() //초
-				var milisec1 = Math.floor(newTime1.getMilliseconds() / 10) //밀리초
-				document.getElementById('postTestMin1').innerText = addZero(min1)
-				document.getElementById('postTestSec1').innerText = 10 - Number(sec1);//addZero()
+				// var nowTime1 = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
+				// var newTime1 = new Date(nowTime1 - stTime1) //(nowTime - stTime)을 new Date()에 넣는다
+				// var min1 = newTime1.getMinutes() //분
+				// var sec1 = newTime1.getSeconds() //초
+				// var milisec1 = Math.floor(newTime1.getMilliseconds() / 10) //밀리초
+				// document.getElementById('postTestMin1').innerText = addZero(min1)
+				var num = Number(document.getElementById('postTestSec1').textContent);
+				
+				document.getElementById('postTestSec1').innerText = num - 1;
+				if( num - 1 == 0){
+					
+					$('.' + type + '-timer-box').attr('style', "display:none;");
+					$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
+					document.getElementById('postTestSec1').innerText = 10;
+				}
 				// document.getElementById('postTestMilisec').innerText = addZero(milisec)
-					if(10 - Number(sec1) == 0){
-						clearTime(type);
-						$('.' + type + '-timer-box').attr('style', "display:none;");
-						$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
-					}
+					// if(10 - Number(sec1) == 0){
+					// 	clearTime(type);
+					// 	$('.' + type + '-timer-box').attr('style', "display:none;");
+					// 	$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
+					// }
 			}, 1000)
 		}
 

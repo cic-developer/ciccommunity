@@ -142,12 +142,12 @@ class Searchcoin extends CB_Controller
 				$korean = $array['localization']['ko'];
 				$symbol = $array['symbol'];
 				$name =  $array['name'];
-
-				print_r($korean);
+				// print_r($name);
+				// // print_r($korean);
 				$data = array(
-					'clist_market' => $getList['symbol'],
-					'clist_name_ko' => $getList['localization']['ko'],
-					'clist_name_en' => $getList['name'],
+					'clist_market' => $symbol,
+					'clist_name_ko' => $korean,
+					'clist_name_en' => $name,
 				);
 
 				// echo "<pre><br>";
@@ -163,7 +163,31 @@ class Searchcoin extends CB_Controller
 							$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 						}
 					
-				}
+					}
+					$data = array(
+						array(
+							'coin_market'=> $symbol,
+							'coin_keyword'=>$korean
+						),
+						array(
+							'coin_market'=> $symbol,
+							'coin_keyword'=>$name
+						),
+						array(
+							'coin_market'=> $symbol,
+							'coin_keyword'=> $symbol,
+						),
+					);
+					if(isset($data) && !empty($data)){
+						foreach($data as $thisData){
+							if(in_array($thisData['coin_keyword'], $keyword_arr)){	
+								continue;
+							}
+							else{
+								$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
+							}	
+					    }
+					}	 
 
 				}	
 		
