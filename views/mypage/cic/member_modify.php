@@ -81,27 +81,30 @@
 			<!-- 테스트 -->
 			<div id="myModal_phone" class="modal">
 				<div class="modal-content">
-					<ul class="entry">
+					<ul class="entry phone-modify-box">
 						<li class="">
 							<p class="btxt">새 핸드폰번호</p>
 							<div class="field modify">
 								<p class="chk-input w380">
 									<input type="text" placeholder="" onkeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="" readonly disabled style="background-color:#efefef;">
 								</p>
-								<a href="javascript:void(0);" id="phone_modify_btn" class="modify-btn">
+								<a href="javascript:void(0);" id="confirm_phone_number" class="modify-btn" style="display:none;">
+									<span>확인</span>
+								</a>
+								<a href="javascript:void(0);" data-type="phone" class="modify-btn send_ath_email">
 									<span>이메일인증</span>
 								</a>
 							</div>
 						</li>
 					</ul>
-					<ul class="entry">
+					<ul class="entry ath-email-box" style="display:none;">
 						<li class="">
 							<p class="btxt">인증번호</p>
 							<div class="field modify">
 								<p class="chk-input w380">
 									<input type="text" placeholder="인증번호를 입력해주세요" id="new_phone" name="new_phone" value="">
 								</p>
-								<a href="javascript:void(0);" id="phone_modify_btn" class="modify-btn">
+								<a href="javascript:void(0);" id="confirm_ath_email" class="modify-btn">
 									<span>확인</span>
 								</a>
 							</div>
@@ -293,6 +296,42 @@
 /**
  * 이메일 인증 시작
  */
+
+	$(document).ready(function(){
+		$(".send_ath_email").on('click', function() {
+			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.
+            
+			$.ajax({
+				url: cb_url + '/membermodify/ajax_modify_email_send',
+				type: 'POST',
+				data: {
+					type: type,
+					csrf_test_name : cb_csrf_hash
+				},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				success: function(data) {
+					state = data.state;
+					message = data.message;
+                    
+					// 성공
+					if(state == 1){
+						// 성공 메세지
+                        alert(message);
+					}
+					// 실패
+					if(state == 0){
+						// 실패 메세지
+						alert(message);
+					}
+				},
+				error: function(){
+					alert('에러가 발생했습니다.');
+				}
+			});
+		})
+	})
 
 	// 인증번호 이메일 발송
 	$(document).ready(function(){
