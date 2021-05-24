@@ -81,14 +81,14 @@
 			<!-- 테스트 -->
 			<div id="myModal_phone" class="modal">
 				<div class="modal-content">
-					<ul class="entry phone-modify-box">
+					<ul class="entry modify-box">
 						<li class="">
 							<p class="btxt">새 핸드폰번호</p>
 							<div class="field modify">
 								<p class="chk-input w380">
 									<input type="text" placeholder="" onkeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="" readonly disabled style="background-color:#efefef;">
 								</p>
-								<a href="javascript:void(0);" id="confirm_phone_number" class="modify-btn" style="display:none;">
+								<a href="javascript:void(0);" id="confirm_phone_number" class="modify-btn confirm-btn" style="display:none;">
 									<span>확인</span>
 								</a>
 								<a href="javascript:void(0);" data-type="phone" class="modify-btn send_ath_email">
@@ -102,7 +102,7 @@
 							<p class="btxt">인증번호</p>
 							<div class="field modify">
 								<p class="chk-input w380">
-									<input type="text" placeholder="인증번호를 입력해주세요" id="new_phone" name="new_phone" value="">
+									<input type="text" placeholder="인증번호를 입력해주세요" id="ath_num" name="ath_num" value="">
 								</p>
 								<a href="javascript:void(0);" data-type="phone" class="modify-btn confirm_ath_email">
 									<span>확인</span>
@@ -340,6 +340,7 @@
 	$(document).ready(function(){
 		$(".confirm_ath_email").on('click', function() {
 			var type = $(this).data('type');
+			var ath_num = $('#myModal_' + type + ' .ath-email-box #ath_num').val();
 
 			var result = '';
 			var reason = '';
@@ -349,7 +350,6 @@
 				data: {
 					type: type,
 					ath_num: ath_num,
-					modify_type: modify_type,
 					csrf_test_name : cb_csrf_hash
 				},
 				dataType: 'json',
@@ -359,15 +359,28 @@
 					result = data.result;
 					reason = data.reason;
 					
-					alert(reason);
-					
-					// 실패
-					if(result == 0){}
-					
 					//성공
-					//// => 핸드폰변경 박스
 					if(result == 1) {
+						// 성공 메세지
+						alert(reason);
+						$('#myModal_' + type + ' .ath-email-box').attr('style', "display:none;"); // 이메일 인증 박스 제거
+
+						// 변경값 입력 input style 변경
+						$('#new_' + type).attr('readonly', false);
+						$('#new_' + type).attr('disabled', false);
+						$('#new_' + type).attr('style', "background-color: white;");
+
+						$('#myModal_' + type + ' .modify-box .send_ath_email').attr('style', "display:none;"); // 이메일인증 버튼 제거
+						$('#myModal_' + type + ' .modify-box .confirm-btn').attr('style', "display:block;"); // 확인 버튼 생성
 					}
+					// 실패
+					if(result == 0){
+						// 실패 메세지
+						alert(reason);
+					}
+				},
+				error: function(){
+					alert('에러가 발생했습니다.');
 				}
 			});
 		})

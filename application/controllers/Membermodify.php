@@ -2199,18 +2199,26 @@ class Membermodify extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		// 이메일 발송시, 세션에 저장한 랜덤인증번호
-		$ath_num = $this->session->userdata('ath_num');
+		// 이메일 발송시 세션에 저장했던 인증번호
+		if($type == 'phone'){
+			$ath_num = $this->session->userdata('phone_ath_num');
+		}
+		if($type == 'password'){
+			$ath_num = $this->session->userdata('password_ath_num');
+		}
+		if($type == 'wallet'){
+			$ath_num = $this->session->userdata('wallet_ath_num');
+		}
 
 		// 세션에 저장한 인증번호 == 입력한 인증번호
 		if($ath_num == $_ath_num){
 
 			// 핸드폰
-			if($modify_type == 'phone'){
+			if($type == 'phone'){
 				// 인증결과 세션 저장
 				$this->session->set_userdata('phone_modify_ath_mail_result', '1');
 				// 세션에 저장 되어있던 인증번호 삭제
-				$this->session->unset_userdata('ath_num');
+				$this->session->unset_userdata('phone_ath_num');
 
 				$result = array(
 					'result' => '1',
@@ -2220,28 +2228,28 @@ class Membermodify extends CB_Controller
 			}
 
 			// 이메일
-			if($modify_type == 'password'){
+			if($type == 'password'){
 				// 인증결과 세션 저장
 				$this->session->set_userdata('password_modify_ath_mail_result', '1');
 				// 세션에 저장 되어있던 인증번호 삭제
-				$this->session->unset_userdata('ath_num');
+				$this->session->unset_userdata('password_ath_num');
 
 				$result = array(
-					'result' => '2',
+					'result' => '1',
 					'reason' => '인증 되었습니다',
 				);
 				exit(json_encode($result));
 			}
 
 			// 지갑
-			if($modify_type == 'wallet'){
+			if($type == 'wallet'){
 				// 인증결과 세션 저장
 				$this->session->set_userdata('wallet_modify_ath_mail_result', '1');
 				// 세션에 저장 되어있던 인증번호 삭제
-				$this->session->unset_userdata('ath_num');
+				$this->session->unset_userdata('wallet_ath_num');
 
 				$result = array(
-					'result' => '3',
+					'result' => '1',
 					'reason' => '인증 되었습니다',
 				);
 				exit(json_encode($result));
@@ -2250,7 +2258,7 @@ class Membermodify extends CB_Controller
 		} else{
 
 			// 핸드폰
-			if($modify_type == 'phone'){
+			if($type == 'phone'){
 				$this->session->set_userdata('phone_modify_ath_mail_result', '');
 
 				$result = array(
@@ -2261,7 +2269,7 @@ class Membermodify extends CB_Controller
 			}
 
 			// 이메일
-			if($modify_type == 'password'){
+			if($type == 'password'){
 				$this->session->set_userdata('password_modify_ath_mail_result', '');
 
 				$result = array(
@@ -2272,7 +2280,7 @@ class Membermodify extends CB_Controller
 			}
 			
 			// 지갑
-			if($modify_type == 'wallet'){
+			if($type == 'wallet'){
 				$this->session->set_userdata('wallet_modify_ath_mail_result', '');
 
 				$result = array(
