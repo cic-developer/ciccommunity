@@ -118,8 +118,6 @@ class Searchcoin extends CB_Controller
 		
 		//이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-
-		print_r($search_option);
 		// keyword 테이블을 통째로 불러온다.
 		$keyword_list = $this->CIC_coin_keyword_model->get_keyword();
 		$coin_list = $this->CIC_coin_list_model->getstockData();
