@@ -76,13 +76,25 @@
 				<a href="javascript:fnPopup();" id="submitButton" class="update-btn"><span>정보업데이트</span></a>
 				<a href="javascript:void(0);" id="submitUserDelete" class="leave-btn"><span>회원탈퇴</span></a>
 			</div>
-
-			<!-- test -->
-			<div id="myModal_phone" class="modal">
-				<!-- Modal content -->
-				<a href="javascript:void(0);" class="ath-email modify-btn modal-btn" data-type="phone"><span>이메일인증</span></a>
-			</div>
 			
+
+			<!-- 테스트 -->
+			<div id="myModal_phone" class="modal">
+				<ul class="modal-content entry ">
+					<li class="">
+						<p class="btxt">새 핸드폰번호</p>
+						<div class="field modify">
+							<p class="chk-input w380">
+								<input type="text" placeholder="" onkeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="" readonly disabled style="background-color:#efefef;">
+							</p>
+							<a href="javascript:void(0);" id="phone_modify_btn" class="modify-btn">
+								<span>이메일인증</span>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+
 			<!-- 핸드폰번호 변경 -->
 			<!-- <div id="myModal_phone" class="modal"> -->
 				<!-- Modal content -->
@@ -133,7 +145,7 @@
 	margin: 15% auto; /* 15% from the top and centered */
 	padding: 20px;
 	border: 1px solid #888;
-	width: 50%; /* Could be more or less, depending on screen size */                          
+	width: 33%; /* Could be more or less, depending on screen size */                          
 }
 
 /* The Close Button */
