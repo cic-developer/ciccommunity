@@ -278,105 +278,26 @@ class Maincoin extends CB_Controller
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
-			$brd_order = $this->input->post('brd_order') ? $this->input->post('brd_order') : 0;
-			$brd_search = $this->input->post('brd_search') ? $this->input->post('brd_search') : 0;
 			$updatedata = array(
-				'bgr_id' => $this->input->post('bgr_id', null, ''),
-				'brd_key' => $this->input->post('brd_key', null, ''),
-				'brd_name' => $this->input->post('brd_name', null, ''),
-				'brd_mobile_name' => $this->input->post('brd_mobile_name', null, ''),
-				'brd_order' => $brd_order,
-				'brd_search' => $brd_search,
+				'cme_id' => $this->input->post('cme_id', null, ''),
+				'cme_korean_nm' => $this->input->post('cme_korean_nm', null, ''),
+				'cme_english_nm' => $this->input->post('cme_english_nm', null, ''),
+				'cme_api' => $this->input->post('cme_api', null, ''),
 			);
-
-			$array = array('board_layout', 'board_mobile_layout', 'board_sidebar',
-				'board_mobile_sidebar', 'board_skin', 'board_mobile_skin', 'header_content',
-				'footer_content', 'mobile_header_content', 'mobile_footer_content', 'board_use_captcha', 'board_extra_type');
-
-			$metadata = array();
-			$groupdata = array();
-			$alldata = array();
-			$grp = $this->input->post('grp');
-			$all = $this->input->post('all');
-
-			foreach ($array as $value) {
-				$metadata[$value] = $this->input->post($value, null, '');
-				if (element($value, $grp)) {
-					$groupdata[$value] = $this->input->post($value, null, '');
-				}
-				if (element($value, $all)) {
-					$alldata[$value] = $this->input->post($value, null, '');
-				}
-			}
 
 			/**
 			 * 게시물을 수정하는 경우입니다
 			 */
 			if ($this->input->post($primary_key)) {
 				$this->{$this->modelname}->update($this->input->post($primary_key), $updatedata);
-				$this->Board_meta_model->save($cme_idx, $metadata);
-
-				$getdata = $this->{$this->modelname}->get_one($cme_idx);
-				if ($groupdata) {
-					$where = array(
-						'bgr_id' => $getdata['bgr_id'],
-					);
-					$res = $this->Board_model->get_board_list($where);
-					foreach ($res as $bkey => $bval) {
-						if ($bval['brd_id'] === $getdata['brd_id']) {
-							continue;
-						}
-						$this->Board_meta_model->save($bval['brd_id'], $groupdata);
-					}
-				}
-				if ($alldata) {
-					$res = $this->Board_model->get_board_list();
-					foreach ($res as $bkey => $bval) {
-						if ($bval['brd_id'] === $getdata['brd_id']) {
-							continue;
-						}
-						$this->Board_meta_model->save($bval['brd_id'], $alldata);
-					}
-				}
 				$view['view']['alert_message'] = '기본정보 설정이 저장되었습니다';
 			} else {
 				/**
 				 * 게시물을 새로 입력하는 경우입니다
 				 * 기본값 설정입니다
 				 */
-				$upload_max_filesize = ini_get('upload_max_filesize');
-				if ( ! preg_match("/([m|M])$/", $upload_max_filesize)) {
-					$upload_max_filesize = (int)($upload_max_filesize / 1048576);
-				} else {
-					$array = array('m', 'M');
-					$upload_max_filesize = str_replace($array, '', $upload_max_filesize);
-				}
 
 				$cme_idx = $this->{$this->modelname}->insert($updatedata);
-				$this->Board_meta_model->save($cme_idx, $metadata);
-
-				$getdata = $this->{$this->modelname}->get_one($cme_idx);
-				if ($groupdata) {
-					$where = array(
-						'bgr_id' => $getdata['bgr_id'],
-					);
-					$res = $this->Board_model->get_board_list($where);
-					foreach ($res as $bkey => $bval) {
-						if ($bval['brd_id'] === $getdata['brd_id']) {
-							continue;
-						}
-						$this->Board_meta_model->save($bval['brd_id'], $groupdata);
-					}
-				}
-				if ($alldata) {
-					$res = $this->Board_model->get_board_list();
-					foreach ($res as $bkey => $bval) {
-						if ($bval['brd_id'] === $getdata['brd_id']) {
-							continue;
-						}
-						$this->Board_meta_model->save($bval['brd_id'], $alldata);
-					}
-				}
 				$this->session->set_flashdata(
 					'message',
 					'기본정보 설정이 저장되었습니다'
@@ -387,15 +308,16 @@ class Maincoin extends CB_Controller
 			}
 		}
 
+		$param =& $this->querystring;
 		$getdata = array();
 		if ($cme_idx) {
 			$getdata = $this->{$this->modelname}->get_one($cme_idx);
 		} else {
 			// 기본값 설정
-			$getdata['brd_search'] = 1;
 		}
 
 		$view['view']['data'] = $getdata;
+		$view['view']['list_url'] = admin_url($this->pagedir . '/exchange/?' . $param->output());
 
 		/**
 		 * primary key 정보를 저장합니다

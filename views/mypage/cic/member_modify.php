@@ -162,25 +162,12 @@
 									<span>인증번호 재전송</span>
 								</a>	
 							</div>
-							
-<div>
-<div>
-<span id="postTestMin">00</span><!-- 분 -->
-<span>:</span>
-<span id="postTestSec">00</span><!--초-->
-<span>.</span>
-<span id="postTestMilisec">00</span><!--밀리초-->
-</div>
-<div>
-<ul id="testRecordList"></ul><!--중간 기록할 리스트-->
-</div>
-<div>
-<button type="button" id="testStartBtn">START</button><!--시작/재시작/기록 버튼-->
-<button type="button" id="testStopBtn">STOP</button><!--스톱 버튼-->
-</div>
-</div>
-
-
+							<div class="timer-box" style="display:none;">
+								<span id="postTestMin">00</span><!-- 분 -->
+								<span>:</span>
+								<span id="postTestSec">10</span><!--초-->
+								<!-- <span id="postTestMilisec">00</span>밀리초 -->
+							</div>
 						</li>
 					</ul>
 					<ul class="entry ath-nice-box" style="display:none;">
@@ -373,7 +360,7 @@
  */
 /*****************************************************************************/
 /**
- * 이메일 인증 시작
+ * 이메일 재전송 시작
  */
 
 	var stTime
@@ -385,15 +372,20 @@
 		}
 
 		timerStart = setInterval(function() {
-		var nowTime = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
-		var newTime = new Date(nowTime - stTime) //(nowTime - stTime)을 new Date()에 넣는다
-		var min = newTime.getMinutes() //분
-		var sec = newTime.getSeconds() //초
-		var milisec = Math.floor(newTime.getMilliseconds() / 10) //밀리초
-		document.getElementById('postTestMin').innerText = addZero(min)
-		document.getElementById('postTestSec').innerText = addZero(sec)
-		document.getElementById('postTestMilisec').innerText = addZero(milisec)
-		}, 1)
+			var nowTime = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
+			var newTime = new Date(nowTime - stTime) //(nowTime - stTime)을 new Date()에 넣는다
+			var min = newTime.getMinutes() //분
+			var sec = newTime.getSeconds() //초
+			var milisec = Math.floor(newTime.getMilliseconds() / 10) //밀리초
+			document.getElementById('postTestMin').innerText = addZero(min)
+			document.getElementById('postTestSec').innerText = addZero(10- sec)
+			// document.getElementById('postTestMilisec').innerText = addZero(milisec)
+				if((addZero(10 - sec)) == 0){
+					clearTime();
+					$('.timer-box').attr('style', "display:none;");
+					$('.resend').attr('style', "display:block; margin-top: 20px;");
+				}
+		}, 1000)
 	}
 
 	var clearTime = function(){
@@ -407,6 +399,7 @@
 	}
 
 	var waitResend = function() {
+		$('.timer-box').attr('style', "display:block;");
 		$('.resend').attr('style', "display:none;");
 		startTime();
 	}
@@ -454,7 +447,13 @@
 			});
 		})
 	})
-
+/**
+ * 이메일 재전송 끝
+ */
+/*****************************************************************************/
+/**
+ * 이메일 전송 시작
+ */
 	$(document).ready(function(){
 		$(".send-ath-email").on('click', function() {
 			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.
@@ -479,7 +478,7 @@
 					if(state == 1){
 						// 성공 메세지
                         alert(message);
-
+                        
 						$('#myModal_' + type + ' .ath-email-box .send-ath-email').attr('style', "display:none;"); // 이메일 전송 버튼 제거
 						$('#myModal_' + type + ' .ath-email-box .confirm-ath-email').attr('style', "display:block;"); // 이메일 인증 버튼 생성					}
 						$('#myModal_' + type + ' .ath-email-box .resend').attr('style', "display:block; margin-top: 20px;"); // 이메일 인증 버튼 생성					}
@@ -496,7 +495,13 @@
 			});
 		})
 	})
-
+/**
+ * 이메일 전송 끝
+ */
+/*****************************************************************************/
+/**
+ * 인증 박스 보이기 시작
+ */
 	$(document).ready(function(){
 		$(".view_ath_box").on('click', function() {
 			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.
@@ -552,7 +557,10 @@
 			// });
 		})
 	})
-
+/**
+ * 인증 박스 보이기 끝
+ */
+/*****************************************************************************/
 	$(document).ready(function(){
 		$(".confirm_ath_email").on('click', function() {
 			var type = $(this).data('type');

@@ -30,8 +30,8 @@
 				<label class="col-sm-2 control-label">API 선택</label>
 				<div class="col-sm-10 form-inline">
 					<select name="cme_api" class="form-control">
-						<option value="coingecko" <?php echo set_select('cme_api', 'coingecko', element('cme_api', element('data', $view) === $i ? true : false)); ?>>Coingecko</option>
-						<option value="hotbit_korea" <?php echo set_select('cme_api', 'hotbit_korea', element('cme_api', element('data', $view) === $i ? true : false)); ?>>핫빗코리아</option>
+						<option value="coingecko" <?php echo set_select('cme_api', 'coingecko', element('cme_api', element('data', $view)) === 'coingecko' ? true : false); ?>>Coingecko</option>
+						<option value="hotbit_korea" <?php echo set_select('cme_api', 'hotbit_korea', element('cme_api', element('data', $view)) === 'hotbit_korea' ? true : false); ?>>핫빗코리아</option>
 					</select>
 					<p class="help-block">레벨을 수동으로 설정하여도 해당 유저의 명예포인트에 따라 자동으로 변동됩니다.</p>
 				</div>
@@ -46,7 +46,7 @@
 				</div>
 			</div>
 			<div class="btn-group pull-right" role="group" aria-label="...">
-				<button type="button" class="btn btn-default btn-sm btn-history-back" >취소하기</button>
+				<a href="<?php echo element('list_url', $view); ?>" class="btn btn-default btn-sm" >목록</a>
 				<button type="submit" class="btn btn-success btn-sm">저장하기</button>
 			</div>
 		<?php echo form_close(); ?>

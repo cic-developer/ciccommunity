@@ -197,7 +197,9 @@ class CIC_Coin_list_model extends CB_Model
             $list_[] = $list['name'];
 
         }
-        return $list_;
+        if(is_array($list_)){
+            return $list_;
+         }
         
     }
 

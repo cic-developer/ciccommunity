@@ -58,20 +58,11 @@ class News extends CB_Controller
 				$result['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
 				$result['list'][$key]['num'] = $list_num--;
 				if ($board) {
-					$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
 					$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
 				}
-				$result['list'][$key]['category'] = '';
-				if (element('post_category', $val)) {
-					$result['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
-				}
-				if (element('post_image', $val)) {
-					$imagewhere = array(
-						'post_id' => element('post_id', $val),
-						'pfi_is_image' => 1,
-					);
-					$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-					$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+
+				if (element('news_image', $val)) {
+					$result['list'][$key]['thumb_url'] = thumb_url(element('news_image', $result), 80);
 				} else {
 					$result['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
 				}
