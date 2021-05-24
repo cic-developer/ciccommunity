@@ -6,7 +6,7 @@ class News extends CB_Controller
 {
     public $pagedir = 'cicconfigs/news';
 
-    protected $models = array('News', 'Company');
+    protected $models = array('News');
 
 
     protected $modelname = 'News_model';
@@ -87,7 +87,7 @@ class News extends CB_Controller
 		$search_option = array('news_title' => '제목', 'news_id' => '뉴스번호',   'news_wdate' => '작성일');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
-		$view['view']['listall_url'] = admin_url($this->pagedir);rl($this->pagedir . '/news/?' . $param->output());
+		$view['view']['listall_url'] = admin_url($this->pagedir);rl($this->pagedir . '/news' . $param->output());
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

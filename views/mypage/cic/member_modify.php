@@ -435,12 +435,9 @@
  * 이메일 재전송 시작
  */
 
-	var stTime1
-	var timerStart1
-	var stTime2
-	var timerStart2
-	var stTime3
-	var timerStart3
+	var timerStart1;
+	var timerStart2;
+	var timerStart3;
     
 	var startTime = function(type){
         

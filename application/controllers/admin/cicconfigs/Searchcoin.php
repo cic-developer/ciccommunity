@@ -134,10 +134,15 @@ class Searchcoin extends CB_Controller
 			$coin_arr[] = element('clist_market', $value);
 		}
 
+		$coinId = array();
 		$get_apiList = $this -> CIC_coin_list_model->get_apiList();
+		foreach($get_apiList as $apiId){
+			$coinId = $apiId['id'];
+		}
 		$list_ = array();
 		for($i=0; $i< count($get_apiList); $i++){
-			$data = $this -> CIC_coin_list_model->retrieve_api($apiList[$i]);
+			$data = $this -> CIC_coin_list_model->retrieve_api($coinId[$i]);
+			// print_r($data);
 			// foreach($getLists as $getList){
 			// 	$korean = $array['localization']['ko'];
 			// 	$symbol = $array['symbol'];
@@ -155,14 +160,15 @@ class Searchcoin extends CB_Controller
 				// echo "</pre></br>";
 				if(isset($data) && !empty($data)){
 					foreach($data as $coinData){
+						print_r($coinData);
 						$stock = $this->CIC_coin_list_model->insertStockData($coinData);
 						$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 					
-				}
+					}
 
 				}	
 		
-			}
+			// }
 		}
 		// 	// echo "<pre><br>";$list_
 		// 	// print_r($getLists);
