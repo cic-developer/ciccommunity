@@ -638,9 +638,12 @@ class Post_model extends CB_Model
 
 	public function get_like_point_ranking_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
+
 		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
 			$orderby = 'post_like_point desc';
 		}
+		print_r($orderby);
+		exit;
 		
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
 		if (empty($sfield)) {
@@ -733,9 +736,9 @@ class Post_model extends CB_Model
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}
-		$qry = $this->db->get();
-		print_r($qry);
+		print_r($orderby);
 		exit;
+		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
 		
 

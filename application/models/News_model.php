@@ -15,7 +15,7 @@ class News_model extends CB_Model
 
     public $primary_key = 'news_id';
 
-    public $allow_order = array('news_id', 'comp_id', 'news_title', 'news_content', 'news_reviews', 'news_hot', );
+    public $allow_order = array('news_id', 'comp_id', 'news_title', 'news_content', 'news_reviews desc', 'news_hot', );
 
     function __construct()
     {
@@ -27,6 +27,8 @@ class News_model extends CB_Model
 		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
 			$orderby = 'news_reviews desc';
 		}
+		print_r($orderby);
+		exit;
 		
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
 		if (empty($sfield)) {
@@ -119,9 +121,9 @@ class News_model extends CB_Model
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}
+		print_r($orderby);
+		exit;
 		$qry = $this->db->get();
-		// print_r($qry);
-		// exit;
 		$result['list'] = $qry->result_array();
 		
 

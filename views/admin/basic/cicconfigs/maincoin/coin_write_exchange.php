@@ -24,9 +24,9 @@
 			<div class="list-group">
 				<div class="form-group list-group-item">
 					<div class="col-sm-1">순번</div>
-					<div class="col-sm-3">거래소명</div>
-					<div class="col-sm-4">코인 id</div>
-					<div class="col-sm-1">사용여부</div>
+					<div class="col-sm-4">거래소명</div>
+					<div class="col-sm-5">코인 id</div>
+					<div class="col-sm-2">사용여부</div>
 				</div>
 				<div id="sortable">
 					<?php
@@ -34,13 +34,10 @@
 						foreach (element('list', element('exchange_list', $view)) as $result) {
 					?>
 						<div class="form-group list-group-item">
-						<?php 
-				exit($result['num']);
-				?>
 							<div class="col-sm-1"><?php echo element('num', $result); ?></div>
-							<div class="col-sm-3"><input type="text" class="form-control" name="mgr_title[<?php echo element('mgr_id', $result); ?>]" value="<?php echo html_escape(element('mgr_title', $result)); ?>"/></div>
-							<div class="col-sm-4"><input type="text" class="form-control" name="mgr_description[<?php echo element('mgr_id', $result); ?>]" value="<?php echo html_escape(element('mgr_description', $result)); ?>" /></div>
-							<div class="col-sm-1"><input type="checkbox" name="mgr_is_default[<?php echo element('mgr_id', $result); ?>]" value="1" <?php echo element('mgr_is_default', $result) ? ' checked="checked" ' : ''; ?> /></div>
+							<div class="col-sm-4"><input type="text" class="form-control" name="mgr_title[<?php echo element('mgr_id', $result); ?>]" value="<?php echo html_escape(element('mgr_title', $result)); ?>"/></div>
+							<div class="col-sm-5"><input type="text" class="form-control" name="mgr_description[<?php echo element('mgr_id', $result); ?>]" value="<?php echo html_escape(element('mgr_description', $result)); ?>" /></div>
+							<div class="col-sm-2"><input type="checkbox" name="mgr_is_default[<?php echo element('mgr_id', $result); ?>]" value="1" <?php echo element('mgr_is_default', $result) ? ' checked="checked" ' : ''; ?> /></div>
 						</div>
 					<?php
 						}
