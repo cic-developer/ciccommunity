@@ -1,7 +1,4 @@
 <div class="box">
-<?php
-if (element(element('primary_key', $view), element('data', $view))) {
-?>
 	<div class="box-header">
 		<h4 class="pb10 pull-left">코인 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>
 		<div class="clearfix"></div>
@@ -10,20 +7,6 @@ if (element(element('primary_key', $view), element('data', $view))) {
 			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/coin_write_exchange/' . element('cmc_idx', element('data', $view))); ?>" onclick="return check_form_changed();">거래소 설정</a></li>
 		</ul>
 	</div>
-<?php
-} else {
-?>
-	<div class="box-header">
-		<h4 class="pb10 pull-left">코인 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>
-		<div class="clearfix"></div>
-		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a href="javascript:;" >기본정보</a></li>
-			<li role="presentation"><a href="javascript:;" onClick="alert('기본정보를 저장하신 후에 다른 정보 수정이 가능합니다');">거래소 설정</a></li>
-		</ul>
-	</div>
-<?php
-}
-?>
 	<div class="box-table">
 		<?php
 		echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
@@ -40,25 +23,24 @@ if (element(element('primary_key', $view), element('data', $view))) {
 			<div class="row"><?php echo element('total_rows', element('data', $view), 0); ?>개의 그룹이 존재합니다</div>
 			<div class="list-group">
 				<div class="form-group list-group-item">
-					<div class="col-sm-1">순서변경</div>
-					<div class="col-sm-3">그룹명</div>
-					<div class="col-sm-4">설명</div>
-					<div class="col-sm-1">기본그룹</div>
-					<div class="col-sm-1">회원수</div>
-					<div class="col-sm-2"><button type="button" class="btn btn-outline btn-primary btn-xs btn-add-rows">추가</button></div>
+					<div class="col-sm-1">순번</div>
+					<div class="col-sm-3">거래소명</div>
+					<div class="col-sm-4">코인 id</div>
+					<div class="col-sm-1">사용여부</div>
 				</div>
 				<div id="sortable">
 					<?php
-					if (element('list', element('data', $view))) {
-						foreach (element('list', element('data', $view)) as $result) {
+					if (element('list', element('exchange_list', $view))) {
+						foreach (element('list', element('exchange_list', $view)) as $result) {
 					?>
 						<div class="form-group list-group-item">
-							<div class="col-sm-1"><div class="fa fa-arrows" style="cursor:pointer;"></div><input type="hidden" name="mgr_id[<?php echo element('mgr_id', $result); ?>]" value="<?php echo element('mgr_id', $result); ?>" /></div>
+						<?php 
+				exit($result['num']);
+				?>
+							<div class="col-sm-1"><?php echo element('num', $result); ?></div>
 							<div class="col-sm-3"><input type="text" class="form-control" name="mgr_title[<?php echo element('mgr_id', $result); ?>]" value="<?php echo html_escape(element('mgr_title', $result)); ?>"/></div>
 							<div class="col-sm-4"><input type="text" class="form-control" name="mgr_description[<?php echo element('mgr_id', $result); ?>]" value="<?php echo html_escape(element('mgr_description', $result)); ?>" /></div>
 							<div class="col-sm-1"><input type="checkbox" name="mgr_is_default[<?php echo element('mgr_id', $result); ?>]" value="1" <?php echo element('mgr_is_default', $result) ? ' checked="checked" ' : ''; ?> /></div>
-							<div class="col-sm-1"><?php echo element('member_count', $result); ?></div>
-							<div class="col-sm-2"><button type="button" class="btn btn-outline btn-default btn-xs btn-delete-row" >삭제</button></div>
 						</div>
 					<?php
 						}

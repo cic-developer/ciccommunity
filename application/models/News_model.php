@@ -25,8 +25,9 @@ class News_model extends CB_Model
     public function get_news_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
     {
 		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
-			$orderby = 'news_id desc';
+			$orderby = 'news_reviews desc';
 		}
+		
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
 		if (empty($sfield)) {
 			$sfield = array('news_title', 'news_contents');
@@ -76,11 +77,10 @@ class News_model extends CB_Model
 				}
 			}
 		}
-		
-		$this->db->select('news.*, company.*');
+
+		$this->db->select('news.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point');
 		$this->db->from($this->_table);
 		$this->db->join('member', 'news.comp_id = company.comp_id', 'left');
-		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
 		
 		if ($where) {
 			$this->db->where($where);
@@ -88,7 +88,16 @@ class News_model extends CB_Model
 		if ($search_where) {
 			$this->db->where($search_where);
 		}
-		
+		// if ($category_id) {
+		// 	if (strpos($category_id, '.')) {
+		// 		$this->db->like('post_category', $category_id . '', 'after');
+		// 	} else {
+		// 		$this->db->group_start();
+		// 		$this->db->where('post_category', $category_id);
+		// 		$this->db->or_like('post_category', $category_id . '.', 'after');
+		// 		$this->db->group_end();
+		// 	}
+		// }
 		if ($search_like) {
 			foreach ($search_like as $item) {
 				foreach ($item as $skey => $sval) {
@@ -105,26 +114,36 @@ class News_model extends CB_Model
 			}
 			$this->db->group_end();
 		}
-		
+
 		$this->db->order_by($orderby);
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}
 		$qry = $this->db->get();
-		print_r($qry);
-		exit;
+		// print_r($qry);
+		// exit;
 		$result['list'] = $qry->result_array();
 		
+
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
-		$this->db->join('member', 'news.comp_id = company.comp_id', 'left');
-		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 0', 'left');
+		// $this->db->join('member', 'post.mem_id = member.mem_id', 'left');
 		if ($where) {
 			$this->db->where($where);
 		}
 		if ($search_where) {
 			$this->db->where($search_where);
 		}
+		// if ($category_id) {
+		// 	if (strpos($category_id, '.')) {
+		// 		$this->db->like('post_category', $category_id . '', 'after');
+		// 	} else {
+		// 		$this->db->group_start();
+		// 		$this->db->where('post_category', $category_id);
+		// 		$this->db->or_like('post_category', $category_id . '.', 'after');
+		// 		$this->db->group_end();
+		// 	}
+		// }
 		if ($search_like) {
 			foreach ($search_like as $item) {
 				foreach ($item as $skey => $sval) {
@@ -142,6 +161,8 @@ class News_model extends CB_Model
 			$this->db->group_end();
 		}
 		$qry = $this->db->get();
+		// print_r($qry);
+		// exit;
 		$rows = $qry->row_array();
 		$result['total_rows'] = $rows['rownum'];
 

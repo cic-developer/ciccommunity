@@ -775,6 +775,8 @@ class Post_model extends CB_Model
 			$this->db->group_end();
 		}
 		$qry = $this->db->get();
+		// print_r($qry);
+		// exit;
 		$rows = $qry->row_array();
 		$result['total_rows'] = $rows['rownum'];
 
@@ -791,7 +793,6 @@ class Post_model extends CB_Model
 			$sfield = array('post_title', 'post_content');
 		}
 		$search_where = array();
-		print_r($search_where);
 		$search_like = array();
 		$search_or_like = array();
 		if ($sfield && is_array($sfield)) {

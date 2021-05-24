@@ -562,8 +562,8 @@ class Maincoin extends CB_Controller
 		 * 페이지에 숫자가 아닌 문자가 입력되거나 1보다 작은 숫자가 입력되면 에러 페이지를 보여줍니다.
 		 */
 		$param =& $this->querystring;
-		$findex = 'mgr_order';
-		$forder = 'asc';
+		$findex = 'cmc_orderby';
+		$forder = 'desc';
 
 
 		/**
@@ -604,30 +604,35 @@ class Maincoin extends CB_Controller
 
 			$updatedata = $this->input->post();
 
-			$this->{$this->modelname}->update_group($updatedata);
+			$this->CIC_maincoin_coin_model->update_group($updatedata);
 			$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 		}
 
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
-		$this->{$this->modelname}->allow_order_field = array('mgr_order'); // 정렬이 가능한 필드
-		// $result = $this->{$this->modelname}
-		// 	->get_admin_list('', '', '', '', $findex, $forder);
-		// if (element('list', $result)) {
-		// 	foreach (element('list', $result) as $key => $val) {
-		// 		$countwhere = array(
-		// 			'mgr_id' => element('mgr_id', $val),
-		// 		);
-		// 		$result['list'][$key]['member_count'] = $this->Member_group_member_model->count_by($countwhere);
-		// 	}
-		// }
+		$this->CIC_maincoin_coin_model->allow_order_field = array('mgr_order'); // 정렬이 가능한 필드
+
+		$where = array(
+			'cme_del <>' => 1,
+		);
+		$exchange_list = $this->{$this->modelname}
+			->get_admin_list('', '', $where, '', 'cme_orderby', 'desc');
+		$view['view']['exchange_list'] = $exchange_list;
+		$list_num = $exchange_list['total_rows'];
+		if (element('list', $exchange_list)) {
+			foreach (element('list', $exchange_list) as $key => $val) {
+				$exchange_list['list'][$key]['num'] = $list_num--;
+				exit($exchange_list['list'][$key]['num']);
+			}
+		}
+		$result = $this->CIC_maincoin_coin_model->get_one($cmc_idx);
 		$view['view']['data'] = $result;
 
 		/**
 		 * primary key 정보를 저장합니다
 		 */
-		$view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
+		$view['view']['primary_key'] = $this->CIC_maincoin_coin_model->primary_key;
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

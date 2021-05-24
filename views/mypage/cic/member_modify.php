@@ -180,15 +180,8 @@
 								<form name="form_chk" method="post" id="password_form_chk">
 									<input type="hidden" name="m" value="checkplusService">
 									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('password_enc_data', $view)); ?>">
-									<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
+									<a href="javascript:fnPopup();" class="modify-btn modal-btn">
 										<span>핸드폰인증</span>
-									</a>
-								</form>
-								<form name="form_chk" method="post" id="password_form_chk" style="display:none;">
-									<input type="hidden" name="m" value="checkplusService">
-									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('password_enc_data', $view)); ?>">
-									<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
-										<span>핸드폰인증x</span>
 									</a>
 								</form>
 							</div>
@@ -261,15 +254,8 @@
 								<form name="form_chk" method="post" id="wallet_form_chk">
 									<input type="hidden" name="m" value="checkplusService">
 									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">
-									<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
+									<a href="javascript:fnPopup();" class="modify-btn modal-btn">
 										<span>핸드폰인증</span>
-									</a>
-								</form>
-								<form name="form_chk" method="post" id="wallet_form_chk" style="display:none;">
-									<input type="hidden" name="m" value="checkplusService">
-									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">
-									<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
-										<span>핸드폰인증x</span>
 									</a>
 								</form>
 							</div>
@@ -831,9 +817,6 @@
 
 
 
-/**
- * 이메일 인증 끝
- */
 /*****************************************************************************/
 /**
  * 휴대폰번호변경 시작
