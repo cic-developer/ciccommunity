@@ -25,7 +25,7 @@ class News extends CB_Controller
     public function index()
     {
  		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_board_post_index';
+		$eventname = 'event_admin_cicconfigs_news_index';
 		$this->load->event($eventname);
 
 		$view = array();
@@ -55,7 +55,7 @@ class News extends CB_Controller
 		
 		$result = $this->{$this->modelname}
 			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-
+		
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
@@ -181,5 +181,4 @@ class News extends CB_Controller
 
         return $this->db->update($this->_table);
     }
-
 }

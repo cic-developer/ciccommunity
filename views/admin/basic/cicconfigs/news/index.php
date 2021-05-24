@@ -21,10 +21,6 @@
 					?>
 				</div>
 				<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
-				<?php
-				print_r(element('data', $view));
-				exit;
-				?>
 				<div class="table-responsive">
 					<table class="table table-hover table-striped table-bordered">
 						<thead>

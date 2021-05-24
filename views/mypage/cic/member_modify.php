@@ -290,7 +290,7 @@
 		margin: 15% auto; /* 15% from the top and centered */
 		padding: 20px;
 		border: 1px solid #888;
-		width: 33%; /* Could be more or less, depending on screen size */                          
+		width: 40%; /* Could be more or less, depending on screen size */                          
 	}
 
 	/* The Close Button */
@@ -445,76 +445,45 @@
 	var startTime = function(type){
         
 		if(type == "phone"){
-			if(! stTime1) {
-				stTime1 = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
-			}
-            
+			
 			timerStart1 = setInterval(function() {
-				// var nowTime1 = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
-				// var newTime1 = new Date(nowTime1 - stTime1) //(nowTime - stTime)을 new Date()에 넣는다
-				// var min1 = newTime1.getMinutes() //분
-				// var sec1 = newTime1.getSeconds() //초
-				// var milisec1 = Math.floor(newTime1.getMilliseconds() / 10) //밀리초
-				// document.getElementById('postTestMin1').innerText = addZero(min1)
 				var num = Number(document.getElementById('postTestSec1').textContent);
 				
 				document.getElementById('postTestSec1').innerText = num - 1;
 				if( num - 1 == 0){
-					
+					clearTime(type);
 					$('.' + type + '-timer-box').attr('style', "display:none;");
 					$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
 					document.getElementById('postTestSec1').innerText = 10;
 				}
-				// document.getElementById('postTestMilisec').innerText = addZero(milisec)
-					// if(10 - Number(sec1) == 0){
-					// 	clearTime(type);
-					// 	$('.' + type + '-timer-box').attr('style', "display:none;");
-					// 	$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
-					// }
 			}, 1000)
 		}
 
 		if(type == "password"){
-			if(! stTime2) {
-				stTime2 = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
-			}
-            
 			timerStart2 = setInterval(function() {
-				var nowTime2 = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
-				var newTime2 = new Date(nowTime2 - stTime2) //(nowTime - stTime)을 new Date()에 넣는다
-				var min2 = newTime2.getMinutes() //분
-				var sec2 = newTime2.getSeconds() //초
-				var milisec2 = Math.floor(newTime2.getMilliseconds() / 10) //밀리초
-				document.getElementById('postTestMin2').innerText = addZero(min2)
-				document.getElementById('postTestSec2').innerText = addZero(10- sec2)
-				// document.getElementById('postTestMilisec').innerText = addZero(milisec)
-					if((addZero(10 - sec2)) == 0){
-						clearTime(type);
-						$('.' + type + '-timer-box').attr('style', "display:none;");
-						$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
-					}
+				var num = Number(document.getElementById('postTestSec2').textContent);
+				
+				document.getElementById('postTestSec2').innerText = num - 1;
+				if( num - 1 == 0){
+					clearTime(type);
+					$('.' + type + '-timer-box').attr('style', "display:none;");
+					$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
+					document.getElementById('postTestSec2').innerText = 10;
+				}
 			}, 1000)
 		}
         
 		if(type == "wallet"){
-			if(! stTime3) {
-				stTime3 = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
-			}
-            
 			timerStart3 = setInterval(function() {
-				var nowTime3 = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
-				var newTime3 = new Date(nowTime3 - stTime3) //(nowTime - stTime)을 new Date()에 넣는다
-				var min3 = newTime3.getMinutes() //분
-				var sec3 = newTime3.getSeconds() //초
-				var milisec3 = Math.floor(newTime3.getMilliseconds() / 10) //밀리초
-				document.getElementById('postTestMin3').innerText = addZero(min3)
-				document.getElementById('postTestSec3').innerText = addZero(10- sec3)
-				// document.getElementById('postTestMilisec').innerText = addZero(milisec)
-					if((addZero(10 - sec3)) == 0){
-						clearTime(type);
-						$('.' + type + '-timer-box').attr('style', "display:none;");
-						$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
-					}
+				var num = Number(document.getElementById('postTestSec3').textContent);
+				
+				document.getElementById('postTestSec3').innerText = num - 1;
+				if( num - 1 == 0){
+					clearTime(type);
+					$('.' + type + '-timer-box').attr('style', "display:none;");
+					$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
+					document.getElementById('postTestSec3').innerText = 10;
+				}
 			}, 1000)
 		}
 	}
