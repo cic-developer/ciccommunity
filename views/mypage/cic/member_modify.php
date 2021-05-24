@@ -82,43 +82,54 @@
 			<div id="myModal_phone" class="modal">
 				<div class="modal-content">
 					<ul class="entry modify-box">
-						<li class="">
+						<li class="wallet-modify-content">
 							<p class="btxt">새 핸드폰번호</p>
 							<div class="field modify">
 								<p class="chk-input w380">
-									<input type="text" placeholder="" onkeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="" readonly disabled style="background-color:#efefef;">
+									<input type="text" placeholder="핸드폰번호" onkeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="" readonly disabled style="background-color:#efefef;">
 								</p>
-								<a href="javascript:void(0);" id="confirm_phone_number" class="modify-btn confirm-btn" style="display:none;">
-									<span>확인</span>
-								</a>
-								<a href="javascript:void(0);" data-type="phone" class="modify-btn send_ath_email">
+								<a href="javascript:void(0);" data-type="phone" class="modify-btn view_ath_box">
 									<span>이메일인증</span>
 								</a>
 							</div>
+							<a href="javascript:void(0);" id="confirm_phone" class="modify-btn confirm-btn" style="display:none;">
+								<span>확인</span>
+							</a>
 						</li>
 					</ul>
 					<ul class="entry ath-email-box" style="display:none;">
 						<li class="">
-							<p class="btxt">인증번호</p>
-							<div class="field modify">
-								<p class="chk-input w380">
-									<input type="text" placeholder="인증번호를 입력해주세요" class="ath_num" name="ath_num" value="">
-								</p>
-								<a href="javascript:void(0);" data-type="phone" class="modify-btn confirm_ath_email">
-									<span>확인</span>
-								</a>
+							<p class="btxt">이메일인증</p>
+							<div class="all-email-box">
+								<div class="field modify">
+									<p class="chk-input w380">
+										<input type="text" placeholder="인증번호를 입력해주세요" class="ath_num" name="ath_num" value="">
+									</p>
+									<a href="javascript:void(0);" data-type="phone" class="modify-btn send-ath-email">
+										<span>이메일인증</span>
+									</a>
+									<a href="javascript:void(0);" data-type="phone" class="modify-btn confirm-ath-email" style="display:none;">
+										<span>확인</span>
+									</a>
+									
+								</div>
+								<div class="phone-resend-email" style="display:none;">
+									<a href="javascript:void(0);" data-type="phone" class="modify-btn resend-ath-email" style="display:block;">
+										<span>인증번호 재전송</span>
+									</a>	
+								</div>
+								<div class="phone-timer-box" style="display:none;">
+									<span id="postTestMin1">00</span><!-- 분 -->
+									<span>:</span>
+									<span id="postTestSec1">10</span><!--초-->
+									<!-- <span id="postTestMilisec">00</span>밀리초 -->
+								</div>
 							</div>
+							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
 						</li>
 					</ul>
 				</div>
-				
 			</div>
-
-			<!-- 핸드폰번호 변경 -->
-			<!-- <div id="myModal_phone" class="modal"> -->
-				<!-- Modal content -->
-				<!-- <a href="javascript:void(0);" class="ath-email modify-btn modal-btn" data-type="phone"><span>이메일인증</span></a>
-			</div> -->
 
 			<!-- 새 비밀번호 modal -->
 			<div id="myModal_password" class="modal">
@@ -191,12 +202,6 @@
 				</div>
 			</div>
 
-			<!-- 비밀번호 변경 -->
-			<!-- <div id="myModal_password" class="modal">  -->
-				<!-- Modal content -->
-				<!-- <a href="javascript:void(0);" class="ath-email modify-btn modal-btn" data-type="password"><span>이메일인증</span></a>
-			</div> -->
-
 			<!-- 새 지갑주소 modal -->
 			<div id="myModal_wallet" class="modal">
 				<div class="modal-content">
@@ -265,12 +270,6 @@
 				</div>
 			</div>
 
-			<!-- 지갑주소 변경 -->
-			<div id="myModal_wallet" class="modal"> 
-				<!-- Modal content -->
-				<a href="javascript:void(0);" class="ath-email modify-btn modal-btn" data-type="wallet"><span>이메일인증</span></a>
-			</div>
-
 			<!-- 로딩바 -->
 			<!-- <div id = "Progress_Loading">
 				<img src="../../../assets/images/ajax-loader.gif"/>
@@ -283,71 +282,71 @@
 
 <style>
 
-/* The Modal (background) */
-.modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0,0,0); /* Fallback color */
-	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+	/* The Modal (background) */
+	.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 1; /* Sit on top */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	}
 
-/* Modal Content/Box */
-.modal-content {
-	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 33%; /* Could be more or less, depending on screen size */                          
-}
+	/* Modal Content/Box */
+	.modal-content {
+		background-color: #fefefe;
+		margin: 15% auto; /* 15% from the top and centered */
+		padding: 20px;
+		border: 1px solid #888;
+		width: 33%; /* Could be more or less, depending on screen size */                          
+	}
 
-/* The Close Button */
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
-.close:hover,
-.close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
+	/* The Close Button */
+	.close {
+		color: #aaa;
+		float: right;
+		font-size: 28px;
+		font-weight: bold;
+	}
+	.close:hover,
+	.close:focus {
+		color: black;
+		text-decoration: none;
+		cursor: pointer;
+	}
 
-.modal-btn {
-	line-height: 35px;
-    border-radius: 35px;
-    font-size: 14px;
-    color: #111;
-    background: #efefefef;
-    font-weight: 500;
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 15px;
-    min-width: 120px;
-    text-align: center;
-    box-sizing: border-box;
-	position:absolute;
-	left:50%;
-	top:50%;
-	transform: translatex(-50%) translatey(-50%);
-}
+	.modal-btn {
+		line-height: 35px;
+		border-radius: 35px;
+		font-size: 14px;
+		color: #111;
+		background: #efefefef;
+		font-weight: 500;
+		display: inline-block;
+		vertical-align: top;
+		margin-left: 15px;
+		min-width: 120px;
+		text-align: center;
+		box-sizing: border-box;
+		position:absolute;
+		left:50%;
+		top:50%;
+		transform: translatex(-50%) translatey(-50%);
+	}
 
-/* #Progress_Loading
-{
-	position: fixed;
-	left: 50%;
-	top: 50%;
-	background: #ffffff;
-	z-index:99;
-	transform: translatex(-40%) translatey(-50%);
-} */
+	/* #Progress_Loading
+	{
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		background: #ffffff;
+		z-index:99;
+		transform: translatex(-40%) translatey(-50%);
+	} */
 
 </style>
 
@@ -436,6 +435,8 @@
  * 이메일 재전송 시작
  */
 
+	var stTime1
+	var timerStart1
 	var stTime2
 	var timerStart2
 	var stTime3
@@ -443,6 +444,28 @@
     
 	var startTime = function(type){
         
+		if(type == "phone"){
+			if(! stTime1) {
+				stTime1 = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
+			}
+            
+			timerStart1 = setInterval(function() {
+				var nowTime1 = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
+				var newTime1 = new Date(nowTime1 - stTime1) //(nowTime - stTime)을 new Date()에 넣는다
+				var min1 = newTime1.getMinutes() //분
+				var sec1 = newTime1.getSeconds() //초
+				var milisec1 = Math.floor(newTime1.getMilliseconds() / 10) //밀리초
+				document.getElementById('postTestMin1').innerText = addZero(min1)
+				document.getElementById('postTestSec1').innerText = addZero(10- sec1)
+				// document.getElementById('postTestMilisec').innerText = addZero(milisec)
+					if((addZero(10 - sec1)) == 0){
+						clearTime(type);
+						$('.' + type + '-timer-box').attr('style', "display:none;");
+						$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
+					}
+			}, 1000)
+		}
+
 		if(type == "password"){
 			if(! stTime2) {
 				stTime2 = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
@@ -458,9 +481,9 @@
 				document.getElementById('postTestSec2').innerText = addZero(10- sec2)
 				// document.getElementById('postTestMilisec').innerText = addZero(milisec)
 					if((addZero(10 - sec2)) == 0){
-						clearTime();
-						$('.' + type + 'password-timer-box').attr('style', "display:none;");
-						$('.' + type + 'password-resend-email').attr('style', "display:block; margin-top: 20px;");
+						clearTime(type);
+						$('.' + type + '-timer-box').attr('style', "display:none;");
+						$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
 					}
 			}, 1000)
 		}
@@ -481,14 +504,18 @@
 				// document.getElementById('postTestMilisec').innerText = addZero(milisec)
 					if((addZero(10 - sec3)) == 0){
 						clearTime(type);
-						$('.' + type + 'wallet-timer-box').attr('style', "display:none;");
-						$('.' + type + 'wallet-resend-email').attr('style', "display:block; margin-top: 20px;");
+						$('.' + type + '-timer-box').attr('style', "display:none;");
+						$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
 					}
 			}, 1000)
 		}
 	}
 
 	var clearTime = function(type){
+		if(type == "phone" && timerStart1) {
+			clearInterval(timerStart1)
+		}
+
 		if(type == "password" && timerStart2) {
 			clearInterval(timerStart2)
 		}
@@ -584,8 +611,8 @@
                         alert(message);
                         
 						$('#myModal_' + type + ' .ath-email-box .send-ath-email').attr('style', "display:none;"); // 이메일 전송 버튼 제거
-						$('#myModal_' + type + ' .ath-email-box .confirm-ath-email').attr('style', "display:block;"); // 이메일 인증 버튼 생성					}
-						$('#myModal_' + type + ' .ath-email-box .' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;"); // 이메일 인증 버튼 생성					}
+						$('#myModal_' + type + ' .ath-email-box .confirm-ath-email').attr('style', "display:block;"); // 이메일 인증 버튼 생성
+						$('#myModal_' + type + ' .ath-email-box .' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;"); // 이메일 인증 버튼 생성
 					}
 					// 실패
 					if(state == 0){
@@ -691,6 +718,14 @@
 	var isAgreeForModify = function(type) {
 		var isAgreeEmail = $('#myModal_' + type + ' .ath-email-box').hasClass("agree");
 		var isAgreeNice = $('#myModal_' + type + ' .ath-nice-box').hasClass("agree");
+
+		if(type == "phone" && isAgreeEmail){
+			$('#myModal_' + type + ' #new_phone').attr('readonly', false);
+			$('#myModal_' + type + ' #new_phone').attr('disabled', false);
+			$('#myModal_' + type + ' #new_phone').attr('style', '');
+            
+			$('#myModal_' + type + ' .confirm-btn').attr('style', 'display:block; margin-top:20px;');
+		}
         
 		if(type == "password" && ( isAgreeEmail && isAgreeNice )){
 			$('#myModal_' + type + ' #new_password').attr('readonly', false);
