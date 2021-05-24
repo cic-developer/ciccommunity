@@ -104,7 +104,7 @@
 								<p class="chk-input w380">
 									<input type="text" placeholder="인증번호를 입력해주세요" id="new_phone" name="new_phone" value="">
 								</p>
-								<a href="javascript:void(0);" id="confirm_ath_email" class="modify-btn">
+								<a href="javascript:void(0);" data-type="phone" class="modify-btn confirm_ath_email">
 									<span>확인</span>
 								</a>
 							</div>
@@ -301,6 +301,8 @@
 		$(".send_ath_email").on('click', function() {
 			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.
             
+			var state ='';
+			var message = '';
 			$.ajax({
 				url: cb_url + '/membermodify/ajax_modify_email_send',
 				type: 'POST',
@@ -319,6 +321,8 @@
 					if(state == 1){
 						// 성공 메세지
                         alert(message);
+
+						$('#myModal_' + type + ' .ath-email-box').attr('style', "display:block;"); // 이메일 인증 박스 생성
 					}
 					// 실패
 					if(state == 0){
@@ -328,6 +332,42 @@
 				},
 				error: function(){
 					alert('에러가 발생했습니다.');
+				}
+			});
+		})
+	})
+
+	$(document).ready(function(){
+		$(".confirm_ath_email").on('click', function() {
+			var type = $(this).data('type');
+
+			var result = '';
+			var reason = '';
+			$.ajax({
+				url: cb_url + '/membermodify/ajax_modify_ath_mail',
+				type: 'POST',
+				data: {
+					type: type,
+					ath_num: ath_num,
+					modify_type: modify_type,
+					csrf_test_name : cb_csrf_hash
+				},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				success: function(data) {
+					result = data.result;
+					reason = data.reason;
+					
+					alert(reason);
+					
+					// 실패
+					if(result == 0){}
+					
+					//성공
+					//// => 핸드폰변경 박스
+					if(result == 1) {
+					}
 				}
 			});
 		})

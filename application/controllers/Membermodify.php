@@ -2118,8 +2118,17 @@ class Membermodify extends CB_Controller
 		// 로그인한 회원 정보
 		$member_info = $this->member->get_member();
 		$email = $member_info['mem_email'];
+
 		// 세션에 인증번호 저장
-		$this->session->set_userdata('ath_num', $rand_num);
+		if($type == 'phone'){
+			$this->session->set_userdata('phone_ath_num', $rand_num);
+		}
+		if($type == 'password'){
+			$this->session->set_userdata('password_ath_num', $rand_num);
+		}
+		if($type == 'wallet'){
+			$this->session->set_userdata('wallet_ath_num', $rand_num);
+		}
 
 		// 이메일에 포함될 데이터
 		$getdata['rand_num'] = $rand_num;
@@ -2177,10 +2186,10 @@ class Membermodify extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('before', $eventname);
 
+		// 인증 진행 타입
+		$type = trim($this->input->post('type'));
 		// 입력한 인증번호
 		$_ath_num = trim($this->input->post('ath_num'));
-		// 인증 진행 타입
-		$modify_type = trim($this->input->post('modify_type'));
 		
 		if (empty($_ath_num)) {
 			$result = array(
