@@ -30,11 +30,11 @@ class News extends CB_Controller
         $view['view'] = array();
         
         $view['view']['event']['before'] = Events::trigger('before', $eventname);
-        
-        $param =& $this->querystring;
+
+		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = $this->input->get('findex') ? $this->input->get('findex') : $this->{$this->modelname}->primary_key;
-		$forder = $this->input->get('forder', null, 'desc');
+		$findex = 'post_id';
+		$forder = 'desc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
         
@@ -42,23 +42,41 @@ class News extends CB_Controller
         $offset = ($page - 1) * $per_page;
         
         $this->{$this->modelname}->allow_search_field = array('news_id', 'news_title', 'news_content', 'comp_id');
-        $this->{$this->modelname}->search_field_equal = array();
-        $this->{$this->modelname}->allow_order_field = array();
+        $this->{$this->modelname}->search_field_equal = array('news_id', 'comp_id');
+        $this->{$this->modelname}->allow_order_field = array('news_id');
         
         $where = array();
         $result = $this->{$this->modelname}
         ->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
         $list_num = $result['total_rows'] = ($page - 1) * $per_page;
-        if(element('list', $result)){
-            foreach (element('list', $result) as $key => $val) {
-                $result['list'][$key]['display_name'] = display_username(
-                    element('news_title',$val),
-                    element('news_content',$val),
-                    element('comp_id',$val)
-                );
-                $result['list'][$key]['num'] = $list_num--;
-            }
-        }
+		if (element('list', $result)) {
+			foreach (element('list', $result) as $key => $val) {
+				$result['list'][$key]['post_display_name'] = display_username(
+					element('post_userid', $val),
+					element('post_nickname', $val)
+				);
+				$result['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+				$result['list'][$key]['num'] = $list_num--;
+				if ($board) {
+					$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+					$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+				}
+				$result['list'][$key]['category'] = '';
+				if (element('post_category', $val)) {
+					$result['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+				}
+				if (element('post_image', $val)) {
+					$imagewhere = array(
+						'post_id' => element('post_id', $val),
+						'pfi_is_image' => 1,
+					);
+					$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+					$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+				} else {
+					$result['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+				}
+			}
+		}
 
         $view['view']['data'] = $result;
 

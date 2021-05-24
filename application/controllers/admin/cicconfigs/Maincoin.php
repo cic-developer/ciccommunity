@@ -229,111 +229,32 @@ class Maincoin extends CB_Controller
 		 */
 		$config = array(
 			array(
-				'field' => 'is_submit',
-				'label' => '전송',
-				'rules' => 'trim|numeric',
+				'field' => 'cme_korean_nm',
+				'label' => '거래소명 - 한글',
+				'rules' => 'trim|required|min_length[2]|max_length[10]',
 			),
 			array(
-				'field' => 'brd_name',
-				'label' => '게시판이름',
-				'rules' => 'trim|required',
+				'field' => 'cme_english_nm',
+				'label' => '거래소명 - 영문',
+				'rules' => 'trim|required|min_length[2]|max_length[20]|alpha_dash',
 			),
 			array(
-				'field' => 'brd_mobile_name',
-				'label' => '게시판모바일이름',
-				'rules' => 'trim',
-			),
-			array(
-				'field' => 'bgr_id',
-				'label' => '그룹명',
-				'rules' => 'trim|required|numeric',
-			),
-			array(
-				'field' => 'board_layout',
-				'label' => '레이아웃',
-				'rules' => 'trim',
-			),
-			array(
-				'field' => 'board_mobile_layout',
-				'label' => '모바일레이아웃',
-				'rules' => 'trim',
-			),
-			array(
-				'field' => 'board_sidebar',
-				'label' => '사이드바',
-				'rules' => 'trim',
-			),
-			array(
-				'field' => 'board_mobile_sidebar',
-				'label' => '모바일사이드바',
-				'rules' => 'trim',
-			),
-			array(
-				'field' => 'board_skin',
-				'label' => '스킨',
-				'rules' => 'trim',
-			),
-			array(
-				'field' => 'board_mobile_skin',
-				'label' => '모바일스킨',
-				'rules' => 'trim',
-			),
-			array(
-				'field' => 'header_content',
-				'label' => '상단내용',
-				'rules' => 'trim',
-			),
-			array(
-				'field' => 'footer_content',
-				'label' => '하단내용',
-				'rules' => 'trim',
-			),
-			array(
-				'field' => 'mobile_header_content',
-				'label' => '모바일상단내용',
-				'rules' => 'trim',
-			),
-			array(
-				'field' => 'mobile_footer_content',
-				'label' => '모바일하단내용',
-				'rules' => 'trim',
-			),
-			array(
-				'field' => 'brd_order',
-				'label' => '정렬순서',
-				'rules' => 'trim|required|numeric|is_natural|less_than_equal_to[10000]',
-			),
-			array(
-				'field' => 'brd_search',
-				'label' => '검색여부',
-				'rules' => 'trim|numeric',
-			),
-			array(
-				'field' => 'board_use_captcha',
-				'label' => '검색여부',
-				'rules' => 'trim|numeric',
-			),
-			/**
-			 * 2021 03 15 추가
-			 * CIC 포럼 및 QnA등을 위한 설정
-			*/
-			array(
-				'field' => 'board_extra_type',
-				'label' => '게시판설정',
-				'rules' => 'trim'
+				'field' => 'cme_api',
+				'label' => 'API',
+				'rules' => 'trim|required|in_list[coingecko,hotbit_korea]',
 			),
 		);
 		if ($this->input->post($primary_key)) {
 			$config[] = array(
-				'field' => 'brd_key',
-				'label' => '게시판주소',
-				'rules' => 'trim|required|alpha_dash|min_length[3]|max_length[50]|is_unique[board.brd_key.brd_id.' . element('brd_id', $getdata) . ']',
+				'field' => 'cme_id',
+				'label' => '거래소 id',
+				'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[20]|is_unique[cic_maincoin_exchange.cme_id.cme_idx.' . element('cme_idx', $getdata) . ']',
 			);
 		} else {
 			$config[] = array(
-				'field' => 'brd_key',
-				'label' => '게시판주소',
-				'rules' => 'trim|required|alpha_dash|min_length[3]|max_length[50]|is_unique[board.brd_key]',
+				'field' => 'cme_id',
+				'label' => '거래소 id',
+				'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[20]|is_unique[cic_maincoin_exchange.cme_id]',
 			);
 		}
 		$this->form_validation->set_rules($config);
@@ -430,70 +351,6 @@ class Maincoin extends CB_Controller
 					$array = array('m', 'M');
 					$upload_max_filesize = str_replace($array, '', $upload_max_filesize);
 				}
-				$metadata['order_by_field'] = 'post_num, post_reply';
-				$metadata['list_count'] = 20;
-				$metadata['mobile_list_count'] = 10;
-				$metadata['page_count'] = 5;
-				$metadata['mobile_page_count'] = 3;
-				$metadata['show_list_from_view'] = 1;
-				$metadata['new_icon_hour'] = 24;
-				$metadata['hot_icon_hit'] = 100;
-				$metadata['hot_icon_day'] = 30;
-				$metadata['subject_length'] = 60;
-				$metadata['mobile_subject_length'] = 40;
-				$metadata['reply_order'] = 'asc';
-				$metadata['gallery_cols'] = 4;
-				$metadata['gallery_image_width'] = 120;
-				$metadata['gallery_image_height'] = 80;
-				$metadata['mobile_gallery_cols'] = 2;
-				$metadata['mobile_gallery_image_width'] = 120;
-				$metadata['mobile_gallery_image_height'] = 80;
-				$metadata['use_scrap'] = 1;
-				$metadata['use_post_like'] = 1;
-				$metadata['use_post_dislike'] = 1;
-				$metadata['use_print'] = 1;
-				$metadata['use_sns'] = 1;
-				$metadata['use_prev_next_post'] = 1;
-				$metadata['use_mobile_prev_next_post'] = 1;
-				$metadata['use_blame'] = 1;
-				$metadata['blame_blind_count'] = 3;
-				$metadata['syntax_highlighter'] = 1;
-				$metadata['comment_syntax_highlighter'] = 1;
-				$metadata['use_autoplay'] = 1;
-				$metadata['post_image_width'] = 600;
-				$metadata['post_mobile_image_width'] = 400;
-				$metadata['content_target_blank'] = 1;
-				$metadata['use_auto_url'] = 1;
-				$metadata['use_mobile_auto_url'] = 1;
-				$metadata['use_post_dhtml'] = 1;
-				$metadata['link_num'] = 2;
-				$metadata['use_upload_file'] = 1;
-				$metadata['upload_file_num'] = 2;
-				$metadata['mobile_upload_file_num'] = 2;
-				$metadata['upload_file_max_size'] = $upload_max_filesize;
-				$metadata['comment_count'] = 20;
-				$metadata['mobile_comment_count'] = 20;
-				$metadata['comment_page_count'] = 5;
-				$metadata['mobile_comment_page_count'] = 3;
-				$metadata['use_comment_like'] = 1;
-				$metadata['use_comment_dislike'] = 1;
-				$metadata['use_comment_profile'] = 1;
-				$metadata['use_mobile_comment_profile'] = 1;
-				$metadata['comment_best'] = 1;
-				$metadata['mobile_comment_best'] = 1;
-				$metadata['comment_best_like_num'] = 3;
-				$metadata['use_comment_secret'] = 1;
-				$metadata['comment_order'] = 'asc';
-				$metadata['use_comment_blame'] = 1;
-				$metadata['comment_blame_blind_count'] = 3;
-				$metadata['protect_comment_num'] = 5;
-				$metadata['use_sideview'] = 1;
-				$metadata['use_sideview_icon'] = 1;
-				$metadata['use_tempsave'] = 1;
-				$metadata['use_download_log'] = 1;
-				$metadata['use_posthistory'] = 1;
-				$metadata['use_link_click_log'] = 1;
-				$metadata['use_sitemap'] = 1;
 
 				$cme_idx = $this->{$this->modelname}->insert($updatedata);
 				$this->Board_meta_model->save($cme_idx, $metadata);
@@ -525,7 +382,7 @@ class Maincoin extends CB_Controller
 					'기본정보 설정이 저장되었습니다'
 				);
 
-				$redirecturl = admin_url($this->pagedir . '/write/' . $cme_idx);
+				$redirecturl = admin_url($this->pagedir . '/exchange_write/' . $cme_idx);
 				redirect($redirecturl);
 			}
 		}
@@ -533,36 +390,12 @@ class Maincoin extends CB_Controller
 		$getdata = array();
 		if ($cme_idx) {
 			$getdata = $this->{$this->modelname}->get_one($cme_idx);
-			$board_meta = $this->Board_meta_model->get_all_meta(element('brd_id', $getdata));
-			if (is_array($board_meta)) {
-				$getdata = array_merge($getdata, $board_meta);
-			}
 		} else {
 			// 기본값 설정
 			$getdata['brd_search'] = 1;
 		}
 
 		$view['view']['data'] = $getdata;
-		$view['view']['data']['board_layout_option'] = get_skin_name(
-			'_layout',
-			set_value('board_layout', element('board_layout', $getdata)),
-			'기본설정따름'
-		);
-		$view['view']['data']['board_mobile_layout_option'] = get_skin_name(
-			'_layout',
-			set_value('board_mobile_layout', element('board_mobile_layout', $getdata)),
-			'기본설정따름'
-		);
-		$view['view']['data']['board_skin_option'] = get_skin_name(
-			'board',
-			set_value('board_skin', element('board_skin', $getdata)),
-			'기본설정따름'
-		);
-		$view['view']['data']['board_mobile_skin_option'] = get_skin_name(
-			'board',
-			set_value('board_mobile_skin', element('board_mobile_skin', $getdata)),
-			'기본설정따름'
-		);
 
 		/**
 		 * primary key 정보를 저장합니다

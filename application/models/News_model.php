@@ -22,7 +22,7 @@ class News_model extends CB_Model
         parent::__construct();
     }
 
-    public function get_news_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
+    public function get_news_list($limit = '', $offset = '', $where = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
     {
 		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
 			$orderby = 'news_id desc';
@@ -33,13 +33,13 @@ class News_model extends CB_Model
 			$sfield = array('news_title', 'news_content');
 		}
 
-		        print_r('hello');
-        exit;
 		
-        $search_where = array();
+		$search_where = array();
 		$search_like = array();
 		$search_or_like = array();
 		if ($sfield && is_array($sfield)) {
+			print_r('hello');
+			exit;
 			foreach ($sfield as $skey => $sval) {
 				$ssf = $sval;
 				if ($skeyword && $ssf && in_array($ssf, $this->allow_search_field)) {

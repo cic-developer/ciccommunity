@@ -162,6 +162,25 @@
 									<span>인증번호 재전송</span>
 								</a>	
 							</div>
+							
+<div>
+<div>
+<span id="postTestMin">00</span><!-- 분 -->
+<span>:</span>
+<span id="postTestSec">00</span><!--초-->
+<span>.</span>
+<span id="postTestMilisec">00</span><!--밀리초-->
+</div>
+<div>
+<ul id="testRecordList"></ul><!--중간 기록할 리스트-->
+</div>
+<div>
+<button type="button" id="testStartBtn">START</button><!--시작/재시작/기록 버튼-->
+<button type="button" id="testStopBtn">STOP</button><!--스톱 버튼-->
+</div>
+</div>
+
+
 						</li>
 					</ul>
 					<ul class="entry ath-nice-box" style="display:none;">
@@ -357,9 +376,39 @@
  * 이메일 인증 시작
  */
 
-	var waitResend = function() {
-		$('.resend').attr('style', "display:none;")
+	var stTime
+	var timerStart
 
+	var startTime = function(){
+		if(! stTime) {
+			stTime = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
+		}
+
+		timerStart = setInterval(function() {
+		var nowTime = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
+		var newTime = new Date(nowTime - stTime) //(nowTime - stTime)을 new Date()에 넣는다
+		var min = newTime.getMinutes() //분
+		var sec = newTime.getSeconds() //초
+		var milisec = Math.floor(newTime.getMilliseconds() / 10) //밀리초
+		document.getElementById('postTestMin').innerText = addZero(min)
+		document.getElementById('postTestSec').innerText = addZero(sec)
+		document.getElementById('postTestMilisec').innerText = addZero(milisec)
+		}, 1)
+	}
+
+	var clearTime = function(){
+		if(timerStart) {
+			clearInterval(timerStart)
+		}
+	}
+
+	function addZero(num) {
+		return (num < 10 ? '0'+num : ''+num)
+	}
+
+	var waitResend = function() {
+		$('.resend').attr('style', "display:none;");
+		startTime();
 	}
 
 	$(document).ready(function(){
