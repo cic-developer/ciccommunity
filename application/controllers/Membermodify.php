@@ -2561,10 +2561,16 @@ class Membermodify extends CB_Controller
 		$this->checkplus->success($EncodeData);
 
 		$data = $this->session->userdata('dec_data');
+		$data2 = $this->session->userdata('type');
 		$DI = $data['dupinfo'];
 		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
-;
+
+		print_r("<br>");
+		print_r("hi");
+		print_r("<br>");
+		print_r($EncodeData);
+
 		exit;
 		if(count($isDI) > 0){ // 중복 이면
 			// 휴대폰 인증 결과 저장
@@ -2605,8 +2611,8 @@ class Membermodify extends CB_Controller
 
 		$this->session->set_userdata('password_modify_ath_nice_phone_result', '');
 
-		if($this->input->get("EncodeData1")){
-			$this->checkplus->fail($this->input->get("EncodeData1"));
+		if($this->input->get("EncodeData")){
+			$this->checkplus->fail($this->input->get("EncodeData"));
 			
 			echo("<script>alert('인증에 실패하였습니다!');</script>");
 			echo("<script>self.close()</script>");
@@ -2634,8 +2640,8 @@ class Membermodify extends CB_Controller
 
 		$this->session->set_userdata('wallet_modify_ath_nice_phone_result', '');
 
-		if($this->input->get("EncodeData2")){
-			$this->checkplus->fail($this->input->get("EncodeData2"));
+		if($this->input->get("EncodeData")){
+			$this->checkplus->fail($this->input->get("EncodeData"));
 			
 			echo("<script>alert('인증에 실패하였습니다!');</script>");
 			echo("<script>self.close()</script>");

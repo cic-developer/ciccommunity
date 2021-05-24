@@ -188,13 +188,7 @@
 						<li>
 							<p class="btxt">핸드폰인증</p>
 							<div class="all-nice-box">
-								<form name="form_chk" method="post" id="password_form_chk">
-									<input type="hidden" name="m" value="checkplusService">
-									<input type="hidden" name="EncodeData1" value="<?php echo html_escape(element('password_enc_data', $view)); ?>">
-									<a href="javascript:fnPopup();" class="modify-btn modal-btn">
-										<span>핸드폰인증</span>
-									</a>
-								</form>
+								<!--  -->
 							</div>
 							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
 						</li>
@@ -256,14 +250,7 @@
 						<li>
 							<p class="btxt">핸드폰인증</p>
 							<div class="all-nice-box">
-								<form name="form_chk" method="post" id="wallet_form_chk">
-									<input type="hidden" name="m" value="checkplusService">
-									<input type="hidden" name="type" value="wallet">
-									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">
-									<a href="javascript:fnPopup();" class="modify-btn modal-btn">
-										<span>핸드폰인증</span>
-									</a>
-								</form>
+								<!--  -->
 							</div>
 							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
 						</li>
@@ -960,11 +947,17 @@
  * 나이스 휴대폰 인증 시작
  */
 	window.name ="Parent_window";
-	function fnPopup(){
+	function fnPopup1(){
 		window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
-		document.form_chk.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
-		document.form_chk.target = "popupChk";
-		document.form_chk.submit();
+		document.form_chk1.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+		document.form_chk1.target = "popupChk";
+		document.form_chk1.submit();
+	}
+	function fnPopup2(){
+		window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
+		document.form_chk2.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+		document.form_chk2.target = "popupChk";
+		document.form_chk2.submit();
 	}
 
 	var successNice = function(type){

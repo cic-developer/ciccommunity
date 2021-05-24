@@ -33,7 +33,7 @@ class Maincoin extends CB_Controller
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
-	protected $helpers = array('form', 'array', 'dhtml_editor');
+	protected $helpers = array('form', 'array', 'dhtml_editor', 'maincoin');
 
 	function __construct()
 	{
