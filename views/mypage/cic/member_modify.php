@@ -356,6 +356,55 @@
 /**
  * 이메일 인증 시작
  */
+
+	var waitResend = function(el) {
+		$(this).removeClass("resend-ath-email");
+	}
+
+	$(document).ready(function(){
+		$('.resend-ath-email').on('click', function() {
+			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.
+
+			var state ='';
+			var message = '';
+			$.ajax({
+				url: cb_url + '/membermodify/ajax_modify_email_send',
+				type: 'POST',
+				data: {
+					type: type,
+					csrf_test_name : cb_csrf_hash
+				},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				// beforeSend: function () {
+				// var vm = this;
+				// 	vm.setAttribute("disabled", "disabled");
+				// },
+				success: function(data) {
+					state = data.state;
+					message = data.message;
+                    
+					// 성공
+					if(state == 1){
+						// 성공 메세지
+                        alert(message);
+					}
+					// 실패
+					if(state == 0){
+						// 실패 메세지
+						alert(message);
+					}
+
+					waitResend(this);
+				},
+				error: function() {
+					alert("에러가 발생했습니다");
+				}
+			});
+		})
+	})
+
 	$(document).ready(function(){
 		$(".send-ath-email").on('click', function() {
 			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.

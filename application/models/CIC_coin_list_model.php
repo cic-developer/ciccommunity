@@ -191,12 +191,7 @@ class CIC_Coin_list_model extends CB_Model
         $refresh = $this -> input -> post('refresh');
         // convert json to php array or object
         $array = json_decode($response, true);
-        $list_ = array();
-        foreach($array as $list){
-            $list_[] = $list['name'];
-
-        }
-        return $list_;
+        return $array;
         
     }
 
