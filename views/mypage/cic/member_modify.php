@@ -128,10 +128,10 @@
 							<p class="btxt">새 비밀번호</p>
 							<div class="field modify">
 								<p class="chk-input w380">
-									<input type="text" placeholder="" onkeyup="inputPhoneNumber(this);" id="new_password" name="new_password" value="" readonly disabled style="background-color:#efefef;">
+									<input type="text" placeholder="" id="new_password" name="new_password" value="" readonly disabled style="background-color:#efefef;">
 								</p>
-								<p class="chk-input w380" style="margin-top:30px;">
-									<input type="text" placeholder="" onkeyup="inputPhoneNumber(this);" id="new_password" name="new_password" value="" readonly disabled style="background-color:#efefef;">
+								<p class="chk-input w380" style="margin-top:35px;">
+									<input type="text" placeholder="" id="new_password_re" name="new_password_re" value="" readonly disabled style="background-color:#efefef;">
 								</p>
 								<a href="javascript:void(0);" id="confirm_password_number" class="modify-btn confirm-btn" style="display:none;">
 									<span>확인</span>
@@ -153,6 +153,18 @@
 									<span>확인</span>
 								</a>
 							</div>
+						</li>
+					</ul>
+					<ul class="entry ath-nice-box" style="display:none;">
+						<li>
+							<p class="btxt">휴대폰인증</p>
+							<form name="form_chk" method="post" id="password_form_chk">
+								<input type="hidden" name="m" value="checkplusService">
+								<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">
+								<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
+									<span>핸드폰인증</span>
+								</a>
+							</form>
 						</li>
 					</ul>
 				</div>
@@ -362,6 +374,10 @@
                         alert(message);
 
 						$('#myModal_' + type + ' .ath-email-box').attr('style', "display:block;"); // 이메일 인증 박스 생성
+						
+						if(type == "password" || type == "wallet"){
+							$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:block;"); // 핸드폰 인증 박스 생성
+						}
 					}
 					// 실패
 					if(state == 0){

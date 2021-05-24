@@ -135,7 +135,7 @@ class Searchcoin extends CB_Controller
 		}
 		$get_apiList = $this -> CIC_coin_list_model->get_apiList();
 		//getting coin list from api
-		// $getList = $this -> CIC_coin_list_model->retrieve_api();
+		$getList = $this -> CIC_coin_list_model->retrieve_api();
 		// for($i=0; $i<count($getList); $i++){
 		// 	$market = $getList[$i]['market'];
 		// 	//Getting only coin starting with K	

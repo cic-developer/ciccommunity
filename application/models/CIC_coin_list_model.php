@@ -157,8 +157,13 @@ class CIC_Coin_list_model extends CB_Model
         // }
                 // convert json to php array or object
             $array = json_decode($response, true);
-            print_r(1);
+            echo  "<pre><br>";
+            print_r($array);
+            echo  "</pre></br>";
             return $array;
+            // $array['localization']['ko']
+            //$array['symbole']
+
     }        
     function get_apiList(){
         $curl = curl_init();
