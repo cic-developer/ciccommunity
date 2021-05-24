@@ -576,9 +576,9 @@ class Maincoin extends CB_Controller
 		 */
 		$config = array(
 			array(
-				'field' => 's',
-				'label' => '그룹명',
-				'rules' => 'trim',
+				'field' => 'cmcd_cmc_idx',
+				'label' => '코인 idx',
+				'rules' => 'trim|is_natural_no_zero',
 			),
 		);
 		$this->form_validation->set_rules($config);
@@ -604,7 +604,7 @@ class Maincoin extends CB_Controller
 
 			$updatedata = $this->input->post();
 
-			$this->CIC_maincoin_coin_model->update_group($updatedata);
+			$this->CIC_maincoin_coin_detail_model->update_exchange($updatedata);
 			$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 		}
 

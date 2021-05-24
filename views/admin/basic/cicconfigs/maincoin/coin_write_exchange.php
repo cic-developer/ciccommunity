@@ -20,13 +20,14 @@
 					<button type="submit" class="btn btn-outline btn-danger btn-sm">저장하기</button>
 				</div>
 			</div>
-			<div class="row"><?php echo element('total_rows', element('data', $view), 0); ?>개의 그룹이 존재합니다</div>
+			<div class="row"><?php echo element('total_rows', element('exchange_list', $view), 0); ?>개의 거래소가 존재합니다</div>
 			<div class="list-group">
 				<div class="form-group list-group-item">
 					<div class="col-sm-1">순번</div>
 					<div class="col-sm-3">거래소명</div>
-					<div class="col-sm-2">사용여부</div>
-					<div class="col-sm-6">코인 id</div>
+					<div class="col-sm-2">API</div>
+					<div class="col-sm-1">사용여부</div>
+					<div class="col-sm-5">코인 id</div>
 				</div>
 				<div id="sortable">
 					<?php
@@ -37,8 +38,9 @@
 							<input type="hidden" name="cmcd_cme_idx[<?php echo element('cme_idx', $result); ?>]" value="<?php echo element('cme_idx', $result); ?>"/>
 							<div class="col-sm-1"><?php echo element('num', $result); ?></div>
 							<div class="col-sm-3"><?php echo html_escape(element('cme_korean_nm', $result)); ?></div>
-							<div class="col-sm-2"><input type="checkbox" name="cmcd_coin_id[<?php echo element('cme_idx', $result); ?>]" value="1" <?php echo element('mgr_is_default', $result) ? ' checked="checked" ' : ''; ?> /></div>
-							<div class="col-sm-6"><input type="text" class="form-control" name="cmcd_use[<?php echo element('cme_idx', $result); ?>]" value="<?php echo html_escape(element('mgr_description', $result)); ?>" /></div>
+							<div class="col-sm-2"><?php echo html_escape(element('cme_api', $result)); ?></div>
+							<div class="col-sm-1"><input type="checkbox" name="cmcd_coin_id[<?php echo element('cme_idx', $result); ?>]" value="1" <?php echo element('mgr_is_default', $result) ? ' checked="checked" ' : ''; ?> /></div>
+							<div class="col-sm-5"><input type="text" class="form-control" name="cmcd_use[<?php echo element('cme_idx', $result); ?>]" value="<?php echo html_escape(element('mgr_description', $result)); ?>" /></div>
 						</div>
 					<?php
 						}
@@ -52,15 +54,4 @@
 </div>
 
 <script type="text/javascript">
-//<![CDATA[
-$(function() {
-	$('#fadminwrite').validate({
-		rules: {
-			cmc_korean_nm: {required :true, minlength:2, maxlength:10 },
-			cmc_english_nm: {required :true, minlength:2, maxlength:20 },
-			cmc_symbol: {required :true, minlength:2, maxlength:20 },
-		}
-	});
-});
-//]]>
 </script>

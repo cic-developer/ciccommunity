@@ -27,8 +27,6 @@ class News_model extends CB_Model
 		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
 			$orderby = 'news_reviews desc';
 		}
-		print_r($orderby);
-		exit;
 		
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
 		if (empty($sfield)) {
@@ -38,6 +36,8 @@ class News_model extends CB_Model
 		$search_where = array();
 		$search_like = array();
 		$search_or_like = array();
+		print_r('hello');
+		exit;
 		if ($sfield && is_array($sfield)) {
 			foreach ($sfield as $skey => $sval) {
 				$ssf = $sval;
@@ -121,8 +121,7 @@ class News_model extends CB_Model
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}
-		print_r($orderby);
-		exit;
+
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
 		
@@ -163,8 +162,6 @@ class News_model extends CB_Model
 			$this->db->group_end();
 		}
 		$qry = $this->db->get();
-		// print_r($qry);
-		// exit;
 		$rows = $qry->row_array();
 		$result['total_rows'] = $rows['rownum'];
 

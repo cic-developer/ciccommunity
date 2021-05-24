@@ -151,11 +151,11 @@ class CIC_Coin_list_model extends CB_Model
         $array = json_decode($response, true);
         $refresh = $this -> input -> post('refresh');
         foreach($array as $arr){
-            echo '<pre><br>';
-            print_r($array['localization']['ko']);
-            print_r($array['symbol']);
-            print_r($array['name']);
-            echo '</pre></br>';
+            // echo '<pre><br>';
+            // print_r($array['localization']['ko']);
+            // print_r($array['symbol']);
+            // print_r($array['name']);
+            // echo '</pre></br>';
         }
         if($refresh){
         // convert json to php array or object
@@ -202,8 +202,9 @@ class CIC_Coin_list_model extends CB_Model
         $listId = array();
         if(is_array($array)){
             foreach($array as $arr){
-                $listId = $arr['id'];
+                $listId[] = $arr['id'];
             }
+            print_r($listId[1]);
             return $listId;
         }
         
