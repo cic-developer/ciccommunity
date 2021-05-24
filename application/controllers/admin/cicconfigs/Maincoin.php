@@ -51,7 +51,7 @@ class Maincoin extends CB_Controller
 	public function index()
 	{
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_ciccinfigs_maincoin_index';
+		$eventname = 'event_admin_cicconfigs_maincoin_index';
 		$this->load->event($eventname);
 
 		$view = array();

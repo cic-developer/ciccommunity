@@ -55,6 +55,7 @@ class CIC_maincoin_coin_detail_model extends CB_Model
 				if ($value) {
 					$updatedata = array(
 						'cmcd_coin_id' => $data['cmcd_coin_id'][$key],
+						'cmcd_coin_market' => $data['cmcd_coin_market'][$key],
 						'cmcd_datetime' => $now_date,
 					);
 					$this->update($value, $updatedata);
@@ -63,6 +64,7 @@ class CIC_maincoin_coin_detail_model extends CB_Model
 						'cmcd_cmc_idx' => $data['cmcd_cmc_idx'],
 						'cmcd_cme_idx' => $key,
 						'cmcd_coin_id' => $data['cmcd_coin_id'][$key],
+						'cmcd_coin_market' => $data['cmcd_coin_market'][$key],
 						'cmcd_datetime' => $now_date,
 					);
 					$this->insert($insertdata);

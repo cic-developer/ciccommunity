@@ -138,19 +138,23 @@ class Searchcoin extends CB_Controller
 		$list_ = array();
 		for($i = 0; $i<count($get_apiList); $i++){
 			$getLists = $this -> CIC_coin_list_model->retrieve_api($get_apiList[$i]);
-			print_r($getLists);
+			// print_r($getLists);
 			// $data = array(
 			// 	'clist_market' => $getList[$i]['symbol'],
 			// 	'clist_name_ko' => $getList[$i]['localization']['ko'],
 			// 	'clist_name_en' => $getList[$i]['name'],
 			// );
+			if(isset($data) && !empty($data)){
+				foreach($data as $coinData){
+					$stock = $this->CIC_coin_list_model->insertStockData($data);
+					$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+				}
+				
+			}
 			// echo "<pre><br>";
 			// print_r($data);
 			// echo "</pre></br>";
-		
-		
 			}
-		
 		// 	// echo "<pre><br>";$list_
 		// 	// print_r($getLists);
 		// 	// echo "</pre></br>";		

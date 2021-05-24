@@ -50,49 +50,17 @@ class News extends CB_Controller
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
 		$this->{$this->modelname}->allow_search_field = array('news_id', 'news_title', 'news_content', 'comp_id', 'news_reviews', 'news_wdate'); // 검색이 가능한 필드
-		$this->{$this->modelname}->search_field_equal = array('post_id', 'mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->{$this->modelname}->allow_order_field = array('post_id'); // 정렬이 가능한 필드
-		// $checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-		// $where = array(
-		// 	'brd_id' => 1,
-		// 	'post_exept_state' => 0,
-		// 	'post_datetime >=' => $checktime,
-		// 	'post_del <>' => 2,
-		// );
-		// if ($brdid = (int) $this->input->get('brd_id')) {
-		// 	$where['brd_id'] = $brdid;
-		// }
+		$this->{$this->modelname}->search_field_equal = array('news_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->{$this->modelname}->allow_order_field = array('news_id'); // 정렬이 가능한 필드
 		
 		$result = $this->{$this->modelname}
 			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-			print_r($result);
-			exit;
-		$list_num = $result['total_rows'] - ($page - 1) * $per_page;esult)) {
+
+		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
+
+		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
-				// $result['list'][$key]['p_display_name'] = display_username(
-				// 	element('news_title', $val),
-				// 	element('post_nickname', $val)
-				// );
-				// $result['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
 				$result['list'][$key]['num'] = $list_num--;
-				// if ($board) {
-				// 	$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-				// 	$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
-				// }
-				// $result['list'][$key]['category'] = '';
-				// if (element('post_category', $val)) {
-				// 	$result['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
-				// }
-				// if (element('post_image', $val)) {
-				// 	$imagewhere = array(
-				// 		'post_id' => element('post_id', $val),
-				// 		'pfi_is_image' => 1,
-				// 	);
-				// 	$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-				// 	$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
-				// } else {
-				// 	$result['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
-				// }
 			}
 		}
 		$view['view']['data'] = $result;

@@ -172,9 +172,9 @@ class Search extends CB_Controller
 
 		$view['view']['data'] = $result;
 		$view['view']['boardlist'] = $boardlist;
-		echo "<pre><br>";
-		print_r($result);
-		echo "</pre></br>";
+		// echo "<pre><br>";
+		// print_r($result);
+		// echo "</pre></br>";
 		$view['view']['grouplist'] = $grouplist;
 		$total_rows = $result['total_rows'];
 		$view['total_rows'] = $total_rows;

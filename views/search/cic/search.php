@@ -11,8 +11,8 @@
 							//print_r($value);
 					?>
 					<ul>
-						<li class="active"><a href="<?php current_full_url() ?>"><span>통합검색</span></a></li>
-						<li><a href="<?php current_full_url() ?>/group_id=<?php echo element ('brd_order', $value) ?>"><span>제목</span></a></li>
+						<li class="active"><a href="<?php base_url() ?>"><span>통합검색</span></a></li>
+						<li><a href="<?php base_url() ?>/<?php echo element ('brd_order', $value) ?>"><span>제목</span></a></li>
 						<li><a href="#n"><span>내용</span></a></li>
 						<li><a href="#n"><span>작성자</span></a></li>
 					</ul>

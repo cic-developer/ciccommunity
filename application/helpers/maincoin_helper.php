@@ -14,13 +14,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 if ( ! function_exists('get_coin_price')) {
 
-	function get_coin_price($api, $coin_id, $exchange)
+	function get_coin_price($api, $coin_id, $market="KRW", $exchange_id="")
 	{
         switch($api){
             case 'coingecko':{
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
-                    CURLOPT_URL => "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}&period=86400",
+                    CURLOPT_URL => "https://api.coingecko.com/api/v3/exchanges/{$exchange_id}/tickers?coin_ids={$coin_id}",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_FOLLOWLOCATION => true,
                     CURLOPT_ENCODING => "",
@@ -53,7 +53,7 @@ if ( ! function_exists('get_coin_price')) {
             case 'hotbit_korea': {
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
-                    CURLOPT_URL => "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}&period=86400",
+                    CURLOPT_URL => "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_FOLLOWLOCATION => true,
                     CURLOPT_ENCODING => "",

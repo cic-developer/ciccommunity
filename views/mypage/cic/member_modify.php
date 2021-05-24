@@ -308,7 +308,7 @@
 	}
 
 	.modal-btn {
-		line-height: 35px;
+		/* line-height: 35px;
 		border-radius: 35px;
 		font-size: 14px;
 		color: #111;
@@ -323,7 +323,19 @@
 		position:absolute;
 		left:50%;
 		top:50%;
-		transform: translatex(-50%) translatey(-50%);
+		transform: translatex(-50%) translatey(-50%); */
+		line-height: 35px;
+		border-radius: 35px;
+		font-size: 14px;
+		color: #fff;
+		background: #111;
+		font-weight: 500;
+		display: inline-block;
+		vertical-align: top;
+		margin-left: 15px;
+		min-width: 120px;
+		text-align: center;
+		box-sizing: border-box;
 	}
 
 	/* #Progress_Loading
@@ -628,7 +640,10 @@
 			if($(this).hasClass("active")){
 				$('#myModal_' + type + ' .ath-email-box').attr('style', "display:none;"); // 이메일 인증 박스 제거
                 
-				if(type == "password" || type == "wallet"){
+				if(type == "password"){
+					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:none;"); // 핸드폰 인증 박스 제거
+				}
+				if(type == "wallet"){
 					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:none;"); // 핸드폰 인증 박스 제거
 				}
                 
@@ -636,8 +651,31 @@
 			} else{
 				$('#myModal_' + type + ' .ath-email-box').attr('style', "display:block;"); // 이메일 인증 박스 생성
                 
-				if(type == "password" || type == "wallet"){
+				if(type == "password"){
+					var html = '';
+					html += '<div class="field modify">';
+					html += '<form name="form_chk1" method="post" id="password_form_chk">';
+					html += '<input type="hidden" name="m" value="checkplusService">';
+					html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('password_enc_data', $view)); ?>">';
+					html += '<a href="javascript:fnPopup1();" id="ath_nice_phone" class="modify-btn"><span>휴대폰 인증</span></a>';
+					html += '</form>';
+					html += '</div>';
+
 					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:block;"); // 핸드폰 인증 박스 생성
+					$('#myModal_' + type + ' .ath-nice-box').append(html); // 핸드폰 인증 버튼 생성
+				}
+				if(type == "wallet"){
+					var html = '';
+					html += '<div class="field modify">';
+					html += '<form name="form_chk2" method="post" id="wallet_form_chk">';
+					html += '<input type="hidden" name="m" value="checkplusService">';
+					html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">';
+					html += '<a href="javascript:fnPopup2();" id="ath_nice_phone" class="modify-btn"><span>휴대폰 인증</span></a>';
+					html += '</form>';
+					html += '</div>';
+
+					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:block;"); // 핸드폰 인증 박스 생성
+					$('#myModal_' + type + ' .ath-nice-box').append(html); // 핸드폰 인증 버튼 생성
 				}
                 
 				$(this).addClass("active");

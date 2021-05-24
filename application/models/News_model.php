@@ -87,16 +87,6 @@ class News_model extends CB_Model
 		if ($search_where) {
 			$this->db->where($search_where);
 		}
-		// if ($category_id) {
-		// 			if (strpos($category_id, '.')) {
-		// 		$this->db->like('post_category', $category_id . '', 'after');
-		// 	} else {
-		// 		$this->db->group_start();
-		// 		$this->db->where('post_category', $category_id);
-		// 		$this->db->or_like('post_category', $category_id . '.', 'after');
-		// 		$this->db->group_end();
-		// 	}
-		// }
 		if ($search_like) {
 			foreach ($search_like as $item) {
 				foreach ($item as $skey => $sval) {
