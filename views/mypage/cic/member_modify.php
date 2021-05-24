@@ -155,6 +155,11 @@
 								<a href="javascript:void(0);" data-type="password" class="modify-btn confirm-ath-email" style="display:none;">
 									<span>확인</span>
 								</a>
+								<div style="clear:both;">
+									<a href="javascript:void(0);" data-type="password" class="modify-btn confirm-ath-email" style="display:block;">
+										<span>인증번호 재전송</span>
+									</a>	
+								</div>
 							</div>
 						</li>
 					</ul>
@@ -351,7 +356,7 @@
  * 이메일 인증 시작
  */
 	$(document).ready(function(){
-		$(".sned-ath-email").on('click', function() {
+		$(".send-ath-email").on('click', function() {
 			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.
 
 			var state ='';
@@ -374,6 +379,9 @@
 					if(state == 1){
 						// 성공 메세지
                         alert(message);
+
+						$('#myModal_' + type + ' .ath-email-box .send-ath-email').attr('style', "display:none;"); // 이메일 전송 버튼 제거
+						$('#myModal_' + type + ' .ath-email-box .confirm-ath-email').attr('style', "display:block;"); // 이메일 인증 버튼 생성					}
 					}
 					// 실패
 					if(state == 0){
