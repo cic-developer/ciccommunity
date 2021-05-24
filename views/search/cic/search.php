@@ -30,8 +30,10 @@
                     <?php echo form_close(); ?>
 				</div>
 				<div class="abr">
+				<?php if (element('boardlist', $view)) { ?>
+							<?php foreach (element('boardlist', $view) as $key => $value) { ?>
 					<div class="sel-box c02">
-						<a href="#n" class="sel-btn"><span>제목만</span></a>
+						<a href="<?php echo base_url() ?>" class="sel-btn"><span>제목만</span></a>
 						<ul>
 							<li class="active"><a href="#n"><span>제목만</span></a></li>
 							<li><a href="#n"><span>내용만</span></a></li>
@@ -46,6 +48,9 @@
 						</ul>
 					</div>
 				</div>
+				<?php
+						}
+					}?>		
 				
 			</div>
 			<div class="result">
