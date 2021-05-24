@@ -125,11 +125,12 @@ class CIC_Coin_list_model extends CB_Model
         return $query->row_array();
     }
 
-    function retrieve_api($coinName){
+    function retrieve_api(){
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/{$coinName}?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
+            // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/{$coinName}?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
+            CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/bitcoin?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",
@@ -147,13 +148,17 @@ class CIC_Coin_list_model extends CB_Model
         if($err){
             echo "cUrl Error :" . $err;
         }
-        $refresh = $this -> input -> post('refresh');
-        if($refresh){
-        // convert json to php array or object
+        // $refresh = $this -> input -> post('refresh');
+        // if($refresh){
+        // // convert json to php array or object
+        //     $array = json_decode($response, true);
+        //     print_r(1);
+        //     return $array;
+        // }
+                // convert json to php array or object
             $array = json_decode($response, true);
             print_r(1);
             return $array;
-        }
     }        
     function get_apiList(){
         $curl = curl_init();

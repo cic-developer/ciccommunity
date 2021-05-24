@@ -78,7 +78,7 @@
 			</div>
 			
 
-			<!-- 테스트 -->
+			<!-- 새 핸드폰번호 modal -->
 			<div id="myModal_phone" class="modal">
 				<div class="modal-content">
 					<ul class="entry modify-box">
@@ -120,11 +120,50 @@
 				<!-- <a href="javascript:void(0);" class="ath-email modify-btn modal-btn" data-type="phone"><span>이메일인증</span></a>
 			</div> -->
 
-			<!-- 비밀번호 변경 -->
-			<div id="myModal_password" class="modal"> 
-				<!-- Modal content -->
-				<a href="javascript:void(0);" class="ath-email modify-btn modal-btn" data-type="password"><span>이메일인증</span></a>
+			<!-- 새 비밀번호 modal -->
+			<div id="myModal_password" class="modal">
+				<div class="modal-content">
+					<ul class="entry modify-box">
+						<li class="">
+							<p class="btxt">새 비밀번호</p>
+							<div class="field modify">
+								<p class="chk-input w380">
+									<input type="text" placeholder="" onkeyup="inputPhoneNumber(this);" id="new_password" name="new_password" value="" readonly disabled style="background-color:#efefef;">
+								</p>
+								<p class="chk-input w380" style="margin-top:30px;">
+									<input type="text" placeholder="" onkeyup="inputPhoneNumber(this);" id="new_password" name="new_password" value="" readonly disabled style="background-color:#efefef;">
+								</p>
+								<a href="javascript:void(0);" id="confirm_password_number" class="modify-btn confirm-btn" style="display:none;">
+									<span>확인</span>
+								</a>
+								<a href="javascript:void(0);" data-type="password" class="modify-btn send_ath_email">
+									<span>이메일+핸드폰인증</span>
+								</a>
+							</div>
+						</li>
+					</ul>
+					<ul class="entry ath-email-box" style="display:none;">
+						<li class="">
+							<p class="btxt">인증번호</p>
+							<div class="field modify">
+								<p class="chk-input w380">
+									<input type="text" placeholder="인증번호를 입력해주세요" id="ath_num" name="ath_num" value="">
+								</p>
+								<a href="javascript:void(0);" data-type="password" class="modify-btn confirm_ath_email">
+									<span>확인</span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+				
 			</div>
+
+			<!-- 비밀번호 변경 -->
+			<!-- <div id="myModal_password" class="modal">  -->
+				<!-- Modal content -->
+				<!-- <a href="javascript:void(0);" class="ath-email modify-btn modal-btn" data-type="password"><span>이메일인증</span></a>
+			</div> -->
 
 			<!-- 지갑주소 변경 -->
 			<div id="myModal_wallet" class="modal"> 
@@ -584,7 +623,7 @@
 	}
 
 	// 핸드폰번호 validation and 사용가능여부 check
-	$(document).on('click', "#phone_modify_btn", function(){
+	$(document).on('click', "#confirm_phone_number", function(){
         
 		var _phone = $("#new_phone").val(); // 입력한 핸드폰번호
 		var phone = _phone;
