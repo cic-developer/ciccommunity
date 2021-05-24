@@ -118,15 +118,15 @@ class News_model extends CB_Model
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}
-		print_r($limit);
-		exit;
 		$qry = $this->db->get();
+		print_r('123');
+		exit;
 		$result['list'] = $qry->result_array();
 		
 
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
-		// $this->db->join('member', 'post.mem_id = member.mem_id', 'left');
+		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
 		if ($where) {
 			$this->db->where($where);
 		}

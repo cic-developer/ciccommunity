@@ -14,7 +14,7 @@
 		$attributes = array('class' => 'form-horizontal', 'name' => 'flist', 'id' => 'flist');
 		echo form_open(current_full_url(), $attributes);
 		?>
-			<input type="hidden" name="cmcd_cmc_idx" value="<?php echo element('cmc_idx', element('data', $result)); ?>" />
+			<input type="hidden" name="cmcd_cmc_idx" value="<?php echo element('cmc_idx', element('data', $view)); ?>" />
 			<div class="box-table-header">
 				<div class="btn-group pull-right" role="group" aria-label="...">
 					<button type="submit" class="btn btn-outline btn-danger btn-sm">저장하기</button>
@@ -35,12 +35,12 @@
 						foreach (element('list', element('exchange_list', $view)) as $result) {
 					?>
 						<div class="form-group list-group-item">
-							<input type="hidden" name="cmcd_cme_idx[<?php echo element('cme_idx', $result); ?>]" value="<?php echo element('cmcd_idx', $result); ?>"/>
+							<input type="hidden" name="cmcd_cme_idx[<?php echo element('cme_idx', $result); ?>]" value="<?php echo element('cmcd_idx', element('detail', $result)); ?>"/>
 							<div class="col-sm-1"><?php echo element('num', $result); ?></div>
 							<div class="col-sm-3"><?php echo html_escape(element('cme_korean_nm', $result)); ?></div>
 							<div class="col-sm-2"><?php echo html_escape(element('cme_api', $result)); ?></div>
-							<div class="col-sm-1"><input type="checkbox" name="cmcd_coin_id[<?php echo element('cme_idx', $result); ?>]" value="1" <?php echo element('mgr_is_default', $result) ? ' checked="checked" ' : ''; ?> /></div>
-							<div class="col-sm-5"><input type="text" class="form-control" name="cmcd_use[<?php echo element('cme_idx', $result); ?>]" value="<?php echo html_escape(element('mgr_description', $result)); ?>" /></div>
+							<div class="col-sm-1"><input type="checkbox" name="cmcd_use[<?php echo element('cme_idx', $result); ?>]" value="1" <?php echo element('cmcd_idx', element('detail', $result)) ? ' checked="checked" ' : ''; ?> /></div>
+							<div class="col-sm-5"><input type="text" class="form-control" name="cmcd_coin_id[<?php echo element('cme_idx', $result); ?>]" value="<?php echo html_escape(element('cmcd_coin_id', element('detail', $result))); ?>" /></div>
 						</div>
 					<?php
 						}

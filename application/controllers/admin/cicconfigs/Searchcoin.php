@@ -135,17 +135,21 @@ class Searchcoin extends CB_Controller
 		}
 
 		$get_apiList = $this -> CIC_coin_list_model->get_apiList();
-		// print_r($get_apiList);
 		$list_ = array();
+		for($i = 0; $i<count($get_apiList); $i++){
+			$getLists = $this -> CIC_coin_list_model->retrieve_api($get_apiList[$i]);
+			
+			$data = array(
+				'clist_market' => $getList[$i]['symbol'],
+				'clist_name_ko' => $getList[$i]['localization']['ko'],
+				'clist_name_en' => $getList[$i]['name'],
+			);
+			// echo "<pre><br>";
+			// print_r($data);
+			// echo "</pre></br>";
 		
-		// foreach($get_apiList as $list){
-		// 	$list_[] = $list;
-			// print_r($list);
-				
-			for($i = 0; $i<count($get_apiList); $i++){
-				$getLists = $this -> CIC_coin_list_model->retrieve_api($get_apiList[$i]);
-				print_r($getLists);
-		}
+		
+			}
 		
 		// 	// echo "<pre><br>";$list_
 		// 	// print_r($getLists);
@@ -156,11 +160,7 @@ class Searchcoin extends CB_Controller
 
 				// if(strcmp(substr($market, 0, 1), "K")==0){	
 					// $market = substr($market, 4);
-					$data = array(
-						'clist_market' => $getList['symbol'],
-						'clist_name_ko' => $getList['localization']['ko'],
-						'clist_name_en' => $getList['name'],
-					);
+
 					print_r($data);
 					if(isset($data) && !empty($data)){
 						foreach($data as $coinData){

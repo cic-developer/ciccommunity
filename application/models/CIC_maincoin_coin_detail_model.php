@@ -65,8 +65,6 @@ class CIC_maincoin_coin_detail_model extends CB_Model
 						'cmcd_coin_id' => $data['cmcd_coin_id'][$key],
 						'cmcd_datetime' => $now_date,
 					);
-					print_r($insertdata);
-					exit;
 					$this->insert($insertdata);
 				}
 			}

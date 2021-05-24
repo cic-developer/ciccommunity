@@ -619,11 +619,11 @@ class Maincoin extends CB_Controller
 		$exchange_list = $this->{$this->modelname}
 			->get_admin_list('', '', $where, '', 'cme_orderby', 'desc');
 		$coin_detail_list = $this->CIC_maincoin_coin_detail_model->get_this_exchange($cmc_idx);
-		print_r($coin_detail_list);
 		$list_num = $exchange_list['total_rows'];
 		if (element('list', $exchange_list)) {
 			foreach (element('list', $exchange_list) as $key => $val) {
 				$exchange_list['list'][$key]['num'] = $list_num--;
+				$exchange_list['list'][$key]['detail'] = $coin_detail_list[element('cme_idx', $val)];
 			}
 		}
 		$view['view']['exchange_list'] = $exchange_list;

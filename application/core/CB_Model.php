@@ -223,6 +223,8 @@ class CB_Model extends CI_Model
 			$this->db->limit($limit, $offset);
 		}
 		$qry = $this->db->get();
+		print_r($qry);
+		exit;
 		$result['list'] = $qry->result_array();
 
 		$this->db->select('count(*) as rownum');

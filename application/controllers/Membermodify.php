@@ -182,6 +182,9 @@ class Membermodify extends CB_Controller
 		$this->session->unset_userdata('wallet_modify_ath_nice_phone_result');
 
 		$view['view']['password_enc_data'] = $this->checkplus->main('membermodify', 'password_auth_phone_success', 'password_auth_phone_fail');
+
+		print_r($view['view']['password_enc_data']);
+		// exit;
 		$view['view']['wallet_enc_data'] = $this->checkplus->main('membermodify', 'wallet_auth_phone_success', 'wallet_auth_phone_fail');
 		// $view['view']['dec_data'] = $this->session->userdata('dec_data');
 
@@ -2512,10 +2515,15 @@ class Membermodify extends CB_Controller
 
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
+		$EncodeData = $this->input->get("EncodeData");
+		$this->checkplus->success($EncodeData);
+
 		$data = $this->session->userdata('dec_data');
 		$DI = $data['dupinfo'];
-
+		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
+
+		exit;
 
 		if(count($isDI) > 0){ // 중복 이면
 			// 휴대폰 인증 결과 저장
@@ -2551,11 +2559,15 @@ class Membermodify extends CB_Controller
 
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
+		$EncodeData = $this->input->get("EncodeData");
+		$this->checkplus->success($EncodeData);
+
 		$data = $this->session->userdata('dec_data');
 		$DI = $data['dupinfo'];
-
+		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
-
+		print($isDI);
+		exit;
 		if(count($isDI) > 0){ // 중복 이면
 			// 휴대폰 인증 결과 저장
 			$this->session->set_userdata('wallet_modify_ath_nice_phone_result', '1');

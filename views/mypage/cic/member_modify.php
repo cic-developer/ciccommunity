@@ -10,7 +10,7 @@
 			$attributes = array('class' => 'form-horizontal', 'name' => 'fregisterform', 'id' => 'fregisterform');
 			echo form_open_multipart('membermodify/update', $attributes);
 		?>
-			<h3>개인정보변경</h3>
+			<h3>개인정보변경<?php echo html_escape(element('password_enc_data', $view)); ?></h3>
 			<div class="entry">
 				<ul>
 					<li>
@@ -190,7 +190,7 @@
 							<div class="all-nice-box">
 								<form name="form_chk" method="post" id="password_form_chk">
 									<input type="hidden" name="m" value="checkplusService">
-									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">
+									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('password_enc_data', $view)); ?>">
 									<a href="javascript:fnPopup();" class="modify-btn modal-btn">
 										<span>핸드폰인증</span>
 									</a>
