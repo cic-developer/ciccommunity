@@ -148,12 +148,12 @@ class CIC_Coin_list_model extends CB_Model
         if($err){
             echo "cUrl Error :" . $err;
         }
-        $refresh = $this -> input -> post('refresh');
-        if($refresh){
+        // $refresh = $this -> input -> post('refresh');
+        // if($refresh){
         // convert json to php array or object
             $array = json_decode($response, true);
             return $array;
-        }
+        // }
                 // convert json to php array or object
             // $array = json_decode($response, true);
             // echo  "<pre><br>";
@@ -192,8 +192,8 @@ class CIC_Coin_list_model extends CB_Model
         // convert json to php array or object
         $array = json_decode($response, true);
         $list_ = array();
-        for($i=0; $i<count($array); $i++){
-            $list_[] = $array[$i]['name'];
+        foreach($array as $list){
+            $list_[] = $list['name'];
 
         }
         return $list_;

@@ -155,11 +155,12 @@
 								<a href="javascript:void(0);" data-type="password" class="modify-btn confirm-ath-email" style="display:none;">
 									<span>확인</span>
 								</a>
-								<div style="clear:both;">
-									<a href="javascript:void(0);" data-type="password" class="modify-btn confirm-ath-email" style="display:block;">
-										<span>인증번호 재전송</span>
-									</a>	
-								</div>
+								
+							</div>
+							<div class="resend" style="display:none;">
+								<a href="javascript:void(0);" data-type="password" class="modify-btn resend-ath-email" style="display:block;">
+									<span>인증번호 재전송</span>
+								</a>	
 							</div>
 						</li>
 					</ul>
@@ -382,6 +383,7 @@
 
 						$('#myModal_' + type + ' .ath-email-box .send-ath-email').attr('style', "display:none;"); // 이메일 전송 버튼 제거
 						$('#myModal_' + type + ' .ath-email-box .confirm-ath-email').attr('style', "display:block;"); // 이메일 인증 버튼 생성					}
+						$('#myModal_' + type + ' .ath-email-box .resend').attr('style', "display:block; margin-top: 20px;"); // 이메일 인증 버튼 생성					}
 					}
 					// 실패
 					if(state == 0){

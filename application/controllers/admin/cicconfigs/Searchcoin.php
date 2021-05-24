@@ -134,13 +134,18 @@ class Searchcoin extends CB_Controller
 			$coin_arr[] = element('clist_market', $value);
 		}
 		$get_apiList = $this -> CIC_coin_list_model->get_apiList();
-		// print_r($get_apiList);
+		echo "<pre><br>";
+		print_r($get_apiList);
+		echo "</pre></br>";
 		//getting coin list from api
 		$getList = $this -> CIC_coin_list_model->retrieve_api($get_apiList);
+		// echo "<pre><br>";
+		// print_r($getList);
+		// echo "</pre></br>";
 		for($i=0; $i<count($getList); $i++){
 			// $market = $getList[$i]['market'];
 			//Getting only coin starting with K	
-			// $korean = $getList[$i]['localization']['ko'];
+			$korean = $getList[$i]['localization']['ko'];
 			echo "<pre><br>";
 			print_r('$korean');
 			echo "</pre></br>";
