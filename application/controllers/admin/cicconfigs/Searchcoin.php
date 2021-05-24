@@ -135,14 +135,18 @@ class Searchcoin extends CB_Controller
 		}
 
 		$get_apiList = $this -> CIC_coin_list_model->get_apiList();
+		
 		$list_ = array();
 		foreach($get_apiList as $list){
-			$list_[] = $list;
-			print_r($list_);
+			$list_[] = $list['korean_name'];
+			$getList = $this -> CIC_coin_list_model->retrieve_api("bitcoin");
+			
+			print_r($getList);
 		}
-		$getList = $this -> CIC_coin_list_model->retrieve_api($list_);
+
 		// foreach($get_apiList as $list){
 			
+				
 			
 		// }
 		// 	foreach($getLists as $getList){

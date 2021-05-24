@@ -6,7 +6,7 @@ class News extends CB_Controller
 {
     public $pagedir = 'cicconfigs/news';
 
-    protected $models = array('News');
+    protected $models = array('News', 'Company');
 
 
     protected $modelname = 'News_model';
@@ -60,7 +60,6 @@ class News extends CB_Controller
 				if ($board) {
 					$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
 				}
-
 				if (element('news_image', $val)) {
 					$result['list'][$key]['thumb_url'] = thumb_url(element('news_image', $result), 80);
 				} else {

@@ -122,9 +122,6 @@
 
 			<!-- 새 비밀번호 modal -->
 			<div id="myModal_password" class="modal">
-			<form name="form_chk" method="post" id="password_form_chk">
-				<input type="hidden" name="m" value="checkplusService">
-				<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">
 				<div class="modal-content">
 					<ul class="entry modify-box">
 						<li class="">
@@ -178,22 +175,25 @@
 					</ul>
 					<ul class="entry ath-nice-box" style="display:none;">
 						<li>
-							<p class="btxt">휴대폰인증</p>
-							<!-- <form name="form_chk" method="post" id="password_form_chk"> -->
-								<!-- <input type="hidden" name="m" value="checkplusService">
-								<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>"> -->
+							<p class="btxt">핸드폰인증</p>
+							<form name="form_chk" method="post" id="password_form_chk" style="display:none;">
+								<input type="hidden" name="m" value="checkplusService">
+								<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">
 								<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
 									<span>핸드폰인증</span>
 								</a>
-							<!-- </form> -->
-							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
+							</form>
+							<form name="form_chk" method="post" id="password_form_chk">
+								<input type="hidden" name="m" value="checkplusService">
+								<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">
+								<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
+									<span>핸드폰인증</span>
+								</a>
+							</form>
 						</li>
 					</ul>
 				</div>
-				<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
-									<span>핸드폰인증</span>
-								</a>
-				</form>
+				
 			</div>
 
 			<!-- 비밀번호 변경 -->
@@ -395,7 +395,6 @@
 					$('.timer-box').attr('style', "display:none;");
 					$('.resend').attr('style', "display:block; margin-top: 20px;");
 				}
-				console.log("hi");
 		}, 1000)
 	}
 
