@@ -176,20 +176,23 @@
 					<ul class="entry ath-nice-box" style="display:none;">
 						<li>
 							<p class="btxt">핸드폰인증</p>
-							<form name="form_chk" method="post" id="password_form_chk" style="display:none;">
-								<input type="hidden" name="m" value="checkplusService">
-								<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">
-								<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
-									<span>핸드폰인증</span>
-								</a>
-							</form>
-							<form name="form_chk" method="post" id="password_form_chk">
-								<input type="hidden" name="m" value="checkplusService">
-								<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">
-								<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
-									<span>핸드폰인증</span>
-								</a>
-							</form>
+							<div class="all-nice-box">
+								<form name="form_chk" method="post" id="password_form_chk">
+									<input type="hidden" name="m" value="checkplusService">
+									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">
+									<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
+										<span>핸드폰인증</span>
+									</a>
+								</form>
+								<form name="form_chk" method="post" id="password_form_chk" style="display:none;">
+									<input type="hidden" name="m" value="checkplusService">
+									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">
+									<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
+										<span>핸드폰인증x</span>
+									</a>
+								</form>
+							</div>
+							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
 						</li>
 					</ul>
 				</div>
@@ -586,6 +589,24 @@
 /**
  * 이메일 인증 하기 끝
  */
+
+	var successNiceForPassword = function(type){
+		$('#myModal_' + type + ' .ath-nice-box .all-nice-box').attr('style', "display:none");
+		$('#myModal_' + type + ' .ath-nice-box .success').attr('style', "display:block");
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	// 인증번호 이메일 발송
 	$(document).ready(function(){

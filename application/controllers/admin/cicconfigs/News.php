@@ -26,6 +26,7 @@ class News extends CB_Controller
     {
         $eventname = 'event_admin_news_index';
         $this->load->event($eventname);
+        
         $view = array();
         $view['view'] = array();
         
@@ -33,7 +34,7 @@ class News extends CB_Controller
 
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = 'post_id';
+		$findex = 'news_id';
 		$forder = 'desc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
@@ -45,20 +46,24 @@ class News extends CB_Controller
         $this->{$this->modelname}->search_field_equal = array('news_id', 'comp_id');
         $this->{$this->modelname}->allow_order_field = array('news_id');
         
-        $where = array();
+        print_r('hello');
+        exit;
+        // $where = array();
         $result = $this->{$this->modelname}
         ->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
         $list_num = $result['total_rows'] = ($page - 1) * $per_page;
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
+                print_r(element('news_index', $val));
+                exit;
 				$result['list'][$key]['post_display_name'] = display_username(
-					element('post_userid', $val),
-					element('post_nickname', $val)
+					element('news_id', $val),
+					element('comp_id', $val)
 				);
-				$result['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+				$result['list'][$key]['company'] = $company = $this->company->item_all(element('comp_id', $val));
 				$result['list'][$key]['num'] = $list_num--;
-				if ($board) {
-					$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+				if ($company) {
+					$result['list'][$key]['newsurl'] = post_url(element('comp_url', $company) + element('comp_segment', $company) + element('news_index', $val));
 				}
 				if (element('news_image', $val)) {
 					$result['list'][$key]['thumb_url'] = thumb_url(element('news_image', $result), 80);

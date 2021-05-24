@@ -26,6 +26,11 @@ class CIC_maincoin_exchange_model extends CB_Model
 	{
 		parent::__construct();
 	}
+
+	function get_this_orderby(){
+		$result = $this->_get('', 'cme_orderby', $where, 1, '', 'cme_orderby', 'DESC');
+		return (int)element('cme_orderby', $result->row_array()) + 1;
+	}
 }
 
 ?>

@@ -2525,7 +2525,7 @@ class Membermodify extends CB_Controller
 
 			echo("<script>");
 			echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
-			echo("window.opener.createPasswordModify();"); // 패스워드 변경 폼 생성
+			echo("window.opener.successNiceForPassword('password');"); // 패스워드 변경 폼 생성
 			echo("self.close();");
 			echo("</script>");
 			exit;

@@ -24,22 +24,15 @@ class News_model extends CB_Model
 
     public function get_news_list($limit = '', $offset = '', $where = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
     {
-		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
-			$orderby = 'news_id desc';
-		}
-
-        $sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
+		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
 		if (empty($sfield)) {
 			$sfield = array('news_title', 'news_content');
 		}
 
-		
 		$search_where = array();
 		$search_like = array();
 		$search_or_like = array();
 		if ($sfield && is_array($sfield)) {
-			print_r('hello');
-			exit;
 			foreach ($sfield as $skey => $sval) {
 				$ssf = $sval;
 				if ($skeyword && $ssf && in_array($ssf, $this->allow_search_field)) {
@@ -80,18 +73,20 @@ class News_model extends CB_Model
 				}
 			}
 		}
-        
-        $this->db->select('news.*','news_id','comp_id', 'news_title');
-        $this->db->from($this->_table);
-        $this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
-        
-        if ($where) {
+
+		$this->db->select('news.*, company.*');
+		$this->db->from($this->_table);
+		$this->db->join('member', 'news.comp_id = company.comp_id', 'left');
+		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
+
+		if ($where) {
 			$this->db->where($where);
 		}
 		if ($search_where) {
 			$this->db->where($search_where);
 		}
-        if ($search_like) {
+
+		if ($search_like) {
 			foreach ($search_like as $item) {
 				foreach ($item as $skey => $sval) {
 					$this->db->like($skey, $sval);
@@ -107,7 +102,7 @@ class News_model extends CB_Model
 			}
 			$this->db->group_end();
 		}
-        
+
 		$this->db->order_by($orderby);
 		if ($limit) {
 			$this->db->limit($limit, $offset);
@@ -115,16 +110,16 @@ class News_model extends CB_Model
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
 
-        $this->db->select('count(*) as rownum');
+		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
-		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
+		$this->db->join('member', 'news.comp_id = company.comp_id', 'left');
+		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 0', 'left');
 		if ($where) {
 			$this->db->where($where);
 		}
 		if ($search_where) {
 			$this->db->where($search_where);
 		}
-
 		if ($search_like) {
 			foreach ($search_like as $item) {
 				foreach ($item as $skey => $sval) {

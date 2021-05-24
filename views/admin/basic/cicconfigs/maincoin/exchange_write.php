@@ -27,6 +27,12 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-sm-2 control-label">거래소 로고 url</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="cme_logo" value="<?php echo set_value('cme_logo', element('cme_logo', element('data', $view))); ?>" />
+				</div>
+			</div>
+			<div class="form-group">
 				<label class="col-sm-2 control-label">API 선택</label>
 				<div class="col-sm-10 form-inline">
 					<select name="cme_api" class="form-control">
@@ -61,6 +67,7 @@ $(function() {
 			cme_id: { required: true, minlength:2, maxlength:20 },
 			cme_korean_nm: {required :true, minlength:2, maxlength:10 },
 			cme_english_nm: {required :true, minlength:2, maxlength:20 },
+			cme_logo: {required :true},
 			cme_api: {required :true},
 		}
 	});

@@ -115,7 +115,7 @@ class Maincoin extends CB_Controller
 		$search_option = array('cme_korean_nm' => '거래소명(한글)', 'cme_english_nm' => '거래소명(영어)');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
-		$view['view']['listall_url'] = admin_url($this->pagedir . '/exchange');
+		$view['view']['listall_url'] = admin_url($this->pagedir);
 		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/exchange_listdelete/?' . $param->output());
 		$view['view']['write_url'] = admin_url($this->pagedir . '/exchange_write/?' . $param->output());
 		
@@ -188,6 +188,11 @@ class Maincoin extends CB_Controller
 				'rules' => 'trim|required|min_length[2]|max_length[20]|alpha_dash',
 			),
 			array(
+				'field' => 'cme_logo',
+				'label' => '거래소 로고 url',
+				'rules' => 'trim|required|valid_url',
+			),
+			array(
 				'field' => 'cme_api',
 				'label' => 'API',
 				'rules' => 'trim|required|in_list[coingecko,hotbit_korea]',
@@ -231,6 +236,7 @@ class Maincoin extends CB_Controller
 				'cme_id' => $this->input->post('cme_id', null, ''),
 				'cme_korean_nm' => $this->input->post('cme_korean_nm', null, ''),
 				'cme_english_nm' => $this->input->post('cme_english_nm', null, ''),
+				'cme_logo' => $this->input->post('cme_logo', null, ''),
 				'cme_api' => $this->input->post('cme_api', null, ''),
 				'cme_default' => $this->input->post('cme_default', null, '') ? 1 : 0,
 			);
@@ -249,6 +255,10 @@ class Maincoin extends CB_Controller
 				 * 게시물을 새로 입력하는 경우입니다
 				 * 기본값 설정입니다
 				 */
+				$lastest_where = array(
+
+				);
+				$updatedata['cme_orderby'] = $this->{$this->modelname}->get_this_orderby();
 
 				$cme_idx = $this->{$this->modelname}->insert($updatedata);
 				$this->session->set_flashdata(
@@ -257,7 +267,7 @@ class Maincoin extends CB_Controller
 				);
 			}
 
-			$redirecturl = admin_url($this->pagedir . '/exchange/');
+			$redirecturl = admin_url($this->pagedir);
 			redirect($redirecturl);
 		}
 
@@ -270,7 +280,7 @@ class Maincoin extends CB_Controller
 		}
 
 		$view['view']['data'] = $getdata;
-		$view['view']['list_url'] = admin_url($this->pagedir . '/exchange/?' . $param->output());
+		$view['view']['list_url'] = admin_url($this->pagedir . '?' . $param->output());
 
 		/**
 		 * primary key 정보를 저장합니다
