@@ -124,14 +124,14 @@
 			<div id="myModal_password" class="modal">
 				<div class="modal-content">
 					<ul class="entry modify-box">
-						<li class="">
+						<li class="password-modify-content">
 							<p class="btxt">새 비밀번호</p>
 							<div class="field modify">
 								<p class="chk-input w380">
-									<input type="text" placeholder="" id="new_password" name="new_password" value="" readonly disabled style="background-color:#efefef;">
+									<input type="text" placeholder="비밀번호" id="new_password" name="new_password" value="" readonly disabled style="background-color:#efefef;">
 								</p>
 								<p class="chk-input w380" style="margin-top:35px;">
-									<input type="text" placeholder="" id="new_password_re" name="new_password_re" value="" readonly disabled style="background-color:#efefef;">
+									<input type="text" placeholder="비밀번호확인" id="new_password_re" name="new_password_re" value="" readonly disabled style="background-color:#efefef;">
 								</p>
 								<a href="javascript:void(0);" data-type="password" class="modify-btn view_ath_box">
 									<span>이메일+핸드폰인증</span>
@@ -609,6 +609,9 @@
  * 나이스 핸드폰 인증 하기 끝
  */
 /*****************************************************************************/
+/**
+ * 모든 인증 완료 후 => input 태그 활성화 시작
+ */
 	var isAgreeForModify = function(type) {
 		var isAgreeEmail = $('#myModal_' + type + ' .ath-email-box').hasClass("agree");
 		var isAgreeNice = $('#myModal_' + type + ' .ath-nice-box').hasClass("agree");
@@ -617,14 +620,108 @@
 			$('#myModal_' + type + ' #new_password').attr('readonly', false);
 			$('#myModal_' + type + ' #new_password').attr('disabled', false);
 			$('#myModal_' + type + ' #new_password').attr('style', '');
+            
+			$('#myModal_' + type + ' #new_password_re').attr('readonly', false);
+			$('#myModal_' + type + ' #new_password_re').attr('disabled', false);
+			$('#myModal_' + type + ' #new_password_re').attr('style', '');
+            
+			$('#myModal_' + type + ' .confirm-btn').attr('style', 'display:block; margin-top:20px;');
 		}
 	}
+/**
+ * 모든 인증 완료 후 => input 태그 활성화 끝
+ */
+/*****************************************************************************/
+/**
+ * 비밀번호변경 시작
+ */
+	// 비밀번호 == 비밀번호 확인 check
+	var oldVal1 = '';
+	$(document).on("propertychange change keyup paste input","#new_password",function(){
+		var currentVal = $(this).val();
+		if(currentVal == oldVal1) {
+			return;
+		}
+		
+		password2 = $("#new_password_re").val();
+		if(password2 != currentVal ){ // && currentVal.length > 0){
+			$('.agree-password').remove();
+			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
+			$('.password-modify-content').append(html);
+		} else{
+			$('.agree-password').remove();
+			html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
+			$('.password-modify-content').append(html);
+		}
+		
+		oldVal1 = currentVal;
+	});
 
+	// 비밀번호 확인 == 비밀번호 check
+	var oldVal2 = '';
+	$(document).on("propertychange change keyup paste input","#new_password_re",function(){
+		var currentVal = $(this).val();
+		if(currentVal == oldVal2) {
+			return;
+		}
+		
+		password1 = $("#new_password").val();
+		if(password1 != currentVal ){ // && currentVal.length > 0){
+			$('.agree-password').remove();
+			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
+			$('.password-modify-content').append(html);
+		} else{
+			$('.agree-password').remove();
+			html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
+			$('.password-modify-content').append(html);
+		}
+		
+		oldVal2 = currentVal;
+	});
 
+	// 비밀번호 validation
+	$(document).on('click', "#confirm_password_number", function(){
+		$('#myModal_password .modify-box > p').remove(); // append된 validation 메세지 일괄 삭제
 
-
-
-
+		var _password = $("#new_password").val(); // 입력한 비밀번호
+		var _password_re = $("#new_password_re").val(); // 입력한 비밀번호 확인
+		var password = _password;
+		var state = '';
+		var message = '';
+		$.ajax({
+			url: cb_url + '/membermodify/ajax_password_confirm',
+			type: 'POST',
+			data: {
+				new_password: _password,
+				new_password_re: _password_re,
+				csrf_test_name : cb_csrf_hash
+			},
+			dataType: 'json',
+			async: false,
+			cache: false,
+			success: function(data) {
+				state = data.state;
+				message = data.message;
+                
+				if(state == 1){
+					alert(message); // 성공 메세지 출력
+					$("#mem_password").val(password); // 유저에게 보이는(readonly input tag)부분에 값 변경: 해당 값은 최종 정보업데이트 시 post로 넘어갑니다
+					modal2.style.display = "none"; // modal 종료
+				}
+				if(state == 0){
+					// validation 메세지 append (해당 메세지는 여러개가 생성될수 있기때문에 append를 하였습니다.)
+					$('#myModal_password .modify-box > p').append(message);
+				}
+			},
+			error: function(){
+				alert('에러가 발생했습니다.');
+			}
+		});
+	});
+/**
+ * 비밀번호변경 끝
+ */
+/*****************************************************************************/
 
 
 
@@ -869,124 +966,7 @@
  * 휴대폰번호변경 끝
  */
 /********************************************************/
-/**
- * 비밀번호변경 시작
- */
-	// 비밀번호 == 비밀번호 확인 check
-	var oldVal1 = '';
-	$(document).on("propertychange change keyup paste input","#new_password",function(){
-		var currentVal = $(this).val();
-		if(currentVal == oldVal1) {
-			return;
-		}
-		
-		password2 = $("#new_password_re").val();
-		if(password2 != currentVal ){ // && currentVal.length > 0){
-			$('.agree-password').remove();
-			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
-			$('.password-re-modify-content').append(html);
-		} else{
-			$('.agree-password').remove();
-			html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
-			$('.password-re-modify-content').append(html);
-		}
-		
-		oldVal1 = currentVal;
-	});
 
-	// 비밀번호 확인 == 비밀번호 check
-	var oldVal2 = '';
-	$(document).on("propertychange change keyup paste input","#new_password_re",function(){
-		var currentVal = $(this).val();
-		if(currentVal == oldVal2) {
-			return;
-		}
-		
-		password1 = $("#new_password").val();
-		if(password1 != currentVal ){ // && currentVal.length > 0){
-			$('.agree-password').remove();
-			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
-			$('.password-re-modify-content').append(html);
-		} else{
-			$('.agree-password').remove();
-			html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
-			$('.password-re-modify-content').append(html);
-		}
-		
-		oldVal2 = currentVal;
-	});
-
-	// 비밀번호변경 박스 생성하기
-	function createPasswordModify(){
-		var html = '';
-		html += '<div class="modal-content entry">';
-		html += '<ul class="password-modify-box">';
-		html += '<li class="password-modify-content">';
-		html += '<p class="btxt">새 비밀번호</p>';
-		html += '<div class="field modify">';
-		html += '<p class="chk-input w380">';
-		html += '<input type="password" placeholder="" id="new_password" name="new_password" value="">';
-		html += '</p>';
-		html += '</div>';
-		html += '</li>';
-		html += '<li class="password-re-modify-content">';
-		html += '<p class="btxt">새 비밀번호 확인</p>';
-		html += '<div class="field modify">';
-		html += '<p class="chk-input w380">';
-		html += '<input type="password" placeholder="" id="new_password_re" name="new_password_re" value="">';
-		html += '</p>';
-		html += '<a href="javascript:void(0);" id="password_modify_btn" class="modify-btn"><span>확인</span></a>';
-		html += '</div>';
-		html += '</li>';
-		html += '</ul>';
-		html += '</div>';
-        
-		$('#password_form_chk').remove(); // 휴대폰 인증 버튼 삭제			
-		$('#myModal_password').append(html); // 비밀번호변경 박스 생성
-	}
-
-	// 비밀번호 validation
-	$(document).on('click', "#password_modify_btn", function(){
-		$('.password-modify-box > p').remove(); // append된 validation 메세지 일괄 삭제
-
-		var _password = $("#new_password").val(); // 입력한 비밀번호
-		var _password_re = $("#new_password_re").val(); // 입력한 비밀번호 확인
-		var password = _password;
-		var state = '';
-		var message = '';
-		$.ajax({
-			url: cb_url + '/membermodify/ajax_password_confirm',
-			type: 'POST',
-			data: {
-				new_password: _password,
-				new_password_re: _password_re,
-				csrf_test_name : cb_csrf_hash
-			},
-			dataType: 'json',
-			async: false,
-			cache: false,
-			success: function(data) {
-				state = data.state;
-				message = data.message;
-                
-				if(state == 1){
-					alert(message); // 성공 메세지 출력
-					$("#mem_password").val(password); // 유저에게 보이는(readonly input tag)부분에 값 변경: 해당 값은 최종 정보업데이트 시 post로 넘어갑니다
-					modal2.style.display = "none"; // modal 종료
-				}
-				if(state == 0){
-					// validation 메세지 append (해당 메세지는 여러개가 생성될수 있기때문에 append를 하였습니다.)
-					$('.password-modify-box').append(message);
-				}
-			},
-			error: function(){
-				alert('에러가 발생했습니다.');
-			}
-		});
-	});
-/**
- * 비밀번호변경 끝
- */
 /********************************************************/
 /**
  * 지갑주소변경 시작

@@ -152,7 +152,7 @@ class CIC_Coin_list_model extends CB_Model
         $refresh = $this -> input -> post('refresh');
         if($refresh){
         // convert json to php array or object
-                return $array;
+            return $array;
         }
                 // convert json to php array or object
             // $array = json_decode($response, true);
@@ -170,7 +170,7 @@ class CIC_Coin_list_model extends CB_Model
 
         curl_setopt_array($curl, array(
             // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/list?markets?vs_currency=KRW",
-            CURLOPT_URL => "https://api.upbit.com/v1/market/all",
+            CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/markets?vs_currency=KRW&order=market_cap_desc&per_page=300&page=1&sparkline=false",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",

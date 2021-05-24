@@ -36,7 +36,7 @@
 				<label class="col-sm-2 control-label">기본으로 설정</label>
 				<div class="col-sm-10">
 					<label for="cml_default" class="checkbox-inline">
-						<input type="checkbox" name="cml_default" id="cml_default" value="1" <?php echo set_checkbox('cml_default', '1', (element('cml_default', element('data', $view)) ? true : false)); ?> /> 기본 거래소로 설정합니다.
+						<input type="checkbox" name="cml_default" id="cml_default" value="1" <?php echo set_checkbox('cml_default', '1', (element('cml_default', element('data', $view)) ? true : false)); ?> /> 기본 코인으로 설정합니다.
 					</label>
 					<p class="help-block">비회원이거나, 유저가 별도 설정하지 않은 경우 기본적으로 노출됩니다.</p>
 				</div>
