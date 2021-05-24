@@ -695,7 +695,7 @@ class Post_model extends CB_Model
 		$this->db->select('post.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point');
 		$this->db->from($this->_table);
 		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
-
+		
 		if ($where) {
 			$this->db->where($where);
 		}
@@ -734,7 +734,10 @@ class Post_model extends CB_Model
 			$this->db->limit($limit, $offset);
 		}
 		$qry = $this->db->get();
+		print_r($qry);
+		exit;
 		$result['list'] = $qry->result_array();
+		
 
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);

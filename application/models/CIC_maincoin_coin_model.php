@@ -28,8 +28,6 @@ class CIC_maincoin_coin_model extends CB_Model
 	}
 
 	function get_this_orderby(){
-		echo $this->_table;
-		exit('hi');
 		$result = $this->_get('', 'cmc_orderby', '', 1, '', 'cmc_orderby', 'DESC');
 		return element('cmc_orderby', $result->row_array()) ? (int)element('cmc_orderby', $result->row_array()) + 1 : 1;
 	}

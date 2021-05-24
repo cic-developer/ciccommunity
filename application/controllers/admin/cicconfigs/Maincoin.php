@@ -444,17 +444,16 @@ class Maincoin extends CB_Controller
 			$config[] = array(
 				'field' => 'cmc_symbol',
 				'label' => '코인 심볼',
-				'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[20]|is_unique[CIC_maincoin_coin.cmc_symbol.cmc_idx.' . element('cmc_idx', $getdata) . ']',
+				'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[20]|is_unique[cic_maincoin_coin.cmc_symbol.cmc_idx.' . element('cmc_idx', $getdata) . ']',
 			);
 		} else {
 			$config[] = array(
 				'field' => 'cmc_symbol',
 				'label' => '코인 심볼',
-				'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[20]|is_unique[CIC_maincoin_coin.cmc_symbol]',
+				'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[20]|is_unique[cic_maincoin_coin.cmc_symbol]',
 			);
 		}
 		$this->form_validation->set_rules($config);
-
 
 		/**
 		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
@@ -464,7 +463,6 @@ class Maincoin extends CB_Controller
 
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-
 		} else {
 			/**
 			 * 유효성 검사를 통과한 경우입니다.
@@ -475,10 +473,10 @@ class Maincoin extends CB_Controller
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
 			$updatedata = array(
-				'cmc_korean_nm' => $this->input->post('cme_korean_nm', null, ''),
-				'cmc_english_nm' => $this->input->post('cme_english_nm', null, ''),
-				'cmc_symbol' => $this->input->post('cme_symbol', null, ''),
-				'cmc_default' => $this->input->post('cme_default', null, '') ? 1 : 0,
+				'cmc_korean_nm' => $this->input->post('cmc_korean_nm', null, ''),
+				'cmc_english_nm' => $this->input->post('cmc_english_nm', null, ''),
+				'cmc_symbol' => $this->input->post('cmc_symbol', null, ''),
+				'cmc_default' => $this->input->post('cmc_default', null, '') ? 1 : 0,
 			);
 
 			/**
@@ -495,7 +493,7 @@ class Maincoin extends CB_Controller
 				 * 게시물을 새로 입력하는 경우입니다
 				 * 기본값 설정입니다
 				 */
-				$updatedata['cme_orderby'] = $this->CIC_maincoin_coin_model->get_this_orderby();
+				$updatedata['cmc_orderby'] = $this->CIC_maincoin_coin_model->get_this_orderby();
 
 
 				$cmc_idx = $this->CIC_maincoin_coin_model->insert($updatedata);
@@ -532,6 +530,112 @@ class Maincoin extends CB_Controller
 		 * 어드민 레이아웃을 정의합니다
 		 */
 		$layoutconfig = array('layout' => 'layout', 'skin' => 'coin_write');
+		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
+	}
+
+	/**
+	 * 코인 거래소 수정 페이지를 가져오는 메소드입니다
+	 */
+	public function coin_write_exchange($cmc_idx = 0)
+	{
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_admin_ciccinfigs_maincoin_coin_write_exchange';
+		$this->load->event($eventname);
+
+		$view = array();
+		$view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		/**
+		 * 프라이머리키가 입력되지 않으면 에러처리합니다
+		 */
+		$cmc_idx = (int) $cmc_idx;
+		if (empty($cmc_idx) OR $cmc_idx < 1) {
+			show_404();
+		}
+		/**
+		 * 페이지에 숫자가 아닌 문자가 입력되거나 1보다 작은 숫자가 입력되면 에러 페이지를 보여줍니다.
+		 */
+		$param =& $this->querystring;
+		$findex = 'mgr_order';
+		$forder = 'asc';
+
+
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+
+		/**
+		 * 전송된 데이터의 유효성을 체크합니다
+		 */
+		$config = array(
+			array(
+				'field' => 's',
+				'label' => '그룹명',
+				'rules' => 'trim',
+			),
+		);
+		$this->form_validation->set_rules($config);
+
+
+		/**
+		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
+		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
+		 */
+		if ($this->form_validation->run() === false) {
+
+			// 이벤트가 존재하면 실행합니다
+			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+
+		} else {
+			/**
+			 * 유효성 검사를 통과한 경우입니다.
+			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
+			 */
+
+			// 이벤트가 존재하면 실행합니다
+			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+
+			$updatedata = $this->input->post();
+
+			$this->{$this->modelname}->update_group($updatedata);
+			$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+		}
+
+		/**
+		 * 게시판 목록에 필요한 정보를 가져옵니다.
+		 */
+		$this->{$this->modelname}->allow_order_field = array('mgr_order'); // 정렬이 가능한 필드
+		// $result = $this->{$this->modelname}
+		// 	->get_admin_list('', '', '', '', $findex, $forder);
+		// if (element('list', $result)) {
+		// 	foreach (element('list', $result) as $key => $val) {
+		// 		$countwhere = array(
+		// 			'mgr_id' => element('mgr_id', $val),
+		// 		);
+		// 		$result['list'][$key]['member_count'] = $this->Member_group_member_model->count_by($countwhere);
+		// 	}
+		// }
+		$view['view']['data'] = $result;
+
+		/**
+		 * primary key 정보를 저장합니다
+		 */
+		$view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+		/**
+		 * 어드민 레이아웃을 정의합니다
+		 */
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'coin_write_exchange');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));

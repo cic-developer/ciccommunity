@@ -45,14 +45,13 @@ class News extends CB_Controller
         $this->{$this->modelname}->allow_search_field = array('news_id', 'news_title', 'news_content', 'comp_id');
         $this->{$this->modelname}->search_field_equal = array('news_id', 'comp_id');
         $this->{$this->modelname}->allow_order_field = array('news_id');
+        // print_r('hello');
+        // exit;
         
         
         // $where = array();
         $result = $this->{$this->modelname}
             ->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-
-            // print_r($result);
-            // exit;
         $list_num = $result['total_rows'] = ($page - 1) * $per_page;
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {

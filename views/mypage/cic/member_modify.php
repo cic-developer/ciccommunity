@@ -164,9 +164,9 @@
 									</a>	
 								</div>
 								<div class="password-timer-box" style="display:none;">
-									<span id="postTestMin">00</span><!-- 분 -->
+									<span id="postTestMin2">00</span><!-- 분 -->
 									<span>:</span>
-									<span id="postTestSec">10</span><!--초-->
+									<span id="postTestSec2">10</span><!--초-->
 									<!-- <span id="postTestMilisec">00</span>밀리초 -->
 								</div>
 							</div>
@@ -245,9 +245,9 @@
 									</a>	
 								</div>
 								<div class="wallet-timer-box" style="display:none;">
-									<span id="postTestMin">00</span><!-- 분 -->
+									<span id="postTestMin3">00</span><!-- 분 -->
 									<span>:</span>
-									<span id="postTestSec">10</span><!--초-->
+									<span id="postTestSec3">10</span><!--초-->
 									<!-- <span id="postTestMilisec">00</span>밀리초 -->
 								</div>
 							</div>
@@ -450,59 +450,65 @@
  * 이메일 재전송 시작
  */
 
-	var stTime1
-	var timerStart1
-
-	var startTime1 = function(){
-		if(! stTime1) {
-			stTime1 = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
-		}
-
-		timerStart1 = setInterval(function() {
-			var nowTime1 = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
-			var newTime1 = new Date(nowTime1 - stTime1) //(nowTime - stTime)을 new Date()에 넣는다
-			var min1 = newTime1.getMinutes() //분
-			var sec1 = newTime1.getSeconds() //초
-			var milisec1 = Math.floor(newTime1.getMilliseconds() / 10) //밀리초
-			document.getElementById('postTestMin').innerText = addZero(mi1n)
-			document.getElementById('postTestSec').innerText = addZero(10- sec1)
-			// document.getElementById('postTestMilisec').innerText = addZero(milisec)
-				if((addZero(10 - sec1)) == 0){
-					clearTime();
-					$('.timer-box1').attr('style', "display:none;");
-					$('.resend1').attr('style', "display:block; margin-top: 20px;");
-				}
-		}, 1000)
-	}
-
 	var stTime2
 	var timerStart2
-
-	var startTime2 = function(){
-		if(! stTime2) {
-			stTime2 = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
+	var stTime3
+	var timerStart3
+    
+	var startTime = function(type){
+        
+		if(type == "password"){
+			if(! stTime2) {
+				stTime2 = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
+			}
+            
+			timerStart2 = setInterval(function() {
+				var nowTime2 = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
+				var newTime2 = new Date(nowTime2 - stTime2) //(nowTime - stTime)을 new Date()에 넣는다
+				var min2 = newTime2.getMinutes() //분
+				var sec2 = newTime2.getSeconds() //초
+				var milisec2 = Math.floor(newTime2.getMilliseconds() / 10) //밀리초
+				document.getElementById('postTestMin2').innerText = addZero(min2)
+				document.getElementById('postTestSec2').innerText = addZero(10- sec2)
+				// document.getElementById('postTestMilisec').innerText = addZero(milisec)
+					if((addZero(10 - sec2)) == 0){
+						clearTime();
+						$('.' + type + 'password-timer-box').attr('style', "display:none;");
+						$('.' + type + 'password-resend-email').attr('style', "display:block; margin-top: 20px;");
+					}
+			}, 1000)
 		}
-
-		timerStart2 = setInterval(function() {
-			var nowTime2 = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
-			var newTime2 = new Date(nowTime2 - stTime2) //(nowTime - stTime)을 new Date()에 넣는다
-			var min2 = newTime2.getMinutes() //분
-			var sec2 = newTime2.getSeconds() //초
-			var milisec2 = Math.floor(newTime2.getMilliseconds() / 10) //밀리초
-			document.getElementById('postTestMin').innerText = addZero(min2)
-			document.getElementById('postTestSec').innerText = addZero(10- sec2)
-			// document.getElementById('postTestMilisec').innerText = addZero(milisec)
-				if((addZero(10 - sec2)) == 0){
-					clearTime();
-					$('.timer-box2').attr('style', "display:none;");
-					$('.resend2').attr('style', "display:block; margin-top: 20px;");
-				}
-		}, 1000)
+        
+		if(type == "wallet"){
+			if(! stTime3) {
+				stTime3 = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
+			}
+            
+			timerStart3 = setInterval(function() {
+				var nowTime3 = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
+				var newTime3 = new Date(nowTime3 - stTime3) //(nowTime - stTime)을 new Date()에 넣는다
+				var min3 = newTime3.getMinutes() //분
+				var sec3 = newTime3.getSeconds() //초
+				var milisec3 = Math.floor(newTime3.getMilliseconds() / 10) //밀리초
+				document.getElementById('postTestMin3').innerText = addZero(min3)
+				document.getElementById('postTestSec3').innerText = addZero(10- sec3)
+				// document.getElementById('postTestMilisec').innerText = addZero(milisec)
+					if((addZero(10 - sec3)) == 0){
+						clearTime(type);
+						$('.' + type + 'wallet-timer-box').attr('style', "display:none;");
+						$('.' + type + 'wallet-resend-email').attr('style', "display:block; margin-top: 20px;");
+					}
+			}, 1000)
+		}
 	}
 
-	var clearTime = function(){
-		if(timerStart) {
-			clearInterval(timerStart)
+	var clearTime = function(type){
+		if(type == "password" && timerStart2) {
+			clearInterval(timerStart2)
+		}
+
+		if(type == "wallet" && timerStart3) {
+			clearInterval(timerStart3)
 		}
 	}
 
@@ -510,18 +516,10 @@
 		return (num < 10 ? '0'+num : ''+num)
 	}
 
-	var waitResend = function() {
-		if(type == "password"){
-			$('.password-timer-box').attr('style', "display:block;");
-			$('.password-resend-email').attr('style', "display:none;");
-			startTime1();
-		}
-        
-		if(type == "wallet"){
-			$('.wallet-timer-box').attr('style', "display:block;");
-			$('.wallet-resend-email').attr('style', "display:none;");
-			startTime2();
-		}
+	var waitResend = function(type) {
+		$('.' + type + '-timer-box').attr('style', "display:block;");
+		$('.' + type + '-resend-email').attr('style', "display:none;");
+		startTime(type);
 	}
 
 	$(document).ready(function(){
@@ -832,171 +830,6 @@
 
 
 
-
-
-
-	// 인증번호 이메일 발송
-	$(document).ready(function(){
-		$(".ath-email").on('click', function(){
-			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.
-            
-			$.ajax({
-				url: cb_url + '/membermodify/ajax_modify_email_send',
-				type: 'POST',
-				data: {
-					type: type,
-					csrf_test_name : cb_csrf_hash
-				},
-				dataType: 'json',
-				async: false,
-				cache: false,
-				success: function(data) {
-					state = data.state;
-					message = data.message;
-                    
-					// 성공
-					if(state == 1){
-						// 성공 메세지
-                        alert(message);
-                        
-						// 핸드폰번호변경 이메일 인증
-						if(type == 'phone'){
-							$('#myModal_phone > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
-						}
-						// 비밀번호변경 이메일 인증
-						if(type == 'password'){
-							$('#myModal_password > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
-						}
-						// 지갑주소변경 이메일 인증
-						if(type == 'wallet'){
-							$('#myModal_wallet > .ath-email').remove(); // 이메일 인증 실행 버튼 삭제
-						}
-						var html = '';
-						html += '<div class="modal-content ' + type + '-modal-content entry">';
-						html += '<ul class="ath-email-box">';
-						html += '<li class="ath-email-content">';
-						html += '<p class="btxt">';
-						html += '이메일 인증';
-						html += '<i class="fas fa-recycle"></i>';
-						html += '</p>';
-						html += '<div class="field modify">';
-						html += '<p class="chk-input w380">';
-						html += '<input type="text" placeholder="" id="ath_num" name="ath_num" value="">';
-						html += '<input type="hidden" id="modify_type" name="modify_type" value="' + type + '">';
-						html += '</p>';
-						html += '<a href="javascript:void(0);" id="ath_mail_btn" class="modify-btn"><span>인증번호 확인</span></a>';
-						html += '</div>';
-						html += '</li>';
-						html += '</ul>';
-						html += '</div>';
-                        
-						// 핸드폰번호변경 이메일 인증
-						if(type == 'phone'){
-							$('#myModal_phone').append(html); // 이메일 인증박스 추가
-						}
-						// 비밀번호변경 이메일 인증
-						if(type == 'password'){
-							$('#myModal_password').append(html); // 이메일 인증박스 추가
-						}
-						// 지갑주소변경 이메일 인증
-						if(type == 'wallet'){
-							$('#myModal_wallet').append(html); // 이메일 인증박스 추가
-						}
-					}
-					// 실패
-					if(state == 0){
-						// 실패 메세지
-						alert(message);
-					}
-				},
-				error: function(){
-					alert('에러가 발생했습니다.');
-				}
-			});
-		})
-	})
-
-	// 이메일 인증 하기
-	$(document).on('click', "#ath_mail_btn", function(){
-		var ath_num = $(".ath_num").val();
-		var modify_type = $("#modify_type").val();
-        
-		var result = '';
-		var reason = '';
-		$.ajax({
-			url: cb_url + '/membermodify/ajax_modify_ath_mail',
-			type: 'POST',
-			data: {
-				ath_num: ath_num,
-				modify_type: modify_type,
-				csrf_test_name : cb_csrf_hash
-			},
-			dataType: 'json',
-			async: false,
-			cache: false,
-			success: function(data) {
-				result = data.result;
-				reason = data.reason;
-                
-				alert(reason);
-                
-				// 실패
-				if(result == 0){}
-                
-				//성공
-				//// => 핸드폰변경 박스
-				if(result == 1) {
-					
-					var html = '';
-					html += '<ul class="phone-modify-box">';
-					html += '<li class="phone-modify-content">';
-					html += '<p class="btxt">새 핸드폰번호</p>';
-					html += '<div class="field modify">';
-					html += '<p class="chk-input w380">';
-					html += '<input type="text" placeholder="" onKeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="">';
-					html += '</p>';
-					html += '<a href="javascript:void(0);" id="phone_modify_btn" class="modify-btn"><span>완료</span></a>';
-					html += '</div>';
-					html += '</li>';
-					html += '</ul>';
-                    
-					$('.phone-modal-content > .ath-email-box').remove(); // 이메일 인증 박스 삭제		
-					$('.phone-modal-content').append(html); // 수정 박스 생성
-				}
-                
-				//// => 비밀번호변경 휴대폰인증 버튼
-				if(result == 2){
-                    
-					var html = '';
-					html += '<form name="form_chk" method="post" id="password_form_chk">'
-					html += '<input type="hidden" name="m" value="checkplusService">'
-					html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">'
-					html += '<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn"><span>휴대폰 인증</span></a>'
-					html += '</form>'
-					
-					$('.password-modal-content').remove(); // 이메일 인증 박스 삭제		
-					$('#myModal_password').append(html); // 수정 박스 생성
-				}
-				
-				//// => 지갑주소변경 휴대폰인증 버튼
-				if(result == 3){
-					
-					var html = '';
-					html += '<form name="form_chk" method="post" id="wallet_form_chk">'
-					html += '<input type="hidden" name="m" value="checkplusService">'
-					html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">'
-					html += '<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn"><span>휴대폰 인증</span></a>'
-					html += '</form>'
-                    
-					$('.wallet-modal-content').remove(); // 이메일 인증 박스 삭제		
-					$('#myModal_wallet').append(html); // 수정 박스 생성
-				}
-			},
-				error: function(){
-					alert('에러가 발생했습니다.');
-				}
-		});
-	});
 
 /**
  * 이메일 인증 끝

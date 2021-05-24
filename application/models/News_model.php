@@ -36,8 +36,6 @@ class News_model extends CB_Model
 		$search_like = array();
 		$search_or_like = array();
 		if ($sfield && is_array($sfield)) {
-			print_r('hello');
-			exit;
 			foreach ($sfield as $skey => $sval) {
 				$ssf = $sval;
 				if ($skeyword && $ssf && in_array($ssf, $this->allow_search_field)) {
@@ -78,19 +76,19 @@ class News_model extends CB_Model
 				}
 			}
 		}
-
+		
 		$this->db->select('news.*, company.*');
 		$this->db->from($this->_table);
 		$this->db->join('member', 'news.comp_id = company.comp_id', 'left');
 		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
-
+		
 		if ($where) {
 			$this->db->where($where);
 		}
 		if ($search_where) {
 			$this->db->where($search_where);
 		}
-
+		
 		if ($search_like) {
 			foreach ($search_like as $item) {
 				foreach ($item as $skey => $sval) {
@@ -107,14 +105,16 @@ class News_model extends CB_Model
 			}
 			$this->db->group_end();
 		}
-
+		
 		$this->db->order_by($orderby);
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}
 		$qry = $this->db->get();
+		print_r($qry);
+		exit;
 		$result['list'] = $qry->result_array();
-
+		
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
 		$this->db->join('member', 'news.comp_id = company.comp_id', 'left');
