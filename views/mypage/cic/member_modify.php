@@ -136,7 +136,7 @@
 								<a href="javascript:void(0);" id="confirm_password_number" class="modify-btn confirm-btn" style="display:none;">
 									<span>확인</span>
 								</a>
-								<a href="javascript:void(0);" data-type="password" class="modify-btn send_ath_email">
+								<a href="javascript:void(0);" data-type="password" class="modify-btn view_ath_box">
 									<span>이메일+핸드폰인증</span>
 								</a>
 							</div>
@@ -149,7 +149,10 @@
 								<p class="chk-input w380">
 									<input type="text" placeholder="인증번호를 입력해주세요" id="ath_num" name="ath_num" value="">
 								</p>
-								<a href="javascript:void(0);" data-type="password" class="modify-btn confirm_ath_email">
+								<a href="javascript:void(0);" data-type="password" class="modify-btn send-ath-email">
+									<span>이메일인증</span>
+								</a>
+								<a href="javascript:void(0);" data-type="password" class="modify-btn confirm-ath-email" style="display:none;">
 									<span>확인</span>
 								</a>
 							</div>
@@ -347,11 +350,10 @@
 /**
  * 이메일 인증 시작
  */
-
 	$(document).ready(function(){
-		$(".send_ath_email").on('click', function() {
+		$(".sned-ath-email").on('click', function() {
 			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.
-            
+
 			var state ='';
 			var message = '';
 			$.ajax({
@@ -372,12 +374,6 @@
 					if(state == 1){
 						// 성공 메세지
                         alert(message);
-
-						$('#myModal_' + type + ' .ath-email-box').attr('style', "display:block;"); // 이메일 인증 박스 생성
-						
-						if(type == "password" || type == "wallet"){
-							$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:block;"); // 핸드폰 인증 박스 생성
-						}
 					}
 					// 실패
 					if(state == 0){
@@ -385,10 +381,66 @@
 						alert(message);
 					}
 				},
-				error: function(){
-					alert('에러가 발생했습니다.');
+				error: function() {
+					alert("에러가 발생했습니다");
 				}
 			});
+		})
+	})
+
+	$(document).ready(function(){
+		$(".view_ath_box").on('click', function() {
+			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.
+            
+			// var state ='';
+			// var message = '';
+			// $.ajax({
+			// 	url: cb_url + '/membermodify/ajax_modify_email_send',
+			// 	type: 'POST',
+			// 	data: {
+			// 		type: type,
+			// 		csrf_test_name : cb_csrf_hash
+			// 	},
+			// 	dataType: 'json',
+			// 	async: false,
+			// 	cache: false,
+			// 	success: function(data) {
+			// 		state = data.state;
+			// 		message = data.message;
+                    
+			// 		// 성공
+			// 		if(state == 1){
+			// 			// 성공 메세지
+            //             alert(message);
+
+			if($(this).hasClass("active")){
+				$('#myModal_' + type + ' .ath-email-box').attr('style', "display:none;"); // 이메일 인증 박스 제거
+			    
+				if(type == "password" || type == "wallet"){
+					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:none;"); // 핸드폰 인증 박스 제거
+				}
+                
+				$(this).removeClass("active");
+			} else{
+				$('#myModal_' + type + ' .ath-email-box').attr('style', "display:block;"); // 이메일 인증 박스 생성
+			    
+				if(type == "password" || type == "wallet"){
+					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:block;"); // 핸드폰 인증 박스 생성
+				}
+                
+				$(this).addClass("active");
+			}
+			// 		}
+			// 		// 실패
+			// 		if(state == 0){
+			// 			// 실패 메세지
+			// 			alert(message);
+			// 		}
+			// 	},
+			// 	error: function(){
+			// 		alert('에러가 발생했습니다.');
+			// 	}
+			// });
 		})
 	})
 
