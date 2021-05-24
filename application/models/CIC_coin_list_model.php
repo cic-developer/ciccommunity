@@ -150,9 +150,11 @@ class CIC_Coin_list_model extends CB_Model
         }
         $array = json_decode($response, true);
         $refresh = $this -> input -> post('refresh');
-
-        print_r($array);
-
+        foreach($array as $arr){
+            echo '<pre><br>';
+            print_r($arr['localization']);
+            echo '</pre></br>';
+        }
         if($refresh){
         // convert json to php array or object
             return $array;

@@ -44,9 +44,9 @@
 						?>
 							<tr>
 								<td><?php echo number_format(element('num', $result)); ?></td>
-								<td><?php echo html_escape(element('cml_korean_nm', $result)); ?></td>
-								<td><?php echo html_escape(element('cml_symbol', $result)); ?></td>
-								<td><?php echo (element('cml_default', $result) == 1) ? '기본' : ''; ?></td>
+								<td><?php echo html_escape(element('cmc_korean_nm', $result)); ?></td>
+								<td><?php echo html_escape(element('cmc_symbol', $result)); ?></td>
+								<td><?php echo (element('cmc_default', $result) == 1) ? '기본' : ''; ?></td>
 								<td>업 / 다운</td>
 								<td><a href="<?php echo admin_url($this->pagedir); ?>/coin_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
 								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>

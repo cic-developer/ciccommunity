@@ -6,8 +6,8 @@ if (element(element('primary_key', $view), element('data', $view))) {
 		<h4 class="pb10 pull-left">코인 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>
 		<div class="clearfix"></div>
 		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/coin_write/' . element('cml_idx', element('data', $view))); ?>" onclick="return check_form_changed();">기본정보</a></li>
-			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/coin_write_exchange/' . element('cml_idx', element('data', $view))); ?>" onclick="return check_form_changed();">거래소 설정</a></li>
+			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/coin_write/' . element('cmc_idx', element('data', $view))); ?>" onclick="return check_form_changed();">기본정보</a></li>
+			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/coin_write_exchange/' . element('cmc_idx', element('data', $view))); ?>" onclick="return check_form_changed();">거래소 설정</a></li>
 		</ul>
 	</div>
 <?php
@@ -33,35 +33,28 @@ if (element(element('primary_key', $view), element('data', $view))) {
 		?>
 			<input type="hidden" name="<?php echo element('primary_key', $view); ?>"	value="<?php echo element(element('primary_key', $view), element('data', $view)); ?>" />
 			<div class="form-group">
-				<label class="col-sm-2 control-label">코인 id</label>
-				<div class="col-sm-10 form-inline">
-					<input type="text" class="form-control" name="cml_id" value="<?php echo set_value('cml_id', element('cml_id', element('data', $view))); ?>" />
-					<p class="help-block">API 사용시 구분자로 활용됩니다.</p>
-				</div>
-			</div>
-			<div class="form-group">
 				<label class="col-sm-2 control-label">코인 심볼</label>
 				<div class="col-sm-10 form-inline">
-					<input type="text" class="form-control" name="cml_symbol" value="<?php echo set_value('cml_symbol', element('cml_symbol', element('data', $view))); ?>" />
+					<input type="text" class="form-control" name="cmc_symbol" value="<?php echo set_value('cmc_symbol', element('cmc_symbol', element('data', $view))); ?>" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">코인이름 - 한글</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="cml_korean_nm" value="<?php echo set_value('cml_korean_nm', element('cml_korean_nm', element('data', $view))); ?>" />
+					<input type="text" class="form-control" name="cmc_korean_nm" value="<?php echo set_value('cmc_korean_nm', element('cmc_korean_nm', element('data', $view))); ?>" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">코인이름 - 영문</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="cml_english_nm" value="<?php echo set_value('cml_english_nm', element('cml_english_nm', element('data', $view))); ?>" />
+					<input type="text" class="form-control" name="cmc_english_nm" value="<?php echo set_value('cmc_english_nm', element('cmc_english_nm', element('data', $view))); ?>" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">기본으로 설정</label>
 				<div class="col-sm-10">
-					<label for="cml_default" class="checkbox-inline">
-						<input type="checkbox" name="cml_default" id="cml_default" value="1" <?php echo set_checkbox('cml_default', '1', (element('cml_default', element('data', $view)) ? true : false)); ?> /> 기본 코인으로 설정합니다.
+					<label for="cmc_default" class="checkbox-inline">
+						<input type="checkbox" name="cmc_default" id="cmc_default" value="1" <?php echo set_checkbox('cmc_default', '1', (element('cmc_default', element('data', $view)) ? true : false)); ?> /> 기본 코인으로 설정합니다.
 					</label>
 					<p class="help-block">비회원이거나, 유저가 별도 설정하지 않은 경우 기본적으로 노출됩니다.</p>
 				</div>
@@ -79,10 +72,9 @@ if (element(element('primary_key', $view), element('data', $view))) {
 $(function() {
 	$('#fadminwrite').validate({
 		rules: {
-			cml_id: { required: true, minlength:2, maxlength:20 },
-			cml_korean_nm: {required :true, minlength:2, maxlength:10 },
-			cml_english_nm: {required :true, minlength:2, maxlength:20 },
-			cml_api: {required :true},
+			cmc_korean_nm: {required :true, minlength:2, maxlength:10 },
+			cmc_english_nm: {required :true, minlength:2, maxlength:20 },
+			cmc_symbol: {required :true, minlength:2, maxlength:20 },
 		}
 	});
 });

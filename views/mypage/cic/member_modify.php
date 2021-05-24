@@ -450,56 +450,54 @@
  * 이메일 재전송 시작
  */
 
-	var stTime1;
-	var timerStart1;
-	var stTime2;
-	var timerStart2;
-    
-	var startTime = function(type){
-        
-		if(type == "password"){
-			if(! stTime1) {
-				stTime1 = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
-			}
-            
-			timerStart1 = setInterval(function() {
-				var nowTime = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
-				var newTime = new Date(nowTime - stTime1) //(nowTime - stTime)을 new Date()에 넣는다
-				var min = newTime.getMinutes() //분
-				var sec = newTime.getSeconds() //초
-				var milisec = Math.floor(newTime.getMilliseconds() / 10) //밀리초
-				document.getElementById('postTestMin').innerText = addZero(min)
-				document.getElementById('postTestSec').innerText = addZero(10- sec)
-				// document.getElementById('postTestMilisec').innerText = addZero(milisec)
-					if((addZero(10 - sec)) == 0){
-						clearTime();
-						$('.' + type + '-timer-box').attr('style', "display:none;");
-						$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
-					}
-			}, 1000)
+	var stTime1
+	var timerStart1
+
+	var startTime1 = function(){
+		if(! stTime1) {
+			stTime1 = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
 		}
-        
-		if(type == "wallet"){
-			if(! stTime2) {
-				stTime2 = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
-			}
-            
-			timerStart2 = setInterval(function() {
-				var nowTime = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
-				var newTime = new Date(nowTime - stTime2) //(nowTime - stTime)을 new Date()에 넣는다
-				var min = newTime.getMinutes() //분
-				var sec = newTime.getSeconds() //초
-				var milisec = Math.floor(newTime.getMilliseconds() / 10) //밀리초
-				document.getElementById('postTestMin').innerText = addZero(min)
-				document.getElementById('postTestSec').innerText = addZero(10- sec)
-				// document.getElementById('postTestMilisec').innerText = addZero(milisec)
-					if((addZero(10 - sec)) == 0){
-						clearTime();
-						$('.' + type + '-timer-box').attr('style', "display:none;");
-						$('.' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;");
-					}
-			}, 1000)
+
+		timerStart1 = setInterval(function() {
+			var nowTime1 = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
+			var newTime1 = new Date(nowTime1 - stTime1) //(nowTime - stTime)을 new Date()에 넣는다
+			var min1 = newTime1.getMinutes() //분
+			var sec1 = newTime1.getSeconds() //초
+			var milisec1 = Math.floor(newTime1.getMilliseconds() / 10) //밀리초
+			document.getElementById('postTestMin').innerText = addZero(mi1n)
+			document.getElementById('postTestSec').innerText = addZero(10- sec1)
+			// document.getElementById('postTestMilisec').innerText = addZero(milisec)
+				if((addZero(10 - sec1)) == 0){
+					clearTime();
+					$('.timer-box1').attr('style', "display:none;");
+					$('.resend1').attr('style', "display:block; margin-top: 20px;");
+				}
+		}, 1000)
+	}
+
+	var stTime2
+	var timerStart2
+
+	var startTime2 = function(){
+		if(! stTime2) {
+			stTime2 = new Date().getTime() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
 		}
+
+		timerStart2 = setInterval(function() {
+			var nowTime2 = new Date().getTime() //1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
+			var newTime2 = new Date(nowTime2 - stTime2) //(nowTime - stTime)을 new Date()에 넣는다
+			var min2 = newTime2.getMinutes() //분
+			var sec2 = newTime2.getSeconds() //초
+			var milisec2 = Math.floor(newTime2.getMilliseconds() / 10) //밀리초
+			document.getElementById('postTestMin').innerText = addZero(min2)
+			document.getElementById('postTestSec').innerText = addZero(10- sec2)
+			// document.getElementById('postTestMilisec').innerText = addZero(milisec)
+				if((addZero(10 - sec2)) == 0){
+					clearTime();
+					$('.timer-box2').attr('style', "display:none;");
+					$('.resend2').attr('style', "display:block; margin-top: 20px;");
+				}
+		}, 1000)
 	}
 
 	var clearTime = function(){
@@ -512,11 +510,18 @@
 		return (num < 10 ? '0'+num : ''+num)
 	}
 
-	var waitResend = function(type) {
-		$('.' + type + '-timer-box').attr('style', "display:block;");
-		$('.' + type + '-resend-email').attr('style', "display:none;");
-
-		startTime(type);
+	var waitResend = function() {
+		if(type == "password"){
+			$('.password-timer-box').attr('style', "display:block;");
+			$('.password-resend-email').attr('style', "display:none;");
+			startTime1();
+		}
+        
+		if(type == "wallet"){
+			$('.wallet-timer-box').attr('style', "display:block;");
+			$('.wallet-resend-email').attr('style', "display:none;");
+			startTime2();
+		}
 	}
 
 	$(document).ready(function(){

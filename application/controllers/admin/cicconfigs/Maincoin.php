@@ -23,7 +23,7 @@ class Maincoin extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_maincoin_exchange','CIC_maincoin_list');
+	protected $models = array('CIC_maincoin_exchange','CIC_maincoin_coin');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
@@ -185,7 +185,7 @@ class Maincoin extends CB_Controller
 			array(
 				'field' => 'cme_english_nm',
 				'label' => '거래소명 - 영문',
-				'rules' => 'trim|required|min_length[2]|max_length[20]|alpha_dash',
+				'rules' => 'trim|required|min_length[2]|max_length[20]',
 			),
 			array(
 				'field' => 'cme_logo',
@@ -317,7 +317,7 @@ class Maincoin extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = 'cml_orderby';
+		$findex = 'cmc_orderby';
 		$forder = 'desc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
@@ -327,15 +327,15 @@ class Maincoin extends CB_Controller
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
-		$this->CIC_maincoin_list_model->allow_search_field = array('cme_id', 'cme_english_nm', 'cme_korean_nm'); // 검색이 가능한 필드
-		$this->CIC_maincoin_list_model->search_field_equal = array('cme_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->CIC_maincoin_list_model->allow_order_field = array('cme_orderby'); // 정렬이 가능한 필드
+		$this->CIC_maincoin_coin_model->allow_search_field = array('cme_id', 'cme_english_nm', 'cme_korean_nm'); // 검색이 가능한 필드
+		$this->CIC_maincoin_coin_model->search_field_equal = array('cme_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->CIC_maincoin_coin_model->allow_order_field = array('cme_orderby'); // 정렬이 가능한 필드
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		$where = array(
-			'cml_del <>' => 1,
+			'cmc_del <>' => 1,
 		);
 		
-		$result = $this->CIC_maincoin_list_model
+		$result = $this->CIC_maincoin_coin_model
 			->get_admin_list($per_page, $offset, $where, '', $findex, '', $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		
@@ -349,7 +349,7 @@ class Maincoin extends CB_Controller
 		/**
 		 * primary key 정보를 저장합니다
 		 */
-		$view['view']['primary_key'] = $this->CIC_maincoin_list_model->primary_key;
+		$view['view']['primary_key'] = $this->CIC_maincoin_coin_model->primary_key;
 
 		/**
 		 * 페이지네이션을 생성합니다
@@ -364,7 +364,7 @@ class Maincoin extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('cml_symbol' => '코인심볼','cml_korean_nm' => '코인이름(한글)', 'cml_english_nm' => '코인이름(영어)');
+		$search_option = array('cmc_symbol' => '코인심볼','cmc_korean_nm' => '코인이름(한글)', 'cmc_english_nm' => '코인이름(영어)');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir . '/coin');
@@ -387,7 +387,7 @@ class Maincoin extends CB_Controller
 	/**
 	 * 코인 추가 또는 수정 페이지를 가져오는 메소드입니다
 	 */
-	public function coin_write($cml_idx = 0)
+	public function coin_write($cmc_idx = 0)
 	{
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_ciccinfigs_maincoin_coin_write';
@@ -402,20 +402,20 @@ class Maincoin extends CB_Controller
 		/**
 		 * 프라이머리키에 숫자형이 입력되지 않으면 에러처리합니다
 		 */
-		if ($cml_idx) {
-			$cml_idx = (int) $cml_idx;
-			if (empty($cml_idx) OR $cml_idx < 1) {
+		if ($cmc_idx) {
+			$cmc_idx = (int) $cmc_idx;
+			if (empty($cmc_idx) OR $cmc_idx < 1) {
 				show_404();
 			}
 		}
-		$primary_key = $this->CIC_maincoin_list_model->primary_key;
+		$primary_key = $this->CIC_maincoin_coin_model->primary_key;
 
 		/**
 		 * 수정 페이지일 경우 기존 데이터를 가져옵니다
 		 */
 		$getdata = array();
-		if ($cml_idx) {
-			$getdata = $this->CIC_maincoin_list_model->get_one($cml_idx);
+		if ($cmc_idx) {
+			$getdata = $this->CIC_maincoin_coin_model->get_one($cmc_idx);
 		} else {
 			// 기본값 설정
 		}
@@ -430,32 +430,27 @@ class Maincoin extends CB_Controller
 		 */
 		$config = array(
 			array(
-				'field' => 'cml_korean_nm',
+				'field' => 'cmc_korean_nm',
 				'label' => '코인 이름 - 한글',
 				'rules' => 'trim|required|min_length[2]|max_length[10]',
 			),
 			array(
-				'field' => 'cml_english_nm',
+				'field' => 'cmc_english_nm',
 				'label' => '코인 이름 - 영문',
-				'rules' => 'trim|required|min_length[2]|max_length[20]|alpha_dash',
-			),
-			array(
-				'field' => 'cml_symbol',
-				'label' => '코인 심볼',
-				'rules' => 'trim|required|in_list[coingecko,hotbit_korea]',
+				'rules' => 'trim|required|min_length[2]|max_length[20]',
 			),
 		);
 		if ($this->input->post($primary_key)) {
 			$config[] = array(
-				'field' => 'cml_id',
-				'label' => '코인 id',
-				'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[20]|is_unique[cic_maincoin_list.cml_id.cml_idx.' . element('cml_idx', $getdata) . ']',
+				'field' => 'cmc_symbol',
+				'label' => '코인 심볼',
+				'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[20]|is_unique[CIC_maincoin_coin.cmc_symbol.cmc_idx.' . element('cmc_idx', $getdata) . ']',
 			);
 		} else {
 			$config[] = array(
-				'field' => 'cml_id',
-				'label' => '코인 id',
-				'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[20]|is_unique[cic_maincoin_list.cml_id]',
+				'field' => 'cmc_symbol',
+				'label' => '코인 심볼',
+				'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[20]|is_unique[CIC_maincoin_coin.cmc_symbol]',
 			);
 		}
 		$this->form_validation->set_rules($config);
@@ -480,18 +475,17 @@ class Maincoin extends CB_Controller
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
 			$updatedata = array(
-				'cml_id' => $this->input->post('cme_id', null, ''),
-				'cml_korean_nm' => $this->input->post('cme_korean_nm', null, ''),
-				'cml_english_nm' => $this->input->post('cme_english_nm', null, ''),
-				'cml_symbol' => $this->input->post('cme_symbol', null, ''),
-				'cml_default' => $this->input->post('cme_default', null, '') ? 1 : 0,
+				'cmc_korean_nm' => $this->input->post('cme_korean_nm', null, ''),
+				'cmc_english_nm' => $this->input->post('cme_english_nm', null, ''),
+				'cmc_symbol' => $this->input->post('cme_symbol', null, ''),
+				'cmc_default' => $this->input->post('cme_default', null, '') ? 1 : 0,
 			);
 
 			/**
 			 * 게시물을 수정하는 경우입니다
 			 */
 			if ($this->input->post($primary_key)) {
-				$this->CIC_maincoin_list_model->update($this->input->post($primary_key), $updatedata);
+				$this->CIC_maincoin_coin_model->update($this->input->post($primary_key), $updatedata);
 				$this->session->set_flashdata(
 					'message',
 					'정상적으로 수정되었습니다'
@@ -501,10 +495,10 @@ class Maincoin extends CB_Controller
 				 * 게시물을 새로 입력하는 경우입니다
 				 * 기본값 설정입니다
 				 */
-				$updatedata['cme_orderby'] = $this->CIC_maincoin_list_model->get_this_orderby();
+				$updatedata['cme_orderby'] = $this->CIC_maincoin_coin_model->get_this_orderby();
 
 
-				$cml_idx = $this->CIC_maincoin_list_model->insert($updatedata);
+				$cmc_idx = $this->CIC_maincoin_coin_model->insert($updatedata);
 				$this->session->set_flashdata(
 					'message',
 					'정상적으로 추가되었습니다'
@@ -517,8 +511,8 @@ class Maincoin extends CB_Controller
 
 		$param =& $this->querystring;
 		$getdata = array();
-		if ($cml_idx) {
-			$getdata = $this->CIC_maincoin_list_model->get_one($cml_idx);
+		if ($cmc_idx) {
+			$getdata = $this->CIC_maincoin_coin_model->get_one($cmc_idx);
 		} else {
 			// 기본값 설정
 		}
