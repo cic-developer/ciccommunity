@@ -102,7 +102,7 @@
 							<p class="btxt">인증번호</p>
 							<div class="field modify">
 								<p class="chk-input w380">
-									<input type="text" placeholder="인증번호를 입력해주세요" id="ath_num" name="ath_num" value="">
+									<input type="text" placeholder="인증번호를 입력해주세요" class="ath_num" name="ath_num" value="">
 								</p>
 								<a href="javascript:void(0);" data-type="phone" class="modify-btn confirm_ath_email">
 									<span>확인</span>
@@ -133,13 +133,13 @@
 								<p class="chk-input w380" style="margin-top:35px;">
 									<input type="text" placeholder="" id="new_password_re" name="new_password_re" value="" readonly disabled style="background-color:#efefef;">
 								</p>
-								<a href="javascript:void(0);" id="confirm_password_number" class="modify-btn confirm-btn" style="display:none;">
-									<span>확인</span>
-								</a>
 								<a href="javascript:void(0);" data-type="password" class="modify-btn view_ath_box">
 									<span>이메일+핸드폰인증</span>
 								</a>
 							</div>
+							<a href="javascript:void(0);" id="confirm_password_number" class="modify-btn confirm-btn" style="display:none;">
+								<span>확인</span>
+							</a>
 						</li>
 					</ul>
 					<ul class="entry ath-email-box" style="display:none;">
@@ -148,7 +148,7 @@
 							<div class="all-email-box">
 								<div class="field modify">
 									<p class="chk-input w380">
-										<input type="text" placeholder="인증번호를 입력해주세요" id="ath_num" name="ath_num" value="">
+										<input type="text" placeholder="인증번호를 입력해주세요" class="ath_num" name="ath_num" value="">
 									</p>
 									<a href="javascript:void(0);" data-type="password" class="modify-btn send-ath-email">
 										<span>이메일인증</span>
@@ -521,7 +521,7 @@
             
 			if($(this).hasClass("active")){
 				$('#myModal_' + type + ' .ath-email-box').attr('style', "display:none;"); // 이메일 인증 박스 제거
-			    
+                
 				if(type == "password" || type == "wallet"){
 					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:none;"); // 핸드폰 인증 박스 제거
 				}
@@ -529,7 +529,7 @@
 				$(this).removeClass("active");
 			} else{
 				$('#myModal_' + type + ' .ath-email-box').attr('style', "display:block;"); // 이메일 인증 박스 생성
-			    
+                
 				if(type == "password" || type == "wallet"){
 					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:block;"); // 핸드폰 인증 박스 생성
 				}
@@ -548,7 +548,7 @@
 	$(document).ready(function(){
 		$(".confirm-ath-email").on('click', function() {
 			var type = $(this).data('type');
-			var ath_num = $('#myModal_' + type + ' .ath-email-box #ath_num').val();
+			var ath_num = $('#myModal_' + type + ' .ath-email-box .ath_num').val();
 
 			var result = '';
 			var reason = '';
@@ -573,6 +573,10 @@
 						alert(reason);
 						$('#myModal_' + type + ' .ath-email-box .all-email-box').attr('style', "display:none;"); // 이메일 인증 박스 제거
 						$('#myModal_' + type + ' .ath-email-box .success').attr('style', "display:block;"); // 이메일 성공 메세지 생성
+                        
+						$('#myModal_' + type + ' .ath-email-box').addClass("agree") // 인증 완료 표식
+                        
+						isAgreeForModify(type);
 					}
 					// 실패
 					if(result == 0){
@@ -589,13 +593,32 @@
 /**
  * 이메일 인증 하기 끝
  */
-
+/*****************************************************************************/
+/**
+ * 나이스 핸드폰 인증 하기 시작
+ */
 	var successNiceForPassword = function(type){
 		$('#myModal_' + type + ' .ath-nice-box .all-nice-box').attr('style', "display:none");
 		$('#myModal_' + type + ' .ath-nice-box .success').attr('style', "display:block");
+        
+		$('#myModal_' + type + ' .ath-nice-box').addClass("agree") // 인증 완료 표식
+        
+		isAgreeForModify(type);
 	}
-
-
+/**
+ * 나이스 핸드폰 인증 하기 끝
+ */
+/*****************************************************************************/
+	var isAgreeForModify = function(type) {
+		var isAgreeEmail = $('#myModal_' + type + ' .ath-email-box').hasClass("agree");
+		var isAgreeNice = $('#myModal_' + type + ' .ath-nice-box').hasClass("agree");
+        
+		if(type == "password" && ( isAgreeEmail && isAgreeNice )){
+			$('#myModal_' + type + ' #new_password').attr('readonly', false);
+			$('#myModal_' + type + ' #new_password').attr('disabled', false);
+			$('#myModal_' + type + ' #new_password').attr('style', '');
+		}
+	}
 
 
 
@@ -691,7 +714,7 @@
 
 	// 이메일 인증 하기
 	$(document).on('click', "#ath_mail_btn", function(){
-		var ath_num = $("#ath_num").val();
+		var ath_num = $(".ath_num").val();
 		var modify_type = $("#modify_type").val();
         
 		var result = '';

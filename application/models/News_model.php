@@ -24,11 +24,14 @@ class News_model extends CB_Model
 
     public function get_news_list($limit = '', $offset = '', $where = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
     {
+		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
+			$orderby = 'news_reviews desc';
+		}
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
 		if (empty($sfield)) {
-			$sfield = array('news_title', 'news_content');
+			$sfield = array('news_title', 'news_contents');
 		}
-
+		
 		$search_where = array();
 		$search_like = array();
 		$search_or_like = array();

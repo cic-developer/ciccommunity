@@ -30,6 +30,7 @@
 				<label class="col-sm-2 control-label">거래소 로고 url</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="cme_logo" value="<?php echo set_value('cme_logo', element('cme_logo', element('data', $view))); ?>" />
+					<p class="help-block"><a href="https://www.coingecko.com/ko/api" target="_blank">https://www.coingecko.com/ko/api(클릭)</a> > /exchanges/{id} > Try it out > id 에 거래소 id 입력 후 Execute를 누르면 로고주소를 얻을 수 있습니다.</p>
 				</div>
 			</div>
 			<div class="form-group">

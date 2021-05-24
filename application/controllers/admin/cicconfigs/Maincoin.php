@@ -255,9 +255,6 @@ class Maincoin extends CB_Controller
 				 * 게시물을 새로 입력하는 경우입니다
 				 * 기본값 설정입니다
 				 */
-				$lastest_where = array(
-
-				);
 				$updatedata['cme_orderby'] = $this->{$this->modelname}->get_this_orderby();
 
 				$cme_idx = $this->{$this->modelname}->insert($updatedata);
@@ -504,6 +501,8 @@ class Maincoin extends CB_Controller
 				 * 게시물을 새로 입력하는 경우입니다
 				 * 기본값 설정입니다
 				 */
+				$updatedata['cme_orderby'] = $this->CIC_maincoin_list_model->get_this_orderby();
+
 
 				$cml_idx = $this->CIC_maincoin_list_model->insert($updatedata);
 				$this->session->set_flashdata(
@@ -538,7 +537,7 @@ class Maincoin extends CB_Controller
 		/**
 		 * 어드민 레이아웃을 정의합니다
 		 */
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'exchange_write');
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'coin_write');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
