@@ -36,8 +36,6 @@ class News_model extends CB_Model
 		$search_where = array();
 		$search_like = array();
 		$search_or_like = array();
-		print_r('hello');
-		exit;
 		if ($sfield && is_array($sfield)) {
 			foreach ($sfield as $skey => $sval) {
 				$ssf = $sval;
@@ -83,7 +81,6 @@ class News_model extends CB_Model
 		$this->db->select('news.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point');
 		$this->db->from($this->_table);
 		$this->db->join('member', 'news.comp_id = company.comp_id', 'left');
-		
 		if ($where) {
 			$this->db->where($where);
 		}
@@ -91,7 +88,7 @@ class News_model extends CB_Model
 			$this->db->where($search_where);
 		}
 		// if ($category_id) {
-		// 	if (strpos($category_id, '.')) {
+		// 			if (strpos($category_id, '.')) {
 		// 		$this->db->like('post_category', $category_id . '', 'after');
 		// 	} else {
 		// 		$this->db->group_start();
@@ -121,7 +118,8 @@ class News_model extends CB_Model
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}
-
+		print_r($limit);
+		exit;
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
 		

@@ -142,19 +142,15 @@ class Searchcoin extends CB_Controller
 		// 	$list_[] = $list;
 			// print_r($list);
 				
-			// for($i = 0; $i<count($getList); $i++){
-			// 	$korean = $getList[$i]['localization']['ko'];
-			// 	echo "<pre><br>";
-			// 	print_r($korean);
-			// 	echo "</pre></br>"; }
-			$getLists = $this -> CIC_coin_list_model->retrieve_api($get_apiList[1]);
-			// print_r($getLists);
-		// }
+			for($i = 0; $i<count($get_apiList); $i++){
+				$getLists = $this -> CIC_coin_list_model->retrieve_api($get_apiList[$i]);
+				print_r($getLists);
+		}
 		
 		// 	// echo "<pre><br>";$list_
 		// 	// print_r($getLists);
 		// 	// echo "</pre></br>";		
-			foreach($getLists as $getList){
+			// foreach($getLists as $getList){
 				// $market = $getList[$i]['market'];
 				//Getting only coin starting with K	
 
@@ -201,7 +197,7 @@ class Searchcoin extends CB_Controller
 							}	
 						} 
 					}
-			}	
+			// }	
 		// }	
 		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());

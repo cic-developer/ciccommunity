@@ -208,11 +208,14 @@ class Register extends CB_Controller
 		$eventname = 'event_register_auth_success';
 		$this->load->event($eventname);
 
+		$EncodeData = $this->input->get("EncodeData");
+		$this->checkplus->success($EncodeData);
+
 		$data = $this->session->userdata('dec_data');
 		$DI = $data['dupinfo'];
-
+		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
-
+		
 		if(count($isDI) > 0){ // 중복 이면
 			// $this->session->unset_userdata('dec_data');
 			echo("<script>alert('이미 가입된 회원입니다');</script>");

@@ -35,7 +35,7 @@
 						foreach (element('list', element('exchange_list', $view)) as $result) {
 					?>
 						<div class="form-group list-group-item">
-							<input type="hidden" name="cmcd_cme_idx[<?php echo element('cme_idx', $result); ?>]" value="<?php echo element('cme_idx', $result); ?>"/>
+							<input type="hidden" name="cmcd_cme_idx[<?php echo element('cme_idx', $result); ?>]" value="<?php echo element('cmcd_idx', $result); ?>"/>
 							<div class="col-sm-1"><?php echo element('num', $result); ?></div>
 							<div class="col-sm-3"><?php echo html_escape(element('cme_korean_nm', $result)); ?></div>
 							<div class="col-sm-2"><?php echo html_escape(element('cme_api', $result)); ?></div>

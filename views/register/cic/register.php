@@ -5,6 +5,7 @@
 		<div class="member-wrap join">
 			<h3>회원가입 약관 동의 (본인인증)</h3>
 			<?php 	
+			html_escape(element('dec_data', $view));
 				$attributes = array('class' => 'form-horizontal', 'name' => 'fregisterform', 'id' => 'fregisterform');
 				echo form_open(current_full_url(), $attributes);
 				

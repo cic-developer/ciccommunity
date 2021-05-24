@@ -2526,7 +2526,7 @@ class Membermodify extends CB_Controller
 			echo("<script>");
 			echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
 			echo("window.opener.successNice('password');"); // 패스워드 변경 폼 생성
-			// echo("self.close();");
+			echo("self.close();");
 			echo("</script>");
 			exit;
 		}
@@ -2565,7 +2565,7 @@ class Membermodify extends CB_Controller
 			echo("<script>");
 			echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
 			echo("window.opener.successNice('wallet');"); // 패스워드 변경 폼 생성
-			// echo("self.close();");
+			echo("self.close();");
 			echo("</script>");
 			exit;
 		}
@@ -2693,7 +2693,6 @@ class Membermodify extends CB_Controller
 		$result = $this->Member_model->set_user_modify($mem_id, $new_phone, $new_password);
 
 		// 세션데이터 지우기
-		$this->session->unset_userdata('dec_data');
 		$this->session->unset_userdata('phone_modify_ath_mail_result');
 		$this->session->unset_userdata('password_modify_ath_mail_result');
 		$this->session->unset_userdata('wallet_modify_ath_mail_result');
