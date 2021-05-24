@@ -10,8 +10,8 @@
 						foreach (element('grouplist', $view) as $key => $value) {
 					?>
 					<ul>
-						<li class="active"><a href="<?php base_url('/search') ?>"><span>통합검색</span></a></li>
-						<li><a href="<?php base_url('/search') ?>/search?group_id=<?php echo $bgr_name ?>"><span>제목</span></a></li>
+						<li class="active"><a href="<?php current_full_url() ?>"><span>통합검색</span></a></li>
+						<li><a href="<?php current_full_url() ?>/group_id=<?php $bgr_name ?>"><span>제목</span></a></li>
 						<li><a href="#n"><span>내용</span></a></li>
 						<li><a href="#n"><span>작성자</span></a></li>
 					</ul>
@@ -30,10 +30,8 @@
                     <?php echo form_close(); ?>
 				</div>
 				<div class="abr">
-				<?php if (element('boardlist', $view)) { ?>
-							<?php foreach (element('boardlist', $view) as $key => $value) { ?>
 					<div class="sel-box c02">
-						<a href="<?php echo base_url() ?>" class="sel-btn"><span>제목만</span></a>
+						<a href="#n" class="sel-btn"><span>제목만</span></a>
 						<ul>
 							<li class="active"><a href="#n"><span>제목만</span></a></li>
 							<li><a href="#n"><span>내용만</span></a></li>
@@ -48,9 +46,6 @@
 						</ul>
 					</div>
 				</div>
-				<?php
-						}
-					}?>		
 				
 			</div>
 			<div class="result">
