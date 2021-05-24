@@ -76,12 +76,18 @@
 				<a href="javascript:fnPopup();" id="submitButton" class="update-btn"><span>정보업데이트</span></a>
 				<a href="javascript:void(0);" id="submitUserDelete" class="leave-btn"><span>회원탈퇴</span></a>
 			</div>
-			
-			<!-- 핸드폰번호 변경 -->
+
+			<!-- test -->
 			<div id="myModal_phone" class="modal">
 				<!-- Modal content -->
 				<a href="javascript:void(0);" class="ath-email modify-btn modal-btn" data-type="phone"><span>이메일인증</span></a>
 			</div>
+			
+			<!-- 핸드폰번호 변경 -->
+			<!-- <div id="myModal_phone" class="modal"> -->
+				<!-- Modal content -->
+				<!-- <a href="javascript:void(0);" class="ath-email modify-btn modal-btn" data-type="phone"><span>이메일인증</span></a>
+			</div> -->
 
 			<!-- 비밀번호 변경 -->
 			<div id="myModal_password" class="modal"> 

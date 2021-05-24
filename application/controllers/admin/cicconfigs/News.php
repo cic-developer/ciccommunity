@@ -22,7 +22,7 @@ class News extends CB_Controller
 
     public function index()
     {
-        $eventname = 'event_news_index';
+        $eventname = 'event_admin_news_index';
         $this->load->event($eventname);
 
         $view = array();

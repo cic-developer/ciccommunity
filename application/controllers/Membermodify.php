@@ -2185,7 +2185,7 @@ class Membermodify extends CB_Controller
 		if (empty($_ath_num)) {
 			$result = array(
 				'result' => '0',
-				'reason' => '인증번호가 넘어오지 않았습니다',
+				'reason' => '인증번호를 입력해주세요',
 			);
 			exit(json_encode($result));
 		}
