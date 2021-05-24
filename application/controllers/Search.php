@@ -176,6 +176,7 @@ class Search extends CB_Controller
 		$total_rows = $result['total_rows'];
 		$view['total_rows'] = $total_rows;
 
+		print_r($grouplist);
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
 			$sfieldarray = array('post_title', 'post_content', 'post_both');
 			if (in_array($sfield2, $sfieldarray)) {
@@ -249,8 +250,6 @@ class Search extends CB_Controller
 		}
 		$this->pagination->initialize($config);
 		$view['view']['paging'] = $this->pagination->create_links();
-		$view['view']['page'] = $page;
-
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
