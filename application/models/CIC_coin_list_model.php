@@ -161,15 +161,15 @@ class CIC_Coin_list_model extends CB_Model
             $name =  $array['name'];
 
             $data = array(
-                'clist_market' => $korean,
-                'clist_name_ko'=> $symbol,
-                'clist_name_en'=> $name
+                'korean' => $korean,
+                'syembol'=> $symbol,
+                'name'=> $name
             );
             // print_r($data);
         
             if($refresh){
             // convert json to php array or object
-                return $data;
+                return $array;
             }
         }
                 // convert json to php array or object
@@ -215,6 +215,7 @@ class CIC_Coin_list_model extends CB_Model
             foreach($array as $arr){
                 $listId[] = $arr['id'];
             }
+            print_r($listId[1]);
             return $listId;
         }
         

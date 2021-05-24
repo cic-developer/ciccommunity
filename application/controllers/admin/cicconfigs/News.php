@@ -65,12 +65,6 @@ class News extends CB_Controller
 		}
 		$view['view']['data'] = $result;
 
-		// $select = 'comp_id, comp_name';
-		// $where = array(
-		// 	'brd_id' => 1
-		// );
-		// $view['view']['boardlist'] = $this->Board_model->get_board_list($where);
-
 		/**
 		 * primary key 정보를 저장합니다
 		 */

@@ -37,16 +37,20 @@ if ( ! function_exists('get_coin_price')) {
                 }
                 //convert json to php array or object
                 $array = json_decode($response, true);
-                $result = $array['result'];
-                if($result){
-                    return array(
-                        'price' => $result['last'],
-                        'volume' => $result['deal'],
-                        'change_rate' => $result['open'] ? (($result['open'] - $result['last']) / $result['open'] * 100) : 0,
-                    );
-                } else {
-                    return array();
+                $result = $array['tickers'];
+                print_r($result);
+                exit;
+                if($result && is_array($result)){
+                    foreach($result as $val){
+                        if($val['target'] != $market) continue;
+                        return array(
+                            'price' => $val['last'],
+                            'volume' => $val['volume']*$val['last'],
+                            'change_rate' => $val['market'] ? (($result['open'] - $result['last']) / $result['open'] * 100) : 0,
+                        );
+                    }
                 }
+                return array();
             }
             break;
 

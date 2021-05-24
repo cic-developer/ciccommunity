@@ -2520,9 +2520,6 @@ class Membermodify extends CB_Controller
 		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
 
-		print($this->checkplus->success($EncodeData));
-		exit;
-
 		if(count($isDI) > 0){ // 중복 이면
 			// 휴대폰 인증 결과 저장
 			$this->session->set_userdata('password_modify_ath_nice_phone_result', '1');
@@ -2566,12 +2563,6 @@ class Membermodify extends CB_Controller
 		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
 
-		print_r("<br>");
-		print_r("hi");
-		print_r("<br>");
-		print_r($EncodeData);
-
-		exit;
 		if(count($isDI) > 0){ // 중복 이면
 			// 휴대폰 인증 결과 저장
 			$this->session->set_userdata('wallet_modify_ath_nice_phone_result', '1');

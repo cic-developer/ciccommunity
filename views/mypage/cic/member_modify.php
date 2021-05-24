@@ -139,16 +139,16 @@
 							<p class="btxt">새 비밀번호</p>
 							<div class="field modify">
 								<p class="chk-input w380">
-									<input type="text" placeholder="비밀번호" id="new_password" name="new_password" value="" readonly disabled style="background-color:#efefef;">
+									<input type="password" placeholder="비밀번호" id="new_password" name="new_password" value="" readonly disabled style="background-color:#efefef;">
 								</p>
 								<p class="chk-input w380" style="margin-top:35px;">
-									<input type="text" placeholder="비밀번호확인" id="new_password_re" name="new_password_re" value="" readonly disabled style="background-color:#efefef;">
+									<input type="password" placeholder="비밀번호확인" id="new_password_re" name="new_password_re" value="" readonly disabled style="background-color:#efefef;">
 								</p>
 								<a href="javascript:void(0);" data-type="password" class="modify-btn view_ath_box">
 									<span>이메일+핸드폰인증</span>
 								</a>
 							</div>
-							<a href="javascript:void(0);" id="confirm_password_number" class="modify-btn confirm-btn" style="display:none;">
+							<a href="javascript:void(0);" id="confirm_password" class="modify-btn confirm-btn" style="display:none;">
 								<span>확인</span>
 							</a>
 						</li>
@@ -454,9 +454,10 @@
 				var newTime1 = new Date(nowTime1 - stTime1) //(nowTime - stTime)을 new Date()에 넣는다
 				var min1 = newTime1.getMinutes() //분
 				var sec1 = newTime1.getSeconds() //초
+				alert(sec1);
 				var milisec1 = Math.floor(newTime1.getMilliseconds() / 10) //밀리초
 				document.getElementById('postTestMin1').innerText = addZero(min1)
-				document.getElementById('postTestSec1').innerText = addZero(10- sec1)
+				document.getElementById('postTestSec1').innerText = addZero(10 - sec1)
 				// document.getElementById('postTestMilisec').innerText = addZero(milisec)
 					if((addZero(10 - sec1)) == 0){
 						clearTime(type);
@@ -642,9 +643,11 @@
                 
 				if(type == "password"){
 					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:none;"); // 핸드폰 인증 박스 제거
+					$('#myModal_' + type + ' .ath-nice-box .all-nice-box > *').remove(); // 핸드폰 인증 버튼 제거
 				}
 				if(type == "wallet"){
 					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:none;"); // 핸드폰 인증 박스 제거
+					$('#myModal_' + type + ' .ath-nice-box .all-nice-box > *').remove(); // 핸드폰 인증 버튼 제거
 				}
                 
 				$(this).removeClass("active");
@@ -662,7 +665,7 @@
 					html += '</div>';
 
 					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:block;"); // 핸드폰 인증 박스 생성
-					$('#myModal_' + type + ' .ath-nice-box').append(html); // 핸드폰 인증 버튼 생성
+					$('#myModal_' + type + ' .ath-nice-box .all-nice-box').append(html); // 핸드폰 인증 버튼 생성
 				}
 				if(type == "wallet"){
 					var html = '';
@@ -675,7 +678,7 @@
 					html += '</div>';
 
 					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:block;"); // 핸드폰 인증 박스 생성
-					$('#myModal_' + type + ' .ath-nice-box').append(html); // 핸드폰 인증 버튼 생성
+					$('#myModal_' + type + ' .ath-nice-box .all-nice-box').append(html); // 핸드폰 인증 버튼 생성
 				}
                 
 				$(this).addClass("active");
@@ -778,6 +781,77 @@
  */
 /*****************************************************************************/
 /**
+ * 휴대폰번호변경 시작
+ */
+	// 핸드폰번호 하이푼 자동 생성
+	function inputPhoneNumber(obj) { 
+		var number = obj.value.replace(/[^0-9]/g, ""); 
+		var phone = ""; 
+		if(number.length < 4) { 
+			return number; 
+		} else if(number.length < 7) { 
+			phone += number.substr(0, 3); 
+			phone += "-"; 
+			phone += number.substr(3); 
+		} else if(number.length < 11) { 
+			phone += number.substr(0, 3); 
+			phone += "-"; 
+			phone += number.substr(3, 3);
+			phone += "-"; 
+			phone += number.substr(6); 
+		} else { 
+			phone += number.substr(0, 3); 
+			phone += "-"; 
+			phone += number.substr(3, 4); 
+			phone += "-"; 
+			phone += number.substr(7); 
+		} 
+		
+		obj.value = phone; 
+	}
+
+	// 핸드폰번호 validation and 사용가능여부 check
+	$(document).on('click', "#confirm_phone", function(){
+        
+		var _phone = $("#new_phone").val(); // 입력한 핸드폰번호
+		var phone = _phone;
+		var state = '';
+		var message = '';
+		$.ajax({
+			url: cb_url + '/membermodify/ajax_phone_confirm',
+			type: 'POST',
+			data: {
+				new_phone: _phone,
+				csrf_test_name : cb_csrf_hash
+			},
+			dataType: 'json',
+			async: false,
+			cache: false,
+			success: function(data) {
+				state = data.state;
+				message = data.message;
+                
+                
+				if(state == 1){
+					alert(message); // 성공 메세지 출력
+					$("#mem_phone").val(phone); // 유저에게 보이는(readonly input tag)부분에 값 변경: 해당 값은 최종 정보업데이트 시 post로 넘어갑니다
+					modal1.style.display = "none"; // modal 종료
+				}
+				if(state == 0){
+					// 실패 메세지 출력
+					alert(message);
+				}
+			},
+			error: function(){
+				alert('에러가 발생했습니다.');
+			}
+		});
+	})
+/**
+ * 휴대폰번호변경 끝
+ */
+/*****************************************************************************/
+/**
  * 비밀번호변경 시작
  */
 	// 비밀번호 == 비밀번호 확인 check
@@ -792,11 +866,11 @@
 		if(password2 != currentVal ){ // && currentVal.length > 0){
 			$('.agree-password').remove();
 			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
-			$('#confirm_password_number').before(html);
+			$('#confirm_password').before(html);
 		} else{
 			$('.agree-password').remove();
 			html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
-			$('#confirm_password_number').before(html);
+			$('#confirm_password').before(html);
 		}
 		
 		oldVal1 = currentVal;
@@ -814,11 +888,11 @@
 		if(password1 != currentVal ){ // && currentVal.length > 0){
 			$('.agree-password').remove();
 			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
-			$('#confirm_password_number').before(html);
+			$('#confirm_password').before(html);
 		} else{
 			$('.agree-password').remove();
 			html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
-			$('#confirm_password_number').before(html);
+			$('#confirm_password').before(html);
 		}
 		
 		oldVal2 = currentVal;
@@ -908,77 +982,6 @@
 	});
 /**
  * 지갑주소변경 끝
- */
-/*****************************************************************************/
-/**
- * 휴대폰번호변경 시작
- */
-	// 핸드폰번호 하이푼 자동 생성
-	function inputPhoneNumber(obj) { 
-		var number = obj.value.replace(/[^0-9]/g, ""); 
-		var phone = ""; 
-		if(number.length < 4) { 
-			return number; 
-		} else if(number.length < 7) { 
-			phone += number.substr(0, 3); 
-			phone += "-"; 
-			phone += number.substr(3); 
-		} else if(number.length < 11) { 
-			phone += number.substr(0, 3); 
-			phone += "-"; 
-			phone += number.substr(3, 3);
-			phone += "-"; 
-			phone += number.substr(6); 
-		} else { 
-			phone += number.substr(0, 3); 
-			phone += "-"; 
-			phone += number.substr(3, 4); 
-			phone += "-"; 
-			phone += number.substr(7); 
-		} 
-		
-		obj.value = phone; 
-	}
-
-	// 핸드폰번호 validation and 사용가능여부 check
-	$(document).on('click', "#confirm_phone_number", function(){
-        
-		var _phone = $("#new_phone").val(); // 입력한 핸드폰번호
-		var phone = _phone;
-		var state = '';
-		var message = '';
-		$.ajax({
-			url: cb_url + '/membermodify/ajax_phone_confirm',
-			type: 'POST',
-			data: {
-				new_phone: _phone,
-				csrf_test_name : cb_csrf_hash
-			},
-			dataType: 'json',
-			async: false,
-			cache: false,
-			success: function(data) {
-				state = data.state;
-				message = data.message;
-                
-                
-				if(state == 1){
-					alert(message); // 성공 메세지 출력
-					$("#mem_phone").val(phone); // 유저에게 보이는(readonly input tag)부분에 값 변경: 해당 값은 최종 정보업데이트 시 post로 넘어갑니다
-					modal1.style.display = "none"; // modal 종료
-				}
-				if(state == 0){
-					// 실패 메세지 출력
-					alert(message);
-				}
-			},
-			error: function(){
-				alert('에러가 발생했습니다.');
-			}
-		});
-	})
-/**
- * 휴대폰번호변경 끝
  */
 /********************************************************/
 /**
