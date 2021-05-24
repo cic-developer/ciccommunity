@@ -80,19 +80,35 @@
 
 			<!-- 테스트 -->
 			<div id="myModal_phone" class="modal">
-				<ul class="modal-content entry ">
-					<li class="">
-						<p class="btxt">새 핸드폰번호</p>
-						<div class="field modify">
-							<p class="chk-input w380">
-								<input type="text" placeholder="" onkeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="" readonly disabled style="background-color:#efefef;">
-							</p>
-							<a href="javascript:void(0);" id="phone_modify_btn" class="modify-btn">
-								<span>이메일인증</span>
-							</a>
-						</div>
-					</li>
-				</ul>
+				<div class="modal-content">
+					<ul class="entry">
+						<li class="">
+							<p class="btxt">새 핸드폰번호</p>
+							<div class="field modify">
+								<p class="chk-input w380">
+									<input type="text" placeholder="" onkeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="" readonly disabled style="background-color:#efefef;">
+								</p>
+								<a href="javascript:void(0);" id="phone_modify_btn" class="modify-btn">
+									<span>이메일인증</span>
+								</a>
+							</div>
+						</li>
+					</ul>
+					<ul class="entry">
+						<li class="">
+							<p class="btxt">인증번호</p>
+							<div class="field modify">
+								<p class="chk-input w380">
+									<input type="text" placeholder="인증번호를 입력해주세요" id="new_phone" name="new_phone" value="">
+								</p>
+								<a href="javascript:void(0);" id="phone_modify_btn" class="modify-btn">
+									<span>확인</span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+				
 			</div>
 
 			<!-- 핸드폰번호 변경 -->
