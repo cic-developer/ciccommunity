@@ -122,6 +122,9 @@
 
 			<!-- 새 비밀번호 modal -->
 			<div id="myModal_password" class="modal">
+			<form name="form_chk" method="post" id="password_form_chk">
+				<input type="hidden" name="m" value="checkplusService">
+				<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">
 				<div class="modal-content">
 					<ul class="entry modify-box">
 						<li class="">
@@ -144,46 +147,53 @@
 					</ul>
 					<ul class="entry ath-email-box" style="display:none;">
 						<li class="">
-							<p class="btxt">인증번호</p>
-							<div class="field modify">
-								<p class="chk-input w380">
-									<input type="text" placeholder="인증번호를 입력해주세요" id="ath_num" name="ath_num" value="">
-								</p>
-								<a href="javascript:void(0);" data-type="password" class="modify-btn send-ath-email">
-									<span>이메일인증</span>
-								</a>
-								<a href="javascript:void(0);" data-type="password" class="modify-btn confirm-ath-email" style="display:none;">
-									<span>확인</span>
-								</a>
-								
+							<p class="btxt">이메일인증</p>
+							<div class="all-email-box">
+								<div class="field modify">
+									<p class="chk-input w380">
+										<input type="text" placeholder="인증번호를 입력해주세요" id="ath_num" name="ath_num" value="">
+									</p>
+									<a href="javascript:void(0);" data-type="password" class="modify-btn send-ath-email">
+										<span>이메일인증</span>
+									</a>
+									<a href="javascript:void(0);" data-type="password" class="modify-btn confirm-ath-email" style="display:none;">
+										<span>확인</span>
+									</a>
+									
+								</div>
+								<div class="resend" style="display:none;">
+									<a href="javascript:void(0);" data-type="password" class="modify-btn resend-ath-email" style="display:block;">
+										<span>인증번호 재전송</span>
+									</a>	
+								</div>
+								<div class="timer-box" style="display:none;">
+									<span id="postTestMin">00</span><!-- 분 -->
+									<span>:</span>
+									<span id="postTestSec">10</span><!--초-->
+									<!-- <span id="postTestMilisec">00</span>밀리초 -->
+								</div>
 							</div>
-							<div class="resend" style="display:none;">
-								<a href="javascript:void(0);" data-type="password" class="modify-btn resend-ath-email" style="display:block;">
-									<span>인증번호 재전송</span>
-								</a>	
-							</div>
-							<div class="timer-box" style="display:none;">
-								<span id="postTestMin">00</span><!-- 분 -->
-								<span>:</span>
-								<span id="postTestSec">10</span><!--초-->
-								<!-- <span id="postTestMilisec">00</span>밀리초 -->
-							</div>
+							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
 						</li>
 					</ul>
 					<ul class="entry ath-nice-box" style="display:none;">
 						<li>
 							<p class="btxt">휴대폰인증</p>
-							<form name="form_chk" method="post" id="password_form_chk">
-								<input type="hidden" name="m" value="checkplusService">
-								<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>">
+							<!-- <form name="form_chk" method="post" id="password_form_chk"> -->
+								<!-- <input type="hidden" name="m" value="checkplusService">
+								<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('phone_enc_data', $view)); ?>"> -->
 								<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
 									<span>핸드폰인증</span>
 								</a>
-							</form>
+							<!-- </form> -->
+							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
 						</li>
 					</ul>
 				</div>
-				
+				<a href="javascript:fnPopup();" id="ath_nice_phone" class="ath-nice-phone modify-btn modal-btn">
+									<span>핸드폰인증</span>
+								</a>
+				</form>
 			</div>
 
 			<!-- 비밀번호 변경 -->
@@ -385,6 +395,7 @@
 					$('.timer-box').attr('style', "display:none;");
 					$('.resend').attr('style', "display:block; margin-top: 20px;");
 				}
+				console.log("hi");
 		}, 1000)
 	}
 
@@ -506,27 +517,6 @@
 		$(".view_ath_box").on('click', function() {
 			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.
             
-			// var state ='';
-			// var message = '';
-			// $.ajax({
-			// 	url: cb_url + '/membermodify/ajax_modify_email_send',
-			// 	type: 'POST',
-			// 	data: {
-			// 		type: type,
-			// 		csrf_test_name : cb_csrf_hash
-			// 	},
-			// 	dataType: 'json',
-			// 	async: false,
-			// 	cache: false,
-			// 	success: function(data) {
-			// 		state = data.state;
-			// 		message = data.message;
-                    
-			// 		// 성공
-			// 		if(state == 1){
-			// 			// 성공 메세지
-            //             alert(message);
-
 			if($(this).hasClass("active")){
 				$('#myModal_' + type + ' .ath-email-box').attr('style', "display:none;"); // 이메일 인증 박스 제거
 			    
@@ -544,25 +534,17 @@
                 
 				$(this).addClass("active");
 			}
-			// 		}
-			// 		// 실패
-			// 		if(state == 0){
-			// 			// 실패 메세지
-			// 			alert(message);
-			// 		}
-			// 	},
-			// 	error: function(){
-			// 		alert('에러가 발생했습니다.');
-			// 	}
-			// });
 		})
 	})
 /**
  * 인증 박스 보이기 끝
  */
 /*****************************************************************************/
+/**
+ * 이메일 인증 하기 시작
+ */
 	$(document).ready(function(){
-		$(".confirm_ath_email").on('click', function() {
+		$(".confirm-ath-email").on('click', function() {
 			var type = $(this).data('type');
 			var ath_num = $('#myModal_' + type + ' .ath-email-box #ath_num').val();
 
@@ -587,15 +569,8 @@
 					if(result == 1) {
 						// 성공 메세지
 						alert(reason);
-						$('#myModal_' + type + ' .ath-email-box').attr('style', "display:none;"); // 이메일 인증 박스 제거
-
-						// 변경값 입력 input style 변경
-						$('#new_' + type).attr('readonly', false);
-						$('#new_' + type).attr('disabled', false);
-						$('#new_' + type).attr('style', "background-color: white;");
-
-						$('#myModal_' + type + ' .modify-box .send_ath_email').attr('style', "display:none;"); // 이메일인증 버튼 제거
-						$('#myModal_' + type + ' .modify-box .confirm-btn').attr('style', "display:block;"); // 확인 버튼 생성
+						$('#myModal_' + type + ' .ath-email-box .all-email-box').attr('style', "display:none;"); // 이메일 인증 박스 제거
+						$('#myModal_' + type + ' .ath-email-box .success').attr('style', "display:block;"); // 이메일 성공 메세지 생성
 					}
 					// 실패
 					if(result == 0){
@@ -609,6 +584,9 @@
 			});
 		})
 	})
+/**
+ * 이메일 인증 하기 끝
+ */
 
 	// 인증번호 이메일 발송
 	$(document).ready(function(){

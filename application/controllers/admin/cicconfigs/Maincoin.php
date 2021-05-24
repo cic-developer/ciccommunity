@@ -23,7 +23,7 @@ class Maincoin extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_maincoin_exchange');
+	protected $models = array('CIC_maincoin_exchange','CIC_maincoin_list');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
@@ -123,24 +123,6 @@ class Maincoin extends CB_Controller
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
 				$result['list'][$key]['num'] = $list_num--;
-				// if ($board) {
-				// 	$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-				// 	$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
-				// }
-				// $result['list'][$key]['category'] = '';
-				// if (element('post_category', $val)) {
-				// 	$result['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
-				// }
-				// if (element('post_image', $val)) {
-				// 	$imagewhere = array(
-				// 		'post_id' => element('post_id', $val),
-				// 		'pfi_is_image' => 1,
-				// 	);
-				// 	$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-				// 	$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
-				// } else {
-				// 	$result['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
-				// }
 			}
 		}
 		$view['view']['data'] = $result;
@@ -283,6 +265,7 @@ class Maincoin extends CB_Controller
 				'cme_korean_nm' => $this->input->post('cme_korean_nm', null, ''),
 				'cme_english_nm' => $this->input->post('cme_english_nm', null, ''),
 				'cme_api' => $this->input->post('cme_api', null, ''),
+				'cme_default' => $this->input->post('cme_default', null, '') ? 1 : 0,
 			);
 
 			/**
@@ -290,7 +273,10 @@ class Maincoin extends CB_Controller
 			 */
 			if ($this->input->post($primary_key)) {
 				$this->{$this->modelname}->update($this->input->post($primary_key), $updatedata);
-				$view['view']['alert_message'] = '기본정보 설정이 저장되었습니다';
+				$this->session->set_flashdata(
+					'message',
+					'정상적으로 수정되었습니다'
+				);
 			} else {
 				/**
 				 * 게시물을 새로 입력하는 경우입니다
@@ -300,12 +286,12 @@ class Maincoin extends CB_Controller
 				$cme_idx = $this->{$this->modelname}->insert($updatedata);
 				$this->session->set_flashdata(
 					'message',
-					'기본정보 설정이 저장되었습니다'
+					'정상적으로 추가되었습니다'
 				);
-
-				$redirecturl = admin_url($this->pagedir . '/exchange_write/' . $cme_idx);
-				redirect($redirecturl);
 			}
+
+			$redirecturl = admin_url($this->pagedir . '/exchange/');
+			redirect($redirecturl);
 		}
 
 		$param =& $this->querystring;
@@ -353,17 +339,71 @@ class Maincoin extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		/**
+		 * 페이지에 숫자가 아닌 문자가 입력되거나 1보다 작은 숫자가 입력되면 에러 페이지를 보여줍니다.
+		 */
+		$param =& $this->querystring;
+		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
+		$findex = 'cme_orderby';
+		$forder = 'desc';
+		$sfield = $this->input->get('sfield', null, '');
+		$skeyword = $this->input->get('skeyword', null, '');
+
+		$per_page = admin_listnum();
+		$offset = ($page - 1) * $per_page;
+		/**
+		 * 게시판 목록에 필요한 정보를 가져옵니다.
+		 */
+		$this->CIC_maincoin_list_model->allow_search_field = array('cme_id', 'cme_english_nm', 'cme_korean_nm'); // 검색이 가능한 필드
+		$this->CIC_maincoin_list_model->search_field_equal = array('cme_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->CIC_maincoin_list_model->allow_order_field = array('cme_orderby'); // 정렬이 가능한 필드
+		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+		$where = array(
+			'cml_del <>' => 1,
+		);
+		
+		$result = $this->CIC_maincoin_list_model
+			->get_admin_list($per_page, $offset, $where, '', $findex, '', $forder, $sfield, $skeyword);
+		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
+		
+		if (element('list', $result)) {
+			foreach (element('list', $result) as $key => $val) {
+				$result['list'][$key]['num'] = $list_num--;
+			}
+		}
+		$view['view']['data'] = $result;
+
+		/**
 		 * primary key 정보를 저장합니다
 		 */
-		$view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
+		$view['view']['primary_key'] = $this->CIC_maincoin_list_model->primary_key;
 
+		/**
+		 * 페이지네이션을 생성합니다
+		 */
+		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['total_rows'] = $result['total_rows'];
+		$config['per_page'] = $per_page;
+		$this->pagination->initialize($config);
+		$view['view']['paging'] = $this->pagination->create_links();
+		$view['view']['page'] = $page;
+
+		/**
+		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
+		 */
+		$search_option = array('cme_korean_nm' => '거래소명(한글)', 'cme_english_nm' => '거래소명(영어)');
+		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
+		$view['view']['search_option'] = search_option($search_option, $sfield);
+		$view['view']['listall_url'] = admin_url($this->pagedir . '/exchange');
+		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/exchange_listdelete/?' . $param->output());
+		$view['view']['write_url'] = admin_url($this->pagedir . '/exchange_write/?' . $param->output());
+		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
 		/**
 		 * 어드민 레이아웃을 정의합니다
 		 */
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'coin');
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'exchange');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
