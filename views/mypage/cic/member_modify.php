@@ -73,8 +73,7 @@
 				</ul>
 			</div>
 			<div class="lower">
-				<!-- <a href="javascript:fnPopup();"  -->
-				<a id="submitButton" class="update-btn"><span>정보업데이트</span></a>
+				<a href="javascript:fnPopup();" id="submitButton" class="update-btn"><span>정보업데이트</span></a>
 				<a href="javascript:void(0);" id="submitUserDelete" class="leave-btn"><span>회원탈퇴</span></a>
 			</div>
 			
@@ -189,10 +188,10 @@
 						<li>
 							<p class="btxt">핸드폰인증</p>
 							<div class="all-nice-box">
-								<form name="form_chk1" method="post" id="password_form_chk">
-									<input type="hidden" name="m" value="checkplusService1">
+								<form name="form_chk" method="post" id="password_form_chk">
+									<input type="hidden" name="m" value="checkplusService">
 									<input type="hidden" name="EncodeData1" value="<?php echo html_escape(element('password_enc_data', $view)); ?>">
-									<a href="javascript:fnPopup1();" class="modify-btn modal-btn">
+									<a href="javascript:fnPopup();" class="modify-btn modal-btn">
 										<span>핸드폰인증</span>
 									</a>
 								</form>
@@ -257,10 +256,11 @@
 						<li>
 							<p class="btxt">핸드폰인증</p>
 							<div class="all-nice-box">
-								<form name="form_chk2" method="post" id="wallet_form_chk">
+								<form name="form_chk" method="post" id="wallet_form_chk">
 									<input type="hidden" name="m" value="checkplusService">
-									<input type="hidden" name="EncodeData2" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">
-									<a href="javascript:fnPopup2();" class="modify-btn modal-btn">
+									<input type="hidden" name="type" value="wallet">
+									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">
+									<a href="javascript:fnPopup();" class="modify-btn modal-btn">
 										<span>핸드폰인증</span>
 									</a>
 								</form>
@@ -962,16 +962,9 @@
 	window.name ="Parent_window";
 	function fnPopup(){
 		window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
-		document.form_chk1.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
-		document.form_chk1.target = "popupChk";
-		document.form_chk1.submit();
-	}
-
-	function fnPopup2(){
-		window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
-		document.form_chk2.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
-		document.form_chk2.target = "popupChk";
-		document.form_chk2.submit();
+		document.form_chk.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+		document.form_chk.target = "popupChk";
+		document.form_chk.submit();
 	}
 
 	var successNice = function(type){

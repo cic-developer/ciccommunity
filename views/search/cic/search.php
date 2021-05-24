@@ -12,7 +12,7 @@
 					?>
 					<ul>
 						<li class="active"><a href="<?php current_full_url() ?>"><span>통합검색</span></a></li>
-						<li><a href="<?php current_full_url() ?>/group_id=<?php echo element ('bgr_name', $value) ?>"><span>제목</span></a></li>
+						<li><a href="<?php current_full_url() ?>/group_id=<?php echo element ('brd_order', $value) ?>"><span>제목</span></a></li>
 						<li><a href="#n"><span>내용</span></a></li>
 						<li><a href="#n"><span>작성자</span></a></li>
 					</ul>
@@ -124,8 +124,7 @@
 								<tr>
 									<td>
 										<div class="my-info">
-											<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>"
-													alt=""></p>
+											<p class="pimg"><img src="<?php echo element('mem_icon',$result)?>" alt=""></p>
 											<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
 										</div>
 									</td>

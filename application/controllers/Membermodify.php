@@ -2512,7 +2512,7 @@ class Membermodify extends CB_Controller
 
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		$EncodeData = $this->input->get("EncodeData1");
+		$EncodeData = $this->input->get("EncodeData");
 		$this->checkplus->success($EncodeData);
 
 		$data = $this->session->userdata('dec_data');
@@ -2520,7 +2520,7 @@ class Membermodify extends CB_Controller
 		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
 
-		print($isDI);
+		print($this->checkplus->success($EncodeData));
 		exit;
 
 		if(count($isDI) > 0){ // 중복 이면
@@ -2557,14 +2557,14 @@ class Membermodify extends CB_Controller
 
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		$EncodeData = $this->input->get("EncodeData2");
+		$EncodeData = $this->input->get("EncodeData");
 		$this->checkplus->success($EncodeData);
 
 		$data = $this->session->userdata('dec_data');
 		$DI = $data['dupinfo'];
 		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
-		print($isDI);
+;
 		exit;
 		if(count($isDI) > 0){ // 중복 이면
 			// 휴대폰 인증 결과 저장
