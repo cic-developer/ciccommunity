@@ -110,7 +110,7 @@
 				<a href="javascript:void(0);" class="bw-btn btn-one-delete" data-one-delete-url="<?php echo element('delete_url', $view); ?>"><span>신고</span></a>
 				<?php } ?>
 			</div>
-			<div class="gap60">ㄴㅇㄹㄴㅇㄹ</div>
+			<div class="gap60"></div>
 			<div class="best">
 				<div class="fl">
 					<h4>BEST VP UP</h4>

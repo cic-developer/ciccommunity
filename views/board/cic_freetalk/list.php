@@ -107,8 +107,6 @@
                         }
                     }
                     if (element('list', element('data', element('list', $view)))) {
-                        print_r(element('list', element('data', element('list', $view))));
-                        exit;
                         foreach (element('list', element('data', element('list', $view))) as $result) {
                     ?>
                         <tr>

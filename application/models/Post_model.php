@@ -744,8 +744,6 @@ class Post_model extends CB_Model
 		if ($where) {
 			$this->db->where($where);
 		}
-		// print_r($where);
-		// exit;
 		if ($search_where) {
 			$this->db->where($search_where);
 		}
