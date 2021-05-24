@@ -736,16 +736,16 @@ class Post_model extends CB_Model
 		$qry = $this->db->get();
 		
 		$result['list'] = $qry->result_array();
-		print_r($this->db->last_query());
-		exit;
 		
 
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
-		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
+		// $this->db->join('member', 'post.mem_id = member.mem_id', 'left');
 		if ($where) {
 			$this->db->where($where);
 		}
+		// print_r($where);
+		// exit;
 		if ($search_where) {
 			$this->db->where($search_where);
 		}

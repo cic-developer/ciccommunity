@@ -138,12 +138,12 @@ class Searchcoin extends CB_Controller
 		$list_ = array();
 		for($i = 0; $i<count($get_apiList); $i++){
 			$getLists = $this -> CIC_coin_list_model->retrieve_api($get_apiList[$i]);
-			
-			$data = array(
-				'clist_market' => $getList[$i]['symbol'],
-				'clist_name_ko' => $getList[$i]['localization']['ko'],
-				'clist_name_en' => $getList[$i]['name'],
-			);
+			print_r($getLists);
+			// $data = array(
+			// 	'clist_market' => $getList[$i]['symbol'],
+			// 	'clist_name_ko' => $getList[$i]['localization']['ko'],
+			// 	'clist_name_en' => $getList[$i]['name'],
+			// );
 			// echo "<pre><br>";
 			// print_r($data);
 			// echo "</pre></br>";
@@ -161,42 +161,42 @@ class Searchcoin extends CB_Controller
 				// if(strcmp(substr($market, 0, 1), "K")==0){	
 					// $market = substr($market, 4);
 
-					print_r($data);
-					if(isset($data) && !empty($data)){
-						foreach($data as $coinData){
-							if(in_array($coinData, $coin_arr)){
-								continue;
-							}
-							else{
-								$stock = $this->CIC_coin_list_model->insertStockData($data);
-								$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-							}
-						}
-					}
-					$data = array(
-						array(
-							'coin_market'=> $getList['symbol'],
-							'coin_keyword'=>$getList['localization']['ko']
-						),
-						array(
-							'coin_market'=> $getList['symbol'],
-							'coin_keyword'=>$getList['name']
-						),
-						array(
-							'coin_market'=> $getList['symbol'],
-							'coin_keyword'=> $getList['symbol'],
-						),
-					);
-					if(isset($data) && !empty($data)){
-						foreach($data as $thisData){
-							if(in_array($thisData['coin_keyword'], $keyword_arr)){	
-								continue;
-							}
-							else{
-								$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
-							}	
-						} 
-					}
+					// print_r($data);
+					// if(isset($data) && !empty($data)){
+					// 	foreach($data as $coinData){
+					// 		if(in_array($coinData, $coin_arr)){
+					// 			continue;
+					// 		}
+					// 		else{
+					// 			$stock = $this->CIC_coin_list_model->insertStockData($data);
+					// 			$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+					// 		}
+					// 	}
+					// }
+					// $data = array(
+					// 	array(
+					// 		'coin_market'=> $getList['symbol'],
+					// 		'coin_keyword'=>$getList['localization']['ko']
+					// 	),
+					// 	array(
+					// 		'coin_market'=> $getList['symbol'],
+					// 		'coin_keyword'=>$getList['name']
+					// 	),
+					// 	array(
+					// 		'coin_market'=> $getList['symbol'],
+					// 		'coin_keyword'=> $getList['symbol'],
+					// 	),
+					// );
+					// if(isset($data) && !empty($data)){
+					// 	foreach($data as $thisData){
+					// 		if(in_array($thisData['coin_keyword'], $keyword_arr)){	
+					// 			continue;
+					// 		}
+					// 		else{
+					// 			$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
+					// 		}	
+					// 	} 
+					// }
 			// }	
 		// }	
 		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');

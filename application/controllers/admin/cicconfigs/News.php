@@ -65,9 +65,7 @@ class News extends CB_Controller
 		
 		$result = $this->{$this->modelname}
 			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
-		
-		if (element('list', $result)) {
+		$list_num = $result['total_rows'] - ($page - 1) * $per_page;esult)) {
 			foreach (element('list', $result) as $key => $val) {
 				// $result['list'][$key]['p_display_name'] = display_username(
 				// 	element('news_title', $val),

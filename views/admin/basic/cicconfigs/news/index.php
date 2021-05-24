@@ -21,12 +21,12 @@
 					?>
 					<?php if (element('boardlist', $view)) { ?>
 						<div class="pull-right mr10">
-							<select name="brd_id" class="form-control" onChange="location.href='<?php echo current_url(); ?>?brd_id=' + this.value;">
+							<!-- <select name="brd_id" class="form-control" onChange="location.href='<?php echo current_url(); ?>?brd_id=' + this.value;">
 								<option value="">전체게시판</option>
 								<?php foreach (element('boardlist', $view) as $key => $value) { ?>
 								<option value="<?php echo element('brd_id', $value); ?>" <?php echo set_select('brd_id', element('brd_id', $value), ($this->input->get('brd_id') === element('brd_id', $value) ? true : false)); ?>><?php echo html_escape(element('brd_name', $value)); ?></option>
 						<?php } ?>
-					</select>
+					</select> -->
 				</div>
 			<?php } ?>
 				</div>

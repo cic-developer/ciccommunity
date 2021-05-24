@@ -182,9 +182,6 @@ class Membermodify extends CB_Controller
 		$this->session->unset_userdata('wallet_modify_ath_nice_phone_result');
 
 		$view['view']['password_enc_data'] = $this->checkplus->main('membermodify', 'password_auth_phone_success', 'password_auth_phone_fail');
-
-		print_r($view['view']['password_enc_data']);
-		// exit;
 		$view['view']['wallet_enc_data'] = $this->checkplus->main('membermodify', 'wallet_auth_phone_success', 'wallet_auth_phone_fail');
 		// $view['view']['dec_data'] = $this->session->userdata('dec_data');
 
@@ -2515,7 +2512,7 @@ class Membermodify extends CB_Controller
 
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		$EncodeData = $this->input->get("EncodeData");
+		$EncodeData = $this->input->get("EncodeData1");
 		$this->checkplus->success($EncodeData);
 
 		$data = $this->session->userdata('dec_data');
@@ -2523,6 +2520,7 @@ class Membermodify extends CB_Controller
 		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
 
+		print($isDI);
 		exit;
 
 		if(count($isDI) > 0){ // 중복 이면
@@ -2559,7 +2557,7 @@ class Membermodify extends CB_Controller
 
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		$EncodeData = $this->input->get("EncodeData");
+		$EncodeData = $this->input->get("EncodeData2");
 		$this->checkplus->success($EncodeData);
 
 		$data = $this->session->userdata('dec_data');
@@ -2607,8 +2605,8 @@ class Membermodify extends CB_Controller
 
 		$this->session->set_userdata('password_modify_ath_nice_phone_result', '');
 
-		if($this->input->get("EncodeData")){
-			$this->checkplus->fail($this->input->get("EncodeData"));
+		if($this->input->get("EncodeData1")){
+			$this->checkplus->fail($this->input->get("EncodeData1"));
 			
 			echo("<script>alert('인증에 실패하였습니다!');</script>");
 			echo("<script>self.close()</script>");
@@ -2636,8 +2634,8 @@ class Membermodify extends CB_Controller
 
 		$this->session->set_userdata('wallet_modify_ath_nice_phone_result', '');
 
-		if($this->input->get("EncodeData")){
-			$this->checkplus->fail($this->input->get("EncodeData"));
+		if($this->input->get("EncodeData2")){
+			$this->checkplus->fail($this->input->get("EncodeData2"));
 			
 			echo("<script>alert('인증에 실패하였습니다!');</script>");
 			echo("<script>self.close()</script>");
