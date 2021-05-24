@@ -357,8 +357,9 @@
  * 이메일 인증 시작
  */
 
-	var waitResend = function(el) {
-		$(this).removeClass("resend-ath-email");
+	var waitResend = function() {
+		$('.resend').attr('style', "display:none;")
+
 	}
 
 	$(document).ready(function(){
@@ -396,7 +397,7 @@
 						alert(message);
 					}
 
-					waitResend(this);
+					waitResend();
 				},
 				error: function() {
 					alert("에러가 발생했습니다");

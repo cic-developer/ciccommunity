@@ -8,42 +8,43 @@ class News extends CB_Controller
 
     protected $models = array('News');
 
+
     protected $modelname = 'News_model';
 
-    protected $helpers = array('form', 'array', 'dhtml_editor');
+
+    protected $helpers = array('form', 'array',);
+
 
     function __construct()
     {
         parent::__construct();
 
-        $this->load->library(array('paginagion', 'querystring', 'session','news'));
-        $this->load->model(array('News_model'));
+        $this->load->library(array('pagination', 'querystring')); 
     }
 
     public function index()
     {
         $eventname = 'event_admin_news_index';
         $this->load->event($eventname);
-
         $view = array();
         $view['view'] = array();
-
+        
         $view['view']['event']['before'] = Events::trigger('before', $eventname);
-
+        
         $param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
 		$findex = $this->input->get('findex') ? $this->input->get('findex') : $this->{$this->modelname}->primary_key;
 		$forder = $this->input->get('forder', null, 'desc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
-
+        
         $per_page = admin_listnum();
         $offset = ($page - 1) * $per_page;
-
+        
         $this->{$this->modelname}->allow_search_field = array('news_id', 'news_title', 'news_content', 'comp_id');
         $this->{$this->modelname}->search_field_equal = array();
         $this->{$this->modelname}->allow_order_field = array();
-
+        
         $where = array();
         $result = $this->{$this->modelname}
         ->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
@@ -58,6 +59,7 @@ class News extends CB_Controller
                 $result['list'][$key]['num'] = $list_num--;
             }
         }
+
         $view['view']['data'] = $result;
 
         $view['view']['primary_key'] = $this->{$this->modelname}->primary_key;

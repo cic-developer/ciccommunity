@@ -24,11 +24,18 @@ class News_model extends CB_Model
 
     public function get_news_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
     {
+		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
+			$orderby = 'news_id desc';
+		}
+
         $sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
 		if (empty($sfield)) {
 			$sfield = array('news_title', 'news_content');
 		}
 
+		        print_r('hello');
+        exit;
+		
         $search_where = array();
 		$search_like = array();
 		$search_or_like = array();
@@ -74,7 +81,7 @@ class News_model extends CB_Model
 			}
 		}
         
-        $this->db->select('news.*','comp_id');
+        $this->db->select('news.*','news_id','comp_id', 'news_title');
         $this->db->from($this->_table);
         $this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
         
