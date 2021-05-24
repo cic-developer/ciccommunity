@@ -136,29 +136,36 @@ class Searchcoin extends CB_Controller
 
 		$get_apiList = $this -> CIC_coin_list_model->get_apiList();
 		$list_ = array();
-		foreach($get_apiList as $apiList){
-			$getLists = $this -> CIC_coin_list_model->retrieve_api($apiList);
-			// print_r($getLists);
-			$data = array(
-				'clist_market' => $getList['symbol'],
-				'clist_name_ko' => $getList['localization']['ko'],
-				'clist_name_en' => $getList['name'],
-			);
-			if(isset($data) && !empty($data)){
-				foreach($data as $coinData){
-					if(in_array($coinData, $coin_arr)){
-						continue;
-					}
-					else{
-						$stock = $this->CIC_coin_list_model->insertStockData($data);
-						$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-					}
-				
-			}
-			echo "<pre><br>";
-			print_r($data);
-			echo "</pre></br>";
-		
+		for($i=0; $i< count($get_apiList); $i++){
+			$getLists = $this -> CIC_coin_list_model->retrieve_api($apiList[$i]);
+			foreach($getLists as $getList){
+				$korean = $array['localization']['ko'];
+				$symbol = $array['symbol'];
+				$name =  $array['name'];
+
+				print_r($korean);
+				$data = array(
+					'clist_market' => $getList['symbol'],
+					'clist_name_ko' => $getList['localization']['ko'],
+					'clist_name_en' => $getList['name'],
+				);
+
+				// echo "<pre><br>";
+				// print_r($data);
+				// echo "</pre></br>";
+				if(isset($data) && !empty($data)){
+					foreach($data as $coinData){
+						if(in_array($coinData, $coin_arr)){
+							continue;
+						}
+						else{
+							$stock = $this->CIC_coin_list_model->insertStockData($data);
+							$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+						}
+					
+				}
+
+				}	
 		
 			}
 		}

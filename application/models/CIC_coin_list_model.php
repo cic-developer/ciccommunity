@@ -215,7 +215,7 @@ class CIC_Coin_list_model extends CB_Model
             foreach($array as $arr){
                 $listId[] = $arr['id'];
             }
-            print_r($listId[1]);
+            // print_r($listId[1]);
             return $listId;
         }
         

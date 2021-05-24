@@ -72,7 +72,6 @@ if (strtoupper(config_item('uri_segment_post_type')) === 'B') {
 	$route[config_item('uri_segment_post') . '/([0-9]+)'] = "board_post/post/$1";
 }
 
-$route[config_item('uri_segment_news') . '/([a-zA-Z0-9_9]+)'] = "news/lists";
 
 $route[config_item('uri_segment_write') . '/([a-zA-Z0-9_-]+)'] = "board_write/write/$1";
 $route[config_item('uri_segment_reply') . '/([0-9]+)'] = "board_write/reply/$1";

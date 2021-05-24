@@ -65,6 +65,7 @@ class News extends CB_Controller
 		}
 		$view['view']['data'] = $result;
 
+
 		/**
 		 * primary key 정보를 저장합니다
 		 */
