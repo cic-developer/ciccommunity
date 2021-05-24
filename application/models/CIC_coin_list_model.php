@@ -150,42 +150,11 @@ class CIC_Coin_list_model extends CB_Model
         }
         $array = json_decode($response, true);
         $refresh = $this -> input -> post('refresh');
-        print_r(gettype($array));
-        if(is_array($array)){
-            foreach($array as $arr){
-                // echo '<pre><br>';
-                // print_r($array['localization']['ko']);
-                // print_r($array['symbol']);
-                // print_r($array['name']);
-                // echo '</pre></br>';
-                $korean = $array['localization']['ko'];
-                $symbol = $array['symbol'];
-                $name =  $array['name'];
-
-                $data = array(
-                    'clist_market' => $symbol,
-                    'clist_name_ko' => $korean,
-                    'clist_name_en' => $name,
-                );
-
-                // print_r($data);
-            
-                if($refresh){
-                // convert json to php array or object
-                    return $data;
-                }
-            }
+        // print_r($data);
+        if($refresh && is_array($array) ||  is_object($array)){
+            // convert json to php array or object
+            return $array;
         }
-                // convert json to php array or object
-            // $array = json_decode($response, true);
-            // echo  "<pre><br>";
-            // print_r($array);
-            // echo  "</pre></br>";
-            // return $array;
-            // $array['localization']['ko']
-            //$array['symbol']
-            //$array['name']
-
     }        
     function get_apiList(){
         $curl = curl_init();
