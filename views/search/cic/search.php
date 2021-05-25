@@ -83,16 +83,15 @@
 					<div style="text-align:left; border-bottom:5px solid #ddd; padding-bottom:5px;">
 						<img style= "width: 30px; padding-right:10px;" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
 						<strong class="btxt"><?php echo $korean; ?></strong>
-						<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p>	
-					</div>
-					<p class="stxt">
-						<h6 class="high_m_all">
-							<u class="1btc">
+						<p class="stxt">
+							<span> KRW-<?php echo $symbole; ?></span>
+							<u class="btc">
 								1.0000BTC <small class="doller">$30,971</small>
 							</u>
-							<span class="high"><u>고가</u> ￦ <?php echo $high; ?></span>
-							<span class="low"><u>저가</u> ￦ <?php echo $low; ?> </span>
-						</h6>
+						</p>	
+					</div>
+					<p class="stxt">
+						
 						<!--상한가와 하한가 전체-->
 						<h6 class="high_mnp_all">
 							<!--상한가-->
@@ -107,7 +106,9 @@
 							<u class="low_money">-8.82% <i class="fas fa-long-arrow-alt-down"></i>
 							</u>	
 							<!--하한가 끝-->
-							
+							<h
+							<span class="high"><u>고가</u> ￦ <?php echo $high; ?></span>
+							<span class="low"><u>저가</u> ￦ <?php echo $low; ?> </span>
 						</h6>
 						<!--상한가와 하한가 전체 끝-->
 					</p>

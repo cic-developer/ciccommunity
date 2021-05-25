@@ -26,24 +26,14 @@
                     <div class="visual-slide">
                     
                     <?php
-						if (element('banner',element('popularpost', $view))) {
-							foreach (element('list',element('popularpost', $view)) as $popularpost) {
+						if (element('list',element('banner', $view))) {
+							foreach (element('list',element('banner', $view)) as $banner) {
 						?>
-                            <h1>안녕</h1>
-							<!-- <li>
-                                <a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" class="new">
-                                    <p class="num"><?php echo number_format(element('num', $popularpost));?></p>
-                                    <p class="btxt">
-                                        <span class="txt"><?php echo html_escape(element('post_title', $popularpost));?></span>
-                                        <span class="hit">(<?php echo number_format(element('post_hit', $popularpost));?>)</span>
-                                    </p>
-                                    <div>
-                                        <p class="stxt"><?php echo element('post_userid', $popularpost); ?><span><img src="<?php echo base_url('assets/images/like-popo.png') ?>"alt="" /></span></p>
-                                        <p class="date"><?php echo number_format(element('post_comment_count', $popularpost)); ?>
-                                        <span><?php echo display_datetime(element('post_datetime', $popularpost), 'full'); ?></span></p>
-                                    </div>                        
+                            <div class="item">
+                                <a href="<?php echo element('ban_url', $banner) ?>" target="<?php echo element('ban_target', $banner) ?>">
+                                    <img src="<?php echo base_url('uploads/banner/'.element('ban_image', $banner)) ?>" alt="" />
                                 </a>
-							</li> -->
+                            </div>
 						<?php
 							}
 						}

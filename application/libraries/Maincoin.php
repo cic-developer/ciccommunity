@@ -109,7 +109,7 @@ class Maincoin
             return array(
                 'price' => $price_data[0]['price'],
                 'volume' => $ticker_data['acc_trade_value_24H'],
-                'change_rate' => $ticker_data['fluctate_rate_24H'],
+                'change_rate' => $ticker_data['fluctate_rate_24H']*100,
             );
         } else {
             return array();
@@ -130,7 +130,7 @@ class Maincoin
             return array(
                 'price' => $data['trade_price'],
                 'volume' => $data['acc_trade_price_24h'],
-                'change_rate' => $data['signed_change_rate'],
+                'change_rate' => $data['signed_change_rate']*100,
             );
         } else {
             return array();
@@ -162,38 +162,40 @@ class Maincoin
      * 코인빗 에서 데이터 가져오는 함수
      */
     private function get_coinbit_data($coin_id, $market="KRW"){
-        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+        $url = "https://production-api.coinbit.global/api/v1.0/trading_pairs/";
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
-
-        $data = $result['result'];
-        if($data){
-            return array(
-                'price' => $data['last'],
-                'volume' => $data['deal'],
-                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
-            );
-        } else {
-            return array();
+        if($result){
+            foreach($result as $data){
+                if($data['name'] == $coin_id.'-'.$market){
+                    return array(
+                        'price' => $data['close_price'],
+                        'volume' => $data['acc_trade_volume_24h'],
+                        'change_rate' => $data['signed_change_rate']*100,
+                    );
+                }
+            }
         }
+
+        return array();
     }
 
     /**
      * 코인원 에서 데이터 가져오는 함수
      */
-    private function get_coinone_data($coin_id, $market="KRW"){
-        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+    private function get_coinone_data($coin_id){
+        $url = "https://api.coinone.co.kr/ticker?currency={$coin_id}";
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
-        $data = $result['result'];
+        $data = $result;
         if($data){
             return array(
                 'price' => $data['last'],
-                'volume' => $data['deal'],
-                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+                'volume' => $data['volume']*$data['last'],
+                'change_rate' => $data['first'] ? (($data['first'] - $data['last']) / $data['first'] * 100) : 0,
             );
         } else {
             return array();
@@ -204,7 +206,7 @@ class Maincoin
      * 코빗 에서 데이터 가져오는 함수
      */
     private function get_korbit_data($coin_id, $market="KRW"){
-        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+        $url = "https://api.korbit.co.kr/v1/ticker/detailed?currency_pair={$coin_id}_{$market}";
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();

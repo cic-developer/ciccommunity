@@ -127,6 +127,7 @@ class Main extends CB_Controller
 		$view['view']['canonical'] = site_url();		
 		$view['view']['searchrank'] = $this->Search_keyword_model->get_main_rank();
 		$view['view']['popularpost'] = $popularpost;
+		$view['view']['banner'] = $banner;
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

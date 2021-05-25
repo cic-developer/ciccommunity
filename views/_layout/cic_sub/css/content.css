@@ -5386,8 +5386,16 @@
 
 .right_content_all .high_m_all {
     display: block;
-    float: left;
-    padding-top: 5%;
+    float: right;
+    padding-top: 1%;
+}
+
+.right_content_all .high_m_all .btc {
+    font-size: 15px;
+    color: #777;
+    display: block;
+    text-decoration: none;
+    padding-bottom: 2%;
 }
 
 .right_content_all .stxt span {
@@ -5413,12 +5421,12 @@
     margin-block-start: 0em;
     margin-block-end: 0em;
     float: right;
-    padding-top: 1%;
+    padding-top: 5%;
 }
 
 .right_content_all .high_money {
     display: inline-block;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 400;
     color: #fa5252;
     padding-bottom: 25px;
@@ -5427,7 +5435,7 @@
 
 .right_content_all .low_money {
     display: inline-block;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 400;
     color: #228be6;
     padding-bottom: 25px;
@@ -5439,6 +5447,9 @@
     color: #999;
     display: block;
     font-weight: 400;
+    text-decoration: none;
+    padding-left: 139px;
+    float: right;
 }
 
 .right_content_all .high {
@@ -5458,7 +5469,7 @@
 
 .right_content_all .low {
     color: #228be6;
-    display: block;
+    display: inline-block;
     padding-bottom: 5px;
     font-size: 15px;
 }
@@ -7766,3 +7777,5 @@ label input[type='checkbox'] {
         font-size: 13px;
     }
 }
+
+ne
