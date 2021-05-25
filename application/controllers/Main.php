@@ -41,24 +41,41 @@ class Main extends CB_Controller
 	 */
 	public function index()
 	{
-		$where = array();
-		$where['ban_activated'] = '1';
-		$result = $this->CIC_Banner_model->get_admin_list('', '', $where, '', 'ban_id', 'desc', '', '');
+		$view = array();
+		$view['view'] = array();
+		$view['view']['banner'] = array();
 
-		print_r("<h1><strong>메인페이지 테스트 中 입니다...</strong></h1><strong>(feat.하승범)</strong>");
-		print_r("<br>");
-		print_r("<br>");
-		print_r("<br>");
-		print_r("<hr>");
-		print_r($result);
-		print_r("<hr>");
-		print_r('<div class="visual-slide">');
-		print_r('<div class="item">');
-		print_r('<a href="#n"');
-		print_r('<img src="'.$result["list"][0]["ban_image"].'">');
-		print_r('</a>');
-		print_r('</div>');
-		print_r('</div>');
+		
+		if($this->CIC_Banner_model->get_today_list()){
+			foreach ($this->CIC_Banner_model->get_today_list() as $key => $val) {
+				if ($val) {
+					// $view['view']['banner'] = $val;
+
+					print_r("<br>");
+					print_r($key);
+					print_r("<br>");
+					print_r($val);
+				}
+			}
+		}
+
+		exit;
+		print_r($view['view']['banner']);
+
+		// print_r("<h1><strong>메인페이지 테스트 中 입니다...</strong></h1><strong>(feat.하승범)</strong>");
+		// print_r("<br>");
+		// print_r("<br>");
+		// print_r("<br>");
+		// print_r("<hr>");
+		// print_r($result);
+		// print_r("<hr>");
+		// print_r('<div class="visual-slide">');
+		// print_r('<div class="item">');
+		// print_r('<a href="#n"');
+		// print_r('<img src="'.$result["list"][0]["ban_image"].'">');
+		// print_r('</a>');
+		// print_r('</div>');
+		// print_r('</div>');
 		exit;
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_main_index';

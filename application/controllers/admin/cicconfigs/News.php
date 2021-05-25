@@ -104,6 +104,9 @@ class News extends CB_Controller
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
+
+        // print_r($this->db->last_query());
+        // exit;
     }
 
     public function delete_news()

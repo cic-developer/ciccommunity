@@ -5350,6 +5350,7 @@
                                     .right_content_all .stxt {
                                         display: block;
                                         padding-top: 20px;
+                                        margin-left: 0!important;
                                     }
                                     
                                     .right_content_all {
@@ -5362,6 +5363,7 @@
                                     .right_content_all .stxt {
                                         display: block;
                                         padding-top: 20px;
+                                        margin-left: 0;
                                     }
                                     
                                     .right_content_all .high_mnp_all {
@@ -5387,6 +5389,13 @@
                                         color: #228be6;
                                         padding-bottom: 25px;
                                         text-decoration: none;
+                                    }
+                                    
+                                    .right_content_all .btc {
+                                        font-size: 15px;
+                                        color: #999;
+                                        display: block;
+                                        font-weight: 400;
                                     }
                                     
                                     .right_content_all .high {
@@ -7704,5 +7713,3 @@
                                             font-size: 13px;
                                         }
                                     }
-                                    
-                                    ;
