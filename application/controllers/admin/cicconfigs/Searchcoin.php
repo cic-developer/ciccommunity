@@ -183,42 +183,37 @@ class Searchcoin extends CB_Controller
 		$view = array();
 		$view['view'] = array();
 	
-		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+		// $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
 		//INSERT KEYWORDS IN DB
-
 		$stockKey = $this->CIC_coin_list_model->getstockData();
-			foreach($stockKey as $getList){
-				$data = array(
-					array(
-						'coin_market'=> $getList['clist_market'],
-						'coin_keyword'=>$getList['clist_name_ko']
-					),
-					array(
-						'coin_market'=> $getList['clist_market'],
-						'coin_keyword'=>$getList['clist_name_en']
-					),
-					array(
-						'coin_market'=> $getList['clist_market'],
-						'coin_keyword'=> $getList['clist_market'],
-					),
-				);
-				
-				// echo "<pre><bre>";
-				// print_r($data);
-				// echo "</pre></bre>";
-				
-				if(isset($data) && !empty($data)){
-					foreach($data as $thisData){
-						if(in_array($thisData['coin_keyword'], $keyword_arr)){	
-							continue;
-						}
-						else{
-							$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
-						}	
-					} 
-				}	
-			}
+		foreach($stockKey as $getList){
+			$data = array(
+				array(
+					'coin_market'=> $getList['clist_market'],
+					'coin_keyword'=>$getList['clist_name_ko']
+				),
+				array(
+					'coin_market'=> $getList['clist_market'],
+					'coin_keyword'=>$getList['clist_name_en']
+				),
+				array(
+					'coin_market'=> $getList['clist_market'],
+					'coin_keyword'=> $getList['clist_market'],
+				),
+			);
+			
+			if(isset($data) && !empty($data)){
+				foreach($data as $thisData){
+					if(in_array($thisData['coin_keyword'], $keyword_arr)){	
+						continue;
+					}
+					else{
+						$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
+					}	
+				} 
+			}	
+		}
 
 		//CREATE COIN KEYWORD LIST FOR ADMIN
 

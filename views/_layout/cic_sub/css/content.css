@@ -5398,23 +5398,13 @@
 }
 
 .right_content_all .high_money {
-    display: inline-block;
+    display: block;
     font-size: 15px;
     font-weight: 400;
     color: #fa5252;
     padding-bottom: 25px;
     text-decoration: none;
     text-align: right;
-}
-
-.right_content_all .stxt {
-    display: block;
-    padding-top: 20px;
-}
-
-.right_content_all .stxt {
-    display: block;
-    padding-top: 20px;
 }
 
 .right_content_all .stxt {
