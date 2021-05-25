@@ -87,6 +87,8 @@ class News extends CB_Controller
 		$search_option = array('news_title' => '제목', 'news_id' => '뉴스번호',   'news_wdate' => '작성일');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
+        $view['view']['update_news_enable_0'] = admin_url($this->pagedir . '/update_news_enable_1/?' . $param->output());
+        $view['view']['update_news_show_1'] = admin_url($this->pagedir . '/update_news_show_1/?' . $param->output());
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

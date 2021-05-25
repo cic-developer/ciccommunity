@@ -41,6 +41,13 @@ class Main extends CB_Controller
 	 */
 	public function index()
 	{
+
+		print_r("<h1><strong>메인페이지 테스트 中 입니다...</strong></h1><strong>(feat.하승범)</strong>");
+		print_r("<br>");
+		print_r("<br>");
+		print_r("<br>");
+		print_r("<hr>");
+		exit;
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_main_index';
 		$this->load->event($eventname);

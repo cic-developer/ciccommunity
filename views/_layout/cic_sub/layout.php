@@ -55,9 +55,11 @@ var cb_board_url = <?php echo ( isset($view) && element('board_key', $view)) ? '
 var cb_device_type = "<?php echo $this->cbconfig->get_device_type() === 'mobile' ? 'mobile' : 'desktop' ?>";
 var cb_csrf_hash = "<?php echo $this->security->get_csrf_hash(); ?>";
 var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
+
+// 지갑 입출금을 위한 변수 선언 지우면 안됩니다.//
+
 </script>
 
-<!-- <script type="text/javascript" src="<?php //echo base_url('assets/js/common.js'); ?>"></script> -->
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.extension.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/sideview.js'); ?>"></script>

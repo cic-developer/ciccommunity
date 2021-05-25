@@ -127,7 +127,6 @@ class Searchcoin extends CB_Controller
 		foreach($keyword_list as $value){
 			$keyword_arr[] = element('coin_keyword', $value);
 		}
-		
 		// 통째로 가져온 테이블에서 keyword 만 담은 array() 만든다.
 		$coin_arr = array();
 		foreach($coin_list as $value){
@@ -162,35 +161,39 @@ class Searchcoin extends CB_Controller
 								}
 							}
 						}
-
-						$stockKey = $this->CIC_coin_list_model->getstockData();
-						$data = array(
-							array(
-								'coin_market'=> $getList[$i]['symbol'],
-								'coin_keyword'=>$getList[$i]['localization']['ko']
-							),
-							array(
-								'coin_market'=> $getList[$i]['symbol'],
-								'coin_keyword'=>$getList[$i]['name']
-							),
-							array(
-								'coin_market'=> $getList[$i]['symbol'],
-								'coin_keyword'=> $getList[$i]['symbol'],
-							),
-						);
-						if(isset($data) && !empty($data)){
-							foreach($data as $thisData){
-								if(in_array($thisData['coin_keyword'], $keyword_arr)){	
-									continue;
-								}
-								else{
-									$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
-								}	
-							} 
-						}
 					}		
 				}
-			}		
+			}
+			
+			 
+			$stockKey = $this->CIC_coin_list_model->getstockData();
+			echo "<pre><bre>";
+			print_r($stockKey);
+			echo "</pre></bre>";
+			$data = array(
+				array(
+					'coin_market'=> $getList[$i]['symbol'],
+					'coin_keyword'=>$getList[$i]['localization']['ko']
+				),
+				array(
+					'coin_market'=> $getList[$i]['symbol'],
+					'coin_keyword'=>$getList[$i]['name']
+				),
+				array(
+					'coin_market'=> $getList[$i]['symbol'],
+					'coin_keyword'=> $getList[$i]['symbol'],
+				),
+			);
+			if(isset($data) && !empty($data)){
+				foreach($data as $thisData){
+					if(in_array($thisData['coin_keyword'], $keyword_arr)){	
+						continue;
+					}
+					else{
+						$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
+					}	
+				} 
+			}	
 		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;

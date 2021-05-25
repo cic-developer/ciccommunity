@@ -150,9 +150,9 @@ class CIC_Coin_list_model extends CB_Model
         $arr = json_decode($response, true);
         if(is_array($arr) || is_object($arr)){
             for($i=0; $i<count( $arr); $i++){
-                echo "<pre><br>";    
-                print_r($arr[$i]['id']);
-                echo "</pre></br>";
+                // echo "<pre><br>";    
+                // print_r($arr[$i]['id']);
+                // echo "</pre></br>";
                 curl_setopt_array($curl, array(
                     CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/" .$arr[$i]['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
                     // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/bitcoin?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",

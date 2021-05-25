@@ -20,6 +20,7 @@
                     <button class="enter"><span class="blind">검색</span></button>
                     <?php echo form_close(); ?>
                 </div>
+                <!-- banner start; -->
                 <div class="vis">
                     <a href="#n" class="prev"><span class="blind">이전</span></a>
                     <div class="visual-slide">
@@ -42,6 +43,7 @@
                     </div>
                     <a href="#n" class="next"><span class="blind">다음</span></a>
                 </div>
+                <!-- banner end; -->
             </div>
         </div>
         <!-- e : msec-visual -->
