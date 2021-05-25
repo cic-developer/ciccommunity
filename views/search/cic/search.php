@@ -196,7 +196,7 @@
 				<div class="gap75"></div>
 				<div class="tits">
 					<h3>WRITER</h3>
-					<a href="#n" class="more"><span>more</span></a>
+					<a href="<?php echo base_url(). "search/?" .$paging?>" class="more"><span>more</span></a>
 				</div>
 				<div class="list vimg vp">
 					<ul>
