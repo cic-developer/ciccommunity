@@ -109,10 +109,10 @@
 							</u>
 							<?php } ?>
 							<?php if($trade > $prev){?>
-							<u class="low_money_percent">  +8.3% <i class="fas fa-long-arrow-alt-up"></i>
+							<u class="low_money_percent"> +<?php echo $rate ?>% <i class="fas fa-long-arrow-alt-up"></i>
 							</u>
 							<?php } else{ ?> </u>
-							<u class="low_money_percent">- 8.3% <i class="fas fa-long-arrow-alt-down"></i>
+							<u class="low_money_percent">- <?php echo $rate ?>% <i class="fas fa-long-arrow-alt-down"></i>
 							</u>
 							<?php } ?>	
 							<!--하한가 끝-->
@@ -233,9 +233,7 @@
 						}
 					if (!element('list', element('data', $view)))  {		
 					?>
-						<tr>
-							<td colspan="5" class="nopost center">게시물이 없습니다</td>
-						</tr>
+							<li colspan="5" style="text-align: center"  class="nopost">게시물이 없습니다</li>
 					<?php } ?>	
 					</ul>
 					<script>

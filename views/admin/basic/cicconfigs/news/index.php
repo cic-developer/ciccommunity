@@ -9,6 +9,7 @@
 					<ul class="nav nav-pills">
 						<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir); ?>">뉴스목록</a></li>
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/enable'); ?>">비활성화 뉴스목록</a></li>
+						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/show'); ?>">비공개 뉴스목록</a></li>
 					</ul>
 					<?php
 					ob_start();
@@ -28,6 +29,7 @@
 						<thead>
 							<tr>
 								<th><a href="<?php echo element('news_id', element('sort', $view)); ?>">번호</a></th>
+								<th>신문사</th>
 								<th>뉴스 제목</th>
 								<th>스크랩 날짜</th>
 								<th>조회수</th>
@@ -43,6 +45,7 @@
 								?>
 							<tr>
 								<td><?php echo number_format(element('news_id', $result)); ?></td>
+								<td></td>
 								<td><?php echo html_escape(element('news_title', $result)); ?></td>
 								<td><?php echo display_datetime(element('news_wdate', $result), 'full'); ?></td>
 								<td><?php echo number_format(element('news_reviews', $result)); ?></td>

@@ -194,6 +194,17 @@ class Mypage extends CB_Controller
 		$config['base_url'] = site_url('mypage/post') . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
+		$config['first_link'] = '처음';
+		$config['last_link'] = '마지막';
+		$config['next_link'] = '다음';
+		$config['prev_link'] = '이전';
+		if ($this->cbconfig->get_device_view_type() === 'mobile') {
+			$config['num_links'] = element('mobile_page_count', $board)
+				? element('mobile_page_count', $board) : 2;
+		} else {
+			$config['num_links'] = element('page_count', $board)
+				? element('page_count', $board) : 4;
+		}
 		$this->pagination->initialize($config);
 		
 		$view['view']['paging'] = $this->pagination->create_links();

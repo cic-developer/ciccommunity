@@ -237,14 +237,14 @@ class Search extends CB_Controller
 			$view['prev'] = $prev;
 			$view['difference'] = $difference;
 			$view['rate'] = $rate;
-			// $difference = $trade - (float)$result_price['prev_closing_price'];
-			// $pourcentage = $trade / $result_price['prev_closing_price'] * 100;
-			// $view['pourcentage'] = $pourcentage;
-			// 
-			echo "<pre><br>";
-			// print_r($difference);
-			print_r($result_price);
-			echo "</pre></br>";
+			// // $difference = $trade - (float)$result_price['prev_closing_price'];
+			// // $pourcentage = $trade / $result_price['prev_closing_price'] * 100;
+			// // $view['pourcentage'] = $pourcentage;
+			// // 
+			// echo "<pre><br>";
+			// // print_r($difference);
+			// print_r($result_price);
+			// echo "</pre></br>";
 
 
 		}

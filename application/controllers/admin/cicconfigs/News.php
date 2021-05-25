@@ -196,7 +196,7 @@ class News extends CB_Controller
 	public function show()
 	{
 		 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_cicconfigs_news_enable';
+		$eventname = 'event_admin_cicconfigs_news_show';
 		$this->load->event($eventname);
 
 		$view = array();
@@ -225,7 +225,7 @@ class News extends CB_Controller
 		$this->{$this->modelname}->allow_order_field = array('news_id'); // 정렬이 가능한 필드
 		
         $where = array(
-			'news_enable ' => 0
+			'news_show ' => 0
 		);
 
 		$result = $this->{$this->modelname}
@@ -271,7 +271,7 @@ class News extends CB_Controller
 		/**
 		 * 어드민 레이아웃을 정의합니다
 		 */
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'enable');
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'show');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));

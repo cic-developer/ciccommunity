@@ -126,7 +126,6 @@ class CIC_Coin_list_model extends CB_Model
     }
 
     function retrieve_api($coinName){
-        
 
         for($i=0; $i<count($coinName); $i++){
             // echo "<pre><br>";
