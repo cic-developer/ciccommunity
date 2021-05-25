@@ -147,7 +147,8 @@ class Mypage extends CB_Controller
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 
-		$per_page = $this->cbconfig->item('list_count') ? $this->cbconfig->item('list_count') : 10;
+		$per_page = 10;
+		// $per_page = $this->cbconfig->item('list_count') ? $this->cbconfig->item('list_count') : 10;
 		$offset = ($page - 1) * $per_page;
 
 		$this->Post_model->allow_search_field = array('post_id', 'post_title', 'post_content', 'post_both', 'post_category', 'post_userid', 'post_nickname'); // 검색이 가능한 필드
@@ -165,9 +166,6 @@ class Mypage extends CB_Controller
 		$result = $this->Post_model
 			->get_post_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
-
-		print_r($list_num);
-		exit;
 
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {

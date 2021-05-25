@@ -68,6 +68,9 @@
 
 <script>
     $(document).on('ready', function(){
-        if(window.klaytn === undefined) alert('klaytn이 설치되지 않았습니다.\nklaytn을 설치하여 주세요');
+        if(window.klaytn === undefined) {
+            alert('Klaytn Kaikas가 설치되지 않았습니다.\nKlaytn Kaikas을 설치하여 주세요');
+            location.href="https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F";
+        }
     });
 </script>

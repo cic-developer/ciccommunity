@@ -159,7 +159,7 @@ class Coinapi
             return array(
                 'price' => $data['last'],
                 'volume' => $data['deal'],
-                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+                'change_rate' => $data['open'] ? (($data['last'] - $data['open']) / $data['open'] * 100) : 0,
             );
         } else {
             return array();
@@ -179,7 +179,7 @@ class Coinapi
                 if($data['name'] == $coin_id.'-'.$market){
                     return array(
                         'price' => $data['close_price'],
-                        'volume' => $data['acc_trade_volume_24h'],
+                        'volume' => $data['acc_trade_value_24h'],
                         'change_rate' => $data['signed_change_rate']*100,
                     );
                 }
@@ -193,17 +193,17 @@ class Coinapi
      * 코인원 에서 데이터 가져오는 함수
      */
     private function get_coinone_data($coin_id){
-        $url = "https://api.coinone.co.kr/ticker?currency={$coin_id}";
+        $url = "https://api.coinone.co.kr/ticker_utc?currency={$coin_id}";
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
-
+        
         $data = $result;
         if($data){
             return array(
                 'price' => $data['last'],
                 'volume' => $data['volume']*$data['last'],
-                'change_rate' => $data['first'] ? (($data['first'] - $data['last']) / $data['first'] * 100) : 0,
+                'change_rate' => $data['yesterday_last'] ? (($data['yesterday_last'] - $data['last']) / $data['yesterday_last'] * 100) : 0,
             );
         } else {
             return array();

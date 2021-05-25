@@ -217,12 +217,13 @@ class Search extends CB_Controller
 		$korean = $key_search['clist_name_ko'];
 		$symbole = $key_search['clist_market'];
 
+		$trade = array();
 		foreach($act_price as $act){
 			$trade = (float)$act[0]['price'];
 			$view['trade'] = $trade;
 		}
 		echo "<pre><bre>";
-        print_r($api_result);
+        print_r($act_price);
 		echo "</pre></bre>"; 
 		
 		foreach($api_result as $result_price){
@@ -231,15 +232,14 @@ class Search extends CB_Controller
 			$view['low'] = $low;
 			$view['high'] = $high;
 
-			if((float)$result_price['prev_closing_price'] < (float)$result_price['prev_closing_price']){
-				$difference = (float)$result_price['prev_closing_price'] - (float)$result_price['prev_closing_price'];
-				$pourcentage = ((float)$result_price['prev_closing_price'] / (float)$result_price['prev_closing_price']) * 100;
-				$view['pourcentage'] = $pourcentage;
-				$view['difference'] = $difference;
-			}else{
-				$difference = (float)$result_price['prev_closing_price'] - (float)$result_price['prev_closing_price'];
-				$view['difference'] = $difference;
-			}
+			$difference = $trade - (float)$result_price['prev_closing_price'];
+			$pourcentage = ($result_price['prev_closing_price'] / $trade) * 100;
+			$view['pourcentage'] = $pourcentage;
+			$view['difference'] = $difference;
+			echo "<pre><br>";
+			// print_r($difference);
+			print_r($pourcentage);
+			echo "</pre></br>";
 
 
 		}

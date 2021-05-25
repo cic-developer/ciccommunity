@@ -73,9 +73,10 @@
 			</div>
 			<!-- s: paging-wrap -->
 			<div class="paging-wrap">
-				<?php echo element('paging', element('list', $view)); ?>
+				<?php echo element('paging', $view); ?>
+			</div>
 				<!-- <a href="#" class="prev ctrl"><span>이전</span></a> -->
-				<ul>
+				<!-- <ul>
 					<li><a href="#" class="active">1</a></li>
 					<li><a href="#n">2</a></li>
 					<li><a href="#n">3</a></li>
@@ -83,8 +84,7 @@
 					<li><a href="#n">5</a></li>
 				</ul>
 				<p class="num"><span>1</span> / 10 </p>
-				<a href="#" class="next ctrl"><span>다음</span></a>
-			</div>
+				<a href="#" class="next ctrl"><span>다음</span></a> -->
 			<!-- e: paging-wrap -->
 			<!-- s: board-filter -->
 			<div class="board-filter">
@@ -103,7 +103,7 @@
 					</p>
 					<p class="chk-input">
 						<input type="text" placeholder="검색어를 입력해주세요" autocomplete="off">
-						<a href="<?php echo base_url('post/5')?>" class="search-btn"><span>검색</span></a>
+						<a href="<?php echo base_url('mypage/post/5')?>" class="search-btn"><span>검색</span></a>
 					</p>
 				</div>
 				<!-- <p class="chk-input">
