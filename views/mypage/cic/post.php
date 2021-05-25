@@ -45,7 +45,7 @@
 							<tr>
 								<td>
 									<p class="chk-check">
-										<input type="checkbox" id="vsel[]" /><label for="vsel[]"><span
+										<input type="checkbox" id="<?php echo element('post_id', $post); ?>" name="vsel[]" /><label for="<?php echo element('post_id', $post); ?>"><span
 												class="blind">선택</span></label>
 									</p>
 								</td>
@@ -63,7 +63,7 @@
 				</table>
 			</div>
 			<div class="lower r">
-				<a href="#n" class="by-btn"><span>삭제</span></a>
+				<a href="javascript:void(0);" class="by-btn list-delete-btn" data-list-delete-url="<?php echo element('list_delete_url', $view); ?>"><span>삭제</span></a>
 			</div>
 			<!-- s: paging-wrap -->
 			<div class="paging-wrap">
@@ -100,18 +100,40 @@
 <!-- e: #container-wrap //-->
 
 <script>
-$(document).on("click", "#chkall", function() {
-	var chk = document.getElementsByName("chk[]");
-	for (i = 0; i < chk.length; i++) chk[i].checked = this.checked;
-});
+	$(document).on("click", "#vsel-all", function() {
+		var chk = document.getElementsByName("vsel[]");
+		for (i = 0; i < chk.length; i++) chk[i].checked = this.checked;
+	});
 
-$(document).on("click", ".list-chkbox, #chkall", function() {
-	var $checkedCheckboxes = $(".list-chkbox:checked");
-	var $checkboxes = $(".list-chkbox");
-	if ($checkedCheckboxes.length) {
-		$(".btn-list-update , .btn-list-selected").removeClass("disabled");
-	} else {
-		$(".btn-list-update , .btn-list-selected").addClass("disabled");
-	}
-});
+	$(document).on('click', '.list-delete-btn', function() {
+		list_delete_submit(document.flist, 'delete', $(this).attr('data-list-delete-url'));
+	});
+
+	// list delete submit
+    function list_delete_submit(f, acttype, actpage){
+        var chk = document.getElementsByName("vsel[]");
+
+		console.log("=> " ,chk);
+		return;
+
+        // 0.01보다 작거나 숫자가 아닌경우도 검사해야 한다. ...
+        var cp_percoin = $('#cp_percoin').val().trim();
+        if(cp_percoin.length < 1){
+            alert("필수값 입니다")
+            $('#cp_percoin').focus();
+            return;
+        }
+
+        var cp_content1 = $('#cp_content1').val().trim();
+        if(cp_content1.length < 1){
+            alert("필수값 입니다")
+            $('#cp_content1').focus();
+            return;
+        }
+
+
+        if (acttype === 'approve' && ! confirm('선택한 요청을 정말 승인 하시겠습니까?')) return;
+        f.action = actpage;
+		f.submit();
+    }   
 </script>

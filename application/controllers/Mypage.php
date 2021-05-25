@@ -117,6 +117,7 @@ class Mypage extends CB_Controller
 	 */
 	public function post()
 	{
+
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_mypage_post';
 		$this->load->event($eventname);
@@ -186,6 +187,7 @@ class Mypage extends CB_Controller
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
+		$view['view']['list_delete_url'] = site_url('mypage/listdelete');
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;
 

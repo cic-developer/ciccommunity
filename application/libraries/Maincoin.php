@@ -340,6 +340,13 @@ class Maincoin
      * 후오비 에서 데이터 가져오는 함수
      */
     private function get_huobi_data($coin_id, $market="usdt"){
+        //환율정보
+        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+        $usd_price = $result[0]['basePrice'];
+
         $url = "https://api.huobi.pro/market/detail?symbol=".strtolower($coin_id).strtolower($market);
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
@@ -348,8 +355,8 @@ class Maincoin
         $data = $result['tick'];
         if($data){
             return array(
-                'price' => $data['last'],
-                'volume' => $data['deal'],
+                'price' => $data['close'] * $usd_price,
+                'volume' => $data['amount'] * $data['close'] * $usd_price,
                 'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
             );
         } else {
