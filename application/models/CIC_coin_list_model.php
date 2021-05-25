@@ -148,12 +148,12 @@ class CIC_Coin_list_model extends CB_Model
         $refresh = $this -> input -> post('refresh');
         // convert json to php array or object
         $arr = json_decode($response, true);
-            if(is_array($arr) || is_object($arr)){
-            for($ie=0; $i<count( $arr); $i++){
-                // print_r();
+        if(is_array($arr) || is_object($arr)){
+            for($i=0; $i<count( $arr); $i++){
+                echo "<pre><br>";    
                 print_r($arr[$i]['id']);
-                $curl_ = curl_init();
-                curl_setopt_array($curl_, array(
+                echo "</pre></br>";
+                curl_setopt_array($curl, array(
                     CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/" .$arr[$i]['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
                     // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/bitcoin?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
                     CURLOPT_RETURNTRANSFER => true,
@@ -161,14 +161,12 @@ class CIC_Coin_list_model extends CB_Model
                     CURLOPT_ENCODING => "",
                     CURLOPT_MAXREDIRS => 10,
                     CURLOPT_TIMEOUT => 90,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => "GET"   
-                    
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,                    
                 ));
-                $response = curl_exec($curl_);
-                $err = curl_error($curl_);
+                $response = curl_exec($curl);
+                $err = curl_error($curl);
 
-                curl_close($curl_);
+                curl_close($curl);
 
                 if($err){
                     echo "cUrl Error :" . $err;

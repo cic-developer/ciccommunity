@@ -26,10 +26,9 @@
 						<thead>
 							<tr>
 								<th><a href="<?php echo element('news_id', element('sort', $view)); ?>">번호</a></th>
-								<th>신문사</th>
-								<th>제목</th>
-								<th>작성일</th>
-								<th>조회</th>
+								<th>뉴스 제목</th>
+								<th>스크랩 날짜</th>
+								<th>조회수</th>
 								<th><input type="checkbox" name="chkall" id="chkall" /></th>
 							</tr>
 						</thead>
@@ -39,10 +38,11 @@
 							foreach (element('list', element('data', $view)) as $result) {
 								?>
 							<tr>
-								<td><?php echo number_format(element('comp_id', $result)); ?></td>
+								<td><?php echo number_format(element('news_id', $result)); ?></td>
 								<td><?php echo html_escape(element('news_title', $result)); ?></td>
 								<td><?php echo display_datetime(element('news_wdate', $result), 'full'); ?></td>
 								<td><?php echo number_format(element('news_reviews', $result)); ?></td>
+								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
 							</tr>
 						<?php
 							}

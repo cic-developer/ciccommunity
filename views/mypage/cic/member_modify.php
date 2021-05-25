@@ -753,11 +753,11 @@
 		if(password2 != currentVal ){ // && currentVal.length > 0){
 			$('.agree-password').remove();
 			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
-			$('#confirm_password').before(html);
+			$('.password-modify-content').append(html);
 		} else{
 			$('.agree-password').remove();
 			html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
-			$('#confirm_password').before(html);
+			$('.password-modify-content').append(html);
 		}
 		
 		oldVal1 = currentVal;
@@ -775,11 +775,11 @@
 		if(password1 != currentVal ){ // && currentVal.length > 0){
 			$('.agree-password').remove();
 			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
-			$('#confirm_password').before(html);
+			$('.password-modify-content').append(html);
 		} else{
 			$('.agree-password').remove();
 			html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
-			$('#confirm_password').before(html);
+			$('.password-modify-content').append(html);
 		}
 		
 		oldVal2 = currentVal;

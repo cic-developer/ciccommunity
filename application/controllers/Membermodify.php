@@ -2303,18 +2303,20 @@ class Membermodify extends CB_Controller
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_membermodify_ajax_phone_confirm';
 		$this->load->event($eventname);
-
+        
 		/**
 		 * 로그인이 필요한 페이지입니다
 		 */
 		required_user_login();
-
+        
 		$view = array();
 		$view['view'] = array();
-
+        
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-
+        
+		$this->session->set_userdata('phone_confirm', '');
+        
 		if($this->session->userdata('phone_modify_ath_mail_result') != '1'){
 			$result = array(
 				'state' => '0',
@@ -2325,12 +2327,12 @@ class Membermodify extends CB_Controller
 		
 		$new_phone = $this->input->post('new_phone');
 		$isPhone = $this->Member_model->get_by_memPhone($new_phone, '');
-
+        
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
 		$this->load->library('form_validation');
-
+        
 		$config = array(
 			array(
 				'field' => 'new_phone',
@@ -2340,7 +2342,7 @@ class Membermodify extends CB_Controller
 		);
 		$this->form_validation->set_rules($config);
 		$form_validation = $this->form_validation->run();
-
+        
 		if(!$form_validation){
 			$result = array(
 				'state' => '0',
@@ -2348,7 +2350,7 @@ class Membermodify extends CB_Controller
 			);
 			exit(json_encode($result));
 		}
-
+        
 		if(strlen($new_phone) < 1){
 			$result = array(
 				'state' => '0',
@@ -2356,7 +2358,7 @@ class Membermodify extends CB_Controller
 			);
 			exit(json_encode($result));
 		}
-
+        
 		if(count($isPhone) > 0){ // 중복 이면
 			$result = array(
 				'state' => '0',
@@ -2364,7 +2366,7 @@ class Membermodify extends CB_Controller
 			);
 			exit(json_encode($result));
 		}
-
+        
 		$result = array(
 			'state' => '1',
 			'message' => '사용 가능한 번호입니다',
@@ -2383,27 +2385,41 @@ class Membermodify extends CB_Controller
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_membermodify_ajax_password_confirm';
 		$this->load->event($eventname);
-
+        
 		/**
 		 * 로그인이 필요한 페이지입니다
 		 */
 		required_user_login();
-
+        
 		$view = array();
 		$view['view'] = array();
-
+        
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-		
-		$new_phone = $this->input->post('new_phone');
-		$isPhone = $this->Member_model->get_by_memPhone($new_phone, '');
-
+        
+		$this->session->set_userdata('password_confirm', '');
+        
+		if($this->session->userdata('password_modify_ath_mail_result') != '1'){
+			$result = array(
+				'state' => '0',
+				'message' => '이메일 인증이 필요합니다',
+			);
+			exit(json_encode($result));
+		}
+		if($this->session->userdata('password_modify_ath_nice_phone_result') != '1'){
+			$result = array(
+				'state' => '0',
+				'message' => '핸드폰 인증이 필요합니다',
+			);
+			exit(json_encode($result));
+		}
+        
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
 		$this->load->library('form_validation');
 		$password_length = $this->cbconfig->item('password_length');
-
+        
 		$config = array(
 			array(
 				'field' => 'new_password',
@@ -2419,20 +2435,22 @@ class Membermodify extends CB_Controller
 		// password_description
 		$this->form_validation->set_rules($config);
 		$form_validation = $this->form_validation->run();
-
+        
 		if(!$form_validation){
 			$result = array(
 				'state' => '0',
 				'message' => $this->form_validation->error_string(),
 			);
 			exit(json_encode($result));
-		}
-
-		$result = array(
-			'state' => '1',
-			'message' => '사용 가능한 비밀번호입니다',
-		);
+		}else{
+			$this->session->set_userdata('password_confirm', '1');
+            
+			$result = array(
+				'state' => '1',
+				'message' => '사용 가능한 비밀번호입니다',
+			);
 			exit(json_encode($result));
+		}
 	}
 /**
  * 비밀번호변경 끝
@@ -2445,27 +2463,44 @@ class Membermodify extends CB_Controller
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_membermodify_ajax_wallet_confirm';
 		$this->load->event($eventname);
-
+        
 		/**
 		 * 로그인이 필요한 페이지입니다
 		 */
 		required_user_login();
-
+        
 		$view = array();
 		$view['view'] = array();
-
+        
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+        
+		$this->session->set_userdata('wallet_confirm', '');
+        
+		if($this->session->userdata('wallet_modify_ath_mail_result') != '1'){
+			$result = array(
+				'state' => '0',
+				'message' => '이메일 인증이 필요합니다',
+			);
+			exit(json_encode($result));
+		}
+		if($this->session->userdata('wallet_modify_ath_nice_phone_result') != '1'){
+			$result = array(
+				'state' => '0',
+				'message' => '핸드폰 인증이 필요합니다',
+			);
+			exit(json_encode($result));
+		}
 		
 		$new_wallet = $this->input->post('new_wallet');
 		$isWallet = $this->Member_model->get_by_memWallet($new_wallet, '');
-
+        
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
 		$this->load->library('form_validation');
 		$password_length = $this->cbconfig->item('password_length');
-
+        
 		$config = array(
 			array(
 				'field' => 'new_wallet',
@@ -2476,28 +2511,31 @@ class Membermodify extends CB_Controller
 		
 		$this->form_validation->set_rules($config);
 		$form_validation = $this->form_validation->run();
-
+        
 		if(!$form_validation){
 			$result = array(
 				'state' => '0',
 				'message' => '지갑주소를 입력해주세요',
 			);
 			exit(json_encode($result));
+		}else{
+            
+			if(count($isWallet) > 0){ // 중복 이면
+				$result = array(
+					'state' => '0',
+					'message' => '이미 사용중인 지갑주소입니다',
+				);
+				exit(json_encode($result));
+			}else{
+                
+				$this->session->set_userdata('wallet_confirm', '1');
+				$result = array(
+					'state' => '1',
+					'message' => '사용 가능한 지갑주소입니다',
+				);
+				exit(json_encode($result));
+			}
 		}
-
-		if(count($isWallet) > 0){ // 중복 이면
-			$result = array(
-				'state' => '0',
-				'message' => '이미 사용중인 지갑주소입니다',
-			);
-			exit(json_encode($result));
-		}
-
-		$result = array(
-			'state' => '1',
-			'message' => '사용 가능한 지갑주소입니다',
-		);
-			exit(json_encode($result));
 	}
 /**
 * 지갑주소변경 끝

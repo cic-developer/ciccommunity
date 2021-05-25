@@ -55,8 +55,8 @@
 			</div>
 			<!-- HERE THE PRICE -->
 			<?php if($trade){ ?>
-				<div class="result" style="height: 180px">
-					<div style="border-bottom: 1px solid #aaa; border-radius: 25px;">
+				<div class="result" style="overflow:hidden; padding-bottom:40px; padding-left:40px; padding-right:40px;">
+					<div style="text-align:left; padding-bottom:20px;">
 						<br><img style= "width: 30px" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
 						<strong  class="btxt"><?php echo $korean; ?></strong>
 						<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p>

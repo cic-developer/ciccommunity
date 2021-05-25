@@ -15,7 +15,7 @@ class News_model extends CB_Model
 
     public $primary_key = 'news_id';
 
-    public $allow_order = array('news_id', 'comp_id', 'news_title', 'news_content', 'news_reviews desc', 'news_hot', );
+    public $allow_order = array('news_id desc', 'comp_id', 'news_title', 'news_content', 'news_reviews desc', 'news_hot', );
 
     function __construct()
     {
@@ -25,7 +25,7 @@ class News_model extends CB_Model
     public function get_news_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
     {
 		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
-			$orderby = 'news_reviews desc';
+			$orderby = 'news_id desc';
 		}
 		
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
