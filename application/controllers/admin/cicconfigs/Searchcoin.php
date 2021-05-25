@@ -140,10 +140,11 @@ class Searchcoin extends CB_Controller
 			for($i=0; $i<count($getList); $i++){
 					// $market = $getList[$i]['market'];
 					//Getting only coin starting with K	
-					// $korean = $getList[$i]['localization']['ko'];
+					$korean = $getList[$i]['localization']['ko'];
 					// print_r($getList['name']);
 					// if(strcmp(substr($market, 0, 1), "K")==0){	
 						// $market = substr($market, 4);
+					if($korean){	
 						$data = array(
 							'clist_market' => $getList[$i]['symbol'],
 							'clist_name_ko' => $getList[$i]['localization']['ko'],
@@ -185,6 +186,7 @@ class Searchcoin extends CB_Controller
 								}	
 							} 
 						}
+					}		
 				}
 			}		
 		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');

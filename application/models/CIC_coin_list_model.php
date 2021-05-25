@@ -137,26 +137,20 @@ class CIC_Coin_list_model extends CB_Model
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 90,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET"   
-                
+                CURLOPT_CUSTOMREQUEST => "GET"          
         ));
-
         $response = curl_exec($curl);
         $err = curl_error($curl);
-
         curl_close($curl);
-
         if($err){
             echo "cUrl Error :" . $err;
         }
         $refresh = $this -> input -> post('refresh');
         // convert json to php array or object
         $arr = json_decode($response, true);
-        // $array
-        print_r($arr);
-
-        if(is_array($array_) || is_object($array_)){
-            while($value = $arr){
+        // print_r($arr['id']);
+        if(is_array($arr) || is_object($arr)){
+            while($arr = $value){
                 print_r($value['id']);
                 $curl_ = curl_init();
                 curl_setopt_array($curl_, array(
