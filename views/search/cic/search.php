@@ -86,9 +86,13 @@
 						<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p>	
 					</div>
 					<p class="stxt">
-					<!--1.0000BTC-->
-					<span class="btc">1.0000BTC ($30,971)</span>
-					<!--1.0000BTC 끝-->
+						<h6 class="high_m_all">
+							<u class="1btc">
+								1.0000BTC <small class="doller">$30,971</small>
+							</u>
+							<span class="high"><u>고가</u> ￦ <?php echo $high; ?></span>
+							<span class="low"><u>저가</u> ￦ <?php echo $low; ?> </span>
+						</h6>
 						<!--상한가와 하한가 전체-->
 						<h6 class="high_mnp_all">
 							<!--상한가-->
@@ -106,8 +110,6 @@
 							
 						</h6>
 						<!--상한가와 하한가 전체 끝-->
-						<span class="high"><u>고가</u> ￦ <?php echo $high; ?></span>
-						<span class="low"><u>저가</u> ￦ <?php echo $low; ?> </span>
 					</p>
 					</div>
 				</div>

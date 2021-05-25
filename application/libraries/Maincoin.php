@@ -34,52 +34,52 @@ class Maincoin
             break;
 
             case 'coinbit':{
-
+                return get_coinbit_data($coin_id, $market);
             }
             break;
 
             case 'coinone':{
-
+                return get_coinone_data($coin_id, $market);
             }
             break;
 
             case 'korbit':{
-
+                return get_korbit_data($coin_id, $market);
             }
             break;
 
             case 'bitflyer':{
-
+                return get_bitflyer_data($coin_id, $market);
             }
             break;
 
             case 'binance':{
-
+                return get_binance_data($coin_id, $market);
             }
             break;
 
             case 'bitfinex':{
-
+                return get_bitfinex_data($coin_id, $market);
             }
             break;
 
             case 'okex':{
-
+                return get_okex_data($coin_id, $market);
             }
             break;
 
             case 'huobi':{
-
+                return get_huobi_data($coin_id, $market);
             }
             break;
 
             case 'bittrex':{
-
+                return get_bittrex_data($coin_id, $market);
             }
             break;
 
             case 'poloniex':{
-
+                return get_poloniex_data($coin_id, $market);
             }
             break;
 
@@ -93,17 +93,23 @@ class Maincoin
      * 빗썸 에서 데이터 가져오는 함수
      */
     private function get_bithumb_data($coin_id, $market="KRW"){
+        $url = "https://api.bithumb.com/public/ticker/{$market}_{$coin_id}";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+        $ticker_data = $result['data'];
+
         $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
+        $price_data = $result['data'];
 
-        $data = $result['result'];
-        if($data){
+        if($ticker_data && $price_data){
             return array(
-                'price' => $data['last'],
-                'volume' => $data['deal'],
-                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+                'price' => $price_data[0]['price'],
+                'volume' => $ticker_data['acc_trade_value_24H'],
+                'change_rate' => $ticker_data['fluctate_rate_24H'],
             );
         } else {
             return array();
@@ -135,6 +141,216 @@ class Maincoin
      * 핫빗코리아 에서 데이터 가져오는 함수
      */
     private function get_hotbitkorea_data($coin_id, $market="KRW"){
+        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+
+        $data = $result['result'];
+        if($data){
+            return array(
+                'price' => $data['last'],
+                'volume' => $data['deal'],
+                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+            );
+        } else {
+            return array();
+        }
+    }
+
+    /**
+     * 코인빗 에서 데이터 가져오는 함수
+     */
+    private function get_coinbit_data($coin_id, $market="KRW"){
+        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+
+        $data = $result['result'];
+        if($data){
+            return array(
+                'price' => $data['last'],
+                'volume' => $data['deal'],
+                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+            );
+        } else {
+            return array();
+        }
+    }
+
+    /**
+     * 코인원 에서 데이터 가져오는 함수
+     */
+    private function get_coinone_data($coin_id, $market="KRW"){
+        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+
+        $data = $result['result'];
+        if($data){
+            return array(
+                'price' => $data['last'],
+                'volume' => $data['deal'],
+                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+            );
+        } else {
+            return array();
+        }
+    }
+
+    /**
+     * 코빗 에서 데이터 가져오는 함수
+     */
+    private function get_korbit_data($coin_id, $market="KRW"){
+        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+
+        $data = $result['result'];
+        if($data){
+            return array(
+                'price' => $data['last'],
+                'volume' => $data['deal'],
+                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+            );
+        } else {
+            return array();
+        }
+    }
+
+    /**
+     * 비트플라이어 에서 데이터 가져오는 함수
+     */
+    private function get_bitflyer_data($coin_id, $market="KRW"){
+        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+
+        $data = $result['result'];
+        if($data){
+            return array(
+                'price' => $data['last'],
+                'volume' => $data['deal'],
+                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+            );
+        } else {
+            return array();
+        }
+    }
+
+    /**
+     * 바이낸스 에서 데이터 가져오는 함수
+     */
+    private function get_binance_data($coin_id, $market="KRW"){
+        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+
+        $data = $result['result'];
+        if($data){
+            return array(
+                'price' => $data['last'],
+                'volume' => $data['deal'],
+                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+            );
+        } else {
+            return array();
+        }
+    }
+
+    /**
+     * 비트파이넥스 에서 데이터 가져오는 함수
+     */
+    private function get_bitfinex_data($coin_id, $market="KRW"){
+        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+
+        $data = $result['result'];
+        if($data){
+            return array(
+                'price' => $data['last'],
+                'volume' => $data['deal'],
+                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+            );
+        } else {
+            return array();
+        }
+    }
+
+    /**
+     * 오케이엑스 에서 데이터 가져오는 함수
+     */
+    private function get_okex_data($coin_id, $market="KRW"){
+        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+
+        $data = $result['result'];
+        if($data){
+            return array(
+                'price' => $data['last'],
+                'volume' => $data['deal'],
+                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+            );
+        } else {
+            return array();
+        }
+    }
+
+    /**
+     * 후오비 에서 데이터 가져오는 함수
+     */
+    private function get_huobi_data($coin_id, $market="KRW"){
+        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+
+        $data = $result['result'];
+        if($data){
+            return array(
+                'price' => $data['last'],
+                'volume' => $data['deal'],
+                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+            );
+        } else {
+            return array();
+        }
+    }
+
+    /**
+     * 비트렉스 에서 데이터 가져오는 함수
+     */
+    private function get_bittrex_data($coin_id, $market="KRW"){
+        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+
+        $data = $result['result'];
+        if($data){
+            return array(
+                'price' => $data['last'],
+                'volume' => $data['deal'],
+                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+            );
+        } else {
+            return array();
+        }
+    }
+
+    /**
+     * 폴로닉스 에서 데이터 가져오는 함수
+     */
+    private function get_poloniex_data($coin_id, $market="KRW"){
         $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
