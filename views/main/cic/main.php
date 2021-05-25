@@ -34,17 +34,19 @@
                                 <img src="<?php echo base_url('uploads/banner/'.element('ban_image', $banner)) ?>" alt="" />
                             </a>
                         </div>
-
-                        <div class="item">
-                            <a href="#n"><img src="<?php echo base_url('assets/images/visual-img01.jpg') ?>"
-                                    alt="" /></a>
-                        </div>
-
-                        <?php echo element('banner_count', $view) ?>
                     <?php
                         }
                     }
                     ?>
+
+                    <?php for($i=0; $i<element('banner_noimage_count', $view); $i=$i+1){ ?>
+                            <div class="item">
+                            <a href="#n">
+                                <img src="<?php echo base_url('assets/images/noimage.jpg') ?>" alt="" />
+                            </a>
+                        </div>
+                    <?php }?>
+
                     </div>
                     <a href="#n" class="next"><span class="blind">다음</span></a>
                 </div>

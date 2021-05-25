@@ -110,7 +110,7 @@ class News_model extends CB_Model
 		}
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
-		
+	
 
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
@@ -140,8 +140,8 @@ class News_model extends CB_Model
 		$rows = $qry->row_array();
 		$result['total_rows'] = $rows['rownum'];
 
-		print_r($this->db->last_query());
-		exit;
+		// print_r($this->db->last_query());
+		// exit;
 
 		return $result;
     }
