@@ -153,16 +153,16 @@ class CIC_Coin_list_model extends CB_Model
                 // convert json to php array or object
                 $array_ = json_decode($response, true);
                 $coinName = array();
+                // $array
 
-                if(is_array($array_) || is_object($array_)){
-                    foreach($array_ as $arr ){
-                        $coinName = $getList['name'];
-                    }
-                }
+        if(is_array($array_) || is_object($array_)){
+            foreach($array_ as $arr ){
+                $coinName[] = $arr['id'];
+                // print_r($coinName);
+        
 
-                print_r($coinName);
-
-        curl_setopt_array($curl, array(
+        $curl_ = curl_init();
+        curl_setopt_array($curl_, array(
             CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/{$coinName}?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
             // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/bitcoin?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
             CURLOPT_RETURNTRANSFER => true,
@@ -174,10 +174,10 @@ class CIC_Coin_list_model extends CB_Model
             CURLOPT_CUSTOMREQUEST => "GET"   
             
         ));
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+        $response = curl_exec($curl_);
+        $err = curl_error($curl_);
 
-        curl_close($curl);
+        curl_close($curl_);
 
         if($err){
             echo "cUrl Error :" . $err;
@@ -185,13 +185,14 @@ class CIC_Coin_list_model extends CB_Model
         $array = json_decode($response, true);
         $refresh = $this -> input -> post('refresh');
         // print_r($data);
-        if($refresh && is_array($array) || is_object($array) ){
+        if(is_array($array) || is_object($array) ){
             // convert json to php array or object
-            return $array;
+            print_r($array);
         }
-    }        
+    }   
+}     
     // function get_apiList(){
-    //     $curl = curl_init();
+ }   //     $curl = curl_init();
 
     //     curl_setopt_array($curl, array(
     //         // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/list?markets?vs_currency=KRW",
