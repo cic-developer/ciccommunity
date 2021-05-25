@@ -35,8 +35,9 @@
 						</thead>
 						<tbody>
 						<?php
-						if (element('list', element('data', $view))) {ment('data', $view)) as $result) {
-						?>
+						if (element('list', element('data', $view))) {
+							foreach (element('list', element('data', $view)) as $result) {
+								?>
 							<tr>
 								<td><?php echo number_format(element('comp_id', $result)); ?></td>
 								<td><?php echo html_escape(element('news_title', $result)); ?></td>
@@ -44,6 +45,8 @@
 								<td><?php echo number_format(element('news_reviews', $result)); ?></td>
 							</tr>
 						<?php
+							print_r('hello');
+							exit;
 							}
 						}
 						if ( ! element('list', element('data', $view))) {

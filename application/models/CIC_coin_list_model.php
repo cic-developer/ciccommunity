@@ -150,7 +150,7 @@ class CIC_Coin_list_model extends CB_Model
         $arr = json_decode($response, true);
         // print_r($arr['id']);
         if(is_array($arr) || is_object($arr)){
-            while($arr = $value){
+            foreach($arr as &$value){
                 print_r($value['id']);
                 $curl_ = curl_init();
                 curl_setopt_array($curl_, array(
@@ -175,9 +175,8 @@ class CIC_Coin_list_model extends CB_Model
                 }
                 $array = json_decode($response, true);
                 $refresh = $this -> input -> post('refresh');
-                // print_r($data);
                 if(is_array($array) || is_object($array) ){
-                    // convert json to php array or object
+
                     return $array;
                 }
             }   
