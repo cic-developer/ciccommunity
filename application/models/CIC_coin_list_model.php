@@ -126,31 +126,44 @@ class CIC_Coin_list_model extends CB_Model
     }
 
     function retrieve_api($coinName){
-        $curlMultiReq = curl_multi_init();
-        $output = [];
-        foreach($coinName as $url){
-            $ch = curl_init("https://api.coingecko.com/api/v3/coins/" .$coinName['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false");
-            curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-            $data = curl_exec($ch) or die(curl_error($ch));
-            ini_set("memory_limit","30M");
-            if ($data === false) {
-                $info = curl_getinfo($ch);
-                curl_close($ch);
-                die('error occured during curl exec. Additioanl info: ' . 
-                            var_export($info));
-            }
-            
-            $output [] = json_decode($data, true);   // Add new data to output
+        $mh = curl_multi_init();
+        $handles = array();
+        
+        for($i = 0 ; $i < count($coinName) ; $i++){
+            $ch = curl_init();
+            $handles[] = $ch;
+        
+            curl_setopt($ch, CURLOPT_URL, "https://api.coingecko.com/api/v3/coins/" .$coinName[$i]['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false");
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        
+            curl_multi_add_handle($mh,$ch);
+        }
+        
+        $running = null;
+        do {
+            curl_multi_exec($mh, $running);
+        } while ($running);
+        
+        foreach($handles as $ch){
+            $result = curl_multi_getcontent($ch);
+        
+            $arr = json_decode($result,true);
+            $array = array();
+            foreach($arr as $key){       
+                array_push($array, $key);
+                
+            }   
+        print_r($array);
+            curl_multi_remove_handle($mh, $ch);
             curl_close($ch);
         }
-        print_r($output);
     }  
     
-    
+    // $output [] = json_decode($data, true);   // Add new data to output
+    // curl_close($ch)
+
     function get_apiList(){
         $curl = curl_init();
 
