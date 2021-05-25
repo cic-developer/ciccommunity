@@ -148,7 +148,12 @@ class CIC_Coin_list_model extends CB_Model
         $output [] = json_decode($data,true);   // Add new data to output
         curl_close($ch);
     }
-    
+    $data = array();
+    foreach($output as $arr){
+        echo "<pre><br>";
+        print($arr['symbol']);
+        echo "</pre></br>";
+    }
     return $output;
 
     }  
