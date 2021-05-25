@@ -51,6 +51,14 @@ class Main extends CB_Controller
 		print_r("<br>");
 		print_r("<hr>");
 		print_r($result);
+		print_r("<hr>");
+		print_r('<div class="visual-slide">');
+		print_r('<div class="item">');
+		print_r('<a href="#n"');
+		print_r('<img src="'.$result["list"][0]["ban_image"].'">');
+		print_r('</a>');
+		print_r('</div>');
+		print_r('</div>');
 		exit;
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_main_index';

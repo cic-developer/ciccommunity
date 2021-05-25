@@ -5416,7 +5416,7 @@
     }
 }
 
-@media only screen and (max-width:999px) {
+. @media only screen and (max-width:999px) {
     .search-wrap.list .result .btxt {
         font-size: 20px;
     }
