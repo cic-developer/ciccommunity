@@ -229,7 +229,7 @@ class Search extends CB_Controller
 			$view['high'] = $high;
 		}
         //Send to view
-		$view['symbole'] = $symbole;
+		$view['symbole'] = strtoupper($symbole);
 		$view['korean'] = $korean;
 		// 코인 검색 여기까지 
 
