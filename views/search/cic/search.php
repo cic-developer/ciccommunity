@@ -196,7 +196,15 @@
 				<div class="gap75"></div>
 				<div class="tits">
 					<h3>WRITER</h3>
-					<a href="<?php echo base_url(). "search/?" .$paging?>" class="more"><span>more</span></a>
+					<?php if (element('boardlist', $view)) {
+						foreach (element('boardlist', $view) as $key => $value) {
+							// print_r($value);
+					?>
+					<a href="<?php echo base_url(). "search/?board_id="?><?php echo element('brd_id', $value) ?>" class="more"><span>more</span></a>
+					<?php 
+						}
+					}
+					?>
 				</div>
 				<div class="list vimg vp">
 					<ul>
