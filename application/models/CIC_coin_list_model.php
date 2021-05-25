@@ -126,39 +126,29 @@ class CIC_Coin_list_model extends CB_Model
     }
 
     function retrieve_api($coinName){
-        $mh = curl_multi_init();
-        $handles = array();
         
-        for($i = 0 ; $i < count($coinName) ; $i++){
-            $ch = curl_init();
-            $handles[] = $ch;
-        
-            curl_setopt($ch, CURLOPT_URL, "https://api.coingecko.com/api/v3/coins/" .$coinName[$i]['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false");
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        
-            curl_multi_add_handle($mh,$ch);
+        $node_count = count($coinName);
+        $curl_arr = array();
+        $master = curl_multi_init();
+
+        for($i = 0; $i < $node_count; $i++){
+            $url = "https://api.coingecko.com/api/v3/coins/" .$coinName[$i]['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false";
+            $curl_arr[$i] = curl_init($url);
+            curl_setopt($curl_arr[$i], CURLOPT_RETURNTRANSFER, true);
+            curl_multi_add_handle($master, $curl_arr[$i]);
         }
-        
-        $running = null;
         do {
-            curl_multi_exec($mh, $running);
-        } while ($running);
-        
-        foreach($handles as $ch){
-            $result = curl_multi_getcontent($ch);
-        
-            $arr = json_decode($result,true);
-            $array = array();
-            foreach($arr as $key){       
-                array_push($array, $key);
-                
-            }   
-        print_r($array);
-            curl_multi_remove_handle($mh, $ch);
-            curl_close($ch);
+            curl_multi_exec($master, $running);
+        } while($running > 0);
+
+        echo "results: ";
+        for($i = 0; $i < $node_count; $i++)
+        {
+            $results = curl_multi_getcontent  ( $curl_arr[$i]  );
+            echo( $i . "\n" . $results . "\n");
         }
+        echo 'done';
+
     }  
     
     // $output [] = json_decode($data, true);   // Add new data to output
