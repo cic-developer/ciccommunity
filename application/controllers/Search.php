@@ -229,8 +229,10 @@ class Search extends CB_Controller
 		foreach($api_result as $result_price){
 			$high = $result_price['max_price'];
 			$low =$result_price['min_price'];
+			$prev = $result_price['prev_closing_price']
 			$view['low'] = $low;
 			$view['high'] = $high;
+			$view['prev'] = $prev;
 
 			$difference = $trade - (float)$result_price['prev_closing_price'];
 			$pourcentage = ($result_price['prev_closing_price'] / $trade) * 100;

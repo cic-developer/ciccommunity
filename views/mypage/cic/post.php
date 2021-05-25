@@ -75,42 +75,22 @@
 			<div class="paging-wrap">
 				<?php echo element('paging', $view); ?>
 			</div>
-				<!-- <a href="#" class="prev ctrl"><span>이전</span></a> -->
-				<!-- <ul>
-					<li><a href="#" class="active">1</a></li>
-					<li><a href="#n">2</a></li>
-					<li><a href="#n">3</a></li>
-					<li><a href="#n">4</a></li>
-					<li><a href="#n">5</a></li>
-				</ul>
-				<p class="num"><span>1</span> / 10 </p>
-				<a href="#" class="next ctrl"><span>다음</span></a> -->
 			<!-- e: paging-wrap -->
 			<!-- s: board-filter -->
-			<div class="board-filter">
-				<!-- <p class="chk-select">
-					<select>
-						<option value="">제목</option>
-						<option value="">내용</option>
-					</select>
-				</p> -->
+			<form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
 				<div class="board-filter">
 					<p class="chk-select">
 						<select>
-							<option value="">제목</option>
-							<option value="">내용</option>
+							<?php echo element('search_option', $view); ?>
 						</select>
 					</p>
 					<p class="chk-input">
-						<input type="text" placeholder="검색어를 입력해주세요" autocomplete="off">
-						<a href="<?php echo base_url('mypage/post/5')?>" class="search-btn"><span>검색</span></a>
+						<input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword', $view)); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
+						<!-- <a href="<?php echo base_url('mypage/post/5')?>" class="search-btn"><span>검색</span></a> -->
+						<button class="btn btn-default btn-sm" name="search_submit" type="submit">검색!</button>
 					</p>
 				</div>
-				<!-- <p class="chk-input">
-					<input type="text" placeholder="검색어를 입력해주세요" autocomplete="off" />
-					<a href="#n" class="search-btn"><span>검색</span></a>
-				</p> -->
-			</div>
+			</form>
 			<!-- e: board-filter -->
 		</div>
 		<?php echo form_close(); ?>

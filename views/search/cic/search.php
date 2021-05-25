@@ -102,8 +102,12 @@
 							</u>
 							상한가 끝-->
 							<!--하한가-->
-							<u class="low_money">-48,965,150 <i class="fas fa-long-arrow-alt-down"></i>
+							<?php if($trade > $prev){?>
+								<u class="low_money"> +<?php echo $difference; ?> <i class="fas fa-long-arrow-alt-up"></i>
+							<?php } else{ ?> 
+								<u class="low_money"><?php echo $difference; ?> <i class="fas fa-long-arrow-alt-down"></i>
 							</u>
+							<?php } ?>
 							<u class="low_money_percent">-8.82% <i class="fas fa-long-arrow-alt-down"></i>
 							</u>	
 							<!--하한가 끝-->

@@ -203,7 +203,7 @@ class Coinapi
             return array(
                 'price' => $data['last'],
                 'volume' => $data['volume']*$data['last'],
-                'change_rate' => $data['yesterday_last'] ? (($data['yesterday_last'] - $data['last']) / $data['yesterday_last'] * 100) : 0,
+                'change_rate' => $data['yesterday_last'] ? (($data['last'] - $data['yesterday_last']) / $data['yesterday_last'] * 100) : 0,
             );
         } else {
             return array();
@@ -233,6 +233,7 @@ class Coinapi
 
     /**
      * 비트플라이어 에서 데이터 가져오는 함수
+     * 변화율을 구할 수 없음
      */
     private function get_bitflyer_data($coin_id){
         $jpy_price = $this->get_jpy_price();
@@ -317,7 +318,7 @@ class Coinapi
             return array(
                 'price' => $data[0]['last'] * $usd_price,
                 'volume' => $data[0]['vol24h'] * $usd_price,
-                'change_rate' => $data[0]['sodUtc0'] ? (($data[0]['sodUtc0'] - $data[0]['last']) / $data[0]['sodUtc0'] * 100) : 0,
+                'change_rate' => $data[0]['sodUtc0'] ? (($data[0]['last'] - $data[0]['sodUtc0']) / $data[0]['sodUtc0'] * 100) : 0,
             );
         } else {
             return array();
@@ -340,7 +341,7 @@ class Coinapi
             return array(
                 'price' => $data['close'] * $usd_price,
                 'volume' => $data['amount'] * $data['close'] * $usd_price,
-                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+                'change_rate' => $data['open'] ? (($data['close'] - $data['open']) / $data['open'] * 100) : 0,
             );
         } else {
             return array();
@@ -350,20 +351,20 @@ class Coinapi
     /**
      * 비트렉스 에서 데이터 가져오는 함수
      */
-    private function get_bittrex_data($coin_id, $market="USDT"){
+    private function get_bittrex_data($coin_id, $market="USD"){
         $usd_price = $this->get_usd_price();
 
-        $url = "https://api.bittrex.com/api/v1.1/public/getmarketsummary?market={$market}-{$coin_id}s";
+        $url = "https://api.bittrex.com/api/v1.1/public/getmarketsummary?market={$market}-{$coin_id}";
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
-
+        
         $data = $result['result'];
         if($data){
             return array(
                 'price' => $data[0]['Last'] * $usd_price,
                 'volume' => $data[0]['BaseVolume'] * $usd_price,
-                'change_rate' => $data[0]['PrevDay'] ? (($data[0]['PrevDay'] - $data[0]['Last']) / $data[0]['PrevDay'] * 100) : 0,
+                'change_rate' => $data[0]['PrevDay'] ? (($data[0]['Last'] - $data[0]['PrevDay']) / $data[0]['PrevDay'] * 100) : 0,
             );
         } else {
             return array();

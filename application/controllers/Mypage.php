@@ -151,7 +151,7 @@ class Mypage extends CB_Controller
 		// $per_page = $this->cbconfig->item('list_count') ? $this->cbconfig->item('list_count') : 10;
 		$offset = ($page - 1) * $per_page;
 
-		$this->Post_model->allow_search_field = array('post_id', 'post_title', 'post_content', 'post_both', 'post_category', 'post_userid', 'post_nickname'); // 검색이 가능한 필드
+		$this->Post_model->allow_search_field = array('post_id', 'post_title', 'post_content', 'post_category', 'post_userid', 'post_nickname'); // 검색이 가능한 필드
 		$this->Post_model->search_field_equal = array('post_id', 'post_userid', 'post_nickname'); // 검색중 like 가 아닌 = 검색을 하는 필드
 
 		
@@ -195,13 +195,21 @@ class Mypage extends CB_Controller
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
-		$view['view']['list_delete_url'] = site_url('mypage/listdelete');
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;
 
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+		/**
+		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
+		 */
+		$search_option = array('post_id' => '번호',  'post_title' => '제목', 'post_content' => '내용', 
+									'post_category' => '카테고리', 'post_userid' => '아이디', 'post_nickname' => '닉네임');
+		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
+		$view['view']['search_option'] = search_option($search_option, $sfield);
+		$view['view']['list_delete_url'] = site_url('mypage/listdelete');
 
 		/**
 		 * 레이아웃을 정의합니다
