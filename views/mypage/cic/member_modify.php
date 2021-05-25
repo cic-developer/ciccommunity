@@ -82,23 +82,7 @@
 			<div id="myModal_phone" class="modal">
 				<div class="modal-content">
 					<ul class="entry modify-box">
-						<li class="wallet-modify-content">
-							<p class="btxt">새 핸드폰번호</p>
-							<div class="field modify">
-								<p class="chk-input w380">
-									<input type="text" placeholder="핸드폰번호" onkeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="" readonly disabled style="background-color:#efefef;">
-								</p>
-								<a href="javascript:void(0);" data-type="phone" class="modify-btn view_ath_box">
-									<span>이메일인증</span>
-								</a>
-							</div>
-							<a href="javascript:void(0);" id="confirm_phone" class="modify-btn confirm-btn" style="display:none;">
-								<span>확인</span>
-							</a>
-						</li>
-					</ul>
-					<ul class="entry ath-email-box" style="display:none;">
-						<li class="">
+						<li class="ath-email-content">
 							<p class="btxt">이메일인증</p>
 							<div class="all-email-box">
 								<div class="field modify">
@@ -127,6 +111,20 @@
 							</div>
 							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
 						</li>
+						<li class="wallet-modify-content">
+							<p class="btxt">새 핸드폰번호</p>
+							<div class="field modify">
+								<p class="chk-input w380">
+									<input type="text" placeholder="핸드폰번호" onkeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="" readonly disabled style="background-color:#efefef;">
+								</p>
+								<a href="javascript:void(0);" data-type="phone" class="modify-btn view_ath_box">
+									<span>확인</span>
+								</a>
+							</div>
+							<a href="javascript:void(0);" id="confirm_phone" class="modify-btn confirm-btn">
+								<span>확인</span>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -135,25 +133,6 @@
 			<div id="myModal_password" class="modal">
 				<div class="modal-content">
 					<ul class="entry modify-box">
-						<li class="password-modify-content">
-							<p class="btxt">새 비밀번호</p>
-							<div class="field modify">
-								<p class="chk-input w380">
-									<input type="password" placeholder="비밀번호" id="new_password" name="new_password" value="" readonly disabled style="background-color:#efefef;">
-								</p>
-								<p class="chk-input w380" style="margin-top:35px;">
-									<input type="password" placeholder="비밀번호확인" id="new_password_re" name="new_password_re" value="" readonly disabled style="background-color:#efefef;">
-								</p>
-								<a href="javascript:void(0);" data-type="password" class="modify-btn view_ath_box">
-									<span>이메일+핸드폰인증</span>
-								</a>
-							</div>
-							<a href="javascript:void(0);" id="confirm_password" class="modify-btn confirm-btn" style="display:none;">
-								<span>확인</span>
-							</a>
-						</li>
-					</ul>
-					<ul class="entry ath-email-box" style="display:none;">
 						<li class="">
 							<p class="btxt">이메일인증</p>
 							<div class="all-email-box">
@@ -182,6 +161,23 @@
 								</div>
 							</div>
 							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
+						</li>
+						<li class="password-modify-content">
+							<p class="btxt">새 비밀번호</p>
+							<div class="field modify">
+								<p class="chk-input w380">
+									<input type="password" placeholder="비밀번호" id="new_password" name="new_password" value="" readonly disabled style="background-color:#efefef;">
+								</p>
+								<p class="chk-input w380" style="margin-top:35px;">
+									<input type="password" placeholder="비밀번호확인" id="new_password_re" name="new_password_re" value="" readonly disabled style="background-color:#efefef;">
+								</p>
+								<a href="javascript:void(0);" data-type="password" class="modify-btn view_ath_box">
+									<span>확인</span>
+								</a>
+							</div>
+							<a href="javascript:void(0);" id="confirm_password" class="modify-btn confirm-btn" style="display:none;">
+								<span>확인</span>
+							</a>
 						</li>
 					</ul>
 					<ul class="entry ath-nice-box" style="display:none;">
@@ -215,7 +211,7 @@
 							</a>
 						</li>
 					</ul>
-					<ul class="entry ath-email-box" style="display:none;">
+					<ul class="entry ath-email-content" style="display:none;">
 						<li class="">
 							<p class="btxt">이메일인증</p>
 							<div class="all-email-box">
@@ -584,9 +580,9 @@
 						// 성공 메세지
                         alert(message);
                         
-						$('#myModal_' + type + ' .ath-email-box .send-ath-email').attr('style', "display:none;"); // 이메일 전송 버튼 제거
-						$('#myModal_' + type + ' .ath-email-box .confirm-ath-email').attr('style', "display:block;"); // 이메일 인증 버튼 생성
-						$('#myModal_' + type + ' .ath-email-box .' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;"); // 이메일 인증 버튼 생성
+						$('#myModal_' + type + ' .ath-email-content .send-ath-email').attr('style', "display:none;"); // 이메일 전송 버튼 제거
+						$('#myModal_' + type + ' .ath-email-content .confirm-ath-email').attr('style', "display:block;"); // 이메일 인증 버튼 생성
+						$('#myModal_' + type + ' .ath-email-content .' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;"); // 이메일 인증 버튼 생성
 					}
 					// 실패
 					if(state == 0){
@@ -612,7 +608,7 @@
 			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.
             
 			if($(this).hasClass("active")){
-				$('#myModal_' + type + ' .ath-email-box').attr('style', "display:none;"); // 이메일 인증 박스 제거
+				$('#myModal_' + type + ' .ath-email-content').attr('style', "display:none;"); // 이메일 인증 박스 제거
                 
 				if(type == "password"){
 					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:none;"); // 핸드폰 인증 박스 제거
@@ -625,7 +621,7 @@
                 
 				$(this).removeClass("active");
 			} else{
-				$('#myModal_' + type + ' .ath-email-box').attr('style', "display:block;"); // 이메일 인증 박스 생성
+				$('#myModal_' + type + ' .ath-email-content').attr('style', "display:block;"); // 이메일 인증 박스 생성
                 
 				if(type == "password"){
 					var html = '';
@@ -668,7 +664,7 @@
 	$(document).ready(function(){
 		$(".confirm-ath-email").on('click', function() {
 			var type = $(this).data('type');
-			var ath_num = $('#myModal_' + type + ' .ath-email-box .ath_num').val();
+			var ath_num = $('#myModal_' + type + ' .ath-email-content .ath_num').val();
 
 			var result = '';
 			var reason = '';
@@ -691,10 +687,10 @@
 					if(result == 1) {
 						// 성공 메세지
 						alert(reason);
-						$('#myModal_' + type + ' .ath-email-box .all-email-box').attr('style', "display:none;"); // 이메일 인증 박스 제거
-						$('#myModal_' + type + ' .ath-email-box .success').attr('style', "display:block;"); // 이메일 성공 메세지 생성
+						$('#myModal_' + type + ' .ath-email-content .all-email-box').attr('style', "display:none;"); // 이메일 인증 박스 제거
+						$('#myModal_' + type + ' .ath-email-content .success').attr('style', "display:block;"); // 이메일 성공 메세지 생성
                         
-						$('#myModal_' + type + ' .ath-email-box').addClass("agree") // 인증 완료 표식
+						$('#myModal_' + type + ' .ath-email-content').addClass("agree") // 인증 완료 표식
                         
 						isAgreeForModify(type);
 					}
@@ -718,7 +714,7 @@
  * 모든 인증 완료 후 => input 태그 활성화 시작
  */
 	var isAgreeForModify = function(type) {
-		var isAgreeEmail = $('#myModal_' + type + ' .ath-email-box').hasClass("agree");
+		var isAgreeEmail = $('#myModal_' + type + ' .ath-email-content').hasClass("agree");
 		var isAgreeNice = $('#myModal_' + type + ' .ath-nice-box').hasClass("agree");
 
 		if(type == "phone" && isAgreeEmail){
