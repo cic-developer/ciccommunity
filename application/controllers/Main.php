@@ -56,21 +56,22 @@ class Main extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
         
 		// 배너 가져오기 시작
-		$banner = $this->CIC_Banner_model->get_today_list();
-        $view['view']['banner_count'] = count(element('list', $banner));
-        $view['view']['banner_noimage_count'] = 4 - $view['view']['banner_count'];
+		$_banner = $this->CIC_Banner_model->get_today_list();
 
-		if(element('list', $banner)){
-			foreach (element('list', $banner) as $key => $val) {
-				if ($val) {
+		print_r($_banner);
+		exit;
+		$banner = array();
+		
+		if(element('list', $_banner)){
+			foreach (element('list', $_banner) as $key => $val) {
+				if ($val && $val['ban_image']) {
 					$banner['list'][$key] = $val;
-					print_r("<br>");
-					print_r("~~");
-					print_r($val);
 				}
 			}
 		}
-		exit;
+		
+		$view['view']['banner_count'] = count(element('list', $banner));
+		$view['view']['banner_noimage_count'] = 4 - $view['view']['banner_count'];
 		// 배너 가져오기 끝
 
 		$where = array(

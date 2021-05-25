@@ -5377,6 +5377,10 @@
     -moz-box-shadow: 0 0 9px rgba(0, 0, 0, 0.1);
 }
 
+.right_content_all {
+    overflow: hidden;
+}
+
 .right_content_all .stxt {
     display: block;
     padding-top: 20px;
@@ -5420,6 +5424,8 @@
     font-size: 35px;
     font-weight: 500;
     text-align: left;
+    padding-left: 5px;
+    padding-top: 1%;
 }
 
 .right_content_all .high_mnp_all {
@@ -5435,6 +5441,7 @@
 .right_content_all .high_money,
 .right_content_all .low_money {
     padding-right: 2%;
+    padding-left: 5px;
 }
 
 .right_content_all .high_money,
@@ -5474,10 +5481,14 @@
     padding-right: 3%;
 }
 
+
+/**/
+
 .right_content_all .price_all {
     display: block;
     text-align: left;
     padding-top: 19%;
+    padding-left: 5px;
 }
 
 .right_content_all .high u,

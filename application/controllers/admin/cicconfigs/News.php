@@ -93,6 +93,8 @@ class News extends CB_Controller
 		$view['view']['search_option'] = search_option($search_option, $sfield);
         $view['view']['update_news_enable_1_url'] = admin_url($this->pagedir . '/update_news_enable_1/?' . $param->output());
 		
+			// 		print_r($this->db->lastquery());
+			// exit;
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
@@ -137,7 +139,42 @@ class News extends CB_Controller
     public function update_news_enable_0()
 	{
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_board_post_bestpost';
+		$eventname = 'event_admin_update_news_enable_0';
+		$this->load->event($eventname);
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+		/**
+		 * 체크한 게시물의 삭제를 실행합니다
+		 */
+
+		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
+			foreach ($this->input->post('chk') as $val) {
+				if ($val) {
+					$this->News_model->update_news_enable_0($val);
+				}
+			}
+		}
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('after', $eventname);
+
+		/**
+		 * 삭제가 끝난 후 목록페이지로 이동합니다
+		 */
+		$this->session->set_flashdata(
+			'message',
+			'정상적으로 비활성화 되었습니다.'
+		);
+		$param =& $this->querystring;
+		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+		redirect($redirecturl);
+	}
+	
+	public function update_news_enable_1()
+	{
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_admin_update_news_enable_1';
 		$this->load->event($eventname);
 
 		// 이벤트가 존재하면 실행합니다
@@ -148,7 +185,7 @@ class News extends CB_Controller
 		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
 			foreach ($this->input->post('chk') as $val) {
 				if ($val) {
-					$this->News_model->update_news_enable_0($val);
+					$this->News_model->update_news_enable_1($val);
 				}
 			}
 		}

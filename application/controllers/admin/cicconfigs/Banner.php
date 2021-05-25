@@ -328,7 +328,7 @@ class Banner extends CB_Controller
 				'ban_activated' => $ban_activated,
                 'ban_url'    =>  $this->input->post('ban_url', null, ''),
                 'ban_target' =>  $this->input->post('ban_target', null, ''),
-                'ban_target' =>  $this->input->post('ban_order', null, ''),
+                'ban_order' =>  $this->input->post('ban_order', null, ''),
 			);
 
             if($updatephoto){

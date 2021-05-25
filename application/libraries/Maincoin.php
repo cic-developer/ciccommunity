@@ -226,16 +226,24 @@ class Maincoin
     /**
      * 비트플라이어 에서 데이터 가져오는 함수
      */
-    private function get_bitflyer_data($coin_id, $market="KRW"){
-        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+    private function get_bitflyer_data($coin_id){
+        //환율정보
+        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+        $usd_price = $result[0]['basePrice'];
+
+        //거래소정보
+        $url = "https://api.bitflyer.com/v1/getticker?product_code={$coin_id}_USD";
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
-        $data = $result['result'];
+        $data = $result;
         if($data){
             return array(
-                'price' => $data['last'],
+                'price' => $data['last'] * $usd_price,
                 'volume' => $data['deal'],
                 'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
             );
