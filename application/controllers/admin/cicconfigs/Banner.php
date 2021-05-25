@@ -260,6 +260,7 @@ class Banner extends CB_Controller
 			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
 			 */
 
+			 // $upload_path => uploads/banner/
             $this->load->library('upload');
 			if (isset($_FILES) && isset($_FILES['ban_image']) && isset($_FILES['ban_image']['name']) && $_FILES['ban_image']['name']) {
 				$upload_path = config_item('uploads_dir') . '/banner/';

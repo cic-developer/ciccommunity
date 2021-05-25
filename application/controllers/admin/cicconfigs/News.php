@@ -91,8 +91,7 @@ class News extends CB_Controller
 		$search_option = array('news_title' => '제목', 'news_id' => '뉴스번호',   'news_wdate' => '작성일');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
-        $view['view']['update_news_enable_0'] = admin_url($this->pagedir . '/update_news_enable_1/?' . $param->output());
-        $view['view']['update_news_enable_0'] = admin_url($this->pagedir . '/update_news_enable_0/?' . $param->output());
+        $view['view']['update_news_enable_0_url'] = admin_url($this->pagedir . '/update_news_enable_0/?' . $param->output());
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
@@ -107,7 +106,8 @@ class News extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
     }
 
-    public function delete_news(){
+    public function delete_news()
+    {
         $eventname = 'event_admin_news_delete';
         $this->load->event($eventname);
 
@@ -132,58 +132,36 @@ class News extends CB_Controller
     }
 
     public function update_news_enable_0()
-    {
-        $where = array(
-            'news_id' => $news_id,
-        );
-        $updatedata = array(
-            'news_enable' => 0,
-        );
-        $this->db->where($where);
-        $this->db->set($updatedata);
+	{
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_admin_board_post_bestpost';
+		$this->load->event($eventname);
 
-        return $this->db->update($this->_table);
-    }
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+		/**
+		 * 체크한 게시물의 삭제를 실행합니다
+		 */
+		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
+			foreach ($this->input->post('chk') as $val) {
+				if ($val) {
+					$this->News_model->update_news_enable_0($val);
+				}
+			}
+		}
 
-    public function update_news_enable_1()
-    {
-        $where = array(
-            'news_id' => $news_id,
-        );
-        $updatedata = array(
-            'news_enable' => 1,
-        );
-        $this->db->where($where);
-        $this->db->set($updatedata);
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('after', $eventname);
 
-        return $this->db->update($this->_table);
-    }
-
-    public function update_news_show_0()
-    {
-        $where = array(
-            'news_id' => $news_id,
-        );
-        $updatedata = array(
-            'news_show' => 0,
-        );
-        $this->db->where($where);
-        $this->db->set($updatedata);
-
-        return $this->db->update($this->_table);
-    }
-
-    public function update_news_show_1()
-    {
-        $where = array(
-            'news_id' => $news_id,
-        );
-        $updatedata = array(
-            'news_show' => 1,
-        );
-        $this->db->where($where);
-        $this->db->set($updatedata);
-
-        return $this->db->update($this->_table);
-    }
+		/**
+		 * 삭제가 끝난 후 목록페이지로 이동합니다
+		 */
+		$this->session->set_flashdata(
+			'message',
+			'정상적으로 비활성화 되었습니다.'
+		);
+		$param =& $this->querystring;
+		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+		redirect($redirecturl);
+	}
 }

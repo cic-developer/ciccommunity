@@ -173,20 +173,55 @@ class News_model extends CB_Model
         return $result;
     }
 
-    public function delete($primary_value = '', $where = '')
-    {
-        if( empty($primary_value)){
-            return false;
-        }
-        $result = parent::delete($primary_value);
-        $this->cache->delete($this->cache_prefix . $primary_value);
-        return $result;
-    }
-
-    public function update($news_id)
+	public function update_news_enable_0()
     {
         $where = array(
             'news_id' => $news_id,
+        );
+        $updatedata = array(
+            'news_enable' => 0,
+        );
+        $this->db->where($where);
+        $this->db->set($updatedata);
+
+        return $this->db->update($this->_table);
+    }
+
+    public function update_news_enable_1()
+    {
+        $where = array(
+            'news_id' => $news_id,
+        );
+        $updatedata = array(
+            'news_enable' => 1,
+        );
+        $this->db->where($where);
+        $this->db->set($updatedata);
+
+        return $this->db->update($this->_table);
+    }
+
+    public function update_news_show_0()
+    {
+        $where = array(
+            'news_id' => $news_id,
+        );
+        $updatedata = array(
+            'news_show' => 0,
+        );
+        $this->db->where($where);
+        $this->db->set($updatedata);
+
+        return $this->db->update($this->_table);
+    }
+
+    public function update_news_show_1()
+    {
+        $where = array(
+            'news_id' => $news_id,
+        );
+        $updatedata = array(
+            'news_show' => 1,
         );
         $this->db->where($where);
         $this->db->set($updatedata);

@@ -1,3 +1,7 @@
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+  />
 <div id="container-wrap">
 		<div id="contents" class="div-cont">
 		<!-- page start // -->
@@ -82,7 +86,7 @@
 						<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p>	
 					</div>
 					<p class="stxt" style="display:block; padding-top:20px;" >
-						<u class="high_money">+2,858,090 <i class="fas fa-long-arrow-alt-up"></i></u>	
+						<!--상한가--><u class="high_money">+2,858,090 <i class="fas fa-long-arrow-alt-up"></i></u><!--상한가 끝-->	
 						<span style="color:#fa5252; display:block; padding-bottom:5px;">고가  ￦ <?php echo $high; ?> </span>
 						<span style="color:#228be6; display:block;">저가 ￦ <?php echo $low; ?> </span>
 					</p>

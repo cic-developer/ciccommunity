@@ -165,8 +165,29 @@ class Searchcoin extends CB_Controller
 				}
 			}
 			
-			 
-			$stockKey = $this->CIC_coin_list_model->getstockData();
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');
+		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
+	}
+
+	public function CStock_keyword(){
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_amdmin_coin_keyword';
+		$this->load->event($eventname);
+	    $this->load->helper('url');
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+	
+		$view = array();
+		$view['view'] = array();
+	
+		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+		//INSERT KEYWORDS IN DB
+
+		$stockKey = $this->CIC_coin_list_model->getstockData();
 			foreach($stockKey as $getList){
 				$data = array(
 					array(
@@ -198,26 +219,6 @@ class Searchcoin extends CB_Controller
 					} 
 				}	
 			}
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');
-		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-		$this->data = $view;
-		$this->layout = element('layout_skin_file', element('layout', $view));
-		$this->view = element('view_skin_file', element('layout', $view));
-	}
-
-	public function CStock_keyword(){
-		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_amdmin_coin_keyword';
-		$this->load->event($eventname);
-	    $this->load->helper('url');
-	
-		// 이벤트가 존재하면 실행합니다
-		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-	
-		$view = array();
-		$view['view'] = array();
-	
-		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
 		//CREATE COIN KEYWORD LIST FOR ADMIN
 

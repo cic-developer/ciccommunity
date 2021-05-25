@@ -8,20 +8,13 @@
 		?>
 
 		<div class="box-table-header">
-
-		<?php
-		ob_start();
-		?>
 			<div class="btn-group pull-right" role="group" aria-label="...">
-				<a href="<?php echo element('listall_url', $view); ?>" value = "rafresh_" name = "rafresh_" class="btn btn-outline btn-default btn-sm">전체목록</a>
-				<!-- <form action='get'>
+				<!-- <a href="<?php echo element('listall_url', $view); ?>" value = "rafresh_" name = "rafresh_" class="btn btn-outline btn-default btn-sm">전체목록</a> -->
+				<form action='post'>
 					<input type="submit" id = "refresh_" name="refresh_" class="btn btn-outline btn-default btn-sm" value="코인목록 갱신">
-				</form>	 -->
+				</form>	
 			</div>
-		<?php
 
-		ob_end_flush();
-		?>
 		</div>
 
 			<div class="list-group">

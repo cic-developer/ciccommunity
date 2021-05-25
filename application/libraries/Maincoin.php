@@ -122,9 +122,9 @@ class Maincoin
         $data = $result[0];
         if($data){
             return array(
-                'price' => $data['last'],
-                'volume' => $data['deal'],
-                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+                'price' => $data['trade_price'],
+                'volume' => $data['acc_trade_price_24h'],
+                'change_rate' => $data['signed_change_rate'],
             );
         } else {
             return array();

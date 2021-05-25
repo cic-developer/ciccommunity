@@ -5380,10 +5380,46 @@
     -moz-box-shadow: 0 0 9px rgba(0, 0, 0, 0.1);
 }
 
+.right_content_all .stxt {
+    display: block;
+    padding-top: 20px;
+}
+
 .right_content_all {
     overflow: hidden;
     float: right;
     text-align: left;
+    width: 50%;
+}
+
+.right_content_all .stxt {
+    display: block;
+    padding-top: 20px;
+}
+
+.right_content_all .high_money {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 400;
+    color: #fa5252;
+    padding-bottom: 25px;
+    text-decoration: none;
+    text-align: right;
+}
+
+.right_content_all .stxt {
+    display: block;
+    padding-top: 20px;
+}
+
+.right_content_all .stxt {
+    display: block;
+    padding-top: 20px;
+}
+
+.right_content_all .stxt {
+    display: block;
+    padding-top: 20px;
 }
 
 .search-wrap.list .result .btxt {
