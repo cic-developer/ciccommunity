@@ -135,8 +135,7 @@ class Searchcoin extends CB_Controller
 		}
 		$get_apiList = $this -> CIC_coin_list_model->get_apiList();
 		$getList = $this -> CIC_coin_list_model->retrieve_api($get_apiList);
-		print_r($getList);
-		
+		print_r($getList);		
 		if(is_array($array) || is_object($array) ){
 			for($i=0; $i<count($getList); $i++){
 					// $market = $getList[$i]['market'];
@@ -145,13 +144,14 @@ class Searchcoin extends CB_Controller
 					// print_r($getList['name']);
 					// if(strcmp(substr($market, 0, 1), "K")==0){	
 						// $market = substr($market, 4);
-					if($korean){	
+						
 						$data = array(
 							'clist_market' => $getList[$i]['symbol'],
 							'clist_name_ko' => $getList[$i]['localization']['ko'],
 							'clist_name_en' => $getList[$i]['name'],
 						);
-						// print_r($data);
+						print_r(1);
+						print_r($data);
 						if(isset($data) && !empty($data)){
 							foreach($data as $coinData){
 								if(in_array($coinData, $coin_arr)){
@@ -163,7 +163,6 @@ class Searchcoin extends CB_Controller
 								}
 							}
 						}
-						print_r('$stockKey'); 
 						$stockKey = $this->CIC_coin_list_model->getstockData();
 						
 						$data = array(
@@ -189,10 +188,9 @@ class Searchcoin extends CB_Controller
 									$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
 								}	
 							} 
-						}
-					}		
+						}	
 				}
-			}		
+		}		
 		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;

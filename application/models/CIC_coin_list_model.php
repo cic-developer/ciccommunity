@@ -139,7 +139,6 @@ class CIC_Coin_list_model extends CB_Model
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
             $data = curl_exec($ch) or die(curl_error($ch));
-        }
         if ($data === false) {
             $info = curl_getinfo($ch);
             curl_close($ch);
@@ -150,7 +149,7 @@ class CIC_Coin_list_model extends CB_Model
         curl_close($ch);
     }
     
-    print_r($output);
+    return $output;
 
     }  
     
