@@ -205,18 +205,18 @@ class Maincoin
     /**
      * 코빗 에서 데이터 가져오는 함수
      */
-    private function get_korbit_data($coin_id, $market="KRW"){
-        $url = "https://api.korbit.co.kr/v1/ticker/detailed?currency_pair={$coin_id}_{$market}";
+    private function get_korbit_data($coin_id, $market="krw"){
+        $url = "https://api.korbit.co.kr/v1/ticker/detailed?currency_pair=".strtolower($coin_id)."_".strtolower($market);
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
-        $data = $result['result'];
+        $data = $result;
         if($data){
             return array(
                 'price' => $data['last'],
-                'volume' => $data['deal'],
-                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+                'volume' => $data['volume'] * $data['last'],
+                'change_rate' => $data['changePercent'],
             );
         } else {
             return array();

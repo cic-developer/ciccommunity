@@ -57,9 +57,10 @@ class Main extends CB_Controller
         
 		// 배너 가져오기 시작
 		$banner = $this->CIC_Banner_model->get_today_list();
-        
-		if(element('list', $result)){
-			foreach (element('list', $result) as $key => $val) {
+        $view['view']['banner_count'] = count(element('list', $banner));
+
+		if(element('list', $banner)){
+			foreach (element('list', $banner) as $key => $val) {
 				if ($val) {
 					$banner['list'][$key] = $val;
 				}

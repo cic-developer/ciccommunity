@@ -26,35 +26,25 @@
                     <div class="visual-slide">
                     
                     <?php
-						if (element('list',element('banner', $view))) {
-							foreach (element('list',element('banner', $view)) as $banner) {
-						?>
-                            <div class="item">
-                                <a href="<?php echo element('ban_url', $banner) ?>" target="<?php echo element('ban_target', $banner) ?>">
-                                    <img src="<?php echo base_url('uploads/banner/'.element('ban_image', $banner)) ?>" alt="" />
-                                </a>
-                            </div>
-						<?php
-							}
-						}
-                        ?>
+                    if (element('list',element('banner', $view))) {
+                        foreach (element('list',element('banner', $view)) as $banner) {
+                    ?>
+                        <div class="item">
+                            <a href="<?php echo element('ban_url', $banner) ?>" target="<?php echo element('ban_target', $banner) ?>">
+                                <img src="<?php echo base_url('uploads/banner/'.element('ban_image', $banner)) ?>" alt="" />
+                            </a>
+                        </div>
 
                         <div class="item">
                             <a href="#n"><img src="<?php echo base_url('assets/images/visual-img01.jpg') ?>"
                                     alt="" /></a>
                         </div>
-                        <div class="item">
-                            <a href="#n"><img src="<?php echo base_url('assets/images/visual-img02.jpg') ?>"
-                                    alt="" /></a>
-                        </div>
-                        <div class="item">
-                            <a href="#n"><img src="<?php echo base_url('assets/images/visual-img03.jpg') ?>"
-                                    alt="" /></a>
-                        </div>
-                        <div class="item">
-                            <a href="#n"><img src="<?php echo base_url('assets/images/visual-img04.jpg') ?>"
-                                    alt="" /></a>
-                        </div>
+
+                        <?php echo element('banner_count', $view) ?>
+                    <?php
+                        }
+                    }
+                    ?>
                     </div>
                     <a href="#n" class="next"><span class="blind">다음</span></a>
                 </div>

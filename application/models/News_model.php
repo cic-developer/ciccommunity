@@ -114,23 +114,12 @@ class News_model extends CB_Model
 
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
-		// $this->db->join('member', 'news.comp_id = company.mem_id', 'left');
 		if ($where) {
 			$this->db->where($where);
 		}
 		if ($search_where) {
 			$this->db->where($search_where);
 		}
-		// if ($category_id) {
-		// 	if (strpos($category_id, '.')) {
-		// 		$this->db->like('post_category', $category_id . '', 'after');
-		// 	} else {
-		// 		$this->db->group_start();
-		// 		$this->db->where('post_category', $category_id);
-		// 		$this->db->or_like('post_category', $category_id . '.', 'after');
-		// 		$this->db->group_end();
-		// 	}
-		// }
 		if ($search_like) {
 			foreach ($search_like as $item) {
 				foreach ($item as $skey => $sval) {
@@ -150,6 +139,9 @@ class News_model extends CB_Model
 		$qry = $this->db->get();
 		$rows = $qry->row_array();
 		$result['total_rows'] = $rows['rownum'];
+
+		print_r($this->db->last_query());
+		exit;
 
 		return $result;
     }

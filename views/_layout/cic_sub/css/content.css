@@ -5422,23 +5422,31 @@
     margin-block-end: 0em;
     float: right;
     padding-top: 5%;
+    width: 100%;
 }
 
-.right_content_all .high_money {
+.right_content_all .high_money,
+.right_content_all .low_money {
+    padding-right: 2%;
+}
+
+.right_content_all .high_money,
+.right_content_all .high_percent {
     display: inline-block;
     font-size: 20px;
     font-weight: 400;
     color: #fa5252;
-    padding-bottom: 25px;
+    padding-bottom: 10px;
     text-decoration: none;
 }
 
-.right_content_all .low_money {
+.right_content_all .low_money,
+.right_content_all .low_percent {
     display: inline-block;
     font-size: 20px;
     font-weight: 400;
     color: #228be6;
-    padding-bottom: 25px;
+    padding-bottom: 10px;
     text-decoration: none;
 }
 
@@ -5454,9 +5462,15 @@
 
 .right_content_all .high {
     color: #fa5252;
-    display: block;
+    display: inline-block;
     padding-bottom: 5px;
     font-size: 15px;
+    padding-right: 3%;
+}
+
+.right_content_all .price_all {
+    display: block;
+    text-align: right;
 }
 
 .right_content_all .high u,
@@ -7778,4 +7792,4 @@ label input[type='checkbox'] {
     }
 }
 
-ne
+.right_content_all .low_money
