@@ -125,7 +125,39 @@ class CIC_Coin_list_model extends CB_Model
         return $query->row_array();
     }
 
-    function retrieve_api(){
+    function retrieve_api($coinName){
+        $curl = curl_init();
+        for($i=0; $i<count($coinName); $i++){
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/{$coinName}?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
+                // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/bitcoin?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 90,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET"   
+                
+            ));
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+
+            curl_close($curl);
+
+            if($err){
+                echo "cUrl Error :" . $err;
+            }
+            $array = json_decode($response, true);
+            $refresh = $this -> input -> post('refresh');
+            // print_r($data);
+            if($refresh && is_array($array){
+                // convert json to php array or object
+                return $array;
+            }
+        }     
+    }        
+    function get_apiList(){
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -137,82 +169,27 @@ class CIC_Coin_list_model extends CB_Model
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 90,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET"          
+            CURLOPT_CUSTOMREQUEST => "GET"   
+            
         ));
+
         $response = curl_exec($curl);
         $err = curl_error($curl);
+
         curl_close($curl);
+
         if($err){
             echo "cUrl Error :" . $err;
         }
         $refresh = $this -> input -> post('refresh');
         // convert json to php array or object
-        $arr = json_decode($response, true);
-        if(is_array($arr) || is_object($arr)){
-            for($i=0; $i<count( $arr); $i++){
-                // echo "<pre><br>";    
-                // print_r($arr[$i]['id']);
-                // echo "</pre></br>";
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/" .$arr[$i]['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
-                    // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/bitcoin?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_ENCODING => "",
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 90,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,                    
-                ));
-                $response = curl_exec($curl);
-                $err = curl_error($curl);
-
-                curl_close($curl);
-
-                if($err){
-                    echo "cUrl Error :" . $err;
-                }
-                $array = json_decode($response, true);
-                $refresh = $this -> input -> post('refresh');
-                if(is_array($array) || is_object($array) ){
-
-                    return $array;
-                }
-            }   
-        }   
-     }  
-
-    // function get_apiList(){
-    //     $curl = curl_init();
-    //     curl_setopt_array($curl, array(
-    //         // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/list?markets?vs_currency=KRW",
-    //         CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/markets?vs_currency=KRW&order=market_cap_desc&per_page=300&page=1&sparkline=false",
-    //         CURLOPT_RETURNTRANSFER => true,
-    //         CURLOPT_FOLLOWLOCATION => true,
-    //         CURLOPT_ENCODING => "",
-    //         CURLOPT_MAXREDIRS => 10,
-    //         CURLOPT_TIMEOUT => 90,
-    //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    //         CURLOPT_CUSTOMREQUEST => "GET"   
-            
-    //     ));
-
-    //     $response = curl_exec($curl);
-    //     $err = curl_error($curl);
-
-    //     curl_close($curl);
-
-    //     if($err){
-    //         echo "cUrl Error :" . $err;
-    //     }
-    //     $refresh = $this -> input -> post('refresh');
-    //     // convert json to php array or object
-    //     $array = json_decode($response, true);
-    //     if(is_array($array)){
-    //         // print_r($array);
-    //         return $array;
-    //     }
+        $array = json_decode($response, true);
+        if(is_array($array)){
+            // print_r($array);
+            return $array;
+        }
         
-    // }
+    }
 
 }
 ?>

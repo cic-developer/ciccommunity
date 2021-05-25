@@ -119,11 +119,11 @@ class Searchcoin extends CB_Controller
 		//이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 		// keyword 테이블을 통째로 불러온다.
-		$keyword_list = $this->CIC_coin_keyword_model->get_keyword();
+		
 		$coin_list = $this->CIC_coin_list_model->getstockData();
 		// 통째로 가져온 테이블에서 keyword 만 담은 array() 만든다.
 		$keyword_arr = array();
-		
+		$keyword_list = $this->CIC_coin_keyword_model->get_keyword();
 		foreach($keyword_list as $value){
 			$keyword_arr[] = element('coin_keyword', $value);
 		}
@@ -245,6 +245,11 @@ class Searchcoin extends CB_Controller
 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
 		//INSERT KEYWORDS IN DB
+		$keyword_list = $this->CIC_coin_keyword_model->get_keyword();
+		$keyword_arr = array();
+		foreach($keyword_list as $value){
+			$keyword_arr[] = element('coin_keyword', $value);
+		}
 		$stockKey = $this->CIC_coin_list_model->getstockData();
 		foreach($stockKey as $getList){
 			$data = array(
@@ -277,7 +282,6 @@ class Searchcoin extends CB_Controller
 		//SHOWING LIST TO VIEW KEYWORD TO LIST
 		$keylist = $this -> CIC_coin_keyword_model->get_keyword();
 		$view['keylist'] = $keylist;
-
 
 		$coin_list = $this->CIC_coin_list_model->getstockData();
 		$view['coin_list'] = $coin_list;
