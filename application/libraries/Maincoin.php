@@ -119,7 +119,7 @@ class Maincoin
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
-        $data = $result['result'];
+        $data = $result[0];
         if($data){
             return array(
                 'price' => $data['last'],

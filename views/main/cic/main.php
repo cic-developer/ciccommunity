@@ -24,6 +24,9 @@
                 <div class="vis">
                     <a href="#n" class="prev"><span class="blind">이전</span></a>
                     <div class="visual-slide">
+                    <?php
+                    echo banner('top', 'rand', '2', '<div class="item"><a href="#n">', '</a></div>');
+                    ?>
                         <div class="item">
                             <a href="#n"><img src="<?php echo base_url('assets/images/visual-img01.jpg') ?>"
                                     alt="" /></a>

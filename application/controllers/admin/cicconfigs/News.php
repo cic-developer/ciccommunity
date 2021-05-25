@@ -59,7 +59,7 @@ class News extends CB_Controller
 
 		$result = $this->{$this->modelname}
 			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-		
+
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
@@ -92,7 +92,7 @@ class News extends CB_Controller
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
         $view['view']['update_news_enable_0'] = admin_url($this->pagedir . '/update_news_enable_1/?' . $param->output());
-        $view['view']['update_news_show_1'] = admin_url($this->pagedir . '/update_news_show_1/?' . $param->output());
+        $view['view']['update_news_enable_0'] = admin_url($this->pagedir . '/update_news_enable_0/?' . $param->output());
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

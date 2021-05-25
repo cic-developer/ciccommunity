@@ -61,8 +61,8 @@
 						<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
 						{
 							"symbol": "BITHUMB:<?php echo $symbole ?>KRW",
-							"width": 300,
-							"height": 150,
+							"width": 400,
+							"height": 200,
 							"locale": "en",
 							"dateRange": "12M",
 							"colorTheme": "light",
@@ -75,16 +75,18 @@
 						</script>
 					</div>	
 					<!-- TradingView Widget END -->
-					<div style="text-align:left; float:right; padding-right:35%; border-bottom:5px solid #ddd; padding-bottom:5px;">
+					<div class="right_content_all">
+					<div style="text-align:left; border-bottom:5px solid #ddd; padding-bottom:5px;">
 						<img style= "width: 30px; padding-right:10px;" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
 						<strong class="btxt"><?php echo $korean; ?></strong>
 						<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p>	
 					</div>
-					<u class="high_money">+2,858,090 <i class="fas fa-long-arrow-alt-up"></i></u>	
-					<p class="stxt" style="display:block; padding-top:20px; float:right; padding-right:40%;" > 
+					<p class="stxt" style="display:block; padding-top:20px;" >
+						<u class="high_money">+2,858,090 <i class="fas fa-long-arrow-alt-up"></i></u>	
 						<span style="color:#fa5252; display:block; padding-bottom:5px;">고가  ￦ <?php echo $high; ?> </span>
 						<span style="color:#228be6; display:block;">저가 ￦ <?php echo $low; ?> </span>
 					</p>
+					</div>
 				</div>
 			<?php
 			}
