@@ -45,7 +45,7 @@
 							<tr>
 								<td>
 									<p class="chk-check">
-										<input type="checkbox" id="<?php echo element('post_id', $post); ?>" name="vsel[]" /><label for="<?php echo element('post_id', $post); ?>"><span
+										<input type="checkbox" id="<?php echo element('post_id', $post); ?>" name="vsel[]" value="<?php echo element('post_id', $post); ?>" /><label for="<?php echo element('post_id', $post); ?>"><span
 												class="blind">선택</span></label>
 									</p>
 								</td>
@@ -112,27 +112,22 @@
 	// list delete submit
     function list_delete_submit(f, acttype, actpage){
         var chk = document.getElementsByName("vsel[]");
+		var checkLen = 0;
+		var checkArr = [];
 
-		console.log("=> " ,chk);
-		return;
+		for(var val of chk){
+			if(val.checked){
+				checkArr.push(val.value);
+				checkLen++;
+			}
+		}
 
-        // 0.01보다 작거나 숫자가 아닌경우도 검사해야 한다. ...
-        var cp_percoin = $('#cp_percoin').val().trim();
-        if(cp_percoin.length < 1){
-            alert("필수값 입니다")
-            $('#cp_percoin').focus();
-            return;
-        }
+		if(checkLen < 1){
+			alert('삭제할 게시물을 체크해주세요');
+			return;
+		}
 
-        var cp_content1 = $('#cp_content1').val().trim();
-        if(cp_content1.length < 1){
-            alert("필수값 입니다")
-            $('#cp_content1').focus();
-            return;
-        }
-
-
-        if (acttype === 'approve' && ! confirm('선택한 요청을 정말 승인 하시겠습니까?')) return;
+        if (acttype === 'delete' && ! confirm('선택한 게시물을 정말 삭제 하시겠습니까?')) return;
         f.action = actpage;
 		f.submit();
     }   

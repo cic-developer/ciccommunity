@@ -108,7 +108,7 @@ class News extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
     }
 
-	public function enable_0()
+	public function enable()
 	{
 		 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_cicconfigs_news_index';

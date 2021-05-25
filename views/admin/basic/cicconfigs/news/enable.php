@@ -8,7 +8,7 @@
 				<div class="box-table-header">
 					<ul class="nav nav-pills">
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir); ?>">뉴스목록</a></li>
-						<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/enable_0'); ?>">비활성화 뉴스목록</a></li>
+						<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/enable'); ?>">제외목록</a></li>
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/show_0'); ?>">비공개 뉴스목록</a></li>
 					</ul>
 					<?php

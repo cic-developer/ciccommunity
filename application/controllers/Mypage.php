@@ -1450,6 +1450,9 @@ class Mypage extends CB_Controller
 	 */
 	public function listdelete()
 	{
+
+		print_r("hi");
+		exit;
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_mypage_post_listdelete';
 		$this->load->event($eventname);

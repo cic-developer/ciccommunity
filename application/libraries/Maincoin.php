@@ -15,6 +15,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Maincoin
 {
+    private $usd_price = 0;
+    private $jpy_price = 0;
+    
     public function get_data($exchange="", $coin_id, $market="KRW"){
         switch($exchange){
 
@@ -329,7 +332,7 @@ class Maincoin
             return array(
                 'price' => $data[0]['last'] * $usd_price,
                 'volume' => $data[0]['vol24h'] * $usd_price,
-                'change_rate' => $data[0]['sodUtc0'] ? (($data[0]['sodUtc0'] - $data[0]['last']) / $data[0]['sodUtc0'] * 100) * $usd_price : 0,
+                'change_rate' => $data[0]['sodUtc0'] ? (($data[0]['sodUtc0'] - $data[0]['last']) / $data[0]['sodUtc0'] * 100) : 0,
             );
         } else {
             return array();
@@ -367,8 +370,15 @@ class Maincoin
     /**
      * 비트렉스 에서 데이터 가져오는 함수
      */
-    private function get_bittrex_data($coin_id, $market="KRW"){
-        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+    private function get_bittrex_data($coin_id, $market="USDT"){
+        //환율정보
+        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+        $usd_price = $result[0]['basePrice'];
+
+        $url = "https://api.bittrex.com/api/v1.1/public/getmarketsummary?market={$market}-{$coin_id}s";
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
@@ -376,9 +386,9 @@ class Maincoin
         $data = $result['result'];
         if($data){
             return array(
-                'price' => $data['last'],
-                'volume' => $data['deal'],
-                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+                'price' => $data[0]['Last'] * $usd_price,
+                'volume' => $data[0]['BaseVolume'] * $usd_price,
+                'change_rate' => $data[0]['PrevDay'] ? (($data[0]['PrevDay'] - $data[0]['Last']) / $data[0]['PrevDay'] * 100) : 0,
             );
         } else {
             return array();
@@ -388,18 +398,25 @@ class Maincoin
     /**
      * 폴로닉스 에서 데이터 가져오는 함수
      */
-    private function get_poloniex_data($coin_id, $market="KRW"){
-        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+    private function get_poloniex_data($coin_id, $market="USDT"){
+        //환율정보
+        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+        $usd_price = $result[0]['basePrice'];
+
+        $url = "https://poloniex.com/public?command=returnTicker";
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
-        $data = $result['result'];
+        $data = $result[$market.'_'.$coin_id];
         if($data){
             return array(
-                'price' => $data['last'],
-                'volume' => $data['deal'],
-                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+                'price' => $data['last'] * $usd_price,
+                'volume' => $data['baseVolume'] * $usd_price,
+                'change_rate' => $data['percentChange'] * 100,
             );
         } else {
             return array();
@@ -428,6 +445,28 @@ class Maincoin
     //     }
     //     return array();
     // }
+
+    private function get_usd_price(){
+        if($this->usd_price) return $this->usd_price;
+        //환율정보
+        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+        $this->usd_price = $result[0]['basePrice'];
+        return $this->usd_price;
+    }
+
+    private function get_jpy_price(){
+        if($this->jpy_price) return $this->jpy_price;
+        //환율정보
+        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWJPY";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+        $this->jpy_price = $result[0]['basePrice']/100; //100엔당 가격이라 나누기100
+        return $this->jpy_price;
+    }
 
     private function get_curl($url){
         $curl = curl_init();
