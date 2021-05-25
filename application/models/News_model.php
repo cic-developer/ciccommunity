@@ -165,7 +165,7 @@ class News_model extends CB_Model
         return $result;
     }
 
-	public function update_news_enable_0()
+	public function update_news_enable_0($news_id)
     {
         $where = array(
             'news_id' => $news_id,
@@ -179,7 +179,7 @@ class News_model extends CB_Model
         return $this->db->update($this->_table);
     }
 
-    public function update_news_enable_1()
+    public function update_news_enable_1($news_id)
     {
         $where = array(
             'news_id' => $news_id,

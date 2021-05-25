@@ -46,6 +46,7 @@ class CIC_Banner_model extends CB_Model
 			$this->db->or_where(array('ban_end_date' => ''));
 			$this->db->or_where(array('ban_end_date' => null));
 			$this->db->group_end();
+			$this->db->order_by('ban_order', 'DESC');
 			$res = $this->db->get();
 			$result['list'] = $res->result_array();
 

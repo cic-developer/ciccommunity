@@ -30,7 +30,8 @@
 						$attributes = array('class' => 'search_box', 'name' => 'searchForm', 'id' => 'searchForm', 'method'=> 'get', 'action' => base_url('/search'));
 						echo form_open(current_full_url(), $attributes);
 					?>
-					<p class="chk-input"><input type="text" placeholder="검색어를 입력해주세요" autocomplete="off" name="skeyword"></p>
+					<p class="chk-input"><input type="text" placeholder="검색어를 입력해주세요" autocomplete="off" name="skeyword"
+						value="<?php echo $this->input->get('skeyword');?>"></p>
 					<button class="enter"><span class="blind">검색</span></button>
                     <?php echo form_close(); ?>
 				</div>
@@ -84,14 +85,14 @@
 						<img style= "width: 30px; padding-right:10px;" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
 						<strong class="btxt"><?php echo $korean; ?></strong>
 						<p class="stxt">
-							<span> KRW-<?php echo $symbole; ?></span>
-							<u class="btc">
-								1.0000BTC <small class="doller">$30,971</small>
+							<span> <?php echo $symbole; ?></span>
+							<u class="btc" >
+								<small hidden class="doller">1.0000BTC $30,971</small>
 							</u>
 						</p>	
 					</div>
 					<p class="stxt">
-						<h6 class="price_now">123,156,147 ￦</h6>
+					<h6 class="price_now"> ￦<?php echo $trade ?></h6>
 						<!--상한가와 하한가 전체-->
 						<h6 class="high_mnp_all">
 							<!--상한가-->

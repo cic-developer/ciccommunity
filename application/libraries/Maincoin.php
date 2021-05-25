@@ -228,14 +228,14 @@ class Maincoin
      */
     private function get_bitflyer_data($coin_id){
         //환율정보
-        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
+        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWJPY";
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
-        $usd_price = $result[0]['basePrice'];
+        $jpy_price = $result[0]['basePrice']/100; //100엔당 가격이라 나누기100
 
         //거래소정보
-        $url = "https://api.bitflyer.com/v1/getticker?product_code={$coin_id}_USD";
+        $url = "https://api.bitflyer.com/v1/getticker?product_code={$coin_id}_JPY";
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
@@ -243,9 +243,9 @@ class Maincoin
         $data = $result;
         if($data){
             return array(
-                'price' => $data['last'] * $usd_price,
-                'volume' => $data['deal'],
-                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+                'price' => $data['ltp'] * $jpy_price,
+                'volume' => $data['volume'] * $data['ltp'] * $jpy_price,
+                'change_rate' => 0,
             );
         } else {
             return array();

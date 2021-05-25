@@ -221,13 +221,10 @@ class Search extends CB_Controller
 			$trade = (float)$act[0]['price'];
 			$view['trade'] = $trade;
 		}
-		// echo "<pre><bre>";
-        // print_r($api_result);
-		// echo "</pre></bre>";
-
-		/*  
+		echo "<pre><bre>";
+        print_r($api_result);
+		echo "</pre></bre>"; 
 		
-		*/
 		foreach($api_result as $result_price){
 			$high = $result_price['max_price'];
 			$low =$result_price['min_price'];

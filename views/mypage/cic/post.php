@@ -33,126 +33,20 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>
-								<p class="chk-check">
-									<input type="checkbox" id="vsel01" /><label for="vsel01"><span
-											class="blind">선택</span></label>
-								</p>
-							</td>
-							<td><span>11</span></td>
-							<td class="l"><a href="#">한국인은 대출 안 나오는데 외국인은 80% 해주고 외국인 건물주 논 ... (10)</a></td>
-							<td>2020-08-25</td>
-							<td>12</td>
-						</tr>
-						<tr>
-							<td>
-								<p class="chk-check">
-									<input type="checkbox" id="vsel02" /><label for="vsel02"><span
-											class="blind">선택</span></label>
-								</p>
-							</td>
-							<td><span>10</span></td>
-							<td class="l"><a href="#">운전하는게 점점 힘들어지고 하기 싫어지네요... (6)</a></td>
-							<td>2020-08-25</td>
-							<td>12</td>
-						</tr>
-						<tr>
-							<td>
-								<p class="chk-check">
-									<input type="checkbox" id="vsel03" /><label for="vsel03"><span
-											class="blind">선택</span></label>
-								</p>
-							</td>
-							<td><span>9</span></td>
-							<td class="l"><a href="#">담금주인데 안에 들어간 것이 뭔지 아시는 분 계실까요? ... (3)</a></td>
-							<td>2020-08-25</td>
-							<td>12</td>
-						</tr>
-						<tr>
-							<td>
-								<p class="chk-check">
-									<input type="checkbox" id="vsel04" /><label for="vsel04"><span
-											class="blind">선택</span></label>
-								</p>
-							</td>
-							<td><span>8</span></td>
-							<td class="l"><a href="#">한국인은 대출 안 나오는데 외국인은 80% 해주고 외국인 건물주 논 ... (10)</a></td>
-							<td>2020-08-25</td>
-							<td>12</td>
-						</tr>
-						<tr>
-							<td>
-								<p class="chk-check">
-									<input type="checkbox" id="vsel05" /><label for="vsel05"><span
-											class="blind">선택</span></label>
-								</p>
-							</td>
-							<td><span>7</span></td>
-							<td class="l"><a href="#">운전하는게 점점 힘들어지고 하기 싫어지네요... (6)</a></td>
-							<td>2020-08-25</td>
-							<td>12</td>
-						</tr>
-						<tr>
-							<td>
-								<p class="chk-check">
-									<input type="checkbox" id="vsel06" /><label for="vsel06"><span
-											class="blind">선택</span></label>
-								</p>
-							</td>
-							<td><span>6</span></td>
-							<td class="l"><a href="#">담금주인데 안에 들어간 것이 뭔지 아시는 분 계실까요? ... (3)</a></td>
-							<td>2020-08-25</td>
-							<td>12</td>
-						</tr>
-						<tr>
-							<td>
-								<p class="chk-check">
-									<input type="checkbox" id="vsel07" /><label for="vsel07"><span
-											class="blind">선택</span></label>
-								</p>
-							</td>
-							<td><span>5</span></td>
-							<td class="l"><a href="#">한국인은 대출 안 나오는데 외국인은 80% 해주고 외국인 건물주 논 ... (10)</a></td>
-							<td>2020-08-25</td>
-							<td>12</td>
-						</tr>
-						<tr>
-							<td>
-								<p class="chk-check">
-									<input type="checkbox" id="vsel08" /><label for="vsel08"><span
-											class="blind">선택</span></label>
-								</p>
-							</td>
-							<td><span>4</span></td>
-							<td class="l"><a href="#">운전하는게 점점 힘들어지고 하기 싫어지네요... (6)</a></td>
-							<td>2020-08-25</td>
-							<td>12</td>
-						</tr>
-						<tr>
-							<td>
-								<p class="chk-check">
-									<input type="checkbox" id="vsel09" /><label for="vsel09"><span
-											class="blind">선택</span></label>
-								</p>
-							</td>
-							<td><span>2</span></td>
-							<td class="l"><a href="#">담금주인데 안에 들어간 것이 뭔지 아시는 분 계실까요? ... (3)</a></td>
-							<td>2020-08-25</td>
-							<td>12</td>
-						</tr>
-						<tr>
-							<td>
-								<p class="chk-check">
-									<input type="checkbox" id="vsel10" /><label for="vsel10"><span
-											class="blind">선택</span></label>
-								</p>
-							</td>
-							<td><span>1</span></td>
-							<td class="l"><a href="#">담금주인데 안에 들어간 것이 뭔지 아시는 분 계실까요? ... (3)</a></td>
-							<td>2020-08-25</td>
-							<td>12</td>
-						</tr>
+						<?php foreach(element('list',element('data', $view)) as $post ) { ?>
+							<tr>
+								<td>
+									<p class="chk-check">
+										<input type="checkbox" id="vsel01" /><label for="vsel01"><span
+												class="blind">선택</span></label>
+									</p>
+								</td>
+								<td><span>11</span></td>
+								<td class="l"><a href="#">한국인은 대출 안 나오는데 외국인은 80% 해주고 외국인 건물주 논 ... (10)</a></td>
+								<td>2020-08-25</td>
+								<td>12</td>
+							</tr>
+						<?php } ?>
 					</tbody>
 				</table>
 			</div>
