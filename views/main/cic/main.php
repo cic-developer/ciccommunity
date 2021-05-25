@@ -160,10 +160,10 @@
 						?>
 							<li>
                                 <a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" class="new">
-                                    <p class="num"><?php echo number_format(element('num', $popularpost)); ?></p>
+                                    <p class="num"><?php echo number_format(element('num', $popularpost));?></p>
                                     <p class="btxt">
-                                        <span class="btxt"><?php echo html_escape(element('post_title', $popularpost)); ?></span>
-                                        <span class="hit">(<?php echo number_format(element('post_hit', $popularpost)); ?>)</span>
+                                        <span class="txt"><?php echo html_escape(element('post_title', $popularpost));?></span>
+                                        <span class="hit">(<?php echo number_format(element('post_hit', $popularpost));?>)</span>
                                     </p>
                                     <div>
                                         <p class="stxt"><?php echo element('post_userid', $popularpost); ?><span><img src="<?php echo base_url('assets/images/like-popo.png') ?>"alt="" /></span></p>

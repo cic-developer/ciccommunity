@@ -2517,28 +2517,42 @@ class Membermodify extends CB_Controller
 
 		$data = $this->session->userdata('dec_data');
 		$DI = $data['dupinfo'];
-		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
 
 		if(count($isDI) > 0){ // 중복 이면
-			// 휴대폰 인증 결과 저장
-			$this->session->set_userdata('password_modify_ath_nice_phone_result', '1');
+			$_DI = $new_phone =  $this->member->item('mem_dup_info');
+
+			if($DI == $_DI){ // 인증완료
+				// 휴대폰 인증 결과 저장
+				$this->session->set_userdata('password_modify_ath_nice_phone_result', '1');
+				// 휴대폰 인증 데이터 삭제
+				$this->session->unset_userdata('dec_data');
+
+				echo("<script>");
+				echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
+				echo("window.opener.successNice('password');"); // 패스워드 변경 폼 생성
+				echo("self.close();");
+				echo("</script>");
+				exit;
+			}else{
+				// 휴대폰 인증 결과 저장
+				$this->session->set_userdata('password_modify_ath_nice_phone_result', '');
+				// 휴대폰 인증 데이터 삭제
+				$this->session->unset_userdata('dec_data');
+
+				echo("<script>");
+				echo("alert('회원가입시 사용한 핸드폰번호를 이용해주세요');"); // 인증완료 문구
+				echo("self.close();");
+				echo("</script>");
+				exit;
+			}
+		} else {
 			// 휴대폰 인증 데이터 삭제
 			$this->session->unset_userdata('dec_data');
 
-			echo("<script>");
-			echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
-			echo("window.opener.successNice('password');"); // 패스워드 변경 폼 생성
-			echo("self.close();");
-			echo("</script>");
-			exit;
+			echo("<script>alert('인증에 실패하였습니다');</script>");
+			echo("<script>self.close()</script>");
 		}
-
-		// 휴대폰 인증 데이터 삭제
-		$this->session->unset_userdata('dec_data');
-
-		echo("<script>alert('인증에 실패하였습니다');</script>");
-		echo("<script>self.close()</script>");
 	}
 
 	// 지갑주소 변경
@@ -2564,24 +2578,41 @@ class Membermodify extends CB_Controller
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
 
 		if(count($isDI) > 0){ // 중복 이면
-			// 휴대폰 인증 결과 저장
-			$this->session->set_userdata('wallet_modify_ath_nice_phone_result', '1');
+			$_DI = $new_phone =  $this->member->item('mem_dup_info');
+
+			if($DI == $_DI){ // 인증완료
+				// 휴대폰 인증 결과 저장
+				$this->session->set_userdata('wallet_modify_ath_nice_phone_result', '1');
+				// 휴대폰 인증 데이터 삭제
+				$this->session->unset_userdata('dec_data');
+
+				echo("<script>");
+				echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
+				echo("window.opener.successNice('wallet');"); // 패스워드 변경 폼 생성
+				echo("self.close();");
+				echo("</script>");
+				exit;
+			} else{
+				// 휴대폰 인증 결과 저장
+				$this->session->set_userdata('wallet_modify_ath_nice_phone_result', '');
+				// 휴대폰 인증 데이터 삭제
+				$this->session->unset_userdata('dec_data');
+
+				echo("<script>");
+				echo("alert('회원가입시 사용한 핸드폰번호를 이용해주세요');"); // 인증완료 문구
+				echo("self.close();");
+				echo("</script>");
+				exit;
+			}
+
+			
+		} else {
 			// 휴대폰 인증 데이터 삭제
 			$this->session->unset_userdata('dec_data');
 
-			echo("<script>");
-			echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
-			echo("window.opener.successNice('wallet');"); // 패스워드 변경 폼 생성
-			echo("self.close();");
-			echo("</script>");
-			exit;
+			echo("<script>alert('인증에 실패하였습니다');</script>");
+			echo("<script>self.close()</script>");
 		}
-
-		// 휴대폰 인증 데이터 삭제
-		$this->session->unset_userdata('dec_data');
-
-		echo("<script>alert('인증에 실패하였습니다');</script>");
-		echo("<script>self.close()</script>");
 	}
 
 	public function password_auth_phone_fail(){
@@ -2674,7 +2705,7 @@ class Membermodify extends CB_Controller
 		$wallet_nice_ath_result = $this->session->userdata('wallet_modify_ath_nice_phone_result'); // 지갑주소수정 휴대폰 인증 결과
 
 		$mem_id = (int) $this->member->item('mem_id');
-		$new_phone =  $this->member->item('mem_phone');;
+		$new_phone =  $this->member->item('mem_phone');
 		$new_password =  $this->member->item('mem_password');
 		$new_wallet = $this->member->item('mem_wallet_address');
 		// 수정할 데이터 가져오기

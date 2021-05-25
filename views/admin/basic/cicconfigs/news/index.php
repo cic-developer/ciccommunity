@@ -45,8 +45,6 @@
 								<td><?php echo number_format(element('news_reviews', $result)); ?></td>
 							</tr>
 						<?php
-							print_r('hello');
-							exit;
 							}
 						}
 						if ( ! element('list', element('data', $view))) {
