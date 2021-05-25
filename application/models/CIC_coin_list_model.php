@@ -149,9 +149,9 @@ class CIC_Coin_list_model extends CB_Model
         curl_close($ch);
     }
     $data = array();
-    foreach($output as $arr){
+    for($i = 0; $i<count($output); $i++){
         echo "<pre><br>";
-        print($arr['symbol']);
+        print($output[$i]['localization']['ko']);
         echo "</pre></br>";
     }
     return $output;
