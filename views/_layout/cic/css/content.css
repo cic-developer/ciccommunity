@@ -1855,6 +1855,9 @@
     background: url(/assets/images/ico-search.jpg) no-repeat center center;
     background-size: 45% auto;
     box-sizing: border-box;
+    /* 추가 */
+    border: none;
+    /* 추가 */
 }
 
 .board-filter .ov {

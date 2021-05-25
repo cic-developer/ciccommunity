@@ -143,7 +143,7 @@ class Mypage extends CB_Controller
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
 		$findex = $this->Post_model->primary_key;
-		$forder = 'desc';
+		// $forder = 'desc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 
@@ -164,7 +164,7 @@ class Mypage extends CB_Controller
 		);
 
 		$result = $this->Post_model
-			->get_post_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->get_post_list($per_page, $offset, $where, '', $findex, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
@@ -195,6 +195,7 @@ class Mypage extends CB_Controller
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
+		
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;
 

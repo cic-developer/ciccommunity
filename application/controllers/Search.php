@@ -230,17 +230,20 @@ class Search extends CB_Controller
 			$high = $result_price['max_price'];
 			$low =$result_price['min_price'];
 			$prev = $result_price['prev_closing_price'];
+			$rate = $result_price['fluctate_rate_24H'];
+			$difference = $result_price['fluctate_24H'];
 			$view['low'] = $low;
 			$view['high'] = $high;
 			$view['prev'] = $prev;
-
-			$difference = $trade - (float)$result_price['prev_closing_price'];
-			$pourcentage = ($result_price['prev_closing_price'] / $trade) * 100;
-			$view['pourcentage'] = $pourcentage;
 			$view['difference'] = $difference;
+			$view['rate'] = $rate;
+			// $difference = $trade - (float)$result_price['prev_closing_price'];
+			// $pourcentage = $trade / $result_price['prev_closing_price'] * 100;
+			// $view['pourcentage'] = $pourcentage;
+			// 
 			echo "<pre><br>";
 			// print_r($difference);
-			print_r($pourcentage);
+			print_r($result_price);
 			echo "</pre></br>";
 
 

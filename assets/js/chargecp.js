@@ -257,25 +257,25 @@ const PER = new caver.klay.Contract(token_abi, token_address);
 //     }
 // };
 
-// setAccountInfo = async() => {
-//     const { klaytn } = window;
-//     if (klaytn === undefined) return;
+setAccountInfo = async() => {
+    const { klaytn } = window;
+    if (klaytn === undefined) return;
 
-//     // 클레이튼에 접속되어있는 월렛주소
-//     const account = klaytn.selectedAddress;
+    // 클레이튼에 접속되어있는 월렛주소
+    const account = klaytn.selectedAddress;
 
-//     //
-//     const balance = await caver.klay.getBalance(account);
-//     const token_balance = await PER.methods.balanceOf(account).call();
+    //
+    const balance = await caver.klay.getBalance(account);
+    const token_balance = await PER.methods.balanceOf(account).call();
 
-//     // 8217 = 메인넷 , 1001 = 테스트넷
-//     getNetworkResults.innerHTML =
-//         klaytn.networkVersion == 8217 ? "메인넷" : "테스트넷";
+    // 8217 = 메인넷 , 1001 = 테스트넷
+    getNetworkResults.innerHTML =
+        klaytn.networkVersion == 8217 ? "메인넷" : "테스트넷";
 
-//     getAccountAddress.innerHTML = account;
+    getAccountAddress.innerHTML = account;
 
-//     getAccountsResults.innerHTML = token_balance / 1000000000000000000 + " PER";
-// };
+    getAccountsResults.innerHTML = token_balance / 1000000000000000000 + " PER";
+};
 
 // RunTransfer.onclick = async() => {
 //     const { klaytn } = window;
@@ -341,4 +341,16 @@ $(document).on('ready', async function() {
         alert('Klaytn Kaikas연동에 실패 하였습니다. 마이페이지로 이동합니다.');
         location.href = "/mypage";
     }
+
+    // 클레이튼에 접속되어있는 월렛주소
+    const account = klaytn.selectedAddress;
+
+    const balance = await caver.klay.getBalance(account);
+    const token_balance = await PER.methods.balanceOf(account).call();
+
+    var network = klaytn.networkVersion;
+    var selected_addr = account;
+    var per_token = token_balance / 1000000000000000000;
+
+    console.log(network, selected_addr, per_token);
 });
