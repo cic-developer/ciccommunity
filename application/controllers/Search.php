@@ -172,12 +172,15 @@ class Search extends CB_Controller
 
 		$view['view']['data'] = $result;
 		$view['view']['boardlist'] = $boardlist;
-		// echo "<pre><br>";
-		// print_r($result);
-		// echo "</pre></br>";
+;
 		$view['view']['grouplist'] = $grouplist;
 		$total_rows = $result['total_rows'];
 		$view['total_rows'] = $total_rows;
+
+		echo "<pre><br>";
+		// print_r($grouplist);
+		print_r($boardlist);
+		echo "</pre></br>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
 			$sfieldarray = array('post_title', 'post_content', 'post_both');
