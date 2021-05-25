@@ -148,13 +148,13 @@ class CIC_Coin_list_model extends CB_Model
         $refresh = $this -> input -> post('refresh');
         // convert json to php array or object
         $arr = json_decode($response, true);
-        // print_r($arr['id']);
-        if(is_array($arr) || is_object($arr)){
-            foreach($arr as &$value){
-                print_r($value['id']);
+            if(is_array($arr) || is_object($arr)){
+            for($ie=0; $i<count( $arr); $i++){
+                // print_r();
+                print_r($arr[$i]['id']);
                 $curl_ = curl_init();
                 curl_setopt_array($curl_, array(
-                    CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/" .$value['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
+                    CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/" .$arr[$i]['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
                     // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/bitcoin?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_FOLLOWLOCATION => true,

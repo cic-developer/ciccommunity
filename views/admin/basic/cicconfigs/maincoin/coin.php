@@ -1,7 +1,7 @@
 <div class="box">
 		<div class="box-table">
 			<?php
-			print_r(get_coin_price('coingecko', 'ethereum', 'KRW', 'upbit'));
+			// print_r(get_coin_price('coingecko', 'ethereum', 'KRW', 'upbit'));
 			echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
 			$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
 			echo form_open(current_full_url(), $attributes);

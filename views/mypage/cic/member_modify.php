@@ -187,23 +187,7 @@
 			<div id="myModal_wallet" class="modal">
 				<div class="modal-content">
 					<ul class="entry modify-box">
-						<li class="wallet-modify-content">
-							<p class="btxt">새 지갑주소</p>
-							<div class="field modify">
-								<p class="chk-input w380">
-									<input type="text" placeholder="지갑주소" id="new_wallet" name="new_wallet" value="" readonly disabled style="background-color:#efefef;">
-								</p>
-								<a href="javascript:void(0);" data-type="wallet" class="modify-btn view_ath_box">
-									<span>이메일+핸드폰인증</span>
-								</a>
-							</div>
-							<a href="javascript:void(0);" id="confirm_wallet" class="modify-btn confirm-btn" style="display:none;">
-								<span>확인</span>
-							</a>
-						</li>
-					</ul>
-					<ul class="entry ath-email-content" style="display:none;">
-						<li class="">
+						<li class="ath-email-content">
 							<p class="btxt">이메일인증</p>
 							<div class="all-email-box">
 								<div class="field modify">
@@ -232,23 +216,28 @@
 							</div>
 							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
 						</li>
-					</ul>
-					<ul class="entry ath-nice-content" style="display:none;">
-						<li>
+						<li class="ath-nice-content">
 							<p class="btxt">핸드폰인증</p>
 							<div class="all-nice-box">
 								<!--  -->
 							</div>
 							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
 						</li>
+						<li class="wallet-modify-content">
+							<p class="btxt">새 지갑주소</p>
+							<div class="field modify">
+								<p class="chk-input w380">
+									<input type="text" placeholder="지갑주소" id="new_wallet" name="new_wallet" value="" readonly disabled style="background-color:#efefef;">
+								</p>
+								<a href="javascript:void(0);" id="confirm_wallet" data-type="wallet" class="modify-btn">
+									<span>확인</span>
+								</a>
+							</div>
+						</li>
 					</ul>
 				</div>
 			</div>
 
-			<!-- 로딩바 -->
-			<!-- <div id = "Progress_Loading">
-				<img src="../../../assets/images/ajax-loader.gif"/>
-			</div> -->
 			<?php echo form_close(); ?>
 		</div>
 	 	<!-- page end // -->
@@ -295,22 +284,6 @@
 	}
 
 	.modal-btn {
-		/* line-height: 35px;
-		border-radius: 35px;
-		font-size: 14px;
-		color: #111;
-		background: #efefefef;
-		font-weight: 500;
-		display: inline-block;
-		vertical-align: top;
-		margin-left: 15px;
-		min-width: 120px;
-		text-align: center;
-		box-sizing: border-box;
-		position:absolute;
-		left:50%;
-		top:50%;
-		transform: translatex(-50%) translatey(-50%); */
 		line-height: 35px;
 		border-radius: 35px;
 		font-size: 14px;
@@ -324,30 +297,9 @@
 		text-align: center;
 		box-sizing: border-box;
 	}
-
-	/* #Progress_Loading
-	{
-		position: fixed;
-		left: 50%;
-		top: 50%;
-		background: #ffffff;
-		z-index:99;
-		transform: translatex(-40%) translatey(-50%);
-	} */
-
 </style>
 
 <script>
-
-	// $(document).ready(function(){
-	// 	$('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
-	// })
-	// .ajaxStart(function(){
-	// 	$('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
-	// })
-	// .ajaxStop(function(){
-	// 	$('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
-	// });
 /*****************************************************************************/
 	/*
 	** 회원탈퇴 시작
@@ -366,6 +318,9 @@
 /*****************************************************************************/
 	/*
 	** 모달 시작
+	* modal1: 핸드폰변경
+	* modal2: 비밀번호변경
+	* modal3: 지갑주소변경
 	*/
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){
@@ -392,19 +347,29 @@
 	}
 	btn2.onclick = function() {
 		modal2.style.display = "block";
-
+        
 		var html = '';
 		html += '<div class="field modify">';
 		html += '<form name="form_chk1" method="post" id="password_form_chk">';
 		html += '<input type="hidden" name="m" value="checkplusService">';
 		html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('password_enc_data', $view)); ?>">';
-		html += '<a href="javascript:fnPopup1();" id="ath_nice_phone" class="modify-btn"><span>핸드폰 인증</span></a>';
+		html += '<a href="javascript:fnPopup1();" id="ath_nice_phone" class="modify-btn"><span>핸드폰인증</span></a>';
 		html += '</form>';
 		html += '</div>';
-		$('#myModal_password .ath-nice-content .all-nice-box').append(html); // 핸드폰 인증 버튼 생성
+		$('#myModal_password .ath-nice-content .all-nice-box').append(html); // 핸드폰인증 버튼 생성
 	}
 	btn3.onclick = function() {
 		modal3.style.display = "block";
+        
+		var html = '';
+		html += '<div class="field modify">';
+		html += '<form name="form_chk2" method="post" id="wallet_form_chk">';
+		html += '<input type="hidden" name="m" value="checkplusService">';
+		html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">';
+		html += '<a href="javascript:fnPopup2();" id="ath_nice_phone" class="modify-btn"><span>핸드폰인증</span></a>';
+		html += '</form>';
+		html += '</div>';
+		$('#myModal_wallet .ath-nice-content .all-nice-box').append(html); // 핸드폰인증 버튼 생성
 	}
 
 	// When the user clicks on <span> (x), close the modal
@@ -419,11 +384,13 @@
 		}
 		if (event.target == modal2) {
 			modal2.style.display = "none";
-
-			$('#myModal_password .ath-nice-content .all-nice-box > *').remove(); // 핸드폰 인증 버튼 제거
+            
+			$('#myModal_password .ath-nice-content .all-nice-box > *').remove(); // 핸드폰인증 버튼 제거
 		}
 		if (event.target == modal3) {
 			modal3.style.display = "none";
+            
+			$('#myModal_wallet .ath-nice-content .all-nice-box > *').remove(); // 핸드폰인증 버튼 제거
 		}
 	}
 /**
@@ -542,7 +509,8 @@
 						// 실패 메세지
 						alert(message);
 					}
-
+					
+                    // 이메일 재전송까지 10초...
 					waitResend(type);
 				},
 				error: function() {
@@ -601,64 +569,6 @@
 	})
 /**
  * 이메일 전송 끝
- */
-/*****************************************************************************/
-/**
- * 인증 박스 보이기 시작
- */
-	$(document).ready(function(){
-		$(".view_ath_box").on('click', function() {
-			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.
-            
-			if($(this).hasClass("active")){
-				$('#myModal_' + type + ' .ath-email-content').attr('style', "display:none;"); // 이메일 인증 박스 제거
-                
-				if(type == "password"){
-					$('#myModal_' + type + ' .ath-nice-content').attr('style', "display:none;"); // 핸드폰 인증 박스 제거
-					$('#myModal_' + type + ' .ath-nice-content .all-nice-box > *').remove(); // 핸드폰 인증 버튼 제거
-				}
-				if(type == "wallet"){
-					$('#myModal_' + type + ' .ath-nice-content').attr('style', "display:none;"); // 핸드폰 인증 박스 제거
-					$('#myModal_' + type + ' .ath-nice-content .all-nice-box > *').remove(); // 핸드폰 인증 버튼 제거
-				}
-                
-				$(this).removeClass("active");
-			} else{
-				$('#myModal_' + type + ' .ath-email-content').attr('style', "display:block;"); // 이메일 인증 박스 생성
-                
-				if(type == "password"){
-					var html = '';
-					html += '<div class="field modify">';
-					html += '<form name="form_chk1" method="post" id="password_form_chk">';
-					html += '<input type="hidden" name="m" value="checkplusService">';
-					html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('password_enc_data', $view)); ?>">';
-					html += '<a href="javascript:fnPopup1();" id="ath_nice_phone" class="modify-btn"><span>핸드폰 인증</span></a>';
-					html += '</form>';
-					html += '</div>';
-
-					$('#myModal_' + type + ' .ath-nice-content').attr('style', "display:block;"); // 핸드폰 인증 박스 생성
-					$('#myModal_' + type + ' .ath-nice-content .all-nice-box').append(html); // 핸드폰 인증 버튼 생성
-				}
-				if(type == "wallet"){
-					var html = '';
-					html += '<div class="field modify">';
-					html += '<form name="form_chk2" method="post" id="wallet_form_chk">';
-					html += '<input type="hidden" name="m" value="checkplusService">';
-					html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('wallet_enc_data', $view)); ?>">';
-					html += '<a href="javascript:fnPopup2();" id="ath_nice_phone" class="modify-btn"><span>핸드폰 인증</span></a>';
-					html += '</form>';
-					html += '</div>';
-
-					$('#myModal_' + type + ' .ath-nice-content').attr('style', "display:block;"); // 핸드폰 인증 박스 생성
-					$('#myModal_' + type + ' .ath-nice-content .all-nice-box').append(html); // 핸드폰 인증 버튼 생성
-				}
-                
-				$(this).addClass("active");
-			}
-		})
-	})
-/**
- * 인증 박스 보이기 끝
  */
 /*****************************************************************************/
 /**
@@ -877,8 +787,19 @@
 
 	// 비밀번호 validation
 	$(document).on('click', "#confirm_password", function(){
+        
+		if(! $('#myModal_password .ath-email-content').hasClass("agree")){
+			alert("이메일 인증이 필요합니다");
+			return;
+		}
+        
+		if(! $('#myModal_password .ath-nice-content').hasClass("agree")){
+			alert("핸드폰인증이 필요합니다");
+			return;
+		}
+        
 		$('#myModal_password .modify-box > p').remove(); // append된 validation 메세지 일괄 삭제
-
+        
 		var _password = $("#new_password").val(); // 입력한 비밀번호
 		var _password_re = $("#new_password_re").val(); // 입력한 비밀번호 확인
 		var password = _password;
@@ -924,6 +845,16 @@
 	// 지갑주소 validation
 	$(document).on('click', "#confirm_wallet", function(){
         
+		if(! $('#myModal_wallet .ath-email-content').hasClass("agree")){
+			alert("이메일 인증이 필요합니다");
+			return;
+		}
+        
+		if(! $('#myModal_wallet .ath-nice-content').hasClass("agree")){
+			alert("핸드폰인증이 필요합니다");
+			return;
+		}
+        
 		var _wallet = $("#new_wallet").val(); // 입력한 지갑주소
 		var wallet = _wallet;
 		var state = '';
@@ -962,7 +893,7 @@
  */
 /********************************************************/
 /**
- * 나이스 핸드폰 인증 시작
+ * 나이스 핸드폰인증 시작
  */
 	window.name ="Parent_window";
 	function fnPopup1(){
@@ -979,15 +910,15 @@
 	}
 
 	var successNice = function(type){
-		// $('#myModal_' + type + ' > .modal-content > .ath-nice-content .all-nice-box').attr('style', "display:none");
-		$('#myModal_' + type + ' > .modal-content .ath-nice-content .success').attr('style', "display:block");
+		$('#myModal_' + type + ' > .modal-content > .ath-nice-content .all-nice-box').attr('style', "display:none"); // 인증버튼 제거
+		$('#myModal_' + type + ' > .modal-content .ath-nice-content .success').attr('style', "display:block"); // 인증완료 메세지
         
 		$('#myModal_' + type + ' > .modal-content .ath-nice-content').addClass("agree") // 인증 완료 표식
         
 		isAgreeForModify(type);
 	}
 /**
- * 나이스 핸드폰 인증 끝
+ * 나이스 핸드폰인증 끝
  */
 
 

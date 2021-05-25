@@ -2212,42 +2212,42 @@ class Membermodify extends CB_Controller
 
 		// 세션에 저장한 인증번호 == 입력한 인증번호
 		if($ath_num == $_ath_num){
-
+            
 			// 핸드폰
 			if($type == 'phone'){
 				// 인증결과 세션 저장
 				$this->session->set_userdata('phone_modify_ath_mail_result', '1');
 				// 세션에 저장 되어있던 인증번호 삭제
 				$this->session->unset_userdata('phone_ath_num');
-
+                
 				$result = array(
 					'result' => '1',
 					'reason' => '인증 되었습니다',
 				);
 				exit(json_encode($result));
 			}
-
+            
 			// 이메일
 			if($type == 'password'){
 				// 인증결과 세션 저장
 				$this->session->set_userdata('password_modify_ath_mail_result', '1');
 				// 세션에 저장 되어있던 인증번호 삭제
 				$this->session->unset_userdata('password_ath_num');
-
+                
 				$result = array(
 					'result' => '1',
 					'reason' => '인증 되었습니다',
 				);
 				exit(json_encode($result));
 			}
-
+            
 			// 지갑
 			if($type == 'wallet'){
 				// 인증결과 세션 저장
 				$this->session->set_userdata('wallet_modify_ath_mail_result', '1');
 				// 세션에 저장 되어있던 인증번호 삭제
 				$this->session->unset_userdata('wallet_ath_num');
-
+                
 				$result = array(
 					'result' => '1',
 					'reason' => '인증 되었습니다',
@@ -2314,6 +2314,14 @@ class Membermodify extends CB_Controller
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		if($this->session->userdata('phone_modify_ath_mail_result') != '1'){
+			$result = array(
+				'state' => '0',
+				'message' => '이메일 인증이 필요합니다',
+			);
+			exit(json_encode($result));
+		}
 		
 		$new_phone = $this->input->post('new_phone');
 		$isPhone = $this->Member_model->get_by_memPhone($new_phone, '');
