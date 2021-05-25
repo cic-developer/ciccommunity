@@ -131,36 +131,36 @@ class CIC_Coin_list_model extends CB_Model
         curl_setopt_array($curl, array(
             // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/list?markets?vs_currency=KRW",
             CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/markets?vs_currency=KRW&order=market_cap_desc&per_page=300&page=1&sparkline=false",
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_ENCODING => "",
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 90,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => "GET"   
-                    
-                ));
-        
-                $response = curl_exec($curl);
-                $err = curl_error($curl);
-        
-                curl_close($curl);
-        
-                if($err){
-                    echo "cUrl Error :" . $err;
-                }
-                $refresh = $this -> input -> post('refresh');
-                // convert json to php array or object
-                $array_ = json_decode($response, true);
-                // $array
-                // print_r($array_);
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 90,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET"   
+                
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if($err){
+            echo "cUrl Error :" . $err;
+        }
+        $refresh = $this -> input -> post('refresh');
+        // convert json to php array or object
+        // $array_ = json_decode($response, true);
+        // $array
+        // print_r($array_);
 
         if(is_array($array_) || is_object($array_)){
-            foreach($array_ as $key => $value ){
-                print_r($value['id']);
+            while($array_ = json_decode($response, true)){
+                print_r($array_['id']);
                 $curl_ = curl_init();
                 curl_setopt_array($curl_, array(
-                    CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/" .$value['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
+                    CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/" .$array_['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
                     // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/bitcoin?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_FOLLOWLOCATION => true,
