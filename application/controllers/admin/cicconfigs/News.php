@@ -263,8 +263,14 @@ class News extends CB_Controller
 		$this->{$this->modelname}->allow_order_field = array('news_id'); // 정렬이 가능한 필드
 		
         $where = array(
-            'news_enable ' => 0,
-        );
+			'news_enable ' => 0
+		);
+		if ($this->input->get('news_enable')) {
+			$where['news_enable'] = 0;
+		}
+		if ($this->input->get('mem_denied')) {
+			$where['mem_denied'] = 1;
+		}
 
 		$result = $this->{$this->modelname}
 			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
@@ -309,7 +315,7 @@ class News extends CB_Controller
 		/**
 		 * 어드민 레이아웃을 정의합니다
 		 */
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'index');
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'enable');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));

@@ -1,4 +1,4 @@
-const caver = require('./caver');
+// import { caver } from "./caver";
 
 const token_abi = [{
         constant: true,
@@ -237,107 +237,108 @@ const token_abi = [{
 const token_address = "0x7eee60a000986e9efe7f5c90340738558c24317b";
 const PER = new caver.klay.Contract(token_abi, token_address);
 
-const getNetworkResults = document.getElementById("connectNetwork");
-const getAccountAddress = document.getElementById("getAccountAddress");
-const getAccountsResults = document.getElementById("getAccountsResult");
-
-// transfer
-const RunTransfer = document.getElementById("RunTransfer");
-const ToAddress = document.getElementById("ToAddress");
-const ToValue = document.getElementById("ToValue");
-const txhash = document.getElementById("txhash");
-const reciept = document.getElementById("reciept");
-const success_fromAddress = document.getElementById("success_fromAddress");
-const success_toAddress = document.getElementById("success_toAddress");
-const success_value = document.getElementById("success_value");
-
 // kai-kas 연결 함수
-connectAccountInfo = async() => {
-    const { klaytn } = window;
-    if (klaytn) {
-        try {
-            // 연결되면
-            await klaytn.enable();
-            // setAccountInfo() 로 카이카스 정보 불러오기
-            this.setAccountInfo(klaytn);
-            console.log("kai-kas 연결 성공");
-        } catch (error) {
-            // 연결실패
-            console.log("kai-kas 연결 실패");
-        }
-    } else {
-        // 카이카스가 설치되어있지 않음
-        console.log("kai-kas가 설치되어 있지 않은 브라우져 입니다.");
+// connectAccountInfo = async() => {
+//     const { klaytn } = window;
+//     if (klaytn) {
+//         try {
+//             // 연결되면
+//             await klaytn.enable();
+//             // setAccountInfo() 로 카이카스 정보 불러오기
+//             this.setAccountInfo(klaytn);
+//             console.log("kai-kas 연결 성공");
+//         } catch (error) {
+//             // 연결실패
+//             console.log("kai-kas 연결 실패");
+//         }
+//     } else {
+//         // 카이카스가 설치되어있지 않음
+//         console.log("kai-kas가 설치되어 있지 않은 브라우져 입니다.");
+//     }
+// };
+
+// setAccountInfo = async() => {
+//     const { klaytn } = window;
+//     if (klaytn === undefined) return;
+
+//     // 클레이튼에 접속되어있는 월렛주소
+//     const account = klaytn.selectedAddress;
+
+//     //
+//     const balance = await caver.klay.getBalance(account);
+//     const token_balance = await PER.methods.balanceOf(account).call();
+
+//     // 8217 = 메인넷 , 1001 = 테스트넷
+//     getNetworkResults.innerHTML =
+//         klaytn.networkVersion == 8217 ? "메인넷" : "테스트넷";
+
+//     getAccountAddress.innerHTML = account;
+
+//     getAccountsResults.innerHTML = token_balance / 1000000000000000000 + " PER";
+// };
+
+// RunTransfer.onclick = async() => {
+//     const { klaytn } = window;
+//     if (klaytn === undefined) return;
+//     const account = klaytn.selectedAddress;
+
+//     const data = caver.klay.abi.encodeFunctionCall({
+//         name: "transfer",
+//         type: "function",
+//         inputs: [{
+//                 type: "address",
+//                 name: "_to",
+//             },
+//             {
+//                 type: "uint256",
+//                 name: "_value",
+//             },
+//         ],
+//     }, [
+//         ToAddress.value,
+//         caver.utils
+//         .toBN(ToValue.value)
+//         .mul(caver.utils.toBN(Number(`1e${18}`)))
+//         .toString(),
+//     ]);
+
+//     caver.klay
+//         .sendTransaction({
+//             type: "SMART_CONTRACT_EXECUTION",
+//             account,
+//             to: token_address,
+//             data,
+//             gas: 3000000,
+//         })
+//         .on("transactionHash", (transactionHash) => {
+//             console.log("txHash", transactionHash);
+//             txhash.innerHTML = `https://scope.klaytn.com/tx/${transactionHash}?tabId=internalTx`;
+//         })
+//         .on("receipt", (receipt) => {
+//             console.log("receipt", receipt);
+//             reciept.innerHTML = JSON.stringify(receipt);
+//             success_fromAddress.innerHTML = receipt.from;
+//             success_toAddress.innerHTML = receipt.logs[0].topics[2];
+//             success_value.innerHTML =
+//                 caver.utils.hexToNumberString(receipt.logs[0].data) /
+//                 1000000000000000000;
+//         })
+//         .on("error", (error) => {
+//             console.log("error", error);
+//         });
+// };
+
+$(document).on('ready', async function() {
+    const klaytn = window.klaytn;
+    if (klaytn === undefined) {
+        alert('Klaytn Kaikas가 설치되지 않았습니다.\nKlaytn Kaikas을 설치하여 주세요');
+        location.href = "https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F";
     }
-};
 
-setAccountInfo = async() => {
-    const { klaytn } = window;
-    if (klaytn === undefined) return;
-
-    // 클레이튼에 접속되어있는 월렛주소
-    const account = klaytn.selectedAddress;
-
-    //
-    const balance = await caver.klay.getBalance(account);
-    const token_balance = await PER.methods.balanceOf(account).call();
-
-    // 8217 = 메인넷 , 1001 = 테스트넷
-    getNetworkResults.innerHTML =
-        klaytn.networkVersion == 8217 ? "메인넷" : "테스트넷";
-
-    getAccountAddress.innerHTML = account;
-
-    getAccountsResults.innerHTML = token_balance / 1000000000000000000 + " PER";
-};
-
-RunTransfer.onclick = async() => {
-    const { klaytn } = window;
-    if (klaytn === undefined) return;
-    const account = klaytn.selectedAddress;
-
-    const data = caver.klay.abi.encodeFunctionCall({
-        name: "transfer",
-        type: "function",
-        inputs: [{
-                type: "address",
-                name: "_to",
-            },
-            {
-                type: "uint256",
-                name: "_value",
-            },
-        ],
-    }, [
-        ToAddress.value,
-        caver.utils
-        .toBN(ToValue.value)
-        .mul(caver.utils.toBN(Number(`1e${18}`)))
-        .toString(),
-    ]);
-
-    caver.klay
-        .sendTransaction({
-            type: "SMART_CONTRACT_EXECUTION",
-            account,
-            to: token_address,
-            data,
-            gas: 3000000,
-        })
-        .on("transactionHash", (transactionHash) => {
-            console.log("txHash", transactionHash);
-            txhash.innerHTML = `https://scope.klaytn.com/tx/${transactionHash}?tabId=internalTx`;
-        })
-        .on("receipt", (receipt) => {
-            console.log("receipt", receipt);
-            reciept.innerHTML = JSON.stringify(receipt);
-            success_fromAddress.innerHTML = receipt.from;
-            success_toAddress.innerHTML = receipt.logs[0].topics[2];
-            success_value.innerHTML =
-                caver.utils.hexToNumberString(receipt.logs[0].data) /
-                1000000000000000000;
-        })
-        .on("error", (error) => {
-            console.log("error", error);
-        });
-};
+    try {
+        await klaytn.enable();
+    } catch (error) {
+        alert('Klaytn Kaikas연동에 실패 하였습니다. 마이페이지로 이동합니다.');
+        location.href = "/mypage";
+    }
+});

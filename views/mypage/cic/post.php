@@ -4,10 +4,12 @@
 		<?php
 		echo show_alert_message($this->session->flashdata('message'), '<script>alert("', '");</script>');
 		$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
-		echo form_open(current_full_url(), $attributes);
 		?>
 		<!-- page start // -->
 		<div class="board-wrap list">
+			<?php
+			echo form_open(current_full_url(), $attributes);
+			?>
 			<div class="tab">
 				<ul>
 					<li class="active"><a href="#n"><span>작성글</span></a></li>
@@ -71,6 +73,7 @@
 			<div class="lower r">
 				<a href="javascript:void(0);" class="by-btn list-delete-btn" data-list-delete-url="<?php echo element('list_delete_url', $view); ?>"><span>삭제</span></a>
 			</div>
+			<?php echo form_close(); ?>
 			<!-- s: paging-wrap -->
 			<div class="paging-wrap">
 				<?php echo element('paging', $view); ?>
@@ -80,7 +83,7 @@
 			<form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
 				<div class="board-filter">
 					<p class="chk-select">
-						<select>
+						<select name="sfield">
 							<?php echo element('search_option', $view); ?>
 						</select>
 					</p>
@@ -93,7 +96,6 @@
 			</form>
 			<!-- e: board-filter -->
 		</div>
-		<?php echo form_close(); ?>
 		<!-- page end // -->
 	</div>
 </div>

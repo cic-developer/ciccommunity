@@ -7,10 +7,8 @@
 			?>
 				<div class="box-table-header">
 					<ul class="nav nav-pills">
-						<!-- <li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir); ?>">뉴스목록</a></li> -->
-						<a href="?" class="btn btn-sm <?php echo ( ! $this->input->get('news_id') && ! $this->input->get('mem_denied')) ? 'btn-success' : 'btn-default'; ?>">전체회원</a>
-						<a href="?news_enable=1" class="btn btn-sm <?php echo ($this->input->get('news_enable')) ? 'btn-success' : 'btn-default'; ?>">비활성화 뉴스목록</a>
-						<a href="?mem_denied=1" class="btn btn-sm <?php echo ($this->input->get('mem_denied')) ? 'btn-success' : 'btn-default'; ?>">차단회원</a>
+						<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir); ?>">뉴스목록</a></li>
+						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/enable'); ?>">비활성화 뉴스목록</a></li>
 					</ul>
 					<?php
 					ob_start();

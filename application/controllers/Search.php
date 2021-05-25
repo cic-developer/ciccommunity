@@ -222,14 +222,14 @@ class Search extends CB_Controller
 			$trade = (float)$act[0]['price'];
 			$view['trade'] = $trade;
 		}
-		echo "<pre><bre>";
-        print_r($act_price);
-		echo "</pre></bre>"; 
+		// echo "<pre><bre>";
+        // print_r($act_price);
+		// echo "</pre></bre>"; 
 		
 		foreach($api_result as $result_price){
 			$high = $result_price['max_price'];
 			$low =$result_price['min_price'];
-			$prev = $result_price['prev_closing_price']
+			$prev = $result_price['prev_closing_price'];
 			$view['low'] = $low;
 			$view['high'] = $high;
 			$view['prev'] = $prev;
