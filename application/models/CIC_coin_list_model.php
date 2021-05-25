@@ -178,10 +178,11 @@ class CIC_Coin_list_model extends CB_Model
                     return $array;
                 }
             }   
-        }     
-    // function get_apiList(){
- }   //     $curl = curl_init();
+        }   
+     }  
 
+    // function get_apiList(){
+    //     $curl = curl_init();
     //     curl_setopt_array($curl, array(
     //         // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/list?markets?vs_currency=KRW",
     //         CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/markets?vs_currency=KRW&order=market_cap_desc&per_page=300&page=1&sparkline=false",

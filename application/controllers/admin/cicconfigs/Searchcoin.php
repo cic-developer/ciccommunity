@@ -162,6 +162,8 @@ class Searchcoin extends CB_Controller
 								}
 							}
 						}
+
+						$stockKey = $this->CIC_coin_list_model->getstockData();
 						$data = array(
 							array(
 								'coin_market'=> $getList[$i]['symbol'],

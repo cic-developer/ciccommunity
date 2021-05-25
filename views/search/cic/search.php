@@ -57,11 +57,11 @@
 			<?php if($trade){ ?>
 				<div class="result" style="overflow:hidden; padding-bottom:40px; padding-left:40px; padding-right:40px;">
 					<div style="text-align:left; padding-bottom:20px;">
-						<br><img style= "width: 30px" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
+						<br><img style= "width: 30px; padding-right:10px;" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
 						<strong  class="btxt"><?php echo $korean; ?></strong>
 						<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p>
 					</div>
-					<p class="stxt" style="float: right"> <span style="color:blue">고가  ￦ <?php echo $high; ?> </span></br></br>
+					<p class="stxt" style="float:right; padding-top:95px;" > <span style="color:blue">고가  ￦ <?php echo $high; ?> </span></br></br>
 					<span style="color:red">저가 ￦ <?php echo $low; ?> </span></p>		
 					<!-- TradingView Widget BEGIN -->
 					<div class="text-center" style="float: left">

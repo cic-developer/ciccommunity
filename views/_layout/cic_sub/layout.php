@@ -62,8 +62,8 @@ var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.extension.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/sideview.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/js.cookie.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/caver.js'); ?>"></script>
 <?php echo $this->managelayout->display_js(); ?>
-
 
 </head>
 <body <?php echo isset($view) ? element('body_script', $view) : ''; ?>>

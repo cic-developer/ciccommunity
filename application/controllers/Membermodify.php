@@ -2337,7 +2337,7 @@ class Membermodify extends CB_Controller
 			array(
 				'field' => 'new_phone',
 				'label' => '새번호',
-				'rules' => 'trim|valid_phone',
+				'rules' => 'trim|required|valid_phone',
 			),
 		);
 		$this->form_validation->set_rules($config);
@@ -2349,29 +2349,31 @@ class Membermodify extends CB_Controller
 				'message' => '번호를 정확히 입력해주세요',
 			);
 			exit(json_encode($result));
+		}else{
+            
+			// if(strlen($new_phone) < 1){
+			// 	$result = array(
+			// 		'state' => '0',
+			// 		'message' => '번호를 입력해주세요',
+			// 	);
+			// 	exit(json_encode($result));
+			// }
+			if(count($isPhone) > 0){ // 중복 이면
+				$result = array(
+					'state' => '0',
+					'message' => '이미 사용중인 번호입니다',
+				);
+				exit(json_encode($result));
+			}else{
+				
+				$this->session->set_userdata('phone_confirm', '1');
+				$result = array(
+					'state' => '1',
+					'message' => '사용 가능한 번호입니다',
+				);
+				exit(json_encode($result));
+			}
 		}
-        
-		if(strlen($new_phone) < 1){
-			$result = array(
-				'state' => '0',
-				'message' => '번호를 입력해주세요',
-			);
-			exit(json_encode($result));
-		}
-        
-		if(count($isPhone) > 0){ // 중복 이면
-			$result = array(
-				'state' => '0',
-				'message' => '이미 사용중인 번호입니다',
-			);
-			exit(json_encode($result));
-		}
-        
-		$result = array(
-			'state' => '1',
-			'message' => '사용 가능한 번호입니다',
-		);
-		exit(json_encode($result));
 	}
 
 /**
@@ -2749,22 +2751,29 @@ class Membermodify extends CB_Controller
 		$wallet_mail_ath_result = $this->session->userdata('wallet_modify_ath_mail_result');	// 지갑주소수정 이메일 인증 결과
 		$password_nice_ath_result = $this->session->userdata('password_modify_ath_nice_phone_result'); // 비밀번호수정 휴대폰 인증 결과
 		$wallet_nice_ath_result = $this->session->userdata('wallet_modify_ath_nice_phone_result'); // 지갑주소수정 휴대폰 인증 결과
-
+        
+		$phone_validation_result = $this->session->userdata('phone_confirm'); // phone validation 결과
+		$password_validation_result = $this->session->userdata('password_confirm'); // password validation 결과
+		$wallet_validation_result = $this->session->userdata('wallet_confirm'); // wallet validation 결과
+        
 		$mem_id = (int) $this->member->item('mem_id');
 		$new_phone =  $this->member->item('mem_phone');
 		$new_password =  $this->member->item('mem_password');
 		$new_wallet = $this->member->item('mem_wallet_address');
 		// 수정할 데이터 가져오기
-		if($phone_mail_ath_result == '1'){
+		if($phone_mail_ath_result == '1'
+			&& $phone_validation_result == '1'){
 			$new_phone = $this->input->post('mem_phone');
 		}
 		if($password_mail_ath_result == '1'
-			&&  $password_nice_ath_result == '1'){
+			&&  $password_nice_ath_result == '1'
+				&& $password_validation_result == '1'){
 			$new_password = password_hash($this->input->post('mem_password'), PASSWORD_BCRYPT);
 			
 		}
 		if($wallet_mail_ath_result == '1'
-			&& $wallet_nice_ath_result == '1'){
+			&& $wallet_nice_ath_result == '1'
+				&& $wallet_validation_result == '1'){
 			$new_wallet = $this->input->post('mem_wallet');
 		}
 
@@ -2782,6 +2791,9 @@ class Membermodify extends CB_Controller
 		$this->session->unset_userdata('wallet_modify_ath_mail_result');
 		$this->session->unset_userdata('password_modify_ath_nice_phone_result');
 		$this->session->unset_userdata('wallet_modify_ath_nice_phone_result');
+		$this->session->unset_userdata('phone_confirm');
+		$this->session->unset_userdata('password_confirm');
+		$this->session->unset_userdata('wallet_confirm');
 		
 		if($result == 0){
 			echo("<script>alert('정보수정에 실패하였습니다 (관리자문의)');</script>");
