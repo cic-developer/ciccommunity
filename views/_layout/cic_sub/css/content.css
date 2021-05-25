@@ -5397,6 +5397,13 @@
     padding-top: 20px;
 }
 
+.right_content_all .hight_mnp_all .high_money {
+    display: block;
+    text-align: right;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
 .right_content_all .high_money {
     display: inline-block;
     font-size: 15px;
@@ -5404,7 +5411,6 @@
     color: #fa5252;
     padding-bottom: 25px;
     text-decoration: none;
-    text-align: right;
 }
 
 .right_content_all .stxt {

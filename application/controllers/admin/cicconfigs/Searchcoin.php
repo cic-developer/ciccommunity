@@ -133,9 +133,10 @@ class Searchcoin extends CB_Controller
 		foreach($coin_list as $value){
 			$coin_arr[] = element('clist_market', $value);
 		}
-		$getList = $this -> CIC_coin_list_model->retrieve_api();
-		// print_r($getList);
 		// $get_apiList = $this -> CIC_coin_list_model->get_apiList();
+		// $getList = $this -> CIC_coin_list_model->retrieve_api();
+		// print_r($getList);
+		
 		if(is_array($array) || is_object($array) ){
 			for($i=0; $i<count($getList); $i++){
 					// $market = $getList[$i]['market'];

@@ -129,7 +129,7 @@ class CIC_Coin_list_model extends CB_Model
         $curl = curl_init();
         for($i=0; $i<count($coinName); $i++){
             curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/{$coinName}?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
+                CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/" .$coinName[$i]['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
                 // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/bitcoin?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_FOLLOWLOCATION => true,
@@ -150,8 +150,7 @@ class CIC_Coin_list_model extends CB_Model
             }
             $array = json_decode($response, true);
             $refresh = $this -> input -> post('refresh');
-            // print_r($data);
-            if($refresh && is_array($array){
+            if($refresh && is_array($array)){
                 // convert json to php array or object
                 return $array;
             }
@@ -181,8 +180,6 @@ class CIC_Coin_list_model extends CB_Model
         if($err){
             echo "cUrl Error :" . $err;
         }
-        $refresh = $this -> input -> post('refresh');
-        // convert json to php array or object
         $array = json_decode($response, true);
         if(is_array($array)){
             // print_r($array);

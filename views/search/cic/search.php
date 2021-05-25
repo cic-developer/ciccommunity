@@ -86,8 +86,16 @@
 						<p class="stxt"><span> KRW-<?php echo $symbole; ?> </span></p>	
 					</div>
 					<p class="stxt" style="display:block; padding-top:20px;" >
-						<!--상한가--><u class="high_money">+48,965,150 <i class="fas fa-long-arrow-alt-up"></i></u><!--상한가 끝-->
-						<!--상한가--><u class="high_money">+8.82% <i class="fas fa-long-arrow-alt-up"></i></u><!--상한가 끝-->	
+						<!--상한가와 하한가 전체-->
+						<h6 class="hight_mnp_all">
+							<!--상한가-->
+							<u class="high_money">+48,965,150 <i class="fas fa-long-arrow-alt-up"></i>
+							</u>
+							<u class="high_money">+8.82% <i class="fas fa-long-arrow-alt-up"></i>
+							</u>
+							<!--상한가 끝-->	
+						</h6>
+						<!--상한가와 하한가 전체 끝-->
 						<span style="color:#fa5252; display:block; padding-bottom:5px;">고가  ￦ <?php echo $high; ?> </span>
 						<span style="color:#228be6; display:block;">저가 ￦ <?php echo $low; ?> </span>
 					</p>
