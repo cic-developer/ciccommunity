@@ -20,10 +20,18 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<th>
+							<!-- <th>
 								<p class="chk-check">
 									<input type="checkbox" id="vsel-all" /><label for="vsel-all"><span
 											class="blind">선택</span></label>
+								</p>
+							</th> -->
+							<th>
+								<p class="chk-check">
+									<input type="checkbox" name="vsel-all" id="vsel-all" />
+									<label for="vsel-all">
+										<span class="blind">선택</span>
+									</label>
 								</p>
 							</th>
 							<th>번호</th>
@@ -90,3 +98,20 @@
 	</div>
 </div>
 <!-- e: #container-wrap //-->
+
+<script>
+$(document).on("click", "#chkall", function() {
+	var chk = document.getElementsByName("chk[]");
+	for (i = 0; i < chk.length; i++) chk[i].checked = this.checked;
+});
+
+$(document).on("click", ".list-chkbox, #chkall", function() {
+	var $checkedCheckboxes = $(".list-chkbox:checked");
+	var $checkboxes = $(".list-chkbox");
+	if ($checkedCheckboxes.length) {
+		$(".btn-list-update , .btn-list-selected").removeClass("disabled");
+	} else {
+		$(".btn-list-update , .btn-list-selected").addClass("disabled");
+	}
+});
+</script>

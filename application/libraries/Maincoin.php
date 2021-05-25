@@ -311,18 +311,25 @@ class Maincoin
     /**
      * 오케이엑스 에서 데이터 가져오는 함수
      */
-    private function get_okex_data($coin_id, $market="KRW"){
-        $url = "https://api.hotbit.co.kr/api/spot/v3/instruments/ticker?market={$coin_id}/{$market}&period=86400";
+    private function get_okex_data($coin_id, $market="USD"){
+        //환율정보
+        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+        $usd_price = $result[0]['basePrice'];
+
+        $url = "https://www.okex.com/api/v5/market/ticker?instId={$coin_id}-{$market}-SWAP";
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
-        $data = $result['result'];
+        $data = $result['data'];
         if($data){
             return array(
-                'price' => $data['last'],
-                'volume' => $data['deal'],
-                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+                'price' => $data[0]['last'] * $usd_price,
+                'volume' => $data[0]['vol24h'] * $usd_price,
+                'change_rate' => $data[0]['sodUtc0'] ? (($data[0]['sodUtc0'] - $data[0]['last']) / $data[0]['sodUtc0'] * 100) * $usd_price : 0,
             );
         } else {
             return array();
@@ -332,13 +339,13 @@ class Maincoin
     /**
      * 후오비 에서 데이터 가져오는 함수
      */
-    private function get_huobi_data($coin_id, $market="KRW"){
-        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+    private function get_huobi_data($coin_id, $market="usdt"){
+        $url = "https://api.huobi.pro/market/detail?symbol=".strtolower($coin_id).strtolower($market);
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
-        $data = $result['result'];
+        $data = $result['tick'];
         if($data){
             return array(
                 'price' => $data['last'],

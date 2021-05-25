@@ -53,10 +53,10 @@ class News extends CB_Controller
 		$this->{$this->modelname}->search_field_equal = array('news_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('news_id'); // 정렬이 가능한 필드
 		
-        $where = array(
-            'news_enable ' => 1,
-			'news_show' => 1,
-        );
+        // $where = array(
+        //     'news_enable ' => 1,
+		// 	'news_show' => 1,
+        // );
 
 		$result = $this->{$this->modelname}
 			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
@@ -107,8 +107,6 @@ class News extends CB_Controller
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
 
-        // print_r($this->db->last_query());
-        // exit;
     }
 
     public function update_news_enable_0()
