@@ -117,13 +117,10 @@
 								<p class="chk-input w380">
 									<input type="text" placeholder="핸드폰번호" onkeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="" readonly disabled style="background-color:#efefef;">
 								</p>
-								<a href="javascript:void(0);" data-type="phone" class="modify-btn view_ath_box">
+								<a href="javascript:void(0);" id="confirm_phone"  data-type="phone" class="modify-btn">
 									<span>확인</span>
 								</a>
 							</div>
-							<a href="javascript:void(0);" id="confirm_phone" class="modify-btn confirm-btn">
-								<span>확인</span>
-							</a>
 						</li>
 					</ul>
 				</div>
@@ -133,7 +130,7 @@
 			<div id="myModal_password" class="modal">
 				<div class="modal-content">
 					<ul class="entry modify-box">
-						<li class="">
+						<li class="ath-email-content">
 							<p class="btxt">이메일인증</p>
 							<div class="all-email-box">
 								<div class="field modify">
@@ -146,7 +143,6 @@
 									<a href="javascript:void(0);" data-type="password" class="modify-btn confirm-ath-email" style="display:none;">
 										<span>확인</span>
 									</a>
-									
 								</div>
 								<div class="password-resend-email" style="display:none;">
 									<a href="javascript:void(0);" data-type="password" class="modify-btn resend-ath-email" style="display:block;">
@@ -162,6 +158,13 @@
 							</div>
 							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
 						</li>
+						<li class="ath-nice-content">
+							<p class="btxt">핸드폰인증</p>
+							<div class="all-nice-box">
+							
+							</div>
+							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
+						</li>
 						<li class="password-modify-content">
 							<p class="btxt">새 비밀번호</p>
 							<div class="field modify">
@@ -171,22 +174,10 @@
 								<p class="chk-input w380" style="margin-top:35px;">
 									<input type="password" placeholder="비밀번호확인" id="new_password_re" name="new_password_re" value="" readonly disabled style="background-color:#efefef;">
 								</p>
-								<a href="javascript:void(0);" data-type="password" class="modify-btn view_ath_box">
+								<a href="javascript:void(0);" id="confirm_password" data-type="password" class="modify-btn">
 									<span>확인</span>
 								</a>
 							</div>
-							<a href="javascript:void(0);" id="confirm_password" class="modify-btn confirm-btn" style="display:none;">
-								<span>확인</span>
-							</a>
-						</li>
-					</ul>
-					<ul class="entry ath-nice-box" style="display:none;">
-						<li>
-							<p class="btxt">핸드폰인증</p>
-							<div class="all-nice-box">
-								<!--  -->
-							</div>
-							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
 						</li>
 					</ul>
 				</div>
@@ -242,7 +233,7 @@
 							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
 						</li>
 					</ul>
-					<ul class="entry ath-nice-box" style="display:none;">
+					<ul class="entry ath-nice-content" style="display:none;">
 						<li>
 							<p class="btxt">핸드폰인증</p>
 							<div class="all-nice-box">
@@ -401,6 +392,16 @@
 	}
 	btn2.onclick = function() {
 		modal2.style.display = "block";
+
+		var html = '';
+		html += '<div class="field modify">';
+		html += '<form name="form_chk1" method="post" id="password_form_chk">';
+		html += '<input type="hidden" name="m" value="checkplusService">';
+		html += '<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('password_enc_data', $view)); ?>">';
+		html += '<a href="javascript:fnPopup1();" id="ath_nice_phone" class="modify-btn"><span>핸드폰 인증</span></a>';
+		html += '</form>';
+		html += '</div>';
+		$('#myModal_password .ath-nice-content .all-nice-box').append(html); // 핸드폰 인증 버튼 생성
 	}
 	btn3.onclick = function() {
 		modal3.style.display = "block";
@@ -418,6 +419,8 @@
 		}
 		if (event.target == modal2) {
 			modal2.style.display = "none";
+
+			$('#myModal_password .ath-nice-content .all-nice-box > *').remove(); // 핸드폰 인증 버튼 제거
 		}
 		if (event.target == modal3) {
 			modal3.style.display = "none";
@@ -611,12 +614,12 @@
 				$('#myModal_' + type + ' .ath-email-content').attr('style', "display:none;"); // 이메일 인증 박스 제거
                 
 				if(type == "password"){
-					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:none;"); // 핸드폰 인증 박스 제거
-					$('#myModal_' + type + ' .ath-nice-box .all-nice-box > *').remove(); // 핸드폰 인증 버튼 제거
+					$('#myModal_' + type + ' .ath-nice-content').attr('style', "display:none;"); // 핸드폰 인증 박스 제거
+					$('#myModal_' + type + ' .ath-nice-content .all-nice-box > *').remove(); // 핸드폰 인증 버튼 제거
 				}
 				if(type == "wallet"){
-					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:none;"); // 핸드폰 인증 박스 제거
-					$('#myModal_' + type + ' .ath-nice-box .all-nice-box > *').remove(); // 핸드폰 인증 버튼 제거
+					$('#myModal_' + type + ' .ath-nice-content').attr('style', "display:none;"); // 핸드폰 인증 박스 제거
+					$('#myModal_' + type + ' .ath-nice-content .all-nice-box > *').remove(); // 핸드폰 인증 버튼 제거
 				}
                 
 				$(this).removeClass("active");
@@ -633,8 +636,8 @@
 					html += '</form>';
 					html += '</div>';
 
-					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:block;"); // 핸드폰 인증 박스 생성
-					$('#myModal_' + type + ' .ath-nice-box .all-nice-box').append(html); // 핸드폰 인증 버튼 생성
+					$('#myModal_' + type + ' .ath-nice-content').attr('style', "display:block;"); // 핸드폰 인증 박스 생성
+					$('#myModal_' + type + ' .ath-nice-content .all-nice-box').append(html); // 핸드폰 인증 버튼 생성
 				}
 				if(type == "wallet"){
 					var html = '';
@@ -646,8 +649,8 @@
 					html += '</form>';
 					html += '</div>';
 
-					$('#myModal_' + type + ' .ath-nice-box').attr('style', "display:block;"); // 핸드폰 인증 박스 생성
-					$('#myModal_' + type + ' .ath-nice-box .all-nice-box').append(html); // 핸드폰 인증 버튼 생성
+					$('#myModal_' + type + ' .ath-nice-content').attr('style', "display:block;"); // 핸드폰 인증 박스 생성
+					$('#myModal_' + type + ' .ath-nice-content .all-nice-box').append(html); // 핸드폰 인증 버튼 생성
 				}
                 
 				$(this).addClass("active");
@@ -715,7 +718,7 @@
  */
 	var isAgreeForModify = function(type) {
 		var isAgreeEmail = $('#myModal_' + type + ' .ath-email-content').hasClass("agree");
-		var isAgreeNice = $('#myModal_' + type + ' .ath-nice-box').hasClass("agree");
+		var isAgreeNice = $('#myModal_' + type + ' .ath-nice-content').hasClass("agree");
 
 		if(type == "phone" && isAgreeEmail){
 			$('#myModal_' + type + ' #new_phone').attr('readonly', false);
@@ -781,6 +784,11 @@
 
 	// 핸드폰번호 validation and 사용가능여부 check
 	$(document).on('click', "#confirm_phone", function(){
+
+		if(! $('#myModal_phone .ath-email-content').hasClass("agree")){
+			alert("이메일 인증이 필요합니다");
+			return;
+		}
         
 		var _phone = $("#new_phone").val(); // 입력한 핸드폰번호
 		var phone = _phone;
@@ -971,10 +979,10 @@
 	}
 
 	var successNice = function(type){
-		$('#myModal_' + type + ' > .modal-content > .ath-nice-box .all-nice-box').attr('style', "display:none");
-		$('#myModal_' + type + ' > .modal-content > .ath-nice-box .success').attr('style', "display:block");
+		// $('#myModal_' + type + ' > .modal-content > .ath-nice-content .all-nice-box').attr('style', "display:none");
+		$('#myModal_' + type + ' > .modal-content .ath-nice-content .success').attr('style', "display:block");
         
-		$('#myModal_' + type + ' > .modal-content > .ath-nice-box').addClass("agree") // 인증 완료 표식
+		$('#myModal_' + type + ' > .modal-content .ath-nice-content').addClass("agree") // 인증 완료 표식
         
 		isAgreeForModify(type);
 	}
