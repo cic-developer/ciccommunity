@@ -126,41 +126,31 @@ class CIC_Coin_list_model extends CB_Model
     }
 
     function retrieve_api($coinName){
-
-        for($i=0; $i<count($coinName); $i++){
-            // echo "<pre><br>";
-            // print_r($coinName[$i]);
-            // echo "</pre></br>";
-
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/" .$coinName[$i]['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
-                // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/bitcoin?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 90,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET"   
-                
-            ));
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-
-            curl_close($curl);
-
-            if($err){
-                echo "cUrl Error :" . $err;
+        $curlMultiReq = curl_multi_init();
+        $output = [];
+        foreach($coinName as $url){
+            $ch = curl_init("https://api.coingecko.com/api/v3/coins/" .$coinName['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false");
+            curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+            $data = curl_exec($ch) or die(curl_error($ch));
+            ini_set("memory_limit","30M");
+            if ($data === false) {
+                $info = curl_getinfo($ch);
+                curl_close($ch);
+                die('error occured during curl exec. Additioanl info: ' . 
+                            var_export($info));
             }
-            $array = json_decode($response, true);
-            $refresh = $this -> input -> post('refresh');
-            if($refresh && is_array($array)){
-                // convert json to php array or object
-                return $array;
-            }
-        }     
-    }        
+            
+            $output [] = json_decode($data, true);   // Add new data to output
+            curl_close($ch);
+        }
+        print_r($output);
+    }  
+    
+    
     function get_apiList(){
         $curl = curl_init();
 
