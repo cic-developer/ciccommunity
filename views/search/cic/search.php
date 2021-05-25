@@ -102,17 +102,17 @@
 							</u>
 							상한가 끝-->
 							<!--하한가-->
-							<?php if($trade > $prev){?>
-								<u class="low_money"> +<?php echo $difference; ?> <i class="fas fa-long-arrow-alt-up"></i>
+							<?php if(strpos($difference, "-") === 0){?>
+								<u class="low_money"> <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-down"></i>
 							<?php } else{ ?> </u>
-								<u class="low_money"><?php echo $difference; ?> <i class="fas fa-long-arrow-alt-down"></i>
+								<u class="low_money"> + <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-up"></i>
 							</u>
 							<?php } ?>
-							<?php if($trade > $prev){?>
-							<u class="low_money_percent"> +<?php echo $rate ?>% <i class="fas fa-long-arrow-alt-up"></i>
+							<?php if(strpos($rate, "-") === 0){?>
+							<u class="low_money_percent"> <?php echo $rate ?>% <i class="fas fa-long-arrow-alt-down"></i>
 							</u>
 							<?php } else{ ?> </u>
-							<u class="low_money_percent">- <?php echo $rate ?>% <i class="fas fa-long-arrow-alt-down"></i>
+							<u class="low_money_percent">+ <?php echo $rate ?>% <i class="fas fa-long-arrow-alt-up"></i>
 							</u>
 							<?php } ?>	
 							<!--하한가 끝-->
