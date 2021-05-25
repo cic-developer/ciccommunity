@@ -1,5 +1,10 @@
 <div id="container-wrap">
 	<div id="contents" class="div-cont">
+		<?php
+		echo show_alert_message($this->session->flashdata('message'), '<script>alert("', '");</script>');
+		$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
+		echo form_open(current_full_url(), $attributes);
+		?>
 		<!-- page start // -->
 		<div class="board-wrap list">
 			<div class="tab">
@@ -94,6 +99,7 @@
 			</div>
 			<!-- e: board-filter -->
 		</div>
+		<?php echo form_close(); ?>
 		<!-- page end // -->
 	</div>
 </div>
@@ -106,6 +112,7 @@
 	});
 
 	$(document).on('click', '.list-delete-btn', function() {
+		console.log("=> ", document);
 		list_delete_submit(document.flist, 'delete', $(this).attr('data-list-delete-url'));
 	});
 

@@ -1451,8 +1451,6 @@ class Mypage extends CB_Controller
 	public function listdelete()
 	{
 
-		print_r("hi");
-		exit;
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_mypage_post_listdelete';
 		$this->load->event($eventname);
@@ -1463,8 +1461,8 @@ class Mypage extends CB_Controller
 		/**
 		 * 체크한 게시물의 삭제를 실행합니다
 		 */
-		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
-			foreach ($this->input->post('chk') as $val) {
+		if ($this->input->post('vsel') && is_array($this->input->post('vsel'))) {
+			foreach ($this->input->post('vsel') as $val) {
 				if ($val) {
 					$this->board->delete_post($val);
 				}
@@ -1481,8 +1479,6 @@ class Mypage extends CB_Controller
 			'message',
 			'정상적으로 삭제되었습니다'
 		);
-		$param =& $this->querystring;
-		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-		redirect($redirecturl);
+		redirect('mypage/post');
 	}
 }

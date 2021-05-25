@@ -17,72 +17,76 @@ class Maincoin
 {
     private $usd_price = 0;
     private $jpy_price = 0;
+    private $jpyusd_price = 0;
+    function __construct(){
+        $this->get_overseas_krw_price();
+    }
     
     public function get_data($exchange="", $coin_id, $market="KRW"){
         switch($exchange){
 
             case 'bithumb':{
-
+                return $this->get_bithumb_data($coin_id, $market);
             }
             break;
 
             case 'upbit':{
-
+                return $this->get_upbit_data($coin_id, $market);
             }
             break;
 
             case 'hotbit_korea':{
-                return get_hotbitkorea_data($coin_id, $market);
+                return $this->get_hotbitkorea_data($coin_id, $market);
             }
             break;
 
             case 'coinbit':{
-                return get_coinbit_data($coin_id, $market);
+                return $this->get_coinbit_data($coin_id, $market);
             }
             break;
 
             case 'coinone':{
-                return get_coinone_data($coin_id, $market);
+                return $this->get_coinone_data($coin_id);
             }
             break;
 
             case 'korbit':{
-                return get_korbit_data($coin_id, $market);
+                return $this->get_korbit_data($coin_id, $market);
             }
             break;
 
             case 'bitflyer':{
-                return get_bitflyer_data($coin_id, $market);
+                return $this->get_bitflyer_data($coin_id);
             }
             break;
 
             case 'binance':{
-                return get_binance_data($coin_id, $market);
+                return $this->get_binance_data($coin_id, $market);
             }
             break;
 
             case 'bitfinex':{
-                return get_bitfinex_data($coin_id, $market);
+                return $this->get_bitfinex_data($coin_id);
             }
             break;
 
             case 'okex':{
-                return get_okex_data($coin_id, $market);
+                return $this->get_okex_data($coin_id, $market);
             }
             break;
 
             case 'huobi':{
-                return get_huobi_data($coin_id, $market);
+                return $this->get_huobi_data($coin_id, $market);
             }
             break;
 
             case 'bittrex':{
-                return get_bittrex_data($coin_id, $market);
+                return $this->get_bittrex_data($coin_id, $market);
             }
             break;
 
             case 'poloniex':{
-                return get_poloniex_data($coin_id, $market);
+                return $this->get_poloniex_data($coin_id, $market);
             }
             break;
 
@@ -97,13 +101,13 @@ class Maincoin
      */
     private function get_bithumb_data($coin_id, $market="KRW"){
         $url = "https://api.bithumb.com/public/ticker/{$market}_{$coin_id}";
-        $result = get_curl($url);
+        $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
         $ticker_data = $result['data'];
 
         $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
-        $result = get_curl($url);
+        $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
         $price_data = $result['data'];
@@ -124,7 +128,7 @@ class Maincoin
      */
     private function get_upbit_data($coin_id, $market="KRW"){
         $url = "https://api.upbit.com/v1/ticker?markets={$market}-{$coin_id}";
-        $result = get_curl($url);
+        $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
@@ -145,7 +149,7 @@ class Maincoin
      */
     private function get_hotbitkorea_data($coin_id, $market="KRW"){
         $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
-        $result = get_curl($url);
+        $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
@@ -166,7 +170,7 @@ class Maincoin
      */
     private function get_coinbit_data($coin_id, $market="KRW"){
         $url = "https://production-api.coinbit.global/api/v1.0/trading_pairs/";
-        $result = get_curl($url);
+        $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
         if($result){
@@ -189,7 +193,7 @@ class Maincoin
      */
     private function get_coinone_data($coin_id){
         $url = "https://api.coinone.co.kr/ticker?currency={$coin_id}";
-        $result = get_curl($url);
+        $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
@@ -210,7 +214,7 @@ class Maincoin
      */
     private function get_korbit_data($coin_id, $market="krw"){
         $url = "https://api.korbit.co.kr/v1/ticker/detailed?currency_pair=".strtolower($coin_id)."_".strtolower($market);
-        $result = get_curl($url);
+        $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
@@ -230,16 +234,11 @@ class Maincoin
      * 비트플라이어 에서 데이터 가져오는 함수
      */
     private function get_bitflyer_data($coin_id){
-        //환율정보
-        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWJPY";
-        $result = get_curl($url);
-        //curl 중 오류발생할 경우 빈 배열 리턴
-        if($result === FALSE) return array();
-        $jpy_price = $result[0]['basePrice']/100; //100엔당 가격이라 나누기100
+        $jpy_price = $this->get_jpy_price();
 
         //거래소정보
         $url = "https://api.bitflyer.com/v1/getticker?product_code={$coin_id}_JPY";
-        $result = get_curl($url);
+        $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
@@ -259,15 +258,10 @@ class Maincoin
      * 바이낸스 에서 데이터 가져오는 함수
      */
     private function get_binance_data($coin_id, $market="USDT"){
-        //환율정보
-        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
-        $result = get_curl($url);
-        //curl 중 오류발생할 경우 빈 배열 리턴
-        if($result === FALSE) return array();
-        $usd_price = $result[0]['basePrice'];
+        $usd_price = $this->get_usd_price();
 
         $url = "https://api.binance.com/api/v3/ticker/24hr?symbol={$coin_id}{$market}";
-        $result = get_curl($url);
+        $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
@@ -287,15 +281,10 @@ class Maincoin
      * 비트파이넥스 에서 데이터 가져오는 함수
      */
     private function get_bitfinex_data($coin_id){
-        //환율정보
-        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
-        $result = get_curl($url);
-        //curl 중 오류발생할 경우 빈 배열 리턴
-        if($result === FALSE) return array();
-        $usd_price = $result[0]['basePrice'];
+        $usd_price = $this->get_usd_price();
 
         $url = "https://api-pub.bitfinex.com/v2/ticker/t{$coin_id}USD";
-        $result = get_curl($url);
+        $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
@@ -315,15 +304,10 @@ class Maincoin
      * 오케이엑스 에서 데이터 가져오는 함수
      */
     private function get_okex_data($coin_id, $market="USD"){
-        //환율정보
-        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
-        $result = get_curl($url);
-        //curl 중 오류발생할 경우 빈 배열 리턴
-        if($result === FALSE) return array();
-        $usd_price = $result[0]['basePrice'];
+        $usd_price = $this->get_usd_price();
 
         $url = "https://www.okex.com/api/v5/market/ticker?instId={$coin_id}-{$market}-SWAP";
-        $result = get_curl($url);
+        $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
@@ -343,15 +327,10 @@ class Maincoin
      * 후오비 에서 데이터 가져오는 함수
      */
     private function get_huobi_data($coin_id, $market="usdt"){
-        //환율정보
-        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
-        $result = get_curl($url);
-        //curl 중 오류발생할 경우 빈 배열 리턴
-        if($result === FALSE) return array();
-        $usd_price = $result[0]['basePrice'];
+        $usd_price = $this->get_usd_price();
 
         $url = "https://api.huobi.pro/market/detail?symbol=".strtolower($coin_id).strtolower($market);
-        $result = get_curl($url);
+        $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
@@ -371,15 +350,10 @@ class Maincoin
      * 비트렉스 에서 데이터 가져오는 함수
      */
     private function get_bittrex_data($coin_id, $market="USDT"){
-        //환율정보
-        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
-        $result = get_curl($url);
-        //curl 중 오류발생할 경우 빈 배열 리턴
-        if($result === FALSE) return array();
-        $usd_price = $result[0]['basePrice'];
+        $usd_price = $this->get_usd_price();
 
         $url = "https://api.bittrex.com/api/v1.1/public/getmarketsummary?market={$market}-{$coin_id}s";
-        $result = get_curl($url);
+        $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
@@ -399,15 +373,10 @@ class Maincoin
      * 폴로닉스 에서 데이터 가져오는 함수
      */
     private function get_poloniex_data($coin_id, $market="USDT"){
-        //환율정보
-        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
-        $result = get_curl($url);
-        //curl 중 오류발생할 경우 빈 배열 리턴
-        if($result === FALSE) return array();
-        $usd_price = $result[0]['basePrice'];
+        $usd_price = $this->get_usd_price();
 
         $url = "https://poloniex.com/public?command=returnTicker";
-        $result = get_curl($url);
+        $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
@@ -428,7 +397,7 @@ class Maincoin
     //  */
     // private function get_coingecko_data($coin_id, $market="KRW", $exchange_id=""){
     //     $url = "https://api.coingecko.com/api/v3/exchanges/{$exchange_id}/tickers?coin_ids={$coin_id}";
-    //     $result = get_curl($url);
+    //     $result = $this->get_curl($url);
     //     //curl 중 오류발생할 경우 빈 배열 리턴
     //     if($result === FALSE) return array();
 
@@ -446,13 +415,25 @@ class Maincoin
     //     return array();
     // }
 
+    private function get_overseas_krw_price(){
+        if($this->usd_price) return $this->usd_price;
+        //환율정보
+        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD,FRX.KRWJPY,FRX.JPYUSD";
+        $result = $this->get_curl($url);
+        //curl 중 오류발생할 경우 0 리턴
+        if($result === FALSE) return 0;
+        $this->usd_price = $result[0]['basePrice'];
+        $this->jpy_price = $result[1]['basePrice'];
+        $this->jpyusd_price = $result[2]['basePrice'];
+    }
+
     private function get_usd_price(){
         if($this->usd_price) return $this->usd_price;
         //환율정보
         $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
-        $result = get_curl($url);
-        //curl 중 오류발생할 경우 빈 배열 리턴
-        if($result === FALSE) return array();
+        $result = $this->get_curl($url);
+        //curl 중 오류발생할 경우 0 리턴
+        if($result === FALSE) return 0;
         $this->usd_price = $result[0]['basePrice'];
         return $this->usd_price;
     }
@@ -461,9 +442,9 @@ class Maincoin
         if($this->jpy_price) return $this->jpy_price;
         //환율정보
         $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWJPY";
-        $result = get_curl($url);
-        //curl 중 오류발생할 경우 빈 배열 리턴
-        if($result === FALSE) return array();
+        $result = $this->get_curl($url);
+        //curl 중 오류발생할 경우 0 리턴
+        if($result === FALSE) return 0;
         $this->jpy_price = $result[0]['basePrice']/100; //100엔당 가격이라 나누기100
         return $this->jpy_price;
     }

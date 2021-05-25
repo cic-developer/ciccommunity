@@ -111,7 +111,7 @@ class News extends CB_Controller
 	public function enable()
 	{
 		 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_cicconfigs_news_index';
+		$eventname = 'event_admin_cicconfigs_news_enable';
 		$this->load->event($eventname);
 
 		$view = array();
