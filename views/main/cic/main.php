@@ -31,7 +31,7 @@
                     ?>
                         <div class="item">
                             <a href="<?php echo element('ban_url', $banner) ?>" target="<?php echo element('ban_target', $banner) ?>">
-                                <img src="<?php echo base_url('uploads/banner/'.element('ban_image', $banner)) ?>" alt="" />
+                                <img src="<?php echo base_url('uploads/banner/'.element('ban_image', $banner)) ?>" alt="<?php echo element('ban_title', $banner) ?>" />
                             </a>
                         </div>
                     <?php

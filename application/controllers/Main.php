@@ -64,9 +64,13 @@ class Main extends CB_Controller
 			foreach (element('list', $banner) as $key => $val) {
 				if ($val) {
 					$banner['list'][$key] = $val;
+					print_r("<br>");
+					print_r("~~");
+					print_r($val);
 				}
 			}
 		}
+		exit;
 		// 배너 가져오기 끝
 
 		$where = array(

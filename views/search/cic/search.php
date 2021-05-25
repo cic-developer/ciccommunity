@@ -91,7 +91,9 @@
 						</p>	
 					</div>
 					<p class="stxt">
-						
+						<h5 class="price_now">
+							49,207,759 ￦
+						</h5>
 						<!--상한가와 하한가 전체-->
 						<h6 class="high_mnp_all">
 							<!--상한가-->
@@ -99,7 +101,7 @@
 							</u>
 							<u class="high_money_percent">+8.82% <i class="fas fa-long-arrow-alt-up"></i>
 							</u>
-							상한가 끝-->
+							<!--상한가 끝-->
 							<!--하한가-->
 							<u class="low_money">-48,965,150 <i class="fas fa-long-arrow-alt-down"></i>
 							</u>
