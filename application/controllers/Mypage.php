@@ -142,7 +142,10 @@ class Mypage extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = $this->Post_model->primary_key;
+		$order_by_field = element('order_by_field', $board)
+			? element('order_by_field', $board)
+			: 'post_num, post_reply';
+		$findex = $this->input->get('findex', null, $order_by_field);
 		// $forder = 'desc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
