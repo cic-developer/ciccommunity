@@ -255,18 +255,25 @@ class Maincoin
     /**
      * 바이낸스 에서 데이터 가져오는 함수
      */
-    private function get_binance_data($coin_id, $market="KRW"){
-        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+    private function get_binance_data($coin_id, $market="USDT"){
+        //환율정보
+        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+        $usd_price = $result[0]['basePrice'];
+
+        $url = "https://api.binance.com/api/v3/ticker/24hr?symbol={$coin_id}{$market}";
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
-        $data = $result['result'];
+        $data = $result;
         if($data){
             return array(
-                'price' => $data['last'],
-                'volume' => $data['deal'],
-                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+                'price' => $data['lastPrice'] * $usd_price,
+                'volume' => $data['quoteVolume'] * $usd_price,
+                'change_rate' => $data['priceChangePercent'],
             );
         } else {
             return array();
@@ -276,18 +283,25 @@ class Maincoin
     /**
      * 비트파이넥스 에서 데이터 가져오는 함수
      */
-    private function get_bitfinex_data($coin_id, $market="KRW"){
-        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+    private function get_bitfinex_data($coin_id){
+        //환율정보
+        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD";
+        $result = get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+        $usd_price = $result[0]['basePrice'];
+
+        $url = "https://api-pub.bitfinex.com/v2/ticker/t{$coin_id}USD";
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
-        $data = $result['result'];
+        $data = $result;
         if($data){
             return array(
-                'price' => $data['last'],
-                'volume' => $data['deal'],
-                'change_rate' => $data['open'] ? (($data['open'] - $data['last']) / $data['open'] * 100) : 0,
+                'price' => $data[6] * $usd_price,
+                'volume' => $data[7] * $data[6] * $usd_price,
+                'change_rate' => $data[5] * 100,
             );
         } else {
             return array();
@@ -298,7 +312,7 @@ class Maincoin
      * 오케이엑스 에서 데이터 가져오는 함수
      */
     private function get_okex_data($coin_id, $market="KRW"){
-        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+        $url = "https://api.hotbit.co.kr/api/spot/v3/instruments/ticker?market={$coin_id}/{$market}&period=86400";
         $result = get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();

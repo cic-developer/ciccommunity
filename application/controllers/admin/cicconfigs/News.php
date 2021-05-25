@@ -53,9 +53,10 @@ class News extends CB_Controller
 		$this->{$this->modelname}->search_field_equal = array('news_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('news_id'); // 정렬이 가능한 필드
 		
-        // $where = array(
-        //     'news_enable <' => 1
-        // );
+        $where = array(
+            'news_enable ' => 1,
+			'news_show' => 1,
+        );
 
 		$result = $this->{$this->modelname}
 			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
@@ -92,6 +93,7 @@ class News extends CB_Controller
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
         $view['view']['update_news_enable_0_url'] = admin_url($this->pagedir . '/update_news_enable_0/?' . $param->output());
+		$view['view']['update_news_show_0_url'] = admin_url($this->pagedir . '/update_news_show_0/?' . $param->output());
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
@@ -107,32 +109,6 @@ class News extends CB_Controller
 
         // print_r($this->db->last_query());
         // exit;
-    }
-
-    public function delete_news()
-    {
-        $eventname = 'event_admin_news_delete';
-        $this->load->event($eventname);
-
-        Events::trigger('before', $eventname);
-
-        if ($this->input->news('chk') && is_array($this->input->news('chk'))) {
-            foreach ($this->input->news('chk') as $val) {
-                if ($val) {
-                    $this->news->delete_news($val);
-                }
-            }
-        }
-
-        Events::trigger('after', $eventname);
-
-        $this->session->set_flashdata(
-            'message',
-            '정상적으로 삭제되었습니다.'
-        );
-        $param =& $this->querystring;
-        $redirecturl = admin_url($this->pagedir . '?' . $param->output());
-        redirect($redirecturl);
     }
 
     public function update_news_enable_0()
@@ -203,4 +179,56 @@ class News extends CB_Controller
 		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
 		redirect($redirecturl);
 	}
+	
+	public function update_news_show_0()
+    {
+        $eventname = 'event_admin_news_delete';
+        $this->load->event($eventname);
+
+        Events::trigger('before', $eventname);
+
+        if ($this->input->news('chk') && is_array($this->input->news('chk'))) {
+            foreach ($this->input->news('chk') as $val) {
+                if ($val) {
+                    $this->News_model->update_news_show_0($val);
+                }
+            }
+        }
+
+        Events::trigger('after', $eventname);
+
+        $this->session->set_flashdata(
+            'message',
+            '비공개 설정으로 변경되었습니다.'
+        );
+        $param =& $this->querystring;
+        $redirecturl = admin_url($this->pagedir . '?' . $param->output());
+        redirect($redirecturl);
+    }
+
+	public function update_news_show_1()
+    {
+        $eventname = 'event_admin_news_delete';
+        $this->load->event($eventname);
+
+        Events::trigger('before', $eventname);
+
+        if ($this->input->news('chk') && is_array($this->input->news('chk'))) {
+            foreach ($this->input->news('chk') as $val) {
+                if ($val) {
+                    $this->News_model->update_news_show_1($val);
+                }
+            }
+        }
+
+        Events::trigger('after', $eventname);
+
+        $this->session->set_flashdata(
+            'message',
+            '공개 설정으로 변경되었습니다.'
+        );
+        $param =& $this->querystring;
+        $redirecturl = admin_url($this->pagedir . '?' . $param->output());
+        redirect($redirecturl);
+    }
 }

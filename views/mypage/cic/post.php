@@ -37,14 +37,18 @@
 							<tr>
 								<td>
 									<p class="chk-check">
-										<input type="checkbox" id="vsel01" /><label for="vsel01"><span
+										<input type="checkbox" id="vsel[]" /><label for="vsel[]"><span
 												class="blind">선택</span></label>
 									</p>
 								</td>
-								<td><span>11</span></td>
-								<td class="l"><a href="#">한국인은 대출 안 나오는데 외국인은 80% 해주고 외국인 건물주 논 ... (10)</a></td>
-								<td>2020-08-25</td>
-								<td>12</td>
+								<td><span><?php echo number_format(element('num', $post));?></span></td>
+								<td class="l">
+									<a href="<?php echo goto_url(element('post_url', $post)); ?>">
+										<?php echo html_escape(element('post_title', $post));?>
+									</a>
+								</td>
+								<td><?php echo display_datetime(element('post_datetime', $post), 'full'); ?></td>
+								<td><?php echo number_format(element('post_hit', $post));?></td>
 							</tr>
 						<?php } ?>
 					</tbody>
