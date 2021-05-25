@@ -132,22 +132,25 @@ class CIC_Coin_list_model extends CB_Model
         $master = curl_multi_init();
 
         for($i = 0; $i < $node_count; $i++){
-            $url = "https://api.coingecko.com/api/v3/coins/" .$coinName[$i]['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false";
-            $curl_arr[$i] = curl_init($url);
-            curl_setopt($curl_arr[$i], CURLOPT_RETURNTRANSFER, true);
-            curl_multi_add_handle($master, $curl_arr[$i]);
+            $ch = curl_init("https://api.coingecko.com/api/v3/coins/" .$coinName[$i]['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false");
+            curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+            $data = curl_exec($ch) or die(curl_error($ch));
         }
-        do {
-            curl_multi_exec($master, $running);
-        } while($running > 0);
-
-        echo "results: ";
-        for($i = 0; $i < $node_count; $i++)
-        {
-            $results = curl_multi_getcontent  ( $curl_arr[$i]  );
-            echo( $i . "\n" . $results . "\n");
+        if ($data === false) {
+            $info = curl_getinfo($ch);
+            curl_close($ch);
+            die('error occured during curl exec. Additioanl info: ' . 
+                    var_export($info));
         }
-        echo 'done';
+        $output [] = json_decode($data,true);   // Add new data to output
+        curl_close($ch);
+    }
+    
+    print_r($output);
 
     }  
     
