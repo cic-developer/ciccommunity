@@ -50,6 +50,9 @@ class Maincoin extends CB_Controller
 	 */
 	public function index()
 	{
+		$this->load->library(array('coinapi'));
+		print_r($this->coinapi->get_data('coinbit', 'BTC', 'KRW'));
+		exit('<br/>good');
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_cicconfigs_maincoin_index';
 		$this->load->event($eventname);

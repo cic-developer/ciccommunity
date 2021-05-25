@@ -13,12 +13,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * 거래소에서 API를 통해 데이터를 받아오는 라이브러리입니다.
  */
 
-class Maincoin
+class Coinapi
 {
     private $usd_price = 0;
     private $jpy_price = 0;
     private $jpyusd_price = 0;
-    function __construct(){
+	function __construct()
+	{
         $this->get_overseas_krw_price();
     }
     
@@ -100,13 +101,13 @@ class Maincoin
      * 빗썸 에서 데이터 가져오는 함수
      */
     private function get_bithumb_data($coin_id, $market="KRW"){
-        $url = "https://api.bithumb.com/public/ticker/{$market}_{$coin_id}";
+        $url = "https://api.bithumb.com/public/ticker/{$coin_id}_{$market}";
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
         $ticker_data = $result['data'];
-
-        $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
+        
+        $url = "https://api.bithumb.com/public/transaction_history/{$coin_id}_{$market}";
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
@@ -116,7 +117,7 @@ class Maincoin
             return array(
                 'price' => $price_data[0]['price'],
                 'volume' => $ticker_data['acc_trade_value_24H'],
-                'change_rate' => $ticker_data['fluctate_rate_24H']*100,
+                'change_rate' => $ticker_data['fluctate_rate_24H'],
             );
         } else {
             return array();

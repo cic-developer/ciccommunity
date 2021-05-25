@@ -1,3 +1,4 @@
+<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
 <div id="container-wrap">
 	<div id="contents" class="div-cont">
 		<?php
@@ -72,6 +73,7 @@
 			</div>
 			<!-- s: paging-wrap -->
 			<div class="paging-wrap">
+				<?php echo element('paging', element('list', $view)); ?>
 				<!-- <a href="#" class="prev ctrl"><span>이전</span></a> -->
 				<ul>
 					<li><a href="#" class="active">1</a></li>
@@ -92,10 +94,22 @@
 						<option value="">내용</option>
 					</select>
 				</p> -->
-				<p class="chk-input">
+				<div class="board-filter">
+					<p class="chk-select">
+						<select>
+							<option value="">제목</option>
+							<option value="">내용</option>
+						</select>
+					</p>
+					<p class="chk-input">
+						<input type="text" placeholder="검색어를 입력해주세요" autocomplete="off">
+						<a href="<?php echo base_url('post/5')?>" class="search-btn"><span>검색</span></a>
+					</p>
+				</div>
+				<!-- <p class="chk-input">
 					<input type="text" placeholder="검색어를 입력해주세요" autocomplete="off" />
 					<a href="#n" class="search-btn"><span>검색</span></a>
-				</p>
+				</p> -->
 			</div>
 			<!-- e: board-filter -->
 		</div>

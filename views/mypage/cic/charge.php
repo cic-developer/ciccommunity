@@ -65,3 +65,9 @@
         <!-- page end // -->
     </div>
 </div>
+
+<script>
+    $(document).on('ready', function(){
+        if(window.klaytn === undefined) alert('klaytn이 설치되지 않았습니다.\nklaytn을 설치하여 주세요');
+    });
+</script>

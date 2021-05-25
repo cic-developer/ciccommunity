@@ -144,10 +144,16 @@ class Mypage extends CB_Controller
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
 		$findex = $this->Post_model->primary_key;
 		$forder = 'desc';
+		$sfield = $this->input->get('sfield', null, '');
+		$skeyword = $this->input->get('skeyword', null, '');
 
-		$per_page = $this->cbconfig->item('list_count') ? $this->cbconfig->item('list_count') : 20;
+		$per_page = $this->cbconfig->item('list_count') ? $this->cbconfig->item('list_count') : 10;
 		$offset = ($page - 1) * $per_page;
 
+		$this->Post_model->allow_search_field = array('post_id', 'post_title', 'post_content', 'post_both', 'post_category', 'post_userid', 'post_nickname'); // 검색이 가능한 필드
+		$this->Post_model->search_field_equal = array('post_id', 'post_userid', 'post_nickname'); // 검색중 like 가 아닌 = 검색을 하는 필드
+
+		
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
@@ -155,9 +161,13 @@ class Mypage extends CB_Controller
 			'post.mem_id' => $mem_id,
 			'post_del' => 0,
 		);
+
 		$result = $this->Post_model
-			->get_post_list($per_page, $offset, $where, '', $findex, $forder);
+			->get_post_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
+
+		print_r($list_num);
+		exit;
 
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {

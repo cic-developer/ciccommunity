@@ -1,8 +1,3 @@
-<?php
-// $this->load->library('maincoin');
-exit('good');
-?>
-
 <div class="box">
 		<div class="box-table">
 			<?php

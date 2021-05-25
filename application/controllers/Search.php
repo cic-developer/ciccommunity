@@ -230,6 +230,18 @@ class Search extends CB_Controller
 			$low =$result_price['min_price'];
 			$view['low'] = $low;
 			$view['high'] = $high;
+
+			if((float)$result_price['prev_closing_price'] < (float)$result_price['prev_closing_price']){
+				$difference = (float)$result_price['prev_closing_price'] - (float)$result_price['prev_closing_price'];
+				$pourcentage = ((float)$result_price['prev_closing_price'] / (float)$result_price['prev_closing_price']) * 100;
+				$view['pourcentage'] = $pourcentage;
+				$view['difference'] = $difference;
+			}else{
+				$difference = (float)$result_price['prev_closing_price'] - (float)$result_price['prev_closing_price'];
+				$view['difference'] = $difference;
+			}
+
+
 		}
         //Send to view
 		$view['symbole'] = strtoupper($symbole);
