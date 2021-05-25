@@ -81,7 +81,7 @@ class CIC_Coin_keyword_model extends CB_Model
         return $result;
 
     }
-    function insert_keyword_list($data){
+    function rafresh_keyword_list($data){
         $this-> db -> where('coin_keyword', $coin_keyword);
         $query = $this->db->get('cic_coin_keyword');
         $refresh_ = $this -> input -> post('refresh_');
@@ -89,6 +89,12 @@ class CIC_Coin_keyword_model extends CB_Model
             $result = $this->db->insert('cic_coin_keyword', $data);
             return $result;  
         }
+    }
+    function insert_keyword_list($data){
+        $this-> db -> where('coin_keyword', $coin_keyword);
+        $query = $this->db->get('cic_coin_keyword');
+            $result = $this->db->insert('cic_coin_keyword', $data);
+            return $result;
     }
 
     

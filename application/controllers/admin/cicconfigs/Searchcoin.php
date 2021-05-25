@@ -127,6 +127,7 @@ class Searchcoin extends CB_Controller
 		foreach($keyword_list as $value){
 			$keyword_arr[] = element('coin_keyword', $value);
 		}
+
 		// 통째로 가져온 테이블에서 keyword 만 담은 array() 만든다.
 		$coin_arr = array();
 		foreach($coin_list as $value){
@@ -161,10 +162,36 @@ class Searchcoin extends CB_Controller
 								}
 							}
 						}
+						print_r('$stockKey'); 
+						$stockKey = $this->CIC_coin_list_model->getstockData();
+						
+						$data = array(
+							array(
+								'coin_market'=> $getList[$i]['symbol'],
+								'coin_keyword'=>$getList[$i]['localization']['ko']
+							),
+							array(
+								'coin_market'=> $getList[$i]['symbol'],
+								'coin_keyword'=>$getList[$i]['name']
+							),
+							array(
+								'coin_market'=> $getList[$i]['symbol'],
+								'coin_keyword'=> $getList[$i]['symbol'],
+							),
+						);
+						if(isset($data) && !empty($data)){
+							foreach($data as $thisData){
+								if(in_array($thisData['coin_keyword'], $keyword_arr)){	
+									continue;
+								}
+								else{
+									$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
+								}	
+							} 
+						}
 					}		
 				}
-			}
-			
+			}		
 		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
@@ -177,43 +204,14 @@ class Searchcoin extends CB_Controller
 		$eventname = 'event_amdmin_coin_keyword';
 		$this->load->event($eventname);
 	    $this->load->helper('url');
+	
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 	
 		$view = array();
 		$view['view'] = array();
 	
-		// $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-
-		//INSERT KEYWORDS IN DB
-		$stockKey = $this->CIC_coin_list_model->getstockData();
-		foreach($stockKey as $getList){
-			$data = array(
-				array(
-					'coin_market'=> $getList['clist_market'],
-					'coin_keyword'=>$getList['clist_name_ko']
-				),
-				array(
-					'coin_market'=> $getList['clist_market'],
-					'coin_keyword'=>$getList['clist_name_en']
-				),
-				array(
-					'coin_market'=> $getList['clist_market'],
-					'coin_keyword'=> $getList['clist_market'],
-				),
-			);
-			
-			if(isset($data) && !empty($data)){
-				foreach($data as $thisData){
-					if(in_array($thisData['coin_keyword'], $keyword_arr)){	
-						continue;
-					}
-					else{
-						$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
-					}	
-				} 
-			}	
-		}
+		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
 		//CREATE COIN KEYWORD LIST FOR ADMIN
 
@@ -245,6 +243,36 @@ class Searchcoin extends CB_Controller
 			}
 		}
 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+
+		//INSERT KEYWORDS IN DB
+		$stockKey = $this->CIC_coin_list_model->getstockData();
+		foreach($stockKey as $getList){
+			$data = array(
+				array(
+					'coin_market'=> $getList['clist_market'],
+					'coin_keyword'=>$getList['clist_name_ko']
+				),
+				array(
+					'coin_market'=> $getList['clist_market'],
+					'coin_keyword'=>$getList['clist_name_en']
+				),
+				array(
+					'coin_market'=> $getList['clist_market'],
+					'coin_keyword'=> $getList['clist_market'],
+				),
+			);
+			
+			if(isset($data) && !empty($data)){
+				foreach($data as $thisData){
+					if(in_array($thisData['coin_keyword'], $keyword_arr)){	
+						continue;
+					}
+					else{
+						$this->CIC_coin_keyword_model->rafresh_keyword_list($thisData);
+					}	
+				} 
+			}	
+		}
 			
 		//SHOWING LIST TO VIEW KEYWORD TO LIST
 		$keylist = $this -> CIC_coin_keyword_model->get_keyword();
