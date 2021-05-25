@@ -18,7 +18,7 @@ class Main extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Board', 'Post', 'Search_keyword');
+	protected $models = array('Board', 'Post', 'Search_keyword', 'CIC_Banner');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -41,12 +41,16 @@ class Main extends CB_Controller
 	 */
 	public function index()
 	{
+		$where = array();
+		$where['ban_activated'] = '1';
+		$result = $this->CIC_Banner_model->get_admin_list('', '', $where, '', 'ban_id', 'desc', '', '');
 
 		print_r("<h1><strong>메인페이지 테스트 中 입니다...</strong></h1><strong>(feat.하승범)</strong>");
 		print_r("<br>");
 		print_r("<br>");
 		print_r("<br>");
 		print_r("<hr>");
+		print_r($result);
 		exit;
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_main_index';
