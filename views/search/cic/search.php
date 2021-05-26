@@ -187,12 +187,12 @@
 				<div class="tits">
 					<h3>WRITER</h3>
 					<?php if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result) { ?>		
+							foreach (element('list', element('data', $view)) as $result) { ?>
 					<a href="<?php echo base_url(). "search/?board_id="?><?php echo element('brd_id', $value) ?>" class="more"><span>more</span></a>
 					<?php
 							}
 						}
-					}
+					
 					?>
 				</div>
 				<div class="list vimg vp">

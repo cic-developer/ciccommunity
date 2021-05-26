@@ -56,7 +56,14 @@
 								?>
 							<tr>
 								<td><?php echo number_format(element('news_id', $result)); ?></td>
-								<td><a href="?comp_id=<?php echo element('comp_id', $result); ?>"><?php echo html_escape(element('comp_name', element('company', $result))); ?></a> <a href="<?php echo goto_url(element('companydurl', $result)); ?>" target="_blank"><span class="fa fa-external-link"></span></a></td>
+								<td><a href="?comp_id=<?php echo element('comp_id', $result); ?>"><?php echo html_escape(element('comp_name', element('company', $result))); ?></a> <a href="<?php echo goto_url(element('companyurl', $result)); ?>" target="_blank"><span class="fa fa-external-link"></span></a></td>
+								<td>
+									<?php if (element('thumb_url', $result)) {?>
+										<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank">
+											<img src="<?php echo element('thumb_url', $result); ?>" alt="<?php echo html_escape(element('post_title', $result)); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" class="thumbnail mg0" style="width:80px;" />
+										</a>
+									<?php } ?>
+								</td>
 								<td><?php echo html_escape(element('news_title', $result)); ?></td>
 								<td><?php echo display_datetime(element('news_wdate', $result), 'full'); ?></td>
 								<td><?php echo number_format(element('news_reviews', $result)); ?></td>
