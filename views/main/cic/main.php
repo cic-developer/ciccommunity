@@ -29,7 +29,7 @@
                     if (element('list',element('banner', $view))) {
                         foreach (element('list',element('banner', $view)) as $banner) {
                     ?>
-                        <div class="item">
+                        <div class="item banner-hit" data-banner-id="<?php echo element('ban_id', $banner) ?>">
                             <a href="<?php echo element('ban_url', $banner) ?>" target="<?php echo element('ban_target', $banner) ?>">
                                 <img src="<?php echo base_url('uploads/banner/'.element('ban_image', $banner)) ?>" alt="<?php echo element('ban_title', $banner) ?>" />
                             </a>
@@ -343,4 +343,6 @@
 </div>
 <script>
     setInterval(() => $('.visual-slide').trigger('prev.owl.carousel', [600]), 3000);
+
+
 </script>

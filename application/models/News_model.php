@@ -24,7 +24,10 @@ class News_model extends CB_Model
 
     public function get_news_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
     {
-
+		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
+			$orderby = 'news_id desc';
+		}
+		
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
 		if (empty($sfield)) {
 			$sfield = array('news_title', 'news_contents');
@@ -75,7 +78,7 @@ class News_model extends CB_Model
 			}
 		}
 
-		$this->db->select('news.*, company.*');
+		$this->db->select('news.*, ');
 		$this->db->from($this->_table);
 		$this->db->join('company', 'news.comp_id = company.comp_id', 'left');
 		if ($where) {
@@ -110,6 +113,9 @@ class News_model extends CB_Model
 
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
+		$this->db->join('company', 'news.comp_id = company.comp_id', 'left');
+		
+
 		if ($where) {
 			$this->db->where($where);
 		}
