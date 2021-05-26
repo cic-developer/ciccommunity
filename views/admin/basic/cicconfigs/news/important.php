@@ -48,7 +48,7 @@
 								<th>신문사</th>
 								<th>뉴스 제목</th>
 								<th>스크랩 날짜</th>
-								<th>조회수</th>
+								<th>주요뉴스 순위</th>
 								<th>활성상태</th>
 								<th>공개여부</th>
 								<th><input type="checkbox" name="chkall" id="chkall" /></th>
@@ -72,7 +72,7 @@
 									</a>
 								</td>
 								<td><?php echo display_datetime(element('news_wdate', $result), 'full'); ?></td>
-								<td><?php echo number_format(element('news_reviews', $result)); ?></td>
+								<td><?php echo number_format(element('news_important', $result)); ?></td>
 								<td><?php echo element('news_enable', $result) === '1' ? '활성' : '비활성화'; ?></td>
 								<td><?php echo element('news_show', $result) === '1' ? '공개' : '비공개'; ?></td>
 								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
