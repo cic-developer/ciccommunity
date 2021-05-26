@@ -63,7 +63,7 @@
 				<div class="result" style="overflow:hidden; padding-bottom:40px; padding-left:40px; padding-right:40px;">
 				<!-- TradingView Widget BEGIN -->
 				<div class="text-center" style="float: left">
-				<canvas id="canvas" width="400" height="200"></canvas>
+				<canvas id="canvas" width="450" height="220"></canvas>
 				</div>	
 					<!-- TradingView Widget END -->
 					<div class="right_content_all">
@@ -399,18 +399,23 @@
 		// tooltips: {
 		// 	enabled: false,
 		// },
+		elements: {
+			points:{ hitRadius: 10, hoverRadius: 10 }
+		},
 		legend: {
 			display: false,
 		},
 		scales: {
 			xAxes: [{
+				// display: false,
 				gridLines: {
 					display: false,
 				}
 			}],
 			yAxes: [{
+				// display: false,
 				gridLines: {
-					display: false,
+					display: true,
 				}
 			}]
 		}

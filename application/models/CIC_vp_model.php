@@ -30,9 +30,136 @@ class CIC_vp_model extends CB_Model
 
 	public function get_admin_list($limit = '', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
+		print_r("test....ing....");
+		exit;
 		$select = 'cic_vp.*, member.mem_userid, member.mem_nickname, member.mem_is_admin, member.mem_icon, member.mem_vp';
 		$join[] = array('table' => 'member', 'on' => 'cic_vp.mem_id = member.mem_id', 'type' => 'left');
 		$result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
+
+		return $result;
+	}
+
+	public function get_vp_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
+	{
+		$sfield = array('vp_id');
+		// $sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
+		// if (empty($sfield)) {
+		// 	$sfield = array('vp_id', 'post_content');
+		// }
+
+		$search_where = array();
+		$search_like = array();
+		$search_or_like = array();
+		if ($sfield && is_array($sfield)) {
+			foreach ($sfield as $skey => $sval) {
+				$ssf = $sval;
+				if ($skeyword && $ssf && in_array($ssf, $this->allow_search_field)) {
+					if (in_array($ssf, $this->search_field_equal)) {
+						$search_where[$ssf] = $skeyword;
+					} else {
+						$swordarray = explode(' ', $skeyword);
+						foreach ($swordarray as $str) {
+							if (empty($ssf)) {
+								continue;
+							}
+							if ($sop === 'AND') {
+								$search_like[] = array($ssf => $str);
+							} else {
+								$search_or_like[] = array($ssf => $str);
+							}
+						}
+					}
+				}
+			}
+		} else {
+			$ssf = $sfield;
+			if ($skeyword && $ssf && in_array($ssf, $this->allow_search_field)) {
+				if (in_array($ssf, $this->search_field_equal)) {
+					$search_where[$ssf] = $skeyword;
+				} else {
+					$swordarray = explode(' ', $skeyword);
+					foreach ($swordarray as $str) {
+						if (empty($ssf)) {
+							continue;
+						}
+						if ($sop === 'AND') {
+							$search_like[] = array($ssf => $str);
+						} else {
+							$search_or_like[] = array($ssf => $str);
+						}
+					}
+				}
+			}
+		}
+
+		$this->db->select('cic_vp.*, member.mem_userid, member.mem_nickname, member.mem_is_admin, member.mem_icon, member.mem_vp');
+		$this->db->from($this->_table);
+		$this->db->join('member', 'cic_vp.mem_id = member.mem_id', 'left');
+
+		if ($where) {
+			$this->db->where($where);
+		}
+		if ($search_where) {
+			$this->db->where($search_where);
+		}
+		if ($like) {
+			$this->db->like($like);
+		}
+		if ($search_like) {
+			foreach ($search_like as $item) {
+				foreach ($item as $skey => $sval) {
+					$this->db->like($skey, $sval);
+				}
+			}
+		}
+		if ($search_or_like) {
+			$this->db->group_start();
+			foreach ($search_or_like as $item) {
+				foreach ($item as $skey => $sval) {
+					$this->db->or_like($skey, $sval);
+				}
+			}
+			$this->db->group_end();
+		}
+
+		$this->db->order_by($orderby);
+		if ($limit) {
+			$this->db->limit($limit, $offset);
+		}
+		$qry = $this->db->get();
+		$result['list'] = $qry->result_array();
+
+		$this->db->select('count(*) as rownum');
+		$this->db->from($this->_table);
+		$this->db->join('member', 'cic_vp.mem_id = member.mem_id', 'left');
+		if ($where) {
+			$this->db->where($where);
+		}
+		if ($search_where) {
+			$this->db->where($search_where);
+		}
+		if ($like) {
+			$this->db->like($like);
+		}
+		if ($search_like) {
+			foreach ($search_like as $item) {
+				foreach ($item as $skey => $sval) {
+					$this->db->like($skey, $sval);
+				}
+			}
+		}
+		if ($search_or_like) {
+			$this->db->group_start();
+			foreach ($search_or_like as $item) {
+				foreach ($item as $skey => $sval) {
+					$this->db->or_like($skey, $sval);
+				}
+			}
+			$this->db->group_end();
+		}
+		$qry = $this->db->get();
+		$rows = $qry->row_array();
+		$result['total_rows'] = $rows['rownum'];
 
 		return $result;
 	}

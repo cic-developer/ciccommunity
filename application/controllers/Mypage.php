@@ -418,13 +418,12 @@ class Mypage extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$this->load->model(array('Post_model', 'Comment_model'));
         
 		
 		$findex = $this->input->get('findex', null, $order_by_field);
 		// $findex = $this->Comment_model->primary_key;
 		
-		// $forder = 'desc';
+		$forder = 'desc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 
@@ -432,18 +431,23 @@ class Mypage extends CB_Controller
 		// $per_page = $this->cbconfig->item('list_count') ? (int) $this->cbconfig->item('list_count') : 20;
 		$offset = ($page - 1) * $per_page;
         
-		$this->Comment_model->allow_search_field = array('cmt_content'); // 검색이 가능한 필드
-		$this->Comment_model->search_field_equal = array(''); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->CIC_vp->allow_search_field = array('vp_content', 'vp_point', 'vp-action'); // 검색이 가능한 필드
+		$this->CIC_vp->search_field_equal = array(''); // 검색중 like 가 아닌 = 검색을 하는 필드
         
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
 		$where = array(
-			'comment.mem_id' => $mem_id,
+			'mem_id' => $mem_id,
 			// 'comment.cmt_del' => 0, => (현재는 row에서 삭제)
 		);
-		$result = $this->Comment_model
-			->get_comment_list($per_page, $offset, $where, '', $findex, $sfield, $skeyword);
+		// $result = $this->CIC_vp_model
+		// 	->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		// $result = $this->CIC_vp_model
+		// 	->get_vp_list($per_page, $offset, $where, '', $forder, $sfield, $skeyword);
+
+		// 	print_r($result);
+			exit;
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {

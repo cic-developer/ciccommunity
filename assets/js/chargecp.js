@@ -235,8 +235,8 @@ const token_abi = [{
     },
 ];
 const token_address = "0x7eee60a000986e9efe7f5c90340738558c24317b";
-const PER_address = "퍼 어드레스 주소!!";
 const PER = new caver.klay.Contract(token_abi, token_address);
+const PER_address = "0x0E3A0B94cF7bd745aA8a65Bd707509761e65A832"; //퍼 월렛 주소
 
 // kai-kas 연결 함수
 // connectAccountInfo = async() => {
@@ -319,24 +319,24 @@ $(document).on('ready', async function() {
     }
 
     try {
-        await klaytn.enable();
-        // 클레이튼에 접속되어있는 월렛주소
-        const account = klaytn.selectedAddress;
-        const balance = await caver.klay.getBalance(account);
-        const token_balance = await PER.methods.balanceOf(account).call();
 
-        const network = klaytn.networkVersion;
-        const selected_addr = account;
-        const per_token = token_balance / 1000000000000000000;
-
-        $(document).on('click', '#charge_button', function() {
-            let charge_value = $('#charge_input').val();
-            if (klaytn === undefined) {
-                alert('Klaytn Kaikas가 설치되지 않았습니다.\nKlaytn Kaikas을 설치하여 주세요');
-                location.href = "https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F";
-            }
+        $(document).on('click', '#charge_button', async function() {
             await klaytn.enable();
+            // 클레이튼에 접속되어있는 월렛주소
+            const account = klaytn.selectedAddress;
+            const balance = await caver.klay.getBalance(account);
+            const token_balance = await PER.methods.balanceOf(account).call();
 
+            const network = klaytn.networkVersion;
+            const selected_addr = account;
+            const per_token = token_balance / 1000000000000000000;
+
+            if (network !== 8217) alert('Klaytn Kaikas의 Network를\nMain network로 바꿔주세요');
+            if (!selected_addr) alert('Klaytn Kaikas의 주소를 다시 확인해주세요');
+            if (per_token < 0) alert('Klaytn Kaikas에 PER 코인이 없습니다.\nPER 코인을 추가 또는 충전해주세요');
+
+            let charge_value = $('#charge_input').val();
+            await klaytn.enable();
             const data = caver.klay.abi.encodeFunctionCall({
                 name: "transfer",
                 type: "function",
@@ -349,13 +349,39 @@ $(document).on('ready', async function() {
                         name: "_value",
                     },
                 ],
-            }, [,
+            }, [
+                PER_address,
                 caver.utils
                 .toBN(charge_value)
                 .mul(caver.utils.toBN(Number(`1e${18}`)))
                 .toString(),
             ]);
 
+            //여기 있는 데이터들로 
+            var txhash, reciept, success_fromAddress, success_toAddress, success_value;
+
+            caver.klay.sendTransaction({
+                type: "SMART_CONTRACT_EXECUTION",
+                account,
+                to: token_address,
+                data,
+                gas: 3000000,
+            }).on("transactionHash", (transactionHash) => {
+                console.log("txHash", transactionHash);
+                txhash = `https://scope.klaytn.com/tx/${transactionHash}?tabId=internalTx`;
+            }).on("receipt", (receipt) => {
+                console.log("receipt", receipt);
+                reciept = JSON.stringify(receipt);
+                success_fromAddress = receipt.from;
+                success_toAddress = receipt.logs[0].topics[2];
+                success_value =
+                    caver.utils.hexToNumberString(receipt.logs[0].data) /
+                    1000000000000000000;
+            }).on("error", (error) => {
+                console.log("error", error);
+            });
+
+            console.log(txhash, reciept, success_fromAddress, success_toAddress, success_value);
         });
     } catch (error) {
         alert('Klaytn Kaikas연동에 실패 하였습니다. 마이페이지로 이동합니다.');
