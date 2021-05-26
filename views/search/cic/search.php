@@ -198,10 +198,12 @@
 					<h3>WRITER</h3>
 					<?php if (element('boardlist', $view)) {
 						foreach (element('boardlist', $view) as $key => $value) {
-							// print_r($value);
+							if(element ('brd_key', $value) == 'freetalk'){
+								echo element('brd_id', $value);
 					?>
 					<a href="<?php echo base_url(). "search/?board_id="?><?php echo element('brd_id', $value) ?>" class="more"><span>more</span></a>
-					<?php 
+					<?php
+							}
 						}
 					}
 					?>
