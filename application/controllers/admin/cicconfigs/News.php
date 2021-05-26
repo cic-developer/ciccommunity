@@ -80,6 +80,7 @@ class News extends CB_Controller
 		$select ='comp_id, comp_name';
 		$view['view']['companylist'] = $this->Company_model->get_company_list();
 
+
 		/**
 		 * primary key 정보를 저장합니다
 		 */

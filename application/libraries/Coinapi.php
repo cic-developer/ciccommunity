@@ -115,11 +115,16 @@ class Coinapi
         $price_data = $result['data'];
 
         $binance_data = $this->get_binance_data($coin_id, "USDT");
-        if()
+        if(count($binance_data) == 0){
+            $binance_price = 0;
+        } else {
+            $binance_price = $binance_data['price'];
+        }
+        
         if($ticker_data && $price_data){
             return array(
                 'price'         => $price_data[0]['price'],
-                'korea_premium' => $ticker_data['acc_trade_value_24H'],
+                'korea_premium' => $binance_price ? ($price_data[0]['price'] - $binance_price) / $binance_price * 100 : '',
                 'volume'        => $ticker_data['acc_trade_value_24H'],
                 'change_rate'   => $ticker_data['fluctate_rate_24H'],
             );
@@ -136,13 +141,21 @@ class Coinapi
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
-
         $data = $result[0];
+
+        $binance_data = $this->get_binance_data($coin_id, "USDT");
+        if(count($binance_data) == 0){
+            $binance_price = 0;
+        } else {
+            $binance_price = $binance_data['price'];
+        }
+
         if($data){
             return array(
-                'price' => $data['trade_price'],
-                'volume' => $data['acc_trade_price_24h'],
-                'change_rate' => $data['signed_change_rate']*100,
+                'price'         => $data['trade_price'],
+                'korea_premium' => $binance_price ? ($data['trade_price'] - $binance_price) / $binance_price * 100 : '',
+                'volume'        => $data['acc_trade_price_24h'],
+                'change_rate'   => $data['signed_change_rate']*100,
             );
         } else {
             return array();
@@ -157,13 +170,21 @@ class Coinapi
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
-
         $data = $result['result'];
+
+        $binance_data = $this->get_binance_data($coin_id, "USDT");
+        if(count($binance_data) == 0){
+            $binance_price = 0;
+        } else {
+            $binance_price = $binance_data['price'];
+        }
+
         if($data){
             return array(
-                'price' => $data['last'],
-                'volume' => $data['deal'],
-                'change_rate' => $data['open'] ? (($data['last'] - $data['open']) / $data['open'] * 100) : 0,
+                'price'         => $data['last'],
+                'korea_premium' => $binance_price ? ($data['last'] - $binance_price) / $binance_price * 100 : '',
+                'volume'        => $data['deal'],
+                'change_rate'   => $data['open'] ? (($data['last'] - $data['open']) / $data['open'] * 100) : 0,
             );
         } else {
             return array();
@@ -178,13 +199,22 @@ class Coinapi
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
+
+        $binance_data = $this->get_binance_data($coin_id, "USDT");
+        if(count($binance_data) == 0){
+            $binance_price = 0;
+        } else {
+            $binance_price = $binance_data['price'];
+        }
+
         if($result){
             foreach($result as $data){
                 if($data['name'] == $coin_id.'-'.$market){
                     return array(
-                        'price' => $data['close_price'],
-                        'volume' => $data['acc_trade_value_24h'],
-                        'change_rate' => $data['signed_change_rate']*100,
+                        'price'         => $data['close_price'],
+                        'korea_premium' => $binance_price ? ($data['close_price'] - $binance_price) / $binance_price * 100 : '',
+                        'volume'        => $data['acc_trade_value_24h'],
+                        'change_rate'   => $data['signed_change_rate']*100,
                     );
                 }
             }
@@ -201,13 +231,21 @@ class Coinapi
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
-        
         $data = $result;
+
+        $binance_data = $this->get_binance_data($coin_id, "USDT");
+        if(count($binance_data) == 0){
+            $binance_price = 0;
+        } else {
+            $binance_price = $binance_data['price'];
+        }
+
         if($data){
             return array(
-                'price' => $data['last'],
-                'volume' => $data['volume']*$data['last'],
-                'change_rate' => $data['yesterday_last'] ? (($data['last'] - $data['yesterday_last']) / $data['yesterday_last'] * 100) : 0,
+                'price'         => $data['last'],
+                'korea_premium' => $binance_price ? ($data['last'] - $binance_price) / $binance_price * 100 : '',
+                'volume'        => $data['volume']*$data['last'],
+                'change_rate'   => $data['yesterday_last'] ? (($data['last'] - $data['yesterday_last']) / $data['yesterday_last'] * 100) : 0,
             );
         } else {
             return array();
@@ -222,13 +260,21 @@ class Coinapi
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
-
         $data = $result;
+
+        $binance_data = $this->get_binance_data($coin_id, "USDT");
+        if(count($binance_data) == 0){
+            $binance_price = 0;
+        } else {
+            $binance_price = $binance_data['price'];
+        }
+
         if($data){
             return array(
-                'price' => $data['last'],
-                'volume' => $data['volume'] * $data['last'],
-                'change_rate' => $data['changePercent'],
+                'price'         => $data['last'],
+                'korea_premium' => $binance_price ? ($data['last'] - $binance_price) / $binance_price * 100 : '',
+                'volume'        => $data['volume'] * $data['last'],
+                'change_rate'   => $data['changePercent'],
             );
         } else {
             return array();
@@ -284,6 +330,7 @@ class Coinapi
             if($market=="USDT") $this->binance_data[$coin_id] = $return_data;
             return $return_data;
         } else {
+            if($market=="USDT") $this->binance_data[$coin_id] = array();
             return array();
         }
     }

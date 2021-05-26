@@ -388,10 +388,19 @@
             data: price,
             backgroundColor: ['rgba(0,0,255, 0.1)'],
             borderColor: [
-				'rgba(0,0,255, 0.1)',
+				'rgba(0,0,255, 1.0)',
             ],
             borderWidth: 1
-        }]
+        }],
+		
     },
+	options: {
+    scale: {
+        ticks: {
+            display: false,
+            maxTicksLimit: 3
+        }
+    	}
+   }
 });
 </script>

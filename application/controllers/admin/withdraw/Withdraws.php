@@ -374,8 +374,8 @@ class Withdraws extends CB_Controller
 		}
 
 		// 로그인한 관리자 정보 불라오기
-		$member_info = $this->member->get_member();
-		if(!$member_info){
+		$admin_info = $this->member->get_member();
+		if(!$admin_info){
 			$this->session->set_flashdata(
 				'message',
 				'관리자 정보 에러'
@@ -385,8 +385,8 @@ class Withdraws extends CB_Controller
 			redirect($redirecturl);
 			// show_404();
 		}
-		if($member_info['mem_userid'] && $this->input->ip_address()){
-			$adminid = $member_info['mem_userid'];
+		if($admin_info['mem_userid'] && $this->input->ip_address()){
+			$adminid = $admin_info['mem_userid'];
 			$adminip = $this->input->ip_address();
 		}
 
@@ -435,7 +435,9 @@ class Withdraws extends CB_Controller
 			 */
 			$content = $this->input->post('cp_content2');
 			$memo = $this->input->post('cp_memo2');
-			$logResult = $this->CIC_cp_model->set_cp_retire($content, $memIdx, $money);
+			// $logResult = $this->CIC_cp_model->set_cp_retire($content, $memIdx, $money);
+			// $logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '-', -$money, '@byself' , '출금신청');
+			$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, $content, $money, '@byadmin' , '출금반려');
 
 			/**
 			 * 반려한 출금 요청건의 상태를 0으로 수정합니다.
