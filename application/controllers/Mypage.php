@@ -219,7 +219,8 @@ class Mypage extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('post_id' => '번호',  'post_title' => '제목', 'post_content' => '내용', 
+		// 'post_id' => '번호', 제외
+		$search_option = array('post_title' => '제목', 'post_content' => '내용', 
 									'post_category' => '카테고리', 'post_userid' => '아이디', 'post_nickname' => '닉네임');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
@@ -278,28 +279,33 @@ class Mypage extends CB_Controller
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-
+        
 		/**
 		 * 페이지에 숫자가 아닌 문자가 입력되거나 1보다 작은 숫자가 입력되면 에러 페이지를 보여줍니다.
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
 		$this->load->model(array('Post_model', 'Comment_model'));
-
+        
 		$findex = $this->Comment_model->primary_key;
 		$forder = 'desc';
-
+        
 		$per_page = $this->cbconfig->item('list_count') ? (int) $this->cbconfig->item('list_count') : 20;
 		$offset = ($page - 1) * $per_page;
-
+        
+		$this->Post_model->allow_search_field = array('post_id', 'post_title', 'post_content', 'post_category', 'post_userid', 'post_nickname'); // 검색이 가능한 필드
+		$this->Post_model->search_field_equal = array('post_id', 'post_userid', 'post_nickname'); // 검색중 like 가 아닌 = 검색을 하는 필드
+        
+        
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
 		$where = array(
 			'comment.mem_id' => $mem_id,
+			// 'comment.cmt_del' => 0, => (현재는 row에서 삭제)
 		);
 		$result = $this->Comment_model
-			->get_comment_list($per_page, $offset, $where, '', $findex, $forder);
+			->get_comment_list($per_page, $offset, $where, '', $findex, $forder, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
@@ -311,7 +317,7 @@ class Mypage extends CB_Controller
 			}
 		}
 		$view['view']['data'] = $result;
-
+        
 		/**
 		 * 페이지네이션을 생성합니다
 		 */

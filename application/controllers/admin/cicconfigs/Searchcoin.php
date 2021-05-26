@@ -134,63 +134,62 @@ class Searchcoin extends CB_Controller
 			$coin_arr[] = element('clist_market', $value);
 		}
 		$get_apiList = $this -> CIC_coin_list_model->get_apiList();
-		$getList = $this -> CIC_coin_list_model->retrieve_api($get_apiList);
-		// print_r($getList);		
-		if(is_array($array) || is_object($array) ){
-			for($i=0; $i<count($getList); $i++){
-					// $market = $getList[$i]['market'];
-					//Getting only coin starting with K	
-					$korean = $getList[$i]['localization']['ko'];
-					// print_r($getList['name']);
-					// if(strcmp(substr($market, 0, 1), "K")==0){	
-						// $market = substr($market, 4);
-						
-						$data = array(
-							'clist_market' => $getList[$i]['symbol'],
-							'clist_name_ko' => $getList[$i]['localization']['ko'],
-							'clist_name_en' => $getList[$i]['name'],
-						);
-						print_r(1);
-						// print_r($data);
-						if(isset($data) && !empty($data)){
-							foreach($data as $coinData){
-								if(in_array($coinData, $coin_arr)){
-									continue;
-								}
-								else{
-									$stock = $this->CIC_coin_list_model->insertStockData($data);
-									$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-								}
-							}
+
+		for($i=0; $i<count($get_apiList); $i++){
+				// Getting only coin starting with K
+			echo "<pre><br>";
+			print_r($get_apiList[$i]);
+			echo "</pre></br>";	
+			$market =$get_apiList[$i]['market'];
+			if(strcmp(substr($market, 0, 1), "K")==0){	
+				$market = substr($market, 4);	
+				$data = array(
+					'clist_market' => $market,
+					'clist_name_ko' => $getList[$i]['localization']['ko'],
+					'clist_name_en' => $getList[$i]['name'],
+				);
+				print_r(1);
+				print_r($data);
+				if(isset($data) && !empty($data)){
+					foreach($data as $coinData){
+						if(in_array($coinData, $coin_arr)){
+							continue;
 						}
-						$stockKey = $this->CIC_coin_list_model->getstockData();
-						
-						$data = array(
-							array(
-								'coin_market'=> $getList[$i]['symbol'],
-								'coin_keyword'=>$getList[$i]['localization']['ko']
-							),
-							array(
-								'coin_market'=> $getList[$i]['symbol'],
-								'coin_keyword'=>$getList[$i]['name']
-							),
-							array(
-								'coin_market'=> $getList[$i]['symbol'],
-								'coin_keyword'=> $getList[$i]['symbol'],
-							),
-						);
-						if(isset($data) && !empty($data)){
-							foreach($data as $thisData){
-								if(in_array($thisData['coin_keyword'], $keyword_arr)){	
-									continue;
-								}
-								else{
-									$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
-								}	
-							} 
-						}	
+						else{
+							$stock = $this->CIC_coin_list_model->insertStockData($data);
+							$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+						}
+					}
 				}
-		}		
+				$stockKey = $this->CIC_coin_list_model->getstockData();
+				
+				$data = array(
+					array(
+						'coin_market'=> $getList[$i]['symbol'],
+						'coin_keyword'=>$getList[$i]['localization']['ko']
+					),
+					array(
+						'coin_market'=> $getList[$i]['symbol'],
+						'coin_keyword'=>$getList[$i]['name']
+					),
+					array(
+						'coin_market'=> $getList[$i]['symbol'],
+						'coin_keyword'=> $getList[$i]['symbol'],
+					),
+				);
+				if(isset($data) && !empty($data)){
+					foreach($data as $thisData){
+						if(in_array($thisData['coin_keyword'], $keyword_arr)){	
+							continue;
+						}
+						else{
+							$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
+						}	
+				} 
+			}	
+		}
+	}
+				
 		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
@@ -203,17 +202,12 @@ class Searchcoin extends CB_Controller
 		$eventname = 'event_amdmin_coin_keyword';
 		$this->load->event($eventname);
 	    $this->load->helper('url');
-	
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-	
 		$view = array();
 		$view['view'] = array();
-	
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-
 		//CREATE COIN KEYWORD LIST FOR ADMIN
-
 		$this->load->library('form_validation');
 		$config = array(
 			array(
@@ -224,9 +218,8 @@ class Searchcoin extends CB_Controller
 				'field' => 'keyword',
 				'rules'=>'required'
 			),
-
 		);
-		// $getList = $this -> CIC_coin_list_model->retrieve_api();
+		//$getList = $this -> CIC_coin_list_model->retrieve_api();
 		$this->form_validation->set_rules($config);
 		if($this->form_validation -> run () == FALSE){
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
@@ -265,7 +258,6 @@ class Searchcoin extends CB_Controller
 					'coin_keyword'=> $getList['clist_market'],
 				),
 			);
-			
 			if(isset($data) && !empty($data)){
 				foreach($data as $thisData){
 					if(in_array($thisData['coin_keyword'], $keyword_arr)){	
@@ -276,15 +268,12 @@ class Searchcoin extends CB_Controller
 					}	
 				} 
 			}	
-		}
-			
+		}	
 		//SHOWING LIST TO VIEW KEYWORD TO LIST
 		$keylist = $this -> CIC_coin_keyword_model->get_keyword();
 		$view['keylist'] = $keylist;
-
 		$coin_list = $this->CIC_coin_list_model->getstockData();
 		$view['coin_list'] = $coin_list;
-
 
 		//이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
@@ -299,7 +288,6 @@ class Searchcoin extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
-
 	function delete_keyword(){
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_amdmin_coin_delete';
@@ -310,10 +298,8 @@ class Searchcoin extends CB_Controller
 		$view['view'] = array();			
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-
 		//DELETE KEYWORD
 		$key_id = (int)$_GET['id'];
-
 		$deleted = $this->CIC_coin_keyword_model->delete_keyword($key_id);
 		if($deleted == 1){
 			redirect( "https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=".$_GET['pageId']."");
@@ -324,7 +310,6 @@ class Searchcoin extends CB_Controller
 
 	}
 	function get_keyword(){
-
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_amdmin_coin_get';
 		$this->load->event($eventname);

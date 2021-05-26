@@ -125,37 +125,37 @@ class CIC_Coin_list_model extends CB_Model
         return $query->row_array();
     }
 
-    function retrieve_api($coinName){
+    // function retrieve_api($coinName){
         
-        $node_count = count($coinName);
-        $curl_arr = array();
-        $master = curl_multi_init();
-        for($i = 0; $i < $node_count; $i++){
-            $ch = curl_init("https://api.coingecko.com/api/v3/coins/" .$coinName[$i]['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false");
-            curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-            $data = curl_exec($ch) or die(curl_error($ch));
-            if ($data === false) {
-                $info = curl_getinfo($ch);
-                curl_close($ch);
-                die('error occured during curl exec. Additioanl info: ' . 
-                        var_export($info));
-            }
-            $output [] = json_decode($data,true);   // Add new data to output
-            curl_close($ch);
-        }
-        $data = array();
-        for($i = 0; $i<count($output); $i++){
-            echo "<pre><br>";
-            print($output[$i]['localization']['ko']);
-            echo "</pre></br>";
-        }
-        return $output;
+    //     $node_count = count($coinName);
+    //     $curl_arr = array();
+    //     $master = curl_multi_init();
+    //     for($i = 0; $i < $node_count; $i++){
+    //         $ch = curl_init("https://api.coingecko.com/api/v3/coins/" .$coinName[$i]['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false");
+    //         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+    //         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+    //         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    //         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    //         $data = curl_exec($ch) or die(curl_error($ch));
+    //         if ($data === false) {
+    //             $info = curl_getinfo($ch);
+    //             curl_close($ch);
+    //             die('error occured during curl exec. Additioanl info: ' . 
+    //                     var_export($info));
+    //         }
+    //         $output [] = json_decode($data,true);   // Add new data to output
+    //         curl_close($ch);
+    //     }
+    //     $data = array();
+    //     for($i = 0; $i<count($output); $i++){
+    //         echo "<pre><br>";
+    //         print($output[$i]['localization']['ko']);
+    //         echo "</pre></br>";
+    //     }
+    //     return $output;
 
-    }  
+    // }  
     
     // $output [] = json_decode($data, true);   // Add new data to output
     // curl_close($ch)
@@ -164,10 +164,7 @@ class CIC_Coin_list_model extends CB_Model
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/list?markets?vs_currency=KRW",
-            CURLOPT_URL => "https://api.coingecko.com/api/v3/exchanges/bithumb",
-            // CURLOPT_URL => "https://api.bithumb.com/public/ticker/ALL_KRW",
-            // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/markets?vs_currency=KRW&order=market_cap_desc&per_page=300&page=1&sparkline=false",
+            CURLOPT_URL => "https://api.upbit.com/v1/market/all",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",
@@ -187,16 +184,7 @@ class CIC_Coin_list_model extends CB_Model
             echo "cUrl Error :" . $err;
         }
         $array = json_decode($response, true);
-        if(is_array($array)){
-            // print_r($array);
-            print_r(count($array['data']));
-            // print_r(count($array));
-            // print_r(count($array['tickers']));
-            exit;
-            return $array;
-        } else {
-            return FALSE;
-        }
+        return $array;
         
     }
 
