@@ -381,17 +381,20 @@
         datasets: [{
             label: label,
             data: price.reverse(),
-            backgroundColor: ['rgba(0,0,255, 0.1)'],
+            backgroundColor: ['rgb(227,240,252)'],
             borderColor: [
 				'rgba(0,0,255, 1.0)',
             ],
             borderWidth: 0.5,
-			fill: "start"
+			fillColor: '#ffff00'
         }]	
     },
 	options: {
 		responsive: true,
 		elements: {
+			line:{
+				tension: 0.5
+			},
 			points:{ hitRadius: 10, hoverRadius: 10 }
 		},
 		legend: {

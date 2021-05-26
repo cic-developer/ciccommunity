@@ -24,6 +24,7 @@
 					?>
 					<?php if (element('companylist', $view)) { ?>
 						<div class="pull-right mr10">
+							<!-- <select name="comp_id" class="form-control" onChange="location.href='<?php echo current_url(); ?>?comp_id=' + this.value;"> -->
 							<select name="comp_id" class="form-control" onChange="location.href='<?php echo current_url(); ?>?comp_id=' + this.value;">
 								<option value="">전체신문사</option>
 								<?php foreach (element('companylist', $view) as $key => $value) { ?>

@@ -22,7 +22,6 @@ class Cic_company extends CI_Controller
         if($comp_id){
             $this->CI->load->model('Company_model');
             $company = $this->CI->Company_model->get_one($comp_id);
-        } else {
             return false;
         }
 
