@@ -74,8 +74,6 @@ class News extends CB_Controller
 				$result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
 				if($company) {
 					$result['list'][$key]['companyurl'] = element('comp_url', $company);
-					// print_r(element('news_index',$val));
-					// exit;
 					$result['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
 				}
 				$result['list'][$key]['num'] = $list_num--;
@@ -340,7 +338,7 @@ class News extends CB_Controller
 		}
 
 		$result = $this->{$this->modelname}
-			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->most_view_news($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
@@ -348,8 +346,6 @@ class News extends CB_Controller
 				$result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
 				if($company) {
 					$result['list'][$key]['companyurl'] = element('comp_url', $company);
-					// print_r(element('news_index',$val));
-					// exit;
 					$result['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
 				}
 				$result['list'][$key]['num'] = $list_num--;
