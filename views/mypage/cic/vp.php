@@ -51,17 +51,15 @@
 							<tr>
 								<td>
 									<p class="chk-check">
-										<input type="checkbox" id="<?php echo element('cmt_id', $post); ?>" name="vsel[]" value="<?php echo element('cmt_id', $post); ?>" /><label for="<?php echo element('cmt_id', $post); ?>"><span
+										<input type="checkbox" id="<?php echo element('vp_id', $post); ?>" name="vsel[]" value="<?php echo element('vp_id', $post); ?>" /><label for="<?php echo element('vp_id', $post); ?>"><span
 												class="blind">선택</span></label>
 									</p>
 								</td>
 								<td><span><?php echo number_format(element('num', $post));?></span></td>
 								<td class="l">
-									<a href="<?php echo goto_url(element('comment_url', $post)); ?>">
-										<?php echo html_escape(element('cmt_content', $post));?>
-									</a>
+										<?php echo html_escape(element('vp_content', $post));?>
 								</td>
-								<td><?php echo display_datetime(element('cmt_datetime', $post), 'full'); ?></td>
+								<td><?php echo display_datetime(element('vp_datetime', $post), 'full'); ?></td>
 							</tr>
 						<?php } ?>
 					</tbody>

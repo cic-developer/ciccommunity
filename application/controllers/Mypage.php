@@ -433,8 +433,8 @@ class Mypage extends CB_Controller
 		// $per_page = $this->cbconfig->item('list_count') ? (int) $this->cbconfig->item('list_count') : 20;
 		$offset = ($page - 1) * $per_page;
         
-		$this->CIC_vp->allow_search_field = array('vp_content', 'vp_point', 'vp-action'); // 검색이 가능한 필드
-		$this->CIC_vp->search_field_equal = array(''); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->CIC_vp_model->allow_search_field = array('vp_content', 'vp_point', 'vp-action'); // 검색이 가능한 필드
+		$this->CIC_vp_model->search_field_equal = array(''); // 검색중 like 가 아닌 = 검색을 하는 필드
         
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
@@ -444,8 +444,6 @@ class Mypage extends CB_Controller
 		);
 		$result = $this->CIC_vp_model->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 
-			print_r($result);
-			exit;
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
@@ -453,7 +451,6 @@ class Mypage extends CB_Controller
 				$post = $this->Post_model
 					->get_one(element('post_id', $val), 'brd_id');
 				$brd_key = $this->board->item_id('brd_key', element('brd_id', $post));
-				$result['list'][$key]['comment_url'] = post_url($brd_key, element('post_id', $val)) . '#comment_' . element('cmt_id', $val);
 				$result['list'][$key]['num'] = $list_num--;
 			}
 		}
@@ -490,19 +487,19 @@ class Mypage extends CB_Controller
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
 		// 'post_id' => '번호', 'post_nickname' => '닉네임', 'post_category' => '카테고리', 'post_userid' => '아이디', 제외
-		$search_option = array('cmt_content' => '내용');
+		$search_option = array('vp_content' => '내용');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
-		$view['view']['list_delete_url'] = site_url('mypage/commentListdelete');
+		$view['view']['list_delete_url'] = site_url('mypage/vpListdelete');
         
 		/**
 		 * 레이아웃을 정의합니다
 		 */
-		$page_title = $this->cbconfig->item('site_meta_title_mypage_comment');
-		$meta_description = $this->cbconfig->item('site_meta_description_mypage_comment');
-		$meta_keywords = $this->cbconfig->item('site_meta_keywords_mypage_comment');
-		$meta_author = $this->cbconfig->item('site_meta_author_mypage_comment');
-		$page_name = $this->cbconfig->item('site_page_name_mypage_comment');
+		$page_title = $this->cbconfig->item('site_meta_title_mypage_vp');
+		$meta_description = $this->cbconfig->item('site_meta_description_mypage_vp');
+		$meta_keywords = $this->cbconfig->item('site_meta_keywords_mypage_vp');
+		$meta_author = $this->cbconfig->item('site_meta_author_mypage_vp');
+		$page_name = $this->cbconfig->item('site_page_name_mypage_vp');
         
 		$layoutconfig = array(
 			'path' => 'mypage',

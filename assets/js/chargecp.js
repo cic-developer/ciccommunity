@@ -285,17 +285,17 @@ $(document).on('ready', async function() {
             //여기 있는 데이터들로 
             var txhash, reciept, success_fromAddress, success_toAddress, success_value;
 
-            caver.klay.sendTransaction({
+            await caver.klay.sendTransaction({
                 type: "SMART_CONTRACT_EXECUTION",
                 account,
                 to: token_address,
                 data,
                 gas: 3000000,
             }).on("transactionHash", (transactionHash) => {
-                console.log("txHash", transactionHash);
+                // console.log("txHash", transactionHash);
                 txhash = `https://scope.klaytn.com/tx/${transactionHash}?tabId=internalTx`;
             }).on("receipt", (receipt) => {
-                console.log("receipt", receipt);
+                // console.log("receipt", receipt);
                 reciept = JSON.stringify(receipt);
                 success_fromAddress = receipt.from;
                 success_toAddress = receipt.logs[0].topics[2];

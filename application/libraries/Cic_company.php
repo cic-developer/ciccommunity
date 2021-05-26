@@ -25,7 +25,10 @@ class Cic_company extends CI_Controller
         } else {
             return false;
         }
-        $company['company_name'] = ($this->CI->cbconfig->get_device_view_type() === 'mobile' && $company['comp_mobile_name'])
+
+        if (element('comp_id', $company)) {
+            $this->comany_id[element('comp_id', $company)] = $company;
+        }
     }
 
     public function item_all($comp_id = 0)

@@ -250,8 +250,7 @@ class Search extends CB_Controller
 		
 		foreach($getHist as $histDota){
 			if($histDota['candle_date_time_kst']){
-				// $his_time[] = substr($histDota['candle_date_time_kst'], 12);
-				$his_time[] = substr($time, 0, -3);
+				$his_time[] = $histDota['candle_date_time_kst'];
 				$his_price[] = $histDota['trade_price'];
 			}	
 		$view['his_price'] = $his_price;

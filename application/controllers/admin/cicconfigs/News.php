@@ -12,7 +12,7 @@ class News extends CB_Controller
     protected $modelname = 'News_model';
 
 
-    protected $helpers = array('form', 'array',);
+    protected $helpers = array('form', 'array','cic_company');
 
 
     function __construct()
