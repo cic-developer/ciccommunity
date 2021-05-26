@@ -440,15 +440,10 @@ class Mypage extends CB_Controller
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
 		$where = array(
-			'mem_id' => $mem_id,
-			// 'comment.cmt_del' => 0, => (현재는 row에서 삭제)
+			'cic_vp.mem_id' => $mem_id,
 		);
-		$result = $this->CIC_vp_model
-			->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-		// $result = $this->CIC_vp_model
-		// 	->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-		// $result = $this->CIC_vp_model
-		// 	->get_vp_list($/
+		$result = $this->CIC_vp_model->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+
 			print_r($result);
 			exit;
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;

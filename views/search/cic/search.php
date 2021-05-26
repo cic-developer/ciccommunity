@@ -88,17 +88,17 @@
 							</u>
 							상한가 끝-->
 							<!--하한가-->
-							<?php if(strpos($difference, "-") === 0){?>
-								<u class="low_money"> <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-down"></i>
+							<?php if($change === 'FALL'){?>
+								<u class="low_money"> - <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-down"></i>
 							<?php } else{ ?> </u>
 								<u class="low_money"> + <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-up"></i>
 							</u>
 							<?php } ?>
-							<?php if(strpos($rate, "-") === 0){?>
-							<u class="low_money_percent"> <?php echo $rate ?>% <i class="fas fa-long-arrow-alt-down"></i>
+							<?php if($change === 'FALL'){?>
+							<u class="low_money_percent"> - <?php echo round($rate, 2);  ?>% <i class="fas fa-long-arrow-alt-down"></i>
 							</u>
 							<?php } else{ ?> </u>
-							<u class="low_money_percent">+ <?php echo $rate ?>% <i class="fas fa-long-arrow-alt-up"></i>
+							<u class="low_money_percent">+ <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-up"></i>
 							</u>
 							<?php } ?>	
 							<!--하한가 끝-->
@@ -375,12 +375,12 @@
 	<?php foreach ($his_time as $key => $val){ ?>
 		time.push('<?php echo $val; ?>');
 	<?php } ?>
-
+	console.log(time.length);
 	var price = new Array();
 	<?php foreach ($his_price as $key => $val){ ?>
 		price.push('<?php echo $val; ?>');
 	<?php } ?>
-
+	console.log(price.length);
 	var myChart = new Chart(ctx, {
     type: 'line',
     data: {
