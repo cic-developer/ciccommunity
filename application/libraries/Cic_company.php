@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Cic_company extends CI_Controller
 {
     private $CI;
-    private $company_id;
+    private $company_id = array();
 	private $admin;
 	private $call_admin;
     
@@ -21,13 +21,14 @@ class Cic_company extends CI_Controller
 
         if($comp_id){
             $this->CI->load->model('Company_model');
+		
             $company = $this->CI->Company_model->get_one($comp_id);
-            return false;
         }
 
         if (element('comp_id', $company)) {
-            $this->comany_id[element('comp_id', $company)] = $company;
+            $this->company_id[element('comp_id', $company)] = $company;
         }
+        return $this->company_id[$comp_id];
     }
 
     public function item_all($comp_id = 0)
@@ -37,7 +38,7 @@ class Cic_company extends CI_Controller
             return false;
         }
         if ( ! isset($this->company_id[$comp_id])) {
-            $this->get_news($comp_id, '');
+            $this->get_company($comp_id);
         }
         if ( ! isset($this->company_id[$comp_id])) {
             return false;

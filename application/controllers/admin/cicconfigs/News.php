@@ -64,7 +64,6 @@ class News extends CB_Controller
 		if($compid = (int) $this->input->get('comp_id')){
 			$where['news.comp_id'] = $compid;
 		}
-		
 
 		$result = $this->{$this->modelname}
 			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
@@ -72,9 +71,7 @@ class News extends CB_Controller
 
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
-				$result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('news.comp_id', $val));
-				print_r($this->db->lastquery());
-				exit;
+				$result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
 				if($company) {
 					$result['list'][$key]['companyurl'] = company_url(element('comp_url', $company));
 					$result['list'][$key]['newsurl'] = news_url(element('comp_url',$company),element('comp_segment',$company),element('news_index',$val));

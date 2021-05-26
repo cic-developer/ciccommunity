@@ -19,9 +19,9 @@ class Company_model extends CB_Model
     /**
 	 * 사용되는 테이블의 프라이머리키
 	 */
-	public $primary_key = 'brd_id'; // 사용되는 테이블의 프라이머리키
+	public $primary_key = 'comp_id'; // 사용되는 테이블의 프라이머리키
 
-	public $cache_prefix = 'board/board-model-get-'; // 캐시 사용시 프리픽스
+	public $cache_prefix = 'company/company-model-get-'; // 캐시 사용시 프리픽스
 
 	public $cache_time = 86400; // 캐시 저장시간
 
