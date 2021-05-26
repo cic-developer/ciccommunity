@@ -172,22 +172,36 @@ class Main extends CB_Controller
 	 */
 	public function bannerHit()
 	{
-
-		print_r("hi");
-		exit;
-		$view = array();
-		$view['view'] = array();
-		$view['view']['banner'] = array();
-
-		$eventname = 'event_main_index';
+        
+		$eventname = 'event_main_bannerHit';
 		$this->load->event($eventname);
-
-		$view = array();
-		$view['view'] = array();
-		$view['view']['banner'] = array();
-
+        
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
         
+		if($this->input->post("ban_id")){
+			$ban_id = $this->input->post("ban_id");
+            
+			// 세션 생성
+			if ( ! $this->session->userdata('ban_id_' . $ban_id)) {
+				$this->CIC_Banner_model->update_plus($ban_id, 'ban_hit', 1);
+				$this->session->set_userdata(
+					'ban_id_' . $ban_id_,
+					'1'
+				);
+                
+				$result = array(
+					'state' => '1',
+					'message' => 'hit success',
+				);
+				exit(json_encode($result));
+			}
+		}
+        
+		$result = array(
+			'state' => '0',
+			'message' => 'hit fail',
+		);
+		exit(json_encode($result));
 	}
 }

@@ -347,6 +347,8 @@
     $(document).on('click', ".banner-hit", function() {
         var banner_id = $(".banner-hit").data('banner-id');
 
+        var state = '';
+        var message = '';
         $.ajax({
             url: cb_url + '/main/bannerHit',
             type: 'POST',
@@ -358,7 +360,15 @@
             async: false,
             cache: false,
             success: function(data){
-
+                state = data.state;
+                message = data.message;
+                
+                if(state == '1'){
+                    alert('Banner Hit Success!');
+                }
+                if(state == '0'){
+                    alert('Banner Hit fail!');
+                }
             },
             error: function(){
                 alert('Banner Hit Error!');
