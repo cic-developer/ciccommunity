@@ -195,7 +195,7 @@ class News extends CB_Controller
 
 	public function show()
 	{
-		 		// 이벤트 라이브러리를 로딩합니다
+		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_cicconfigs_news_show';
 		$this->load->event($eventname);
 
@@ -262,7 +262,7 @@ class News extends CB_Controller
 		$search_option = array('news_title' => '제목', 'news_id' => '뉴스번호',   'news_wdate' => '작성일');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
-        $view['view']['update_news_enable_1_url'] = admin_url($this->pagedir . '/update_news_enable_1/?' . $param->output());
+        $view['view']['update_news_show_1_url'] = admin_url($this->pagedir . '/update_news_show_1/?' . $param->output());
 		
 		
 		// 이벤트가 존재하면 실행합니다
@@ -312,7 +312,6 @@ class News extends CB_Controller
 		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
 		redirect($redirecturl);
 	}
-	
 	public function update_news_enable_1()
 	{
 		// 이벤트 라이브러리를 로딩합니다
@@ -331,10 +330,8 @@ class News extends CB_Controller
 				}
 			}
 		}
-
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('after', $eventname);
-
 		/**
 		 * 삭제가 끝난 후 목록페이지로 이동합니다
 		 */
@@ -346,33 +343,6 @@ class News extends CB_Controller
 		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
 		redirect($redirecturl);
 	}
-	
-	public function update_news_show_0()
-    {
-        $eventname = 'event_admin_news_delete';
-        $this->load->event($eventname);
-
-        Events::trigger('before', $eventname);
-
-        if ($this->input->news('chk') && is_array($this->input->news('chk'))) {
-            foreach ($this->input->news('chk') as $val) {
-                if ($val) {
-                    $this->News_model->update_news_show_0($val);
-                }
-            }
-        }
-
-        Events::trigger('after', $eventname);
-
-        $this->session->set_flashdata(
-            'message',
-            '비공개 설정으로 변경되었습니다.'
-        );
-        $param =& $this->querystring;
-        $redirecturl = admin_url($this->pagedir . '?' . $param->output());
-        redirect($redirecturl);
-    }
-
 	public function update_news_show_1()
     {
         $eventname = 'event_admin_news_delete';

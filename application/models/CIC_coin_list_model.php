@@ -139,22 +139,22 @@ class CIC_Coin_list_model extends CB_Model
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
             $data = curl_exec($ch) or die(curl_error($ch));
-        if ($data === false) {
-            $info = curl_getinfo($ch);
+            if ($data === false) {
+                $info = curl_getinfo($ch);
+                curl_close($ch);
+                die('error occured during curl exec. Additioanl info: ' . 
+                        var_export($info));
+            }
+            $output [] = json_decode($data,true);   // Add new data to output
             curl_close($ch);
-            die('error occured during curl exec. Additioanl info: ' . 
-                    var_export($info));
         }
-        $output [] = json_decode($data,true);   // Add new data to output
-        curl_close($ch);
-    }
-    $data = array();
-    for($i = 0; $i<count($output); $i++){
-        echo "<pre><br>";
-        print($output[$i]['localization']['ko']);
-        echo "</pre></br>";
-    }
-    return $output;
+        $data = array();
+        for($i = 0; $i<count($output); $i++){
+            echo "<pre><br>";
+            print($output[$i]['localization']['ko']);
+            echo "</pre></br>";
+        }
+        return $output;
 
     }  
     
@@ -166,6 +166,8 @@ class CIC_Coin_list_model extends CB_Model
 
         curl_setopt_array($curl, array(
             // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/list?markets?vs_currency=KRW",
+            // CURLOPT_URL => "https://api.coingecko.com/api/v3/exchanges/bithumb",
+            // CURLOPT_URL => "https://api.bithumb.com/public/ticker/ALL_KRW",
             CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/markets?vs_currency=KRW&order=market_cap_desc&per_page=300&page=1&sparkline=false",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
@@ -188,7 +190,13 @@ class CIC_Coin_list_model extends CB_Model
         $array = json_decode($response, true);
         if(is_array($array)){
             // print_r($array);
+            // print_r(count($array['data']));
+            print_r(count($array));
+            // print_r(count($array['tickers']));
+            exit;
             return $array;
+        } else {
+            return FALSE;
         }
         
     }
