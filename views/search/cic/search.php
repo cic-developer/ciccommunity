@@ -366,7 +366,7 @@
 	</div>
 	<!-- e: #container-wrap //-->
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script>
 	var ctx = document.getElementById('canvas').getContext('2d');
 	var time = new Array();
@@ -391,16 +391,27 @@
 				'rgba(0,0,255, 1.0)',
             ],
             borderWidth: 1
-        }],
+        }]
 		
     },
 	options: {
-    scale: {
-        ticks: {
-            display: false,
-            maxTicksLimit: 3
-        }
-    	}
-   }
+		scales: {
+			x: {
+				gridLines: {
+					display: true,
+					zeroLineColor:'white',
+                  	color:'transparent'
+				}
+			},
+			y: {
+				gridLines: {
+					display: true,
+					zeroLineColor:'white',
+                  	color:'transparent'
+				}
+			}
+		},
+
+	}
 });
 </script>

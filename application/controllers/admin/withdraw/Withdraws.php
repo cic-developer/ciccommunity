@@ -435,9 +435,7 @@ class Withdraws extends CB_Controller
 			 */
 			$content = $this->input->post('cp_content2');
 			$memo = $this->input->post('cp_memo2');
-			// $logResult = $this->CIC_cp_model->set_cp_retire($content, $memIdx, $money);
-			// $logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '-', -$money, '@byself' , '출금신청');
-			$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, $content, $money, '@byadmin' , '출금반려');
+			$logResult = $this->CIC_cp_model->set_cic_cp($memIdx, $content, $money, '@byadmin', $admin_info['mem_id'], '출금반려');
 
 			/**
 			 * 반려한 출금 요청건의 상태를 0으로 수정합니다.

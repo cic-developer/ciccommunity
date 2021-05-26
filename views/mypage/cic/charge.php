@@ -15,10 +15,10 @@
                         <p class="btxt">충전액</p>
                         <div class="field draw">
                             <p class="chk-input w210">
-                                <input type="text" placeholder="금액을 입력해주세요." value="">
+                                <input id="charge_input" type="text" placeholder="금액을 입력해주세요." value="">
                             </p>
                             <p class="ctxt">CP</p>
-                            <a href="#n" class="draw-btn"><span>충전하기</span></a>
+                            <a id="charge_button" href="#n" class="draw-btn"><span>충전하기</span></a>
                         </div>
                         <!-- 아래 100CP는, 메인페이지 거래소 가격 해서 1PER 당 n CP(CP는 100원) 비율로 나타냈으면 합니다. -->
                         <div class="explan">1 PER 당 &rarr;<p style="display:inline;"> 100 CP 입니다.</p></div>

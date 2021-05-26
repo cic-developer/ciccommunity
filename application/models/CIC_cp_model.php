@@ -163,18 +163,16 @@ class CIC_cp_model extends CB_Model
 		return $result;
 	}
 
-	public function set_cic_cp($memIdx = 0, $content = '' , $money = 0 , $type = '', $action = '')
+	public function set_cic_cp($memIdx = 0, $content = '' , $money = 0 , $type = '', $cp_related_id = 0, $action = '')
 	{
 
-		$login_mem_id = $this->member->item('mem_id');
-		
 		$arr = array(
 			'mem_id'=> $memIdx,
 			'cp_datetime' => date("Y-m-d H:i:s"),
 			'cp_content' => $content,
 			'cp_point' => $money,
 			'cp_type' => $type,
-			'cp_related_id' => $login_mem_id,
+			'cp_related_id' => $cp_related_id,
 			'cp_action' => $action
 		);
 

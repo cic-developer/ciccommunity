@@ -132,19 +132,6 @@ class Searchcoin extends CB_Controller
 			$coin_arr[] = element('clist_market', $value);
 		}
 
-		$getHist = $this -> CIC_coin_list_model->get_histData();
-		foreach($getHist as $histDota){
-			if($histDota['candle_date_time_kst']){
-				$time = substr($histDota['candle_date_time_kst'], 12);
-				$time = substr($time, 0, -3);
-				echo "<pre><br>";
-				print_r($time. " -> " .$histDota['trade_price']);
-				echo "</pre></br>";
-			}
-
-
-		}
-
 		$get_apiList = $this -> CIC_coin_list_model->get_apiList();
 		for($i=0; $i<count($get_apiList); $i++){
 			// Getting only coin starting with K

@@ -19,7 +19,7 @@ class News extends CB_Controller
     {
         parent::__construct();
 
-        $this->load->library(array('pagination', 'querystring')); 
+        $this->load->library(array('pagination', 'querystring', 'news')); 
     }
 
 	public function index()

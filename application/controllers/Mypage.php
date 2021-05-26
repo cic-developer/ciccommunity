@@ -1568,7 +1568,7 @@ class Mypage extends CB_Controller
 						'포인트 차감후 신청에 실패하였습니다 (관리자 문의)'
 					);
 				} else{
-					$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '-', -$money, '@byself' , '출금신청');
+					$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '-', -$money, '@byself', $mem_id, '출금신청');
 
 					$this->session->set_flashdata(
 						'message',

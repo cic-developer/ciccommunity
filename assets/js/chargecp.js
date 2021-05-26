@@ -235,6 +235,7 @@ const token_abi = [{
     },
 ];
 const token_address = "0x7eee60a000986e9efe7f5c90340738558c24317b";
+const PER_address = "퍼 어드레스 주소!!";
 const PER = new caver.klay.Contract(token_abi, token_address);
 
 // kai-kas 연결 함수
@@ -324,34 +325,41 @@ $(document).on('ready', async function() {
         const balance = await caver.klay.getBalance(account);
         const token_balance = await PER.methods.balanceOf(account).call();
 
-        var network = klaytn.networkVersion;
-        var selected_addr = account;
-        var per_token = token_balance / 1000000000000000000;
+        const network = klaytn.networkVersion;
+        const selected_addr = account;
+        const per_token = token_balance / 1000000000000000000;
 
+        $(document).on('click', '#charge_button', function() {
+            let charge_value = $('#charge_input').val();
+            if (klaytn === undefined) {
+                alert('Klaytn Kaikas가 설치되지 않았습니다.\nKlaytn Kaikas을 설치하여 주세요');
+                location.href = "https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F";
+            }
+            await klaytn.enable();
 
+            const data = caver.klay.abi.encodeFunctionCall({
+                name: "transfer",
+                type: "function",
+                inputs: [{
+                        type: "address",
+                        name: "_to",
+                    },
+                    {
+                        type: "uint256",
+                        name: "_value",
+                    },
+                ],
+            }, [,
+                caver.utils
+                .toBN(charge_value)
+                .mul(caver.utils.toBN(Number(`1e${18}`)))
+                .toString(),
+            ]);
+
+        });
     } catch (error) {
         alert('Klaytn Kaikas연동에 실패 하였습니다. 마이페이지로 이동합니다.');
         console.log(error);
         // location.href = "/mypage";
     }
-
-    setAccountInfo = async() => {
-        const { klaytn } = window;
-        if (klaytn === undefined) return;
-
-        // 클레이튼에 접속되어있는 월렛주소
-        const account = klaytn.selectedAddress;
-
-        //
-        const balance = await caver.klay.getBalance(account);
-        const token_balance = await PER.methods.balanceOf(account).call();
-
-        // 8217 = 메인넷 , 1001 = 테스트넷
-        getNetworkResults.innerHTML =
-            klaytn.networkVersion == 8217 ? "메인넷" : "테스트넷";
-
-        getAccountAddress.innerHTML = account;
-
-        getAccountsResults.innerHTML = token_balance / 1000000000000000000 + " PER";
-    };
 });
