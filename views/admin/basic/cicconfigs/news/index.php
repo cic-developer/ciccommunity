@@ -61,7 +61,11 @@
 										<?php echo html_escape(element('comp_name', element('company', $result))); ?>
 									</a>
 								</td>
-								<td><?php echo html_escape(element('news_title', $result)); ?></td>
+								<td>
+									<a href="<?php echo goto_url(element('newsurl', $result)); ?>">
+										<?php echo html_escape(element('news_title', $result)); ?>
+									</a>
+								</td>
 								<td><?php echo display_datetime(element('news_wdate', $result), 'full'); ?></td>
 								<td><?php echo number_format(element('news_reviews', $result)); ?></td>
 								<td><?php echo element('news_enable', $result) === '1' ? '활성' : '비활성화'; ?></td>
