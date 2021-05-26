@@ -111,32 +111,31 @@ class Mypage extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
-
 	/**
 	 * 마이페이지>나의작성글 입니다
 	 */
 	public function post()
 	{
-
+        
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_mypage_post';
 		$this->load->event($eventname);
-
+        
 		/**
 		 * 로그인이 필요한 페이지입니다
 		 */
 		required_user_login();
-
+        
 		$mem_id = (int) $this->member->item('mem_id');
-
+        
 		$view = array();
 		$view['view'] = array();
-
+        
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-
+        
 		$this->load->model(array('Post_model', 'Post_file_model'));
-
+        
 		/**
 		 * 페이지에 숫자가 아닌 문자가 입력되거나 1보다 작은 숫자가 입력되면 에러 페이지를 보여줍니다.
 		 */
@@ -149,14 +148,14 @@ class Mypage extends CB_Controller
 		// $forder = 'desc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
-
+        
 		$per_page = 10;
 		// $per_page = $this->cbconfig->item('list_count') ? $this->cbconfig->item('list_count') : 10;
 		$offset = ($page - 1) * $per_page;
-
+        
 		$this->Post_model->allow_search_field = array('post_id', 'post_title', 'post_content', 'post_category', 'post_userid', 'post_nickname'); // 검색이 가능한 필드
 		$this->Post_model->search_field_equal = array('post_id', 'post_userid', 'post_nickname'); // 검색중 like 가 아닌 = 검색을 하는 필드
-
+        
 		
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
@@ -165,11 +164,11 @@ class Mypage extends CB_Controller
 			'post.mem_id' => $mem_id,
 			'post_del' => 0,
 		);
-
+        
 		$result = $this->Post_model
 			->get_post_list($per_page, $offset, $where, '', $findex, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
-
+        
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
 				$brd_key = $this->board->item_id('brd_key', element('brd_id', $val));
@@ -188,9 +187,9 @@ class Mypage extends CB_Controller
 				}
 			}
 		}
-
+        
 		$view['view']['data'] = $result;
-
+        
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
@@ -212,11 +211,11 @@ class Mypage extends CB_Controller
 		
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;
-
-
+        
+        
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-
+        
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
@@ -224,8 +223,8 @@ class Mypage extends CB_Controller
 									'post_category' => '카테고리', 'post_userid' => '아이디', 'post_nickname' => '닉네임');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
-		$view['view']['list_delete_url'] = site_url('mypage/listdelete');
-
+		$view['view']['list_delete_url'] = site_url('mypage/postListdelete');
+        
 		/**
 		 * 레이아웃을 정의합니다
 		 */
@@ -234,7 +233,7 @@ class Mypage extends CB_Controller
 		$meta_keywords = $this->cbconfig->item('site_meta_keywords_mypage_post');
 		$meta_author = $this->cbconfig->item('site_meta_author_mypage_post');
 		$page_name = $this->cbconfig->item('site_page_name_mypage_post');
-
+        
 		$layoutconfig = array(
 			'path' => 'mypage',
 			'layout' => 'layout',
@@ -255,9 +254,8 @@ class Mypage extends CB_Controller
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
-
+        
 	}
-
 
 	/**
 	 * 마이페이지>나의작성글(댓글) 입니다
@@ -1479,16 +1477,18 @@ class Mypage extends CB_Controller
 	/**
 	 * 목록 페이지에서 선택삭제를 하는 경우 실행되는 메소드입니다
 	 */
-	public function listdelete()
+	public function postListdelete()
 	{
-
+        
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_mypage_post_listdelete';
 		$this->load->event($eventname);
-
+        
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('before', $eventname);
-
+        
+		required_user_login();
+        
 		/**
 		 * 체크한 게시물의 삭제를 실행합니다
 		 */
@@ -1502,30 +1502,44 @@ class Mypage extends CB_Controller
 				
 				if ($val && $post_mem_id == $mem_id) {
 					$this->board->delete_post($val);
-					array_push($deletePostArr, $val);
 				} else {
 					array_push($deletePostArr, $val);
 				}
 			}
+		}else {
+			// 이벤트가 존재하면 실행합니다
+			Events::trigger('after', $eventname);
+			
+			$this->session->set_flashdata(
+				'message',
+				'게시물 삭제에 실패하였습니다'
+			);
+			redirect('mypage/post');
 		}
 		
-
+		// 삭제에 실패한 게시물 배열
 		if($deletePostArr){
-			print_r("hi");
-			exit;
+			// 이벤트가 존재하면 실행합니다
+			Events::trigger('after', $eventname);
+            
+			// print_r($deletePostArr); => 확인용
+			$this->session->set_flashdata(
+				'message',
+				'일부 게시물 삭제에 실패하였습니다'
+			);
+			redirect('mypage/post');
+		}else {
+			// 이벤트가 존재하면 실행합니다
+			Events::trigger('after', $eventname);
+            
+			/**
+			 * 삭제가 끝난 후 목록페이지로 이동합니다
+			 */
+			$this->session->set_flashdata(
+				'message',
+				'정상적으로 삭제되었습니다'
+			);
+			redirect('mypage/post');
 		}
-		
-
-		// 이벤트가 존재하면 실행합니다
-		Events::trigger('after', $eventname);
-
-		/**
-		 * 삭제가 끝난 후 목록페이지로 이동합니다
-		 */
-		$this->session->set_flashdata(
-			'message',
-			'정상적으로 삭제되었습니다'
-		);
-		redirect('mypage/post');
 	}
 }

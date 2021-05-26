@@ -12,8 +12,8 @@
 			?>
 			<div class="tab">
 				<ul>
-					<li class="active"><a href="post"><span>작성글</span></a></li>
-					<li><a href="comment"><span>작성댓글</span></a></li>
+					<li><a href="post"><span>작성글</span></a></li>
+					<li class="active"><a href="comment"><span>작성댓글</span></a></li>
 					<li><a href="#n"><span>행사한vp</span></a></li>
 				</ul>
 			</div>

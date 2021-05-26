@@ -130,7 +130,6 @@ class CIC_Coin_list_model extends CB_Model
         $node_count = count($coinName);
         $curl_arr = array();
         $master = curl_multi_init();
-        $k = 0;
         for($i = 0; $i < $node_count; $i++){
             $ch = curl_init("https://api.coingecko.com/api/v3/coins/" .$coinName[$i]['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false");
             curl_setopt($ch, CURLOPT_TIMEOUT, 30);
@@ -145,12 +144,9 @@ class CIC_Coin_list_model extends CB_Model
                 die('error occured during curl exec. Additioanl info: ' . 
                         var_export($info));
             }
-            $k++;
             $output [] = json_decode($data,true);   // Add new data to output
             curl_close($ch);
         }
-        echo $k;
-        exit;
         $data = array();
         for($i = 0; $i<count($output); $i++){
             echo "<pre><br>";
@@ -169,9 +165,9 @@ class CIC_Coin_list_model extends CB_Model
 
         curl_setopt_array($curl, array(
             // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/list?markets?vs_currency=KRW",
-            // CURLOPT_URL => "https://api.coingecko.com/api/v3/exchanges/bithumb",
+            CURLOPT_URL => "https://api.coingecko.com/api/v3/exchanges/bithumb",
             // CURLOPT_URL => "https://api.bithumb.com/public/ticker/ALL_KRW",
-            CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/markets?vs_currency=KRW&order=market_cap_desc&per_page=300&page=1&sparkline=false",
+            // CURLOPT_URL => "https://api.coingecko.com/api/v3/coins/markets?vs_currency=KRW&order=market_cap_desc&per_page=300&page=1&sparkline=false",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",
@@ -193,10 +189,10 @@ class CIC_Coin_list_model extends CB_Model
         $array = json_decode($response, true);
         if(is_array($array)){
             // print_r($array);
-            // print_r(count($array['data']));
+            print_r(count($array['data']));
             // print_r(count($array));
             // print_r(count($array['tickers']));
-            // exit;
+            exit;
             return $array;
         } else {
             return FALSE;
