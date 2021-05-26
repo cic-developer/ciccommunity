@@ -293,14 +293,12 @@ class Mypage extends CB_Controller
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 
-		print_r($skeyword );
-        
 		$per_page = 10;
 		// $per_page = $this->cbconfig->item('list_count') ? (int) $this->cbconfig->item('list_count') : 20;
 		$offset = ($page - 1) * $per_page;
         
-		$this->Post_model->allow_search_field = array('cmt_content'); // 검색이 가능한 필드
-		$this->Post_model->search_field_equal = array('cmt_content'); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->Comment_model->allow_search_field = array('cmt_content'); // 검색이 가능한 필드
+		$this->Comment_model->search_field_equal = array(''); // 검색중 like 가 아닌 = 검색을 하는 필드
         
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
@@ -1509,7 +1507,7 @@ class Mypage extends CB_Controller
 	}
 
 	/**
-	 * 목록 페이지에서 선택삭제를 하는 경우 실행되는 메소드입니다
+	 * 게시물 목록 페이지에서 선택삭제를 하는 경우 실행되는 메소드입니다
 	 */
 	public function postListdelete()
 	{
@@ -1575,6 +1573,76 @@ class Mypage extends CB_Controller
 				'정상적으로 삭제되었습니다'
 			);
 			redirect('mypage/post');
+		}
+	}
+
+	/**
+	 * 댓글 목록 페이지에서 선택삭제를 하는 경우 실행되는 메소드입니다
+	 */
+	public function commentListdelete()
+	{
+        
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_mypage_comment_listdelete';
+		$this->load->event($eventname);
+        
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+        
+		required_user_login();
+        
+		/**
+		 * 체크한 게시물의 삭제를 실행합니다
+		 */
+		$deleteCommentArr = array();
+		if ($this->input->post('vsel') && is_array($this->input->post('vsel'))) {
+			foreach ($this->input->post('vsel') as $val) {
+				$comment_info = $this->Comment_model->get_one($val);
+				$comment_mem_id = $post_info['mem_id'];
+				$mem_id = (int) $this->member->item('mem_id');
+				// $member_info = $this->member->get_member();
+				// $mem_id = $member_info['mem_id'];
+				
+				if ($val && $comment_mem_id == $mem_id) {
+					$this->board->delete_comment($val);
+				} else {
+					array_push($deleteCommentArr, $val);
+				}
+			}
+		}else {
+			// 이벤트가 존재하면 실행합니다
+			Events::trigger('after', $eventname);
+			
+			$this->session->set_flashdata(
+				'message',
+				'댓글 삭제에 실패하였습니다'
+			);
+			redirect('mypage/post');
+		}
+		
+		// 삭제에 실패한 게시물 배열
+		if($deleteCommentArr){
+			// 이벤트가 존재하면 실행합니다
+			Events::trigger('after', $eventname);
+            
+			// print_r($deletePostArr); => 확인용
+			$this->session->set_flashdata(
+				'message',
+				'일부 댓글 삭제에 실패하였습니다'
+			);
+			redirect('mypage/post');
+		}else {
+			// 이벤트가 존재하면 실행합니다
+			Events::trigger('after', $eventname);
+            
+			/**
+			 * 삭제가 끝난 후 목록페이지로 이동합니다
+			 */
+			$this->session->set_flashdata(
+				'message',
+				'정상적으로 삭제되었습니다'
+			);
+			redirect('mypage/comment');
 		}
 	}
 }

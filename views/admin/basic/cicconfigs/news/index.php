@@ -22,7 +22,7 @@
 					$buttons = ob_get_contents();
 					ob_end_flush();
 					?>
-					<?php if (element('boardlist', $view)) { ?>
+					<?php if (element('companylist', $view)) { ?>
 						<div class="pull-right mr10">
 							<select name="comp_id" class="form-control" onChange="location.href='<?php echo current_url(); ?>?comp_id=' + this.value;">
 								<option value="">전체신문사</option>
@@ -55,7 +55,7 @@
 								?>
 							<tr>
 								<td><?php echo number_format(element('news_id', $result)); ?></td>
-								<td></td>
+								<td><a href="?comp_id=<?php echo element('comp_id', $result); ?>"><?php echo html_escape(element('comp_name', element('company', $result))); ?></a></td>
 								<td><?php echo html_escape(element('news_title', $result)); ?></td>
 								<td><?php echo display_datetime(element('news_wdate', $result), 'full'); ?></td>
 								<td><?php echo number_format(element('news_reviews', $result)); ?></td>

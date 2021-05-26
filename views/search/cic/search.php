@@ -63,7 +63,7 @@
 				<div class="result" style="overflow:hidden; padding-bottom:40px; padding-left:40px; padding-right:40px;">
 				<!-- TradingView Widget BEGIN -->
 				<div class="text-center" style="float: left">
-					<canvas id="canvas"></canvas>
+				<canvas id="canvas" width="400" height="200"></canvas>
 				</div>	
 					<!-- TradingView Widget END -->
 					<div class="right_content_all">
@@ -366,55 +366,34 @@
 	</div>
 	<!-- e: #container-wrap //-->
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script>
-	var ctx = document.getElementById('canvas');
-	var context = ctx.getContext("2d");
-
-
-	// ctx.width = 400; 
-	// ctx.heigh = 100;
-	var data = {
-	labels: ['', '', '', '', '', ''],
-	datasets: [{
-		label: 'Bitcoin',
-		data: [1, 2, 5, 7,  28, 30 ],
-		backgroundColor: "white",
-		borderColor: "#3e95cd"
-		}]
-	};
-	var option = {
-		responsive: false,
-		maintainAspectRatio: false,
-		elements: {
-			line: {
-				tension: 0.4 // disables bezier curves
-			}
-		},
-		legend: {
-			display: false
-		},
-		scales: {
-			yAxes:[{
-				stacked:true,
-				ticks: {			
-					max: high,
-					min: low
-					
-				},
-				gridLines: {
-					display:true,
-				}
-			}],
-			xAxes:{
-				gridLines: {
-					display: true,
-				}
-			}
-		}
-	};
-	var myBarChart = Chart.Line(canvas,{
-		data:data,
-		options:option
-	});
+var ctx = document.getElementById('canvas').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+});
 </script>
