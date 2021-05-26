@@ -419,7 +419,9 @@ class Mypage extends CB_Controller
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
         
-		
+		$order_by_field = element('order_by_field', $board)
+			? element('order_by_field', $board)
+			: 'vp_id';
 		$findex = $this->input->get('findex', null, $order_by_field);
 		// $findex = $this->Comment_model->primary_key;
 		
@@ -444,9 +446,11 @@ class Mypage extends CB_Controller
 		// $result = $this->CIC_vp_model
 		// 	->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		// $result = $this->CIC_vp_model
-		// 	->get_vp_list($per_page, $offset, $where, '', $forder, $sfield, $skeyword);
+		// 	->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		$result = $this->CIC_vp_model
+			->get_vp_list($per_page, $offset, $where, '', $forder, $sfield, $skeyword);
 
-		// 	print_r($result);
+			print_r($result);
 			exit;
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 

@@ -369,6 +369,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script>
 	var ctx = document.getElementById('canvas').getContext('2d');
+
+	var label = '<?php echo $symbole; ?>';
 	var time = new Array();
 	<?php foreach ($his_time as $key => $val){ ?>
 		time.push('<?php echo $val; ?>');
@@ -384,7 +386,7 @@
     data: {
         labels: ['3:00', '2:00', '1:00', '0:00', '9:00', '8:00', '7:00', '6:00', '5:00', '4:00', '3:00', '2:00', '1:00', '0:00', '3:00', '2:00', '1:00', '0:00', '9:00', '8:00', '7:00', '6:00', '5:00', '4:00'],
         datasets: [{
-            label: '# of Votes',
+            label: label,
             data: price,
             backgroundColor: ['rgba(0,0,255, 0.1)'],
             borderColor: [
@@ -407,14 +409,18 @@
 		},
 		scales: {
 			xAxes: [{
-				// display: false,
+				display: false,
 				gridLines: {
 					display: false,
 				}
 			}],
 			yAxes: [{
-				// display: false,
+				ticks: {
+					display: false,
+				},
+				
 				gridLines: {
+					
 					display: true,
 				}
 			}]

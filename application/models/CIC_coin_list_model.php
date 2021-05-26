@@ -142,11 +142,11 @@ class CIC_Coin_list_model extends CB_Model
 
 
     //GET DATA FOR CHART
-    function get_histData(){
+    function get_histData($market){
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.upbit.com/v1/candles/minutes/60?market=KRW-BTC&count=24",
+            CURLOPT_URL => "https://api.upbit.com/v1/candles/minutes/60?market=KRW-{$market}&count=24",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",
@@ -166,7 +166,6 @@ class CIC_Coin_list_model extends CB_Model
             echo "cUrl Error :" . $err;
         }
         $array = json_decode($response, true);
-
         return $array;
     }
 }

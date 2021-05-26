@@ -30,8 +30,7 @@ class CIC_vp_model extends CB_Model
 
 	public function get_admin_list($limit = '', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
-		print_r("test....ing....");
-		exit;
+		
 		$select = 'cic_vp.*, member.mem_userid, member.mem_nickname, member.mem_is_admin, member.mem_icon, member.mem_vp';
 		$join[] = array('table' => 'member', 'on' => 'cic_vp.mem_id = member.mem_id', 'type' => 'left');
 		$result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
@@ -41,11 +40,10 @@ class CIC_vp_model extends CB_Model
 
 	public function get_vp_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
-		$sfield = array('vp_id');
-		// $sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
-		// if (empty($sfield)) {
-		// 	$sfield = array('vp_id', 'post_content');
-		// }
+		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
+		if (empty($sfield)) {
+			$sfield = array('vp_id');
+		}
 
 		$search_where = array();
 		$search_like = array();
@@ -121,14 +119,15 @@ class CIC_vp_model extends CB_Model
 			}
 			$this->db->group_end();
 		}
-
 		$this->db->order_by($orderby);
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}
 		$qry = $this->db->get();
+		print_r($qry);
+		exit;
 		$result['list'] = $qry->result_array();
-
+		
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
 		$this->db->join('member', 'cic_vp.mem_id = member.mem_id', 'left');

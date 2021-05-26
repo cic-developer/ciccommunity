@@ -217,6 +217,7 @@ class Search extends CB_Controller
 		$market = $key_search['clist_market'];
 		$api_result = $this->CIC_coin_list_model -> get_price($market);
 		$act_price = $this->CIC_coin_list_model -> act_price($market);
+		$getHist = $this -> CIC_coin_list_model->get_histData($market);
 		$korean = $key_search['clist_name_ko'];
 		$symbole = $key_search['clist_market'];
 
@@ -247,7 +248,7 @@ class Search extends CB_Controller
 		//HISTORICAL DATA FOR CHART
 		$his_price = array();
 		$his_time = array();
-		$getHist = $this -> CIC_coin_list_model->get_histData($market);
+		
 		foreach($getHist as $histDota){
 			if($histDota['candle_date_time_kst']){
 				$his_time[] = substr($histDota['candle_date_time_kst'], 12);

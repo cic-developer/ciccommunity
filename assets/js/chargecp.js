@@ -1,5 +1,3 @@
-// import { caver } from "./caver";
-
 const token_abi = [{
         constant: true,
         inputs: [],
@@ -237,79 +235,6 @@ const token_abi = [{
 const token_address = "0x7eee60a000986e9efe7f5c90340738558c24317b";
 const PER = new caver.klay.Contract(token_abi, token_address);
 const PER_address = "0x0E3A0B94cF7bd745aA8a65Bd707509761e65A832"; //퍼 월렛 주소
-
-// kai-kas 연결 함수
-// connectAccountInfo = async() => {
-//     const { klaytn } = window;
-//     if (klaytn) {
-//         try {
-//             // 연결되면
-//             await klaytn.enable();
-//             // setAccountInfo() 로 카이카스 정보 불러오기
-//             this.setAccountInfo(klaytn);
-//             console.log("kai-kas 연결 성공");
-//         } catch (error) {
-//             // 연결실패
-//             console.log("kai-kas 연결 실패");
-//         }
-//     } else {
-//         // 카이카스가 설치되어있지 않음
-//         console.log("kai-kas가 설치되어 있지 않은 브라우져 입니다.");
-//     }
-// };
-
-
-
-// RunTransfer.onclick = async() => {
-//     const { klaytn } = window;
-//     if (klaytn === undefined) return;
-//     const account = klaytn.selectedAddress;
-
-//     const data = caver.klay.abi.encodeFunctionCall({
-//         name: "transfer",
-//         type: "function",
-//         inputs: [{
-//                 type: "address",
-//                 name: "_to",
-//             },
-//             {
-//                 type: "uint256",
-//                 name: "_value",
-//             },
-//         ],
-//     }, [
-//         ToAddress.value,
-//         caver.utils
-//         .toBN(ToValue.value)
-//         .mul(caver.utils.toBN(Number(`1e${18}`)))
-//         .toString(),
-//     ]);
-
-//     caver.klay
-//         .sendTransaction({
-//             type: "SMART_CONTRACT_EXECUTION",
-//             account,
-//             to: token_address,
-//             data,
-//             gas: 3000000,
-//         })
-//         .on("transactionHash", (transactionHash) => {
-//             console.log("txHash", transactionHash);
-//             txhash.innerHTML = `https://scope.klaytn.com/tx/${transactionHash}?tabId=internalTx`;
-//         })
-//         .on("receipt", (receipt) => {
-//             console.log("receipt", receipt);
-//             reciept.innerHTML = JSON.stringify(receipt);
-//             success_fromAddress.innerHTML = receipt.from;
-//             success_toAddress.innerHTML = receipt.logs[0].topics[2];
-//             success_value.innerHTML =
-//                 caver.utils.hexToNumberString(receipt.logs[0].data) /
-//                 1000000000000000000;
-//         })
-//         .on("error", (error) => {
-//             console.log("error", error);
-//         });
-// };
 
 $(document).on('ready', async function() {
     const klaytn = window.klaytn;
