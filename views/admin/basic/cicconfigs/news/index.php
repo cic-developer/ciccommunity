@@ -56,7 +56,7 @@
 								?>
 							<tr>
 								<td><?php echo number_format(element('news_id', $result)); ?></td>
-								<td><a href="?news.comp_id=<?php echo element('news.comp_id', $result); ?>"><?php echo html_escape(element('comp_name', element('company', $result))); ?></a><span class="fa fa-external-link"></span></td>
+								<td><a href="?comp_id=<?php echo element('comp_id', $result); ?>"><?php echo html_escape(element('comp_name', element('company', $result))); ?></a> <a href="<?php echo goto_url(element('companydurl', $result)); ?>" target="_blank"><span class="fa fa-external-link"></span></a></td>
 								<td><?php echo html_escape(element('news_title', $result)); ?></td>
 								<td><?php echo display_datetime(element('news_wdate', $result), 'full'); ?></td>
 								<td><?php echo number_format(element('news_reviews', $result)); ?></td>

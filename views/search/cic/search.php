@@ -186,18 +186,21 @@
 				<div class="gap75"></div>
 				<div class="tits">
 					<h3>WRITER</h3>
-					<?php
-						if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result) {
-					?>
+					<?php if (element('list', element('data', $view))) {
+							foreach (element('list', element('data', $view)) as $result) { ?>		
 					<a href="<?php echo base_url(). "search/?board_id="?><?php echo element('brd_id', $value) ?>" class="more"><span>more</span></a>
 					<?php
-
+							}
+						}
+					}
 					?>
 				</div>
 				<div class="list vimg vp">
 					<ul>
-		
+					<?php
+						if (element('list', element('data', $view))) {
+							foreach (element('list', element('data', $view)) as $result) {
+					?>		
 						<li>
 							<a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>">
 								<div class="img"><img src="<?php echo thumb_url(element('images', $result))?>?>" alt=""></div>
