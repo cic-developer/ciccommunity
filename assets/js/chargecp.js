@@ -1,3 +1,6 @@
+document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/caver-js/1.6.1/caver.min.js"></script>');
+
+function init() {}
 const token_abi = [{
         constant: true,
         inputs: [],
@@ -241,6 +244,8 @@ $(document).on('ready', async function() {
     if (klaytn === undefined) {
         alert('Klaytn Kaikas가 설치되지 않았습니다.\nKlaytn Kaikas을 설치하여 주세요');
         location.href = "https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F";
+    } else {
+        console.log('klaytn : ', klaytn);
     }
 
     try {

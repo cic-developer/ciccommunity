@@ -12,14 +12,14 @@ class News extends CB_Controller
     protected $modelname = 'News_model';
 
 
-    protected $helpers = array('form', 'array','cic_company');
+    protected $helpers = array('form', 'array');
 
 
     function __construct()
     {
         parent::__construct();
 
-        $this->load->library(array('pagination', 'querystring', 'cic_news')); 
+        $this->load->library(array('pagination', 'querystring', 'cic_company')); 
     }
 
 	public function index()
@@ -68,9 +68,7 @@ class News extends CB_Controller
 
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
-				// print_r('hello');
-				// exit;
-				// $result['list'][$key]['company'] = $company = $this->news->item_all(element('comp_id', $val));
+				// $result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
 				$result['list'][$key]['num'] = $list_num--;
 
 			}

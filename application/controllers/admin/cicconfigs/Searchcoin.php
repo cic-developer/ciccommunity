@@ -131,7 +131,7 @@ class Searchcoin extends CB_Controller
 		foreach($coin_list as $value){
 			$coin_arr[] = element('clist_market', $value);
 		}
-
+    
 		$get_apiList = $this -> CIC_coin_list_model->get_apiList();
 		for($i=0; $i<count($get_apiList); $i++){
 			// Getting only coin starting with K
@@ -177,6 +177,8 @@ class Searchcoin extends CB_Controller
 							$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
 						}	
 					} 
+				}else{
+					continue;
 				}	
 			}
 		}

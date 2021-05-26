@@ -490,7 +490,6 @@ class Mypage extends CB_Controller
 		$search_option = array('vp_content' => '내용');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
-		$view['view']['list_delete_url'] = site_url('mypage/vpListdelete');
         
 		/**
 		 * 레이아웃을 정의합니다
@@ -505,6 +504,133 @@ class Mypage extends CB_Controller
 			'path' => 'mypage',
 			'layout' => 'layout',
 			'skin' => 'vp',
+			'layout_dir' => 'cic_sub',//$this->cbconfig->item('layout_mypage'),
+			'mobile_layout_dir' => 'cic_sub',//$this->cbconfig->item('mobile_layout_mypage'),
+			'use_sidebar' => $this->cbconfig->item('sidebar_mypage'),
+			'use_mobile_sidebar' => $this->cbconfig->item('mobile_sidebar_mypage'),
+			'skin_dir' => $this->cbconfig->item('skin_mypage'),
+			'mobile_skin_dir' => $this->cbconfig->item('mobile_skin_mypage'),
+			'page_title' => $page_title,
+			'meta_description' => $meta_description,
+			'meta_keywords' => $meta_keywords,
+			'meta_author' => $meta_author,
+			'page_name' => $page_name,
+		);
+		$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
+	}
+
+	public function cp()
+	{
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_mypage_cp';
+		$this->load->event($eventname);
+
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+
+		$mem_id = (int) $this->member->item('mem_id');
+
+		$view = array();
+		$view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+        
+		/**
+		 * 페이지에 숫자가 아닌 문자가 입력되거나 1보다 작은 숫자가 입력되면 에러 페이지를 보여줍니다.
+		 */
+		$param =& $this->querystring;
+		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
+        
+		$order_by_field = element('order_by_field', $board)
+			? element('order_by_field', $board)
+			: 'vp_id';
+		$findex = $this->input->get('findex', null, $order_by_field);
+		// $findex = $this->Comment_model->primary_key;
+		
+		$forder = 'desc';
+		$sfield = $this->input->get('sfield', null, '');
+		$skeyword = $this->input->get('skeyword', null, '');
+
+		$per_page = 10;
+		// $per_page = $this->cbconfig->item('list_count') ? (int) $this->cbconfig->item('list_count') : 20;
+		$offset = ($page - 1) * $per_page;
+        
+		$this->CIC_vp_model->allow_search_field = array('vp_content', 'vp_point', 'vp-action'); // 검색이 가능한 필드
+		$this->CIC_vp_model->search_field_equal = array(''); // 검색중 like 가 아닌 = 검색을 하는 필드
+        
+		/**
+		 * 게시판 목록에 필요한 정보를 가져옵니다.
+		 */
+		$where = array(
+			'cic_vp.mem_id' => $mem_id,
+		);
+		$result = $this->CIC_vp_model->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+
+		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
+
+		if (element('list', $result)) {
+			foreach (element('list', $result) as $key => $val) {
+				$post = $this->Post_model
+					->get_one(element('post_id', $val), 'brd_id');
+				$brd_key = $this->board->item_id('brd_key', element('brd_id', $post));
+				$result['list'][$key]['num'] = $list_num--;
+			}
+		}
+		$view['view']['data'] = $result;
+        
+		/**
+		 * 페이지네이션을 생성합니다
+		 */
+		$config['base_url'] = site_url('mypage/comment') . '?' . $param->replace('page');
+		$config['total_rows'] = $result['total_rows'];
+		$config['per_page'] = $per_page;
+		$config['first_link'] = '처음';
+		$config['last_link'] = '마지막';
+		$config['next_link'] = '다음';
+		$config['prev_link'] = '이전';
+		if ($this->cbconfig->get_device_view_type() === 'mobile') {
+			$config['num_links'] = element('mobile_page_count', $board)
+				? element('mobile_page_count', $board) : 2;
+		} else {
+			$config['num_links'] = element('page_count', $board)
+				? element('page_count', $board) : 4;
+		}
+		$this->pagination->initialize($config);
+        
+		$view['view']['paging'] = $this->pagination->create_links();
+		$view['view']['page'] = $page;
+        
+        
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+        
+        
+		/**
+		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
+		 */
+		$search_option = array('cp_content' => '내용');
+		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
+		$view['view']['search_option'] = search_option($search_option, $sfield);
+        
+		/**
+		 * 레이아웃을 정의합니다
+		 */
+		$page_title = $this->cbconfig->item('site_meta_title_mypage_cp');
+		$meta_description = $this->cbconfig->item('site_meta_description_mypage_cp');
+		$meta_keywords = $this->cbconfig->item('site_meta_keywords_mypage_cp');
+		$meta_author = $this->cbconfig->item('site_meta_author_mypage_cp');
+		$page_name = $this->cbconfig->item('site_page_name_mypage_cp');
+        
+		$layoutconfig = array(
+			'path' => 'mypage',
+			'layout' => 'layout',
+			'skin' => 'cp',
 			'layout_dir' => 'cic_sub',//$this->cbconfig->item('layout_mypage'),
 			'mobile_layout_dir' => 'cic_sub',//$this->cbconfig->item('mobile_layout_mypage'),
 			'use_sidebar' => $this->cbconfig->item('sidebar_mypage'),

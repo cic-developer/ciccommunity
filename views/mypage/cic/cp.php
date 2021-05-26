@@ -14,8 +14,8 @@
 				<ul>
 					<li><a href="post"><span>작성글</span></a></li>
 					<li><a href="comment"><span>작성댓글</span></a></li>
-					<li class="active"><a href="vp"><span>행사한vp</span></a></li>
-					<li><a href="cp"><span>행사한cp</span></a></li>
+					<li><a href="vp"><span>행사한vp</span></a></li>
+					<li class="active"><a href="cp"><span>행사한cp</span></a></li>
 				</ul>
 			</div>
 			<div class="list record">
@@ -29,7 +29,7 @@
 					<thead>
 						<tr>
 							<th>번호</th>
-							<th>vp</th>
+							<th>cp</th>
 							<th>내용</th>
 							<th>등록일</th>
 						</tr>
