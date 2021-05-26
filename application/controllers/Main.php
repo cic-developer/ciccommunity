@@ -166,4 +166,28 @@ class Main extends CB_Controller
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
+
+	/**
+	 * 배너 조회수
+	 */
+	public function bannerHit()
+	{
+
+		print_r("hi");
+		exit;
+		$view = array();
+		$view['view'] = array();
+		$view['view']['banner'] = array();
+
+		$eventname = 'event_main_index';
+		$this->load->event($eventname);
+
+		$view = array();
+		$view['view'] = array();
+		$view['view']['banner'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+        
+	}
 }

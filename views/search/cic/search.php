@@ -78,21 +78,32 @@
 						</p>	
 					</div>
 					<p class="stxt">
-					<h6 class="price_now"> ￦<?php echo $trade ?></h6>
+						<?php if($change === 'FALL'){?>
+							<h6 style="color: blue" class="price_now"> ￦<?php echo $trade ?></h6>
+						<?php } elseif($change === 'RISE'){?>
+							<h6 class="price_now" style="color: red"> ￦<?php echo $trade ?></h6>
+						<?php }else {?>
+							<h6 class="price_now"> ￦<?php echo $trade ?></h6>
+						<?php }?>
 						<!--상한가와 하한가 전체-->
 						<h6 class="high_mnp_all">
 							<!--하한가-->
 							<?php if($change === 'FALL'){?>
 								<u class="low_money"> - <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-down"></i>
-							<?php } else{ ?> </u>
-								<u class="low_money"> + <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-up"></i>
+							<?php } elseif($change === 'RISE'){ ?> </u>
+								<u class="low_money" style="color: red"> + <?php echo $difference; ?> <i  class="fas fa-long-arrow-alt-up"></i>
 							</u>
-							<?php } ?>
+							<?php} else{ ?> </u>
+								<u class="low_money" style="color: black"> + <?php echo $difference; ?> <i  class="fas fa-long-arrow-alt-up"></i>
+							</u>
+							<?php  }?>
+
+							<!-- RATE -->
 							<?php if($change === 'FALL'){?>
 							<u class="low_money_percent"> - <?php echo round($rate, 2);  ?>% <i class="fas fa-long-arrow-alt-down"></i>
 							</u>
 							<?php } else{ ?> </u>
-							<u class="low_money_percent">+ <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-up"></i>
+							<u class="low_money_percent" style="color: red">+ <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-up"></i>
 							</u>
 							<?php } ?>	
 							<!--하한가 끝-->

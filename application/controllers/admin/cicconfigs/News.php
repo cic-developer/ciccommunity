@@ -57,12 +57,12 @@ class News extends CB_Controller
 		$this->{$this->modelname}->allow_order_field = array('news_id'); // 정렬이 가능한 필드
 		
 		$where = array(
-			'news_show' => 1,
-			'news_enable' => 1,
+			// 'news_show' => 1,
+			// 'news_enable' => 1,
 		);
 
 		if($compid = (int) $this->input->get('comp_id')){
-			$where['comp_id'] = $compid;
+			$where['news.comp_id'] = $compid;
 		}
 		
 

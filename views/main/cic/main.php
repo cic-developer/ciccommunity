@@ -344,5 +344,25 @@
 <script>
     setInterval(() => $('.visual-slide').trigger('prev.owl.carousel', [600]), 3000);
 
+    $(document).on('click', ".banner-hit", function() {
+        var banner_id = $(".banner-hit").data('banner-id');
 
+        $.ajax({
+            url: cb_url + '/main/bannerHit',
+            type: 'POST',
+            data: {     
+                ban_id: banner_id,
+                csrf_test_name : cb_csrf_hash
+            },
+            dataType: 'json',
+            async: false,
+            cache: false,
+            success: function(data){
+
+            },
+            error: function(){
+                alert('Banner Hit Error!');
+            }
+        });
+    })
 </script>
