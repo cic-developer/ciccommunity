@@ -38,11 +38,14 @@ class CIC_vp_model extends CB_Model
 		return $result;
 	}
 
-	public function get_vp_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
+	public function get_comment_list($limit = '', $offset = '', $where = '', $like = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
+		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
+			$orderby = 'vp_id';
+		}
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
 		if (empty($sfield)) {
-			$sfield = array('vp_id');
+			$sfield = 'vp_content';
 		}
 
 		$search_where = array();
@@ -119,18 +122,18 @@ class CIC_vp_model extends CB_Model
 			}
 			$this->db->group_end();
 		}
+
 		$this->db->order_by($orderby);
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}
 		$qry = $this->db->get();
-		print_r($qry);
 		exit;
 		$result['list'] = $qry->result_array();
-		
+
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
-		$this->db->join('member', 'cic_vp.mem_id = member.mem_id', 'left');
+		$this->db->join('member', 'comment.mem_id = member.mem_id', 'left');
 		if ($where) {
 			$this->db->where($where);
 		}

@@ -123,6 +123,7 @@ class Post extends CB_Controller
 		$select = 'brd_id, brd_name';
 		$view['view']['boardlist'] = $this->Board_model->get_board_list();
 
+
 		/**
 		 * primary key 정보를 저장합니다
 		 */

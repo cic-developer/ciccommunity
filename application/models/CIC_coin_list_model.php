@@ -168,5 +168,34 @@ class CIC_Coin_list_model extends CB_Model
         $array = json_decode($response, true);
         return $array;
     }
+
+
+     //GET DATA FOR CHART
+     function get_price_($market){
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.upbit.com/v1/ticker?markets=KRW-{$market}",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 90,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET"   
+            
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if($err){
+            echo "cUrl Error :" . $err;
+        }
+        $array = json_decode($response, true);
+        return $array;
+    }
 }
 ?>

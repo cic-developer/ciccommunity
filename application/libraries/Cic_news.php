@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class News extends CI_Controller
+class Cic_news extends CI_Controller
 {
     private $CI;
     private $company_id;

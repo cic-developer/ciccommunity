@@ -19,7 +19,7 @@ class News extends CB_Controller
     {
         parent::__construct();
 
-        $this->load->library(array('pagination', 'querystring', 'news')); 
+        $this->load->library(array('pagination', 'querystring', 'cic_news')); 
     }
 
 	public function index()
@@ -70,7 +70,7 @@ class News extends CB_Controller
 			foreach (element('list', $result) as $key => $val) {
 				// print_r('hello');
 				// exit;
-				$result['list'][$key]['company'] = $company = $this->board->item_all(element('comp_id', $val));
+				// $result['list'][$key]['company'] = $company = $this->news->item_all(element('comp_id', $val));
 				$result['list'][$key]['num'] = $list_num--;
 
 			}
