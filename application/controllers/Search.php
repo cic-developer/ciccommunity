@@ -254,8 +254,10 @@ class Search extends CB_Controller
 				$his_time[] = substr($time, 0, -3);
 				$his_price[] = $histDota['trade_price'];
 			}
+		// print_r(count($his_price));
+		// print_r(count($his_time));	
 		$view['his_price'] = $his_price;
-		$view['time'] = $his_time;
+		$view['his_time'] = $his_time;
 
 		}
 		// END HISTORICAL DATA FOR CHART

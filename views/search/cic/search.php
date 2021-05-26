@@ -395,22 +395,25 @@
 		
     },
 	options: {
-		scales: {
-			x: {
-				gridLines: {
-					display: true,
-					zeroLineColor:'white',
-                  	color:'transparent'
-				}
-			},
-			y: {
-				gridLines: {
-					display: true,
-					zeroLineColor:'white',
-                  	color:'transparent'
-				}
-			}
+		responsive: true,
+		// tooltips: {
+		// 	enabled: false,
+		// },
+		legend: {
+			display: false,
 		},
+		scales: {
+			xAxes: [{
+				gridLines: {
+					display: false,
+				}
+			}],
+			yAxes: [{
+				gridLines: {
+					display: false,
+				}
+			}]
+		}
 
 	}
 });
