@@ -53,6 +53,10 @@ class News extends CB_Controller
 		$this->{$this->modelname}->search_field_equal = array('news_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('news_id'); // 정렬이 가능한 필드
 		
+		$where = array(
+
+		);
+
 		if($compid = (int) $this->input->get('comp_id')){
 			$where['comp_id'] = $compid;
 		}
@@ -64,7 +68,9 @@ class News extends CB_Controller
 
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
-				// $result['list'][$key]['company'] = $company = $this->company->item_all(element('comp_id', $val));
+				// print_r('hello');
+				// exit;
+				$result['list'][$key]['company'] = $company = $this->company->item_all(element('comp_id', $val));
 				$result['list'][$key]['num'] = $list_num--;
 
 			}

@@ -372,8 +372,8 @@ class Mypage extends CB_Controller
 			'path' => 'mypage',
 			'layout' => 'layout',
 			'skin' => 'comment',
-			'layout_dir' => $this->cbconfig->item('layout_mypage'),
-			'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_mypage'),
+			'layout_dir' => 'cic_sub',//$this->cbconfig->item('layout_mypage'),
+			'mobile_layout_dir' => 'cic_sub',//$this->cbconfig->item('mobile_layout_mypage'),
 			'use_sidebar' => $this->cbconfig->item('sidebar_mypage'),
 			'use_mobile_sidebar' => $this->cbconfig->item('mobile_sidebar_mypage'),
 			'skin_dir' => $this->cbconfig->item('skin_mypage'),
@@ -1599,8 +1599,7 @@ class Mypage extends CB_Controller
 		if ($this->input->post('vsel') && is_array($this->input->post('vsel'))) {
 			foreach ($this->input->post('vsel') as $val) {
 				$comment_info = $this->Comment_model->get_one($val);
-				exit;
-				$comment_mem_id = $post_info['mem_id'];
+				$comment_mem_id = $comment_info['mem_id'];
 				$mem_id = (int) $this->member->item('mem_id');
 				// $member_info = $this->member->get_member();
 				// $mem_id = $member_info['mem_id'];
@@ -1620,7 +1619,7 @@ class Mypage extends CB_Controller
 				'message',
 				'댓글 삭제에 실패하였습니다'
 			);
-			redirect('mypage/post');
+			redirect('mypage/comment');
 		}
 		
 		// 삭제에 실패한 게시물 배열
@@ -1633,7 +1632,7 @@ class Mypage extends CB_Controller
 				'message',
 				'일부 댓글 삭제에 실패하였습니다'
 			);
-			redirect('mypage/post');
+			redirect('mypage/comment');
 		}else {
 			// 이벤트가 존재하면 실행합니다
 			Events::trigger('after', $eventname);

@@ -119,7 +119,6 @@ class Searchcoin extends CB_Controller
 		//이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 		// keyword 테이블을 통째로 불러온다.
-		
 		$coin_list = $this->CIC_coin_list_model->getstockData();
 		// 통째로 가져온 테이블에서 keyword 만 담은 array() 만든다.
 		$keyword_arr = array();
@@ -127,16 +126,20 @@ class Searchcoin extends CB_Controller
 		foreach($keyword_list as $value){
 			$keyword_arr[] = element('coin_keyword', $value);
 		}
-
 		// 통째로 가져온 테이블에서 keyword 만 담은 array() 만든다.
 		$coin_arr = array();
 		foreach($coin_list as $value){
 			$coin_arr[] = element('clist_market', $value);
 		}
-		$get_apiList = $this -> CIC_coin_list_model->get_apiList();
 
+		$getHist = $this -> CIC_coin_list_model->get_histData();
+		echo "<pre><br>";
+		print_r($getHist);
+		echo "</pre></br>";
+
+		$get_apiList = $this -> CIC_coin_list_model->get_apiList();
 		for($i=0; $i<count($get_apiList); $i++){
-				// Getting only coin starting with K
+			// Getting only coin starting with K
 			$market =$get_apiList[$i]['market'];
 			if(strcmp(substr($market, 0, 1), "K")==0){	
 				$market = substr($market, 4);	
@@ -178,18 +181,16 @@ class Searchcoin extends CB_Controller
 						else{
 							$this->CIC_coin_keyword_model->insert_keyword_list($thisData);
 						}	
-				} 
-			}	
+					} 
+				}	
+			}
 		}
-	}
-				
 		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
-
 	public function CStock_keyword(){
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_amdmin_coin_keyword';
