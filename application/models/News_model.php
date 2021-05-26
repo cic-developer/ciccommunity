@@ -352,7 +352,7 @@ class News_model extends CB_Model
 		);
 		
 		$this->db->select_max('news_important');
-		$result = $this->db->get('post')->row_array();
+		$result = $this->db->get('news')->row_array();
 
 		$updatedata = array(
 			'news_important' => element('news_important', $result) +1,

@@ -11,17 +11,17 @@
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/enable'); ?>">비활성화 뉴스목록</a></li>
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/show'); ?>">비공개 뉴스목록</a></li>
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/most_view_news'); ?>">많이 본 뉴스 관리</a></li>
-						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/show'); ?>">주요 뉴스 관리</a></li>
+						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/important'); ?>">주요 뉴스 관리</a></li>
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/show'); ?>">신문사 관리</a></li>
 					</ul>
 					<?php
 					ob_start();
-					update_news_important_url
+					
 					?>
 						<div class="btn-group pull-right" role="group" aria-label="...">
 							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('update_news_enable_0_url', $view); ?>" >비활성화</button>
 							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('update_news_show_0_url', $view); ?>" >비공개</button>
-							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('update_news_show_0_url', $view); ?>" >주요뉴스 선정</button>
+							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('update_news_important_url', $view); ?>" >주요뉴스 선정</button>
 						</div>
 					<?php
 					$buttons = ob_get_contents();

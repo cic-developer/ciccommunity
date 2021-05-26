@@ -11,7 +11,7 @@
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/enable'); ?>">비활성화 뉴스목록</a></li>
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/show'); ?>">비공개 뉴스목록</a></li>
 						<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/most_view_news'); ?>">많이 본 뉴스 관리</a></li>
-						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/show'); ?>">주요 뉴스 관리</a></li>
+						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/important'); ?>">주요 뉴스 관리</a></li>
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/show'); ?>">신문사 관리</a></li>
 					</ul>
 					<?php
