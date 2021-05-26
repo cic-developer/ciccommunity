@@ -53,6 +53,9 @@ class News extends CB_Controller
 		$this->{$this->modelname}->search_field_equal = array('news_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('news_id'); // 정렬이 가능한 필드
 		
+		if($compid = (int) $this->input->get('comp_id')){
+			$where['comp_id'] = $compid;
+		}
 
 		$result = $this->{$this->modelname}
 			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);

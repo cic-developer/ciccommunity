@@ -18,7 +18,7 @@ class Mypage extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_withdraw', 'CIC_withdraw_log', 'Member', 'Post');
+	protected $models = array('CIC_withdraw', 'CIC_withdraw_log', 'Member', 'Post', 'Comment');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -287,7 +287,8 @@ class Mypage extends CB_Controller
 		$this->load->model(array('Post_model', 'Comment_model'));
         
 		
-		$findex = $this->Comment_model->primary_key;
+		$findex = $this->input->get('findex', null, $order_by_field);
+		// $findex = $this->Comment_model->primary_key;
 		
 		// $forder = 'desc';
 		$sfield = $this->input->get('sfield', null, '');
@@ -1598,6 +1599,7 @@ class Mypage extends CB_Controller
 		if ($this->input->post('vsel') && is_array($this->input->post('vsel'))) {
 			foreach ($this->input->post('vsel') as $val) {
 				$comment_info = $this->Comment_model->get_one($val);
+				exit;
 				$comment_mem_id = $post_info['mem_id'];
 				$mem_id = (int) $this->member->item('mem_id');
 				// $member_info = $this->member->get_member();
@@ -1608,6 +1610,7 @@ class Mypage extends CB_Controller
 				} else {
 					array_push($deleteCommentArr, $val);
 				}
+				
 			}
 		}else {
 			// 이벤트가 존재하면 실행합니다
