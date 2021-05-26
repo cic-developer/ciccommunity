@@ -368,14 +368,18 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script>
-var ctx = document.getElementById('canvas').getContext('2d');
-var myChart = new Chart(ctx, {
+	var ctx = document.getElementById('canvas').getContext('2d');
+	var time = new Array();
+	<?php foreach ($his_time as $key => $val){ ?>
+		time.push('<?php echo $val; ?>');
+	<?php } ?>
+	var myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: <?php echo $time; ?>
+        labels: time,
         datasets: [{
             label: '# of Votes',
-            data: <?php echo $his_price; ?>,
+            data: [12, 19, 3, 5, 2, 3, 4],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
