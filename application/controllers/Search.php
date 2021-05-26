@@ -243,6 +243,27 @@ class Search extends CB_Controller
         //Send to view
 		$view['symbole'] = strtoupper($symbole);
 		$view['korean'] = $korean;
+
+		//HISTORICAL DATA FOR CHART
+		// $his_price = array();
+		// $time = array();
+		$getHist = $this -> CIC_coin_list_model->get_histData();
+		foreach($getHist as $histDota){
+			if($histDota['candle_date_time_kst']){
+				$time = substr($histDota['candle_date_time_kst'], 12);
+				$time = substr($time, 0, -3);
+				$his_price = $histDota['trade_price']);
+
+				$view['his_price'] = $his_price;
+				$view['time'] = $time;
+
+			}
+
+
+		}
+		// END HISTORICAL DATA FOR CHART
+
+
 		// 코인 검색 여기까지 
 
 		/**
