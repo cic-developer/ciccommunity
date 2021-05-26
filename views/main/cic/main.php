@@ -345,7 +345,7 @@
     setInterval(() => $('.visual-slide').trigger('prev.owl.carousel', [600]), 3000);
 
     $(document).on('click', ".banner-hit", function() {
-        var banner_id = $(".banner-hit").data('banner-id');
+        var banner_id = $(this).data('banner-id');
 
         var state = '';
         var message = '';
@@ -364,14 +364,14 @@
                 message = data.message;
                 
                 if(state == '1'){
-                    alert('Banner Hit Success!');
+                    // alert('Banner Hit Success!');
                 }
                 if(state == '0'){
-                    alert('Banner Hit fail!');
+                    // alert('Banner Hit fail!');
                 }
             },
             error: function(){
-                alert('Banner Hit Error!');
+                // alert('Banner Hit Error!');
             }
         });
     })

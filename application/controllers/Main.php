@@ -186,7 +186,7 @@ class Main extends CB_Controller
 			if ( ! $this->session->userdata('ban_id_' . $ban_id)) {
 				$this->CIC_Banner_model->update_plus($ban_id, 'ban_hit', 1);
 				$this->session->set_userdata(
-					'ban_id_' . $ban_id_,
+					'ban_id_' . $ban_id,
 					'1'
 				);
                 
