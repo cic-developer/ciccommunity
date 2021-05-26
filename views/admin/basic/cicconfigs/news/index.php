@@ -22,6 +22,16 @@
 					$buttons = ob_get_contents();
 					ob_end_flush();
 					?>
+					<?php if (element('boardlist', $view)) { ?>
+						<div class="pull-right mr10">
+							<select name="brd_id" class="form-control" onChange="location.href='<?php echo current_url(); ?>?brd_id=' + this.value;">
+								<option value="">전체신문사</option>
+								<?php foreach (element('companylist', $view) as $key => $value) { ?>
+									<option value="<?php echo element('brd_id', $value); ?>" <?php echo set_select('brd_id', element('brd_id', $value), ($this->input->get('brd_id') === element('brd_id', $value) ? true : false)); ?>><?php echo html_escape(element('brd_name', $value)); ?></option>
+								<?php } ?>
+							</select>
+						</div>
+					<?php } ?>
 				</div>
 				<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
 				<div class="table-responsive">

@@ -145,9 +145,6 @@ class Searchcoin extends CB_Controller
 					'clist_name_ko' => $get_apiList[$i]['korean_name'],
 					'clist_name_en' => $get_apiList[$i]['english_name'],
 				);
-				echo"<pre><br>"; 
-				print_r($data);
-				echo"</pre></br>";
 				if(isset($data) && !empty($data)){
 					foreach($data as $coinData){
 						if(in_array($coinData, $coin_arr)){

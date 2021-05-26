@@ -63,22 +63,8 @@
 				<div class="result" style="overflow:hidden; padding-bottom:40px; padding-left:40px; padding-right:40px;">
 				<!-- TradingView Widget BEGIN -->
 				<div class="text-center" style="float: left">
-						<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-						{
-							"symbol": "BITHUMB:<?php echo $symbole ?>KRW",
-							"width": 400,
-							"height": 200,
-							"locale": "en",
-							"dateRange": "12M",
-							"colorTheme": "light",
-							"trendLineColor": "#37a6ef",
-							"underLineColor": "#E3F2FD",
-							"isTransparent": false,
-							"autosize": false,
-							"largeChartUrl": ""
-						}
-						</script>
-					</div>	
+					<canvas id="canvas"></canvas>
+				</div>	
 					<!-- TradingView Widget END -->
 					<div class="right_content_all">
 					<div style="text-align:left; border-bottom:5px solid #ddd; padding-bottom:5px;">
@@ -391,7 +377,7 @@ var opening_price = <?php echo $opening_price ?>;
 var prev_price = <?php echo $prev_price ?>;
 var trade = <?php echo $trade ?>;
 
-ctx.width = 200; 
+ctx.width = 400; 
 // ctx.heigh = 100;
 var data = {
 labels: ['', '', '', '', '', ''],
