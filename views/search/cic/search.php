@@ -15,12 +15,10 @@
 							//print_r($value);
 					?>
 					<ul>
-						<select class="input per100" name="sfield">
-							<li class="active"><a href="<?php base_url() ?>"><span>통합검색</span></a></li>
-							<li ><option value="post_title" <?php echo $this->input->get('sfield') === 'post_both' ? 'selected="selected"' : ''; ?>><span>제목</span></option></li>
-							<li><option value="post_content" <?php echo $this->input->get('sfield') === 'post_title' ? 'selected="selected"' : ''; ?>><span>내용</span></option></li>
-							<li value="post_nickname" ><option value="post_nickname" <?php echo $this->input->get('sfield') === 'post_nickname' ? 'selected="selected"' : ''; ?>><span>작성자</span></option></li>
-						</select>
+						<li class="active"><a href="<?php base_url() ?>"><span>통합검색</span></a></li>
+						<li value="post_title"><a href="<?php base_url() ?>/<?php echo element ('brd_order', $value) ?>"><span>제목</span></a></li>
+						<li value="post_content"><a href="#n"><span>내용</span></a></li>
+						<li value="post_nickname"><a href="#n"><span>작성자</span></a></li>
 					</ul>
 					<?php
 					}
@@ -201,9 +199,8 @@
 					<?php if (element('boardlist', $view)) {
 						foreach (element('boardlist', $view) as $key => $value) {
 							if(element ('brd_key', $value) == 'freetalk'){
-								echo element('brd_id', $value);
 					?>
-					<a href="<?php echo base_url(). "search/?board_id="?><?php echo element('brd_id', $value) ?>"  class="more"><span>more</span></a>
+					<a href="<?php echo base_url(). "search/?board_id="?><?php echo element('brd_id', $value) ?>" class="more"><span>more</span></a>
 					<?php
 							}
 						}
