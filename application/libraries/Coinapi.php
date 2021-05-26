@@ -18,6 +18,7 @@ class Coinapi
     private $usd_price = 0;
     private $jpy_price = 0;
     private $jpyusd_price = 0;
+    private $binance_data = array();
 	function __construct()
 	{
         $this->get_overseas_krw_price();
@@ -113,11 +114,14 @@ class Coinapi
         if($result === FALSE) return array();
         $price_data = $result['data'];
 
+        $binance_data = $this->get_binance_data($coin_id, "USDT");
+        if()
         if($ticker_data && $price_data){
             return array(
-                'price' => $price_data[0]['price'],
-                'volume' => $ticker_data['acc_trade_value_24H'],
-                'change_rate' => $ticker_data['fluctate_rate_24H'],
+                'price'         => $price_data[0]['price'],
+                'korea_premium' => $ticker_data['acc_trade_value_24H'],
+                'volume'        => $ticker_data['acc_trade_value_24H'],
+                'change_rate'   => $ticker_data['fluctate_rate_24H'],
             );
         } else {
             return array();
@@ -260,6 +264,8 @@ class Coinapi
      * 바이낸스 에서 데이터 가져오는 함수
      */
     private function get_binance_data($coin_id, $market="USDT"){
+        //기존 바이낸스에서 가져온 값이 있을경우 그대로 리턴
+        if($market=="USDT" && isset($this->binance_data[$coin_id])) return $this->binance_data[$coin_id];
         $usd_price = $this->get_usd_price();
 
         $url = "https://api.binance.com/api/v3/ticker/24hr?symbol={$coin_id}{$market}";
@@ -269,11 +275,14 @@ class Coinapi
 
         $data = $result;
         if($data){
-            return array(
+            $return_data = array(
                 'price' => $data['lastPrice'] * $usd_price,
                 'volume' => $data['quoteVolume'] * $usd_price,
                 'change_rate' => $data['priceChangePercent'],
             );
+            //한국 프리미엄 계산을 위해 메모리에 저장
+            if($market=="USDT") $this->binance_data[$coin_id] = $return_data;
+            return $return_data;
         } else {
             return array();
         }

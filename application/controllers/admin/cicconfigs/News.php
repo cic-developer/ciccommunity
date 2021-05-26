@@ -70,7 +70,7 @@ class News extends CB_Controller
 			foreach (element('list', $result) as $key => $val) {
 				// print_r('hello');
 				// exit;
-				$result['list'][$key]['company'] = $company = $this->company->item_all(element('comp_id', $val));
+				$result['list'][$key]['company'] = $company = $this->board->item_all(element('comp_id', $val));
 				$result['list'][$key]['num'] = $list_num--;
 
 			}

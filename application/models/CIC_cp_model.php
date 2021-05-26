@@ -162,4 +162,22 @@ class CIC_cp_model extends CB_Model
 		$result = $this->insert($arr);
 		return $result;
 	}
+
+	public function set_cic_cp($memIdx = 0, $content = '', $type = '', $money = 0, $action = '')
+	{
+
+		$arr = array(
+			'mem_id'=> $memIdx,
+			'cp_datetime' => date("Y-m-d H:i:s"),
+			'cp_content' => $content,
+			'cp_point' => $money,
+			'cp_type' => $type,
+			'cp_related_id' => $memIdx,
+			'cp_action' => $action
+		);
+
+		$result = $this->insert($arr);
+		return $result;
+	}
+}
 }

@@ -18,7 +18,7 @@ class Mypage extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_withdraw', 'CIC_withdraw_log', 'Member', 'Post', 'Comment');
+	protected $models = array('CIC_withdraw', 'CIC_withdraw_log', 'Member', 'Post', 'Comment', 'CIC_cp');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -1532,9 +1532,8 @@ class Mypage extends CB_Controller
 			 * 포인트 차감
 			 * member
 			 */
-
 			$result = $this->Member_model->set_user_point($mem_id, $money, $mem_cp);
-
+			
 			if($result != 1){
 				$this->session->set_flashdata(
 					'message',
@@ -1545,9 +1544,9 @@ class Mypage extends CB_Controller
 				 * 출금 신청
 				 * cic_withdraw
 				 */
-
+                
 				$result = $this->CIC_withdraw_model->set_withdraw($mem_id, $mem_userid, $mem_userip, $mem_nickname, $mem_wallet_address, $money);
-
+                
 				if($result == 0 ){
 					/**
 					 * 출금 신청 실패로 인한, 차감포인트 리셋
@@ -1556,19 +1555,22 @@ class Mypage extends CB_Controller
 					// 차감 후의 포인트 가져오기
 					$new_mem_cp = $this->Member_model->get_by_memid($mem_id, 'mem_cp');
 					$result = $this->Member_model->set_user_point($mem_id, -$money, $new_mem_cp['mem_cp']);
-
+                    
 					if($result != 1){
 						$this->session->set_flashdata(
 							'message',
 							'포인트 차감후 신청 및 포인트 리셋에 실패하였습니다 (관리자문의)'
 						);
 					} 
-
+                    
 					$this->session->set_flashdata(
 						'message',
 						'포인트 차감후 신청에 실패하였습니다 (관리자 문의)'
 					);
 				} else{
+
+					$logResult = $this->CIC_cp_model->set_cp_retire('출금신청', $mem_id, -$money);
+
 					$this->session->set_flashdata(
 						'message',
 						'정상적으로 신청되었습니다'

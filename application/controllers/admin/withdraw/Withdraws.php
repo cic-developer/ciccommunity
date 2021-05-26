@@ -428,36 +428,22 @@ class Withdraws extends CB_Controller
 			$param =& $this->querystring;
 			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
 			redirect($redirecturl);
-		} 
-		
-		else{
+		} else{
 			/**
 			 * 반환 로그를 기록합니다.
 			 * cic_cp
 			 */
-			if (!$this->input->post('cp_content2')
-			) {
-				// 이벤트가 존재하면 실행합니다
-				Events::trigger('after', $eventname);
-				/**
-				 * 처리가 끝난 후 목록페이지로 이동합니다
-				 */
-				$this->session->set_flashdata(
-					'message',
-					'처리 사유를 입력해주세요.'
-				);
-				$param =& $this->querystring;
-				$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-				redirect($redirecturl);
-			}
-		}
+			$content = $this->input->post('cp_content2');
+			$memo = $this->input->post('cp_memo2');
+			$logResult = $this->CIC_cp_model->set_cp_retire($content, $memIdx, $money);
 
-		$content = $this->input->post('cp_content2');
-		$memo = $this->input->post('cp_memo2');
-		$result = $this->CIC_cp_model->set_cp_retire($content, $memIdx, $money);
-
-		// 출금반환 실패
-		if($result == 0){
+			/**
+			 * 반려한 출금 요청건의 상태를 0으로 수정합니다.
+			 * cic_withdraw
+			 * 리턴값이 무조건 1만나옴. ??????<=
+			 */
+			$result = $this->{$this->modelname}->set_withdraw_retire($widIdx, $content, $adminid, $adminip, $memo);
+		
 			// 이벤트가 존재하면 실행합니다
 			Events::trigger('after', $eventname);
 			/**
@@ -465,34 +451,13 @@ class Withdraws extends CB_Controller
 			 */
 			$this->session->set_flashdata(
 				'message',
-				'출금반환에 실패하였습니다.'
+				'정상적으로 처리되었습니다.'
 			);
 			$param =& $this->querystring;
 			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
 
 			redirect($redirecturl);
 		}
-
-		/**
-		 * 반려한 출금 요청건의 상태를 0으로 수정합니다.
-		 * cic_withdraw
-		 * 리턴값이 무조건 1만나옴. ??????<=
-		 */
-		$result = $this->{$this->modelname}->set_withdraw_retire($widIdx, $content, $adminid, $adminip, $memo);
-	
-		// 이벤트가 존재하면 실행합니다
-		Events::trigger('after', $eventname);
-		/**
-		 * 처리가 끝난 후 목록페이지로 이동합니다
-		 */
-		$this->session->set_flashdata(
-			'message',
-			'정상적으로 처리되었습니다.'
-		);
-		$param =& $this->querystring;
-		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-
-		redirect($redirecturl);
 	}
 
 	/**
