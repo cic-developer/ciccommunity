@@ -45,7 +45,7 @@ class Cic_company extends CI_Controller
 
         return $this->company_id[$comp_id];
     }
-
+    
 
     public function delete_company($comp_id = 0)
     {

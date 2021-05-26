@@ -38,14 +38,14 @@ class Company_model extends CB_Model
         return $result;
     }
 
-    public function get_one($primary_value = '', $select = '', $where = '')
-    {
-        $use_cache = false;
+	public function get_one($primary_value = '', $select = '', $where = '')
+	{
+		$use_cache = false;
 		if ($primary_value && empty($select) && empty($where)) {
 			$use_cache = true;
 		}
 
-        if ($use_cache) {
+		if ($use_cache) {
 			$cachename = $this->cache_prefix . $primary_value;
 			if ( ! $result = $this->cache->get($cachename)) {
 				$result = parent::get_one($primary_value);
@@ -55,7 +55,7 @@ class Company_model extends CB_Model
 			$result = parent::get_one($primary_value, $select, $where);
 		}
 		return $result;
-    }
+	}
 
     public function delete($primary_value = '', $where = '')
 	{

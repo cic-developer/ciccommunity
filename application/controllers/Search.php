@@ -233,6 +233,7 @@ class Search extends CB_Controller
 			$view['prev'] = $prev;
 			$view['difference'] = $difference;
 			$view['rate'] = $rate;
+			$view['change'] = $change;
 			
 		}
         //Send to view
