@@ -28,7 +28,7 @@ class Cic_company extends CI_Controller
         if (element('comp_id', $company)) {
             $this->company_id[element('comp_id', $company)] = $company;
         }
-        return $this->company_id[$comp_id];
+        
     }
 
     public function item_all($comp_id = 0)

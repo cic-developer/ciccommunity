@@ -73,8 +73,10 @@ class News extends CB_Controller
 			foreach (element('list', $result) as $key => $val) {
 				$result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
 				if($company) {
-					$result['list'][$key]['companyurl'] = company_url(element('comp_url', $company));
-					$result['list'][$key]['newsurl'] = news_url(element('comp_url',$company),element('comp_segment',$company),element('news_index',$val));
+					$result['list'][$key]['companyurl'] = element('comp_url', $company);
+					// $result['list'][$key]['newsurl'] = news_url(element('comp_url',$company),element('comp_segment',$company),element('news_index',$val));
+					// print_r($result['list'][$key]['companyurl']);
+					// exit;
 				}
 				$result['list'][$key]['num'] = $list_num--;
 

@@ -99,8 +99,8 @@
 								<u class="low_money_percent" style="color: #fa5252"> + <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-up"></i>
 								</u>	
 							<?php }else {?>
-								<u class="low_money" style= "color: black" > <?php echo $difference; ?><i class="fas fa-long-arrow-alt-right"></i> </u>
-								<u class="low_money_percent" style= "color: black"> <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-right"></i></u>
+								<u class="low_money" style= "color: black" > -<?php echo $difference; ?><i class="fas fa-long-arrow-alt-right"></i> </u>
+								<u class="low_money_percent" style= "color: black"> - <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-right"></i></u>
 							<?php }?>
 							<!--상한가와 하한가 전체-->	
 								<!--하한가 끝-->
@@ -186,23 +186,18 @@
 				<div class="gap75"></div>
 				<div class="tits">
 					<h3>WRITER</h3>
-					<?php if (element('boardlist', $view)) {
-						foreach (element('boardlist', $view) as $key => $value) {
-							if(element ('brd_key', $value) == 'freetalk'){
+					<?php
+						if (element('list', element('data', $view))) {
+							foreach (element('list', element('data', $view)) as $result) {
 					?>
 					<a href="<?php echo base_url(). "search/?board_id="?><?php echo element('brd_id', $value) ?>" class="more"><span>more</span></a>
 					<?php
-							}
-						}
-					}
+
 					?>
 				</div>
 				<div class="list vimg vp">
 					<ul>
-					<?php
-						if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result) {
-					?>		
+		
 						<li>
 							<a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>">
 								<div class="img"><img src="<?php echo thumb_url(element('images', $result))?>?>" alt=""></div>
