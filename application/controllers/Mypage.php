@@ -1496,9 +1496,10 @@ class Mypage extends CB_Controller
 		if ($this->input->post('vsel') && is_array($this->input->post('vsel'))) {
 			foreach ($this->input->post('vsel') as $val) {
 				$post_info = $this->Post_model->get_one($val);
-				$member_info = $this->member->get_member();
 				$post_mem_id = $post_info['mem_id'];
-				$mem_id = $member_info['mem_id'];
+				$mem_id = (int) $this->member->item('mem_id');
+				// $member_info = $this->member->get_member();
+				// $mem_id = $member_info['mem_id'];
 				
 				if ($val && $post_mem_id == $mem_id) {
 					$this->board->delete_post($val);
