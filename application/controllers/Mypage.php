@@ -219,9 +219,7 @@ class Mypage extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		// 'post_id' => '번호', 제외
-		// , 'post_nickname' => '닉네임', 제외
-		//  'post_category' => '카테고리', 'post_userid' => '아이디', 제외
+		// 'post_id' => '번호', 'post_nickname' => '닉네임', 'post_category' => '카테고리', 'post_userid' => '아이디', 제외
 		$search_option = array('post_title' => '제목', 'post_content' => '내용');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
@@ -291,9 +289,11 @@ class Mypage extends CB_Controller
 		
 		$findex = $this->Comment_model->primary_key;
 		
-		$forder = 'desc';
+		// $forder = 'desc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
+
+		print_r($skeyword );
         
 		$per_page = 10;
 		// $per_page = $this->cbconfig->item('list_count') ? (int) $this->cbconfig->item('list_count') : 20;
@@ -302,7 +302,6 @@ class Mypage extends CB_Controller
 		$this->Post_model->allow_search_field = array('cmt_content'); // 검색이 가능한 필드
 		$this->Post_model->search_field_equal = array('cmt_content'); // 검색중 like 가 아닌 = 검색을 하는 필드
         
-
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
@@ -311,7 +310,7 @@ class Mypage extends CB_Controller
 			// 'comment.cmt_del' => 0, => (현재는 row에서 삭제)
 		);
 		$result = $this->Comment_model
-			->get_comment_list($per_page, $offset, $where, '', 'cmt_id', $sfield, $skeyword);
+			->get_comment_list($per_page, $offset, $where, '', $findex, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
@@ -324,15 +323,6 @@ class Mypage extends CB_Controller
 			}
 		}
 		$view['view']['data'] = $result;
-
-		foreach($result['list'] as $key => $val){
-
-			print_r($val);
-			print_r("<br>");
-			print_r("<br>");
-			print_r("<br>");
-		}
-		exit;
         
 		/**
 		 * 페이지네이션을 생성합니다
@@ -340,14 +330,36 @@ class Mypage extends CB_Controller
 		$config['base_url'] = site_url('mypage/comment') . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
+		$config['first_link'] = '처음';
+		$config['last_link'] = '마지막';
+		$config['next_link'] = '다음';
+		$config['prev_link'] = '이전';
+		if ($this->cbconfig->get_device_view_type() === 'mobile') {
+			$config['num_links'] = element('mobile_page_count', $board)
+				? element('mobile_page_count', $board) : 2;
+		} else {
+			$config['num_links'] = element('page_count', $board)
+				? element('page_count', $board) : 4;
+		}
 		$this->pagination->initialize($config);
+        
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;
-
-
+        
+        
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-
+        
+        
+		/**
+		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
+		 */
+		// 'post_id' => '번호', 'post_nickname' => '닉네임', 'post_category' => '카테고리', 'post_userid' => '아이디', 제외
+		$search_option = array('cmt_content' => '내용');
+		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
+		$view['view']['search_option'] = search_option($search_option, $sfield);
+		$view['view']['list_delete_url'] = site_url('mypage/commentListdelete');
+        
 		/**
 		 * 레이아웃을 정의합니다
 		 */
@@ -356,7 +368,7 @@ class Mypage extends CB_Controller
 		$meta_keywords = $this->cbconfig->item('site_meta_keywords_mypage_comment');
 		$meta_author = $this->cbconfig->item('site_meta_author_mypage_comment');
 		$page_name = $this->cbconfig->item('site_page_name_mypage_comment');
-
+        
 		$layoutconfig = array(
 			'path' => 'mypage',
 			'layout' => 'layout',

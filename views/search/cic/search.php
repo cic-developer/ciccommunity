@@ -366,60 +366,55 @@
 	</div>
 	<!-- e: #container-wrap //-->
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js" type="text/javascript"></script>
 <script>
-var ctx = document.getElementById('canvas');
-var context = ctx.getContext("2d");
+	var ctx = document.getElementById('canvas');
+	var context = ctx.getContext("2d");
 
-var high = <?php echo $high ?>;
-var low = <?php echo $low ?>; 
-var opening_price = <?php echo $opening_price ?>;
-var prev_price = <?php echo $prev_price ?>;
-var trade = <?php echo $trade ?>;
 
-ctx.width = 400; 
-// ctx.heigh = 100;
-var data = {
-labels: ['', '', '', '', '', ''],
-datasets: [{
-	label: 'Bitcoin',
-    data: [trade, prev_price, opening_price, trade,  prev_price, opening_price ],
-	backgroundColor: "white",
-	borderColor: "#3e95cd"
-    }]
-};
-var option = {
-	responsive: false,
-    maintainAspectRatio: false,
-	elements: {
-        line: {
-            tension: 0.4 // disables bezier curves
-        }
-	},
-	legend: {
-        display: false
-    },
-	scales: {
-		yAxes:[{
-    		stacked:true,
-			ticks: {			
-				max: high,
-				min: low
-				
-			},
-        	gridLines: {
-        		display:false,
-            }
-    	}],
-		xAxes:{
-			gridLines: {
-				display: true,
+	// ctx.width = 400; 
+	// ctx.heigh = 100;
+	var data = {
+	labels: ['', '', '', '', '', ''],
+	datasets: [{
+		label: 'Bitcoin',
+		data: [1, 2, 5, 7,  28, 30 ],
+		backgroundColor: "white",
+		borderColor: "#3e95cd"
+		}]
+	};
+	var option = {
+		responsive: false,
+		maintainAspectRatio: false,
+		elements: {
+			line: {
+				tension: 0.4 // disables bezier curves
 			}
-    	}
-    }
-};
-var myBarChart = Chart.Line(canvas,{
-	data:data,
-  	options:option
-});
+		},
+		legend: {
+			display: false
+		},
+		scales: {
+			yAxes:[{
+				stacked:true,
+				ticks: {			
+					max: high,
+					min: low
+					
+				},
+				gridLines: {
+					display:true,
+				}
+			}],
+			xAxes:{
+				gridLines: {
+					display: true,
+				}
+			}
+		}
+	};
+	var myBarChart = Chart.Line(canvas,{
+		data:data,
+		options:option
+	});
 </script>

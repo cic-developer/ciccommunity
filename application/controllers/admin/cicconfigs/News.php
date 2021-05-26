@@ -91,7 +91,7 @@ class News extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('news_title' => '제목', 'news_id' => '뉴스번호',   'news_wdate' => '작성일');
+		$search_option = array('news_title' => '뉴스제목', 'news_id' => '뉴스번호', 'news_wdate' => '작성일');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
         $view['view']['update_news_enable_0_url'] = admin_url($this->pagedir . '/update_news_enable_0/?' . $param->output());
@@ -112,7 +112,7 @@ class News extends CB_Controller
 
 	public function enable()
 	{
-		 		// 이벤트 라이브러리를 로딩합니다
+		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_cicconfigs_news_enable';
 		$this->load->event($eventname);
 

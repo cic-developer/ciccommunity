@@ -345,11 +345,11 @@ $(document).on('ready', async function() {
         var network = klaytn.networkVersion;
         var selected_addr = account;
         var per_token = token_balance / 1000000000000000000;
-
-        console.log(network, selected_addr, token_balance);
+        console.log(network, selected_addr, per_token);
     } catch (error) {
         alert('Klaytn Kaikas연동에 실패 하였습니다. 마이페이지로 이동합니다.');
-        location.href = "/mypage";
+        console.log(error);
+        // location.href = "/mypage";
     }
 
 

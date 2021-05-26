@@ -45,7 +45,6 @@
 							<th>번호</th>
 							<th>내용</th>
 							<th>등록일</th>
-							<th>조회</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -53,18 +52,17 @@
 							<tr>
 								<td>
 									<p class="chk-check">
-										<input type="checkbox" id="<?php echo element('post_id', $post); ?>" name="vsel[]" value="<?php echo element('post_id', $post); ?>" /><label for="<?php echo element('post_id', $post); ?>"><span
+										<input type="checkbox" id="<?php echo element('cmt_id', $post); ?>" name="vsel[]" value="<?php echo element('cmt_id', $post); ?>" /><label for="<?php echo element('cmt_id', $post); ?>"><span
 												class="blind">선택</span></label>
 									</p>
 								</td>
 								<td><span><?php echo number_format(element('num', $post));?></span></td>
 								<td class="l">
-									<a href="<?php echo goto_url(element('post_url', $post)); ?>">
-										<?php echo html_escape(element('post_title', $post));?>
+									<a href="<?php echo goto_url(element('comment_url', $post)); ?>">
+										<?php echo html_escape(element('cmt_content', $post));?>
 									</a>
 								</td>
-								<td><?php echo display_datetime(element('post_datetime', $post), 'full'); ?></td>
-								<td><?php echo number_format(element('post_hit', $post));?></td>
+								<td><?php echo display_datetime(element('cmt_datetime', $post), 'full'); ?></td>
 							</tr>
 						<?php } ?>
 					</tbody>

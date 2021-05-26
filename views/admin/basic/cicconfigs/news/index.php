@@ -24,10 +24,10 @@
 					?>
 					<?php if (element('boardlist', $view)) { ?>
 						<div class="pull-right mr10">
-							<select name="brd_id" class="form-control" onChange="location.href='<?php echo current_url(); ?>?brd_id=' + this.value;">
+							<select name="comp_id" class="form-control" onChange="location.href='<?php echo current_url(); ?>?comp_id=' + this.value;">
 								<option value="">전체신문사</option>
 								<?php foreach (element('companylist', $view) as $key => $value) { ?>
-									<option value="<?php echo element('brd_id', $value); ?>" <?php echo set_select('brd_id', element('brd_id', $value), ($this->input->get('brd_id') === element('brd_id', $value) ? true : false)); ?>><?php echo html_escape(element('brd_name', $value)); ?></option>
+									<option value="<?php echo element('comp_id', $value); ?>" <?php echo set_select('comp_id', element('comp_id', $value), ($this->input->get('comp_id') === element('comp_id', $value) ? true : false)); ?>><?php echo html_escape(element('comp_name', $value)); ?></option>
 								<?php } ?>
 							</select>
 						</div>
