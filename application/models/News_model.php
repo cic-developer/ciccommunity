@@ -344,4 +344,38 @@ class News_model extends CB_Model
 
         return $this->db->update($this->_table);
     }
+
+	public function upadte_news_important($news_id)
+	{
+		$where = array(
+			'news_id' => $news_id,
+		);
+		
+		$this->db->select_max('news_important');
+		$result = $this->db->get('post')->row_array();
+
+		$updatedata = array(
+			'news_important' => element('news_important', $result) +1,
+		);
+		$this->db->where($where);
+		$this->db->set($updatedata);
+
+		return $this->db->update($this->_table);
+	}
+
+	public function update_news_important_0($news_important)
+	{
+		$where = array(
+			'news_important' => $news_important,
+		);
+
+		$updatedata = array(
+			'news_important' => 0,
+		);
+		$this->db->where($where);
+		$this->db->set($updatedata);
+
+		return $this->db->update($this->_table);
+	}
+
 }

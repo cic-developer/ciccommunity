@@ -16,10 +16,12 @@
 					</ul>
 					<?php
 					ob_start();
+					update_news_important_url
 					?>
 						<div class="btn-group pull-right" role="group" aria-label="...">
 							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('update_news_enable_0_url', $view); ?>" >비활성화</button>
 							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('update_news_show_0_url', $view); ?>" >비공개</button>
+							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('update_news_show_0_url', $view); ?>" >주요뉴스 선정</button>
 						</div>
 					<?php
 					$buttons = ob_get_contents();

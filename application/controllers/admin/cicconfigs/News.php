@@ -74,6 +74,8 @@ class News extends CB_Controller
 				$result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
 				if($company) {
 					$result['list'][$key]['companyurl'] = element('comp_url', $company);
+					// print_r(element('news_index',$val));
+					// exit;
 					$result['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
 				}
 				$result['list'][$key]['num'] = $list_num--;
@@ -110,6 +112,7 @@ class News extends CB_Controller
 		$view['view']['search_option'] = search_option($search_option, $sfield);
         $view['view']['update_news_enable_0_url'] = admin_url($this->pagedir . '/update_news_enable_0/?' . $param->output());
 		$view['view']['update_news_show_0_url'] = admin_url($this->pagedir . '/update_news_show_0/?' . $param->output());
+		$view['view']['update_news_important_url'] = admin_url($this->pagedir . '/update_news_important/?' . $param->output());
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
@@ -440,6 +443,7 @@ class News extends CB_Controller
 		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
 		redirect($redirecturl);
 	}
+
 	public function update_news_enable_1()
 	{
 		// 이벤트 라이브러리를 로딩합니다
@@ -523,4 +527,30 @@ class News extends CB_Controller
         $redirecturl = admin_url($this->pagedir . '?' . $param->output());
         redirect($redirecturl);
     }
+
+	public function update_news_important()
+	{
+		$eventname = 'event_admin_news_delete';
+        $this->load->event($eventname);
+
+        Events::trigger('before', $eventname);
+
+        if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
+            foreach ($this->input->post('chk') as $val) {
+                if ($val) {
+                    $this->News_model->upadte_news_important($val);
+                }
+            }
+        }
+
+        Events::trigger('after', $eventname);
+
+        $this->session->set_flashdata(
+            'message',
+            '주요 뉴스로 선정되었습니다.'
+        );
+        $param =& $this->querystring;
+        $redirecturl = admin_url($this->pagedir . '?' . $param->output());
+        redirect($redirecturl);
+	}
 }
