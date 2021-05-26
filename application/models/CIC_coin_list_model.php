@@ -130,7 +130,7 @@ class CIC_Coin_list_model extends CB_Model
         $node_count = count($coinName);
         $curl_arr = array();
         $master = curl_multi_init();
-
+        $k = 0;
         for($i = 0; $i < $node_count; $i++){
             $ch = curl_init("https://api.coingecko.com/api/v3/coins/" .$coinName[$i]['id']. "?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false");
             curl_setopt($ch, CURLOPT_TIMEOUT, 30);
@@ -145,9 +145,12 @@ class CIC_Coin_list_model extends CB_Model
                 die('error occured during curl exec. Additioanl info: ' . 
                         var_export($info));
             }
+            $k++;
             $output [] = json_decode($data,true);   // Add new data to output
             curl_close($ch);
         }
+        echo $k;
+        exit;
         $data = array();
         for($i = 0; $i<count($output); $i++){
             echo "<pre><br>";
@@ -191,9 +194,9 @@ class CIC_Coin_list_model extends CB_Model
         if(is_array($array)){
             // print_r($array);
             // print_r(count($array['data']));
-            print_r(count($array));
+            // print_r(count($array));
             // print_r(count($array['tickers']));
-            exit;
+            // exit;
             return $array;
         } else {
             return FALSE;

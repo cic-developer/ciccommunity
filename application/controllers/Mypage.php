@@ -1492,13 +1492,29 @@ class Mypage extends CB_Controller
 		/**
 		 * 체크한 게시물의 삭제를 실행합니다
 		 */
+		$deletePostArr = array();
 		if ($this->input->post('vsel') && is_array($this->input->post('vsel'))) {
 			foreach ($this->input->post('vsel') as $val) {
-				if ($val) {
+				$post_info = $this->Post_model->get_one($val);
+				$member_info = $this->member->get_member();
+				$post_mem_id = $post_info['mem_id'];
+				$mem_id = $member_info['mem_id'];
+				
+				if ($val && $post_mem_id == $mem_id) {
 					$this->board->delete_post($val);
+					array_push($deletePostArr, $val);
+				} else {
+					array_push($deletePostArr, $val);
 				}
 			}
 		}
+		
+
+		if($deletePostArr){
+			print_r("hi");
+			exit;
+		}
+		
 
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('after', $eventname);

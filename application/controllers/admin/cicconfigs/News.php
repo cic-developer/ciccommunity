@@ -343,6 +343,33 @@ class News extends CB_Controller
 		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
 		redirect($redirecturl);
 	}
+
+	public function update_news_show_0()
+    {
+        $eventname = 'event_admin_news_delete';
+        $this->load->event($eventname);
+
+        Events::trigger('before', $eventname);
+
+        if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
+            foreach ($this->input->post('chk') as $val) {
+                if ($val) {
+                    $this->News_model->update_news_show_0($val);
+                }
+            }
+        }
+
+        Events::trigger('after', $eventname);
+
+        $this->session->set_flashdata(
+            'message',
+            '공개 설정으로 변경되었습니다.'
+        );
+        $param =& $this->querystring;
+        $redirecturl = admin_url($this->pagedir . '?' . $param->output());
+        redirect($redirecturl);
+    }
+
 	public function update_news_show_1()
     {
         $eventname = 'event_admin_news_delete';
@@ -350,8 +377,8 @@ class News extends CB_Controller
 
         Events::trigger('before', $eventname);
 
-        if ($this->input->news('chk') && is_array($this->input->news('chk'))) {
-            foreach ($this->input->news('chk') as $val) {
+        if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
+            foreach ($this->input->post('chk') as $val) {
                 if ($val) {
                     $this->News_model->update_news_show_1($val);
                 }
