@@ -22,6 +22,8 @@ class CIC_vp_model extends CB_Model
 	 */
 	public $primary_key = 'vp_id'; // 사용되는 테이블의 프라이머리키
 
+	// public $allow_order = array('vp_id');
+
 	function __construct()
 	{
 		parent::__construct();
@@ -30,23 +32,48 @@ class CIC_vp_model extends CB_Model
 
 	public function get_admin_list($limit = '', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
-		
+		$like = '';
+		$sfield = '';
+		$skeyword = '';
+		print_r("test....ing....");
+		print_r("<br>");
+		print_r("<hr>");
+		print_r("<br>");
+		print_r($limit);
+		print_r("<br>");
+		print_r($offset);
+		print_r("<br>");
+		print_r($where);
+		print_r("<br>");
+		print_r($like);
+		print_r("<br>");
+		print_r($findex);
+		print_r("<br>");
+		print_r($forder);
+		print_r("<br>");
+		print_r($sfield);
+		print_r("<br>");
+		print_r($skeyword);
+		print_r("<br>");
+		print_r($sop);
 		$select = 'cic_vp.*, member.mem_userid, member.mem_nickname, member.mem_is_admin, member.mem_icon, member.mem_vp';
 		$join[] = array('table' => 'member', 'on' => 'cic_vp.mem_id = member.mem_id', 'type' => 'left');
 		$result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
+		print_r("<hr>");
 
+		print_r("<hr>");
+		print_r($result);
+		exit;
 		return $result;
 	}
 
-	public function get_comment_list($limit = '', $offset = '', $where = '', $like = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
+	public function get_vp_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
-		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
-			$orderby = 'vp_id';
-		}
-		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
-		if (empty($sfield)) {
-			$sfield = 'vp_content';
-		}
+		$sfield = array('vp_id');
+		// $sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
+		// if (empty($sfield)) {
+		// 	$sfield = array('vp_id', 'post_content');
+		// }
 
 		$search_where = array();
 		$search_like = array();
@@ -122,18 +149,16 @@ class CIC_vp_model extends CB_Model
 			}
 			$this->db->group_end();
 		}
-
 		$this->db->order_by($orderby);
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}
 		$qry = $this->db->get();
-		exit;
 		$result['list'] = $qry->result_array();
-
+		
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
-		$this->db->join('member', 'comment.mem_id = member.mem_id', 'left');
+		$this->db->join('member', 'cic_vp.mem_id = member.mem_id', 'left');
 		if ($where) {
 			$this->db->where($where);
 		}

@@ -31,57 +31,6 @@ class CIC_Coin_list_model extends CB_Model
 	 * Get RealTime Coin Price
 	 */
 
-	function get_price($market)
-	{
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.bithumb.com/public/ticker/{$market}_KRW",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 90,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET"   
-            
-        ));
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        if($err){
-            echo "cUrl Error :" . $err;
-        }
-        $array = json_decode($response, true);
-        return $array;
-	}
-    function act_price($clist_market)
-	{
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.bithumb.com/public/transaction_history/" .$clist_market. "_KRW",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 90,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET"   
-            
-        ));
-        
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        if($err){
-            echo "cUrl Error :" . $err;
-        }
-        $array = json_decode($response, true);
-        return $array;
-	}
     function insertStockData($data){
         if(isset($data) && !empty($data)){
             $result = $this->db->insert('cic_coin_list', $data);
@@ -171,7 +120,7 @@ class CIC_Coin_list_model extends CB_Model
 
 
      //GET DATA FOR CHART
-     function get_price_($market){
+     function get_price($market){
         $curl = curl_init();
 
         curl_setopt_array($curl, array(

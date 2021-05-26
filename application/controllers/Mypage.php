@@ -443,13 +443,12 @@ class Mypage extends CB_Controller
 			'mem_id' => $mem_id,
 			// 'comment.cmt_del' => 0, => (현재는 row에서 삭제)
 		);
-		// $result = $this->CIC_vp_model
-		// 	->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-		// $result = $this->CIC_vp_model
-		// 	->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$result = $this->CIC_vp_model
-			->get_vp_list($per_page, $offset, $where, '', $forder, $sfield, $skeyword);
-
+			->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		// $result = $this->CIC_vp_model
+		// 	->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		// $result = $this->CIC_vp_model
+		// 	->get_vp_list($/
 			print_r($result);
 			exit;
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;

@@ -216,30 +216,29 @@ class Search extends CB_Controller
 		$key_search = $this-> CIC_coin_keyword_model -> search_coin($skeyword);
 		$market = $key_search['clist_market'];
 		$api_result = $this->CIC_coin_list_model -> get_price($market);
-		$act_price = $this->CIC_coin_list_model -> act_price($market);
 		$getHist = $this -> CIC_coin_list_model->get_histData($market);
 		$korean = $key_search['clist_name_ko'];
 		$symbole = $key_search['clist_market'];
 
-		$trade = array();
-		foreach($act_price as $act){
-			$trade = (float)$act[0]['price'];
-			$view['trade'] = $trade;
-		} 
-		
+		// echo "<pre><br>";
+		// print_r($api_result_);
+		// echo "</pre></br>";
 		foreach($api_result as $result_price){
-			$high = $result_price['max_price'];
-			$low =$result_price['min_price'];
+			$high = $result_price['high_price'];
+			$low =$result_price['low_price'];
 			$prev = $result_price['prev_closing_price'];
-			$rate = $result_price['fluctate_rate_24H'];
-			$difference = $result_price['fluctate_24H'];
+			$change = $result_price['change'];
+			$rate =  $result_price['change_rate'];
+			$difference = $result_price['change_price'];
+			$trade = $result_price['trade_price'];
+
+			$view['trade'] = $trade;
 			$view['low'] = $low;
 			$view['high'] = $high;
 			$view['prev'] = $prev;
 			$view['difference'] = $difference;
 			$view['rate'] = $rate;
-
-
+			
 		}
         //Send to view
 		$view['symbole'] = strtoupper($symbole);
@@ -254,9 +253,7 @@ class Search extends CB_Controller
 				$his_time[] = substr($histDota['candle_date_time_kst'], 12);
 				$his_time[] = substr($time, 0, -3);
 				$his_price[] = $histDota['trade_price'];
-			}
-		// print_r(count($his_price));
-		// print_r(count($his_time));	
+			}	
 		$view['his_price'] = $his_price;
 		$view['his_time'] = $his_time;
 
