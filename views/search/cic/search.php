@@ -81,12 +81,6 @@
 					<h6 class="price_now"> ￦<?php echo $trade ?></h6>
 						<!--상한가와 하한가 전체-->
 						<h6 class="high_mnp_all">
-							<!--상한가-->
-							<!--<u class="high_money">+48,965,150 <i class="fas fa-long-arrow-alt-up"></i>
-							</u>
-							<u class="high_money_percent">+8.82% <i class="fas fa-long-arrow-alt-up"></i>
-							</u>
-							상한가 끝-->
 							<!--하한가-->
 							<?php if($change === 'FALL'){?>
 								<u class="low_money"> - <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-down"></i>
@@ -369,7 +363,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script>
 	var ctx = document.getElementById('canvas').getContext('2d');
-
 	var label = '<?php echo $symbole; ?>';
 	var time = new Array();
 	<?php foreach ($his_time as $key => $val){ ?>
@@ -384,23 +377,20 @@
 	var myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: time,//['3:00', '2:00', '1:00', '0:00', '9:00', '8:00', '7:00', '6:00', '5:00', '4:00', '3:00', '2:00', '1:00', '0:00', '3:00', '2:00', '1:00', '0:00', '9:00', '8:00', '7:00', '6:00', '5:00', '4:00'],
+        labels: time.reverse(),
         datasets: [{
             label: label,
-            data: price,
+            data: price.reverse(),
             backgroundColor: ['rgba(0,0,255, 0.1)'],
             borderColor: [
 				'rgba(0,0,255, 1.0)',
             ],
-            borderWidth: 1
-        }]
-		
+            borderWidth: 0.5,
+			fill: "start"
+        }]	
     },
 	options: {
 		responsive: true,
-		// tooltips: {
-		// 	enabled: false,
-		// },
 		elements: {
 			points:{ hitRadius: 10, hoverRadius: 10 }
 		},
@@ -418,14 +408,11 @@
 				ticks: {
 					display: false,
 				},
-				
 				gridLines: {
-					
 					display: true,
 				}
 			}]
 		}
-
 	}
 });
 </script>

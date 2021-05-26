@@ -13,6 +13,9 @@ class Cic_news extends CI_Controller
 	{
 		$this->CI = & get_instance();
 	}
+
+
+
     public function get_news($news_id = 0)
     {
         if(empty($news_id)){
@@ -27,21 +30,6 @@ class Cic_news extends CI_Controller
         }
     }
 
-    public function item_all($comp_id = 0)
-    {
-        $comp_id = (int) $comp_id;
-        if(empty($comp_id) OR $comp_id < 1) {
-            return false;
-        }
-        if ( ! isset($this->$company_id[$comp_id])) {
-            $this->get_news($comp_id, '');
-        }
-        if ( ! isset($this->company_id[$comp_id])) {
-            return false;
-        }
-
-        return $this->company_id[$comp_id];
-    }
 
 
     public function delete_news($news_id = 0)

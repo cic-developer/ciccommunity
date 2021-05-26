@@ -37,7 +37,7 @@ class Cic_company extends CI_Controller
         if(empty($comp_id) OR $comp_id < 1) {
             return false;
         }
-        if ( ! isset($this->$company_id[$comp_id])) {
+        if ( ! isset($this->company_id[$comp_id])) {
             $this->get_news($comp_id, '');
         }
         if ( ! isset($this->company_id[$comp_id])) {

@@ -240,7 +240,7 @@ $(document).on('ready', async function() {
     if (klaytn === undefined) {
         alert('Klaytn Kaikas가 설치되지 않았습니다.\nKlaytn Kaikas을 설치하여 주세요');
         window.open('https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F');
-        // history.back();
+        history.back();
     } else {
         console.log('klaytn : ', klaytn);
     }
