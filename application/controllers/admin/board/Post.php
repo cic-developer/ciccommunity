@@ -120,6 +120,9 @@ class Post extends CB_Controller
 		}
 		$view['view']['data'] = $result;
 
+		print_r($result['list'][$key]['board']);
+		exit;
+
 		$select = 'brd_id, brd_name';
 		$view['view']['boardlist'] = $this->Board_model->get_board_list();
 

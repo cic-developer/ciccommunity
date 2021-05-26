@@ -18,7 +18,7 @@ class Register extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Member_nickname', 'Member_meta', 'Member_auth_email', 'Member_userid', 'Member');
+	protected $models = array('Member_nickname', 'Member_meta', 'Member_auth_email', 'Member_userid', 'Member', 'Config');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -57,6 +57,11 @@ class Register extends CB_Controller
 
 		$view['view']['enc_data'] = $this->checkplus->main('register', 'auth_success', 'auth_fail');
 		$view['view']['dec_data'] = $this->session->userdata('dec_data');
+
+		// 이용약관 가져오기
+		$getdata = $this->Config_model->get_all_meta();
+		$view['view']['member_register_policy1'] = $getdata['member_register_policy1'];
+		$view['view']['member_register_policy2'] = $getdata['member_register_policy2'];
 
 		if ($this->member->is_member()
 			&& ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {

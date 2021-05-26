@@ -14,7 +14,8 @@
 				<div class="item c01">
 					<h4>회원가입 약관 동의</h4>
 					<div class="agree-txt">
-						<p>제 1 장 &nbsp;&nbsp;총 칙</p>
+						<?php echo nl2br(html_escape(element('member_register_policy1', $view))) ?>
+						<!-- <p>제 1 장 &nbsp;&nbsp;총 칙</p>
 						<p>&nbsp;</p>
 						<p>제 1 조 &nbsp;(목 적)<br>
 							이 약관은 주식회사 머니넷(이하 총칭하여 "회사"라 합니다)이 제공하는 인터넷 웹사이트의 서비스(도메인명 www.moneynet.co.kr, 이하 "서비스"라
@@ -204,14 +205,15 @@
 							① 회사와 회원은 서비스와 관련하여 발생한 분쟁을 원만하게 해결하기 위하여 필요한 모든 노력을 하여야 합니다.<br>
 							② 제1항의 규정에도 불구하고 회사와 회원간에 소송이 제기될 경우, 소송은 민사소송법상의 관할법원에 제기합니다.<br>
 							부 칙 (2016. 9. 1)<br>
-							① 이 약관은 2016년 9월 1일부터 적용됩니다.</p>
+							① 이 약관은 2016년 9월 1일부터 적용됩니다.</p> -->
 					</div>
 					<p class="chk-check"><input type="checkbox" id="jsel01" name="agree" value="1"><label for="jsel01">이용약관에 동의합니다.</label></p>
 				</div>
 				<div class="item c02">
 					<h4>개인정보 <br>취급방침 동의</h4>
 					<div class="agree-txt">
-						<p>(주)머니넷은 기본적인 서비스 제공을 위한 필수정보와 맞춤 서비스 제공을 위한 선택정보로 구분하여 개인정보를 수집하고 있습니다.</p>
+						<?php echo nl2br(html_escape(element('member_register_policy2', $view))) ?>
+						<!-- <p>(주)머니넷은 기본적인 서비스 제공을 위한 필수정보와 맞춤 서비스 제공을 위한 선택정보로 구분하여 개인정보를 수집하고 있습니다.</p>
 						<p><br>
 							① 회사는 회원가입, 회원식별 및 최적의 서비스 제공을 위하여 아래와 같은 최소한의 정보를 수집합니다.<br>
 							&lt;개인 회원가입&gt;<br>
@@ -226,7 +228,7 @@
 							② 서비스 이용과정이나 사업 처리 과정에서 아래와 같은 정보들이 생성되어 수집될 수 있습니다.<br>
 							- IP Address, 쿠키, 접속 로그, 서비스 이용 기록, 불량 이용 기록, 이용해지 기록 등<br>
 							③ 유료 서비스 이용 과정에서 아래와 같은 결제 정보들이 수집될 수 있습니다.<br>
-							- 은행계좌 정보, 결제기록 등</p>
+							- 은행계좌 정보, 결제기록 등</p> -->
 					</div>
 					<p class="chk-check"><input type="checkbox" id="jsel02" name="agree2" value="1"><label for="jsel02">개인정보 취급방침에
 							동의합니다.</label></p>
