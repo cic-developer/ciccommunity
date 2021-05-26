@@ -8,13 +8,24 @@
 		<div class="search-wrap list">
 			<div class="filter">
 				<div class="sel-box c01">
-				<select class="input per100" name="sfield">
-					<option value="post_both" <?php echo $this->input->get('sfield') === 'post_both' ? 'selected="selected"' : ''; ?>>제목+내용</option>
-					<option value="post_title" <?php echo $this->input->get('sfield') === 'post_title' ? 'selected="selected"' : ''; ?>>제목</option>
-					<option value="post_content" <?php echo $this->input->get('sfield') === 'post_content' ? 'selected="selected"' : ''; ?>>내용</option>
-					<option value="post_userid" <?php echo $this->input->get('sfield') === 'post_userid' ? 'selected="selected"' : ''; ?>>회원아이디</option>
-					<option value="post_nickname" <?php echo $this->input->get('sfield') === 'post_nickname' ? 'selected="selected"' : ''; ?>>회원닉네임</option>
-					</select>
+					<a href="#n" class="sel-btn"><span>통합검색</span></a>
+					<?php
+					if (element('grouplist', $view)) {
+						foreach (element('grouplist', $view) as $key => $value) {
+							//print_r($value);
+					?>
+					<ul>
+						<select class="input per100" name="sfield">
+							<li class="active"><a href="<?php base_url() ?>"><span>통합검색</span></a></li>
+							<li ><option value="post_title" <?php echo $this->input->get('sfield') === 'post_both' ? 'selected="selected"' : ''; ?>><span>제목</span></option></li>
+							<li><option value="post_content" <?php echo $this->input->get('sfield') === 'post_title' ? 'selected="selected"' : ''; ?>><span>내용</span></option></li>
+							<li value="post_nickname" ><option value="post_nickname" <?php echo $this->input->get('sfield') === 'post_nickname' ? 'selected="selected"' : ''; ?>><span>작성자</span></option></li>
+						</select>
+					</ul>
+					<?php
+					}
+						}		
+					?>
 				</div>
 				<div class="field search">
                     <?php 
