@@ -1,6 +1,3 @@
-document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/caver-js/1.6.1/caver.min.js"></script>');
-
-function init() {}
 const token_abi = [{
         constant: true,
         inputs: [],
@@ -236,18 +233,18 @@ const token_abi = [{
     },
 ];
 const token_address = "0x7eee60a000986e9efe7f5c90340738558c24317b";
-const PER = new caver.klay.Contract(token_abi, token_address);
 const PER_address = "0x0E3A0B94cF7bd745aA8a65Bd707509761e65A832"; //퍼 월렛 주소
 
 $(document).on('ready', async function() {
     const klaytn = window.klaytn;
     if (klaytn === undefined) {
         alert('Klaytn Kaikas가 설치되지 않았습니다.\nKlaytn Kaikas을 설치하여 주세요');
-        location.href = "https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F";
+        window.open('https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F');
+        // history.back();
     } else {
         console.log('klaytn : ', klaytn);
     }
-
+    const PER = new caver.klay.Contract(token_abi, token_address);
     try {
 
         $(document).on('click', '#charge_button', async function() {

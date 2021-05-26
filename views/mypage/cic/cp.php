@@ -14,7 +14,7 @@
 				<ul>
 					<li><a href="post"><span>작성글</span></a></li>
 					<li><a href="comment"><span>작성댓글</span></a></li>
-					<li><a href="vp"><span>행사한vp</span></a></li>
+					<li><a href="cp"><span>행사한cp</span></a></li>
 					<li class="active"><a href="cp"><span>행사한cp</span></a></li>
 				</ul>
 			</div>
@@ -24,12 +24,14 @@
 						<col width="70" />
 						<col width="200" />
 						<col width="*" />
+						<col width="250" />
 						<col width="100" />
 					</colgroup>
 					<thead>
 						<tr>
 							<th>번호</th>
 							<th>cp</th>
+							<th>메모</th>
 							<th>내용</th>
 							<th>등록일</th>
 						</tr>
@@ -38,11 +40,12 @@
 						<?php foreach(element('list',element('data', $view)) as $post ) { ?>
 							<tr>
 								<td><span><?php echo number_format(element('num', $post));?></span></td>
-								<td><span><?php echo html_escape(element('vp_point', $post));?></span></td>
-								<td class="l">
-										<?php echo html_escape(element('vp_content', $post));?>
+								<td><span><?php echo html_escape(element('cp_point', $post));?></span></td>
+								<td class="l"><span><?php echo html_escape(element('cp_content', $post));?></span></td>
+								<td>
+										<?php echo html_escape(element('cp_action', $post));?>
 								</td>
-								<td><?php echo display_datetime(element('vp_datetime', $post), 'full'); ?></td>
+								<td><?php echo display_datetime(element('cp_datetime', $post), 'full'); ?></td>
 							</tr>
 						<?php } ?>
 					</tbody>

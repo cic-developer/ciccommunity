@@ -24,12 +24,14 @@
 						<col width="70" />
 						<col width="200" />
 						<col width="*" />
+						<col width="250" />
 						<col width="100" />
 					</colgroup>
 					<thead>
 						<tr>
 							<th>번호</th>
-							<th>vp</th>
+							<th>cp</th>
+							<th>메모</th>
 							<th>내용</th>
 							<th>등록일</th>
 						</tr>
@@ -39,8 +41,9 @@
 							<tr>
 								<td><span><?php echo number_format(element('num', $post));?></span></td>
 								<td><span><?php echo html_escape(element('vp_point', $post));?></span></td>
-								<td class="l">
-										<?php echo html_escape(element('vp_content', $post));?>
+								<td class="l"><span><?php echo html_escape(element('vp_content', $post));?></span></td>
+								<td>
+										<?php echo html_escape(element('vp_action', $post));?>
 								</td>
 								<td><?php echo display_datetime(element('vp_datetime', $post), 'full'); ?></td>
 							</tr>

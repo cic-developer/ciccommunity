@@ -1,5 +1,3 @@
-<script type="text/javascript" src="<?php echo base_url('assets/js/chargecp.js'); ?>"></script>
-
 <div id="container-wrap">
     <div id="contents" class="div-cont">
         <!-- page start // -->
@@ -67,7 +65,7 @@
         <!-- page end // -->
     </div>
 </div>
-
+<script type="text/javascript" src="<?php echo base_url('assets/js/chargecp.js'); ?>"></script>
 <!-- <script>
     $(document).on('ready', async function(){
         const klaytn = window.klaytn;

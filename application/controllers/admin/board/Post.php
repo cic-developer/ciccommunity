@@ -96,8 +96,8 @@ class Post extends CB_Controller
 					element('post_userid', $val),
 					element('post_nickname', $val)
 				);
-				print_r($val);
-				exit;
+				// print_r($val);
+				// exit;
 				$result['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
 				$result['list'][$key]['num'] = $list_num--;
 				if ($board) {

@@ -433,7 +433,7 @@ class Mypage extends CB_Controller
 		// $per_page = $this->cbconfig->item('list_count') ? (int) $this->cbconfig->item('list_count') : 20;
 		$offset = ($page - 1) * $per_page;
         
-		$this->CIC_vp_model->allow_search_field = array('vp_content', 'vp_point', 'vp-action'); // 검색이 가능한 필드
+		$this->CIC_vp_model->allow_search_field = array('vp_content', 'vp_point', 'vp_action'); // 검색이 가능한 필드
 		$this->CIC_vp_model->search_field_equal = array(''); // 검색중 like 가 아닌 = 검색을 하는 필드
         
 		/**
@@ -459,7 +459,7 @@ class Mypage extends CB_Controller
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-		$config['base_url'] = site_url('mypage/comment') . '?' . $param->replace('page');
+		$config['base_url'] = site_url('mypage/vp') . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$config['first_link'] = '처음';
@@ -549,7 +549,7 @@ class Mypage extends CB_Controller
         
 		$order_by_field = element('order_by_field', $board)
 			? element('order_by_field', $board)
-			: 'vp_id';
+			: 'cp_id';
 		$findex = $this->input->get('findex', null, $order_by_field);
 		// $findex = $this->Comment_model->primary_key;
 		
@@ -561,16 +561,16 @@ class Mypage extends CB_Controller
 		// $per_page = $this->cbconfig->item('list_count') ? (int) $this->cbconfig->item('list_count') : 20;
 		$offset = ($page - 1) * $per_page;
         
-		$this->CIC_vp_model->allow_search_field = array('vp_content', 'vp_point', 'vp-action'); // 검색이 가능한 필드
-		$this->CIC_vp_model->search_field_equal = array(''); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->CIC_cp_model->allow_search_field = array('cp_content', 'cp_point', 'cp_action'); // 검색이 가능한 필드
+		$this->CIC_cp_model->search_field_equal = array(''); // 검색중 like 가 아닌 = 검색을 하는 필드
         
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
 		$where = array(
-			'cic_vp.mem_id' => $mem_id,
+			'cic_cp.mem_id' => $mem_id,
 		);
-		$result = $this->CIC_vp_model->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		$result = $this->CIC_cp_model->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
@@ -587,7 +587,7 @@ class Mypage extends CB_Controller
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-		$config['base_url'] = site_url('mypage/comment') . '?' . $param->replace('page');
+		$config['base_url'] = site_url('mypage/cp') . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$config['first_link'] = '처음';
