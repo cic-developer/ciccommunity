@@ -137,19 +137,17 @@ class Searchcoin extends CB_Controller
 
 		for($i=0; $i<count($get_apiList); $i++){
 				// Getting only coin starting with K
-			echo "<pre><br>";
-			print_r($get_apiList[$i]);
-			echo "</pre></br>";	
 			$market =$get_apiList[$i]['market'];
 			if(strcmp(substr($market, 0, 1), "K")==0){	
 				$market = substr($market, 4);	
 				$data = array(
 					'clist_market' => $market,
-					'clist_name_ko' => $getList[$i]['localization']['ko'],
-					'clist_name_en' => $getList[$i]['name'],
+					'clist_name_ko' => $get_apiList[$i]['korean_name'],
+					'clist_name_en' => $get_apiList[$i]['english_name'],
 				);
-				print_r(1);
+				echo"<pre><br>"; 
 				print_r($data);
+				echo"</pre></br>";
 				if(isset($data) && !empty($data)){
 					foreach($data as $coinData){
 						if(in_array($coinData, $coin_arr)){
@@ -161,20 +159,18 @@ class Searchcoin extends CB_Controller
 						}
 					}
 				}
-				$stockKey = $this->CIC_coin_list_model->getstockData();
-				
 				$data = array(
 					array(
-						'coin_market'=> $getList[$i]['symbol'],
-						'coin_keyword'=>$getList[$i]['localization']['ko']
+						'coin_market'=> $market,
+						'coin_keyword'=>$get_apiList[$i]['korean_name'],
 					),
 					array(
-						'coin_market'=> $getList[$i]['symbol'],
-						'coin_keyword'=>$getList[$i]['name']
+						'coin_market'=> $market,
+						'coin_keyword'=>$get_apiList[$i]['english_name']
 					),
 					array(
-						'coin_market'=> $getList[$i]['symbol'],
-						'coin_keyword'=> $getList[$i]['symbol'],
+						'coin_market'=> $market,
+						'coin_keyword'=> $market
 					),
 				);
 				if(isset($data) && !empty($data)){
