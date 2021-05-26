@@ -172,15 +172,13 @@ class Search extends CB_Controller
 
 		$view['view']['data'] = $result;
 		$view['view']['boardlist'] = $boardlist;
-;
 		$view['view']['grouplist'] = $grouplist;
 		$total_rows = $result['total_rows'];
 		$view['total_rows'] = $total_rows;
 
-		// echo "<pre><br>";
-		// // print_r($grouplist);
-		// print_r($boardlist);
-		// echo "</pre></br>";
+		echo "<pre><br>";
+		print_r($result);
+		echo "</pre></br>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
 			$sfieldarray = array('post_title', 'post_content', 'post_both');
@@ -212,7 +210,7 @@ class Search extends CB_Controller
 		}
 		$view['view']['highlight_keyword'] = $highlight_keyword;
 
-		//코인 값 검색
+		//코인 값 검색 AND CALL OF MODELS
 		$key_search = $this-> CIC_coin_keyword_model -> search_coin($skeyword);
 		$market = $key_search['clist_market'];
 		$api_result = $this->CIC_coin_list_model -> get_price($market);
@@ -220,9 +218,6 @@ class Search extends CB_Controller
 		$korean = $key_search['clist_name_ko'];
 		$symbole = $key_search['clist_market'];
 
-		// echo "<pre><br>";
-		// print_r($api_result_);
-		// echo "</pre></br>";
 		foreach($api_result as $result_price){
 			$high = $result_price['high_price'];
 			$low =$result_price['low_price'];
@@ -247,7 +242,6 @@ class Search extends CB_Controller
 		//HISTORICAL DATA FOR CHART
 		$his_price = array();
 		$his_time = array();
-		
 		foreach($getHist as $histDota){
 			if($histDota['candle_date_time_kst']){
 				$his_time[] = $histDota['candle_date_time_kst'];
@@ -258,15 +252,11 @@ class Search extends CB_Controller
 
 		}
 		// END HISTORICAL DATA FOR CHART
-
-
 		// 코인 검색 여기까지 
-
 		/**
 		 * primary key 정보를 저장합니다
 		 */
 		$view['view']['primary_key'] = $this->Post_model->primary_key;
-
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
@@ -283,7 +273,6 @@ class Search extends CB_Controller
 		$view['view']['paging'] = $this->pagination->create_links();
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-
 		/**
 		 * 레이아웃을 정의합니다
 		 */
@@ -292,14 +281,12 @@ class Search extends CB_Controller
 		$meta_keywords = $this->cbconfig->item('site_meta_keywords_search');
 		$meta_author = $this->cbconfig->item('site_meta_author_search');
 		$page_name = $this->cbconfig->item('site_page_name_search');
-
 		$searchconfig = array(
 			'{검색어}',
 		);
 		$replaceconfig = array(
 			$skeyword,
 		);
-
 		$page_title = str_replace($searchconfig, $replaceconfig, $page_title);
 		$meta_description = str_replace($searchconfig, $replaceconfig, $meta_description);
 		$meta_keywords = str_replace($searchconfig, $replaceconfig, $meta_keywords);

@@ -68,14 +68,11 @@ class News extends CB_Controller
 
 		$result = $this->{$this->modelname}
 			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
-				// $result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
 				$result['list'][$key]['num'] = $list_num--;
-
 			}
 		}
 		$view['view']['data'] = $result;
