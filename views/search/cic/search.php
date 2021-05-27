@@ -166,8 +166,8 @@
 					<h3>자유게시판</h3>
 					<?php
 						if(element('list', element('boardlist', $view))) {
-							foreach (element('list', element('boardlist', $view)) as $value) {
-								echo $value;
+							foreach (element('list', element('boardlist', $view)) as $boardlist) {
+								echo element('brd_id', $boardlist);
 							}	
 						}	
 					?>

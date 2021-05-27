@@ -183,7 +183,7 @@ class Search extends CB_Controller
 		$view['total_rows'] = $total_rows;
 
 		// echo "<pre><br>";
-		// print_r($result);
+		// print_r($boardlist);
 		// echo "</pre></br>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
