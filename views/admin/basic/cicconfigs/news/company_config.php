@@ -32,7 +32,7 @@
 					<table class="table table-hover table-striped table-bordered">
 						<thead>
 							<tr>
-								<th><a href="<?php echo element('cme_orderby', element('sort', $view)); ?>">번호</a></th>
+								<th><a href="<?php echo element('comp_id', element('sort', $view)); ?>">번호</a></th>
 								<th>신문사</th>
 								<th>URL</th>
 								<th>Segment</th>
@@ -47,7 +47,7 @@
 								foreach (element('list', element('data', $view)) as $result) {
 									?>
 								<tr>
-									<td><?php echo number_format(element('news_id', $result)); ?></td>
+									<td><?php echo number_format(element('comp_id', $result)); ?></td>
 									<td>
 										<a href="<?php echo goto_url(element('comp_url', $result)); ?>">
 											<?php echo html_escape(element('comp_name', element('company', $result))); ?>
@@ -58,7 +58,7 @@
 											<?php echo html_escape(element('comp_url', $result)); ?>
 										</a>
 									</td>
-									<td><?php echo html_escape('comp_segment', $result); ?></td>
+									<td><?php echo element('comp_segment', $result); ?></td>
 									<td><?php echo element('comp_index', $result); ?></td>
 									<td><?php echo element('comp_active', $result) === '1' ? '활성' : '비활성'; ?></td>
 									<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>

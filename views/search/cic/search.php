@@ -136,6 +136,13 @@
 							<col width="100">
 							<col width="100">
 						</colgroup>
+						<?php
+
+						if (element('list', element('data', $view))) {
+							foreach (element('list', element('data', $view)) as $result) {
+								if(element('brd_name', $result) === '자유게시판'){
+						?>
+
 						<thead>
 							<tr>
 								<th>글쓴이</th>
@@ -146,12 +153,6 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php
-
-							if (element('list', element('data', $view))) {
-								foreach (element('list', element('data', $view)) as $result) {
-									if(element('brd_name', $result) === '자유게시판'){
-							?>
 								<tr>
 									<td>
 										<div class="my-info">

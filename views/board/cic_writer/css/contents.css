@@ -16,7 +16,7 @@
     letter-spacing: -0.03em;
     padding: 17px 35px;
     line-height: 1em;
-    color: #111
+    color: #111;
 }
 
 .member-wrap.modify .entry {}
@@ -44,7 +44,7 @@
 }
 
 .member-wrap.modify .entry li .btxt span {
-    color: #fdb302
+    color: #fdb302;
 }
 
 .member-wrap.modify .entry li .w210 {
@@ -124,14 +124,14 @@
     background: #111;
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .member-wrap.modify h3 {
         font-size: 17px;
-        padding: 15px 25px
+        padding: 15px 25px;
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .member-wrap.modify {
         width: calc(100% + 30px);
         margin-left: -15px;
@@ -180,10 +180,10 @@
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     .member-wrap.modify h3 {
         font-size: 15px;
-        padding: 12px 15px
+        padding: 12px 15px;
     }
     .member-wrap.modify .lower a {
         font-size: 14px;
@@ -212,7 +212,7 @@
 
 .member-wrap.login h3 {
     font-size: 35px;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     text-align: center;
     font-weight: 400;
     color: #333;
@@ -232,7 +232,7 @@
     position: relative;
 }
 
-.member-wrap.login .entry li:nth-child(n+2) {
+.member-wrap.login .entry li:nth-child(n + 2) {
     margin-top: 15px;
 }
 
@@ -245,12 +245,12 @@
     height: 40px;
     font-size: 14px;
     letter-spacing: 0.03em;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     border: none;
     font-weight: 300;
     color: #111;
     padding: 0 20px;
-    background: #f8f8f8
+    background: #f8f8f8;
 }
 
 .member-wrap.login .login-btn {
@@ -262,7 +262,7 @@
     line-height: 42px;
     color: #fff;
     text-align: center;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 14px;
     font-weight: 400;
     text-transform: uppercase;
@@ -273,7 +273,7 @@
 }
 
 .member-wrap.login .login-btn:hover {
-    background: #111
+    background: #111;
 }
 
 .member-wrap.login .other ul {
@@ -282,7 +282,7 @@
 
 .member-wrap.login .other li {}
 
-.member-wrap.login .other li:nth-child(n+2) {
+.member-wrap.login .other li:nth-child(n + 2) {
     margin-top: 5px;
 }
 
@@ -307,7 +307,7 @@
 }
 
 .member-wrap.login .other a:hover {
-    text-decoration: underline
+    text-decoration: underline;
 }
 
 #container-wrap.login-bg:after {
@@ -326,13 +326,13 @@
     transition: opacity 0.3s ease-out;
 }
 
-@media only screen and (max-width:1400px) {
+@media only screen and (max-width: 1400px) {
     #container-wrap.login-bg:after {
         background-size: 340px auto;
     }
 }
 
-@media only screen and (max-width:1100px) {
+@media only screen and (max-width: 1100px) {
     .member-wrap.login {
         padding: 90px 20px;
     }
@@ -341,7 +341,7 @@
     }
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .member-wrap.login {}
     .member-wrap.login h3 {
         font-size: 30px;
@@ -357,19 +357,19 @@
     }
 }
 
-@media only screen and (max-width:880px) {
+@media only screen and (max-width: 880px) {
     #container-wrap.login-bg:after {
         opacity: 0;
     }
 }
 
-@media only screen and (max-width:780px) {
+@media only screen and (max-width: 780px) {
     .member-wrap.login {
         padding: 70px 20px;
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .member-wrap.login h3 {
         font-size: 27px;
     }
@@ -378,7 +378,7 @@
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     .member-wrap.login {
         padding: 40px 15px;
     }
@@ -411,7 +411,7 @@
     width: 2000px;
     display: block;
     content: "";
-    z-index: -1
+    z-index: -1;
 }
 
 .member-wrap.mypage .myinfo:after {
@@ -452,7 +452,7 @@
 }
 
 .member-wrap.mypage .myinfo .fl .my .btxt {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 30px;
     font-weight: 700;
     letter-spacing: -0.03em;
@@ -461,7 +461,7 @@
 }
 
 .member-wrap.mypage .myinfo .fl .my .stxt {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 15px;
     font-weight: 300;
     letter-spacing: -0.03em;
@@ -473,7 +473,7 @@
 }
 
 .member-wrap.mypage .myinfo .fl .my .modify-btn {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     width: 40px;
     height: 20px;
     position: absolute;
@@ -498,13 +498,13 @@
     position: relative;
 }
 
-.member-wrap.mypage .myinfo .fl .state ul li:nth-child(n+2) {
+.member-wrap.mypage .myinfo .fl .state ul li:nth-child(n + 2) {
     margin-top: 10px;
 }
 
 .member-wrap.mypage .myinfo .fl .state ul li p {
     padding-left: 35px;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 14px;
     color: #fff;
     font-weight: 300;
@@ -538,13 +538,13 @@
     line-height: 100%;
     height: 61px;
     color: #fff;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 18px;
     font-weight: 900;
     letter-spacing: -0.01em;
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .member-wrap.mypage .myinfo:before {
         width: 1200px;
         margin-left: -600px;
@@ -580,7 +580,7 @@
     }
 }
 
-@media only screen and (max-width:780px) {
+@media only screen and (max-width: 780px) {
     .member-wrap.mypage .myinfo:before {
         width: 1000px;
         margin-left: -500px;
@@ -610,7 +610,7 @@
     .member-wrap.mypage .myinfo .fl .state {
         margin-top: 20px;
     }
-    .member-wrap.mypage .myinfo .fl .state ul li:nth-child(n+2) {
+    .member-wrap.mypage .myinfo .fl .state ul li:nth-child(n + 2) {
         margin-top: 5px;
     }
     .member-wrap.mypage .myinfo .fl .state ul li p {
@@ -620,10 +620,10 @@
         line-height: 26px;
     }
     .member-wrap.mypage .myinfo .fl .state ul li:nth-child(1) p {
-        background-size: 16px auto
+        background-size: 16px auto;
     }
     .member-wrap.mypage .myinfo .fl .state ul li:nth-child(2) p {
-        background-size: 16px auto
+        background-size: 16px auto;
     }
     .member-wrap.mypage .myinfo .fl .state ul li .pico {
         height: 35px;
@@ -639,7 +639,7 @@
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     .member-wrap.mypage .myinfo:before {
         width: 800px;
         margin-left: -400px;
@@ -675,7 +675,7 @@
 
 .member-wrap.mypage .myinfo .fr li {}
 
-.member-wrap.mypage .myinfo .fr li:nth-child(n+2) {
+.member-wrap.mypage .myinfo .fr li:nth-child(n + 2) {
     margin-top: 15px;
 }
 
@@ -683,7 +683,7 @@
     font-size: 33px;
     color: #fff;
     font-weight: 700;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     line-height: 58px;
     padding-right: 60px;
     text-align: right;
@@ -702,17 +702,17 @@
     margin-top: 25px;
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .member-wrap.mypage .myinfo .fr li p {
         font-size: 27px;
         line-height: 48px;
         height: 48px;
         padding-right: 50px;
-        background-size: auto 44px !important
+        background-size: auto 44px !important;
     }
 }
 
-@media only screen and (max-width:780px) {
+@media only screen and (max-width: 780px) {
     .member-wrap.mypage .myinfo .fr {
         position: relative;
         right: auto;
@@ -721,7 +721,7 @@
         padding-top: 15px;
         border-top: 1px solid rgba(255, 255, 255, 0.4);
     }
-    .member-wrap.mypage .myinfo .fr li:nth-child(n+2) {
+    .member-wrap.mypage .myinfo .fr li:nth-child(n + 2) {
         margin-top: 10px;
     }
     .member-wrap.mypage .myinfo .fr li p {
@@ -729,22 +729,22 @@
         line-height: 38px;
         height: 38px;
         padding-right: 45px;
-        background-size: auto 34px !important
+        background-size: auto 34px !important;
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     .member-wrap.mypage .myinfo .fr li p {
         font-size: 17px;
         line-height: 30px;
         height: 30px;
         padding-right: 35px;
-        background-size: auto 28px !important
+        background-size: auto 28px !important;
     }
 }
 
 .member-wrap.mypage .mycic {
-    padding: 40px 0
+    padding: 40px 0;
 }
 
 .member-wrap.mypage .mycic h3 {
@@ -752,12 +752,12 @@
     font-weight: 300;
     color: #111;
     line-height: 1.2em;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     margin-bottom: 30px;
 }
 
 .member-wrap.mypage .mycic ul {
-    margin: 0 -1%
+    margin: 0 -1%;
 }
 
 .member-wrap.mypage .mycic ul:after {
@@ -820,7 +820,7 @@
     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .member-wrap.mypage .mycic h3 {
         font-size: 28px;
         margin-bottom: 15px;
@@ -828,8 +828,8 @@
     .member-wrap.mypage .mycic ul li {
         width: 48%;
     }
-    .member-wrap.mypage .mycic ul li:nth-child(n+3) {
-        margin-top: 2%
+    .member-wrap.mypage .mycic ul li:nth-child(n + 3) {
+        margin-top: 2%;
     }
     .member-wrap.mypage .mycic ul li .txt {
         padding: 25px;
@@ -844,7 +844,7 @@
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .member-wrap.mypage .mycic {
         padding: 0;
         width: calc(100% + 30px);
@@ -862,8 +862,8 @@
         float: none;
         width: auto;
     }
-    .member-wrap.mypage .mycic ul li:nth-child(n+3) {
-        margin-top: 0
+    .member-wrap.mypage .mycic ul li:nth-child(n + 3) {
+        margin-top: 0;
     }
     .member-wrap.mypage .mycic ul li:hover {
         box-shadow: none;
@@ -874,7 +874,7 @@
         border: none;
         border-top: 1px solid #ececec;
         padding: 15px 15px;
-        height: auto
+        height: auto;
     }
     .member-wrap.mypage .mycic ul li .btxt {
         line-height: 1.1em;
@@ -902,11 +902,11 @@
         right: 15px;
         top: 0;
         display: block;
-        content: ""
+        content: "";
     }
 }
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 
 /* ======================================================
@@ -925,7 +925,7 @@
     letter-spacing: -0.03em;
     padding: 17px 35px;
     line-height: 1em;
-    color: #111
+    color: #111;
 }
 
 .member-wrap.withdraw .entry {}
@@ -953,7 +953,7 @@
 }
 
 .member-wrap.withdraw .entry li .btxt span {
-    color: #fdb302
+    color: #fdb302;
 }
 
 .member-wrap.withdraw .entry li .stxt {
@@ -1030,11 +1030,11 @@
 .member-wrap.withdraw .entry li .field.draw .ctxt {
     position: absolute;
     right: 135px;
-    top: 0
+    top: 0;
 }
 
 .member-wrap.withdraw .no-mgt {
-    margin-top: -1px
+    margin-top: -1px;
 }
 
 .member-wrap.withdraw .list {
@@ -1070,14 +1070,14 @@
     font-weight: 400;
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .member-wrap.withdraw h3 {
         font-size: 17px;
-        padding: 15px 25px
+        padding: 15px 25px;
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .member-wrap.withdraw {
         width: calc(100% + 30px);
         margin-left: -15px;
@@ -1123,22 +1123,22 @@
     }
     .member-wrap.withdraw .entry li .ctxt {
         line-height: 30px;
-        font-size: 14px
+        font-size: 14px;
     }
     .member-wrap.withdraw .entry li .field.draw .ctxt {
         right: 95px;
     }
     .member-wrap.withdraw .gap50 {
-        display: none
+        display: none;
     }
     .member-wrap.withdraw .list {
         margin-top: 0;
     }
     .member-wrap.withdraw .list table {
-        border-top: none
+        border-top: none;
     }
     .member-wrap.withdraw .list table colgroup {
-        display: none
+        display: none;
     }
     .member-wrap.withdraw .list table thead {
         display: none;
@@ -1161,7 +1161,7 @@
     }
     .member-wrap.withdraw .list table tbody td:nth-child(1) {
         font-weight: 500;
-        color: #000
+        color: #000;
     }
     .member-wrap.withdraw .list table tbody td:nth-child(1):before {
         display: inline-block;
@@ -1187,13 +1187,13 @@
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     .member-wrap.withdraw h3 {
         font-size: 15px;
-        padding: 12px 15px
+        padding: 12px 15px;
     }
     .member-wrap.withdraw .entry li .ctxt {
-        font-size: 13px
+        font-size: 13px;
     }
     .member-wrap.withdraw .list table tbody td {
         font-size: 14px;
@@ -1219,7 +1219,7 @@
 .member-wrap.appear .filter .month {}
 
 .member-wrap.appear .filter .month p {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 25px;
     font-weight: 900;
     color: #111;
@@ -1227,7 +1227,7 @@
     height: 36px;
     line-height: 42px;
     padding-left: 72px;
-    background: url(/assets/images/ico-calendar.png) no-repeat 25px top
+    background: url(/assets/images/ico-calendar.png) no-repeat 25px top;
 }
 
 .member-wrap.appear .filter .abr {
@@ -1252,7 +1252,7 @@
 }
 
 .member-wrap.appear .filter .abr .chk-input input {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     height: 22px;
     border: none;
     font-size: 12px;
@@ -1282,9 +1282,9 @@
     border-left: 1px solid #ccc;
 }
 
-@media only screen and (max-width:1200px) {}
+@media only screen and (max-width: 1200px) {}
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .member-wrap.appear .filter .month p {
         font-size: 21px;
         background-position: 0;
@@ -1296,7 +1296,7 @@
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .member-wrap.appear .filter .month p {
         font-size: 19px;
         background-size: 20px auto;
@@ -1307,7 +1307,7 @@
     }
 }
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 .member-wrap.appear .calendar {
     margin-top: 20px;
@@ -1347,16 +1347,16 @@
 }
 
 .member-wrap.appear .calendar table tbody td:nth-child(1) {
-    border-left: none
+    border-left: none;
 }
 
 .member-wrap.appear .calendar table tbody td.before .con,
 .member-wrap.appear .calendar table tbody td.after .con {
-    opacity: 0.2
+    opacity: 0.2;
 }
 
 .member-wrap.appear .calendar table tbody td.today {
-    background: #f6f6f6
+    background: #f6f6f6;
 }
 
 .member-wrap.appear .calendar table tbody td .con {
@@ -1376,7 +1376,7 @@
 }
 
 .member-wrap.appear .calendar table tbody td .day {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     text-align: left;
     font-weight: 400;
     color: #000;
@@ -1395,7 +1395,7 @@
 }
 
 .member-wrap.appear .calendar table tbody td .active a {
-    background-image: url(/assets/images/appear-on.png)
+    background-image: url(/assets/images/appear-on.png);
 }
 
 .member-wrap.appear .calendar table tbody td:nth-child(1) .day {
@@ -1414,7 +1414,7 @@
     display: block;
     line-height: 44px;
     height: 42px;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 16px;
     text-align: center;
     color: #888;
@@ -1429,9 +1429,9 @@
     color: #fff;
 }
 
-@media only screen and (max-width:1200px) {}
+@media only screen and (max-width: 1200px) {}
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .member-wrap.appear .calendar table thead th {
         font-size: 14px;
         padding: 13px 0;
@@ -1451,10 +1451,10 @@
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .member-wrap.appear .calendar table thead th {
         font-size: 13px;
-        padding: 10px 0
+        padding: 10px 0;
     }
     .member-wrap.appear .calendar table tbody td .con {
         padding: 10px 10px;
@@ -1464,7 +1464,7 @@
         height: 40px;
     }
     .member-wrap.appear .calendar table tbody td .day {
-        margin-bottom: 5px
+        margin-bottom: 5px;
     }
     .member-wrap.appear .calendar table tbody td .con {
         min-height: 60px;
@@ -1474,7 +1474,7 @@
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     .member-wrap.appear .calendar table tbody td a img {}
     .member-wrap.appear .calendar table tbody td a {
         width: 30px;
@@ -1506,7 +1506,7 @@
     letter-spacing: -0.03em;
     padding: 17px 35px;
     line-height: 1em;
-    color: #111
+    color: #111;
 }
 
 .member-wrap.charge .entry {}
@@ -1534,7 +1534,7 @@
 }
 
 .member-wrap.charge .entry li .btxt span {
-    color: #fdb302
+    color: #fdb302;
 }
 
 .member-wrap.charge .entry li .stxt {
@@ -1611,7 +1611,7 @@
 .member-wrap.charge .entry li .field.draw .ctxt {
     position: absolute;
     right: 135px;
-    top: 0
+    top: 0;
 }
 
 .member-wrap.charge .list {
@@ -1647,14 +1647,14 @@
     font-weight: 400;
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .member-wrap.charge h3 {
         font-size: 17px;
-        padding: 15px 25px
+        padding: 15px 25px;
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .member-wrap.charge {
         width: calc(100% + 30px);
         margin-left: -15px;
@@ -1700,25 +1700,25 @@
     }
     .member-wrap.charge .entry li .ctxt {
         line-height: 30px;
-        font-size: 14px
+        font-size: 14px;
     }
     .member-wrap.charge .entry li .field.draw .ctxt {
         right: 95px;
     }
     .member-wrap.charge .gap50 {
-        display: none
+        display: none;
     }
     .member-wrap.charge .no-mgt {
-        margin-top: -1px
+        margin-top: -1px;
     }
     .member-wrap.charge .list {
         margin-top: 0;
     }
     .member-wrap.charge .list table {
-        border-top: none
+        border-top: none;
     }
     .member-wrap.charge .list table colgroup {
-        display: none
+        display: none;
     }
     .member-wrap.charge .list table thead {
         display: none;
@@ -1741,7 +1741,7 @@
     }
     .member-wrap.charge .list table tbody td:nth-child(1) {
         font-weight: 500;
-        color: #000
+        color: #000;
     }
     .member-wrap.charge .list table tbody td:nth-child(1):before {
         display: inline-block;
@@ -1767,13 +1767,13 @@
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     .member-wrap.charge h3 {
         font-size: 15px;
-        padding: 12px 15px
+        padding: 12px 15px;
     }
     .member-wrap.charge .entry li .ctxt {
-        font-size: 13px
+        font-size: 13px;
     }
     .member-wrap.charge .list table tbody td {
         font-size: 14px;
@@ -1837,13 +1837,13 @@
     /* 추가 */
 }
 
-@media only screen and (max-width:1200px) {}
+@media only screen and (max-width: 1200px) {}
 
-@media only screen and (max-width:999px) {}
+@media only screen and (max-width: 999px) {}
 
-@media only screen and (max-width:680px) {}
+@media only screen and (max-width: 680px) {}
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 
 /* =====================================
@@ -1857,21 +1857,21 @@
 }
 
 .board-wrap.list .tab {
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
 .board-wrap.list .tab ul:after {
     display: block;
     content: "";
-    clear: both
+    clear: both;
 }
 
 .board-wrap.list .tab li {
     float: left;
 }
 
-.board-wrap.list .tab li:nth-child(n+2) {
-    margin-left: 25px
+.board-wrap.list .tab li:nth-child(n + 2) {
+    margin-left: 25px;
 }
 
 .board-wrap.list .tab li a {
@@ -1885,41 +1885,41 @@
 
 .board-wrap.list .tab li.active a {
     font-weight: 500;
-    color: #111
+    color: #111;
 }
 
-@media only screen and (max-width:999px) {}
+@media only screen and (max-width: 999px) {}
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .board-wrap.list .tab {
-        margin-bottom: 15px
+        margin-bottom: 15px;
     }
     .board-wrap.list .tab li a {
         font-size: 14px;
     }
-    .board-wrap.list .tab li:nth-child(n+2) {
-        margin-left: 15px
+    .board-wrap.list .tab li:nth-child(n + 2) {
+        margin-left: 15px;
     }
     .board-wrap.list .gap60 {
         height: 30px;
     }
 }
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 .board-wrap.list .vtab {
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
 .board-wrap.list .vtab ul:after {
     display: block;
     content: "";
-    clear: both
+    clear: both;
 }
 
 .board-wrap.list .vtab li {
     float: left;
-    width: 50%
+    width: 50%;
 }
 
 .board-wrap.list .vtab li a {
@@ -1928,7 +1928,7 @@
     text-align: center;
     position: relative;
     color: #555;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-weight: 400;
     font-size: 25px;
     letter-spacing: -0.02em;
@@ -1946,23 +1946,23 @@
 }
 
 .board-wrap.list .vtab li.active a {
-    color: #111
+    color: #111;
 }
 
 .board-wrap.list .vtab li.active a:after {
     background: #fcb800;
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .board-wrap.list .vtab li a {
         line-height: 55px;
         font-size: 23px;
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .board-wrap.list .vtab {
-        margin-bottom: 15px
+        margin-bottom: 15px;
     }
     .board-wrap.list .vtab li a {
         line-height: 50px;
@@ -1970,7 +1970,7 @@
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     .board-wrap.list .vtab li a {
         line-height: 45px;
         font-size: 18px;
@@ -1978,7 +1978,7 @@
 }
 
 .board-wrap.list .list.vnews h3 {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 32px;
     color: #111;
     font-weight: 400;
@@ -1995,7 +1995,7 @@
 }
 
 .board-wrap.list .list.vnews .owl-stage-outer {
-    overflow: visible
+    overflow: visible;
 }
 
 .board-wrap.list .list.vnews .item {}
@@ -2028,7 +2028,7 @@
     line-height: 1.25em;
     word-break: keep-all;
     max-height: 38px;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .board-wrap.list .list.vnews .item .stxt {
@@ -2041,7 +2041,7 @@
     line-height: 1.35em;
     word-break: keep-all;
     max-height: 52px;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .board-wrap.list .list.vnews .item .ctxt {
@@ -2056,11 +2056,11 @@
 }
 
 .board-wrap.list .list.vnews .item .ctxt span {
-    color: #888
+    color: #888;
 }
 
 .board-wrap.list .list.vnews .item .ctxt.vp {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     margin-top: 12px;
     padding-top: 12px;
     border-top: 1px solid #eaeaea;
@@ -2078,7 +2078,6 @@
     width: auto;
     top: auto;
     bottom: auto;
-    ;
     text-align: center;
     height: 10px;
     margin-top: 30px;
@@ -2102,13 +2101,13 @@
     background: #555;
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .board-wrap.list .list.vnews h3 {
         font-size: 28px;
     }
     .board-wrap.list .list.vnews .vnews-slide {
         overflow: visible;
-        padding: 0 40px
+        padding: 0 40px;
     }
     .board-wrap.list .list.vnews .item .img img {
         width: 100%;
@@ -2117,7 +2116,7 @@
     }
     .board-wrap.list .list.vnews .owl-dots {
         margin-top: 20px;
-        height: 8px
+        height: 8px;
     }
     .board-wrap.list .list.vnews .owl-dots .owl-dot {
         width: 8px;
@@ -2125,14 +2124,14 @@
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .board-wrap.list .list.vnews h3 {
         font-size: 24px;
         margin-bottom: 15px;
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     .board-wrap.list .list.vnews h3 {
         font-size: 20px;
     }
@@ -2141,7 +2140,7 @@
 .board-wrap.list .list.vimg {}
 
 .board-wrap.list .list.vimg ul {
-    border-bottom: 1px solid #ddd
+    border-bottom: 1px solid #ddd;
 }
 
 .board-wrap.list .list.vimg li {
@@ -2149,7 +2148,7 @@
     padding-bottom: 15px;
 }
 
-.board-wrap.list .list.vimg li:nth-child(n+2) {
+.board-wrap.list .list.vimg li:nth-child(n + 2) {
     border-top: 1px solid #eee;
 }
 
@@ -2233,14 +2232,14 @@
     line-height: 18px;
 }
 
-.board-wrap.list .list.vimg li .ctxt span:nth-child(n+2) {
+.board-wrap.list .list.vimg li .ctxt span:nth-child(n + 2) {
     position: relative;
     display: inline-block;
     vertical-align: top;
-    margin-left: 22px
+    margin-left: 22px;
 }
 
-.board-wrap.list .list.vimg li .ctxt span:nth-child(n+2):before {
+.board-wrap.list .list.vimg li .ctxt span:nth-child(n + 2):before {
     width: 1px;
     height: 10px;
     position: absolute;
@@ -2249,10 +2248,10 @@
     margin-top: -4px;
     display: block;
     content: "";
-    background: #aaa
+    background: #aaa;
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .board-wrap.list .list.vimg li a {
         padding-left: 75px;
     }
@@ -2274,22 +2273,22 @@
     .board-wrap.list .list.vimg li .ctxt {
         margin-top: 2px;
     }
-    .board-wrap.list .list.vimg li .ctxt span:nth-child(n+2) {
-        margin-left: 16px
+    .board-wrap.list .list.vimg li .ctxt span:nth-child(n + 2) {
+        margin-left: 16px;
     }
-    .board-wrap.list .list.vimg li .ctxt span:nth-child(n+2):before {
+    .board-wrap.list .list.vimg li .ctxt span:nth-child(n + 2):before {
         left: -8px;
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .board-wrap.list .list.vimg li {
         padding-top: 12px;
         padding-bottom: 12px;
     }
 }
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 .board-wrap.list .list.vimg.vp {
     border-top: 1px solid #333;
@@ -2341,7 +2340,7 @@
 }
 
 .board-wrap.list .list.vimg.vp li .vp {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     display: inline-block;
     vertical-align: top;
     margin-left: 20px;
@@ -2351,10 +2350,10 @@
     font-size: 13px;
     letter-spacing: -0.02em;
     font-weight: 700;
-    min-width: 90px
+    min-width: 90px;
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .board-wrap.list .list.vimg.vp li a {
         padding-right: 0;
     }
@@ -2367,12 +2366,11 @@
         top: auto;
         margin-top: 5px;
         height: 22px;
-        ;
     }
     .board-wrap.list .list.vimg.vp li .photo {
         width: auto;
         padding-left: 28px;
-        overflow: visible
+        overflow: visible;
     }
     .board-wrap.list .list.vimg.vp li .pimg img {
         width: 20px;
@@ -2389,9 +2387,9 @@
     }
 }
 
-@media only screen and (max-width:680px) {}
+@media only screen and (max-width: 680px) {}
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     .board-wrap.list .list.vimg.vp li .photo {
         padding-left: 24px;
     }
@@ -2421,9 +2419,9 @@
     border-bottom: none;
 }
 
-@media only screen and (min-width:1000px) {}
+@media only screen and (min-width: 1000px) {}
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .board-wrap.list .list.record {
         padding-top: 0;
         width: calc(100% + 40px);
@@ -2434,20 +2432,20 @@
         border-top: none;
     }
     .board-wrap.list .list.record table colgroup {
-        display: none
+        display: none;
     }
     .board-wrap.list .list.record table thead {
         display: none;
     }
     .board-wrap.list .list.record table thead th {}
     .board-wrap.list .list.record table tbody {
-        display: block
+        display: block;
     }
     .board-wrap.list .list.record table tbody tr {
         display: block;
         padding: 15px 15px 15px 50px;
         position: relative;
-        border-bottom: 1px solid #ddd
+        border-bottom: 1px solid #ddd;
     }
     .board-wrap.list .list.record table tbody tr:after {
         display: block;
@@ -2472,14 +2470,14 @@
         width: 100%;
         margin-bottom: 2px;
     }
-    .board-wrap.list .list.record table tbody td:nth-child(n+4) {
+    .board-wrap.list .list.record table tbody td:nth-child(n + 4) {
         margin-right: 15px;
         color: #999;
         font-size: 13px;
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .board-wrap.list .list.record {
         width: calc(100% + 30px);
         margin-left: -15px;
@@ -2493,7 +2491,7 @@
     }
 }
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 .board-wrap.list .list.community {}
 
@@ -2589,37 +2587,37 @@
 .board-wrap.list .list.community table tbody td.l.file a .fimg {
     position: absolute;
     right: 0;
-    top: -1px
+    top: -1px;
 }
 
-@media only screen and (max-width:1200px) {}
+@media only screen and (max-width: 1200px) {}
 
-@media only screen and (min-width:1000px) {
+@media only screen and (min-width: 1000px) {
     .board-wrap.list .list.community table tbody td.l {
         padding-left: 5px !important;
     }
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .board-wrap.list .list.community table {
         display: block;
         border-top: 1px solid #333;
     }
     .board-wrap.list .list.community table colgroup {
-        display: none
+        display: none;
     }
     .board-wrap.list .list.community table thead {
         display: none;
     }
     .board-wrap.list .list.community table thead th {}
     .board-wrap.list .list.community table tbody {
-        display: block
+        display: block;
     }
     .board-wrap.list .list.community table tbody tr {
         display: block;
         padding: 15px 15px 35px 15px;
         position: relative;
-        border-bottom: 1px solid #ddd
+        border-bottom: 1px solid #ddd;
     }
     .board-wrap.list .list.community table tbody tr:after {
         display: block;
@@ -2641,7 +2639,7 @@
         width: 100%;
         margin-bottom: 2px;
     }
-    .board-wrap.list .list.community table tbody td:nth-child(n+3) {
+    .board-wrap.list .list.community table tbody td:nth-child(n + 3) {
         margin-right: 15px;
         color: #999;
         font-size: 13px;
@@ -2668,14 +2666,14 @@
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .board-wrap.list .list.community table tbody tr {
         padding: 10px 15px 30px 15px;
     }
     .board-wrap.list .list.community table tbody td:nth-child(1) {
         bottom: 8px;
     }
-    .board-wrap.list .list.community table tbody td:nth-child(n+3) {
+    .board-wrap.list .list.community table tbody td:nth-child(n + 3) {
         margin-right: 10px;
     }
     .board-wrap.list .list.community table tbody td:last-child {
@@ -2683,11 +2681,11 @@
     }
 }
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 .board-wrap.list .list table {
     table-layout: fixed;
-    border-top: 1px solid #000
+    border-top: 1px solid #000;
 }
 
 .board-wrap.list .list table thead th {
@@ -2702,12 +2700,12 @@
 
 .board-wrap.list .list table thead tr th:first-child {
     border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px
+    border-bottom-left-radius: 5px;
 }
 
 .board-wrap.list .list table thead tr th:last-child {
     border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px
+    border-bottom-right-radius: 5px;
 }
 
 .board-wrap.list .list table tbody td {
@@ -2721,11 +2719,11 @@
 }
 
 .board-wrap.list .list table tbody tr.notice {
-    background: #f9f9f9
+    background: #f9f9f9;
 }
 
 .board-wrap.list .list table tbody tr.notice td:first-child {
-    color: #111
+    color: #111;
 }
 
 .board-wrap.list .list table tbody tr.notice td.l a {
@@ -2756,12 +2754,12 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: #666
+    color: #666;
 }
 
 .board-wrap.list .list table tbody td.l a:hover {
     color: #111;
-    text-decoration: underline
+    text-decoration: underline;
 }
 
 .board-wrap.list .list table .chk-check {
@@ -2775,34 +2773,34 @@
     height: 20px;
 }
 
-@media only screen and (max-width:1200px) {}
+@media only screen and (max-width: 1200px) {}
 
-@media only screen and (min-width:1000px) {
+@media only screen and (min-width: 1000px) {
     .board-wrap.list .list.notice table tbody td.l {
         padding-left: 5px !important;
     }
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .board-wrap.list .list.notice table {
         display: block;
         border-top: none;
     }
     .board-wrap.list .list.notice table colgroup {
-        display: none
+        display: none;
     }
     .board-wrap.list .list.notice table thead {
         display: none;
     }
     .board-wrap.list .list.notice table thead th {}
     .board-wrap.list .list.notice table tbody {
-        display: block
+        display: block;
     }
     .board-wrap.list .list.notice table tbody tr {
         display: block;
         padding: 15px 15px;
         position: relative;
-        border-bottom: 1px solid #ddd
+        border-bottom: 1px solid #ddd;
     }
     .board-wrap.list .list.notice table tbody tr:after {
         display: block;
@@ -2825,7 +2823,7 @@
         width: 100%;
         margin-bottom: 2px;
     }
-    .board-wrap.list .list.notice table tbody td:nth-child(n+3) {
+    .board-wrap.list .list.notice table tbody td:nth-child(n + 3) {
         margin-right: 15px;
         color: #999;
         font-size: 13px;
@@ -2835,30 +2833,30 @@
     }
     .board-wrap.list .list.notice table tbody .notice td:nth-child(1):before {
         display: inline;
-        content: "["
+        content: "[";
     }
     .board-wrap.list .list.notice table tbody .notice td:nth-child(1):after {
         display: inline;
-        content: "]"
+        content: "]";
     }
     .board-wrap.list .list.notice table tbody td.l a {
         color: #111;
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .board-wrap.list .list.notice table tbody tr {
         padding: 10px 15px;
     }
     .board-wrap.list .list.notice table tbody td:nth-child(1) {
         top: 10px;
     }
-    .board-wrap.list .list.notice table tbody td:nth-child(n+3) {
+    .board-wrap.list .list.notice table tbody td:nth-child(n + 3) {
         margin-right: 10px;
     }
 }
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 .board-wrap.list .lower {
     margin-top: 20px;
@@ -2873,7 +2871,7 @@
 .board-wrap.list .real:after {
     display: block;
     content: "";
-    clear: both
+    clear: both;
 }
 
 .board-wrap.list .real .fl {
@@ -2893,7 +2891,7 @@
 }
 
 .board-wrap.list .real h4 {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 18px;
     font-weight: 400;
     color: #fff;
@@ -2909,7 +2907,7 @@
 
 .board-wrap.list .real li {}
 
-.board-wrap.list .real li:nth-child(n+2) {
+.board-wrap.list .real li:nth-child(n + 2) {
     margin-top: 14px;
 }
 
@@ -2926,7 +2924,7 @@
 }
 
 .board-wrap.list .real li a span {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     position: absolute;
     right: 0;
     top: 0;
@@ -2937,7 +2935,7 @@
     font-weight: 700;
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .board-wrap.list .real h4 {
         font-size: 16px;
     }
@@ -2953,7 +2951,7 @@
     .board-wrap.list .real ul {
         padding: 15px 15px;
     }
-    .board-wrap.list .real li:nth-child(n+2) {
+    .board-wrap.list .real li:nth-child(n + 2) {
         margin-top: 9px;
     }
     .board-wrap.list .real li a {
@@ -2961,9 +2959,9 @@
     }
 }
 
-@media only screen and (max-width:680px) {}
+@media only screen and (max-width: 680px) {}
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 
 /* =====================================
@@ -3035,7 +3033,7 @@
 }
 
 .board-wrap.detail .tits ul {
-    margin-top: 7px
+    margin-top: 7px;
 }
 
 .board-wrap.detail .tits ul:after {
@@ -3050,14 +3048,14 @@
     font-size: 14px;
     letter-spacing: -0.03em;
     color: #777;
-    line-height: 24px
+    line-height: 24px;
 }
 
-.board-wrap.detail .tits li:nth-child(n+2) {
+.board-wrap.detail .tits li:nth-child(n + 2) {
     margin-left: 24px;
 }
 
-.board-wrap.detail .tits li:nth-child(n+2):before {
+.board-wrap.detail .tits li:nth-child(n + 2):before {
     width: 1px;
     height: 12px;
     top: 50%;
@@ -3066,14 +3064,14 @@
     position: absolute;
     left: -13px;
     display: block;
-    content: ""
+    content: "";
 }
 
-@media only screen and (max-width:1200px) {}
+@media only screen and (max-width: 1200px) {}
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .board-wrap.detail .binfo {
-        padding: 25px 20px
+        padding: 25px 20px;
     }
     .board-wrap.detail .binfo h4 {
         font-size: 14px;
@@ -3088,15 +3086,15 @@
         font-size: 18px;
     }
     .board-wrap.detail .tits ul {
-        margin-top: 5px
+        margin-top: 5px;
     }
     .board-wrap.detail .tits li {
         font-size: 13px;
     }
-    .board-wrap.detail .tits li:nth-child(n+2) {
+    .board-wrap.detail .tits li:nth-child(n + 2) {
         margin-left: 16px;
     }
-    .board-wrap.detail .tits li:nth-child(n+2):before {
+    .board-wrap.detail .tits li:nth-child(n + 2):before {
         left: -8px;
     }
     .board-wrap.detail .tits .logo img {
@@ -3107,9 +3105,9 @@
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .board-wrap.detail .binfo {
-        padding: 20px 15px
+        padding: 20px 15px;
     }
     .board-wrap.detail .tits {
         padding: 15px 15px;
@@ -3122,7 +3120,7 @@
     }
 }
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 .board-wrap.detail .tits .my-info {
     position: relative;
@@ -3189,11 +3187,11 @@
     vertical-align: top;
 }
 
-.board-wrap.detail .tits .vp-point li:nth-child(n+2) {
+.board-wrap.detail .tits .vp-point li:nth-child(n + 2) {
     margin-left: 30px;
 }
 
-.board-wrap.detail .tits .vp-point li:nth-child(n+2):before {
+.board-wrap.detail .tits .vp-point li:nth-child(n + 2):before {
     display: none;
 }
 
@@ -3218,7 +3216,7 @@
     background-size: auto 25px;
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .board-wrap.detail .tits .abr {
         position: relative;
         right: auto;
@@ -3236,7 +3234,7 @@
         top: 0;
         line-height: 20px;
     }
-    .board-wrap.detail .tits .vp-point li:nth-child(n+2) {
+    .board-wrap.detail .tits .vp-point li:nth-child(n + 2) {
         margin-left: 20px;
     }
     .board-wrap.detail .tits .vp-point li a {
@@ -3253,15 +3251,20 @@
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .board-wrap.detail .tits .abr p {
-        font-size: 13px
+        font-size: 13px;
     }
 }
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
+
+
+/* overflow & word-wrap => 임의추가 */
 
 .board-wrap.detail .cons {
+    overflow: hidden;
+    word-wrap: break-word;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     min-height: 200px;
@@ -3275,7 +3278,7 @@
 }
 
 .board-wrap.detail .cons .img {
-    margin: 40px 0
+    margin: 40px 0;
 }
 
 .board-wrap.detail .cons .img.first {
@@ -3306,7 +3309,7 @@
     vertical-align: top;
 }
 
-.board-wrap.detail .cons .vp-point li:nth-child(n+2) {
+.board-wrap.detail .cons .vp-point li:nth-child(n + 2) {
     margin-left: 50px;
 }
 
@@ -3331,20 +3334,23 @@
     background-size: auto 48px;
 }
 
-@media only screen and (max-width:1200px) {}
+@media only screen and (max-width: 1200px) {}
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
+    /* overflow & word-wrap => 임의추가 */
     .board-wrap.detail .cons {
+        overflow: hidden;
+        word-wrap: break-word;
         padding: 20px 20px 50px 20px;
         font-size: 14px;
     }
     .board-wrap.detail .cons .img {
-        margin: 20px 0
+        margin: 20px 0;
     }
     .board-wrap.detail .cons .vp-point {
         margin-top: 50px;
     }
-    .board-wrap.detail .cons .vp-point li:nth-child(n+2) {
+    .board-wrap.detail .cons .vp-point li:nth-child(n + 2) {
         margin-left: 25px;
     }
     .board-wrap.detail .cons .vp-point li a {
@@ -3361,15 +3367,21 @@
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
+    /* overflow & word-wrap => 임의추가 */
     .board-wrap.detail .cons {
-        padding: 15px 15px 50px 15px
+        overflow: hidden;
+        word-wrap: break-word;
+        padding: 15px 15px 50px 15px;
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
+    /* overflow & word-wrap => 임의추가 */
     .board-wrap.detail .cons {
-        padding: 15px 15px 30px 15px
+        overflow: hidden;
+        word-wrap: break-word;
+        padding: 15px 15px 30px 15px;
     }
 }
 
@@ -3379,7 +3391,7 @@
 
 .board-wrap.detail .files li {}
 
-.board-wrap.detail .files li:nth-child(n+2) {
+.board-wrap.detail .files li:nth-child(n + 2) {
     margin-top: 5px;
 }
 
@@ -3403,20 +3415,20 @@
 
 .board-wrap.detail .files li a:hover {
     color: #111;
-    text-decoration: underline
+    text-decoration: underline;
 }
 
 .board-wrap.detail .others {
     border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd
+    border-bottom: 1px solid #ddd;
 }
 
 .board-wrap.detail .others li {
     position: relative;
-    padding: 12px 12px 12px 105px
+    padding: 12px 12px 12px 105px;
 }
 
-.board-wrap.detail .others li:nth-child(n+2) {
+.board-wrap.detail .others li:nth-child(n + 2) {
     border-top: 1px solid #ddd;
 }
 
@@ -3442,29 +3454,29 @@
 
 .board-wrap.detail .others li a:hover {
     color: #111;
-    text-decoration: underline
+    text-decoration: underline;
 }
 
-@media only screen and (max-width:1200px) {}
+@media only screen and (max-width: 1200px) {}
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .board-wrap.detail .files {
         padding: 15px 20px;
     }
     .board-wrap.detail .others li {
-        padding: 12px 12px 12px 80px
+        padding: 12px 12px 12px 80px;
     }
     .board-wrap.detail .others li .btxt {
         padding-left: 20px;
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .board-wrap.detail .files {
         padding: 15px 15px;
     }
     .board-wrap.detail .others li {
-        padding: 10px 10px 10px 80px
+        padding: 10px 10px 10px 80px;
     }
     .board-wrap.detail .others li .btxt {
         padding-left: 15px;
@@ -3472,7 +3484,7 @@
     }
 }
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 .board-wrap.detail .upper {
     margin-bottom: 15px;
@@ -3516,7 +3528,7 @@
     margin-top: 35px;
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .board-wrap.detail .upper a {
         height: 25px;
         line-height: 23px;
@@ -3528,16 +3540,16 @@
     }
 }
 
-@media only screen and (max-width:680px) {}
+@media only screen and (max-width: 680px) {}
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 .board-wrap.detail .best {}
 
 .board-wrap.detail .best:after {
     display: block;
     content: "";
-    clear: both
+    clear: both;
 }
 
 .board-wrap.detail .best .fl {
@@ -3557,7 +3569,7 @@
 }
 
 .board-wrap.detail .best h4 {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 18px;
     font-weight: 400;
     color: #fff;
@@ -3573,7 +3585,7 @@
 
 .board-wrap.detail .best li {}
 
-.board-wrap.detail .best li:nth-child(n+2) {
+.board-wrap.detail .best li:nth-child(n + 2) {
     margin-top: 12px;
 }
 
@@ -3585,7 +3597,7 @@
 }
 
 .board-wrap.detail .best li a .num {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     position: absolute;
     left: 0;
     top: 2px;
@@ -3597,7 +3609,7 @@
 }
 
 .board-wrap.detail .best li a .vp {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     position: absolute;
     right: 0;
     top: 2px;
@@ -3623,7 +3635,6 @@
     position: absolute;
     left: 20px;
     top: 0;
-    ;
     padding-right: 24px;
     display: inline-block;
     vertical-align: top;
@@ -3653,7 +3664,7 @@
     text-overflow: ellipsis;
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .board-wrap.detail .best h4 {
         font-size: 16px;
     }
@@ -3669,7 +3680,7 @@
     .board-wrap.detail .best ul {
         padding: 15px 15px;
     }
-    .board-wrap.detail .best li:nth-child(n+2) {
+    .board-wrap.detail .best li:nth-child(n + 2) {
         margin-top: 9px;
     }
     .board-wrap.detail .best li a {
@@ -3694,9 +3705,9 @@
     }
 }
 
-@media only screen and (max-width:680px) {}
+@media only screen and (max-width: 680px) {}
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 .cmmt-wrap {
     background: #f9f9f9;
@@ -3720,7 +3731,7 @@
 }
 
 .cmmt-wrap .comment .ov {
-    border: 1px solid #ccc
+    border: 1px solid #ccc;
 }
 
 .cmmt-wrap .comment textarea {
@@ -3740,7 +3751,7 @@
     text-align: right;
     padding: 7px 10px;
     border-top: 1px solid #ccc;
-    background: #f4f4f4
+    background: #f4f4f4;
 }
 
 .cmmt-wrap .comment .write-btn {
@@ -3755,9 +3766,9 @@
     text-align: center;
 }
 
-@media only screen and (max-width:1200px) {}
+@media only screen and (max-width: 1200px) {}
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .cmmt-wrap {
         background: #f9f9f9;
         padding: 20px 20px;
@@ -3767,7 +3778,7 @@
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .cmmt-wrap {
         background: #f9f9f9;
         padding: 20px 15px;
@@ -3782,7 +3793,7 @@
     }
 }
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 .cmmt-wrap .cmmt {
     position: relative;
@@ -3827,7 +3838,7 @@
     float: left;
 }
 
-.cmmt-wrap .cmmt .list .vp-point li:nth-child(n+2) {
+.cmmt-wrap .cmmt .list .vp-point li:nth-child(n + 2) {
     margin-left: 15px;
     margin-top: 0 !important;
     padding-top: 0;
@@ -3858,15 +3869,15 @@
     bottom: 20px;
 }
 
-.cmmt-wrap .cmmt .list li:nth-child(n+2) {
+.cmmt-wrap .cmmt .list li:nth-child(n + 2) {
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px solid #dedede
+    border-top: 1px solid #dedede;
 }
 
 .cmmt-wrap .cmmt .list li {
     position: relative;
-    z-index: 201
+    z-index: 201;
 }
 
 .cmmt-wrap .cmmt .list .aread {
@@ -3881,7 +3892,7 @@
     min-width: 110px;
 }
 
-.cmmt-wrap .cmmt .layer-wrap li:nth-child(n+2) {
+.cmmt-wrap .cmmt .layer-wrap li:nth-child(n + 2) {
     border-top: 0;
     padding: 0;
     margin: 0;
@@ -3901,7 +3912,7 @@
     width: 100%;
     height: 100%;
     display: block;
-    content: ""
+    content: "";
 }
 
 .cmmt-wrap .cmmt .nickname .ico {
@@ -3929,9 +3940,9 @@
     color: #111;
 }
 
-@media only screen and (max-width:1200px) {}
+@media only screen and (max-width: 1200px) {}
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .cmmt-wrap .cmmt .nickname {
         height: 25px;
     }
@@ -3947,9 +3958,9 @@
     }
 }
 
-@media only screen and (max-width:680px) {}
+@media only screen and (max-width: 680px) {}
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 .cmmt-wrap .cmmt .ctrls {
     margin-top: 12px;
@@ -3959,7 +3970,7 @@
 .cmmt-wrap .cmmt .ctrls ul:after {
     display: block;
     content: "";
-    clear: both
+    clear: both;
 }
 
 .cmmt-wrap .cmmt .ctrls li {
@@ -3973,14 +3984,14 @@
     font-size: 13px;
 }
 
-.cmmt-wrap .cmmt .ctrls li:nth-child(n+2) {
+.cmmt-wrap .cmmt .ctrls li:nth-child(n + 2) {
     border-top: 0;
     padding: 0;
     margin: 0;
-    margin-left: 22px
+    margin-left: 22px;
 }
 
-.cmmt-wrap .cmmt .ctrls li:nth-child(n+2):before {
+.cmmt-wrap .cmmt .ctrls li:nth-child(n + 2):before {
     width: 1px;
     height: 10px;
     position: absolute;
@@ -3989,7 +4000,7 @@
     margin-top: -4px;
     display: block;
     content: "";
-    background: #aaa
+    background: #aaa;
 }
 
 .cmmt-wrap .cmmt .ctrls li a {
@@ -4033,7 +4044,13 @@
     margin-top: 15px;
 }
 
+
+/* overflow & word-wrap => 임의추가 */
+
 .cmmt-wrap .cmmt .vtxt {
+    overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-all;
     margin-top: 15px;
 }
 
@@ -4043,10 +4060,13 @@
     line-height: 1.5em;
 }
 
-@media only screen and (max-width:1200px) {}
+@media only screen and (max-width: 1200px) {}
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
+    /* overflow & word-wrap => 임의추가 */
     .cmmt-wrap .cmmt .vtxt {
+        overflow: hidden;
+        word-wrap: break-word;
         margin-top: 10px;
     }
     .cmmt-wrap .cmmt .vtxt p {
@@ -4063,9 +4083,9 @@
     }
 }
 
-@media only screen and (max-width:680px) {}
+@media only screen and (max-width: 680px) {}
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 .cmmt-wrap .reply {
     margin-top: 20px;
@@ -4138,9 +4158,9 @@
     top: 15px;
 }
 
-@media only screen and (max-width:1200px) {}
+@media only screen and (max-width: 1200px) {}
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .cmmt-wrap .reply.cdepth2 {
         margin-left: 20px;
     }
@@ -4152,9 +4172,9 @@
     }
 }
 
-@media only screen and (max-width:680px) {}
+@media only screen and (max-width: 680px) {}
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 
 /* =====================================
@@ -4169,7 +4189,7 @@
     display: none;
     width: 290px;
     box-sizing: border-box;
-    border: 1px solid #d6d6d6
+    border: 1px solid #d6d6d6;
 }
 
 .layer-wrap.singo .is-top {
@@ -4210,7 +4230,7 @@
     padding-left: 24px;
 }
 
-.layer-wrap.singo .is-con .sel .chk-radio:nth-child(n+2) {
+.layer-wrap.singo .is-con .sel .chk-radio:nth-child(n + 2) {
     margin-left: 5px;
 }
 
@@ -4265,9 +4285,9 @@
     text-align: center;
 }
 
-@media only screen and (max-width:1200px) {}
+@media only screen and (max-width: 1200px) {}
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     /* .layer-wrap.singo{position:fixed !important;left:50% !important; top:50% !important; margin:0 !important-webkit-transform: translate(-50%, -50%); -moz-transform: translate(-50%, -50%);  -ms-transform: translate(-50%, -50%);  -o-transform: translate(-50%, -50%);  transform: translate(-50%, -50%);} */
     .layer-wrap.singo .is-top {
         padding: 0 15px;
@@ -4286,9 +4306,9 @@
     }
 }
 
-@media only screen and (max-width:680px) {}
+@media only screen and (max-width: 680px) {}
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 
 /* ======================================================

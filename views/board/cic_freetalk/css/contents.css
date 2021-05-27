@@ -3261,7 +3261,12 @@
 
 @media only screen and (max-width:480px) {}
 
+
+/* overflow & word-wrap => 임의추가 */
+
 .board-wrap.detail .cons {
+    overflow: hidden;
+    word-wrap: break-word;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     min-height: 200px;
@@ -3334,7 +3339,10 @@
 @media only screen and (max-width:1200px) {}
 
 @media only screen and (max-width:999px) {
+    /* overflow & word-wrap => 임의추가 */
     .board-wrap.detail .cons {
+        overflow: hidden;
+        word-wrap: break-word;
         padding: 20px 20px 50px 20px;
         font-size: 14px;
     }
@@ -3362,13 +3370,19 @@
 }
 
 @media only screen and (max-width:680px) {
+    /* overflow & word-wrap => 임의추가 */
     .board-wrap.detail .cons {
+        overflow: hidden;
+        word-wrap: break-word;
         padding: 15px 15px 50px 15px
     }
 }
 
 @media only screen and (max-width:480px) {
+    /* overflow & word-wrap => 임의추가 */
     .board-wrap.detail .cons {
+        overflow: hidden;
+        word-wrap: break-word;
         padding: 15px 15px 30px 15px
     }
 }
@@ -4033,7 +4047,12 @@
     margin-top: 15px;
 }
 
+
+/* overflow & word-wrap => 임의추가 */
+
 .cmmt-wrap .cmmt .vtxt {
+    overflow: hidden;
+    word-wrap: break-word;
     margin-top: 15px;
 }
 
@@ -4046,7 +4065,10 @@
 @media only screen and (max-width:1200px) {}
 
 @media only screen and (max-width:999px) {
+    /* overflow & word-wrap => 임의추가 */
     .cmmt-wrap .cmmt .vtxt {
+        overflow: hidden;
+        word-wrap: break-word;
         margin-top: 10px;
     }
     .cmmt-wrap .cmmt .vtxt p {

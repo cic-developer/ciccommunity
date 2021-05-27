@@ -546,14 +546,14 @@ class News extends CB_Controller
 		if($compid = (int) $this->input->get('comp_id')){
 			$where['news.comp_id'] = $compid;
 		}
-
+		
 		$result = $this->Company_model
-			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		->get_company_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
-
-		print_r('hello');
-		exit;
+		
 		if (element('list', $result)) {
+			// print_r(element('list', $result));
+			// exit;
 			foreach (element('list', $result) as $key => $val) {
 				$result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
 				if($company) {

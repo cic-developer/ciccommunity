@@ -34,6 +34,7 @@ class Company_model extends CB_Model
 
     public function get_company_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
     {
+
         if ( ! in_array(strtolower($orderby), $this->allow_order)) {
 			$orderby = 'comp_id asc';
 		}
@@ -90,7 +91,7 @@ class Company_model extends CB_Model
 
 		$this->db->select('company.*, ');
 		$this->db->from($this->_table);
-		$this->db->join('news', 'company.comp_id = news.comp_id', 'left');
+		// $this->db->join('news', 'company.comp_id = news.comp_id', 'left');
 		if ($where) {
 			$this->db->where($where);
 		}
@@ -123,7 +124,7 @@ class Company_model extends CB_Model
 
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
-		$this->db->join('news', 'company.comp_id = news.comp_id', 'left');
+		// $this->db->join('news', 'company.comp_id = news.comp_id', 'left');
 		
 
 		if ($where) {
@@ -152,6 +153,8 @@ class Company_model extends CB_Model
 		$rows = $qry->row_array();
 		$result['total_rows'] = $rows['rownum'];
 
+		// print_r($result);
+		// exit;
 
 		return $result;
     }
