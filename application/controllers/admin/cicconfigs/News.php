@@ -651,6 +651,16 @@ class News extends CB_Controller
 					'lable' => 'Segment',
 					'rules' => 'trim|required|min_length[2]|max_length[30]',
 				),
+				array(
+					'field' => 'comp_img_select',
+					'lable' => 'Segment',
+					'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[30]',
+				),
+				array(
+					'field' => 'comp_segment',
+					'lable' => 'Segment',
+					'rules' => 'trim|required|min_length[2]|max_length[30]',
+				),
 			);
 			if ($this->input->post($primary_key)) {
 				$config[] = array(

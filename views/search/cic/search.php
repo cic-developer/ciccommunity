@@ -160,8 +160,6 @@
 			<?php } ?>	
 			<!-- PRICE UNTIL HERE -->
 
-<hr>
-<hr>
 
 			<div class="gap35"></div>
 			<div class="cont">
@@ -169,7 +167,6 @@
 					<h3>자유게시판</h3>
 					<a href="#n" class="more"><span>more</span></a>
 				</div>
-				<div class="gap60"></div>
 				<div class="list community">
 					<table>
 						<colgroup>
@@ -179,6 +176,8 @@
 							<col width="100">
 							<col width="100">
 						</colgroup>
+
+
 						<thead>
 							<tr>
 								<th>글쓴이</th>
