@@ -1,6 +1,8 @@
 <div class="box">
 <?php
 if (element(element('primary_key', $view), element('data', $view))) {
+	// print_r(element(element('primary_key', $view), element('data', $view)));
+	// exit;
 ?>
 	<div class="box-header">
 		<h4 class="pb10 pull-left">신문사 설정 수정 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>
@@ -30,13 +32,6 @@ if (element(element('primary_key', $view), element('data', $view))) {
 		echo form_open_multipart(current_full_url(), $attributes);
 		?>
 			<input type="hidden" name="<?php echo element('primary_key', $view); ?>"	value="<?php echo element(element('primary_key', $view), element('data', $view)); ?>" />
-            <div class="form-group">
-				<label class="col-sm-2 control-label">신문사 id</label>
-				<div class="col-sm-10 form-inline">
-					<input type="text" class="form-control" name="cme_id" value="<?php echo set_value('comp_id', element('comp_id', element('data', $view))); ?>" />
-					<p class="help-block">신문사 명을 입력하세요.</p>
-				</div>
-			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">신문사 이름</label>
 				<div class="col-sm-10 form-inline">
@@ -62,7 +57,7 @@ if (element(element('primary_key', $view), element('data', $view))) {
 				<label class="col-sm-2 control-label">활성화/비활성화</label>
 				<div class="col-sm-10 form-inline">
 					<label for="cmc_default" class="checkbox-inline">
-						<input type="checkbox" name="cmc_default" id="cmc_default" value="1" <?php echo set_checkbox('cmc_default', '1', (element('cmc_default', element('data', $view)) ? true : false)); ?> /> 기본 코인으로 설정합니다.
+						<input type="checkbox" name="comp_active" id="comp_active" value="1" <?php echo set_checkbox('comp_active', '1', (element('comp_active', element('data', $view)) ? true : false)); ?> /> 활성화
 					</label>
 					<p class="help-block">해당 신문사를 크롤링 하려면 활성화 그렇지 않다면 비활성화를 선택하세요.</p>
 				</div>

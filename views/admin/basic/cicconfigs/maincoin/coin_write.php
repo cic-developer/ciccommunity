@@ -1,6 +1,8 @@
 <div class="box">
 <?php
 if (element(element('primary_key', $view), element('data', $view))) {
+	// print_r(element(element('primary_key', $view), element('data', $view)));
+	// exit;
 ?>
 	<div class="box-header">
 		<h4 class="pb10 pull-left">코인 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>

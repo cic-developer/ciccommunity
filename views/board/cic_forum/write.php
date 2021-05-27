@@ -275,6 +275,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php echo element('footercontent', element('board', $view)); ?>
 
+<style>
+	.chk-input label {
+		font-size:14px;
+		color:#f47523
+	}
+</style>
 
 <script type="text/javascript">
 // 글자수 제한

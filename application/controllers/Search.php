@@ -228,7 +228,7 @@ class Search extends CB_Controller
 
 		if($market === "PER"){
 			foreach($api_result as $result_price){
-				// print_r($result_price);
+				print_r($result_price);
 				$high = $result_price['high'];
 				$low =$result_price['low'];
 				$prev = $result_price['open'];
@@ -245,6 +245,7 @@ class Search extends CB_Controller
 				}
 				$view['low'] = $low;
 				$view['high'] = $high;
+				$view['prev'] = $prev;
 
 				
 				// $view['change'] = $change;

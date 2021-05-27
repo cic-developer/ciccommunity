@@ -567,14 +567,14 @@ class News extends CB_Controller
 		}
 		$view['view']['data'] = $result;
 
-		$select ='comp_id, comp_name';
-		$view['view']['companylist'] = $this->Company_model->get_company_list();
+		// $select ='comp_id, comp_name';
+		// $view['view']['companylist'] = $this->Company_model->get_company_list();
+		$view['view']['primary_key'] = $this->Company_model->primary_key;
 
 
 		/**
 		 * primary key 정보를 저장합니다
 		 */
-		$view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
 
 		/**
 		 * 페이지네이션을 생성합니다
@@ -641,20 +641,15 @@ class News extends CB_Controller
 		$this->load->library('form_validation');
 
 		$config = array(
-			array(
-				'field' => 'comp_url',
-				'lable' => 'URL',
-				'rules' => 'prep_url|valid_url',
-			),
-			array(
-				'field' => 'comp_segment',
-				'lable' => 'Segment',
-				'rules' => 'trim|required|min_length[2]|max_length[30]',
-			),
-			array(
-				'field' => 'comp_active',
-				'lable' => '활성화',
-				'rules' => 'trim|required|[0 === 비활성화 , 1 === 활성화 ]',
+				array(
+					'field' => 'comp_url',
+					'lable' => 'URL',
+					'rules' => 'prep_url|valid_url',
+				),
+				array(
+					'field' => 'comp_segment',
+					'lable' => 'Segment',
+					'rules' => 'trim|required|min_length[2]|max_length[30]',
 				),
 			);
 			if ($this->input->post($primary_key)) {

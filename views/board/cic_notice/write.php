@@ -40,6 +40,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 </div>
 
+<style>
+	.chk-input label {
+		font-size:14px;
+		color:#f47523
+	}
+</style>
+
 <script type="text/javascript">
 // 글자수 제한
 var char_min = parseInt(<?php echo (int) element('post_min_length', element('board', $view)); ?>); // 최소

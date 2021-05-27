@@ -46,3 +46,10 @@
 		<!-- page end // -->
 	</div>
 </div>
+
+<style>
+	.chk-input label {
+		font-size:14px;
+		color:#f47523
+	}
+</style>

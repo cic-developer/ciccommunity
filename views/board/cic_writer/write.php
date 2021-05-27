@@ -31,9 +31,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<label> <input type="checkbox" class="checkbox" name="post_notice" value="1"> <p>메인으로 게시</p> </label>
 					</div>
 					<?php } ?>
-					<div class="main-check">
+					<!-- <div class="main-check">
 						<label> <input type="checkbox" class="checkbox" value="1"> <p>대표 이미지삭제</p> </label>
-					</div>
+					</div> -->
 				</ul>
 			</div>
 
@@ -116,6 +116,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 </div>
 
+<style>
+	input[type="checkbox"]{
+		-webkit-appearance: auto;
+		-moz-appearance: auto;
+		appearance: auto;
+	}
+	.chk-input label {
+		font-size:14px;
+		color:#f47523
+	}
+</style>
 
 <script type="text/javascript">
 // 글자수 제한
