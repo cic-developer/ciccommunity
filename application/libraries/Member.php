@@ -343,6 +343,7 @@ class Member extends CI_Controller
 	public function get_member_level($mem_level = 1)
 	{
 		if ($this->is_member()) {
+			$member = $this->CI->Member_model->get_by_memid($this->is_member());
 			if($mem_level == 100){
 				return array( 
 					'mlc_title' => '관리자', 
@@ -361,7 +362,6 @@ class Member extends CI_Controller
 			} else {
 				$this->CI->load->library('point');
 				$this->CI->point->setUserLevel($this->is_member());
-				$member = $this->CI->Member_model->get_by_memid($this->is_member());
 				if(!$member){
 					return false;
 				}

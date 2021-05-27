@@ -655,6 +655,13 @@ class News extends CB_Controller
 				'lable' => '활성화',
 				'rules' => 'trim|required|[0 === 비활성화 , 1 === 활성화 ]',
 			),
+			if ($this->input->post($primary_key)) {
+				$config[] = array(
+						'field' => 'comp_name',
+						'label' => '신문사 명',
+						'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[15]|is_unique[company.comp_name.comp_id.' . element('comp_id', $getdata) . ']',
+				);
+			}
 		);
 
 		$this->form_validation->set_rules($config);

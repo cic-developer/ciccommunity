@@ -228,15 +228,20 @@ class Search extends CB_Controller
 
 		if($market === "PER"){
 			foreach($api_result as $result_price){
-				print_r($result_price);
+				// print_r($result_price);
 				$high = $result_price['high'];
 				$low =$result_price['low'];
-				// $prev = $result_price['prev_closing_price'];
+				$prev = $result_price['open'];
 				// $change = 'RISE';
-				// $rate =  $result_price['change_rate'];
-				// $difference = 23;
+				
+				
 				$trade =$result_price['last'];
+				
+				print_r($difference);
 				if($trade != NULL){
+					$difference = $trade - $prev;
+					$rate =  ($trade / $prev) * 100;
+					print_r($rate);
 					$view['trade'] = $trade;
 				}else{
 					continue;
@@ -244,7 +249,7 @@ class Search extends CB_Controller
 				$view['trade'] = $trade;
 				$view['low'] = $low;
 				$view['high'] = $high;
-				// $view['difference'] = $difference;
+				$view['difference'] = $difference;
 				// $view['rate'] = $rate;
 				// $view['change'] = $change;
 				
@@ -253,12 +258,12 @@ class Search extends CB_Controller
 			$his_price = array();
 			$his_time = array();
 			for($i=0; $i<25; $i++){
-				echo "<pre><br>";
-				print_r($getHist['result'][$i]);
-				echo "</pre></br>";
+				// echo "<pre><br>";
+				// print_r($getHist['result'][$i]);
+				// echo "</pre></br>";
 				if($getHist['result'][$i][0]){
 					$his_time[] = $getHist['result'][$i][0];
-					$his_price[] = $getHist['result'][$i][2];
+					$his_price[] = $getHist['result'][$i][1];
 				}
 			}		
 			$view['his_price'] = $his_price;
@@ -291,9 +296,10 @@ class Search extends CB_Controller
 					$his_time[] = $histDota['candle_date_time_kst'];
 					$his_price[] = $histDota['trade_price'];
 				}	
+			}	
 			$view['his_price'] = $his_price;
 			$view['his_time'] = $his_time;
-			}
+			
 		}	
         //Send to view
 		$view['symbole'] = strtoupper($symbole);
