@@ -110,6 +110,16 @@ class CIC_Coin_list_model extends CB_Model
                 CURLOPT_CUSTOMREQUEST => "GET"   
                 
             ));
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+
+            curl_close($curl);
+
+            if($err){
+                echo "cUrl Error :" . $err;
+            }
+            $array = json_decode($response, true);
+            return $array;
         }else{
             curl_setopt_array($curl, array(
                 CURLOPT_URL => "https://api.upbit.com/v1/candles/minutes/60?market=KRW-{$market}&count=24",
@@ -122,17 +132,20 @@ class CIC_Coin_list_model extends CB_Model
                 CURLOPT_CUSTOMREQUEST => "GET"   
                 
             ));
-        }
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+        
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
 
-        curl_close($curl);
+            curl_close($curl);
 
-        if($err){
-            echo "cUrl Error :" . $err;
+            if($err){
+                echo "cUrl Error :" . $err;
+            }
+            $array = json_decode($response, true);
+            return $array;
+        
         }
-        $array = json_decode($response, true);
-        return $array;
+
     }
 
 
@@ -152,6 +165,17 @@ class CIC_Coin_list_model extends CB_Model
                 CURLOPT_CUSTOMREQUEST => "GET"   
                 
             ));
+
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+
+            curl_close($curl);
+
+            if($err){
+                echo "cUrl Error :" . $err;
+            }
+            $array = json_decode($response, true);
+            return $array;
         }else{
             curl_setopt_array($curl, array(
                 CURLOPT_URL => "https://api.upbit.com/v1/ticker?markets=KRW-{$market}",
@@ -164,17 +188,19 @@ class CIC_Coin_list_model extends CB_Model
                 CURLOPT_CUSTOMREQUEST => "GET"   
                 
             ));
-        }
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
 
-        curl_close($curl);
+            curl_close($curl);
 
-        if($err){
-            echo "cUrl Error :" . $err;
+            if($err){
+                echo "cUrl Error :" . $err;
+            }
+            $array = json_decode($response, true);
+            return $array;
+       
         }
-        $array = json_decode($response, true);
-        return $array;
+
     }
 }
 ?>

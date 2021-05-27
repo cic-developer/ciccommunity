@@ -683,7 +683,30 @@ class News extends CB_Controller
 					'정상적으로 수정되었습니다'
 				);
 			}
+			$redirecturl = admin_url($this->pagedir);
+			redirect($redirecturl);
 		}
+		
+		$param =& $this->querystring;
+		$getdata = array();
+		if ($comp_id) {
+			$getdata = $this->Company_model->get_one($comp_id);
+		} else {
+			// 기본값 설정
+		}
+
+		$view['view']['data'] = $getdata;
+		$view['view']['list_url'] = admin_url($this->pagedir . '?' . $param->output());
+
+		$view['view']['primary_key'] = $primary_key;
+
+		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'updatecompany');
+		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
     public function update_news_enable_0()

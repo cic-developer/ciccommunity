@@ -319,8 +319,13 @@ class Board extends CI_Controller
 
 		$post = $this->CI->Post_model->get_one(element('post_id', $comment));
 		$board = $this->CI->board->item_all(element('brd_id', $post));
-
-		$this->CI->Comment_model->delete($cmt_id);
+		
+		$updatedata = array(
+			'cmt_del' => 1,
+			'cmt_updated_datetime' => cdate('Y-m-d H:i:s'),
+		);
+		// $this->CI->Comment_model->delete($cmt_id);
+		$this->CI->Comment_model->update($cmt_id, $updatedata);
 		$deletewhere = array(
 			'target_id' => $cmt_id,
 			'target_type' => 2,

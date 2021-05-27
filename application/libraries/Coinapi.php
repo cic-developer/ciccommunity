@@ -57,6 +57,11 @@ class Coinapi
             }
             break;
 
+            case 'gdac':{
+                return $this->get_gdac_data($coin_id, $market);
+            }
+            break;
+
             case 'bitflyer':{
                 return $this->get_bitflyer_data($coin_id);
             }
@@ -102,6 +107,7 @@ class Coinapi
      * 빗썸 에서 데이터 가져오는 함수
      */
     private function get_bithumb_data($coin_id, $market="KRW"){
+        $usd_price = $this->get_usd_price();
         $url = "https://api.bithumb.com/public/ticker/{$coin_id}_{$market}";
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
@@ -124,6 +130,7 @@ class Coinapi
         if($ticker_data && $price_data){
             return array(
                 'price'         => $price_data[0]['price'],
+                'price_usd'     => $price_data[0]['price']/$usd_price,
                 'korea_premium' => $binance_price ? ($price_data[0]['price'] - $binance_price) / $binance_price * 100 : '',
                 'volume'        => $ticker_data['acc_trade_value_24H'],
                 'change_rate'   => $ticker_data['fluctate_rate_24H'],
@@ -137,6 +144,7 @@ class Coinapi
      * 업비트 에서 데이터 가져오는 함수
      */
     private function get_upbit_data($coin_id, $market="KRW"){
+        $usd_price = $this->get_usd_price();
         $url = "https://partner.gdac.com/v0.4/public/tickers/{$market}%2F{$coin_id}";
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
@@ -153,6 +161,7 @@ class Coinapi
         if($data){
             return array(
                 'price'         => $data['trade_price'],
+                'price_usd'     => $data['trade_price']/$usd_price,
                 'korea_premium' => $binance_price ? ($data['trade_price'] - $binance_price) / $binance_price * 100 : '',
                 'volume'        => $data['acc_trade_price_24h'],
                 'change_rate'   => $data['signed_change_rate']*100,
@@ -166,6 +175,7 @@ class Coinapi
      * 핫빗코리아 에서 데이터 가져오는 함수
      */
     private function get_hotbitkorea_data($coin_id, $market="KRW"){
+        $usd_price = $this->get_usd_price();
         $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
@@ -182,6 +192,7 @@ class Coinapi
         if($data){
             return array(
                 'price'         => $data['last'],
+                'price_usd'     => $data['last']/$usd_price,
                 'korea_premium' => $binance_price ? ($data['last'] - $binance_price) / $binance_price * 100 : '',
                 'volume'        => $data['deal'],
                 'change_rate'   => $data['open'] ? (($data['last'] - $data['open']) / $data['open'] * 100) : 0,
@@ -195,6 +206,7 @@ class Coinapi
      * 코인빗 에서 데이터 가져오는 함수
      */
     private function get_coinbit_data($coin_id, $market="KRW"){
+        $usd_price = $this->get_usd_price();
         $url = "https://production-api.coinbit.global/api/v1.0/trading_pairs/";
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
@@ -212,6 +224,7 @@ class Coinapi
                 if($data['name'] == $coin_id.'-'.$market){
                     return array(
                         'price'         => $data['close_price'],
+                        'price_usd'     => $data['close_price']/$usd_price,
                         'korea_premium' => $binance_price ? ($data['close_price'] - $binance_price) / $binance_price * 100 : '',
                         'volume'        => $data['acc_trade_value_24h'],
                         'change_rate'   => $data['signed_change_rate']*100,
@@ -227,6 +240,7 @@ class Coinapi
      * 코인원 에서 데이터 가져오는 함수
      */
     private function get_coinone_data($coin_id){
+        $usd_price = $this->get_usd_price();
         $url = "https://api.coinone.co.kr/ticker_utc?currency={$coin_id}";
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
@@ -243,6 +257,7 @@ class Coinapi
         if($data){
             return array(
                 'price'         => $data['last'],
+                'price_usd'     => $data['last']/$usd_price,
                 'korea_premium' => $binance_price ? ($data['last'] - $binance_price) / $binance_price * 100 : '',
                 'volume'        => $data['volume']*$data['last'],
                 'change_rate'   => $data['yesterday_last'] ? (($data['last'] - $data['yesterday_last']) / $data['yesterday_last'] * 100) : 0,
@@ -256,6 +271,7 @@ class Coinapi
      * 코빗 에서 데이터 가져오는 함수
      */
     private function get_korbit_data($coin_id, $market="krw"){
+        $usd_price = $this->get_usd_price();
         $url = "https://api.korbit.co.kr/v1/ticker/detailed?currency_pair=".strtolower($coin_id)."_".strtolower($market);
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
@@ -272,6 +288,7 @@ class Coinapi
         if($data){
             return array(
                 'price'         => $data['last'],
+                'price_usd'     => $data['last']/$usd_price,
                 'korea_premium' => $binance_price ? ($data['last'] - $binance_price) / $binance_price * 100 : '',
                 'volume'        => $data['volume'] * $data['last'],
                 'change_rate'   => $data['changePercent'],
@@ -284,7 +301,8 @@ class Coinapi
     /**
      * 지닥 에서 데이터 가져오는 함수
      */
-    private function get_gdac_data($coin_id, $market="krw"){
+    private function get_gdac_data($coin_id, $market="KRW"){
+        $usd_price = $this->get_usd_price();
         $url = "https://api.korbit.co.kr/v1/ticker/detailed?currency_pair=".strtolower($coin_id)."_".strtolower($market);
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
@@ -301,9 +319,10 @@ class Coinapi
         if($data){
             return array(
                 'price'         => $data['last'],
+                'price_usd'     => $data['last']/$usd_price,
                 'korea_premium' => $binance_price ? ($data['last'] - $binance_price) / $binance_price * 100 : '',
                 'volume'        => $data['volume'] * $data['last'],
-                'change_rate'   => $data['changePercent'],
+                'change_rate'   => $data['open'] ? (($data['last'] - $data['open']) / $data['open'] * 100) : 0,
             );
         } else {
             return array();
@@ -316,6 +335,7 @@ class Coinapi
      */
     private function get_bitflyer_data($coin_id){
         $jpy_price = $this->get_jpy_price();
+        $jpyusd_price = $this->get_jpyusd_price();
 
         //거래소정보
         $url = "https://api.bitflyer.com/v1/getticker?product_code={$coin_id}_JPY";
@@ -326,9 +346,10 @@ class Coinapi
         $data = $result;
         if($data){
             return array(
-                'price' => $data['ltp'] * $jpy_price,
-                'volume' => $data['volume'] * $data['ltp'] * $jpy_price,
-                'change_rate' => 0,
+                'price'         => $data['ltp'] * $jpy_price,
+                'price_usd'     => $data['ltp']/$jpyusd_price,
+                'volume'        => $data['volume'] * $data['ltp'] * $jpy_price,
+                'change_rate'   => 0,
             );
         } else {
             return array();
@@ -351,9 +372,10 @@ class Coinapi
         $data = $result;
         if($data){
             $return_data = array(
-                'price' => $data['lastPrice'] * $usd_price,
-                'volume' => $data['quoteVolume'] * $usd_price,
-                'change_rate' => $data['priceChangePercent'],
+                'price'         => $data['lastPrice'] * $usd_price,
+                'price_usd'     => $data['lastPrice'],
+                'volume'        => $data['quoteVolume'] * $usd_price,
+                'change_rate'   => $data['priceChangePercent'],
             );
             //한국 프리미엄 계산을 위해 메모리에 저장
             if($market=="USDT") $this->binance_data[$coin_id] = $return_data;
@@ -378,9 +400,10 @@ class Coinapi
         $data = $result;
         if($data){
             return array(
-                'price' => $data[6] * $usd_price,
-                'volume' => $data[7] * $data[6] * $usd_price,
-                'change_rate' => $data[5] * 100,
+                'price'         => $data[6] * $usd_price,
+                'price_usd'     => $data[6],
+                'volume'        => $data[7] * $data[6] * $usd_price,
+                'change_rate'   => $data[5] * 100,
             );
         } else {
             return array();
@@ -401,9 +424,10 @@ class Coinapi
         $data = $result['data'];
         if($data){
             return array(
-                'price' => $data[0]['last'] * $usd_price,
-                'volume' => $data[0]['vol24h'] * $usd_price,
-                'change_rate' => $data[0]['sodUtc0'] ? (($data[0]['last'] - $data[0]['sodUtc0']) / $data[0]['sodUtc0'] * 100) : 0,
+                'price'         => $data[0]['last'] * $usd_price,
+                'price_usd'     => $data[0]['last'],
+                'volume'        => $data[0]['vol24h'] * $usd_price,
+                'change_rate'   => $data[0]['sodUtc0'] ? (($data[0]['last'] - $data[0]['sodUtc0']) / $data[0]['sodUtc0'] * 100) : 0,
             );
         } else {
             return array();
@@ -424,9 +448,10 @@ class Coinapi
         $data = $result['tick'];
         if($data){
             return array(
-                'price' => $data['close'] * $usd_price,
-                'volume' => $data['amount'] * $data['close'] * $usd_price,
-                'change_rate' => $data['open'] ? (($data['close'] - $data['open']) / $data['open'] * 100) : 0,
+                'price'         => $data['close'] * $usd_price,
+                'price_usd'     => $data['close'],
+                'volume'        => $data['amount'] * $data['close'] * $usd_price,
+                'change_rate'   => $data['open'] ? (($data['close'] - $data['open']) / $data['open'] * 100) : 0,
             );
         } else {
             return array();
@@ -447,9 +472,10 @@ class Coinapi
         $data = $result['result'];
         if($data){
             return array(
-                'price' => $data[0]['Last'] * $usd_price,
-                'volume' => $data[0]['BaseVolume'] * $usd_price,
-                'change_rate' => $data[0]['PrevDay'] ? (($data[0]['Last'] - $data[0]['PrevDay']) / $data[0]['PrevDay'] * 100) : 0,
+                'price'         => $data[0]['Last'] * $usd_price,
+                'price_usd'     => $data[0]['Last'],
+                'volume'        => $data[0]['BaseVolume'] * $usd_price,
+                'change_rate'   => $data[0]['PrevDay'] ? (($data[0]['Last'] - $data[0]['PrevDay']) / $data[0]['PrevDay'] * 100) : 0,
             );
         } else {
             return array();
@@ -470,9 +496,10 @@ class Coinapi
         $data = $result[$market.'_'.$coin_id];
         if($data){
             return array(
-                'price' => $data['last'] * $usd_price,
-                'volume' => $data['baseVolume'] * $usd_price,
-                'change_rate' => $data['percentChange'] * 100,
+                'price'         => $data['last'] * $usd_price,
+                'price_usd'     => $data['last'],
+                'volume'        => $data['baseVolume'] * $usd_price,
+                'change_rate'   => $data['percentChange'] * 100,
             );
         } else {
             return array();
@@ -534,6 +561,17 @@ class Coinapi
         if($result === FALSE) return 0;
         $this->jpy_price = $result[0]['basePrice']/100; //100엔당 가격이라 나누기100
         return $this->jpy_price;
+    }
+
+    private function get_jpyusd_price(){
+        if($this->jpyusd_price) return $this->jpyusd_price;
+        //환율정보
+        $url = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.JPYUSD";
+        $result = $this->get_curl($url);
+        //curl 중 오류발생할 경우 0 리턴
+        if($result === FALSE) return 0;
+        $this->jpyusd_price = $result[0]['basePrice'];
+        return $this->jpyusd_price;
     }
 
     private function get_curl($url){
