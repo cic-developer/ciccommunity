@@ -137,11 +137,11 @@ class Coinapi
      * 업비트 에서 데이터 가져오는 함수
      */
     private function get_upbit_data($coin_id, $market="KRW"){
-        $url = "https://api.upbit.com/v1/ticker?markets={$market}-{$coin_id}";
+        $url = "https://partner.gdac.com/v0.4/public/tickers/{$market}%2F{$coin_id}";
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
-        $data = $result[0];
+        $data = $result;
 
         $binance_data = $this->get_binance_data($coin_id, "USDT");
         if(count($binance_data) == 0){
@@ -256,6 +256,35 @@ class Coinapi
      * 코빗 에서 데이터 가져오는 함수
      */
     private function get_korbit_data($coin_id, $market="krw"){
+        $url = "https://api.korbit.co.kr/v1/ticker/detailed?currency_pair=".strtolower($coin_id)."_".strtolower($market);
+        $result = $this->get_curl($url);
+        //curl 중 오류발생할 경우 빈 배열 리턴
+        if($result === FALSE) return array();
+        $data = $result;
+
+        $binance_data = $this->get_binance_data($coin_id, "USDT");
+        if(count($binance_data) == 0){
+            $binance_price = 0;
+        } else {
+            $binance_price = $binance_data['price'];
+        }
+
+        if($data){
+            return array(
+                'price'         => $data['last'],
+                'korea_premium' => $binance_price ? ($data['last'] - $binance_price) / $binance_price * 100 : '',
+                'volume'        => $data['volume'] * $data['last'],
+                'change_rate'   => $data['changePercent'],
+            );
+        } else {
+            return array();
+        }
+    }
+
+    /**
+     * 지닥 에서 데이터 가져오는 함수
+     */
+    private function get_gdac_data($coin_id, $market="krw"){
         $url = "https://api.korbit.co.kr/v1/ticker/detailed?currency_pair=".strtolower($coin_id)."_".strtolower($market);
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴

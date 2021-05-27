@@ -95,19 +95,12 @@ class CIC_Coin_list_model extends CB_Model
         
         //GET TIME STAMP 
         $hour = date('h:i');
-        print_r($hour);
         $today = strtotime("today $hour");
         $yesterday = strtotime("yesterday $hour");
-        
-        
-        
-        "<br>";echo date("Y-m-d H:i:s\n", $today) -> getTimestamp();
-        echo date("Y-m-d H:i:s\n", $yesterday) -> getTimestamp();
-    
         $curl = curl_init();
         if($market == "PER"){
             curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.hotbit.co.kr/api/v2/market.kline?market=PER/KRW&start_time=1621967860&end_time=1622086660&interval=3600",
+                CURLOPT_URL => "https://api.hotbit.co.kr/api/v2/market.kline?market=PER/KRW&start_time={$yesterday}&end_time={$today}&interval=3600",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_ENCODING => "",

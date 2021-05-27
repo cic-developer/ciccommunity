@@ -653,11 +653,37 @@ class News extends CB_Controller
 				'rules' => 'trim|required|min_length[2]|max_length[30]',
 			),
 			array(
-				'field' => '',
-				'lable' => '',
-				'rules' => '',
+				'field' => 'comp_active',
+				'lable' => '활성화',
+				'rules' => 'trim|required|[0 === 비활성화 , 1 === 활성화 ]',
 			),
 		);
+
+		$this->form_validation->set_rules($config);
+
+		if ($this->form_validation->run() === false) {
+
+			// 이벤트가 존재하면 실행합니다
+			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+
+		} else {
+
+			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+			$updatedata = array(
+				'comp_name' => $this->input->post('comp_name', null, ''),
+				'comp_url' => $this->input->post('comp_url', null, ''),
+				'comp_segment' => $this->input->post('comp_segment', null, ''),
+				'comp_active' => $this->input->post('comp_active', null, ''),
+			);
+
+			if ($this->input->post($primary_key)) {
+				$this->Company_model->update($this->input->post($primary_key), $updatedata);
+				$this->session->set_flashdata(
+					'message',
+					'정상적으로 수정되었습니다'
+				);
+			}
+		}
 	}
 
     public function update_news_enable_0()
