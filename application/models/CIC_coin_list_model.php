@@ -152,7 +152,6 @@ class CIC_Coin_list_model extends CB_Model
      //GET DATA FOR CHART
      function get_price($market){
         $curl = curl_init();
-
         if($market === "PER"){
             curl_setopt_array($curl, array(
                 CURLOPT_URL => "https://api.hotbit.co.kr/api/v2/market.status_today?market=PER/KRW",
@@ -175,6 +174,7 @@ class CIC_Coin_list_model extends CB_Model
                 echo "cUrl Error :" . $err;
             }
             $array = json_decode($response, true);
+            print_r($array);
             return $array;
         }else{
             curl_setopt_array($curl, array(

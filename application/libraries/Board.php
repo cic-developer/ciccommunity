@@ -319,12 +319,24 @@ class Board extends CI_Controller
 
 		$post = $this->CI->Post_model->get_one(element('post_id', $comment));
 		$board = $this->CI->board->item_all(element('brd_id', $post));
-		
+
+
+		$cmt_num = element('cmt_num', $comment);
+		$where = array(
+			'scrap.cmt_num' => $cmt_num,
+			'cmt_del' => 0,
+		);
+		$cmt_numArr = $this->CI->get_list('', '', $where, '', '', '');
+
+		print_r('<script>console.log("hi");</script>');
+		echo '<script>console.log("hi");</script>';
+		exit;
+
+		// $this->CI->Comment_model->delete($cmt_id);
 		$updatedata = array(
 			'cmt_del' => 1,
 			'cmt_updated_datetime' => cdate('Y-m-d H:i:s'),
 		);
-		// $this->CI->Comment_model->delete($cmt_id);
 		$this->CI->Comment_model->update($cmt_id, $updatedata);
 		$deletewhere = array(
 			'target_id' => $cmt_id,

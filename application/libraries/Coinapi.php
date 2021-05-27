@@ -145,7 +145,7 @@ class Coinapi
      */
     private function get_upbit_data($coin_id, $market="KRW"){
         $usd_price = $this->get_usd_price();
-        $url = "https://partner.gdac.com/v0.4/public/tickers/{$market}%2F{$coin_id}";
+        $url = "https://api.upbit.com/v1/ticker?markets={$market}-{$coin_id}";
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
@@ -303,7 +303,7 @@ class Coinapi
      */
     private function get_gdac_data($coin_id, $market="KRW"){
         $usd_price = $this->get_usd_price();
-        $url = "https://api.korbit.co.kr/v1/ticker/detailed?currency_pair=".strtolower($coin_id)."_".strtolower($market);
+        $url = "https://partner.gdac.com/v0.4/public/tickers/{$market}%2F{$coin_id}";
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
@@ -505,29 +505,6 @@ class Coinapi
             return array();
         }
     }
-
-    // /**
-    //  * Coingecko 에서 데이터 가져오는 함수
-    //  */
-    // private function get_coingecko_data($coin_id, $market="KRW", $exchange_id=""){
-    //     $url = "https://api.coingecko.com/api/v3/exchanges/{$exchange_id}/tickers?coin_ids={$coin_id}";
-    //     $result = $this->get_curl($url);
-    //     //curl 중 오류발생할 경우 빈 배열 리턴
-    //     if($result === FALSE) return array();
-
-    //     $data = $result['tickers'];
-    //     if($data && is_array($data)){
-    //         foreach($data as $val){
-    //             if($val['target'] != $market) continue;
-    //             return array(
-    //                 'price' => $val['last'],
-    //                 'volume' => $val['volume']*$val['last'],
-    //                 'change_rate' => 0,
-    //             );
-    //         }
-    //     }
-    //     return array();
-    // }
 
     private function get_overseas_krw_price(){
         if($this->usd_price) return $this->usd_price;
