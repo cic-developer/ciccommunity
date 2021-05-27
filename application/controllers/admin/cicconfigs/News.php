@@ -611,18 +611,21 @@ class News extends CB_Controller
 
 	public function updatecompany($comp_id = 0)
 	{
+		
 		$eventname = 'event_admin_ciccinfigs_maincoin_coin';
 		$this->load->event($eventname);
-
+		
 		$view = array();
 		$view['view'] = array();
-
+		
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-
-		$comp_id = (int) $comp_id;
-		if (empty($comp_id) OR $comp_id < 1) {
-			show_404();
-		}
+		
+		// $comp_id = (int) $comp_id;
+		// if (empty($comp_id) OR $comp_id < 1) {
+		// 	show_404();
+		// }
+		// print_r('hello');
+		// exit;
 
 		$param =& $this->querystring;
 		$findex = 'comp_id';
@@ -655,10 +658,29 @@ class News extends CB_Controller
 
 			$updatedata = $this->input->post();
 
-			$this->Company_model->update_exchange($updatedata);
+			// $this->Company_model->update_exchange($updatedata);
 			$view['view']['alert_message'] = '정상적으로 저장되었습니다';
 		}
 
+		$this->CIC_maincoin_coin_model->allow_order_field = array('comp_id');
+
+		$where = array(
+		);
+
+		$result = $this->Company_model->get_one($comp_id);
+		$view['view']['data'] = $result;
+
+
+
+		$view['view']['primary_key'] = $this->Company_model->primary_key;
+
+		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'updatecompany');
+		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
 	// public function updatecompany($comp_id = 0)

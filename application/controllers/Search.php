@@ -246,6 +246,23 @@ class Search extends CB_Controller
 				$view['change'] = $change;
 				
 			}
+
+			//HISTORICAL DATA FOR CHART
+			$his_price = array();
+			$his_time = array();
+			for($i=0; $i<25; $i++){
+				echo "<pre><br>";
+				print_r($getHist['result'][$i]);
+				echo "</pre></br>";
+				if($getHist['result'][$i][0]){
+					$his_time[] = $getHist['result'][$i][0];
+					$his_price[] = $$getHist['result'][$i][0]['trade_price'];
+				}	
+			$view['his_price'] = $his_price;
+			$view['his_time'] = $his_time;
+
+		}
+			
 		}else {
 			foreach($api_result as $result_price){
 				$high = $result_price['high_price'];
@@ -265,21 +282,27 @@ class Search extends CB_Controller
 				$view['change'] = $change;
 				
 			}
+
+			//HISTORICAL DATA FOR CHART
+			$his_price = array();
+			$his_time = array();
+			foreach($getHist as $histDota){
+				echo "<pre><br>";
+				print_r($histDota);
+				echo "</pre></br>";
+				if($histDota['candle_date_time_kst']){
+					$his_time[] = $histDota['candle_date_time_kst'];
+					$his_price[] = $histDota['trade_price'];
+				}	
+			$view['his_price'] = $his_price;
+			$view['his_time'] = $his_time;
+
 		}
         //Send to view
 		$view['symbole'] = strtoupper($symbole);
 		$view['korean'] = $korean;
 
-		//HISTORICAL DATA FOR CHART
-		$his_price = array();
-		$his_time = array();
-		foreach($getHist as $histDota){
-			if($histDota['candle_date_time_kst']){
-				$his_time[] = $histDota['candle_date_time_kst'];
-				$his_price[] = $histDota['trade_price'];
-			}	
-		$view['his_price'] = $his_price;
-		$view['his_time'] = $his_time;
+
 
 		}
 		// END HISTORICAL DATA FOR CHART

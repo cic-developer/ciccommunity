@@ -42,9 +42,14 @@
 							<div class="col-sm-4"><input type="text" class="form-control" name="cmcd_coin_id[<?php echo element('cme_idx', $result); ?>]" value="<?php echo html_escape(element('cmcd_coin_id', element('detail', $result))); ?>" /></div>
 							<div class="col-sm-2">
 								<select class="form-control" name="cmcd_coin_market[<?php echo element('cme_idx', $result); ?>]" id="cmcd_coin_market[<?php echo element('cme_idx', $result); ?>]">
-									<option value="KRW" <?php echo set_select('board_sidebar', 'KRW', (element('cmcd_coin_market', element('detail', $result)) === 'KRW' ? true : false)); ?> >KRW</option>
-									<option value="USDT" <?php echo set_select('board_sidebar', 'USDT', (element('cmcd_coin_market', element('detail', $result)) === 'USDT' ? true : false)); ?> >USDT</option>
-									<option value="BTC" <?php echo set_select('board_sidebar', 'BTC', (element('cmcd_coin_market', element('detail', $result)) === 'BTC' ? true : false)); ?> >BTC</option>
+									<?php
+										$market_explode = explode(',',element('cme_market', $result));
+										foreach($market_explode as $market){
+									?>
+										<option value="<?php echo $market; ?>" <?php echo set_select('board_sidebar', $market, (element('cmcd_coin_market', element('detail', $result)) === $market ? true : false)); ?> ><?php echo $market; ?></option>
+									<?php
+										}
+									?>
 								</select>
 							</div>
 						</div>

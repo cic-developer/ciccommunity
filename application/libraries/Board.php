@@ -304,7 +304,6 @@ class Board extends CI_Controller
 	 */
 	public function delete_comment($cmt_id = 0)
 	{
-
 		$cmt_id = (int) $cmt_id;
 		if (empty($cmt_id) OR $cmt_id < 1) {
 			return false;
@@ -328,12 +327,14 @@ class Board extends CI_Controller
 		);
 		$cmt_numArr = $this->CI->Comment_model->get_list('', '', $where, '', '', '');
 
-		exit($cmt_numArr['list']);
-
-		if(count($cmt_numArr) == 1 ){
-			foreach($cmt_numArr as $val){
-				$this->CI->Comment_model->delete($val['cmt_id']);
+		if(count($cmt_numArr['list']) == 1 ){
+			
+			foreach(element('list', $cmt_numArr) as $key => $val){
+				print_r($val);
+				print_r("<br><br><br><br>");
+				// $this->CI->Comment_model->delete($val['cmt_id']);
 			}
+			exit;
 		} else{
 			$updatedata = array(
 				'cmt_del' => 1,
@@ -442,10 +443,10 @@ class Board extends CI_Controller
 					element('cmt_reply', $comment)
 				);
 
-			if ($count_comment_reply > 0) {
-				$result = array('error' => '이 댓글에 답변댓글이 있으므로 댓글을 삭제할 수 없습니다');
-				return json_encode($result);
-			}
+			// if ($count_comment_reply > 0) {
+			// 	$result = array('error' => '이 댓글에 답변댓글이 있으므로 댓글을 삭제할 수 없습니다');
+			// 	return json_encode($result);
+			// }
 		}
 
 		if (element('protect_comment_day', $board) > 0 && $is_admin === false) {

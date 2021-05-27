@@ -642,4 +642,42 @@ class Maincoin extends CB_Controller
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
+
+
+	/**
+	 * 거래소 순서를 변경하는 메소드입니다
+	 */
+	public function ajax_set_exchange_orderby(){
+
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+
+		/**
+		 * 전송된 데이터의 유효성을 체크합니다
+		 */
+		$config = array(
+			array(
+				'field' => 'this_exchange',
+				'label' => '선택 거래소',
+				'rules' => 'trim|required|is_natural_no_zero|max_length[10]',
+			),
+			array(
+				'field' => 'target_exchange',
+				'label' => '변경할 거래소',
+				'rules' => 'trim|required|is_natural_no_zero|max_length[10]',
+			),
+		);
+		$this->form_validation->set_rules($config);
+
+		/**
+		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
+		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
+		 */
+		if ($this->form_validation->run() === false) {
+			$result = array('error' => '비정상적인 접근입니다.');
+			exit(json_encode($result));
+		}
+	}
 }

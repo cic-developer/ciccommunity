@@ -201,5 +201,13 @@ class Company_model extends CB_Model
 		return $result;
 	}
 
-
+	// public function updatecompany($data = array())
+	// {
+	// 	$now_date = cdate('Y-m-d H:i:s');
+	// 	if(elemet('comp_id', $data && is_array(element('comp_id', $data)))) {
+	// 		foreach ( element('comp_id', $data) as $key => $value) {
+	// 			if (! element($key, element()))
+	// 		}
+	// 	}
+	// }
 }
