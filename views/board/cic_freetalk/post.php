@@ -106,8 +106,8 @@
 				<?php if(element('delete_url', $view)){ ?>
 				<a href="javascript:void(0);" class="bw-btn btn-one-delete" data-one-delete-url="<?php echo element('delete_url', $view); ?>"><span>삭제</span></a>
 				<?php } ?>
-				<?php if(element('delete_url', $view)){ ?>
-				<a href="javascript:void(0);" class="bw-btn btn-one-delete" data-one-delete-url="<?php echo element('delete_url', $view); ?>"><span>신고</span></a>
+				<?php if(element('report_url', $view)){ ?>
+				<a href="javascript:void(0);" class="bw-btn btn-one-report" data-one-delete-url="<?php echo element('report_url', $view); ?>"><span>신고</span></a>
 				<?php } ?>
 			</div>
 			<div class="gap60"></div>

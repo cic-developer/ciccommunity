@@ -15,6 +15,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	echo form_open_multipart(current_full_url(), $attributes);
 	?>
 		<input type="hidden" name="<?php echo element('primary_key', $view); ?>"	value="<?php echo element(element('primary_key', $view), element('post', $view)); ?>" />
+		<input type="hidden" class="input px150" name="post_nickname" id="post_nickname" value="<?php echo set_value('post_nickname', element('post_nickname', element('post', $view))); ?>" />
+		<input type="hidden" class="input px400" name="post_email" id="post_email" value="<?php echo set_value('post_email', element('post_email', element('post', $view))); ?>" />
+		<input type="hidden" class="input px400" name="post_homepage" id="post_homepage" value="<?php echo set_value('post_homepage', element('post_homepage', element('post', $view))); ?>" />
 		<div class="form-horizontal box-table">
 			<?php if (element('is_post_name', element('post', $view))) { ?>
 				<div class="form-group">

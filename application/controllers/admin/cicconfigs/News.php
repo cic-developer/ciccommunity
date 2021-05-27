@@ -653,12 +653,22 @@ class News extends CB_Controller
 				),
 				array(
 					'field' => 'comp_img_select',
-					'lable' => 'Segment',
-					'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[30]',
+					'lable' => 'Image_Select',
+					'rules' => 'trim|required|min_length[2]|max_length[30]',
 				),
 				array(
-					'field' => 'comp_segment',
-					'lable' => 'Segment',
+					'field' => 'comp_title_select',
+					'lable' => 'Title_Select',
+					'rules' => 'trim|required|min_length[2]|max_length[30]',
+				),
+				array(
+					'field' => 'comp_contents_select',
+					'lable' => 'Contents_Select',
+					'rules' => 'trim|required|min_length[2]|max_length[30]',
+				),
+				array(
+					'field' => 'comp_wrapper',
+					'lable' => 'Comp_Wrapper',
 					'rules' => 'trim|required|min_length[2]|max_length[30]',
 				),
 			);

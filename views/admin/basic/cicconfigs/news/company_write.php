@@ -54,6 +54,34 @@ if (element(element('primary_key', $view), element('data', $view))) {
                 </div>
 			</div>
 			<div class="form-group">
+				<label class="col-sm-2 control-label">Title_select</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="comp_title_select" value="<?php echo set_value('comp_title_select', element('comp_title_select', element('data', $view))); ?>" />
+                    <p class="help-block">뉴스 제목을 가져오는 부분을 입력하십시오.</p>
+                </div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Contents_select</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="comp_contents_select" value="<?php echo set_value('comp_contents_select', element('comp_contents_select', element('data', $view))); ?>" />
+                    <p class="help-block">뉴스 본문을 가져오는 부분을 입력하시오.</p>
+                </div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Contents_select</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="comp_img_select" value="<?php echo set_value('comp_img_select', element('comp_img_select', element('data', $view))); ?>" />
+                    <p class="help-block">뉴스 이미지를 가져오는 부분을 입력하시오.</p>
+                </div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Wrapper</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="comp_wrapper" value="<?php echo set_value('comp_wrapper', element('comp_wrapper', element('data', $view))); ?>" />
+                    <p class="help-block">뉴스 contents 감싸는 id 또는 class.</p>
+                </div>
+			</div>
+			<div class="form-group">
 				<label class="col-sm-2 control-label">활성화/비활성화</label>
 				<div class="col-sm-10 form-inline">
 					<label for="cmc_default" class="checkbox-inline">
@@ -78,6 +106,10 @@ $(function() {
 			comp_name:{required :true, minlength:2, maxlength:15},
 			comp_url: {required :true, minlength:2, maxlength:50 },
 			comp_segment: {required :true, minlength:2, maxlength:50 },
+			comp_title_select: {required :true, minlength:2, maxlength:50 },
+			comp_contents_select: {required :true, minlength:2, maxlength:50 },
+			comp_img_select: {required :true, minlength:2, maxlength:50 },
+			comp_wrapper: {required :true, minlength:2, maxlength:50 }
 		}
 	});
 });

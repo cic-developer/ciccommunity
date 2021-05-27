@@ -165,6 +165,11 @@
 			<div class="cont">
 				<div class="tits">
 					<h3>자유게시판</h3>
+					<?php
+						if (element('$boardlist', $view)) {
+							echo $boardlist;
+						}		
+					?>
 					<a href="#n" class="more"><span>more</span></a>
 				</div>
 				<div class="list community">
@@ -176,8 +181,6 @@
 							<col width="100">
 							<col width="100">
 						</colgroup>
-
-
 						<thead>
 							<tr>
 								<th>글쓴이</th>
