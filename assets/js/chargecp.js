@@ -258,9 +258,18 @@ $(document).on('ready', async function() {
             const selected_addr = account;
             const per_token = token_balance / 1000000000000000000;
 
-            if (network !== 8217) alert('Klaytn Kaikas의 Network를\nMain network로 바꿔주세요');
-            if (!selected_addr) alert('Klaytn Kaikas의 주소를 다시 확인해주세요');
-            if (per_token < 0) alert('Klaytn Kaikas에 PER 코인이 없습니다.\nPER 코인을 추가 또는 충전해주세요');
+            if (network !== 8217) {
+                alert('Klaytn Kaikas의 Network를\nMain network로 바꿔주세요');
+                location.reload();
+            }
+            if (!selected_addr) {
+                alert('Klaytn Kaikas의 주소를 다시 확인해주세요');
+                location.reload();
+            }
+            if (per_token < 0) {
+                alert('Klaytn Kaikas에 PER 코인이 없습니다.\nPER 코인을 추가 또는 충전해주세요');
+                location.reload();
+            }
 
             let charge_value = $('#charge_input').val();
             await klaytn.enable();
@@ -294,7 +303,6 @@ $(document).on('ready', async function() {
                 data,
                 gas: 3000000,
             }).on("transactionHash", (transactionHash) => {
-                // console.log("txHash", transactionHash);
                 txhash = `https://scope.klaytn.com/tx/${transactionHash}?tabId=internalTx`;
             }).on("receipt", (receipt) => {
                 // console.log("receipt", receipt);
@@ -308,6 +316,7 @@ $(document).on('ready', async function() {
                 console.log("error", error);
             });
 
+            //여기 있는데이터들이 실제로 거래가 이루어지는지 알려주는 데이터들
             console.log(txhash, reciept, success_fromAddress, success_toAddress, success_value);
         });
     } catch (error) {

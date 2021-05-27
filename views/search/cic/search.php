@@ -76,6 +76,12 @@
 						</p>	
 					</div>
 					<p class="stxt">
+					    <?php if( $symbole === "PER"){?>
+							<h6 style="color: #228be6;" class="price_now"> ￦<?php echo $trade ?></h6>
+							<span class="high"><u>고가</u> ￦ <?php echo $high; ?></span>
+							<span class="low"><u>저가</u> ￦ <?php echo $low; ?></span>
+
+						<?php } else{?>
 						<?php if($change == 'FALL'){ ?>
 							<h6 style="color: #228be6;" class="price_now"> ￦<?php echo $trade ?></h6>
 						<?php }else if($change == 'RISE'){?>
@@ -114,6 +120,7 @@
 					</div>
 				</div>
 			<?php
+			}
 			}
 			if(!$trade || is_string($trade)){?>
 				<div></div>

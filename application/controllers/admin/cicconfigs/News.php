@@ -595,6 +595,7 @@ class News extends CB_Controller
         $view['view']['update_news_enable_0_url'] = admin_url($this->pagedir . '/update_news_enable_0/?' . $param->output());
 		$view['view']['update_news_show_0_url'] = admin_url($this->pagedir . '/update_news_show_0/?' . $param->output());
 		$view['view']['update_news_important_url'] = admin_url($this->pagedir . '/update_news_important/?' . $param->output());
+		// $view['view']['updatecompany_url'] = admin_url($this->pagedir . '/updatecompany/?' . $param->output());
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
@@ -614,6 +615,7 @@ class News extends CB_Controller
 		
 		$eventname = 'event_admin_ciccinfigs_maincoin_coin';
 		$this->load->event($eventname);
+
 		
 		$view = array();
 		$view['view'] = array();
@@ -622,11 +624,13 @@ class News extends CB_Controller
 		
 		// $comp_id = (int) $comp_id;
 		// if (empty($comp_id) OR $comp_id < 1) {
-		// 	show_404();
-		// }
-		// print_r('hello');
-		// exit;
-
+		// 		show_404();
+		// 	}
+			// print_r('hello');
+			// exit;
+			
+			// print_r($comp_id);
+			// exit;
 		$param =& $this->querystring;
 		$findex = 'comp_id';
 		$forder = 'desc';

@@ -42,12 +42,12 @@
 						if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) {
 						?>
-							<tr>
+							<tr data-idx="<?php echo element('cme_idx', $result)?>">
 								<td><?php echo number_format(element('num', $result)); ?></td>
 								<td><img src="<?php echo element('cme_logo', $result); ?>" alt="거래소 로고" style="height:20px; width:auto;"/>  <?php echo html_escape(element('cme_korean_nm', $result)); ?></td>
 								<td><?php echo html_escape(element('cme_market', $result)); ?></td>
 								<td><?php echo (element('cme_default', $result) == 1) ? '기본' : ''; ?></td>
-								<td>업 / 다운</td>
+								<td><span class="orderby_up" style="cursor:pointer;">업</span> / <span class="orderby_down" style="cursor:pointer;">다운</span></td>
 								<td><a href="<?php echo admin_url($this->pagedir); ?>/exchange_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
 								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
 							</tr>
@@ -90,3 +90,16 @@
 		</div>
 	</form>
 </div>
+<script>
+	$('.orderby_up').on('click', function(){
+		set_orderby(this, 'up');
+	});
+	$('.orderby_down').on('click', function(){
+		set_orderby(this, 'down');
+	});
+
+	function set_orderby(_this, type){
+		console.log(type);
+		console.log($(_this).parents('tr'));
+	}
+</script>

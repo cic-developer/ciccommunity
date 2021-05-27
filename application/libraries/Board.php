@@ -326,15 +326,16 @@ class Board extends CI_Controller
 			'cmt_del' => 0,
 		);
 		$cmt_numArr = $this->CI->Comment_model->get_list('', '', $where, '', '', '');
-
+        
 		if(count($cmt_numArr['list']) == 1 ){
 			
-			foreach(element('list', $cmt_numArr) as $key => $val){
-				print_r($val);
-				print_r("<br><br><br><br>");
-				// $this->CI->Comment_model->delete($val['cmt_id']);
+			$where = array(
+				'cmt_num' => $cmt_num,
+			);
+			$cmt_delArr = $this->CI->Comment_model->get_list('', '', $where, '', '', '');
+			foreach(element('list', $cmt_delArr) as $key => $val){
+				$this->CI->Comment_model->delete($val['cmt_id']);
 			}
-			exit;
 		} else{
 			$updatedata = array(
 				'cmt_del' => 1,

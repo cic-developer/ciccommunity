@@ -66,20 +66,3 @@
     </div>
 </div>
 <script type="text/javascript" src="<?php echo base_url('assets/js/chargecp.js'); ?>"></script>
-<!-- <script>
-    $(document).on('ready', async function(){
-        const klaytn = window.klaytn;
-        if(klaytn === undefined) {
-            alert('Klaytn Kaikas가 설치되지 않았습니다.\nKlaytn Kaikas을 설치하여 주세요');
-            location.href="https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F";
-        }
-
-        try{
-            await klaytn.enable();
-            // setAccountInfo(klaytn);
-        }catch(error){
-            alert('Klaytn Kaikas연동에 실패 하였습니다. 마이페이지로 이동합니다.');
-            location.href="<?php //echo base_url('/mypage')?>";
-        }
-    });
-</script> -->
