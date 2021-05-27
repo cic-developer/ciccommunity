@@ -57,6 +57,37 @@ $(function() {
 });
 <?php } ?>
 
+	var oldTitle= '';
+	$(document).on("propertychange change keyup paste input","#post_title",function(){
+		var title = $(this).val();
+		if(title == oldTitle) {
+			return;
+		}
+
+		var titleLen = title.length;
+
+		if(titleLen < 2 || titleLen > 60){
+			alert('hi');
+		}
+
+		// if(title.length < 0){
+		// 	alert('hi');
+		// }
+		
+		// password2 = $("#new_password_re").val();
+		// if(password2 != currentVal ){ // && currentVal.length > 0){
+		// 	$('.agree-password').remove();
+		// 	html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
+		// 	$('.password-modify-content').append(html);
+		// } else{
+		// 	$('.agree-password').remove();
+		// 	html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
+		// 	$('.password-modify-content').append(html);
+		// }
+		
+		oldTitle = title;
+	});
+
 function submitContents(f) {
 	if ($('#char_count')) {
 		if (char_min > 0 || char_max > 0) {

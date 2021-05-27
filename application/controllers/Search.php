@@ -62,6 +62,12 @@ class Search extends CB_Controller
 		if ($sfield === 'post_both') {
 			$sfield = array('post_title', 'post_content');
 		}
+		// //TRIAL
+		// else {
+		// 	$sfield = 'post_content';}
+		// }else{
+		// 	$sfield = array('post_content');
+		// }
 
 		$mem_id = (int) $this->member->item('mem_id');
 
@@ -176,9 +182,9 @@ class Search extends CB_Controller
 		$total_rows = $result['total_rows'];
 		$view['total_rows'] = $total_rows;
 
-		echo "<pre><br>";
-		print_r($result);
-		echo "</pre></br>";
+		// echo "<pre><br>";
+		// print_r($result);
+		// echo "</pre></br>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
 			$sfieldarray = array('post_title', 'post_content', 'post_both');

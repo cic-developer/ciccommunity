@@ -547,7 +547,7 @@ class News extends CB_Controller
 			$where['news.comp_id'] = $compid;
 		}
 
-		$result = $this->{$this->modelname}
+		$result = $this->Company_model
 			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
