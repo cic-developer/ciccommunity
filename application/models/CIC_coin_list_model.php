@@ -99,99 +99,62 @@ class CIC_Coin_list_model extends CB_Model
         $yesterday = strtotime("yesterday $hour");
         $curl = curl_init();
         if($market == "PER"){
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.hotbit.co.kr/api/v2/market.kline?market=PER/KRW&start_time={$yesterday}&end_time={$today}&interval=3600",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 90,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET"             
-            ));
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-
-            curl_close($curl);
-
-            if($err){
-                echo "cUrl Error :" . $err;
-            }
-            $array = json_decode($response, true);
-            return $array;
+            $url = "https://api.hotbit.co.kr/api/v2/market.kline?market=PER/KRW&start_time={$yesterday}&end_time={$today}&interval=3600";
         }else{
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.upbit.com/v1/candles/minutes/60?market=KRW-{$market}&count=24",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 90,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET"    
-            ));
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
+            $url = "https://api.upbit.com/v1/candles/minutes/60?market=KRW-{$market}&count=24";
+        }    
+            
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 90,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET"             
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
 
-            curl_close($curl);
+        curl_close($curl);
 
-            if($err){
-                echo "cUrl Error :" . $err;
-            }
-            $array = json_decode($response, true);
-            return $array; 
+        if($err){
+            echo "cUrl Error :" . $err;
         }
+        $array = json_decode($response, true);
+        return $array;
     }
      //GET DATA FOR CHART
     function get_price($market){
         $curl = curl_init();
         if($market === "PER"){
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.hotbit.co.kr/api/v2/market.status_today?market=PER/KRW",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 90,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET"   
-                
-            ));
-
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-
-            curl_close($curl);
-
-            if($err){
-                echo "cUrl Error :" . $err;
-            }
-            $array = json_decode($response, true);
-            return $array;
+            $url = "https://api.hotbit.co.kr/api/v2/market.status_today?market=PER/KRW";
         }else{
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.upbit.com/v1/ticker?markets=KRW-{$market}",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 90,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET"   
-                
-            ));
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-
-            curl_close($curl);
-
-            if($err){
-                echo "cUrl Error :" . $err;
-            }
-            $array = json_decode($response, true);
-            return $array;
-       
+            $url = "https://api.upbit.com/v1/ticker?markets=KRW-{$market}";
         }
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 90,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET"   
+            
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if($err){
+            echo "cUrl Error :" . $err;
+        }
+        $array = json_decode($response, true);
+        return $array;
 
     }
 }
