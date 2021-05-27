@@ -61,7 +61,7 @@
                     </tbody>
                 </table>
             </div>
-		    <?php if (element('write_url', element('list', $view))) { ?>
+            <?php if (element('write_url', element('list', $view))) { ?>
             <div class="lower r">
                 <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn">글쓰기</a>
             </div>
@@ -73,20 +73,34 @@
             <!-- e: paging-wrap -->
             <!-- s: board-filter -->
             <div class="board-filter">
-                <form id="searchForm" class="navbar-form navbar-right pull-right" action="<?php echo board_url(element('brd_key', element('board', element('list', $view)))); ?>" onSubmit="return postSearch(this);">
+
+                <form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
+                    <div class="board-filter">
+                        <p class="chk-select">
+                            <select name="sfield">
+                                <?php echo element('search_option',  element('list', $view)); ?>
+                            </select>
+                        </p>
+                        <p class="chk-input">
+                            <input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword',  element('list', $view))); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
+                            <button class="search-btn" name="search_submit" type="submit"></button>
+                        </p>
+                    </div>
+                </form>
+                <!-- <form id="searchForm" class="navbar-form navbar-right pull-right" action="<?php echo board_url(element('brd_key', element('board', element('list', $view)))); ?>" onSubmit="return postSearch(this);">
 					<input type="hidden" name="findex" value="<?php echo html_escape($this->input->get('findex')); ?>" />
-                    <!-- <p class="chk-select">
+                    <p class="chk-select">
                         <select name="sfield">
                             <option value="post_title" <?php echo ($this->input->get('sfield') === 'post_title') ? ' selected="selected" ' : ''; ?>>제목</option>
                             <option value="post_content" <?php echo ($this->input->get('sfield') === 'post_content') ? ' selected="selected" ' : ''; ?>>내용</option>
                         </select>
-                    </p> -->
+                    </p>
                     <p class="chk-input">
                         <input type="text" name="skeyword" placeholder="검색어를 입력해주세요" value="<?php echo html_escape($this->input->get('skeyword')); ?>" autocomplete="off">
                         <a href="javascript:document.querySelector('#searchForm').submit();" class="search-btn"><span>검색</span></a>
                     </p>
                 
-				</form>
+				</form> -->
                 <script type="text/javascript">
                 //<![CDATA[
                 function postSearch(f) {

@@ -1270,13 +1270,8 @@ class Board_post extends CB_Controller
 		$order_by_field = element('order_by_field', $board)
 			? element('order_by_field', $board)
 			: 'post_num, post_reply';
-		// $findex = $this->input->get('findex') ? $this->input->get('findex') : $this->Post_model->primary_key;
 		$findex = $this->input->get('findex', null, $order_by_field);
-		// $sfield = $sfieldchk = $this->input->get('sfield', null, '');
 		$sfield = $this->input->get('sfield', null, '');
-		// if ($sfield === 'post_both') {
-		// 	$sfield = array('post_title', 'post_content');
-		// }
 		$skeyword = $this->input->get('skeyword', null, '');
 		if ($this->cbconfig->get_device_view_type() === 'mobile') {
 			$per_page = element('mobile_list_count', $board)
