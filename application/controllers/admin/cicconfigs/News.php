@@ -627,23 +627,19 @@ class News extends CB_Controller
 				show_404();
 			}
 		}
+
 		$primary_key = $this->Company_model->primary_key;
 
 		$getdata = array();
 		if ($comp_id) {
 			$getdata = $this->Company_model->get_one($comp_id);
 		} else {
-
+			// 기본값 설정
 		}
 
 		$this->load->library('form_validation');
 
 		$config = array(
-			array(
-				'field' => 'comp_name',
-				'label' => '신문사 명',
-				'rules' => 'trim|required|min_length[2]|max_length[10]',
-			),
 			array(
 				'field' => 'comp_url',
 				'lable' => 'URL',
@@ -725,10 +721,10 @@ class News extends CB_Controller
 		print_r($comp_id);
 		exit;
 		
-		$comp_id = (int) $comp_id;
-		if (empty($comp_id) OR $comp_id < 1) {
-				show_404();
-		}
+		// $comp_id = (int) $comp_id;
+		// if (empty($comp_id) OR $comp_id < 1) {
+		// 		show_404();
+		// }
 
 		$primary_key = $this->Company_model->primary_key;
 		

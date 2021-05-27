@@ -1999,8 +1999,8 @@ class Board_write extends CB_Controller
 				'post_update_mem_id' => $mem_id,
 			);
 
-			$mem_level = $this->member->item('mem_level');
-			if ($is_post_name && $mem_level != 100) {
+			$mem_is_admin = $this->member->item('mem_is_admin');
+			if ($is_post_name && $mem_is_admin != 1) {
 				$updatedata['post_nickname'] = $this->input->post('post_nickname', null, '');
 				$updatedata['post_email'] = $this->input->post('post_email', null, '');
 				$updatedata['post_homepage'] = $this->input->post('post_homepage', null, '');
@@ -2276,8 +2276,8 @@ class Board_write extends CB_Controller
 	 */
 	public function _mem_nickname_check($str)
 	{
-		$mem_level = $this->member->item('mem_level');
-		if($mem_level == 100){
+		$mem_is_admin = $this->member->item('mem_is_admin');
+		if($mem_is_admin == 1){
 			return true;
 		}
 		
@@ -2315,8 +2315,8 @@ class Board_write extends CB_Controller
 	 */
 	public function _mem_email_check($str)
 	{
-		$mem_level = $this->member->item('mem_level');
-		if($mem_level == 100){
+		$mem_is_admin = $this->member->item('mem_is_admin');
+		if($mem_is_admin == 1){
 			return true;
 		}
 

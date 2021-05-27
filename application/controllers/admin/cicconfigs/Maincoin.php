@@ -692,24 +692,26 @@ class Maincoin extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		$next_exchange = $this->{$this->modelname}->get_one($this->input->post('target_exchange'));
-		if(!$target_exchange){
+		$next_exchange = $this->{$this->modelname}->get_beside_exchange($this->input->post('cme_idx'), $this->input->post('type'));
+		exit(json_encode($this->db->last_query()));
+
+		if(!$next_exchange){
 			$result = array('error' => '변경할 거래소를 찾을 수 없습니다.');
 			exit(json_encode($result));
 		}
 
-		$this->{$this->modelname}->update(
-			element('cme_idx',$this_exchange), 
-			array(
-				'cme_orderby' => element('cme_orderby', $target_exchange)
-			)
-		);
-		$this->{$this->modelname}->update(
-			element('cme_idx',$target_exchange), 
-			array(
-				'cme_orderby' => element('cme_orderby', $this_exchange)
-			)
-		);
+		// $this->{$this->modelname}->update(
+		// 	element('cme_idx',$this_exchange), 
+		// 	array(
+		// 		'cme_orderby' => element('cme_orderby', $target_exchange)
+		// 	)
+		// );
+		// $this->{$this->modelname}->update(
+		// 	element('cme_idx',$target_exchange), 
+		// 	array(
+		// 		'cme_orderby' => element('cme_orderby', $this_exchange)
+		// 	)
+		// );
 		$result = array('success' => '성공적으로 수정하였습니다.');
 		exit(json_encode($result));
 	}

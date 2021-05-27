@@ -99,7 +99,21 @@
 	});
 
 	function set_orderby(_this, type){
-		console.log(type);
-		console.log($(_this).parents('tr'));
+		const cme_idx = $(_this).parents('tr').attr('data-idx');
+        $.ajax({
+            url: cb_admin_url + '/cicconfigs/maincoin/ajax_set_exchange_orderby',
+            type: 'post',
+            data: {
+                cme_idx: cme_idx,
+                type: type,
+                csrf_test_name: cb_csrf_hash
+            },
+            dataType: 'json',
+            async: false,
+            cache: false,
+            success: function(data) {
+				console.log(data);
+            }
+        });
 	}
 </script>
