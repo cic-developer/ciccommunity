@@ -1998,14 +1998,7 @@ class Board_write extends CB_Controller
 				'post_updated_datetime' => cdate('Y-m-d H:i:s'),
 				'post_update_mem_id' => $mem_id,
 			);
-
-			// $mem_is_admin = $this->member->item('mem_is_admin');
-			// if ($is_post_name && $mem_is_admin != 1) {
-			// 	$updatedata['post_nickname'] = $this->input->post('post_nickname', null, '');
-			// 	$updatedata['post_email'] = $this->input->post('post_email', null, '');
-			// 	$updatedata['post_homepage'] = $this->input->post('post_homepage', null, '');
-			// }
-			// $mem_is_admin = $this->member->item('mem_is_admin');
+			
 			if ($is_post_name) {
 				$updatedata['post_nickname'] = $this->input->post('post_nickname', null, '');
 				$updatedata['post_email'] = $this->input->post('post_email', null, '');
@@ -2282,11 +2275,6 @@ class Board_write extends CB_Controller
 	 */
 	public function _mem_nickname_check($str)
 	{
-		// $mem_is_admin = $this->member->item('mem_is_admin');
-		// if($mem_is_admin == 1){
-		// 	return true;
-		// }
-		
 		$this->load->helper('chkstring');
 		if (chkstring($str, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false) {
 			$this->form_validation->set_message(
@@ -2303,29 +2291,14 @@ class Board_write extends CB_Controller
 			);
 			return false;
 		}
-
-		if(strlen($st) < 1){
-			$this->form_validation->set_message(
-				'_mem_nickname_check',
-				'닉네임 항목은 필수 입력입니다.'
-			);
-			return false;
-		}
-
 		return true;
 	}
-
 
 	/**
 	 * 게시물 작성시 비회원이 작성한 경우 이메일체크합니다
 	 */
 	public function _mem_email_check($str)
 	{
-		// $mem_is_admin = $this->member->item('mem_is_admin');
-		// if($mem_is_admin == 1){
-		// 	return true;
-		// }
-
 		list($emailid, $emaildomain) = explode('@', $str);
 		$denied_list = explode(',', $this->cbconfig->item('denied_email_list'));
 		$emaildomain = trim($emaildomain);

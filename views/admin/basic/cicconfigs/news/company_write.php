@@ -15,7 +15,7 @@ if (element(element('primary_key', $view), element('data', $view))) {
 } else {
 ?>
 	<div class="box-header">
-		<h4 class="pb10 pull-left">코인 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>
+		<h4 class="pb10 pull-left">신문사 정보 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>
 		<div class="clearfix"></div>
 		<ul class="nav nav-tabs">
 			<li role="presentation" class="active"><a href="javascript:;" >신문사 정보</a></li>
@@ -53,16 +53,6 @@ if (element(element('primary_key', $view), element('data', $view))) {
                     <p class="help-block">크롤링에 사용되는 segment를 입력하세요.</p>
                 </div>
 			</div>
-			<!-- <div class="form-group">
-				<label class="col-sm-2 control-label">활성화/비활성화</label>
-				<div class="col-sm-10 form-inline">
-					<select name="cme_api" class="form-control">
-						<option value="1" <?php echo set_select('comp_active', 1, element('comp_active', element('data', $view)) === 1 ? true : false); ?>>활성화</option>
-						<option value="0" <?php echo set_select('comp_active', 0, element('comp_active', element('data', $view)) === 0 ? true : false); ?>>비활성화</option>
-					</select>
-					<p class="help-block">해당 신문사를 크롤링 하려면 활성화 그렇지 않다면 비활성화를 선택하세요</p>
-				</div>
-			</div> -->
 			<div class="form-group">
 				<label class="col-sm-2 control-label">활성화/비활성화</label>
 				<div class="col-sm-10 form-inline">
