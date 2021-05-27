@@ -166,12 +166,21 @@
 					<h3>자유게시판</h3>
 					<?php
 						if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result) {
-								echo element('brd_id', $boardlist);
-							}	
+							foreach (element('list', element('data', $view)) as $result) { ?>
+
+					<a href="<?php echo element('tab_url', $view); ?>"  
+					<?php echo ( ! $this->input->get('board_id')) ? 'class="active"' : ''; ?> class="more"><span>more </span>
+					(<?php echo number_format( array_sum(element('board_rows', $view))); ?>)
+					</a>
+					<?php
+						foreach (element('board_rows', $view) as $key => $value) {?>
+						<?php print_r( element('tab_url', $view)) ?>
+							<li role="presentation" <?php echo ($this->input->get('board_id') === $key) ? 'class="active"' : ''; ?>><a href="<?php echo element('tab_url', $view) . '&amp;board_id=' . $key; ?>"><?php echo html_escape(element('brd_name', element($key, element('boardlist', $view)))); ?> (<?php echo $value; ?>)</a></li>
+					<?php
 						}	
+					}	
+				}	
 					?>
-					<a href="#n" class="more"><span>more</span></a>
 				</div>
 				<div class="list community">
 					<table>
