@@ -228,20 +228,20 @@ class Search extends CB_Controller
 
 		if($market === "PER"){
 			foreach($api_result as $result_price){
-                echo "<pre><br>";
-				print_r($result_price);
-				echo "</pre></br>";
+                // echo "<pre><br>";
+				// print_r($result_price);
+				// echo "</pre></br>";
 				$high = $result_price['high'];
 				$low =$result_price['low'];
 				// $prev = $result_price['prev_closing_price'];
-				// $change = $result_price['change'];
-				// $rate =  $result_price['change_rate'];
-				// $difference = $result_price['change_price'];
+				// $change = 'RISE';
+				$rate =  $result_price['change_rate'];
+				// $difference = 23;
 				$trade =(float)$result_price['last'];
 
 				
 				$view['trade'] = $trade;
-				print_r($trade);
+				// print_r($trade);
 				$view['low'] = $low;
 				$view['high'] = $high;
 				// $view['difference'] = $difference;
@@ -249,7 +249,6 @@ class Search extends CB_Controller
 				// $view['change'] = $change;
 				
 			}
-
 			//HISTORICAL DATA FOR CHART
 			$his_price = array();
 			$his_time = array();
@@ -284,7 +283,6 @@ class Search extends CB_Controller
 				$view['change'] = $change;
 				
 			}
-
 			//HISTORICAL DATA FOR CHART
 			$his_price = array();
 			$his_time = array();
@@ -295,15 +293,12 @@ class Search extends CB_Controller
 				}	
 			$view['his_price'] = $his_price;
 			$view['his_time'] = $his_time;
-
-		}
+			}
+		}	
         //Send to view
 		$view['symbole'] = strtoupper($symbole);
 		$view['korean'] = $korean;
 
-
-
-		}
 		// END HISTORICAL DATA FOR CHART
 		// 코인 검색 여기까지 
 		/**

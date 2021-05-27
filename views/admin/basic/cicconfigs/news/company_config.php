@@ -20,7 +20,7 @@
 						<div class="btn-group pull-right" role="group" aria-label="...">
 							<a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a>
 							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-delete btn-list-selected disabled" data-list-delete-url = "<?php echo element('list_delete_url', $view); ?>" >선택삭제</button>
-							<a href="<?php echo element('write_url', $view); ?>" class="btn btn-outline btn-danger btn-sm " >거래소 추가</a>
+							<a href="<?php echo element('company_write_url', $view); ?>" class="btn btn-outline btn-danger btn-sm " >거래소 추가</a>
 						</div>
 					<?php
 					$buttons = ob_get_contents();
@@ -62,7 +62,7 @@
 									<td><?php echo element('comp_segment', $result); ?></td>
 									<td><?php echo element('comp_index', $result); ?></td>
 									<td><?php echo element('comp_active', $result) === '1' ? '활성' : '비활성'; ?></td>
-									<td><a href="<?php echo admin_url($this->pagedir); ?>/updatecompany/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
+									<td><a href="<?php echo admin_url($this->pagedir); ?>/company_wirte/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
 									
 									<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
 								</tr>

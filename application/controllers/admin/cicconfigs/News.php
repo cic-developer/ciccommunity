@@ -595,7 +595,7 @@ class News extends CB_Controller
         $view['view']['update_news_enable_0_url'] = admin_url($this->pagedir . '/update_news_enable_0/?' . $param->output());
 		$view['view']['update_news_show_0_url'] = admin_url($this->pagedir . '/update_news_show_0/?' . $param->output());
 		$view['view']['update_news_important_url'] = admin_url($this->pagedir . '/update_news_important/?' . $param->output());
-		// $view['view']['updatecompany_url'] = admin_url($this->pagedir . '/updatecompany/?' . $param->output());
+		$view['view']['company_write_url'] = admin_url($this->pagedir . '/company_write/?' . $param->output());
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
@@ -610,7 +610,7 @@ class News extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
-	public function updatecompany($comp_id = 0)
+	public function company_write($comp_id = 0)
 	{
 		
 		$eventname = 'event_admin_ciccinfigs_maincoin_coin';
@@ -621,11 +621,15 @@ class News extends CB_Controller
 		$view['view'] = array();
 		
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		print_r($comp_id);
+		exit;
 		
-		// $comp_id = (int) $comp_id;
-		// if (empty($comp_id) OR $comp_id < 1) {
-		// 		show_404();
-		// 	}
+		$comp_id = (int) $comp_id;
+		if (empty($comp_id) OR $comp_id < 1) {
+				show_404();
+		}
+
+		$primary_key = $this->Company_model->primary_key;
 		
 		$param =& $this->querystring;
 		$findex = 'comp_id';
@@ -640,8 +644,6 @@ class News extends CB_Controller
 				'rules' => 'trim|is_natural_no_zero',
 			),
 		);
-		print_r($comp_id);
-		exit;
 		$this->form_validation->set_rules($config);
 
 		if ($this->form_validation->run() === false) {
@@ -678,14 +680,14 @@ class News extends CB_Controller
 
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'updatecompany');
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'company_write');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
-	// public function updatecompany($comp_id = 0)
+	// public function company_write($comp_id = 0)
 	// {
 	// 	$eventname = 'event_admin_ciccinfigs_update_company';
 	// 	$this->load->event($eventname);
@@ -778,7 +780,7 @@ class News extends CB_Controller
 
 	// 	$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-	// 	$layoutconfig = array('layout' => 'layout', 'skin' => 'updatecompany');
+	// 	$layoutconfig = array('layout' => 'layout', 'skin' => 'company_write');
 	// 	$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 	// 	$this->data = $view;
 	// 	$this->layout = element('layout_skin_file', element('layout', $view));

@@ -320,6 +320,7 @@ class Board extends CI_Controller
 		$post = $this->CI->Post_model->get_one(element('post_id', $comment));
 		$board = $this->CI->board->item_all(element('brd_id', $post));
 
+		// =>
 		$cmt_num = element('cmt_num', $comment);
 		$where = array(
 			'cmt_num' => $cmt_num,
@@ -343,6 +344,7 @@ class Board extends CI_Controller
 			);
 			$this->CI->Comment_model->update($cmt_id, $updatedata);
 		}
+		// =>
 		
 		$deletewhere = array(
 			'target_id' => $cmt_id,

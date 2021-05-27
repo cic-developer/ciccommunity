@@ -397,6 +397,7 @@ class Maincoin extends CB_Controller
 		/**
 		 * 프라이머리키에 숫자형이 입력되지 않으면 에러처리합니다
 		 */
+		
 		if ($cmc_idx) {
 			$cmc_idx = (int) $cmc_idx;
 			if (empty($cmc_idx) OR $cmc_idx < 1) {
@@ -404,9 +405,7 @@ class Maincoin extends CB_Controller
 			}
 		}
 
-		print_r($cmc_idx);
-		exit;
-		
+
 		$primary_key = $this->CIC_maincoin_coin_model->primary_key;
 
 		/**
@@ -553,6 +552,9 @@ class Maincoin extends CB_Controller
 		/**
 		 * 프라이머리키가 입력되지 않으면 에러처리합니다
 		 */
+		print_r($cmc_idx);
+		exit;
+		
 		$cmc_idx = (int) $cmc_idx;
 		if (empty($cmc_idx) OR $cmc_idx < 1) {
 			show_404();
