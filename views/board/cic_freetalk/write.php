@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<h3><?php echo html_escape(element('board_name', element('board', $view))); ?> 글쓰기</h3>
 			<div class="entry">
 				<ul>
-					<li>
+					<li class="title-box">
 						<p class="btxt">제목</p>
 						<div class="field">
 							<p class="chk-input w100p">
@@ -59,16 +59,32 @@ $(function() {
 
 	var oldTitle= '';
 	$(document).on("propertychange change keyup paste input","#post_title",function(){
+		$('.post_title-error').remove();
 		var title = $(this).val();
 		if(title == oldTitle) {
 			return;
 		}
 
 		var titleLen = title.length;
+		var html = '';	
+		html += '<label id="post_title-error" class="error" for="post_title">';
 
 		if(titleLen < 2 || titleLen > 60){
-			alert('hi');
+
+			if(titleLen == 0){
+				html += '필수항목입니다.';
+			}
+			if(titleLen < 2){
+				html += '제목을 2자 이상 입력해주세요.';
+			}
+			if(titleLen  > 60){
+				html += '제목을 60자 이하 입력해주세요.';
+			}
+
+			html += '</label>';
+			$('.title-box').append(html)
 		}
+			
 
 		// if(title.length < 0){
 		// 	alert('hi');
