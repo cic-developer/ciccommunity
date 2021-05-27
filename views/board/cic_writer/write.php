@@ -72,6 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							onchange="setThumbnail(event);"
 						>
 						<?php if ($download_link) { ?>
+							<img style="width:80px; height:80px;" src="<?php echo base_url('uploads/post/'.element('pfi_filename', element($i, element('file', $view)))); ?>" alt="<?php echo html_escape(element('pfi_originname', element($i, element('file', $view)))); ?>" />
 							<a href="<?php echo $download_link; ?>"><?php echo html_escape(element('pfi_originname', element($i, element('file', $view)))); ?></a>
 							<label for="<?php echo $del_column; ?>">
 								<input type="checkbox" name="<?php echo $del_column; ?>" id="<?php echo $del_column; ?>" value="1" <?php echo set_checkbox($del_column, '1'); ?> /> 삭제

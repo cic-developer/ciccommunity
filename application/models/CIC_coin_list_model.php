@@ -92,20 +92,44 @@ class CIC_Coin_list_model extends CB_Model
 
     //GET DATA FOR CHART
     function get_histData($market){
+        
+        //GET TIME STAMP 
+        $hour = date('h:i');
+        print_r($hour);
+        $today = strtotime("today $hour");
+        $yesterday = strtotime("yesterday $hour");
+        
+        
+        
+        "<br>";echo date("Y-m-d H:i:s\n", $today) -> getTimestamp();
+        echo date("Y-m-d H:i:s\n", $yesterday) -> getTimestamp();
+    
         $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.upbit.com/v1/candles/minutes/60?market=KRW-{$market}&count=24",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 90,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET"   
-            
-        ));
-
+        if($market == "PER"){
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.hotbit.co.kr/api/v2/market.kline?market=PER/KRW&start_time=1621967860&end_time=1622086660&interval=3600",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 90,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET"   
+                
+            ));
+        }else{
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.upbit.com/v1/candles/minutes/60?market=KRW-{$market}&count=24",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 90,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET"   
+                
+            ));
+        }
         $response = curl_exec($curl);
         $err = curl_error($curl);
 
@@ -123,18 +147,31 @@ class CIC_Coin_list_model extends CB_Model
      function get_price($market){
         $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.upbit.com/v1/ticker?markets=KRW-{$market}",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 90,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET"   
-            
-        ));
-
+        if($market === "PER"){
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.hotbit.co.kr/api/v2/market.status_today?market=PER/KRW",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 90,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET"   
+                
+            ));
+        }else{
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.upbit.com/v1/ticker?markets=KRW-{$market}",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 90,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET"   
+                
+            ));
+        }
         $response = curl_exec($curl);
         $err = curl_error($curl);
 

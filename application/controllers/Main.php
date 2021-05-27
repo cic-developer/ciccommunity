@@ -316,15 +316,15 @@ class Main extends CB_Controller
 		$page_name = $this->cbconfig->item('site_page_name_main');
 
 		$layoutconfig = array(
-			'path' => 'main',
+			'path' => 'coin',
 			'layout' => 'layout',
-			'skin' => 'coin',
-			'layout_dir' => $this->cbconfig->item('layout_main'),
-			'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_main'),
+			'skin' => 'config',
+			'layout_dir' => 'cic_sub',//$this->cbconfig->item('layout_main'),
+			'mobile_layout_dir' => 'cic_sub',//$this->cbconfig->item('mobile_layout_main'),
 			'use_sidebar' => $this->cbconfig->item('sidebar_main'),
 			'use_mobile_sidebar' => $this->cbconfig->item('mobile_sidebar_main'),
-			'skin_dir' => $this->cbconfig->item('skin_main'),
-			'mobile_skin_dir' => $this->cbconfig->item('mobile_skin_main'),
+			'skin_dir' => 'cic',//$this->cbconfig->item('skin_main'),
+			'mobile_skin_dir' => 'cic',//$this->cbconfig->item('mobile_skin_main'),
 			'page_title' => $page_title,
 			'meta_description' => $meta_description,
 			'meta_keywords' => $meta_keywords,

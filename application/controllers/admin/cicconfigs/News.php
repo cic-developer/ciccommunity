@@ -645,7 +645,7 @@ class News extends CB_Controller
 			array(
 				'field' => 'comp_url',
 				'lable' => 'URL',
-				'rules' => '',
+				'rules' => 'prep_url|valid_url',
 			),
 			array(
 				'field' => 'comp_segment',
