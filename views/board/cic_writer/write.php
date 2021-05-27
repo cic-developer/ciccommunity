@@ -59,9 +59,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			?>
 				<div class="form-group">
 					<div class="thumbnail"><img src="../assets/images/visual-img03.jpg" alt="썸네일"></div>
+
 					<label for="<?php echo $file_column; ?>" class="col-sm-2 control-label">대표이미지 #</label>
 					<div class="col-sm-10">
-						<input type="file" class="form-control" name="<?php echo $file_column; ?>" id="<?php echo $file_column; ?>" />
+						<!-- <input type="file" class="form-control" name="<?php echo $file_column; ?>" id="<?php echo $file_column; ?>" /> -->
+						<input 
+							type="file"
+							accept="image/png, image/jpeg"
+							name="<?php echo $file_column; ?>" id="<?php echo $file_column; ?>" 
+							onchange="setThumbnail(event);"
+						>
 						<?php if ($download_link) { ?>
 							<a href="<?php echo $download_link; ?>"><?php echo html_escape(element('pfi_originname', element($i, element('file', $view)))); ?></a>
 							<label for="<?php echo $del_column; ?>">
@@ -69,6 +76,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</label>
 						<?php } ?>
 					</div>
+
 				</div>
 			<?php
 				}
@@ -120,50 +128,73 @@ $(function() {
 });
 <?php } ?>
 
-function submitContents(f) {
-	if ($('#char_count')) {
-		if (char_min > 0 || char_max > 0) {
-			var cnt = parseInt(check_byte('post_content', 'char_count'));
-			if (char_min > 0 && char_min > cnt) {
-				alert('내용은 ' + char_min + '글자 이상 쓰셔야 합니다.');
-				$('#post_content').focus();
-				return false;
-			} else if (char_max > 0 && char_max < cnt) {
-				alert('내용은 ' + char_max + '글자 이하로 쓰셔야 합니다.');
-				$('#post_content').focus();
-				return false;
+	function submitContents(f) {
+		if ($('#char_count')) {
+			if (char_min > 0 || char_max > 0) {
+				var cnt = parseInt(check_byte('post_content', 'char_count'));
+				if (char_min > 0 && char_min > cnt) {
+					alert('내용은 ' + char_min + '글자 이상 쓰셔야 합니다.');
+					$('#post_content').focus();
+					return false;
+				} else if (char_max > 0 && char_max < cnt) {
+					alert('내용은 ' + char_max + '글자 이하로 쓰셔야 합니다.');
+					$('#post_content').focus();
+					return false;
+				}
 			}
 		}
-	}
-	var title = '';
-	var content = '';
-	$.ajax({
-		url: cb_url + '/postact/filter_spam_keyword',
-		type: 'POST',
-		data: {
-			title: f.post_title.value,
-			content: f.post_content.value,
-			csrf_test_name : cb_csrf_hash
-		},
-		dataType: 'json',
-		async: false,
-		cache: false,
-		success: function(data) {
-			title = data.title;
-			content = data.content;
+		var title = '';
+		var content = '';
+		$.ajax({
+			url: cb_url + '/postact/filter_spam_keyword',
+			type: 'POST',
+			data: {
+				title: f.post_title.value,
+				content: f.post_content.value,
+				csrf_test_name : cb_csrf_hash
+			},
+			dataType: 'json',
+			async: false,
+			cache: false,
+			success: function(data) {
+				title = data.title;
+				content = data.content;
+			}
+		});
+		if (title) {
+			alert('제목에 금지단어(\'' + title + '\')가 포함되어있습니다');
+			f.post_title.focus();
+			return false;
 		}
-	});
-	if (title) {
-		alert('제목에 금지단어(\'' + title + '\')가 포함되어있습니다');
-		f.post_title.focus();
-		return false;
+		if (content) {
+			alert('내용에 금지단어(\'' + content + '\')가 포함되어있습니다');
+			f.post_content.focus();
+			return false;
+		}
 	}
-	if (content) {
-		alert('내용에 금지단어(\'' + content + '\')가 포함되어있습니다');
-		f.post_content.focus();
-		return false;
+
+	function setThumbnail(event) { 
+		
+		if(document.querySelector("div#image_container")){ // 엘리먼트 제거
+			var header = document.querySelector("div#image_container");
+			header.parentNode.removeChild(header); 
+		}
+		var div = document.createElement("div"); // 엘리먼트 추가
+		div.className = 'pre-pro-img';
+		div.id = 'image_container';
+		document.querySelector("div#div-pro-img").append(div);
+		
+		var reader = new FileReader(); 
+		
+		reader.onload = function(event) {
+			var img = document.createElement("img"); 
+			img.id = 'profile-img';
+			img.setAttribute("src", event.target.result); 
+			document.querySelector("div#image_container").appendChild(img); 
+		};
+		
+		reader.readAsDataURL(event.target.files[0]); 
 	}
-}
 </script>
 
 <?php

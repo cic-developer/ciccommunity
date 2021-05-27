@@ -643,14 +643,14 @@ class News extends CB_Controller
 				'rules' => 'trim|required|min_length[2]|max_length[10]',
 			),
 			array(
+				'field' => 'comp_url',
+				'lable' => 'URL',
+				'rules' => '',
+			),
+			array(
 				'field' => 'comp_segment',
 				'lable' => 'Segment',
 				'rules' => 'trim|required|min_length[2]|max_length[30]',
-			),
-			array(
-				'field' => '',
-				'lable' => '',
-				'rules' => '',
 			),
 			array(
 				'field' => '',

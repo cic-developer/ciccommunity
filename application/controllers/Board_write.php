@@ -1588,7 +1588,7 @@ class Board_write extends CB_Controller
 			$config[] = array(
 				'field' => 'post_nickname',
 				'label' => '닉네임',
-				'rules' => 'trim|required|min_length[2]|max_length[20]|callback__mem_nickname_check',
+				'rules' => 'trim|min_length[2]|max_length[20]|callback__mem_nickname_check',
 			);
 			$config[] = array(
 				'field' => 'post_email',
@@ -2296,6 +2296,15 @@ class Board_write extends CB_Controller
 			);
 			return false;
 		}
+
+		if(strlen($st) < 1){
+			$this->form_validation->set_message(
+				'_mem_nickname_check',
+				'닉네임 항목은 필수 입력입니다.'
+			);
+			return false;
+		}
+
 		return true;
 	}
 
