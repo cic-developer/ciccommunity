@@ -63,6 +63,7 @@
 									<td><?php echo element('comp_index', $result); ?></td>
 									<td><?php echo element('comp_active', $result) === '1' ? '활성' : '비활성'; ?></td>
 									<td><a href="<?php echo admin_url($this->pagedir); ?>/updatecompany/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
+									
 									<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
 								</tr>
 								<?php

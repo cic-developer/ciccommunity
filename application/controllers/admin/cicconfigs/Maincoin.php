@@ -403,6 +403,10 @@ class Maincoin extends CB_Controller
 				show_404();
 			}
 		}
+
+		print_r($cmc_idx);
+		exit;
+		
 		$primary_key = $this->CIC_maincoin_coin_model->primary_key;
 
 		/**

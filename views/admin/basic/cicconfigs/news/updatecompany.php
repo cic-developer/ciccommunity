@@ -1,10 +1,7 @@
 <div class="box">
 	<div class="box-header">
 		<h4 class="pb10 pull-left">거래소 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>
-        <?php
-        print_r(element('primary_key', $view), $result);
-        exit;
-        ?>
+
 		<div class="clearfix"></div>
 	</div>
 	<div class="box-table">
@@ -15,6 +12,13 @@
 		echo form_open_multipart(current_full_url(), $attributes);
 		?>
 			<input type="hidden" name="<?php echo element('primary_key', $view); ?>"	value="<?php echo element(element('primary_key', $view), element('data', $view)); ?>" />
+            <div class="form-group">
+				<label class="col-sm-2 control-label">신문사 id</label>
+				<div class="col-sm-10 form-inline">
+					<input type="text" class="form-control" name="cme_id" value="<?php echo set_value('comp_id', element('comp_id', element('data', $view))); ?>" />
+					<p class="help-block">신문사 명을 입력하세요.</p>
+				</div>
+			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">신문사 이름</label>
 				<div class="col-sm-10 form-inline">

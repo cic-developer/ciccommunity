@@ -626,17 +626,13 @@ class News extends CB_Controller
 		// if (empty($comp_id) OR $comp_id < 1) {
 		// 		show_404();
 		// 	}
-			// print_r('hello');
-			// exit;
-			
-			// print_r($comp_id);
-			// exit;
+		
 		$param =& $this->querystring;
 		$findex = 'comp_id';
 		$forder = 'desc';
-
+		
 		$this->load->library('form_validation');
-
+		
 		$config = array(
 			array(
 				'field' => 'comp_id',
@@ -644,6 +640,8 @@ class News extends CB_Controller
 				'rules' => 'trim|is_natural_no_zero',
 			),
 		);
+		print_r($comp_id);
+		exit;
 		$this->form_validation->set_rules($config);
 
 		if ($this->form_validation->run() === false) {

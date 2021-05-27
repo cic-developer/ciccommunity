@@ -228,19 +228,20 @@ class Search extends CB_Controller
 
 		if($market === "PER"){
 			foreach($api_result as $result_price){
-
-				// print_r($result_price['open']);
+                echo "<pre><br>";
+				print_r($result_price);
+				echo "</pre></br>";
 				$high = $result_price['high'];
 				$low =$result_price['low'];
 				// $prev = $result_price['prev_closing_price'];
 				// $change = $result_price['change'];
 				// $rate =  $result_price['change_rate'];
 				// $difference = $result_price['change_price'];
-				$trade =(float)$result_price['open'];
+				$trade =(float)$result_price['last'];
 
 				
 				$view['trade'] = $trade;
-				// print_r(gettype($trade));
+				print_r($trade);
 				$view['low'] = $low;
 				$view['high'] = $high;
 				// $view['difference'] = $difference;
@@ -259,12 +260,11 @@ class Search extends CB_Controller
 				if($getHist['result'][$i][0]){
 					$his_time[] = $getHist['result'][$i][0];
 					$his_price[] = $$getHist['result'][$i][1];
-				}	
+				}
+			}		
 			$view['his_price'] = $his_price;
 			$view['his_time'] = $his_time;
 
-		}
-			
 		}else {
 			foreach($api_result as $result_price){
 				$high = $result_price['high_price'];

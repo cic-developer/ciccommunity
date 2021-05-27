@@ -276,9 +276,10 @@ class Comment_list extends CB_Controller
 					}
 				}
 				if (element('cmt_del', $val)) {
-					$result['list'][$key]['content'] = '<div class="alert alert-danger">이 게시물은 '
-						. html_escape(element('delete_mem_nickname', $meta)) . '님에 의해 '
-						. html_escape(element('delete_datetime', $meta)) . ' 에 삭제 되었습니다</div>';
+					$result['list'][$key]['content'] = '<div class="alert alert-danger">삭제된 댓글입니다</div>';
+					// $result['list'][$key]['content'] = '<div class="alert alert-danger">이 게시물은 '
+					// 	. html_escape(element('delete_mem_nickname', $meta)) . '님에 의해 '
+					// 	. html_escape(element('delete_datetime', $meta)) . ' 에 삭제 되었습니다</div>';
 				}
 				if (element('mem_id', $val) >= 0) {
 					$result['list'][$key]['display_name'] = display_username(
