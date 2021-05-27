@@ -141,7 +141,7 @@
                 </table>
             </div>
             
-		    <?php if (element('write_url', element('list', $view))) { ?>
+            <?php if (element('write_url', element('list', $view))) { ?>
             <div class="lower r">
                 <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn">글쓰기</a>
             </div>
