@@ -2275,6 +2275,11 @@ class Board_write extends CB_Controller
 	 */
 	public function _mem_nickname_check($str)
 	{
+		$mem_level = $this->member->item('mem_level');
+		if($mem_level == 100){
+			return true;
+		}
+		
 		$this->load->helper('chkstring');
 		if (chkstring($str, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false) {
 			$this->form_validation->set_message(
@@ -2300,6 +2305,11 @@ class Board_write extends CB_Controller
 	 */
 	public function _mem_email_check($str)
 	{
+		$mem_level = $this->member->item('mem_level');
+		if($mem_level == 100){
+			return true;
+		}
+
 		list($emailid, $emaildomain) = explode('@', $str);
 		$denied_list = explode(',', $this->cbconfig->item('denied_email_list'));
 		$emaildomain = trim($emaildomain);

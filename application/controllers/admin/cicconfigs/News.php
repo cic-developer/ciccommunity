@@ -609,6 +609,57 @@ class News extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
+	public function updatecompany($comp_id = 0)
+	{
+		$eventname = 'event_admin_ciccinfigs_update_company';
+		$this->load->event($eventname);
+
+		$view = array();
+		$view['view'] = array();
+
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		if($comp_id) {
+			$comp_id = (int) $comp_id;
+			if(empty($comp_id) OR $comp_id < 1 ){
+				show_404();
+			}
+		}
+		$primary_key = $this->Company_model->primary_key;
+
+		$getdata = array();
+		if ($comp_id) {
+			$getdata = $this->Company_model->get_one($comp_id);
+		} else {
+
+		}
+
+		$this->load->library('form_validation');
+
+		$config = array(
+			array(
+				'field' => 'comp_name',
+				'label' => '신문사 명',
+				'rules' => 'trim|required|min_length[2]|max_length[10]',
+			),
+			array(
+				'field' => 'comp_segment',
+				'lable' => 'Segment',
+				'rules' => 'trim|required|min_length[2]|max_length[30]',
+			),
+			array(
+				'field' => '',
+				'lable' => '',
+				'rules' => '',
+			),
+			array(
+				'field' => '',
+				'lable' => '',
+				'rules' => '',
+			),
+		);
+	}
+
     public function update_news_enable_0()
 	{
 		// 이벤트 라이브러리를 로딩합니다
