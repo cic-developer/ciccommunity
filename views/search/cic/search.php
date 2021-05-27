@@ -87,8 +87,8 @@
 								<!--상한가와 하한가 전체-->
 								<h6 class="high_mnp_all">
 									<?php if($trade < $prev){?>
-										<u class="low_money" style="color: #228be6;"> - <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-down"></i></u>
-										<u class="low_money_percent" style="color: #228be6"> - <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-down"></i>
+										<u class="low_money" style="color: #228be6;"> <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-down"></i></u>
+										<u class="low_money_percent" style="color: #228be6"> <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-down"></i>
 										</u>
 										<!-- IF RISE  -->
 									<?php } else if($trade > $prev){?>
@@ -108,12 +108,6 @@
 										</h5>
 									<!-- </h6> -->
 									<!--상한가와 하한가 전체 끝-->>
-								</h6>
-
-
-								<h6 class="high_mnp_all">
-									<span class="high"><u>고가</u> ￦ <?php echo $high; ?></span>
-									<span class="low"><u>저가</u> ￦ <?php echo $low; ?></span>
 								</h6>
 							<?php } else{?>
 								<?php if($change == 'FALL'){ ?>
