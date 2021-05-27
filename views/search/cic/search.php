@@ -123,6 +123,7 @@
 						</div>
 					</div>
 				<?php
+
 			}
 			if(!$trade || is_string($trade)){?>
 				<div></div>

@@ -233,24 +233,20 @@ class Search extends CB_Controller
 				$low =$result_price['low'];
 				$prev = $result_price['open'];
 				// $change = 'RISE';
-				
-				
 				$trade =$result_price['last'];
-				
-				print_r($difference);
 				if($trade != NULL){
 					$difference = $trade - $prev;
-					$rate =  ($trade / $prev) * 100;
-					print_r($rate);
+					$rate =  ($difference / $prev) * 100;
 					$view['trade'] = $trade;
+					$view['difference'] = $difference;
+					$view['rate'] = $rate;
 				}else{
 					continue;
 				}
-				$view['trade'] = $trade;
 				$view['low'] = $low;
 				$view['high'] = $high;
-				$view['difference'] = $difference;
-				// $view['rate'] = $rate;
+
+				
 				// $view['change'] = $change;
 				
 			}

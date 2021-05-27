@@ -613,6 +613,7 @@ class News extends CB_Controller
 
 	public function company_write($comp_id = 0)
 	{
+		
 		$eventname = 'event_admin_ciccinfigs_update_company';
 		$this->load->event($eventname);
 
@@ -654,16 +655,22 @@ class News extends CB_Controller
 				'field' => 'comp_active',
 				'lable' => '활성화',
 				'rules' => 'trim|required|[0 === 비활성화 , 1 === 활성화 ]',
-			),
+				),
+			);
 			if ($this->input->post($primary_key)) {
 				$config[] = array(
 						'field' => 'comp_name',
 						'label' => '신문사 명',
 						'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[15]|is_unique[company.comp_name.comp_id.' . element('comp_id', $getdata) . ']',
 				);
+			} else {
+				$config[] = array(
+					'field' => 'comp_name',
+						'label' => '신문사 명',
+						'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[15]|is_unique[company.comp_name]'
+				);
 			}
-		);
-
+		
 		$this->form_validation->set_rules($config);
 
 		if ($this->form_validation->run() === false) {
@@ -674,11 +681,12 @@ class News extends CB_Controller
 		} else {
 
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+
 			$updatedata = array(
 				'comp_name' => $this->input->post('comp_name', null, ''),
 				'comp_url' => $this->input->post('comp_url', null, ''),
 				'comp_segment' => $this->input->post('comp_segment', null, ''),
-				'comp_active' => $this->input->post('comp_active', null, ''),
+				'comp_active' => $this->input->post('comp_active', null, '') ? 1 : 0,
 			);
 
 			if ($this->input->post($primary_key)) {
@@ -687,7 +695,14 @@ class News extends CB_Controller
 					'message',
 					'정상적으로 수정되었습니다'
 				);
+			} else {
+				$comp_id = $this->Company_model->insert($updatedata);
+				$this->session->set_flashdata(
+					'message',
+					'정상적으로 추가되었습니다'
+				);
 			}
+
 			$redirecturl = admin_url($this->pagedir);
 			redirect($redirecturl);
 		}
@@ -701,7 +716,7 @@ class News extends CB_Controller
 		}
 
 		$view['view']['data'] = $getdata;
-		$view['view']['list_url'] = admin_url($this->pagedir . '?' . $param->output());
+		$view['view']['list_url'] = admin_url($this->pagedir . '/company_config/?' . $param->output());
 
 		$view['view']['primary_key'] = $primary_key;
 
@@ -714,82 +729,82 @@ class News extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
-	public function company_write_exchange($comp_id = 0)
-	{
+	// public function company_write_exchange($comp_id = 0)
+	// {
 		
-		$eventname = 'event_admin_ciccinfigs_maincoin_coin';
-		$this->load->event($eventname);
+	// 	$eventname = 'event_admin_ciccinfigs_maincoin_coin';
+	// 	$this->load->event($eventname);
 
 		
-		$view = array();
-		$view['view'] = array();
+	// 	$view = array();
+	// 	$view['view'] = array();
 		
-		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-		print_r($comp_id);
-		exit;
+	// 	$view['view']['event']['before'] = Events::trigger('before', $eventname);
+	// 	print_r($comp_id);
+	// 	exit;
 		
-		// $comp_id = (int) $comp_id;
-		// if (empty($comp_id) OR $comp_id < 1) {
-		// 		show_404();
-		// }
+	// 	// $comp_id = (int) $comp_id;
+	// 	// if (empty($comp_id) OR $comp_id < 1) {
+	// 	// 		show_404();
+	// 	// }
 
-		$primary_key = $this->Company_model->primary_key;
+	// 	$primary_key = $this->Company_model->primary_key;
 		
-		$param =& $this->querystring;
-		$findex = 'comp_id';
-		$forder = 'desc';
+	// 	$param =& $this->querystring;
+	// 	$findex = 'comp_id';
+	// 	$forder = 'desc';
 		
-		$this->load->library('form_validation');
+	// 	$this->load->library('form_validation');
 		
-		$config = array(
-			array(
-				'field' => 'comp_id',
-				'label' => '신문사 id',
-				'rules' => 'trim|is_natural_no_zero',
-			),
-		);
-		$this->form_validation->set_rules($config);
+	// 	$config = array(
+	// 		array(
+	// 			'field' => 'comp_id',
+	// 			'label' => '신문사 id',
+	// 			'rules' => 'trim|is_natural_no_zero',
+	// 		),
+	// 	);
+	// 	$this->form_validation->set_rules($config);
 
-		if ($this->form_validation->run() === false) {
+	// 	if ($this->form_validation->run() === false) {
 
-			// 이벤트가 존재하면 실행합니다
-			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+	// 		// 이벤트가 존재하면 실행합니다
+	// 		$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 
-		} else {
-			/**
-			 * 유효성 검사를 통과한 경우입니다.
-			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
-			 */
+	// 	} else {
+	// 		/**
+	// 		 * 유효성 검사를 통과한 경우입니다.
+	// 		 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
+	// 		 */
 
-			// 이벤트가 존재하면 실행합니다
-			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+	// 		// 이벤트가 존재하면 실행합니다
+	// 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
-			$updatedata = $this->input->post();
+	// 		$updatedata = $this->input->post();
 
-			// $this->Company_model->update_exchange($updatedata);
-			$view['view']['alert_message'] = '정상적으로 저장되었습니다';
-		}
+	// 		// $this->Company_model->update_exchange($updatedata);
+	// 		$view['view']['alert_message'] = '정상적으로 저장되었습니다';
+	// 	}
 
-		$this->CIC_maincoin_coin_model->allow_order_field = array('comp_id');
+	// 	$this->CIC_maincoin_coin_model->allow_order_field = array('comp_id');
 
-		$where = array(
-		);
+	// 	$where = array(
+	// 	);
 
-		$result = $this->Company_model->get_one($comp_id);
-		$view['view']['data'] = $result;
+	// 	$result = $this->Company_model->get_one($comp_id);
+	// 	$view['view']['data'] = $result;
 
 
 
-		$view['view']['primary_key'] = $this->Company_model->primary_key;
+	// 	$view['view']['primary_key'] = $this->Company_model->primary_key;
 
-		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+	// 	$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'company_write');
-		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-		$this->data = $view;
-		$this->layout = element('layout_skin_file', element('layout', $view));
-		$this->view = element('view_skin_file', element('layout', $view));
-	}
+	// 	$layoutconfig = array('layout' => 'layout', 'skin' => 'company_write_exchange');
+	// 	$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+	// 	$this->data = $view;
+	// 	$this->layout = element('layout_skin_file', element('layout', $view));
+	// 	$this->view = element('view_skin_file', element('layout', $view));
+	// }
 
     public function update_news_enable_0()
 	{

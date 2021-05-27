@@ -61,10 +61,9 @@ if (element(element('primary_key', $view), element('data', $view))) {
 			<div class="form-group">
 				<label class="col-sm-2 control-label">활성화/비활성화</label>
 				<div class="col-sm-10 form-inline">
-					<select name="cme_api" class="form-control">
-						<option value="0" <?php echo set_select('comp_active', 0 , element('comp_active', element('data', $view)) === '0' ? true : false); ?>>바활성화</option>
-						<option value="1" <?php echo set_select('comp_active', 1 , element('comp_active', element('data', $view)) === '1' ? true : false); ?>>활성화</option>
-					</select>
+					<label for="cmc_default" class="checkbox-inline">
+						<input type="checkbox" name="cmc_default" id="cmc_default" value="1" <?php echo set_checkbox('cmc_default', '1', (element('cmc_default', element('data', $view)) ? true : false)); ?> /> 기본 코인으로 설정합니다.
+					</label>
 					<p class="help-block">해당 신문사를 크롤링 하려면 활성화 그렇지 않다면 비활성화를 선택하세요.</p>
 				</div>
 			</div>
