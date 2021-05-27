@@ -30,8 +30,8 @@
 							<tr>
 								<th><a href="<?php echo element('cme_orderby', element('sort', $view)); ?>">번호</a></th>
 								<th>거래소 명</th>
-								<th>api</th>
-								<th>기본값설정</th>
+								<th>마켓</th>
+								<th>기본노출설정</th>
 								<th>순서변경</th>
 								<th>수정</th>
 								<th><input type="checkbox" name="chkall" id="chkall" /></th>
@@ -45,7 +45,7 @@
 							<tr>
 								<td><?php echo number_format(element('num', $result)); ?></td>
 								<td><img src="<?php echo element('cme_logo', $result); ?>" alt="거래소 로고" style="height:20px; width:auto;"/>  <?php echo html_escape(element('cme_korean_nm', $result)); ?></td>
-								<td><?php echo html_escape(element('cme_api', $result)); ?></td>
+								<td><?php echo html_escape(element('cme_market', $result)); ?></td>
 								<td><?php echo (element('cme_default', $result) == 1) ? '기본' : ''; ?></td>
 								<td>업 / 다운</td>
 								<td><a href="<?php echo admin_url($this->pagedir); ?>/exchange_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>

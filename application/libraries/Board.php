@@ -304,6 +304,7 @@ class Board extends CI_Controller
 	 */
 	public function delete_comment($cmt_id = 0)
 	{
+
 		$cmt_id = (int) $cmt_id;
 		if (empty($cmt_id) OR $cmt_id < 1) {
 			return false;
@@ -320,24 +321,27 @@ class Board extends CI_Controller
 		$post = $this->CI->Post_model->get_one(element('post_id', $comment));
 		$board = $this->CI->board->item_all(element('brd_id', $post));
 
-
 		$cmt_num = element('cmt_num', $comment);
 		$where = array(
-			'scrap.cmt_num' => $cmt_num,
+			'cmt_num' => $cmt_num,
 			'cmt_del' => 0,
 		);
-		$cmt_numArr = $this->CI->get_list('', '', $where, '', '', '');
+		$cmt_numArr = $this->CI->Comment_model->get_list('', '', $where, '', '', '');
 
-		print_r('<script>console.log("hi");</script>');
-		echo '<script>console.log("hi");</script>';
-		exit;
+		exit($cmt_numArr['list']);
 
-		// $this->CI->Comment_model->delete($cmt_id);
-		$updatedata = array(
-			'cmt_del' => 1,
-			'cmt_updated_datetime' => cdate('Y-m-d H:i:s'),
-		);
-		$this->CI->Comment_model->update($cmt_id, $updatedata);
+		if(count($cmt_numArr) == 1 ){
+			foreach($cmt_numArr as $val){
+				$this->CI->Comment_model->delete($val['cmt_id']);
+			}
+		} else{
+			$updatedata = array(
+				'cmt_del' => 1,
+				'cmt_updated_datetime' => cdate('Y-m-d H:i:s'),
+			);
+			$this->CI->Comment_model->update($cmt_id, $updatedata);
+		}
+		
 		$deletewhere = array(
 			'target_id' => $cmt_id,
 			'target_type' => 2,

@@ -413,7 +413,7 @@ class Coinapi
     /**
      * 오케이엑스 에서 데이터 가져오는 함수
      */
-    private function get_okex_data($coin_id, $market="USD"){
+    private function get_okex_data($coin_id, $market="USDT"){
         $usd_price = $this->get_usd_price();
 
         $url = "https://www.okex.com/api/v5/market/ticker?instId={$coin_id}-{$market}-SWAP";

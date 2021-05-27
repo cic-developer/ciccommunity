@@ -24,9 +24,8 @@
 			<div class="list-group">
 				<div class="form-group list-group-item">
 					<div class="col-sm-1">순번</div>
-					<div class="col-sm-2">거래소명</div>
-					<div class="col-sm-2">API</div>
-					<div class="col-sm-1">사용여부</div>
+					<div class="col-sm-3">거래소명</div>
+					<div class="col-sm-2">사용여부</div>
 					<div class="col-sm-4">코인 id</div>
 					<div class="col-sm-2">마켓</div>
 				</div>
@@ -39,10 +38,9 @@
 							<input type="hidden" name="cmcd_cme_idx[<?php echo element('cme_idx', $result); ?>]" value="<?php echo element('cmcd_idx', element('detail', $result)); ?>"/>
 							<div class="col-sm-1"><?php echo element('num', $result); ?></div>
 							<div class="col-sm-3"><?php echo html_escape(element('cme_korean_nm', $result)); ?></div>
-							<div class="col-sm-2"><?php echo html_escape(element('cme_api', $result)); ?></div>
-							<div class="col-sm-1"><input type="checkbox" name="cmcd_use[<?php echo element('cme_idx', $result); ?>]" value="1" <?php echo element('cmcd_idx', element('detail', $result)) ? ' checked="checked" ' : ''; ?> /></div>
+							<div class="col-sm-2"><input type="checkbox" name="cmcd_use[<?php echo element('cme_idx', $result); ?>]" value="1" <?php echo element('cmcd_idx', element('detail', $result)) ? ' checked="checked" ' : ''; ?> /></div>
 							<div class="col-sm-4"><input type="text" class="form-control" name="cmcd_coin_id[<?php echo element('cme_idx', $result); ?>]" value="<?php echo html_escape(element('cmcd_coin_id', element('detail', $result))); ?>" /></div>
-							<div class="col-sm-1">
+							<div class="col-sm-2">
 								<select class="form-control" name="cmcd_coin_market[<?php echo element('cme_idx', $result); ?>]" id="cmcd_coin_market[<?php echo element('cme_idx', $result); ?>]">
 									<option value="KRW" <?php echo set_select('board_sidebar', 'KRW', (element('cmcd_coin_market', element('detail', $result)) === 'KRW' ? true : false)); ?> >KRW</option>
 									<option value="USDT" <?php echo set_select('board_sidebar', 'USDT', (element('cmcd_coin_market', element('detail', $result)) === 'USDT' ? true : false)); ?> >USDT</option>

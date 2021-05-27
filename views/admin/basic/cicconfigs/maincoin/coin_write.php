@@ -51,7 +51,7 @@ if (element(element('primary_key', $view), element('data', $view))) {
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">기본으로 설정</label>
+				<label class="col-sm-2 control-label">기본노출 설정</label>
 				<div class="col-sm-10">
 					<label for="cmc_default" class="checkbox-inline">
 						<input type="checkbox" name="cmc_default" id="cmc_default" value="1" <?php echo set_checkbox('cmc_default', '1', (element('cmc_default', element('data', $view)) ? true : false)); ?> /> 기본 코인으로 설정합니다.

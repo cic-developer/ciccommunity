@@ -107,8 +107,7 @@ class CIC_Coin_list_model extends CB_Model
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 90,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET"   
-                
+                CURLOPT_CUSTOMREQUEST => "GET"             
             ));
             $response = curl_exec($curl);
             $err = curl_error($curl);
@@ -129,10 +128,8 @@ class CIC_Coin_list_model extends CB_Model
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 90,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET"   
-                
+                CURLOPT_CUSTOMREQUEST => "GET"    
             ));
-        
             $response = curl_exec($curl);
             $err = curl_error($curl);
 
@@ -142,15 +139,11 @@ class CIC_Coin_list_model extends CB_Model
                 echo "cUrl Error :" . $err;
             }
             $array = json_decode($response, true);
-            return $array;
-        
+            return $array; 
         }
-
     }
-
-
      //GET DATA FOR CHART
-     function get_price($market){
+    function get_price($market){
         $curl = curl_init();
         if($market === "PER"){
             curl_setopt_array($curl, array(
@@ -174,7 +167,6 @@ class CIC_Coin_list_model extends CB_Model
                 echo "cUrl Error :" . $err;
             }
             $array = json_decode($response, true);
-            print_r($array);
             return $array;
         }else{
             curl_setopt_array($curl, array(

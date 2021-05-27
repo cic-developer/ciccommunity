@@ -224,24 +224,47 @@ class Search extends CB_Controller
 		$getHist = $this -> CIC_coin_list_model->get_histData($market);
 		$korean = $key_search['clist_name_ko'];
 		$symbole = $key_search['clist_market'];
+		
 
-		foreach($api_result as $result_price){
-			$high = $result_price['high_price'];
-			$low =$result_price['low_price'];
-			$prev = $result_price['prev_closing_price'];
-			$change = $result_price['change'];
-			$rate =  $result_price['change_rate'];
-			$difference = $result_price['change_price'];
-			$trade = $result_price['trade_price'];
+		if($market === "PER"){
+			foreach($api_result as $result_price){
 
-			$view['trade'] = $trade;
-			$view['low'] = $low;
-			$view['high'] = $high;
-			$view['prev'] = $prev;
-			$view['difference'] = $difference;
-			$view['rate'] = $rate;
-			$view['change'] = $change;
-			
+				print_r($result_price);
+				$high = $result_price['high'];
+				$low =$result_price['low'];
+				$prev = $result_price['prev_closing_price'];
+				$change = $result_price['change'];
+				$rate =  $result_price['change_rate'];
+				$difference = $result_price['change_price'];
+				$trade = $result_price['open'];
+
+				$view['trade'] = $trade;
+				$view['low'] = $low;
+				$view['high'] = $high;
+				$view['difference'] = $difference;
+				$view['rate'] = $rate;
+				$view['change'] = $change;
+				
+			}
+		}else {
+			foreach($api_result as $result_price){
+				$high = $result_price['high_price'];
+				$low =$result_price['low_price'];
+				$prev = $result_price['prev_closing_price'];
+				$change = $result_price['change'];
+				$rate =  $result_price['change_rate'];
+				$difference = $result_price['change_price'];
+				$trade = $result_price['trade_price'];
+
+				$view['trade'] = $trade;
+				$view['low'] = $low;
+				$view['high'] = $high;
+				$view['prev'] = $prev;
+				$view['difference'] = $difference;
+				$view['rate'] = $rate;
+				$view['change'] = $change;
+				
+			}
 		}
         //Send to view
 		$view['symbole'] = strtoupper($symbole);

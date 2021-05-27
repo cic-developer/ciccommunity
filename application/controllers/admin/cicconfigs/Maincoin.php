@@ -193,11 +193,6 @@ class Maincoin extends CB_Controller
 				'label' => '거래소 로고 url',
 				'rules' => 'trim|required|valid_url',
 			),
-			array(
-				'field' => 'cme_api',
-				'label' => 'API',
-				'rules' => 'trim|required|in_list[coingecko,hotbit_korea]',
-			),
 		);
 		if ($this->input->post($primary_key)) {
 			$config[] = array(
@@ -238,7 +233,6 @@ class Maincoin extends CB_Controller
 				'cme_korean_nm' => $this->input->post('cme_korean_nm', null, ''),
 				'cme_english_nm' => $this->input->post('cme_english_nm', null, ''),
 				'cme_logo' => $this->input->post('cme_logo', null, ''),
-				'cme_api' => $this->input->post('cme_api', null, ''),
 				'cme_default' => $this->input->post('cme_default', null, '') ? 1 : 0,
 			);
 
