@@ -224,15 +224,11 @@ class Search extends CB_Controller
 		$getHist = $this -> CIC_coin_list_model->get_histData($market);
 		$korean = $key_search['clist_name_ko'];
 		$symbole = $key_search['clist_market'];
-		
-
 		if($market === "PER"){
 			foreach($api_result as $result_price){
-				print_r($result_price);
 				$high = $result_price['high'];
 				$low =$result_price['low'];
-				$prev = $result_price['open'];
-				// $change = 'RISE';
+				$prev = $result_price['open'];;
 				$trade =$result_price['last'];
 				if($trade != NULL){
 					$difference = $trade - $prev;
@@ -246,18 +242,12 @@ class Search extends CB_Controller
 				$view['low'] = $low;
 				$view['high'] = $high;
 				$view['prev'] = $prev;
-
-				
-				// $view['change'] = $change;
 				
 			}
 			//HISTORICAL DATA FOR CHART
 			$his_price = array();
 			$his_time = array();
 			for($i=0; $i<25; $i++){
-				// echo "<pre><br>";
-				// print_r($getHist['result'][$i]);
-				// echo "</pre></br>";
 				if($getHist['result'][$i][0]){
 					$his_time[] = $getHist['result'][$i][0];
 					$his_price[] = $getHist['result'][$i][1];
@@ -265,7 +255,6 @@ class Search extends CB_Controller
 			}		
 			$view['his_price'] = $his_price;
 			$view['his_time'] = $his_time;
-
 		}else {
 			foreach($api_result as $result_price){
 				$high = $result_price['high_price'];
@@ -298,7 +287,6 @@ class Search extends CB_Controller
 			$view['his_time'] = $his_time;
 			
 		}	
-        //Send to view
 		$view['symbole'] = strtoupper($symbole);
 		$view['korean'] = $korean;
 

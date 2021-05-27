@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css'); ?>
+<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/hotfix.css'); ?>
 
 <?php echo element('headercontent', element('board', $view)); ?>
 
@@ -274,13 +275,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <?php echo element('footercontent', element('board', $view)); ?>
-
-<style>
-	.chk-input label {
-		font-size:14px;
-		color:#f47523
-	}
-</style>
 
 <script type="text/javascript">
 // 글자수 제한

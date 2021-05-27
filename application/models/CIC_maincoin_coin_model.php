@@ -31,6 +31,22 @@ class CIC_maincoin_coin_model extends CB_Model
 		$result = $this->_get('', 'cmc_orderby', '', 1, '', 'cmc_orderby', 'DESC');
 		return element('cmc_orderby', $result->row_array()) ? (int)element('cmc_orderby', $result->row_array()) + 1 : 1;
 	}
+
+	function get_beside_coin($cmc_orderby, $type){
+		if($type == 'up'){
+			$where = array(
+				'cmc_orderby >' => $cmc_orderby
+			);
+			$orderby = 'ASC';
+		} else {
+			$where = array(
+				'cmc_orderby <' => $cmc_orderby
+			);
+			$orderby = 'DESC';
+		}
+		$result = $this->_get('', 'cme_idx, cmc_orderby', $where, 1, 0, 'cmc_orderby', $orderby);
+		return $result->row_array();
+	}
 }
 
 ?>

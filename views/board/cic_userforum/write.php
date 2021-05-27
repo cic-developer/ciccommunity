@@ -1,3 +1,7 @@
+
+
+<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/hotfix.css'); ?>
+
 <div id="container-wrap">
 	<div id="contents" class="div-cont">
 	<?php
@@ -46,10 +50,3 @@
 		<!-- page end // -->
 	</div>
 </div>
-
-<style>
-	.chk-input label {
-		font-size:14px;
-		color:#f47523
-	}
-</style>

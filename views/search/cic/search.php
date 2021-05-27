@@ -66,7 +66,11 @@
 						<!-- TradingView Widget END -->
 						<div class="right_content_all">
 						<div style="text-align:left; border-bottom:5px solid #ddd; padding-bottom:5px;">
-							<img style= "width: 30px; padding-right:10px;" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
+							<?php if(!file_exists('https://static.upbit.com/logos/' .$symbole)) { ?>
+								<img style= "width: 30px; padding-right:10px;" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
+							<?php }else {?>
+								<img></img>
+								<?php } ?>
 							<strong class="btxt"><?php echo $korean; ?></strong>
 							<p class="stxt">
 								<span> <?php echo $symbole; ?></span>

@@ -112,7 +112,13 @@
             async: false,
             cache: false,
             success: function(data) {
-				console.log(data);
+				if(data.error){
+					alert(data.error);
+				}
+				if(data.success){
+					alert(data.success);
+					location.reload();
+				}
             }
         });
 	}

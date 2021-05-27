@@ -656,7 +656,7 @@ class News extends CB_Controller
 				$config[] = array(
 						'field' => 'comp_name',
 						'label' => '신문사 명',
-						'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[15]|is_unique[company.comp_name.comp_id.' . element('comp_id', $getdata) . ']',
+						'rules' => 'trim|required|min_length[2]|max_length[15]|is_unique[company.comp_name.comp_id.' . element('comp_id', $getdata) . ']',
 				);
 			} else {
 				$config[] = array(

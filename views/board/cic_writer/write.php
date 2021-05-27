@@ -2,7 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<div id="container-wrap">
+<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/hotfix.css'); ?>
+
+
+<div id="container-wrap"></div>
 	<div id="contents" class="div-cont">
 		<?php
 			echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
@@ -116,17 +119,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 </div>
 
-<style>
-	input[type="checkbox"]{
-		-webkit-appearance: auto;
-		-moz-appearance: auto;
-		appearance: auto;
-	}
-	.chk-input label {
-		font-size:14px;
-		color:#f47523
-	}
-</style>
 
 <script type="text/javascript">
 // 글자수 제한

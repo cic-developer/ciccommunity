@@ -32,9 +32,20 @@ class CIC_maincoin_exchange_model extends CB_Model
 		return element('cme_orderby', $result->row_array()) ? (int)element('cme_orderby', $result->row_array()) + 1 : 1;
 	}
 
-	function get_beside_exchange($cme_idx, $type){
-		$result = $this->_get('', 'cme_orderby', '', 1, $cme_idx, 'cme_orderby', 'DESC');
-		return element('cme_orderby', $result->row_array()) ? (int)element('cme_orderby', $result->row_array()) + 1 : 1;
+	function get_beside_exchange($cme_orderby, $type){
+		if($type == 'up'){
+			$where = array(
+				'cme_orderby >' => $cme_orderby
+			);
+			$orderby = 'ASC';
+		} else {
+			$where = array(
+				'cme_orderby <' => $cme_orderby
+			);
+			$orderby = 'DESC';
+		}
+		$result = $this->_get('', 'cme_idx, cme_orderby', $where, 1, 0, 'cme_orderby', $orderby);
+		return $result->row_array();
 	}
 }
 

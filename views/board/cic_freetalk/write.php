@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+
+<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/hotfix.css'); ?>
+
 <div id="container-wrap">
 	<div id="contents" class="div-cont">
 		<?php
@@ -41,13 +44,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<?php echo form_close(); ?>
 	</div>
 </div>
-
-<style>
-	.chk-input label {
-		font-size:14px;
-		color:#f47523
-	}
-</style>
 
 <script type="text/javascript">
 // 글자수 제한

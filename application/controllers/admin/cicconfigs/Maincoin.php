@@ -552,8 +552,6 @@ class Maincoin extends CB_Controller
 		/**
 		 * 프라이머리키가 입력되지 않으면 에러처리합니다
 		 */
-		print_r($cmc_idx);
-		exit;
 		
 		$cmc_idx = (int) $cmc_idx;
 		if (empty($cmc_idx) OR $cmc_idx < 1) {
@@ -692,26 +690,25 @@ class Maincoin extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		$next_exchange = $this->{$this->modelname}->get_beside_exchange($this->input->post('cme_idx'), $this->input->post('type'));
-		exit(json_encode($this->db->last_query()));
+		$next_exchange = $this->{$this->modelname}->get_beside_exchange(element('cme_orderby', $this_exchange), $this->input->post('type'));
 
 		if(!$next_exchange){
-			$result = array('error' => '변경할 거래소를 찾을 수 없습니다.');
+			$result = array('error' => $this->input->post('type') == 'up' ? '이미 최상단입니다.' : '이미 최하단입니다.');
 			exit(json_encode($result));
 		}
 
-		// $this->{$this->modelname}->update(
-		// 	element('cme_idx',$this_exchange), 
-		// 	array(
-		// 		'cme_orderby' => element('cme_orderby', $target_exchange)
-		// 	)
-		// );
-		// $this->{$this->modelname}->update(
-		// 	element('cme_idx',$target_exchange), 
-		// 	array(
-		// 		'cme_orderby' => element('cme_orderby', $this_exchange)
-		// 	)
-		// );
+		$this->{$this->modelname}->update(
+			element('cme_idx',$this_exchange), 
+			array(
+				'cme_orderby' => element('cme_orderby', $next_exchange)
+			)
+		);
+		$this->{$this->modelname}->update(
+			element('cme_idx',$next_exchange), 
+			array(
+				'cme_orderby' => element('cme_orderby', $this_exchange)
+			)
+		);
 		$result = array('success' => '성공적으로 수정하였습니다.');
 		exit(json_encode($result));
 	}
