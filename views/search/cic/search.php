@@ -13,7 +13,7 @@
 						if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) { ?>
 					<ul>
-						<li class="active"><a href="<?php base_url() ?>"><span>통합검색</span></a></li>
+						<li class="post_both"><a href="<?php base_url() ?>?sfield=post_both&skeyword=<?php echo $this->input->get('skeyword')?>"><span>통합검색</span></a></li>
 						<li value="post_title"><a href="<?php base_url() ?>?sfield=post_title&skeyword=<?php echo $this->input->get('skeyword')?>"><span>제목</span></a></li>
 						<li value="post_content"><a href="<?php base_url() ?>?sfield=post_content&skeyword=<?php echo $this->input->get('skeyword')?>"><span>내용</span></a></li>
 						<li value="post_nickname"><a href="<?php base_url() ?>?sfield=post_nickname&skeyword=<?php echo $this->input->get('skeyword')?>"><span>작성자</span></a></li>
@@ -150,6 +150,7 @@
 
 							if (element('list', element('data', $view))) {
 								foreach (element('list', element('data', $view)) as $result) {
+									if(element('brd_name', $result) === '자유게시판'){
 							?>
 								<tr>
 									<td>
@@ -167,6 +168,7 @@
 									</td>
 								</tr>
 							<?php
+									}
 								}
 							}
 							if (!element('list', element('data', $view)))  {
@@ -176,10 +178,8 @@
 								</tr>
 							<?php } ?>
 						</tbody>
+					
 					</table>
-					<div class="paging-wrap">
-						<?php echo element('paging', $view); ?>
-					</div>
 				</div>
 				<div class="gap75"></div>
 				<div class="tits">

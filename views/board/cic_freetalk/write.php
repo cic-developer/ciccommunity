@@ -59,47 +59,62 @@ $(function() {
 
 	var oldTitle= '';
 	$(document).on("propertychange change keyup paste input","#post_title",function(){
-		$('.post_title-error').remove();
+		
 		var title = $(this).val();
 		if(title == oldTitle) {
 			return;
 		}
-
+		
+		$('#post_title-error').remove();
+		
 		var titleLen = title.length;
 		var html = '';	
 		html += '<label id="post_title-error" class="error" for="post_title">';
-
+		
 		if(titleLen < 2 || titleLen > 60){
-
+		
 			if(titleLen == 0){
-				html += '필수항목입니다.';
-			}
-			if(titleLen < 2){
-				html += '제목을 2자 이상 입력해주세요.';
-			}
-			if(titleLen  > 60){
-				html += '제목을 60자 이하 입력해주세요.';
+				html += '필수 항목입니다.';
+			}else if(titleLen < 2){
+				html += '최소 2자 이상 입력하세요.';
+			}else if(titleLen  > 59){
+				html += '60자를 넘을 수 없습니다.';
 			}
 
 			html += '</label>';
 			$('.title-box').append(html)
 		}
-			
-
-		// if(title.length < 0){
-		// 	alert('hi');
-		// }
 		
-		// password2 = $("#new_password_re").val();
-		// if(password2 != currentVal ){ // && currentVal.length > 0){
-		// 	$('.agree-password').remove();
-		// 	html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
-		// 	$('.password-modify-content').append(html);
-		// } else{
-		// 	$('.agree-password').remove();
-		// 	html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
-		// 	$('.password-modify-content').append(html);
-		// }
+		oldTitle = title;
+	});
+
+	var oldContent= '';
+	$(document).on("propertychange change keyup paste input","#post_title",function(){
+		
+		var title = $(this).val();
+		if(title == oldTitle) {
+			return;
+		}
+		
+		$('#post_title-error').remove();
+		
+		var titleLen = title.length;
+		var html = '';	
+		html += '<label id="post_title-error" class="error" for="post_title">';
+		
+		if(titleLen < 2 || titleLen > 60){
+		
+			if(titleLen == 0){
+				html += '필수 항목입니다.';
+			}else if(titleLen < 2){
+				html += '최소 2자 이상 입력하세요.';
+			}else if(titleLen  > 59){
+				html += '60자를 넘을 수 없습니다.';
+			}
+			
+			html += '</label>';
+			$('.title-box').append(html)
+		}
 		
 		oldTitle = title;
 	});
