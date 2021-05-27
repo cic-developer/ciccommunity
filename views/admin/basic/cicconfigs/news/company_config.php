@@ -33,50 +33,46 @@
 						<thead>
 							<tr>
 								<th><a href="<?php echo element('cme_orderby', element('sort', $view)); ?>">번호</a></th>
-								<th>거래소 명</th>
-								<th>api</th>
-								<th>기본값설정</th>
-								<th>순서변경</th>
-								<th>수정</th>
+								<th>신문사</th>
+								<th>URL</th>
+								<th>Segment</th>
+								<th>Index</th>
+								<th>활성상태</th>
 								<th><input type="checkbox" name="chkall" id="chkall" /></th>
 							</tr>
 						</thead>
 						<tbody>
 						<?php
-						if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result) {
-								?>
-							<tr>
-								<td><?php echo number_format(element('news_id', $result)); ?></td>
-								<td>
-									<a href="<?php echo goto_url(element('companyurl', $result)); ?>">
-										<?php echo html_escape(element('comp_name', element('company', $result))); ?>
-									</a>
-								</td>
-								<td>
-									<a href="<?php echo goto_url(element('newsurl', $result)); ?>">
-										<?php echo html_escape(element('news_title', $result)); ?>
-									</a>
-								</td>
-								<td><?php echo display_datetime(element('news_wdate', $result), 'full'); ?></td>
-								<td><?php echo number_format(element('news_reviews', $result)); ?></td>
-								<td><?php echo element('news_enable', $result) === '1' ? '활성' : '비활성화'; ?></td>
-								<td><?php echo element('news_show', $result) === '1' ? '공개' : '비공개'; ?></td>
-								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
-							</tr>
-						<?php
+							if (element('list', element('data', $view))) {
+								foreach (element('list', element('data', $view)) as $result) {
+									?>
+								<tr>
+									<td><?php echo number_format(element('news_id', $result)); ?></td>
+									<td>
+										<a href="<?php echo goto_url(element('comp_url', $result)); ?>">
+											<?php echo html_escape(element('comp_name', element('company', $result))); ?>
+										</a>
+									</td>
+									<td>
+										<a href="<?php echo goto_url(element('comp_url', $result)); ?>">
+											<?php echo html_escape(element('comp_url', $result)); ?>
+										</a>
+									</td>
+									<td><?php echo html_escape('comp_segment', $result); ?></td>
+									<td><?php echo element('comp_index', $result); ?></td>
+									<td><?php echo element('comp_active', $result) === '1' ? '활성' : '비활성'; ?></td>
+									<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
+								</tr>
+								<?php
+								}
 							}
-						}
-						if ( ! element('list', element('data', $view))) {
-						?>
-						<?php
-						}
-						?>
+							if ( ! element('list', element('data', $view))) {
+							?>
 							<tr>
 								<td colspan="12" class="nopost">자료가 없습니다</td>
 							</tr>
-						<?php
-						}
+							<?php
+							}
 						?>
 					</tbody>
 				</table>

@@ -88,37 +88,6 @@ $(function() {
 		oldTitle = title;
 	});
 
-	var oldContent= '';
-	$(document).on("propertychange change keyup paste input","#post_title",function(){
-		
-		var title = $(this).val();
-		if(title == oldTitle) {
-			return;
-		}
-		
-		$('#post_title-error').remove();
-		
-		var titleLen = title.length;
-		var html = '';	
-		html += '<label id="post_title-error" class="error" for="post_title">';
-		
-		if(titleLen < 2 || titleLen > 60){
-		
-			if(titleLen == 0){
-				html += '필수 항목입니다.';
-			}else if(titleLen < 2){
-				html += '최소 2자 이상 입력하세요.';
-			}else if(titleLen  > 59){
-				html += '60자를 넘을 수 없습니다.';
-			}
-			
-			html += '</label>';
-			$('.title-box').append(html)
-		}
-		
-		oldTitle = title;
-	});
-
 function submitContents(f) {
 	if ($('#char_count')) {
 		if (char_min > 0 || char_max > 0) {

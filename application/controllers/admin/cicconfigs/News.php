@@ -532,7 +532,7 @@ class News extends CB_Controller
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
 
-		
+
 		
 		$this->{$this->modelname}->allow_search_field = array('news_id', 'news_title', 'news_content', 'comp_id', 'news_reviews', 'news_wdate'); // 검색이 가능한 필드
 		$this->{$this->modelname}->search_field_equal = array('news_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
@@ -551,6 +551,8 @@ class News extends CB_Controller
 			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
+		print_r('hello');
+		exit;
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
 				$result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
@@ -561,8 +563,6 @@ class News extends CB_Controller
 					$result['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
 				}
 				$result['list'][$key]['num'] = $list_num--;
-
-
 			}
 		}
 		$view['view']['data'] = $result;
