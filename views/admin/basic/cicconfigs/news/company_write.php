@@ -68,7 +68,7 @@ if (element(element('primary_key', $view), element('data', $view))) {
                 </div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Contents_select</label>
+				<label class="col-sm-2 control-label">Image_select</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="comp_img_select" value="<?php echo set_value('comp_img_select', element('comp_img_select', element('data', $view))); ?>" />
                     <p class="help-block">뉴스 이미지를 가져오는 부분을 입력하시오.</p>

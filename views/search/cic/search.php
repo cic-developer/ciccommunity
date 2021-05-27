@@ -159,16 +159,17 @@
 				<div></div>
 			<?php } ?>	
 			<!-- PRICE UNTIL HERE -->
-
-
+			
 			<div class="gap35"></div>
 			<div class="cont">
 				<div class="tits">
 					<h3>자유게시판</h3>
 					<?php
-						if (element('$boardlist', $view)) {
-							echo $boardlist;
-						}		
+						if(element('list', element('boardlist', $view))) {
+							foreach (element('list', element('boardlist', $view)) as $value) {
+								echo $value;
+							}	
+						}	
 					?>
 					<a href="#n" class="more"><span>more</span></a>
 				</div>
