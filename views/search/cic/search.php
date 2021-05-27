@@ -165,8 +165,8 @@
 				<div class="tits">
 					<h3>자유게시판</h3>
 					<?php
-						if(element('list', element('boardlist', $view))) {
-							foreach (element('list', element('boardlist', $view)) as $boardlist) {
+						if (element('list', element('data', $view))) {
+							foreach (element('list', element('data', $view)) as $result) {
 								echo element('brd_id', $boardlist);
 							}	
 						}	
