@@ -1,6 +1,3 @@
-<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/tooltip.css'); ?>
-<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css'); ?>
-<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
 <div id="container-wrap">
     <div id="contents" class="div-cont">
         <!-- page start // -->
