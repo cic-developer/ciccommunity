@@ -161,7 +161,14 @@ class Search extends CB_Controller
 					);
 					$images = $this->Post_file_model
 						->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-				}
+					if (element('pfi_filename', $images)) {
+						$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $images), $image_width, $image_height);
+						}
+					} else {
+						$thumb_url = get_post_image_url(element('post_content', $value), $image_width, $image_height);
+						$result['list'][$key]['thumb_url'] = $thumb_url ? $thumb_url : thumb_url('', '', $image_width, $image_height);
+					}
+					}
 				$result['list'][$key]['images'] = $images;
 				$result['list'][$key]['post_url'] = post_url(element('brd_key', $val), element('post_id', $val));
 				$result['list'][$key]['display_name'] = display_username(
@@ -174,17 +181,16 @@ class Search extends CB_Controller
 				$result['list'][$key]['content'] = cut_str(strip_tags(element('post_content', $val)),200);
 				$result['list'][$key]['is_mobile'] = (element('post_device', $val) === 'mobile') ? true : false;
 			}
-		}
-
+		
 		$view['view']['data'] = $result;
 		$view['view']['boardlist'] = $boardlist;
 		$view['view']['grouplist'] = $grouplist;
 		$total_rows = $result['total_rows'];
 		$view['total_rows'] = $total_rows;
 
-		// echo "<pre><br>";
-		// print_r($result);
-		// echo "</pre></br>";
+		echo "<pre><br>";
+		print_r($result);
+		echo "</pre></br>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
 			$sfieldarray = array('post_title', 'post_content', 'post_both');

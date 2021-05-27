@@ -209,7 +209,7 @@
 								<tr>
 									<td>
 										<div class="my-info">
-											<p class="pimg"><img src="<?php echo thumb_url(element('mem_image', $result),30, 30)?>" alt=""></p>
+											<p class="pimg"><img src="<?php echo thumb_url(element('post_image', $result),30, 30)?>" alt=""></p>
 											<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
 										</div>
 									</td>
