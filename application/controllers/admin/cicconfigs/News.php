@@ -334,6 +334,7 @@ class News extends CB_Controller
 		$where = array(
 			'news_show' => 1,
 			'news_enable' => 1,
+			'news_reviews >' => 0,
 		);
 
 		if($compid = (int) $this->input->get('comp_id')){
@@ -505,7 +506,7 @@ class News extends CB_Controller
 
 	public function company_config()
 	{
-
+		
 	}
 
     public function update_news_enable_0()

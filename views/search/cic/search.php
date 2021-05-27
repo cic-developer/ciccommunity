@@ -10,19 +10,18 @@
 				<div class="sel-box c01">
 					<a href="#n" class="sel-btn"><span>통합검색</span></a>
 					<?php
-					if (element('grouplist', $view)) {
-						foreach (element('grouplist', $view) as $key => $value) {
-							//print_r($value);
-					?>
+						if (element('list', element('data', $view))) {
+							foreach (element('list', element('data', $view)) as $result) { ?>
 					<ul>
 						<li class="active"><a href="<?php base_url() ?>"><span>통합검색</span></a></li>
-						<li value="post_title"><a href="<?php base_url() ?>/<?php echo element ('brd_order', $value) ?>"><span>제목</span></a></li>
+						<li value="post_title"><a href="<?php base_url() ?>?post_title=<?php echo element ('post_title', $result) ?>
+						&skeyword=<?php echo $this->input->get('skeyword')?>"><span>제목</span></a></li>
 						<li value="post_content"><a href="#n"><span>내용</span></a></li>
 						<li value="post_nickname"><a href="#n"><span>작성자</span></a></li>
 					</ul>
 					<?php
-					}
-						}		
+						}
+					}		
 					?>
 				</div>
 				<div class="field search">

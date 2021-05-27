@@ -153,7 +153,21 @@
             <!-- e: paging-wrap -->
             <!-- s: board-filter -->
             <div class="board-filter">
-                <p class="chk-select">
+                <form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
+                    <div class="board-filter">
+                        <p class="chk-select">
+                            <select name="sfield">
+                                <?php echo element('search_option',  element('list', $view)); ?>
+                            </select>
+                        </p>
+                        <p class="chk-input">
+                            <input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword',  element('list', $view))); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
+                            <!-- <a href="<?php echo base_url('mypage/post/5')?>" class="search-btn"><span>검색</span></a> -->
+                            <button class="search-btn" name="search_submit" type="submit"></button>
+                        </p>
+                    </div>
+                </form>
+                <!-- <p class="chk-select">
                     <select>
                         <option value="">제목</option>
                         <option value="">내용</option>
@@ -162,7 +176,7 @@
                 <p class="chk-input">
                     <input type="text" placeholder="검색어를 입력해주세요" autocomplete="off">
                     <a href="<?php echo base_url('post/5')?>" class="search-btn"><span>검색</span></a>
-                </p>
+                </p> -->
             </div>
             <!-- e: board-filter -->
         </div>
