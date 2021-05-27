@@ -1999,7 +1999,8 @@ class Board_write extends CB_Controller
 				'post_update_mem_id' => $mem_id,
 			);
 
-			if ($is_post_name) {
+			$mem_level = $this->member->item('mem_level');
+			if ($is_post_name && $mem_level != 100) {
 				$updatedata['post_nickname'] = $this->input->post('post_nickname', null, '');
 				$updatedata['post_email'] = $this->input->post('post_email', null, '');
 				$updatedata['post_homepage'] = $this->input->post('post_homepage', null, '');

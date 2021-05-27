@@ -1,9 +1,28 @@
 <div class="box">
+<?php
+if (element(element('primary_key', $view), element('data', $view))) {
+?>
 	<div class="box-header">
-		<h4 class="pb10 pull-left">거래소 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>
-
+		<h4 class="pb10 pull-left">신문사 설정 수정 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>
 		<div class="clearfix"></div>
+		<ul class="nav nav-tabs">
+			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/company_write/' . element('cmc_idx', element('data', $view))); ?>" onclick="return check_form_changed();">기본정보</a></li>
+		</ul>
 	</div>
+<?php
+} else {
+?>
+	<div class="box-header">
+		<h4 class="pb10 pull-left">코인 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>
+		<div class="clearfix"></div>
+		<ul class="nav nav-tabs">
+			<li role="presentation" class="active"><a href="javascript:;" >기본정보</a></li>
+			<li role="presentation"><a href="javascript:;" onClick="alert('기본정보를 저장하신 후에 다른 정보 수정이 가능합니다');">거래소 설정</a></li>
+		</ul>
+	</div>
+<?php
+}
+?>
 	<div class="box-table">
 		<?php
 		echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');

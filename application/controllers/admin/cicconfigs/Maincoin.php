@@ -665,14 +665,14 @@ class Maincoin extends CB_Controller
 		 */
 		$config = array(
 			array(
-				'field' => 'this_exchange',
+				'field' => 'cme_idx',
 				'label' => '선택 거래소',
 				'rules' => 'trim|required|is_natural_no_zero|max_length[10]',
 			),
 			array(
-				'field' => 'target_exchange',
+				'field' => 'type',
 				'label' => '변경할 거래소',
-				'rules' => 'trim|required|is_natural_no_zero|max_length[10]',
+				'rules' => 'trim|required|in_list[up,down]',
 			),
 		);
 		$this->form_validation->set_rules($config);
@@ -686,13 +686,13 @@ class Maincoin extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		$this_exchange = $this->{$this->modelname}->get_one($this->input->post('this_exchange'));
+		$this_exchange = $this->{$this->modelname}->get_one($this->input->post('cme_idx'));
 		if(!$this_exchange){
 			$result = array('error' => '선택한 거래소를 찾을 수 없습니다.');
 			exit(json_encode($result));
 		}
 
-		$target_exchange = $this->{$this->modelname}->get_one($this->input->post('target_exchange'));
+		$next_exchange = $this->{$this->modelname}->get_one($this->input->post('target_exchange'));
 		if(!$target_exchange){
 			$result = array('error' => '변경할 거래소를 찾을 수 없습니다.');
 			exit(json_encode($result));
