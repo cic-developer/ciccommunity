@@ -47,7 +47,7 @@
 								<td><?php echo number_format(element('num', $result)); ?></td>
 								<td><?php echo html_escape(element('cmc_korean_nm', $result)); ?></td>
 								<td><?php echo html_escape(element('cmc_symbol', $result)); ?></td>
-								<td><?php echo (element('cmc_default', $result) >= 1) ? '기본' : ''; ?></td>
+								<td><?php echo (element('cmc_default', $result) == 1) ? '기본' : (element('cmc_default', $result) == 2 ? '필수' : ''); ?></td>
 								<td><span class="orderby_up" style="cursor:pointer;">업</span> / <span class="orderby_down" style="cursor:pointer;">다운</span></td>
 								<td><a href="<?php echo admin_url($this->pagedir); ?>/coin_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
 								<td><input type="checkbox"  class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" <?php echo element('cmc_default', $result) == 2 ? 'disabled' : 'name="chk[]"'?> /></td>

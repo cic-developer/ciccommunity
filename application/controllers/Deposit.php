@@ -87,21 +87,23 @@ class Deposit extends CB_Controller
             
             if($memResult == 1){
                 // cp 로그 기록
-                $logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '', $deposit_meta, '@byself', $mem_id, '예치금 넣기');
+                $logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '', -$deposit_meta, '@byself', $mem_id, '예치금 넣기');
                 
-                if($logResult == 1) {
-                    $result = array(
-                        'state' => '1',
-                        'message' => $deposit_meta.'cp를 예치하였습니다',
-                    );
-                    exit(json_encode($result));
-                }else {
-                    $result = array(
-                        'state' => '0',
-                        'message' => '예치금을 넣은후 로그기록에 실패하였습니다',
-                    );
-                    exit(json_encode($result));
-                }
+                $result = array(
+                    'state' => '1',
+                    'message' => $deposit_meta.'cp를 예치하였습니다',
+                );
+                exit(json_encode($result));
+
+                // $logResult false반환값 확인 필요
+                // if($logResult == 1) {
+                // }else {
+                //     $result = array(
+                //         'state' => '0',
+                //         'message' => '예치금을 넣은후 로그기록에 실패하였습니다',
+                //     );
+                //     exit(json_encode($result));
+                // }
             }else {
                 $result = array(
                     'state' => '0',
@@ -156,21 +158,21 @@ class Deposit extends CB_Controller
                 // cp 로그 기록
                 $logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '', $mem_deposit, '@byself', $mem_id, '예치금 반환');
                 
-                print_r($logResult);
-                exit;
-                if($logResult == 1){
-                    $result = array(
-                        'state' => '1',
-                        'message' => '예치금이 반환 되었습니다',
-                    );
-                    exit(json_encode($result));
-                }else {
-                    $result = array(
-                        'state' => '0',
-                        'message' => '예치금 반환후 로그기록에 실패하였습니다',
-                    );
-                    exit(json_encode($result));
-                }
+                $result = array(
+                    'state' => '1',
+                    'message' => '예치금이 반환 되었습니다',
+                );
+                exit(json_encode($result));
+
+                // $logResult false반환값 확인 필요7
+                // if($logResult == 1){
+                // }else {
+                //     $result = array(
+                //         'state' => '0',
+                //         'message' => '예치금 반환후 로그기록에 실패하였습니다',
+                //     );
+                //     exit(json_encode($result));
+                // }
             }else {
                 $result = array(
                     'state' => '0',

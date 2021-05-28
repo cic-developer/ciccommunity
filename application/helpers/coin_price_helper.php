@@ -38,6 +38,7 @@ if ( ! function_exists('number_unit_to_korean')) {
 if ( ! function_exists('rs_number_format')) {
 	function rs_number_format($number, $demicals = 0)
 	{
+        if(!$number) return '';
         $value = number_format($number, $demicals);
         if($value && $demicals > 0){
             $check = TRUE;

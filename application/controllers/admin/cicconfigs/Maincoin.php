@@ -67,7 +67,7 @@ class Maincoin extends CB_Controller
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
 		$findex = 'cme_orderby';
-		$forder = 'desc';
+		$forder = 'asc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 
@@ -86,11 +86,11 @@ class Maincoin extends CB_Controller
 		
 		$result = $this->{$this->modelname}
 			->get_admin_list($per_page, $offset, $where, '', $findex, '', $forder, $sfield, $skeyword);
-		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
+		$list_num = 1 + ($page - 1) * $per_page;
 		
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
-				$result['list'][$key]['num'] = $list_num--;
+				$result['list'][$key]['num'] = $list_num++;
 			}
 		}
 		$view['view']['data'] = $result;
@@ -313,7 +313,7 @@ class Maincoin extends CB_Controller
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
 		$findex = 'cmc_orderby';
-		$forder = 'desc';
+		$forder = 'asc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 
@@ -332,11 +332,11 @@ class Maincoin extends CB_Controller
 		
 		$result = $this->CIC_maincoin_coin_model
 			->get_admin_list($per_page, $offset, $where, '', $findex, '', $forder, $sfield, $skeyword);
-		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
+		$list_num = 1 + ($page - 1) * $per_page;
 		
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
-				$result['list'][$key]['num'] = $list_num--;
+				$result['list'][$key]['num'] = $list_num++;
 			}
 		}
 		$view['view']['data'] = $result;

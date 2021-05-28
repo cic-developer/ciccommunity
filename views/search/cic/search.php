@@ -8,16 +8,17 @@
 		<div class="search-wrap list">
 			<div class="filter">
 				<div class="sel-box c01">
-				    <?php if($_GET['sfield'] === "post_title"){ ?>
-					   <a href="#n" id="optionb" class="sel-btn"><span>통합검색</span></a>
-					<?php }elseif($_GET['sfield'] === "post_title"){ ?>
+
+					<?php if($_GET['sfield'] === "post_title"){ ?>
 						<a href="#n" id="optionb" class="sel-btn"><span>제목</span></a>	
-					<?php }elseif($_GET['sfield'] === "post_both"){ ?>
+					<?php }elseif($_GET['sfield'] === "post_content"){ ?>
 						<a href="#n" id="optionb" class="sel-btn"><span>내용</span></a>	
-					<?php }elseif($_GET['sfield'] === "post_both"){ ?>
-						<a href="#n" id="optionb" class="sel-btn"><span>작석자</span></a>	
+					<?php }elseif($_GET['sfield'] === "post_nickname"){ ?>
+						<a href="#n" id="optionb" class="sel-btn"><span>작석자</span></a>
+					<?php }	
+					 else { ?>
+					   <a href="#n" id="optionb" class="sel-btn"><span>통합검색</span></a>
 					<?php } ?>
-					
 					<ul>
 						<li class="active"><a href="<?php base_url() ?>?sfield=post_both&skeyword=<?php echo $this->input->get('skeyword')?>"><span>통합검색</span></a></li>
 						<li name="option" class="post_title"><a href="<?php base_url() ?>?sfield=post_title&skeyword=<?php echo $this->input->get('skeyword')?>"><span>제목</span></a></li>
@@ -46,7 +47,11 @@
 				</div>
 				<div class="abr">
 					<div class="sel-box c02">
+					<?php if($_GET['sop'] === "AND"){ ?>
 						<a href="#n" class="sel-btn"><span>제목만</span></a>
+					<?php }	else { ?>
+						<a href="#n" id="optionb" class="sel-btn"><span>내용만</span></a>
+					<?php } ?>
 						<ul>
 							<li class="active"><a href="<?php base_url() ?>?sfield=<?php echo $this->input->get('sfield')?>
 								&sop=AND&skeyword=<?php echo $this->input->get('skeyword')?>"><span>제목만</span></a></li>
