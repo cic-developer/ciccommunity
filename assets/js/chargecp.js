@@ -565,8 +565,11 @@ $(document).on('ready', async function() {
     const DEPOSIT = new caver.klay.Contract(contract_abi, contract_address);
 
     try {
-
         $(document).on('click', '#charge_button', async function() {
+            if (!mem_id) {
+                alert("로그인 후 이용 가능합니다.");
+                location.href = "/mypage";
+            }
             await klaytn.enable();
             // 클레이튼에 접속되어있는 월렛주소
             const account = klaytn.selectedAddress;
@@ -617,7 +620,6 @@ $(document).on('ready', async function() {
 
             //여기 있는 데이터들로 
             var txhash, reciept, success_fromAddress, success_toAddress, success_value;
-
             await caver.klay.sendTransaction({
                 type: "SMART_CONTRACT_EXECUTION",
                 account,
@@ -626,7 +628,7 @@ $(document).on('ready', async function() {
                 gas: 3000000,
             }).on("transactionHash", (transactionHash) => {
                 txhash = `https://scope.klaytn.com/tx/${transactionHash}?tabId=internalTx`;
-            }).on("receipt", (receipt) => {
+            }).on("receipt", async(receipt) => {
                 // console.log("receipt", receipt);
                 reciept = JSON.stringify(receipt);
                 success_fromAddress = receipt.from;
@@ -634,12 +636,61 @@ $(document).on('ready', async function() {
                 success_value =
                     caver.utils.hexToNumberString(receipt.logs[0].data) /
                     1000000000000000000;
+
+                const transferData = await caver.klay.abi.encodeFunctionCall({
+                    name: "deposit_enter",
+                    type: "function",
+                    inputs: [{
+                            type: "address",
+                            name: "_from",
+                        },
+                        {
+                            type: "address",
+                            name: "_to",
+                        },
+                        {
+                            type: "uint256",
+                            name: "_value",
+                        },
+                        {
+                            type: "string",
+                            name: "_url",
+                        },
+                        {
+                            type: "string",
+                            name: "_id",
+                        },
+                    ],
+                }, [
+                    selected_addr,
+                    contract_address,
+                    caver.utils
+                    .toBN(charge_value)
+                    .mul(caver.utils.toBN(Number(`1e${18}`)))
+                    .toString(),
+                    document.location.href,
+                    mem_id
+                ]);
+
+                await caver.klay.sendTransaction({
+                    type: "SMART_CONTRACT_EXECUTION",
+                    account,
+                    to: token_address,
+                    transferData,
+                    gas: 3000000,
+                }).on("transactionHash", (transactionHash) => {
+
+                }).on("receipt", (receipt) => {
+                    console.log(receipt);
+                }).on("error", (error) => {
+                    console.log("error occur", error);
+                })
             }).on("error", (error) => {
                 console.log("error", error);
             });
 
             //여기 있는데이터들이 실제로 거래가 이루어지는지 알려주는 데이터들
-            console.log(txhash, reciept, success_fromAddress, success_toAddress, success_value);
+            // console.log(txhash, reciept, success_fromAddress, success_toAddress, success_value);
         });
     } catch (error) {
         alert('Klaytn Kaikas연동에 실패 하였습니다. 마이페이지로 이동합니다.');

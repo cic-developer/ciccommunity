@@ -252,7 +252,7 @@
 					<?php
 						if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) {
-					?>		
+								if(element('brd_name', $result) === 'CIC Writer'){?>		
 						<li>
 							<a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>">
 								<div class="img"><img src="<?php echo thumb_url(element('images', $result))?>?>" alt=""></div>
@@ -278,8 +278,9 @@
 							</a>
 						</li>
 					<?php	
-							}
+							}	
 						}
+					}
 					if (!element('list', element('data', $view)))  {		
 					?>
 							<li colspan="5" style="text-align: center"  class="nopost">게시물이 없습니다</li>

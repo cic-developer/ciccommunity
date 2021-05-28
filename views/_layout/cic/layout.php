@@ -55,6 +55,7 @@
         var layout_skin_path = "<?php echo element('layout_skin_path', $layout); ?>";
         var view_skin_path = "<?php echo element('view_skin_path', $layout); ?>";
         var is_member = "<?php echo $this->member->is_member() ? '1' : ''; ?>";
+        var mem_id = "<?php echo $this->member->is_member()?>";
         var is_admin = "<?php echo $this->member->is_admin(); ?>";
         var cb_admin_url = <?php echo $this->member->is_admin() === 'super' ? 'cb_url + "/'.config_item(
             'uri_segment_admin').
