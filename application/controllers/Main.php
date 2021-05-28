@@ -367,15 +367,18 @@ class Main extends CB_Controller
 		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
 		 */
 		if ($this->form_validation->run() === false) {
-			$result = array('error' => '비정상적인 접근입니다.');
+			$result = array('error' => '비정상적인 접근입니다.(1)');
 			exit(json_encode($result));
 		}
 		$symbol = $this->input->post('cmc_symbol');
 		$mem_idx = $this->member->is_member();
-		if($symbol == 'PER'){
-			
-		} else {
-
+		$data = $this->coinapi->get_select_data($symbol);
+		if($data === FALSE){
+			$result = array('error' => '비정상적인 접근입니다.(2)');
+			exit(json_encode($result));
 		}
+
+		$result = array('success' => json_encode($data));
+		exit(json_encode($result));
 	}
 }

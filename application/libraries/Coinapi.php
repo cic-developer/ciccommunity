@@ -83,47 +83,31 @@ class Coinapi extends CI_Controller
         );
         $coin =  $this->CI->CIC_maincoin_coin_model->get_select($symbol);
         if(!$coin) return FALSE;
-
 		if ($symbol == 'PER') {
             $data = array();
             $coinDetail = $coin['coin_detail'];
             foreach($coinDetail as $thisDetail){
-
+                $exchange = $thisDetail['cme_id'];
+                $coin_id = $thisDetail['cmcd_coin_id'];
+                $market = $thisDetail['cmcd_coin_market'];
+                $data[] = $this->get_coin_data($exchange, $coin_id, $market);
             }
-                if($coin[0]['coin_detail'][$thisExchange['cme_idx']]){
-                    $coin_id = $coin[0]['coin_detail'][$thisExchange['cme_idx']]['cmcd_coin_id'];
-                    $market = $coin[0]['coin_detail'][$thisExchange['cme_idx']]['cmcd_coin_market'];
-                    $data[] = $this->get_coin_data($thisExchange['cme_id'], $coin_id, $market);
-                } else {
-                    $data[] = array();
-                }
-		} else {
+            return $data;
+		}
 
-            //개별 정보 세팅되있는지 확인
-            if($this->CI->member->is_member()){
-                $user_maincoin_data = $this->CI->Member_extra_vars_model->item($this->CI->member->is_member(), 'mem_maincoin');
-                if($user_maincoin_data){
-                    $decoded_data = json_decode($user_maincoin_data);
-                }
-            }
-
-            //거래소 목록 정리
-            if(isset($decoded_data) && isset($decoded_data['exchange'])){
-                $exchange = $this->CI->CIC_maincoin_exchange_model->get_default_list();
-            } else {
-                $exchange = $this->CI->CIC_maincoin_exchange_model->get_user_list($decoded_data['exchange']);
-            }
-            
+        //개별 정보 세팅되있는지 확인
+        if($this->CI->member->is_member()){
             $user_maincoin_data = $this->CI->Member_extra_vars_model->item($this->CI->member->is_member(), 'mem_maincoin');
-            if($this->CI->member->is_member() === false){
-                //기본값 리턴
-                $exchange = $this->CI->CIC_maincoin_exchange_model->get_default_list();
-                $coin = $this->CI->CIC_maincoin_coin_model->get_default_list();
-            } else {
+            if($user_maincoin_data){
                 $decoded_data = json_decode($user_maincoin_data);
-                $exchange = $this->CI->CIC_maincoin_exchange_model->get_user_list($decoded_data['exchange']);
-                $coin = $this->CI->CIC_maincoin_coin_model->get_user_list($decoded_data['coin']);
             }
+        }
+
+        //거래소 목록 정리
+        if(isset($decoded_data) && isset($decoded_data['exchange'])){
+            $exchange = $this->CI->CIC_maincoin_exchange_model->get_default_list();
+        } else {
+            $exchange = $this->CI->CIC_maincoin_exchange_model->get_user_list($decoded_data['exchange']);
         }
 
         $first_block = array();
@@ -426,7 +410,7 @@ class Coinapi extends CI_Controller
      */
     private function get_gdac_data($coin_id, $market="KRW"){
         $usd_price = $this->get_usd_price();
-        $url = "https://partner.gdac.com/v0.4/public/tickers/{$market}%2F{$coin_id}";
+        $url = "https://partner.gdac.com/v0.4/public/tickers/{$coin_id}%2F{$market}";
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();

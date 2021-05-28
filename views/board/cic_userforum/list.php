@@ -183,15 +183,15 @@
                             <tbody>
                                 <tr>
                                     <td>필요 예치금</td>
-                                    <td>11</td>
+                                    <td><?php echo number_format(element('deposit_meta', $view), 2); ?></td>
                                 </tr>
                                 <tr>
                                     <td>보유 CP</td>
-                                    <td>22</td>
+                                    <td><?php echo number_format(element('mem_cp', $view), 2); ?></td>
                                 </tr>
                                 <tr>
                                     <td>예상 잔여 CP</td>
-                                    <td>33</td>
+                                    <td><?php echo number_format(element('change_cp', $view), 2); ?></td>
                                 </tr>
                             </tbody>
                         </table>

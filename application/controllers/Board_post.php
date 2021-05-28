@@ -18,7 +18,7 @@ class Board_post extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Post', 'Post_meta', 'Post_extra_vars', 'CIC_member_level_config');
+	protected $models = array('Post', 'Post_meta', 'Post_extra_vars', 'CIC_member_level_config', 'CIC_forum');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -167,17 +167,31 @@ class Board_post extends CB_Controller
 		if(element('brd_id', element('board', $list)) == 6){
 			// print_r("here?");
 			// exit;
-
+            
 			// 유저 보유 예치금
 			$mem_deposit = $this->member->item('mem_deposit');
 			$view['view']['mem_deposit'] = $mem_deposit;
-
+            
 			// 예치금 yes or no
 			$view['view']['isDeposit'] = $mem_deposit ? true : false;
-
+            
 			$depositUrl = $mem_deposit ? 'deposit/subtract' : 'deposit/insert';
-
+            
 			$view['view']['deposit_url'] = $depositUrl;
+            
+			if(!$mem_deposit){
+				// 설정된 예치금액
+				$deposit_meta =(int)  $this->CIC_forum_model->item('forum_deposit');
+
+				$view['view']['deposit_meta'] = $deposit_meta;
+                
+				// 유저 보유 cp
+				$mem_cp = $this->member->item('mem_cp');
+				$view['view']['mem_cp'] = $mem_cp;
+
+				// 예상 잔여 cp
+				$view['view']['change_cp'] = $mem_cp - $deposit_meta;
+			}
 		}
 		
 		if(element('brd_id', element('board', $list)) == 1 or 2){

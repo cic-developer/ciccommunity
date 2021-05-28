@@ -166,16 +166,8 @@
 			<div class="cont">
 				<div class="tits">
 					<h3>자유게시판</h3>
-					<?php
-						if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result) { ?>
-								<a href="<?php echo base_url()."board/freetalk?sfield=post_title&skeyword="?><?php echo $this->input->get('skeyword')?>
-									"class="more"><span>more</span></a>
-					<?php			
-								
-							}
-						}	
-					?>
+						<a href="<?php echo base_url()."board/freetalk?sfield=post_title&skeyword="?><?php echo $this->input->get('skeyword')?>
+							"class="more"><span>more</span></a>
 				</div>
 				<div class="list vimg vp">
 				<div class="list community">
@@ -222,7 +214,6 @@
 						}   
 						// foreach (element('list', element('data', $view)) as $result) {
 							if($free_row <= 0){?>
-						 
 								<tr>
 									<td colspan="5" class="nopost">게시물이 없습니다</td>
 								</tr>
@@ -240,14 +231,8 @@
 				<div class="gap75"></div>
 				<div class="tits">
 					<h3>WRITER</h3>
-					<?php if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result) { ?>
-								<a href="<?php echo base_url()."board/cicwriter?sfield=post_title&skeyword="?><?php echo $this->input->get('skeyword')?>" 
-									class="more"><span>more</span></a>
-						<?php
-							}
-						}
-					?>
+						<a href="<?php echo base_url()."board/cicwriter?sfield=post_title&skeyword="?><?php echo $this->input->get('skeyword')?>" 
+							class="more"><span>more</span></a>
 				</div>
 				<div class="list vimg vp">
 					<ul>
@@ -289,7 +274,7 @@
 					if ($writer_row <= 0)  {?>
 							<li colspan="5" class="nopost" style="text-align: center">게시물이 없습니다</li>
 					<?php 
-							} 
+					} 	
 					?>	
 					</ul>
 					<script>
