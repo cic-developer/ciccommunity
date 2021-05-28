@@ -28,7 +28,7 @@
 				<div class="table-responsive">
 					<table class="table table-hover table-striped table-bordered">
 						<thead>
-							<tr>
+							<tr data-idx="<?php echo element('cme_idx', $result)?>">
 								<th><a href="<?php echo element('cme_orderby', element('sort', $view)); ?>">번호</a></th>
 								<th>코인 이름</th>
 								<th>코인 심볼</th>
@@ -48,7 +48,7 @@
 								<td><?php echo html_escape(element('cmc_korean_nm', $result)); ?></td>
 								<td><?php echo html_escape(element('cmc_symbol', $result)); ?></td>
 								<td><?php echo (element('cmc_default', $result) == 1) ? '기본' : ''; ?></td>
-								<td>업 / 다운</td>
+								<td><span class="orderby_up" style="cursor:pointer;">업</span> / <span class="orderby_down" style="cursor:pointer;">다운</span></td>
 								<td><a href="<?php echo admin_url($this->pagedir); ?>/coin_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
 								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
 							</tr>
@@ -91,3 +91,36 @@
 		</div>
 	</form>
 </div>
+<script>
+	$('.orderby_up').on('click', function(){
+		set_orderby(this, 'up');
+	});
+	$('.orderby_down').on('click', function(){
+		set_orderby(this, 'down');
+	});
+
+	function set_orderby(_this, type){
+		const cmc_idx = $(_this).parents('tr').attr('data-idx');
+        $.ajax({
+            url: cb_admin_url + '/cicconfigs/maincoin/ajax_set_coin_orderby',
+            type: 'post',
+            data: {
+                cmc_idx: cmc_idx,
+                type: type,
+                csrf_test_name: cb_csrf_hash
+            },
+            dataType: 'json',
+            async: false,
+            cache: false,
+            success: function(data) {
+				if(data.error){
+					alert(data.error);
+				}
+				if(data.success){
+					alert(data.success);
+					location.reload();
+				}
+            }
+        });
+	}
+</script>

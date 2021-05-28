@@ -56,6 +56,7 @@
 				<p class="btxt"><span><?php echo element('highlight_keyword', $view);?></span> 에 대한 통합검색 총</p>
 				<p class="stxt"><?php echo $total_rows; ?>건</p>
 			</div>
+			<!-- PAGE 검색 기능 끝 -->
 			<!-- HERE THE MARKET PRICE VALUES -->
 			<?php if($trade){ ?>
 				<div class="result" style="overflow:hidden; padding-bottom:40px; padding-left:40px; padding-right:40px;">
@@ -160,6 +161,7 @@
 			<?php } ?>	
 			<!-- PRICE UNTIL HERE -->
 			
+			<!-- 자유게시판 시각 -->
 			<div class="gap35"></div>
 			<div class="cont">
 				<div class="tits">
@@ -168,7 +170,7 @@
 						if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) { 
 								if(element('brd_name', $result) === '자유게시판'){?>
-									<a href="<?php echo base_url()."board/freetalk?skeyword="?><?php echo $this->input->get('skeyword')?>
+									<a href="<?php echo base_url()."board/freetalk?sfield=post_title&skeyword="?><?php echo $this->input->get('skeyword')?>
 										"<?php echo (!element('brd_id', $result)) ? 'class="active"' : ''; ?> class="more"><span>more</span>
 									</a>
 					<?php			
@@ -227,12 +229,15 @@
 						</tbody>
 					</table>
 				</div>
+				<!-- 자유게시판 끝!!! -->
+
+				<!-- CIC WRITER 시작 -->
 				<div class="gap75"></div>
 				<div class="tits">
 					<h3>WRITER</h3>
 					<?php if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) { ?>
-								<a href="<?php echo base_url()."board/cicwriter?skeyword="?><?php echo $this->input->get('skeyword')?>" 
+								<a href="<?php echo base_url()."board/cicwriter?sfield=post_title&skeyword="?><?php echo $this->input->get('skeyword')?>" 
 									class="more"><span>more</span></a>
 						<?php
 							}
@@ -288,6 +293,9 @@
 						})
 					</script>
 				</div>
+				<!-- CIC WRITER 끝 -->
+
+				<!-- NEWS START -->
 				<div class="gap75"></div>
 				<div class="tits">
 					<h3>NEWS</h3>
@@ -412,6 +420,8 @@
 	</div>
 	<!-- e: #container-wrap //-->
 </div>
+
+<!-- CHARTJS CANVAS 시작 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script>
 	var ctx = document.getElementById('canvas').getContext('2d');

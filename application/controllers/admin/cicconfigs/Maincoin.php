@@ -752,29 +752,29 @@ class Maincoin extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		$this_exchange = $this->{$this->modelname}->get_one($this->input->post('cme_idx'));
-		if(!$this_exchange){
+		$this_coin = $this->CIC_maincoin_coin_model->get_one($this->input->post('cmc_idx'));
+		if(!$this_coin){
 			$result = array('error' => '선택한 거래소를 찾을 수 없습니다.');
 			exit(json_encode($result));
 		}
 
-		$next_exchange = $this->{$this->modelname}->get_beside_exchange(element('cme_orderby', $this_exchange), $this->input->post('type'));
+		$next_coin = $this->CIC_maincoin_coin_model->get_beside_coin(element('cmc_orderby', $this_coin), $this->input->post('type'));
 
-		if(!$next_exchange){
+		if(!$next_coin){
 			$result = array('error' => $this->input->post('type') == 'up' ? '이미 최상단입니다.' : '이미 최하단입니다.');
 			exit(json_encode($result));
 		}
 
-		$this->{$this->modelname}->update(
-			element('cme_idx',$this_exchange), 
+		$this->CIC_maincoin_coin_model->update(
+			element('cmc_idx',$this_coin), 
 			array(
-				'cme_orderby' => element('cme_orderby', $next_exchange)
+				'cmc_orderby' => element('cmc_orderby', $next_coin)
 			)
 		);
-		$this->{$this->modelname}->update(
-			element('cme_idx',$next_exchange), 
+		$this->CIC_maincoin_coin_model->update(
+			element('cmc_idx',$next_coin), 
 			array(
-				'cme_orderby' => element('cme_orderby', $this_exchange)
+				'cmc_orderby' => element('cmc_orderby', $this_coin)
 			)
 		);
 		$result = array('success' => '성공적으로 수정하였습니다.');

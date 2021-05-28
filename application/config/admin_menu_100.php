@@ -22,5 +22,6 @@ $config['admin_page_menu']['cicconfigs'] =
 			'Point/config'			=> array('명예포인트 설정', 'id="POIconfig"'),
 			'banner'				=> array('배너 설정', ''),
 			'news'					=> array('뉴스 설정', ''),
+			'forum'					=> array('포럼 설정', ''),
 		),
 	);
