@@ -100,16 +100,31 @@ class News extends CB_Controller
 		
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-		$page_title = $this->cbconfig->item('site_meta_title_board_list');
-		$meta_description = $this->cbconfig->item('site_meta_description_board_list');
-		$meta_keywords = $this->cbconfig->item('site_meta_keywords_board_list');
-		$meta_author = $this->cbconfig->item('site_meta_author_board_list');
-		$page_name = $this->cbconfig->item('site_page_name_board_list');
+		$page_title = $this->cbconfig->item('site_meta_title_news');
+		$meta_description = $this->cbconfig->item('site_meta_description_news');
+		$meta_keywords = $this->cbconfig->item('site_meta_keywords_news');
+		$meta_author = $this->cbconfig->item('site_meta_author_news');
+		$page_name = $this->cbconfig->item('site_page_name_news');
 		
-		
-		$searchconfig = array(
-			'{게시판명}',
+		$layoutconfig = array(
+			'path' => 'news',
+			'layout' => 'layout',
+			'skin' => 'news',
+			'layout_dir' => $this->cbconfig->item('layout_news'),
+			'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_news'),
+			'use_sidebar' => $this->cbconfig->item('sidebar_news'),
+			'use_mobile_sidebar' => $this->cbconfig->item('mobile_sidebar_news'),
+			'skin_dir' => $this->cbconfig->item('skin_news'),
+			'mobile_skin_dir' => $this->cbconfig->item('mobile_skin_news'),
+			'page_title' => $page_title,
+			'meta_description' => $meta_description,
+			'meta_keywords' => $meta_keywords,
+			'meta_author' => $meta_author,
+			'page_name' => $page_name,
 		);
-
-
+		$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
+	}
 }

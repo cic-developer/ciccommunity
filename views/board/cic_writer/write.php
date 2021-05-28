@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/hotfix.css'); ?>
 
 
-<div id="container-wrap"></div>
+<div id="container-wrap">
 	<div id="contents" class="div-cont">
 		<?php
 			echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
@@ -17,7 +17,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<input type="hidden" class="input px150" name="post_nickname" id="post_nickname" value="<?php echo set_value('post_nickname', element('post_nickname', element('post', $view))); ?>" />
 		<input type="hidden" class="input px400" name="post_email" id="post_email" value="<?php echo set_value('post_email', element('post_email', element('post', $view))); ?>" />
 		<input type="hidden" class="input px400" name="post_homepage" id="post_homepage" value="<?php echo set_value('post_homepage', element('post_homepage', element('post', $view))); ?>" />
-		<!-- page start // --><div class="board-wrap write">
+		<!-- page start // -->
+		<div class="board-wrap write">
 			<h3><?php echo html_escape(element('board_name', element('board', $view))); ?> 글쓰기</h3>
 			<div class="entry">
 				<ul>
@@ -121,7 +122,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<?php echo form_close(); ?>
 	</div>
 </div>
-
 
 <script type="text/javascript">
 // 글자수 제한

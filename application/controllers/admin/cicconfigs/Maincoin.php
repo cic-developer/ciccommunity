@@ -651,7 +651,8 @@ class Maincoin extends CB_Controller
 	/**
 	 * 거래소 순서를 변경하는 메소드입니다
 	 */
-	public function ajax_set_exchange_orderby(){
+	public function ajax_set_exchange_orderby()
+	{
 
 		/**
 		 * Validation 라이브러리를 가져옵니다
@@ -669,7 +670,74 @@ class Maincoin extends CB_Controller
 			),
 			array(
 				'field' => 'type',
-				'label' => '변경할 거래소',
+				'label' => '타입',
+				'rules' => 'trim|required|in_list[up,down]',
+			),
+		);
+		$this->form_validation->set_rules($config);
+
+		/**
+		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
+		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
+		 */
+		if ($this->form_validation->run() === false) {
+			$result = array('error' => '비정상적인 접근입니다.');
+			exit(json_encode($result));
+		}
+
+		$this_exchange = $this->{$this->modelname}->get_one($this->input->post('cme_idx'));
+		if(!$this_exchange){
+			$result = array('error' => '선택한 거래소를 찾을 수 없습니다.');
+			exit(json_encode($result));
+		}
+
+		$next_exchange = $this->{$this->modelname}->get_beside_exchange(element('cme_orderby', $this_exchange), $this->input->post('type'));
+
+		if(!$next_exchange){
+			$result = array('error' => $this->input->post('type') == 'up' ? '이미 최상단입니다.' : '이미 최하단입니다.');
+			exit(json_encode($result));
+		}
+
+		$this->{$this->modelname}->update(
+			element('cme_idx',$this_exchange), 
+			array(
+				'cme_orderby' => element('cme_orderby', $next_exchange)
+			)
+		);
+		$this->{$this->modelname}->update(
+			element('cme_idx',$next_exchange), 
+			array(
+				'cme_orderby' => element('cme_orderby', $this_exchange)
+			)
+		);
+		$result = array('success' => '성공적으로 수정하였습니다.');
+		exit(json_encode($result));
+	}
+
+
+	/**
+	 * 코인 순서를 변경하는 메소드입니다
+	 */
+	public function ajax_set_coin_orderby()
+	{
+
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+
+		/**
+		 * 전송된 데이터의 유효성을 체크합니다
+		 */
+		$config = array(
+			array(
+				'field' => 'cmc_idx',
+				'label' => '선택 코인',
+				'rules' => 'trim|required|is_natural_no_zero|max_length[10]',
+			),
+			array(
+				'field' => 'type',
+				'label' => '타입',
 				'rules' => 'trim|required|in_list[up,down]',
 			),
 		);
