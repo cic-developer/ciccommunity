@@ -118,7 +118,7 @@
                                         </div>
                                     </td>
                                     <td><?php echo rs_number_format($price); ?></td>
-                                    <td><?php echo rs_number_format($korea_premium,2); ?></td>
+                                    <td><?php echo rs_number_format($korea_premium,2); ?> %</td>
                                     <td><?php echo number_unit_to_korean($volume); ?></td>
                                     <td>
                                         <p class="percent <?php echo $percent_class; ?>"><span><?php echo rs_number_format($change_rate,2); ?> %</span></p>

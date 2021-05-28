@@ -23,7 +23,7 @@ class Deposit extends CB_Controller
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
-	protected $helpers = array('form', 'array', 'chkstring',  'dhtml_editor');
+	protected $helpers = array('form', 'array' );
 
 	function __construct()
 	{
@@ -73,11 +73,6 @@ class Deposit extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-
-
-
-
-
         $mem_id = (int) $this->member->item('mem_id');
         $mem_cp = $this->member->item('mem_cp');
         $mem_deposit = $this->member->item('mem_deposit');
@@ -91,8 +86,14 @@ class Deposit extends CB_Controller
             $memResult = $this->Member_model->set_user_modify($mem_id, $arr);
 
             // cp 로그 기록
-            if($result == 1){
+            if($memResult == 1){
                 $logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '', $mem_deposit, '@byself', $mem_id, '예치금 반환');
+
+                $result = array(
+                    'state' => '1',
+                    'message' => '예치금이 반환 되었습니다',
+                );
+                exit(json_encode($result));
             }else {
                 $result = array(
                     'state' => '0',
@@ -107,69 +108,5 @@ class Deposit extends CB_Controller
 			);
 			exit(json_encode($result));
         }
-
-        print_r($mem_deposit);
-        exit;
-
-
-
-
-
-        exit;
-        
-		$this->session->set_userdata('password_confirm', '');
-        
-		if($this->session->userdata('password_modify_ath_mail_result') != '1'){
-			$result = array(
-				'state' => '0',
-				'message' => '이메일 인증이 필요합니다',
-			);
-			exit(json_encode($result));
-		}
-		if($this->session->userdata('password_modify_ath_nice_phone_result') != '1'){
-			$result = array(
-				'state' => '0',
-				'message' => '핸드폰 인증이 필요합니다',
-			);
-			exit(json_encode($result));
-		}
-        
-		/**
-		 * Validation 라이브러리를 가져옵니다
-		 */
-		$this->load->library('form_validation');
-		$password_length = $this->cbconfig->item('password_length');
-        
-		$config = array(
-			array(
-				'field' => 'new_password',
-				'label' => '새 비밀번호',
-				'rules' => 'trim|required|min_length[' . $password_length . ']|callback__mem_password_check',
-			),
-			array(
-				'field' => 'new_password_re',
-				'label' => '새 비밀번호 확인',
-				'rules' => 'trim|required|min_length[' . $password_length . ']|matches[new_password]',
-			),
-		);
-		// password_description
-		$this->form_validation->set_rules($config);
-		$form_validation = $this->form_validation->run();
-        
-		if(!$form_validation){
-			$result = array(
-				'state' => '0',
-				'message' => $this->form_validation->error_string(),
-			);
-			exit(json_encode($result));
-		}else{
-			$this->session->set_userdata('password_confirm', '1');
-            
-			$result = array(
-				'state' => '1',
-				'message' => '사용 가능한 비밀번호입니다',
-			);
-			exit(json_encode($result));
-		}
 	}
 }

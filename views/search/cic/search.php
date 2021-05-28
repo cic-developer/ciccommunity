@@ -263,8 +263,8 @@
 								</div>
 								<div class="abr">
 									<div class="photo">
-									
-										<p class="pimg"><img src="<?php echo thumb_url('post', element('pfi_filename', element('images', $result)))?>" alt=""></p>
+										<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30);?>"
+                                            alt="<?php echo element('mlc_title', $result); ?>"></p>
 
 										<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
 									</div>
