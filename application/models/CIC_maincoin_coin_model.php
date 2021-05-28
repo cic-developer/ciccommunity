@@ -91,11 +91,13 @@ class CIC_maincoin_coin_model extends CB_Model
 	function get_beside_coin($cmc_orderby, $type){
 		if($type == 'up'){
 			$where = array(
+				'cmc_default !=' => 2,
 				'cmc_orderby <' => $cmc_orderby
 			);
 			$orderby = 'DESC';
 		} else {
 			$where = array(
+				'cmc_default !=' => 2,
 				'cmc_orderby >' => $cmc_orderby
 			);
 			$orderby = 'ASC';

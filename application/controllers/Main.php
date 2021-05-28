@@ -317,9 +317,9 @@ class Main extends CB_Controller
 		$page_name = $this->cbconfig->item('site_page_name_main');
 
 		$layoutconfig = array(
-			'path' => 'coin',
+			'path' => 'main',
 			'layout' => 'layout',
-			'skin' => 'config',
+			'skin' => 'coin',
 			'layout_dir' => 'cic_sub',//$this->cbconfig->item('layout_main'),
 			'mobile_layout_dir' => 'cic_sub',//$this->cbconfig->item('mobile_layout_main'),
 			'use_sidebar' => $this->cbconfig->item('sidebar_main'),

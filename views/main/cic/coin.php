@@ -81,6 +81,7 @@
                                             class="blind">삭제</span></button></li>
                                 <li><a href="#n" class="ibtn"><span>LTC (라이트코인)</span></a><button class="delete"><span
                                             class="blind">삭제</span></button></li>
+                                <li><a href="#n"><span>PER (퍼토큰)</span></a></li>
                             </ul>
                         </div>
                     </div>

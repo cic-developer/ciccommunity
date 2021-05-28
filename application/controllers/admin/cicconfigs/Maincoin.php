@@ -66,8 +66,8 @@ class Maincoin extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = 'cme_orderby';
-		$forder = 'asc';
+		$findex = $this->input->get('findex', null, 'cme_orderby');
+		$forder = $this->input->get('forder', null, 'asc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 
@@ -94,6 +94,9 @@ class Maincoin extends CB_Controller
 			}
 		}
 		$view['view']['data'] = $result;
+		$view['view']['sort'] = array(
+			'cme_orderby' => $param->sort('cme_orderby', 'desc'),
+		);
 
 		/**
 		 * primary key 정보를 저장합니다
@@ -312,8 +315,8 @@ class Maincoin extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = 'cmc_orderby';
-		$forder = 'asc';
+		$findex = $this->input->get('findex', null, 'cmc_orderby');
+		$forder = $this->input->get('forder', null, 'asc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 

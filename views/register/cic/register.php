@@ -289,10 +289,9 @@
 									<?php 
 										if(html_escape(element('dec_data', $view))){
 									?>
-										<a id="submitButton"> <span>이어서 가입</span></a>
+										<a id="submitButton" style="background-color:#fccb17;"> <span>이어서 가입</span></a>
 									<?php } else{ ?>
-										<a id="submitButton"> <span>이어서 가입</span></a>
-										<!-- <a href="javascript:fnPopup();"> <span>휴대폰 본인 인증</span></a> -->
+										<a href="javascript:fnPopup();"> <span>휴대폰 본인 인증</span></a>
 										<!-- <button type="button" id="submitButton"> <span>hipass</span></button> -->
 									<?php
 									} ?>
