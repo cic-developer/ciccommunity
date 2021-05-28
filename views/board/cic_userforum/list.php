@@ -179,17 +179,54 @@
 
 <script>
 
+    // $(document).on('click', '#deposit_subtract', function() {
+	// 	deposit_subtract_submit(document.flist, 'subtract', $(this).attr('data-deposit-url'));
+	// });
+
+    // function deposit_subtract_submit(f, acttype, actpage){
+
+    //     alert("예치한 금액이 전부 반환됩니다")
+
+    //     if (acttype === 'subtract' && ! confirm('선택한 요청을 정말 승인 하시겠습니까?')) return;
+    //     f.action = actpage;
+	// 	f.submit();
+    // }   
+
     $(document).on('click', '#deposit_subtract', function() {
-		deposit_subtract_submit(document.flist, 'subtract', $(this).attr('data-deposit-url'));
-	});
+        alert("예치한 금액이 전부 반환됩니다");
 
-    function deposit_subtract_submit(f, acttype, actpage){
+        var isConfirm = confirm('선택한 요청을 정말 승인 하시겠습니까?');
 
-        alert("예치한 금액이 전부 반환됩니다")
+        if(isConfirm){
 
-        if (acttype === 'subtract' && ! confirm('선택한 요청을 정말 승인 하시겠습니까?')) return;
-        f.action = actpage;
-		f.submit();
-    }   
+            $.ajax({
+                url: cb_url + '/deposit/subtract',
+                type: 'POST',
+                data: {
+                    csrf_test_name : cb_csrf_hash
+                },
+                dataType: 'json',
+                async: false,
+                cache: false,
+                success: function(data) {
+                    state = data.state;
+                    message = data.message;
+                    
+                    
+                    if(state == 1){
+                        // 성공 메세지 출력
+                        alert(message); 
+                    }
+                    if(state == 0){
+                        // 실패 메세지 출력
+                        alert(message);
+                    }
+                },
+                error: function(){
+                    alert('에러가 발생했습니다.');
+                }
+            });
+        }
+    })
 
 </script>

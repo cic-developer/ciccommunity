@@ -198,7 +198,7 @@ class Coinapi extends CI_Controller
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
-        $data = $result;
+        $data = $result[0];
 
         $binance_data = $this->get_binance_data($coin_id, "USDT");
         if(count($binance_data) == 0){

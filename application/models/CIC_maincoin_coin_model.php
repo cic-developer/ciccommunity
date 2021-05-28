@@ -32,6 +32,24 @@ class CIC_maincoin_coin_model extends CB_Model
 			'cmc_default' => '1'
 		);
 		$result = $this->get('', '', $where, '', '', 'cmc_orderby', 'ASC');
+		$i = 0;
+		foreach($result as $val){
+			$this->db->where(array(
+				'cmcd_cmc_idx' => element('cmc_idx', $val),
+			));
+			$detail_data = $this->db->get('cic_maincoin_coin_detail')->result_array();
+			$result[$i]['coin_detail'] = array();
+			foreach($detail_data as $thisData){
+				$result[$i]['coin_detail'][element('cmcd_cme_idx', $thisData)] = $thisData;
+			}
+			$i++;
+		}
+		return $result;
+	}
+
+	function get_user_list($where_in){
+		$this->db->where_in('cmc_idx', $where_in);
+		$result = $this->get();
 		foreach($result as $val){
 			$this->db->where(array(
 				'cmcd_cmc_idx' => element('cmc_idx', $val),
@@ -43,11 +61,6 @@ class CIC_maincoin_coin_model extends CB_Model
 			}
 		}
 		return $result;
-	}
-
-	function get_user_list($where_in){
-		$this->db->where_in('cmc_idx', $where_in);
-		return $this->get();
 	}
 
 	function get_this_orderby(){

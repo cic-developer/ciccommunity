@@ -175,7 +175,7 @@ class Board_post extends CB_Controller
 			// 예치금 yes or no
 			$view['view']['isDeposit'] = $mem_deposit ? true : false;
 
-			$depositUrl = $mem_deposit ? 'board/userforum/subtract' : 'board/userforum/insert';
+			$depositUrl = $mem_deposit ? 'deposit/subtract' : 'deposit/insert';
 
 			$view['view']['deposit_url'] = $depositUrl;
 		}

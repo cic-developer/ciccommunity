@@ -102,7 +102,10 @@
                                 $i = 0;
                                 foreach(element('exchange', element('maincoin', $view)) as  $thisExchange){
                                     $thisPrice = element($i, element('first_block', element('maincoin', $view)));
-                                    print_r($thisPrice);
+                                    $volume = element('volume', $thisPrice);
+                                    $price = element('price', $thisPrice);
+                                    $korea_premium = element('korea_premium', $thisPrice);
+                                    $change_rate = element('change_rate', $thisPrice);
                             ?>
                                 <tr>
                                     <td>
@@ -113,11 +116,11 @@
                                             <p class="txt"><?php echo element('cme_korean_nm', $thisExchange); ?></p>
                                         </div>
                                     </td>
-                                    <td>2,520,260,975</td>
-                                    <td>3,254.66</td>
-                                    <td>59,025.200</td>
+                                    <td><?php echo number_format($volume); ?></td>
+                                    <td><?php echo number_format($price); ?></td>
+                                    <td><?php echo number_format($korea_premium,2); ?></td>
                                     <td>
-                                        <p class="percent up"><span>0.06 %</span></p>
+                                        <p class="percent up"><span><?php echo number_format($change_rate,2); ?> %</span></p>
                                     </td>
                                 </tr>
                             <?php
