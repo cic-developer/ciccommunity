@@ -15,6 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if ( ! function_exists('number_unit_to_korean')) {
 	function number_unit_to_korean($number)
 	{
+        if(!$number) return '';
         $BIG_ORDER = ["", "만", "억", "조"];
         $str = "";
         for($i = count($BIG_ORDER) - 1; $i >= 0; --$i){
@@ -38,7 +39,7 @@ if ( ! function_exists('rs_number_format')) {
 	function rs_number_format($number, $demicals = 0)
 	{
         $value = number_format($number, $demicals);
-        if($demicals > 0){
+        if($value && $demicals > 0){
             $check = TRUE;
             while($check){
                 //문제없으면 반복종료

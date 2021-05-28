@@ -278,59 +278,63 @@
     // }   
 
     // Get the modal
-    var modal = document.getElementById('myModal_deposit');
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("deposit_insert");
+    var btn = $('#deposit_insert');
 
-    // When the user clicks on the button, open the modal 
-	btn.onclick = function() {
-		modal.style.display = "block";
-	}
+    if(btn){
 
-    // When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
-		if (event.target == modal) {
-			modal.style.display = "none";
-		}
-	}
+        var modal = document.getElementById('myModal_deposit');
+        // Get the button that opens the modal
 
-    $(document).on('click', '#deposit_insert_confirm', function() {
-    
-        var isConfirm = confirm('선택한 요청을 정말 승인 하시겠습니까?');
-        
-        if(isConfirm){
-        
-            $.ajax({
-                url: cb_url + '/deposit/insert',
-                type: 'POST',
-                data: {
-                    csrf_test_name : cb_csrf_hash
-                },
-                dataType: 'json',
-                async: false,
-                cache: false,
-                success: function(data) {
-                    state = data.state;
-                    message = data.message;
-                    
-                    
-                    if(state == 1){
-                        // 성공 메세지 출력
-                        alert(message); 
-                        location.reload(true);
-                    }
-                    if(state == 0){
-                        // 실패 메세지 출력
-                        alert(message);
-                    }
-                },
-                error: function(){
-                    alert('에러가 발생했습니다.');
-                }
-            });
+        // When the user clicks on the button, open the modal 
+        btn.onclick = function() {
+            modal.style.display = "block";
         }
-    })
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        $(document).on('click', '#deposit_insert_confirm', function() {
+    
+            var isConfirm = confirm('선택한 요청을 정말 승인 하시겠습니까?');
+            
+            if(isConfirm){
+            
+                $.ajax({
+                    url: cb_url + '/deposit/insert',
+                    type: 'POST',
+                    data: {
+                        csrf_test_name : cb_csrf_hash
+                    },
+                    dataType: 'json',
+                    async: false,
+                    cache: false,
+                    success: function(data) {
+                        state = data.state;
+                        message = data.message;
+                        
+                        
+                        if(state == 1){
+                            // 성공 메세지 출력
+                            alert(message); 
+                            location.reload(true);
+                        }
+                        if(state == 0){
+                            // 실패 메세지 출력
+                            alert(message);
+                        }
+                    },
+                    error: function(){
+                        alert('에러가 발생했습니다.');
+                    }
+                });
+            }
+        })
+    }
 
     $(document).on('click', '#deposit_subtract_confirm', function() {
         alert("예치한 금액이 전부 반환됩니다");

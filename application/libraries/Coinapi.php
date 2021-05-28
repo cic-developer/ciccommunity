@@ -93,8 +93,8 @@ class Coinapi extends CI_Controller
                 $exchange = $thisDetail['cme_id'];
                 $coin_id = $thisDetail['cmcd_coin_id'];
                 $market = $thisDetail['cmcd_coin_market'];
-                $return_data['exchange'] = $thisDetail;
-                $return_data['data'] = $this->get_coin_data($exchange, $coin_id, $market);
+                $return_data['exchange'][] = $thisDetail;
+                $return_data['data'][] = $this->get_coin_data($exchange, $coin_id, $market);
             }
             return $return_data;
 		}

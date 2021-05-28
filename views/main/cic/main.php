@@ -108,7 +108,7 @@
                                     <td>
                                         <div class="vlogo">
                                             <p class="img"><img
-                                                    src="<?php echo element('cme_logo', $thisExchange); ?>" alt="" />
+                                                    src="<?php echo element('cme_logo', $thisExchange); ?>" alt="<?php echo element('cme_korean_nm', $thisExchange); ?> 로고" />
                                             </p>
                                             <p class="txt"><?php echo element('cme_korean_nm', $thisExchange); ?></p>
                                         </div>
