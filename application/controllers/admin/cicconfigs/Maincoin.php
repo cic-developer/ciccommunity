@@ -355,7 +355,9 @@ class Maincoin extends CB_Controller
 		$this->pagination->initialize($config);
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;
-
+		$view['view']['sort'] = array(
+			'cmc_orderby' => $param->sort('cmc_orderby', 'desc'),
+		);
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */

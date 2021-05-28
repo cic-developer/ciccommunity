@@ -29,7 +29,7 @@
 					<table class="table table-hover table-striped table-bordered">
 						<thead>
 							<tr>
-								<th><a href="<?php echo element('cme_orderby', element('sort', $view)); ?>">번호</a></th>
+								<th><a href="<?php echo element('cmc_orderby', element('sort', $view)); ?>">번호</a></th>
 								<th>코인 이름</th>
 								<th>코인 심볼</th>
 								<th>기본노출설정</th>
