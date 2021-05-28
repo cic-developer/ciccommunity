@@ -64,22 +64,18 @@
                             $i = 0;
                             foreach(element('coin', element('maincoin', $view)) as  $thisCoin){
                         ?>
-                            <li <?php echo  $i == 0 ? 'class="active"' : '' ?> ><a href="#n"><span><?php echo element('cmc_symbol' ,$thisCoin); ?></span></a></li>
+                            <li <?php echo  $i == 0 ? 'class="active"' : '' ?> >
+                                <a href="#n" class="maincoin_symbol" data-symbol="<?php echo element('cmc_symbol', $thisCoin); ?>"><span><?php echo element('cmc_symbol' ,$thisCoin); ?></span></a>
+                            </li>
                         <?php
                                 $i++;
                             }
                         ?>
-                        <!-- <li class="active"><a href="#n"><span>BTC</span></a></li>
-                        <li><a href="#n"><span>ETH</span></a></li>
-                        <li><a href="#n"><span>LTC</span></a></li>
-                        <li><a href="#n"><span>ETC</span></a></li>
-                        <li><a href="#n"><span>XLM</span></a></li>
-                        <li><a href="#n"><span>klay</span></a></li> -->
-                        <li class="cyellow"><a href="#n"><span>PER</span></a></li>
+                        <li class="cyellow"><a href="#n" class="maincoin_symbol" data-symbol="PER"><span>PER</span></a></li>
                     </ul>
                     <a href="<?php echo base_url('/main/coin')?>" class="more"><span>더 많은 코인 보기</span></a>
                 </div>
-                <div class="list">
+                <div class="list" id="maincoin_table">
                     <table>
                         <colgroup>
                             <col width="*" />
@@ -391,6 +387,29 @@
                 }
                 if(state == '0'){
                     // alert('Banner Hit fail!');
+                }
+            },
+            error: function(){
+                // alert('Banner Hit Error!');
+            }
+        });
+    })
+
+    $(document).on('click', ".maincoin_symbol", function(){
+        var symbol = $(this).data('symbol');
+        
+        $.ajax({
+            url: cb_url + '/main/ajax_get_maincoin?symbol='+symbol,
+            type: 'GET',
+            dataType: 'json',
+            async: false,
+            cache: false,
+            success: function(data){
+                if(data.error){
+                    alert(data.error);
+                }
+                if(data.success){
+                    $('#maincoin_table').html(data.success);
                 }
             },
             error: function(){

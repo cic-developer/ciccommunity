@@ -214,12 +214,18 @@
 								<?php
 								}
 							}
-						}
-							if (!element('list', element('data', $view)))  {?>
+						}   
+						if (element('list', element('data', $view))) {
+							foreach (element('list', element('data', $view)) as $result) {
+								if ($writer_row == 0)  {?>
 								<tr>
 									<td colspan="5" class="nopost">게시물이 없습니다</td>
 								</tr>
-							<?php } ?>
+							<?php 
+								} 
+							}
+						}
+							?>
 						</tbody>
 					</table>
 				</div>
@@ -276,17 +282,10 @@
 							}	
 						}
 					}
-					if (element('list', element('data', $view))) {
-						foreach (element('list', element('data', $view)) as $result) {
-							if(element('brd_name', $result) === 'CIC Writer'){
-								if (!element('list', element('data', $view)))  {?>
-						<li colspan="5" class="nopost" style="text-align: center">게시물이 없습니다</li>
+					if ($free_row == 0)  {?>
+							<li colspan="5" class="nopost" style="text-align: center">게시물이 없습니다</li>
 					<?php 
-								} 
-							}
-						}	
-					}	
-					
+							} 
 					?>	
 					</ul>
 					<script>

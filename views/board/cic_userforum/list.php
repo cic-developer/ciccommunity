@@ -177,13 +177,32 @@
             <div id="myModal_deposit" class="modal">
 				<div class="modal-content">
 					<ul class="entry modify-box">
-						<li class="ath-email-content">
+                        <table>
+                            <colgroup>
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>필요 예치금</td>
+                                    <td>11</td>
+                                </tr>
+                                <tr>
+                                    <td>보유 CP</td>
+                                    <td>22</td>
+                                </tr>
+                                <tr>
+                                    <td>예상 잔여 CP</td>
+                                    <td>33</td>
+                                </tr>
+                            </tbody>
+                        </table>
+						<!-- <li class="ath-email-content">
 							<p class="btxt">이메일인증</p>
 							<div class="all-email-box">
 								<div class="field modify">
 									<p class="chk-input w380">
 										<input type="text" placeholder="인증번호를 입력해주세요" class="ath_num" name="ath_num" value="">
 									</p>
+                                    
                                     <label for="deposit_confirm">확인</label>
 									<input type="checkbox" id="deposit_confirm" >
 									
@@ -192,12 +211,6 @@
 									<a href="javascript:void(0);" data-type="phone" class="modify-btn resend-ath-email" style="display:block;">
 										<span>인증번호 재전송</span>
 									</a>	
-								</div>
-								<div class="phone-timer-box" style="display:none;">
-									<span id="postTestMin1">00</span><!-- 분 -->
-									<span>:</span>
-									<span id="postTestSec1">10</span><!--초-->
-									<!-- <span id="postTestMilisec">00</span>밀리초 -->
 								</div>
 							</div>
 							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
@@ -212,7 +225,7 @@
 									<span>확인</span>
 								</a>
 							</div>
-						</li>
+						</li> -->
 					</ul>
 				</div>
 			</div>
