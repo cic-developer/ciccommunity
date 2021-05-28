@@ -41,17 +41,19 @@ class Coinapi extends CI_Controller
             $coin =  $this->CI->CIC_maincoin_coin_model->get_default_list();
 		} else {
             $user_maincoin_data = $this->CI->Member_extra_vars_model->item($this->CI->member->is_member(), 'mem_maincoin');
-            if(!$user_maincoin_data || !is_array(json_decode($user_maincoin_data))){
+            if(!$user_maincoin_data || !is_array(json_decode($user_maincoin_data, true))){
                 //기본값 리턴
                 $exchange = $this->CI->CIC_maincoin_exchange_model->get_default_list();
                 $coin = $this->CI->CIC_maincoin_coin_model->get_default_list();
             } else {
-                $decoded_data = json_decode($user_maincoin_data);
+                $decoded_data = json_decode($user_maincoin_data, true);
                 $exchange = $this->CI->CIC_maincoin_exchange_model->get_user_list($decoded_data['exchange']);
                 $coin = $this->CI->CIC_maincoin_coin_model->get_user_list($decoded_data['coin']);
             }
         }
 
+        print_r($coin[0]['coin_detail']);
+        exit;
         $first_block = array();
         foreach($exchange as $thisExchange){
             $thisCoinDetail = $coin[0]['coin_detail'][$thisExchange['cme_idx']];
@@ -103,7 +105,7 @@ class Coinapi extends CI_Controller
         if($this->CI->member->is_member()){
             $user_maincoin_data = $this->CI->Member_extra_vars_model->item($this->CI->member->is_member(), 'mem_maincoin');
             if($user_maincoin_data){
-                $decoded_data = json_decode($user_maincoin_data);
+                $decoded_data = json_decode($user_maincoin_data, true);
             }
         }
         

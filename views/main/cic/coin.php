@@ -69,7 +69,7 @@
                                     $i = 0;
                                     foreach(element('except_coin_list',$view) as $l){
                                 ?>
-                                <li <?php echo $i == 0 ? 'class="active"' : '' ?> data-value="<?php echo element('cmc_symbol', $l) ?>">
+                                <li <?php echo $i == 0 ? 'class="active"' : '' ?> data-value="<?php echo element('cmc_idx', $l) ?>">
                                     <a href="#n" class="ibtn">
                                         <span><?php echo element('cmc_symbol', $l); ?> (<?php echo element('cmc_korean_nm', $l); ?>)</span>
                                     </a>
@@ -92,7 +92,7 @@
                                     $i = 0;
                                     foreach(element('my_coin_list',$view) as $l){
                                 ?>
-                                <li <?php echo $i == 0 ? 'class="active"' : '' ?> data-value="<?php echo element('cmc_symbol', $l) ?>">
+                                <li <?php echo $i == 0 ? 'class="active"' : '' ?> data-value="<?php echo element('cmc_idx', $l) ?>">
                                     <a href="#n" class="ibtn">
                                         <span><?php echo element('cmc_symbol', $l); ?> (<?php echo element('cmc_korean_nm', $l); ?>)</span>
                                     </a>

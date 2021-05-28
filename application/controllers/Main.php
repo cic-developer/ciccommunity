@@ -273,9 +273,9 @@ class Main extends CB_Controller
 			}
 			$exchange = array_unique($exchange);
 
-			$coin = explode(',',$this->input->post('my_exchange'));
+			$coin = explode(',',$this->input->post('my_coin'));
 			for($i=0; $i<count($coin); $i++){
-				$coin[$i] = trim($coin[$i]);
+				$coin[$i] = (int)trim($coin[$i]);
 			}
 			$coin = array_unique($coin);
 
@@ -285,19 +285,19 @@ class Main extends CB_Controller
 				'coin' => $coin,
 				'money' => $money,
 			);
-			$this->Member_extra_vars_model->save($this->member->is_member(), array('mem_maincoin', json_encode($set_data,JSON_UNESCAPED_UNICODE)));
+			$this->Member_extra_vars_model->save($this->member->is_member(), array('mem_maincoin' => json_encode($set_data,JSON_UNESCAPED_UNICODE)));
 			
-			// $this->session->set_flashdata(
-			// 	'message',
-			// 	'정상적으로 수정되었습니다.'
-			// );
-			// redirect(base_url('/main/coin'));
+			$this->session->set_flashdata(
+				'message',
+				'정상적으로 수정되었습니다.'
+			);
+			redirect(base_url('/main/coin'));
 		} else {
 			// 데이터 가져오기 시작
 			$exchange_list = $this->CIC_maincoin_exchange_model->get('','','','','','cme_orderby','ASC');
 			$coin_list = $this->CIC_maincoin_coin_model->get('','',array('cmc_default !=' => 2),'','','cmc_orderby','ASC');
-			$member_coin_data_raw = $this->Member_extra_vars_model->item('mem_maincoin');
-			$member_coin_data = json_decode($member_coin_data_raw);
+			$member_coin_data_raw = $this->Member_extra_vars_model->item($this->member->is_member(), 'mem_maincoin');
+			$member_coin_data = json_decode($member_coin_data_raw, true);
 			$member_exchange_list = element('exchange',$member_coin_data) ? element('exchange',$member_coin_data) : array();
 			$member_coin_list = element('coin',$member_coin_data) ? element('coin',$member_coin_data) : array();
 			// 데이터 가져오기 끝
@@ -316,7 +316,7 @@ class Main extends CB_Controller
 			$my_coin_list = array();
 			$except_coin_list = array();
 			foreach($coin_list as $l){
-				if(in_array(element('cme_idx' ,$l), $member_coin_list)){
+				if(in_array(element('cmc_idx' ,$l), $member_coin_list)){
 					$my_coin_list[] = $l;
 				} else {
 					$except_coin_list[] = $l;
