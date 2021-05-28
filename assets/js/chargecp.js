@@ -589,25 +589,26 @@ $(document).on('ready', async function() {
                 alert('Klaytn Kaikas에 PER 코인이 없습니다.\nPER 코인을 추가 또는 충전해주세요');
                 location.reload();
             }
-
-            console.log(DEPOSIT.methods.manager().call());
-            return;
             let charge_value = $('#charge_input').val();
+            // DEPOSIT.methods.approve().call();
+            // PER.methods.approve(contract_address, charge_value);
+            // return;
+
             await klaytn.enable();
-            const data = caver.klay.abi.encodeFunctionCall({
-                name: "transfer",
+            const data = await caver.klay.abi.encodeFunctionCall({
+                name: "approve",
                 type: "function",
                 inputs: [{
                         type: "address",
-                        name: "_to",
+                        name: "_spender",
                     },
                     {
                         type: "uint256",
-                        name: "_value",
+                        name: "_tokens",
                     },
                 ],
             }, [
-                PER_address,
+                contract_address,
                 caver.utils
                 .toBN(charge_value)
                 .mul(caver.utils.toBN(Number(`1e${18}`)))

@@ -20,6 +20,10 @@ class News extends CB_Controller
 	 */
 	protected $models = array('News');
 
+
+	protected $modelname = 'News_model';
+
+
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
@@ -59,5 +63,13 @@ class News extends CB_Controller
 		$per_page = admin_listnum();
 		$offset = ($page - 1) * $per_page;
 		
+		$this->{$this->modelname}->allow_search_field = array('news_id', 'news_title', 'news_content', 'comp_id', 'news_reviews', 'news_wdate'); // 검색이 가능한 필드
+		$this->{$this->modelname}->search_field_equal = array('news_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->{$this->modelname}->allow_order_field = array('news_id'); // 정렬이 가능한 필드
+
+		$where = array(
+			// 'news_show' => 1,
+			// 'news_enable' => 1,
+		);
 	}
 }

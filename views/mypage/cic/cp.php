@@ -14,7 +14,7 @@
 				<ul>
 					<li><a href="post"><span>작성글</span></a></li>
 					<li><a href="comment"><span>작성댓글</span></a></li>
-					<li><a href="cp"><span>행사한cp</span></a></li>
+					<li><a href="vp"><span>행사한vp</span></a></li>
 					<li class="active"><a href="cp"><span>행사한cp</span></a></li>
 				</ul>
 			</div>
