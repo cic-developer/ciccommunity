@@ -322,9 +322,9 @@ class Maincoin extends CB_Controller
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
-		$this->CIC_maincoin_coin_model->allow_search_field = array('cme_id', 'cme_english_nm', 'cme_korean_nm'); // 검색이 가능한 필드
-		$this->CIC_maincoin_coin_model->search_field_equal = array('cme_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->CIC_maincoin_coin_model->allow_order_field = array('cme_orderby'); // 정렬이 가능한 필드
+		$this->CIC_maincoin_coin_model->allow_search_field = array('cmc_id', 'cmc_english_nm', 'cmc_korean_nm', 'cmc_symbol'); // 검색이 가능한 필드
+		$this->CIC_maincoin_coin_model->search_field_equal = array('cmc_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->CIC_maincoin_coin_model->allow_order_field = array('cmc_orderby'); // 정렬이 가능한 필드
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		$where = array(
 			'cmc_del <>' => 1,
