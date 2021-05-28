@@ -70,11 +70,12 @@ class CIC_maincoin_coin_detail_model extends CB_Model
 					$this->insert($insertdata);
 				}
 			}
+			$deletewhere = array(
+				'cmcd_cmc_idx' => $data['cmcd_cmc_idx'],
+				'cmcd_datetime !=' => $now_date,
+			);
+			$this->delete_where($deletewhere);
 		}
-		$deletewhere = array(
-			'cmcd_datetime !=' => $now_date,
-		);
-		$this->delete_where($deletewhere);
 	}
 }
 

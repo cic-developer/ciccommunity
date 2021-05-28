@@ -647,6 +647,53 @@ class Maincoin extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
+	/**
+	 * 목록 페이지에서 선택삭제를 하는 경우 실행되는 메소드입니다
+	 */
+	public function coin_listdelete()
+	{
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_admin_ciccinfigs_maincoin_coin_listdelete';
+		$this->load->event($eventname);
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+
+		/**
+		 * 체크한 게시물의 삭제를 실행합니다
+		 */
+
+		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
+			foreach ($this->input->post('chk') as $val) {
+				if ($val) {
+					$where = array(
+						'cmc_idx' => $val,
+					);
+					$this->CIC_maincoin_coin_model->delete_where($where);
+					$where = array(
+						'cmcd_cmc_idx' => $val,
+					);
+					$this->CIC_maincoin_coin_detail_model->delete_where($where);
+				}
+			}
+		}
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('after', $eventname);
+
+		/**
+		 * 삭제가 끝난 후 목록페이지로 이동합니다
+		 */
+		$this->session->set_flashdata(
+			'message',
+			'정상적으로 삭제되었습니다'
+		);
+		$param =& $this->querystring;
+		$redirecturl = admin_url($this->pagedir . '/coin?' . $param->output());
+
+		redirect($redirecturl);
+	}
+
 
 	/**
 	 * 거래소 순서를 변경하는 메소드입니다

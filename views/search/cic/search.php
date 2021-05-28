@@ -171,9 +171,7 @@
 							foreach (element('list', element('data', $view)) as $result) { 
 								if(element('brd_name', $result) === '자유게시판'){?>
 									<a href="<?php echo base_url()."board/freetalk?sfield=post_title&skeyword="?><?php echo $this->input->get('skeyword')?>
-										"<?php echo $total_rows < 0 ? 'class="active"' : ''; ?> class="more"><span>more</span>
-									</a>
-									
+										"<?php echo $total_rows < 0 ? 'class="active"' : ''; ?> class="more"><span>more</span></a>
 					<?php			
 								}	
 							}
@@ -239,13 +237,13 @@
 					<?php if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) { ?>
 								<a href="<?php echo base_url()."board/cicwriter?sfield=post_title&skeyword="?><?php echo $this->input->get('skeyword')?>" 
-									class="more"><span>more</span></a>
+								<?php echo $total_rows < 0 ? 'class="active"' : ''; ?> class="more"><span>more</span></a>
 						<?php
 							}
 						}
 					?>
 				</div>
-				<div class="list vimg vp">
+				<div class="list vimg">
 					<ul>
 					<?php
 						if (element('list', element('data', $view))) {
@@ -302,7 +300,7 @@
 					<h3>NEWS</h3>
 					<a href="#n" class="more"><span>more</span></a>
 				</div>
-				<div class="list vimg vp">
+				<div class="list vimg">
 				<ul>
 					<li>
 						<a href="#n">
