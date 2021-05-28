@@ -2560,14 +2560,15 @@ class Membermodify extends CB_Controller
 
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		$EncodeData = $this->input->get("EncodeData");
+		$EncodeData = $this->input->get("EncodeData") ? $this->input->get("EncodeData") : $this->input->post("EncodeData");
 		$this->checkplus->success($EncodeData);
 
 		$data = $this->session->userdata('dec_data');
 		$DI = $data['dupinfo'];
+		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
 
-		if(count($isDI) > 0){ // 중복 이면
+		if($isDI){ // 중복 이면
 			$_DI = $new_phone =  $this->member->item('mem_dup_info');
 
 			if($DI == $_DI){ // 인증완료
@@ -2616,16 +2617,15 @@ class Membermodify extends CB_Controller
 
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		$EncodeData = $this->input->get("EncodeData");
+		$EncodeData = $this->input->get("EncodeData") ? $this->input->get("EncodeData") : $this->input->post("EncodeData");
 		$this->checkplus->success($EncodeData);
 
 		$data = $this->session->userdata('dec_data');
-		$data2 = $this->session->userdata('type');
 		$DI = $data['dupinfo'];
 		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
 
-		if(count($isDI) > 0){ // 중복 이면
+		if($isDI){ // 중복 이면
 			$_DI = $new_phone =  $this->member->item('mem_dup_info');
 
 			if($DI == $_DI){ // 인증완료
@@ -2667,6 +2667,7 @@ class Membermodify extends CB_Controller
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_membermodify_password_auth_phone_fail';
 		$this->load->event($eventname);
+		$EncodeData = $this->input->get("EncodeData") ? $this->input->get("EncodeData") : $this->input->post("EncodeData");
 
 		/**
 		 * 로그인이 필요한 페이지입니다
@@ -2681,8 +2682,8 @@ class Membermodify extends CB_Controller
 
 		$this->session->set_userdata('password_modify_ath_nice_phone_result', '');
 
-		if($this->input->get("EncodeData")){
-			$this->checkplus->fail($this->input->get("EncodeData"));
+		if($EncodeData){
+			$this->checkplus->fail($EncodeData);
 			
 			echo("<script>alert('인증에 실패하였습니다!');</script>");
 			echo("<script>self.close()</script>");
@@ -2696,6 +2697,7 @@ class Membermodify extends CB_Controller
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_membermodify_wallet_auth_phone_fail';
 		$this->load->event($eventname);
+		$EncodeData = $this->input->get("EncodeData") ? $this->input->get("EncodeData") : $this->input->post("EncodeData");
 
 		/**
 		 * 로그인이 필요한 페이지입니다
@@ -2710,8 +2712,8 @@ class Membermodify extends CB_Controller
 
 		$this->session->set_userdata('wallet_modify_ath_nice_phone_result', '');
 
-		if($this->input->get("EncodeData")){
-			$this->checkplus->fail($this->input->get("EncodeData"));
+		if($EncodeData){
+			$this->checkplus->fail($EncodeData);
 			
 			echo("<script>alert('인증에 실패하였습니다!');</script>");
 			echo("<script>self.close()</script>");

@@ -119,6 +119,9 @@ class News extends CB_Controller
 			}
 		}
 
+		// 	print_r($result);
+		// exit;
+
 		$view['view']['most_view'] = $most_view;
 		$view['view']['data'] = $result;
 		

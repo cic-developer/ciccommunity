@@ -18,9 +18,9 @@
                         <div class="owl-stage"
                             style="transform: translate3d(-1040px, 0px, 0px); transition: all 0s ease 0s; width: 3900px;">
                                 <?php
-                                if (element('list',element('most_view_news', $view))) {
-                                    foreach (element('list',element('most_view_news', $view)) as $most_view) {
-                                        ?>
+									if (element('list', element('most_view', $view))) {
+										foreach (element('list', element('most_view', $view)) as $most_view) {
+											?>
                                         <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
 											<div class="item">
 												<a href="#n">
@@ -29,8 +29,7 @@
 													</div>
 													<div class="txt">
 														<p class="btxt"><?php echo html_escape(cut_str(strip_tags(element('news_title', $most_view)), 15)); ?></p>
-														<p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트
-															예시 입니다 ...</p>
+														<p class="stxt"><?php echo html_escape(cut_str(strip_tags(element('news_contents', $most_view)), 20)); ?></p>
 														<p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
 													</div>
 												</a>
