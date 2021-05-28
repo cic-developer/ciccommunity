@@ -759,7 +759,8 @@ class Maincoin extends CB_Controller
 		}
 
 		$next_coin = $this->CIC_maincoin_coin_model->get_beside_coin(element('cmc_orderby', $this_coin), $this->input->post('type'));
-
+		// print_r($this->db->last_query());
+		// exit;
 		if(!$next_coin){
 			$result = array('error' => $this->input->post('type') == 'up' ? '이미 최상단입니다.' : '이미 최하단입니다.');
 			exit(json_encode($result));

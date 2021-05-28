@@ -44,7 +44,7 @@ class CIC_maincoin_coin_model extends CB_Model
 			);
 			$orderby = 'DESC';
 		}
-		$result = $this->_get('', 'cme_idx, cmc_orderby', $where, 1, 0, 'cmc_orderby', $orderby);
+		$result = $this->_get('', 'cmc_idx, cmc_orderby', $where, 1, 0, 'cmc_orderby', $orderby);
 		return $result->row_array();
 	}
 }

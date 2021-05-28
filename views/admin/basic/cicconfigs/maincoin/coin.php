@@ -28,7 +28,7 @@
 				<div class="table-responsive">
 					<table class="table table-hover table-striped table-bordered">
 						<thead>
-							<tr data-idx="<?php echo element('cme_idx', $result)?>">
+							<tr>
 								<th><a href="<?php echo element('cme_orderby', element('sort', $view)); ?>">번호</a></th>
 								<th>코인 이름</th>
 								<th>코인 심볼</th>
@@ -43,7 +43,7 @@
 						if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) {
 						?>
-							<tr>
+							<tr data-idx="<?php echo element('cmc_idx', $result)?>">
 								<td><?php echo number_format(element('num', $result)); ?></td>
 								<td><?php echo html_escape(element('cmc_korean_nm', $result)); ?></td>
 								<td><?php echo html_escape(element('cmc_symbol', $result)); ?></td>

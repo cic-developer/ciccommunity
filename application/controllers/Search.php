@@ -176,15 +176,18 @@ class Search extends CB_Controller
 			}
 		}
 
+		$free_row = $result['board_rows']['1'];
+		$writer_row = $result['board_rows']['2'];
+
 		$view['view']['data'] = $result;
 		$view['view']['boardlist'] = $boardlist;
 		$view['view']['grouplist'] = $grouplist;
-		$total_rows = $result['total_rows'];
+		$total_rows = $free_row + $writer_row;
 		$view['total_rows'] = $total_rows;
 
-		// echo "<pre><br>";
-		// print_r($result);
-		// echo "</pre></br>";
+		echo "<pre><br>";
+		print_r($total_rows);
+		echo "</pre></br>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
 			$sfieldarray = array('post_title', 'post_content', 'post_both');
