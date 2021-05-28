@@ -9,19 +9,12 @@
 			<div class="filter">
 				<div class="sel-box c01">
 					<a href="#n" class="sel-btn"><span>통합검색</span></a>
-					<?php
-						if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result) { ?>
-							<ul>
-								<li class="active"><a href="<?php base_url() ?>?sfield=post_both&skeyword=<?php echo $this->input->get('skeyword')?>"><span>통합검색</span></a></li>
-								<li value="post_title"><a href="<?php base_url() ?>?sfield=post_title&skeyword=<?php echo $this->input->get('skeyword')?>"><span>제목</span></a></li>
-								<li value="post_content"><a href="<?php base_url() ?>?sfield=post_content&skeyword=<?php echo $this->input->get('skeyword')?>"><span>내용</span></a></li>
-								<li value="post_nickname"><a href="<?php base_url() ?>?sfield=post_nickname&skeyword=<?php echo $this->input->get('skeyword')?>"><span>작성자</span></a></li>
-							</ul>
-					<?php
-							}
-						}		
-					?>
+					<ul>
+						<li class="active"><a href="<?php base_url() ?>?sfield=post_both&skeyword=<?php echo $this->input->get('skeyword')?>"><span>통합검색</span></a></li>
+						<li value="post_title"><a href="<?php base_url() ?>?sfield=post_title&skeyword=<?php echo $this->input->get('skeyword')?>"><span>제목</span></a></li>
+						<li value="post_content"><a href="<?php base_url() ?>?sfield=post_content&skeyword=<?php echo $this->input->get('skeyword')?>"><span>내용</span></a></li>
+						<li value="post_nickname"><a href="<?php base_url() ?>?sfield=post_nickname&skeyword=<?php echo $this->input->get('skeyword')?>"><span>작성자</span></a></li>
+					</ul>		
 				</div>
 				<div class="field search">
                     <?php 
@@ -243,7 +236,7 @@
 						}
 					?>
 				</div>
-				<div class="list vimg">
+				<div class="list vimg vp">
 					<ul>
 					<?php
 						if (element('list', element('data', $view))) {
@@ -300,7 +293,7 @@
 					<h3>NEWS</h3>
 					<a href="#n" class="more"><span>more</span></a>
 				</div>
-				<div class="list vimg">
+				<div class="list vimg vp">
 				<ul>
 					<li>
 						<a href="#n">

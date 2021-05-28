@@ -258,7 +258,7 @@
 			</div>
 			<div class="list vimg">
 				<ul>
-					<li>
+					<!-- <li>
 						<a href="#n">
 							<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png') ?>" alt="">
 							</div>
@@ -275,7 +275,20 @@
 								</div>
 							</div>
 						</a>
-					</li>
+					</li> -->
+					<?php
+                        if (element('list', element('data', element('list', $view)))) {
+							
+
+			print_r('here');
+			exit;
+
+							foreach (element('list', element('data', element('list', $view))) as $result) {
+                    ?>
+                    <?php
+                        }
+                    }
+                    ?>
 				</ul>
 				<script>
 					$(function () {

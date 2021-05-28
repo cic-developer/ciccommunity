@@ -202,15 +202,15 @@
 	var reg_num = /^[0-9]*$/;
 	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
 
-	$('.up').on('click', function(){
+	$(document).on('click', '.up', function(){
 		const content_type = $(this).attr('data-contenttype');
-		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmt_idx');
+		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
 		update_vp(content_idx, content_type, 'up');
 	});
 	
-	$('.down').on('click', function(){
+	$(document).on('click', '.down', function(){
 		const content_type = $(this).attr('data-contenttype');
-		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmt_idx');
+		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
 		update_vp(content_idx, content_type, 'down');
 	});
 
