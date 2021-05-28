@@ -73,13 +73,40 @@ class Forum extends CB_Controller
 				'rules' => 'trim|required|greater_than_equal_to[0]|callback__forum_deposit_decimal_check',
 			),
 		);
+		$this->form_validation->set_rules($config);
 
+		/**
+		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
+		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
+		 */
+		if ($this->form_validation->run() === false) {
+
+			// 이벤트가 존재하면 실행합니다
+			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+
+		} else {
+			/**
+			 * 유효성 검사를 통과한 경우입니다.
+			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
+			 */
+
+			$array = array(
+				'forum_deposit'
+			);
+			foreach ($array as $value) {
+				$savedata[$value] = $this->input->post($value, null, '');
+			}
+
+			$this->CIC_forum_model->save($savedata);
+			$view['view']['alert_message'] = '기본정보 설정이 저장되었습니다';
+		}
+
+		$getdata = $this->Config_model->get_all_meta();
+		$view['view']['data'] = $getdata;
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-		// $view['data'] = $result['list'];
-		
 		/**
 		 * 어드민 레이아웃을 정의합니다
 		 */

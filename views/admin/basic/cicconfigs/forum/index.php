@@ -18,11 +18,11 @@
 			$attributes = array('class' => 'form-horizontal', 'name' => 'fadminwrite', 'id' => 'fadminwrite');
 			echo form_open(current_full_url(), $attributes);
 			?>
-				<input type="hidden" name="is_submit" value="1" />
+				<input type="hidden" name="is_submit" value="2" />
 				<div class="form-group">
 					<label class="col-sm-2 control-label">포럼 예치금</label>
 					<div class="col-sm-10">
-						<input type="number" class="form-control" name="forum_deposit" id="forum_deposit" value="<?php echo set_value('forum_deposit', (int) element('forum_deposit', element('data', $view))); ?>" style="width:180px;" />
+						<input type="number" class="form-control" name="forum_deposit" id="forum_deposit" value="<?php echo set_value('forum_deposit', (int) element('forum_deposit', element('data', $view))); ?>" style="width:180px;" /> &nbsp; 도전 CIC포럼 기본 예치금을 설정할 수 있습니다.
 					</div>
 				</div>
 
@@ -33,3 +33,27 @@
 		<?php echo form_close(); ?>
 	</div>
 </div>
+
+<script type="text/javascript">
+//<![CDATA[
+$(function() {
+	$('#fadminwrite').validate({
+		rules: {
+			forum_deposit: {required :true, number : true, min:1},
+		}
+	});
+});
+
+var form_original_data = $('#fadminwrite').serialize();
+function check_form_changed() {
+	if ($('#fadminwrite').serialize() !== form_original_data) {
+		if (confirm('저장하지 않은 정보가 있습니다. 저장하지 않은 상태로 이동하시겠습니까?')) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	return true;
+}
+//]]>
+</script>

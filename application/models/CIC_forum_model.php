@@ -22,7 +22,7 @@ class CIC_forum_model extends CB_Model
 	 */
 	public $meta_key = 'frm_key';
 
-	public $meta_value = 'frm_key';
+	public $meta_value = 'frm_value';
 
 	public $cache_name= 'forum-model-get'; // 캐시 사용시 프리픽스
 
@@ -99,8 +99,8 @@ class CIC_forum_model extends CB_Model
 			return false;
 		}
 		$updatedata = array(
-			'cfg_key' => $column,
-			'cfg_value' => $value,
+			'frm_key' => $column,
+			'frm_value' => $value,
 		);
 		$this->db->replace($this->_table, $updatedata);
 

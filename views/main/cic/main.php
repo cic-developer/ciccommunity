@@ -84,7 +84,7 @@
                                 <th>거래소</th>
                                 <th>거래금액</th>
                                 <th>시세(KRW)</th>
-                                <th>점유율</th>
+                                <th>한국프리미엄</th>
                                 <th>변동률(24h)</th>
                             </tr>
                         </thead>

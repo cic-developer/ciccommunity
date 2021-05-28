@@ -26,7 +26,7 @@ class Coinapi extends CI_Controller
         $this->get_overseas_krw_price();
     }
 
-    public function get_user_data($mem_idx){
+    public function get_main_data($mem_idx){
         $this->CI->load->model('CIC_maincoin_exchange_model','CIC_maincoin_coin_model', 'Member_extra_vars_model');
 
 		if ($this->CI->member->is_member() === false) {
@@ -35,14 +35,15 @@ class Coinapi extends CI_Controller
         $user_maincoin_data = $this->CI->Member_extra_vars_model->item($this->member->is_member(), 'mem_maincoin');
         if(!$user_maincoin_data || !is_array($user_maincoin_data)){
             //기본값 리턴
+        } else {
+            $decoded_data = json_decode($user_maincoin_data);
         }
 
-        $maincoin_data = json_decode($user_maincoin_data);
         $exchange = $maincoin_data['exchange'];
         $coin = $maincoin_data['coin'];
 
         $return_data = array(
-            'exchange' => array(),
+            'exchange' => $exchange,
             'coin' => array(),
         );
 
