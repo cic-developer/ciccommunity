@@ -60,21 +60,24 @@
             <div class="msec-01">
                 <div class="tab">
                     <ul>
-                    <?php
-                        for($i=0; $i<count(element('coin',element('maincoin', $view))); $i++){
-                    ?>
-                    <?php
-                        }
-                    ?>
-                        <li class="active"><a href="#n"><span>BTC</span></a></li>
+                        <?php
+                            $i = 0;
+                            foreach(element('coin', element('maincoin', $view)) as  $thisCoin){
+                        ?>
+                            <li <?php echo  $i == 0 ? 'class="active"' : '' ?> ><a href="#n"><span><?php echo element('cmc_symbol' ,$thisCoin); ?></span></a></li>
+                        <?php
+                                $i++;
+                            }
+                        ?>
+                        <!-- <li class="active"><a href="#n"><span>BTC</span></a></li>
                         <li><a href="#n"><span>ETH</span></a></li>
                         <li><a href="#n"><span>LTC</span></a></li>
                         <li><a href="#n"><span>ETC</span></a></li>
                         <li><a href="#n"><span>XLM</span></a></li>
-                        <li><a href="#n"><span>klay</span></a></li>
+                        <li><a href="#n"><span>klay</span></a></li> -->
                         <li class="cyellow"><a href="#n"><span>PER</span></a></li>
                     </ul>
-                    <a href="<?php echo base_url('/Coin')?>" class="more"><span>더 많은 코인 보기</span></a>
+                    <a href="<?php echo base_url('/main/coin')?>" class="more"><span>더 많은 코인 보기</span></a>
                 </div>
                 <div class="list">
                     <table>
@@ -95,23 +98,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div class="vlogo">
-                                        <p class="img"><img
-                                                src="<?php echo base_url('assets/images/coin-logo01.png') ?>" alt="" />
-                                        </p>
-                                        <p class="txt">빗썸</p>
-                                    </div>
-                                </td>
-                                <td>2,520,260,975</td>
-                                <td>3,254.66</td>
-                                <td>59,025.200</td>
-                                <td>
-                                    <p class="percent up"><span>0.06 %</span></p>
-                                </td>
-                            </tr>
-                            <tr>
+                            <?php
+                                $i = 0;
+                                foreach(element('exchange', element('maincoin', $view)) as  $thisExchange){
+                                    $thisPrice = element($i, element('first_block', element('maincoin', $view)))
+                            ?>
+                                <tr>
+                                    <td>
+                                        <div class="vlogo">
+                                            <p class="img"><img
+                                                    src="<?php echo element('cme_logo', $thisExchange); ?>" alt="" />
+                                            </p>
+                                            <p class="txt"><?php echo element('cme_korean_nm', $thisExchange); ?></p>
+                                        </div>
+                                    </td>
+                                    <td>2,520,260,975</td>
+                                    <td>3,254.66</td>
+                                    <td>59,025.200</td>
+                                    <td>
+                                        <p class="percent up"><span>0.06 %</span></p>
+                                    </td>
+                                </tr>
+                            <?php
+                                    $i++;
+                                }
+                            ?>
+                            <!-- <tr>
                                 <td>
                                     <div class="vlogo">
                                         <p class="img"><img
@@ -142,7 +154,7 @@
                                 <td>
                                     <p class="percent down"><span>0.06 %</span></p>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>

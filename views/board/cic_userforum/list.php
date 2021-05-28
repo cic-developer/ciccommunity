@@ -9,6 +9,12 @@
     </div>
     <div id="contents" class="div-cont">
         <!-- page start / -->
+
+        <?php
+		echo show_alert_message($this->session->flashdata('message'), '<script>alert("', '");</script>');
+		$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
+		echo form_open(current_full_url(), $attributes);
+		?>
         <div class="board-wrap list">
             <div class="forums">
                 <h3>진행중인 <span>BEST</span> 포럼</h3>
@@ -116,9 +122,9 @@
             <div class="lower r">
                 <div class="ov">
                     <?php if (element('isDeposit', $view)) { ?>
-                    <a href="#n" class="by-btn"><span>예치금 빼기</span></a>
+                    <a href="#n" class="by-btn" id="subtract" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>"><span>예치금 빼기</span></a>
                     <?php }else { ?>
-                    <a href="#n" class="by-btn"><span>예치금 넣기</span></a>
+                    <a href="#n" class="by-btn" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>"><span>예치금 넣기</span></a>
                     <?php } ?>
 
                     <a href="#n" class="by-btn"><span>글쓰기</span></a>

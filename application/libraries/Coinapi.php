@@ -52,15 +52,23 @@ class Coinapi extends CI_Controller
             }
         }
 
+        $first_block = array();
+        foreach($exchange as $thisExchange){
+            $first_block[] = $this->get_coin_data($thisExchange['cme_id'], $coin[0]['']);
+        }
+
+
         $return_data = array(
             'exchange' => $exchange,
             'coin' => $coin,
-            'first_block' => array(),
+            'first_block' => $first_block,
         );
         return $return_data;
     }
+
+    public function get_coin_data(){}
     
-    public function get_coin_data($exchange="", $coin_id, $market="KRW"){
+    public function get_api_data($exchange="", $coin_id, $market="KRW"){
         switch($exchange){
 
             case 'bithumb':{

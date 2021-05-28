@@ -171,7 +171,13 @@ class Board_post extends CB_Controller
 			// 유저 보유 예치금
 			$mem_deposit = $this->member->item('mem_deposit');
 			$view['view']['mem_deposit'] = $mem_deposit;
+
+			// 예치금 yes or no
 			$view['view']['isDeposit'] = $mem_deposit ? true : false;
+
+			$depositUrl = $mem_deposit ? 'board/userforum/subtract' : 'board/userforum/insert';
+
+			$view['view']['deposit_url'] = $depositUrl;
 		}
 		
 		if(element('brd_id', element('board', $list)) == 1 or 2){

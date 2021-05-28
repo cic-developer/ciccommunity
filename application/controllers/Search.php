@@ -153,6 +153,7 @@ class Search extends CB_Controller
 						->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
 				}
 				$result['list'][$key]['images'] = $images;
+				$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $images), 50, 40);
 				$result['list'][$key]['post_url'] = post_url(element('brd_key', $val), element('post_id', $val));
 				$result['list'][$key]['display_name'] = display_username(
 					element('post_userid', $val),
@@ -160,6 +161,7 @@ class Search extends CB_Controller
 					element('mem_icon', $val),
 					'Y'
 				);
+				
 				$result['list'][$key]['display_datetime'] = display_datetime(element('post_datetime', $val), 'user', 'Y-m-d H:i');
 				$result['list'][$key]['content'] = cut_str(strip_tags(element('post_content', $val)),200);
 				$result['list'][$key]['is_mobile'] = (element('post_device', $val) === 'mobile') ? true : false;
@@ -175,9 +177,9 @@ class Search extends CB_Controller
 		$total_rows = $free_row + $writer_row;
 		$view['total_rows'] = $total_rows;
 
-		// echo "<pre><br>";
-		// print_r($result['list'][3]);
-		// echo "</pre></br>";
+		echo "<pre><br>";
+		print_r($result['list'][3]);
+		echo "</pre></br>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
 			$sfieldarray = array('post_title', 'post_content', 'post_both');
