@@ -2,19 +2,30 @@ const token_abi = [{
         constant: true,
         inputs: [],
         name: "name",
-        outputs: [{ name: "", type: "string" }],
+        outputs: [{
+            name: "",
+            type: "string",
+        }, ],
         payable: false,
         stateMutability: "view",
         type: "function",
     },
     {
         constant: false,
-        inputs: [
-            { name: "_spender", type: "address" },
-            { name: "_value", type: "uint256" },
+        inputs: [{
+                name: "_spender",
+                type: "address",
+            },
+            {
+                name: "_value",
+                type: "uint256",
+            },
         ],
         name: "approve",
-        outputs: [{ name: "success", type: "bool" }],
+        outputs: [{
+            name: "success",
+            type: "bool",
+        }, ],
         payable: false,
         stateMutability: "nonpayable",
         type: "function",
@@ -23,20 +34,34 @@ const token_abi = [{
         constant: true,
         inputs: [],
         name: "totalSupply",
-        outputs: [{ name: "", type: "uint256" }],
+        outputs: [{
+            name: "",
+            type: "uint256",
+        }, ],
         payable: false,
         stateMutability: "view",
         type: "function",
     },
     {
         constant: false,
-        inputs: [
-            { name: "_from", type: "address" },
-            { name: "_to", type: "address" },
-            { name: "_value", type: "uint256" },
+        inputs: [{
+                name: "_from",
+                type: "address",
+            },
+            {
+                name: "_to",
+                type: "address",
+            },
+            {
+                name: "_value",
+                type: "uint256",
+            },
         ],
         name: "transferFrom",
-        outputs: [{ name: "success", type: "bool" }],
+        outputs: [{
+            name: "success",
+            type: "bool",
+        }, ],
         payable: false,
         stateMutability: "nonpayable",
         type: "function",
@@ -45,37 +70,77 @@ const token_abi = [{
         constant: true,
         inputs: [],
         name: "decimals",
-        outputs: [{ name: "", type: "uint8" }],
+        outputs: [{
+            name: "",
+            type: "uint8",
+        }, ],
         payable: false,
         stateMutability: "view",
         type: "function",
     },
     {
         constant: false,
-        inputs: [{ name: "_value", type: "uint256" }],
+        inputs: [{
+            name: "_value",
+            type: "uint256",
+        }, ],
         name: "burn",
-        outputs: [{ name: "success", type: "bool" }],
+        outputs: [{
+            name: "success",
+            type: "bool",
+        }, ],
         payable: false,
         stateMutability: "nonpayable",
         type: "function",
     },
     {
         constant: true,
-        inputs: [{ name: "", type: "address" }],
+        inputs: [{
+            name: "",
+            type: "address",
+        }, ],
         name: "balanceOf",
-        outputs: [{ name: "", type: "uint256" }],
+        outputs: [{
+            name: "",
+            type: "uint256",
+        }, ],
         payable: false,
         stateMutability: "view",
         type: "function",
     },
     {
         constant: false,
-        inputs: [
-            { name: "_from", type: "address" },
-            { name: "_value", type: "uint256" },
+        inputs: [{
+                name: "target",
+                type: "address",
+            },
+            {
+                name: "mintedAmount",
+                type: "uint256",
+            },
+        ],
+        name: "mintToken",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function",
+    },
+    {
+        constant: false,
+        inputs: [{
+                name: "_from",
+                type: "address",
+            },
+            {
+                name: "_value",
+                type: "uint256",
+            },
         ],
         name: "burnFrom",
-        outputs: [{ name: "success", type: "bool" }],
+        outputs: [{
+            name: "success",
+            type: "bool",
+        }, ],
         payable: false,
         stateMutability: "nonpayable",
         type: "function",
@@ -93,7 +158,10 @@ const token_abi = [{
         constant: true,
         inputs: [],
         name: "owner",
-        outputs: [{ name: "", type: "address" }],
+        outputs: [{
+            name: "",
+            type: "address",
+        }, ],
         payable: false,
         stateMutability: "view",
         type: "function",
@@ -102,7 +170,10 @@ const token_abi = [{
         constant: true,
         inputs: [],
         name: "symbol",
-        outputs: [{ name: "", type: "string" }],
+        outputs: [{
+            name: "",
+            type: "string",
+        }, ],
         payable: false,
         stateMutability: "view",
         type: "function",
@@ -111,62 +182,103 @@ const token_abi = [{
         constant: true,
         inputs: [],
         name: "released",
-        outputs: [{ name: "", type: "bool" }],
+        outputs: [{
+            name: "",
+            type: "bool",
+        }, ],
         payable: false,
         stateMutability: "view",
         type: "function",
     },
     {
         constant: false,
-        inputs: [
-            { name: "_to", type: "address" },
-            { name: "_value", type: "uint256" },
+        inputs: [{
+                name: "_to",
+                type: "address",
+            },
+            {
+                name: "_value",
+                type: "uint256",
+            },
         ],
         name: "transfer",
-        outputs: [{ name: "success", type: "bool" }],
+        outputs: [{
+            name: "success",
+            type: "bool",
+        }, ],
         payable: false,
         stateMutability: "nonpayable",
         type: "function",
     },
     {
         constant: true,
-        inputs: [{ name: "", type: "address" }],
+        inputs: [{
+            name: "",
+            type: "address",
+        }, ],
         name: "frozenAccount",
-        outputs: [{ name: "", type: "bool" }],
+        outputs: [{
+            name: "",
+            type: "bool",
+        }, ],
         payable: false,
         stateMutability: "view",
         type: "function",
     },
     {
         constant: false,
-        inputs: [
-            { name: "_spender", type: "address" },
-            { name: "_value", type: "uint256" },
-            { name: "_extraData", type: "bytes" },
+        inputs: [{
+                name: "_spender",
+                type: "address",
+            },
+            {
+                name: "_value",
+                type: "uint256",
+            },
+            {
+                name: "_extraData",
+                type: "bytes",
+            },
         ],
         name: "approveAndCall",
-        outputs: [{ name: "success", type: "bool" }],
+        outputs: [{
+            name: "success",
+            type: "bool",
+        }, ],
         payable: false,
         stateMutability: "nonpayable",
         type: "function",
     },
     {
         constant: true,
-        inputs: [
-            { name: "", type: "address" },
-            { name: "", type: "address" },
+        inputs: [{
+                name: "",
+                type: "address",
+            },
+            {
+                name: "",
+                type: "address",
+            },
         ],
         name: "allowance",
-        outputs: [{ name: "", type: "uint256" }],
+        outputs: [{
+            name: "",
+            type: "uint256",
+        }, ],
         payable: false,
         stateMutability: "view",
         type: "function",
     },
     {
         constant: false,
-        inputs: [
-            { name: "target", type: "address" },
-            { name: "freeze", type: "bool" },
+        inputs: [{
+                name: "target",
+                type: "address",
+            },
+            {
+                name: "freeze",
+                type: "bool",
+            },
         ],
         name: "freezeAccount",
         outputs: [],
@@ -176,7 +288,10 @@ const token_abi = [{
     },
     {
         constant: false,
-        inputs: [{ name: "newOwner", type: "address" }],
+        inputs: [{
+            name: "newOwner",
+            type: "address",
+        }, ],
         name: "transferOwnership",
         outputs: [],
         payable: false,
@@ -184,10 +299,18 @@ const token_abi = [{
         type: "function",
     },
     {
-        inputs: [
-            { name: "initialSupply", type: "uint256" },
-            { name: "tokenName", type: "string" },
-            { name: "tokenSymbol", type: "string" },
+        inputs: [{
+                name: "initialSupply",
+                type: "uint256",
+            },
+            {
+                name: "tokenName",
+                type: "string",
+            },
+            {
+                name: "tokenSymbol",
+                type: "string",
+            },
         ],
         payable: false,
         stateMutability: "nonpayable",
@@ -195,43 +318,237 @@ const token_abi = [{
     },
     {
         anonymous: false,
-        inputs: [
-            { indexed: false, name: "target", type: "address" },
-            { indexed: false, name: "frozen", type: "bool" },
+        inputs: [{
+                indexed: false,
+                name: "target",
+                type: "address",
+            },
+            {
+                indexed: false,
+                name: "frozen",
+                type: "bool",
+            },
         ],
         name: "FrozenFunds",
         type: "event",
     },
     {
         anonymous: false,
-        inputs: [
-            { indexed: true, name: "from", type: "address" },
-            { indexed: true, name: "to", type: "address" },
-            { indexed: false, name: "value", type: "uint256" },
+        inputs: [{
+                indexed: true,
+                name: "from",
+                type: "address",
+            },
+            {
+                indexed: true,
+                name: "to",
+                type: "address",
+            },
+            {
+                indexed: false,
+                name: "value",
+                type: "uint256",
+            },
         ],
         name: "Transfer",
         type: "event",
     },
     {
         anonymous: false,
-        inputs: [
-            { indexed: true, name: "_owner", type: "address" },
-            { indexed: true, name: "_spender", type: "address" },
-            { indexed: false, name: "_value", type: "uint256" },
+        inputs: [{
+                indexed: true,
+                name: "_owner",
+                type: "address",
+            },
+            {
+                indexed: true,
+                name: "_spender",
+                type: "address",
+            },
+            {
+                indexed: false,
+                name: "_value",
+                type: "uint256",
+            },
         ],
         name: "Approval",
         type: "event",
     },
     {
         anonymous: false,
-        inputs: [
-            { indexed: true, name: "from", type: "address" },
-            { indexed: false, name: "value", type: "uint256" },
+        inputs: [{
+                indexed: true,
+                name: "from",
+                type: "address",
+            },
+            {
+                indexed: false,
+                name: "value",
+                type: "uint256",
+            },
         ],
         name: "Burn",
         type: "event",
     },
 ];
+const contract_abi = [{
+        "constant": false,
+        "inputs": [],
+        "name": "acceptOwnership",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [{
+                "name": "_from",
+                "type": "address"
+            },
+            {
+                "name": "_to",
+                "type": "address"
+            },
+            {
+                "name": "_value",
+                "type": "uint256"
+            },
+            {
+                "name": "_url",
+                "type": "string"
+            },
+            {
+                "name": "_id",
+                "type": "string"
+            }
+        ],
+        "name": "deposit_enter",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "exit",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "setFreeze",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [{
+            "name": "_newManager",
+            "type": "address"
+        }],
+        "name": "transferOwnership",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "name": "_tokenAddress",
+            "type": "address"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "anonymous": false,
+        "inputs": [{
+                "indexed": false,
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "name": "value",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "name": "url",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "name": "id",
+                "type": "string"
+            }
+        ],
+        "name": "deposit",
+        "type": "event"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "freeze",
+        "outputs": [{
+            "name": "",
+            "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "manager",
+        "outputs": [{
+            "name": "",
+            "type": "address"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "newManager",
+        "outputs": [{
+            "name": "",
+            "type": "address"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "tokenAddress",
+        "outputs": [{
+            "name": "",
+            "type": "address"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
+const contract_address = "0x5682461966BB835da2C55c883E5C5985c54829e6"
 const token_address = "0x7eee60a000986e9efe7f5c90340738558c24317b";
 const PER_address = "0x0E3A0B94cF7bd745aA8a65Bd707509761e65A832"; //퍼 월렛 주소
 
@@ -245,6 +562,8 @@ $(document).on('ready', async function() {
         console.log('klaytn : ', klaytn);
     }
     const PER = new caver.klay.Contract(token_abi, token_address);
+    const DEPOSIT = new caver.klay.Contract(contract_abi, contract_address);
+
     try {
 
         $(document).on('click', '#charge_button', async function() {
@@ -271,6 +590,8 @@ $(document).on('ready', async function() {
                 location.reload();
             }
 
+            console.log(DEPOSIT.methods.manager().call());
+            return;
             let charge_value = $('#charge_input').val();
             await klaytn.enable();
             const data = caver.klay.abi.encodeFunctionCall({
