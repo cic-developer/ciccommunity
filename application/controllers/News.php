@@ -44,7 +44,10 @@ class News extends CB_Controller
 		$eventname = 'event_news_post_list';
 		$this->load->event($eventname);
 
-		
+		$view = array();
+		$view['view'] = array();
+
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 		
 	}
 }
