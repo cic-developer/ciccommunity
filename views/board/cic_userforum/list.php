@@ -109,6 +109,7 @@
                                 <p class="cyellow">10,000,000</p>
                             </td>
                         </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -116,7 +117,7 @@
                 <div class="ov">
                     <a href="#n" class="by-btn"><span>예치금 넣기<!-- 예치금이 넣어져있으면 예치금 빼기로 변경 --></span></a>
                     <a href="#n" class="by-btn"><span>글쓰기</span></a>
-                    <p class="ex-cp">보유 예치금 : 1,000,000 CP</p>
+                    <p class="ex-cp">보유 예치금 : <?php echo number_format(element('mem_deposit', $view)); ?> CP</p>
                 </div>
             </div>
             <!-- s: paging-wrap -->

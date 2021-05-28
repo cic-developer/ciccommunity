@@ -58,6 +58,10 @@ class Board_post extends CB_Controller
 		$view['view']['list'] = $list = $this->_get_list($brd_key);
 		$view['view']['board_key'] = element('brd_key', element('board', $list));
 
+		// 유저 보유 예치금
+		$mem_deposit = $this->member->item('mem_deposit');
+		$view['view']['mem_deposit'] = $mem_deposit;
+
 		// stat_count_board ++
 		$this->_stat_count_board(element('brd_id', element('board', $list)));
 
@@ -453,7 +457,7 @@ class Board_post extends CB_Controller
 		$view['view']['dislike_point_ranking_writer'] = $dislike_point_ranking_writer;
 		
 		$mem_id = (int) $this->member->item('mem_id');
-
+		
 		if ( ! element('post_id', $post)) {
 			show_404();
 		}
