@@ -169,9 +169,9 @@
 							foreach (element('list', element('data', $view)) as $result) { 
 								if(element('brd_name', $result) === '자유게시판'){?>
 									<a href="<?php echo base_url()."board/freetalk?skeyword="?><?php echo $this->input->get('skeyword')?>
-										"<?php echo (!element('brd_id', $result)) ? 'class="active"' : ''; ?> class="more"><span>more </span>
+										"<?php echo (!element('brd_id', $result)) ? 'class="active"' : ''; ?> class="more"><span>more</span>
 									</a>
-									<?php			
+					<?php			
 								}	
 							}
 						}	
@@ -199,8 +199,7 @@
 						<?php
 						if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) {
-								if(element('brd_name', $result) === '자유게시판'){
-						?>
+								if(element('brd_name', $result) === '자유게시판'){?>
 								<tr>
 									<td>
 										<div class="my-info">
@@ -217,17 +216,15 @@
 									</td>
 								</tr>
 							<?php
-									}
 								}
 							}
-							if (!element('list', element('data', $view)))  {
-							?>
+						}
+							if (!element('list', element('data', $view)))  {?>
 								<tr>
 									<td colspan="5" class="nopost">게시물이 없습니다</td>
 								</tr>
 							<?php } ?>
 						</tbody>
-					
 					</table>
 				</div>
 				<div class="gap75"></div>
@@ -276,9 +273,8 @@
 							}	
 						}
 					}
-					if (!element('list', element('data', $view)))  {		
-					?>
-							<li colspan="5" class="nopost" style="text-align: center">게시물이 없습니다</li>
+					if (!element('list', element('data', $view)))  {?>
+						<li colspan="5" class="nopost" style="text-align: center">게시물이 없습니다</li>
 					<?php } ?>	
 					</ul>
 					<script>
