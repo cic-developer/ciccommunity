@@ -276,9 +276,18 @@
 							}	
 						}
 					}
-					if (!element('list', element('data', $view)))  {?>
+					if (element('list', element('data', $view))) {
+						foreach (element('list', element('data', $view)) as $result) {
+							if(element('brd_name', $result) === 'CIC Writer'){
+								if (!element('list', element('data', $view)))  {?>
 						<li colspan="5" class="nopost" style="text-align: center">게시물이 없습니다</li>
-					<?php } ?>	
+					<?php 
+								} 
+							}
+						}	
+					}	
+					
+					?>	
 					</ul>
 					<script>
 						$(function(){

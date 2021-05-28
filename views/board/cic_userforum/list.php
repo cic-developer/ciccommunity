@@ -172,10 +172,110 @@
                 </div>
             </div>
             <!-- e: board-filter -->
+
+            <!-- 새 핸드폰번호 modal -->
+            <div id="myModal_deposit" class="modal">
+				<div class="modal-content">
+					<ul class="entry modify-box">
+						<li class="ath-email-content">
+							<p class="btxt">이메일인증</p>
+							<div class="all-email-box">
+								<div class="field modify">
+									<p class="chk-input w380">
+										<input type="text" placeholder="인증번호를 입력해주세요" class="ath_num" name="ath_num" value="">
+									</p>
+                                    <label for="deposit_confirm">확인</label>
+									<input type="checkbox" id="deposit_confirm" >
+									
+								</div>
+								<div class="phone-resend-email" style="display:none;">
+									<a href="javascript:void(0);" data-type="phone" class="modify-btn resend-ath-email" style="display:block;">
+										<span>인증번호 재전송</span>
+									</a>	
+								</div>
+								<div class="phone-timer-box" style="display:none;">
+									<span id="postTestMin1">00</span><!-- 분 -->
+									<span>:</span>
+									<span id="postTestSec1">10</span><!--초-->
+									<!-- <span id="postTestMilisec">00</span>밀리초 -->
+								</div>
+							</div>
+							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
+						</li>
+						<li class="wallet-modify-content">
+							<p class="btxt">새 핸드폰번호</p>
+							<div class="field modify">
+								<p class="chk-input w380">
+									<input type="text" placeholder="핸드폰번호" onkeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="" readonly disabled style="background-color:#efefef;">
+								</p>
+								<a href="javascript:void(0);" id="confirm_phone"  data-type="phone" class="modify-btn">
+									<span>확인</span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+
         </div>
         <!-- page end / -->
     </div>
 </div>
+
+<style>
+
+	/* The Modal (background) */
+	.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 1; /* Sit on top */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	}
+
+	/* Modal Content/Box */
+	.modal-content {
+		background-color: #fefefe;
+		margin: 15% auto; /* 15% from the top and centered */
+		padding: 20px;
+		border: 1px solid #888;
+		width: 20%; /* Could be more or less, depending on screen size */                          
+	}
+
+	/* The Close Button */
+	.close {
+		color: #aaa;
+		float: right;
+		font-size: 28px;
+		font-weight: bold;
+	}
+	.close:hover,
+	.close:focus {
+		color: black;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	.modal-btn {
+		line-height: 35px;
+		border-radius: 35px;
+		font-size: 14px;
+		color: #fff;
+		background: #111;
+		font-weight: 500;
+		display: inline-block;
+		vertical-align: top;
+		margin-left: 15px;
+		min-width: 120px;
+		text-align: center;
+		box-sizing: border-box;
+	}
+</style>
 
 <script>
 
@@ -192,43 +292,67 @@
 	// 	f.submit();
     // }   
 
-    $(document).on('click', '#deposit_insert', function() {
-        alert("예치한 금액이 전부 반환됩니다");
+    // Get the modal
+    var modal = document.getElementById('myModal_deposit');
 
-        var isConfirm = confirm('선택한 요청을 정말 승인 하시겠습니까?');
+    // Get the button that opens the modal
+    var btn = document.getElementById("deposit_insert");
 
-        if(isConfirm){
+    // When the user clicks on the button, open the modal 
+	btn.onclick = function() {
+		modal.style.display = "block";
+	}
 
-            $.ajax({
-                url: cb_url + '/deposit/subtract',
-                type: 'POST',
-                data: {
-                    csrf_test_name : cb_csrf_hash
-                },
-                dataType: 'json',
-                async: false,
-                cache: false,
-                success: function(data) {
-                    state = data.state;
-                    message = data.message;
+    // When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+
+
+
+    // $(document).on('click', '#deposit_insert', function() {
+
+
+
+
+        // alert("예치한 금액이 전부 반환됩니다");
+
+        // var isConfirm = confirm('선택한 요청을 정말 승인 하시겠습니까?');
+
+        // if(isConfirm){
+
+        //     $.ajax({
+        //         url: cb_url + '/deposit/subtract',
+        //         type: 'POST',
+        //         data: {
+        //             csrf_test_name : cb_csrf_hash
+        //         },
+        //         dataType: 'json',
+        //         async: false,
+        //         cache: false,
+        //         success: function(data) {
+        //             state = data.state;
+        //             message = data.message;
                     
                     
-                    if(state == 1){
-                        // 성공 메세지 출력
-                        alert(message); 
-                        location.reload(true);
-                    }
-                    if(state == 0){
-                        // 실패 메세지 출력
-                        alert(message);
-                    }
-                },
-                error: function(){
-                    alert('에러가 발생했습니다.');
-                }
-            });
-        }
-    })
+        //             if(state == 1){
+        //                 // 성공 메세지 출력
+        //                 alert(message); 
+        //                 location.reload(true);
+        //             }
+        //             if(state == 0){
+        //                 // 실패 메세지 출력
+        //                 alert(message);
+        //             }
+        //         },
+        //         error: function(){
+        //             alert('에러가 발생했습니다.');
+        //         }
+        //     });
+        // }
+    // })
 
     $(document).on('click', '#deposit_subtract', function() {
         alert("예치한 금액이 전부 반환됩니다");

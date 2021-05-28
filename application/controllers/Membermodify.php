@@ -2790,7 +2790,7 @@ class Membermodify extends CB_Controller
 		);
 
 		$this->Member_extra_vars_model->save($mem_id, $data); // memo: return 값이 없다
-		$result = $this->Member_model->set_user_modify($mem_id, $new_phone, $new_password);
+		$result = $this->Member_model->set_user_modify($mem_id, $arr);
 
 		// 세션데이터 지우기
 		$this->session->unset_userdata('phone_modify_ath_mail_result');
