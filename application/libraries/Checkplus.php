@@ -52,7 +52,7 @@ class Checkplus extends CI_Controller
 		$authtype = "M";      		// 없으면 기본 선택화면, X: 공인인증서, M: 핸드폰, C: 카드 (1가지만 사용 가능)
 			
 		$popgubun 	= "N";		//Y : 취소버튼 있음 / N : 취소버튼 없음
-		$customize 	= "Mobile";		//없으면 기본 웹페이지 / Mobile : 모바일페이지 (default값은 빈값, 환경에 맞는 화면 제공)
+		$customize 	= "";		//없으면 기본 웹페이지 / Mobile : 모바일페이지 (default값은 빈값, 환경에 맞는 화면 제공)
 		
 		$gender = "";      		// 없으면 기본 선택화면, 0: 여자, 1: 남자
 		
@@ -113,6 +113,10 @@ class Checkplus extends CI_Controller
 
 	public function success($EncodeData)
 	{
+		//EncodeData 없이 접근할 경우 차단
+		if($EncodeData){
+			exit('비정상적인 접근입니다.(1)');
+		}
 		//**************************************************************************************************************
 		//NICE평가정보 Copyright(c) KOREA INFOMATION SERVICE INC. ALL RIGHTS RESERVED
 		
@@ -139,56 +143,60 @@ class Checkplus extends CI_Controller
 
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
-		if ($enc_data != "") {
 
-			$plaindata = `$cb_encode_path DEC $sitecode $sitepasswd $enc_data`;		// 암호화된 결과 데이터의 복호화
-			echo "[plaindata]  " . $plaindata . "<br>";
+		$plaindata = `$cb_encode_path DEC $sitecode $sitepasswd $enc_data`;		// 암호화된 결과 데이터의 복호화
+		// echo "[plaindata]  " . $plaindata . "<br>";
+		// log_message('error', );
 
-			if ($plaindata == -1){
-				$returnMsg  = "암/복호화 시스템 오류";
-			}else if ($plaindata == -4){
-				$returnMsg  = "복호화 처리 오류";
-			}else if ($plaindata == -5){
-				$returnMsg  = "HASH값 불일치 - 복호화 데이터는 리턴됨";
-			}else if ($plaindata == -6){
-				$returnMsg  = "복호화 데이터 오류";
-			}else if ($plaindata == -9){
-				$returnMsg  = "입력값 오류";
-			}else if ($plaindata == -12){
-				$returnMsg  = "사이트 비밀번호 오류";
-			}else{
-				// 복호화가 정상적일 경우 데이터를 파싱합니다.
-				$ciphertime = `$cb_encode_path CTS $sitecode $sitepasswd $enc_data`;	// 암호화된 결과 데이터 검증 (복호화한 시간획득)
-				log_message('error', '$plaindata : '.$plaindata);
-				$requestnumber = $this->GetValue($plaindata , "REQ_SEQ");
-				$responsenumber = $this->GetValue($plaindata , "RES_SEQ");
-				$authtype = $this->GetValue($plaindata , "AUTH_TYPE");
-				// $name =$this-> GetValue($plaindata , "NAME");
-				$name = $this->GetValue($plaindata , "UTF8_NAME"); //charset utf8 사용시 주석 해제 후 사용
-				$birthdate = $this->GetValue($plaindata , "BIRTHDATE");
-				$gender = $this->GetValue($plaindata , "GENDER");
-				$nationalinfo = $this->GetValue($plaindata , "NATIONALINFO");	//내/외국인정보(사용자 매뉴얼 참조)
-				$dupinfo = $this->GetValue($plaindata , "DI");
-				$conninfo = $this->GetValue($plaindata , "CI");
-				$mobileno = $this->GetValue($plaindata , "MOBILE_NO");
-				$mobileco = $this->GetValue($plaindata , "MOBILE_CO");
+		if ($plaindata == -1){
+			$returnMsg  = "암/복호화 시스템 오류";
+		}else if ($plaindata == -4){
+			$returnMsg  = "복호화 처리 오류";
+		}else if ($plaindata == -5){
+			$returnMsg  = "HASH값 불일치 - 복호화 데이터는 리턴됨";
+		}else if ($plaindata == -6){
+			$returnMsg  = "복호화 데이터 오류";
+		}else if ($plaindata == -9){
+			$returnMsg  = "입력값 오류";
+		}else if ($plaindata == -12){
+			$returnMsg  = "사이트 비밀번호 오류";
+		}else{
+			// 복호화가 정상적일 경우 데이터를 파싱합니다.
+			$ciphertime = `$cb_encode_path CTS $sitecode $sitepasswd $enc_data`;	// 암호화된 결과 데이터 검증 (복호화한 시간획득)
+		
+			$requestnumber = $this->GetValue($plaindata , "REQ_SEQ");
+			$responsenumber = $this->GetValue($plaindata , "RES_SEQ");
+			$authtype = $this->GetValue($plaindata , "AUTH_TYPE");
+			// $name =$this-> GetValue($plaindata , "NAME");
+			$name = $this->GetValue($plaindata , "UTF8_NAME"); //charset utf8 사용시 주석 해제 후 사용
+			$birthdate = $this->GetValue($plaindata , "BIRTHDATE");
+			$gender = $this->GetValue($plaindata , "GENDER");
+			$nationalinfo = $this->GetValue($plaindata , "NATIONALINFO");	//내/외국인정보(사용자 매뉴얼 참조)
+			$dupinfo = $this->GetValue($plaindata , "DI");
+			$conninfo = $this->GetValue($plaindata , "CI");
+			$mobileno = $this->GetValue($plaindata , "MOBILE_NO");
+			$mobileco = $this->GetValue($plaindata , "MOBILE_CO");
 
-				if(strcmp($this->CI->session->userdata('REQ_SEQ'), $requestnumber) != 0)
-				{
-					echo "세션값이 다릅니다. 올바른 경로로 접근하시기 바랍니다.<br>";
-					$requestnumber = "";
-					$responsenumber = "";
-					$authtype = "";
-					$name = "";
-					$birthdate = "";
-					$gender = "";
-					$nationalinfo = "";
-					$dupinfo = "";
-					$conninfo = "";
-			$mobileno = "";
-			$mobileco = "";
-				}
+			if(strcmp($this->CI->session->userdata('REQ_SEQ'), $requestnumber) != 0)
+			{
+				echo "세션값이 다릅니다. 올바른 경로로 접근하시기 바랍니다.<br>";
+				$requestnumber = "";
+				$responsenumber = "";
+				$authtype = "";
+				$name = "";
+				$birthdate = "";
+				$gender = "";
+				$nationalinfo = "";
+				$dupinfo = "";
+				$conninfo = "";
+				$mobileno = "";
+				$mobileco = "";
 			}
+		}
+
+		//오류사항이 있을경우 오류리턴
+		if($returnMsg){
+			exit($returnMsg);
 		}
 
 		$dec_data = array(

@@ -95,6 +95,24 @@ class News extends CB_Controller
 				$result['list'][$key]['num'] = $list_num--;
 			}
 		}
+
+		// $most_view = $this->{$this->modelname}
+		// ->important_news($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		// $list_num = $most_view['total_rows'] - ($page - 1) * $per_page;
+		
+		// if (element('list', $most_view)) {
+		// 	foreach (element('list', $most_view) as $key => $val) {
+		// 		// $most_view['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
+		// 		// if($company) {
+		// 			// $most_view['list'][$key]['companyurl'] = element('comp_url', $company);
+		// 			// print_r(element('news_index',$val));
+		// 			// exit;
+		// 			// $most_view['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
+		// 		// }
+		// 		$most_view['list'][$key]['num'] = $list_num--;
+		// 	}
+		// }
+		$view['view']['most_view'] = $most_view;
 		$view['view']['data'] = $result;
 		
 		

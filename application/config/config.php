@@ -587,6 +587,7 @@ $config['csrf_regenerate'] = FALSE; // 값을 변경하지 말아주세요 >> TR
 $config['csrf_exclude_uris'] = array();
 $config['csrf_exclude_uris'][] = 'editorfileupload/smarteditor/.*';
 $config['csrf_exclude_uris'][] = 'editorfileupload/ckeditor';
+$config['csrf_exclude_uris'][] = 'register/auth_success';
 
 /*
 |--------------------------------------------------------------------------

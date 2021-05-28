@@ -12,14 +12,14 @@
 		<!-- page start // -->
 		<div class="board-wrap list">
 			<div class="list vnews">
-                <h3>BEST</h3>
+                <h3>많이 본 뉴스</h3>
                 <div class="vnews-slide owl-loaded owl-drag">
                     <div class="owl-stage-outer">
                         <div class="owl-stage"
                             style="transform: translate3d(-1040px, 0px, 0px); transition: all 0s ease 0s; width: 3900px;">
                                 <?php
-                                if (element('list',element('writerbest', $view))) {
-                                    foreach (element('list',element('writerbest', $view)) as $writerbest) {
+                                if (element('list',element('most_view', $view))) {
+                                    foreach (element('list',element('most_view', $view)) as $most_view) {
                                         ?>
                                         <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
 											<div class="item">
@@ -28,7 +28,7 @@
 															src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">
 													</div>
 													<div class="txt">
-														<p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+														<p class="btxt"><?php echo html_escape(cut_str(strip_tags(element('news_title', $most_view)), 15)); ?></p>
 														<p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트
 															예시 입니다 ...</p>
 														<p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
@@ -134,7 +134,7 @@
 						}
 						?>
 				</ul>
-				<script>
+				<!-- <script>
 					$(function () {
 						$('.list.vimg').find('li').each(function () {
 							var chkimg = $(this).find('.img').length;
@@ -143,11 +143,11 @@
 							}
 						})
 					})
-				</script>
+				</script> -->
 			</div>
 			<!-- s: paging-wrap -->
-			<div class="paging-wrap">
-				<!-- <a href="#" class="prev ctrl"><span>이전</span></a> -->
+			<!-- <div class="paging-wrap">
+				<a href="#" class="prev ctrl"><span>이전</span></a>
 				<ul>
 					<li><a href="#" class="active">1</a></li>
 					<li><a href="#n">2</a></li>
@@ -157,7 +157,10 @@
 				</ul>
 				<p class="num"><span>1</span> / 10 </p>
 				<a href="#" class="next ctrl"><span>다음</span></a>
-			</div>
+			</div> -->
+			 <div class="paging-wrap">
+                <?php echo element('paging', element('list', $view)); ?>
+            </div>
 			<!-- e: paging-wrap -->
 			<!-- s: board-filter -->
 			<div class="board-filter">
