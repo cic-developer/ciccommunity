@@ -20,9 +20,9 @@
 			?>
 				<input type="hidden" name="is_submit" value="1" />
 				<div class="form-group">
-					<label class="col-sm-2 control-label">회원가입시 포인트</label>
+					<label class="col-sm-2 control-label">포럼 예치금</label>
 					<div class="col-sm-10">
-						<input type="number" class="form-control" name="point_register" id="point_register" value="<?php echo set_value('point_register', (int) element('point_register', element('data', $view))); ?>" />
+						<input type="number" class="form-control" name="forum_deposit" id="forum_deposit" value="<?php echo set_value('forum_deposit', (int) element('forum_deposit', element('data', $view))); ?>" style="width:180px;" />
 					</div>
 				</div>
 

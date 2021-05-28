@@ -186,7 +186,7 @@ class Search extends CB_Controller
 		$view['total_rows'] = $total_rows;
 
 		echo "<pre><br>";
-		print_r($result['list'][3]['images']);
+		print_r($result['list'][3]);
 		echo "</pre></br>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {

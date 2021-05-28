@@ -13,15 +13,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * 거래소에서 API를 통해 데이터를 받아오는 라이브러리입니다.
  */
 
-class Coinapi
+class Coinapi extends CI_Controller
 {
+    private $CI;
     private $usd_price = 0;
     private $jpy_price = 0;
     private $jpyusd_price = 0;
     private $binance_data = array();
 	function __construct()
 	{
+		$this->CI = & get_instance();
         $this->get_overseas_krw_price();
+    }
+
+    public function get_user_data($mem_idx){
+        $this->CI->load->model('CIC_maincoin_exchange_model','CIC_maincoin_coin_model', 'Member_extra_vars_model');
+
+		if ($this->CI->member->is_member() === false) {
+            //기본값 리턴
+		}
+        $user_maincoin_data = $this->CI->Member_extra_vars_model->item($this->member->is_member(), 'mem_maincoin');
+        if(!$user_maincoin_data || !is_array($user_maincoin_data)){
+            //기본값 리턴
+        }
+
+        $maincoin_data = json_decode($user_maincoin_data);
+        $exchange = $maincoin_data['exchange'];
+        $coin = $maincoin_data['coin'];
+
+        $return_data = array(
+            'exchange' => array(),
+            'coin' => array(),
+        );
+
+
     }
     
     public function get_coin_data($exchange="", $coin_id, $market="KRW"){

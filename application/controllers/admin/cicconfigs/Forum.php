@@ -52,7 +52,7 @@ class Forum extends CB_Controller
 	public function index()
 	{
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_withdraw_withdraws_index';
+		$eventname = 'event_admin_forum_index';
 		$this->load->event($eventname);
 
 		$view = array();
@@ -60,6 +60,19 @@ class Forum extends CB_Controller
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+
+		$config = array(
+			array(
+				'field' => 'forum_deposit',
+				'label' => '포럼 예치금',
+				'rules' => 'trim|required|greater_than_equal_to[0]|callback__forum_deposit_decimal_check',
+			),
+		);
 
 		
 		// 이벤트가 존재하면 실행합니다
@@ -75,5 +88,29 @@ class Forum extends CB_Controller
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
+	}
+
+	/**
+	 * 예치금 설정, 소수점 두자리 이내 확인
+	 */
+	public function _forum_deposit_decimal_check($str)
+	{
+		// $this->load->helper('chkstring');
+		//  if (chkstring($str, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false) {
+		// 	$this->form_validation->set_message(
+		// 		'_mem_nickname_check',
+		// 		'닉네임은 공백없이 한글, 영문, 숫자만 입력 가능합니다'
+		// 	);
+		// 	return false;
+		// }
+
+		// if (preg_match("/[\,]?{$str}/i", $this->cbconfig->item('denied_nickname_list'))) {
+		// 	$this->form_validation->set_message(
+		// 		'_mem_nickname_check',
+		// 		$str . ' 은(는) 예약어로 사용하실 수 없는 닉네임입니다'
+		// 	);
+		// 	return false;
+		// }
+		return true;
 	}
 }
