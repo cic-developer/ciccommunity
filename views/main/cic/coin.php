@@ -261,4 +261,8 @@
 
         $('#fcoinform').submit();
     });
+
+    $(document).on('click', '.refresh-btn', function(){
+        location.reload();
+    })
 </script>
