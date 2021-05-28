@@ -54,7 +54,14 @@ class Coinapi extends CI_Controller
 
         $first_block = array();
         foreach($exchange as $thisExchange){
-            $first_block[] = $this->get_coin_data($thisExchange['cme_id'], $coin[0]['']);
+            $thisCoinDetail = $coin[0]['coin_detail'][$thisExchange['cme_idx']];
+            if($coin[0]['coin_detail'][$thisExchange['cme_idx']]){
+                $coin_id = $coin[0]['coin_detail'][$thisExchange['cme_idx']]['cmcd_coin_id'];
+                $market = $coin[0]['coin_detail'][$thisExchange['cme_idx']]['cmcd_coin_market'];
+                $first_block[] = $this->get_coin_data($thisExchange['cme_id'], $coin_id, $market);
+            } else {
+                $first_block[] = array();
+            }
         }
 
 
@@ -65,10 +72,8 @@ class Coinapi extends CI_Controller
         );
         return $return_data;
     }
-
-    public function get_coin_data(){}
     
-    public function get_api_data($exchange="", $coin_id, $market="KRW"){
+    public function get_coin_data($exchange="", $coin_id, $market="KRW"){
         switch($exchange){
 
             case 'bithumb':{

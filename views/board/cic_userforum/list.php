@@ -122,7 +122,7 @@
             <div class="lower r">
                 <div class="ov">
                     <?php if (element('isDeposit', $view)) { ?>
-                    <a href="#n" class="by-btn" id="subtract" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>"><span>예치금 빼기</span></a>
+                    <a href="#n" class="by-btn" id="deposit_subtract" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>"><span>예치금 빼기</span></a>
                     <?php }else { ?>
                     <a href="#n" class="by-btn" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>"><span>예치금 넣기</span></a>
                     <?php } ?>
@@ -176,3 +176,20 @@
         <!-- page end / -->
     </div>
 </div>
+
+<script>
+
+    $(document).on('click', '#deposit_subtract', function() {
+		deposit_subtract_submit(document.flist, 'subtract', $(this).attr('data-deposit-url'));
+	});
+
+    function deposit_subtract_submit(f, acttype, actpage){
+
+        alert("예치한 금액이 전부 반환됩니다")
+
+        if (acttype === 'subtract' && ! confirm('선택한 요청을 정말 승인 하시겠습니까?')) return;
+        f.action = actpage;
+		f.submit();
+    }   
+
+</script>

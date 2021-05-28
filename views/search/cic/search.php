@@ -265,7 +265,7 @@
 								<div class="abr">
 									<div class="photo">
 									
-										<p class="pimg"><img src="<?php echo thumb_url('post', element('mem_photo', element('images', $result)))?>" alt=""></p>
+										<p class="pimg"><img src="<?php echo element('mem_icon', $result)?>" alt=""></p>
 
 										<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
 									</div>

@@ -101,7 +101,8 @@
                             <?php
                                 $i = 0;
                                 foreach(element('exchange', element('maincoin', $view)) as  $thisExchange){
-                                    $thisPrice = element($i, element('first_block', element('maincoin', $view)))
+                                    $thisPrice = element($i, element('first_block', element('maincoin', $view)));
+                                    print_r($thisPrice);
                             ?>
                                 <tr>
                                     <td>
