@@ -2,30 +2,19 @@ const token_abi = [{
         constant: true,
         inputs: [],
         name: "name",
-        outputs: [{
-            name: "",
-            type: "string",
-        }, ],
+        outputs: [{ name: "", type: "string" }],
         payable: false,
         stateMutability: "view",
         type: "function",
     },
     {
         constant: false,
-        inputs: [{
-                name: "_spender",
-                type: "address",
-            },
-            {
-                name: "_value",
-                type: "uint256",
-            },
+        inputs: [
+            { name: "_spender", type: "address" },
+            { name: "_value", type: "uint256" },
         ],
         name: "approve",
-        outputs: [{
-            name: "success",
-            type: "bool",
-        }, ],
+        outputs: [{ name: "success", type: "bool" }],
         payable: false,
         stateMutability: "nonpayable",
         type: "function",
@@ -34,34 +23,20 @@ const token_abi = [{
         constant: true,
         inputs: [],
         name: "totalSupply",
-        outputs: [{
-            name: "",
-            type: "uint256",
-        }, ],
+        outputs: [{ name: "", type: "uint256" }],
         payable: false,
         stateMutability: "view",
         type: "function",
     },
     {
         constant: false,
-        inputs: [{
-                name: "_from",
-                type: "address",
-            },
-            {
-                name: "_to",
-                type: "address",
-            },
-            {
-                name: "_value",
-                type: "uint256",
-            },
+        inputs: [
+            { name: "_from", type: "address" },
+            { name: "_to", type: "address" },
+            { name: "_value", type: "uint256" },
         ],
         name: "transferFrom",
-        outputs: [{
-            name: "success",
-            type: "bool",
-        }, ],
+        outputs: [{ name: "success", type: "bool" }],
         payable: false,
         stateMutability: "nonpayable",
         type: "function",
@@ -70,77 +45,37 @@ const token_abi = [{
         constant: true,
         inputs: [],
         name: "decimals",
-        outputs: [{
-            name: "",
-            type: "uint8",
-        }, ],
+        outputs: [{ name: "", type: "uint8" }],
         payable: false,
         stateMutability: "view",
         type: "function",
     },
     {
         constant: false,
-        inputs: [{
-            name: "_value",
-            type: "uint256",
-        }, ],
+        inputs: [{ name: "_value", type: "uint256" }],
         name: "burn",
-        outputs: [{
-            name: "success",
-            type: "bool",
-        }, ],
+        outputs: [{ name: "success", type: "bool" }],
         payable: false,
         stateMutability: "nonpayable",
         type: "function",
     },
     {
         constant: true,
-        inputs: [{
-            name: "",
-            type: "address",
-        }, ],
+        inputs: [{ name: "", type: "address" }],
         name: "balanceOf",
-        outputs: [{
-            name: "",
-            type: "uint256",
-        }, ],
+        outputs: [{ name: "", type: "uint256" }],
         payable: false,
         stateMutability: "view",
         type: "function",
     },
     {
         constant: false,
-        inputs: [{
-                name: "target",
-                type: "address",
-            },
-            {
-                name: "mintedAmount",
-                type: "uint256",
-            },
-        ],
-        name: "mintToken",
-        outputs: [],
-        payable: false,
-        stateMutability: "nonpayable",
-        type: "function",
-    },
-    {
-        constant: false,
-        inputs: [{
-                name: "_from",
-                type: "address",
-            },
-            {
-                name: "_value",
-                type: "uint256",
-            },
+        inputs: [
+            { name: "_from", type: "address" },
+            { name: "_value", type: "uint256" },
         ],
         name: "burnFrom",
-        outputs: [{
-            name: "success",
-            type: "bool",
-        }, ],
+        outputs: [{ name: "success", type: "bool" }],
         payable: false,
         stateMutability: "nonpayable",
         type: "function",
@@ -158,10 +93,7 @@ const token_abi = [{
         constant: true,
         inputs: [],
         name: "owner",
-        outputs: [{
-            name: "",
-            type: "address",
-        }, ],
+        outputs: [{ name: "", type: "address" }],
         payable: false,
         stateMutability: "view",
         type: "function",
@@ -170,10 +102,7 @@ const token_abi = [{
         constant: true,
         inputs: [],
         name: "symbol",
-        outputs: [{
-            name: "",
-            type: "string",
-        }, ],
+        outputs: [{ name: "", type: "string" }],
         payable: false,
         stateMutability: "view",
         type: "function",
@@ -182,103 +111,62 @@ const token_abi = [{
         constant: true,
         inputs: [],
         name: "released",
-        outputs: [{
-            name: "",
-            type: "bool",
-        }, ],
+        outputs: [{ name: "", type: "bool" }],
         payable: false,
         stateMutability: "view",
         type: "function",
     },
     {
         constant: false,
-        inputs: [{
-                name: "_to",
-                type: "address",
-            },
-            {
-                name: "_value",
-                type: "uint256",
-            },
+        inputs: [
+            { name: "_to", type: "address" },
+            { name: "_value", type: "uint256" },
         ],
         name: "transfer",
-        outputs: [{
-            name: "success",
-            type: "bool",
-        }, ],
+        outputs: [{ name: "success", type: "bool" }],
         payable: false,
         stateMutability: "nonpayable",
         type: "function",
     },
     {
         constant: true,
-        inputs: [{
-            name: "",
-            type: "address",
-        }, ],
+        inputs: [{ name: "", type: "address" }],
         name: "frozenAccount",
-        outputs: [{
-            name: "",
-            type: "bool",
-        }, ],
+        outputs: [{ name: "", type: "bool" }],
         payable: false,
         stateMutability: "view",
         type: "function",
     },
     {
         constant: false,
-        inputs: [{
-                name: "_spender",
-                type: "address",
-            },
-            {
-                name: "_value",
-                type: "uint256",
-            },
-            {
-                name: "_extraData",
-                type: "bytes",
-            },
+        inputs: [
+            { name: "_spender", type: "address" },
+            { name: "_value", type: "uint256" },
+            { name: "_extraData", type: "bytes" },
         ],
         name: "approveAndCall",
-        outputs: [{
-            name: "success",
-            type: "bool",
-        }, ],
+        outputs: [{ name: "success", type: "bool" }],
         payable: false,
         stateMutability: "nonpayable",
         type: "function",
     },
     {
         constant: true,
-        inputs: [{
-                name: "",
-                type: "address",
-            },
-            {
-                name: "",
-                type: "address",
-            },
+        inputs: [
+            { name: "", type: "address" },
+            { name: "", type: "address" },
         ],
         name: "allowance",
-        outputs: [{
-            name: "",
-            type: "uint256",
-        }, ],
+        outputs: [{ name: "", type: "uint256" }],
         payable: false,
         stateMutability: "view",
         type: "function",
     },
     {
         constant: false,
-        inputs: [{
-                name: "target",
-                type: "address",
-            },
-            {
-                name: "freeze",
-                type: "bool",
-            },
+        inputs: [
+            { name: "target", type: "address" },
+            { name: "freeze", type: "bool" },
         ],
         name: "freezeAccount",
         outputs: [],
@@ -288,10 +176,7 @@ const token_abi = [{
     },
     {
         constant: false,
-        inputs: [{
-            name: "newOwner",
-            type: "address",
-        }, ],
+        inputs: [{ name: "newOwner", type: "address" }],
         name: "transferOwnership",
         outputs: [],
         payable: false,
@@ -299,18 +184,10 @@ const token_abi = [{
         type: "function",
     },
     {
-        inputs: [{
-                name: "initialSupply",
-                type: "uint256",
-            },
-            {
-                name: "tokenName",
-                type: "string",
-            },
-            {
-                name: "tokenSymbol",
-                type: "string",
-            },
+        inputs: [
+            { name: "initialSupply", type: "uint256" },
+            { name: "tokenName", type: "string" },
+            { name: "tokenSymbol", type: "string" },
         ],
         payable: false,
         stateMutability: "nonpayable",
@@ -318,74 +195,38 @@ const token_abi = [{
     },
     {
         anonymous: false,
-        inputs: [{
-                indexed: false,
-                name: "target",
-                type: "address",
-            },
-            {
-                indexed: false,
-                name: "frozen",
-                type: "bool",
-            },
+        inputs: [
+            { indexed: false, name: "target", type: "address" },
+            { indexed: false, name: "frozen", type: "bool" },
         ],
         name: "FrozenFunds",
         type: "event",
     },
     {
         anonymous: false,
-        inputs: [{
-                indexed: true,
-                name: "from",
-                type: "address",
-            },
-            {
-                indexed: true,
-                name: "to",
-                type: "address",
-            },
-            {
-                indexed: false,
-                name: "value",
-                type: "uint256",
-            },
+        inputs: [
+            { indexed: true, name: "from", type: "address" },
+            { indexed: true, name: "to", type: "address" },
+            { indexed: false, name: "value", type: "uint256" },
         ],
         name: "Transfer",
         type: "event",
     },
     {
         anonymous: false,
-        inputs: [{
-                indexed: true,
-                name: "_owner",
-                type: "address",
-            },
-            {
-                indexed: true,
-                name: "_spender",
-                type: "address",
-            },
-            {
-                indexed: false,
-                name: "_value",
-                type: "uint256",
-            },
+        inputs: [
+            { indexed: true, name: "_owner", type: "address" },
+            { indexed: true, name: "_spender", type: "address" },
+            { indexed: false, name: "_value", type: "uint256" },
         ],
         name: "Approval",
         type: "event",
     },
     {
         anonymous: false,
-        inputs: [{
-                indexed: true,
-                name: "from",
-                type: "address",
-            },
-            {
-                indexed: false,
-                name: "value",
-                type: "uint256",
-            },
+        inputs: [
+            { indexed: true, name: "from", type: "address" },
+            { indexed: false, name: "value", type: "uint256" },
         ],
         name: "Burn",
         type: "event",
@@ -562,14 +403,9 @@ $(document).on('ready', async function() {
         console.log('klaytn : ', klaytn);
     }
     const PER = new caver.klay.Contract(token_abi, token_address);
-    const DEPOSIT = new caver.klay.Contract(contract_abi, contract_address);
-
     try {
+
         $(document).on('click', '#charge_button', async function() {
-            if (!mem_id) {
-                alert("로그인 후 이용 가능합니다.");
-                location.href = "/mypage";
-            }
             await klaytn.enable();
             // 클레이튼에 접속되어있는 월렛주소
             const account = klaytn.selectedAddress;
@@ -592,22 +428,19 @@ $(document).on('ready', async function() {
                 alert('Klaytn Kaikas에 PER 코인이 없습니다.\nPER 코인을 추가 또는 충전해주세요');
                 location.reload();
             }
-            let charge_value = $('#charge_input').val();
-            // DEPOSIT.methods.approve().call();
-            // PER.methods.approve(contract_address, charge_value);
-            // return;
 
+            let charge_value = $('#charge_input').val();
             await klaytn.enable();
-            const data = await caver.klay.abi.encodeFunctionCall({
+            const data = caver.klay.abi.encodeFunctionCall({
                 name: "approve",
                 type: "function",
                 inputs: [{
                         type: "address",
-                        name: "_spender",
+                        name: "_to",
                     },
                     {
                         type: "uint256",
-                        name: "_tokens",
+                        name: "_value",
                     },
                 ],
             }, [
@@ -620,6 +453,7 @@ $(document).on('ready', async function() {
 
             //여기 있는 데이터들로 
             var txhash, reciept, success_fromAddress, success_toAddress, success_value;
+
             await caver.klay.sendTransaction({
                 type: "SMART_CONTRACT_EXECUTION",
                 account,
@@ -628,7 +462,7 @@ $(document).on('ready', async function() {
                 gas: 3000000,
             }).on("transactionHash", (transactionHash) => {
                 txhash = `https://scope.klaytn.com/tx/${transactionHash}?tabId=internalTx`;
-            }).on("receipt", async(receipt) => {
+            }).on("receipt", (receipt) => {
                 // console.log("receipt", receipt);
                 reciept = JSON.stringify(receipt);
                 success_fromAddress = receipt.from;
@@ -636,61 +470,12 @@ $(document).on('ready', async function() {
                 success_value =
                     caver.utils.hexToNumberString(receipt.logs[0].data) /
                     1000000000000000000;
-
-                const transferData = await caver.klay.abi.encodeFunctionCall({
-                    name: "deposit_enter",
-                    type: "function",
-                    inputs: [{
-                            type: "address",
-                            name: "_from",
-                        },
-                        {
-                            type: "address",
-                            name: "_to",
-                        },
-                        {
-                            type: "uint256",
-                            name: "_value",
-                        },
-                        {
-                            type: "string",
-                            name: "_url",
-                        },
-                        {
-                            type: "string",
-                            name: "_id",
-                        },
-                    ],
-                }, [
-                    selected_addr,
-                    contract_address,
-                    caver.utils
-                    .toBN(charge_value)
-                    .mul(caver.utils.toBN(Number(`1e${18}`)))
-                    .toString(),
-                    document.location.href,
-                    mem_id
-                ]);
-
-                await caver.klay.sendTransaction({
-                    type: "SMART_CONTRACT_EXECUTION",
-                    account,
-                    to: token_address,
-                    transferData,
-                    gas: 3000000,
-                }).on("transactionHash", (transactionHash) => {
-
-                }).on("receipt", (receipt) => {
-                    console.log(receipt);
-                }).on("error", (error) => {
-                    console.log("error occur", error);
-                })
             }).on("error", (error) => {
                 console.log("error", error);
             });
 
             //여기 있는데이터들이 실제로 거래가 이루어지는지 알려주는 데이터들
-            // console.log(txhash, reciept, success_fromAddress, success_toAddress, success_value);
+            console.log(txhash, reciept, success_fromAddress, success_toAddress, success_value);
         });
     } catch (error) {
         alert('Klaytn Kaikas연동에 실패 하였습니다. 마이페이지로 이동합니다.');
