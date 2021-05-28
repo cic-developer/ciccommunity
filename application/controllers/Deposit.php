@@ -78,7 +78,35 @@ class Deposit extends CB_Controller
 
 
 
+        $mem_id = (int) $this->member->item('mem_id');
+        $mem_cp = $this->member->item('mem_cp');
         $mem_deposit = $this->member->item('mem_deposit');
+
+        // 예치금 제거 + cp 반환
+        if($mem_deposit){
+            $arr = array(
+                'mem_cp' => $mem_cp + $mem_deposit,
+                'mem_deposit' => null,
+            );
+            $memResult = $this->Member_model->set_user_modify($mem_id, $arr);
+
+            // cp 로그 기록
+            if($result == 1){
+                $logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '', $mem_deposit, '@byself', $mem_id, '예치금 반환');
+            }else {
+                $result = array(
+                    'state' => '0',
+                    'message' => '예치금 반환후 로그기록에 실패하였습니다',
+                );
+                exit(json_encode($result));
+            }
+        }else {
+            $result = array(
+				'state' => '0',
+				'message' => '반환할 예치금이 없습니다',
+			);
+			exit(json_encode($result));
+        }
 
         print_r($mem_deposit);
         exit;

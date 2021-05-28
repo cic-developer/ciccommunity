@@ -135,14 +135,9 @@ class Member_model extends CB_Model
 		return $result;
 	}
 
-	public function set_user_modify($primary_value = '', $mem_phone = '', $mem_password = '')
+	public function set_user_modify($primary_value = '', $arr)
 	{
-
-		$arr = array(
-			'mem_phone' => $mem_phone,
-			'mem_password' => $mem_password,
-		);
-
+		
 		$result = $this->update($primary_value, $arr);
 
 		return $result;

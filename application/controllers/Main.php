@@ -23,7 +23,7 @@ class Main extends CB_Controller
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
-	protected $helpers = array('form', 'array');
+	protected $helpers = array('form', 'array', 'coin_price');
 
 	function __construct()
 	{

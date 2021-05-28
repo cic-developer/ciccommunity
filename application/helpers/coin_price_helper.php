@@ -15,26 +15,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if ( ! function_exists('number_unit_to_korean')) {
 	function number_unit_to_korean($number)
 	{
+        $BIG_ORDER = ["", "만", "억", "조"];
+        $str = "";
+        for($i = count($BIG_ORDER) - 1; $i >= 0; --$i){
+            $unit = pow(10000, $i);
+            $part = floor($number / $unit);
+            if($part > 0){
+                $str .= $part . $BIG_ORDER[$i];
+                if($i == 2) break; // *조 **억 또는 *억
+                if($i == 1) break; // **만
+            }
+            $number %= $unit;	
+        }
+        return $str;
 	}
 }
 
 /**
- * 금액별 소숫점 제한 설정
+ * 최대소숫점 지정 가능
  */
-if ( ! function_exists('number_unit_to_korean')) {
-	function number_unit_to_korean($number)
+if ( ! function_exists('rs_number_format')) {
+	function rs_number_format($number, $demicals = 0)
 	{
+        $value = number_format($number, $demicals);
+        if($demicals > 0){
+            $check = TRUE;
+            while($check){
+                //문제없으면 반복종료
+                $check = FALSE;
+
+                $last_value = substr($value, -1);
+
+                //마지막 문자가 0이나 . 일경우 삭제
+                if($last_value == 0 || $last_value == '.'){
+                    //마지막문자 제거
+                    $value = substr($value, 0, -1);
+                    $check = TRUE;
+                }
+            }
+        }
+        return $value;
 	}
 }
 
-/**
- * 소숫점인데 .00 과 같이 0일경우 삭제
- */
-if ( ! function_exists('claen_dot_number')) {
-	function claen_dot_number($number)
-	{
-        return (int)$number;
-	}
-}
 
 ?>

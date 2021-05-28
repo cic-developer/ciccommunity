@@ -1,7 +1,7 @@
 <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
-  />
+/>
 <div id="container-wrap">
 		<div id="contents" class="div-cont">
 		<!-- page start // -->
@@ -62,10 +62,10 @@
 						<!-- TradingView Widget END -->
 						<div class="right_content_all">
 						<div style="text-align:left; border-bottom:5px solid #ddd; padding-bottom:5px;">
-							<?php if(!file_exists('https://static.upbit.com/logos/' .$symbole)) { ?>
-								<img style= "width: 30px; padding-right:10px;" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
-							<?php }else {?>
+							<?php if($symbole == "PER"){ ?>
 								<img></img>
+							<?php }else {?>
+								<<img style= "width: 30px; padding-right:10px;" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
 								<?php } ?>
 							<strong class="btxt"><?php echo $korean; ?></strong>
 							<p class="stxt">
@@ -155,7 +155,7 @@
 				<div></div>
 			<?php } ?>	
 			<!-- PRICE UNTIL HERE -->
-			
+
 			<!-- 자유게시판 시각 -->
 			<div class="gap35"></div>
 			<div class="cont">

@@ -2784,6 +2784,11 @@ class Membermodify extends CB_Controller
 			// 'mem_wallet_address' => '123123123',
 		);
 
+		$arr = array(
+			'mem_phone' => $new_phone,
+			'mem_password' => $new_password,
+		);
+
 		$this->Member_extra_vars_model->save($mem_id, $data); // memo: return 값이 없다
 		$result = $this->Member_model->set_user_modify($mem_id, $new_phone, $new_password);
 
