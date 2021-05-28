@@ -40,19 +40,19 @@ if ( ! function_exists('rs_number_format')) {
 	{
         if(!$number) return '';
         $value = number_format($number, $demicals);
-        if($value && $demicals > 0){
+        if($value && $demicals > 0 && strpos($value, '.') !== FALSE){
             $check = TRUE;
             while($check){
                 //문제없으면 반복종료
                 $check = FALSE;
 
                 $last_value = substr($value, -1);
-
                 //마지막 문자가 0이나 . 일경우 삭제
-                if($last_value == 0 || $last_value == '.'){
-                    //마지막문자 제거
+                if($last_value === '0' || $last_value == '.'){
+                    if($last_value === '0'){
+                        $check = TRUE;
+                    }
                     $value = substr($value, 0, -1);
-                    $check = TRUE;
                 }
             }
         }

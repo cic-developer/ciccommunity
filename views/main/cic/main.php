@@ -118,11 +118,11 @@
                                     <td><?php echo number_unit_to_korean($volume); ?></td>
                                     <td>
                                         <?php
-                                        if($change_rate){
+                                        // if($change_rate){
                                         ?>
                                         <p class="percent <?php echo $percent_class; ?>"><span><?php echo rs_number_format($change_rate,2); ?> %</span></p>
                                         <?php
-                                        }
+                                        // }
                                         ?>
                                     </td>
                                 </tr>
