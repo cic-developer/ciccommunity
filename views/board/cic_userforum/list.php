@@ -122,9 +122,9 @@
             <div class="lower r">
                 <div class="ov">
                     <?php if (element('isDeposit', $view)) { ?>
-                    <a href="#n" class="by-btn" id="deposit_subtract" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>"><span>예치금 빼기</span></a>
+                    <a href="#n" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>"><span>예치금 빼기</span></a>
                     <?php }else { ?>
-                    <a href="#n" class="by-btn" id="deposit_insert" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>"><span>예치금 넣기</span></a>
+                    <a href="#n" class="by-btn" id="deposit_insert"><span>예치금 넣기</span></a>
                     <?php } ?>
 
                     <a href="#n" class="by-btn"><span>글쓰기</span></a>
@@ -176,7 +176,7 @@
             <!-- 새 핸드폰번호 modal -->
             <div id="myModal_deposit" class="modal">
 				<div class="modal-content">
-					<ul class="entry modify-box">
+					<!-- <ul class="entry modify-box"> -->
                         <table>
                             <colgroup>
                             </colgroup>
@@ -195,38 +195,10 @@
                                 </tr>
                             </tbody>
                         </table>
-						<!-- <li class="ath-email-content">
-							<p class="btxt">이메일인증</p>
-							<div class="all-email-box">
-								<div class="field modify">
-									<p class="chk-input w380">
-										<input type="text" placeholder="인증번호를 입력해주세요" class="ath_num" name="ath_num" value="">
-									</p>
-                                    
-                                    <label for="deposit_confirm">확인</label>
-									<input type="checkbox" id="deposit_confirm" >
-									
-								</div>
-								<div class="phone-resend-email" style="display:none;">
-									<a href="javascript:void(0);" data-type="phone" class="modify-btn resend-ath-email" style="display:block;">
-										<span>인증번호 재전송</span>
-									</a>	
-								</div>
-							</div>
-							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
-						</li>
-						<li class="wallet-modify-content">
-							<p class="btxt">새 핸드폰번호</p>
-							<div class="field modify">
-								<p class="chk-input w380">
-									<input type="text" placeholder="핸드폰번호" onkeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="" readonly disabled style="background-color:#efefef;">
-								</p>
-								<a href="javascript:void(0);" id="confirm_phone"  data-type="phone" class="modify-btn">
-									<span>확인</span>
-								</a>
-							</div>
-						</li> -->
-					</ul>
+                        <a href="javascript:void(0);" id="deposit_insert_confirm"  data-type="phone" class="modify-btn" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>">
+                            <span>확인</span>
+                        </a>
+					<!-- </ul> -->
 				</div>
 			</div>
 
@@ -323,57 +295,50 @@
 		}
 	}
 
-
-
-    // $(document).on('click', '#deposit_insert', function() {
-
-
-
-
-        // alert("예치한 금액이 전부 반환됩니다");
-
-        // var isConfirm = confirm('선택한 요청을 정말 승인 하시겠습니까?');
-
-        // if(isConfirm){
-
-        //     $.ajax({
-        //         url: cb_url + '/deposit/subtract',
-        //         type: 'POST',
-        //         data: {
-        //             csrf_test_name : cb_csrf_hash
-        //         },
-        //         dataType: 'json',
-        //         async: false,
-        //         cache: false,
-        //         success: function(data) {
-        //             state = data.state;
-        //             message = data.message;
-                    
-                    
-        //             if(state == 1){
-        //                 // 성공 메세지 출력
-        //                 alert(message); 
-        //                 location.reload(true);
-        //             }
-        //             if(state == 0){
-        //                 // 실패 메세지 출력
-        //                 alert(message);
-        //             }
-        //         },
-        //         error: function(){
-        //             alert('에러가 발생했습니다.');
-        //         }
-        //     });
-        // }
-    // })
-
-    $(document).on('click', '#deposit_subtract', function() {
-        alert("예치한 금액이 전부 반환됩니다");
-
+    $(document).on('click', '#deposit_insert_confirm', function() {
+    
         var isConfirm = confirm('선택한 요청을 정말 승인 하시겠습니까?');
-
+        
         if(isConfirm){
+        
+            $.ajax({
+                url: cb_url + '/deposit/insert',
+                type: 'POST',
+                data: {
+                    csrf_test_name : cb_csrf_hash
+                },
+                dataType: 'json',
+                async: false,
+                cache: false,
+                success: function(data) {
+                    state = data.state;
+                    message = data.message;
+                    
+                    
+                    if(state == 1){
+                        // 성공 메세지 출력
+                        alert(message); 
+                        location.reload(true);
+                    }
+                    if(state == 0){
+                        // 실패 메세지 출력
+                        alert(message);
+                    }
+                },
+                error: function(){
+                    alert('에러가 발생했습니다.');
+                }
+            });
+        }
+    })
 
+    $(document).on('click', '#deposit_subtract_confirm', function() {
+        alert("예치한 금액이 전부 반환됩니다");
+        
+        var isConfirm = confirm('선택한 요청을 정말 승인 하시겠습니까?');
+        
+        if(isConfirm){
+        
             $.ajax({
                 url: cb_url + '/deposit/subtract',
                 type: 'POST',

@@ -378,7 +378,7 @@ class Main extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		$result = array('success' => json_encode($data));
+		$result = array('success' => $this->load->view('main/cic/ajax_maincoin', $data, TRUE));
 		exit(json_encode($result));
 	}
 }

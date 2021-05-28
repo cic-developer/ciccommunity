@@ -11,14 +11,18 @@
 					<a href="#n" id="optionb" class="sel-btn"><span>통합검색</span></a>
 					<ul>
 						<li class="active"><a href="<?php base_url() ?>?sfield=post_both&skeyword=<?php echo $this->input->get('skeyword')?>"><span>통합검색</span></a></li>
-						<li value="post_title"><a href="<?php base_url() ?>?sfield=post_title&skeyword=<?php echo $this->input->get('skeyword')?>"><span>제목</span></a></li>
-						<li value="post_content"><a href="<?php base_url() ?>?sfield=post_content&skeyword=<?php echo $this->input->get('skeyword')?>"><span>내용</span></a></li>
-						<li value="post_nickname"><a href="<?php base_url() ?>?sfield=post_nickname&skeyword=<?php echo $this->input->get('skeyword')?>"><span>작성자</span></a></li>
+						<li class="post_title"><a href="<?php base_url() ?>?sfield=post_title&skeyword=<?php echo $this->input->get('skeyword')?>"><span>제목</span></a></li>
+						<li class="post_content"><a href="<?php base_url() ?>?sfield=post_content&skeyword=<?php echo $this->input->get('skeyword')?>"><span>내용</span></a></li>
+						<li class="post_nickname"><a href="<?php base_url() ?>?sfield=post_nickname&skeyword=<?php echo $this->input->get('skeyword')?>"><span>작성자</span></a></li>
 					</ul>		
 				</div>
 				<script>
-					$('li').click(function(){
-						$(#optionb).val($(this).text());
+					$(document).ready(function(){
+					$("#optionb").on("click", function(event) {
+						$("#theme-title").html(       
+						$(this).attr("class")
+						);
+					});
 					});
 				</script>
 				<div class="field search">

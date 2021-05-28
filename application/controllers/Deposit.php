@@ -18,7 +18,7 @@ class Deposit extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_cp', 'Member');
+	protected $models = array('CIC_cp', 'Member', 'CIC_forum');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -48,7 +48,58 @@ class Deposit extends CB_Controller
 	 */
 	public function insert()
 	{
+        // cp 차감 기록 + member 예치금 추가
+
+        // 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_deposit_ajax_insert';
+		$this->load->event($eventname);
         
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+        
+		$view = array();
+		$view['view'] = array();
+        
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+        $mem_id = (int) $this->member->item('mem_id');
+        $mem_cp = $this->member->item('mem_cp');
+        $deposit_meta = (int)  $this->CIC_forum_model->item('forum_deposit');
+
+        // 예치금 추가 + cp 차감
+        if(!$mem_deposit){
+            $arr = array(
+                'mem_cp' => $mem_cp - $deposit_meta,
+                'mem_deposit' => $deposit_meta,
+            );
+            $memResult = $this->Member_model->set_user_modify($mem_id, $arr);
+
+            // cp 로그 기록
+            if($memResult == 1){
+                $logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '', $deposit_meta, '@byself', $mem_id, '예치금 넣기');
+
+                $result = array(
+                    'state' => '1',
+                    'message' => $deposit_meta.'cp를 예치하였습니다',
+                );
+                exit(json_encode($result));
+            }else {
+                $result = array(
+                    'state' => '0',
+                    'message' => '예치금을 넣은후 로그기록에 실패하였습니다',
+                );
+                exit(json_encode($result));
+            }
+        }else {
+            $result = array(
+				'state' => '0',
+				'message' => '이미 예치된 cp가 존재합니다',
+			);
+			exit(json_encode($result));
+        }
 	}
 
 	/**

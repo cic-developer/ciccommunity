@@ -82,17 +82,21 @@ class Coinapi extends CI_Controller
             )
         );
         $coin =  $this->CI->CIC_maincoin_coin_model->get_select($symbol);
+        $return_data = array(
+            'exchange' => array(),
+            'data' => array(),
+        );
         if(!$coin) return FALSE;
 		if ($symbol == 'PER') {
-            $data = array();
             $coinDetail = $coin['coin_detail'];
             foreach($coinDetail as $thisDetail){
                 $exchange = $thisDetail['cme_id'];
                 $coin_id = $thisDetail['cmcd_coin_id'];
                 $market = $thisDetail['cmcd_coin_market'];
-                $data[] = $this->get_coin_data($exchange, $coin_id, $market);
+                $return_data['exchange'] = $thisDetail;
+                $return_data['data'] = $this->get_coin_data($exchange, $coin_id, $market);
             }
-            return $data;
+            return $return_data;
 		}
 
         //개별 정보 세팅되있는지 확인
@@ -102,32 +106,26 @@ class Coinapi extends CI_Controller
                 $decoded_data = json_decode($user_maincoin_data);
             }
         }
-
+        
         //거래소 목록 정리
         if(isset($decoded_data) && isset($decoded_data['exchange'])){
-            $exchange = $this->CI->CIC_maincoin_exchange_model->get_default_list();
-        } else {
             $exchange = $this->CI->CIC_maincoin_exchange_model->get_user_list($decoded_data['exchange']);
+        } else {
+            $exchange = $this->CI->CIC_maincoin_exchange_model->get_default_list();
         }
 
-        $first_block = array();
+        $return_data['exchange'] = $exchange;
         foreach($exchange as $thisExchange){
-            $thisCoinDetail = $coin[0]['coin_detail'][$thisExchange['cme_idx']];
-            if($coin[0]['coin_detail'][$thisExchange['cme_idx']]){
-                $coin_id = $coin[0]['coin_detail'][$thisExchange['cme_idx']]['cmcd_coin_id'];
-                $market = $coin[0]['coin_detail'][$thisExchange['cme_idx']]['cmcd_coin_market'];
-                $first_block[] = $this->get_coin_data($thisExchange['cme_id'], $coin_id, $market);
+            $thisCoinDetail = $coin['coin_detail'][$thisExchange['cme_idx']];
+            if($coin['coin_detail'][$thisExchange['cme_idx']]){
+                $coin_id = $coin['coin_detail'][$thisExchange['cme_idx']]['cmcd_coin_id'];
+                $market = $coin['coin_detail'][$thisExchange['cme_idx']]['cmcd_coin_market'];
+                $return_data['data'][] = $this->get_coin_data($thisExchange['cme_id'], $coin_id, $market);
             } else {
-                $first_block[] = array();
+                $return_data['data'][] = array();
             }
         }
 
-
-        $return_data = array(
-            'exchange' => $exchange,
-            'coin' => $coin,
-            'first_block' => $first_block,
-        );
         return $return_data;
     }
     
