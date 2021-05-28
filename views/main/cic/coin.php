@@ -3,8 +3,15 @@
         <!-- page start // -->
         <div class="price-wrap">
             <h3>시세표 설정</h3>
+            
+			<?php 	
+				$attributes = array('class' => 'form-horizontal', 'name' => 'fcoinform', 'id' => 'fcoinform');
+				echo form_open(current_full_url(), $attributes);
+			?>
+            <input type="hidden" name="my_exchange" value="">
+            <input type="hidden" name="my_coin" value="">
             <div class="cont">
-                <div class="set-list">
+                <div class="set-list" id="exchange_list">
                     <div class="item fl">
                         <h4><span>거래소</span> 종류</h4>
                         <div class="c01">
@@ -53,7 +60,7 @@
                     </div>
                 </div>
                 <div class="gap50"></div>
-                <div class="set-list">
+                <div class="set-list" id="coin_list">
                     <div class="item fl">
                         <h4><span>암호화폐</span></h4>
                         <div class="c01">
@@ -193,11 +200,11 @@
                     <h4>화폐단위</h4>
                     <ul>
                         <li>
-                            <p class="chk-radio"><input type="radio" name="dsel01Group" id="dsel01" checked=""><label
+                            <p class="chk-radio"><input type="radio" name="money" id="dsel01" value="krw" <?php echo set_radio('money', 'krw', (element('money', $view) === 'krw' ? true : false)); ?>><label
                                     for="dsel01">KRW</label></p>
                         </li>
                         <li>
-                            <p class="chk-radio"><input type="radio" name="dsel01Group" id="dsel02"><label
+                            <p class="chk-radio"><input type="radio" name="money" id="dsel02" value="usd" <?php echo set_radio('money', 'usd', (element('money', $view) === 'usd' ? true : false)); ?>><label
                                     for="dsel02">USD</label></p>
                         </li>
                     </ul>
@@ -208,7 +215,14 @@
                 <a href="#n" class="save-btn"><span>저장</span></a>
                 <a href="#n" class="refresh-btn"><span>초기화</span></a>
             </div>
+            <?php echo form_close(); ?>
         </div>
         <!-- page end // -->
     </div>
 </div>
+<script>
+    $(document).on('click', '.save-btn', function(){
+
+        $('#fcoinform').submit();
+    });
+</script>

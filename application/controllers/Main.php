@@ -266,6 +266,32 @@ class Main extends CB_Controller
 		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
 		 */
 		if ($this->form_validation->run() === true) {
+
+			$exchange = explode(',',$this->input->post('my_exchange'));
+			for($i=0; $i<count($exchange); $i++){
+				$exchange[$i] = (int)trim($exchange[$i]);
+			}
+			$exchange = array_unique($exchange);
+
+			$coin = explode(',',$this->input->post('my_exchange'));
+			for($i=0; $i<count($coin); $i++){
+				$coin[$i] = trim($coin[$i]);
+			}
+			$coin = array_unique($coin);
+
+			$money = $this->input->post('money');
+			$set_data = array(
+				'exchange' => $exchange,
+				'coin' => $coin,
+				'money' => $money,
+			);
+			$this->Member_extra_vars_model->save($this->member->is_member(), array('mem_maincoin', json_encode($set_data,JSON_UNESCAPED_UNICODE)));
+			
+			$this->session->set_flashdata(
+				'message',
+				'정상적으로 수정되었습니다.'
+			);
+			redirect(base_url('/main/coin'));
 		} else {
 			// 데이터 가져오기 시작
 			$exchange_list = $this->CIC_maincoin_exchange_model->get('','','','','','cme_orderby','ASC');
@@ -300,6 +326,8 @@ class Main extends CB_Controller
 			$view['view']['except_exchange_list'] = $except_exchange_list;
 			$view['view']['my_coin_list'] = $my_coin_list;
 			$view['view']['except_coin_list'] = $except_coin_list;
+			$view['view']['money'] = element('money',$member_coin_data) ? element('money',$member_coin_data) : 'krw';
+
 	
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
