@@ -176,8 +176,8 @@ class Search extends CB_Controller
 			}
 		}
 
-		$free_row = $result['board_rows']['1'];
-		$writer_row = $result['board_rows']['2'];
+		$free_row = $result['board_rows']['1']; // 장유게시판 검색 ROW 
+		$writer_row = $result['board_rows']['2']; // WRITER 개시판 검색 Row
 
 		$view['view']['data'] = $result;
 		$view['view']['boardlist'] = $boardlist;
@@ -185,9 +185,9 @@ class Search extends CB_Controller
 		$total_rows = $free_row + $writer_row;
 		$view['total_rows'] = $total_rows;
 
-		echo "<pre><br>";
-		print_r($boardlist);
-		echo "</pre></br>";
+		// echo "<pre><br>";
+		// print_r($boardlist);
+		// echo "</pre></br>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
 			$sfieldarray = array('post_title', 'post_content', 'post_both');

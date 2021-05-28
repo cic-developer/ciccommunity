@@ -52,7 +52,7 @@ class Checkplus extends CI_Controller
 		$authtype = "M";      		// 없으면 기본 선택화면, X: 공인인증서, M: 핸드폰, C: 카드 (1가지만 사용 가능)
 			
 		$popgubun 	= "N";		//Y : 취소버튼 있음 / N : 취소버튼 없음
-		$customize 	= "";		//없으면 기본 웹페이지 / Mobile : 모바일페이지 (default값은 빈값, 환경에 맞는 화면 제공)
+		$customize 	= "Mobile";		//없으면 기본 웹페이지 / Mobile : 모바일페이지 (default값은 빈값, 환경에 맞는 화면 제공)
 		
 		$gender = "";      		// 없으면 기본 선택화면, 0: 여자, 1: 남자
 		

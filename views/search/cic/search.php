@@ -30,7 +30,7 @@
 					<div class="sel-box c02">
 						<a href="#n" class="sel-btn"><span>제목만</span></a>
 						<ul>
-							<li class="active"><a href="<?php base_url() ?>?sop=AND&skeyword=<?php echo $this->input->get('skeyword')?>"><span>제목만</span></a></li>
+							<li class="active"><a href="<?php base_url() ?>?sfield=<?php echo $this->input->get('sfield')?>&sop=AND&skeyword=<?php echo $this->input->get('skeyword')?>"><span>제목만</span></a></li>
 							<li><a href="<?php base_url() ?>?sop=OR&skeyword=<?php echo $this->input->get('skeyword')?>"><span>내용만</span></a></li>
 						</ul>
 					</div>
