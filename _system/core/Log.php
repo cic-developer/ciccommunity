@@ -169,6 +169,15 @@ class CI_Log {
 	 */
 	public function write_log($level, $msg)
 	{
+
+		/*
+		** Declaration of 오류로그가 너무 쌓여서 임의로 쌓이지 않도록 설정
+		*/
+		if(strpos($msg, 'Declaration of') !== FALSE){
+			return FALSE;
+		}
+
+
 		if ($this->_enabled === FALSE)
 		{
 			return FALSE;

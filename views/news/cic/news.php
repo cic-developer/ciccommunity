@@ -107,142 +107,7 @@
 									</a>
 								</div>
 							</div>
-							<div class="owl-item active" style="width: 240px; margin-right: 20px;">
-								<div class="item">
-									<a href="#n">
-										<div class="img"><img
-												src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">
-										</div>
-										<div class="txt">
-											<p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
-											<p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트
-												예시 입니다 ...</p>
-											<p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="owl-item active" style="width: 240px; margin-right: 20px;">
-								<div class="item">
-									<a href="#n">
-										<div class="img"><img
-												src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">
-										</div>
-										<div class="txt">
-											<p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
-											<p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트
-												예시 입니다 ...</p>
-											<p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 240px; margin-right: 20px;">
-								<div class="item">
-									<a href="#n">
-										<div class="img"><img
-												src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">
-										</div>
-										<div class="txt">
-											<p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
-											<p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트
-												예시 입니다 ...</p>
-											<p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 240px; margin-right: 20px;">
-								<div class="item">
-									<a href="#n">
-										<div class="img"><img
-												src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">
-										</div>
-										<div class="txt">
-											<p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
-											<p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트
-												예시 입니다 ...</p>
-											<p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 240px; margin-right: 20px;">
-								<div class="item">
-									<a href="#n">
-										<div class="img"><img
-												src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">
-										</div>
-										<div class="txt">
-											<p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
-											<p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트
-												예시 입니다 ...</p>
-											<p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
-								<div class="item">
-									<a href="#n">
-										<div class="img"><img
-												src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">
-										</div>
-										<div class="txt">
-											<p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
-											<p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트
-												예시 입니다 ...</p>
-											<p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
-								<div class="item">
-									<a href="#n">
-										<div class="img"><img
-												src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">
-										</div>
-										<div class="txt">
-											<p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
-											<p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트
-												예시 입니다 ...</p>
-											<p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
-								<div class="item">
-									<a href="#n">
-										<div class="img"><img
-												src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">
-										</div>
-										<div class="txt">
-											<p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
-											<p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트
-												예시 입니다 ...</p>
-											<p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
-								<div class="item">
-									<a href="#n">
-										<div class="img"><img
-												src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">
-										</div>
-										<div class="txt">
-											<p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
-											<p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트
-												예시 입니다 ...</p>
-											<p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
-										</div>
-									</a>
-								</div>
-							</div>
-						</div>
+
 					</div>
 					<div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><span
 								aria-label="Previous">‹</span></button><button type="button" role="presentation"
@@ -277,18 +142,37 @@
 						</a>
 					</li> -->
 					<?php
-                        if (element('list', element('data', element('list', $view)))) {
-							
-
-			print_r('here');
-			exit;
-
-							foreach (element('list', element('data', element('list', $view))) as $result) {
-                    ?>
-                    <?php
-                        }
-                    }
-                    ?>
+						if (element('list', element('data', $view))) {
+							foreach (element('list', element('data', $view)) as $result) {
+								?>
+							<li>
+								<a href="#n">
+									<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png') ?>" alt="">
+									</div>
+									<div class="txt">
+										<div class="vc">
+											<p class="btxt"><?php echo html_escape(element('news_title', $result)); ?><span>(<?php echo number_format(element('news_reviews', $result)); ?>)</span></p>
+											<p class="stxt"><?php echo html_escape(element('news_contents', $result)); ?></p>
+											<p class="ctxt">
+												<span>블록미디어</span>
+												<span>02:18</span>
+												<span>조회 82</span>
+											</p>
+										</div>
+									</div>
+								</a>
+							</li>
+						<?php
+							}
+						}
+						if ( ! element('list', element('data', $view))) {
+						?>
+							<tr>
+								<td colspan="12" class="nopost">자료가 없습니다</td>
+							</tr>
+						<?php
+						}
+						?>
 				</ul>
 				<script>
 					$(function () {

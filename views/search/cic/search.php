@@ -171,6 +171,7 @@
 						}	
 					?>
 				</div>
+				<div class="list vimg vp">
 				<div class="list community">
 					<table>
 						<colgroup>
@@ -220,6 +221,7 @@
 							<?php } ?>
 						</tbody>
 					</table>
+				</div>
 				</div>
 				<!-- 자유게시판 끝!!! -->
 
@@ -294,104 +296,104 @@
 					<a href="#n" class="more"><span>more</span></a>
 				</div>
 				<div class="list vimg vp">
-				<ul>
-					<li>
-						<a href="#n">
-							<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
-							<div class="txt">
-								<div class="vc">
-									<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-									<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-									<p class="ctxt">
-										<span>블록미디어</span>
-										<span>02:18</span>
-										<span>조회 82</span>
-									</p>
+					<ul>
+						<li>
+							<a href="#n">
+								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
+								<div class="txt">
+									<div class="vc">
+										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
+										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
+										<p class="ctxt">
+											<span>블록미디어</span>
+											<span>02:18</span>
+											<span>조회 82</span>
+										</p>
+									</div>
 								</div>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="#n">
-							<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
-							<div class="txt">
-								<div class="vc">
-									<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-									<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-									<p class="ctxt">
-										<span>블록미디어</span>
-										<span>02:18</span>
-										<span>조회 82</span>
-									</p>
+							</a>
+						</li>
+						<li>
+							<a href="#n">
+								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
+								<div class="txt">
+									<div class="vc">
+										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
+										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
+										<p class="ctxt">
+											<span>블록미디어</span>
+											<span>02:18</span>
+											<span>조회 82</span>
+										</p>
+									</div>
 								</div>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="#n">
-							<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
-							<div class="txt">
-								<div class="vc">
-									<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-									<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-									<p class="ctxt">
-										<span>블록미디어</span>
-										<span>02:18</span>
-										<span>조회 82</span>
-									</p>
+							</a>
+						</li>
+						<li>
+							<a href="#n">
+								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
+								<div class="txt">
+									<div class="vc">
+										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
+										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
+										<p class="ctxt">
+											<span>블록미디어</span>
+											<span>02:18</span>
+											<span>조회 82</span>
+										</p>
+									</div>
 								</div>
-							</div>
-						</a>
-					</li>
-					<li class="no-img">
-						<a href="#n">
-							<div class="txt">
-								<div class="vc">
-									<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-									<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-									<p class="ctxt">
-										<span>블록미디어</span>
-										<span>02:18</span>
-										<span>조회 82</span>
-									</p>
+							</a>
+						</li>
+						<li class="no-img">
+							<a href="#n">
+								<div class="txt">
+									<div class="vc">
+										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
+										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
+										<p class="ctxt">
+											<span>블록미디어</span>
+											<span>02:18</span>
+											<span>조회 82</span>
+										</p>
+									</div>
 								</div>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="#n">
-							<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
-							<div class="txt">
-								<div class="vc">
-									<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-									<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-									<p class="ctxt">
-										<span>블록미디어</span>
-										<span>02:18</span>
-										<span>조회 82</span>
-									</p>
+							</a>
+						</li>
+						<li>
+							<a href="#n">
+								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
+								<div class="txt">
+									<div class="vc">
+										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
+										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
+										<p class="ctxt">
+											<span>블록미디어</span>
+											<span>02:18</span>
+											<span>조회 82</span>
+										</p>
+									</div>
 								</div>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="#n">
-							<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
-							<div class="txt">
-								<div class="vc">
-									<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-									<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-									<p class="ctxt">
-										<span>블록미디어</span>
-										<span>02:18</span>
-										<span>조회 82</span>
-									</p>
+							</a>
+						</li>
+						<li>
+							<a href="#n">
+								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
+								<div class="txt">
+									<div class="vc">
+										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
+										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
+										<p class="ctxt">
+											<span>블록미디어</span>
+											<span>02:18</span>
+											<span>조회 82</span>
+										</p>
+									</div>
 								</div>
-							</div>
-						</a>
-					</li>
-				</ul>
-			</div>
+							</a>
+						</li>
+					</ul>
+				</div>
 			<!-- s: paging-wrap -->
 			<div class="paging-wrap">
 				<!-- <a href="#" class="prev ctrl"><span>이전</span></a> -->

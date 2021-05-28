@@ -185,9 +185,9 @@ class Search extends CB_Controller
 		$total_rows = $free_row + $writer_row;
 		$view['total_rows'] = $total_rows;
 
-		// echo "<pre><br>";
-		// print_r($result);
-		// echo "</pre></br>";
+		echo "<pre><br>";
+		print_r($boardlist);
+		echo "</pre></br>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
 			$sfieldarray = array('post_title', 'post_content', 'post_both');
