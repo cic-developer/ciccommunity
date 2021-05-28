@@ -36,7 +36,7 @@
                                     $i = 0;
                                     foreach(element('my_exchange_list',$view) as $l){
                                 ?>
-                                    <li <?php echo $i == 0 ? 'class="active"' : '' ?>>
+                                    <li <?php echo $i == 0 ? 'class="active"' : '' ?> data-value="<?php echo element('cme_idx', $l) ?>">
                                         <a href="#n" class="ibtn">
                                             <span><?php echo element('cme_korean_nm', $l); ?></span>
                                         </a>
@@ -58,19 +58,19 @@
                         <h4><span>암호화폐</span></h4>
                         <div class="c01">
                             <ul>
-                                <li class="active"><a href="#n" class="ibtn"><span>BTC (비트코인)</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>ETC (이더리움)</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>LTC (라이트코인)</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>ETC (이더리움 클래식)</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>XLM (스텔라루멘)</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>KLAY (클레이튼)</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>BCH (비트코인 캐시)</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>EOS (이오스)</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>ADA (에이다)</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>DOT (폴카닷) </span></a></li>
-                                <li><a href="#n" class="ibtn"><span>BSV (비트코인에스브이)</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>XMR (모네로)</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>QTUM (퀸텀)</span></a></li>
+                                <?php
+                                    $i = 0;
+                                    foreach(element('except_coin_list',$view) as $l){
+                                ?>
+                                <li <?php echo $i == 0 ? 'class="active"' : '' ?>>
+                                    <a href="#n" class="ibtn">
+                                        <span><?php echo element('cmc_symbol', $l); ?> (<?php echo element('cmc_korean_nm', $l); ?>)</span>
+                                    </a>
+                                </li>
+                                <?php
+                                        $i++;
+                                    }
+                                ?>
                             </ul>
                         </div>
                     </div>
@@ -81,14 +81,22 @@
                         <a href="#n" class="down-btn"><span class="blind">아래로<span></span></span></a>
                         <div class="c02">
                             <ul>
-                                <li class="active"><a href="#n" class="ibtn"><span>BTC (비트코인)</span></a><button class="delete"><span
-                                            class="blind">삭제</span></button></li>
-                                <li><a href="#n" class="ibtn"><span>ETC (이더리움)</span></a><button
-                                        class="delete"><span class="blind">삭제</span></button></li>
-                                <li><a href="#n" class="ibtn"><span>핫빗코리아</span></a><button class="delete"><span
-                                            class="blind">삭제</span></button></li>
-                                <li><a href="#n" class="ibtn"><span>LTC (라이트코인)</span></a><button class="delete"><span
-                                            class="blind">삭제</span></button></li>
+                                <?php
+                                    $i = 0;
+                                    foreach(element('my_coin_list',$view) as $l){
+                                ?>
+                                <li <?php echo $i == 0 ? 'class="active"' : '' ?> data-value="<?php echo element('cmc_symbol', $l) ?>">
+                                    <a href="#n" class="ibtn">
+                                        <span><?php echo element('cmc_symbol', $l); ?> (<?php echo element('cmc_korean_nm', $l); ?>)</span>
+                                    </a>
+                                    <button class="delete">
+                                        <span class="blind">삭제</span>
+                                    </button>
+                                </li>
+                                <?php
+                                        $i++;
+                                    }
+                                ?>
                                 <li class="per"><a href="#n"><span>PER (퍼토큰)</span></a></li>
                             </ul>
                         </div>

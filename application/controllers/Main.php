@@ -233,72 +233,107 @@ class Main extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
         
-		// 데이터 가져오기 시작
-		$exchange_list = $this->CIC_maincoin_exchange_model->get('','','','','','cme_orderby','ASC');
-		$coin_list = $this->CIC_maincoin_coin_model->get('','','','','','cmc_orderby','ASC');
-		$member_coin_data_raw = $this->Member_extra_vars_model->item('mem_maincoin');
-		$member_coin_data = json_decode($member_coin_data_raw);
-		$member_exchange_list = element('exchange',$member_coin_data) ? element('exchange',$member_coin_data) : array();
-		$member_coin_list = element('coin',$member_coin_data) ? element('coin',$member_coin_data) : array();
-		// 데이터 가져오기 끝
-		$view['view']['exchange_list'] = $exchange_list;
-		$view['view']['coin_list'] = $coin_list;
-
-		$my_exchange_list = array();
-		$except_exchange_list = array();
-		foreach($exchange_list as $l){
-			if(in_array(element('cme_idx' ,$l), $member_exchange_list)){
-				$my_exchange_list[] = $l;
-			} else {
-				$except_exchange_list[] = $l;
-			}
-		}
-		$my_coin_list = array();
-		$except_coin_list = array();
-		foreach($coin_list as $l){
-			if(in_array(element('cme_idx' ,$l), $member_coin_list)){
-				$my_coin_list[] = $l;
-			} else {
-				$except_coin_list[] = $l;
-			}
-		}
-		$view['view']['my_exchange_list'] = $my_exchange_list;
-		$view['view']['except_exchange_list'] = $except_exchange_list;
-		$view['view']['my_coin_list'] = $my_coin_list;
-		$view['view']['except_coin_list'] = $except_coin_list;
-
-		// 이벤트가 존재하면 실행합니다
-		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
 		/**
-		 * 레이아웃을 정의합니다
+		 * Validation 라이브러리를 가져옵니다
 		 */
-		$page_title = $this->cbconfig->item('site_meta_title_main');
-		$meta_description = $this->cbconfig->item('site_meta_description_main');
-		$meta_keywords = $this->cbconfig->item('site_meta_keywords_main');
-		$meta_author = $this->cbconfig->item('site_meta_author_main');
-		$page_name = $this->cbconfig->item('site_page_name_main');
+		$this->load->library('form_validation');
 
-		$layoutconfig = array(
-			'path' => 'main',
-			'layout' => 'layout',
-			'skin' => 'coin',
-			'layout_dir' => 'cic_sub',//$this->cbconfig->item('layout_main'),
-			'mobile_layout_dir' => 'cic_sub',//$this->cbconfig->item('mobile_layout_main'),
-			'use_sidebar' => $this->cbconfig->item('sidebar_main'),
-			'use_mobile_sidebar' => $this->cbconfig->item('mobile_sidebar_main'),
-			'skin_dir' => 'cic',//$this->cbconfig->item('skin_main'),
-			'mobile_skin_dir' => 'cic',//$this->cbconfig->item('mobile_skin_main'),
-			'page_title' => $page_title,
-			'meta_description' => $meta_description,
-			'meta_keywords' => $meta_keywords,
-			'meta_author' => $meta_author,
-			'page_name' => $page_name,
+		/**
+		 * 전송된 데이터의 유효성을 체크합니다
+		 */
+		$config = array(
+			array(
+				'field' => 'my_exchange',
+				'label' => '내 거래소',
+				'rules' => 'trim|required|callback__check_comma_input',
+			),
+			array(
+				'field' => 'my_coin',
+				'label' => '내 코인',
+				'rules' => 'trim|required|callback__check_comma_input',
+			),
+			array(
+				'field' => 'money',
+				'label' => '화폐단위',
+				'rules' => 'trim|required|in_list[krw,usd]',
+			),
 		);
-		$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
-		$this->data = $view;
-		$this->layout = element('layout_skin_file', element('layout', $view));
-		$this->view = element('view_skin_file', element('layout', $view));
+		$this->form_validation->set_rules($config);
+
+		/**
+		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
+		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
+		 */
+		if ($this->form_validation->run() === true) {
+		} else {
+			// 데이터 가져오기 시작
+			$exchange_list = $this->CIC_maincoin_exchange_model->get('','','','','','cme_orderby','ASC');
+			$coin_list = $this->CIC_maincoin_coin_model->get('','',array('cmc_default !=' => 2),'','','cmc_orderby','ASC');
+			$member_coin_data_raw = $this->Member_extra_vars_model->item('mem_maincoin');
+			$member_coin_data = json_decode($member_coin_data_raw);
+			$member_exchange_list = element('exchange',$member_coin_data) ? element('exchange',$member_coin_data) : array();
+			$member_coin_list = element('coin',$member_coin_data) ? element('coin',$member_coin_data) : array();
+			// 데이터 가져오기 끝
+			$view['view']['exchange_list'] = $exchange_list;
+			$view['view']['coin_list'] = $coin_list;
+	
+			$my_exchange_list = array();
+			$except_exchange_list = array();
+			foreach($exchange_list as $l){
+				if(in_array(element('cme_idx' ,$l), $member_exchange_list)){
+					$my_exchange_list[] = $l;
+				} else {
+					$except_exchange_list[] = $l;
+				}
+			}
+			$my_coin_list = array();
+			$except_coin_list = array();
+			foreach($coin_list as $l){
+				if(in_array(element('cme_idx' ,$l), $member_coin_list)){
+					$my_coin_list[] = $l;
+				} else {
+					$except_coin_list[] = $l;
+				}
+			}
+			$view['view']['my_exchange_list'] = $my_exchange_list;
+			$view['view']['except_exchange_list'] = $except_exchange_list;
+			$view['view']['my_coin_list'] = $my_coin_list;
+			$view['view']['except_coin_list'] = $except_coin_list;
+	
+			// 이벤트가 존재하면 실행합니다
+			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+	
+			/**
+			 * 레이아웃을 정의합니다
+			 */
+			$page_title = $this->cbconfig->item('site_meta_title_main');
+			$meta_description = $this->cbconfig->item('site_meta_description_main');
+			$meta_keywords = $this->cbconfig->item('site_meta_keywords_main');
+			$meta_author = $this->cbconfig->item('site_meta_author_main');
+			$page_name = $this->cbconfig->item('site_page_name_main');
+	
+			$layoutconfig = array(
+				'path' => 'main',
+				'layout' => 'layout',
+				'skin' => 'coin',
+				'layout_dir' => 'cic_sub',//$this->cbconfig->item('layout_main'),
+				'mobile_layout_dir' => 'cic_sub',//$this->cbconfig->item('mobile_layout_main'),
+				'use_sidebar' => $this->cbconfig->item('sidebar_main'),
+				'use_mobile_sidebar' => $this->cbconfig->item('mobile_sidebar_main'),
+				'skin_dir' => 'cic',//$this->cbconfig->item('skin_main'),
+				'mobile_skin_dir' => 'cic',//$this->cbconfig->item('mobile_skin_main'),
+				'page_title' => $page_title,
+				'meta_description' => $meta_description,
+				'meta_keywords' => $meta_keywords,
+				'meta_author' => $meta_author,
+				'page_name' => $page_name,
+			);
+			$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+			$this->data = $view;
+			$this->layout = element('layout_skin_file', element('layout', $view));
+			$this->view = element('view_skin_file', element('layout', $view));
+		}
 	}
 
 
@@ -343,5 +378,13 @@ class Main extends CB_Controller
 
 		$result = array('success' => $this->load->view('main/cic/ajax_maincoin', $data, TRUE));
 		exit(json_encode($result));
+	}
+
+	private function _check_comma_input($string){
+		if(count(explode(',', $string)) > 0){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
 	}
 }

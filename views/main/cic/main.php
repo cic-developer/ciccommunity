@@ -64,7 +64,7 @@
                             $i = 0;
                             foreach(element('coin', element('maincoin', $view)) as  $thisCoin){
                         ?>
-                            <li <?php echo  $i == 0 ? 'class="active"' : '' ?> >
+                            <li <?php echo  $i == 0 ? 'class="active"' : '' ?>>
                                 <a href="#n" class="maincoin_symbol" data-symbol="<?php echo element('cmc_symbol', $thisCoin); ?>"><span><?php echo element('cmc_symbol' ,$thisCoin); ?></span></a>
                             </li>
                         <?php
