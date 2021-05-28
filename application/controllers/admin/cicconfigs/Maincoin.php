@@ -474,8 +474,10 @@ class Maincoin extends CB_Controller
 				'cmc_korean_nm' => $this->input->post('cmc_korean_nm', null, ''),
 				'cmc_english_nm' => $this->input->post('cmc_english_nm', null, ''),
 				'cmc_symbol' => $this->input->post('cmc_symbol', null, ''),
-				'cmc_default' => $this->input->post('cmc_default', null, '') ? 1 : 0,
 			);
+			if($this->input->post('cmc_default') != 2){
+				$updatedata['cmc_default'] = $this->input->post('cmc_default', null, '') ? 1 : 0;
+			}
 
 			/**
 			 * 게시물을 수정하는 경우입니다
@@ -628,6 +630,7 @@ class Maincoin extends CB_Controller
 		$view['view']['exchange_list'] = $exchange_list;
 		$result = $this->CIC_maincoin_coin_model->get_one($cmc_idx);
 		$view['view']['data'] = $result;
+		$view['view']['list_url'] = admin_url($this->pagedir . '/coin/?' . $param->output());
 
 		/**
 		 * primary key 정보를 저장합니다

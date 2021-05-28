@@ -5,7 +5,7 @@ if (element(element('primary_key', $view), element('data', $view))) {
 	// exit;
 ?>
 	<div class="box-header">
-		<h4 class="pb10 pull-left">코인 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>
+		<h4 class="pb10 pull-left"><?php echo element('cmc_symbol', element('data', $view)) ? element('cmc_symbol', element('data', $view)).' ' : '' ?>코인 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>
 		<div class="clearfix"></div>
 		<ul class="nav nav-tabs">
 			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/coin_write/' . element('cmc_idx', element('data', $view))); ?>" onclick="return check_form_changed();">기본정보</a></li>
@@ -56,7 +56,14 @@ if (element(element('primary_key', $view), element('data', $view))) {
 				<label class="col-sm-2 control-label">기본노출 설정</label>
 				<div class="col-sm-10">
 					<label for="cmc_default" class="checkbox-inline">
-						<input type="checkbox" name="cmc_default" id="cmc_default" value="1" <?php echo set_checkbox('cmc_default', '1', (element('cmc_default', element('data', $view)) ? true : false)); ?> /> 기본 코인으로 설정합니다.
+						<input type="checkbox" name="cmc_default" id="cmc_default" value="1" <?php echo set_checkbox('cmc_default', '1', (element('cmc_default', element('data', $view)) ? true : false)); ?> <?php echo element('cmc_default', element('data', $view)) == 2 ? 'disabled' : '' ?>/> 기본 코인으로 설정합니다.
+						<?php 
+							if(element('cmc_default', element('data', $view)) == 2){
+						?>
+							<input type="hidden" name="cmc_default" value="2"/>
+						<?php
+							}
+						?>
 					</label>
 					<p class="help-block">비회원이거나, 유저가 별도 설정하지 않은 경우 기본적으로 노출됩니다.</p>
 				</div>

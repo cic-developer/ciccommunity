@@ -1,6 +1,6 @@
 <div class="box">
 	<div class="box-header">
-		<h4 class="pb10 pull-left">코인 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>
+		<h4 class="pb10 pull-left"><?php echo element('cmc_symbol', element('data', $view)); ?> 코인 <?php echo element(element('primary_key', $view), element('data', $view)) ? '수정' : '추가';?></h4>
 		<div class="clearfix"></div>
 		<ul class="nav nav-tabs">
 			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/coin_write/' . element('cmc_idx', element('data', $view))); ?>" onclick="return check_form_changed();">기본정보</a></li>
@@ -17,6 +17,7 @@
 			<input type="hidden" name="cmcd_cmc_idx" value="<?php echo element('cmc_idx', element('data', $view)); ?>" />
 			<div class="box-table-header">
 				<div class="btn-group pull-right" role="group" aria-label="...">
+					<a href="<?php echo element('list_url', $view); ?>" class="btn btn-default btn-sm" >목록</a>
 					<button type="submit" class="btn btn-outline btn-danger btn-sm">저장하기</button>
 				</div>
 			</div>
