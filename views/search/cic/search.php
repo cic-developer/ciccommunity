@@ -163,12 +163,11 @@
 					<h3>자유게시판</h3>
 					<?php
 						if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result) { 
-								if(element('brd_name', $result) === '자유게시판'){?>
-									<a href="<?php echo base_url()."board/freetalk?sfield=post_title&skeyword="?><?php echo $this->input->get('skeyword')?>
-										"<?php echo $total_rows < 0 ? 'class="active"' : ''; ?> class="more"><span>more</span></a>
+							foreach (element('list', element('data', $view)) as $result) { ?>
+								<a href="<?php echo base_url()."board/freetalk?sfield=post_title&skeyword="?><?php echo $this->input->get('skeyword')?>
+									"class="more"><span>more</span></a>
 					<?php			
-								}	
+								
 							}
 						}	
 					?>
@@ -197,22 +196,22 @@
 						if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) {
 								if(element('brd_name', $result) === '자유게시판'){?>
-								<tr>
-									<td>
-										<div class="my-info">
-											<p class="pimg"><img src="<?php echo thumb_url(element('post_image', $result),30, 30)?>" alt=""></p>
-											<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
-										</div>
-									</td>
-									<td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>">
-										<?php echo html_escape(element('post_title', $result)); ?></a></td>
-									<td><?php echo element('display_datetime', $result); ?></td>
-									<td><?php echo number_format(element('post_hit', $result)); ?></td>
-									<td>
-										<p class="cyellow"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p>
-									</td>
-								</tr>
-							<?php
+									<tr>
+										<td>
+											<div class="my-info">
+												<p class="pimg"><img src="<?php echo thumb_url(element('post_image', $result),30, 30)?>" alt=""></p>
+												<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
+											</div>
+										</td>
+										<td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>">
+											<?php echo html_escape(element('post_title', $result)); ?></a></td>
+										<td><?php echo element('display_datetime', $result); ?></td>
+										<td><?php echo number_format(element('post_hit', $result)); ?></td>
+										<td>
+											<p class="cyellow"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p>
+										</td>
+									</tr>
+								<?php
 								}
 							}
 						}
@@ -234,7 +233,7 @@
 					<?php if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) { ?>
 								<a href="<?php echo base_url()."board/cicwriter?sfield=post_title&skeyword="?><?php echo $this->input->get('skeyword')?>" 
-								<?php echo $total_rows < 0 ? 'class="active"' : ''; ?> class="more"><span>more</span></a>
+									class="more"><span>more</span></a>
 						<?php
 							}
 						}

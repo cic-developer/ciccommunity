@@ -91,9 +91,9 @@
                         <thead>
                             <tr>
                                 <th>거래소</th>
-                                <th>거래금액</th>
                                 <th>시세(KRW)</th>
                                 <th>한국프리미엄</th>
+                                <th>거래금액</th>
                                 <th>변동률(24h)</th>
                             </tr>
                         </thead>
@@ -106,6 +106,7 @@
                                     $price = element('price', $thisPrice);
                                     $korea_premium = element('korea_premium', $thisPrice);
                                     $change_rate = element('change_rate', $thisPrice);
+                                    $percent_class = $change_rate > 0 ? 'up' : $change_rate < 0 ? 'down' : '';
                             ?>
                                 <tr>
                                     <td>
@@ -116,11 +117,11 @@
                                             <p class="txt"><?php echo element('cme_korean_nm', $thisExchange); ?></p>
                                         </div>
                                     </td>
-                                    <td><?php echo number_format($volume); ?></td>
                                     <td><?php echo number_format($price); ?></td>
                                     <td><?php echo number_format($korea_premium,2); ?></td>
+                                    <td><?php echo number_format($volume); ?></td>
                                     <td>
-                                        <p class="percent up"><span><?php echo number_format($change_rate,2); ?> %</span></p>
+                                        <p class="percent <?php echo $percent_class; ?>"><span><?php echo number_format($change_rate,2); ?> %</span></p>
                                     </td>
                                 </tr>
                             <?php

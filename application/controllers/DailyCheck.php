@@ -2,15 +2,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Document class
+ * DailyCheck class
  *
- * Copyright (c) CIBoard <www.ciboard.co.kr>
+ * Copyright (c) RSTEAM <www.rs-team.com>
  *
- * @author CIBoard (develop@ciboard.co.kr)
+ * @author RSTEAM (developer@rs-team.com)
  */
 
 /**
- * 일반 문서 페이지를 보여주는 controller 입니다.
+ * 출석체크 controller 입니다.
  */
 class DailyCheck extends CB_Controller
 {
