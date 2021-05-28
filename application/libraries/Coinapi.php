@@ -41,7 +41,7 @@ class Coinapi extends CI_Controller
             $coin =  $this->CI->CIC_maincoin_coin_model->get_default_list();
 		} else {
             $user_maincoin_data = $this->CI->Member_extra_vars_model->item($this->CI->member->is_member(), 'mem_maincoin');
-            if(!$user_maincoin_data || !is_array($user_maincoin_data)){
+            if(!$user_maincoin_data || !is_array(json_decode($user_maincoin_data))){
                 //기본값 리턴
                 $exchange = $this->CI->CIC_maincoin_exchange_model->get_default_list();
                 $coin = $this->CI->CIC_maincoin_coin_model->get_default_list();
@@ -82,11 +82,38 @@ class Coinapi extends CI_Controller
             )
         );
         $coin =  $this->CI->CIC_maincoin_coin_model->get_select($symbol);
-        
+        if(!$coin) return FALSE;
+
 		if ($symbol == 'PER') {
-            //기본값 리턴
-            $exchange =  $this->CI->CIC_maincoin_exchange_model->get_default_list();
+            $data = array();
+            $coinDetail = $coin['coin_detail'];
+            foreach($coinDetail as $thisDetail){
+
+            }
+                if($coin[0]['coin_detail'][$thisExchange['cme_idx']]){
+                    $coin_id = $coin[0]['coin_detail'][$thisExchange['cme_idx']]['cmcd_coin_id'];
+                    $market = $coin[0]['coin_detail'][$thisExchange['cme_idx']]['cmcd_coin_market'];
+                    $data[] = $this->get_coin_data($thisExchange['cme_id'], $coin_id, $market);
+                } else {
+                    $data[] = array();
+                }
 		} else {
+
+            //개별 정보 세팅되있는지 확인
+            if($this->CI->member->is_member()){
+                $user_maincoin_data = $this->CI->Member_extra_vars_model->item($this->CI->member->is_member(), 'mem_maincoin');
+                if($user_maincoin_data){
+                    $decoded_data = json_decode($user_maincoin_data);
+                }
+            }
+
+            //거래소 목록 정리
+            if(isset($decoded_data) && isset($decoded_data['exchange'])){
+                $exchange = $this->CI->CIC_maincoin_exchange_model->get_default_list();
+            } else {
+                $exchange = $this->CI->CIC_maincoin_exchange_model->get_user_list($decoded_data['exchange']);
+            }
+            
             $user_maincoin_data = $this->CI->Member_extra_vars_model->item($this->CI->member->is_member(), 'mem_maincoin');
             if($this->CI->member->is_member() === false){
                 //기본값 리턴

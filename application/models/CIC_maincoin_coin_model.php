@@ -68,9 +68,13 @@ class CIC_maincoin_coin_model extends CB_Model
 			'cmc_symbol' => $symbol,
 		);
 		$result = $this->get_one('', '', $where);
+		if(!$result){
+			return FALSE;
+		}
 		$this->db->where(array(
 			'cmcd_cmc_idx' => element('cmc_idx', $result),
 		));
+		$this->db->join('cic_maincoin_exchange', 'cic_maincoin_exchange.cme_idx = cic_maincoin_coin_detail.cmcd_cme_idx', 'inner');
 		$detail_data = $this->db->get('cic_maincoin_coin_detail')->result_array();
 		$result['coin_detail'] = array();
 		foreach($detail_data as $thisData){

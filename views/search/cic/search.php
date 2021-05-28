@@ -8,7 +8,7 @@
 		<div class="search-wrap list">
 			<div class="filter">
 				<div class="sel-box c01">
-					<a href="#n" class="sel-btn"><span>통합검색</span></a>
+					<a href="#n" id="optionb" class="sel-btn"><span>통합검색</span></a>
 					<ul>
 						<li class="active"><a href="<?php base_url() ?>?sfield=post_both&skeyword=<?php echo $this->input->get('skeyword')?>"><span>통합검색</span></a></li>
 						<li value="post_title"><a href="<?php base_url() ?>?sfield=post_title&skeyword=<?php echo $this->input->get('skeyword')?>"><span>제목</span></a></li>
@@ -16,6 +16,11 @@
 						<li value="post_nickname"><a href="<?php base_url() ?>?sfield=post_nickname&skeyword=<?php echo $this->input->get('skeyword')?>"><span>작성자</span></a></li>
 					</ul>		
 				</div>
+				<script>
+					$('li').click(function(){
+						$(#optionb).val($(this).text());
+					});
+				</script>
 				<div class="field search">
                     <?php 
 						$attributes = array('class' => 'search_box', 'name' => 'searchForm', 'id' => 'searchForm', 'method'=> 'get', 'action' => base_url('/search'));

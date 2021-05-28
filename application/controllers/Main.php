@@ -373,7 +373,7 @@ class Main extends CB_Controller
 		$symbol = $this->input->post('cmc_symbol');
 		$mem_idx = $this->member->is_member();
 		if($symbol == 'PER'){
-
+			
 		} else {
 
 		}

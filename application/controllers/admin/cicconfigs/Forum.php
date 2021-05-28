@@ -51,6 +51,12 @@ class Forum extends CB_Controller
 	 */
 	public function index()
 	{
+
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+		
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_forum_index';
 		$this->load->event($eventname);
