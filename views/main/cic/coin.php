@@ -9,19 +9,19 @@
                         <h4><span>거래소</span> 종류</h4>
                         <div class="c01">
                             <ul>
-                                <li class="active"><a href="#n" class="ibtn"><span>빗썸</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>업비트</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>핫빗코리아</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>코인빗</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>코인원</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>코빗</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>비트플라이어</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>바이낸스</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>비트파이넥스</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>오케이코인 </span></a></li>
-                                <li><a href="#n" class="ibtn"><span>후오비</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>비트렉스</span></a></li>
-                                <li><a href="#n" class="ibtn"><span>폴로닉스</span></a></li>
+                                <?php
+                                    $i = 0;
+                                    foreach(element('except_exchange_list',$view) as $l){
+                                ?>
+                                    <li <?php echo $i == 0 ? 'class="active"' : '' ?>>
+                                        <a href="#n" class="ibtn">
+                                            <span><?php echo element('cme_korean_nm', $l); ?></span>
+                                        </a>
+                                    </li>
+                                <?php
+                                        $i++;
+                                    }
+                                ?>
                             </ul>
                         </div>
                     </div>
@@ -32,14 +32,22 @@
                         <a href="#n" class="down-btn"><span class="blind">아래로<span></span></span></a>
                         <div class="c02">
                             <ul>
-                                <li class="active"><a href="#n" class="ibtn"><span>빗썸</span></a><button class="delete"><span
-                                            class="blind">삭제</span></button></li>
-                                <li><a href="#n" class="ibtn"><span>업비트</span></a><button
-                                        class="delete"><span class="blind">삭제</span></button></li>
-                                <li><a href="#n" class="ibtn"><span>핫빗코리아</span></a><button class="delete"><span
-                                            class="blind">삭제</span></button></li>
-                                <li><a href="#n" class="ibtn"><span>비트렉스</span></a><button class="delete"><span
-                                            class="blind">삭제</span></button></li>
+                                <?php
+                                    $i = 0;
+                                    foreach(element('my_exchange_list',$view) as $l){
+                                ?>
+                                    <li <?php echo $i == 0 ? 'class="active"' : '' ?>>
+                                        <a href="#n" class="ibtn">
+                                            <span><?php echo element('cme_korean_nm', $l); ?></span>
+                                        </a>
+                                        <button class="delete">
+                                            <span class="blind">삭제</span>
+                                        </button>
+                                    </li>
+                                <?php
+                                        $i++;
+                                    }
+                                ?>
                             </ul>
                         </div>
                     </div>

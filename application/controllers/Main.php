@@ -238,11 +238,34 @@ class Main extends CB_Controller
 		$coin_list = $this->CIC_maincoin_coin_model->get('','','','','','cmc_orderby','ASC');
 		$member_coin_data_raw = $this->Member_extra_vars_model->item('mem_maincoin');
 		$member_coin_data = json_decode($member_coin_data_raw);
+		$member_exchange_list = element('exchange',$member_coin_data) ? element('exchange',$member_coin_data) : array();
+		$member_coin_list = element('coin',$member_coin_data) ? element('coin',$member_coin_data) : array();
 		// 데이터 가져오기 끝
 		$view['view']['exchange_list'] = $exchange_list;
 		$view['view']['coin_list'] = $coin_list;
-		$view['view']['my_exchange_list'] = element('exchange', $member_coin_data) ? element('exchange', $member_coin_data) : array();
-		$view['view']['my_coin_list'] = element('coin', $member_coin_data) ? element('coin', $member_coin_data) : array();
+
+		$my_exchange_list = array();
+		$except_exchange_list = array();
+		foreach($exchange_list as $l){
+			if(in_array(element('cme_idx' ,$l), $member_exchange_list)){
+				$my_exchange_list[] = $l;
+			} else {
+				$except_exchange_list[] = $l;
+			}
+		}
+		$my_coin_list = array();
+		$except_coin_list = array();
+		foreach($coin_list as $l){
+			if(in_array(element('cme_idx' ,$l), $member_coin_list)){
+				$my_coin_list[] = $l;
+			} else {
+				$except_coin_list[] = $l;
+			}
+		}
+		$view['view']['my_exchange_list'] = $my_exchange_list;
+		$view['view']['except_exchange_list'] = $except_exchange_list;
+		$view['view']['my_coin_list'] = $my_coin_list;
+		$view['view']['except_coin_list'] = $except_coin_list;
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
