@@ -442,13 +442,13 @@ class Maincoin extends CB_Controller
 			$config[] = array(
 				'field' => 'cmc_symbol',
 				'label' => '코인 심볼',
-				'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[20]|is_unique[cic_maincoin_coin.cmc_symbol.cmc_idx.' . element('cmc_idx', $getdata) . ']',
+				'rules' => 'trim|required|alpha_numeric|min_length[2]|max_length[6]|is_unique[cic_maincoin_coin.cmc_symbol.cmc_idx.' . element('cmc_idx', $getdata) . ']',
 			);
 		} else {
 			$config[] = array(
 				'field' => 'cmc_symbol',
 				'label' => '코인 심볼',
-				'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[20]|is_unique[cic_maincoin_coin.cmc_symbol]',
+				'rules' => 'trim|required|alpha_numeric|min_length[2]|max_length[6]|is_unique[cic_maincoin_coin.cmc_symbol]',
 			);
 		}
 		$this->form_validation->set_rules($config);

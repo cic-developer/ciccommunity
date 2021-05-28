@@ -72,6 +72,53 @@ class Coinapi extends CI_Controller
         );
         return $return_data;
     }
+
+    public function get_select_data($symbol){
+        $this->CI->load->model(
+            array(
+                'CIC_maincoin_exchange_model',
+                'CIC_maincoin_coin_model',
+                'Member_extra_vars_model'
+            )
+        );
+        $coin =  $this->CI->CIC_maincoin_coin_model->get_select($symbol);
+        
+		if ($symbol == 'PER') {
+            //기본값 리턴
+            $exchange =  $this->CI->CIC_maincoin_exchange_model->get_default_list();
+		} else {
+            $user_maincoin_data = $this->CI->Member_extra_vars_model->item($this->CI->member->is_member(), 'mem_maincoin');
+            if($this->CI->member->is_member() === false){
+                //기본값 리턴
+                $exchange = $this->CI->CIC_maincoin_exchange_model->get_default_list();
+                $coin = $this->CI->CIC_maincoin_coin_model->get_default_list();
+            } else {
+                $decoded_data = json_decode($user_maincoin_data);
+                $exchange = $this->CI->CIC_maincoin_exchange_model->get_user_list($decoded_data['exchange']);
+                $coin = $this->CI->CIC_maincoin_coin_model->get_user_list($decoded_data['coin']);
+            }
+        }
+
+        $first_block = array();
+        foreach($exchange as $thisExchange){
+            $thisCoinDetail = $coin[0]['coin_detail'][$thisExchange['cme_idx']];
+            if($coin[0]['coin_detail'][$thisExchange['cme_idx']]){
+                $coin_id = $coin[0]['coin_detail'][$thisExchange['cme_idx']]['cmcd_coin_id'];
+                $market = $coin[0]['coin_detail'][$thisExchange['cme_idx']]['cmcd_coin_market'];
+                $first_block[] = $this->get_coin_data($thisExchange['cme_id'], $coin_id, $market);
+            } else {
+                $first_block[] = array();
+            }
+        }
+
+
+        $return_data = array(
+            'exchange' => $exchange,
+            'coin' => $coin,
+            'first_block' => $first_block,
+        );
+        return $return_data;
+    }
     
     public function get_coin_data($exchange="", $coin_id, $market="KRW"){
         switch($exchange){

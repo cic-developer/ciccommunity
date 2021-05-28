@@ -399,8 +399,12 @@
         var symbol = $(this).data('symbol');
         
         $.ajax({
-            url: cb_url + '/main/ajax_get_maincoin?symbol='+symbol,
-            type: 'GET',
+            url: cb_url + '/main/ajax_get_maincoin',
+            type: 'POST',
+            data: {     
+                cmc_symbol: symbol,
+                csrf_test_name : cb_csrf_hash
+            },
             dataType: 'json',
             async: false,
             cache: false,

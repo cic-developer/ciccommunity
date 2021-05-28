@@ -63,6 +63,22 @@ class CIC_maincoin_coin_model extends CB_Model
 		return $result;
 	}
 
+	function get_select($symbol){
+		$where = array(
+			'cmc_symbol' => $symbol,
+		);
+		$result = $this->get_one('', '', $where);
+		$this->db->where(array(
+			'cmcd_cmc_idx' => element('cmc_idx', $result),
+		));
+		$detail_data = $this->db->get('cic_maincoin_coin_detail')->result_array();
+		$result['coin_detail'] = array();
+		foreach($detail_data as $thisData){
+			$result['coin_detail'][element('cmcd_cme_idx', $thisData)] = $thisData;
+		}
+		return $result;
+	}
+
 	function get_this_orderby(){
 		$result = $this->_get('', 'cmc_orderby', '', 1, '', 'cmc_orderby', 'DESC');
 		return element('cmc_orderby', $result->row_array()) ? (int)element('cmc_orderby', $result->row_array()) + 1 : 1;

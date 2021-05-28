@@ -215,18 +215,15 @@
 								}
 							}
 						}   
-							if (!element('list', element('data', $view)))  {
-								foreach (element('list', element('data', $view)) as $result) {
-									if(element('brd_name', $result) === '자유게시판'){
-								if ($writer_row == 0)  {?>
+						// foreach (element('list', element('data', $view)) as $result) {
+							if($free_row <= 0){?>
+						 
 								<tr>
 									<td colspan="5" class="nopost">게시물이 없습니다</td>
 								</tr>
 							<?php 
 								} 
-							}
-						}
-					}
+							// }
 							?>
 						</tbody>
 					</table>
@@ -284,7 +281,7 @@
 							}	
 						}
 					}
-					if ($free_row == 0)  {?>
+					if ($writer_row <= 0)  {?>
 							<li colspan="5" class="nopost" style="text-align: center">게시물이 없습니다</li>
 					<?php 
 							} 

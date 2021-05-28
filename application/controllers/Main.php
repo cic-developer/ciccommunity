@@ -344,12 +344,38 @@ class Main extends CB_Controller
 	 */
 	public function ajax_get_maincoin()
 	{
-		$symbol = $this->input->get('symbol');
+
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+
+		/**
+		 * 전송된 데이터의 유효성을 체크합니다
+		 */
+		$config = array(
+			array(
+				'field' => 'cmc_symbol',
+				'label' => '선택 코인',
+				'rules' => 'trim|required|alpha_numeric|min_length[2]|max_length[6]',
+			),
+		);
+		$this->form_validation->set_rules($config);
+
+		/**
+		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
+		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
+		 */
+		if ($this->form_validation->run() === false) {
+			$result = array('error' => '비정상적인 접근입니다.');
+			exit(json_encode($result));
+		}
+		$symbol = $this->input->post('cmc_symbol');
 		$mem_idx = $this->member->is_member();
 		if($symbol == 'PER'){
 
 		} else {
-			
+
 		}
 	}
 }

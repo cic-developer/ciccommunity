@@ -83,7 +83,7 @@ $(function() {
 		rules: {
 			cmc_korean_nm: {required :true, minlength:2, maxlength:10 },
 			cmc_english_nm: {required :true, minlength:2, maxlength:20 },
-			cmc_symbol: {required :true, minlength:2, maxlength:20 },
+			cmc_symbol: {required :true, minlength:2, maxlength:6 },
 		}
 	});
 });
