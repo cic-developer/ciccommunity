@@ -217,13 +217,14 @@ class Main extends CB_Controller
 		 * 로그인이 필요한 페이지입니다
 		 */
 		required_user_login();
-		
+
 		$view = array();
 		$view['view'] = array();
 		$view['view']['banner'] = array();
 
 		$eventname = 'event_main_index';
 		$this->load->event($eventname);
+		$this->load->model(array('CIC_maincoin_exchange_model','CIC_maincoin_coin_model','Member_extra_vars_model'));
 
 		$view = array();
 		$view['view'] = array();
@@ -232,83 +233,16 @@ class Main extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
         
-		// 배너 가져오기 시작
-		$_banner = $this->CIC_Banner_model->get_today_list();
-		$banner = array();
-		
-		if(element('list', $_banner)){
-			foreach (element('list', $_banner) as $key => $val) {
-				if ($val && $val['ban_image']) {
-					$banner['list'][$key] = $val;
-				}
-			}
-		}
-		
-		$view['view']['banner_count'] = count(element('list', $banner));
-		$view['view']['banner_noimage_count'] = 4 - $view['view']['banner_count'];
-		// 배너 가져오기 끝
-
-		$where = array(
-			'brd_search' => 1,
-		);
-		$board_id = $this->Board_model->get_board_list($where);
-		$board_list = array();
-		if ($board_id && is_array($board_id)) {
-			foreach ($board_id as $key => $val) {
-				$board_list[] = $this->board->item_all(element('brd_id', $val));
-			}
-		}
-
-		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-		$where = array(
-			'post_exept_state' => 0,
-			'post_datetime >=' => $checktime,
-			'post_del <>' => 2,
-		);
-		$limit = 10;
-
-		$popularpost = $this->Post_model
-			->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-
-		$list_num = 1;
-		
-		if (element('list', $popularpost)) {
-			foreach (element('list', $popularpost) as $key => $val) {
-				$popularpost['list'][$key]['post_display_name'] = display_username(
-					element('post_userid', $val),
-					element('post_nickname', $val)
-				);
-				$popularpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-				$popularpost['list'][$key]['num'] = $list_num++;
-				if ($board) {
-					$popularpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-					$popularpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
-				}
-				$popularpost['list'][$key]['category'] = '';
-				if (element('post_category', $val)) {
-					$popularpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
-				}
-				if (element('post_image', $val)) {
-					$imagewhere = array(
-						'post_id' => element('post_id', $val),
-						'pfi_is_image' => 1,
-					);
-					$popularpost['list'][$key][''] = thumb_url('post', element('pfi_filename', $file), 80);
-				} else {
-					$popularpost['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
-				}
-			}
-		}
-		$view['view']['data'] = $popularpost;
-
-		$select = 'brd_id, brd_name';
-		$view['view']['boardlist'] = $this->Board_model->get_board_list();
-			
-		$view['view']['board_list'] = $board_list;
-		$view['view']['canonical'] = site_url();		
-		$view['view']['searchrank'] = $this->Search_keyword_model->get_main_rank();
-		$view['view']['popularpost'] = $popularpost;
-		$view['view']['banner'] = $banner;
+		// 데이터 가져오기 시작
+		$exchange_list = $this->CIC_maincoin_exchange_model->get('','','','','','cme_orderby','ASC');
+		$coin_list = $this->CIC_maincoin_coin_model->get('','','','','','cmc_orderby','ASC');
+		$member_coin_data_raw = $this->Member_extra_vars_model->item('mem_maincoin');
+		$member_coin_data = json_decode($member_coin_data_raw);
+		// 데이터 가져오기 끝
+		$view['view']['exchange_list'] = $exchange_list;
+		$view['view']['coin_list'] = $coin_list;
+		$view['view']['my_exchange_list'] = element('exchange', $member_coin_data) ? element('exchange', $member_coin_data) : array();
+		$view['view']['my_coin_list'] = element('coin', $member_coin_data) ? element('coin', $member_coin_data) : array();
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

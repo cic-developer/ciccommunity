@@ -73,7 +73,7 @@
                         ?>
                         <li class="cyellow"><a href="#n" class="maincoin_symbol" data-symbol="PER"><span>PER</span></a></li>
                     </ul>
-                    <a href="<?php echo base_url('/main/coin')?>" class="more"><span>더 많은 코인 보기</span></a>
+                    <a href="<?php echo $this->member->is_member() ? base_url('/main/coin') : 'javascript:alert(\'로그인이 필요한 서비스입니다.\');'?>" class="more"><span>더 많은 코인 보기</span></a>
                 </div>
                 <div class="list" id="maincoin_table">
                     <table>
