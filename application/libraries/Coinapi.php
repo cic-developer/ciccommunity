@@ -52,8 +52,6 @@ class Coinapi extends CI_Controller
             }
         }
 
-        print_r($coin[0]['coin_detail']);
-        exit;
         $first_block = array();
         foreach($exchange as $thisExchange){
             $thisCoinDetail = $coin[0]['coin_detail'][$thisExchange['cme_idx']];
@@ -621,7 +619,7 @@ class Coinapi extends CI_Controller
         //curl 중 오류발생할 경우 0 리턴
         if($result === FALSE) return 0;
         $this->usd_price = $result[0]['basePrice'];
-        $this->jpy_price = $result[1]['basePrice'];
+        $this->jpy_price = $result[1]['basePrice']/100;
         $this->jpyusd_price = $result[2]['basePrice'];
     }
 

@@ -50,17 +50,28 @@ class CIC_maincoin_coin_model extends CB_Model
 	function get_user_list($where_in){
 		$this->db->where_in('cmc_idx', $where_in);
 		$result = $this->get();
+		$i = 0;
 		foreach($result as $val){
 			$this->db->where(array(
 				'cmcd_cmc_idx' => element('cmc_idx', $val),
 			));
 			$detail_data = $this->db->get('cic_maincoin_coin_detail')->result_array();
-			$val['coin_detail'] = array();
+			$result[$i]['coin_detail'] = array();
 			foreach($detail_data as $thisData){
-				$val['coin_detail'][element('cmcd_cme_idx', $thisData)] = $thisData;
+				$result[$i]['coin_detail'][element('cmcd_cme_idx', $thisData)] = $thisData;
+			}
+			$i++;
+		}
+		$return_data = array();
+		foreach($where_in as $l){
+			foreach($result as $r){
+				if($l == element('cmc_idx' ,$r)){
+					$return_data[] = $r;
+					break;
+				}
 			}
 		}
-		return $result;
+		return $return_data;
 	}
 
 	function get_select($symbol){

@@ -36,7 +36,17 @@ class CIC_maincoin_exchange_model extends CB_Model
 
 	function get_user_list($where_in){
 		$this->db->where_in('cme_idx', $where_in);
-		return $this->get();
+		$result = $this->get();
+		$return_data = array();
+		foreach($where_in as $l){
+			foreach($result as $r){
+				if($l == element('cme_idx' ,$r)){
+					$return_data[] = $r;
+					break;
+				}
+			}
+		}
+		return $return_data;
 	}
 
 	function get_this_orderby(){
