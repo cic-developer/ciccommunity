@@ -74,7 +74,7 @@ class News extends CB_Controller
 			// 'news_show' => 1,
 			'news_important >' => 0,
 		);
-		
+
 		if($compid = (int) $this->input->get('comp_id')){
 			$where['news.comp_id'] = $compid;
 		}
@@ -85,16 +85,14 @@ class News extends CB_Controller
 		
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
-				$result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
-				if($company) {
-					$result['list'][$key]['companyurl'] = element('comp_url', $company);
+				// $result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
+				// if($company) {
+					// $result['list'][$key]['companyurl'] = element('comp_url', $company);
 					// print_r(element('news_index',$val));
 					// exit;
-					$result['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
-				}
+					// $result['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
+				// }
 				$result['list'][$key]['num'] = $list_num--;
-				
-				
 			}
 		}
 		$view['view']['data'] = $result;

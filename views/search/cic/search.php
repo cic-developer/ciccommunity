@@ -240,7 +240,6 @@
 						<?php
 							}
 						}
-					
 					?>
 				</div>
 				<div class="list vimg vp">
