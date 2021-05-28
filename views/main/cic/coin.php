@@ -9,11 +9,11 @@
                         <h4><span>거래소</span> 종류</h4>
                         <div class="c01">
                             <ul>
-                                <li><a href="#n" class="ibtn"><span>빗썸</span></a></li>
+                                <li class="active"><a href="#n" class="ibtn"><span>빗썸</span></a></li>
                                 <li><a href="#n" class="ibtn"><span>업비트</span></a></li>
                                 <li><a href="#n" class="ibtn"><span>핫빗코리아</span></a></li>
                                 <li><a href="#n" class="ibtn"><span>코인빗</span></a></li>
-                                <li class="active"><a href="#n" class="ibtn"><span>코인원</span></a></li>
+                                <li><a href="#n" class="ibtn"><span>코인원</span></a></li>
                                 <li><a href="#n" class="ibtn"><span>코빗</span></a></li>
                                 <li><a href="#n" class="ibtn"><span>비트플라이어</span></a></li>
                                 <li><a href="#n" class="ibtn"><span>바이낸스</span></a></li>
@@ -32,9 +32,9 @@
                         <a href="#n" class="down-btn"><span class="blind">아래로<span></span></span></a>
                         <div class="c02">
                             <ul>
-                                <li><a href="#n" class="ibtn"><span>빗썸</span></a><button class="delete"><span
+                                <li class="active"><a href="#n" class="ibtn"><span>빗썸</span></a><button class="delete"><span
                                             class="blind">삭제</span></button></li>
-                                <li class="active"><a href="#n" class="ibtn"><span>업비트</span></a><button
+                                <li><a href="#n" class="ibtn"><span>업비트</span></a><button
                                         class="delete"><span class="blind">삭제</span></button></li>
                                 <li><a href="#n" class="ibtn"><span>핫빗코리아</span></a><button class="delete"><span
                                             class="blind">삭제</span></button></li>
@@ -50,11 +50,11 @@
                         <h4><span>암호화폐</span></h4>
                         <div class="c01">
                             <ul>
-                                <li><a href="#n" class="ibtn"><span>BTC (비트코인)</span></a></li>
+                                <li class="active"><a href="#n" class="ibtn"><span>BTC (비트코인)</span></a></li>
                                 <li><a href="#n" class="ibtn"><span>ETC (이더리움)</span></a></li>
                                 <li><a href="#n" class="ibtn"><span>LTC (라이트코인)</span></a></li>
                                 <li><a href="#n" class="ibtn"><span>ETC (이더리움 클래식)</span></a></li>
-                                <li class="active"><a href="#n" class="ibtn"><span>XLM (스텔라루멘)</span></a></li>
+                                <li><a href="#n" class="ibtn"><span>XLM (스텔라루멘)</span></a></li>
                                 <li><a href="#n" class="ibtn"><span>KLAY (클레이튼)</span></a></li>
                                 <li><a href="#n" class="ibtn"><span>BCH (비트코인 캐시)</span></a></li>
                                 <li><a href="#n" class="ibtn"><span>EOS (이오스)</span></a></li>
@@ -73,9 +73,9 @@
                         <a href="#n" class="down-btn"><span class="blind">아래로<span></span></span></a>
                         <div class="c02">
                             <ul>
-                                <li><a href="#n" class="ibtn"><span>BTC (비트코인)</span></a><button class="delete"><span
+                                <li class="active"><a href="#n" class="ibtn"><span>BTC (비트코인)</span></a><button class="delete"><span
                                             class="blind">삭제</span></button></li>
-                                <li class="active"><a href="#n" class="ibtn"><span>ETC (이더리움)</span></a><button
+                                <li><a href="#n" class="ibtn"><span>ETC (이더리움)</span></a><button
                                         class="delete"><span class="blind">삭제</span></button></li>
                                 <li><a href="#n" class="ibtn"><span>핫빗코리아</span></a><button class="delete"><span
                                             class="blind">삭제</span></button></li>
@@ -108,6 +108,11 @@
                             }
                         });
                         $(document).on("click", ".delete", function () {
+                            var istxt = $(this).closest('li').find('a.ibtn > span').text();
+                            $(this).closest('.set-list').find('.c01 > ul').append(
+                                '<li><a href="#n" class="ibtn"><span>' + istxt +
+                                '</span></a></li>'
+                            );
                             $(this).closest('li').remove();
                         });
                         $(document).on("click", ".ibtn", function () {
