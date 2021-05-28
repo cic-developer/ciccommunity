@@ -520,11 +520,10 @@ $(document).on('ready', async function() {
                     to: contract_address,
                     data: data2,
                     gas: 3000000,
-                }).on("transactionHash", (transactionHash) => {
-                    let data4 = caver.rpc.klay.getTransactionReceipt(transactionHash);
-                    console.log(data4);
+                }).on("transactionHash", async(transactionHash) => {
+                    console.log(transactionHash);
+                    //여기서 console.log 찍는 transactionHash를 통해 데이터를 저장한다.
                 });
-                console.log(data3);
 
             }).on("error", (error) => {
                 console.log("error", error);

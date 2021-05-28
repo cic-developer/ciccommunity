@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<h3><?php echo html_escape(element('board_name', element('board', $view))); ?> 글쓰기</h3>
 			<div class="entry">
 				<ul>
-					<li>
+					<li class="title-box">
 						<p class="btxt">제목</p>
 						<div class="field">
 							<p class="chk-input w100p">
