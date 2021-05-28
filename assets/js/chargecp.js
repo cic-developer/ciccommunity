@@ -433,67 +433,28 @@ $(document).on('ready', async function() {
             }
 
             let charge_value = $('#charge_input').val();
-            await klaytn.enable();
-            // const data = caver.klay.abi.encodeFunctionCall({
-            //     name: "approve",
-            //     type: "function",
-            //     inputs: [{
-            //             type: "address",
-            //             name: "_to",
-            //         },
-            //         {
-            //             type: "uint256",
-            //             name: "_value",
-            //         },
-            //     ],
-            // }, [
-            //     contract_address,
-            //     caver.utils
-            //     .toBN(charge_value)
-            //     .mul(caver.utils.toBN(Number(`1e${18}`)))
-            //     .toString(),
-            // ]);
-
 
             const data = caver.klay.abi.encodeFunctionCall({
-                name: "deposit_enter",
+                name: "approve",
                 type: "function",
                 inputs: [{
-                        "name": "_from",
-                        "type": "address"
+                        type: "address",
+                        name: "_to",
                     },
                     {
-                        "name": "_to",
-                        "type": "address"
+                        type: "uint256",
+                        name: "_value",
                     },
-                    {
-                        "name": "_value",
-                        "type": "uint256"
-                    },
-                    {
-                        "name": "_url",
-                        "type": "string"
-                    },
-                    {
-                        "name": "_id",
-                        "type": "string"
-                    }
                 ],
             }, [
-                // from
-                account,
-                // to
                 contract_address,
-                // value
                 caver.utils
                 .toBN(charge_value)
                 .mul(caver.utils.toBN(Number(`1e${18}`)))
                 .toString(),
-                // url
-                "1",
-                // id
-                "test"
             ]);
+
+
 
             //여기 있는 데이터들로 
             var txhash, reciept, success_fromAddress, success_toAddress, success_value;
@@ -501,13 +462,13 @@ $(document).on('ready', async function() {
             await caver.klay.sendTransaction({
                 type: "SMART_CONTRACT_EXECUTION",
                 account,
-                to: contract_address,
+                to: token_address,
                 data,
                 gas: 3000000,
             }).on("transactionHash", (transactionHash) => {
                 txhash = `https://scope.klaytn.com/tx/${transactionHash}?tabId=internalTx`;
             }).on("receipt", (receipt) => {
-                // console.log("receipt", receipt);
+                console.log("receipt", receipt);
                 reciept = JSON.stringify(receipt);
                 // success_fromAddress = receipt.from;
                 // success_toAddress = receipt.logs[0].topics[2];
@@ -515,14 +476,15 @@ $(document).on('ready', async function() {
                 //     caver.utils.hexToNumberString(receipt.logs[0].data) /
                 //     1000000000000000000;
 
-                // transfer(account, charge_value)
+
+                setTimeout(() => transfer(charge_value), 5000)
 
             }).on("error", (error) => {
                 console.log("error", error);
             });
 
             //여기 있는데이터들이 실제로 거래가 이루어지는지 알려주는 데이터들
-            // console.log(txhash, reciept, success_fromAddress, success_toAddress, success_value);
+            console.log(txhash, reciept, success_fromAddress, success_toAddress, success_value);
         });
     } catch (error) {
         alert('Klaytn Kaikas연동에 실패 하였습니다. 마이페이지로 이동합니다.');
@@ -531,7 +493,9 @@ $(document).on('ready', async function() {
     }
 
 
-    const transfer = async(account, charge_value) => {
+    const transfer = async(charge_value) => {
+        await klaytn.enable();
+        const account = klaytn.selectedAddress;
         const transferData = caver.klay.abi.encodeFunctionCall({
             name: "deposit_enter",
             type: "function",

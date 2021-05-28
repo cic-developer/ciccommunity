@@ -283,7 +283,7 @@
 					}
 					if (!element('list', element('data', $view)))  {		
 					?>
-							<li colspan="5" style="text-align: center"  class="nopost">게시물이 없습니다</li>
+							<li colspan="5" class="nopost" style="text-align: center">게시물이 없습니다</li>
 					<?php } ?>	
 					</ul>
 					<script>
