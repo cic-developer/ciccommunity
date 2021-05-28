@@ -71,7 +71,30 @@ class News extends CB_Controller
 		$this->{$this->modelname}->allow_order_field = array('news_id'); // 정렬이 가능한 필드
 		
 		$where = array(
-			// 'news_show' => 1,
+			'news_reviews >' => 0,
+			// 'news_important >' => 0,
+		);
+		$most_view = $this->{$this->modelname}
+		->most_view_news($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		$list_num = $most_view['total_rows'] - ($page - 1) * $per_page;
+		
+		if (element('list', $most_view)) {
+			foreach (element('list', $most_view) as $key => $val) {
+				// $most_view['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
+				// if($company) {
+					// $most_view['list'][$key]['companyurl'] = element('comp_url', $company);
+					// print_r(element('news_index',$val));
+					// exit;
+					// $most_view['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
+				// }
+				$most_view['list'][$key]['num'] = $list_num--;
+			}
+		}
+		// print_r($most_view);
+		// exit;
+		
+		$where = array(
+			// 'news_reviews >' => 0,
 			'news_important >' => 0,
 		);
 
@@ -96,22 +119,6 @@ class News extends CB_Controller
 			}
 		}
 
-		// $most_view = $this->{$this->modelname}
-		// ->important_news($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-		// $list_num = $most_view['total_rows'] - ($page - 1) * $per_page;
-		
-		// if (element('list', $most_view)) {
-		// 	foreach (element('list', $most_view) as $key => $val) {
-		// 		// $most_view['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
-		// 		// if($company) {
-		// 			// $most_view['list'][$key]['companyurl'] = element('comp_url', $company);
-		// 			// print_r(element('news_index',$val));
-		// 			// exit;
-		// 			// $most_view['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
-		// 		// }
-		// 		$most_view['list'][$key]['num'] = $list_num--;
-		// 	}
-		// }
 		$view['view']['most_view'] = $most_view;
 		$view['view']['data'] = $result;
 		

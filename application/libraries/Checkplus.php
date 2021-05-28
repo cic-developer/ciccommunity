@@ -114,7 +114,7 @@ class Checkplus extends CI_Controller
 	public function success($EncodeData)
 	{
 		//EncodeData 없이 접근할 경우 차단
-		if($EncodeData){
+		if(!$EncodeData){
 			exit('비정상적인 접근입니다.(1)');
 		}
 		//**************************************************************************************************************
@@ -196,7 +196,7 @@ class Checkplus extends CI_Controller
 
 		//오류사항이 있을경우 오류리턴
 		if($returnMsg){
-			exit($returnMsg);
+			exit("오류 :: ".$returnMsg);
 		}
 
 		$dec_data = array(

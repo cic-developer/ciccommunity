@@ -213,7 +213,7 @@ class Register extends CB_Controller
 		$eventname = 'event_register_auth_success';
 		$this->load->event($eventname);
 
-		$EncodeData = $this->input->get("EncodeData");
+		$EncodeData = $this->input->get("EncodeData") ? $this->input->get("EncodeData") : $this->input->post("EncodeData");
 		$this->checkplus->success($EncodeData);
 
 		$data = $this->session->userdata('dec_data');
@@ -221,7 +221,7 @@ class Register extends CB_Controller
 		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
 		
-		if(count($isDI) > 0){ // 중복 이면
+		if($isDI){ // 중복 이면
 			// $this->session->unset_userdata('dec_data');
 			echo("<script>alert('이미 가입된 회원입니다');</script>");
 			echo("<script>window.opener.location.replace('/register/auth_duplicate');</script>");
@@ -236,21 +236,15 @@ class Register extends CB_Controller
 		
 		// $this->member->get_by_memDI('MC0GCCqGSIb3DQIJAyEAtonfQuH352/KCB0yrjiwSQcnDQTS7ff5UcT4ievX8HM=');
 
-		if($this->input->get("EncodeData")){
-			$this->checkplus->success($this->input->get("EncodeData"));
-			
-			echo("<script>window.opener.fregisterform.submit();</script>");
-			echo("<script>self.close()</script>");
-		} else {
-			echo("<script>alert('비정상적인 접근입니다.')</script>");
-			echo("<script>self.close()</script>");
-		}
+		echo("<script>window.opener.fregisterform.submit();</script>");
+		echo("<script>self.close()</script>");
 	}
 
 	public function auth_fail(){
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_register_auth_fail';
 		$this->load->event($eventname);
+		$EncodeData = $this->input->get("EncodeData") ? $this->input->get("EncodeData") : $this->input->post("EncodeData");
 
 		$view = array();
 		$view['view'] = array();
@@ -258,8 +252,8 @@ class Register extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		if($this->input->get("EncodeData")){
-			$this->checkplus->fail($this->input->get("EncodeData"));
+		if($EncodeData){
+			$this->checkplus->fail($EncodeData);
 			
 			echo("<script>alert('인증에 실패하였습니다!');</script>");
 			echo("<script>self.close()</script>");

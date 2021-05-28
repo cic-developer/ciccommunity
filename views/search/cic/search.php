@@ -263,7 +263,8 @@
 								</div>
 								<div class="abr">
 									<div class="photo">
-										<p class="pimg"><img src="<?php echo thumb_url(element('mem_photo', $result),30, 30)?>" alt=""></p>
+										<p class="pimg"><img src="<?php echo thumb_url('pfi_originname', element('pfi_originname', $result), 30, 30); ?>"
+                                            alt="<?php echo element('mlc_title', $result); ?>"></p>
 										<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
 									</div>
 									<p class="vp"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?> VP</p>

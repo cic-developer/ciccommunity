@@ -18,8 +18,8 @@
                         <div class="owl-stage"
                             style="transform: translate3d(-1040px, 0px, 0px); transition: all 0s ease 0s; width: 3900px;">
                                 <?php
-                                if (element('list',element('most_view', $view))) {
-                                    foreach (element('list',element('most_view', $view)) as $most_view) {
+                                if (element('list',element('most_view_news', $view))) {
+                                    foreach (element('list',element('most_view_news', $view)) as $most_view) {
                                         ?>
                                         <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
 											<div class="item">
