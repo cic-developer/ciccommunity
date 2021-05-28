@@ -301,27 +301,33 @@ class Main extends CB_Controller
 			$member_exchange_list = element('exchange',$member_coin_data) ? element('exchange',$member_coin_data) : array();
 			$member_coin_list = element('coin',$member_coin_data) ? element('coin',$member_coin_data) : array();
 			// 데이터 가져오기 끝
-			$view['view']['exchange_list'] = $exchange_list;
-			$view['view']['coin_list'] = $coin_list;
 	
 			$my_exchange_list = array();
-			$except_exchange_list = array();
-			foreach($exchange_list as $l){
-				if(in_array(element('cme_idx' ,$l), $member_exchange_list)){
-					$my_exchange_list[] = $l;
-				} else {
-					$except_exchange_list[] = $l;
+			foreach($member_exchange_list as $l){
+				$i = 0;
+				foreach($exchange_list as $r){
+					if($l == element('cme_idx',$r)){
+						$my_exchange_list[] = $r;
+						array_splice($exchange_list, $i, 1);
+					}
+					$i++;
 				}
 			}
+			$except_exchange_list = $exchange_list;
+			
 			$my_coin_list = array();
-			$except_coin_list = array();
-			foreach($coin_list as $l){
-				if(in_array(element('cmc_idx' ,$l), $member_coin_list)){
-					$my_coin_list[] = $l;
-				} else {
-					$except_coin_list[] = $l;
+			foreach($member_coin_list as $l){
+				$i = 0;
+				foreach($coin_list as $r){
+					if($l == element('cmc_idx',$r)){
+						$my_coin_list[] = $r;
+						array_splice($coin_list, $i, 1);
+					}
+					$i++;
 				}
 			}
+			$except_coin_list = $coin_list;
+			
 			$view['view']['my_exchange_list'] = $my_exchange_list;
 			$view['view']['except_exchange_list'] = $except_exchange_list;
 			$view['view']['my_coin_list'] = $my_coin_list;
