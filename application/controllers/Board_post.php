@@ -58,10 +58,6 @@ class Board_post extends CB_Controller
 		$view['view']['list'] = $list = $this->_get_list($brd_key);
 		$view['view']['board_key'] = element('brd_key', element('board', $list));
 
-		// 유저 보유 예치금
-		$mem_deposit = $this->member->item('mem_deposit');
-		$view['view']['mem_deposit'] = $mem_deposit;
-
 		// stat_count_board ++
 		$this->_stat_count_board(element('brd_id', element('board', $list)));
 
@@ -159,6 +155,23 @@ class Board_post extends CB_Controller
 			}
 
 			
+		}
+
+		// CIC 포럼, forum
+		if(element('brd_id', element('board', $list)) == 3){
+			// print_r("here?");
+			// exit;
+		}
+
+		// 도전 CIC 포럼, userForum
+		if(element('brd_id', element('board', $list)) == 6){
+			// print_r("here?");
+			// exit;
+
+			// 유저 보유 예치금
+			$mem_deposit = $this->member->item('mem_deposit');
+			$view['view']['mem_deposit'] = $mem_deposit;
+			$view['view']['isDeposit'] = $mem_deposit ? true : false;
 		}
 		
 		if(element('brd_id', element('board', $list)) == 1 or 2){

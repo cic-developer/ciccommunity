@@ -14,12 +14,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Search extends CB_Controller
 {
-
-	/**
+    /**
 	 * 모델을 로딩합니다
 	 */
 	protected $models = array('Board', 'Board_group', 'Post', 'Post_file', 'Search_keyword', 'CIC_coin_list', 'CIC_coin_keyword');
-
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
@@ -34,12 +32,10 @@ class Search extends CB_Controller
 		 */
 		$this->load->library(array('pagination', 'querystring'));
 	}
-
-
 	/**
 	 * 검색 페이지 함수입니다
 	 */
-	 public function index()
+	public function index()
 	{
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_search_index';
@@ -62,12 +58,6 @@ class Search extends CB_Controller
 		if ($sfield === 'post_both') {
 			$sfield = array('post_title', 'post_content');
 		}
-		// //TRIAL
-		// else {
-		// 	$sfield = 'post_content';}
-		// }else{
-		// 	$sfield = array('post_content');
-		// }
 
 		$mem_id = (int) $this->member->item('mem_id');
 
@@ -185,9 +175,9 @@ class Search extends CB_Controller
 		$total_rows = $free_row + $writer_row;
 		$view['total_rows'] = $total_rows;
 
-		echo "<pre><br>";
-		print_r($result['list'][3]);
-		echo "</pre></br>";
+		// echo "<pre><br>";
+		// print_r($result['list'][3]);
+		// echo "</pre></br>";
 
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
 			$sfieldarray = array('post_title', 'post_content', 'post_both');

@@ -32,7 +32,7 @@ class Main extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('querystring'));
+		$this->load->library(array('querystring', 'coinapi'));
 	}
 
 
@@ -132,6 +132,7 @@ class Main extends CB_Controller
 		$view['view']['searchrank'] = $this->Search_keyword_model->get_main_rank();
 		$view['view']['popularpost'] = $popularpost;
 		$view['view']['banner'] = $banner;
+		$view['view']['maincoin'] = $this->coinapi->get_main_data();
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

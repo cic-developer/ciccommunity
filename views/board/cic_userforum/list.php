@@ -115,8 +115,15 @@
             </div>
             <div class="lower r">
                 <div class="ov">
-                    <a href="#n" class="by-btn"><span>예치금 넣기<!-- 예치금이 넣어져있으면 예치금 빼기로 변경 --></span></a>
+                    <?php if (element('isDeposit', $view)) { ?>
+                    <a href="#n" class="by-btn"><span>예치금 빼기</span></a>
+                    <?php }else { ?>
+                    <a href="#n" class="by-btn"><span>예치금 넣기</span></a>
+                    <?php } ?>
+
                     <a href="#n" class="by-btn"><span>글쓰기</span></a>
+                    <!-- 글쓰기시 관리자가 설정한 포인트보다 적으면... alert하면 어떨까 -->
+                    
                     <p class="ex-cp">보유 예치금 : <?php echo number_format(element('mem_deposit', $view)); ?> CP</p>
                 </div>
             </div>

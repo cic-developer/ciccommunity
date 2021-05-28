@@ -26,39 +26,38 @@ class Coinapi extends CI_Controller
         $this->get_overseas_krw_price();
     }
 
-    public function get_main_data($mem_idx){
-        $this->CI->load->model('CIC_maincoin_exchange_model','CIC_maincoin_coin_model', 'Member_extra_vars_model');
-
+    public function get_main_data(){
+        $this->CI->load->model(
+            array(
+                'CIC_maincoin_exchange_model',
+                'CIC_maincoin_coin_model',
+                'Member_extra_vars_model'
+            )
+        );
+        
 		if ($this->CI->member->is_member() === false) {
             //기본값 리턴
-            $exchange =  $this->CI->CIC_maincoin_exchange_model->get_default_list(),
-            $coin =  $this->CI->CIC_maincoin_coin_model->get_default_list(),
+            $exchange =  $this->CI->CIC_maincoin_exchange_model->get_default_list();
+            $coin =  $this->CI->CIC_maincoin_coin_model->get_default_list();
 		} else {
-            $user_maincoin_data = $this->CI->Member_extra_vars_model->item($this->member->is_member(), 'mem_maincoin');
+            $user_maincoin_data = $this->CI->Member_extra_vars_model->item($this->CI->member->is_member(), 'mem_maincoin');
             if(!$user_maincoin_data || !is_array($user_maincoin_data)){
                 //기본값 리턴
-                $maincoin_data = array(
-                    'exchange' => $this->CI->CIC_maincoin_exchange_model->get_default_list(),
-                    'coin' => $this->CI->CIC_maincoin_coin_model->get_default_list(),
-                );
+                $exchange = $this->CI->CIC_maincoin_exchange_model->get_default_list();
+                $coin = $this->CI->CIC_maincoin_coin_model->get_default_list();
             } else {
                 $decoded_data = json_decode($user_maincoin_data);
-                $maincoin_data = array(
-                    'exchange' => $this->CI->CIC_maincoin_exchange_model->get_user_list($decoded_data['exchange']),
-                    'coin' => $this->CI->CIC_maincoin_coin_model->get_user_list($decoded_data['coin']),
-                );
+                $exchange = $this->CI->CIC_maincoin_exchange_model->get_user_list($decoded_data['exchange']);
+                $coin = $this->CI->CIC_maincoin_coin_model->get_user_list($decoded_data['coin']);
             }
         }
 
-        $exchange = $maincoin_data['exchange'];
-        $coin = $maincoin_data['coin'];
-
         $return_data = array(
             'exchange' => $exchange,
-            'coin' => array(),
+            'coin' => $coin,
+            'first_block' => array(),
         );
-
-
+        return $return_data;
     }
     
     public function get_coin_data($exchange="", $coin_id, $market="KRW"){

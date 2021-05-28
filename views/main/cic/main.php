@@ -60,6 +60,12 @@
             <div class="msec-01">
                 <div class="tab">
                     <ul>
+                    <?php
+                        for($i=0; $i<count(element('coin',element('maincoin', $view))); $i++){
+                    ?>
+                    <?php
+                        }
+                    ?>
                         <li class="active"><a href="#n"><span>BTC</span></a></li>
                         <li><a href="#n"><span>ETH</span></a></li>
                         <li><a href="#n"><span>LTC</span></a></li>
