@@ -168,15 +168,10 @@
 						if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) { 
 								if(element('brd_name', $result) === '자유게시판'){?>
-
-									<a href="<?php echo element('tab_url', $view); ?>"<?php echo (!element('brd_id', $result)) ? 'class="active"' : ''; ?> class="more"><span>more </span>
+									<a href="<?php echo base_url()."board/freetalk?skeyword="?><?php echo $this->input->get('skeyword')?>
+										"<?php echo (!element('brd_id', $result)) ? 'class="active"' : ''; ?> class="more"><span>more </span>
 									</a>
-									<?php
-										foreach (element('board_rows', $view) as $key => $value) { print_r($value);?>
-										
-											<a role="presentation" <?php echo (element('brd_id', $result) === $key) ? 'class="active"' : ''; ?> href="<?php echo element('tab_url', $view) . '&amp;board_id='. $key; ?>"><?php echo html_escape(element('brd_name', element($key, element('boardlist', $view)))); ?> (<?php echo $value; ?>)</a>
-									<?php
-										}	
+									<?php			
 								}	
 							}
 						}	
@@ -240,8 +235,9 @@
 					<h3>WRITER</h3>
 					<?php if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) { ?>
-					<a href="<?php echo base_url(). "search/?board_id="?><?php echo element('brd_id', $value) ?>" class="more"><span>more</span></a>
-					<?php
+								<a href="<?php echo base_url()."board/cicwriter?skeyword="?><?php echo $this->input->get('skeyword')?>" 
+									class="more"><span>more</span></a>
+						<?php
 							}
 						}
 					

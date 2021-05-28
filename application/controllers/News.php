@@ -45,6 +45,9 @@ class News extends CB_Controller
 	 */
 	public function index()
 	{
+		/* 최초 뉴스 접속시 주요뉴스를 불러오는 인덱스 입니다.
+		*/
+
 		$eventname = 'event_news_post_list';
 		$this->load->event($eventname);
 		
@@ -69,10 +72,12 @@ class News extends CB_Controller
 		
 		$where = array(
 			// 'news_show' => 1,
-			// 'news_enable' => 1,
+			'news_important >' => 0,
 		);
-		print_r('hello');
-		exit;
+		
+		if($compid = (int) $this->input->get('comp_id')){
+			$where['news.comp_id'] = $compid;
+		}
 		
 		$result = $this->{$this->modelname}
 		->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
