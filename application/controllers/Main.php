@@ -287,11 +287,11 @@ class Main extends CB_Controller
 			);
 			$this->Member_extra_vars_model->save($this->member->is_member(), array('mem_maincoin', json_encode($set_data,JSON_UNESCAPED_UNICODE)));
 			
-			$this->session->set_flashdata(
-				'message',
-				'정상적으로 수정되었습니다.'
-			);
-			redirect(base_url('/main/coin'));
+			// $this->session->set_flashdata(
+			// 	'message',
+			// 	'정상적으로 수정되었습니다.'
+			// );
+			// redirect(base_url('/main/coin'));
 		} else {
 			// 데이터 가져오기 시작
 			$exchange_list = $this->CIC_maincoin_exchange_model->get('','','','','','cme_orderby','ASC');
@@ -408,7 +408,7 @@ class Main extends CB_Controller
 		exit(json_encode($result));
 	}
 
-	private function _check_comma_input($string){
+	public function _check_comma_input($string){
 		if(count(explode(',', $string)) > 0){
 			return TRUE;
 		} else {

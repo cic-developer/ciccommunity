@@ -20,7 +20,7 @@
                                     $i = 0;
                                     foreach(element('except_exchange_list',$view) as $l){
                                 ?>
-                                    <li <?php echo $i == 0 ? 'class="active"' : '' ?>>
+                                    <li <?php echo $i == 0 ? 'class="active"' : '' ?> data-value="<?php echo element('cme_idx', $l) ?>">
                                         <a href="#n" class="ibtn">
                                             <span><?php echo element('cme_korean_nm', $l); ?></span>
                                         </a>
@@ -69,7 +69,7 @@
                                     $i = 0;
                                     foreach(element('except_coin_list',$view) as $l){
                                 ?>
-                                <li <?php echo $i == 0 ? 'class="active"' : '' ?>>
+                                <li <?php echo $i == 0 ? 'class="active"' : '' ?> data-value="<?php echo element('cmc_symbol', $l) ?>">
                                     <a href="#n" class="ibtn">
                                         <span><?php echo element('cmc_symbol', $l); ?> (<?php echo element('cmc_korean_nm', $l); ?>)</span>
                                     </a>
@@ -119,6 +119,8 @@
                             if (cachk > 0) {
                                 var istxt = $(this).closest('.set-list').find('.c01').find(
                                     'li.active > a > span').text();
+                                var isvalue = $(this).closest('.set-list').find('.c01').find(
+                                    'li.active').data('value');
                                 $(this).closest('.set-list').find('.c01').find('li.active').remove();
                                 $(this).closest('.set-list').find('.c02 > ul > li').removeClass(
                                     'active');
@@ -127,7 +129,7 @@
                                     var per_html = $(this).closest('.set-list').find('.c02 > ul > .per').html();
                                     $(this).closest('.set-list').find('.c02 > ul > .per').remove();
                                     $(this).closest('.set-list').find('.c02 > ul').append(
-                                        '<li class="active"><a href="#n" class="ibtn"><span>' + istxt +
+                                        '<li class="active" data-value="'+isvalue+'"><a href="#n" class="ibtn"><span>' + istxt +
                                         '</span></a><button class="delete"><span class="blind">삭제</span></button></li>'
                                     );
                                     $(this).closest('.set-list').find('.c02 > ul').append(
@@ -136,7 +138,7 @@
                                     );
                                 } else {
                                     $(this).closest('.set-list').find('.c02 > ul').append(
-                                        '<li class="active"><a href="#n" class="ibtn"><span>' + istxt +
+                                        '<li class="active" data-value="'+isvalue+'"><a href="#n" class="ibtn"><span>' + istxt +
                                         '</span></a><button class="delete"><span class="blind">삭제</span></button></li>'
                                     );
                                 }
@@ -212,7 +214,7 @@
             </div>
             <div class="lower">
                 <p class="ex">※ 가상화폐는 최대 8개까지 선택할 수 있으며, PER 코인은 고정입니다.</p>
-                <a href="#n" class="save-btn"><span>저장</span></a>
+                <a href="javascript:void(0);" class="save-btn"><span>저장</span></a>
                 <a href="#n" class="refresh-btn"><span>초기화</span></a>
             </div>
             <?php echo form_close(); ?>
@@ -222,6 +224,40 @@
 </div>
 <script>
     $(document).on('click', '.save-btn', function(){
+        var exchange_list = $('#exchange_list .c02 > ul > li');
+        var exchange_string = '';
+        if(exchange_list.length == 0){
+            alert('거래소를 최소 1개 선택해주세요.');
+            return false;
+        }
+        for(var i = 0; i < exchange_list.length; i++){
+            var _this = exchange_list[i];
+            var value = $(_this).data('value');
+            if(i == 0){
+                exchange_string += value;
+            } else {
+                exchange_string += ','+value;
+            }
+        }
+        $('input[name="my_exchange"]').val(exchange_string);
+
+        var coin_list = $('#coin_list .c02 > ul > li');
+        var coin_string = '';
+        if(coin_list.length == 1){
+            alert('코인을 최소 1개 선택해주세요.');
+            return false;
+        }
+        for(var i = 0; i < coin_list.length; i++){
+            var _this = coin_list[i];
+            var value = $(_this).data('value');
+            if(!value) continue;
+            if(i == 0){
+                coin_string += value;
+            } else {
+                coin_string += ','+value;
+            }
+        }
+        $('input[name="my_coin"]').val(coin_string);
 
         $('#fcoinform').submit();
     });
