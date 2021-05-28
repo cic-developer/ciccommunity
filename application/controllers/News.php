@@ -48,6 +48,16 @@ class News extends CB_Controller
 		$view['view'] = array();
 
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		$param =& $this->querystring;
+		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
+		$findex = 'news_id';
+		$forder = 'desc';
+		$sfield = $this->input->get('sfield', null, '');
+		$skeyword = $this->input->get('skeyword', null, '');
+
+		$per_page = admin_listnum();
+		$offset = ($page - 1) * $per_page;
 		
 	}
 }
