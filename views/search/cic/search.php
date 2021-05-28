@@ -248,7 +248,8 @@
 								if(element('brd_name', $result) === 'CIC Writer'){?>		
 						<li>
 							<a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>">
-								<div class="img"><img src="<?php echo thumb_url('post', element('pfi_filename', element('images', $result))); ?>"alt=""></div>
+								<div class="img"><img src="<?php echo thumb_url('post', element('pfi_filename', element('images', $result))); ?>" 
+									alt="<?php echo html_escape(element('post_title', $result)); ?>"></div>
 								<div class="txt">
 									<div class="vc">
 										<p class="btxt"><?php echo html_escape(element('post_title', $result)); ?><span class="yellow-bg"></span> 
@@ -264,7 +265,7 @@
 								<div class="abr">
 									<div class="photo">
 									
-										<p class="pimg"><img src="<?php echo thumb_url(element('mem_photo', $result),30, 30)?>" alt=""></p>
+										<p class="pimg"><img src="<?php echo thumb_url('post', element('pfi_filename', element('images', $result),30, 30))?>" alt=""></p>
 
 										<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
 									</div>

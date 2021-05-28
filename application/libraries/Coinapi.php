@@ -24,7 +24,7 @@ class Coinapi
         $this->get_overseas_krw_price();
     }
     
-    public function get_data($exchange="", $coin_id, $market="KRW"){
+    public function get_coin_data($exchange="", $coin_id, $market="KRW"){
         switch($exchange){
 
             case 'bithumb':{
