@@ -518,10 +518,12 @@ $(document).on('ready', async function() {
                     type: "SMART_CONTRACT_EXECUTION",
                     account,
                     to: contract_address,
-                    data2,
+                    data: data2,
                     gas: 3000000,
+                }).on("transactionHash", (transactionHash) => {
+                    let data4 = caver.rpc.klay.getTransactionReceipt(transactionHash);
+                    console.log(data4);
                 });
-
                 console.log(data3);
 
             }).on("error", (error) => {

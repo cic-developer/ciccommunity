@@ -97,31 +97,19 @@ class News extends CB_Controller
 		}
 		$view['view']['data'] = $result;
 		
-
-		$view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
-
-		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
-		$config['total_rows'] = $result['total_rows'];
-		$config['per_page'] = $per_page;
-		$this->pagination->initialize($config);
-		$view['view']['paging'] = $this->pagination->create_links();
-		$view['view']['page'] = $page;
-
-		$search_option = array('news_title' => '뉴스제목', 'news_id' => '뉴스번호', 'news_wdate' => '작성일');
-		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
-		$view['view']['search_option'] = search_option($search_option, $sfield);
-        $view['view']['update_news_enable_0_url'] = admin_url($this->pagedir . '/update_news_enable_0/?' . $param->output());
-		$view['view']['update_news_show_0_url'] = admin_url($this->pagedir . '/update_news_show_0/?' . $param->output());
-		$view['view']['update_news_important_url'] = admin_url($this->pagedir . '/update_news_important/?' . $param->output());
 		
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'news');
-		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-		$this->data = $view;
-		$this->layout = element('layout_skin_file', element('layout', $view));
-		$this->view = element('view_skin_file', element('layout', $view));
-	}
+		$page_title = $this->cbconfig->item('site_meta_title_board_list');
+		$meta_description = $this->cbconfig->item('site_meta_description_board_list');
+		$meta_keywords = $this->cbconfig->item('site_meta_keywords_board_list');
+		$meta_author = $this->cbconfig->item('site_meta_author_board_list');
+		$page_name = $this->cbconfig->item('site_page_name_board_list');
+		
+		
+		$searchconfig = array(
+			'{게시판명}',
+		);
 
 
 }
