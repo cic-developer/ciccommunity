@@ -81,7 +81,7 @@
                                             class="blind">삭제</span></button></li>
                                 <li><a href="#n" class="ibtn"><span>LTC (라이트코인)</span></a><button class="delete"><span
                                             class="blind">삭제</span></button></li>
-                                <li><a href="#n"><span>PER (퍼토큰)</span></a></li>
+                                <li class="per"><a href="#n"><span>PER (퍼토큰)</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -99,10 +99,24 @@
                                 $(this).closest('.set-list').find('.c01').find('li.active').remove();
                                 $(this).closest('.set-list').find('.c02 > ul > li').removeClass(
                                     'active');
-                                $(this).closest('.set-list').find('.c02 > ul').append(
-                                    '<li class="active"><a href="#n" class="ibtn"><span>' + istxt +
-                                    '</span></a><button class="delete"><span class="blind">삭제</span></button></li>'
-                                );
+                                var is_there_per = $(this).closest('.set-list').find('.c02 > ul > .per').length > 0;
+                                if(is_there_per){
+                                    var per_html = $(this).closest('.set-list').find('.c02 > ul > .per').html();
+                                    $(this).closest('.set-list').find('.c02 > ul > .per').remove();
+                                    $(this).closest('.set-list').find('.c02 > ul').append(
+                                        '<li class="active"><a href="#n" class="ibtn"><span>' + istxt +
+                                        '</span></a><button class="delete"><span class="blind">삭제</span></button></li>'
+                                    );
+                                    $(this).closest('.set-list').find('.c02 > ul').append(
+                                        '<li class="per">' + per_html +
+                                        '</li>'
+                                    );
+                                } else {
+                                    $(this).closest('.set-list').find('.c02 > ul').append(
+                                        '<li class="active"><a href="#n" class="ibtn"><span>' + istxt +
+                                        '</span></a><button class="delete"><span class="blind">삭제</span></button></li>'
+                                    );
+                                }
                             } else {
                                 alert('선택된 항목이 없습니다.');
                             }
@@ -129,7 +143,8 @@
                             if (cachkv > 0) {
                                 var isThis = $(this).closest('.item').find('li.active').index();
                                 var $vtem = $(this).closest('.item').find('li.active');
-                                if (isThis == 0) {
+                                var $is_per = $vtem.prev().attr('class') == 'per';
+                                if (isThis == 0 || $is_per) {
                                     alert('처음입니다.');
                                 } else {
                                     $vtem.prev().before($vtem);
@@ -144,7 +159,8 @@
                                 var isThis = $(this).closest('.item').find('li.active').index() + 1;
                                 var isThisLength = $(this).closest('.item').find('li').length;
                                 var $vtem = $(this).closest('.item').find('li.active');
-                                if (isThis == isThisLength) {
+                                var $is_per = $vtem.next().find('a > span').text().indexOf('퍼토큰') > -1
+                                if (isThis == isThisLength || $is_per) {
                                     alert('마지막입니다.');
                                 } else {
                                     $vtem.next().after($vtem);
@@ -154,7 +170,8 @@
                             }
                         });
 
-                    })
+                    });
+
                 </script>
                 <div class="item unit">
                     <h4>화폐단위</h4>
