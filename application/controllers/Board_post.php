@@ -1460,6 +1460,7 @@ class Board_post extends CB_Controller
 		}
 		$result = $this->Post_model
 			->get_post_list($per_page, $offset, $where, $category_id, $findex, $sfield, $skeyword);
+			
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
@@ -1586,6 +1587,8 @@ class Board_post extends CB_Controller
 		}
 
 		$return['data'] = $result;
+		print_r($result);
+		exit;
 		$return['notice_list'] = $noticeresult;
 		if (empty($from_view)) {
 			$board['headercontent'] = ($this->cbconfig->get_device_view_type() === 'mobile')
