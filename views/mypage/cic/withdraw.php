@@ -104,11 +104,11 @@
                                 </tr>
                                 <tr>
                                     <th>신청포인트(CP)</th>
-                                    <td class="withdraw-point"></td>
+                                    <td class="withdraw-point">0</td>
                                 </tr>
                                 <tr>
                                     <th>예상 잔여포인트(CP)</th>
-                                    <td class="preview-point"></td>
+                                    <td class="preview-point"><?php echo number_format(element('mem_cp', $view), 2); ?></td>
                                 </tr>
                                 <tr>
                                     <th>예상 교환포인트(PER))</th>
@@ -204,7 +204,7 @@
 	}
 
     /*
-     *
+     * 출금정보 확인
      */
 
     // 
@@ -220,23 +220,20 @@
             $('.withdraw-point').text('금액을 옳바르게 입력해주세요.');
             $('.preview-point').text('금액을 옳바르게 입력해주세요.');
         } else {
-            var money = $('.my-point').data('my-point');
-            
-            var test = money - parseFloat(currentVal);
-            alert(typeof money);
-            return;
-            alert(parseFloat(money));
-            console.log(parseFloat(money));
+            var _money = $('.my-point').data('my-point');
+            var money = _money.replace(',', '');
+
+            var preview_point = Number(money - currentVal);
 
             $('.withdraw-point').text(currentVal);
-            $('.preview-point').text(<?php echo number_format(element('mem_cp', $view), 2); ?>-currentVal);
+            $('.preview-point').text(preview_point);
         }
 		
 		oldVal1 = currentVal;
 	});
 
     /*
-     *
+     * 출금요청
      */
     
     function isNumeric(num){
