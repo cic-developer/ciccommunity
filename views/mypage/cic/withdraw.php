@@ -27,6 +27,7 @@
                             <p class="ctxt">CP</p>
                             <a href='javascript:void(0);' id="withdraw-request" class="draw-btn withdraw-request" onclick="validateForm()" data-wid-req-url="<?php echo element('req_url', $view); ?>"><span>출금요청</span></a>
                         </div>
+                            <a href='javascript:void(0);' id="withdraw_info" class="draw-btn"><span>출금정보 확인</span></a>
                         <p id="help-text" style="color:red;"></p>
                     </li>
                 </ul>
@@ -90,30 +91,34 @@
                             </colgroup>
                             <tbody>
                                 <tr>
-                                    <td>최소신청금액(CP)</td>
+                                    <th>최소신청금액(CP)</th>
                                     <td><?php echo number_format(element('withdraw_minimum', $view), 2); ?></td>
                                 </tr>
                                 <tr>
-                                    <td>출금수수료(%)</td>
+                                    <th>출금수수료(%)</th>
                                     <td><?php echo number_format(element('withdraw_deposit', $view), 2); ?></td>
                                 </tr>
                                 <tr>
-                                    <td>보유포인트(CP)</td>
+                                    <th>보유포인트(CP)</th>
                                     <td><?php echo number_format(element('mem_cp', $view), 2); ?></td>
                                 </tr>
                                 <tr>
-                                    <td>예상 잔여포인트(CP)</td>
-                                    <td><?php echo number_format(element('change_cp', $view), 2); ?></td>
+                                    <th>신청포인트(CP)</th>
+                                    <td class="withdraw-point"></td>
                                 </tr>
                                 <tr>
-                                    <td>예상 교환포인트(PER))</td>
+                                    <th>예상 잔여포인트(CP)</th>
+                                    <td class="preview-point"></td>
+                                </tr>
+                                <tr>
+                                    <th>예상 교환포인트(PER))</th>
                                     <td>????</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <a href="javascript:void(0);" id="withdraw_request_confirm"  class="modify-btn" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>">
+                        <!-- <a href="javascript:void(0);" id="deposit_insert_confirm"  class="modify-btn" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>">
                             <span>확인</span>
-                        </a>
+                        </a> -->
 					<!-- </ul> -->
 				</div>
 			</div>
@@ -146,7 +151,7 @@
 		margin: 15% auto; /* 15% from the top and centered */
 		padding: 20px;
 		border: 1px solid #888;
-		width: 20%; /* Could be more or less, depending on screen size */                          
+		width: 25%; /* Could be more or less, depending on screen size */                          
 	}
 
 	/* The Close Button */
@@ -184,7 +189,7 @@
     var modal = document.getElementById('myModal_withdraw');
 
     // Get the button that opens the modal
-    var btn = document.getElementById("withdraw-request");
+    var btn = document.getElementById("withdraw_info");
 
     // When the user clicks on the button, open the modal 
 	btn.onclick = function() {
@@ -197,6 +202,30 @@
 			modal.style.display = "none";
 		}
 	}
+
+    /*
+     *
+     */
+
+    // 
+	oldVal1 = '';
+	$("#money").on("propertychange change keyup paste input", function() {
+		var currentVal = $(this).val();
+		if(currentVal == oldVal1) {
+			return;
+		}
+
+        // If x is Not a Number or less than one or greater than 10
+        if (!isNumeric(currentVal)) {
+            $('.withdraw-point').text('금액을 옳바르게 입력해주세요.');
+            $('.preview-point').text('금액을 옳바르게 입력해주세요.');
+        } else {
+            $('.withdraw-point').text(currentVal);
+            $('.withdraw-point').text(currentVal);
+        }
+		
+		oldVal1 = currentVal;
+	});
 
     /*
      *
@@ -236,7 +265,7 @@
 
         // // Get the value of the input field with id="numb"
         x = document.getElementById("money").value;
-        btn = document.getElementById("withdraw_request_confirm");
+        btn = document.getElementById("withdraw-request");
 
         // // If x is Not a Number or less than one or greater than 10
         if (!isNumeric(x) || x < 1 || x > Number(mem_cp)) {
@@ -274,23 +303,3 @@
         };
     }); 
 </script>
-
-<!-- <tr>
-    <td>2021. 03. 21</td>
-    <td>200,000 CP</td>
-    <td>100 PER</td>
-    <td>fasdfsa68bn4a3hg7h4a3ba6ava99</td>
-    <td>
-        <p class="cblue">승인</p>
-    </td>
-</tr>
-<tr>
-    <td>2021. 03. 21</td>
-    <td>200,000 CP</td>
-    <td></td>
-    <td></td>
-    <td>
-        <p class="cred">미승인</p>
-    </td>
-</tr> -->
-

@@ -1535,7 +1535,6 @@ class Mypage extends CB_Controller
 		}
 		$view['view']['mem_cp'] = $member_info['mem_cp'];
 		$where['wid_mem_idx'] = $member_info['mem_id'];
-		$view['view']['change_cp'] = $view['view']['mem_cp'] - $withdraw_minimum;
 		// $view['view']['mem_id'] = $member_info['mem_id'];
 
 		// 출금 요청 url
