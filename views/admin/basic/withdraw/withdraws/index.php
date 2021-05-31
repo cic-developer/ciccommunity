@@ -67,8 +67,10 @@
                                                     data-userip="<?php echo html_escape(element('wid_userip', $result)); ?>"
                                                         data-nickname="<?php echo html_escape(element('wid_nickname', $result)); ?>"
                                                             data-wallet-address="<?php echo html_escape(element('wid_wallet_address', $result)); ?>"
-                                                                data-req-money="<?php echo number_format(element('wid_req_money', $result), 2); ?>"
-                                                                    data-req-datetime="<?php echo html_escape(element('wid_req_datetime', $result)); ?>"
+                                                                data-req-money="<?php echo number_format(element('wid_commission', $result), 2); ?>"
+                                                                    data-req-money="<?php echo number_format(element('wid_req_money', $result), 2); ?>"
+                                                                        data-req-money="<?php echo number_format(element('wid_cal_money', $result), 2); ?>"
+                                                                            data-req-datetime="<?php echo html_escape(element('wid_req_datetime', $result)); ?>"
                                             data-adminid="<?php echo html_escape(element('wid_admin_id', $result)); ?>"
                                                 data-adminip="<?php echo html_escape(element('wid_admin_ip', $result)); ?>"           
                                             data-res-datetime="<?php echo html_escape(element('wid_res_datetime', $result)); ?>"
@@ -257,8 +259,16 @@
                             <td id="wid-wallet-address"></td>
                         </tr>
                         <tr>
-                            <th>출금금액</th>
+                            <th>출금수수료</th>
+                            <td id="wid_commission"></td>
+                        </tr>
+                        <tr>
+                            <th>출금금액(신청)</th>
                             <td id="wid-req-money"></td>
+                        </tr>
+                        <tr>
+                            <th>출금금액(수수료적용)</th>
+                            <td id="wid-cal-money"></td>
                         </tr>
                         <tr>
                             <th>요청날짜</th>
