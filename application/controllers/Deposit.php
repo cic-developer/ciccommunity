@@ -45,6 +45,10 @@ class Deposit extends CB_Controller
 
 	/**
 	 * insert
+     * 
+     * 추가되어야 할 사항
+     * 1. 예치금을 넣을 때 진행중 혹은 승인대기 글이 있는지 확인 (board id 3, 6) 해야할까? 이미 cp로 확인중인데... 흠
+     * 
 	 */
 	public function insert()
 	{

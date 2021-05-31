@@ -247,7 +247,7 @@ class News extends CB_Controller
 		$layoutconfig = array(
 			'path' => 'news',
 			'layout' => 'layout',
-			'skin' => 'news',
+			'skin' => 'latestnews',
 			'layout_dir' => 'cic_sub',
 			'mobile_layout_dir' => 'cic_sub',
 			'use_sidebar' => $this->cbconfig->item('sidebar_news'),
