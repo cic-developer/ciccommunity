@@ -22,15 +22,30 @@
 										foreach (element('list', element('most_view', $view)) as $most_view) {
 											?>
                                         <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
-											<div class="item">
+											<!-- <div class="item">
 												<a href="#n">
+													<div class="img"><img
+														src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">
+													</div>
+													<div class="txt">
+														<p class="btxt">한국핀테크학회, 특금법 실명계 좌 요건의 ‘특금법 시행’</p>
+														<p class="stxt">▲(사진출처 = 픽사베이) [한국블록체인 뉴스] ‘한국 관한 법률’(이하 특금법)의 시행 관련된 텍스트
+														예시 입니다 ...</p>
+														<p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
+													</div>
+												</a>
+											</div> -->
+											<div class="item">
+												<a href="<?php echo goto_url(element('newsurl', $most_view)); ?>">
 													<div class="img"><img
 															src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">
 													</div>
 													<div class="txt">
-														<p class="btxt"><a href="<?php echo goto_url(element('newsurl', $most_view)); ?>"><?php echo html_escape(cut_str(strip_tags(element('news_title', $most_view)), 15)); ?></a></p>
-														<p class="stxt"><a href="<?php echo goto_url(element('newsurl', $most_view)); ?>"><?php echo html_escape(cut_str(strip_tags(element('news_contents', $most_view)), 20)); ?></a></p>
-														<p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
+														<p class="btxt"><?php echo html_escape(cut_str(strip_tags(element('news_title', $most_view)), 10)); ?></p>
+														<p class="stxt"><?php echo html_escape(cut_str(strip_tags(element('news_contents', $most_view)), 10)); ?></p>
+														<p class="ctxt"><?php echo html_escape(element('comp_name', element('company', $most_view))); ?>
+															<span><?php echo display_datetime(element('news_wdate', $most_view)); ?></span>
+														</p>
 													</div>
 												</a>
 											</div>
@@ -110,7 +125,7 @@
 									</div>
 									<div class="txt">
 										<div class="vc">
-											<p class="btxt"><a href="<?php echo goto_url(element('newsurl', $result)); ?>"><?php echo html_escape(element('news_title', $result)); ?><span>(<?php echo number_format(element('news_reviews', $result)); ?>)</span></a></p>
+											<p class="btxt"><span><a href="<?php echo goto_url(element('newsurl', $result)); ?>"><?php echo html_escape(element('news_title', $result)); ?>(<?php echo number_format(element('news_reviews', $result)); ?>)</a></span></p>
 											<p class="stxt"><a href="<?php echo goto_url(element('newsurl', $result)); ?>"><?php echo html_escape(element('news_contents', $result)); ?></a></p>
 											<p class="ctxt">
 												<span><a href="<?php echo goto_url(element('companyurl', $result)); ?>"><?php echo html_escape(element('comp_name', element('company', $result))); ?></a></span>
