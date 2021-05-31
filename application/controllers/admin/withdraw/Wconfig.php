@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 관리자 메인 controller 입니다.
  */
-class WConfig extends CB_Controller
+class Wconfig extends CB_Controller
 {
 
 	/**
@@ -52,8 +52,6 @@ class WConfig extends CB_Controller
 	public function index()
 	{
 
-		print_r("hi");
-		exit;
 		/**
 		 * 로그인이 필요한 페이지입니다
 		 */
@@ -76,19 +74,14 @@ class WConfig extends CB_Controller
 
 		$config = array(
 			array(
-				'field' => 'forum_deposit',
-				'label' => '포럼 예치금',
+				'field' => 'withdraw_deposit',
+				'label' => '출금요청 수수료 설정',
 				'rules' => 'trim|required|greater_than_equal_to[0]|callback__deposit_decimal_check',
 			),
 			array(
-				'field' => 'forum_writer_commission',
-				'label' => '포럼 작성자 지급 포인트 수수료',
-				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[100]|callback__writer_commission_decimal_check',
-			),
-			array(
-				'field' => 'forum_bat_change_commission',
-				'label' => '포럼 배팅 진영 변경 수수료',
-				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[100]|callback__bat_change_commission_decimal_check',
+				'field' => 'withdraw_minimum',
+				'label' => '출금요청 최소금액 설정',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[100]|callback__minimum_decimal_check',
 			),
 		);
 		$this->form_validation->set_rules($config);
@@ -109,9 +102,8 @@ class WConfig extends CB_Controller
 			 */
 
 			$array = array(
-				'forum_deposit',
-				'forum_writer_commission',
-				'forum_bat_change_commission'
+				'withdraw_deposit',
+				'withdraw_minimum',
 			);
 			foreach ($array as $value) {
 				$savedata[$value] = $this->input->post($value, null, '');
@@ -138,7 +130,7 @@ class WConfig extends CB_Controller
 	}
 
 	/**
-	 * 예치금 설정, 소수점 두자리 이내 확인
+	 * 
 	 */
 	public function _deposit_decimal_check($_str)
 	{
@@ -150,15 +142,15 @@ class WConfig extends CB_Controller
         
 		$this->form_validation->set_message(
 			'_deposit_decimal_check',
-			'포럼 예치금은 소수점 2자리 까지 설정이 가능합니다'
+			'출금요청 수수료 설정'
 		);
 		return false;
 	}
 	
 	/**
-	 * 포럼 작성자 지급 포인트 수수료 설정, 소수점 두자리 이내 확인
+	 * 
 	 */
-	public function _writer_commission_decimal_check($_str)
+	public function _minimum_check($_str)
 	{
         
 		$str = explode( '.', $_str );
@@ -167,27 +159,10 @@ class WConfig extends CB_Controller
 		}
         
 		$this->form_validation->set_message(
-			'_writer_commission_decimal_check',
+			'_minimum_check',
 			'포럼 작성자 지급 포인트 수수료는 소수점 2자리 까지 설정이 가능합니다'
 		);
 		return false;
 	}
 	
-	/**
-	 * 포럼 배팅 진영 변경 수수료 설정, 소수점 두자리 이내 확인
-	 */
-	public function _bat_change_commission_decimal_check($_str)
-	{
-		
-		$str = explode( '.', $_str );
-		if( strlen($str[1]) < 3){
-			return true;
-		}
-        
-		$this->form_validation->set_message(
-			'_bat_change_commission_decimal_check',
-			'포럼 배팅 진영 변경 수수료는 소수점 2자리 까지 설정이 가능합니다'
-		);
-		return false;
-	}
 }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -130,11 +129,11 @@
 						</div>
 						<div class="gnb mobile">	
 							<ul class="member">
-								<li><a href="#n" class="mypage-btn"><span>MY PAGE</span></a></li>
-								<li><a href="#n" class="login-btn"><span>LOGIN</span></a></li>
+								<li><a href="<?php echo base_url('/mypage')?>" class="mypage-btn"><span>MY PAGE</span></a></li>
+								<li><a href="<?php echo site_url('login/logout?url=' . urlencode(current_full_url())); ?>" class="login-btn"><span>LOGIN</span></a></li>
 							</ul>
 						</div>
-						<ul class="topmenu" id="topmenu">
+						<ul class="member" id="topmenu">
 							<li class="mn_l1 has-sub is-cloose" style="width: auto;">
 								<a href="<?php echo base_url('/board/freetalk')?>" class="mn_a1"><span>자유게시판</span></a>
 								<div class="depth2-wrap" style="display: block; visibility: visible; height: 45px; opacity: 1; overflow: hidden;">
