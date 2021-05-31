@@ -1510,6 +1510,9 @@ class Mypage extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
+		$withdraw_minimum = $this->CIC_wconfig_model->item('withdraw_minimum'); 
+		$view['view']['withdraw_minimum'] = $withdraw_minimum;
+
 		/**
 		 * 페이지에 숫자가 아닌 문자가 입력되거나 1보다 작은 숫자가 입력되면 에러 페이지를 보여줍니다.
 		 */
@@ -1625,7 +1628,7 @@ class Mypage extends CB_Controller
 			array(
 				'field' => 'money',
 				'label' => '금액',
-				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to['.$member_info['mem_cp'].']',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to['.$member_info['mem_cp'].']|callback__withdraw_minimum_check',
 			),
 		);
 		$this->form_validation->set_rules($config);
@@ -1723,9 +1726,11 @@ class Mypage extends CB_Controller
 			}
 
 		} else {
+			$withdraw_minimum = $this->CIC_wconfig_model->item('withdraw_minimum'); 
+
 			$this->session->set_flashdata(
 				'message',
-				'금액을 옳바르게 입력해주세요'
+				'금액을 옳바르게 입력해주세요 (최소금액: '.$withdraw_minimum.')'
 			);
 		}
 
@@ -1738,6 +1743,22 @@ class Mypage extends CB_Controller
 		// $param =& $this->querystring;
 
 		redirect('mypage/withdraw');
+	}
+
+	function _withdraw_minimum_check($str){
+    
+		// 최소 신청 금액
+		$withdraw_minimum = $this->CIC_wconfig_model->item('withdraw_minimum'); 
+        
+		if($str < $withdraw_minimum){
+			$this->form_validation->set_message(
+				'_withdraw_minimum_check',
+				'최소 신청금액을 맞춰주세요 ('.$withdraw_minimum.')'
+			);
+			return false;
+		}
+
+		return true;
 	}
 
 	function charge(){

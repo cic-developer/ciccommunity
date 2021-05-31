@@ -112,14 +112,15 @@
 									</div>
 									<div class="txt">
 										<div class="vc">
-											<a href="<?php echo goto_url(element('newsurl', $result)); ?>" target="_blank"
-											<p class="btxt"><span><a href="<?php echo goto_url(element('newsurl', $result)); ?>"><?php echo html_escape(element('news_title', $result)); ?>(<?php echo number_format(element('news_reviews', $result)); ?>)</a></span></p>
-											<p class="stxt"><a href="<?php echo goto_url(element('newsurl', $result)); ?>"><?php echo html_escape(element('news_contents', $result)); ?></a></p>
-											<p class="ctxt">
-												<span><a href="<?php echo goto_url(element('companyurl', $result)); ?>"><?php echo html_escape(element('comp_name', element('company', $result))); ?></a></span>
-												<span><?php echo display_datetime(element('news_wdate', $result)); ?></span>
-												<span><?php echo number_format(element('news_reviews', $result)); ?></span>
-											</p>
+											<a href="<?php echo goto_url(element('newsurl', $result)); ?>" target="_blank">
+												<p class="btxt"><?php echo html_escape(element('news_title', $result)); ?><span>(<?php echo number_format(element('news_reviews', $result)); ?>)</span></p>
+												<p class="stxt"><?php echo html_escape(element('news_contents', $result)); ?></p>
+												<p class="ctxt">
+													<span><?php echo html_escape(element('comp_name', element('company', $result))); ?></span>
+													<span><?php echo display_datetime(element('news_wdate', $result)); ?></span>
+													<span><?php echo number_format(element('news_reviews', $result)); ?></span>
+												</p>
+											</a>
 										</div>
 									</div>
 								</a>
