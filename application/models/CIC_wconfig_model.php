@@ -24,7 +24,7 @@ class CIC_wconfig_model extends CB_Model
 
 	public $meta_value = 'wid_value';
 
-	public $cache_name= 'forum-model-get'; // 캐시 사용시 프리픽스
+	public $cache_name= 'withdraw-model-get'; // 캐시 사용시 프리픽스
 
 	public $cache_time = 86400; // 캐시 저장시간
 

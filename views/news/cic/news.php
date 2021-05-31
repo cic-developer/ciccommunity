@@ -23,6 +23,7 @@
                                             ?>
                                             <div class="owl-item" style="width: 240px; margin-right: 20px;">
 											<div class="item">
+												<!-- <a href="<?php echo goto_url(element('newsurl', $most_view)); ?>"> -->
 												<a href="<?php echo goto_url(element('newsurl', $most_view)); ?>">
 													<div class="img"><img
 															src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">

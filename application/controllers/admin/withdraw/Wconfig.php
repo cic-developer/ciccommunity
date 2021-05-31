@@ -58,7 +58,7 @@ class Wconfig extends CB_Controller
 		required_user_login();
 
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_forum_index';
+		$eventname = 'event_admin_withdraw_config_index';
 		$this->load->event($eventname);
 
 		$view = array();
@@ -76,12 +76,12 @@ class Wconfig extends CB_Controller
 			array(
 				'field' => 'withdraw_deposit',
 				'label' => '출금요청 수수료 설정',
-				'rules' => 'trim|required|greater_than_equal_to[0]|callback__deposit_decimal_check',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[100]|callback__deposit_decimal_check',
 			),
 			array(
 				'field' => 'withdraw_minimum',
 				'label' => '출금요청 최소금액 설정',
-				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[100]|callback__minimum_decimal_check',
+				'rules' => 'trim|required|greater_than_equal_to[0]|callback__minimum_decimal_check',
 			),
 		);
 		$this->form_validation->set_rules($config);
@@ -109,16 +109,14 @@ class Wconfig extends CB_Controller
 				$savedata[$value] = $this->input->post($value, null, '');
 			}
 
-			$this->CIC_forum_model->save($savedata);
+			$this->CIC_wconfig_model->save($savedata);
 			$view['view']['alert_message'] = '기본정보 설정이 저장되었습니다';
 		}
 
-		$getdata = $this->CIC_forum_model->get_all_meta();
+		$getdata = $this->CIC_wconfig_model->get_all_meta();
 		$view['view']['data'] = $getdata;
-		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-
 		/**
 		 * 어드민 레이아웃을 정의합니다
 		 */
@@ -142,7 +140,7 @@ class Wconfig extends CB_Controller
         
 		$this->form_validation->set_message(
 			'_deposit_decimal_check',
-			'출금요청 수수료 설정'
+			'출금요청 수수료는 소수점 2자리 까지 설정이 가능합니다'
 		);
 		return false;
 	}
@@ -160,7 +158,7 @@ class Wconfig extends CB_Controller
         
 		$this->form_validation->set_message(
 			'_minimum_check',
-			'포럼 작성자 지급 포인트 수수료는 소수점 2자리 까지 설정이 가능합니다'
+			'출금요청 최소금액은 소수점 2자리 까지 설정이 가능합니다'
 		);
 		return false;
 	}

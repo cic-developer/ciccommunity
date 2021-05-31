@@ -117,8 +117,15 @@ var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
 						</div>
 						<div class="gnb mobile">	
 							<ul class="member">
-								<li><a href="#n" class="mypage-btn"><span>MY PAGE</span></a></li>
-								<li><a href="#n" class="login-btn"><span>LOGIN</span></a></li>
+								<?php if($this->member->is_member()){ ?>
+                                    <li><a href="<?php echo base_url('/mypage')?>" class="mypage-btn"><span>MY PAGE</span></a></li>
+                                    <li><a href="<?php echo site_url('login/logout?url=' . urlencode(current_full_url())); ?>"
+                                        class="login-btn"><span>LOGOUT</span></a></li>
+                                <?php }else{ ?>
+                                    <li><a href="<?php echo base_url('/register')?>" class="mypage-btn"><span>SIGN UP</span></a></li>
+                                    <li><a href="<?php echo site_url('login?url=' . urlencode(current_full_url())); ?>"
+                                        class="login-btn"><span>LOGIN</span></a></li>
+                                <?php }?>
 							</ul>
 						</div>
 						<ul class="topmenu" id="topmenu">

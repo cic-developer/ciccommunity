@@ -129,11 +129,18 @@
 						</div>
 						<div class="gnb mobile">	
 							<ul class="member">
-								<li><a href="<?php echo base_url('/mypage')?>" class="mypage-btn"><span>MY PAGE</span></a></li>
-								<li><a href="<?php echo site_url('login/logout?url=' . urlencode(current_full_url())); ?>" class="login-btn"><span>LOGIN</span></a></li>
+								<?php if($this->member->is_member()){ ?>
+                                    <li><a href="<?php echo base_url('/mypage')?>" class="mypage-btn"><span>MY PAGE</span></a></li>
+                                    <li><a href="<?php echo site_url('login/logout?url=' . urlencode(current_full_url())); ?>"
+                                        class="login-btn"><span>LOGOUT</span></a></li>
+                                <?php }else{ ?>
+                                    <li><a href="<?php echo base_url('/register')?>" class="mypage-btn"><span>SIGN UP</span></a></li>
+                                    <li><a href="<?php echo site_url('login?url=' . urlencode(current_full_url())); ?>"
+                                        class="login-btn"><span>LOGIN</span></a></li>
+                                <?php }?>
 							</ul>
 						</div>
-						<ul class="member" id="topmenu">
+						<ul class="topmenu" id="topmenu">
 							<li class="mn_l1 has-sub is-cloose" style="width: auto;">
 								<a href="<?php echo base_url('/board/freetalk')?>" class="mn_a1"><span>자유게시판</span></a>
 								<div class="depth2-wrap" style="display: block; visibility: visible; height: 45px; opacity: 1; overflow: hidden;">
