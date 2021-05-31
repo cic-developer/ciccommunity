@@ -138,8 +138,16 @@ class Forum extends CB_Controller
 	/**
 	 * 예치금 설정, 소수점 두자리 이내 확인
 	 */
-	public function _decimal_check($str)
+	public function _decimal_check($_str)
 	{
+
+		$str = (double) $_str;
+		$str = fmod($str, 1);
+		$str = $str * 100;
+		// $str = 
+		// (fmod($str,    1) !== 0.00){
+
+		// }
 		// $this->load->helper('chkstring');
 		//  if (chkstring($str, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false) {
 		// 	$this->form_validation->set_message(

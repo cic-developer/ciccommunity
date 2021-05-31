@@ -36,7 +36,7 @@ class News extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('pagination', 'querystring', 'accesslevel', 'videoplayer', 'point'));
+		$this->load->library(array('pagination', 'querystring', 'accesslevel', 'videoplayer', 'point', 'cic_company'));
 	}
 
 
@@ -74,19 +74,20 @@ class News extends CB_Controller
 			'news_reviews >' => 0,
 			// 'news_important >' => 0,
 		);
+		if($compid = (int) $this->input->get('comp_id')){
+			$where['news.comp_id'] = $compid;
+		}
 		$most_view = $this->{$this->modelname}
 		->most_view_news($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $most_view['total_rows'] - ($page - 1) * $per_page;
 		
 		if (element('list', $most_view)) {
 			foreach (element('list', $most_view) as $key => $val) {
-				// $most_view['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
-				// if($company) {
-					// $most_view['list'][$key]['companyurl'] = element('comp_url', $company);
-					// print_r(element('news_index',$val));
-					// exit;
-					// $most_view['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
-				// }
+				$most_view['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
+				if($company) {
+					$most_view['list'][$key]['companyurl'] = element('comp_url', $company);
+					$most_view['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
+				}
 				$most_view['list'][$key]['num'] = $list_num--;
 			}
 		}
@@ -108,13 +109,11 @@ class News extends CB_Controller
 		
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
-				// $result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
-				// if($company) {
-					// $result['list'][$key]['companyurl'] = element('comp_url', $company);
-					// print_r(element('news_index',$val));
-					// exit;
-					// $result['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
-				// }
+				$result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
+				if($company) {
+					$result['list'][$key]['companyurl'] = element('comp_url', $company);
+					$result['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
+				}
 				$result['list'][$key]['num'] = $list_num--;
 			}
 		}

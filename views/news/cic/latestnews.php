@@ -76,7 +76,7 @@
 			<div class="gap60"></div>
 			<div class="vtab">
 				<ul>
-					<li><a href="<?php echo admin_url($this->pagedir . '/news'); ?>"><span>주요뉴스</span></a></li>
+					<li><a href="/news""><span>주요뉴스</span></a></li>
 					<li class="active"><a href="#n"><span>최신뉴스</span></a></li>
 				</ul>
 			</div>
@@ -114,8 +114,8 @@
 											<p class="stxt"><?php echo html_escape(element('news_contents', $result)); ?></p>
 											<p class="ctxt">
 												<span>블록미디어</span>
-												<span>02:18</span>
-												<span>조회 82</span>
+												<span><?php echo display_datetime(element('news_wdate', $result), 'full'); ?></span>
+												<span><?php echo number_format(element('news_reviews', $result)); ?></span>
 											</p>
 										</div>
 									</div>

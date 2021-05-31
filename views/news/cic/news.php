@@ -77,7 +77,7 @@
 			<div class="vtab">
 				<ul>
 					<li class="active"><a href="#n"><span>주요뉴스</span></a></li>
-					<li><a href="#n"><span>최신뉴스</span></a></li>
+					<li><a href="/news/latestnews"><span>최신뉴스</span></a></li>
 				</ul>
 			</div>
 			<div class="list vimg">
@@ -110,7 +110,7 @@
 									</div>
 									<div class="txt">
 										<div class="vc">
-											<p class="btxt"><?php echo html_escape(element('news_title', $result)); ?><span>(<?php echo number_format(element('news_reviews', $result)); ?>)</span></p>
+											<p class="btxt"><a href="<?php echo goto_url(element('newsurl', $result)); ?>"><?php echo html_escape(element('news_title', $result)); ?><span>(<?php echo number_format(element('news_reviews', $result)); ?>)</span></a></p>
 											<p class="stxt"><?php echo html_escape(element('news_contents', $result)); ?></p>
 											<p class="ctxt">
 												<span>블록미디어</span>
