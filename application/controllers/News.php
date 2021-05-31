@@ -32,7 +32,6 @@ class News extends CB_Controller
 	function __construct()
 	{
 		parent::__construct();
-
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
@@ -91,8 +90,6 @@ class News extends CB_Controller
 				$most_view['list'][$key]['num'] = $list_num--;
 			}
 		}
-		// print_r($most_view);
-		// exit;
 		
 		$where = array(
 			'news_important >' => 0,
@@ -177,7 +174,6 @@ class News extends CB_Controller
 		
 		$where = array(
 			'news_reviews >' => 0,
-			// 'news_important >' => 0,
 		);
 		$most_view = $this->{$this->modelname}
 		->most_view_news($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
@@ -185,18 +181,14 @@ class News extends CB_Controller
 		
 		if (element('list', $most_view)) {
 			foreach (element('list', $most_view) as $key => $val) {
-				// $most_view['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
-				// if($company) {
-					// $most_view['list'][$key]['companyurl'] = element('comp_url', $company);
-					// print_r(element('news_index',$val));
-					// exit;
-					// $most_view['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
-				// }
+				$most_view['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
+				if($company) {
+					$most_view['list'][$key]['companyurl'] = element('comp_url', $company);
+					$most_view['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
+				}
 				$most_view['list'][$key]['num'] = $list_num--;
 			}
 		}
-		// print_r($most_view);
-		// exit;
 		
 		$where = array(
 		);
@@ -211,25 +203,22 @@ class News extends CB_Controller
 		
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
-				// $result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
-				// if($company) {
-					// $result['list'][$key]['companyurl'] = element('comp_url', $company);
-					// print_r(element('news_index',$val));
-					// exit;
-					// $result['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
-				// }
+				$result['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
+				if($company) {
+					$result['list'][$key]['companyurl'] = element('comp_url', $company);
+					$result['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
+				}
 				$result['list'][$key]['num'] = $list_num--;
 			}
 		}
 
-		// 	print_r($result);
-		// exit;
 
 		$view['view']['most_view'] = $most_view;
 		$view['view']['data'] = $result;
 		
 		
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
 
 		$page_title = $this->cbconfig->item('site_meta_title_news');
 		$meta_description = $this->cbconfig->item('site_meta_description_news');

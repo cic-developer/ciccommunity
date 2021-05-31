@@ -175,7 +175,7 @@
             </div>
             <!-- e: board-filter -->
 
-            <!-- 새 핸드폰번호 modal -->
+            <!-- modal -->
             <div id="myModal_deposit" class="modal">
 				<div class="modal-content">
 					<!-- <ul class="entry modify-box"> -->
@@ -203,7 +203,7 @@
 					<!-- </ul> -->
 				</div>
 			</div>
-
+            
         </div>
         <!-- page end / -->
     </div>

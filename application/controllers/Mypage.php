@@ -1510,7 +1510,9 @@ class Mypage extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
+		$withdraw_deposit = $this->CIC_wconfig_model->item('withdraw_deposit'); 
 		$withdraw_minimum = $this->CIC_wconfig_model->item('withdraw_minimum'); 
+		$view['view']['withdraw_deposit'] = $withdraw_deposit;
 		$view['view']['withdraw_minimum'] = $withdraw_minimum;
 
 		/**
@@ -1533,6 +1535,7 @@ class Mypage extends CB_Controller
 		}
 		$view['view']['mem_cp'] = $member_info['mem_cp'];
 		$where['wid_mem_idx'] = $member_info['mem_id'];
+		$view['view']['change_cp'] = $view['view']['mem_cp'] - $withdraw_minimum;
 		// $view['view']['mem_id'] = $member_info['mem_id'];
 
 		// 출금 요청 url
