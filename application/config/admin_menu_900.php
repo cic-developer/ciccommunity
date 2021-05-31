@@ -15,6 +15,7 @@ $config['admin_page_menu']['withdraw'] =
 	array(
 		'__config'					=> array('출금요청관리', 'fa-bar-chart-o'),
 		'menu'						=> array(
-			'withdraws'			=> array('출금요청목록', ''),
+			'wconfig'			=> array('출금요청 설정', ''),
+			'withdraws'			=> array('출금요청 목록', ''),
 		),
 	);

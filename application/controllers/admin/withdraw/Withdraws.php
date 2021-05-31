@@ -24,7 +24,7 @@ class Withdraws extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_withdraw', 'CIC_cp', 'CIC_withdraw_log', 'Member');
+	protected $models = array('CIC_withdraw', 'CIC_cp', 'Member');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
