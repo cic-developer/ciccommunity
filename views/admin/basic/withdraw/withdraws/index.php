@@ -67,9 +67,9 @@
                                                     data-userip="<?php echo html_escape(element('wid_userip', $result)); ?>"
                                                         data-nickname="<?php echo html_escape(element('wid_nickname', $result)); ?>"
                                                             data-wallet-address="<?php echo html_escape(element('wid_wallet_address', $result)); ?>"
-                                                                data-req-money="<?php echo number_format(element('wid_commission', $result), 2); ?>"
+                                                                data-commission="<?php echo number_format(element('wid_commission', $result), 2); ?>"
                                                                     data-req-money="<?php echo number_format(element('wid_req_money', $result), 2); ?>"
-                                                                        data-req-money="<?php echo number_format(element('wid_cal_money', $result), 2); ?>"
+                                                                        data-cal-money="<?php echo number_format(element('wid_cal_money', $result), 2); ?>"
                                                                             data-req-datetime="<?php echo html_escape(element('wid_req_datetime', $result)); ?>"
                                             data-adminid="<?php echo html_escape(element('wid_admin_id', $result)); ?>"
                                                 data-adminip="<?php echo html_escape(element('wid_admin_ip', $result)); ?>"           
@@ -240,7 +240,7 @@
 
                         <!-- 신청회원 정보 -->
                         <tr>
-                            <td rowspan="7">신청 회원 정보</td>
+                            <td rowspan="9">신청 회원 정보</td>
                         </tr>
                         <tr>
                             <th width="95">아이디</th>
@@ -259,8 +259,8 @@
                             <td id="wid-wallet-address"></td>
                         </tr>
                         <tr>
-                            <th>출금수수료</th>
-                            <td id="wid_commission"></td>
+                            <th>수수료(%)</th>
+                            <td id="wid-commission"></td>
                         </tr>
                         <tr>
                             <th>출금금액(신청)</th>
@@ -434,7 +434,9 @@
 		var userip = $(this).data('userip');
 		var nickname = $(this).data('nickname');
 		var wallet_address = $(this).data('wallet-address');
+		var commission = $(this).data('commission');
 		var req_money = $(this).data('req-money');
+		var cal_money = $(this).data('cal-money');
 		var req_datetime = $(this).data('req-datetime');
 
 		var adminid = $(this).data('adminid');
@@ -455,7 +457,9 @@
         document.getElementById("wid-userip").innerHTML = userip;
         document.getElementById("wid-nickname").innerHTML = nickname;
         document.getElementById("wid-wallet-address").innerHTML = wallet_address;
+        document.getElementById("wid-commission").innerHTML = commission;
         document.getElementById("wid-req-money").innerHTML = req_money;
+        document.getElementById("wid-cal-money").innerHTML = cal_money;
         document.getElementById("wid-req-datetime").innerHTML = req_datetime;
 
         // 처리관리자정보

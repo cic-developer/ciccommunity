@@ -1640,7 +1640,7 @@ class Mypage extends CB_Controller
 		if ($form_validation) {
 
 			// 회원정보 가져오기
-			$_money = $this->input->post('_money');
+			$_money = $this->input->post('money');
 			$mem_id = $member_info['mem_id'];
 			$mem_userid = $member_info['mem_userid'];
 			$mem_userip = $this->input->ip_address();
@@ -1677,7 +1677,7 @@ class Mypage extends CB_Controller
 				 */
                 $withdraw_deposit = $this->CIC_wconfig_model->item('withdraw_deposit');  // 신청 수수료
 
-				$money = $_money - ($_money * $withdraw_deposit);
+				$money = $_money - ($_money * ($withdraw_deposit/100));
 
 				$result = $this->CIC_withdraw_model->set_withdraw($mem_id, $mem_userid, $mem_userip, $mem_nickname, $mem_wallet_address, $_money, $money, $withdraw_deposit);
                 
@@ -1699,7 +1699,7 @@ class Mypage extends CB_Controller
                     
 					$this->session->set_flashdata(
 						'message',
-						'포인트 차감후 신청에 실패하였습니다 (관리자 문의)'
+						'출금 신청에 실패하였습니다 (관리자 문의)'
 					);
 				} else{
 					$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '-', -$_money, '@byself', $mem_id, '출금신청');

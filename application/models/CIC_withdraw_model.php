@@ -93,8 +93,9 @@ class CIC_withdraw_model extends CB_Model
 		return $result;
 	}
 
-	public function set_withdraw($mem_id = 0, $mem_userid = '', $mem_userip = '', $mem_nickname = '', $mem_wallet_address = '', $_money = 0, $money = 0 ,$withdraw_deposit = 0)
+	public function set_withdraw($mem_id = 0, $mem_userid = '', $mem_userip = '', $mem_nickname = '', $mem_wallet_address = '', $_money = 0, $money = 0 , $withdraw_deposit = 0)
 	{
+
 		$arr = array(
 			'wid_mem_idx' => $mem_id,
 			'wid_userid' => $mem_userid,

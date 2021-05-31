@@ -200,7 +200,7 @@
                                         <span class="hit">(<?php echo number_format(element('post_hit', $popularpost));?>)</span>
                                     </p>
                                     <div>
-                                        <p class="stxt"><?php echo element('post_userid', $popularpost); ?><span><img src="<?php echo base_url('assets/images/like-popo.png') ?>"alt="" /></span></p>
+                                        <p class="stxt"><?php echo element('post_userid', $popularpost); ?><span><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $popularpost), 30, 30); ?>"alt="" /></span></p>
                                         <p class="date"><?php echo number_format(element('post_comment_count', $popularpost)); ?>
                                         <span><?php echo display_datetime(element('post_datetime', $popularpost), 'full'); ?></span></p>
                                     </div>                        
