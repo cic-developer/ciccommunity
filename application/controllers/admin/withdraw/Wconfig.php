@@ -148,7 +148,7 @@ class Wconfig extends CB_Controller
 	/**
 	 * 
 	 */
-	public function _minimum_check($_str)
+	public function _minimum_decimal_check($_str)
 	{
         
 		$str = explode( '.', $_str );
@@ -157,7 +157,7 @@ class Wconfig extends CB_Controller
 		}
         
 		$this->form_validation->set_message(
-			'_minimum_check',
+			'_minimum_decimal_check',
 			'출금요청 최소금액은 소수점 2자리 까지 설정이 가능합니다'
 		);
 		return false;

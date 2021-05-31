@@ -23,8 +23,7 @@
                                             ?>
                                             <div class="owl-item" style="width: 240px; margin-right: 20px;">
 											<div class="item">
-												<!-- <a href="<?php echo goto_url(element('newsurl', $most_view)); ?>"> -->
-												<a href="<?php echo goto_url(element('newsurl', $most_view)); ?>">
+												<a href="<?php echo goto_url(element('newsurl', $most_view)); ?>" target="_blank">
 													<div class="img"><img
 															src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">
 													</div>
@@ -113,6 +112,7 @@
 									</div>
 									<div class="txt">
 										<div class="vc">
+											<a href="<?php echo goto_url(element('newsurl', $result)); ?>" target="_blank"
 											<p class="btxt"><span><a href="<?php echo goto_url(element('newsurl', $result)); ?>"><?php echo html_escape(element('news_title', $result)); ?>(<?php echo number_format(element('news_reviews', $result)); ?>)</a></span></p>
 											<p class="stxt"><a href="<?php echo goto_url(element('newsurl', $result)); ?>"><?php echo html_escape(element('news_contents', $result)); ?></a></p>
 											<p class="ctxt">

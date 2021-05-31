@@ -18,7 +18,7 @@ class Mypage extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_withdraw', 'CIC_withdraw_log', 'Member', 'Post', 'Comment', 'CIC_cp', 'CIC_vp');
+	protected $models = array('CIC_withdraw', 'CIC_withdraw_log', 'Member', 'Post', 'Comment', 'CIC_cp', 'CIC_vp', 'CIC_wconfig');
 
 	/**
 	 * 헬퍼를 로딩합니다
