@@ -140,18 +140,9 @@ class Forum extends CB_Controller
 	 */
 	public function _deposit_decimal_check($_str)
 	{
-		
-		$str = $_str;
-		$str = fmod($str, 1);
-		if($str == 0){
-			return true;
-		}
-		print_r($str);
-		
-		$str = $str * 100;
-
-		exit;
-		if(is_int($str)){
+        
+		$str = explode( '.', $_str );
+		if( strlen($str[1]) < 3){
 			return true;
 		}
         
@@ -167,11 +158,9 @@ class Forum extends CB_Controller
 	 */
 	public function _writer_commission_decimal_check($_str)
 	{
-		return true;
-		$str = (double) $_str;
-		$str = fmod($str, 1);
-		$str = $str * 100;
-		if(is_int($str)){
+        
+		$str = explode( '.', $_str );
+		if( strlen($str[1]) < 3){
 			return true;
 		}
         
@@ -187,11 +176,9 @@ class Forum extends CB_Controller
 	 */
 	public function _bat_change_commission_decimal_check($_str)
 	{
-		return true;
-		$str = (double) $_str;
-		$str = fmod($str, 1);
-		$str = $str * 100;
-		if(is_int($str)){
+		
+		$str = explode( '.', $_str );
+		if( strlen($str[1]) < 3){
 			return true;
 		}
         

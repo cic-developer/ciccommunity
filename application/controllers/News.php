@@ -95,7 +95,6 @@ class News extends CB_Controller
 		// exit;
 		
 		$where = array(
-			// 'news_reviews >' => 0,
 			'news_important >' => 0,
 		);
 

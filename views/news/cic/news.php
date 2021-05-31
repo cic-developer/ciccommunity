@@ -28,8 +28,8 @@
 															src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">
 													</div>
 													<div class="txt">
-														<p class="btxt"><?php echo html_escape(cut_str(strip_tags(element('news_title', $most_view)), 15)); ?></p>
-														<p class="stxt"><?php echo html_escape(cut_str(strip_tags(element('news_contents', $most_view)), 20)); ?></p>
+														<p class="btxt"><a href="<?php echo goto_url(element('newsurl', $most_view)); ?>"><?php echo html_escape(cut_str(strip_tags(element('news_title', $most_view)), 15)); ?></a></p>
+														<p class="stxt"><a href="<?php echo goto_url(element('newsurl', $most_view)); ?>"><?php echo html_escape(cut_str(strip_tags(element('news_contents', $most_view)), 20)); ?></a></p>
 														<p class="ctxt">한국블록체인뉴스 <span>11시간 전</span></p>
 													</div>
 												</a>
@@ -110,12 +110,12 @@
 									</div>
 									<div class="txt">
 										<div class="vc">
-											<p class="btxt"><a href="<?php echo goto_url(element('newsurl', $result)); ?>"> <?php echo html_escape(element('news_title', $result)); ?><span>(<?php echo number_format(element('news_reviews', $result)); ?>)</span></a></p>
-											<p class="stxt"><?php echo html_escape(element('news_contents', $result)); ?></p>
+											<p class="btxt"><a href="<?php echo goto_url(element('newsurl', $result)); ?>"><?php echo html_escape(element('news_title', $result)); ?><span>(<?php echo number_format(element('news_reviews', $result)); ?>)</span></a></p>
+											<p class="stxt"><a href="<?php echo goto_url(element('newsurl', $result)); ?>"><?php echo html_escape(element('news_contents', $result)); ?></a></p>
 											<p class="ctxt">
-												<span>블록미디어</span>
-												<span>02:18</span>
-												<span>조회 82</span>
+												<span><a href="<?php echo goto_url(element('companyurl', $result)); ?>"><?php echo html_escape(element('comp_name', element('company', $result))); ?></a></span>
+												<span><?php echo display_datetime(element('news_wdate', $result)); ?></span>
+												<span><?php echo number_format(element('news_reviews', $result)); ?></span>
 											</p>
 										</div>
 									</div>
