@@ -8,16 +8,16 @@
 		<div class="search-wrap list">
 			<div class="filter">
 				<div class="sel-box c01">
-
-					<?php if($_GET['sfield'] === "post_title"){ ?>
+                    <!-- PAGE 검색 기능 START -->
+					<?php  if($_GET['sfield'] === "post_title"){ ?>
 						<a href="#n" id="optionb" class="sel-btn"><span>제목</span></a>	
-					<?php }elseif($_GET['sfield'] === "post_content"){ ?>
+					<?php } elseif($_GET['sfield'] === "post_content"){ ?>
 						<a href="#n" id="optionb" class="sel-btn"><span>내용</span></a>	
-					<?php }elseif($_GET['sfield'] === "post_nickname"){ ?>
+					<?php } elseif($_GET['sfield'] === "post_nickname"){ ?>
 						<a href="#n" id="optionb" class="sel-btn"><span>작석자</span></a>
 					<?php }	
-					 else { ?>
-					   <a href="#n" id="optionb" class="sel-btn"><span>통합검색</span></a>
+							else { ?>
+						<a href="#n" id="optionb" class="sel-btn"><span>통합검색</span></a>
 					<?php } ?>
 					<ul>
 						<li class="active"><a href="<?php base_url() ?>?sfield=post_both&skeyword=<?php echo $this->input->get('skeyword')?>"><span>통합검색</span></a></li>
@@ -78,99 +78,99 @@
 			<!-- HERE THE MARKET PRICE VALUES -->
 			<?php if($trade){ ?>
 				<div class="result" style="overflow:hidden; padding-bottom:40px; padding-left:40px; padding-right:40px;">
-				<!-- TradingView Widget BEGIN -->
+					<!-- TradingView CANVAS BEGIN -->
 					<div class="text-center" style="float: left">
-					<canvas id="canvas" width="400" height="200"></canvas>
+						<canvas id="canvas" width="400" height="200"></canvas>
 					</div>	
-						<!-- TradingView Widget END -->
+						<!-- TradingView CANVAS END -->
 						<div class="right_content_all">
-						<div style="text-align:left; border-bottom:5px solid #ddd; padding-bottom:5px;">
-							<?php if($symbole == "PER"){ ?>
-								<img></img>
-							<?php }else {?>
-								<<img style= "width: 30px; padding-right:10px;" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
-								<?php } ?>
-							<strong class="btxt"><?php echo $korean; ?></strong>
+							<div style="text-align:left; border-bottom:5px solid #ddd; padding-bottom:5px;">
+								<?php if($symbole == "PER"){ ?>
+									<img></img>
+								<?php }else {?>
+									<<img style= "width: 30px; padding-right:10px;" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
+									<?php } ?>
+								<strong class="btxt"><?php echo $korean; ?></strong>
+								<p class="stxt">
+									<span> <?php echo $symbole; ?></span>
+									<u class="btc" >
+										<small hidden class="doller">1.0000BTC $30,971</small>
+									</u>
+								</p>	
+							</div>
 							<p class="stxt">
-								<span> <?php echo $symbole; ?></span>
-								<u class="btc" >
-									<small hidden class="doller">1.0000BTC $30,971</small>
-								</u>
-							</p>	
+								<?php if($symbole === "PER"){?>
+									<?php if($trade < $prev){ ?>
+										<h6 style="color: #228be6;" class="price_now"> ￦<?php echo $trade ?></h6>
+									<?php }elseif($trade > $prev) {?>
+										<h6 class="price_now" style="color: #fa5252"> ￦<?php echo $trade ?></h6>
+									<?php } else{ ?>
+										<h6 class="price_now"> ￦<?php echo $trade ?></h6>
+									<?php }?>
+									<!--상한가와 하한가 전체-->
+									<h6 class="high_mnp_all">
+										<?php if($trade < $prev){?>
+											<u class="low_money" style="color: #228be6;"> <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-down"></i></u>
+											<u class="low_money_percent" style="color: #228be6"> <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-down"></i>
+											</u>
+											<!-- IF RISE  -->
+										<?php } else if($trade > $prev){?>
+											<u class="low_money" style="color: #fa5252"> + <?php echo $difference; ?> <i  class="fas fa-long-arrow-alt-up"></i>
+											</u>
+											<u class="low_money_percent" style="color: #fa5252"> + <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-up"></i>
+											</u>	
+										<?php }else {?>
+											<u class="low_money" style= "color: black" > <?php echo $difference; ?><i class="fas fa-long-arrow-alt-right"></i> </u>
+											<u class="low_money_percent" style= "color: black"> <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-right"></i></u>
+										<?php }?>
+										<!--상한가와 하한가 전체-->	
+											<!--하한가 끝-->
+											<h5 class="price_all">
+												<span class="high"><u>고가</u> ￦ <?php echo $high; ?></span>
+												<span class="low"><u>저가</u> ￦ <?php echo $low; ?></span>
+											</h5>
+										<!-- </h6> -->
+										<!--상한가와 하한가 전체 끝-->>
+									</h6>
+								<?php } else{?>
+									<?php if($change == 'FALL'){ ?>
+										<h6 style="color: #228be6;" class="price_now"> ￦<?php echo $trade ?></h6>
+									<?php }else if($change == 'RISE'){?>
+										<h6 class="price_now" style="color: #fa5252"> ￦<?php echo $trade ?></h6>
+									<?php }else{?>
+										<h6 class="price_now"> ￦<?php echo $trade ?></h6>
+									<?php }?>
+									
+									<!--상한가와 하한가 전체-->
+									<h6 class="high_mnp_all">
+										<?php if($change == 'FALL'){?>
+											<u class="low_money" style="color: #228be6;"> - <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-down"></i></u>
+											<u class="low_money_percent" style="color: #228be6"> - <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-down"></i>
+											</u>
+											<!-- IF RISE  -->
+										<?php } else if($change == 'RISE'){?>
+											<u class="low_money" style="color: #fa5252"> + <?php echo $difference; ?> <i  class="fas fa-long-arrow-alt-up"></i>
+											</u>
+											<u class="low_money_percent" style="color: #fa5252"> + <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-up"></i>
+											</u>	
+										<?php }else {?>
+											<u class="low_money" style= "color: black" > -<?php echo $difference; ?><i class="fas fa-long-arrow-alt-right"></i> </u>
+											<u class="low_money_percent" style= "color: black"> - <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-right"></i></u>
+										<?php }?>
+										<!--상한가와 하한가 전체-->	
+											<!--하한가 끝-->
+											<h5 class="price_all">
+												<span class="high"><u>고가</u> ￦ <?php echo $high; ?></span>
+												<span class="low"><u>저가</u> ￦ <?php echo $low; ?></span>
+											</h5>
+										<!-- </h6> -->
+										<!--상한가와 하한가 전체 끝-->>
+									</h6>
+									<?php
+									}?>	
+									<!--상한가와 하한가 전체 끝-->
+							</p>
 						</div>
-						<p class="stxt">
-							<?php if($symbole === "PER"){?>
-								<?php if($trade < $prev){ ?>
-									<h6 style="color: #228be6;" class="price_now"> ￦<?php echo $trade ?></h6>
-								<?php }elseif($trade > $prev) {?>
-									<h6 class="price_now" style="color: #fa5252"> ￦<?php echo $trade ?></h6>
-								<?php } else{ ?>
-									<h6 class="price_now"> ￦<?php echo $trade ?></h6>
-								<?php }?>
-								<!--상한가와 하한가 전체-->
-								<h6 class="high_mnp_all">
-									<?php if($trade < $prev){?>
-										<u class="low_money" style="color: #228be6;"> <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-down"></i></u>
-										<u class="low_money_percent" style="color: #228be6"> <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-down"></i>
-										</u>
-										<!-- IF RISE  -->
-									<?php } else if($trade > $prev){?>
-										<u class="low_money" style="color: #fa5252"> + <?php echo $difference; ?> <i  class="fas fa-long-arrow-alt-up"></i>
-										</u>
-										<u class="low_money_percent" style="color: #fa5252"> + <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-up"></i>
-										</u>	
-									<?php }else {?>
-										<u class="low_money" style= "color: black" > -<?php echo $difference; ?><i class="fas fa-long-arrow-alt-right"></i> </u>
-										<u class="low_money_percent" style= "color: black"> - <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-right"></i></u>
-									<?php }?>
-									<!--상한가와 하한가 전체-->	
-										<!--하한가 끝-->
-										<h5 class="price_all">
-											<span class="high"><u>고가</u> ￦ <?php echo $high; ?></span>
-											<span class="low"><u>저가</u> ￦ <?php echo $low; ?></span>
-										</h5>
-									<!-- </h6> -->
-									<!--상한가와 하한가 전체 끝-->>
-								</h6>
-							<?php } else{?>
-								<?php if($change == 'FALL'){ ?>
-									<h6 style="color: #228be6;" class="price_now"> ￦<?php echo $trade ?></h6>
-								<?php }else if($change == 'RISE'){?>
-									<h6 class="price_now" style="color: #fa5252"> ￦<?php echo $trade ?></h6>
-								<?php }else{?>
-									<h6 class="price_now"> ￦<?php echo $trade ?></h6>
-								<?php }?>
-								
-								<!--상한가와 하한가 전체-->
-								<h6 class="high_mnp_all">
-									<?php if($change == 'FALL'){?>
-										<u class="low_money" style="color: #228be6;"> - <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-down"></i></u>
-										<u class="low_money_percent" style="color: #228be6"> - <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-down"></i>
-										</u>
-										<!-- IF RISE  -->
-									<?php } else if($change == 'RISE'){?>
-										<u class="low_money" style="color: #fa5252"> + <?php echo $difference; ?> <i  class="fas fa-long-arrow-alt-up"></i>
-										</u>
-										<u class="low_money_percent" style="color: #fa5252"> + <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-up"></i>
-										</u>	
-									<?php }else {?>
-										<u class="low_money" style= "color: black" > -<?php echo $difference; ?><i class="fas fa-long-arrow-alt-right"></i> </u>
-										<u class="low_money_percent" style= "color: black"> - <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-right"></i></u>
-									<?php }?>
-									<!--상한가와 하한가 전체-->	
-										<!--하한가 끝-->
-										<h5 class="price_all">
-											<span class="high"><u>고가</u> ￦ <?php echo $high; ?></span>
-											<span class="low"><u>저가</u> ￦ <?php echo $low; ?></span>
-										</h5>
-									<!-- </h6> -->
-									<!--상한가와 하한가 전체 끝-->>
-								</h6>
-								<?php
-								}?>	
-								<!--상한가와 하한가 전체 끝-->
-						</p>
-					</div>
 				</div>
 			<?php
 			}
@@ -178,7 +178,6 @@
 				<div></div>
 			<?php } ?>	
 			<!-- PRICE UNTIL HERE -->
-
 			<!-- 자유게시판 시각 -->
 			<div class="gap35"></div>
 			<div class="cont">
