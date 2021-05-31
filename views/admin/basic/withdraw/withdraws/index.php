@@ -263,11 +263,11 @@
                             <td id="wid-commission"></td>
                         </tr>
                         <tr>
-                            <th>출금금액(신청)</th>
+                            <th>신청금액(CP)</th>
                             <td id="wid-req-money"></td>
                         </tr>
                         <tr>
-                            <th>출금금액(수수료적용)</th>
+                            <th>출금금액(CP)</th>
                             <td id="wid-cal-money"></td>
                         </tr>
                         <tr>

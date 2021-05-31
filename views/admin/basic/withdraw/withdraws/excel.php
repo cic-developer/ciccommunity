@@ -9,11 +9,15 @@ td {text-align:center; line-height:40px; font-size:12px; color:#474747; font-fam
 			<th>아이피</th>
 			<th>닉네임</th>
 			<th>지갑주소</th>
-			<th>요청금액</th>
+			<th>수수료(%)</th>
+			<th>신청금액(CP)</th>
+			<th>출금금액(CP)</th>
 			<th>요청날짜</th>
 			<th>결과</th>
 			<th>승인</th>
 			<th>처리완료시 우측 정보 활성화</th>
+			<th>퍼코인</th>
+			<th>트랜잭션</th>
 			<th>관리자아이디</th>
 			<th>관리자아이피</th>
 			<th>처리날짜</th>
@@ -30,11 +34,15 @@ td {text-align:center; line-height:40px; font-size:12px; color:#474747; font-fam
 					<?php echo html_escape(element('wid_nickname', $result)); ?>
 				</td>
 				<td><?php echo html_escape(element('wid_wallet_address', $result)); ?></td>
-				<td><?php echo number_format(element('wid_req_money', $result)); ?></td>
+				<td><?php echo number_format(element('wid_commission', $result), 2); ?></td>
+				<td><?php echo number_format(element('wid_req_money', $result), 2); ?></td>
+				<td><?php echo number_format(element('wid_cal_money', $result), 2); ?></td>
 				<td><?php echo element('wid_req_datetime', $result); ?></td>
 				<td><?php echo html_escape(element('wid_state', $result)) != null ? (element('wid_state', $result) == 1 ? '승인' : '반려' ) : '미처리';?></td>
 				<td><?php echo element('wid_state', $result) != null ? '처리안료' : '미처리'; ?></td>
 				<td>==> </td>
+				<td><?php echo number_format(element('wid_percoin', $result), 2); ?></td>
+				<td><?php echo element('wid_transaction', $result); ?></td>
 				<td><?php echo element('wid_admin_id', $result); ?></td>
 				<td><?php echo element('wid_admin_ip', $result); ?></td>
 				<td><?php echo element('wid_res_datetime', $result); ?></td>
