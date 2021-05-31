@@ -204,8 +204,6 @@ class News extends CB_Controller
 		// exit;
 		
 		$where = array(
-			// 'news_reviews >' => 0,
-			'news_important >' => 0,
 		);
 
 		if($compid = (int) $this->input->get('comp_id')){
@@ -213,7 +211,7 @@ class News extends CB_Controller
 		}
 		
 		$result = $this->{$this->modelname}
-		->important_news($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		->latest_news($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		
 		if (element('list', $result)) {

@@ -76,7 +76,17 @@ class Forum extends CB_Controller
 			array(
 				'field' => 'forum_deposit',
 				'label' => '포럼 예치금',
-				'rules' => 'trim|required|greater_than_equal_to[0]|callback__forum_deposit_decimal_check',
+				'rules' => 'trim|required|greater_than_equal_to[0]|callback__decimal_check',
+			),
+			array(
+				'field' => 'forum_writer_commission',
+				'label' => '포럼 예치금',
+				'rules' => 'trim|required|greater_than_equal_to[0]|callback__decimal_check',
+			),
+			array(
+				'field' => 'forum_bat_change_commission',
+				'label' => '포럼 예치금',
+				'rules' => 'trim|required|greater_than_equal_to[0]|callback__decimal_check',
 			),
 		);
 		$this->form_validation->set_rules($config);
@@ -97,7 +107,9 @@ class Forum extends CB_Controller
 			 */
 
 			$array = array(
-				'forum_deposit'
+				'forum_deposit',
+				'forum_writer_commission',
+				'forum_bat_change_commission'
 			);
 			foreach ($array as $value) {
 				$savedata[$value] = $this->input->post($value, null, '');
@@ -126,7 +138,7 @@ class Forum extends CB_Controller
 	/**
 	 * 예치금 설정, 소수점 두자리 이내 확인
 	 */
-	public function _forum_deposit_decimal_check($str)
+	public function _decimal_check($str)
 	{
 		// $this->load->helper('chkstring');
 		//  if (chkstring($str, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false) {
