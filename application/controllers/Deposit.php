@@ -18,7 +18,7 @@ class Deposit extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_cp', 'Member', 'CIC_forum');
+	protected $models = array('CIC_cp', 'Member', 'CIC_forum', 'Post');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -145,10 +145,26 @@ class Deposit extends CB_Controller
         
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
         
         $mem_id = (int) $this->member->item('mem_id');
         $mem_cp = $this->member->item('mem_cp');
         $mem_deposit = $this->member->item('mem_deposit');
+        
+        $where3 = array(
+            'brd_id' => 3,
+            'mem_id' => $mem_id,
+        );
+        $where6 = array(
+            'brd_id' => 6,
+            'mem_id' => $mem_id,
+        );
+        
+        $post3 = $this->Post_model->get_one('', '', $where);
+        $post6 = $this->Post_model->get_one('', '', $where);
+
+        print_r($post);
+        exit;
         
         // 예치금 제거 + cp 반환
         if($mem_deposit){

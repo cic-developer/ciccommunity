@@ -17,11 +17,11 @@
                     <div class="owl-stage-outer">
                         <div class="owl-stage"
                             style="transform: translate3d(-1040px, 0px, 0px); transition: all 0s ease 0s; width: 3900px;">
+								<div class="owl-item" style="width: 240px; margin-right: 20px;">
                                 <?php
 									if (element('list', element('most_view', $view))) {
 										foreach (element('list', element('most_view', $view)) as $most_view) {
 											?>
-                                        <div class="owl-item cloned" style="width: 240px; margin-right: 20px;">
 											<!-- <div class="item">
 												<a href="#n">
 													<div class="img"><img
@@ -66,7 +66,7 @@
                                                 <div class="txt">
                                                     <p class="btxt">선택된 자료가 없습니다.</p>
                                                     <p class="stxt">선택된 자료가 없습니다.</p>
-                                                    <p class="ctxt vp"><?php echo number_format(element("post_like_point",$writerbest))?></p>
+                                                    <p class="ctxt">선택된 자료가 없습니다.</p>
                                                 </div>
                                             </a>
                                         </div>
