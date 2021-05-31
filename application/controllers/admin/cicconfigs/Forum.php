@@ -76,17 +76,17 @@ class Forum extends CB_Controller
 			array(
 				'field' => 'forum_deposit',
 				'label' => '포럼 예치금',
-				'rules' => 'trim|required|greater_than_equal_to[0]|callback__decimal_check',
+				'rules' => 'trim|required|greater_than_equal_to[0]|callback__deposit_decimal_check',
 			),
 			array(
 				'field' => 'forum_writer_commission',
-				'label' => '포럼 예치금',
-				'rules' => 'trim|required|greater_than_equal_to[0]|callback__decimal_check',
+				'label' => '포럼 작성자 지급 포인트 수수료',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[100]|callback__writer_commission_decimal_check',
 			),
 			array(
 				'field' => 'forum_bat_change_commission',
-				'label' => '포럼 예치금',
-				'rules' => 'trim|required|greater_than_equal_to[0]|callback__decimal_check',
+				'label' => '포럼 배팅 진영 변경 수수료',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[100]|callback__bat_change_commission_decimal_check',
 			),
 		);
 		$this->form_validation->set_rules($config);
@@ -138,32 +138,67 @@ class Forum extends CB_Controller
 	/**
 	 * 예치금 설정, 소수점 두자리 이내 확인
 	 */
-	public function _decimal_check($_str)
+	public function _deposit_decimal_check($_str)
 	{
+		
+		$str = $_str;
+		$str = fmod($str, 1);
+		if($str == 0){
+			return true;
+		}
+		print_r($str);
+		
+		$str = $str * 100;
 
+		exit;
+		if(is_int($str)){
+			return true;
+		}
+        
+		$this->form_validation->set_message(
+			'_deposit_decimal_check',
+			'포럼 예치금은 소수점 2자리 까지 설정이 가능합니다'
+		);
+		return false;
+	}
+	
+	/**
+	 * 포럼 작성자 지급 포인트 수수료 설정, 소수점 두자리 이내 확인
+	 */
+	public function _writer_commission_decimal_check($_str)
+	{
+		return true;
 		$str = (double) $_str;
 		$str = fmod($str, 1);
 		$str = $str * 100;
-		// $str = 
-		// (fmod($str,    1) !== 0.00){
-
-		// }
-		// $this->load->helper('chkstring');
-		//  if (chkstring($str, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false) {
-		// 	$this->form_validation->set_message(
-		// 		'_mem_nickname_check',
-		// 		'닉네임은 공백없이 한글, 영문, 숫자만 입력 가능합니다'
-		// 	);
-		// 	return false;
-		// }
-
-		// if (preg_match("/[\,]?{$str}/i", $this->cbconfig->item('denied_nickname_list'))) {
-		// 	$this->form_validation->set_message(
-		// 		'_mem_nickname_check',
-		// 		$str . ' 은(는) 예약어로 사용하실 수 없는 닉네임입니다'
-		// 	);
-		// 	return false;
-		// }
+		if(is_int($str)){
+			return true;
+		}
+        
+		$this->form_validation->set_message(
+			'_writer_commission_decimal_check',
+			'포럼 작성자 지급 포인트 수수료는 소수점 2자리 까지 설정이 가능합니다'
+		);
+		return false;
+	}
+	
+	/**
+	 * 포럼 배팅 진영 변경 수수료 설정, 소수점 두자리 이내 확인
+	 */
+	public function _bat_change_commission_decimal_check($_str)
+	{
 		return true;
+		$str = (double) $_str;
+		$str = fmod($str, 1);
+		$str = $str * 100;
+		if(is_int($str)){
+			return true;
+		}
+        
+		$this->form_validation->set_message(
+			'_bat_change_commission_decimal_check',
+			'포럼 배팅 진영 변경 수수료는 소수점 2자리 까지 설정이 가능합니다'
+		);
+		return false;
 	}
 }

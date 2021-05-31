@@ -110,7 +110,7 @@
 									</div>
 									<div class="txt">
 										<div class="vc">
-											<p class="btxt"><a href="<?php echo goto_url(element('newsurl', $result)); ?>"><?php echo html_escape(element('news_title', $result)); ?><span>(<?php echo number_format(element('news_reviews', $result)); ?>)</span></a></p>
+											<p class="btxt"><a href="<?php echo goto_url(element('newsurl', $result)); ?>"> <?php echo html_escape(element('news_title', $result)); ?><span>(<?php echo number_format(element('news_reviews', $result)); ?>)</span></a></p>
 											<p class="stxt"><?php echo html_escape(element('news_contents', $result)); ?></p>
 											<p class="ctxt">
 												<span>블록미디어</span>
