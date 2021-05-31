@@ -163,8 +163,13 @@ class Deposit extends CB_Controller
         $post3 = $this->Post_model->get_one('', '', $where);
         $post6 = $this->Post_model->get_one('', '', $where);
 
-        print_r($post);
-        exit;
+        if($post3 || $post6) {
+            $result = array(
+                'state' => '0',
+                'message' => '작성된 포럼이 존재합니다',
+            );
+            exit(json_encode($result));
+        }
         
         // 예치금 제거 + cp 반환
         if($mem_deposit){
