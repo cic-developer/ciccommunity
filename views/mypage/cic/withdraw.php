@@ -100,7 +100,7 @@
                                 </tr>
                                 <tr>
                                     <th>보유포인트(CP)</th>
-                                    <td><?php echo number_format(element('mem_cp', $view), 2); ?></td>
+                                    <td class="my-point" data-my-point="<?php echo number_format(element('mem_cp', $view), 2); ?>"><?php echo number_format(element('mem_cp', $view), 2); ?></td>
                                 </tr>
                                 <tr>
                                     <th>신청포인트(CP)</th>
@@ -220,8 +220,16 @@
             $('.withdraw-point').text('금액을 옳바르게 입력해주세요.');
             $('.preview-point').text('금액을 옳바르게 입력해주세요.');
         } else {
+            var money = $('.my-point').data('my-point');
+            
+            var test = money - parseFloat(currentVal);
+            alert(typeof money);
+            return;
+            alert(parseFloat(money));
+            console.log(parseFloat(money));
+
             $('.withdraw-point').text(currentVal);
-            $('.withdraw-point').text(currentVal);
+            $('.preview-point').text(<?php echo number_format(element('mem_cp', $view), 2); ?>-currentVal);
         }
 		
 		oldVal1 = currentVal;
