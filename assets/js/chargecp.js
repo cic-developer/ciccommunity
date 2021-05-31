@@ -413,7 +413,6 @@ $(document).on('ready', async function() {
             await klaytn.enable();
             // 클레이튼에 접속되어있는 월렛주소
             const account = klaytn.selectedAddress;
-            const balance = await caver.klay.getBalance(account);
             const token_balance = await PER.methods.balanceOf(account).call();
 
             const network = klaytn.networkVersion;
@@ -423,19 +422,22 @@ $(document).on('ready', async function() {
             if (network !== 8217) {
                 alert('Klaytn Kaikas의 Network를\nMain network로 바꿔주세요');
                 location.reload();
+                return;
             }
             if (!selected_addr) {
                 alert('Klaytn Kaikas의 주소를 다시 확인해주세요');
                 location.reload();
+                return;
             }
             if (per_token < 0) {
                 alert('Klaytn Kaikas에 PER 코인이 없습니다.\nPER 코인을 추가 또는 충전해주세요');
                 location.reload();
+                return;
             }
 
             let charge_value = $('#charge_input').val();
 
-            const data = caver.klay.abi.encodeFunctionCall({
+            const approve_data = caver.klay.abi.encodeFunctionCall({
                 name: "approve",
                 type: "function",
                 inputs: [{
@@ -455,31 +457,14 @@ $(document).on('ready', async function() {
                 .toString(),
             ]);
 
-
-
-            //여기 있는 데이터들로 
-            var txhash, reciept, success_fromAddress, success_toAddress, success_value;
-
             await caver.klay.sendTransaction({
                 type: "SMART_CONTRACT_EXECUTION",
                 account,
                 to: token_address,
-                data,
+                data: approve_data,
                 gas: 3000000,
-            }).on("transactionHash", (transactionHash) => {
-                txhash = `https://scope.klaytn.com/tx/${transactionHash}?tabId=internalTx`;
             }).on("receipt", async(receipt) => {
-                // console.log("receipt", receipt);
-                // reciept = JSON.stringify(receipt);
-                // success_fromAddress = receipt.from;
-                // success_toAddress = receipt.logs[0].topics[2];
-                // success_value =
-                //     caver.utils.hexToNumberString(receipt.logs[0].data) /
-                //     1000000000000000000;
-
-
-                // setTimeout(() => transfer(charge_value), 5000)
-                const data2 = await caver.klay.abi.encodeFunctionCall({
+                const sendToPerWallet_data = await caver.klay.abi.encodeFunctionCall({
                     name: "deposit_enter",
                     type: "function",
                     inputs: [{
@@ -514,15 +499,14 @@ $(document).on('ready', async function() {
                     mem_id
                 ]);
 
-                const data3 = await caver.klay.sendTransaction({
+                const sendToPerWallet = await caver.klay.sendTransaction({
                     type: "SMART_CONTRACT_EXECUTION",
                     account,
                     to: contract_address,
-                    data: data2,
+                    data: sendToPerWallet_data,
                     gas: 3000000,
                 }).on("transactionHash", async(transactionHash) => {
-                    console.log(transactionHash);
-                    //여기서 console.log 찍는 transactionHash를 통해 데이터를 저장한다.
+                    //여기서 AJAX 비동기 통신으로 데이터 넘겨주면 된다.
                 });
 
             }).on("error", (error) => {
