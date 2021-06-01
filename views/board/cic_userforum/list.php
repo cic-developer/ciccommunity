@@ -1,3 +1,4 @@
+<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
 <div id="container-wrap">
     <div id="top-vis">
         <div class="txt">
@@ -12,8 +13,8 @@
 
         <?php
 		echo show_alert_message($this->session->flashdata('message'), '<script>alert("', '");</script>');
-		$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
-		echo form_open(current_full_url(), $attributes);
+		// $attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
+		// echo form_open(current_full_url(), $attributes);
 		?>
         <div class="board-wrap list">
             <div class="forums">
@@ -115,7 +116,7 @@
                             </td>
                             <td class="l">
                                 <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><?php echo html_escape(element('title', $result)); ?>
-                                    <span class="reply">(<?php echo element('post_comment_count', $result); ?>)</span>
+                                    <!-- <span class="reply">(<?php echo element('post_comment_count', $result); ?>)</span> -->
                                 </a>
                             </td>
                             <td><?php echo element('display_datetime', $result); ?></td>
@@ -152,42 +153,24 @@
             <?php } ?>
             <!-- s: paging-wrap -->
             <div class="paging-wrap">
-                <!-- <a href="#" class="prev ctrl"><span>이전</span></a> -->
-                <!-- <ul>
-                    <li><a href="#" class="active">1</a></li>
-                    <li><a href="#n">2</a></li>
-                    <li><a href="#n">3</a></li>
-                    <li><a href="#n">4</a></li>
-                    <li><a href="#n">5</a></li>
-                </ul>
-                <p class="num"><span>1</span> / 10 </p>
-                <a href="#" class="next ctrl"><span>다음</span></a> -->
                 <?php echo element('paging', element('list', $view)); ?>
             </div>
             <!-- e: paging-wrap -->
             <!-- s: board-filter -->
             <div class="board-filter sel">
-                <!-- <p class="chk-select">
-					<select>
-						<option value="">제목</option>
-						<option value="">내용</option>
-					</select>
-				</p> -->
-                <div class="ov">
-                    <div class="sel-box">
-                        <a href="#n" class="sel-btn"><span>제목</span></a>
-                        <ul>
-                            <li class="active"><a href="#n"><span>제목+내용</span></a></li>
-                            <li><a href="#n"><span>제목</span></a></li>
-                            <li><a href="#n"><span>내용</span></a></li>
-                            <li><a href="#n"><span>닉네임</span></a></li>
-                        </ul>
+                <form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
+                    <div class="board-filter">
+                        <p class="chk-select">
+                            <select name="sfield">
+                                <?php echo element('search_option',  element('list', $view)); ?>
+                            </select>
+                        </p>
+                        <p class="chk-input">
+                            <input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword',  element('list', $view))); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
+                            <button class="search-btn" name="search_submit" type="submit"></button>
+                        </p>
                     </div>
-                    <p class="chk-input">
-                        <input type="text" placeholder="검색어를 입력해주세요" autocomplete="off" />
-                        <a href="#n" class="search-btn"><span>검색</span></a>
-                    </p>
-                </div>
+                </form>
             </div>
             <!-- e: board-filter -->
 

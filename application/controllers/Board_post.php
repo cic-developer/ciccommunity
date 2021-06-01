@@ -56,8 +56,6 @@ class Board_post extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		$view['view']['list'] = $list = $this->_get_list($brd_key);
-		print_r($view['view']['list']);
-		exit;
 		$view['view']['board_key'] = element('brd_key', element('board', $list));
 
 		// stat_count_board ++
