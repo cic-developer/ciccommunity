@@ -23,9 +23,9 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">출석 가능 시간</label>
 					<div class="col-sm-10 form-inline">
-						<input type="text" class="form-control mr-3" name="attendance_start_time" id="attendance_start_time" value="<?php echo set_value('attendance_start_time', element('attendance_start_time', element('data', $view))); ?>" />
+						<input type="text" class="form-control" name="attendance_start_time" id="attendance_start_time" value="<?php echo set_value('attendance_start_time', element('attendance_start_time', element('data', $view))); ?>" />
 						~
-						<input type="text" class="form-control mr-3" name="attendance_end_time" id="attendance_end_time" value="<?php echo set_value('attendance_end_time', element('attendance_end_time', element('data', $view))); ?>" />
+						<input type="text" class="form-control" name="attendance_end_time" id="attendance_end_time" value="<?php echo set_value('attendance_end_time', element('attendance_end_time', element('data', $view))); ?>" />
 					</div>
 				</div>
 				<div class="form-group">

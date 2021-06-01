@@ -198,6 +198,8 @@ class Attendance extends CB_Controller
 
 			$max_ranking = element('att_ranking', $max_data);
 			$mypoint = $this->cbconfig->item('attendance_point');
+			$myvp = $this->cbconfig->item('attendance_vp');
+			$mycp = $this->cbconfig->item('attendance_cp');
 			$mypoint = (int) $mypoint;
 
 			if (empty($max_ranking)) {
