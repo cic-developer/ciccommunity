@@ -69,17 +69,17 @@ class Board_post extends CB_Controller
 		);
 
 		if(element('brd_id', element('board', $list)) == 1){
-		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-		$where = array(
-			'post_exept_state' => 0,
-			'post_datetime >=' => $checktime,
-			'post_del <>' => 2,
-		);
-		$limit = 10;
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+			$where = array(
+				'post_exept_state' => 0,
+				'post_datetime >=' => $checktime,
+				'post_del <>' => 2,
+			);
+			$limit = 10;
 
-		$list_num = 1;
-		$popularpost = $this->Post_model
-			->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			$list_num = 1;
+			$popularpost = $this->Post_model
+				->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 			if (element('list', $popularpost)) {
 				foreach (element('list', $popularpost) as $key => $val) {
 					$popularpost['list'][$key]['post_display_name'] = display_username(
@@ -160,9 +160,12 @@ class Board_post extends CB_Controller
 		// CIC 포럼, forum
 		if(element('brd_id', element('board', $list)) == 3){
 			$category_id = $this->input->get('category_id');
+			if(!$category_id) {
+				$category_id = 1;
+			}
 			
-			print_r($category_id);
-			exit;
+
+			
 		}
 
 		// 도전 CIC 포럼, userForum
@@ -1287,7 +1290,7 @@ class Board_post extends CB_Controller
 			$alertmessage,
 			$check
 		);
-
+		
 		if (element('use_personal', $board) && $this->member->is_member() === false) {
 			alert('이 게시판은 1:1 게시판입니다. 비회원은 접근할 수 없습니다');
 			return false;
@@ -1464,8 +1467,19 @@ class Board_post extends CB_Controller
 		if (empty($category_id) OR $category_id < 1) {
 			$category_id = '';
 		}
+		// cic 진행중 포럼 && cic 마감 포럼
+		if($board['brd_id'] == 3){
+			$category_id = $this->input->get('category_id');
+			if(!$category_id) {
+				$category_id = 1;
+			}
+		}
+		
 		$result = $this->Post_model
 			->get_post_list($per_page, $offset, $where, $category_id, $findex, $sfield, $skeyword);
+
+			print_r($category_id);
+			exit;
 			
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		if (element('list', $result)) {
