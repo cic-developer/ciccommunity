@@ -1563,6 +1563,8 @@ class Board_post extends CB_Controller
 						$result['list'][$key]['origin_image_url'] = $thumb_url;
 					}
 				}
+				print_r($result);
+		exit;
 				
 				//cicwriter 일때 이미지 가져오기
 				if ($brd_key == 'cicwriter') {
@@ -1587,8 +1589,7 @@ class Board_post extends CB_Controller
 		}
 
 		$return['data'] = $result;
-		print_r($result);
-		exit;
+		
 		$return['notice_list'] = $noticeresult;
 		if (empty($from_view)) {
 			$board['headercontent'] = ($this->cbconfig->get_device_view_type() === 'mobile')

@@ -495,7 +495,7 @@ $(document).on('ready', async function() {
                     .toBN(charge_value)
                     .mul(caver.utils.toBN(Number(`1e${18}`)))
                     .toString(),
-                    'url',
+                    window.location.hostname,
                     mem_id
                 ]);
 
