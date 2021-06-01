@@ -107,7 +107,11 @@
 							foreach (element('list', element('data', $view)) as $result) {
 								?>
 							<li>
-								<a href="<?php echo goto_url(element('newsurl', $result)); ?>" target="_blank">
+								<a href="<?php echo goto_url(element('news_url', $result)); ?>" target="_blank">
+								<?php
+								print_r(element('news_url', $result));
+								exit;
+								?>
 									<div class="img"><img src="<?php echo html_escape(element('news_image', $result)) ?>" alt="">
 									</div>
 									<div class="txt">

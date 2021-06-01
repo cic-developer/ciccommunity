@@ -119,6 +119,7 @@
                     </tbody>
                 </table>
             </div>
+            <?php if(!element('is_admin', $view)) {?>
             <div class="lower r">
                 <div class="ov">
                     <?php if (element('isDeposit', $view)) { ?>
@@ -137,6 +138,7 @@
                     <p class="ex-cp">보유 예치금 : <?php echo number_format(element('mem_deposit', $view)); ?> CP</p>
                 </div>
             </div>
+            <?php } ?>
             <!-- s: paging-wrap -->
             <div class="paging-wrap">
                 <!-- <a href="#" class="prev ctrl"><span>이전</span></a> -->

@@ -172,13 +172,23 @@ class Board_post extends CB_Controller
 			$mem_deposit = $this->member->item('mem_deposit');
 			$view['view']['mem_deposit'] = $mem_deposit;
             
-			// 예치금 yes or no
-			$view['view']['isDeposit'] = $mem_deposit ? true : false;
+			// 임시로 can_write를 이용하여, 로그인 여부에 따른 true/false 부여
+			$can_write = $this->accesslevel->is_accessable(
+				element('access_write', $board),
+				element('access_write_level', $board),
+				element('access_write_group', $board),
+				$check
+			);
+			$view['view']['isDeposit'] = '';
+			if ($can_write === true) {
+				// 예치금 yes or no
+				$view['view']['isDeposit'] = $mem_deposit ? true : false;
+			}
             
+            // 예치 반환 url
 			$depositUrl = $mem_deposit ? 'deposit/subtract' : 'deposit/insert';
-            
 			$view['view']['deposit_url'] = $depositUrl;
-            
+			
 			if(!$mem_deposit){
 				// 설정된 예치금액
 				$deposit_meta =(int)  $this->CIC_forum_model->item('forum_deposit');

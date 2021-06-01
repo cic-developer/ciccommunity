@@ -121,6 +121,7 @@
 
 				</div>
 			</div>
+			<?php if(element('is_admin', $view)) {?>
 			<div class="lower r">
 				<?php if(element('modify_url', $view)){ ?>
 					<a href="<?php echo element('modify_url', $view); ?>" class="bw-btn"><span>수정</span></a>
@@ -135,6 +136,7 @@
 					<button type="button" class="bw-btn btn btn-black" id="btn-blame" onClick="post_blame('<?php echo element('post_id', element('post', $view)); ?>', 'post-blame');">신고 <span class="post-blame"><?php echo element('post_blame', element('post', $view)) ? '+' . number_format(element('post_blame', element('post', $view))) : ''; ?></span></button>
 				<?php } ?>
 			</div>
+			<?php } ?>
 		</div>
 	</div>
 </div>

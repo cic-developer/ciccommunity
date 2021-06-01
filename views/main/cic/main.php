@@ -87,7 +87,7 @@
                         <thead>
                             <tr>
                                 <th>거래소</th>
-                                <th>시세(KRW)</th>
+                                <th>시세(<?php echo element('money', element('maincoin', $view)) == 'usd' ? 'USD' : 'KRW'; ?>)</th>
                                 <th>한국프리미엄</th>
                                 <th>거래금액</th>
                                 <th>변동률(24h)</th>

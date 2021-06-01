@@ -1,3 +1,8 @@
+<style>
+	.mr-1 {
+		margin-right: .5rem;
+	}
+</style>
 <div class="box">
 	<div class="box-header">
 		<ul class="nav nav-tabs">
@@ -24,9 +29,11 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">출석 포인트</label>
+					<label class="col-sm-2 control-label">출석시 지급</label>
 					<div class="col-sm-10">
-						<input type="number" class="form-control" name="attendance_point" id="attendance_point" value="<?php echo set_value('attendance_point', (int) element('attendance_point', element('data', $view))); ?>" /> 점
+					명예포인트 + <input type="number" class="form-control mr-1" name="attendance_point" id="attendance_point" value="<?php echo set_value('attendance_point', (int) element('attendance_point', element('data', $view))); ?>" /> 
+					VP + <input type="number" class="form-control mr-1" name="attendance_point" id="attendance_point" value="<?php echo set_value('attendance_point', (int) element('attendance_point', element('data', $view))); ?>" /> 
+					CP + <input type="number" class="form-control mr-1" name="attendance_point" id="attendance_point" value="<?php echo set_value('attendance_point', (int) element('attendance_point', element('data', $view))); ?>" /> 
 					</div>
 				</div>
 				<div class="form-group">
@@ -96,7 +103,7 @@
 						<input type="number" class="form-control" name="attendance_point_regular_days" id="attendance_point_regular_days" value="<?php echo set_value('attendance_point_regular_days', (int) element('attendance_point_regular_days', element('data', $view))); ?>" /> 일 마다 지급
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" style="display:none;">
 					<label class="col-sm-2 control-label">기본인사말</label>
 					<div class="col-sm-10">
 						<textarea class="form-control" rows="5" name="attendance_default_memo"><?php echo set_value('attendance_default_memo', element('attendance_default_memo', element('data', $view))); ?></textarea>
@@ -105,7 +112,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" style="display:none;">
 					<label class="col-sm-2 control-label">단어필터링</label>
 					<div class="col-sm-10">
 						<textarea class="form-control" rows="5" name="attendance_spam_keyword"><?php echo set_value('attendance_spam_keyword', element('attendance_spam_keyword', element('data', $view))); ?></textarea>

@@ -109,18 +109,15 @@ class News extends CB_Controller
 				if($company) {
 					$result['list'][$key]['companyurl'] = element('comp_url', $company);
 					$result['list'][$key]['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
+					
 				}
 				$result['list'][$key]['num'] = $list_num--;
 			}
 		}
 
-		if ( ! $this->session->userdata('news_id_' . $news_id)) {
-			$this->News_model->update_plus($news_id, 'news_reviews', 1);
-			$this->session->set_userdata(
-				'news_id_' . $post_id,
-				'1'
-			);
-		}
+		$view['view']['news_url'] = $news_url = news_url(element('news_id', $result), $news_id);
+
+		
 		$view['view']['most_view'] = $most_view;
 		$view['view']['data'] = $result;
 
@@ -291,8 +288,39 @@ class News extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
-	public function read()
+	public function read($news_id = 0)
 	{
-		
+		$eventname = 'event_news_read';
+		$this->load->event($eventname);
+
+		$view = array();
+		$view['view'] = array();
+
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		$news_id = (int) $news_id;
+		if (empty($news_id) OR $news_id < 1) {
+			show_404();
+		}
+
+		$news = $this->News_model->get_one($news_id);
+
+		$view['view']['news'] = $news;
+
+		$news['company'] = $company = $this->cic_company->item_all(element('comp_id', $news));
+				if($company) {
+					// $result['list'][$key]['companyurl'] = element('comp_url', $company);
+					$news['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$news);
+		}
+
+		if ( ! $this->session->userdata('news_id_' . $news_id)) {
+			$this->News_model->update_plus($news_id, 'news_reviews', 1);
+			$this->session->set_userdata(
+				'news_id_' . $news_id,
+				'1'
+			);
+		}
+
+		return $news;
 	}
 }
