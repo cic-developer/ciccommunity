@@ -116,10 +116,12 @@
 						CP + <input type="number" class="form-control mr-3" name="attendance_cp_10" id="attendance_cp_10" value="<?php echo set_value('attendance_cp_10', (int) element('attendance_cp_10', element('data', $view))); ?>" /> 
 					</div>
 				</div>
-				<div class="form-group" style="display:none;">
+				<div class="form-group">
 					<label class="col-sm-2 control-label">개근 포인트</label>
 					<div class="col-sm-10">
-						명예포인트 + <input type="number" class="form-control" name="attendance_point_regular" id="attendance_point_regular" value="<?php echo set_value('attendance_point_regular', (int) element('attendance_point_regular', element('data', $view))); ?>" /> ,
+						명예포인트 + <input type="number" class="form-control mr-3" name="attendance_point_regular" id="attendance_point_regular" value="<?php echo set_value('attendance_point_regular', (int) element('attendance_point_regular', element('data', $view))); ?>" />
+						VP + <input type="number" class="form-control mr-3" name="attendance_vp_regular" id="attendance_vp_regular" value="<?php echo set_value('attendance_vp_regular', (int) element('attendance_vp_regular', element('data', $view))); ?>" /> 
+						CP + <input type="number" class="form-control mr-3" name="attendance_cp_regular" id="attendance_cp_regular" value="<?php echo set_value('attendance_cp_regular', (int) element('attendance_cp_regular', element('data', $view))); ?>" />  ,
 						<input type="number" class="form-control" name="attendance_point_regular_days" id="attendance_point_regular_days" value="<?php echo set_value('attendance_point_regular_days', (int) element('attendance_point_regular_days', element('data', $view))); ?>" /> 일 마다 지급
 					</div>
 				</div>

@@ -483,6 +483,16 @@ class Attendancecfg extends CB_Controller
 				'rules' => 'trim|is_natural',
 			),
 			array(
+				'field' => 'attendance_vp_regular',
+				'label' => '개근포인트',
+				'rules' => 'trim|is_natural',
+			),
+			array(
+				'field' => 'attendance_cp_regular',
+				'label' => '개근포인트',
+				'rules' => 'trim|is_natural',
+			),
+			array(
 				'field' => 'attendance_point_regular_days',
 				'label' => '개긴포인트기간',
 				'rules' => 'trim|numeric',
@@ -522,7 +532,7 @@ class Attendancecfg extends CB_Controller
 				'attendance_start_time', 'attendance_end_time', 'attendance_point', 'attendance_vp', 'attendance_cp', 'attendance_point_1', 'attendance_vp_1', 'attendance_cp_1',
 				'attendance_point_2', 'attendance_vp_2', 'attendance_cp_2', 'attendance_point_3', 'attendance_vp_3', 'attendance_cp_3', 'attendance_point_4', 'attendance_vp_4', 'attendance_cp_4', 'attendance_point_5', 'attendance_vp_5', 'attendance_cp_5', 
 				'attendance_point_6', 'attendance_vp_6', 'attendance_cp_6', 'attendance_point_7', 'attendance_vp_7', 'attendance_cp_7', 'attendance_point_8', 'attendance_vp_8', 'attendance_cp_8', 'attendance_point_9', 'attendance_vp_9', 'attendance_cp_9', 
-				'attendance_point_10', 'attendance_vp_10', 'attendance_cp_10', 'attendance_point_regular', 'attendance_point_regular_days',
+				'attendance_point_10', 'attendance_vp_10', 'attendance_cp_10', 'attendance_point_regular', 'attendance_vp_regular', 'attendance_cp_regular', 'attendance_point_regular_days',
 				'attendance_default_memo', 'attendance_spam_keyword'
 			);
 			foreach ($array as $value) {

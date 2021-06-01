@@ -198,13 +198,17 @@ class Attendance extends CB_Controller
 
 			$max_ranking = element('att_ranking', $max_data);
 			$mypoint = $this->cbconfig->item('attendance_point');
-			$myvp = $this->cbconfig->item('attendance_vp');
-			$mycp = $this->cbconfig->item('attendance_cp');
+			$myvp 	 = $this->cbconfig->item('attendance_vp');
+			$mycp 	 = $this->cbconfig->item('attendance_cp');
 			$mypoint = (int) $mypoint;
+			$myvp 	 = (int) $myvp;
+			$mycp 	 = (int) $mycp;
 
 			if (empty($max_ranking)) {
 				$my_ranking = 1;
 				$mypoint += $this->cbconfig->item('attendance_point_1');
+				$myvp	 += $this->cbconfig->item('attendance_vp_1');
+				$mycp	 += $this->cbconfig->item('attendance_cp_1');
 			} else {
 				$my_ranking = $max_ranking + 1;
 			}
@@ -212,6 +216,12 @@ class Attendance extends CB_Controller
 			for ($i = 2; $i <= 10; $i++) {
 				if ($this->cbconfig->item('attendance_point_' . $i) > 0 && $my_ranking === $i) {
 					$mypoint += $this->cbconfig->item('attendance_point_' . $i);
+				}
+				if ($this->cbconfig->item('attendance_vp_' . $i) > 0 && $my_ranking === $i) {
+					$myvp 	 += $this->cbconfig->item('attendance_vp_' . $i);
+				}
+				if ($this->cbconfig->item('attendance_cp_' . $i) > 0 && $my_ranking === $i) {
+					$mycp 	 += $this->cbconfig->item('attendance_cp_' . $i);
 				}
 			}
 			$yesterdata = $this->Attendance_model->yesterday_data();
@@ -226,6 +236,8 @@ class Attendance extends CB_Controller
 			if ($this->cbconfig->item('attendance_point_regular_days')
 				&& $att_continuity % $this->cbconfig->item('attendance_point_regular_days') === 0) {
 				$mypoint += $this->cbconfig->item('attendance_point_regular');
+				$myvp 	 += $this->cbconfig->item('attendance_vp_regular');
+				$mycp	 += $this->cbconfig->item('attendance_cp_regular');
 			}
 
 			$insertdata = array(
@@ -240,14 +252,36 @@ class Attendance extends CB_Controller
 			$att_id = $this->Attendance_model->insert($insertdata);
 
 			$this->load->library('point');
-			$this->point->insert_point(
-				$this->member->item('mem_id'),
-				$mypoint,
-				cdate('Y-m-d') . ' 출석체크',
-				'attendance',
-				$att_id,
-				'출석체크'
-			);
+			if($mypoint){
+				$this->point->insert_point(
+					$this->member->item('mem_id'),
+					$mypoint,
+					cdate('Y-m-d') .' '. $my_ranking . '등 출석체크(명예포인트 지급)',
+					'attendance',
+					$att_id,
+					'출석체크'
+				);
+			}
+			if($myvp){
+				$this->point->insert_vp(
+					$this->member->item('mem_id'),
+					$myvp,
+					cdate('Y-m-d') .' '. $my_ranking . '등 출석체크(VP 지급)',
+					'attendance',
+					$att_id,
+					'출석체크'
+				);
+			}
+			if($mycp){
+				$this->point->insert_cp(
+					$this->member->item('mem_id'),
+					$mycp,
+					cdate('Y-m-d') .' '. $my_ranking . '등 출석체크(CP 지급)',
+					'attendance',
+					$att_id,
+					'출석체크'
+				);
+			}
 
 			// 이벤트가 존재하면 실행합니다
 			Events::trigger('after', $eventname);

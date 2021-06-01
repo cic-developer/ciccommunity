@@ -169,7 +169,7 @@
 				<ul>
 					<li class="active"><a href="#n"><span>작성글</span></a></li>
 					<li><a href="#n"><span>작성댓글</span></a></li>
-					<li><a href="#n"><span>행사한vp</span></a></li>
+					<li><a href="#n"><span>VP기록</span></a></li>
 				</ul>
 			</div>
 			<div class="list record">
