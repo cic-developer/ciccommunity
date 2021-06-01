@@ -22,7 +22,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">포럼 예치금</label>
 					<div class="col-sm-10">
-						<input type="number" class="form-control" name="forum_deposit" id="forum_deposit" value="<?php echo set_value('forum_deposit', (int) element('forum_deposit', element('data', $view))); ?>" style="width:180px;" /> CP &nbsp;&nbsp;&nbsp; 도전 CIC포럼 기본 예치금을 설정할 수 있습니다.
+						<input type="number" class="form-control" name="forum_deposit" id="forum_deposit" value="<?php echo set_value('forum_deposit', element('forum_deposit', element('data', $view))); ?>" style="width:180px;" /> CP &nbsp;&nbsp;&nbsp; 도전 CIC포럼 기본 예치금을 설정할 수 있습니다.
 					</div>
 					<!-- <label class="col-sm-2 control-label">포럼 작성자 지급 포인트 수수료</label>
 					<div class="col-sm-10">
@@ -30,7 +30,7 @@
 					</div> -->
 					<label class="col-sm-2 control-label">포럼 배팅 진영 변경 수수료</label>
 					<div class="col-sm-10">
-						<input type="number" class="form-control" name="forum_bat_change_commission" id="forum_bat_change_commission" value="<?php echo set_value('forum_bat_change_commission', (int) element('forum_bat_change_commission', element('data', $view))); ?>" style="width:180px;" /> % &nbsp;&nbsp;&nbsp; CIC포럼 배팅 진영 변경 수수료를 설정할 수 있습니다.
+						<input type="number" class="form-control" name="forum_bat_change_commission" id="forum_bat_change_commission" value="<?php echo set_value('forum_bat_change_commission', element('forum_bat_change_commission', element('data', $view))); ?>" style="width:180px;" /> % &nbsp;&nbsp;&nbsp; CIC포럼 배팅 진영 변경 수수료를 설정할 수 있습니다.
 					</div>
 				</div>
 
