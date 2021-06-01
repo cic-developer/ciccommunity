@@ -315,12 +315,12 @@ class Attendancecfg extends CB_Controller
 			array(
 				'field' => 'attendance_point',
 				'label' => '출석포인트(명예)',
-				'rules' => 'trim|required|numeric',
+				'rules' => 'trim|required|is_natural',
 			),
 			array(
 				'field' => 'attendance_vp',
 				'label' => '출석포인트(VP)',
-				'rules' => 'trim|required|numeric',
+				'rules' => 'trim|required|is_natural',
 			),
 			array(
 				'field' => 'attendance_cp',
@@ -330,57 +330,57 @@ class Attendancecfg extends CB_Controller
 			array(
 				'field' => 'attendance_point_1',
 				'label' => '1등포인트',
-				'rules' => 'trim|numeric',
+				'rules' => 'trim|is_natural',
 			),
 			array(
 				'field' => 'attendance_point_2',
 				'label' => '2등포인트',
-				'rules' => 'trim|numeric',
+				'rules' => 'trim|is_natural',
 			),
 			array(
 				'field' => 'attendance_point_3',
 				'label' => '3등포인트',
-				'rules' => 'trim|numeric',
+				'rules' => 'trim|is_natural',
 			),
 			array(
 				'field' => 'attendance_point_4',
 				'label' => '4등포인트',
-				'rules' => 'trim|numeric',
+				'rules' => 'trim|is_natural',
 			),
 			array(
 				'field' => 'attendance_point_5',
 				'label' => '5등포인트',
-				'rules' => 'trim|numeric',
+				'rules' => 'trim|is_natural',
 			),
 			array(
 				'field' => 'attendance_point_6',
 				'label' => '6등포인트',
-				'rules' => 'trim|numeric',
+				'rules' => 'trim|is_natural',
 			),
 			array(
 				'field' => 'attendance_point_7',
 				'label' => '7등포인트',
-				'rules' => 'trim|numeric',
+				'rules' => 'trim|is_natural',
 			),
 			array(
 				'field' => 'attendance_point_8',
 				'label' => '8등포인트',
-				'rules' => 'trim|numeric',
+				'rules' => 'trim|is_natural',
 			),
 			array(
 				'field' => 'attendance_point_9',
 				'label' => '9등포인트',
-				'rules' => 'trim|numeric',
+				'rules' => 'trim|is_natural',
 			),
 			array(
 				'field' => 'attendance_point_10',
 				'label' => '10등포인트',
-				'rules' => 'trim|numeric',
+				'rules' => 'trim|is_natural',
 			),
 			array(
 				'field' => 'attendance_point_regular',
 				'label' => '개근포인트',
-				'rules' => 'trim|numeric',
+				'rules' => 'trim|is_natural',
 			),
 			array(
 				'field' => 'attendance_point_regular_days',

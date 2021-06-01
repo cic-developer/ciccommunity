@@ -113,14 +113,20 @@
                                     <p class="rtxt"><?php echo html_escape(element('post_nickname', $result)); ?></p>
                                 </div>
                             </td>
-                            <td class="l"><a href="#n">정치 자료, 성인물은 엄격하게 금지하며 강력하게 제재합니다. <span
-                                        class="reply">(12)</span></a></td>
+                            <td class="l">
+                                <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><?php echo html_escape(element('title', $result)); ?>
+                                    <span class="reply">(<?php echo element('post_comment_count', $result); ?>)</span>
+                                </a>
+                            </td>
                             <td><?php echo element('display_datetime', $result); ?></td>
                             <td>
-                                <p class="cyellow">10,000,000</p>
+                                <p class="cyellow"><?php echo number_format(element('post_like', $result)); ?></p>
                             </td>
                         </tr>
-
+                        <?php
+                            }
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -147,7 +153,7 @@
             <!-- s: paging-wrap -->
             <div class="paging-wrap">
                 <!-- <a href="#" class="prev ctrl"><span>이전</span></a> -->
-                <ul>
+                <!-- <ul>
                     <li><a href="#" class="active">1</a></li>
                     <li><a href="#n">2</a></li>
                     <li><a href="#n">3</a></li>
@@ -155,7 +161,8 @@
                     <li><a href="#n">5</a></li>
                 </ul>
                 <p class="num"><span>1</span> / 10 </p>
-                <a href="#" class="next ctrl"><span>다음</span></a>
+                <a href="#" class="next ctrl"><span>다음</span></a> -->
+                <?php echo element('paging', element('list', $view)); ?>
             </div>
             <!-- e: paging-wrap -->
             <!-- s: board-filter -->

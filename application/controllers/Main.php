@@ -416,6 +416,8 @@ class Main extends CB_Controller
 	public function _check_comma_input($string){
 		if(count(explode(',', $string)) > 0){
 			return TRUE;
+		} else if(count(explode(',', $string)) > 8){
+			return FALSE;
 		} else {
 			return FALSE;
 		}
