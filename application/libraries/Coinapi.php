@@ -241,13 +241,27 @@ class Coinapi extends CI_Controller
         }
         
         if($ticker_data && $price_data){
-            return array(
-                'price'         => $price_data[0]['price'],
-                'price_usd'     => $price_data[0]['price']/$usd_price,
-                'korea_premium' => $binance_price ? ($price_data[0]['price'] - $binance_price) / $binance_price * 100 : '',
-                'volume'        => $ticker_data['acc_trade_value_24H'],
-                'change_rate'   => $ticker_data['fluctate_rate_24H'],
-            );
+            if(in_array($market, array('KRW'))){
+                //원화가격
+                $return_data = array(
+                    'price'         => $price_data[0]['price'],
+                    'price_usd'     => $price_data[0]['price']/$usd_price,
+                    'korea_premium' => $binance_price ? ($price_data[0]['price'] - $binance_price) / $binance_price * 100 : '',
+                    'volume'        => $ticker_data['acc_trade_value_24H'],
+                    'change_rate'   => $ticker_data['fluctate_rate_24H'],
+                );        
+            } else {
+                //BTC가격
+                $upbit_btckrw_data = $this->get_upbit_data('BTC', "KRW");
+                $return_data = array(
+                    'price'         => $price_data[0]['price'] * $upbit_btckrw_data['price'],
+                    'price_usd'     => $price_data[0]['price'] * $upbit_btckrw_data['price_usd'],
+                    'korea_premium' => '',
+                    'volume'        => $ticker_data['acc_trade_value_24H'] * $upbit_btckrw_data['price'],
+                    'change_rate'   => $ticker_data['fluctate_rate_24H'],
+                );       
+            }
+            return $return_data;
         } else {
             return array();
         }
@@ -332,13 +346,27 @@ class Coinapi extends CI_Controller
         }
 
         if($data){
-            return array(
-                'price'         => $data['last'],
-                'price_usd'     => $data['last']/$usd_price,
-                'korea_premium' => $binance_price ? ($data['last'] - $binance_price) / $binance_price * 100 : '',
-                'volume'        => $data['deal'],
-                'change_rate'   => $data['open'] ? (($data['last'] - $data['open']) / $data['open'] * 100) : 0,
-            );
+            if(in_array($market, array('KRW'))){
+                //원화가격
+                $return_data = array(
+                    'price'         => $data['last'],
+                    'price_usd'     => $data['last']/$usd_price,
+                    'korea_premium' => $binance_price ? ($data['last'] - $binance_price) / $binance_price * 100 : '',
+                    'volume'        => $data['deal'],
+                    'change_rate'   => $data['open'] ? (($data['last'] - $data['open']) / $data['open'] * 100) : 0,
+                );        
+            } else {
+                //BTC가격
+                $upbit_btckrw_data = $this->get_upbit_data('BTC', "KRW");
+                $return_data = array(
+                    'price'         => $data['last'] * $upbit_btckrw_data['price'],
+                    'price_usd'     => $data['last'] * $upbit_btckrw_data['price_usd'],
+                    'korea_premium' => '',
+                    'volume'        => $data['deal'] * $upbit_btckrw_data['price'],
+                    'change_rate'   => $data['open'] ? (($data['last'] - $data['open']) / $data['open'] * 100) : 0,
+                );       
+            }
+            return $return_data;
         } else {
             return array();
         }
@@ -369,13 +397,27 @@ class Coinapi extends CI_Controller
         if($result){
             foreach($result as $data){
                 if($data['name'] == $coin_id.'-'.$market){
-                    return array(
-                        'price'         => $data['close_price'],
-                        'price_usd'     => $data['close_price']/$usd_price,
-                        'korea_premium' => $binance_price ? ($data['close_price'] - $binance_price) / $binance_price * 100 : '',
-                        'volume'        => $data['acc_trade_value_24h'],
-                        'change_rate'   => $data['signed_change_rate']*100,
-                    );
+                    if(in_array($market, array('KRW'))){
+                        //원화가격
+                        $return_data = array(
+                            'price'         => $data['close_price'],
+                            'price_usd'     => $data['close_price']/$usd_price,
+                            'korea_premium' => $binance_price ? ($data['close_price'] - $binance_price) / $binance_price * 100 : '',
+                            'volume'        => $data['acc_trade_value_24h'],
+                            'change_rate'   => $data['signed_change_rate']*100,
+                        );        
+                    } else {
+                        //BTC가격
+                        $upbit_btckrw_data = $this->get_upbit_data('BTC', "KRW");
+                        $return_data = array(
+                            'price'         => $data['close_price'] * $upbit_btckrw_data['price'],
+                            'price_usd'     => $data['close_price'] * $upbit_btckrw_data['price_usd'],
+                            'korea_premium' => '',
+                            'volume'        => $data['acc_trade_value_24h'] * $upbit_btckrw_data['price'],
+                            'change_rate'   => $data['signed_change_rate']*100,
+                        );       
+                    }
+                    return $return_data;
                 }
             }
         }
@@ -474,13 +516,27 @@ class Coinapi extends CI_Controller
         }
 
         if($data){
-            return array(
-                'price'         => $data['last'],
-                'price_usd'     => $data['last']/$usd_price,
-                'korea_premium' => $binance_price ? ($data['last'] - $binance_price) / $binance_price * 100 : '',
-                'volume'        => $data['volume'] * $data['last'],
-                'change_rate'   => $data['open'] ? (($data['last'] - $data['open']) / $data['open'] * 100) : 0,
-            );
+            if(in_array($market, array('KRW'))){
+                //원화가격
+                $return_data = array(
+                    'price'         => $data['last'],
+                    'price_usd'     => $data['last']/$usd_price,
+                    'korea_premium' => $binance_price ? ($data['last'] - $binance_price) / $binance_price * 100 : '',
+                    'volume'        => $data['volume'] * $data['last'],
+                    'change_rate'   => $data['open'] ? (($data['last'] - $data['open']) / $data['open'] * 100) : 0,
+                );        
+            } else {
+                //BTC가격
+                $upbit_btckrw_data = $this->get_upbit_data('BTC', "KRW");
+                $return_data = array(
+                    'price'         => $data['last'] * $upbit_btckrw_data['price'],
+                    'price_usd'     => $data['last'] * $upbit_btckrw_data['price_usd'],
+                    'korea_premium' => '',
+                    'volume'        => $data['volume'] * $data['last'] * $upbit_btckrw_data['price'],
+                    'change_rate'   => $data['open'] ? (($data['last'] - $data['open']) / $data['open'] * 100) : 0,
+                );       
+            }
+            return $return_data;
         } else {
             return array();
         }
@@ -533,12 +589,24 @@ class Coinapi extends CI_Controller
 
         $data = $result;
         if($data){
-            $return_data = array(
-                'price'         => $data['lastPrice'] * $usd_price,
-                'price_usd'     => $data['lastPrice'],
-                'volume'        => $data['quoteVolume'] * $usd_price,
-                'change_rate'   => $data['priceChangePercent'],
-            );
+            if(in_array($market, array('USDT', 'BUSD'))){
+                //원화가격
+                $return_data = array(
+                    'price'         => $data['lastPrice'] * $usd_price,
+                    'price_usd'     => $data['lastPrice'],
+                    'volume'        => $data['quoteVolume'] * $usd_price,
+                    'change_rate'   => $data['priceChangePercent'],
+                );        
+            } else {
+                //BTC가격
+                $upbit_btckrw_data = $this->get_upbit_data('BTC', "KRW");
+                $return_data = array(
+                    'price'         => $data['lastPrice'] * $upbit_btckrw_data['price'],
+                    'price_usd'     => $data['lastPrice'] * $upbit_btckrw_data['price_usd'],
+                    'volume'        => $data['quoteVolume'] * $upbit_btckrw_data['price'],
+                    'change_rate'   => $data['priceChangePercent'],
+                );       
+            }
             //한국 프리미엄 계산을 위해 메모리에 저장
             if($market=="USDT") $this->binance_data[$coin_id] = $return_data;
             return $return_data;

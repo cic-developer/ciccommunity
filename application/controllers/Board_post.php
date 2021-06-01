@@ -1723,6 +1723,7 @@ class Board_post extends CB_Controller
 		$return['paging'] = $this->pagination->create_links();
 		$return['page'] = $page;
 
+		
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */

@@ -116,6 +116,35 @@ class News extends CB_Controller
 
 		$view['view']['most_view'] = $most_view;
 		$view['view']['data'] = $result;
+
+		
+		$config['total_rows'] = $result['total_rows'];
+		$config['per_page'] = $per_page;
+		$config['first_link'] = FALSE;
+		$config['last_link'] = FALSE;
+		$config['next_link'] = '다음';
+		$config['prev_link'] = '이전';
+
+		$this->pagination->initialize($config);
+		$return['paging'] = $this->pagination->create_links();
+		$return['page'] = $page;
+
+		/**
+		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
+		 */
+		$search_option = array(
+			'post_title' => '제목',
+			'post_content' => '내용'
+		);
+		$return['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
+		$return['search_option'] = search_option($search_option, $sfield);
+		if ($skeyword) {
+			$return['list_url'] = board_url(element('brd_key', $board));
+			$return['search_list_url'] = board_url(element('brd_key', $board) . '?' . $param->output());
+		} else {
+			$return['list_url'] = board_url(element('brd_key', $board) . '?' . $param->output());
+			$return['search_list_url'] = '';
+		}
 		
 		
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
@@ -215,6 +244,18 @@ class News extends CB_Controller
 
 		$view['view']['most_view'] = $most_view;
 		$view['view']['data'] = $result;
+
+		$config['total_rows'] = $result['total_rows'];
+		$config['per_page'] = $per_page;
+		$config['first_link'] = FALSE;
+		$config['last_link'] = FALSE;
+		$config['next_link'] = '다음';
+		$config['prev_link'] = '이전';
+		
+		$this->pagination->initialize($config);
+		$return['paging'] = $this->pagination->create_links();
+		$return['page'] = $page;
+
 		
 		
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
