@@ -20,6 +20,7 @@ class Coinapi extends CI_Controller
     private $jpy_price = 0;
     private $jpyusd_price = 0;
     private $binance_data = array();
+    private $upbit_data = array();
 	function __construct()
 	{
 		$this->CI = & get_instance();
@@ -214,6 +215,11 @@ class Coinapi extends CI_Controller
      * 빗썸 에서 데이터 가져오는 함수
      */
     private function get_bithumb_data($coin_id, $market="KRW"){
+        //허용된 market 인지 검증
+        $allowed_market = array('KRW', 'BTC');
+        $market = in_array($market, $allowed_market) ? $market : 'KRW';
+        //검증 끝
+
         $usd_price = $this->get_usd_price();
         $url = "https://api.bithumb.com/public/ticker/{$coin_id}_{$market}";
         $result = $this->get_curl($url);
@@ -251,6 +257,13 @@ class Coinapi extends CI_Controller
      * 업비트 에서 데이터 가져오는 함수
      */
     private function get_upbit_data($coin_id, $market="KRW"){
+        //허용된 market 인지 검증
+        $allowed_market = array('KRW', 'BTC');
+        $market = in_array($market, $allowed_market) ? $market : 'KRW';
+        //검증 끝
+
+        //기존 업비트에서 가져온 값이 있을경우 그대로 리턴
+        if($coin_id=="BTC" && $market=="KRW" && isset($this->upbit_data[$coin_id])) return $this->upbit_data[$coin_id];
         $usd_price = $this->get_usd_price();
         $url = "https://api.upbit.com/v1/ticker?markets={$market}-{$coin_id}";
         $result = $this->get_curl($url);
@@ -282,6 +295,11 @@ class Coinapi extends CI_Controller
      * 핫빗코리아 에서 데이터 가져오는 함수
      */
     private function get_hotbitkorea_data($coin_id, $market="KRW"){
+        //허용된 market 인지 검증
+        $allowed_market = array('KRW', 'BTC');
+        $market = in_array($market, $allowed_market) ? $market : 'KRW';
+        //검증 끝
+        
         $usd_price = $this->get_usd_price();
         $url = "https://api.hotbit.co.kr/api/v2/market.status?market={$coin_id}/{$market}&period=86400";
         $result = $this->get_curl($url);
@@ -313,6 +331,11 @@ class Coinapi extends CI_Controller
      * 코인빗 에서 데이터 가져오는 함수
      */
     private function get_coinbit_data($coin_id, $market="KRW"){
+        //허용된 market 인지 검증
+        $allowed_market = array('KRW', 'BTC');
+        $market = in_array($market, $allowed_market) ? $market : 'KRW';
+        //검증 끝
+        
         $usd_price = $this->get_usd_price();
         $url = "https://production-api.coinbit.global/api/v1.0/trading_pairs/";
         $result = $this->get_curl($url);
@@ -377,7 +400,12 @@ class Coinapi extends CI_Controller
     /**
      * 코빗 에서 데이터 가져오는 함수
      */
-    private function get_korbit_data($coin_id, $market="krw"){
+    private function get_korbit_data($coin_id, $market="KRW"){
+        //허용된 market 인지 검증
+        $allowed_market = array('KRW');
+        $market = in_array($market, $allowed_market) ? $market : 'KRW';
+        //검증 끝
+        
         $usd_price = $this->get_usd_price();
         $url = "https://api.korbit.co.kr/v1/ticker/detailed?currency_pair=".strtolower($coin_id)."_".strtolower($market);
         $result = $this->get_curl($url);
@@ -409,6 +437,11 @@ class Coinapi extends CI_Controller
      * 지닥 에서 데이터 가져오는 함수
      */
     private function get_gdac_data($coin_id, $market="KRW"){
+        //허용된 market 인지 검증
+        $allowed_market = array('KRW', 'BTC');
+        $market = in_array($market, $allowed_market) ? $market : 'KRW';
+        //검증 끝
+        
         $usd_price = $this->get_usd_price();
         $url = "https://partner.gdac.com/v0.4/public/tickers/{$coin_id}%2F{$market}";
         $result = $this->get_curl($url);
@@ -467,6 +500,11 @@ class Coinapi extends CI_Controller
      * 바이낸스 에서 데이터 가져오는 함수
      */
     private function get_binance_data($coin_id, $market="USDT"){
+        //허용된 market 인지 검증
+        $allowed_market = array('USDT', 'BUSD', 'BTC');
+        $market = in_array($market, $allowed_market) ? $market : 'USDT';
+        //검증 끝
+        
         //기존 바이낸스에서 가져온 값이 있을경우 그대로 리턴
         if($market=="USDT" && isset($this->binance_data[$coin_id])) return $this->binance_data[$coin_id];
         $usd_price = $this->get_usd_price();
@@ -521,6 +559,11 @@ class Coinapi extends CI_Controller
      * 오케이엑스 에서 데이터 가져오는 함수
      */
     private function get_okex_data($coin_id, $market="USDT"){
+        //허용된 market 인지 검증
+        $allowed_market = array('USDT', 'BTC');
+        $market = in_array($market, $allowed_market) ? $market : 'USDT';
+        //검증 끝
+        
         $usd_price = $this->get_usd_price();
 
         $url = "https://www.okex.com/api/v5/market/ticker?instId={$coin_id}-{$market}-SWAP";
@@ -544,7 +587,12 @@ class Coinapi extends CI_Controller
     /**
      * 후오비 에서 데이터 가져오는 함수
      */
-    private function get_huobi_data($coin_id, $market="usdt"){
+    private function get_huobi_data($coin_id, $market="USDT"){
+        //허용된 market 인지 검증
+        $allowed_market = array('USDT', 'BTC');
+        $market = in_array($market, $allowed_market) ? $market : 'USDT';
+        //검증 끝
+        
         $usd_price = $this->get_usd_price();
 
         $url = "https://api.huobi.pro/market/detail?symbol=".strtolower($coin_id).strtolower($market);
@@ -569,6 +617,11 @@ class Coinapi extends CI_Controller
      * 비트렉스 에서 데이터 가져오는 함수
      */
     private function get_bittrex_data($coin_id, $market="USD"){
+        //허용된 market 인지 검증
+        $allowed_market = array('USD', 'USDT', 'BTC');
+        $market = in_array($market, $allowed_market) ? $market : 'USD';
+        //검증 끝
+        
         $usd_price = $this->get_usd_price();
 
         $url = "https://api.bittrex.com/api/v1.1/public/getmarketsummary?market={$market}-{$coin_id}";
@@ -593,6 +646,11 @@ class Coinapi extends CI_Controller
      * 폴로닉스 에서 데이터 가져오는 함수
      */
     private function get_poloniex_data($coin_id, $market="USDT"){
+        //허용된 market 인지 검증
+        $allowed_market = array('USDT', 'BTC');
+        $market = in_array($market, $allowed_market) ? $market : 'USDT';
+        //검증 끝
+        
         $usd_price = $this->get_usd_price();
 
         $url = "https://poloniex.com/public?command=returnTicker";

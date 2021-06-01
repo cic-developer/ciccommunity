@@ -306,21 +306,43 @@ class Search extends CB_Controller
 		if (element('list', $newsresult)) {
 			foreach (element('list', $result) as $key => $val) {
 				$newsresult['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
-				$images = '';
-				if (element('post_image', $val)) {
-					$imagewhere = array(
-						'post_id' => element('post_id', $val),
-						'pfi_is_image' => 1,
-					);
-					$images = $this->Post_file_model
-						->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-				}
 				$newsresult['list'][$key]['news_url'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
-				$newsresult['list'][$key]['display_datetime'] = display_datetime(element('post_datetime', $val), 'user', 'Y-m-d H:i');
-				$newsresult['list'][$key]['content'] = cut_str(strip_tags(element('post_content', $val)),200);
-				$newsresult['list'][$key]['is_mobile'] = (element('post_device', $val) === 'mobile') ? true : false;
+				// $newsresult['list'][$key]['content'] = cut_str(strip_tags(element('post_content', $val)),200);
 			}
 		}
+
+		$view['view']['data'] = $newsresult;
+
+		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
+			$sfieldarray = array('news_title', 'news_content');
+			if (in_array($sfield2, $sfieldarray)) {
+				$searchinsert = array(
+					'sek_keyword' => $skeyword,
+					'sek_datetime' => cdate('Y-m-d H:i:s'),
+					'sek_ip' => $this->input->ip_address(),
+					// 'mem_id' => $mem_id,
+				);
+				$this->Search_keyword_model->insert($searchinsert);
+				$this->session->set_userdata(
+					'skeyword_' . urlencode($skeyword),
+					1
+				);
+			}
+		}
+		
+		$highlight_keyword = '';
+		if ($skeyword) {
+			$key_explode = explode(' ', $skeyword);
+			if ($key_explode) {
+				foreach ($key_explode as $seval) {
+					if ($highlight_keyword) {
+						$highlight_keyword .= ',';
+					}
+					$highlight_keyword .= '\'' . html_escape($seval) . '\'';
+				}
+			}
+		}
+		$view['view']['highlight_keyword'] = $highlight_keyword;
 	
 
 		// END HISTORICAL DATA FOR CHART
