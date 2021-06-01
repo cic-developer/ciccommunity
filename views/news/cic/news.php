@@ -147,20 +147,8 @@
 				</script> -->
 			</div>
 			<!-- s: paging-wrap -->
-			<!-- <div class="paging-wrap">
-				<a href="#" class="prev ctrl"><span>이전</span></a>
-				<ul>
-					<li><a href="#" class="active">1</a></li>
-					<li><a href="#n">2</a></li>
-					<li><a href="#n">3</a></li>
-					<li><a href="#n">4</a></li>
-					<li><a href="#n">5</a></li>
-				</ul>
-				<p class="num"><span>1</span> / 10 </p>
-				<a href="#" class="next ctrl"><span>다음</span></a>
-			</div> -->
 			 <div class="paging-wrap">
-                <?php echo element('paging', element('list', $view)); ?>
+                <?php echo element('paging', $view); ?>
             </div>
 			<!-- e: paging-wrap -->
 			<!-- s: board-filter -->
@@ -169,7 +157,7 @@
                     <div class="board-filter">
                         <p class="chk-select">
                             <select name="sfield">
-                                <?php echo element('search_option',  element('list', $view)); ?>
+                                <?php echo element('search_option', $view); ?>
                             </select>
                         </p>
                         <p class="chk-input">

@@ -77,11 +77,8 @@ class News extends CB_Controller
 			'news_reviews >' => 0,
 			// 'news_important >' => 0,
 		);
-		if($compid = (int) $this->input->get('comp_id')){
-			$where['news.comp_id'] = $compid;
-		}
 		$most_view = $this->{$this->modelname}
-		->most_view_news(8, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		->most_view_news(8, 0, $where);
 		$list_num = $most_view['total_rows'] - ($page - 1) * $per_page;
 		
 		if (element('list', $most_view)) {
@@ -147,17 +144,10 @@ class News extends CB_Controller
 			'news_title' => '제목',
 			'news_content' => '내용'
 		);
-		$return['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
-		$return['search_option'] = search_option($search_option, $sfield);
-		if ($skeyword) {
-			$return['list_url'] = board_url(element('brd_key', $board));
-			$return['search_list_url'] = board_url(element('brd_key', $board) . '?' . $param->output());
-		} else {
-			$return['list_url'] = board_url(element('brd_key', $board) . '?' . $param->output());
-			$return['search_list_url'] = '';
-		}
+		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
+		$view['view']['search_option'] = search_option($search_option, $sfield);
 
-		$return['primary_key'] = $this->News_model->primary_key;
+		$view['primary_key'] = $this->News_model->primary_key;
 		$view['view']['news_url'] = news_url($this->pagedir . '/news_url/?' . $param->output());
 		
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
@@ -207,7 +197,11 @@ class News extends CB_Controller
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 		
-		$per_page = admin_listnum();
+		if ($this->cbconfig->get_device_view_type() === 'mobile') {
+			$per_page = 10;
+		} else {
+			$per_page = 20;
+		}
 		$offset = ($page - 1) * $per_page;
 		
 		$this->{$this->modelname}->allow_search_field = array('news_id', 'news_title', 'news_content', 'comp_id', 'news_reviews', 'news_wdate'); // 검색이 가능한 필드
@@ -218,7 +212,7 @@ class News extends CB_Controller
 			'news_reviews >' => 0,
 		);
 		$most_view = $this->{$this->modelname}
-		->most_view_news($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		->most_view_news(8, 0, $where);
 		$list_num = $most_view['total_rows'] - ($page - 1) * $per_page;
 		
 		if (element('list', $most_view)) {

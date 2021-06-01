@@ -159,8 +159,10 @@ class Board_post extends CB_Controller
 
 		// CIC 포럼, forum
 		if(element('brd_id', element('board', $list)) == 3){
-			// print_r("here?");
-			// exit;
+			$category_id = $this->input->get('category_id');
+			
+			print_r($category_id);
+			exit;
 		}
 
 		// 도전 CIC 포럼, userForum

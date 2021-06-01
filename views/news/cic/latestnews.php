@@ -40,7 +40,7 @@
 									<?php
 										}
 									}
-									$list_count = count(element('list', element('bestpost', $view)));
+									$list_count = count(element('list', element('most_view', $view)));
 									$max = 4 - $list_count;
 									if($list_count <= 4) {
 										for($i = 0; $i < $max; $i++){
@@ -160,7 +160,7 @@
 				<a href="#" class="next ctrl"><span>다음</span></a>
 			</div> -->
 			 <div class="paging-wrap">
-                <?php echo element('paging', element('list', $view)); ?>
+                <?php echo element('paging', $view); ?>
             </div>
 			<!-- e: paging-wrap -->
 			<!-- s: board-filter -->
