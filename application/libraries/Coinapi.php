@@ -295,7 +295,7 @@ class Coinapi extends CI_Controller
                     'price'         => $data['trade_price'] * $upbit_btckrw_data['price'],
                     'price_usd'     => $data['trade_price'] * $upbit_btckrw_data['price_usd'],
                     'korea_premium' => '',
-                    'volume'        => $data['acc_trade_price_24h'],
+                    'volume'        => $data['acc_trade_price_24h'] * $upbit_btckrw_data['price'],
                     'change_rate'   => $data['signed_change_rate']*100,
                 );       
             }

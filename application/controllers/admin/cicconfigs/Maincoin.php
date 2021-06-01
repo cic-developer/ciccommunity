@@ -617,18 +617,18 @@ class Maincoin extends CB_Controller
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
-		$this->CIC_maincoin_coin_model->allow_order_field = array('mgr_order'); // 정렬이 가능한 필드
+		$this->{$this->modelname}->allow_order_field = array('cme_orderby'); // 정렬이 가능한 필드
 
 		$where = array(
 			'cme_del <>' => 1,
 		);
 		$exchange_list = $this->{$this->modelname}
-			->get_admin_list('', '', $where, '', 'cme_orderby', 'desc');
+			->get_admin_list('', '', $where, '', 'cme_orderby', '', 'asc');
 		$coin_detail_list = $this->CIC_maincoin_coin_detail_model->get_this_exchange($cmc_idx);
-		$list_num = $exchange_list['total_rows'];
+		$list_num = 1;
 		if (element('list', $exchange_list)) {
 			foreach (element('list', $exchange_list) as $key => $val) {
-				$exchange_list['list'][$key]['num'] = $list_num--;
+				$exchange_list['list'][$key]['num'] = $list_num++;
 				$exchange_list['list'][$key]['detail'] = $coin_detail_list[element('cme_idx', $val)];
 			}
 		}

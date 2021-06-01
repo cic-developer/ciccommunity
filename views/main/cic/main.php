@@ -121,7 +121,7 @@
                                         <?php
                                         // if($change_rate){
                                         ?>
-                                        <p class="percent <?php echo $percent_class; ?>"><span><?php echo rs_number_format($change_rate,2); ?> %</span></p>
+                                        <p class="percent <?php echo $percent_class; ?>"><span><?php echo rs_number_format($change_rate, 2, 0); ?> %</span></p>
                                         <?php
                                         // }
                                         ?>

@@ -36,9 +36,9 @@ if ( ! function_exists('number_unit_to_korean')) {
  * 최대소숫점 지정 가능
  */
 if ( ! function_exists('rs_number_format')) {
-	function rs_number_format($number, $demicals = 0)
+	function rs_number_format($number, $demicals = 0, $default = '')
 	{
-        if(!$number) return '';
+        if(!$number) return $default;
         $value = number_format($number, $demicals);
         if($value && $demicals > 0 && strpos($value, '.') !== FALSE){
             $check = TRUE;
