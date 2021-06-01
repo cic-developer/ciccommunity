@@ -162,8 +162,6 @@ class Deposit extends CB_Controller
         
         $post3 = $this->Post_model->get_one('', '', $where3);
         $post6 = $this->Post_model->get_one('', '', $where6);
-        print_r($post3);
-        exit;
 
         if($post3 || $post6) {
             $result = array(

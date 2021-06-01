@@ -129,7 +129,9 @@
                     <a href="#n" class="by-btn" id="deposit_insert" style="display:inline-block;"><span>예치금 넣기</span></a>
                     <?php } ?>
 
-                    <a href="#n" class="by-btn"><span>글쓰기</span></a>
+                    <?php if (element('write_url', element('list', $view))) { ?>
+                        <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn">글쓰기</a>
+                    <?php } ?>
                     <!-- 글쓰기시 관리자가 설정한 포인트보다 적으면... alert하면 어떨까 -->
                     
                     <p class="ex-cp">보유 예치금 : <?php echo number_format(element('mem_deposit', $view)); ?> CP</p>
@@ -184,15 +186,15 @@
                             </colgroup>
                             <tbody>
                                 <tr>
-                                    <td>필요 예치금</td>
+                                    <th>필요 예치금</th>
                                     <td><?php echo number_format(element('deposit_meta', $view), 2); ?></td>
                                 </tr>
                                 <tr>
-                                    <td>보유 CP</td>
+                                    <th>보유 CP</th>
                                     <td><?php echo number_format(element('mem_cp', $view), 2); ?></td>
                                 </tr>
                                 <tr>
-                                    <td>예상 잔여 CP</td>
+                                    <th>예상 잔여 CP</th>
                                     <td><?php echo number_format(element('change_cp', $view), 2); ?></td>
                                 </tr>
                             </tbody>

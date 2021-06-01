@@ -17,7 +17,7 @@ class Search extends CB_Controller
     /**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Board', 'Board_group', 'Post', 'Post_file', 'Search_keyword', 'CIC_coin_list', 'CIC_coin_keyword');
+	protected $models = array('Board', 'Board_group', 'Post', 'Post_file', 'Search_keyword', 'CIC_coin_list', 'CIC_coin_keyword', 'News');
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
@@ -168,7 +168,7 @@ class Search extends CB_Controller
 			}
 		}
 
-		$free_row = $result['board_rows']['1']; // 장유게시판 검색 ROW 
+		$free_row = $result['board_rows']['1']; // 자유게시판 검색 ROW 
 		$writer_row = $result['board_rows']['2']; // WRITER 개시판 검색 Row
 
 		$view['view']['data'] = $result;
@@ -284,6 +284,8 @@ class Search extends CB_Controller
 		}	
 		$view['symbole'] = strtoupper($symbole);
 		$view['korean'] = $korean;
+
+		$this->
 
 		// END HISTORICAL DATA FOR CHART
 		// 코인 검색 여기까지 

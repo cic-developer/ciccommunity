@@ -25,7 +25,7 @@
 											<div class="item">
 												<a href="<?php echo goto_url(element('newsurl', $most_view)); ?>" target="_blank">
 													<div class="img"><img
-															src="<?php echo base_url('assets/images/news-img01.png') ?>" alt="">
+															src="<?php echo html_escape(element('news_image', $most_view)) ?>" alt="">
 													</div>
 													<div class="txt">
 														<p class="btxt"><?php echo html_escape(cut_str(strip_tags(element('news_title', $most_view)), 10)); ?></p>
@@ -108,7 +108,7 @@
 								?>
 							<li>
 								<a href="<?php echo goto_url(element('newsurl', $result)); ?>" target="_blank">
-									<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png') ?>" alt="">
+									<div class="img"><img src="<?php echo html_escape(element('news_image', $result)) ?>" alt="">
 									</div>
 									<div class="txt">
 										<div class="vc">
