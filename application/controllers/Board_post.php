@@ -164,7 +164,7 @@ class Board_post extends CB_Controller
 				$category_id = 1;
 			}
 			
-
+			$view['view']['category_id'] = $category_id;
 			
 		}
 
@@ -1477,9 +1477,6 @@ class Board_post extends CB_Controller
 		
 		$result = $this->Post_model
 			->get_post_list($per_page, $offset, $where, $category_id, $findex, $sfield, $skeyword);
-
-			print_r($category_id);
-			exit;
 			
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		if (element('list', $result)) {
