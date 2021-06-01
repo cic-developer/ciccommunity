@@ -23,7 +23,7 @@
 						<p class="btxt">포럼 주제</p>
 						<div class="field">
 							<p class="chk-input w100p">
-								<input type="text" placeholder="" value="도지코인 1,000원 갈까?">
+								<input id="post_title" type="text" name="post_title" placeholder="포럼 주제를 입력해주세요" value="<?php echo set_value('post_title', element('post_title', element('post', $view))); ?>">
 							</p>
 						</div>
 					</li>
@@ -47,7 +47,8 @@
 				</ul>
 			</div>
 			<div class="lower">
-				<a href="#n" class="enter-btn"><span>포럼 등록하기</span></a>
+				<!-- <a href="#n" class="enter-btn"><span>포럼 등록하기</span></a> -->
+				<button type="submit" class="enter-btn"><span>등록하기</span></button>
 			</div>
 		</div>
 		<?php echo form_close(); ?>

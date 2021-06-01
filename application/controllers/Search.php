@@ -17,7 +17,7 @@ class Search extends CB_Controller
     /**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Board', 'Board_group', 'Post', 'Post_file', 'Search_keyword', 'CIC_coin_list', 'CIC_coin_keyword', 'News');
+	protected $models = array('Board', 'Board_group', 'Post', 'Post_file', 'Search_keyword', 'CIC_coin_list', 'CIC_coin_keyword', 'News', 'Company');
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
@@ -285,7 +285,18 @@ class Search extends CB_Controller
 		$view['symbole'] = strtoupper($symbole);
 		$view['korean'] = $korean;
 
-		$this->
+		$this->News_model->allow_search_field = array('news_title', 'news_content');
+		$this->News_model->search_field_equal = array('post_userid'); // 검색중 like 가 아닌 = 검색을 하는 필드
+
+		$company_id = (int) $this->input->get('company_id') ? (int) $this->input->get('company_id') : '';
+
+		$per_page = 15;
+		$offset = ($page - 1) * $per_page;
+
+		$where = array();
+
+		$where['post.post_secret'] = 0;
+		$where['post.post_del'] = 0;
 
 		// END HISTORICAL DATA FOR CHART
 		// 코인 검색 여기까지 

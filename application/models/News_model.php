@@ -234,6 +234,7 @@ class News_model extends CB_Model
 		}
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
+		
 
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
@@ -268,6 +269,68 @@ class News_model extends CB_Model
 
 
 		return $result;
+	}
+
+	public function get_search_list($limit = '', $offset = '', $where = '', $like = '', $compnay_id = 0, $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
+	{
+		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
+			$orderby = 'news_id';
+		}
+
+		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
+		if (empty($sfield)) {
+			$sfield = array('news_title', 'news_content');
+		}
+
+		$search_where = array();
+		$search_like = array();
+		$search_or_like = array();
+		if ($sfield && is_array($sfield)) {
+			foreach ($sfield as $skey => $sval) {
+				$ssf = $sval;
+				if ($skeyword && $ssf && in_array($ssf, $this->allow_search_field)) {
+					if (in_array($ssf, $this->search_field_equal)) {
+						$search_where[$ssf] = $skeyword;
+					} else {
+						$swordarray = explode(' ', $skeyword);
+						foreach ($swordarray as $str) {
+							if (empty($ssf)) {
+								continue;
+							}
+							if ($sop === 'AND') {
+								$search_like[] = array($ssf => $str);
+							} else {
+								$search_or_like[] = array($ssf => $str);
+							}
+						}
+					}
+				}
+			}
+		} else {
+			$ssf = $sfield;
+			if ($skeyword && $ssf && in_array($ssf, $this->allow_search_field)) {
+				if (in_array($ssf, $this->search_field_equal)) {
+					$search_where[$ssf] = $skeyword;
+				} else {
+					$swordarray = explode(' ', $skeyword);
+					foreach ($swordarray as $str) {
+						if (empty($ssf)) {
+							continue;
+						}
+						if ($sop === 'AND') {
+							$search_like[] = array($ssf => $str);
+						} else {
+							$search_or_like[] = array($ssf => $str);
+						}
+					}
+				}
+			}
+		}
+
+		$this->db->select('news.*, company.*');
+		$this->db->from('news');
+		$this->db->join('company', 'news.comp_id = company.comp_id', 'inner');
+		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
 	}
 
 	public function important_news($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
