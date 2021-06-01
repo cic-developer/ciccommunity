@@ -11,9 +11,9 @@
 		<div class="board-wrap detail">
 			<div class="detail">
 				<div class="binfo">
-					<h4><span>Writer</span> 입니다.</h4>
-					<p>유저들의 의견을 자유롭게 공유할 수 있는 공간입니다. 단, 사이트 내에 명시 된 ‘운영정책’ 을 따릅니다. </p>
-					<p>게시글에 대해서 up / down으로 의견을 표출할 수 있습니다. 작성자는 보팅에 따라 지급 포인트를 받습니다.</p>
+					<h4><span>도전 포럼</span> 입니다.</h4>
+					<p>디지털 자산 관련 어떤 이슈가 주목 받을 때 혹은 커뮤니티 운영과 관련해 의사결정을 하는 투표를 진행 할 수 있습니다. </p>
+					<p>보유 포인트를 이용해 투표에 참여 가능하고 투표 결과에 따라 <strong>순차적</strong>으로 보상 포인트를 지급 받습니다. </p>
 				</div>
 				<div class="gap30"></div>
 				<div class="upper r">
