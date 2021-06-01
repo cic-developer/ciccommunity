@@ -481,9 +481,6 @@ class Post_model extends CB_Model
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
 
-		print_r($this->db->last_query());
-		exit;
-
 		$this->db->select('count(*) cnt, board.brd_id');
 		$this->db->from('post');
 		$this->db->join('board', 'post.brd_id = board.brd_id', 'inner');

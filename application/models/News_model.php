@@ -357,11 +357,68 @@ class News_model extends CB_Model
 			$this->db->group_end();
 		}
 
-		$this->db->where( array('brd_search' => 1));
-		$board_id = (int) $board_id;
-		if ($board_id)	{
-			$this->db->where( array('board.brd_id' => $board_id));
+		$this->db->where( s);
+		$compnay_id = (int) $company_id;
+		if ($company_id)	{
+			$this->db->where( array('company.comp_id' => $company_id));
 		}
+
+		$this->db->order_by($orderby);
+		if ($limit) {
+			$this->db->limit($limit, $offset);
+		}
+		$qry = $this->db->get();
+		$result['list'] = $qry->result_array();
+
+		$this->db->select('count(*) cnt, company.comp_id');
+		$this->db->from('news');
+		$this->db->join('company', 'news.comp_id = company.comp_id', 'inner');
+
+		if ($where) {
+			$this->db->where($where);
+		}
+		if ($search_where) {
+			$this->db->where($search_where);
+		}
+		if ($like) {
+			$this->db->like($like);
+		}
+		if ($search_like) {
+			foreach ($search_like as $item) {
+				foreach ($item as $skey => $sval) {
+					$this->db->like($skey, $sval);
+				}
+			}
+		}
+		if ($search_or_like) {
+			$this->db->group_start();
+			foreach ($search_or_like as $item) {
+				foreach ($item as $skey => $sval) {
+					$this->db->or_like($skey, $sval);
+				}
+			}
+			$this->db->group_end();
+		}
+
+		$this->db->group_by('company.comp_id');
+		$qry = $this->db->get();
+		$cnt = $qry->result_array();
+		$result['total_rows'] = 0;
+
+		if ($cnt) {
+			foreach ($cnt as $key => $value) {
+				if (element('comp_id', $value)) {
+					$result['company_rows'][$value['comp_id']] = element('cnt', $value);
+				}
+			}
+			if ($company_id) {
+				$result['total_rows'] = $result['company_rows'][$company_id];
+			} else {
+				$result['total_rows'] = array_sum($result['company_rows']);
+			}
+		}
+
+		return $result;
 	}
 
 	public function important_news($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')

@@ -68,6 +68,7 @@ class Coinapi extends CI_Controller
         $return_data = array(
             'exchange' => $exchange,
             'coin' => $coin,
+            'money' => $decoded_data && isset($decoded_data['money']) ? $decoded_data['money'] : 'krw',
             'first_block' => $first_block,
         );
         return $return_data;
@@ -115,6 +116,7 @@ class Coinapi extends CI_Controller
         }
 
         $return_data['exchange'] = $exchange;
+        $return_data['money'] = $decoded_data && isset($decoded_data['money']) ? $decoded_data['money'] : 'krw';
         foreach($exchange as $thisExchange){
             $thisCoinDetail = $coin['coin_detail'][$thisExchange['cme_idx']];
             if($coin['coin_detail'][$thisExchange['cme_idx']]){

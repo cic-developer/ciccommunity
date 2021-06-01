@@ -22,7 +22,7 @@
             foreach($exchange as $thisExchange){
                 $thisPrice = $data[$i];
                 $volume = element('volume', $thisPrice);
-                $price = element('price', $thisPrice);
+                $price = $money == 'usd' ? element('price_usd', $thisPrice) : element('price', $thisPrice);
                 $korea_premium = element('korea_premium', $thisPrice);
                 $change_rate = element('change_rate', $thisPrice);
                 $percent_class = $change_rate > 0 ? 'up' : $change_rate < 0 ? 'down' : '';

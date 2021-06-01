@@ -30,7 +30,7 @@ class Search extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('pagination', 'querystring'));
+		$this->load->library(array('pagination', 'querystring', 'cic_company'));
 	}
 	/**
 	 * 검색 페이지 함수입니다
@@ -295,8 +295,33 @@ class Search extends CB_Controller
 
 		$where = array();
 
-		$where['post.post_secret'] = 0;
-		$where['post.post_del'] = 0;
+		$where['news.news_enable'] = 1;
+		$where['news.news_show'] = 1;
+		$like = '';
+
+		$newsresult = $this->News_model
+			->get_search_list($per_page, $offset, $where, $like, $board_id, $findex, $sfield, $skeyword, $sop);
+		$list_num = $newsresult['total_rows'] - ($page - 1) * $per_page;
+
+		if (element('list', $newsresult)) {
+			foreach (element('list', $result) as $key => $val) {
+				$newsresult['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
+				$images = '';
+				if (element('post_image', $val)) {
+					$imagewhere = array(
+						'post_id' => element('post_id', $val),
+						'pfi_is_image' => 1,
+					);
+					$images = $this->Post_file_model
+						->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+				}
+				$newsresult['list'][$key]['news_url'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
+				$newsresult['list'][$key]['display_datetime'] = display_datetime(element('post_datetime', $val), 'user', 'Y-m-d H:i');
+				$newsresult['list'][$key]['content'] = cut_str(strip_tags(element('post_content', $val)),200);
+				$newsresult['list'][$key]['is_mobile'] = (element('post_device', $val) === 'mobile') ? true : false;
+			}
+		}
+	
 
 		// END HISTORICAL DATA FOR CHART
 		// 코인 검색 여기까지 

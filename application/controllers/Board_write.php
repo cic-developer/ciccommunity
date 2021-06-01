@@ -600,6 +600,9 @@ class Board_write extends CB_Controller
 
 					$extra_content[$k]['field_name'] = element('field_name', $value);
 					$extra_content[$k]['display_name'] = element('display_name', $value);
+					if(element('field_name', $value) === 'A_opinion' || element('field_name', $value) === 'B_opinion'){
+						$extra_content[$k]['display_name'] = '';
+					}
 					$extra_content[$k]['input'] = '';
 
 					//field_type : text, url, email, phone, textarea, radio, select, checkbox, date
@@ -613,10 +616,10 @@ class Board_write extends CB_Controller
 							$extra_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input datepicker" value="' . set_value(element('field_name', $value)) . '" readonly="readonly" ' . $required . ' />';
 						} // A의견▼▼▼
 						elseif (element('field_name', $value) === 'A_opinion') {
-							$extra_content[$k]['input'] .= '<div class="field report"><p class="btxt">' . element('field_name', $value) . '</p><p class="chk-input w100p"><input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' /></p></div>';
+							$extra_content[$k]['input'] .= '<div class="field report"><p class="btxt">' . element('display_name', $value) . '</p><p class="chk-input w100p"><input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' /></p></div>';
 						} // B의견▼▼▼
 						elseif (element('field_name', $value) === 'B_opinion') {
-							$extra_content[$k]['input'] .= '<div class="field report"><p class="btxt">' . element('field_name', $value) . '</p><p class="chk-input w100p"><input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' /></p></div>';
+							$extra_content[$k]['input'] .= '<div class="field report mg20t"><p class="btxt">' . element('display_name', $value) . '</p><p class="chk-input w100p"><input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' /></p></div>';
 						}
 						elseif (element('field_type', $value) === 'phone') {
 							$extra_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value)) . '" ' . $required . ' />';
@@ -1848,6 +1851,9 @@ class Board_write extends CB_Controller
 					$item = element(element('field_name', $value), element('extravars', $post));
 					$extra_content[$k]['field_name'] = element('field_name', $value);
 					$extra_content[$k]['display_name'] = element('display_name', $value);
+					if(element('field_name', $value) === 'A_opinion' || element('field_name', $value) === 'B_opinion'){
+						$extra_content[$k]['display_name'] = '';
+					}
 					$extra_content[$k]['input'] = '';
 
 					//field_type : text, url, email, phone, textarea, radio, select, checkbox, date
@@ -1863,7 +1869,7 @@ class Board_write extends CB_Controller
 							$extra_content[$k]['input'] .= '<div class="field report"><p class="btxt">' . element('field_name', $value) . '</p><p class="chk-input w100p"><input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' /></p></div>';
 						} // B의견▼▼▼
 						elseif (element('field_name', $value) === 'B_opinion') {
-							$extra_content[$k]['input'] .= '<div class="field report"><p class="btxt">' . element('field_name', $value) . '</p><p class="chk-input w100p"><input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' /></p></div>';
+							$extra_content[$k]['input'] .= '<div class="field report mg20t"><p class="btxt">' . element('field_name', $value) . '</p><p class="chk-input w100p"><input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' /></p></div>';
 						} elseif (element('field_type', $value) === 'phone') {
 							$extra_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' />';
 						} else {

@@ -99,7 +99,8 @@
                                 foreach(element('exchange', element('maincoin', $view)) as  $thisExchange){
                                     $thisPrice = element($i, element('first_block', element('maincoin', $view)));
                                     $volume = element('volume', $thisPrice);
-                                    $price = element('price', $thisPrice);
+                                    $money = element('money', element('maincoin', $view));
+                                    $price = $money == 'usd' ? element('price_usd', $thisPrice) : element('price', $thisPrice);
                                     $korea_premium = element('korea_premium', $thisPrice);
                                     $change_rate = element('change_rate', $thisPrice);
                                     $percent_class = $change_rate > 0 ? 'up' : $change_rate < 0 ? 'down' : '';
