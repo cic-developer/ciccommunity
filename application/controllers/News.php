@@ -241,9 +241,18 @@ class News extends CB_Controller
 			}
 		}
 
+		$view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
 
 		$view['view']['most_view'] = $most_view;
 		$view['view']['data'] = $result;
+
+		$config['base_url'] = news_url($this->pagedir) . '?' . $param->replace('page');
+		$config['total_rows'] = $result['total_rows'];
+		$config['per_page'] = $per_page;
+		
+		$this->pagination->initialize($config);
+		$view['view']['paging'] = $this->pagination->create_links();
+		$view['view']['page'] = $page;
 		
 		
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

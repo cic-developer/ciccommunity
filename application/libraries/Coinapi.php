@@ -672,7 +672,7 @@ class Coinapi extends CI_Controller
                 $return_data = array(
                     'price'         => $data[0]['last'] * $upbit_btckrw_data['price'],
                     'price_usd'     => $data[0]['last'] * $upbit_btckrw_data['price_usd'],
-                    'volume'        => $data[0]['vol24h'] * $upbit_btckrw_data['price'],
+                    'volume'        => $data[0]['vol24h'] * $data[0]['last'] * $upbit_btckrw_data['price'],
                     'change_rate'   => $data[0]['sodUtc0'] ? (($data[0]['last'] - $data[0]['sodUtc0']) / $data[0]['sodUtc0'] * 100) : 0,
                 );       
             }
@@ -700,12 +700,25 @@ class Coinapi extends CI_Controller
 
         $data = $result['tick'];
         if($data){
-            return array(
-                'price'         => $data['close'] * $usd_price,
-                'price_usd'     => $data['close'],
-                'volume'        => $data['amount'] * $data['close'] * $usd_price,
-                'change_rate'   => $data['open'] ? (($data['close'] - $data['open']) / $data['open'] * 100) : 0,
-            );
+            if(in_array($market, array('USDT'))){
+                //원화가격
+                $return_data = array(
+                    'price'         => $data['close'] * $usd_price,
+                    'price_usd'     => $data['close'],
+                    'volume'        => $data['amount'] * $data['close'] * $usd_price,
+                    'change_rate'   => $data['open'] ? (($data['close'] - $data['open']) / $data['open'] * 100) : 0,
+                );        
+            } else {
+                //BTC가격
+                $upbit_btckrw_data = $this->get_upbit_data('BTC', "KRW");
+                $return_data = array(
+                    'price'         => $data['close'] * $upbit_btckrw_data['price'],
+                    'price_usd'     => $data['close'] * $upbit_btckrw_data['price_usd'],
+                    'volume'        => $data['amount'] * $data['close'] * $upbit_btckrw_data['price'],
+                    'change_rate'   => $data['open'] ? (($data['close'] - $data['open']) / $data['open'] * 100) : 0,
+                );       
+            }
+            return $return_data;
         } else {
             return array();
         }
@@ -729,12 +742,25 @@ class Coinapi extends CI_Controller
         
         $data = $result['result'];
         if($data){
-            return array(
-                'price'         => $data[0]['Last'] * $usd_price,
-                'price_usd'     => $data[0]['Last'],
-                'volume'        => $data[0]['BaseVolume'] * $usd_price,
-                'change_rate'   => $data[0]['PrevDay'] ? (($data[0]['Last'] - $data[0]['PrevDay']) / $data[0]['PrevDay'] * 100) : 0,
-            );
+            if(in_array($market, array('USD','USDT'))){
+                //원화가격
+                $return_data = array(
+                    'price'         => $data[0]['Last'] * $usd_price,
+                    'price_usd'     => $data[0]['Last'],
+                    'volume'        => $data[0]['BaseVolume'] * $usd_price,
+                    'change_rate'   => $data[0]['PrevDay'] ? (($data[0]['Last'] - $data[0]['PrevDay']) / $data[0]['PrevDay'] * 100) : 0,
+                );        
+            } else {
+                //BTC가격
+                $upbit_btckrw_data = $this->get_upbit_data('BTC', "KRW");
+                $return_data = array(
+                    'price'         => $data[0]['Last'] * $upbit_btckrw_data['price'],
+                    'price_usd'     => $data[0]['Last'] * $upbit_btckrw_data['price_usd'],
+                    'volume'        => $data[0]['BaseVolume'] * $upbit_btckrw_data['price'],
+                    'change_rate'   => $data[0]['PrevDay'] ? (($data[0]['Last'] - $data[0]['PrevDay']) / $data[0]['PrevDay'] * 100) : 0,
+                );       
+            }
+            return $return_data;
         } else {
             return array();
         }
@@ -758,12 +784,25 @@ class Coinapi extends CI_Controller
 
         $data = $result[$market.'_'.$coin_id];
         if($data){
-            return array(
-                'price'         => $data['last'] * $usd_price,
-                'price_usd'     => $data['last'],
-                'volume'        => $data['baseVolume'] * $usd_price,
-                'change_rate'   => $data['percentChange'] * 100,
-            );
+            if(in_array($market, array('USDT'))){
+                //원화가격
+                $return_data = array(
+                    'price'         => $data['last'] * $usd_price,
+                    'price_usd'     => $data['last'],
+                    'volume'        => $data['baseVolume'] * $usd_price,
+                    'change_rate'   => $data['percentChange'] * 100,
+                );        
+            } else {
+                //BTC가격
+                $upbit_btckrw_data = $this->get_upbit_data('BTC', "KRW");
+                $return_data = array(
+                    'price'         => $data['last'] * $upbit_btckrw_data['price'],
+                    'price_usd'     => $data['last'] * $upbit_btckrw_data['price_usd'],
+                    'volume'        => $data['baseVolume'] * $upbit_btckrw_data['price'],
+                    'change_rate'   => $data['percentChange'] * 100,
+                );       
+            }
+            return $return_data;
         } else {
             return array();
         }

@@ -110,6 +110,14 @@ if ( ! function_exists('reply_url')) {
 	}
 }
 
+if ( ! function_exists('news_url')) {
+	function news_url($key = '')
+	{
+		$key = trim($key, '/');
+		return site_url(config_item('uri_segment_news') . '/' . $key);
+	}
+}
+
 
 /**
  * 게시물 수정 페이지 주소를 return 합니다
