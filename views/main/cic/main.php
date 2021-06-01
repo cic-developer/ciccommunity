@@ -100,7 +100,6 @@
                                     $thisPrice = element($i, element('first_block', element('maincoin', $view)));
                                     $volume = element('volume', $thisPrice);
                                     $money = element('money', element('maincoin', $view));
-                                    $demical = $money == 'usd' ? 4 : 2;
                                     $price = $money == 'usd' ? element('price_usd', $thisPrice) : element('price', $thisPrice);
                                     $korea_premium = element('korea_premium', $thisPrice);
                                     $change_rate = element('change_rate', $thisPrice);
@@ -115,7 +114,7 @@
                                             <p class="txt"><?php echo element('cme_korean_nm', $thisExchange); ?></p>
                                         </div>
                                     </td>
-                                    <td><?php echo rs_number_format($price); ?></td>
+                                    <td><?php echo rs_get_price($price, $money); ?></td>
                                     <td><?php echo rs_number_format($korea_premium, 2) ? rs_number_format($korea_premium, 2).' %' : '-'; ?></td>
                                     <td><?php echo number_unit_to_korean($volume); ?></td>
                                     <td>

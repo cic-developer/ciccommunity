@@ -15,6 +15,7 @@
 					<p>유저들의 의견을 자유롭게 공유할 수 있는 공간입니다. 단, 사이트 내에 명시 된 ‘운영정책’ 을 따릅니다. </p>
 					<p>게시글에 대해서 좋아요를 이용하여 의견을 표출할 수 있습니다. </p>
 					<p>도전포럼은 포럼으로 승격하기 전까지는 댓글기능을 사용할수 없습니다. </p>
+					<p>많은 추천을 받은 게시물은 포럼으로 승격할수 있습니다. </p>
 				</div>
 				<div class="gap30"></div>
 				<div class="upper r">
@@ -70,55 +71,53 @@
 							});
 						</script>
 						<div class="cont">
-							<h3>?php echo html_escape(element('post_title', element('post', $view))); ?></h3>
+							<h3><?php echo html_escape(element('post_title', element('post', $view))); ?></h3>
 							<ul>
+							<?php
+							if (element('extra_content', $view)) {
+								foreach (element('extra_content', $view) as $key => $value) {
+									if(element('field_name', $value) == 'A_opinion') {
+							?>
 								<li>
 									<div class="bar">
 										<div class="vbar"></div>
-										<p class="percent"><span>50%</span></p>
-										<p class="nums"><i class="counter">52,213,578</i><span>cp</span></p>
+										<p class="percent"><span>??</span></p>
+										<p class="nums"><i class="counter">0</i><span></span></p>
 										<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo1.png')?>" alt="" style="cursor:pointer;" /></p>
-										<a href="#n"><span>A. 간다</span></a>
-										
+										<a><span>A. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
 									</div>
 								</li>
-								
+							<?php
+								} else if(element('field_name', $value) == 'B_opinion'){
+							?>
 								<li>
 									<div class="bar">
 										<div class="vbar"></div>
-										<p class="percent"><span>50%</span></p>
-										<p class="nums"><i class="counter">52,213,578</i><span>cp</span></p>
+										<p class="percent"><span>??</span></p>
+										<p class="nums"><i class="counter">0</i><span></span></p>
 										<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo2.png')?>" alt="" style="cursor:pointer;" /></p>
-										<a href="#n"><span>B. 안간다</span></a>
+										<a><span>A. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
 									</div>
 								</li>
+							<?php
+									}
+								}
+							}
+							?>
 							</ul>
 						</div>
-						<div class="result" style="display:none">
-							<p class="btxt">A. 간다 <span>참여</span></p>
-							<div class="abr">
-								<p class="cp"><span>150</span> CP</p>
-								<a href="#n"><span>추가 참여!</span></a>
-								<a href="#n"><span>의견 변경</span></a>
-							</div>
+
+						<?php if ( ! element('post_del', element('post', $view)) && (element('use_post_like', element('board', $view)) OR element('use_post_dislike', element('board', $view)))) { ?>
+						<div class="recommand vp-point">
+							<?php if (element('use_post_like', element('board', $view))) { ?>
+								<div class="btns">
+								<a class="good enter" href="javascript:;" id="btn-post-like" onClick="post_like('<?php echo element('post_id', element('post', $view)); ?>', '1', 'post-like');" title="추천하기"><span class="post-like">좋아요 up</span><br /><i class="fa fa-thumbs-o-up fa-lg"></i></a>
+								</div>
+							<?php } ?>
 						</div>
-						<div class="btns">
-							<a href="#n" class="enter"><span>투표 참여하기</span></a>
-						</div>
+						<?php } ?>
 					</div>
 					<div class="gap50"></div>
-
-					<?php if ( ! element('post_del', element('post', $view)) && (element('use_post_like', element('board', $view)) OR element('use_post_dislike', element('board', $view)))) { ?>
-					<div class="recommand vp-point">
-						<!-- <ul> -->
-						<?php if (element('use_post_like', element('board', $view))) { ?>
-							<!-- <li> -->
-								<a class="good" href="javascript:;" id="btn-post-like" onClick="post_like('<?php echo element('post_id', element('post', $view)); ?>', '1', 'post-like');" title="추천하기"><span class="post-like">좋아요 up</span><br /><i class="fa fa-thumbs-o-up fa-lg"></i></a>
-							<!-- </li> -->
-						<?php } ?>
-						<!-- </ul> -->
-					</div>
-					<?php } ?>
 
 				</div>
 			</div>
@@ -136,8 +135,6 @@
 					<button type="button" class="bw-btn btn btn-black" id="btn-blame" onClick="post_blame('<?php echo element('post_id', element('post', $view)); ?>', 'post-blame');">신고 <span class="post-blame"><?php echo element('post_blame', element('post', $view)) ? '+' . number_format(element('post_blame', element('post', $view))) : ''; ?></span></button>
 				<?php } ?>
 			</div>
-			<div class="gap60"></div>
 		</div>
-		<div class="gap60"></div>	
 	</div>
 </div>

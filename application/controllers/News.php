@@ -114,6 +114,13 @@ class News extends CB_Controller
 			}
 		}
 
+		if ( ! $this->session->userdata('news_id_' . $news_id)) {
+			$this->News_model->update_plus($news_id, 'news_reviews', 1);
+			$this->session->set_userdata(
+				'news_id_' . $post_id,
+				'1'
+			);
+		}
 		$view['view']['most_view'] = $most_view;
 		$view['view']['data'] = $result;
 
@@ -125,13 +132,6 @@ class News extends CB_Controller
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;
 
-		if ( ! $this->session->userdata('post_id_' . $news_id)) {
-			$this->News_model->update_plus($news_id, 'news_reviews', 1);
-			$this->session->set_userdata(
-				'post_id_' . $post_id,
-				'1'
-			);
-		}
 
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
@@ -289,5 +289,10 @@ class News extends CB_Controller
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
+	}
+
+	public function read()
+	{
+		
 	}
 }

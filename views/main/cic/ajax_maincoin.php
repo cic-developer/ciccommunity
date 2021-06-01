@@ -36,7 +36,7 @@
                         <p class="txt"><?php echo element('cme_korean_nm', $thisExchange); ?></p>
                     </div>
                 </td>
-                <td><?php echo rs_number_format($price); ?></td>
+                <td><?php echo rs_get_price($price, $money); ?></td>
                 <td><?php echo rs_number_format($korea_premium, 2) ? rs_number_format($korea_premium, 2).' %' : '-'; ?></td>
                 <td><?php echo number_unit_to_korean($volume); ?></td>
                 <td>

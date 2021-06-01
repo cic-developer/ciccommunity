@@ -60,5 +60,41 @@ if ( ! function_exists('rs_number_format')) {
 	}
 }
 
+/**
+ * 가격 가져올때 demical 설정
+ */
+if ( ! function_exists('rs_get_price')) {
+	function rs_get_price($number, $money='krw', $default='')
+	{
+        if(!$number) return $default;
+        switch($money){
+            case 'usd':{
+                if($number >= 100){
+                    $value = rs_number_format($number, 2);
+                } else if($number >= 1){
+                    $value = rs_number_format($number, 4);
+                } else {
+                    $value = rs_number_format($number, 6);
+                }
+            } 
+            break;
+
+            case 'krw':
+            default :{
+                if($number >= 100){
+                    $value = rs_number_format($number);
+                } else if($number >= 10){
+                    $value = rs_number_format($number, 1);
+                } else if($number >= 1){
+                    $value = rs_number_format($number, 2);
+                } else {
+                    $value = rs_number_format($number, 3);
+                }
+            }
+        }
+        return $value;
+	}
+}
+
 
 ?>
