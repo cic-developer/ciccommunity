@@ -107,12 +107,11 @@
 							foreach (element('list', element('data', $view)) as $result) {
 								?>
 							<li>
-								<a href="#n">
+								<a href="<?php echo goto_url(element('newsurl', $result)); ?>" target="_blank">
 									<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png') ?>" alt="">
 									</div>
 									<div class="txt">
 										<div class="vc">
-											<a href="<?php echo goto_url(element('newsurl', $result)); ?>" target="_blank">
 												<p class="btxt"><?php echo html_escape(element('news_title', $result)); ?><span>(<?php echo number_format(element('news_reviews', $result)); ?>)</span></p>
 												<p class="stxt"><?php echo html_escape(element('news_contents', $result)); ?></p>
 												<p class="ctxt">
@@ -120,7 +119,6 @@
 													<span><?php echo display_datetime(element('news_wdate', $result)); ?></span>
 													<span><?php echo number_format(element('news_reviews', $result)); ?></span>
 												</p>
-											</a>
 										</div>
 									</div>
 								</a>

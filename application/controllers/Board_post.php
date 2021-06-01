@@ -1469,6 +1469,7 @@ class Board_post extends CB_Controller
 				$result['list'][$key]['meta'] = $meta
 					= $this->Post_meta_model
 					->get_all_meta(element('post_id', $val));
+					
 
 				if ($this->cbconfig->get_device_view_type() === 'mobile') {
 					$result['list'][$key]['title'] = element('mobile_subject_length', $board)
@@ -1563,8 +1564,7 @@ class Board_post extends CB_Controller
 						$result['list'][$key]['origin_image_url'] = $thumb_url;
 					}
 				}
-				print_r($result);
-		exit;
+				
 				
 				//cicwriter 일때 이미지 가져오기
 				if ($brd_key == 'cicwriter') {
