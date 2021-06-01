@@ -442,6 +442,7 @@ class Post_model extends CB_Model
 		$this->db->join('board', 'post.brd_id = board.brd_id', 'inner');
 		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
 
+		
 		if ($where) {
 			$this->db->where($where);
 		}
@@ -470,7 +471,7 @@ class Post_model extends CB_Model
 		$this->db->where( array('brd_search' => 1));
 		$board_id = (int) $board_id;
 		if ($board_id)	{
-			$this->db->where( array('b.brd_id' => $board_id));
+			$this->db->where( array('board.brd_id' => $board_id));
 		}
 
 		$this->db->order_by($orderby);
@@ -479,6 +480,9 @@ class Post_model extends CB_Model
 		}
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
+
+		print_r($this->db->last_query());
+		exit;
 
 		$this->db->select('count(*) cnt, board.brd_id');
 		$this->db->from('post');

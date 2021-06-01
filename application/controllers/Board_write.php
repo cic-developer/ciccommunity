@@ -1851,6 +1851,12 @@ class Board_write extends CB_Controller
 						OR element('field_type', $value) === 'date') {
 						if (element('field_type', $value) === 'date') {
 							$extra_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input datepicker" value="' . set_value(element('field_name', $value), $item) . '" readonly="readonly" ' . $required . ' />';
+						} // A의견
+						elseif (element('field_key', $value) === 'A_opinion') {
+							$extra_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' />';
+						} // B의견
+						elseif (element('field_key', $value) === 'B_opinion') {
+							$extra_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' />';
 						} elseif (element('field_type', $value) === 'phone') {
 							$extra_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' />';
 						} else {
