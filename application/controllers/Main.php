@@ -123,7 +123,6 @@ class Main extends CB_Controller
 			}
 		}
 		$view['view']['data'] = $popularpost;
-
 		$select = 'brd_id, brd_name';
 		$view['view']['boardlist'] = $this->Board_model->get_board_list();
 			

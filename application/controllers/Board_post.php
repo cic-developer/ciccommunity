@@ -317,6 +317,8 @@ class Board_post extends CB_Controller
 		}
 
 		$post = $this->Post_model->get_one($post_id);
+		print_r($post);
+		exit;
 		$post['meta'] = $this->Post_meta_model->get_all_meta($post_id);
 		$post['extravars'] = $this->Post_extra_vars_model->get_all_meta($post_id);
 		$view['view']['post'] = $post;

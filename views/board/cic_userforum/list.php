@@ -335,9 +335,8 @@
     })
 
     $(document).on('click', '#deposit_subtract_confirm', function() {
-        alert("예치한 금액이 전부 반환됩니다");
         
-        var isConfirm = confirm('선택한 요청을 정말 승인 하시겠습니까?');
+        var isConfirm = confirm('예치한 금액을 반환하시겠습니까?');
         
         if(isConfirm){
         
