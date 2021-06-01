@@ -72,6 +72,7 @@ class Deposit extends CB_Controller
         $mem_id = (int) $this->member->item('mem_id');
         $mem_cp = $this->member->item('mem_cp');
         $deposit_meta = (int)  $this->CIC_forum_model->item('forum_deposit');
+        $mem_deposit = $this->member->item('mem_deposit');
         
         if( $mem_cp - $deposit_meta < 0){
             $result = array(

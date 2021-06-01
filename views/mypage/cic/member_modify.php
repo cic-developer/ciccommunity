@@ -61,7 +61,7 @@
 						</div>
 					</li>
 					<li>
-						<p class="btxt"><span>PER</span> 지갑주소</p>
+						<p class="btxt"><span>Kaikas</span> 지갑주소</p>
 						<div class="field modify">
 							<p class="chk-input w380 readonly">
 								<input type="text" id="mem_wallet" name="mem_wallet" placeholder="" value="<?php echo $this->member->item('mem_wallet_address'); ?>" readonly="">

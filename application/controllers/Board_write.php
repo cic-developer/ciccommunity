@@ -18,7 +18,7 @@ class Board_write extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Post', 'Post_link', 'Post_file', 'Post_extra_vars', 'Post_meta');
+	protected $models = array('Post', 'Post_link', 'Post_file', 'Post_extra_vars', 'Post_meta', 'CIC_forum');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -49,7 +49,7 @@ class Board_write extends CB_Controller
 		 * 로그인이 필요한 페이지입니다
 		 */
 		required_user_login();
-		
+
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('before', $eventname);
 
@@ -70,12 +70,44 @@ class Board_write extends CB_Controller
 		}
 		// 도전 CIC 포럼, userForum
 		if($board_id == 6){
-			// print_r("here?");
-			// exit;
+			$mem_id = (int) $this->member->item('mem_id');
+			$mem_cp = $this->member->item('mem_cp');
+			$deposit_meta = (int)  $this->CIC_forum_model->item('forum_deposit');
+			$mem_deposit = $this->member->item('mem_deposit');
+
+			$where3 = array(
+				'brd_id' => 3,
+				'mem_id' => $mem_id,
+			);
+			$where6 = array(
+				'brd_id' => 6,
+				'mem_id' => $mem_id,
+			);
+			$post3 = $this->Post_model->get_one('', '', $where3);
+			$post6 = $this->Post_model->get_one('', '', $where6);
+
+			// 관리자가 아닌 일반 유저인지 확인
+			if($this->member->is_admin()){
+				alert('관리자는 포럼을 작성할수 없습니다');
+				return false;
+			}
+
+			// 이미 예치된 금액이 있는지 확인
+			if(!$mem_deposit){
+				alert('예치된 금액이 없습니다');
+				return false;
+			}
+			// 예치금이 충분히 있는지 확인
+			if( $mem_deposit - $deposit_meta < 0){
+				alert('예치금이 부족합니다, 예치금 반환후 다시 예치해주세요');
+				return false;
+			}
+
+			if($post3 || $post6) {
+				alert('작성된 포럼이 존재합니다');
+				return false;
+			}
 		}
-
-
-
 
 		$board = $this->board->item_all($board_id);
 

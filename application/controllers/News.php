@@ -145,8 +145,8 @@ class News extends CB_Controller
 			$return['search_list_url'] = '';
 		}
 
-		
-		$view['view']['news_url'] = news_url($this->pagedir . '/news_url' . $param->output());
+		$return['primary_key'] = $this->News_model->primary_key;
+		$view['view']['news_url'] = news_url($this->pagedir . '/news_url/?' . $param->output());
 		
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
@@ -289,8 +289,8 @@ class News extends CB_Controller
 
 	public function news_url($news_id = 0)
 	{
-		print_r($news_id);
-		exit;
+		// print_r($news_id);
+		// exit;
 		$eventname = 'event_news_read';
 		$this->load->event($eventname);
 
@@ -310,7 +310,6 @@ class News extends CB_Controller
 
 		$news['company'] = $company = $this->cic_company->item_all(element('comp_id', $news));
 				if($company) {
-					// $result['list'][$key]['companyurl'] = element('comp_url', $company);
 					$news['newsurl'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$news);
 		}
 
@@ -322,8 +321,7 @@ class News extends CB_Controller
 			);
 		}
 
-		// $param =& $this->querystring;
-		// $redirecturl = news_url($this->pagedir . '?' . $param->output());
-		// redirect($redirecturl);
+		$param =& $this->querystring;
+		redirect($news['newsurl']);
 	}
 }
