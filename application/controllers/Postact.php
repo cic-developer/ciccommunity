@@ -652,66 +652,67 @@ class Postact extends CB_Controller
 		$like_min_cp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_min_cp'"));
 		$like_max_cp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_max_cp'"));
 
+		if(element('brd_id', $post) != 6) {
+			switch(element('cfg_value',$_defualt_using_point)){
+				case 'vp' : //vp가 기본 포인트일 경우
+					$_pointSUM = $this->CIC_vp_model->get_point_sum($mem_id);
+					if($like_max_vp <= 0){
+						$result = array('error' => 'VP 사용 설정이 올바르지 않습니다.\n댓글 추천의 VP 사용 한도를 설정해주세요');
+						exit(json_encode($result));	
+					}
+					if($like_min_vp > $usedPoint || $like_max_vp < $usedPoint){
+						$result = array('error' => $like_min_vp.' 이상, '.$like_max_vp.' 이하의 자연수를 입력해주세요');
+						exit(json_encode($result));
+					}
 
-		switch(element('cfg_value',$_defualt_using_point)){
-			case 'vp' : //vp가 기본 포인트일 경우
-				$_pointSUM = $this->CIC_vp_model->get_point_sum($mem_id);
-				if($like_max_vp <= 0){
-					$result = array('error' => 'VP 사용 설정이 올바르지 않습니다.\n댓글 추천의 VP 사용 한도를 설정해주세요');
-					exit(json_encode($result));	
-				}
-				if($like_min_vp > $usedPoint || $like_max_vp < $usedPoint){
-					$result = array('error' => $like_min_vp.' 이상, '.$like_max_vp.' 이하의 자연수를 입력해주세요');
+					//소유 VP가 사용하려는 포인트보다 적은 경우
+					if($_pointSUM < $usedPoint){
+						$result = array('error' => '보유 포인트가 부족합니다.');
+						exit(json_encode($result));
+					}
+
+					$this->point->insert_vp(
+						$mem_id,
+						$usedPoint * -1,
+						element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
+						'point_use',
+						$post_id,
+						'포인트 사용'
+					);
+				break;
+
+
+				case 'cp' :
+					$_pointSUM = $this->CIC_cp_model->get_point_sum($mem_id);
+					if($like_max_cp <= 0){
+						$result = array('error' => 'CP 사용 설정이 올바르지 않습니다.\n댓글 추천의 CP 사용 한도를 설정해주세요');
+						exit(json_encode($result));	
+					}
+					if($like_min_cp > $usedPoint || $like_max_cp < $usedPoint){
+						$result = array('error' => $like_min_cp.' 이상, '.$like_max_cp.' 이하의 자연수를 입력해주세요');
+						exit(json_encode($result));
+					}
+
+					//소유 CP가 사용하려는 포인트보다 적은 경우
+					if($_pointSUM < $usedPoint){
+						$result = array('error' => '보유 포인트가 부족합니다.');
+						exit(json_encode($result));
+					}
+
+					$this->point->insert_cp(
+						$mem_id,
+						$usedPoint * -1,
+						element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
+						'point_use',
+						$post_id,
+						'포인트 사용'
+					);
+				break;
+
+				default :
+					$result = array('error' => '사용될 포인트 설정이 올바르지 않습니다.');
 					exit(json_encode($result));
-				}
-
-				//소유 VP가 사용하려는 포인트보다 적은 경우
-				if($_pointSUM < $usedPoint){
-					$result = array('error' => '보유 포인트가 부족합니다.');
-					exit(json_encode($result));
-				}
-
-				$this->point->insert_vp(
-					$mem_id,
-					$usedPoint * -1,
-					element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
-					'point_use',
-					$post_id,
-					'포인트 사용'
-				);
-			break;
-
-
-			case 'cp' :
-				$_pointSUM = $this->CIC_cp_model->get_point_sum($mem_id);
-				if($like_max_cp <= 0){
-					$result = array('error' => 'CP 사용 설정이 올바르지 않습니다.\n댓글 추천의 CP 사용 한도를 설정해주세요');
-					exit(json_encode($result));	
-				}
-				if($like_min_cp > $usedPoint || $like_max_cp < $usedPoint){
-					$result = array('error' => $like_min_cp.' 이상, '.$like_max_cp.' 이하의 자연수를 입력해주세요');
-					exit(json_encode($result));
-				}
-
-				//소유 CP가 사용하려는 포인트보다 적은 경우
-				if($_pointSUM < $usedPoint){
-					$result = array('error' => '보유 포인트가 부족합니다.');
-					exit(json_encode($result));
-				}
-
-				$this->point->insert_cp(
-					$mem_id,
-					$usedPoint * -1,
-					element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
-					'point_use',
-					$post_id,
-					'포인트 사용'
-				);
-			break;
-
-			default :
-				$result = array('error' => '사용될 포인트 설정이 올바르지 않습니다.');
-				exit(json_encode($result));
+			}
 		}
 
 		if ($like_type === 1) {

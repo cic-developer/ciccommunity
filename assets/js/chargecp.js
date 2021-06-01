@@ -389,7 +389,7 @@ const contract_abi = [{
         "type": "function"
     }
 ]
-const contract_address = "0x5682461966BB835da2C55c883E5C5985c54829e6"
+const contract_address = "0x5682461966BB835da2C55c883E5C5985c54829e6";
 const token_address = "0x7eee60a000986e9efe7f5c90340738558c24317b";
 const PER_address = "0x0E3A0B94cF7bd745aA8a65Bd707509761e65A832"; //퍼 월렛 주소
 

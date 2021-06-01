@@ -651,19 +651,32 @@ class Coinapi extends CI_Controller
         
         $usd_price = $this->get_usd_price();
 
-        $url = "https://www.okex.com/api/v5/market/ticker?instId={$coin_id}-{$market}-SWAP";
+        $url = "https://www.okex.com/api/v5/market/ticker?instId={$coin_id}-{$market}";
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();
 
         $data = $result['data'];
         if($data){
-            return array(
-                'price'         => $data[0]['last'] * $usd_price,
-                'price_usd'     => $data[0]['last'],
-                'volume'        => $data[0]['vol24h'] * $usd_price,
-                'change_rate'   => $data[0]['sodUtc0'] ? (($data[0]['last'] - $data[0]['sodUtc0']) / $data[0]['sodUtc0'] * 100) : 0,
-            );
+            if(in_array($market, array('USDT'))){
+                //원화가격
+                $return_data = array(
+                    'price'         => $data[0]['last'] * $usd_price,
+                    'price_usd'     => $data[0]['last'],
+                    'volume'        => $data[0]['vol24h'] * $usd_price,
+                    'change_rate'   => $data[0]['sodUtc0'] ? (($data[0]['last'] - $data[0]['sodUtc0']) / $data[0]['sodUtc0'] * 100) : 0,
+                );        
+            } else {
+                //BTC가격
+                $upbit_btckrw_data = $this->get_upbit_data('BTC', "KRW");
+                $return_data = array(
+                    'price'         => $data[0]['last'] * $upbit_btckrw_data['price'],
+                    'price_usd'     => $data[0]['last'] * $upbit_btckrw_data['price_usd'],
+                    'volume'        => $data[0]['vol24h'] * $upbit_btckrw_data['price'],
+                    'change_rate'   => $data[0]['sodUtc0'] ? (($data[0]['last'] - $data[0]['sodUtc0']) / $data[0]['sodUtc0'] * 100) : 0,
+                );       
+            }
+            return $return_data;
         } else {
             return array();
         }

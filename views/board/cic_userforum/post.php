@@ -62,11 +62,13 @@
 
 					<?php if ( ! element('post_del', element('post', $view)) && (element('use_post_like', element('board', $view)) OR element('use_post_dislike', element('board', $view)))) { ?>
 					<div class="recommand vp-point">
-						<ul>
+						<!-- <ul> -->
 						<?php if (element('use_post_like', element('board', $view))) { ?>
-							<a class="good" href="javascript:;" id="btn-post-like" onClick="post_like('<?php echo element('post_id', element('post', $view)); ?>', '1', 'post-like');" title="추천하기"><span class="post-like"><?php echo number_format(element('post_like', element('post', $view))); ?></span><br /><i class="fa fa-thumbs-o-up fa-lg"></i></a>
+							<!-- <li> -->
+								<a class="good" href="javascript:;" id="btn-post-like" onClick="post_like('<?php echo element('post_id', element('post', $view)); ?>', '1', 'post-like');" title="추천하기"><span class="post-like">좋아요 up</span><br /><i class="fa fa-thumbs-o-up fa-lg"></i></a>
+							<!-- </li> -->
 						<?php } ?>
-						</ul>
+						<!-- </ul> -->
 					</div>
 					<?php } ?>
 

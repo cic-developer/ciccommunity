@@ -244,18 +244,6 @@ class News extends CB_Controller
 
 		$view['view']['most_view'] = $most_view;
 		$view['view']['data'] = $result;
-
-		$config['total_rows'] = $result['total_rows'];
-		$config['per_page'] = $per_page;
-		$config['first_link'] = FALSE;
-		$config['last_link'] = FALSE;
-		$config['next_link'] = '다음';
-		$config['prev_link'] = '이전';
-		
-		$this->pagination->initialize($config);
-		$return['paging'] = $this->pagination->create_links();
-		$return['page'] = $page;
-
 		
 		
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
