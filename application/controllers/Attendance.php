@@ -256,7 +256,7 @@ class Attendance extends CB_Controller
 				$this->point->insert_point(
 					$this->member->item('mem_id'),
 					$mypoint,
-					cdate('Y-m-d') .' '. $my_ranking . '등 출석체크(명예포인트 지급)',
+					cdate('Y-m-d') . ' 출석체크(명예포인트 지급) '. $my_ranking . '등',
 					'attendance',
 					$att_id,
 					'출석체크'
@@ -266,7 +266,7 @@ class Attendance extends CB_Controller
 				$this->point->insert_vp(
 					$this->member->item('mem_id'),
 					$myvp,
-					cdate('Y-m-d') .' '. $my_ranking . '등 출석체크(VP 지급)',
+					cdate('Y-m-d') . ' 출석체크(VP 지급) '. $my_ranking . '등',
 					'attendance',
 					$att_id,
 					'출석체크'
@@ -276,7 +276,7 @@ class Attendance extends CB_Controller
 				$this->point->insert_cp(
 					$this->member->item('mem_id'),
 					$mycp,
-					cdate('Y-m-d') .' '. $my_ranking . '등 출석체크(CP 지급)',
+					cdate('Y-m-d') . ' 출석체크(CP 지급) '. $my_ranking . '등',
 					'attendance',
 					$att_id,
 					'출석체크'

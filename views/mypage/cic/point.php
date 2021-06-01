@@ -1,64 +1,82 @@
-<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css'); ?>
-
-<div class="mypage">
-	<ul class="nav nav-tabs">
-		<li><a href="<?php echo site_url('mypage'); ?>" title="마이페이지">마이페이지</a></li>
-		<li><a href="<?php echo site_url('mypage/post'); ?>" title="나의 작성글">나의 작성글</a></li>
-		<?php if ($this->cbconfig->item('use_point')) { ?>
-			<li class="active"><a href="<?php echo site_url('mypage/point'); ?>" title="포인트">포인트</a></li>
-		<?php } ?>
-		<li><a href="<?php echo site_url('mypage/followinglist'); ?>" title="팔로우">팔로우</a></li>
-		<li><a href="<?php echo site_url('mypage/like_post'); ?>" title="내가 추천한 글">추천</a></li>
-		<li><a href="<?php echo site_url('mypage/scrap'); ?>" title="나의 스크랩">스크랩</a></li>
-		<li><a href="<?php echo site_url('mypage/loginlog'); ?>" title="나의 로그인기록">로그인기록</a></li>
-		<li><a href="<?php echo site_url('membermodify'); ?>" title="정보수정">정보수정</a></li>
-		<li><a href="<?php echo site_url('membermodify/memberleave'); ?>" title="탈퇴하기">탈퇴하기</a></li>
-	</ul>
-
-	<div class="page-header">
-		<h4>포인트 내역 <small>보유 포인트 : <?php echo number_format($this->member->item('mem_point')); ?>점</small></h4>
+<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
+<div id="container-wrap">
+	<div id="contents" class="div-cont">
+		<?php
+		echo show_alert_message($this->session->flashdata('message'), '<script>alert("', '");</script>');
+		$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
+		?>
+		<!-- page start // -->
+		<div class="board-wrap list">
+			<?php
+			echo form_open(current_full_url(), $attributes);
+			?>
+			<div class="tab">
+				<ul>
+					<li><a href="post"><span>작성글</span></a></li>
+					<li><a href="comment"><span>작성댓글</span></a></li>
+					<li class="active"><a href="point"><span>명예포인트기록</span></a></li>
+					<li><a href="vp"><span>VP기록</span></a></li>
+					<li><a href="cp"><span>CP기록</span></a></li>
+				</ul>
+			</div>
+			<div class="list record">
+				<table>
+					<colgroup>
+						<col width="70" />
+						<col width="200" />
+						<col width="*" />
+						<col width="250" />
+						<col width="100" />
+					</colgroup>
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>명예포인트</th>
+							<th>메모</th>
+							<th>내용</th>
+							<th>등록일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach(element('list',element('data', $view)) as $post ) { ?>
+							<tr>
+								<td><span><?php echo number_format(element('num', $post));?></span></td>
+								<td><span><?php echo html_escape(element('poi_point', $post));?></span></td>
+								<td class="l"><span><?php echo html_escape(element('poi_content', $post));?></span></td>
+								<td>
+										<?php echo html_escape(element('poi_action', $post));?>
+								</td>
+								<td><?php echo display_datetime(element('poi_datetime', $post), 'full'); ?></td>
+							</tr>
+						<?php } ?>
+					</tbody>
+				</table>
+			</div>
+			<?php echo form_close(); ?>
+			<!-- s: paging-wrap -->
+			<div class="paging-wrap">
+				<?php echo element('paging', $view); ?>
+			</div>
+			<!-- e: paging-wrap -->
+			<!-- s: board-filter -->
+			<form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
+				<div class="board-filter">
+					<p class="chk-select">
+						<select name="sfield">
+							<?php echo element('search_option', $view); ?>
+						</select>
+					</p>
+					<p class="chk-input">
+						<input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword', $view)); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
+						<!-- <a href="<?php echo base_url('mypage/post/5')?>" class="search-btn"><span>검색</span></a> -->
+						<button class="search-btn" name="search_submit" type="submit"></button>
+					</p>
+				</div>
+			</form>
+			<!-- e: board-filter -->
+		</div>
+		<!-- page end // -->
 	</div>
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>일시</th>
-				<th>내용</th>
-				<th>지급 포인트</th>
-				<th>사용 포인트</th>
-			</tr>
-		</thead>
-		<tbody>
-		<?php
-		if (element('list', element('data', $view))) {
-			foreach (element('list', element('data', $view)) as $result) {
-		?>
-			<tr>
-				<td><?php echo element('num', $result); ?></td>
-				<td><?php echo display_datetime(element('poi_datetime', $result), 'full'); ?></td>
-				<td><?php echo html_escape(element('poi_content', $result)); ?></td>
-				<td><?php if (element('poi_point', $result) > 0) { ?><span class="label label-success">+<?php echo number_format(element('poi_point', $result)); ?></span><?php } ?></td>
-				<td><?php if (element('poi_point', $result) < 0) { ?><span class="label label-danger"><?php echo number_format(element('poi_point', $result)); ?></span><?php } ?></td>
-			</tr>
-		<?php
-			}
-		}
-		if ( ! element('list', element('data', $view))) {
-		?>
-			<tr>
-				<td colspan="5" class="nopost">회원님의 포인트 내역이 없습니다</td>
-			</tr>
-		<?php
-		}
-		?>
-		<tr class="success">
-			<td>소계</td>
-			<td></td>
-			<td></td>
-			<td>+<?php echo number_format(element('plus', element('data', $view))); ?></td>
-			<td><?php echo number_format(element('minus', element('data', $view))); ?></td>
-		</tr>
-	</tbody>
-	</table>
-	<nav><?php echo element('paging', $view); ?></nav>
 </div>
+<!-- e: #container-wrap //-->
+

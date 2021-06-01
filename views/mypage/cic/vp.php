@@ -14,7 +14,7 @@
 				<ul>
 					<li><a href="post"><span>작성글</span></a></li>
 					<li><a href="comment"><span>작성댓글</span></a></li>
-					<li><a href="point"><span>명예포인트</span></a></li>
+					<li><a href="point"><span>명예포인트기록</span></a></li>
 					<li class="active"><a href="vp"><span>VP기록</span></a></li>
 					<li><a href="cp"><span>CP기록</span></a></li>
 				</ul>
@@ -31,7 +31,7 @@
 					<thead>
 						<tr>
 							<th>번호</th>
-							<th>cp</th>
+							<th>vp</th>
 							<th>메모</th>
 							<th>내용</th>
 							<th>등록일</th>

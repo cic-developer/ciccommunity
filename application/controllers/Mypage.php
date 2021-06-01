@@ -18,7 +18,7 @@ class Mypage extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_withdraw', 'CIC_withdraw_log', 'Member', 'Post', 'Comment', 'CIC_cp', 'CIC_vp', 'CIC_wconfig');
+	protected $models = array('CIC_withdraw', 'CIC_withdraw_log', 'Member', 'Post', 'Comment', 'Point', 'CIC_cp', 'CIC_vp', 'CIC_wconfig');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -683,9 +683,14 @@ class Mypage extends CB_Controller
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
 		$findex = $this->Point_model->primary_key;
 		$forder = 'desc';
+		$sfield = $this->input->get('sfield', null, '');
+		$skeyword = $this->input->get('skeyword', null, '');
 
 		$per_page = $this->cbconfig->item('list_count') ? (int) $this->cbconfig->item('list_count') : 20;
 		$offset = ($page - 1) * $per_page;
+        
+		$this->Point_model->allow_search_field = array('poi_content', 'poi_point', 'poi_action'); // 검색이 가능한 필드
+		$this->Point_model->search_field_equal = array(''); // 검색중 like 가 아닌 = 검색을 하는 필드
 
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
@@ -694,7 +699,7 @@ class Mypage extends CB_Controller
 			'point.mem_id' => $mem_id,
 		);
 		$result = $this->Point_model
-			->get_list($per_page, $offset, $where, '', $findex, $forder);
+			->get_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		$result['plus'] = 0;
 		$result['minus'] = 0;
@@ -723,6 +728,14 @@ class Mypage extends CB_Controller
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+        
+        
+		/**
+		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
+		 */
+		$search_option = array('poi_content' => '내용');
+		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
+		$view['view']['search_option'] = search_option($search_option, $sfield);
 
 		/**
 		 * 레이아웃을 정의합니다

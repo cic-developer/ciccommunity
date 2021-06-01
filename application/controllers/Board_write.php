@@ -1375,6 +1375,19 @@ class Board_write extends CB_Controller
 			return false;
 		}
 
+		$board_id = element('brd_id', $post);
+		// CIC 포럼, forum
+		if($board_id == 3){
+			// print_r("here?");
+			// exit;
+		}
+		// 도전 CIC 포럼, userForum
+		if($board_id == 6){
+			alert('승인대기 포럼은 수정할수 없습니다');
+			return false;
+		}
+
+
 		$post['extravars'] = $this->Post_extra_vars_model->get_all_meta($post_id);
 		$post['meta'] = $this->Post_meta_model->get_all_meta($post_id);
 		$post['post_content'] = html_purifier($post['post_content']);
