@@ -40,7 +40,7 @@
 									<?php
 										}
 									}
-									$list_count = count(element('list', element('bestpost', $view)));
+									$list_count = count(element('list', element('most_view', $view)));
 									$max = 4 - $list_count;
 									if($list_count <= 4) {
 										for($i = 0; $i < $max; $i++){

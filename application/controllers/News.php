@@ -81,7 +81,7 @@ class News extends CB_Controller
 			$where['news.comp_id'] = $compid;
 		}
 		$most_view = $this->{$this->modelname}
-		->most_view_news($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		->most_view_news(8, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $most_view['total_rows'] - ($page - 1) * $per_page;
 		
 		if (element('list', $most_view)) {
@@ -123,14 +123,22 @@ class News extends CB_Controller
 		$view['view']['most_view'] = $most_view;
 		$view['view']['data'] = $result;
 
-		
+		$config = array();
 		$config['base_url'] = '/news/' . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
+		$config['first_link'] = FALSE;
+		$config['last_link'] = FALSE;
+		$config['next_link'] = '다음';
+		$config['prev_link'] = '이전';
+		if ($this->cbconfig->get_device_view_type() === 'mobile') {
+			$config['num_links'] = 3;
+		} else {
+			$config['num_links'] = 5;
+		}
 		$this->pagination->initialize($config);
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;
-
 
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
@@ -251,10 +259,19 @@ class News extends CB_Controller
 		$view['view']['most_view'] = $most_view;
 		$view['view']['data'] = $result;
 
-		$config['base_url'] = news_url($this->pagedir) . '?' . $param->replace('page');
+		$config = array();
+		$config['base_url'] = '/news/latestnews' . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
-		
+		$config['first_link'] = FALSE;
+		$config['last_link'] = FALSE;
+		$config['next_link'] = '다음';
+		$config['prev_link'] = '이전';
+		if ($this->cbconfig->get_device_view_type() === 'mobile') {
+			$config['num_links'] = 3;
+		} else {
+			$config['num_links'] = 5;
+		}
 		$this->pagination->initialize($config);
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;

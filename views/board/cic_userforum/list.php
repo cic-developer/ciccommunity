@@ -71,7 +71,7 @@
                 <ul>
                     <li><a href="<?php echo base_url('board/forum')?>"><span>진행중 포럼</span></a></li>
                     <li class="active"><a href="<?php echo base_url('board/userforum')?>"><span>승인대기 포럼</span></a></li>
-                    <li><a href="#n"><span>마감된 포럼</span></a></li>
+                    <li><a href="<?php echo base_url('board/closeforum')?>"><span>마감된 포럼</span></a></li>
                 </ul>
             </div>
             <div class="gap20"></div>
