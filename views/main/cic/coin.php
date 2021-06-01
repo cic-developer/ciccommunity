@@ -230,6 +230,10 @@
             alert('거래소를 최소 1개 선택해주세요.');
             return false;
         }
+        if(exchange_list.length > 8){
+            alert('거래소를 최대 8개 까지 선택할 수 있습니다.');
+            return false;
+        }
         for(var i = 0; i < exchange_list.length; i++){
             var _this = exchange_list[i];
             var value = $(_this).data('value');
@@ -243,8 +247,14 @@
 
         var coin_list = $('#coin_list .c02 > ul > li');
         var coin_string = '';
+        //PER코인이 기본적으로 선택이 되어있음
         if(coin_list.length == 1){
-            alert('코인을 최소 1개 선택해주세요.');
+            alert('가상화폐는 PER토큰을 제외하고 최소 1개 선택해주세요.');
+            return false;
+        }
+        //PER코인이 기본적으로 선택이 되어있음
+        if(coin_list.length > 7){
+            alert('가상화폐는 최대 8개 까지 선택할 수 있습니다.');
             return false;
         }
         for(var i = 0; i < coin_list.length; i++){

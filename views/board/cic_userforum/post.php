@@ -60,6 +60,54 @@
 					</div>
 					<!-- 본문 내용 끝 -->
 
+					<div class="gap50"></div>
+					<div class="poll-wrap">
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+						<script src="<?php echo base_url('assets/js/jquery/jquery.countup.js')?>"></script>
+						<script>
+							$(function () {
+								$('.counter').countUp();
+							});
+						</script>
+						<div class="cont">
+							<h3>?php echo html_escape(element('post_title', element('post', $view))); ?></h3>
+							<ul>
+								<li>
+									<div class="bar">
+										<div class="vbar"></div>
+										<p class="percent"><span>50%</span></p>
+										<p class="nums"><i class="counter">52,213,578</i><span>cp</span></p>
+										<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo1.png')?>" alt="" style="cursor:pointer;" /></p>
+										<a href="#n"><span>A. 간다</span></a>
+										
+									</div>
+								</li>
+								
+								<li>
+									<div class="bar">
+										<div class="vbar"></div>
+										<p class="percent"><span>50%</span></p>
+										<p class="nums"><i class="counter">52,213,578</i><span>cp</span></p>
+										<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo2.png')?>" alt="" style="cursor:pointer;" /></p>
+										<a href="#n"><span>B. 안간다</span></a>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="result" style="display:none">
+							<p class="btxt">A. 간다 <span>참여</span></p>
+							<div class="abr">
+								<p class="cp"><span>150</span> CP</p>
+								<a href="#n"><span>추가 참여!</span></a>
+								<a href="#n"><span>의견 변경</span></a>
+							</div>
+						</div>
+						<div class="btns">
+							<a href="#n" class="enter"><span>투표 참여하기</span></a>
+						</div>
+					</div>
+					<div class="gap50"></div>
+
 					<?php if ( ! element('post_del', element('post', $view)) && (element('use_post_like', element('board', $view)) OR element('use_post_dislike', element('board', $view)))) { ?>
 					<div class="recommand vp-point">
 						<!-- <ul> -->

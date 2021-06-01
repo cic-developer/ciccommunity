@@ -118,16 +118,20 @@ class News extends CB_Controller
 		$view['view']['data'] = $result;
 
 		
+		$config['base_url'] = news_url($this->pagedir) . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
-		$config['first_link'] = FALSE;
-		$config['last_link'] = FALSE;
-		$config['next_link'] = '다음';
-		$config['prev_link'] = '이전';
-
 		$this->pagination->initialize($config);
-		$return['paging'] = $this->pagination->create_links();
-		$return['page'] = $page;
+		$view['view']['paging'] = $this->pagination->create_links();
+		$view['view']['page'] = $page;
+
+		if ( ! $this->session->userdata('post_id_' . $news_id)) {
+			$this->News_model->update_plus($news_id, 'news_reviews', 1);
+			$this->session->set_userdata(
+				'post_id_' . $post_id,
+				'1'
+			);
+		}
 
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
@@ -145,6 +149,7 @@ class News extends CB_Controller
 			$return['list_url'] = board_url(element('brd_key', $board) . '?' . $param->output());
 			$return['search_list_url'] = '';
 		}
+
 		
 		
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

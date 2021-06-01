@@ -1290,6 +1290,7 @@ class Board_write extends CB_Controller
 	 */
 	public function modify($post_id = 0)
 	{
+		
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_board_write_modify';
 		$this->load->event($eventname);
@@ -1839,7 +1840,7 @@ class Board_write extends CB_Controller
 				}
 			}
 
-			$extra_content = '';
+			$extra_content = array();
 			$k = 0;
 			if ($form && is_array($form)) {
 				foreach ($form as $key => $value) {

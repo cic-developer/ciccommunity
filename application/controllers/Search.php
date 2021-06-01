@@ -285,64 +285,7 @@ class Search extends CB_Controller
 		$view['symbole'] = strtoupper($symbole);
 		$view['korean'] = $korean;
 
-		$this->News_model->allow_search_field = array('news_title', 'news_content');
-		$this->News_model->search_field_equal = array('post_userid'); // 검색중 like 가 아닌 = 검색을 하는 필드
-
-		$company_id = (int) $this->input->get('company_id') ? (int) $this->input->get('company_id') : '';
-
-		$per_page = 15;
-		$offset = ($page - 1) * $per_page;
-
-		$where = array();
-
-		$where['news.news_enable'] = 1;
-		$where['news.news_show'] = 1;
-		$like = '';
-
-		$newsresult = $this->News_model
-			->get_search_list($per_page, $offset, $where, $like, $board_id, $findex, $sfield, $skeyword, $sop);
-		$list_num = $newsresult['total_rows'] - ($page - 1) * $per_page;
-
-		if (element('list', $newsresult)) {
-			foreach (element('list', $result) as $key => $val) {
-				$newsresult['list'][$key]['company'] = $company = $this->cic_company->item_all(element('comp_id', $val));
-				$newsresult['list'][$key]['news_url'] = element('comp_url',$company) . element('comp_segment',$company) . element('news_index',$val);
-				// $newsresult['list'][$key]['content'] = cut_str(strip_tags(element('post_content', $val)),200);
-			}
-		}
-
-		$view['view']['data'] = $newsresult;
-
-		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
-			$sfieldarray = array('news_title', 'news_content');
-			if (in_array($sfield2, $sfieldarray)) {
-				$searchinsert = array(
-					'sek_keyword' => $skeyword,
-					'sek_datetime' => cdate('Y-m-d H:i:s'),
-					'sek_ip' => $this->input->ip_address(),
-					// 'mem_id' => $mem_id,
-				);
-				$this->Search_keyword_model->insert($searchinsert);
-				$this->session->set_userdata(
-					'skeyword_' . urlencode($skeyword),
-					1
-				);
-			}
-		}
 		
-		$highlight_keyword = '';
-		if ($skeyword) {
-			$key_explode = explode(' ', $skeyword);
-			if ($key_explode) {
-				foreach ($key_explode as $seval) {
-					if ($highlight_keyword) {
-						$highlight_keyword .= ',';
-					}
-					$highlight_keyword .= '\'' . html_escape($seval) . '\'';
-				}
-			}
-		}
-		$view['view']['highlight_keyword'] = $highlight_keyword;
 	
 
 		// END HISTORICAL DATA FOR CHART

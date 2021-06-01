@@ -100,6 +100,7 @@
                                     $thisPrice = element($i, element('first_block', element('maincoin', $view)));
                                     $volume = element('volume', $thisPrice);
                                     $money = element('money', element('maincoin', $view));
+                                    $demical = $money == 'usd' ? 4 : 2;
                                     $price = $money == 'usd' ? element('price_usd', $thisPrice) : element('price', $thisPrice);
                                     $korea_premium = element('korea_premium', $thisPrice);
                                     $change_rate = element('change_rate', $thisPrice);
