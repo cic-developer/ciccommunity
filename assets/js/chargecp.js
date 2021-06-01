@@ -506,7 +506,7 @@ $(document).on('ready', async function() {
                     data: sendToPerWallet_data,
                     gas: 3000000,
                 }).on("transactionHash", async(transactionHash) => {
-                    //여기서 AJAX 비동기 통신으로 데이터 넘겨주면 된다.
+                    //여기서 AJAX 비동기 통신으로 데이터 넘겨주면 됩니다.
                 });
 
             }).on("error", (error) => {

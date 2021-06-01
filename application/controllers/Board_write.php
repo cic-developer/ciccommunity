@@ -78,6 +78,7 @@ class Board_write extends CB_Controller
 			$where3 = array(
 				'brd_id' => 3,
 				'mem_id' => $mem_id,
+				'post_category' => 1,
 			);
 			$where6 = array(
 				'brd_id' => 6,

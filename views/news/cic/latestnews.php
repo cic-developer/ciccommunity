@@ -23,7 +23,7 @@
                                             ?>
                                             <div class="owl-item" style="width: 240px; margin-right: 20px;">
 											<div class="item">
-												<a href="<?php echo goto_url(element('newsurl', $most_view)); ?>">
+												<a href="<?php echo site_url('/news/news_url/'.element('news_id', $most_view)); ?>">
 													<div class="img"><img
 															src="<?php echo html_escape(element('news_image', $most_view)) ?>" alt="">
 													</div>
