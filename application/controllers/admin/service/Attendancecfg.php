@@ -314,7 +314,17 @@ class Attendancecfg extends CB_Controller
 			),
 			array(
 				'field' => 'attendance_point',
-				'label' => '출석포인트',
+				'label' => '출석포인트(명예)',
+				'rules' => 'trim|required|numeric',
+			),
+			array(
+				'field' => 'attendance_vp',
+				'label' => '출석포인트(VP)',
+				'rules' => 'trim|required|numeric',
+			),
+			array(
+				'field' => 'attendance_cp',
+				'label' => '출석포인트(CP)',
 				'rules' => 'trim|required|numeric',
 			),
 			array(

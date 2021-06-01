@@ -115,8 +115,6 @@ class News extends CB_Controller
 			}
 		}
 
-		$view['view']['news_url'] = $news_url = news_url(element('news_id', $result), $news_id);
-
 		
 		$view['view']['most_view'] = $most_view;
 		$view['view']['data'] = $result;
@@ -148,6 +146,7 @@ class News extends CB_Controller
 		}
 
 		
+		$view['view']['news_url'] = news_url($this->pagedir . '/newsurl' . $param->output());
 		
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
@@ -288,7 +287,7 @@ class News extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
-	public function read($news_id = 0)
+	public function news_url($news_id = 0)
 	{
 		$eventname = 'event_news_read';
 		$this->load->event($eventname);

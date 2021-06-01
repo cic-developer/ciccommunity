@@ -101,16 +101,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <?php
+                    if (element('list', element('data', element('list', $view)))) {
+                        foreach (element('list', element('data', element('list', $view))) as $result) {
+                    ?>
                         <tr>
                             <td>
                                 <div class="my-info">
-                                    <p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt="" /></p>
-                                    <p class="rtxt">코알못259 코알못259</p>
+                                    <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30); ?>"
+                                            alt="<?php echo element('mlc_title', $result); ?>"></p>
+                                    <p class="rtxt"><?php echo html_escape(element('post_nickname', $result)); ?></p>
                                 </div>
                             </td>
                             <td class="l"><a href="#n">정치 자료, 성인물은 엄격하게 금지하며 강력하게 제재합니다. <span
                                         class="reply">(12)</span></a></td>
-                            <td>방금</td>
+                            <td><?php echo element('display_datetime', $result); ?></td>
                             <td>
                                 <p class="cyellow">10,000,000</p>
                             </td>
@@ -119,7 +124,7 @@
                     </tbody>
                 </table>
             </div>
-            <?php if(!element('is_admin', $view)) {?>
+            <?php if(!element('is_admin', $view) && element('isMember', $view)) {?>
             <div class="lower r">
                 <div class="ov">
                     <?php if (element('isDeposit', $view)) { ?>

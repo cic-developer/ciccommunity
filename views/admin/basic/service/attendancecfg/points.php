@@ -1,6 +1,6 @@
 <style>
-	.mr-1 {
-		margin-right: .5rem;
+	.mr-3 {
+		margin-right: .75rem;
 	}
 </style>
 <div class="box">
@@ -31,9 +31,9 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">출석시 지급</label>
 					<div class="col-sm-10">
-					명예포인트 + <input type="number" class="form-control mr-1" name="attendance_point" id="attendance_point" value="<?php echo set_value('attendance_point', (int) element('attendance_point', element('data', $view))); ?>" /> 
-					VP + <input type="number" class="form-control mr-1" name="attendance_point" id="attendance_point" value="<?php echo set_value('attendance_point', (int) element('attendance_point', element('data', $view))); ?>" /> 
-					CP + <input type="number" class="form-control mr-1" name="attendance_point" id="attendance_point" value="<?php echo set_value('attendance_point', (int) element('attendance_point', element('data', $view))); ?>" /> 
+					명예포인트 + <input type="number" class="form-control mr-3" name="attendance_point" id="attendance_point" value="<?php echo set_value('attendance_point', (int) element('attendance_point', element('data', $view))); ?>" /> 
+					VP + <input type="number" class="form-control mr-3" name="attendance_point" id="attendance_point" value="<?php echo set_value('attendance_point', (int) element('attendance_point', element('data', $view))); ?>" /> 
+					CP + <input type="number" class="form-control mr-3" name="attendance_point" id="attendance_point" value="<?php echo set_value('attendance_point', (int) element('attendance_point', element('data', $view))); ?>" /> 
 					</div>
 				</div>
 				<div class="form-group">

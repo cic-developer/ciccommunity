@@ -108,8 +108,8 @@
                     }
                     if (element('list', element('data', element('list', $view)))) {
                         foreach (element('list', element('data', element('list', $view))) as $result) {
-                            print_r(element('post_url', $result));
-                            exit;
+                            // print_r(element('post_url', $result));
+                            // exit;
                     ?>
                         <tr>
                             <td>

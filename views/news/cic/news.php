@@ -107,11 +107,7 @@
 							foreach (element('list', element('data', $view)) as $result) {
 								?>
 							<li>
-								<a href="<?php echo goto_url(element('news_url', $result)); ?>" target="_blank">
-								<?php
-								print_r(element('news_url', $result));
-								exit;
-								?>
+								<a href="<?php echo admin_url($this->pagedir . '/news_url'); ?>" target="_blank">
 									<div class="img"><img src="<?php echo html_escape(element('news_image', $result)) ?>" alt="">
 									</div>
 									<div class="txt">
