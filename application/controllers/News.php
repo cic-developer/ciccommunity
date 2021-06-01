@@ -120,7 +120,7 @@ class News extends CB_Controller
 		$view['view']['data'] = $result;
 
 		
-		$config['base_url'] = news_url($this->pagedir) . '?' . $param->replace('page');
+		// $config['base_url'] = news_url($this->pagedir) . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
@@ -146,7 +146,7 @@ class News extends CB_Controller
 		}
 
 		
-		$view['view']['news_url'] = news_url($this->pagedir . '/newsurl' . $param->output());
+		$view['view']['news_url'] = news_url($this->pagedir . '/news_url' . $param->output());
 		
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
@@ -289,6 +289,8 @@ class News extends CB_Controller
 
 	public function news_url($news_id = 0)
 	{
+		print_r($news_id);
+		exit;
 		$eventname = 'event_news_read';
 		$this->load->event($eventname);
 
@@ -297,10 +299,10 @@ class News extends CB_Controller
 
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		$news_id = (int) $news_id;
-		if (empty($news_id) OR $news_id < 1) {
-			show_404();
-		}
+		// $news_id = (int) $news_id;
+		// if (empty($news_id) OR $news_id < 1) {
+		// 	show_404();
+		// }
 
 		$news = $this->News_model->get_one($news_id);
 
@@ -320,6 +322,8 @@ class News extends CB_Controller
 			);
 		}
 
-		return $news;
+		// $param =& $this->querystring;
+		// $redirecturl = news_url($this->pagedir . '?' . $param->output());
+		// redirect($redirecturl);
 	}
 }

@@ -333,9 +333,29 @@ class Attendancecfg extends CB_Controller
 				'rules' => 'trim|is_natural',
 			),
 			array(
+				'field' => 'attendance_vp_1',
+				'label' => '출석포인트(VP)',
+				'rules' => 'trim|required|is_natural',
+			),
+			array(
+				'field' => 'attendance_cp_1',
+				'label' => '출석포인트(CP)',
+				'rules' => 'trim|required|numeric',
+			),
+			array(
 				'field' => 'attendance_point_2',
 				'label' => '2등포인트',
 				'rules' => 'trim|is_natural',
+			),
+			array(
+				'field' => 'attendance_vp_2',
+				'label' => '출석포인트(VP)',
+				'rules' => 'trim|required|is_natural',
+			),
+			array(
+				'field' => 'attendance_cp_2',
+				'label' => '출석포인트(CP)',
+				'rules' => 'trim|required|numeric',
 			),
 			array(
 				'field' => 'attendance_point_3',
@@ -343,9 +363,29 @@ class Attendancecfg extends CB_Controller
 				'rules' => 'trim|is_natural',
 			),
 			array(
+				'field' => 'attendance_vp_3',
+				'label' => '출석포인트(VP)',
+				'rules' => 'trim|required|is_natural',
+			),
+			array(
+				'field' => 'attendance_cp_3',
+				'label' => '출석포인트(CP)',
+				'rules' => 'trim|required|numeric',
+			),
+			array(
 				'field' => 'attendance_point_4',
 				'label' => '4등포인트',
 				'rules' => 'trim|is_natural',
+			),
+			array(
+				'field' => 'attendance_vp_4',
+				'label' => '출석포인트(VP)',
+				'rules' => 'trim|required|is_natural',
+			),
+			array(
+				'field' => 'attendance_cp_4',
+				'label' => '출석포인트(CP)',
+				'rules' => 'trim|required|numeric',
 			),
 			array(
 				'field' => 'attendance_point_5',
@@ -353,9 +393,29 @@ class Attendancecfg extends CB_Controller
 				'rules' => 'trim|is_natural',
 			),
 			array(
+				'field' => 'attendance_vp_5',
+				'label' => '출석포인트(VP)',
+				'rules' => 'trim|required|is_natural',
+			),
+			array(
+				'field' => 'attendance_cp_5',
+				'label' => '출석포인트(CP)',
+				'rules' => 'trim|required|numeric',
+			),
+			array(
 				'field' => 'attendance_point_6',
 				'label' => '6등포인트',
 				'rules' => 'trim|is_natural',
+			),
+			array(
+				'field' => 'attendance_vp_6',
+				'label' => '출석포인트(VP)',
+				'rules' => 'trim|required|is_natural',
+			),
+			array(
+				'field' => 'attendance_cp_6',
+				'label' => '출석포인트(CP)',
+				'rules' => 'trim|required|numeric',
 			),
 			array(
 				'field' => 'attendance_point_7',
@@ -363,9 +423,29 @@ class Attendancecfg extends CB_Controller
 				'rules' => 'trim|is_natural',
 			),
 			array(
+				'field' => 'attendance_vp_7',
+				'label' => '출석포인트(VP)',
+				'rules' => 'trim|required|is_natural',
+			),
+			array(
+				'field' => 'attendance_cp_7',
+				'label' => '출석포인트(CP)',
+				'rules' => 'trim|required|numeric',
+			),
+			array(
 				'field' => 'attendance_point_8',
 				'label' => '8등포인트',
 				'rules' => 'trim|is_natural',
+			),
+			array(
+				'field' => 'attendance_vp_8',
+				'label' => '출석포인트(VP)',
+				'rules' => 'trim|required|is_natural',
+			),
+			array(
+				'field' => 'attendance_cp_8',
+				'label' => '출석포인트(CP)',
+				'rules' => 'trim|required|numeric',
 			),
 			array(
 				'field' => 'attendance_point_9',
@@ -373,9 +453,29 @@ class Attendancecfg extends CB_Controller
 				'rules' => 'trim|is_natural',
 			),
 			array(
+				'field' => 'attendance_vp_9',
+				'label' => '출석포인트(VP)',
+				'rules' => 'trim|required|is_natural',
+			),
+			array(
+				'field' => 'attendance_cp_9',
+				'label' => '출석포인트(CP)',
+				'rules' => 'trim|required|numeric',
+			),
+			array(
 				'field' => 'attendance_point_10',
 				'label' => '10등포인트',
 				'rules' => 'trim|is_natural',
+			),
+			array(
+				'field' => 'attendance_vp_10',
+				'label' => '출석포인트(VP)',
+				'rules' => 'trim|required|is_natural',
+			),
+			array(
+				'field' => 'attendance_cp_10',
+				'label' => '출석포인트(CP)',
+				'rules' => 'trim|required|numeric',
 			),
 			array(
 				'field' => 'attendance_point_regular',

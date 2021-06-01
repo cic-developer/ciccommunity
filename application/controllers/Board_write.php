@@ -45,8 +45,14 @@ class Board_write extends CB_Controller
 		$eventname = 'event_board_write_write';
 		$this->load->event($eventname);
 
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+		
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('before', $eventname);
+
 
 		if (empty($brd_key)) {
 			show_404();
@@ -56,6 +62,21 @@ class Board_write extends CB_Controller
 		if (empty($board_id)) {
 			show_404();
 		}
+
+		// CIC 포럼, forum
+		if($board_id == 3){
+			// print_r("here?");
+			// exit;
+		}
+		// 도전 CIC 포럼, userForum
+		if($board_id == 6){
+			// print_r("here?");
+			// exit;
+		}
+
+
+
+
 		$board = $this->board->item_all($board_id);
 
 		$board['is_use_captcha'] = false;
