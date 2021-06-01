@@ -611,7 +611,14 @@ class Board_write extends CB_Controller
 
 						if (element('field_type', $value) === 'date') {
 							$extra_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input datepicker" value="' . set_value(element('field_name', $value)) . '" readonly="readonly" ' . $required . ' />';
-						} elseif (element('field_type', $value) === 'phone') {
+						} // A의견▼▼▼
+						elseif (element('field_name', $value) === 'A_opinion') {
+							$extra_content[$k]['input'] .= '<div class="field report"><p class="btxt">' . element('field_name', $value) . '</p><p class="chk-input w100p"><input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' /></p></div>';
+						} // B의견▼▼▼
+						elseif (element('field_name', $value) === 'B_opinion') {
+							$extra_content[$k]['input'] .= '<div class="field report"><p class="btxt">' . element('field_name', $value) . '</p><p class="chk-input w100p"><input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' /></p></div>';
+						}
+						elseif (element('field_type', $value) === 'phone') {
 							$extra_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value)) . '" ' . $required . ' />';
 						} else {
 							$extra_content[$k]['input'] .= '<input type="' . element('field_type', $value) . '" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>';
@@ -1851,12 +1858,12 @@ class Board_write extends CB_Controller
 						OR element('field_type', $value) === 'date') {
 						if (element('field_type', $value) === 'date') {
 							$extra_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input datepicker" value="' . set_value(element('field_name', $value), $item) . '" readonly="readonly" ' . $required . ' />';
-						} // A의견
-						elseif (element('field_key', $value) === 'A_opinion') {
-							$extra_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' />';
-						} // B의견
-						elseif (element('field_key', $value) === 'B_opinion') {
-							$extra_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' />';
+						} // A의견▼▼▼
+						elseif (element('field_name', $value) === 'A_opinion') {
+							$extra_content[$k]['input'] .= '<div class="field report"><p class="btxt">' . element('field_name', $value) . '</p><p class="chk-input w100p"><input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' /></p></div>';
+						} // B의견▼▼▼
+						elseif (element('field_name', $value) === 'B_opinion') {
+							$extra_content[$k]['input'] .= '<div class="field report"><p class="btxt">' . element('field_name', $value) . '</p><p class="chk-input w100p"><input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' /></p></div>';
 						} elseif (element('field_type', $value) === 'phone') {
 							$extra_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input validphone" value="' . set_value(element('field_name', $value), $item) . '" ' . $required . ' />';
 						} else {

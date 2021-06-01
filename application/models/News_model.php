@@ -356,6 +356,12 @@ class News_model extends CB_Model
 			}
 			$this->db->group_end();
 		}
+
+		$this->db->where( array('brd_search' => 1));
+		$board_id = (int) $board_id;
+		if ($board_id)	{
+			$this->db->where( array('board.brd_id' => $board_id));
+		}
 	}
 
 	public function important_news($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
