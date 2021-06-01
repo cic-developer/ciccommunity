@@ -62,7 +62,11 @@ class News extends CB_Controller
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 		
-		$per_page = admin_listnum();
+		if ($this->cbconfig->get_device_view_type() === 'mobile') {
+			$per_page = 10;
+		} else {
+			$per_page = 20;
+		}
 		$offset = ($page - 1) * $per_page;
 		
 		$this->{$this->modelname}->allow_search_field = array('news_id', 'news_title', 'news_content', 'comp_id', 'news_reviews', 'news_wdate'); // 검색이 가능한 필드
@@ -120,7 +124,7 @@ class News extends CB_Controller
 		$view['view']['data'] = $result;
 
 		
-		// $config['base_url'] = news_url($this->pagedir) . '?' . $param->replace('page');
+		$config['base_url'] = '/news/' . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
@@ -132,8 +136,8 @@ class News extends CB_Controller
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
 		$search_option = array(
-			'post_title' => '제목',
-			'post_content' => '내용'
+			'news_title' => '제목',
+			'news_content' => '내용'
 		);
 		$return['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$return['search_option'] = search_option($search_option, $sfield);
