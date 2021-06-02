@@ -83,6 +83,7 @@ class Board_write extends CB_Controller
 			$where6 = array(
 				'brd_id' => 6,
 				'mem_id' => $mem_id,
+				'post_category' => 1,
 			);
 			$post3 = $this->Post_model->get_one('', '', $where3);
 			$post6 = $this->Post_model->get_one('', '', $where6);
@@ -890,6 +891,10 @@ class Board_write extends CB_Controller
 			if (element('use_category', $board)) {
 				$updatedata['post_category'] = $this->input->post('post_category', null, '');
 			}
+			// 글쓰기가 승인대기 포럼인 경우, cate 1 (2는 반려)
+			if(element('brd_id', $board) == 6) {
+				$updatedata['post_userid'] = 1;
+			}
 
 			$updatedata['post_device']
 				= ($this->cbconfig->get_device_type() === 'mobile') ? 'mobile' : 'desktop';
@@ -976,7 +981,7 @@ class Board_write extends CB_Controller
 				}
 				$postupdate = array(
 					'post_link_count' => count($post_link),
-				 );
+				);
 				$this->Post_model->update($post_id, $postupdate);
 			}
 

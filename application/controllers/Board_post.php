@@ -159,6 +159,7 @@ class Board_post extends CB_Controller
 
 		// CIC 포럼, forum
 		if(element('brd_id', element('board', $list)) == 3){
+			// default cate = 1 (1진행중, 2마감)
 			$category_id = $this->input->get('category_id');
 			if(!$category_id) {
 				$category_id = 1;
@@ -170,8 +171,13 @@ class Board_post extends CB_Controller
 
 		// 도전 CIC 포럼, userForum
 		if(element('brd_id', element('board', $list)) == 6){
-			// print_r("here?");
-			// exit;
+			// default cate = 1 (1승인대기, 2반려)
+			$category_id = $this->input->get('category_id');
+			if(!$category_id) {
+				$category_id = 1;
+			}
+			
+			$view['view']['category_id'] = $category_id;
             
 			// 유저 보유 예치금
 			$mem_deposit = $this->member->item('mem_deposit');
@@ -1473,6 +1479,10 @@ class Board_post extends CB_Controller
 			if(!$category_id) {
 				$category_id = 1;
 			}
+		}
+		// cic 승인대기 포럼 && 반려
+		if($board['brd_id'] == 6){
+			$category_id = 1;
 		}
 		
 		$result = $this->Post_model

@@ -78,7 +78,7 @@
 			<div class="gap60"></div>
 			<div class="vtab">
 				<ul>
-					<li><a href="/news""><span>주요뉴스</span></a></li>
+					<li><a href="/news"><span>주요뉴스</span></a></li>
 					<li class="active"><a href="#n"><span>최신뉴스</span></a></li>
 				</ul>
 			</div>
@@ -125,12 +125,11 @@
 							</li>
 						<?php
 							}
-						}
-						if ( ! element('list', element('data', $view))) {
+						} else {
 						?>
-							<tr>
-								<td colspan="12" class="nopost">자료가 없습니다</td>
-							</tr>
+							<li>
+								<div class="nopost" style="text-align:center;">자료가 없습니다</div>
+							</li>
 						<?php
 						}
 						?>
@@ -165,16 +164,17 @@
 			<!-- e: paging-wrap -->
 			<!-- s: board-filter -->
 			<div class="board-filter">
-				<!-- <p class="chk-select">
-				<select>
-					<option value="">제목</option>
-					<option value="">내용</option>
-				</select>
-			</p> -->
-				<p class="chk-input">
-					<input type="text" placeholder="검색어를 입력해주세요" autocomplete="off">
-					<a href="#n" class="search-btn"><span>검색</span></a>
-				</p>
+				<form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
+					<p class="chk-select">
+						<select name="sfield">
+							<?php echo element('search_option', $view); ?>
+						</select>
+					</p>
+					<p class="chk-input">
+					<input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword',  $view)); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
+						<button class="search-btn" name="search_submit" type="submit"></button>
+					</p>
+				</form>
 			</div>
 			<!-- e: board-filter -->
 		</div>

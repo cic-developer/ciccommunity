@@ -128,9 +128,9 @@
 						}
 						if ( ! element('list', element('data', $view))) {
 						?>
-							<tr>
-								<td colspan="12" class="nopost">자료가 없습니다</td>
-							</tr>
+							<li>
+								<div class="nopost" style="text-align:center;">자료가 없습니다</div>
+							</li>
 						<?php
 						}
 						?>
@@ -152,19 +152,17 @@
             </div>
 			<!-- e: paging-wrap -->
 			<!-- s: board-filter -->
-		<div class="board-filter">
+			<div class="board-filter">
                 <form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
-                    <div class="board-filter">
-                        <p class="chk-select">
-                            <select name="sfield">
-                                <?php echo element('search_option', $view); ?>
-                            </select>
-                        </p>
-                        <p class="chk-input">
-                            <input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword',  element('list', $view))); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
-                            <button class="search-btn" name="search_submit" type="submit"></button>
-                        </p>
-                    </div>
+					<p class="chk-select">
+						<select name="sfield">
+							<?php echo element('search_option', $view); ?>
+						</select>
+					</p>
+					<p class="chk-input">
+						<input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword',  $view)); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
+						<button class="search-btn" name="search_submit" type="submit"></button>
+					</p>
                 </form>
             </div>
 			<!-- e: board-filter -->

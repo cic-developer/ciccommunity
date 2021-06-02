@@ -228,8 +228,31 @@ class Forum extends CB_Controller
 		}
 
 		$view['view']['data'] = $result;
-		$view['view']['sort'] = array(
-			'cme_orderby' => $param->sort('cme_orderby', 'desc'),
-		);
+		// $view['view']['sort'] = array(
+		// 	'cme_orderby' => $param->sort('cme_orderby', 'desc'),
+		// );
+
+		$view['view']['primary_key'] = $this->Post_model->primary_key;
+
+		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['total_rows'] = $result['total_rows'];
+		$config['per_page'] = $per_page;
+		$this->pagination->initialize($config);
+		$view['view']['paging'] = $this->pagination->create_links();
+		$view['view']['page'] = $page;
+
+
+		$search_option = array('post_title' => '제목', 'post_content' => '내용');
+		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
+		$view['view']['search_option'] = search_option($search_option, $sfield);
+		$view['view']['listall_url'] = admin_url($this->pagedir);
+
+	$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+	$layoutconfig = array('layout' => 'layout', 'skin' => 'disapproval_forum');
+		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
 	}
 }

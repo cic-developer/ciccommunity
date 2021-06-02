@@ -511,8 +511,6 @@ class News_model extends CB_Model
 		}
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
-		print_r($this->db->last_query());
-		exit;
 
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
@@ -551,8 +549,9 @@ class News_model extends CB_Model
 
 	public function latest_news($limit = '', $offset = '', $where = '', $findex = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
-		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
-			$orderby = 'news_id desc';
+		if ( ! in_array(strtolower($findex), $this->allow_order)) {
+			$findex = 'news_id';
+			$orderby = 'desc';
 		}
 		
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
@@ -631,7 +630,7 @@ class News_model extends CB_Model
 			$this->db->group_end();
 		}
 
-		$this->db->order_by($orderby);
+		$this->db->order_by($findex, $orderby);
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}

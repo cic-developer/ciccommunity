@@ -69,7 +69,7 @@ class News extends CB_Controller
 		}
 		$offset = ($page - 1) * $per_page;
 		
-		$this->{$this->modelname}->allow_search_field = array('news_id', 'news_title', 'news_content', 'comp_id', 'news_reviews', 'news_wdate'); // 검색이 가능한 필드
+		$this->{$this->modelname}->allow_search_field = array('news_id', 'news_title', 'news_contents', 'comp_id', 'news_reviews', 'news_wdate'); // 검색이 가능한 필드
 		$this->{$this->modelname}->search_field_equal = array('news_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('news_id'); // 정렬이 가능한 필드
 		
@@ -142,13 +142,12 @@ class News extends CB_Controller
 		 */
 		$search_option = array(
 			'news_title' => '제목',
-			'news_content' => '내용'
+			'news_contents' => '내용'
 		);
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 
 		$view['primary_key'] = $this->News_model->primary_key;
-		$view['view']['news_url'] = news_url($this->pagedir . '/news_url/?' . $param->output());
 		
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
@@ -204,7 +203,7 @@ class News extends CB_Controller
 		}
 		$offset = ($page - 1) * $per_page;
 		
-		$this->{$this->modelname}->allow_search_field = array('news_id', 'news_title', 'news_content', 'comp_id', 'news_reviews', 'news_wdate'); // 검색이 가능한 필드
+		$this->{$this->modelname}->allow_search_field = array('news_id', 'news_title', 'news_contents', 'comp_id', 'news_reviews', 'news_wdate'); // 검색이 가능한 필드
 		$this->{$this->modelname}->search_field_equal = array('news_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('news_id'); // 정렬이 가능한 필드
 		
@@ -269,8 +268,18 @@ class News extends CB_Controller
 		$this->pagination->initialize($config);
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;
+
+		/**
+		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
+		 */
+		$search_option = array(
+			'news_title' => '제목',
+			'news_contents' => '내용'
+		);
+		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
+		$view['view']['search_option'] = search_option($search_option, $sfield);
 		
-		
+	
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
 
