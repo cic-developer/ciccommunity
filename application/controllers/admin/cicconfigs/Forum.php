@@ -216,5 +216,20 @@ class Forum extends CB_Controller
 		$where = array(
 			'brd_id' => 6,
 		);
+
+		$result = $this->modelname
+			->get_post_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
+
+		if (element('list', $result)) {
+			foreach (element('list', $result) as $key => $val) {
+				$result['list'][$key]['num'] = $list_num++;
+			}
+		}
+
+		$view['view']['data'] = $result;
+		$view['view']['sort'] = array(
+			'cme_orderby' => $param->sort('cme_orderby', 'desc'),
+		);
 	}
 }

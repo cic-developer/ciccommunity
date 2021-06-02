@@ -101,7 +101,7 @@ class News extends CB_Controller
 		}
 		
 		$result = $this->{$this->modelname}
-			->important_news($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->important_news($per_page, $offset, $where, $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		
 		if (element('list', $result)) {
@@ -212,7 +212,7 @@ class News extends CB_Controller
 			'news_reviews >' => 0,
 		);
 		$most_view = $this->{$this->modelname}
-		->most_view_news(8, 0, $where);
+			->most_view_news(8, 0, $where);
 		$list_num = $most_view['total_rows'] - ($page - 1) * $per_page;
 		
 		if (element('list', $most_view)) {
@@ -234,7 +234,7 @@ class News extends CB_Controller
 		}
 		
 		$result = $this->{$this->modelname}
-		->latest_news($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->latest_news($per_page, $offset, $where, $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		
 		if (element('list', $result)) {
