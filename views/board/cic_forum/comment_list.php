@@ -45,7 +45,7 @@
 						
 						<?php if (element('can_update', $result)) { ?>
 						<li>
-							<a href="javascript:;" class="modify-btn" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'cu'); return false;">수정</a>
+							<a href="javascript:;" class="cmmt-modify-btn" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'cu'); return false;">수정</a>
 						</li>
 						<?php } ?>
 						<?php if (element('can_delete', $result)) { ?>
