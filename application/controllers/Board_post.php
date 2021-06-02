@@ -331,6 +331,7 @@ class Board_post extends CB_Controller
 			show_404();
 		}
 
+		
 		$post = $this->Post_model->get_one($post_id);
 		$post['meta'] = $this->Post_meta_model->get_all_meta($post_id);
 		$post['extravars'] = $this->Post_extra_vars_model->get_all_meta($post_id);
@@ -497,6 +498,16 @@ class Board_post extends CB_Controller
 					}
 				}
 			}
+		}
+		if($post['brd_id'] == 3){ // CIC 포럼, forum
+			// default cate = 1 (1진행중, 2마감)
+			$type = $this->input->get('type');
+			if(!$type) {
+				$type = 1;
+			}
+			
+			$view['view']['type'] = $type;
+		
 		}
 		
 		$view['view']['like_point_ranking_freetalk'] = $like_point_ranking_freetalk;

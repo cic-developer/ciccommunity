@@ -276,40 +276,40 @@ class Forum extends CB_Controller
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
-		$view['view']['update_disapproval_return_url'] = admin_url($this->pagedir . '/update_disapproval_return' . $param->output());
+		$view['view']['update_disapproval_return_url'] = admin_url($this->pagedir . '/update_disapproval_return/?' . $param->output());
 
-	$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-	$layoutconfig = array('layout' => 'layout', 'skin' => 'disapproval_forum');
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'disapproval_forum');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
-	public function update_forum_approval($post_id = 0)
-	{
-		$eventname = 'event_admin_ciccinfigs_update_forum_approval';
-		$this->load->event($eventname);
+	// public function update_forum_approval($post_id = 0)
+	// {
+	// 	$eventname = 'event_admin_ciccinfigs_update_forum_approval';
+	// 	$this->load->event($eventname);
 
-		$view = array();
-		$view['view'] = array();
+	// 	$view = array();
+	// 	$view['view'] = array();
 
-		// 이벤트가 존재하면 실행합니다
-		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+	// 	// 이벤트가 존재하면 실행합니다
+	// 	$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		if ($post_id) {
-			$post_id = (int) $post_id;
-			if (empty($post_id) OR $post_id < 1) {
-				show_404();
-			}
-		}
-		$primary_key = $this->Post_model->primary_key;
-	}
+	// 	if ($post_id) {
+	// 		$post_id = (int) $post_id;
+	// 		if (empty($post_id) OR $post_id < 1) {
+	// 			show_404();
+	// 		}
+	// 	}
+	// 	$primary_key = $this->Post_model->primary_key;
+	// }
 
 	public function update_disapproval_return()
 	{
-		$eventname = 'event_admin_ciccinfigs_disapproval_return';
+		$eventname = 'event_admin_update_disapproval_return';
 		$this->load->event($eventname);
 
 		Events::trigger('before', $eventname);
@@ -317,17 +317,20 @@ class Forum extends CB_Controller
 		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
 			foreach ($this->input->post('chk') as $val) {
 				if ($val) {
-					$this->Post_model->update_disapproval_return($val);
+					$this->Post_model->upadte_forum_return($val);
 				}
 			}
 		}
 
+
 		Events::trigger('after', $eventname);
+
 
 		$this->session->set_flashdata(
 			'message',
 			'선택하신 포럼이 반려되었습니다.'
 		);
+		
 		$param =& $this->querystring;
 		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
 		redirect($redirecturl);

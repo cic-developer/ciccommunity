@@ -15,21 +15,23 @@
 				</div>
 				<div class="gap30"></div>
 				<div class="upper r">
-					<a href="#n" class="bw-btn"><span>목록</span></a>
-					<a href="#n" class="bw-btn"><span>이전</span></a>
-					<a href="#n" class="bw-btn"><span>다음</span></a>
+					<a href="<?php echo element('list_url', $view); ?>" class="bw-btn"><span>목록</span></a>
+					<a href="<?php echo element('url', element('prev_post', $view)); ?>" class="bw-btn"><span>이전</span></a>
+					<a href="<?php echo element('url', element('next_post', $view)); ?>" class="bw-btn"><span>다음</span></a>
 				</div>
 				<div class="tits poll">
-					<h3>도지코인 1000원 갈까?</h3>
+					<h3><?php echo html_escape(element('post_title', element('post', $view))); ?></h3>
 					<ul>
 						<li>
 							<div class="my-info">
-								<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt="" /></p>
-								<p class="rtxt">코린이1235</p>
+								<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', element('post', $view))), 20, 20); ?>"
+										alt="<?php echo element('mlc_title', element('level', element('post', $view))); ?>">
+								</p>
+								<p class="rtxt"><?php echo element('post_nickname', element('post', $view)); ?></p>
 							</div>
 						</li>
-						<li>등록일 : 2020-08-25 </li>
-						<li>조회 : 300 </li>
+						<li>등록일 : <?php echo element('display_datetime', element('post', $view)); ?> </li>
+						<li>조회 : <?php echo number_format(element('post_hit', element('post', $view))); ?> </li>
 					</ul>
 					<div class="poll-abr">
 						<ul>

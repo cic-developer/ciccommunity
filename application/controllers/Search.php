@@ -193,7 +193,7 @@ class Search extends CB_Controller
 			}
 		}
 
-		$this->News_model->allow_search_field = array('news_title', 'news_contents'); // 검색이 가능한 필드
+		$this->News_model->allow_search_field = array('news_title', 'news_contents', 'company.comp_name'); // 검색이 가능한 필드
 		$this->News_model->allow_order = array('news_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$findex = 'news_id';
 		$sop = $this->input->get('sop', null, '');
@@ -203,6 +203,8 @@ class Search extends CB_Controller
 			$sfield = 'news_title';
 		} else if($sfield === 'post_content'){
 			$sfield = 'news_contents';
+		} else if($sfield === 'post_nickname'){
+			$sfield = 'company.comp_name';
 		} else {
 			$sfield = array('news_title', 'news_contents');
 		}

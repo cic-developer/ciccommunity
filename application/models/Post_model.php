@@ -576,7 +576,7 @@ class Post_model extends CB_Model
 		return $post_num;
 	}
 
-	public function update_disapproval_return($post_id)
+	public function upadte_forum_return($post_id)
 	{
 		$where = array(
 			'post_id' => $post_id,
