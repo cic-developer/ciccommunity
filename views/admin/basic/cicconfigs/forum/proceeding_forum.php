@@ -28,7 +28,7 @@
 					<table class="table table-hover table-striped table-bordered">
 						<thead>
 							<tr>
-								<th><a href="<?php echo element('cme_orderby', element('sort', $view)); ?>">번호</a></th>
+								<th><a href="<?php echo element('post_id', element('sort', $view)); ?>">번호</a></th>
 								<th>이미지</th>
 								<th>제목</th>
 								<th>작성자</th>

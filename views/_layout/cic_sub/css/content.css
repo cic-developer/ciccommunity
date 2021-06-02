@@ -5444,8 +5444,9 @@
     margin-left: 0;
 }
 
-.right_content_all .text-center {
+.result .text-center {
     float: left;
+    width: 45%;
 }
 
 .right_content_all .price_now {
@@ -5645,7 +5646,7 @@
     .search-wrap.list .tits .more {
         font-size: 13px;
     }
-    .right_content_all .text-center {
+    .result .text-center {
         float: none;
         width: 100%;
     }
