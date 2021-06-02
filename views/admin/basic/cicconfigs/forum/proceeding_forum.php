@@ -3,8 +3,8 @@
 				<div class="box-table-header">
 					<ul class="nav nav-pills">
                         <li role="presentation"><a href="<?php echo admin_url($this->pagedir); ?>" onclick="return check_form_changed();">기본정보</a></li>
-                        <li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/disapproval_forum'); ?>" onclick="return check_form_changed();"> 승인대기포럼 </a></li>
-                        <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/proceeding_forum'); ?>" onclick="return check_form_changed();">진행중포럼</a></li>
+                        <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/disapproval_forum'); ?>" onclick="return check_form_changed();"> 승인대기포럼 </a></li>
+                        <li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/proceeding_forum'); ?>" onclick="return check_form_changed();">진행중포럼</a></li>
                         <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/close_forum'); ?>" onclick="return check_form_changed();">마감된포럼</a></li>
                         <li role="presentation"><a href="<?php echo admin_url($this->pagedir . ''); ?>" onclick="return check_form_changed();"> - </a></li>
                         <li role="presentation"><a href="<?php echo admin_url($this->pagedir . ''); ?>" onclick="return check_form_changed();"> - </a></li>
@@ -14,7 +14,7 @@
 					ob_start();
 					?>
 						<div class="btn-group pull-right" role="group" aria-label="...">
-							<a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a>
+							<!-- <a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a> -->
 							<!-- <button type="button" class="btn btn-outline btn-default btn-sm btn-list-delete btn-list-selected disabled" data-list-delete-url = "<?php echo element('list_delete_url', $view); ?>" >선택삭제</button> -->
 							<!-- <a href="<?php echo element('write_url', $view); ?>" class="btn btn-outline btn-danger btn-sm " >거래소 추가</a> -->
 						</div>
@@ -29,10 +29,14 @@
 						<thead>
 							<tr>
 								<th><a href="<?php echo element('cme_orderby', element('sort', $view)); ?>">번호</a></th>
+								<th>이미지</th>
 								<th>제목</th>
-								<th>마켓</th>
-								<th>기본노출설정</th>
-								<th>순서변경</th>
+								<th>작성자</th>
+								<th><a href="<?php echo element('post_hit', element('sort', $view)); ?>">조회</a></th>
+								<th><a href="<?php echo element('post_datetime', element('sort', $view)); ?>">날짜</a></th>
+								<th><a href="<?php echo element('cic_forum_info.frm_bat_close_datetime', element('sort', $view)); ?>">배팅마감</a></th>
+								<th><a href="<?php echo element('cic_forum_info.frm_close_datetime', element('sort', $view)); ?>">포럼마감</a></th>
+								<th><a href="<?php echo element('cic_forum_info.frm_total_money', element('sort', $view)); ?>">참여금액</a></th>
 								<th>수정</th>
 								<!-- <th><input type="checkbox" name="chkall" id="chkall" /></th> -->
 							</tr>
@@ -43,13 +47,19 @@
 							foreach (element('list', element('data', $view)) as $result) {
 						?>
 							<tr data-idx="<?php echo element('post_id', $result)?>">
-								<td><?php echo number_format(element('num', $result)); ?></td>
-								<td><?php echo html_escape(element('post_title', $result)); ?></td>
-								<td><?php echo html_escape(element('cme_market', $result)); ?></td>
-								<td><?php echo (element('cme_default', $result) == 1) ? '기본' : ''; ?></td>
-								<td><span class="orderby_up" style="cursor:pointer;">업</span> / <span class="orderby_down" style="cursor:pointer;">다운</span></td>
-								<td><a href="<?php echo admin_url($this->pagedir); ?>/exchange_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
-								<!-- <td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td> -->
+                                <td><?php echo number_format(element('num', $result)); ?></td>
+                                <td><img src="<?php echo forum_banner_image_url(element('frm_image', $result), '', 150); ?>" class="<?php echo element('frm_image', $result) ? 'thumbnail':'' ?> mg0" style="width:80px;" /></td>
+                                <td>
+									<?php if (element('category', $result)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $result))); ?></span><?php } ?>
+									<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><?php echo html_escape(element('post_title', $result)); ?></a>
+								</td>
+                                <td><?php echo element('post_display_name', $result); ?> <?php if (element('post_userid', $result)) { ?> ( <a href="?sfield=mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('post_userid', $result)); ?></a> ) <?php } ?></td>
+                                <td><?php echo number_format(element('post_hit', $result)); ?></td>
+                                <td><?php echo display_datetime(element('post_datetime', $result), 'full'); ?></td>
+                                <td><?php echo display_datetime(element('frm_bat_close_datetime', $result), 'full'); ?></td>
+								<td><?php echo display_datetime(element('frm_close_datetime', $result), 'full'); ?></td>
+                                <td><?php echo number_format(element('frm_total_money', $result), 2); ?></td>
+                                <td><a href="<?php echo admin_url($this->pagedir); ?>/exchange_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
 							</tr>
 						<?php
 							}

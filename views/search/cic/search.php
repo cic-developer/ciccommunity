@@ -79,7 +79,7 @@
 			<?php if($trade){ ?>
 				<div class="result" style="overflow:hidden; padding-bottom:40px; padding-left:40px; padding-right:40px;">
 					<!-- TradingView CANVAS BEGIN -->
-					<div class="text-center" style="float: left">
+					<div class="text-center">
 						<canvas id="canvas" width="400" height="200"></canvas>
 					</div>	
 						<!-- TradingView CANVAS END -->

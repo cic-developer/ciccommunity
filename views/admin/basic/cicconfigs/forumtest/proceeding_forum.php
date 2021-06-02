@@ -5,7 +5,7 @@
                         <li role="presentation"><a href="<?php echo admin_url($this->pagedir); ?>" onclick="return check_form_changed();">기본정보</a></li>
                         <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/disapproval_forum'); ?>" onclick="return check_form_changed();"> 승인대기포럼 </a></li>
                         <li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/proceeding_forum'); ?>" onclick="return check_form_changed();">진행중포럼</a></li>
-                        <li role="presentation"><a href="<?php echo admin_url($this->pagedir . ''); ?>" onclick="return check_form_changed();"> - </a></li>
+                        <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/close_forum'); ?>" onclick="return check_form_changed();">마감된포럼</a></li>
                         <li role="presentation"><a href="<?php echo admin_url($this->pagedir . ''); ?>" onclick="return check_form_changed();"> - </a></li>
                         <li role="presentation"><a href="<?php echo admin_url($this->pagedir . ''); ?>" onclick="return check_form_changed();"> - </a></li>
                         <li role="presentation"><a href="<?php echo admin_url($this->pagedir . ''); ?>" onclick="return check_form_changed();"> - </a></li>
@@ -48,7 +48,7 @@
 						?>
 							<tr data-idx="<?php echo element('post_id', $result)?>">
                                 <td><?php echo number_format(element('num', $result)); ?></td>
-                                <td><img src="<?php echo element('frm_image', $result) ? forum_banner_image_url(element('frm_image', $result), '', 150) : ''; ?>" class="thumbnail mg0" style="width:80px;" /></td>
+                                <td><img src="<?php echo forum_banner_image_url(element('frm_image', $result), '', 150); ?>" class="<?php echo element('frm_image', $result) ? 'thumbnail':'' ?> mg0" style="width:80px;" /></td>
                                 <td>
 									<?php if (element('category', $result)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $result))); ?></span><?php } ?>
 									<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><?php echo html_escape(element('post_title', $result)); ?></a>
