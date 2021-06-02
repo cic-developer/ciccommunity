@@ -68,7 +68,7 @@ class Search extends CB_Controller
 		} else if($this->input->get('type') == 'news'){
 			$type_word = '뉴스';
 		} else {
-			$type_word = '통합';
+			$type_word = '통합검색';
 		}
 		$view['view']['is_all'] = $is_all = !in_array($type, array('free','writer','news'));
 		$view['view']['is_free'] = $is_free = ($type == 'free');

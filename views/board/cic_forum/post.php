@@ -1,3 +1,4 @@
+<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
 <!-- s : #container-wrap //-->
 <div id="container-wrap">
 	<!-- <div id="top-vis" class="bg01">
@@ -41,19 +42,18 @@
 							</li>
 							<li>
 								<p class="btxt">포럼마감</p>
-								<p class="stxt">21.05.17</p>
+								<p class="stxt"><?php echo display_datetime(element('frm_close_datetime', $forum), 'full'); ?></p>
 							</li>
 							<li class="full">
-								<p class="btxt">포인트마감</p>
-								<p class="stxt">52,211,000 cp</p>
+								<p class="btxt">포인트</p>
+								<p class="stxt"><?php echo display_datetime(element('frm_total_money', $forum), 'full'); ?></p>
 							</li>
 						</ul>
 					</div>
 				</div>
 				<div class="cons no-bd">
 					<div class="txt">
-						<p>일론머스크의한마디에 좌지우지되는 도지코인, <br />과연 1,000원을 넘을 것인가? 아니면 도또속으로 떨어질 것인가?</p>
-						<p>당신의 선택은? </p>
+						<?php echo element('content', element('post', $view)); ?>
 					</div>
 				</div>
 			</div>
@@ -73,7 +73,7 @@
 				});
 			</script>
 			<div class="cont">
-				<h3>도지코인 1000원 갈까?</h3>
+				<h3><?php echo html_escape(element('post_title', element('post', $view))); ?></h3>
 				<ul>
 					<li>
 						<div class="bar">
@@ -155,7 +155,7 @@
 		</div>
 		<div class="cmmt-wrap">
 			<div class="comment">
-				<h4>댓글 <span>49</span></h4>
+				<h4>댓글 <span><?php echo number_format(element('post_comment_count', element('post', $view))); ?></span></h4>
 				<div class="ov">
 					<textarea placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
 					<div class="btns">
@@ -164,7 +164,7 @@
 				</div>
 			</div>
 			<div class="cmmt">
-				<!-- <p class="total">댓글 <span>49</span></p> -->
+				<!-- <p class="total">댓글 <span>49</span></p>
 				<div class="list">
 					<ul>
 						<li class="item">
@@ -481,10 +481,10 @@
 							</div>
 						</li>
 					</ul>
-				</div>
+				</div> -->
 				<!-- s: paging-wrap -->
-				<div class="paging-wrap">
-					<!-- <a href="#" class="prev ctrl"><span>이전</span></a> -->
+				<!-- <div class="paging-wrap">
+					<a href="#" class="prev ctrl"><span>이전</span></a>
 					<ul>
 						<li><a href="#" class="active">1</a></li>
 						<li><a href="#n">2</a></li>
@@ -494,8 +494,9 @@
 					</ul>
 					<p class="num"><span>1</span> / 10 </p>
 					<a href="#" class="next ctrl"><span>다음</span></a>
-				</div>
+				</div> -->
 				<!-- e: paging-wrap -->
+<!--  -->
 				<!-- s: layer-wrap.singo -->
 				<div class="layer-wrap singo">
 					<div class="is-top">
@@ -523,12 +524,119 @@
 					</div>
 				</div>
 				<!-- s: layer-wrap.singo -->
+<!--  -->
 				<!-- s: layer-wrap userInfo -->
 				<div class="layer-wrap userInfo">
 					<p>포럼 전적 <span>7승3패</span></p>
 				</div>
 				<!-- e: layer-wrap userInfo -->
-				<script>
+				
+			</div>
+			<!-- e: cmmt -->
+			<!-- page end // -->
+		</div>
+	</div>
+
+	<div class="gap60"></div>
+		<!-- s: cmmt -->
+		<div class="cmmt-wrap">
+			<div class="comment">
+				<h4>댓글 <span><?php echo number_format(element('post_comment_count', element('post', $view))); ?></span></h4>
+					<?php
+						$this->load->view(element('view_skin_path', $layout) . '/comment_write');
+					?>
+					<!-- <textarea placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
+					<div class="btns">
+						<a href="#n" class="write-btn"><span>댓글등록</span></a>
+					</div> -->
+			</div>
+			<div class="cmmt" id="viewcomment">
+			</div>
+		</div>
+		<!-- e: cmmt -->
+		<!-- page end // -->
+	</div>
+</div>
+<!-- e: #container-wrap //-->
+
+<script>
+	var reg_num = /^[0-9]*$/;
+	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
+
+	$(document).on('click', '.up', function(){
+		const content_type = $(this).attr('data-contenttype');
+		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
+		update_vp(content_idx, content_type, 'up');
+	});
+	
+	$(document).on('click', '.down', function(){
+		const content_type = $(this).attr('data-contenttype');
+		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
+		update_vp(content_idx, content_type, 'down');
+	});
+
+	function update_vp(content_idx, content_type, like_type){
+		if(!is_member){
+			alert('로그인이 필요한 서비스입니다.');
+			return false;
+		}
+		const allowed_content_type = ['post', 'comment'];
+		const allowed_like_type = ['up', 'down'];
+
+		if(allowed_content_type.indexOf(content_type) == -1){
+			alert('비정상적인 시도입니다.1');
+			return false;
+		}
+		
+		if(!reg_num.test(content_idx)){
+			alert('비정상적인 시도입니다.2');
+			return false;
+		}
+
+		if(allowed_like_type.indexOf(like_type) == -1){
+			alert('비정상적인 시도입니다.3');
+			return false;
+		}
+
+		const title = 'VP를 '+ (like_type === 'up' ? 'UP' :'DOWN') + ' 합니다.';
+		const _point = prompt(title, 0);
+
+		//취소버튼 누를시
+		if(_point === null){
+			return false;
+		}
+
+		//숫자를 잘 입력했나 검증
+		if(!reg_num.test(_point)){
+			alert('숫자만 입력할 수 있습니다.');
+			return false;
+		}
+		$.ajax({
+			url: cb_url + '/postact/'+content_type+'_like/'+content_idx+'/'+(like_type === 'up' ? '1' :'2'),
+			type: 'get',
+			data: {
+				usePoint: Number(_point),
+			},
+			dataType: 'json',
+			async: false,
+			cache: false,
+			success: function(data) {
+				if(data.error !== undefined){
+					alert(data.error);
+				} else {
+					alert('성공적으로 처리되었습니다.');
+					location.reload();
+				}
+			},
+			error: function(){
+				alert('에러가 발생했습니다.');
+			}
+		});
+		return true;
+	}
+</script>
+
+<script>
 					$(function () {
 						$('.info').find('.nickname').click(function () {
 							var isParent = $(this).closest('.info');
@@ -613,10 +721,3 @@
 						});
 					})
 				</script>
-			</div>
-			<!-- e: cmmt -->
-			<!-- page end // -->
-		</div>
-	</div>
-</div>
-<!-- e: #container-wrap //-->

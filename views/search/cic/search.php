@@ -9,7 +9,7 @@
 			<div class="filter">
 				<div class="sel-box c01">
                     <!-- PAGE 검색 기능 START -->
-					<a href="#n" id="optionb" class="sel-btn"><span><?php echo element('type_word', $view); ?>검색</span></a>
+					<a href="#n" id="optionb" class="sel-btn"><span><?php echo element('type_word', $view); ?></span></a>
 					<ul>
 						<li class="<?php echo element('is_all', $view) ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value=""><span>통합검색</span></a></li>
 						<li class="<?php echo element('is_free', $view) ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="free"><span>자유게시판</span></a></li>
@@ -51,7 +51,7 @@
 				
 			</div>
 			<div class="result">
-				<p class="btxt"><span><?php echo element('highlight_keyword', $view);?></span> 에 대한 <?php echo element('type_word', $view); ?>검색 총</p>
+				<p class="btxt"><span><?php echo element('highlight_keyword', $view);?></span> 에 대한 <?php echo element('type_word', $view); ?> 결과 총</p>
 				<p class="stxt"><?php echo number_format($total_rows); ?>건</p>
 			</div>
 			<!-- PAGE 검색 기능 끝 -->
@@ -164,8 +164,13 @@
 				<!-- 자유게시판 시작 -->
 				<div class="tits">
 					<h3>자유게시판</h3>
-						<a href="<?php echo base_url()."board/freetalk?sfield=post_title&skeyword="?><?php echo $this->input->get('skeyword')?>
-							"class="more"><span>more</span></a>
+					<?php
+					if(element('is_all', $view)){
+					?>
+						<a href="#n" class="more"><span>more</span></a>
+					<?php 
+					}
+					?>
 				</div>
 				<div class="list vimg vp">
 					<div class="list community">
@@ -235,8 +240,13 @@
 				<!-- CIC WRITER 시작 -->
 				<div class="tits">
 					<h3>WRITER</h3>
-						<a href="<?php echo base_url()."board/cicwriter?sfield=post_title&skeyword="?><?php echo $this->input->get('skeyword')?>" 
-							class="more"><span>more</span></a>
+					<?php
+					if(element('is_all', $view)){
+					?>
+						<a href="#n" class="more"><span>more</span></a>
+					<?php 
+					}
+					?>
 				</div>
 				<div class="list vimg vp">
 					<ul>
@@ -304,7 +314,13 @@
 				<!-- NEWS 시작 -->
 				<div class="tits">
 					<h3>NEWS</h3>
+					<?php
+					if(element('is_all', $view)){
+					?>
 					<a href="#n" class="more"><span>more</span></a>
+					<?php 
+					}
+					?>
 				</div>
 				<div class="list vimg vp">
 					<ul>
