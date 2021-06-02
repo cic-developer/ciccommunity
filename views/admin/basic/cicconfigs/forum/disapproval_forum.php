@@ -35,6 +35,8 @@
 								<th>게시일</th>
                                 <th>좋아요</th>
 								<th>승인</th>
+                                
+                                <><input type="checkbox" name="chkall" id="chkall" /></>
 								<!-- <th><input type="checkbox" name="chkall" id="chkall" /></th> -->
 							</tr>
 						</thead>
@@ -52,6 +54,7 @@
 								<td><?php echo number_format(element('post_like', $result))?></td>
                                 <td><a href="<?php echo admin_url($this->pagedir); ?>/update_forum_approval/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">승인</a></td>
 								<!-- <td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td> -->
+                                <th><input type="checkbox" name="chkall" id="chkall" /></th>
 							</tr>
 						<?php
 							}

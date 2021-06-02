@@ -9,13 +9,12 @@
 			<div class="filter">
 				<div class="sel-box c01">
                     <!-- PAGE 검색 기능 START -->
-					<input type="hidden" name="" value="" />
-					<a href="#n" id="optionb" class="sel-btn"><span>통합검색</span></a>
+					<a href="#n" id="optionb" class="sel-btn"><span><?php echo element('type_word', $view); ?></span></a>
 					<ul>
-						<li class="active"><a href="#n"><span>통합검색</span></a></li>
-						<li><a href="#n"><span>자유게시판</span></a></li>
-						<li><a href="#n"><span>WRITER</span></a></li>
-						<li><a href="#n"><span>뉴스</span></a></li>
+						<li class="<?php echo 'active'; ?>" data-value=""><a href="#n" class="li_type"><span>통합검색</span></a></li>
+						<li class="active" data-value="free"><a href="#n" class="li_type"><span>자유게시판</span></a></li>
+						<li class="active" data-value="writer"><a href="#n" class="li_type"><span>WRITER</span></a></li>
+						<li class="active" data-value="news"><a href="#n" class="li_type"><span>뉴스</span></a></li>
 					</ul>		
 				</div>
 				<div class="field search">
@@ -23,6 +22,7 @@
 						$attributes = array('class' => 'search_box', 'name' => 'searchForm', 'id' => 'searchForm', 'method'=> 'get', 'action' => base_url('/search'));
 						echo form_open(current_full_url(), $attributes);
 					?>
+					<input type="hidden" name="type" value="<?php echo $this->input->get('type'); ?>" />
 					<p class="chk-input"><input type="text" placeholder="검색어를 입력해주세요" autocomplete="off" name="skeyword"
 						value="<?php echo $this->input->get('skeyword');?>"></p>
 					<button class="enter"><span class="blind">검색</span></button>
@@ -293,35 +293,20 @@
 				</div>
 				<div class="list vimg vp">
 					<ul>
-						<!-- <li>
-							<a href="#n">
-								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
-								<div class="txt">
-									<div class="vc">
-										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-										<p class="ctxt">
-											<span>블록미디어</span>
-											<span>02:18</span>
-											<span>조회 82</span>
-										</p>
-									</div>
-								</div>
-							</a>
-						</li> -->
 						<?php
 						if (element('list', element('news_data', $view))) {
 							foreach (element('list', element('news_data', $view)) as $result) {
+								$image_url = element('news_image', $result) ? element('news_image', $result) : base_url('assets/images/news-img02.png');
 						?>
 						<li>
 							<a href="<?php echo site_url('/news/news_url/'.element('news_id', $result)); ?>">
-								<div class="img"><img src="<?php echo html_escape(element('news_image', $result)) ?>" alt=""></div>
+								<div class="img"><img src="<?php echo html_escape($image_url) ?>" alt=""></div>
 								<div class="txt">
 									<div class="vc">
 										<p class="btxt"><?php echo html_escape(element('news_title', $result)); ?><span>(<?php echo number_format(element('news_reviews', $result)); ?>)</span></p>	
 										<p class="stxt"><?php echo html_escape(element('news_contents', $result)); ?></p>
 										<p class="ctxt">
-											<span><?php echo html_escape(element('comp_name', element('company', $result))); ?></span>
+											<span><?php echo html_escape(element('comp_name', $result)); ?></span>
 											<span><?php echo display_datetime(element('news_wdate', $result)); ?></span>
 											<span>조회 <?php echo number_format(element('news_reviews', $result)); ?></span>
 										</p>

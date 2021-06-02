@@ -1480,7 +1480,7 @@ class Board_post extends CB_Controller
 			// 	$category_id = 1;
 			// }
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-			$where['post.frm_close_datetime >='] = $checktime;
+			$where['cic_forum_info.frm_close_datetime >='] = $checktime;
 
 			$result = $this->CIC_forum_model
 				->get_post_list($per_page, $offset, $where, $category_id, $findex, $sfield, $skeyword);

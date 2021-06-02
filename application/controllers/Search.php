@@ -60,7 +60,18 @@ class Search extends CB_Controller
 		}
 
 		$mem_id = (int) $this->member->item('mem_id');
-
+		$type = $this->input->get('type');
+		if($this->input->get('type') == 'free'){
+			$type_word = '자유게시판';
+		} else if($this->input->get('type') == 'writer'){
+			$type_word = 'WRITER';
+		} else if($this->input->get('type') == 'news'){
+			$type_word = '뉴스';
+		} else {
+			$type_word = '통합검색';
+		}
+		$view['view']['type'] = $type;
+		$view['view']['type_word'] = $type_word;
 		$skeyword = $this->input->get('skeyword', null, '');
 		if (empty($skeyword)) {
 

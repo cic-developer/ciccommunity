@@ -170,6 +170,8 @@ class CIC_forum_model extends CB_Model
 			$this->db->group_end();
 		}
 		$qry = $this->db->get();
+		print_r($qry);
+		exit;
 		$rows = $qry->row_array();
 		$result['total_rows'] = $rows['rownum'];
 

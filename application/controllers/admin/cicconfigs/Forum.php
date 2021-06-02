@@ -308,7 +308,8 @@ class Forum extends CB_Controller
 
 	public function update_disapproval_return($post_id = 0)
 	{
-		
+		$eventname = 'event_admin_ciccinfigs_disapproval_return';
+		$this->load->event($eventname);
 	}
 
 	public function proceeding_forum()
