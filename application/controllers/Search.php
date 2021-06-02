@@ -139,7 +139,7 @@ class Search extends CB_Controller
 		$offset = ($page - 1) * $per_page;
 
 		$group_id = (int) $this->input->get('group_id') ? (int) $this->input->get('group_id') : '';
-		$board_id = (int) $this->input->get('board_id') ? (int) $this->input->get('board_id') : '';
+		$board_id = $is_all || $is_news ? '' : ($is_free ? 1 : 2);
 
 		$where = array();
 		$boardwhere = array(
@@ -167,8 +167,13 @@ class Search extends CB_Controller
 		$where['post.post_secret'] = 0;
 		$where['post.post_del'] = 0;
 		$like = '';
-		$result = $this->Post_model
-			->get_search_list($per_page, $offset, $where, $like, $board_id, $findex, $sfield, $skeyword, $sop);
+
+		//통합검색 or 뉴스검색일 경우 뉴스 정보 불러오기
+		$result = array();
+		if($is_all || $is_free || $is_writer){
+			$result = $this->Post_model
+				->get_search_list($per_page, $offset, $where, $like, $board_id, $findex, $sfield, $skeyword, $sop);
+		}
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
@@ -197,28 +202,31 @@ class Search extends CB_Controller
 			}
 		}
 
-		$this->News_model->allow_search_field = array('news_title', 'news_contents', 'company.comp_name'); // 검색이 가능한 필드
-		$this->News_model->allow_order = array('news_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$findex = 'news_id';
-		$sop = $this->input->get('sop', null, '');
-		
-		$sfield = $sfield2 = $this->input->get('sfield', null, '');
-		if($sfield === 'post_title') {
-			$sfield = 'news_title';
-		} else if($sfield === 'post_content'){
-			$sfield = 'news_contents';
-		} else if($sfield === 'post_nickname'){
-			$sfield = 'company.comp_name';
-		} else {
-			$sfield = array('news_title', 'news_contents');
+		//통합검색 or 뉴스검색일 경우 뉴스 정보 불러오기
+		$news_result = array();
+		if($is_all || $is_news){
+			$this->News_model->allow_search_field = array('news_title', 'news_contents', 'company.comp_name'); // 검색이 가능한 필드
+			$this->News_model->allow_order = array('news_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
+			$findex = 'news_id';
+			$sop = $this->input->get('sop', null, '');
+			
+			$sfield = $sfield2 = $this->input->get('sfield', null, '');
+			if($sfield === 'post_title') {
+				$sfield = 'news_title';
+			} else if($sfield === 'post_content'){
+				$sfield = 'news_contents';
+			} else if($sfield === 'post_nickname'){
+				$sfield = 'company.comp_name';
+			} else {
+				$sfield = array('news_title', 'news_contents');
+			}
+			$news_result = $this->News_model
+				->get_search_list($per_page, $offset, array(), $like, $findex, $sfield, $skeyword, $sop);
 		}
 
-		$news_result = $this->News_model
-			->get_search_list($per_page, $offset, array(), $like, $findex, $sfield, $skeyword, $sop);
-
-		$free_row = $result['board_rows']['1']; // 자유게시판 검색 ROW 
-		$writer_row = $result['board_rows']['2']; // WRITER 개시판 검색 Row
-		$news_row = $news_result['total_rows']; // WRITER 개시판 검색 Row
+		$free_row = $is_all || $is_free ? (int) $result['board_rows']['1'] : 0; // 자유게시판 검색 ROW 
+		$writer_row = $is_all || $is_writer ? (int) $result['board_rows']['2'] : 0; // WRITER 개시판 검색 Row
+		$news_row = $is_all || $is_news ? (int) $news_result['total_rows'] : 0; // WRITER 개시판 검색 Row
 
 		$view['view']['data'] = $result;
 		$view['view']['news_data'] = $news_result;
@@ -260,78 +268,82 @@ class Search extends CB_Controller
 		}
 		$view['view']['highlight_keyword'] = $highlight_keyword;
 
-		//코인 값 검색 AND CALL OF MODELS
-		$key_search = $this-> CIC_coin_keyword_model -> search_coin($skeyword);
-		$market = $key_search['clist_market'];
-		$api_result = $this->CIC_coin_list_model -> get_price($market);
-		$getHist = $this -> CIC_coin_list_model->get_histData($market);
-		$korean = $key_search['clist_name_ko'];
-		$symbole = $key_search['clist_market'];
-		if($market === "PER"){
-			foreach($api_result as $result_price){
-				$high = $result_price['high'];
-				$low =$result_price['low'];
-				$prev = $result_price['open'];;
-				$trade =$result_price['last'];
-				if($trade != NULL){
-					$difference = $trade - $prev;
-					$rate =  ($difference / $prev) * 100;
-					$view['trade'] = $trade;
-					$view['difference'] = $difference;
-					$view['rate'] = $rate;
-				}else{
-					continue;
-				}
-				$view['low'] = $low;
-				$view['high'] = $high;
-				$view['prev'] = $prev;
-				
-			}
-			//HISTORICAL DATA FOR CHART
-			$his_price = array();
-			$his_time = array();
-			for($i=0; $i<25; $i++){
-				if($getHist['result'][$i][0]){
-					$his_time[] = $getHist['result'][$i][0];
-					$his_price[] = $getHist['result'][$i][1];
-				}
-			}		
-			$view['his_price'] = $his_price;
-			$view['his_time'] = $his_time;
-		}else {
-			foreach($api_result as $result_price){
-				$high = $result_price['high_price'];
-				$low =$result_price['low_price'];
-				$prev = $result_price['prev_closing_price'];
-				$change = $result_price['change'];
-				$rate =  $result_price['change_rate'];
-				$difference = $result_price['change_price'];
-				$trade = $result_price['trade_price'];
-
-				$view['trade'] = $trade;
-				$view['low'] = $low;
-				$view['high'] = $high;
-				$view['prev'] = $prev;
-				$view['difference'] = $difference;
-				$view['rate'] = $rate;
-				$view['change'] = $change;
-				
-			}
-			//HISTORICAL DATA FOR CHART
-			$his_price = array();
-			$his_time = array();
-			foreach($getHist as $histDota){
-				if($histDota['candle_date_time_kst']){
-					$his_time[] = $histDota['candle_date_time_kst'];
-					$his_price[] = $histDota['trade_price'];
+		if($is_all){
+			//코인 값 검색 AND CALL OF MODELS
+			$key_search = $this-> CIC_coin_keyword_model -> search_coin($skeyword);
+			if($key_search){
+				$market = element('clist_market', $key_search);
+				$api_result = $this->CIC_coin_list_model -> get_price($market);
+				$getHist = $this -> CIC_coin_list_model->get_histData($market);
+				$korean = element('clist_name_ko', $key_search);
+				$symbole = element('clist_market', $key_search);
+				if($market === "PER"){
+					foreach($api_result as $result_price){
+						$high = $result_price['high'];
+						$low =$result_price['low'];
+						$prev = $result_price['open'];;
+						$trade =$result_price['last'];
+						if($trade != NULL){
+							$difference = $trade - $prev;
+							$rate =  ($difference / $prev) * 100;
+							$view['trade'] = $trade;
+							$view['difference'] = $difference;
+							$view['rate'] = $rate;
+						}else{
+							continue;
+						}
+						$view['low'] = $low;
+						$view['high'] = $high;
+						$view['prev'] = $prev;
+						
+					}
+					//HISTORICAL DATA FOR CHART
+					$his_price = array();
+					$his_time = array();
+					for($i=0; $i<25; $i++){
+						if($getHist['result'][$i][0]){
+							$his_time[] = $getHist['result'][$i][0];
+							$his_price[] = $getHist['result'][$i][1];
+						}
+					}		
+					$view['his_price'] = $his_price;
+					$view['his_time'] = $his_time;
+				}else {
+					foreach($api_result as $result_price){
+						$high = $result_price['high_price'];
+						$low =$result_price['low_price'];
+						$prev = $result_price['prev_closing_price'];
+						$change = $result_price['change'];
+						$rate =  $result_price['change_rate'];
+						$difference = $result_price['change_price'];
+						$trade = $result_price['trade_price'];
+		
+						$view['trade'] = $trade;
+						$view['low'] = $low;
+						$view['high'] = $high;
+						$view['prev'] = $prev;
+						$view['difference'] = $difference;
+						$view['rate'] = $rate;
+						$view['change'] = $change;
+						
+					}
+					//HISTORICAL DATA FOR CHART
+					$his_price = array();
+					$his_time = array();
+					foreach($getHist as $histDota){
+						if($histDota['candle_date_time_kst']){
+							$his_time[] = $histDota['candle_date_time_kst'];
+							$his_price[] = $histDota['trade_price'];
+						}	
+					}	
+					$view['his_price'] = $his_price;
+					$view['his_time'] = $his_time;
+					
 				}	
-			}	
-			$view['his_price'] = $his_price;
-			$view['his_time'] = $his_time;
-			
-		}	
-		$view['symbole'] = strtoupper($symbole);
-		$view['korean'] = $korean;
+				$view['symbole'] = strtoupper($symbole);
+				$view['korean'] = $korean;
+			}
+		}
 
 		
 	

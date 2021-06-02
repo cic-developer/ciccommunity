@@ -57,11 +57,15 @@
 						<li><a href="#n" class="singo-btn"><span>신고</span></a></li>
 					</ul>
 				</div>
+
 				<div class="comment" id="edit_<?php echo element('cmt_id', $result); ?>">
 				</div>
+
 				<div class="comment" id="reply_<?php echo element('cmt_id', $result); ?>">
 				</div>
+
 				<input type="hidden" value="<?php echo element('cmt_secret', $result); ?>" id="secret_comment_<?php echo element('cmt_id', $result); ?>" />
+				
 				<textarea id="save_comment_<?php echo element('cmt_id', $result); ?>" style="display:none"><?php echo html_escape(element('cmt_content', $result)); ?></textarea>
 			</div>
 	<?php
@@ -134,67 +138,68 @@
 		var istotal = $('.cmmt').find('.item').length;
 		var ischk = (istotal / 2) + 1
 		$('.cmmt').find('.item:nth-child(n+' + ischk + ')').addClass('vfm');
-		$('.ctrls').find('.cmmt-btn').click(function () {
-			$('.cmmt-wrap').find('.singo-btn').removeClass('active');
-			if ($(this).hasClass('active')) {
-				$(this).removeClass('active');
-				$(this).closest('.vcon').removeClass('active');
-				$(this).closest('.reply').removeClass('active');
-				$(this).closest('.ctrls').removeClass('active');
-			} else {
-				$(this).addClass('active');
-				$(this).closest('.vcon').addClass('active');
-				$(this).closest('.reply').addClass('active');
-				$(this).closest('.ctrls').addClass('active');
-			}
-			$('.layer-wrap.singo').bPopup({
-				speed: 0,
-				follow: [false, false],
-				position: [false, false],
-				modalColor: false,
-				modal: false,
-				onClose: function () {
-					$('.cmmt').find('.cread').removeClass('cread')
-				},
-			}).close();
-		});
-		$('.cmmt-wrap').find('.singo-btn').click(function () {
-			$('.cmmt-wrap').find('.singo-btn').removeClass('active');
-			$(this).addClass('active');
-			$('.layer-wrap.singo').bPopup({
-				speed: 0,
-				follow: [false, false],
-				position: [false, false],
-				modalColor: false,
-				modal: false,
-				onClose: function () {
-					$('.cmmt').find('.cread').removeClass('cread')
-				},
-			}).close();
-			var obj = $(this).position();
-			var abj = $(this).position();
-			var thispar = $(this).closest('.ctrls');
-			$(this).closest('.ctrls').parent().addClass('cread');
-			$(this).closest('.ctrls').parent().parent('li').addClass('cread');
-			$('.layer-wrap.singo').css({
-				'top': obj.top,
-				'left': obj.left,
-				'margin-top': '20px',
-				'margin-left': '0'
-			});
-			$('.layer-wrap.singo').bPopup({
-				closeClass: "singo-close",
-				speed: 0,
-				appendTo: $(thispar),
-				onClose: function () {
-					$('.cmmt').find('.cread').removeClass('cread')
-				},
-				follow: [false, false],
-				position: [false, false],
-				modalColor: false,
-				modal: false,
-			});
-		});
+
+		// $('.ctrls').find('.cmmt-btn').click(function () {
+		// 	$('.cmmt-wrap').find('.singo-btn').removeClass('active');
+		// 	if ($(this).hasClass('active')) {
+		// 		$(this).removeClass('active');
+		// 		$(this).closest('.vcon').removeClass('active');
+		// 		$(this).closest('.reply').removeClass('active');
+		// 		$(this).closest('.ctrls').removeClass('active');
+		// 	} else {
+		// 		$(this).addClass('active');
+		// 		$(this).closest('.vcon').addClass('active');
+		// 		$(this).closest('.reply').addClass('active');
+		// 		$(this).closest('.ctrls').addClass('active');
+		// 	}
+		// 	$('.layer-wrap.singo').bPopup({
+		// 		speed: 0,
+		// 		follow: [false, false],
+		// 		position: [false, false],
+		// 		modalColor: false,
+		// 		modal: false,
+		// 		onClose: function () {
+		// 			$('.cmmt').find('.cread').removeClass('cread')
+		// 		},
+		// 	}).close();
+		// });
+		// $('.cmmt-wrap').find('.singo-btn').click(function () {
+		// 	$('.cmmt-wrap').find('.singo-btn').removeClass('active');
+		// 	$(this).addClass('active');
+		// 	$('.layer-wrap.singo').bPopup({
+		// 		speed: 0,
+		// 		follow: [false, false],
+		// 		position: [false, false],
+		// 		modalColor: false,
+		// 		modal: false,
+		// 		onClose: function () {
+		// 			$('.cmmt').find('.cread').removeClass('cread')
+		// 		},
+		// 	}).close();
+		// 	var obj = $(this).position();
+		// 	var abj = $(this).position();
+		// 	var thispar = $(this).closest('.ctrls');
+		// 	$(this).closest('.ctrls').parent().addClass('cread');
+		// 	$(this).closest('.ctrls').parent().parent('li').addClass('cread');
+		// 	$('.layer-wrap.singo').css({
+		// 		'top': obj.top,
+		// 		'left': obj.left,
+		// 		'margin-top': '20px',
+		// 		'margin-left': '0'
+		// 	});
+		// 	$('.layer-wrap.singo').bPopup({
+		// 		closeClass: "singo-close",
+		// 		speed: 0,
+		// 		appendTo: $(thispar),
+		// 		onClose: function () {
+		// 			$('.cmmt').find('.cread').removeClass('cread')
+		// 		},
+		// 		follow: [false, false],
+		// 		position: [false, false],
+		// 		modalColor: false,
+		// 		modal: false,
+		// 	});
+		// });
 	})
 </script>
 

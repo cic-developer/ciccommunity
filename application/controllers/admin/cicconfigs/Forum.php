@@ -276,7 +276,9 @@ class Forum extends CB_Controller
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
-		$view['view']['bestpostexept_url'] = admin_url($this->pagedir . '/bestpostexept/?' . $param->output());
+		$view['view']['upadte_forum_return'] = admin_url($this->pagedir . '/upadte_forum_return/?' . $param->output());
+		// print_r($view['view']['upadte_forum_return']);
+		// exit;
 
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
@@ -329,7 +331,7 @@ class Forum extends CB_Controller
 	// 	redirect($redirecturl);
 	// }
 
-		public function bestpostexept()
+	public function upadte_forum_return()
 	{
 		$eventname = 'event_admin_update_disapproval_return';
 		$this->load->event($eventname);

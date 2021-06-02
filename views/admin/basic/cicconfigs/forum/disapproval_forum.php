@@ -15,10 +15,8 @@
 					?>
 						<div class="btn-group pull-right" role="group" aria-label="...">
 							<a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a>
-							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('bestpostexept_url', $view); ?>" >선택반려</button>
+							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('upadte_forum_return', $view); ?>" >선택반려</button>
 							
-							<!-- <button type="button" class="btn btn-outline btn-default btn-sm btn-list-delete btn-list-selected disabled" data-list-delete-url = "<?php echo element('list_delete_url', $view); ?>" >선택삭제</button> -->
-							<!-- <a href="<?php echo element('write_url', $view); ?>" class="btn btn-outline btn-danger btn-sm " >거래소 추가</a> -->
 						</div>
 					<?php
 					$buttons = ob_get_contents();

@@ -164,6 +164,9 @@ class Popularpost extends CB_Controller
 		$view['view']['list_trash_url'] = admin_url($this->pagedir . '/listtrash/?' . $param->output());
 		$view['view']['list_update_url'] = admin_url($this->pagedir . '/listupdate/?' . $param->output());
 		$view['view']['list_bestpost_url'] = admin_url($this->pagedir . '/bestpostupdate/?' . $param->output());
+
+		// print_r($view['view']['list_bestpost_url']);
+		// exit;
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
