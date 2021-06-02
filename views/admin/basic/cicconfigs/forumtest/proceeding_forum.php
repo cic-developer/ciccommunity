@@ -29,10 +29,14 @@
 						<thead>
 							<tr>
 								<th><a href="<?php echo element('cme_orderby', element('sort', $view)); ?>">번호</a></th>
+								<th>이미지</th>
 								<th>제목</th>
-								<th>마켓</th>
-								<th>기본노출설정</th>
-								<th>순서변경</th>
+								<th>작성자</th>
+								<th>조회</th>
+								<th>날짜</th>
+								<th>배팅마감</th>
+								<th>포럼마감</th>
+								<th>참여금액</th>
 								<th>수정</th>
 								<!-- <th><input type="checkbox" name="chkall" id="chkall" /></th> -->
 							</tr>
@@ -43,13 +47,23 @@
 							foreach (element('list', element('data', $view)) as $result) {
 						?>
 							<tr data-idx="<?php echo element('post_id', $result)?>">
-								<td><?php echo number_format(element('num', $result)); ?></td>
+								<!-- <td><?php echo number_format(element('num', $result)); ?></td>
 								<td><?php echo html_escape(element('post_title', $result)); ?></td>
 								<td><?php echo html_escape(element('cme_market', $result)); ?></td>
 								<td><?php echo (element('cme_default', $result) == 1) ? '기본' : ''; ?></td>
 								<td><span class="orderby_up" style="cursor:pointer;">업</span> / <span class="orderby_down" style="cursor:pointer;">다운</span></td>
 								<td><a href="<?php echo admin_url($this->pagedir); ?>/exchange_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
-								<!-- <td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td> -->
+								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td> -->
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
 							</tr>
 						<?php
 							}

@@ -223,11 +223,11 @@ class Forum extends CB_Controller
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;
 		}
-
-
 		
 		$result = $this->Post_model->get_post_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR');
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
+		// print_r($where);
+		// exit;
 
 		
 		if (element('list', $result)) {
