@@ -185,12 +185,12 @@ class Search extends CB_Controller
 		$sop = $this->input->get('sop', null, '');
 		
 		$sfield = $sfield2 = $this->input->get('sfield', null, '');
-		if ($sfield === 'post_both') {
-			$sfield = array('news_title', 'news_contents');
-		} else if($sfield === 'post_title') {
+		if($sfield === 'post_title') {
 			$sfield = 'news_title';
 		} else if($sfield === 'post_content'){
 			$sfield = 'news_contents';
+		} else {
+			$sfield = array('news_title', 'news_contents');
 		}
 
 		$news_result = $this->News_model

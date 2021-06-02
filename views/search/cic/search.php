@@ -11,10 +11,10 @@
                     <!-- PAGE 검색 기능 START -->
 					<a href="#n" id="optionb" class="sel-btn"><span><?php echo element('type_word', $view); ?></span></a>
 					<ul>
-						<li class="<?php echo 'active'; ?>" data-value=""><a href="#n" class="li_type"><span>통합검색</span></a></li>
-						<li class="active" data-value="free"><a href="#n" class="li_type"><span>자유게시판</span></a></li>
-						<li class="active" data-value="writer"><a href="#n" class="li_type"><span>WRITER</span></a></li>
-						<li class="active" data-value="news"><a href="#n" class="li_type"><span>뉴스</span></a></li>
+						<li class="<?php echo !in_array(element('type', $view), array('free','writer','news')) ? 'active' : ''; ?>" data-value=""><a href="#n" class="li_type"><span>통합검색</span></a></li>
+						<li class="<?php echo element('type', $view) == 'free' ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="free"><span>자유게시판</span></a></li>
+						<li class="<?php echo element('type', $view) == 'writer' ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="writer"><span>WRITER</span></a></li>
+						<li class="<?php echo element('type', $view) == 'news' ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="news"><span>뉴스</span></a></li>
 					</ul>		
 				</div>
 				<div class="field search">
@@ -360,44 +360,59 @@
 	<?php } ?>
 	console.log(price.length);
 	var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: time.reverse(),
-        datasets: [{
-            label: label,
-            data: price.reverse(),
-            backgroundColor: ['rgb(227,240,252)'],
-            borderColor: [
-				'rgba(0,0,255, 1.0)',
-            ],
-            borderWidth: 0.5,
-			fillColor: '#ffff00'
-        }]	
-    },
-	options: {
-		responsive: true,
-		elements: { 
-			points:{ hitRadius: 10, hoverRadius: 10 }
+		type: 'line',
+		data: {
+			labels: time.reverse(),
+			datasets: [{
+				label: label,
+				data: price.reverse(),
+				backgroundColor: ['rgb(227,240,252)'],
+				borderColor: [
+					'rgba(0,0,255, 1.0)',
+				],
+				borderWidth: 0.5,
+				fillColor: '#ffff00'
+			}]	
 		},
-		legend: {
-			display: false,
-		},
-		scales: {
-			xAxes: [{
+		options: {
+			responsive: true,
+			elements: { 
+				points:{ hitRadius: 10, hoverRadius: 10 }
+			},
+			legend: {
 				display: false,
-				gridLines: {
+			},
+			scales: {
+				xAxes: [{
 					display: false,
-				}
-			}],
-			yAxes: [{
-				ticks: {
-					display: false,
-				},
-				gridLines: {
-					display: true,
-				}
-			}]
+					gridLines: {
+						display: false,
+					}
+				}],
+				yAxes: [{
+					ticks: {
+						display: false,
+					},
+					gridLines: {
+						display: true,
+					}
+				}]
+			}
 		}
-	}
-});
+	});
+
+	$(document).on('click', '.li_type', function(){
+		var value = $(this).data('value') ? $(this).data('value') : '';
+		$('input[name="type"]').val(value);
+	})
+
+	$(document).on('click', '.li_sfield', function(){
+		var value = $(this).data('value') ? $(this).data('value') : '';
+		$('input[name="sfield"]').val(value);
+	})
+
+	$(document).on('click', '.li_type', function(){
+		var value = $(this).data('value') ? $(this).data('value') : '';
+		$('input[name="type"]').val(value);
+	})
 </script>

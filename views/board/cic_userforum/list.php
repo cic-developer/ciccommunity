@@ -69,9 +69,9 @@
             <div class="gap50"></div>
             <div class="ftab">
                 <ul>
-                    <li><a href="<?php echo base_url('board/forum?category_id=1')?>"><span>진행중 포럼</span></a></li>
+                    <li><a href="<?php echo base_url('board/forum?type=1')?>"><span>진행중 포럼</span></a></li>
                     <li class="active"><a href="<?php echo base_url('board/userforum')?>"><span>승인대기 포럼</span></a></li>
-                    <li><a href="<?php echo base_url('board/forum?category_id=2')?>"><span>마감된 포럼</span></a></li>
+                    <li><a href="<?php echo base_url('board/forum?type=2')?>"><span>마감된 포럼</span></a></li>
                 </ul>
             </div>
             <div class="gap20"></div>

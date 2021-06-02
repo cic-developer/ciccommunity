@@ -135,6 +135,7 @@ class CIC_forum_model extends CB_Model
 
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
+		$this->db->join('cic_forum_info', 'post.post_id = cic_forum_info.pst_id', 'left');
 		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
 		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
 		if ($where) {
@@ -170,8 +171,6 @@ class CIC_forum_model extends CB_Model
 			$this->db->group_end();
 		}
 		$qry = $this->db->get();
-		print_r($qry);
-		exit;
 		$rows = $qry->row_array();
 		$result['total_rows'] = $rows['rownum'];
 

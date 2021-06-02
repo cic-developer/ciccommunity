@@ -160,12 +160,12 @@ class Board_post extends CB_Controller
 		// CIC 포럼, forum
 		if(element('brd_id', element('board', $list)) == 3){
 			// default cate = 1 (1진행중, 2마감)
-			$category_id = $this->input->get('category_id');
-			if(!$category_id) {
-				$category_id = 1;
+			$type = $this->input->get('type');
+			if(!$type) {
+				$type = 1;
 			}
 			
-			$view['view']['category_id'] = $category_id;
+			$view['view']['type'] = $type;
 			
 		}
 
@@ -1475,12 +1475,17 @@ class Board_post extends CB_Controller
 		}
 		// cic 진행중 포럼 && cic 마감 포럼
 		if($board['brd_id'] == 3){
-			// $category_id = $this->input->get('category_id');
-			// if(!$category_id) {
-			// 	$category_id = 1;
-			// }
+			$type = $this->input->get('type');
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-			$where['cic_forum_info.frm_close_datetime >='] = $checktime;
+			if(!$type) {
+				$type = 1;
+			}
+
+			if($type == 1){
+				$where['cic_forum_info.frm_close_datetime >='] = $checktime;
+			}else if($type == 2){
+				$where['cic_forum_info.frm_close_datetime <'] = $checktime;
+			}
 
 			$result = $this->CIC_forum_model
 				->get_post_list($per_page, $offset, $where, $category_id, $findex, $sfield, $skeyword);

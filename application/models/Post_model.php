@@ -576,6 +576,20 @@ class Post_model extends CB_Model
 		return $post_num;
 	}
 
+	public function update_disapproval_return($post_id)
+	{
+		$where = array(
+			'post_id' => $post_id,
+		);
+		$updatedata = array(
+			'post_category' => 2,
+		);
+		$this->db->where($where);
+		$this->db->set($updatedata);
+
+		return $this->db->update($this->_table);
+	}
+
 	public function upadte_post_exept_state_1($post_id)
 	{
 		$where = array(
