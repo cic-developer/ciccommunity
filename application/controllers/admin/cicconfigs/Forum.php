@@ -24,7 +24,7 @@ class Forum extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_forum','Board', 'Post', 'Board_category', 'Post_file');
+	protected $models = array('CIC_forum','Board', 'Post', 'Board_category', 'Post_file', 'CIC_forum_config');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
@@ -115,11 +115,11 @@ class Forum extends CB_Controller
 				$savedata[$value] = $this->input->post($value, null, '');
 			}
 
-			$this->CIC_forum_model->save($savedata);
+			$this->CIC_forum_config_model->save($savedata);
 			$view['view']['alert_message'] = '기본정보 설정이 저장되었습니다';
 		}
 
-		$getdata = $this->CIC_forum_model->get_all_meta();
+		$getdata = $this->CIC_forum_config_model->get_all_meta();
 		$view['view']['data'] = $getdata;
 		
 		// 이벤트가 존재하면 실행합니다

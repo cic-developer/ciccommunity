@@ -24,7 +24,7 @@ class Forumtest extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_forum','Board', 'Post');
+	protected $models = array('CIC_forum','Board', 'Post', 'CIC_forum_config');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
@@ -115,11 +115,11 @@ class Forumtest extends CB_Controller
 				$savedata[$value] = $this->input->post($value, null, '');
 			}
 
-			$this->CIC_forum_model->save($savedata);
+			$this->CIC_forum_config_model->save($savedata);
 			$view['view']['alert_message'] = '기본정보 설정이 저장되었습니다';
 		}
 
-		$getdata = $this->CIC_forum_model->get_all_meta();
+		$getdata = $this->CIC_forum_config_model->get_all_meta();
 		$view['view']['data'] = $getdata;
 		
 		// 이벤트가 존재하면 실행합니다
@@ -300,9 +300,9 @@ class Forumtest extends CB_Controller
 		$per_page = admin_listnum();
 		$offset = ($page - 1) * $per_page;
 		
-		$this->Post_model->allow_search_field = array('post_id', 'post_title', 'post_content'); // 검색이 가능한 필드
-		$this->Post_model->search_field_equal = array('post_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->Post_model->allow_order_field = array('post_id');
+		$this->{$this->modelname}->allow_search_field = array('post_id', 'post_title', 'post_content'); // 검색이 가능한 필드
+		$this->{$this->modelname}->search_field_equal = array('post_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->{$this->modelname}->allow_order_field = array('post_id');
 		
 		$where = array(
 			'brd_id' => 3,
@@ -310,8 +310,10 @@ class Forumtest extends CB_Controller
 		);
 		// $limit = 20;
 		
-		$result = $this->Post_model->get_post_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR');
+		$result = $this->{$this->modelname}->get_forum_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR');
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
+
+		exit;
 
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
