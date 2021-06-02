@@ -297,6 +297,12 @@ class Forum extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		
+		if ($post_id) {
+			$post_id = (int) $post_id;
+			if (empty($post_id) OR $post_id < 1) {
+				show_404();
+			}
+		}
+		$primary_key = $this->Post_model->primary_key;
 	}
 }

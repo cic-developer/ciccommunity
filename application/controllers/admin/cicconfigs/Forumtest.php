@@ -294,6 +294,7 @@ class Forumtest extends CB_Controller
 		);
 		$findex = $this->input->get('findex', null, 'post_id');
 		$forder = $this->input->get('forder', null, 'desc');
+		$findex = $findex.' '.$forder;
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 		
@@ -310,7 +311,7 @@ class Forumtest extends CB_Controller
 			// 'post_category' => 1
 		);
 		
-		$result = $this->{$this->modelname}->get_post_list($per_page, $offset, $where, '1', $findex, $forder, $sfield, $skeyword);
+		$result = $this->{$this->modelname}->get_post_list($per_page, $offset, $where, '1', $findex, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {

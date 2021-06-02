@@ -27,13 +27,13 @@
 					</ul>		
 				</div>
 				<script>
-					$(document).ready(function(){
-					$("#optionb").on("click", function(event) {
-						$("#theme-title").html(       
-						$(this).attr("class")
-						);
-					});
-					});
+					// $(document).ready(function(){
+					// $("#optionb").on("click", function(event) {
+					// 	$("#theme-title").html(       
+					// 	$(this).attr("class")
+					// 	);
+					// });
+					// });
 				</script>
 				<div class="field search">
                     <?php 
@@ -88,8 +88,8 @@
 								<?php if($symbole == "PER"){ ?>
 									<img></img>
 								<?php }else {?>
-									<<img style= "width: 30px; padding-right:10px;" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
-									<?php } ?>
+									<img style= "width: 30px; padding-right:10px;" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
+								<?php } ?>
 								<strong class="btxt"><?php echo $korean; ?></strong>
 								<p class="stxt" style="display:none;">
 									<span> <?php echo $symbole; ?></span>
@@ -101,67 +101,67 @@
 							<p class="stxt">
 								<?php if($symbole === "PER"){?>
 									<?php if($trade < $prev){ ?>
-										<h6 style="color: #228be6;" class="price_now"> ￦<?php echo $trade ?></h6>
+										<h6 style="color: #228be6;" class="price_now"> ￦<?php echo rs_get_price($trade, 'krw'); ?></h6>
 									<?php }elseif($trade > $prev) {?>
-										<h6 class="price_now" style="color: #fa5252"> ￦<?php echo $trade ?></h6>
+										<h6 class="price_now" style="color: #fa5252"> ￦<?php echo rs_get_price($trade, 'krw'); ?></h6>
 									<?php } else{ ?>
-										<h6 class="price_now"> ￦<?php echo $trade ?></h6>
+										<h6 class="price_now"> ￦<?php echo rs_get_price($trade, 'krw'); ?></h6>
 									<?php }?>
 									<!--상한가와 하한가 전체-->
 									<h6 class="high_mnp_all">
 										<?php if($trade < $prev){?>
-											<u class="low_money" style="color: #228be6;"> <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-down"></i></u>
-											<u class="low_money_percent" style="color: #228be6"> <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-down"></i>
+											<u class="low_money" style="color: #228be6;"> <?php echo rs_get_price($difference, 'krw'); ?> <i class="fas fa-long-arrow-alt-down"></i></u>
+											<u class="low_money_percent" style="color: #228be6"> <?php echo rs_number_format($rate, 2); ?>% <i class="fas fa-long-arrow-alt-down"></i>
 											</u>
 											<!-- IF RISE  -->
 										<?php } else if($trade > $prev){?>
-											<u class="low_money" style="color: #fa5252"> + <?php echo $difference; ?> <i  class="fas fa-long-arrow-alt-up"></i>
+											<u class="low_money" style="color: #fa5252"> + <?php echo rs_get_price($difference, 'krw'); ?> <i  class="fas fa-long-arrow-alt-up"></i>
 											</u>
-											<u class="low_money_percent" style="color: #fa5252"> + <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-up"></i>
+											<u class="low_money_percent" style="color: #fa5252"> + <?php echo rs_number_format($rate, 2); ?>% <i class="fas fa-long-arrow-alt-up"></i>
 											</u>	
 										<?php }else {?>
-											<u class="low_money" style= "color: black" > <?php echo $difference; ?><i class="fas fa-long-arrow-alt-right"></i> </u>
-											<u class="low_money_percent" style= "color: black"> <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-right"></i></u>
+											<u class="low_money" style= "color: black" > <?php echo rs_get_price($difference, 'krw'); ?><i class="fas fa-long-arrow-alt-right"></i> </u>
+											<u class="low_money_percent" style= "color: black"> <?php echo rs_number_format($rate, 2); ?>% <i class="fas fa-long-arrow-alt-right"></i></u>
 										<?php }?>
 										<!--상한가와 하한가 전체-->	
 											<!--하한가 끝-->
 											<h5 class="price_all">
-												<span class="high"><u>고가</u> ￦ <?php echo $high; ?></span>
-												<span class="low"><u>저가</u> ￦ <?php echo $low; ?></span>
+												<span class="high"><u>고가</u> ￦ <?php echo rs_get_price($high, 'krw'); ?></span>
+												<span class="low"><u>저가</u> ￦ <?php echo rs_get_price($low, 'krw'); ?></span>
 											</h5>
 										<!-- </h6> -->
 										<!--상한가와 하한가 전체 끝-->>
 									</h6>
-								<?php } else{?>
+								<?php } else {?>
 									<?php if($change == 'FALL'){ ?>
-										<h6 style="color: #228be6;" class="price_now"> ￦<?php echo $trade ?></h6>
+										<h6 style="color: #228be6;" class="price_now"> ￦<?php echo rs_get_price($trade, 'krw'); ?></h6>
 									<?php }else if($change == 'RISE'){?>
-										<h6 class="price_now" style="color: #fa5252"> ￦<?php echo $trade ?></h6>
+										<h6 class="price_now" style="color: #fa5252"> ￦<?php echo rs_get_price($trade, 'krw'); ?></h6>
 									<?php }else{?>
-										<h6 class="price_now"> ￦<?php echo $trade ?></h6>
+										<h6 class="price_now"> ￦<?php echo rs_get_price($trade, 'krw'); ?></h6>
 									<?php }?>
 									
 									<!--상한가와 하한가 전체-->
 									<h6 class="high_mnp_all">
 										<?php if($change == 'FALL'){?>
-											<u class="low_money" style="color: #228be6;"> - <?php echo $difference; ?> <i class="fas fa-long-arrow-alt-down"></i></u>
-											<u class="low_money_percent" style="color: #228be6"> - <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-down"></i>
+											<u class="low_money" style="color: #228be6;"> - <?php echo rs_get_price($difference, 'krw'); ?> <i class="fas fa-long-arrow-alt-down"></i></u>
+											<u class="low_money_percent" style="color: #228be6"> - <?php echo rs_number_format($rate, 2); ?>% <i class="fas fa-long-arrow-alt-down"></i>
 											</u>
 											<!-- IF RISE  -->
 										<?php } else if($change == 'RISE'){?>
-											<u class="low_money" style="color: #fa5252"> + <?php echo $difference; ?> <i  class="fas fa-long-arrow-alt-up"></i>
+											<u class="low_money" style="color: #fa5252"> + <?php echo rs_get_price($difference, 'krw'); ?> <i  class="fas fa-long-arrow-alt-up"></i>
 											</u>
-											<u class="low_money_percent" style="color: #fa5252"> + <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-up"></i>
+											<u class="low_money_percent" style="color: #fa5252"> + <?php echo rs_number_format($rate, 2); ?>% <i class="fas fa-long-arrow-alt-up"></i>
 											</u>	
 										<?php }else {?>
-											<u class="low_money" style= "color: black" > -<?php echo $difference; ?><i class="fas fa-long-arrow-alt-right"></i> </u>
-											<u class="low_money_percent" style= "color: black"> - <?php echo round($rate, 2); ?>% <i class="fas fa-long-arrow-alt-right"></i></u>
+											<u class="low_money" style= "color: black" > -<?php echo rs_get_price($difference, 'krw'); ?><i class="fas fa-long-arrow-alt-right"></i> </u>
+											<u class="low_money_percent" style= "color: black"> - <?php echo rs_number_format($rate, 2); ?>% <i class="fas fa-long-arrow-alt-right"></i></u>
 										<?php }?>
 										<!--상한가와 하한가 전체-->	
 											<!--하한가 끝-->
 											<h5 class="price_all">
-												<span class="high"><u>고가</u> ￦ <?php echo $high; ?></span>
-												<span class="low"><u>저가</u> ￦ <?php echo $low; ?></span>
+												<span class="high"><u>고가</u> ￦ <?php echo rs_get_price($high, 'krw'); ?></span>
+												<span class="low"><u>저가</u> ￦ <?php echo rs_get_price($low, 'krw'); ?></span>
 											</h5>
 										<!-- </h6> -->
 										<!--상한가와 하한가 전체 끝-->>
