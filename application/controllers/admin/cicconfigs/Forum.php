@@ -213,12 +213,20 @@ class Forum extends CB_Controller
 		$this->Post_model->search_field_equal = array('post_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->Post_model->allow_order_field = array('post_id');
 		
+		
+		// print_r($where);
+		// exit;
 		$where = array(
-			'brd_id' => 6,
+			// 'post.brd_id' => 6,
 		);
+		if($brdid = (int) $this->input->get('comp_id')){
+			$where['news.comp_id'] = $compid;
+		}
+		// $limit = 20;
 		
 		$result = $this->Post_model->get_post_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR');
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
+
 
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {

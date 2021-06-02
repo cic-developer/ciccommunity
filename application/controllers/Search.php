@@ -297,17 +297,17 @@ class Search extends CB_Controller
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-		$config['base_url'] = site_url('search/') . '?' . $param->replace('page');
-		$view['view']['tab_url'] = site_url('search/') . '?' . $param->replace('page, board_id');
-		$config['total_rows'] = $result['total_rows'];
-		$config['per_page'] = $per_page;
-		if ($this->cbconfig->get_device_view_type() === 'mobile') {
-			$config['num_links'] = 3;
-		} else {
-			$config['num_links'] = 5;
-		}
-		$this->pagination->initialize($config);
-		$view['view']['paging'] = $this->pagination->create_links();
+		// $config['base_url'] = site_url('search/') . '?' . $param->replace('page');
+		// $view['view']['tab_url'] = site_url('search/') . '?' . $param->replace('page, board_id');
+		// $config['total_rows'] = $result['total_rows'];
+		// $config['per_page'] = $per_page;
+		// if ($this->cbconfig->get_device_view_type() === 'mobile') {
+		// 	$config['num_links'] = 3;
+		// } else {
+		// 	$config['num_links'] = 5;
+		// }
+		// $this->pagination->initialize($config);
+		// $view['view']['paging'] = $this->pagination->create_links();
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 		/**

@@ -29,7 +29,7 @@
 						<thead>
 							<tr>
 								<th><a href="<?php echo element('cme_orderby', element('sort', $view)); ?>">번호</a></th>
-								<th>거래소 명</th>
+								<th>제목</th>
 								<th>마켓</th>
 								<th>기본노출설정</th>
 								<th>순서변경</th>
@@ -42,9 +42,9 @@
 						if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) {
 						?>
-							<tr data-idx="<?php echo element('cme_idx', $result)?>">
+							<tr data-idx="<?php echo element('post_id', $result)?>">
 								<td><?php echo number_format(element('num', $result)); ?></td>
-								<td><img src="<?php echo element('cme_logo', $result); ?>" alt="거래소 로고" style="height:20px; width:auto;"/>  <?php echo html_escape(element('cme_korean_nm', $result)); ?></td>
+								<td><?php echo html_escape(element('post_title', $result)); ?></td>
 								<td><?php echo html_escape(element('cme_market', $result)); ?></td>
 								<td><?php echo (element('cme_default', $result) == 1) ? '기본' : ''; ?></td>
 								<td><span class="orderby_up" style="cursor:pointer;">업</span> / <span class="orderby_down" style="cursor:pointer;">다운</span></td>
