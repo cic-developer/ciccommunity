@@ -1,3 +1,5 @@
+
+
 <div class="list">
 	<ul>
 	<?php
@@ -55,8 +57,8 @@
 						<?php } ?>
 						<li><a href="javascript:;" class="cmmt-btn" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'c'); return false;"><span>답글</span></a></li>
 						<!-- <li><a href="#n" class="singo-btn"><span>신고</span></a></li> -->
-						<?php if ( ! element('post_del', element('post', $view)) && element('use_blame', element('board', $view)) && ( ! element('blame_blind_count', element('board', $view)) OR element('post_blame', element('post', $view)) < element('blame_blind_count', element('board', $view)))) { ?>
-							<button type="button" class="bw-btn btn btn-black cmmt-singo" id="btn-blame" onClick="post_blame('<?php echo element('post_id', element('post', $view)); ?>', 'post-blame');">신고 <span class="post-blame"><?php echo element('post_blame', element('post', $view)) ? '+' . number_format(element('post_blame', element('post', $view))) : ''; ?></span></button>
+						<?php if (element('use_comment_blame', element('board', $view)) && ( ! element('comment_blame_blind_count', element('board', $view)) OR element('cmt_blame', $result) < element('comment_blame_blind_count', element('board', $view)))) { ?>
+							&nbsp;&nbsp;<a href="javascript:;" id="cmt-btn-blame" onClick="comment_blame('<?php echo element('cmt_id', $result); ?>', 'comment-blame-<?php echo element('cmt_id', $result); ?>');" title="신고하기"><i class="fa fa-bell fa-xs"></i>신고 <span class="comment-blame-<?php echo element('cmt_id', $result); ?>"><?php echo element('cmt_blame', $result) ? '+' . number_format(element('cmt_blame', $result)) : ''; ?></span></a>
 						<?php } ?>
 					</ul>
 				</div>
