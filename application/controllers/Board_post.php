@@ -18,7 +18,7 @@ class Board_post extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Post', 'Post_meta', 'Post_extra_vars', 'CIC_member_level_config', 'CIC_forum', 'CIC_forum_config','Board_category');
+	protected $models = array('Like', 'Post', 'Post_meta', 'Post_extra_vars', 'CIC_member_level_config', 'CIC_forum', 'CIC_forum_config','Board_category');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -166,6 +166,14 @@ class Board_post extends CB_Controller
 			}
 			
 			$view['view']['type'] = $type;
+
+			$select = 'lik_id, lik_type';
+			$where = array(
+				'target_id' => element('post_id', element('board', $list)),
+				'target_type' => 1,
+				'mem_id' => element('mem_id', element('board', $list)),
+			);
+			$exist = $this->Like_model->get_one('', $select, $where);
 			
 		}
 
@@ -196,7 +204,7 @@ class Board_post extends CB_Controller
 			
 			if(!$mem_deposit){
 				// 설정된 예치금액
-				$deposit_meta =(int)  $this->CIC_forum_model->item('forum_deposit');
+				$deposit_meta =(int)  $this->CIC_forum_config_model->item('forum_deposit');
 
 				$view['view']['deposit_meta'] = $deposit_meta;
                 

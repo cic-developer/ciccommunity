@@ -652,7 +652,7 @@ class Postact extends CB_Controller
 		$like_min_cp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_min_cp'"));
 		$like_max_cp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_max_cp'"));
 
-		if(element('brd_id', $post) != 6) {
+		if(element('brd_id', $post) != 6 && element('brd_id', $post) != 3) {
 			switch(element('cfg_value',$_defualt_using_point)){
 				case 'vp' : //vp가 기본 포인트일 경우
 					$_pointSUM = $this->CIC_vp_model->get_point_sum($mem_id);

@@ -114,6 +114,17 @@
 		<!-- s: cmmt -->
 		<div class="cmmt-upper">
 			<!-- <a href="#n" class="cmmt-like">좋아요 <span><?php echo number_format(element('post_like', element('post', $view))); ?></span></a> -->
+
+			<?php if ( ! element('post_del', element('post', $view)) && (element('use_post_like', element('board', $view)) OR element('use_post_dislike', element('board', $view)))) { ?>
+				<div class="recommand vp-point">
+					<?php if (element('use_post_like', element('board', $view))) { ?>
+						<div class="btns">
+							<a class="cmmt-like" href="javascript:;" id="btn-post-like" onClick="post_like('<?php echo element('post_id', element('post', $view)); ?>', '1', 'post-like');" title="추천하기">좋아요<span class="post-like"></span><br /><i class="fa fa-thumbs-o-up fa-lg"></i></a>
+						</div>
+					<?php } ?>
+				</div>
+			<?php } ?>
+
 			<!-- <a href="#n" class="cmmt-singo">신고</a> -->
 			<?php if ( ! element('post_del', element('post', $view)) && element('use_blame', element('board', $view)) && ( ! element('blame_blind_count', element('board', $view)) OR element('post_blame', element('post', $view)) < element('blame_blind_count', element('board', $view)))) { ?>
 				<button type="button" class="bw-btn btn btn-black cmmt-singo" id="btn-blame" onClick="post_blame('<?php echo element('post_id', element('post', $view)); ?>', 'post-blame');">신고 <span class="post-blame"><?php echo element('post_blame', element('post', $view)) ? '+' . number_format(element('post_blame', element('post', $view))) : ''; ?></span></button>
