@@ -47,13 +47,13 @@ if (typeof(CIC_COMMENT_JS) === 'undefined') {
         if (is_submit_comment === true) {
             return false;
         }
+
         is_submit_comment = true;
 
         if ($('#char_count')) {
             if (char_min > 0 || char_max > 0) {
                 // var cnt = parseInt(cic_check_byte('#cmt_content', '#char_count'));
                 var cnt = parseInt($(f.cmt_content).val().length);
-                alert("hi");
                 if (char_min > 0 && char_min > cnt) {
                     alert('내용은 ' + char_min + '글자 이상 쓰셔야 합니다.');
                     f.cmt_content.focus();
