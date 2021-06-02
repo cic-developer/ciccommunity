@@ -148,7 +148,7 @@ var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
 								<a href="<?php echo base_url('/board/forum')?>" class="mn_a1"><span>포럼</span></a>
 								<div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1; overflow: hidden;">
 									<ul class="depth2">
-                                        <li class="mn_l2"><a href="<?php echo base_url('/board/forum?category_id=1')?>" class="mn_a2"><span>CIC 포럼</span></a></li>
+                                        <li class="mn_l2"><a href="<?php echo base_url('/board/forum?type=1')?>" class="mn_a2"><span>CIC 포럼</span></a></li>
                                         <li class="mn_l2"><a href="<?php echo base_url('/board/userforum')?>" class="mn_a2"><span>도전! CIC포럼</span></a></li>
 									</ul>
 								</div>
@@ -172,7 +172,7 @@ var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
 				<span class="mn-bar" style="height: 0px; display: none;">&nbsp;</span>
 				<!-- e: mainNavi-wrap -->
 			</div>
-		 </div>
+		</div>
 	</header>
             <!-- 본문 시작 -->
             <?php if (isset($yield))echo $yield; ?>

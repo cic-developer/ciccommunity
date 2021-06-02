@@ -133,7 +133,7 @@
 					$('.cmmt').find('.cread').removeClass('cread')
 				},
 			}).close();
-		});*/
+		});
 		$('.cmmt-wrap').find('.singo-btn').click(function () {
 			$('.cmmt-wrap').find('.singo-btn').removeClass('active');
 			$(this).addClass('active');

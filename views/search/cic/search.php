@@ -66,7 +66,7 @@
 						<div class="right_content_all">
 							<div style="text-align:left; border-bottom:5px solid #ddd; padding-bottom:5px;">
 								<?php if($symbole == "PER"){ ?>
-									<img></img>
+									<img src="https://upload-hotbit-co-kr.oss-ap-southeast-1.aliyuncs.com/NEW_PER_LOGO.png" alt="퍼토큰 로고"/>
 								<?php }else {?>
 									<img style= "width: 30px; padding-right:10px;" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
 								<?php } ?>
