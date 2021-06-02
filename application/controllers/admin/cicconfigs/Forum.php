@@ -215,6 +215,7 @@ class Forum extends CB_Controller
 		
 		
 		
+
 		$where = array(
 			'brd_id' => 6,
 			'post_del <>' => 2,
@@ -223,6 +224,7 @@ class Forum extends CB_Controller
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;
 		}
+
 		
 		$result = $this->Post_model->
 			get_post_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR');

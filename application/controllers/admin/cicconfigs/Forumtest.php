@@ -288,9 +288,9 @@ class Forumtest extends CB_Controller
 			'post_id' => $param->sort('post_id', 'asc'),
 			'post_hit' => $param->sort('post_hit', 'asc'),
 			'post_datetime' => $param->sort('post_datetime', 'asc'),
-			'cfi.frm_bat_close_datetime' => $param->sort('cfi.frm_bat_close_datetime', 'asc'),
-			'cfi.frm_close_datetime' => $param->sort('cfi.frm_close_datetime', 'asc'),
-			'cfi.frm_total_money' => $param->sort('cfi.frm_total_money', 'asc'),
+			'cic_forum_info.frm_bat_close_datetime' => $param->sort('cic_forum_info.frm_bat_close_datetime', 'asc'),
+			'cic_forum_info.frm_close_datetime' => $param->sort('cic_forum_info.frm_close_datetime', 'asc'),
+			'cic_forum_info.frm_total_money' => $param->sort('cic_forum_info.frm_total_money', 'asc'),
 		);
 		$findex = $this->input->get('findex', null, 'post_id');
 		$forder = $this->input->get('forder', null, 'desc');
