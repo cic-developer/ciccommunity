@@ -107,7 +107,9 @@
                         }
                     } else {
                     ?>
-
+                        <li>
+                            <div class="nopost" style="text-align:center;">자료가 없습니다</div>
+                        </li>
                     <?php
                     }
                     ?>

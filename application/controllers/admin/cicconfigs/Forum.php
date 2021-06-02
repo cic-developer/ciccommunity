@@ -196,29 +196,28 @@ class Forum extends CB_Controller
 
 		$view = array();
 		$view['view'] = array();
-
+		
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-
+		
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
 		$findex = 'news_id';
 		$forder = 'desc';
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
-
+		
 		$per_page = admin_listnum();
 		$offset = ($page - 1) * $per_page;
-
+		
 		$this->Post_model->allow_search_field = array('post_id', 'post_title', 'post_content', 'post.brd_id',); // 검색이 가능한 필드
 		$this->Post_model->search_field_equal = array('post_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->Post_model->allow_order_field = array('post_id');
-
+		
 		$where = array(
 			'brd_id' => 6,
 		);
-
-		$result = $this->modelname
-			->get_post_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		
+		$result = $this->Post_model->get_post_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR');
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {

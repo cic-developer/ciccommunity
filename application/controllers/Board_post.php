@@ -18,7 +18,7 @@ class Board_post extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Post', 'Post_meta', 'Post_extra_vars', 'CIC_member_level_config', 'CIC_forum');
+	protected $models = array('Post', 'Post_meta', 'Post_extra_vars', 'CIC_member_level_config', 'CIC_forum', 'Board_category');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -1480,9 +1480,12 @@ class Board_post extends CB_Controller
 				$category_id = 1;
 			}
 		}
-		// cic 승인대기 포럼 && 반려
+		// cic 진행중 포럼 && cic 마감 포럼
 		if($board['brd_id'] == 6){
-			$category_id = 1;
+			$category_id = $this->input->get('category_id');
+			if(!$category_id) {
+				$category_id = 1;
+			}
 		}
 		
 		$result = $this->Post_model

@@ -5964,8 +5964,8 @@
 }
 
 .search-wrap.list .list.vimg li {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 9px;
+    padding-bottom: 9px;
 }
 
 .search-wrap.list .list.vimg li:nth-child(n + 2) {
