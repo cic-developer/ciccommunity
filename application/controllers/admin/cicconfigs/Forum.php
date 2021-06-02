@@ -188,4 +188,13 @@ class Forum extends CB_Controller
 		);
 		return false;
 	}
+
+	public function disapproval_forum()
+	{
+		$eventname = 'event_admin_cicconfigs_disapproval_forum_list';
+		$this->load->event($eventname);
+
+		$view = array();
+		$view['view'] = array();
+	}
 }

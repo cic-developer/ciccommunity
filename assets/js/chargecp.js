@@ -391,15 +391,13 @@ const contract_abi = [{
 ]
 const contract_address = "0x5682461966BB835da2C55c883E5C5985c54829e6";
 const token_address = "0x7eee60a000986e9efe7f5c90340738558c24317b";
-const PER_address = "0x0E3A0B94cF7bd745aA8a65Bd707509761e65A832"; //퍼 월렛 주소
-
-
 
 $(document).on('ready', async function() {
     const klaytn = window.klaytn;
     if (klaytn === undefined) {
         alert('Klaytn Kaikas가 설치되지 않았습니다.\nKlaytn Kaikas을 설치하여 주세요');
-        window.open('https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F');
+        let _blank = window.open('https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F');
+        if (_blank == null || typeof(_open) == 'undefined') location.href = 'https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F';
         history.back();
     } else {
         console.log('klaytn : ', klaytn);
@@ -513,17 +511,11 @@ $(document).on('ready', async function() {
                 console.log("error", error);
             });
 
-            //여기 있는데이터들이 실제로 거래가 이루어지는지 알려주는 데이터들
-            // console.log(txhash, reciept, success_fromAddress, success_toAddress, success_value);
         });
     } catch (error) {
         alert('Klaytn Kaikas연동에 실패 하였습니다. 마이페이지로 이동합니다.');
         console.log(error);
         // location.href = "/mypage";
     }
-
-    /////////////////////////////////////////////////
-
-
 
 });
