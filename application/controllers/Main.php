@@ -87,6 +87,7 @@ class Main extends CB_Controller
 			'post_exept_state' => 0,
 			'post_datetime >=' => $checktime,
 			'post_del <>' => 2,
+			'brd_id' => 1 ,
 		);
 		$limit = 10;
 
