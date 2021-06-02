@@ -22,7 +22,7 @@ if ( ! function_exists('number_unit_to_korean')) {
             $unit = pow(10000, $i);
             $part = floor($number / $unit);
             if($part > 0){
-                $str .= $part . $BIG_ORDER[$i];
+                $str .= number_format($part) . $BIG_ORDER[$i];
                 if($i == 2) break; // *조 **억 또는 *억
                 if($i == 1) break; // **만
             }

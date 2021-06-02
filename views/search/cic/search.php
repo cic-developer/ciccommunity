@@ -360,8 +360,9 @@
 				}
 				?>
 			<!-- s: paging-wrap -->
-			<!-- <div class="paging-wrap">
-				<ul>
+			<div class="paging-wrap">
+				<?php echo element('paging', $view); ?>
+				<!-- <ul>
 					<li><a href="#" class="active">1</a></li>
 					<li><a href="#n">2</a></li>
 					<li><a href="#n">3</a></li>
@@ -369,8 +370,8 @@
 					<li><a href="#n">5</a></li>
 				</ul>
 				<p class="num"><span>1</span> / 10 </p>
-				<a href="#" class="next ctrl"><span>다음</span></a>
-			</div> -->
+				<a href="#" class="next ctrl"><span>다음</span></a> -->
+			</div>
 			<!-- e: paging-wrap -->
 		</div>		
 		<!-- page end // -->

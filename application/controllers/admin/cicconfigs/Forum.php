@@ -287,6 +287,8 @@ class Forum extends CB_Controller
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
+
+		
 	}
 
 	// public function update_forum_approval($post_id = 0)
@@ -333,6 +335,7 @@ class Forum extends CB_Controller
 
 	public function upadte_forum_return()
 	{
+		
 		$eventname = 'event_admin_update_disapproval_return';
 		$this->load->event($eventname);
 		Events::trigger('before', $eventname);

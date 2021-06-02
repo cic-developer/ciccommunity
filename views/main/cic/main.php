@@ -401,8 +401,10 @@
             }
         });
     })
-
+    var getting_maincoin_data = false;
     $(document).on('click', ".maincoin_symbol", function(){
+        if(getting_maincoin_data) return false;
+        getting_maincoin_data = true;
         var symbol = $(this).data('symbol');
         
         $.ajax({
@@ -427,5 +429,6 @@
                 // alert('Banner Hit Error!');
             }
         });
+        getting_maincoin_data = false;
     })
 </script>

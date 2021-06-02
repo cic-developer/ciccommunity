@@ -278,25 +278,23 @@ class Search extends CB_Controller
 				$korean = element('clist_name_ko', $key_search);
 				$symbole = element('clist_market', $key_search);
 				if($market === "PER"){
-					foreach($api_result as $result_price){
-						$high = $result_price['high'];
-						$low =$result_price['low'];
-						$prev = $result_price['open'];;
-						$trade =$result_price['last'];
-						if($trade != NULL){
-							$difference = $trade - $prev;
-							$rate =  ($difference / $prev) * 100;
-							$view['trade'] = $trade;
-							$view['difference'] = $difference;
-							$view['rate'] = $rate;
-						}else{
-							continue;
-						}
-						$view['low'] = $low;
-						$view['high'] = $high;
-						$view['prev'] = $prev;
-						
+					$result_price = element('result', $api_result);
+
+					$high = $result_price['high'];
+					$low = $result_price['low'];
+					$prev = $result_price['open'];;
+					$trade =$result_price['last'];
+					if($trade != NULL){
+						$difference = $trade - $prev;
+						$rate =  ($difference / $prev) * 100;
+						$view['trade'] = $trade;
+						$view['difference'] = $difference;
+						$view['rate'] = $rate;
 					}
+					$view['low'] = $low;
+					$view['high'] = $high;
+					$view['prev'] = $prev;
+						
 					//HISTORICAL DATA FOR CHART
 					$his_price = array();
 					$his_time = array();
@@ -309,24 +307,23 @@ class Search extends CB_Controller
 					$view['his_price'] = $his_price;
 					$view['his_time'] = $his_time;
 				}else {
-					foreach($api_result as $result_price){
-						$high = $result_price['high_price'];
-						$low =$result_price['low_price'];
-						$prev = $result_price['prev_closing_price'];
-						$change = $result_price['change'];
-						$rate =  $result_price['change_rate'];
-						$difference = $result_price['change_price'];
-						$trade = $result_price['trade_price'];
-		
-						$view['trade'] = $trade;
-						$view['low'] = $low;
-						$view['high'] = $high;
-						$view['prev'] = $prev;
-						$view['difference'] = $difference;
-						$view['rate'] = $rate;
-						$view['change'] = $change;
+					$result_price = element(0, $api_result);
+					$high = $result_price['high_price'];
+					$low =$result_price['low_price'];
+					$prev = $result_price['prev_closing_price'];
+					$change = $result_price['change'];
+					$rate =  $result_price['change_rate'];
+					$difference = $result_price['change_price'];
+					$trade = $result_price['trade_price'];
+	
+					$view['trade'] = $trade;
+					$view['low'] = $low;
+					$view['high'] = $high;
+					$view['prev'] = $prev;
+					$view['difference'] = $difference;
+					$view['rate'] = $rate;
+					$view['change'] = $change;
 						
-					}
 					//HISTORICAL DATA FOR CHART
 					$his_price = array();
 					$his_time = array();
@@ -357,17 +354,23 @@ class Search extends CB_Controller
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-		// $config['base_url'] = site_url('search/') . '?' . $param->replace('page');
-		// $view['view']['tab_url'] = site_url('search/') . '?' . $param->replace('page, board_id');
-		// $config['total_rows'] = $result['total_rows'];
-		// $config['per_page'] = $per_page;
-		// if ($this->cbconfig->get_device_view_type() === 'mobile') {
-		// 	$config['num_links'] = 3;
-		// } else {
-		// 	$config['num_links'] = 5;
-		// }
-		// $this->pagination->initialize($config);
-		// $view['view']['paging'] = $this->pagination->create_links();
+		if(!$is_all){
+			$config['base_url'] = site_url('search/') . '?' . $param->replace('page');
+			$view['view']['tab_url'] = site_url('search/') . '?' . $param->replace('page, board_id');
+			$config['total_rows'] = $total_rows;
+			$config['per_page'] = $per_page;
+			$config['first_link'] = FALSE;
+			$config['last_link'] = FALSE;
+			$config['next_link'] = '다음';
+			$config['prev_link'] = '이전';
+			if ($this->cbconfig->get_device_view_type() === 'mobile') {
+				$config['num_links'] = 3;
+			} else {
+				$config['num_links'] = 5;
+			}
+			$this->pagination->initialize($config);
+			$view['view']['paging'] = $this->pagination->create_links();
+		}
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 		/**

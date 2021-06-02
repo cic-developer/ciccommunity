@@ -45,7 +45,7 @@
 						
 						<?php if (element('can_update', $result)) { ?>
 						<li>
-							<a href="javascript:;" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'cu'); return false;">수정</a>
+							<a href="javascript:;" class="modify-btn" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'cu'); return false;">수정</a>
 						</li>
 						<?php } ?>
 						<?php if (element('can_delete', $result)) { ?>
@@ -118,26 +118,26 @@
 
 <script>
 	$(function () {
-		$('.info').find('.nickname').click(function () {
-			var isParent = $(this).closest('.info');
-			$(this).closest('.list').find('.item').removeClass('zdex')
-			$(this).closest('.item').addClass('zdex');
-			$('.layer-wrap.userInfo').bPopup({
-				closeClass: "userInfo-close",
-				speed: 0,
-				appendTo: isParent,
-				follow: [false, false],
-				position: [false, false],
-				onClose: function () {
-					$('.cmmt').find('.item').removeClass('zdex');
-				},
-				modalColor: 'transparent',
-				modal: true,
-			});
-		});
-		var istotal = $('.cmmt').find('.item').length;
-		var ischk = (istotal / 2) + 1
-		$('.cmmt').find('.item:nth-child(n+' + ischk + ')').addClass('vfm');
+		// $('.info').find('.nickname').click(function () {
+		// 	var isParent = $(this).closest('.info');
+		// 	$(this).closest('.list').find('.item').removeClass('zdex')
+		// 	$(this).closest('.item').addClass('zdex');
+		// 	$('.layer-wrap.userInfo').bPopup({
+		// 		closeClass: "userInfo-close",
+		// 		speed: 0,
+		// 		appendTo: isParent,
+		// 		follow: [false, false],
+		// 		position: [false, false],
+		// 		onClose: function () {
+		// 			$('.cmmt').find('.item').removeClass('zdex');
+		// 		},
+		// 		modalColor: 'transparent',
+		// 		modal: true,
+		// 	});
+		// });
+		// var istotal = $('.cmmt').find('.item').length;
+		// var ischk = (istotal / 2) + 1
+		// $('.cmmt').find('.item:nth-child(n+' + ischk + ')').addClass('vfm');
 
 		// $('.ctrls').find('.cmmt-btn').click(function () {
 		// 	$('.cmmt-wrap').find('.singo-btn').removeClass('active');
@@ -204,41 +204,41 @@
 </script>
 
 <script>
-	$(function () {
-		$('.poll-wrap').find('.cont').find('a').click(function () {
-			if ($(this).closest('li').hasClass('active')) {
-				$(this).closest('li').find('a').removeClass('active');
-			} else {
-				$(this).closest('li').find('a').addClass('active');
-			}
-			$(this).closest('li').siblings('li').find('a').removeClass('active');
-		});
+	// $(function () {
+	// 	$('.poll-wrap').find('.cont').find('a').click(function () {
+	// 		if ($(this).closest('li').hasClass('active')) {
+	// 			$(this).closest('li').find('a').removeClass('active');
+	// 		} else {
+	// 			$(this).closest('li').find('a').addClass('active');
+	// 		}
+	// 		$(this).closest('li').siblings('li').find('a').removeClass('active');
+	// 	});
 
-		$('.poll-wrap').find('.cont').find('li').each(function () {
-			var isbar = $(this).find('.percent > span').text();
-			$(this).find('.vbar').delay(300).animate({
-				'height': isbar
-			}, 450);
-		});
+	// 	$('.poll-wrap').find('.cont').find('li').each(function () {
+	// 		var isbar = $(this).find('.percent > span').text();
+	// 		$(this).find('.vbar').delay(300).animate({
+	// 			'height': isbar
+	// 		}, 450);
+	// 	});
 
-		$('.poll-wrap').find('.btns > .enter').click(function () {
-			if ($(this).closest('.poll-wrap').hasClass('active')) {
-				$(this).closest('.poll-wrap').removeClass('active');
-				$('.poll-wrap').find('.result').hide();
-			} else {
-				$(this).closest('.poll-wrap').addClass('active');
-				$('.poll-wrap').find('.result').show();
-			}
+	// 	$('.poll-wrap').find('.btns > .enter').click(function () {
+	// 		if ($(this).closest('.poll-wrap').hasClass('active')) {
+	// 			$(this).closest('.poll-wrap').removeClass('active');
+	// 			$('.poll-wrap').find('.result').hide();
+	// 		} else {
+	// 			$(this).closest('.poll-wrap').addClass('active');
+	// 			$('.poll-wrap').find('.result').show();
+	// 		}
 
-		});
-		$('.cmmt-like').click(function () {
-			if ($(this).hasClass('active')) {
-				$(this).removeClass('active');
-			} else {
-				$(this).addClass('active');
-			}
-		})
-	})
+	// 	});
+	// 	$('.cmmt-like').click(function () {
+	// 		if ($(this).hasClass('active')) {
+	// 			$(this).removeClass('active');
+	// 		} else {
+	// 			$(this).addClass('active');
+	// 		}
+	// 	})
+	// })
 </script>
 
 <!-- <script>

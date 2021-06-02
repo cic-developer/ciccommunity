@@ -131,86 +131,32 @@
 <!-- e: #container-wrap //-->
 
 <script>
-	var reg_num = /^[0-9]*$/;
-	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
-
-	$(document).on('click', '.up', function(){
-		const content_type = $(this).attr('data-contenttype');
-		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
-		update_vp(content_idx, content_type, 'up');
-	});
-	
-	$(document).on('click', '.down', function(){
-		const content_type = $(this).attr('data-contenttype');
-		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
-		update_vp(content_idx, content_type, 'down');
-	});
-
-	function update_vp(content_idx, content_type, like_type){
-		if(!is_member){
-			alert('로그인이 필요한 서비스입니다.');
-			return false;
-		}
-		const allowed_content_type = ['post', 'comment'];
-		const allowed_like_type = ['up', 'down'];
-
-		if(allowed_content_type.indexOf(content_type) == -1){
-			alert('비정상적인 시도입니다.1');
-			return false;
-		}
-		
-		if(!reg_num.test(content_idx)){
-			alert('비정상적인 시도입니다.2');
-			return false;
-		}
-
-		if(allowed_like_type.indexOf(like_type) == -1){
-			alert('비정상적인 시도입니다.3');
-			return false;
-		}
-
-		const title = 'VP를 '+ (like_type === 'up' ? 'UP' :'DOWN') + ' 합니다.';
-		const _point = prompt(title, 0);
-
-		//취소버튼 누를시
-		if(_point === null){
-			return false;
-		}
-
-		//숫자를 잘 입력했나 검증
-		if(!reg_num.test(_point)){
-			alert('숫자만 입력할 수 있습니다.');
-			return false;
-		}
-		$.ajax({
-			url: cb_url + '/postact/'+content_type+'_like/'+content_idx+'/'+(like_type === 'up' ? '1' :'2'),
-			type: 'get',
-			data: {
-				usePoint: Number(_point),
-			},
-			dataType: 'json',
-			async: false,
-			cache: false,
-			success: function(data) {
-				if(data.error !== undefined){
-					alert(data.error);
-				} else {
-					alert('성공적으로 처리되었습니다.');
-					location.reload();
-				}
-			},
-			error: function(){
-				alert('에러가 발생했습니다.');
-			}
-		});
-		return true;
-	}
-</script>
-
-<script>
 
 	var istotal = $('.cmmt').find('.item').length;
 	var ischk = (istotal / 2) + 1
+
+	$(document).on('click','.modify-btn', function(){
+		$('.cmmt-wrap').find('.singo-btn').removeClass('active');
+			if ($(this).hasClass('active')) {
+				$(this).removeClass('active');
+			} 
+		// else {
+		// 		$(this).addClass('active');
+		// 		$(this).closest('.vcon').addClass('active');
+		// 		$(this).closest('.reply').addClass('active');
+		// 		$(this).closest('.ctrls').addClass('active');
+		// 	}
+		$('.layer-wrap.singo').bPopup({
+			speed: 0,
+			follow: [false, false],
+			position: [false, false],
+			modalColor: false,
+			modal: false,
+			onClose: function () {
+				$('.cmmt').find('.cread').removeClass('cread')
+			},
+		}).close();
+	})
 
 	$(document).on('click','.nickname', function(){
 		var isParent = $(this).closest('.info');
@@ -415,3 +361,82 @@
 		})
 	})
 </script>
+
+<!-- 
+
+<script>
+	var reg_num = /^[0-9]*$/;
+	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
+
+	$(document).on('click', '.up', function(){
+		const content_type = $(this).attr('data-contenttype');
+		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
+		update_vp(content_idx, content_type, 'up');
+	});
+	
+	$(document).on('click', '.down', function(){
+		const content_type = $(this).attr('data-contenttype');
+		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
+		update_vp(content_idx, content_type, 'down');
+	});
+
+	function update_vp(content_idx, content_type, like_type){
+		if(!is_member){
+			alert('로그인이 필요한 서비스입니다.');
+			return false;
+		}
+		const allowed_content_type = ['post', 'comment'];
+		const allowed_like_type = ['up', 'down'];
+
+		if(allowed_content_type.indexOf(content_type) == -1){
+			alert('비정상적인 시도입니다.1');
+			return false;
+		}
+		
+		if(!reg_num.test(content_idx)){
+			alert('비정상적인 시도입니다.2');
+			return false;
+		}
+
+		if(allowed_like_type.indexOf(like_type) == -1){
+			alert('비정상적인 시도입니다.3');
+			return false;
+		}
+
+		const title = 'VP를 '+ (like_type === 'up' ? 'UP' :'DOWN') + ' 합니다.';
+		const _point = prompt(title, 0);
+
+		//취소버튼 누를시
+		if(_point === null){
+			return false;
+		}
+
+		//숫자를 잘 입력했나 검증
+		if(!reg_num.test(_point)){
+			alert('숫자만 입력할 수 있습니다.');
+			return false;
+		}
+		$.ajax({
+			url: cb_url + '/postact/'+content_type+'_like/'+content_idx+'/'+(like_type === 'up' ? '1' :'2'),
+			type: 'get',
+			data: {
+				usePoint: Number(_point),
+			},
+			dataType: 'json',
+			async: false,
+			cache: false,
+			success: function(data) {
+				if(data.error !== undefined){
+					alert(data.error);
+				} else {
+					alert('성공적으로 처리되었습니다.');
+					location.reload();
+				}
+			},
+			error: function(){
+				alert('에러가 발생했습니다.');
+			}
+		});
+		return true;
+	}
+</script> -->
