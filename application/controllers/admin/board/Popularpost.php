@@ -96,6 +96,10 @@ class Popularpost extends CB_Controller
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 
+		// print_r($this->db->last_query());
+		// exit;
+
+
 		
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {

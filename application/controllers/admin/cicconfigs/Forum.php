@@ -224,8 +224,11 @@ class Forum extends CB_Controller
 			$where['brd_id'] = $brdid;
 		}
 		
-		$result = $this->Post_model->get_post_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR');
+		$result = $this->Post_model->
+			get_post_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR');
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
+		print_r($this->db->last_query());
+		exit;
 		// print_r($where);
 		// exit;
 

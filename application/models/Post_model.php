@@ -698,6 +698,7 @@ class Post_model extends CB_Model
 		$this->db->from($this->_table);
 		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
 		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
+		
 		if ($where) {
 			$this->db->where($where);
 		}

@@ -284,32 +284,34 @@ class Forumtest extends CB_Controller
 		
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = 'post_id';
-		$forder = 'desc';
+		$view['view']['sort'] = array(
+			'post_id' => $param->sort('post_id', 'asc'),
+			'post_hit' => $param->sort('post_hit', 'asc'),
+			'post_datetime' => $param->sort('post_datetime', 'asc'),
+			'cfi.frm_bat_close_datetime' => $param->sort('cfi.frm_bat_close_datetime', 'asc'),
+			'cfi.frm_close_datetime' => $param->sort('cfi.frm_close_datetime', 'asc'),
+			'cfi.frm_total_money' => $param->sort('cfi.frm_total_money', 'asc'),
+		);
+		$findex = $this->input->get('findex', null, 'post_id');
+		$forder = $this->input->get('forder', null, 'desc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 		
 		$per_page = admin_listnum();
 		$offset = ($page - 1) * $per_page;
 		
-		$this->Post_model->allow_search_field = array('post_id', 'post_title', 'post_content', 'post.brd_id',); // 검색이 가능한 필드
+		$this->Post_model->allow_search_field = array('post_id', 'post_title', 'post_content'); // 검색이 가능한 필드
 		$this->Post_model->search_field_equal = array('post_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->Post_model->allow_order_field = array('post_id');
 		
-		
-		// print_r($where);
-		// exit;
 		$where = array(
-			'brd_id' => 6,
+			'brd_id' => 3,
+			'post_category' => 1
 		);
-		if($brdid = (int) $this->input->get('brd_id')){
-			$where['brd_id'] = $brdid;
-		}
 		// $limit = 20;
 		
 		$result = $this->Post_model->get_post_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR');
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
-
 
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
