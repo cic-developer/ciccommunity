@@ -167,14 +167,17 @@ class Board_post extends CB_Controller
 			
 			$view['view']['type'] = $type;
 
-			$select = 'lik_id, lik_type';
-			$where = array(
-				'target_id' => element('post_id', element('board', $list)),
-				'target_type' => 1,
-				'mem_id' => element('mem_id', element('board', $list)),
-			);
-			$exist = $this->Like_model->get_one('', $select, $where);
+			// like 여부 status...
+			// $select = 'lik_id, lik_type';
+			// $where = array(
+			// 	'target_id' => element('post_id', element('board', $list)),
+			// 	'target_type' => 1,
+			// 	'mem_id' => element('mem_id', element('board', $list)),
+			// );
+			// $exist = $this->Like_model->get_one('', $select, $where);
 			
+			// $status = element('lik_type', $exist) === '1' ? '1' : '';
+			// $view['view']['like_type'] = $status;
 		}
 
 		// 도전 CIC 포럼, userForum
