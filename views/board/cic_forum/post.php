@@ -156,14 +156,47 @@
 		<div class="cmmt-wrap">
 			<div class="comment">
 				<h4>댓글 <span><?php echo number_format(element('post_comment_count', element('post', $view))); ?></span></h4>
-				<div class="ov">
-					<textarea placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
-					<div class="btns">
-						<a href="#n" class="write-btn"><span>댓글등록</span></a>
-					</div>
-				</div>
+				<?php
+					$this->load->view(element('view_skin_path', $layout) . '/comment_write');
+				?>
 			</div>
+			<div class="cmmt" id="viewcomment">
+			</div>
+
 			<div class="cmmt">
+			<div class="list">
+					<ul>
+						<li class="item">
+							<div class="vcon">
+								<div class="info">
+									<a href="#n" class="nickname">
+										<p class="ico"><img src="<?php echo base_url('assets/images/photo-popo.png')?>" alt="" /></p>
+										<p class="txt">힘을내포포</p>
+									</a>
+								</div>
+								<div class="vtxt">
+									<p>포겔요정 바로싼 등장!! 감사합니다~ </p>
+								</div>
+								<div class="ctrls">
+									<ul>
+										<li>
+											<p class="date">21. 03. 04 19:08</p>
+										</li>
+										<li><a href="#n" class="cmmt-btn"><span>답글</span></a></li>
+										<li><a href="#n" class="singo-btn"><span>신고</span></a></li>
+									</ul>
+								</div>
+								<div class="comment">
+									<textarea
+										placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
+									<div class="btns">
+										<a href="#n" class="write-btn"><span>답글등록</span></a>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
 				<!-- <p class="total">댓글 <span>49</span></p>
 				<div class="list">
 					<ul>
