@@ -582,7 +582,7 @@ class Post_model extends CB_Model
 			'post_id' => $post_id,
 		);
 		$updatedata = array(
-			'post_category' => 2,
+			'post_category' => '2',
 		);
 		$this->db->where($where);
 		$this->db->set($updatedata);

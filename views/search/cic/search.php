@@ -9,12 +9,12 @@
 			<div class="filter">
 				<div class="sel-box c01">
                     <!-- PAGE 검색 기능 START -->
-					<a href="#n" id="optionb" class="sel-btn"><span><?php echo element('type_word', $view); ?></span></a>
+					<a href="#n" id="optionb" class="sel-btn"><span><?php echo element('type_word', $view); ?>검색</span></a>
 					<ul>
-						<li class="<?php echo !in_array(element('type', $view), array('free','writer','news')) ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value=""><span>통합검색</span></a></li>
-						<li class="<?php echo element('type', $view) == 'free' ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="free"><span>자유게시판</span></a></li>
-						<li class="<?php echo element('type', $view) == 'writer' ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="writer"><span>WRITER</span></a></li>
-						<li class="<?php echo element('type', $view) == 'news' ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="news"><span>뉴스</span></a></li>
+						<li class="<?php echo element('is_all', $view) ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value=""><span>통합검색</span></a></li>
+						<li class="<?php echo element('is_free', $view) ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="free"><span>자유게시판</span></a></li>
+						<li class="<?php echo element('is_writer', $view) ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="writer"><span>WRITER</span></a></li>
+						<li class="<?php echo element('is_news', $view) ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="news"><span>뉴스</span></a></li>
 					</ul>		
 				</div>
 				<div class="field search">
@@ -51,12 +51,12 @@
 				
 			</div>
 			<div class="result">
-				<p class="btxt"><span><?php echo element('highlight_keyword', $view);?></span> 에 대한 통합검색 총</p>
+				<p class="btxt"><span><?php echo element('highlight_keyword', $view);?></span> 에 대한 <?php echo element('type_word', $view); ?>검색 총</p>
 				<p class="stxt"><?php echo number_format($total_rows); ?>건</p>
 			</div>
 			<!-- PAGE 검색 기능 끝 -->
 			<!-- HERE THE MARKET PRICE VALUES -->
-			<?php if($trade){ ?>
+			<?php if($trade && element('is_all', $view)){ ?>
 				<div class="result" style="overflow:hidden; padding-bottom:40px; padding-left:40px; padding-right:40px;">
 					<!-- TradingView CANVAS BEGIN -->
 					<div class="text-center">
@@ -154,78 +154,85 @@
 				</div>
 			<?php
 			}
-			if(!$trade || is_string($trade)){?>
-				<div></div>
-			<?php } ?>	
+			?>
 			<!-- PRICE UNTIL HERE -->
-			<!-- 자유게시판 시각 -->
 			<div class="gap35"></div>
 			<div class="cont">
+				<?php
+				if(element('is_all', $view) || element('is_free', $view)){
+				?>
+				<!-- 자유게시판 시작 -->
 				<div class="tits">
 					<h3>자유게시판</h3>
 						<a href="<?php echo base_url()."board/freetalk?sfield=post_title&skeyword="?><?php echo $this->input->get('skeyword')?>
 							"class="more"><span>more</span></a>
 				</div>
 				<div class="list vimg vp">
-				<div class="list community">
-					<table>
-						<colgroup>
-							<col width="170">
-							<col width="*">
-							<col width="100">
-							<col width="100">
-							<col width="100">
-						</colgroup>
-						<thead>
-							<tr>
-								<th>글쓴이</th>
-								<th>제목</th>
-								<th>등록일</th>
-								<th>조회</th>
-								<th><span class="cyellow">VP</span></th>
-							</tr>
-						</thead>
-						<tbody>
-						<?php
-						if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result) {
-								if(element('brd_name', $result) === '자유게시판'){?>
-									<tr>
-										<td>
-											<div class="my-info">
-												<p class="pimg"><img src="<?php echo thumb_url(element('post_image', $result),30, 30)?>" alt=""></p>
-												<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
-											</div>
-										</td>
-										<td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>">
-											<?php echo html_escape(element('post_title', $result)); ?></a></td>
-										<td><?php echo element('display_datetime', $result); ?></td>
-										<td><?php echo number_format(element('post_hit', $result)); ?></td>
-										<td>
-											<p class="cyellow"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p>
-										</td>
-									</tr>
-								<?php
-								}
-							}
-						}   
-						// foreach (element('list', element('data', $view)) as $result) {
-							if($free_row <= 0){?>
+					<div class="list community">
+						<table>
+							<colgroup>
+								<col width="170">
+								<col width="*">
+								<col width="100">
+								<col width="100">
+								<col width="100">
+							</colgroup>
+							<thead>
 								<tr>
-									<td colspan="5" class="nopost">게시물이 없습니다</td>
+									<th>글쓴이</th>
+									<th>제목</th>
+									<th>등록일</th>
+									<th>조회</th>
+									<th><span class="cyellow">VP</span></th>
 								</tr>
-							<?php 
-								} 
-							// }
-							?>
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+							<?php
+							if (element('list', element('data', $view))) {
+								foreach (element('list', element('data', $view)) as $result) {
+									if(element('brd_name', $result) === '자유게시판'){?>
+										<tr>
+											<td>
+												<div class="my-info">
+													<p class="pimg"><img src="<?php echo thumb_url(element('post_image', $result),30, 30)?>" alt=""></p>
+													<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
+												</div>
+											</td>
+											<td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>">
+												<?php echo html_escape(element('post_title', $result)); ?></a></td>
+											<td><?php echo element('display_datetime', $result); ?></td>
+											<td><?php echo number_format(element('post_hit', $result)); ?></td>
+											<td>
+												<p class="cyellow"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p>
+											</td>
+										</tr>
+									<?php
+									}
+								}
+							}   
+							// foreach (element('list', element('data', $view)) as $result) {
+								if($free_row <= 0){?>
+									<tr>
+										<td colspan="5" class="nopost">게시물이 없습니다</td>
+									</tr>
+								<?php 
+									} 
+								// }
+								?>
+							</tbody>
+						</table>
+					</div>
 				</div>
-				</div>
-				<!-- 자유게시판 끝!!! -->
-
-				<!-- CIC WRITER 시작 -->
 				<div class="gap75"></div>
+				<!-- 자유게시판 끝!!! -->
+				<?php
+				}
+				?>
+
+				<?php
+				if(element('is_all', $view) || element('is_writer', $view)){
+				?>
+				<!-- CIC WRITER 시작 -->
 				<div class="tits">
 					<h3>WRITER</h3>
 						<a href="<?php echo base_url()."board/cicwriter?sfield=post_title&skeyword="?><?php echo $this->input->get('skeyword')?>" 
@@ -285,10 +292,16 @@
 						})
 					</script>
 				</div>
-				<!-- CIC WRITER 끝 -->
-
-				<!-- NEWS START -->
 				<div class="gap75"></div>
+				<!-- CIC WRITER 끝 -->
+				<?php
+				}
+				?>
+
+				<?php
+				if(element('is_all', $view) || element('is_news', $view)){
+				?>
+				<!-- NEWS 시작 -->
 				<div class="tits">
 					<h3>NEWS</h3>
 					<a href="#n" class="more"><span>more</span></a>
@@ -326,6 +339,10 @@
 						?>
 					</ul>
 				</div>
+				<!-- NEWS 끝 -->
+				<?php
+				}
+				?>
 			<!-- s: paging-wrap -->
 			<!-- <div class="paging-wrap">
 				<ul>

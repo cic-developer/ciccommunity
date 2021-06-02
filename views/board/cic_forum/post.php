@@ -37,7 +37,7 @@
 						<ul>
 							<li>
 								<p class="btxt">참여마감</p>
-								<p class="stxt cred">07:14:20</p>
+								<p class="stxt cred"><?php echo display_datetime(element('frm_bat_close_datetime', $forum), 'full'); ?></p>
 							</li>
 							<li>
 								<p class="btxt">포럼마감</p>
