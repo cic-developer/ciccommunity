@@ -20,7 +20,8 @@
 // 글자수 제한
 var char_min = parseInt(<?php echo (int) element('comment_min_length', element('board', $view)); ?>); // 최소
 var char_max = parseInt(<?php echo (int) element('comment_max_length', element('board', $view)); ?>); // 최대
-
+alert(char_min);
+alert(char_max);
 <?php if (element('comment_min_length', element('board', $view)) OR element('comment_max_length', element('board', $view))) { ?>
 
 check_byte('cmt_content', 'char_count');
