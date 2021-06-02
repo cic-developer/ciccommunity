@@ -310,10 +310,8 @@ class Forumtest extends CB_Controller
 		);
 		// $limit = 20;
 		
-		$result = $this->{$this->modelname}->get_forum_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR');
+		$result = $this->{$this->modelname}->get_post_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
-
-		exit;
 
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {

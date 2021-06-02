@@ -15,18 +15,14 @@ class CIC_forum_model extends CB_Model
 	/**
 	 * 테이블명
 	 */
-	public $_table = 'cic_forum_config';
+	public $_table = 'post';
 
 	/**
 	 * 사용되는 테이블의 프라이머리키
 	 */
-	public $meta_key = 'frm_key';
+	public $primary_key = 'post_id'; // 사용되는 테이블의 프라이머리키
 
-	public $meta_value = 'frm_value';
-
-	public $cache_name= 'forum-model-get'; // 캐시 사용시 프리픽스
-
-	public $cache_time = 86400; // 캐시 저장시간
+	public $allow_order = array('post_num, post_reply', 'post_datetime desc', 'post_datetime asc', 'post_hit desc', 'post_hit asc', 'post_comment_count desc', 'post_comment_count asc', 'post_comment_updated_datetime desc', 'post_comment_updated_datetime asc', 'post_like_point desc',  'post_dislike_point desc','post_dislike_point asc','post_id desc',);
 
 	function __construct()
 	{
@@ -175,6 +171,9 @@ class CIC_forum_model extends CB_Model
 		$qry = $this->db->get();
 		$rows = $qry->row_array();
 		$result['total_rows'] = $rows['rownum'];
+
+		print_r($result['list']);
+		exit;
 
 		return $result;
 	}
