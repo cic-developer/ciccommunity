@@ -17,7 +17,7 @@ class Search extends CB_Controller
     /**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Board', 'Board_group', 'Post', 'Post_file', 'Search_keyword', 'CIC_coin_list', 'CIC_coin_keyword', 'News', 'Company');
+	protected $models = array('Board', 'Board_group', 'Post', 'News', 'Post_file', 'Search_keyword', 'CIC_coin_list', 'CIC_coin_keyword', 'News', 'Company');
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
@@ -167,20 +167,23 @@ class Search extends CB_Controller
 				$result['list'][$key]['is_mobile'] = (element('post_device', $val) === 'mobile') ? true : false;
 			}
 		}
+		
+		$news_result = $this->News_model
+			->get_search_list($per_page, $offset, array(), $like, $findex, $sfield, $skeyword, $sop);
 
 		$free_row = $result['board_rows']['1']; // 자유게시판 검색 ROW 
 		$writer_row = $result['board_rows']['2']; // WRITER 개시판 검색 Row
+		$news_row = $news_result['total_rows']; // WRITER 개시판 검색 Row
 
 		$view['view']['data'] = $result;
+		$view['view']['news_data'] = $news_result;
 		$view['view']['boardlist'] = $boardlist;
 		$view['view']['grouplist'] = $grouplist;
-		$total_rows = $free_row + $writer_row;
+		$total_rows = $free_row + $writer_row + $news_row;
 		$view['total_rows'] = $total_rows;
 		$view['free_row'] = $free_row;  
 		$view['writer_row'] = $writer_row; 
-		// echo "<pre><br>";
-		// print_r($result['board_rows']);
-		// echo "</pre></br>";
+		
 		if ( ! $this->session->userdata('skeyword_' . urlencode($skeyword))) {
 			$sfieldarray = array('post_title', 'post_content', 'post_both');
 			if (in_array($sfield2, $sfieldarray)) {

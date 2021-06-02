@@ -289,7 +289,7 @@
 						}
 					}
 					if ($writer_row <= 0)  {?>
-							<li colspan="5" class="nopost" style="text-align: center">게시물이 없습니다</li>
+							<li class="nopost" style="text-align: center">게시물이 없습니다</li>
 					<?php 
 					} 	
 					?>	
@@ -315,6 +315,26 @@
 				</div>
 				<div class="list vimg vp">
 					<ul>
+						<!-- <li>
+							<a href="#n">
+								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
+								<div class="txt">
+									<div class="vc">
+										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
+										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
+										<p class="ctxt">
+											<span>블록미디어</span>
+											<span>02:18</span>
+											<span>조회 82</span>
+										</p>
+									</div>
+								</div>
+							</a>
+						</li> -->
+						<?php
+						if (element('list', element('data', $view))) {
+							foreach (element('list', element('data', $view)) as $result) {
+						?>
 						<li>
 							<a href="#n">
 								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
@@ -331,85 +351,14 @@
 								</div>
 							</a>
 						</li>
-						<li>
-							<a href="#n">
-								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
-								<div class="txt">
-									<div class="vc">
-										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-										<p class="ctxt">
-											<span>블록미디어</span>
-											<span>02:18</span>
-											<span>조회 82</span>
-										</p>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
-								<div class="txt">
-									<div class="vc">
-										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-										<p class="ctxt">
-											<span>블록미디어</span>
-											<span>02:18</span>
-											<span>조회 82</span>
-										</p>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li class="no-img">
-							<a href="#n">
-								<div class="txt">
-									<div class="vc">
-										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-										<p class="ctxt">
-											<span>블록미디어</span>
-											<span>02:18</span>
-											<span>조회 82</span>
-										</p>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
-								<div class="txt">
-									<div class="vc">
-										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-										<p class="ctxt">
-											<span>블록미디어</span>
-											<span>02:18</span>
-											<span>조회 82</span>
-										</p>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="#n">
-								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
-								<div class="txt">
-									<div class="vc">
-										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
-										<p class="ctxt">
-											<span>블록미디어</span>
-											<span>02:18</span>
-											<span>조회 82</span>
-										</p>
-									</div>
-								</div>
-							</a>
-						</li>
+						<?php
+							}
+						} else {
+						?>
+							<li class="nopost" style="text-align: center">게시물이 없습니다</li>
+						<?php	
+						}
+						?>
 					</ul>
 				</div>
 			<!-- s: paging-wrap -->

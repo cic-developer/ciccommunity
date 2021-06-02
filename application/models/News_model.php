@@ -271,7 +271,7 @@ class News_model extends CB_Model
 		return $result;
 	}
 
-	public function get_search_list($limit = '', $offset = '', $where = '', $like = '', $compnay_id = 0, $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
+	public function get_search_list($limit = '', $offset = '', $where = '', $like = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
 		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
 			$orderby = 'news_id';
@@ -357,11 +357,7 @@ class News_model extends CB_Model
 			$this->db->group_end();
 		}
 
-		$this->db->where( s);
-		$compnay_id = (int) $company_id;
-		if ($company_id)	{
-			$this->db->where( array('company.comp_id' => $company_id));
-		}
+		$this->db->where( array('news_enable' => 1));
 
 		$this->db->order_by($orderby);
 		if ($limit) {

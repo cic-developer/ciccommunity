@@ -31,8 +31,9 @@
 								<th><a href="<?php echo element('cme_orderby', element('sort', $view)); ?>">번호</a></th>
 								<th>제목</th>
 								<th>내용</th>
-								<th>기본노출설정</th>
-								<th>순서변경</th>
+								<th>작성자</th>
+								<th>게시일</th>
+                                <th>좋아요</th>
 								<th>수정</th>
 								<!-- <th><input type="checkbox" name="chkall" id="chkall" /></th> -->
 							</tr>
@@ -42,13 +43,14 @@
 						if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) {
 						?>
-							<tr data-idx="<?php echo element('post_id', $result)?>">
+							<tr>
 								<td><?php echo number_format(element('num', $result)); ?></td>
-								<td><?php echo html_escape(element('post_title', $result)); ?></td>
-								<td><?php echo html_escape(element('post_content', $result)); ?></td>
-								<td><?php echo (element('cme_default', $result) == 1) ? '기본' : ''; ?></td>
-								<td><span class="orderby_up" style="cursor:pointer;">업</span> / <span class="orderby_down" style="cursor:pointer;">다운</span></td>
-								<td><a href="<?php echo admin_url($this->pagedir); ?>/exchange_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
+								<td><a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><?php echo html_escape(element('post_title', $result)); ?></a></td>
+								<td><a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><?php echo html_escape(strip_tags(element('post_content', $result))); ?></a></td>
+								<td><?php echo element('post_display_name', $result); ?> <?php if (element('post_userid', $result)) { ?> ( <a href="?sfield=mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('post_userid', $result)); ?></a> ) <?php } ?></td>
+								<td><?php echo display_datetime(element('post_datetime', $result))?></td>
+								<td><?php echo number_format(element('post_like', $result))?></td>
+                                <td><a href="<?php echo admin_url($this->pagedir); ?>/exchange_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
 								<!-- <td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td> -->
 							</tr>
 						<?php
@@ -90,36 +92,3 @@
 		</div>
 	</form>
 </div>
-<script>
-	$('.orderby_up').on('click', function(){
-		set_orderby(this, 'up');
-	});
-	$('.orderby_down').on('click', function(){
-		set_orderby(this, 'down');
-	});
-
-	function set_orderby(_this, type){
-		const cme_idx = $(_this).parents('tr').attr('data-idx');
-        $.ajax({
-            url: cb_admin_url + '/cicconfigs/maincoin/ajax_set_exchange_orderby',
-            type: 'post',
-            data: {
-                cme_idx: cme_idx,
-                type: type,
-                csrf_test_name: cb_csrf_hash
-            },
-            dataType: 'json',
-            async: false,
-            cache: false,
-            success: function(data) {
-				if(data.error){
-					alert(data.error);
-				}
-				if(data.success){
-					alert(data.success);
-					location.reload();
-				}
-            }
-        });
-	}
-</script>
