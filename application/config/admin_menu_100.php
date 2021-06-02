@@ -23,5 +23,6 @@ $config['admin_page_menu']['cicconfigs'] =
 			'banner'				=> array('배너 설정', ''),
 			'news'					=> array('뉴스 설정', ''),
 			'forum'					=> array('포럼 설정', ''),
+			'forumtest'					=> array('포럼 설정- 테스트', ''),
 		),
 	);

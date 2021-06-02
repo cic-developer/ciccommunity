@@ -12,19 +12,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 관리자 메인 controller 입니다.
  */
-class Forum extends CB_Controller
+class Forumtest extends CB_Controller
 {
 
 	/**
 	 * 관리자 페이지 상의 현재 디렉토리입니다
 	 * 페이지 이동시 필요한 정보입니다
 	 */
-	public $pagedir = 'cicconfigs/forum';
+	public $pagedir = 'cicconfigs/forumtest';
 
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_forum','Board', 'Post', 'Board_category', 'Post_file');
+	protected $models = array('CIC_forum','Board', 'Post');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
@@ -58,7 +58,7 @@ class Forum extends CB_Controller
 		required_user_login();
 
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_forum_index';
+		$eventname = 'event_admin_test_forum_index';
 		$this->load->event($eventname);
 
 		$view = array();
@@ -191,7 +191,7 @@ class Forum extends CB_Controller
 
 	public function disapproval_forum()
 	{
-		$eventname = 'event_admin_cicconfigs_disapproval_forum_list';
+		$eventname = 'event_admin_test_cicconfigs_disapproval_forum_list';
 		$this->load->event($eventname);
 
 		$view = array();
@@ -214,22 +214,20 @@ class Forum extends CB_Controller
 		$this->Post_model->allow_order_field = array('post_id');
 		
 		
-		
+		// print_r($where);
+		// exit;
 		$where = array(
 			'brd_id' => 6,
-			'post_del <>' => 2,
 		);
-
-		if ($brdid = (int) $this->input->get('brd_id')) {
+		if($brdid = (int) $this->input->get('brd_id')){
 			$where['brd_id'] = $brdid;
 		}
-
-
+		// $limit = 20;
 		
 		$result = $this->Post_model->get_post_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR');
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
-		
+
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
 				$result['list'][$key]['post_display_name'] = display_username(
@@ -242,30 +240,13 @@ class Forum extends CB_Controller
 					$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
 					$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
 				}
-				$result['list'][$key]['category'] = '';
-				if (element('post_category', $val)) {
-					$result['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
-				}
-				if (element('post_image', $val)) {
-					$imagewhere = array(
-						'post_id' => element('post_id', $val),
-						'pfi_is_image' => 1,
-					);
-					$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-					$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
-				} else {
-					$result['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
-				}
 			}
 		}
-		
 
 		$view['view']['data'] = $result;
-		
-		$where = array(
-			'brd_id' => 6
-		);
-		$view['view']['boardlist'] = $this->Board_model->get_board_list($where);
+		// $view['view']['sort'] = array(
+		// 	'cme_orderby' => $param->sort('cme_orderby', 'desc'),
+		// );
 
 		$view['view']['primary_key'] = $this->Post_model->primary_key;
 
