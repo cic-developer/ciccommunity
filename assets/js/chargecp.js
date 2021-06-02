@@ -396,8 +396,15 @@ $(document).on('ready', async function() {
     const klaytn = window.klaytn;
     if (klaytn === undefined) {
         alert('Klaytn Kaikas가 설치되지 않았습니다.\nKlaytn Kaikas을 설치하여 주세요');
-        let _blank = window.open('https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F');
-        if (_blank == null || typeof(_open) == 'undefined') location.href = 'https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F';
+        let _blank = window.open('https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F', '_blank');
+        if (_blank == null || typeof(_open) == 'undefined') {
+
+            let _conf_result = confirm('Klaytn Kaiaks 설치 안내 페이지로 이동 하시겠습니까?');
+            if (_conf_result) {
+                location.href = 'https://m.blog.naver.com/PostView.naver?blogId=djg162&logNo=222063902504&proxyReferer=https:%2F%2Fwww.google.com%2F';
+                return;
+            }
+        }
         history.back();
     } else {
         console.log('klaytn : ', klaytn);
