@@ -125,9 +125,9 @@
                                     <span class="reply">(<?php echo element('post_comment_count', $result); ?>)</span>
                                 </a>
                             </td>
-                            <td>13:33:59</td>
-                            <td>13:33:59</td>
-                            <td> <p class="cyellow">10,000,000</p></td>
+                            <td><?php echo display_datetime(element('frm_bat_close_datetime', $result), 'full'); ?></td>
+                            <td><?php echo display_datetime(element('frm_close_datetime', $result), 'full'); ?></td>
+                            <td><p class="cyellow"><?php echo number_format(element('frm_total_money', $result), 2); ?></p></td>
                         </tr>
                         <!-- <tr>
                             <td>

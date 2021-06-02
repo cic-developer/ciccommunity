@@ -11,7 +11,7 @@
                     <!-- PAGE 검색 기능 START -->
 					<a href="#n" id="optionb" class="sel-btn"><span><?php echo element('type_word', $view); ?></span></a>
 					<ul>
-						<li class="<?php echo !in_array(element('type', $view), array('free','writer','news')) ? 'active' : ''; ?>" data-value=""><a href="#n" class="li_type"><span>통합검색</span></a></li>
+						<li class="<?php echo !in_array(element('type', $view), array('free','writer','news')) ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value=""><span>통합검색</span></a></li>
 						<li class="<?php echo element('type', $view) == 'free' ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="free"><span>자유게시판</span></a></li>
 						<li class="<?php echo element('type', $view) == 'writer' ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="writer"><span>WRITER</span></a></li>
 						<li class="<?php echo element('type', $view) == 'news' ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="news"><span>뉴스</span></a></li>
@@ -30,11 +30,13 @@
 				</div>
 				<div class="abr">
 					<div class="sel-box c02">
+						<input type="hidden" name="sfield" value="<?php echo $this->input->get('sfield'); ?>" />
 						<a href="#n" id="optionb" class="sel-btn"><span>제목 + 내용</span></a>
 						<ul>
-							<li class="active"><a href="#n"><span>제목</span></a></li>
-							<li><a href="#n"><span>내용</span></a></li>
-							<li><a href="#n"><span>작성자</span></a></li>
+							<li class="<?php echo !in_array(element('sfield', $view), array('post_title','post_content','post_nickname')) ? 'active' : ''; ?>"><a href="#n" class="li_sfield" data-value="post_both"><span>제목 + 내용</span></a></li>
+							<li class="<?php echo element('sfield', $view) == 'post_title' ? 'active' : ''; ?>"><a href="#n" class="li_sfield" data-value="post_title"><span>제목</span></a></li>
+							<li class="<?php echo element('sfield', $view) == 'post_content' ? 'active' : ''; ?>"><a href="#n" class="li_sfield" data-value="post_content"><span>내용</span></a></li>
+							<li class="<?php echo element('sfield', $view) == 'post_nickname' ? 'active' : ''; ?>"><a href="#n" class="li_sfield" data-value="post_nickname"><span>작성자</span></a></li>
 						</ul>
 					</div>
 					<div class="sel-box c03">
@@ -402,17 +404,18 @@
 	});
 
 	$(document).on('click', '.li_type', function(){
-		var value = $(this).data('value') ? $(this).data('value') : '';
+		var value = $(this).data('value');
 		$('input[name="type"]').val(value);
 	})
 
 	$(document).on('click', '.li_sfield', function(){
-		var value = $(this).data('value') ? $(this).data('value') : '';
+		var value = $(this).data('value');
+		console.log(value);
 		$('input[name="sfield"]').val(value);
 	})
 
 	$(document).on('click', '.li_type', function(){
-		var value = $(this).data('value') ? $(this).data('value') : '';
+		var value = $(this).data('value');
 		$('input[name="type"]').val(value);
 	})
 </script>

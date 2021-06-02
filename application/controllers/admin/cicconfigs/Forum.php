@@ -335,7 +335,7 @@ class Forum extends CB_Controller
 
 	public function proceeding_forum()
 	{
-		$eventname = 'event_admin_test_cicconfigs_proceeding_forum_list';
+		$eventname = 'event_admin_cicconfigs_proceeding_forum_list';
 		$this->load->event($eventname);
 
 		$view = array();
@@ -366,13 +366,13 @@ class Forum extends CB_Controller
 		$this->{$this->modelname}->search_field_equal = array('post_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('post_id', 'post_hit', 'post_datetime', 'cic_forum_info.frm_bat_close_datetime'
 																, 'cic_forum_info.frm_close_datetime', 'cic_forum_info.frm_total_money');
-		
+		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		$where = array(
 			'brd_id' => 3,
-			// 'post_category' => 1
+			'cic_forum_info.frm_close_datetime >=' => $checktime
 		);
 		
-		$result = $this->{$this->modelname}->get_post_list($per_page, $offset, $where, '1', $findex, $sfield, $skeyword);
+		$result = $this->{$this->modelname}->get_post_list($per_page, $offset, $where, '', $findex, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
@@ -410,6 +410,89 @@ class Forum extends CB_Controller
 	$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
 	$layoutconfig = array('layout' => 'layout', 'skin' => 'proceeding_forum');
+		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
+	}
+
+	public function close_forum()
+	{
+		$eventname = 'event_admin_cicconfigs_close_forum_list';
+		$this->load->event($eventname);
+
+		$view = array();
+		$view['view'] = array();
+		
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		
+		$param =& $this->querystring;
+		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
+		$view['view']['sort'] = array(
+			'post_id' => $param->sort('post_id', 'asc'),
+			'post_hit' => $param->sort('post_hit', 'asc'),
+			'post_datetime' => $param->sort('post_datetime', 'asc'),
+			'cic_forum_info.frm_bat_close_datetime' => $param->sort('cic_forum_info.frm_bat_close_datetime', 'asc'),
+			'cic_forum_info.frm_close_datetime' => $param->sort('cic_forum_info.frm_close_datetime', 'asc'),
+			'cic_forum_info.frm_total_money' => $param->sort('cic_forum_info.frm_total_money', 'asc'),
+		);
+		$findex = $this->input->get('findex', null, 'post_id');
+		$forder = $this->input->get('forder', null, 'desc');
+		$findex = $findex.' '.$forder;
+		$sfield = $this->input->get('sfield', null, '');
+		$skeyword = $this->input->get('skeyword', null, '');
+		
+		$per_page = admin_listnum();
+		$offset = ($page - 1) * $per_page;
+		
+		$this->{$this->modelname}->allow_search_field = array('post_id', 'post_title', 'post_content'); // 검색이 가능한 필드
+		$this->{$this->modelname}->search_field_equal = array('post_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->{$this->modelname}->allow_order_field = array('post_id', 'post_hit', 'post_datetime', 'cic_forum_info.frm_bat_close_datetime'
+																, 'cic_forum_info.frm_close_datetime', 'cic_forum_info.frm_total_money');
+		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+		$where = array(
+			'brd_id' => 3,
+			'cic_forum_info.frm_close_datetime <' => $checktime
+		);
+		
+		$result = $this->{$this->modelname}->get_post_list($per_page, $offset, $where, '', $findex, $sfield, $skeyword);
+		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
+
+		if (element('list', $result)) {
+			foreach (element('list', $result) as $key => $val) {
+				$result['list'][$key]['post_display_name'] = display_username(
+					element('post_userid', $val),
+					element('post_nickname', $val)
+				);
+				$result['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+				$result['list'][$key]['num'] = $list_num++;
+				if ($board) {
+					$result['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+					$result['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+				}
+			}
+		}
+
+		$view['view']['data'] = $result;
+
+		$view['view']['primary_key'] = $this->Post_model->primary_key;
+
+		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['total_rows'] = $result['total_rows'];
+		$config['per_page'] = $per_page;
+		$this->pagination->initialize($config);
+		$view['view']['paging'] = $this->pagination->create_links();
+		$view['view']['page'] = $page;
+
+
+		$search_option = array('post_title' => '제목', 'post_content' => '내용');
+		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
+		$view['view']['search_option'] = search_option($search_option, $sfield);
+		$view['view']['listall_url'] = admin_url($this->pagedir);
+
+	$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+	$layoutconfig = array('layout' => 'layout', 'skin' => 'close_forum');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));

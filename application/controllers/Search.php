@@ -72,6 +72,20 @@ class Search extends CB_Controller
 		}
 		$view['view']['type'] = $type;
 		$view['view']['type_word'] = $type_word;
+
+		
+		if($this->input->get('sfield') == 'post_title'){
+			$sfield_word = '제목';
+		} else if($this->input->get('sfield') == 'post_content'){
+			$sfield_word = '내용';
+		} else if($this->input->get('sfield') == 'post_nickname'){
+			$sfield_word = '작성자';
+		} else {
+			$sfield_word = '제목 + 내용';
+		}
+		$view['view']['sfield'] = $this->input->get('sfield');
+		$view['view']['sfield_word'] = $sfield_word;
+
 		$skeyword = $this->input->get('skeyword', null, '');
 		if (empty($skeyword)) {
 
