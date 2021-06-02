@@ -30,7 +30,7 @@
 							<tr>
 								<th><a href="<?php echo element('cme_orderby', element('sort', $view)); ?>">번호</a></th>
 								<th>제목</th>
-								<th>마켓</th>
+								<th>내용</th>
 								<th>기본노출설정</th>
 								<th>순서변경</th>
 								<th>수정</th>
@@ -45,7 +45,7 @@
 							<tr data-idx="<?php echo element('post_id', $result)?>">
 								<td><?php echo number_format(element('num', $result)); ?></td>
 								<td><?php echo html_escape(element('post_title', $result)); ?></td>
-								<td><?php echo html_escape(element('cme_market', $result)); ?></td>
+								<td><?php echo html_escape(element('post_content', $result)); ?></td>
 								<td><?php echo (element('cme_default', $result) == 1) ? '기본' : ''; ?></td>
 								<td><span class="orderby_up" style="cursor:pointer;">업</span> / <span class="orderby_down" style="cursor:pointer;">다운</span></td>
 								<td><a href="<?php echo admin_url($this->pagedir); ?>/exchange_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>

@@ -54,16 +54,19 @@
 								<td><span class="orderby_up" style="cursor:pointer;">업</span> / <span class="orderby_down" style="cursor:pointer;">다운</span></td>
 								<td><a href="<?php echo admin_url($this->pagedir); ?>/exchange_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
 								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td> -->
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><?php echo number_format(element('num', $result)); ?></td>
+                                <td><img src="<?php echo banner_image_url(element('frm_image', $result), '', 150); ?>" class="thumbnail mg0" style="width:80px;" /></td>
+                                <td>
+									<?php if (element('category', $result)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $result))); ?></span><?php } ?>
+									<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><?php echo html_escape(element('post_title', $result)); ?></a>
+								</td>
+                                <td><?php echo element('post_display_name', $result); ?> <?php if (element('post_userid', $result)) { ?> ( <a href="?sfield=mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('post_userid', $result)); ?></a> ) <?php } ?></td>
+                                <td><?php echo number_format(element('post_hit', $result)); ?></td>
+                                <td><?php echo display_datetime(element('post_datetime', $result), 'full'); ?></td>
+                                <td><?php echo display_datetime(element('frm_bat_close_datetime', $result), 'full'); ?></td>
+								<td><?php echo display_datetime(element('frm_close_datetime', $result), 'full'); ?></td>
+                                <td><?php echo number_format(element('frm_total_money', $result), 2); ?></td>
+                                <td><a href="<?php echo admin_url($this->pagedir); ?>/exchange_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
 							</tr>
 						<?php
 							}

@@ -132,7 +132,6 @@ class CIC_forum_model extends CB_Model
 		}
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
-		print_r($result['list']);
 
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
@@ -173,9 +172,6 @@ class CIC_forum_model extends CB_Model
 		$qry = $this->db->get();
 		$rows = $qry->row_array();
 		$result['total_rows'] = $rows['rownum'];
-
-		// print_r($result);
-		exit;
 
 		return $result;
 	}

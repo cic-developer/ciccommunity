@@ -220,20 +220,15 @@ class Forum extends CB_Controller
 			'brd_id' => 6,
 			'post_del <>' => 2,
 		);
-
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;
 		}
 
 		
 		$result = $this->Post_model->
-			get_post_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR');
+			get_post_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
-		print_r($this->db->last_query());
-		exit;
-		// print_r($where);
-		// exit;
-
+		
 		
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
@@ -264,13 +259,8 @@ class Forum extends CB_Controller
 			}
 		}
 		
-
-		$view['view']['data'] = $result;
 		
-		$where = array(
-			'brd_id' => 6
-		);
-		$view['view']['boardlist'] = $this->Board_model->get_board_list($where);
+		$view['view']['data'] = $result;
 
 		$view['view']['primary_key'] = $this->Post_model->primary_key;
 
