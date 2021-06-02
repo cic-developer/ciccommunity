@@ -32,11 +32,11 @@
 								<th>이미지</th>
 								<th>제목</th>
 								<th>작성자</th>
-								<th>조회</th>
-								<th>날짜</th>
-								<th>배팅마감</th>
-								<th>포럼마감</th>
-								<th>참여금액</th>
+								<th><a href="<?php echo element('post_hit', element('sort', $view)); ?>">조회</a></th>
+								<th><a href="<?php echo element('post_datetime', element('sort', $view)); ?>">날짜</a></th>
+								<th><a href="<?php echo element('cic_forum_info.frm_bat_close_datetime', element('sort', $view)); ?>">배팅마감</a></th>
+								<th><a href="<?php echo element('cic_forum_info.frm_close_datetime', element('sort', $view)); ?>">포럼마감</a></th>
+								<th><a href="<?php echo element('cic_forum_info.frm_total_money', element('sort', $view)); ?>">참여금액</a></th>
 								<th>수정</th>
 								<!-- <th><input type="checkbox" name="chkall" id="chkall" /></th> -->
 							</tr>
@@ -47,15 +47,8 @@
 							foreach (element('list', element('data', $view)) as $result) {
 						?>
 							<tr data-idx="<?php echo element('post_id', $result)?>">
-								<!-- <td><?php echo number_format(element('num', $result)); ?></td>
-								<td><?php echo html_escape(element('post_title', $result)); ?></td>
-								<td><?php echo html_escape(element('cme_market', $result)); ?></td>
-								<td><?php echo (element('cme_default', $result) == 1) ? '기본' : ''; ?></td>
-								<td><span class="orderby_up" style="cursor:pointer;">업</span> / <span class="orderby_down" style="cursor:pointer;">다운</span></td>
-								<td><a href="<?php echo admin_url($this->pagedir); ?>/exchange_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
-								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td> -->
                                 <td><?php echo number_format(element('num', $result)); ?></td>
-                                <td><img src="<?php echo banner_image_url(element('frm_image', $result), '', 150); ?>" class="thumbnail mg0" style="width:80px;" /></td>
+                                <td><img src="<?php echo forum_banner_image_url(element('frm_image', $result), '', 150); ?>" class="thumbnail mg0" style="width:80px;" /></td>
                                 <td>
 									<?php if (element('category', $result)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $result))); ?></span><?php } ?>
 									<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><?php echo html_escape(element('post_title', $result)); ?></a>

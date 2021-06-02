@@ -219,6 +219,7 @@ class Forum extends CB_Controller
 		$where = array(
 			'brd_id' => 6,
 			'post_del <>' => 2,
+			'post_category' => 1,
 		);
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;
@@ -271,7 +272,6 @@ class Forum extends CB_Controller
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;
 
-
 		$search_option = array('post_title' => '제목', 'post_content' => '내용');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
@@ -284,5 +284,19 @@ class Forum extends CB_Controller
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
+	}
+
+	public function update_forum_approval($post_id = 0)
+	{
+		$eventname = 'event_admin_ciccinfigs_update_forum_approval';
+		$this->load->event($eventname);
+
+		$view = array();
+		$view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		
 	}
 }

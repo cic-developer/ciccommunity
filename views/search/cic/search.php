@@ -72,7 +72,7 @@
 			</div>
 			<div class="result">
 				<p class="btxt"><span><?php echo element('highlight_keyword', $view);?></span> 에 대한 통합검색 총</p>
-				<p class="stxt"><?php echo $total_rows; ?>건</p>
+				<p class="stxt"><?php echo number_format($total_rows); ?>건</p>
 			</div>
 			<!-- PAGE 검색 기능 끝 -->
 			<!-- HERE THE MARKET PRICE VALUES -->
@@ -91,10 +91,10 @@
 									<<img style= "width: 30px; padding-right:10px;" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
 									<?php } ?>
 								<strong class="btxt"><?php echo $korean; ?></strong>
-								<p class="stxt">
+								<p class="stxt" style="display:none;">
 									<span> <?php echo $symbole; ?></span>
 									<u class="btc" >
-										<small hidden class="doller">1.0000BTC $30,971</small>
+										<small class="doller">1.0000BTC $30,971</small>
 									</u>
 								</p>	
 							</div>
@@ -332,20 +332,20 @@
 							</a>
 						</li> -->
 						<?php
-						if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result) {
+						if (element('list', element('news_data', $view))) {
+							foreach (element('list', element('news_data', $view)) as $result) {
 						?>
 						<li>
-							<a href="#n">
-								<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png')?>" alt=""></div>
+							<a href="<?php echo site_url('/news/news_url/'.element('news_id', $result)); ?>">
+								<div class="img"><img src="<?php echo html_escape(element('news_image', $result)) ?>" alt=""></div>
 								<div class="txt">
 									<div class="vc">
-										<p class="btxt">김창룡 경찰청장 “공직자 부동산 투기는 구속수사 <span>(5)</span></p>	
-										<p class="stxt">세종 경찰관 투기 의혹 내사 착수 [더백트 | 장우성 기자] 김창룡 경찰청장은 내부정보를 예시 텍스트 입니다 ... </p>
+										<p class="btxt"><?php echo html_escape(element('news_title', $result)); ?><span>(<?php echo number_format(element('news_reviews', $result)); ?>)</span></p>	
+										<p class="stxt"><?php echo html_escape(element('news_contents', $result)); ?></p>
 										<p class="ctxt">
-											<span>블록미디어</span>
-											<span>02:18</span>
-											<span>조회 82</span>
+											<span><?php echo html_escape(element('comp_name', element('company', $result))); ?></span>
+											<span><?php echo display_datetime(element('news_wdate', $result)); ?></span>
+											<span>조회 <?php echo number_format(element('news_reviews', $result)); ?></span>
 										</p>
 									</div>
 								</div>
@@ -362,8 +362,7 @@
 					</ul>
 				</div>
 			<!-- s: paging-wrap -->
-			<div class="paging-wrap">
-				<!-- <a href="#" class="prev ctrl"><span>이전</span></a> -->
+			<!-- <div class="paging-wrap">
 				<ul>
 					<li><a href="#" class="active">1</a></li>
 					<li><a href="#n">2</a></li>
@@ -373,7 +372,7 @@
 				</ul>
 				<p class="num"><span>1</span> / 10 </p>
 				<a href="#" class="next ctrl"><span>다음</span></a>
-			</div>
+			</div> -->
 			<!-- e: paging-wrap -->
 		</div>		
 		<!-- page end // -->

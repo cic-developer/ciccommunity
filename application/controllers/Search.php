@@ -106,7 +106,7 @@ class Search extends CB_Controller
 		$this->Post_model->allow_search_field = array('post_title', 'post_content', 'post_userid', 'post_nickname'); // 검색이 가능한 필드
 		$this->Post_model->search_field_equal = array('post_userid'); // 검색중 like 가 아닌 = 검색을 하는 필드
 
-		$per_page = 15;
+		$per_page = 10;
 		$offset = ($page - 1) * $per_page;
 
 		$group_id = (int) $this->input->get('group_id') ? (int) $this->input->get('group_id') : '';
@@ -167,7 +167,21 @@ class Search extends CB_Controller
 				$result['list'][$key]['is_mobile'] = (element('post_device', $val) === 'mobile') ? true : false;
 			}
 		}
+
+		$this->News_model->allow_search_field = array('news_title', 'news_contents'); // 검색이 가능한 필드
+		$this->News_model->allow_order = array('news_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$findex = 'news_id';
+		$sop = $this->input->get('sop', null, '');
 		
+		$sfield = $sfield2 = $this->input->get('sfield', null, '');
+		if ($sfield === 'post_both') {
+			$sfield = array('news_title', 'news_contents');
+		} else if($sfield === 'post_title') {
+			$sfield = 'news_title';
+		} else if($sfield === 'post_content'){
+			$sfield = 'news_contents';
+		}
+
 		$news_result = $this->News_model
 			->get_search_list($per_page, $offset, array(), $like, $findex, $sfield, $skeyword, $sop);
 

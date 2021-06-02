@@ -117,7 +117,7 @@
 												<p class="ctxt">
 													<span><?php echo html_escape(element('comp_name', element('company', $result))); ?></span>
 													<span><?php echo display_datetime(element('news_wdate', $result)); ?></span>
-													<span><?php echo number_format(element('news_reviews', $result)); ?></span>
+													<span>조회 <?php echo number_format(element('news_reviews', $result)); ?></span>
 												</p>
 										</div>
 									</div>

@@ -278,8 +278,9 @@ class News_model extends CB_Model
 		}
 
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
+
 		if (empty($sfield)) {
-			$sfield = array('news_title', 'news_content');
+			$sfield = array('news_title', 'news_contents');
 		}
 
 		$search_where = array();

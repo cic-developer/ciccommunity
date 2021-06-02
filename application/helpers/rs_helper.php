@@ -12,8 +12,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 포럼 배너 가져오기
  */
-if ( ! function_exists('banner_image_url')) {
-	function banner_image_url($img = '', $width = '', $height = '')
+if ( ! function_exists('forum_banner_image_url')) {
+	function forum_banner_image_url($img = '', $width = '', $height = '')
 	{
 		if (empty($img)) {
 			return false;

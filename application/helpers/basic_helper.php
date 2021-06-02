@@ -560,7 +560,6 @@ if ( ! function_exists('banner_image_url')) {
 	}
 }
 
-
 /**
  * 배너 출력하기
  */
