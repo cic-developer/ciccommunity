@@ -1479,8 +1479,10 @@ class Board_post extends CB_Controller
 			if(!$category_id) {
 				$category_id = 1;
 			}
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+			$where['post_datetime <='] = $checktime;
 		}
-		// cic 진행중 포럼 && cic 마감 포럼
+		// cic 대기 포럼 & 반려
 		if($board['brd_id'] == 6){
 			$category_id = $this->input->get('category_id');
 			if(!$category_id) {
