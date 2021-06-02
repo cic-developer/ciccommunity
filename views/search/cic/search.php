@@ -9,32 +9,15 @@
 			<div class="filter">
 				<div class="sel-box c01">
                     <!-- PAGE 검색 기능 START -->
-					<?php  if($_GET['sfield'] === "post_title"){ ?>
-						<a href="#n" id="optionb" class="sel-btn"><span>제목</span></a>	
-					<?php } elseif($_GET['sfield'] === "post_content"){ ?>
-						<a href="#n" id="optionb" class="sel-btn"><span>내용</span></a>	
-					<?php } elseif($_GET['sfield'] === "post_nickname"){ ?>
-						<a href="#n" id="optionb" class="sel-btn"><span>작석자</span></a>
-					<?php }	
-							else { ?>
-						<a href="#n" id="optionb" class="sel-btn"><span>통합검색</span></a>
-					<?php } ?>
+					<input type="hidden" name="" value="" />
+					<a href="#n" id="optionb" class="sel-btn"><span>통합검색</span></a>
 					<ul>
-						<li class="active"><a href="<?php base_url() ?>?sfield=post_both&skeyword=<?php echo $this->input->get('skeyword')?>"><span>통합검색</span></a></li>
-						<li name="option" class="post_title"><a href="<?php base_url() ?>?sfield=post_title&skeyword=<?php echo $this->input->get('skeyword')?>"><span>제목</span></a></li>
-						<li name="option" class="post_content"><a href="<?php base_url() ?>?sfield=post_content&skeyword=<?php echo $this->input->get('skeyword')?>"><span>내용</span></a></li>
-						<li name="option" class="post_nickname"><a href="<?php base_url() ?>?sfield=post_nickname&skeyword=<?php echo $this->input->get('skeyword')?>"><span>작성자</span></a></li>
+						<li class="active"><a href="#n"><span>통합검색</span></a></li>
+						<li><a href="#n"><span>자유게시판</span></a></li>
+						<li><a href="#n"><span>WRITER</span></a></li>
+						<li><a href="#n"><span>뉴스</span></a></li>
 					</ul>		
 				</div>
-				<script>
-					// $(document).ready(function(){
-					// $("#optionb").on("click", function(event) {
-					// 	$("#theme-title").html(       
-					// 	$(this).attr("class")
-					// 	);
-					// });
-					// });
-				</script>
 				<div class="field search">
                     <?php 
 						$attributes = array('class' => 'search_box', 'name' => 'searchForm', 'id' => 'searchForm', 'method'=> 'get', 'action' => base_url('/search'));
@@ -47,16 +30,11 @@
 				</div>
 				<div class="abr">
 					<div class="sel-box c02">
-					<?php if($_GET['sop'] === "AND"){ ?>
-						<a href="#n" class="sel-btn"><span>제목만</span></a>
-					<?php }	else { ?>
-						<a href="#n" id="optionb" class="sel-btn"><span>내용만</span></a>
-					<?php } ?>
+						<a href="#n" id="optionb" class="sel-btn"><span>제목 + 내용</span></a>
 						<ul>
-							<li class="active"><a href="<?php base_url() ?>?sfield=<?php echo $this->input->get('sfield')?>
-								&sop=AND&skeyword=<?php echo $this->input->get('skeyword')?>"><span>제목만</span></a></li>
-							<li><a href="<?php base_url() ?>??sfield=<?php echo $this->input->get('sfield')?>
-								&sop=OR&skeyword=<?php echo $this->input->get('skeyword')?>"><span>내용만</span></a></li>
+							<li class="active"><a href="#n"><span>제목</span></a></li>
+							<li><a href="#n"><span>내용</span></a></li>
+							<li><a href="#n"><span>작성자</span></a></li>
 						</ul>
 					</div>
 					<div class="sel-box c03">

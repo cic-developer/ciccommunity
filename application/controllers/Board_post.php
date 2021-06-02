@@ -18,7 +18,7 @@ class Board_post extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Post', 'Post_meta', 'Post_extra_vars', 'CIC_member_level_config', 'CIC_forum', 'Board_category');
+	protected $models = array('Post', 'Post_meta', 'Post_extra_vars', 'CIC_member_level_config', 'CIC_forum', 'CIC_forum_config','Board_category');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -1475,12 +1475,15 @@ class Board_post extends CB_Controller
 		}
 		// cic 진행중 포럼 && cic 마감 포럼
 		if($board['brd_id'] == 3){
-			$category_id = $this->input->get('category_id');
-			if(!$category_id) {
-				$category_id = 1;
-			}
+			// $category_id = $this->input->get('category_id');
+			// if(!$category_id) {
+			// 	$category_id = 1;
+			// }
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-			$where['post_datetime <='] = $checktime;
+			$where['post.frm_close_datetime >='] = $checktime;
+
+			$result = $this->CIC_forum_model
+				->get_post_list($per_page, $offset, $where, $category_id, $findex, $sfield, $skeyword);
 		}
 		// cic 대기 포럼 & 반려
 		if($board['brd_id'] == 6){
@@ -1490,8 +1493,10 @@ class Board_post extends CB_Controller
 			}
 		}
 		
-		$result = $this->Post_model
-			->get_post_list($per_page, $offset, $where, $category_id, $findex, $sfield, $skeyword);
+		if($board['brd_id'] != 3) { // && $board['brd_id'] != 6){
+			$result = $this->Post_model
+				->get_post_list($per_page, $offset, $where, $category_id, $findex, $sfield, $skeyword);
+		}
 			
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		if (element('list', $result)) {
