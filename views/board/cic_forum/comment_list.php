@@ -77,6 +77,7 @@
 <div class="paging-wrap">
 	<?php echo element('paging', $view); ?>
 </div>
+
 <!-- e: paging-wrap -->
 <!-- s: layer-wrap.singo -->
 <div class="layer-wrap singo">
@@ -87,14 +88,14 @@
 	<div class="is-con">
 		<div class="sel">
 			<p class="chk-radio">
-				<input type="radio" name="jselGroup" id="jsel01" checked=""><label
+				<input type="radio" name="jselGroup" id="jsel01" checked /><label
 					for="jsel01">욕설/비방</label>
 			</p>
 			<p class="chk-radio">
-				<input type="radio" name="jselGroup" id="jsel02"><label for="jsel02">홍보/상업성</label>
+				<input type="radio" name="jselGroup" id="jsel02" /><label for="jsel02">홍보/상업성</label>
 			</p>
 			<p class="chk-radio">
-				<input type="radio" name="jselGroup" id="jsel03"><label for="jsel03">기타</label>
+				<input type="radio" name="jselGroup" id="jsel03" /><label for="jsel03">기타</label>
 			</p>
 		</div>
 		<textarea placeholder="신고내용을 작성해주세요"></textarea>
@@ -105,12 +106,35 @@
 	</div>
 </div>
 <!-- s: layer-wrap.singo -->
+<!-- s: layer-wrap userInfo -->
+<div class="layer-wrap userInfo">
+	<p>포럼 전적 <span>7승3패</span></p>
+</div>
+<!-- e: layer-wrap userInfo -->
+
 <script>
 	$(function () {
+		$('.info').find('.nickname').click(function () {
+			var isParent = $(this).closest('.info');
+			$(this).closest('.list').find('.item').removeClass('zdex')
+			$(this).closest('.item').addClass('zdex');
+			$('.layer-wrap.userInfo').bPopup({
+				closeClass: "userInfo-close",
+				speed: 0,
+				appendTo: isParent,
+				follow: [false, false],
+				position: [false, false],
+				onClose: function () {
+					$('.cmmt').find('.item').removeClass('zdex');
+				},
+				modalColor: 'transparent',
+				modal: true,
+			});
+		});
 		var istotal = $('.cmmt').find('.item').length;
 		var ischk = (istotal / 2) + 1
 		$('.cmmt').find('.item:nth-child(n+' + ischk + ')').addClass('vfm');
-		/*$('.ctrls').find('.cmmt-btn').click(function () {
+		$('.ctrls').find('.cmmt-btn').click(function () {
 			$('.cmmt-wrap').find('.singo-btn').removeClass('active');
 			if ($(this).hasClass('active')) {
 				$(this).removeClass('active');
@@ -172,7 +196,114 @@
 			});
 		});
 	})
+</script>
+
+<script>
+	$(function () {
+		$('.poll-wrap').find('.cont').find('a').click(function () {
+			if ($(this).closest('li').hasClass('active')) {
+				$(this).closest('li').find('a').removeClass('active');
+			} else {
+				$(this).closest('li').find('a').addClass('active');
+			}
+			$(this).closest('li').siblings('li').find('a').removeClass('active');
+		});
+
+		$('.poll-wrap').find('.cont').find('li').each(function () {
+			var isbar = $(this).find('.percent > span').text();
+			$(this).find('.vbar').delay(300).animate({
+				'height': isbar
+			}, 450);
+		});
+
+		$('.poll-wrap').find('.btns > .enter').click(function () {
+			if ($(this).closest('.poll-wrap').hasClass('active')) {
+				$(this).closest('.poll-wrap').removeClass('active');
+				$('.poll-wrap').find('.result').hide();
+			} else {
+				$(this).closest('.poll-wrap').addClass('active');
+				$('.poll-wrap').find('.result').show();
+			}
+
+		});
+		$('.cmmt-like').click(function () {
+			if ($(this).hasClass('active')) {
+				$(this).removeClass('active');
+			} else {
+				$(this).addClass('active');
+			}
+		})
+	})
+</script>
+
+<!-- <script>
+	$(function () {
+		var istotal = $('.cmmt').find('.item').length;
+		var ischk = (istotal / 2) + 1
+		$('.cmmt').find('.item:nth-child(n+' + ischk + ')').addClass('vfm');
+		/*$('.ctrls').find('.cmmt-btn').click(function () {
+			$('.cmmt-wrap').find('.singo-btn').removeClass('active');
+			if ($(this).hasClass('active')) {
+				$(this).removeClass('active');
+				$(this).closest('.vcon').removeClass('active');
+				$(this).closest('.reply').removeClass('active');
+				$(this).closest('.ctrls').removeClass('active');
+			} else {
+				$(this).addClass('active');
+				$(this).closest('.vcon').addClass('active');
+				$(this).closest('.reply').addClass('active');
+				$(this).closest('.ctrls').addClass('active');
+			}
+			$('.layer-wrap.singo').bPopup({
+				speed: 0,
+				follow: [false, false],
+				position: [false, false],
+				modalColor: false,
+				modal: false,
+				onClose: function () {
+					$('.cmmt').find('.cread').removeClass('cread')
+				},
+			}).close();
+		});*/
+		$('.cmmt-wrap').find('.singo-btn').click(function () {
+			$('.cmmt-wrap').find('.singo-btn').removeClass('active');
+			$(this).addClass('active');
+			$('.layer-wrap.singo').bPopup({
+				speed: 0,
+				follow: [false, false],
+				position: [false, false],
+				modalColor: false,
+				modal: false,
+				onClose: function () {
+					$('.cmmt').find('.cread').removeClass('cread')
+				},
+			}).close();
+			var obj = $(this).position();
+			var abj = $(this).position();
+			var thispar = $(this).closest('.ctrls');
+			$(this).closest('.ctrls').parent().addClass('cread');
+			$(this).closest('.ctrls').parent().parent('li').addClass('cread');
+			$('.layer-wrap.singo').css({
+				'top': obj.top,
+				'left': obj.left,
+				'margin-top': '20px',
+				'margin-left': '0'
+			});
+			$('.layer-wrap.singo').bPopup({
+				closeClass: "singo-close",
+				speed: 0,
+				appendTo: $(thispar),
+				onClose: function () {
+					$('.cmmt').find('.cread').removeClass('cread')
+				},
+				follow: [false, false],
+				position: [false, false],
+				modalColor: false,
+				modal: false,
+			});
+		});
+	})
 
 
 	
-</script>
+</script> -->

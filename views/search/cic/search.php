@@ -66,7 +66,7 @@
 						<div class="right_content_all">
 							<div style="text-align:left; border-bottom:5px solid #ddd; padding-bottom:5px;">
 								<?php if($symbole == "PER"){ ?>
-									<img src="https://upload-hotbit-co-kr.oss-ap-southeast-1.aliyuncs.com/NEW_PER_LOGO.png" alt="퍼토큰 로고"/>
+									<img src="https://upload-hotbit-co-kr.oss-ap-southeast-1.aliyuncs.com/NEW_PER_LOGO.png" alt="퍼토큰 로고" style="width:30px; height:auto; padding-right:10px;" />
 								<?php }else {?>
 									<img style= "width: 30px; padding-right:10px;" src="https://static.upbit.com/logos/<?php echo $symbole; ?>.png"></img>
 								<?php } ?>
@@ -167,7 +167,7 @@
 					<?php
 					if(element('is_all', $view)){
 					?>
-						<a href="#n" class="more"><span>more</span></a>
+						<a href="javascript:void(0);" class="more" data-type="free"><span>more</span></a>
 					<?php 
 					}
 					?>
@@ -243,7 +243,7 @@
 					<?php
 					if(element('is_all', $view)){
 					?>
-						<a href="#n" class="more"><span>more</span></a>
+						<a href="javascript:void(0);" class="more" data-type="writer"><span>more</span></a>
 					<?php 
 					}
 					?>
@@ -317,7 +317,7 @@
 					<?php
 					if(element('is_all', $view)){
 					?>
-					<a href="#n" class="more"><span>more</span></a>
+					<a href="javascript:void(0);" class="more" data-type="news"><span>more</span></a>
 					<?php 
 					}
 					?>
@@ -382,7 +382,7 @@
 <!-- CHARTJS CANVAS 시작 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script>
-	<?php if($trade){ ?>
+	<?php if($trade && element('is_all', $view)){ ?>
 	var ctx = document.getElementById('canvas').getContext('2d');
 	var label = '<?php echo $symbole; ?>';
 	var time = new Array();
@@ -447,8 +447,15 @@
 		$('input[name="sfield"]').val(value);
 	})
 
-	$(document).on('click', '.li_type', function(){
-		var value = $(this).data('value');
-		$('input[name="type"]').val(value);
+	// $(document).on('click', '.li_type', function(){
+	// 	var value = $(this).data('value');
+	// 	$('input[name="type"]').val(value);
+	// })
+
+	$(document).on('click', '.more', function(){
+		var type = $(this).data('type');
+		$('input[name="type"]').val(type);
+		// $('#searchForm').submit();
+		$('.enter').trigger('click');
 	})
 </script>

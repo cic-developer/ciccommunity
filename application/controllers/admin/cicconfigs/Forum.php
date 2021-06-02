@@ -276,7 +276,7 @@ class Forum extends CB_Controller
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
-		$view['view']['update_disapproval_return_url'] = admin_url($this->pagedir . '/update_disapproval_return/?' . $param->output());
+		$view['view']['bestpostexept_url'] = admin_url($this->pagedir . '/bestpostexept/?' . $param->output());
 
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
@@ -307,13 +307,33 @@ class Forum extends CB_Controller
 	// 	$primary_key = $this->Post_model->primary_key;
 	// }
 
-	public function update_disapproval_return()
+	// public function update_disapproval_return()
+	// {
+	// 	$eventname = 'event_admin_update_disapproval_return';
+	// 	$this->load->event($eventname);
+	// 	Events::trigger('before', $eventname);
+	// 	if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
+	// 		foreach ($this->input->post('chk') as $val) {
+	// 			if ($val) {
+	// 				$this->Post_model->upadte_forum_return($val);
+	// 			}
+	// 		}
+	// 	}
+	// 	Events::trigger('after', $eventname);
+	// 	$this->session->set_flashdata(
+	// 		'message',
+	// 		'선택하신 포럼이 반려되었습니다.'
+	// 	);
+	// 	$param =& $this->querystring;
+	// 	$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+	// 	redirect($redirecturl);
+	// }
+
+		public function bestpostexept()
 	{
 		$eventname = 'event_admin_update_disapproval_return';
 		$this->load->event($eventname);
-
 		Events::trigger('before', $eventname);
-
 		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
 			foreach ($this->input->post('chk') as $val) {
 				if ($val) {
@@ -321,16 +341,11 @@ class Forum extends CB_Controller
 				}
 			}
 		}
-
-
 		Events::trigger('after', $eventname);
-
-
 		$this->session->set_flashdata(
 			'message',
-			'선택하신 포럼이 반려되었습니다.'
+			'베스트 게시물에서 제외되었습니다'
 		);
-		
 		$param =& $this->querystring;
 		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
 		redirect($redirecturl);
