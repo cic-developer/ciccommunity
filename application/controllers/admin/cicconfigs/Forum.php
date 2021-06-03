@@ -555,13 +555,13 @@ class Forum extends CB_Controller
 				),
 				array(
 					'field' => 'comp_segment',
-					'lable' => 'Segment',
-					'rules' => 'trim|required|min_length[2]|max_length[30]',
+					'lable' => '배팅 마감일',
+					'rules' => 'trim|alpha_dash|exact_length[10]',
 				),
 				array(
 					'field' => 'comp_img_select',
-					'lable' => 'Image_Select',
-					'rules' => 'trim|required|min_length[2]|max_length[30]',
+					'lable' => '포럼 마감일',
+					'rules' => 'ttrim|alpha_dash|exact_length[10]',
 				),
 			);
 
