@@ -2273,7 +2273,7 @@ class Postact extends CB_Controller
 			// 게시글 확인
 			$this->load->model('Post_model');
 			$post = $this->Post_model->get_one($post_id);
-			if($post){
+			if(!$post){
 				$result = array(
 					'state' => '0',
 					'message' => '존재하지 않는 게시물입니다',
@@ -2369,11 +2369,6 @@ class Postact extends CB_Controller
 		
 		$config = array(
 			array(
-				'field' => 'usePoint',
-				'label' => '배팅금액',
-				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to['.$member_info['mem_cp'].']',
-			),
-			array(
 				'field' => 'post_id',
 				'label' => '게시물번호',
 				'rules' => 'trim|required|greater_than_equal_to[0]',
@@ -2397,14 +2392,13 @@ class Postact extends CB_Controller
 			$mem_id = $member_info['mem_id'];
 			$mem_cp = $member_info['mem_cp'];
 
-			$usePoint = (int) $this->input->post('usePoint');
 			$post_id = (int) $this->input->post('post_id');
 			$option = (int) $this->input->post('option');
 
 			// 게시글 확인
 			$this->load->model('Post_model');
 			$post = $this->Post_model->get_one($post_id);
-			if($post){
+			if(!$post){
 				$result = array(
 					'state' => '0',
 					'message' => '존재하지 않는 게시물입니다',
@@ -2420,7 +2414,13 @@ class Postact extends CB_Controller
 			);
 			$this->load->model('CIC_forum_model');
 			$isBat = $this->CIC_forum_model->get_forum_bat($where);
-			if($isBat){
+			if(!$isBat){
+				$result = array(
+					'state' => '0',
+					'message' => '최초 1회 참여후 이용해주세요',
+				);
+				exit(json_encode($result));
+			}else {
 				$result = array(
 					'state' => '1',
 					'message' => '추가참여 가능',
@@ -2432,7 +2432,7 @@ class Postact extends CB_Controller
 
 	/**
 	 * 포럼 게시물 추가투표(배팅,참여) 하기
-	 */
+	  */
 	public function more_bat_cp(){
 
 		// 이벤트 라이브러리를 로딩합니다
@@ -2496,7 +2496,7 @@ class Postact extends CB_Controller
 			// 게시글 확인
 			$this->load->model('Post_model');
 			$post = $this->Post_model->get_one($post_id);
-			if($post){
+			if(!$post){
 				$result = array(
 					'state' => '0',
 					'message' => '존재하지 않는 게시물입니다',
@@ -2512,12 +2512,52 @@ class Postact extends CB_Controller
 			);
 			$this->load->model('CIC_forum_model');
 			$isBat = $this->CIC_forum_model->get_forum_bat($where);
-			if($isBat){
+			if(!$isBat){
 				$result = array(
-					'state' => '1',
-					'message' => '추가참여 가능',
+					'state' => '0',
+					'message' => '최초 1회 참여후 이용해주세요',
 				);
 				exit(json_encode($result));
+			}else {
+				/**
+				 * 포인트 차감
+				 * member
+				 */
+				$this->load->model('Member_model');
+				$result = $this->Member_model->set_user_point($mem_id, $usePoint, $mem_cp);
+				if($result != 1){
+					$result = array(
+						'state' => '0',
+						'message' => '배팅에 실패하셨습니다 (관리자 문의)',
+					);
+					exit(json_encode($result));
+				}else {
+					/**
+					 * cp 기록
+					 * cic_cp
+					 */
+					$this->load->model('CIC_cp_model');
+					$this->CIC_cp_model->set_cic_cp($mem_id, '-', -$usePoint, '@byself', $mem_id, '추가포럼배팅');
+
+					/**
+					 * 배팅
+					 * cic_forum_cp
+					 */
+					$insertdata = array(
+						'pst_id' => $post_id,
+						'mem_id' => $mem_id,
+						'cfc_option' => $option,
+						'cfc_cp' => $usePoint,
+					);
+					$this->load->model('CIC_forum_model');
+					$this->CIC_forum_model->insert($insertdata);
+
+					$result = array(
+						'state' => '1',
+						'message' => '성공적으로 처리되었습니다',
+					);
+					exit(json_encode($result));
+				}
 			}
 		}
 	}

@@ -166,6 +166,7 @@
 	var my_bat = "<?php echo element('my_bat', $forum); ?>"
 
 	$(document).on('click', '#more_btn', function(){
+		alert(my_bat);
 		update_forum_cp(post_id, my_bat);
 	})
 
@@ -181,8 +182,7 @@
 	})
 
 	function update_forum_cp(post_id, option){
-
-		const allowed_option = [1, 2];
+		const allowed_option = ['1', '2'];
 		
 		if(!is_member){
 			alert('로그인이 필요한 서비스입니다.');
@@ -199,24 +199,10 @@
 			return false;
 		}
         
-		const title = 'CP를 '+ (option === 1 ? 'A' :'B') + '의견에 추가 참여합니다.';
-		const _point = prompt(title, 0);
-        
-		//취소버튼 누를시
-		if(_point === null){
-			return false;
-		}
-        
-		//숫자를 잘 입력했나 검증
-		if(!reg_num.test(_point)){
-			alert('숫자만 입력할 수 있습니다.');
-			return false;
-		}
 		$.ajax({
 			url: cb_url + '/postact/more_bat_confirm',
 			type: 'POST',
 			data: {
-				usePoint: _point,
 				post_id: post_id,
 				option: option,
 				csrf_test_name : cb_csrf_hash
@@ -226,6 +212,20 @@
 			cache: false,
 			success: function(data) {
 				if(data.state == 1){
+
+					const title = 'CP를 '+ (option === 1 ? 'A' :'B') + '의견에 추가 참여합니다.';
+					const _point = prompt(title, 0);
+					
+					//취소버튼 누를시
+					if(_point === null){
+						return false;
+					}
+					
+					//숫자를 잘 입력했나 검증
+					if(!reg_num.test(_point)){
+						alert('숫자만 입력할 수 있습니다.');
+						return false;
+					}
 					// alert(data.message);
 					// location.reload();
 
@@ -243,10 +243,8 @@
 						cache: false,
 						success: function(data) {
 							if(data.state == 1){
-								// alert(data.message);
-								// location.reload();
-
-								
+								alert(data.message);
+								location.reload();
 							}
 							if(data.state == 0){
 								alert(data.message);
