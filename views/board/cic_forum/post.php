@@ -114,7 +114,7 @@
 				<p class="btxt">A. 간다 <span>참여</span></p>
 				<div class="abr">
 					<p class="cp"><span>150</span> CP</p>
-					<a href="#n"><span>추가 참여!</span></a>
+					<a href="#n" id="more_btn"><span>추가 참여!</span></a>
 					<a href="#n"><span>의견 변경</span></a>
 				</div>
 			</div>
@@ -161,18 +161,76 @@
 	var reg_num = /^[0-9]*$/;
 	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
 
+	$(document).on('click', '#more_btn', function(){
+		// update_forum_cp(post_id);
+	})
+
 	$(document).on('click', '#btn_a', function(){
 		var option = 1;
         
-		update_forum_cp(post_id, option);
+		insert_forum_cp(post_id, option);
 	})
 	$(document).on('click', '#btn_b', function(){
 		var option = 2;
 		
-		update_forum_cp(post_id, option);
+		insert_forum_cp(post_id, option);
 	})
 
-	function update_forum_cp(post_id, option){
+	function update_forum_cp(post_id){
+		
+		// if(!is_member){
+		// 	alert('로그인이 필요한 서비스입니다.');
+		// 	return false;
+		// }
+        
+		// if(!reg_num.test(post_id)){
+		// 	alert('비정상적인 시도입니다.2');
+		// 	return false;
+		// }
+        
+		// const title = 'CP를 '+ (option === 1 ? 'A' :'B') + '의견에 투표합니다.';
+		// const _point = prompt(title, 0);
+        
+		// //취소버튼 누를시
+		// if(_point === null){
+		// 	return false;
+		// }
+        
+		// //숫자를 잘 입력했나 검증
+		// if(!reg_num.test(_point)){
+		// 	alert('숫자만 입력할 수 있습니다.');
+		// 	return false;
+		// }
+		// $.ajax({
+		// 	url: cb_url + '/postact/bat_forum',
+		// 	type: 'POST',
+		// 	data: {
+		// 		usePoint: _point,
+		// 		post_id: post_id,
+		// 		option: option,
+		// 		csrf_test_name : cb_csrf_hash
+		// 	},
+		// 	dataType: 'json',
+		// 	async: false,
+		// 	cache: false,
+		// 	success: function(data) {
+		// 		if(data.state == 1){
+		// 			alert(data.message);
+		// 			location.reload();
+		// 		}
+		// 		if(data.state == 0){
+		// 			alert(data.message);
+		// 			location.reload();
+		// 		}
+		// 	},
+		// 	error: function(){
+		// 		alert('에러가 발생했습니다.');
+		// 	}
+		// });
+		// return true;
+	}
+
+	function insert_forum_cp(post_id, option){
         
 		const allowed_option = [1, 2];
 		
@@ -205,7 +263,7 @@
 			return false;
 		}
 		$.ajax({
-			url: cb_url + '/postact/bat_forum_a',
+			url: cb_url + '/postact/bat_forum',
 			type: 'POST',
 			data: {
 				usePoint: _point,

@@ -2210,10 +2210,10 @@ class Postact extends CB_Controller
 	/**
 	 * 포럼 게시물 투표하기
 	 */
-	public function bat_forum_a(){
+	public function bat_forum(){
 
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_postact_bat_forum_a';
+		$eventname = 'event_postact_bat_forum';
 		$this->load->event($eventname);
 
 		/**
@@ -2270,14 +2270,24 @@ class Postact extends CB_Controller
 			$post_id = (int) $this->input->post('post_id');
 			$option = (int) $this->input->post('option');
 
+			// 게시글 확인
+			$this->load->model('Post_model');
+			$post = $this->Post_model->get_one($post_id);
+			if($post){
+				$result = array(
+					'state' => '0',
+					'message' => '존재하지 않는 게시물입니다',
+				);
+				exit(json_encode($result));
+			}
+
+			// 중복배팅 확인
 			$where = array(
 				'pst_id' => $post_id,
 				'mem_id' => $mem_id,
-				// 'cfc_option' => '1',
 			);
 			$this->load->model('CIC_forum_model');
 			$isBat = $this->CIC_forum_model->get_forum_bat($where);
-
 			if($isBat){
 				$result = array(
 					'state' => '0',
