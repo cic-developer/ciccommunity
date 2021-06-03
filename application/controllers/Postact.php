@@ -2208,7 +2208,7 @@ class Postact extends CB_Controller
 	}
 
 	/**
-	 * 포럼 게시물 투표하기
+	 * 포럼 게시물 투표(참여,배팅)하기
 	 */
 	public function bat_forum(){
 
@@ -2332,6 +2332,190 @@ class Postact extends CB_Controller
 				$result = array(
 					'state' => '1',
 					'message' => '성공적으로 처리되었습니다',
+				);
+				exit(json_encode($result));
+			}
+		}
+	}
+
+	/**
+	 * 포럼 게시물 추가참여 가능 여부 확인
+	 */
+	public function more_bat_confirm(){
+
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_postact_more_bat_confirm';
+		$this->load->event($eventname);
+
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+
+		$result = array();
+		$this->output->set_content_type('application/json');
+
+		// 회원 데이터 가져오기
+		$member_info = $this->member->get_member();
+		$view['member'] = $member_info;
+
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+		
+		$config = array(
+			array(
+				'field' => 'usePoint',
+				'label' => '배팅금액',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to['.$member_info['mem_cp'].']',
+			),
+			array(
+				'field' => 'post_id',
+				'label' => '게시물번호',
+				'rules' => 'trim|required|greater_than_equal_to[0]',
+			),
+			array(
+				'field' => 'option',
+				'label' => '의견',
+				'rules' => 'trim|required|greater_than_equal_to[0]',
+			),
+		);
+		$this->form_validation->set_rules($config);
+		$form_validation = $this->form_validation->run();
+
+		if ($form_validation == false) {
+			$result = array(
+				'state' => '0',
+				'message' => '추가참여에 실패하셨습니다1 (관리자 문의)',
+			);
+			exit(json_encode($result));
+		}else {
+			$mem_id = $member_info['mem_id'];
+			$mem_cp = $member_info['mem_cp'];
+
+			$usePoint = (int) $this->input->post('usePoint');
+			$post_id = (int) $this->input->post('post_id');
+			$option = (int) $this->input->post('option');
+
+			// 게시글 확인
+			$this->load->model('Post_model');
+			$post = $this->Post_model->get_one($post_id);
+			if($post){
+				$result = array(
+					'state' => '0',
+					'message' => '존재하지 않는 게시물입니다',
+				);
+				exit(json_encode($result));
+			}
+
+			// 추가참여 가능 여부 확인 (중복배팅 확인)
+			$where = array(
+				'pst_id' => $post_id,
+				'mem_id' => $mem_id,
+				'cfc_option' => $option,
+			);
+			$this->load->model('CIC_forum_model');
+			$isBat = $this->CIC_forum_model->get_forum_bat($where);
+			if($isBat){
+				$result = array(
+					'state' => '1',
+					'message' => '추가참여 가능',
+				);
+				exit(json_encode($result));
+			}
+		}
+	}
+
+	/**
+	 * 포럼 게시물 추가투표(배팅,참여) 하기
+	 */
+	public function more_bat_cp(){
+
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_postact_more_bat_cp';
+		$this->load->event($eventname);
+
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+
+		$result = array();
+		$this->output->set_content_type('application/json');
+
+		// 회원 데이터 가져오기
+		$member_info = $this->member->get_member();
+		$view['member'] = $member_info;
+
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+		
+		$config = array(
+			array(
+				'field' => 'usePoint',
+				'label' => '배팅금액',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to['.$member_info['mem_cp'].']',
+			),
+			array(
+				'field' => 'post_id',
+				'label' => '게시물번호',
+				'rules' => 'trim|required|greater_than_equal_to[0]',
+			),
+			array(
+				'field' => 'option',
+				'label' => '의견',
+				'rules' => 'trim|required|greater_than_equal_to[0]',
+			),
+		);
+		$this->form_validation->set_rules($config);
+		$form_validation = $this->form_validation->run();
+
+		if ($form_validation == false) {
+			$result = array(
+				'state' => '0',
+				'message' => '추가참여에 실패하셨습니다1 (관리자 문의)',
+			);
+			exit(json_encode($result));
+		}else {
+			$mem_id = $member_info['mem_id'];
+			$mem_cp = $member_info['mem_cp'];
+
+			$usePoint = (int) $this->input->post('usePoint');
+			$post_id = (int) $this->input->post('post_id');
+			$option = (int) $this->input->post('option');
+
+			// 게시글 확인
+			$this->load->model('Post_model');
+			$post = $this->Post_model->get_one($post_id);
+			if($post){
+				$result = array(
+					'state' => '0',
+					'message' => '존재하지 않는 게시물입니다',
+				);
+				exit(json_encode($result));
+			}
+
+			// 추가참여 가능 여부 확인 (중복배팅 확인)
+			$where = array(
+				'pst_id' => $post_id,
+				'mem_id' => $mem_id,
+				'cfc_option' => $option,
+			);
+			$this->load->model('CIC_forum_model');
+			$isBat = $this->CIC_forum_model->get_forum_bat($where);
+			if($isBat){
+				$result = array(
+					'state' => '1',
+					'message' => '추가참여 가능',
 				);
 				exit(json_encode($result));
 			}
