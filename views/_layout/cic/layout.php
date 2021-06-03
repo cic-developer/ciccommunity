@@ -196,13 +196,13 @@
             <div id="footer" class="div-cont">
                 <div class="f-logo">
                     <h2><span class="blind">cic+community</span></h2>
-                    <a href="http://ciccommunity.co.kr" target="_blank" title="새창열림">http://ciccommunity.co.kr</a>
+                    <a href="https://ciccommunity.co.kr" target="_blank" title="새창열림">https://ciccommunity.co.kr</a>
                 </div>
                 <div class="f-sns">
                     <ul>
-                        <li><a href="#n"><span class="blind">....</span></a></li>
-                        <li><a href="#n"><span class="blind">유투브</span></a></li>
-                        <li><a href="#n"><span class="blind">블로그</span></a></li>
+                        <li><a href="https://www.percommunity.com" target="_blank"><span class="blind">....</span></a></li>
+                        <li><a href="https://www.youtube.com/channel/UC-akAISl4l5sNBI00A1ykqQ" target="_blank"><span class="blind">유튜브</span></a></li>
+                        <li><a href="https://blog.naver.com/djg162" target="_blank"><span class="blind">블로그</span></a></li>
                     </ul>
                 </div>
                 <div class="f-info">
@@ -220,8 +220,8 @@
                 <div class="f-down">
                     <p>PER Wallet DOWNLOAD</p>
                     <ul>
-                        <li><a href="#n"><span class="blind">Google Play 다운로드</span></a></li>
-                        <li><a href="#n"><span class="blind">App Store 다운로드</span></a></li>
+                        <li><a href="https://play.google.com/store/apps/details?id=com.perwallet" target="_blank"><span class="blind">Google Play 다운로드</span></a></li>
+                        <li><a href="https://apps.apple.com/kr/app/per-wallet/id1562810925" target="_blank"><span class="blind">App Store 다운로드</span></a></li>
                     </ul>
                 </div>
             </div>

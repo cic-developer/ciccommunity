@@ -70,6 +70,7 @@ class Board_write extends CB_Controller
 		}
 		// 도전 CIC 포럼, userForum
 		if($board_id == 6){
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 			$mem_id = (int) $this->member->item('mem_id');
 			$mem_cp = $this->member->item('mem_cp');
 			$deposit_meta = (int)  $this->CIC_forum_config_model->item('forum_deposit');
@@ -78,12 +79,13 @@ class Board_write extends CB_Controller
 			$where3 = array(
 				'brd_id' => 3,
 				'mem_id' => $mem_id,
-				'post_category' => 1,
+				'post_datetime >=' => $checktime,
+				// 'post_category' => 1,
 			);
 			$where6 = array(
 				'brd_id' => 6,
 				'mem_id' => $mem_id,
-				'post_category' => 1,
+				'post_category' => '1',
 			);
 			$post3 = $this->Post_model->get_one('', '', $where3);
 			$post6 = $this->Post_model->get_one('', '', $where6);
@@ -105,8 +107,8 @@ class Board_write extends CB_Controller
 				return false;
 			}
 
-			print_r($post6);
-			exit;
+			// print_r($post6);
+			// exit;
 			if($post3 || $post6) {
 				alert('작성된 포럼이 존재합니다');
 				return false;

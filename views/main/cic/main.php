@@ -334,7 +334,7 @@
                 <div class="cont">
                     <ul>
                         <li>
-                            <a href="#n">
+                            <a href="https://dev.ciccommunity.com/attendance">
                                 <p class="desktop"><img src="<?php echo base_url('assets/images/use-img01.png') ?>"
                                         alt="" /></p>
                                 <p class="mobile"><img src="<?php echo base_url('assets/images/use-img01m.jpg') ?>"
@@ -350,7 +350,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#n">
+                            <a href="javascript:alert('현재 준비중입니다.');">
                                 <p class="desktop"><img src="<?php echo base_url('assets/images/use-img03.png') ?>"
                                         alt="" /></p>
                                 <p class="mobile"><img src="<?php echo base_url('assets/images/use-img03m.jpg') ?>"
