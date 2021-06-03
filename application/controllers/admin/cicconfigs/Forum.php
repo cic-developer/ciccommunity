@@ -496,7 +496,7 @@ class Forum extends CB_Controller
 			}
 		}
 		
-		$primary_key = $this->CIC_forum_info_model->primary_key;
+		// $primary_key = $this->CIC_forum_info_model->primary_key;
 		
 		$getdata = array();
 		if ($pst_id) {
@@ -504,8 +504,8 @@ class Forum extends CB_Controller
 		} else {
 			// 기본값 설정
 		}
-		print_r('help me');
-		exit;
+		// print_r($this->db->last_query());
+		// exit;
 
 		$this->load->library('form_validation');
 

@@ -87,7 +87,7 @@
 							<p class="percent"><span><?php echo number_format(element('A_per', $forum)); ?>%</span></p>
 							<p class="nums"><i class="counter"><?php echo number_format(element('cic_A_cp', $forum), 2); ?></i><span>cp</span></p>
 							<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo1.png')?>" alt="" style="cursor:pointer;" /></p>
-							<a href="#n"><span>A. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
+							<a href="#n" id="btn_a"><span>A. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
 						</div>
 					</li>
 				<?php
@@ -99,7 +99,7 @@
 							<p class="percent"><span><?php echo number_format(element('B_per', $forum)); ?>%</span></p>
 							<p class="nums"><i class="counter"><?php echo number_format(element('cic_B_cp', $forum), 2); ?></i><span>cp</span></p>
 							<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo2.png')?>" alt="" style="cursor:pointer;" /></p>
-							<a href="#n"><span>A. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
+							<a href="#n" id="btn_b"><span>A. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
 						</div>
 					</li>
 				<?php
@@ -156,6 +156,18 @@
 	</div>
 </div>
 <!-- e: #container-wrap //-->
+
+<script>
+	var reg_num = /^[0-9]*$/;
+	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
+	
+	$(document).on('click', '#btn_a', function(){
+		alert('hi');
+	})
+	$(document).on('click', '#btn_b', function(){
+		alert('hi');
+	})
+</script>
 
 <script>
 

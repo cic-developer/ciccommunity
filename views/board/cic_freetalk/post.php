@@ -205,6 +205,7 @@
 	$(document).on('click', '.up', function(){
 		const content_type = $(this).attr('data-contenttype');
 		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
+
 		update_vp(content_idx, content_type, 'up');
 	});
 	
