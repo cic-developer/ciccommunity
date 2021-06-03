@@ -479,7 +479,7 @@ class Forum extends CB_Controller
 	}
 
 	//승인대기 포럼을 진행중인 포럼으로 승격시 폼 벨리데이션을 통한 대표이미지 등록, 배팅마감시간, 포럼 마감시간 설정 함수
-	public function forum_write($post_id = 0)
+	public function forum_write($pst_id = 0)
 	{
 		$eventname = 'event_admin_ciccinfigs_update_company';
 		$this->load->event($eventname);
@@ -489,21 +489,23 @@ class Forum extends CB_Controller
 
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		if($post_id) {
-			$post_id = (int) $post_id;
-			if(empty($post_id) OR $post_id < 1 ){
+		if($pst_id) {
+			$pst_id = (int) $pst_id;
+			if(empty($pst_id) OR $pst_id < 1 ){
 				show_404();
 			}
 		}
-
-		$primary_key = $this->Post_model->primary_key;
-
+		
+		$primary_key = $this->CIC_forum_info_model->primary_key;
+		
 		$getdata = array();
-		if ($post_id) {
-			$getdata = $this->CIC_forum_info_model->get_one($post_id);
+		if ($pst_id) {
+			$getdata = $this->CIC_forum_info_model->get_one($pst_id);
 		} else {
 			// 기본값 설정
 		}
+		print_r('help me');
+		exit;
 
 		$this->load->library('form_validation');
 
