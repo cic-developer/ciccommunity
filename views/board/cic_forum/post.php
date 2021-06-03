@@ -110,6 +110,7 @@
 				
 				</ul>
 			</div>
+				hf
 			<div class="result" style="display:none">
 				<p class="btxt">A. 간다 <span>참여</span></p>
 				<div class="abr">

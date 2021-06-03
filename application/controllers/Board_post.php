@@ -517,6 +517,21 @@ class Board_post extends CB_Controller
 			
 			$view['forum']['A_per'] = ($a_cp/$total_cp) * 100; // A cp %
 			$view['forum']['B_per'] = ($b_cp/$total_cp) * 100; // B cp %
+
+			// 투표진영 가져오기 (A:1, B:2, error:0)
+			$mem_id = (int) $this->member->item('mem_id');
+			$where = array(
+				'pst_id' => $post_id,
+				'mem_id' => $mem_id,
+			);
+			$this->load->model('CIC_forum_model');
+			$isBat = $this->CIC_forum_model->get_forum_bat($where);
+			if($isBat){
+				$view['forum']['my_bat'] = '';
+				if(count($isBat) == 1){
+					$view['forum']['my_bat'] = $isBat[0]['cfc_option'];
+				}
+			}
 		}
 		
 		$view['view']['like_point_ranking_freetalk'] = $like_point_ranking_freetalk;
