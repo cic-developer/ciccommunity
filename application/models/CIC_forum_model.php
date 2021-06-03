@@ -228,6 +228,20 @@ class CIC_forum_model extends CB_Model
 		return $result;
 	}
 
+	public function get_forum_bat(){
+
+	}
+
+	public function get_by_email($email = '', $select = '')
+	{
+		if (empty($email)) {
+			return false;
+		}
+		$where = array('mem_email' => $email);
+		return $this->get_one('', $select, $where);
+	}
+
+
 	// 포럼 cp 배팅
 	public function insert($data)
 	{

@@ -2210,10 +2210,10 @@ class Postact extends CB_Controller
 	/**
 	 * 포럼 게시물 투표하기
 	 */
-	public function bat_forum(){
+	public function bat_forum_a(){
 
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_postact_bat_forum';
+		$eventname = 'event_postact_bat_forum_a';
 		$this->load->event($eventname);
 
 		/**
@@ -2257,10 +2257,11 @@ class Postact extends CB_Controller
 		$form_validation = $this->form_validation->run();
 
 		if ($form_validation == false) {
-			$this->session->set_flashdata(
-				'message',
-				'배팅에 실패하셨습니다1 (관리자 문의)'
+			$result = array(
+				'state' => '0',
+				'message' => '배팅에 실패하셨습니다1 (관리자 문의)',
 			);
+			exit(json_encode($result));
 		}else {
 			$mem_id = $member_info['mem_id'];
 			$mem_cp = $member_info['mem_cp'];
@@ -2269,6 +2270,13 @@ class Postact extends CB_Controller
 			$post_id = (int) $this->input->post('post_id');
 			$option = (int) $this->input->post('option');
 
+			$where = array(
+				'pst_id' => 6,
+				'mem_id' => $mem_id,
+				'cfc_option' => '1',
+			);
+			$post3 = $this->Post_model->get_one('', '', $where3);
+
 			/**
 			 * 포인트 차감
 			 * member
@@ -2276,17 +2284,18 @@ class Postact extends CB_Controller
 			$this->load->model('Member_model');
 			$result = $this->Member_model->set_user_point($mem_id, $usePoint, $mem_cp);
 			if($result != 1){
-				$this->session->set_flashdata(
-					'message',
-					'배팅에 실패하셨습니다2 (관리자 문의)'
+				$result = array(
+					'state' => '0',
+					'message' => '배팅에 실패하셨습니다2 (관리자 문의)',
 				);
+				exit(json_encode($result));
 			}else {
 				/**
 				 * cp 기록
 				 * cic_cp
 				 */
 				$this->load->model('CIC_cp_model');
-				$this->CIC_cp_model->set_cic_cp($mem_id, '-', -$_money, '@byself', $mem_id, '포럼배팅');
+				$this->CIC_cp_model->set_cic_cp($mem_id, '-', -$usePoint, '@byself', $mem_id, '포럼배팅');
 
 				/**
 				 * 배팅
@@ -2301,10 +2310,11 @@ class Postact extends CB_Controller
 				$this->load->model('CIC_forum_model');
 				$this->CIC_forum_model->insert($insertdata);
 
-				$this->session->set_flashdata(
-					'message',
-					'정상적으로 신청되었습니다'
+				$result = array(
+					'state' => '1',
+					'message' => '성공적으로 처리되었습니다',
 				);
+				exit(json_encode($result));
 			}
 		}
 	}

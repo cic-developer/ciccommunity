@@ -205,7 +205,7 @@
 			return false;
 		}
 		$.ajax({
-			url: cb_url + '/postact/bat_forum',
+			url: cb_url + '/postact/bat_forum_a',
 			type: 'POST',
 			data: {
 				usePoint: _point,
@@ -217,10 +217,12 @@
 			async: false,
 			cache: false,
 			success: function(data) {
-				if(data.error !== undefined){
-					alert(data.error);
-				} else {
-					alert('성공적으로 처리되었습니다.');
+				if(data.state == 1){
+					alert(data.message);
+					location.reload();
+				}
+				if(data.state == 0){
+					alert(data.message);
 					location.reload();
 				}
 			},
