@@ -8,7 +8,7 @@
 				echo form_open(current_full_url(), $attributes); 
 			?>
 			<input type="hidden" name="url" value="<?php echo html_escape($this->input->get_post('url')); ?>" />
-			<h3>cic community <br>LOGIN</h3>
+			<h3>CIC COMMUNITY <br>LOGIN</h3>
 			<div class="entry">
 				<ul>
 					<li>

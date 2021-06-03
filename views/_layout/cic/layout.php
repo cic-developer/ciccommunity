@@ -196,7 +196,7 @@
             <div id="footer" class="div-cont">
                 <div class="f-logo">
                     <h2><span class="blind">cic+community</span></h2>
-                    <a href="http://cic community.co.kr" target="_blank" title="새창열림">http://cic community.co.kr</a>
+                    <a href="http://ciccommunity.co.kr" target="_blank" title="새창열림">http://ciccommunity.co.kr</a>
                 </div>
                 <div class="f-sns">
                     <ul>
@@ -215,7 +215,7 @@
                             <li><a href="#n"><span>문의하기</span></a></li>
                         </ul>
                     </div>
-                    <p class="in-copy">Copyright © cic Community. All rights reserved.</p>
+                    <p class="in-copy">Copyright © CIC Community. All rights reserved.</p>
                 </div>
                 <div class="f-down">
                     <p>PER Wallet DOWNLOAD</p>

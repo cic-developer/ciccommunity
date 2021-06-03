@@ -2207,6 +2207,10 @@ class Postact extends CB_Controller
 
 	}
 
+	/**
+	 * 포럼 게시물 투표하기
+	 */
+	// public function bat_forum
 
 	/**
 	 * 게시물 비밀글 설정 및 해제 하기

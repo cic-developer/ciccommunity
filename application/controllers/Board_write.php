@@ -18,7 +18,7 @@ class Board_write extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Post', 'Post_link', 'Post_file', 'Post_extra_vars', 'Post_meta', 'CIC_forum');
+	protected $models = array('Post', 'Post_link', 'Post_file', 'Post_extra_vars', 'Post_meta', 'CIC_forum_config');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -72,7 +72,7 @@ class Board_write extends CB_Controller
 		if($board_id == 6){
 			$mem_id = (int) $this->member->item('mem_id');
 			$mem_cp = $this->member->item('mem_cp');
-			$deposit_meta = (int)  $this->CIC_forum_model->item('forum_deposit');
+			$deposit_meta = (int)  $this->CIC_forum_config_model->item('forum_deposit');
 			$mem_deposit = $this->member->item('mem_deposit');
 
 			$where3 = array(
@@ -105,10 +105,13 @@ class Board_write extends CB_Controller
 				return false;
 			}
 
+			print_r($post6);
+			exit;
 			if($post3 || $post6) {
 				alert('작성된 포럼이 존재합니다');
 				return false;
 			}
+			
 		}
 
 		$board = $this->board->item_all($board_id);
