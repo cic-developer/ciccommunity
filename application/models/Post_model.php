@@ -480,6 +480,8 @@ class Post_model extends CB_Model
 		}
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
+		// echo $this->db->last_query();
+		// exit;
 
 		$this->db->select('count(*) cnt, board.brd_id');
 		$this->db->from('post');
@@ -514,6 +516,7 @@ class Post_model extends CB_Model
 		$this->db->group_by('board.brd_id');
 		$qry = $this->db->get();
 		$cnt = $qry->result_array();
+
 		$result['total_rows'] = 0;
 		if ($cnt) {
 			foreach ($cnt as $key => $value) {

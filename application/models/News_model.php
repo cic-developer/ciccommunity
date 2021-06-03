@@ -366,8 +366,7 @@ class News_model extends CB_Model
 		}
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
-		echo $this->db->last_query();
-		exit;
+		
 		$this->db->select('count(*) cnt, company.comp_id');
 		$this->db->from('news');
 		$this->db->join('company', 'news.comp_id = company.comp_id', 'inner');

@@ -112,7 +112,7 @@
 									</div>
 									<div class="txt">
 										<div class="vc">
-												<p class="btxt"><?php echo html_escape(element('news_title', $result)); ?><span>(<?php echo number_format(element('news_reviews', $result)); ?>)</span></p>
+												<p class="btxt"><?php echo html_escape(element('news_title', $result)); ?><!--<span>(<?php echo number_format(element('news_reviews', $result)); ?>)</span>--></p>
 												<p class="stxt"><?php echo html_escape(element('news_contents', $result)); ?></p>
 												<p class="ctxt">
 													<span><?php echo html_escape(element('comp_name', element('company', $result))); ?></span>
