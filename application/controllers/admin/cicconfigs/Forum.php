@@ -43,7 +43,7 @@ class Forum extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('pagination', 'querystring', 'member', 'upload'));
+		$this->load->library(array('pagination', 'querystring', 'member', ));
 	}
 
 	/**
@@ -289,48 +289,6 @@ class Forum extends CB_Controller
 		
 	}
 
-	// public function update_forum_approval($post_id = 0)
-	// {
-	// 	$eventname = 'event_admin_ciccinfigs_update_forum_approval';
-	// 	$this->load->event($eventname);
-
-	// 	$view = array();
-	// 	$view['view'] = array();
-
-	// 	// 이벤트가 존재하면 실행합니다
-	// 	$view['view']['event']['before'] = Events::trigger('before', $eventname);
-
-	// 	if ($post_id) {
-	// 		$post_id = (int) $post_id;
-	// 		if (empty($post_id) OR $post_id < 1) {
-	// 			show_404();
-	// 		}
-	// 	}
-	// 	$primary_key = $this->Post_model->primary_key;
-	// }
-
-	// public function update_disapproval_return()
-	// {
-	// 	$eventname = 'event_admin_update_disapproval_return';
-	// 	$this->load->event($eventname);
-	// 	Events::trigger('before', $eventname);
-	// 	if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
-	// 		foreach ($this->input->post('chk') as $val) {
-	// 			if ($val) {
-	// 				$this->Post_model->upadte_forum_return($val);
-	// 			}
-	// 		}
-	// 	}
-	// 	Events::trigger('after', $eventname);
-	// 	$this->session->set_flashdata(
-	// 		'message',
-	// 		'선택하신 포럼이 반려되었습니다.'
-	// 	);
-	// 	$param =& $this->querystring;
-	// 	$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-	// 	redirect($redirecturl);
-	// }
-
 	public function upadte_forum_return()
 	{
 		
@@ -554,12 +512,12 @@ class Forum extends CB_Controller
 					'rules' => 'prep_url|valid_url',
 				),
 				array(
-					'field' => 'comp_segment',
+					'field' => 'frm_bat_close_datetime',
 					'lable' => '배팅 마감일',
 					'rules' => 'trim|alpha_dash|exact_length[10]',
 				),
 				array(
-					'field' => 'comp_img_select',
+					'field' => 'frm_close_datetime',
 					'lable' => '포럼 마감일',
 					'rules' => 'ttrim|alpha_dash|exact_length[10]',
 				),
@@ -573,11 +531,11 @@ class Forum extends CB_Controller
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 
 			if ($pid) {
-				if (empty($getdata['ban_start_date']) OR $getdata['ban_start_date'] === '0000-00-00') {
-					$getdata['ban_start_date'] = '';
+				if (empty($getdata['frm_bat_close_datetime']) OR $getdata['frm_bat_close_datetime'] === '0000-00-00') {
+					$getdata['frm_bat_close_datetime'] = '';
 				}
-				if (empty($getdata['ban_end_date']) OR $getdata['ban_end_date'] === '0000-00-00') {
-					$getdata['ban_end_date'] = '';
+				if (empty($getdata['frm_close_datetime']) OR $getdata['frm_close_datetime'] === '0000-00-00') {
+					$getdata['frm_close_datetime'] = '';
 				}
 				$view['view']['data'] = $getdata;
 			}
@@ -593,7 +551,7 @@ class Forum extends CB_Controller
 			/**
 			 * 어드민 레이아웃을 정의합니다
 			 */
-			$layoutconfig = array('layout' => 'layout', 'skin' => 'write');
+			$layoutconfig = array('layout' => 'layout', 'skin' => 'forum_write');
 			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 			$this->data = $view;
 			$this->layout = element('layout_skin_file', element('layout', $view));

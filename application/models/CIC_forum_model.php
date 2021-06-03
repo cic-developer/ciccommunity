@@ -191,6 +191,8 @@ class CIC_forum_model extends CB_Model
 
 		$this->db->select('cic_forum_info.*');
 		$this->db->select_sum('cic_forum_cp.cfc_cp', 'cic_forum_total_cp');
+		// $this->db->select_sum('CASE WHEN  `cic_forum_cp`.`cfc_option` = 1 THEN `cic_forum_cp`.`cfc_cp` ELSE 0 END', 'cic_A_cp');
+		// $this->db->select_sum('CASE WHEN  `cic_forum_cp`.`cfc_option` = 2 THEN `cic_forum_cp`.`cfc_cp` ELSE 0 END', 'cic_B_cp');
 
 		// $this->db->from('$this->_table');
 		$this->db->from('cic_forum_info');

@@ -190,10 +190,7 @@
 								<tr>
 									<td>
 										<div class="my-info">
-										<?php
-											print_r($result);
-										?>
-											<p class="pimg"><img src="<?php echo echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30); ?>" alt=""></p>
+											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 28, 28); ?>" alt=""></p>
 											<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
 										</div>
 									</td>
@@ -263,7 +260,7 @@
 								</div>
 								<div class="abr">
 									<div class="photo">
-										<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30);?>"
+										<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 28, 28);?>"
                                             alt="<?php echo element('mlc_title', $result); ?>"></p>
 
 										<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
