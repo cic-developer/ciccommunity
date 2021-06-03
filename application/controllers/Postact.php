@@ -18,7 +18,7 @@ class Postact extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Post');
+	protected $models = array('Post', 'CIC_cp'. 'Member');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -2257,7 +2257,10 @@ class Postact extends CB_Controller
 		$form_validation = $this->form_validation->run();
 
 		if ($form_validation == false) {
-
+			$this->session->set_flashdata(
+				'message',
+				'배팅에 실패하셨습니다1 (관리자 문의)'
+			);
 		}else {
 			$mem_id = $member_info['mem_id'];
 			$mem_cp = $member_info['mem_cp'];
@@ -2271,8 +2274,30 @@ class Postact extends CB_Controller
 			 * member
 			 */
 			$result = $this->Member_model->set_user_point($mem_id, $usePoint, $mem_cp);
-		}
+			if($result != 1){
+				$this->session->set_flashdata(
+					'message',
+					'배팅에 실패하셨습니다2 (관리자 문의)'
+				);
+			}else {
+				/**
+				 * cp 기록
+				 * cic_cp
+				 */
+				$this->CIC_cp_model->set_cic_cp($mem_id, '-', -$_money, '@byself', $mem_id, '포럼배팅');
 
+				/**
+				 * 배팅
+				 * cic_forum_cp
+				 */
+				$this->CIC_forum_model->;
+
+				$this->session->set_flashdata(
+					'message',
+					'정상적으로 신청되었습니다'
+				);
+			}
+		}
 	}
 
 	/**
