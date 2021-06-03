@@ -43,8 +43,8 @@
 					<div class="sel-box c03">
 						<a href="javascript:void(0);" class="sel-btn"><span><?php echo element('findex_word', $view); ?></span></a>
 						<ul>
-							<li class="<?php echo !in_array(element('sfield', $view), array('view')) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_findex" data-value="latest"><span>최신 순</span></a></li>
-							<li class="<?php echo element('sfield', $view) == 'view' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_findex" data-value="view"><span>조회 순</span></a></li>
+							<li class="<?php echo !in_array(element('findex', $view), array('view')) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_findex" data-value="latest"><span>최신 순</span></a></li>
+							<li class="<?php echo element('findex', $view) == 'view' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_findex" data-value="view"><span>조회 순</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -193,37 +193,34 @@
 							</thead>
 							<tbody>
 							<?php
-							if (element('list', element('data', $view))) {
-								foreach (element('list', element('data', $view)) as $result) {
-									if(element('brd_name', $result) === '자유게시판'){?>
-										<tr>
-											<td>
-												<div class="my-info">
-													<p class="pimg"><img src="<?php echo thumb_url(element('post_image', $result),30, 30)?>" alt=""></p>
-													<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
-												</div>
-											</td>
-											<td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>">
-												<?php echo html_escape(element('post_title', $result)); ?></a></td>
-											<td><?php echo element('display_datetime', $result); ?></td>
-											<td><?php echo number_format(element('post_hit', $result)); ?></td>
-											<td>
-												<p class="cyellow"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p>
-											</td>
-										</tr>
-									<?php
-									}
+							if (element('list', element('free_data', $view))) {
+								foreach (element('list', element('free_data', $view)) as $result) {
+							?>
+								<tr>
+									<td>
+										<div class="my-info">
+											<p class="pimg"><img src="<?php echo thumb_url(element('post_image', $result),30, 30)?>" alt=""></p>
+											<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
+										</div>
+									</td>
+									<td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>">
+										<?php echo html_escape(element('post_title', $result)); ?></a></td>
+									<td><?php echo element('display_datetime', $result); ?></td>
+									<td><?php echo number_format(element('post_hit', $result)); ?></td>
+									<td>
+										<p class="cyellow"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p>
+									</td>
+								</tr>
+							<?php
 								}
-							}   
-							// foreach (element('list', element('data', $view)) as $result) {
-								if($free_row <= 0){?>
-									<tr>
-										<td colspan="5" class="nopost">게시물이 없습니다</td>
-									</tr>
-								<?php 
-									} 
-								// }
-								?>
+							} else {
+							?>
+								<tr>
+									<td colspan="5" class="nopost">게시물이 없습니다</td>
+								</tr>
+							<?php 
+							} 
+							?>
 							</tbody>
 						</table>
 					</div>
@@ -251,9 +248,9 @@
 				<div class="list vimg vp">
 					<ul>
 					<?php
-						if (element('list', element('data', $view))) {
-							foreach (element('list', element('data', $view)) as $result) {
-								if(element('brd_name', $result) === 'CIC Writer'){?>		
+						if (element('list', element('writer_data', $view))) {
+							foreach (element('list', element('writer_data', $view)) as $result) {
+					?>		
 						<li>
 							<a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>">
 								<div class="img"><img src="<?php echo thumb_url('post', element('pfi_filename', element('images', $result))); ?>" 
@@ -282,11 +279,10 @@
 							</a>
 						</li>
 					<?php	
-							}	
 						}
-					}
-					if ($writer_row <= 0)  {?>
-							<li class="nopost" style="text-align: center">게시물이 없습니다</li>
+					} else {
+					?>
+						<li class="nopost" style="text-align: center">게시물이 없습니다</li>
 					<?php 
 					} 	
 					?>	

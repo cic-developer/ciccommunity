@@ -100,6 +100,7 @@ class Search extends CB_Controller
 			$findex_word = "최신 순";
 			$findex = 'post_num, post_reply';
 		}
+		$view['view']['findex'] = $findex_get;
 		$view['view']['findex_word'] = $findex_word;
 
 		$skeyword = $this->input->get('skeyword', null, '');
@@ -151,7 +152,6 @@ class Search extends CB_Controller
 		$offset = ($page - 1) * $per_page;
 
 		$group_id = (int) $this->input->get('group_id') ? (int) $this->input->get('group_id') : '';
-		$board_id = $is_all || $is_news ? '' : ($is_free ? 1 : 2);
 
 		$where = array();
 		$boardwhere = array(
@@ -180,37 +180,75 @@ class Search extends CB_Controller
 		$where['post.post_del'] = 0;
 		$like = '';
 
-		//통합검색 or 뉴스검색일 경우 뉴스 정보 불러오기
-		$result = array();
-		if($is_all || $is_free || $is_writer){
-			$result = $this->Post_model
+		//통합검색 or 자유게시판검색일 경우 자유게시판 정보 불러오기
+		$free_result = array();
+		if($is_all || $is_free){
+			$board_id = 1;
+			$free_result = $this->Post_model
 				->get_search_list($per_page, $offset, $where, $like, $board_id, $findex, $sfield, $skeyword, $sop);
-		}
-		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
-		if (element('list', $result)) {
-			foreach (element('list', $result) as $key => $val) {
-				$images = '';
-				if (element('post_image', $val)) {
-					$imagewhere = array(
-						'post_id' => element('post_id', $val),
-						'pfi_is_image' => 1,
-					);
-					$images = $this->Post_file_model
-						->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-				}
-				$result['list'][$key]['images'] = $images;
-				$result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $images), 50, 40);
-				$result['list'][$key]['post_url'] = post_url(element('brd_key', $val), element('post_id', $val));
-				$result['list'][$key]['display_name'] = display_username(
-					element('post_userid', $val),
-					element('post_nickname', $val),
-					element('mem_icon', $val),
-					'Y'
-				);
 				
-				$result['list'][$key]['display_datetime'] = display_datetime(element('post_datetime', $val), 'user', 'Y-m-d H:i');
-				$result['list'][$key]['content'] = cut_str(strip_tags(element('post_content', $val)),200);
-				$result['list'][$key]['is_mobile'] = (element('post_device', $val) === 'mobile') ? true : false;
+			$list_num = $free_result['total_rows'] - ($page - 1) * $per_page;
+			if (element('list', $free_result)) {
+				foreach (element('list', $free_result) as $key => $val) {
+					$images = '';
+					if (element('post_image', $val)) {
+						$imagewhere = array(
+							'post_id' => element('post_id', $val),
+							'pfi_is_image' => 1,
+						);
+						$images = $this->Post_file_model
+							->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+					}
+					$free_result['list'][$key]['images'] = $images;
+					$free_result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $images), 50, 40);
+					$free_result['list'][$key]['post_url'] = post_url(element('brd_key', $val), element('post_id', $val));
+					$free_result['list'][$key]['display_name'] = display_username(
+						element('post_userid', $val),
+						element('post_nickname', $val),
+						element('mem_icon', $val),
+						'Y'
+					);
+					
+					$free_result['list'][$key]['display_datetime'] = display_datetime(element('post_datetime', $val), 'user', 'Y-m-d H:i');
+					$free_result['list'][$key]['content'] = cut_str(strip_tags(element('post_content', $val)),200);
+					$free_result['list'][$key]['is_mobile'] = (element('post_device', $val) === 'mobile') ? true : false;
+				}
+			}
+		}
+
+		//통합검색 or WRITER검색일 경우 WRITER 정보 불러오기
+		$writer_result = array();
+		if($is_all || $is_writer){
+			$board_id = 2;
+			$writer_result = $this->Post_model
+				->get_search_list($per_page, $offset, $where, $like, $board_id, $findex, $sfield, $skeyword, $sop);
+				
+			$list_num = $writer_result['total_rows'] - ($page - 1) * $per_page;
+			if (element('list', $writer_result)) {
+				foreach (element('list', $writer_result) as $key => $val) {
+					$images = '';
+					if (element('post_image', $val)) {
+						$imagewhere = array(
+							'post_id' => element('post_id', $val),
+							'pfi_is_image' => 1,
+						);
+						$images = $this->Post_file_model
+							->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+					}
+					$writer_result['list'][$key]['images'] = $images;
+					$writer_result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $images), 50, 40);
+					$writer_result['list'][$key]['post_url'] = post_url(element('brd_key', $val), element('post_id', $val));
+					$writer_result['list'][$key]['display_name'] = display_username(
+						element('post_userid', $val),
+						element('post_nickname', $val),
+						element('mem_icon', $val),
+						'Y'
+					);
+					
+					$writer_result['list'][$key]['display_datetime'] = display_datetime(element('post_datetime', $val), 'user', 'Y-m-d H:i');
+					$writer_result['list'][$key]['content'] = cut_str(strip_tags(element('post_content', $val)),200);
+					$writer_result['list'][$key]['is_mobile'] = (element('post_device', $val) === 'mobile') ? true : false;
+				}
 			}
 		}
 
@@ -243,11 +281,13 @@ class Search extends CB_Controller
 				->get_search_list($per_page, $offset, $where, $like, $findex, $sfield, $skeyword, $sop);
 		}
 
-		$free_row = $is_all || $is_free ? (int) $result['board_rows']['1'] : 0; // 자유게시판 검색 ROW 
-		$writer_row = $is_all || $is_writer ? (int) $result['board_rows']['2'] : 0; // WRITER 개시판 검색 Row
+		$free_row = $is_all || $is_free ? (int) $free_result['board_rows']['1'] : 0; // 자유게시판 검색 ROW 
+		$writer_row = $is_all || $is_writer ? (int) $writer_result['board_rows']['2'] : 0; // WRITER 개시판 검색 Row
 		$news_row = $is_all || $is_news ? (int) $news_result['total_rows'] : 0; // WRITER 개시판 검색 Row
 
 		$view['view']['data'] = $result;
+		$view['view']['free_data'] = $free_result;
+		$view['view']['writer_data'] = $writer_result;
 		$view['view']['news_data'] = $news_result;
 		$view['view']['boardlist'] = $boardlist;
 		$view['view']['grouplist'] = $grouplist;
