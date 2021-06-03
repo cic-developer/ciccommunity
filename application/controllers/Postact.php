@@ -2266,7 +2266,7 @@ class Postact extends CB_Controller
 			$mem_id = $member_info['mem_id'];
 			$mem_cp = $member_info['mem_cp'];
 
-			$usePoint = (int) $this->input->post('usePoint');
+			$usePoint = (double) $this->input->post('usePoint');
 			$post_id = (int) $this->input->post('post_id');
 			$option = (int) $this->input->post('option');
 
@@ -2489,7 +2489,8 @@ class Postact extends CB_Controller
 			$mem_id = $member_info['mem_id'];
 			$mem_cp = $member_info['mem_cp'];
 
-			$usePoint = (int) $this->input->post('usePoint');
+			$usePoint = (double) $this->input->post('usePoint');
+			
 			$post_id = (int) $this->input->post('post_id');
 			$option = (int) $this->input->post('option');
 
@@ -2561,7 +2562,7 @@ class Postact extends CB_Controller
 						);
 						exit(json_encode($result));
 					}
-					
+
 					$result = array(
 						'state' => '1',
 						'message' => '성공적으로 처리되었습니다',

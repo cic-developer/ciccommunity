@@ -161,26 +161,31 @@
 <!-- e: #container-wrap //-->
 
 <script>
-	var regex = /^[0-9]+(\.[0-9]+)?$/g;
-	var reg_num = /^[0-9]*$/;
+	var regex = /^[0-9]+(\.[0-9]+)?$/g; // 실수 검사
+	var reg_num = /^[0-9]*$/; // 정수 검사
 	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
-	var is_bat = "<?php echo element('is_bat', $forum); ?>"
+	var is_bat = "<?php echo element('is_bat', $forum); ?>" // 참여, 미참여 여부
 
+	// 추가참여!
 	$(document).on('click', '#more_btn', function(){
 		update_forum_cp(post_id, is_bat);
 	})
 
+	// 의견A
 	$(document).on('click', '#btn_a', function(){
 		var option = 1;
         
 		insert_forum_cp(post_id, option);
 	})
+
+	// 의견B
 	$(document).on('click', '#btn_b', function(){
 		var option = 2;
 		
 		insert_forum_cp(post_id, option);
 	})
 
+	// 추가참여 function
 	function update_forum_cp(post_id, option){
 		const allowed_option = ['1', '2'];
 		
@@ -199,6 +204,7 @@
 			return false;
 		}
         
+		// 추가 참여 가능 여부 확인
 		$.ajax({
 			url: cb_url + '/postact/more_bat_confirm',
 			type: 'POST',
@@ -229,6 +235,7 @@
 					// alert(data.message);
 					// location.reload();
 
+					// 추가참여!
 					$.ajax({
 						url: cb_url + '/postact/more_bat_cp',
 						type: 'POST',
@@ -268,6 +275,7 @@
 		return true;
 	}
 
+	// 투표(배팅, 참여) function
 	function insert_forum_cp(post_id, option){
         
 		const allowed_option = [1, 2];
@@ -336,6 +344,7 @@
 	var ischk = (istotal / 2) + 1
 	$('.cmmt').find('.item:nth-child(n+' + ischk + ')').addClass('vfm');
 
+	// 전적 확인
 	$(document).on('click','.nickname', function(){
 		var isParent = $(this).closest('.info');
 		$(this).closest('.list').find('.item').removeClass('zdex')
@@ -354,6 +363,7 @@
 		});
 	})
 
+	// 댓글 수정
 	$(document).on('click','.cmmt-modify-btn', function(){
 		$('.cmmt-wrap').find('.singo-btn').removeClass('active');
 			if ($(this).hasClass('active')) {
@@ -381,6 +391,7 @@
 		}).close();
 	})
 
+	// 댓글 작성
 	$(document).on('click','.cmmt-btn', function(){
 		$('.cmmt-wrap').find('.singo-btn').removeClass('active');
 			if ($(this).hasClass('active')) {
@@ -408,6 +419,7 @@
 		}).close();
 	})
 
+	// 신고 하기
 	$(document).on('click','.singo-btn', function(){
 		$('.cmmt-wrap').find('.singo-btn').removeClass('active');
 			$(this).addClass('active');
