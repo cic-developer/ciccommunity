@@ -227,4 +227,17 @@ class CIC_forum_model extends CB_Model
 		// exit;
 		return $result;
 	}
+
+	// 포럼 cp 배팅
+	public function insert($data)
+	{
+		if ( ! empty($data)) {
+			$this->db->insert('cic_forum_cp', $data);
+			$insert_id = $this->db->insert_id();
+
+			return $insert_id;
+		} else {
+			return false;
+		}
+	}
 }

@@ -18,7 +18,7 @@ class Postact extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Post', 'CIC_cp'. 'Member');
+	protected $models = array('Post');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -2273,6 +2273,7 @@ class Postact extends CB_Controller
 			 * 포인트 차감
 			 * member
 			 */
+			$this->load->model('Member_model');
 			$result = $this->Member_model->set_user_point($mem_id, $usePoint, $mem_cp);
 			if($result != 1){
 				$this->session->set_flashdata(
@@ -2284,13 +2285,21 @@ class Postact extends CB_Controller
 				 * cp 기록
 				 * cic_cp
 				 */
+				$this->load->model('CIC_cp_model');
 				$this->CIC_cp_model->set_cic_cp($mem_id, '-', -$_money, '@byself', $mem_id, '포럼배팅');
 
 				/**
 				 * 배팅
 				 * cic_forum_cp
 				 */
-				$this->CIC_forum_model->;
+				$insertdata = array(
+					'pst_id' => $post_id,
+					'mem_id' => $mem_id,
+					'cfc_option' => $option,
+					'cfc_cp' => $usePoint,
+				);
+				$this->load->model('CIC_forum_model');
+				$this->CIC_forum_model->insert($insertdata);
 
 				$this->session->set_flashdata(
 					'message',

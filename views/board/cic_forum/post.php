@@ -208,9 +208,9 @@
 			url: cb_url + '/postact/bat_forum',
 			type: 'POST',
 			data: {
-				usePoint: Number(_point),
-				post_id: Number(post_id),
-				option: Number(option),
+				usePoint: _point,
+				post_id: post_id,
+				option: option,
 				csrf_test_name : cb_csrf_hash
 			},
 			dataType: 'json',
