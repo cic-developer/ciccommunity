@@ -165,6 +165,7 @@
 	var reg_num = /^[0-9]*$/; // 정수 검사
 	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
 	var is_bat = "<?php echo element('is_bat', $forum); ?>" // 유저 배팅 진영 1, 2
+	var cfc_state = "<?php echo element('cfc_state', $forum); ?>" // 유저 배팅 진영 1, 2
 
 	// 의견 변경
 	$(document).on('click', '#change_btn', function(){
@@ -203,9 +204,15 @@
 			alert('비정상적인 시도입니다.3');
 			return false;
 		}
-
-		const confirm_content = ' ' + (option === '1' ? 'A' :'B') + '의견을 ' + (option === '2' ? 'A' :'B') + '의견으로 변경 하시겠습니까? (1회)';
+		
+		const num = cfc_state == 1 ? 0 : 1;
+		const confirm_content = ' ' + (option === '1' ? 'A' :'B') + '의견을 ' + (option === '2' ? 'A' :'B') + '의견으로 변경 하시겠습니까? (' + num + '회)';
 		var isConfirm = confirm(confirm_content);
+
+		if(cfc_state == 1) {
+			alert('의견 변경횟수를 초과하였습니다');
+			return false;
+		}
 
 		if(isConfirm){
 			$.ajax({
@@ -220,10 +227,17 @@
 				async: false,
 				cache: false,
 				success: function(data){
-
+					if(data.state == 1){
+						alert(data.message);
+						location.reload();
+					}
+					if(data.state == 0){
+						alert(data.message);
+						location.reload();
+					}
 				},
 				error: function(){
-					alert('에러가 발생했습니다');
+					alert('에러가 발생했습니다!');
 				}
 			})
 		}

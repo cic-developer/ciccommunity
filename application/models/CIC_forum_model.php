@@ -265,4 +265,14 @@ class CIC_forum_model extends CB_Model
 		
 		return $result;
 	}
+	// 포럼 배팅 진영 변경
+	public function change_bat($primary_value = '', $updatedata = '', $where = '')
+	{
+
+		$this->db->where($where);
+		$this->db->set($updatedata);
+		$result = $this->db->update('cic_forum_cp');
+		
+		return $result;
+	}
 }

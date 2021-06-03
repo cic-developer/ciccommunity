@@ -2627,8 +2627,7 @@ class Postact extends CB_Controller
 			$mem_id = $member_info['mem_id'];
 			// $mem_cp = $member_info['mem_cp'];
 
-			$usePoint = (double) $this->input->post('usePoint');
-			
+			// $usePoint = (double) $this->input->post('usePoint');
 			$post_id = (int) $this->input->post('post_id');
 			$option = (int) $this->input->post('option');
 
@@ -2666,63 +2665,45 @@ class Postact extends CB_Controller
 					);
 					exit(json_encode($result));
 				}
-				(int) $isBat[0]['cfc_option'];
 
-
-
-
-
-
-
-				/**
-				 * 포인트 차감
-				 * member
-				 */
-				$this->load->model('Member_model');
-				$result = $this->Member_model->set_user_point($mem_id, $usePoint, $mem_cp);
-				if($result != 1){
+				if($isBat[0]['cfc_state'] == 1){
 					$result = array(
 						'state' => '0',
-						'message' => '배팅에 실패하셨습니다1 (관리자 문의)',
-					);
-					exit(json_encode($result));
-				}else {
-					/**
-					 * cp 기록
-					 * cic_cp
-					 */
-					$this->load->model('CIC_cp_model');
-					$this->CIC_cp_model->set_cic_cp($mem_id, '-', -$usePoint, '@byself', $mem_id, '추가포럼배팅');
-
-					/**
-					 * 추가 배팅
-					 * cic_forum_cp
-					 */
-					$old_bat_cp = (double) $isBat[0]['cfc_cp'];
-					$updatedata = array(
-						'cfc_cp' => $old_bat_cp + $usePoint,
-					);
-					$where = array(
-						'pst_id' => $post_id,
-						'mem_id' => $mem_id,
-						'cfc_option' => $option,
-					);
-					$this->load->model('CIC_forum_model');
-					$_result = $this->CIC_forum_model->more_bat('cic_forum_cp', $updatedata, $where);
-					if($_result != 1){
-						$result = array(
-							'state' => '0',
-							'message' => '배팅에 실패하셨습니다2 (관리자 문의)',
-						);
-						exit(json_encode($result));
-					}
-
-					$result = array(
-						'state' => '1',
-						'message' => '성공적으로 처리되었습니다',
+						'message' => '의견 변경횟수 초과',
 					);
 					exit(json_encode($result));
 				}
+
+				/**
+				 * 배팅 진영 변경
+				 * cic_forum_cp
+				 */
+				$new_cfc_option = $option == 1 ? 2 : 1;
+				$updatedata = array(
+					'cfc_option' => $new_cfc_option,
+					'cfc_state' => 1
+				);
+				$where = array(
+					'pst_id' => $post_id,
+					'mem_id' => $mem_id,
+					'cfc_option' => $option,
+				);
+				$this->load->model('CIC_forum_model');
+				$_result = $this->CIC_forum_model->more_bat('cic_forum_cp', $updatedata, $where);
+
+				if($_result != 1){
+					$result = array(
+						'state' => '0',
+						'message' => '의견 변경에 실패 하였습니다',
+					);
+					exit(json_encode($result));
+				}
+
+				$result = array(
+					'state' => '1',
+					'message' => '성공적으로 처리되었습니다',
+				);
+				exit(json_encode($result));
 			}
 		}
 	}

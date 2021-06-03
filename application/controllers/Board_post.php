@@ -533,6 +533,9 @@ class Board_post extends CB_Controller
 					$view['forum']['bat_cp'] = $isBat[0]['cfc_cp'];
 				}
 			}
+
+			// 의견 변경 state
+			$view['forum']['cfc_state'] = $isBat[0]['cfc_state'];
 		}
 		
 		$view['view']['like_point_ranking_freetalk'] = $like_point_ranking_freetalk;
