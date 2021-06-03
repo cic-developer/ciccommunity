@@ -926,7 +926,6 @@ class Postact extends CB_Controller
 
 	}
 
-
 	/**
 	 * 댓글 추천/비추천 하기
 	 */

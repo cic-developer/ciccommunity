@@ -7,7 +7,7 @@
 		?>
 			<input type="hidden" name="<?php echo element('primary_key', $view); ?>"	value="<?php echo element(element('primary_key', $view), element('data', $view)); ?>" />
 			<div class="form-group">
-				<label class="col-sm-2 control-label">이미지 업로드</label>
+				<label class="col-sm-2 control-label">대표 이미지 선택</label>
 				<div class="col-sm-10">
 					<?php
 					if (element('ban_image', element('data', $view))) {
@@ -24,21 +24,15 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">이미지 설명</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" name="ban_title" value="<?php echo set_value('ban_title', element('ban_title', element('data', $view))); ?>" />
+				<label class="col-sm-2 control-label">배팅 마감일</label>
+				<div class="col-sm-10 form-inline">
+					<input type="text" class="form-control datepicker" name="frm_bat_close_datetime" value="<?php echo set_value('frm_bat_close_datetime', element('frm_bat_close_datetime', element('data', $view))); ?>" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">시작일</label>
+				<label class="col-sm-2 control-label">포럼 마감일</label>
 				<div class="col-sm-10 form-inline">
-					<input type="text" class="form-control datepicker" name="ban_start_date" value="<?php echo set_value('ban_start_date', element('ban_start_date', element('data', $view))); ?>" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">종료일</label>
-				<div class="col-sm-10 form-inline">
-					<input type="text" class="form-control datepicker" name="ban_end_date" value="<?php echo set_value('ban_end_date', element('ban_end_date', element('data', $view))); ?>" />
+					<input type="text" class="form-control datepicker" name="frm_close_datetime" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('data', $view))); ?>" />
 				</div>
 			</div>
 			<div class="btn-group pull-right" role="group" aria-label="...">

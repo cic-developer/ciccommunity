@@ -627,7 +627,7 @@ class Forum extends CB_Controller
 			);
 
             if($updatephoto){
-                $updatedata['ban_image'] = $updatephoto;
+                $updatedata['frm_image'] = $updatephoto;
             }
 			/**
 			 * 게시물을 수정하는 경우입니다
@@ -654,7 +654,7 @@ class Forum extends CB_Controller
 				// );
 			}
 			//오늘 생성된 배너 캐시를 삭제합니다.
-			$this->cache->delete('banner/banner-info-' . cdate('Y-m-d'));
+			$this->cache->delete('forum/forum-info-get' . cdate('Y-m-d'));
 
 			// 이벤트가 존재하면 실행합니다
 			Events::trigger('after', $eventname);
