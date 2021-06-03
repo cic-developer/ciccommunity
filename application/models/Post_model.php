@@ -437,10 +437,11 @@ class Post_model extends CB_Model
 		}
 
 		$this->db->select('post.*, board.brd_key, board.brd_name, board.brd_mobile_name, board.brd_order, board.brd_search,
-			member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point ');
+			member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point, cic_member_level_config.*');
 		$this->db->from('post');
 		$this->db->join('board', 'post.brd_id = board.brd_id', 'inner');
 		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
+		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
 
 		
 		if ($where) {

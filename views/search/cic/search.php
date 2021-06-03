@@ -182,15 +182,6 @@
 								<col width="100">
 								<col width="100">
 							</colgroup>
-							<thead>
-								<tr>
-									<th>글쓴이</th>
-									<th>제목</th>
-									<th>등록일</th>
-									<th>조회</th>
-									<th><span class="cyellow">VP</span></th>
-								</tr>
-							</thead>
 							<tbody>
 							<?php
 							if (element('list', element('free_data', $view))) {
@@ -199,7 +190,10 @@
 								<tr>
 									<td>
 										<div class="my-info">
-											<p class="pimg"><img src="<?php echo thumb_url(element('post_image', $result),30, 30)?>" alt=""></p>
+										<?php
+											print_r($result);
+										?>
+											<p class="pimg"><img src="<?php echo echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30); ?>" alt=""></p>
 											<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
 										</div>
 									</td>
