@@ -228,19 +228,19 @@ class CIC_forum_model extends CB_Model
 		return $result;
 	}
 
-	public function get_forum_bat(){
-
-	}
-
-	public function get_by_email($email = '', $select = '')
+	// 포럼 배팅 확인
+	public function get_forum_bat($where, $select = '')
 	{
-		if (empty($email)) {
+		if (empty($where)) {
 			return false;
 		}
-		$where = array('mem_email' => $email);
-		return $this->get_one('', $select, $where);
-	}
 
+		$this->db->select('cic_forum_cp.*');
+		$this->db->from('cic_forum_cp');
+		$this->db->where($where);
+		$qry = $this->db->get();
+		return $qry->result_array();
+	}
 
 	// 포럼 cp 배팅
 	public function insert($data)

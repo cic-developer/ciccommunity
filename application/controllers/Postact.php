@@ -2271,11 +2271,20 @@ class Postact extends CB_Controller
 			$option = (int) $this->input->post('option');
 
 			$where = array(
-				'pst_id' => 6,
+				'pst_id' => $post_id,
 				'mem_id' => $mem_id,
-				'cfc_option' => '1',
+				// 'cfc_option' => '1',
 			);
-			$post3 = $this->Post_model->get_one('', '', $where3);
+			$this->load->model('CIC_forum_model');
+			$isBat = $this->CIC_forum_model->get_forum_bat($where);
+
+			if($isBat){
+				$result = array(
+					'state' => '0',
+					'message' => '이미 배팅하셨습니다',
+				);
+				exit(json_encode($result));
+			}
 
 			/**
 			 * 포인트 차감
