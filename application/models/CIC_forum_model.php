@@ -219,6 +219,9 @@ class CIC_forum_model extends CB_Model
 			$this->db->limit($limit, $offset);
 		}
 		$result = $this->db->get();
+		
+		print_r($this->db->last_query());
+		exit;
 		return $result;
 	}
 }

@@ -43,7 +43,7 @@ class Forum extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('pagination', 'querystring', 'member'));
+		$this->load->library(array('pagination', 'querystring', 'member', 'upload'));
 	}
 
 	/**
@@ -372,7 +372,7 @@ class Forum extends CB_Controller
 			'post_datetime' => $param->sort('post_datetime', 'asc'),
 			'cic_forum_info.frm_bat_close_datetime' => $param->sort('cic_forum_info.frm_bat_close_datetime', 'asc'),
 			'cic_forum_info.frm_close_datetime' => $param->sort('cic_forum_info.frm_close_datetime', 'asc'),
-			'cic_forum_info.frm_total_money' => $param->sort('cic_forum_info.frm_total_money', 'asc'),
+			'cic_forum_total_cp' => $param->sort('cic_forum_total_cp', 'asc'),
 		);
 		$findex = $this->input->get('findex', null, 'post_id');
 		$forder = $this->input->get('forder', null, 'desc');
@@ -599,8 +599,123 @@ class Forum extends CB_Controller
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
 
+		}else {
+			/**
+			 * 유효성 검사를 통과한 경우입니다.
+			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
+			 */
+
+			 // $upload_path => uploads/banner/
+            $this->load->library('upload');
+			if (isset($_FILES) && isset($_FILES['ban_image']) && isset($_FILES['ban_image']['name']) && $_FILES['ban_image']['name']) {
+				$upload_path = config_item('uploads_dir') . '/banner/';
+				if (is_dir($upload_path) === false) {
+					mkdir($upload_path, 0707);
+					$file = $upload_path . 'index.php';
+					$f = @fopen($file, 'w');
+					@fwrite($f, '');
+					@fclose($f);
+					@chmod($file, 0644);
+				}
+				$upload_path .= cdate('Y') . '/';
+				if (is_dir($upload_path) === false) {
+					mkdir($upload_path, 0707);
+					$file = $upload_path . 'index.php';
+					$f = @fopen($file, 'w');
+					@fwrite($f, '');
+					@fclose($f);
+					@chmod($file, 0644);
+				}
+				$upload_path .= cdate('m') . '/';
+				if (is_dir($upload_path) === false) {
+					mkdir($upload_path, 0707);
+					$file = $upload_path . 'index.php';
+					$f = @fopen($file, 'w');
+					@fwrite($f, '');
+					@fclose($f);
+					@chmod($file, 0644);
+				}
+
+                $uploadconfig = array();
+				$uploadconfig['upload_path'] = $upload_path;
+				$uploadconfig['allowed_types'] = 'jpg|jpeg|png|gif';
+				$uploadconfig['max_size'] = '2000';
+				$uploadconfig['max_width'] = '1000';
+				$uploadconfig['max_height'] = '1000';
+				$uploadconfig['encrypt_name'] = true;
+
+				$this->upload->initialize($uploadconfig);
+
+				if ($this->upload->do_upload('ban_image')) {
+					$img = $this->upload->data();
+					$updatephoto = cdate('Y') . '/' . cdate('m') . '/' . element('file_name', $img);
+				} else {
+					$file_error = $this->upload->display_errors();
+                    print_r($file_error);
+                    exit;
+				}
+            }
+
+
+			// 이벤트가 존재하면 실행합니다
+			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+
+			$ban_start_date = $this->input->post('ban_start_date') ? $this->input->post('ban_start_date') : null;
+			$ban_end_date = $this->input->post('ban_end_date') ? $this->input->post('ban_end_date') : null;
+			$ban_page = $this->input->post('ban_page') ? $this->input->post('ban_page') : 0;
+			$ban_disable_hours = $this->input->post('ban_disable_hours') ? $this->input->post('ban_disable_hours') : 0;
+			$ban_activated = $this->input->post('ban_activated') ? $this->input->post('ban_activated') : 0;
+
+			$updatedata = array(
+				'ban_title' => $this->input->post('ban_title', null, ''),
+				'ban_start_date' => $ban_start_date,
+				'ban_end_date' => $ban_end_date,
+				'ban_activated' => $ban_activated,
+                'ban_url'    =>  $this->input->post('ban_url', null, ''),
+                'ban_target' =>  $this->input->post('ban_target', null, ''),
+                'ban_order' =>  $this->input->post('ban_order', null, ''),
+			);
+
+            if($updatephoto){
+                $updatedata['ban_image'] = $updatephoto;
+            }
+			/**
+			 * 게시물을 수정하는 경우입니다
+			 */
+			if ($this->input->post($primary_key)) {
+				$this->{$this->modelname}->update($this->input->post($primary_key), $updatedata);
+				$this->session->set_flashdata(
+					'message',
+					'정상적으로 수정되었습니다'
+				);
+			} else {
+				/**
+				 * 게시물을 새로 입력하는 경우입니다
+				 */
+				$updatedata['ban_datetime'] = cdate('Y-m-d H:i:s');
+				$updatedata['ban_ip'] = $this->input->ip_address();
+				$updatedata['mem_id'] = $this->member->item('mem_id');
+                $updatedata['ban_hit'] = 0;
+
+				$this->{$this->modelname}->insert($updatedata);
+				$this->session->set_flashdata(
+					'message',
+					'정상적으로 입력되었습니다'
+				);
+			}
+			//오늘 생성된 배너 캐시를 삭제합니다.
+			$this->cache->delete('banner/banner-info-' . cdate('Y-m-d'));
+
+			// 이벤트가 존재하면 실행합니다
+			Events::trigger('after', $eventname);
+
+			/**
+			 * 게시물의 신규입력 또는 수정작업이 끝난 후 목록 페이지로 이동합니다
+			 */
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+
+			redirect($redirecturl);
 		}
 	}
-
-
 }

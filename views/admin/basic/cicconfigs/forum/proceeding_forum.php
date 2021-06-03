@@ -36,7 +36,7 @@
 								<th><a href="<?php echo element('post_datetime', element('sort', $view)); ?>">날짜</a></th>
 								<th><a href="<?php echo element('cic_forum_info.frm_bat_close_datetime', element('sort', $view)); ?>">배팅마감</a></th>
 								<th><a href="<?php echo element('cic_forum_info.frm_close_datetime', element('sort', $view)); ?>">포럼마감</a></th>
-								<th><a href="<?php echo element('cic_forum_info.frm_total_money', element('sort', $view)); ?>">참여금액</a></th>
+								<th><a href="<?php echo element('cic_forum_total_cp', element('sort', $view)); ?>">참여금액</a></th>
 								<th>수정</th>
 								<!-- <th><input type="checkbox" name="chkall" id="chkall" /></th> -->
 							</tr>
@@ -58,7 +58,7 @@
                                 <td><?php echo display_datetime(element('post_datetime', $result), 'full'); ?></td>
                                 <td><?php echo display_datetime(element('frm_bat_close_datetime', $result), 'full'); ?></td>
 								<td><?php echo display_datetime(element('frm_close_datetime', $result), 'full'); ?></td>
-                                <td><?php echo number_format(element('frm_total_money', $result), 2); ?></td>
+                                <td><?php echo number_format(element('cic_forum_total_cp', $result), 2); ?></td>
                                 <td><a href="<?php echo admin_url($this->pagedir); ?>/exchange_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
 							</tr>
 						<?php
