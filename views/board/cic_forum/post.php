@@ -118,7 +118,7 @@
 				<div class="abr">
 					<p class="cp"><span><?php echo rs_number_format(element('bat_cp', $forum), 2, 0); ?></span> CP</p>
 					<a href="#n" id="more_btn"><span>추가 참여!</span></a>
-					<a href="#n"><span>의견 변경</span></a>
+					<a href="#n" id="change_btn"><span>의견 변경</span></a>
 				</div>
 			</div>
 			<div class="btns">
@@ -164,7 +164,12 @@
 	var regex = /^[0-9]+(\.[0-9]+)?$/g; // 실수 검사
 	var reg_num = /^[0-9]*$/; // 정수 검사
 	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
-	var is_bat = "<?php echo element('is_bat', $forum); ?>" // 참여, 미참여 여부
+	var is_bat = "<?php echo element('is_bat', $forum); ?>" // 유저 배팅 진영 1, 2
+
+	// 의견 변경
+	$(document).on('click', '#change_btn', function(){
+		change_forum_bat(post_id, is_bat);
+	})
 
 	// 추가참여!
 	$(document).on('click', '#more_btn', function(){
@@ -184,6 +189,43 @@
 		
 		insert_forum_cp(post_id, option);
 	})
+
+	// 의견 변경 function
+	function change_forum_bat(post_id, option){
+		const allowed_option = ['1', '2'];
+
+		if(!reg_num.test(post_id)){
+			alert('비정상적인 시도입니다.2');
+			return false;
+		}
+
+		if(allowed_option.indexOf(option) == -1){
+			alert('비정상적인 시도입니다.3');
+			return false;
+		}
+
+		const confirm_content = ' ' + (option === '1' ? 'A' :'B') + '의견을 ' + (option === '2' ? 'A' :'B') + '의견으로 변경 하시겠습니까?';
+		const confirm = confirm('')
+
+		$.ajax({
+			url: cb_url + '/postact/change_bat',
+			type: 'POST',
+			data: {
+				post_id: post_id,
+				option: option,
+				csrf_test_name : cb_csrf_hash
+			},
+			dataType: 'json',
+			async: false,
+			cache: false,
+			success: function(data){
+
+			},
+			error: function(){
+				alert('에러가 발생했습니다');
+			}
+		})
+	}
 
 	// 추가참여 function
 	function update_forum_cp(post_id, option){
