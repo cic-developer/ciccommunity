@@ -91,6 +91,8 @@ class CIC_forum_model extends CB_Model
 		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
 
 		if ($where) {
+			print_r('ho');
+			exit;
 			$this->db->where($where);
 		}
 		if ($search_where) {
