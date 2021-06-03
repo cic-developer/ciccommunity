@@ -29,6 +29,7 @@ class CIC_forum_model extends CB_Model
 		parent::__construct();
 	}
 
+	// CIC 포럼 게시물 리스트 가져오기
 	public function get_post_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
 
@@ -176,6 +177,7 @@ class CIC_forum_model extends CB_Model
 		return $result;
 	}
 
+	// CIC 포럼 게시물 가져오기
 	public function get_one($primary_value = '', $select = '', $where = '')
 	{
 		$result = $this->_get($primary_value, $select, $where, 1);
@@ -189,10 +191,8 @@ class CIC_forum_model extends CB_Model
 			$this->db->select($select);
 		}
 
-		$this->db->select('cic_forum_info.*');
+		$this->db->select('cic_forum_info.*, SUM(CASE WHEN  `cic_forum_cp`.`cfc_option` = 1 THEN `cic_forum_cp`.`cfc_cp` ELSE 0 END) AS `cic_A_cp`, SUM(CASE WHEN  `cic_forum_cp`.`cfc_option` = 2 THEN `cic_forum_cp`.`cfc_cp` ELSE 0 END) AS `cic_B_cp`');
 		$this->db->select_sum('cic_forum_cp.cfc_cp', 'cic_forum_total_cp');
-		$this->db->select('CASE WHEN  `cic_forum_cp`.`cfc_option` = 1 THEN `cic_forum_cp`.`cfc_cp` ELSE 0 END', 'cic_A_cp');
-		// $this->db->select_sum('CASE WHEN  `cic_forum_cp`.`cfc_option` = 2 THEN `cic_forum_cp`.`cfc_cp` ELSE 0 END', 'cic_B_cp');
 
 		// $this->db->from('$this->_table');
 		$this->db->from('cic_forum_info');
@@ -222,11 +222,9 @@ class CIC_forum_model extends CB_Model
 		}
 		$result = $this->db->get();
 		
-		print_r($this->db->last_query());
-		exit;
+		// => 주석을 해제하면 해당 query를 볼수 있습니다.
+		// print_r($this->db->last_query());
+		// exit;
 		return $result;
 	}
 }
-
-// SUM(CASE WHEN  `cic_forum_cp`.`cfc_option` = 1 THEN `cic_forum_cp`.`cfc_cp` ELSE 0 END) AS `cic_A_cp`,
-// SUM(CASE WHEN  `cic_forum_cp`.`cfc_option` = 2 THEN `cic_forum_cp`.`cfc_cp` ELSE 0 END) AS `cic_B_cp`
