@@ -24,7 +24,7 @@ class Forum extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_forum','Board', 'Post', 'Board_category', 'Post_file', 'CIC_forum_config');
+	protected $models = array('CIC_forum','Board', 'Post', 'Board_category', 'Post_file', 'CIC_forum_config', 'CIC_forum_info');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
@@ -540,7 +540,7 @@ class Forum extends CB_Controller
 
 		$getdata = array();
 		if ($post_id) {
-			$getdata = $this->Post_model->get_one($post_id);
+			$getdata = $this->CIC_forum_info_model->get_one($post_id);
 		} else {
 			// 기본값 설정
 		}
