@@ -2543,14 +2543,17 @@ class Postact extends CB_Controller
 					 * 배팅
 					 * cic_forum_cp
 					 */
-					$insertdata = array(
+					
+					$updatedata = array(
 						'pst_id' => $post_id,
 						'mem_id' => $mem_id,
 						'cfc_option' => $option,
-						'cfc_cp' => $usePoint,
+						'cfc_cp' => $isBat[0]['cfc_cp'] + $usePoint,
 					);
 					$this->load->model('CIC_forum_model');
-					$this->CIC_forum_model->insert($insertdata);
+					$test = $this->CIC_forum_model->update($updatedata);
+
+					print_r($test);
 
 					$result = array(
 						'state' => '1',

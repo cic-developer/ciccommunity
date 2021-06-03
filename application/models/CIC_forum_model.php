@@ -254,4 +254,11 @@ class CIC_forum_model extends CB_Model
 			return false;
 		}
 	}
+
+	// 포럼 cp 추가 배팅
+	public function update($data)
+	{
+		$result = $this->update('cic_forum_cp', $data);
+		return $result;
+	}
 }
