@@ -128,10 +128,6 @@ class CIC_forum_model extends CB_Model
 			$this->db->limit($limit, $offset);
 		}
 		$qry = $this->db->get();
-
-
-		print_r($qry->result_array());
-		exit;
 		$result['list'] = $qry->result_array();
 
 		$this->db->select('count(*) as rownum');
