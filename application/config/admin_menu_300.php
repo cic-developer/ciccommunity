@@ -32,6 +32,6 @@ $config['admin_page_menu']['board'] =
 			'linkclick'				=> array('링크클릭', ''),
 			'like'					=> array('추천/비추', ''),
 			'blame'					=> array('신고', ''),
-			'test'					=> array('테스트', ''),
+			
 		),
 	);

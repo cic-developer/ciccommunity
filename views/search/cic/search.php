@@ -41,7 +41,7 @@
 						</ul>
 					</div>
 					<div class="sel-box c03">
-						<a href="javascript:void(0);" class="sel-btn"><span>최신순</span></a>
+						<a href="javascript:void(0);" class="sel-btn"><span><?php echo element('findex_word', $view); ?></span></a>
 						<ul>
 							<li class="<?php echo !in_array(element('sfield', $view), array('view')) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_findex" data-value="latest"><span>최신 순</span></a></li>
 							<li class="<?php echo element('sfield', $view) == 'view' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_findex" data-value="view"><span>조회 순</span></a></li>

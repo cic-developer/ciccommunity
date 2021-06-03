@@ -93,10 +93,14 @@ class Search extends CB_Controller
 		}
 		
 		if($findex_get == 'view'){
-			$findex = 'post_hit, post_num';
+			$this->Post_model->allow_order[] = 'post_hit desc, post_num asc';
+			$findex = 'post_hit desc, post_num asc';
+			$findex_word = "조회 순";
 		} else {
+			$findex_word = "최신 순";
 			$findex = 'post_num, post_reply';
 		}
+		$view['view']['findex_word'] = $findex_word;
 
 		$skeyword = $this->input->get('skeyword', null, '');
 		if (empty($skeyword)) {
@@ -214,8 +218,14 @@ class Search extends CB_Controller
 		$news_result = array();
 		if($is_all || $is_news){
 			$this->News_model->allow_search_field = array('news_title', 'news_contents', 'company.comp_name'); // 검색이 가능한 필드
-			$this->News_model->allow_order = array('news_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
-			$findex = 'news_id';
+			$this->News_model->allow_order = array('news_id', 'news_reviews', 'news_reviews desc, news_id asc'); // 검색중 like 가 아닌 = 검색을 하는 필드
+			
+		
+			if($findex_get == 'view'){
+				$findex = 'news_reviews desc, news_id asc';
+			} else {
+				$findex = 'news_id';
+			}
 			$sop = $this->input->get('sop', null, '');
 			
 			$sfield = $sfield2 = $this->input->get('sfield', null, '');
@@ -228,8 +238,9 @@ class Search extends CB_Controller
 			} else {
 				$sfield = array('news_title', 'news_contents');
 			}
+			$where = array();
 			$news_result = $this->News_model
-				->get_search_list($per_page, $offset, array(), $like, $findex, $sfield, $skeyword, $sop);
+				->get_search_list($per_page, $offset, $where, $like, $findex, $sfield, $skeyword, $sop);
 		}
 
 		$free_row = $is_all || $is_free ? (int) $result['board_rows']['1'] : 0; // 자유게시판 검색 ROW 

@@ -518,4 +518,55 @@ class Forum extends CB_Controller
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
+
+	public function forum_write($post_id = 0)
+	{
+		$eventname = 'event_admin_ciccinfigs_update_company';
+		$this->load->event($eventname);
+
+		$view = array();
+		$view['view'] = array();
+
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		if($post_id) {
+			$post_id = (int) $post_id;
+			if(empty($post_id) OR $post_id < 1 ){
+				show_404();
+			}
+		}
+
+		$primary_key = $this->Post_model->primary_key;
+
+		$getdata = array();
+		if ($post_id) {
+			$getdata = $this->Post_model->get_one($post_id);
+		} else {
+			// 기본값 설정
+		}
+
+		$this->load->library('form_validation');
+
+		$config = array(
+				array(
+					'field' => 'comp_url',
+					'lable' => 'URL',
+					'rules' => 'prep_url|valid_url',
+				),
+				array(
+					'field' => 'comp_segment',
+					'lable' => 'Segment',
+					'rules' => 'trim|required|min_length[2]|max_length[30]',
+				),
+				array(
+					'field' => 'comp_img_select',
+					'lable' => 'Image_Select',
+					'rules' => 'trim|required|min_length[2]|max_length[30]',
+				),
+			);
+
+		$this->form_validation->set_rules($config);	
+	}
+
+
 }
