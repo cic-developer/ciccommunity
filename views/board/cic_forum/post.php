@@ -166,7 +166,6 @@
 	var my_bat = "<?php echo element('my_bat', $forum); ?>"
 
 	$(document).on('click', '#more_btn', function(){
-		alert(my_bat);
 		update_forum_cp(post_id, my_bat);
 	})
 
@@ -213,7 +212,7 @@
 			success: function(data) {
 				if(data.state == 1){
 
-					const title = 'CP를 '+ (option === 1 ? 'A' :'B') + '의견에 추가 참여합니다.';
+					const title = 'CP를 '+ (option === '1' ? 'A' :'B') + '의견에 추가 참여합니다.';
 					const _point = prompt(title, 0);
 					
 					//취소버튼 누를시

@@ -256,9 +256,36 @@ class CIC_forum_model extends CB_Model
 	}
 
 	// 포럼 cp 추가 배팅
-	public function update($data)
+	public function more_bat($data)
 	{
 		$result = $this->update('cic_forum_cp', $data);
+		return $result;
+	}
+
+	public function update($primary_value = '', $updatedata = '', $where = '')
+	{
+		if ( ! empty($updatedata)) {
+			if ( ! empty($primary_value)) {
+				// $this->db->where($this->primary_key, $primary_value);
+				$this->db->where($primary_value);
+			}
+			if ( ! empty($where)) {
+				$this->db->where($where);
+			}
+			$this->db->set($updatedata);
+			$result = $this->db->update($this->_table);
+
+			return $result;
+		} else {
+			return false;
+		}
+	}
+
+	public function set_user_modify($primary_value = '', $arr)
+	{
+		
+		$result = $this->update('cic_forum_cp', $arr);
+
 		return $result;
 	}
 }

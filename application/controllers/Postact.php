@@ -2540,21 +2540,21 @@ class Postact extends CB_Controller
 					$this->CIC_cp_model->set_cic_cp($mem_id, '-', -$usePoint, '@byself', $mem_id, '추가포럼배팅');
 
 					/**
-					 * 배팅
+					 * 추가 배팅
 					 * cic_forum_cp
 					 */
-					
+					$old_bat_cp = (int) $isBat[0]['cfc_cp'];
 					$updatedata = array(
+						'cfc_cp' => $old_bat_cp + $usePoint,
+					);
+					$where = array(
 						'pst_id' => $post_id,
 						'mem_id' => $mem_id,
 						'cfc_option' => $option,
-						'cfc_cp' => $isBat[0]['cfc_cp'] + $usePoint,
 					);
 					$this->load->model('CIC_forum_model');
-					$test = $this->CIC_forum_model->update($updatedata);
-
-					print_r($test);
-
+					$test = $this->CIC_forum_model->update('cic_forum_cp', $updatedata, $where);
+					
 					$result = array(
 						'state' => '1',
 						'message' => '성공적으로 처리되었습니다',
