@@ -57,11 +57,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="lower r">
-		<a href="#n" class="bb-btn"><span>목록</span></a>
-		<a href="#n" class="bw-btn"><span>이전</span></a>
-		<a href="#n" class="bw-btn"><span>다음</span></a>
-	</div> -->
+			
 		</div>
 		<div class="gap50"></div>
 		<div class="poll-wrap">
@@ -110,9 +106,15 @@
 				
 				</ul>
 			</div>
-				hf
+
 			<div class="result" style="display:none">
-				<p class="btxt">A. 간다 <span>참여</span></p>
+				<?php if(element('my_bat', $forum) == 1){ ?>
+					<p class="btxt">A. <?php echo element('extra_content', $view)[0]['output'] ?> <span>참여</span></p>
+				<?php }else if(element('my_bat', $forum) == 2) { ?>
+					<p class="btxt">A. <?php echo element('extra_content', $view)[1]['output'] ?> <span>참여</span></p>
+				<?php }else { ?>
+					<p class="btxt"><span>미참여</span></p>
+				<?php } ?>
 				<div class="abr">
 					<p class="cp"><span>150</span> CP</p>
 					<a href="#n" id="more_btn"><span>추가 참여!</span></a>
