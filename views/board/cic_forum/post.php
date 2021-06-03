@@ -75,14 +75,46 @@
 			<div class="cont">
 				<h3><?php echo html_escape(element('post_title', element('post', $view))); ?></h3>
 				<ul>
+
+				<?php
+				if (element('extra_content', $view)) {
+					foreach (element('extra_content', $view) as $key => $value) {
+						if(element('field_name', $value) == 'A_opinion') {
+				?>
 					<li>
 						<div class="bar">
 							<div class="vbar"></div>
 							<p class="percent"><span><?php echo number_format(element('A_per', $forum)); ?>%</span></p>
 							<p class="nums"><i class="counter"><?php echo number_format(element('cic_A_cp', $forum), 2); ?></i><span>cp</span></p>
 							<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo1.png')?>" alt="" style="cursor:pointer;" /></p>
+							<a><span>A. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
+						</div>
+					</li>
+				<?php
+					} else if(element('field_name', $value) == 'B_opinion'){
+				?>
+					<li>
+						<div class="bar">
+							<div class="vbar"></div>
+							<p class="percent"><span><?php echo number_format(element('B_per', $forum)); ?>%</span></p>
+							<p class="nums"><i class="counter"><?php echo number_format(element('cic_B_cp', $forum), 2); ?></i><span>cp</span></p>
+							<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo2.png')?>" alt="" style="cursor:pointer;" /></p>
+							<a><span>A. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
+						</div>
+					</li>
+				<?php
+						}
+					}
+				}
+				?>
+
+					<!-- <li>
+						<div class="bar">
+							<div class="vbar"></div>
+							<p class="percent"><span><?php echo number_format(element('A_per', $forum)); ?>%</span></p>
+							<p class="nums"><i class="counter"><?php echo number_format(element('cic_A_cp', $forum), 2); ?></i><span>cp</span></p>
+							<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo1.png')?>" alt="" style="cursor:pointer;" /></p>
 							<a href="#n"><span>A. 간다</span></a>
-							
 						</div>
 					</li>
 					
@@ -94,7 +126,7 @@
 							<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo2.png')?>" alt="" style="cursor:pointer;" /></p>
 							<a href="#n"><span>B. 안간다</span></a>
 						</div>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 			<div class="result" style="display:none">
