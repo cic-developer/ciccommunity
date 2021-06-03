@@ -510,6 +510,9 @@ class Board_post extends CB_Controller
 		}
 		if($post['brd_id'] == 3){
 			$view['forum'] = $this->CIC_forum_model->get_one($post_id);
+
+			print_r($view['forum']);
+			exit;
 		}
 		
 		$view['view']['like_point_ranking_freetalk'] = $like_point_ranking_freetalk;

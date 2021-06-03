@@ -9,12 +9,12 @@
 			<div class="filter">
 				<div class="sel-box c01">
                     <!-- PAGE 검색 기능 START -->
-					<a href="#n" id="optionb" class="sel-btn"><span><?php echo element('type_word', $view); ?></span></a>
+					<a href="javascript:void(0);" id="optionb" class="sel-btn"><span><?php echo element('type_word', $view); ?></span></a>
 					<ul>
-						<li class="<?php echo element('is_all', $view) ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value=""><span>통합검색</span></a></li>
-						<li class="<?php echo element('is_free', $view) ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="free"><span>자유게시판</span></a></li>
-						<li class="<?php echo element('is_writer', $view) ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="writer"><span>WRITER</span></a></li>
-						<li class="<?php echo element('is_news', $view) ? 'active' : ''; ?>"><a href="#n" class="li_type" data-value="news"><span>뉴스</span></a></li>
+						<li class="<?php echo element('is_all', $view) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_type" data-value=""><span>통합검색</span></a></li>
+						<li class="<?php echo element('is_free', $view) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_type" data-value="free"><span>자유게시판</span></a></li>
+						<li class="<?php echo element('is_writer', $view) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_type" data-value="writer"><span>WRITER</span></a></li>
+						<li class="<?php echo element('is_news', $view) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_type" data-value="news"><span>뉴스</span></a></li>
 					</ul>		
 				</div>
 				<div class="field search">
@@ -31,20 +31,20 @@
 				</div>
 				<div class="abr">
 					<div class="sel-box c02">
-						<a href="#n" id="optionb" class="sel-btn"><span><?php echo element('sfield_word', $view); ?></span></a>
+						<a href="javascript:void(0);" id="optionb" class="sel-btn"><span><?php echo element('sfield_word', $view); ?></span></a>
 						<ul>
-							<li class="<?php echo !in_array(element('sfield', $view), array('post_title','post_content','post_nickname')) ? 'active' : ''; ?>"><a href="#n" class="li_sfield" data-value="post_both"><span>제목 + 내용</span></a></li>
-							<li class="<?php echo element('sfield', $view) == 'post_title' ? 'active' : ''; ?>"><a href="#n" class="li_sfield" data-value="post_title"><span>제목</span></a></li>
-							<li class="<?php echo element('sfield', $view) == 'post_content' ? 'active' : ''; ?>"><a href="#n" class="li_sfield" data-value="post_content"><span>내용</span></a></li>
-							<li class="<?php echo element('sfield', $view) == 'post_nickname' ? 'active' : ''; ?>"><a href="#n" class="li_sfield" data-value="post_nickname"><span>작성자</span></a></li>
+							<li class="<?php echo !in_array(element('sfield', $view), array('post_title','post_content','post_nickname')) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_both"><span>제목 + 내용</span></a></li>
+							<li class="<?php echo element('sfield', $view) == 'post_title' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_title"><span>제목</span></a></li>
+							<li class="<?php echo element('sfield', $view) == 'post_content' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_content"><span>내용</span></a></li>
+							<li class="<?php echo element('sfield', $view) == 'post_nickname' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_nickname"><span>작성자</span></a></li>
 						</ul>
 					</div>
 					<div class="sel-box c03">
-						<a href="#n" class="sel-btn"><span>최신순</span></a>
+						<a href="javascript:void(0);" class="sel-btn"><span>최신순</span></a>
 						<ul>
-							<li class="active"><a href="#n"><span>최신 순</span></a></li>
-							<li><a href="#n"><span>관련도 순</span></a></li>
-							<li><a href="#n"><span>인기 순</span></a></li>
+							<li class="active"><a href="javascript:void(0);"><span>최신 순</span></a></li>
+							<li><a href="javascript:void(0);"><span>관련도 순</span></a></li>
+							<li><a href="javascript:void(0);"><span>인기 순</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -362,15 +362,6 @@
 			<!-- s: paging-wrap -->
 			<div class="paging-wrap">
 				<?php echo element('paging', $view); ?>
-				<!-- <ul>
-					<li><a href="#" class="active">1</a></li>
-					<li><a href="#n">2</a></li>
-					<li><a href="#n">3</a></li>
-					<li><a href="#n">4</a></li>
-					<li><a href="#n">5</a></li>
-				</ul>
-				<p class="num"><span>1</span> / 10 </p>
-				<a href="#" class="next ctrl"><span>다음</span></a> -->
 			</div>
 			<!-- e: paging-wrap -->
 		</div>		

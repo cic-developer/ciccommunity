@@ -401,6 +401,9 @@
             }
         });
     })
+
+    //코인 가격 로딩
+    //무한클릭방지
     var getting_maincoin_data = false;
     $(document).on('click', ".maincoin_symbol", function(){
         if(getting_maincoin_data) return false;
