@@ -276,9 +276,7 @@ class Forum extends CB_Controller
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
-		$view['view']['upadte_forum_return'] = admin_url($this->pagedir . '/upadte_forum_return/?' . $param->output());
-		// print_r($view['view']['upadte_forum_return']);
-		// exit;
+		$view['view']['upadte_forum_return_url'] = admin_url($this->pagedir . '/upadte_forum_return/?' . $param->output());
 
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 

@@ -82,9 +82,10 @@ class CIC_forum_model extends CB_Model
 			}
 		}
 
-		$this->db->select('post.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point, cic_member_level_config.*, cic_forum_info.*, cic_forum_cp.*');
+		$this->db->select('post.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point, cic_member_level_config.*, cic_forum_info.*');
+		$this->db->select_sum('cic_forum_cp.cfc_cp', 'cic_forum_total_cp');
 		$this->db->from($this->_table);
-		$this->db->join('cic_forum_cp', 'post.post_id = cic_forum_cp.pst_id', 'left');
+		$this->db->join('cic_forum_cp', 'cic_forum_info.pst_id = cic_forum_cp.pst_id', 'left');
 		$this->db->join('cic_forum_info', 'post.post_id = cic_forum_info.pst_id', 'left');
 		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
 		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
@@ -128,10 +129,12 @@ class CIC_forum_model extends CB_Model
 		}
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
+		
+		exit;
 
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
-		$this->db->join('cic_forum_cp', 'post.post_id = cic_forum_cp.pst_id', 'left');
+		// $this->db->join('cic_forum_cp', 'post.post_id = cic_forum_cp.pst_id', 'left');
 		$this->db->join('cic_forum_info', 'post.post_id = cic_forum_info.pst_id', 'left');
 		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
 		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
@@ -178,8 +181,6 @@ class CIC_forum_model extends CB_Model
 	{
 		$result = $this->_get($primary_value, $select, $where, 1);
 
-		print_r($result);
-		exit;
 		return $result->row_array();
 	}
 
@@ -189,15 +190,16 @@ class CIC_forum_model extends CB_Model
 			$this->db->select($select);
 		}
 
-		$this->db->select('cic_forum_info.*, cic_forum_cp.*');
+		$this->db->select('cic_forum_info.*');
+		$this->db->select_sum('cic_forum_cp.cfc_cp', 'cic_forum_total_cp');
 
 		// $this->db->from('$this->_table');
 		$this->db->from('cic_forum_info');
 		$this->db->join('cic_forum_cp', 'cic_forum_info.pst_id = cic_forum_cp.pst_id', 'left');
-		
+
 		if ($primary_value) {
 			// $this->db->where($this->primary_key, $primary_value);
-			$this->db->where('pst_id', $primary_value);
+			$this->db->where('cic_forum_info.pst_id', $primary_value);
 		}
 
 

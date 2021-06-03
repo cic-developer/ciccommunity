@@ -24,6 +24,7 @@
 					?>
 					<input type="hidden" name="type" value="<?php echo $this->input->get('type'); ?>" />
 					<input type="hidden" name="sfield" value="<?php echo $this->input->get('sfield'); ?>" />
+					<input type="hidden" name="findex" value="<?php echo $this->input->get('findex'); ?>" />
 					<p class="chk-input"><input type="text" placeholder="검색어를 입력해주세요" autocomplete="off" name="skeyword"
 						value="<?php echo $this->input->get('skeyword');?>"></p>
 					<button class="enter"><span class="blind">검색</span></button>
@@ -42,9 +43,8 @@
 					<div class="sel-box c03">
 						<a href="javascript:void(0);" class="sel-btn"><span>최신순</span></a>
 						<ul>
-							<li class="active"><a href="javascript:void(0);"><span>최신 순</span></a></li>
-							<li><a href="javascript:void(0);"><span>관련도 순</span></a></li>
-							<li><a href="javascript:void(0);"><span>인기 순</span></a></li>
+							<li class="<?php echo !in_array(element('sfield', $view), array('view')) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_findex" data-value="latest"><span>최신 순</span></a></li>
+							<li class="<?php echo element('sfield', $view) == 'view' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_findex" data-value="view"><span>조회 순</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -439,10 +439,10 @@
 		$('input[name="sfield"]').val(value);
 	})
 
-	// $(document).on('click', '.li_type', function(){
-	// 	var value = $(this).data('value');
-	// 	$('input[name="type"]').val(value);
-	// })
+	$(document).on('click', '.li_findex', function(){
+		var value = $(this).data('value');
+		$('input[name="findex"]').val(value);
+	})
 
 	$(document).on('click', '.more', function(){
 		var type = $(this).data('type');

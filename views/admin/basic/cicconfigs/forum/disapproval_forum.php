@@ -19,8 +19,9 @@
 					?>
 						<div class="btn-group pull-right" role="group" aria-label="...">
 							<a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a>
-							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-delete btn-list-selected disabled" data-list-delete-url = "<?php echo element('list_delete_url', $view); ?>" >선택삭제</button>
-							<a href="<?php echo element('company_write_url', $view); ?>" class="btn btn-outline btn-danger btn-sm " >거래소 추가</a>
+							<!-- <button type="button" class="btn btn-outline btn-default btn-sm btn-list-delete btn-list-selected disabled" data-list-delete-url = "<?php echo element('list_delete_url', $view); ?>" >선택삭제</button> -->
+								<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('upadte_forum_return_url', $view); ?>" >선택반려</button>
+							<!-- <a href="<?php echo element('company_write_url', $view); ?>" class="btn btn-outline btn-danger btn-sm " >거래소 추가</a> -->
 						</div>
 					<?php
 					$buttons = ob_get_contents();
@@ -56,14 +57,13 @@
 									</td>
 									<td>
 										<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank">
-											<?php echo html_escape(element('comp_url', $result)); ?>
+											<?php echo html_escape(strip_tags(element('post_content', $result))); ?>
 										</a>
 									</td>
-									<td><?php echo element('comp_segment', $result); ?></td>
-									<td><?php echo element('comp_index', $result); ?></td>
-									<td><?php echo element('comp_active', $result) === '1' ? '활성' : '비활성'; ?></td>
-									<td><a href="<?php echo admin_url($this->pagedir); ?>/company_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
-									
+									<td><?php echo element('post_display_name', $result); ?> <?php if (element('post_userid', $result)) { ?> ( <a href="?sfield=mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('post_userid', $result)); ?></a> ) <?php } ?></td>
+									<td><?php echo display_datetime(element('post_datetime', $result))?></td>
+									<td><?php echo number_format(element('post_like', $result))?></td>
+									<td><a href="<?php echo admin_url($this->pagedir); ?>/company_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">승인</a></td>
 									<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
 								</tr>
 								<?php

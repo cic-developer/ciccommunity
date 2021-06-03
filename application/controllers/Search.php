@@ -52,20 +52,17 @@ class Search extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = $this->input->get('findex', null, 'post_num, post_reply');
+		$findex_get = $this->input->get('findex', null, 'latest');
 		$sfield = $sfield2 = $this->input->get('sfield', null, '');
 		$sop = $this->input->get('sop', null, '');
-		if ($sfield === 'post_both') {
-			$sfield = array('post_title', 'post_content');
-		}
 
 		$mem_id = (int) $this->member->item('mem_id');
-		$type = $this->input->get('type');
-		if($this->input->get('type') == 'free'){
+		$type = $this->input->get('type', null, '');
+		if($type == 'free'){
 			$type_word = '자유게시판';
-		} else if($this->input->get('type') == 'writer'){
+		} else if($type == 'writer'){
 			$type_word = 'WRITER';
-		} else if($this->input->get('type') == 'news'){
+		} else if($type == 'news'){
 			$type_word = '뉴스';
 		} else {
 			$type_word = '통합검색';
@@ -78,17 +75,28 @@ class Search extends CB_Controller
 		$view['view']['type_word'] = $type_word;
 
 		
-		if($this->input->get('sfield') == 'post_title'){
+		if($sfield == 'post_title'){
 			$sfield_word = '제목';
-		} else if($this->input->get('sfield') == 'post_content'){
+		} else if($sfield == 'post_content'){
 			$sfield_word = '내용';
-		} else if($this->input->get('sfield') == 'post_nickname'){
+		} else if($sfield == 'post_nickname'){
 			$sfield_word = '작성자';
 		} else {
 			$sfield_word = '제목 + 내용';
+			$sfield === 'post_both';
 		}
-		$view['view']['sfield'] = $this->input->get('sfield');
+		$view['view']['sfield'] = $sfield;
 		$view['view']['sfield_word'] = $sfield_word;
+
+		if ($sfield === 'post_both') {
+			$sfield = array('post_title', 'post_content');
+		}
+		
+		if($findex_get == 'view'){
+			$findex = 'post_hit, post_num';
+		} else {
+			$findex = 'post_num, post_reply';
+		}
 
 		$skeyword = $this->input->get('skeyword', null, '');
 		if (empty($skeyword)) {

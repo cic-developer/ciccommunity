@@ -46,7 +46,7 @@
 							</li>
 							<li class="full">
 								<p class="btxt">포인트</p>
-								<p class="stxt"><?php echo display_datetime(element('frm_total_money', $forum), 'full'); ?></p>
+								<p class="stxt"><?php echo number_format(element('cic_forum_total_cp', $forum), 2); ?></p>
 							</li>
 						</ul>
 					</div>
