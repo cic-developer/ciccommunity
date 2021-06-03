@@ -342,7 +342,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#n">
+                            <a href="https://dev.ciccommunity.com/mypage/charge">
                                 <p class="desktop"><img src="<?php echo base_url('assets/images/use-img02.png') ?>"
                                         alt="" /></p>
                                 <p class="mobile"><img src="<?php echo base_url('assets/images/use-img02m.jpg') ?>"
