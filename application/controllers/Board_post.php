@@ -508,8 +508,15 @@ class Board_post extends CB_Controller
 				}
 			}
 		}
+		// CIC 포럼 게시물 가져오기
 		if($post['brd_id'] == 3){
 			$view['forum'] = $this->CIC_forum_model->get_one($post_id);
+			$total_cp = $view['forum']['cic_forum_total_cp']; // 총 cp
+			$a_cp = $view['forum']['cic_A_cp']; // A cp
+			$b_cp = $view['forum']['cic_B_cp']; // B cp
+			
+			$view['forum']['A_per'] = ($a_cp/$total_cp) * 100; // A cp %
+			$view['forum']['B_per'] = ($b_cp/$total_cp) * 100; // B cp %
 		}
 		
 		$view['view']['like_point_ranking_freetalk'] = $like_point_ranking_freetalk;

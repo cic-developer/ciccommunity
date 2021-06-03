@@ -289,6 +289,7 @@ class Forum extends CB_Controller
 		
 	}
 
+	// 승인대기 포럼을 반려하는 함수 
 	public function upadte_forum_return()
 	{
 		
@@ -477,6 +478,7 @@ class Forum extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
+	//승인대기 포럼을 진행중인 포럼으로 승격시 폼 벨리데이션을 통한 대표이미지 등록, 배팅마감시간, 포럼 마감시간 설정 함수
 	public function forum_write($post_id = 0)
 	{
 		$eventname = 'event_admin_ciccinfigs_update_company';
@@ -506,11 +508,6 @@ class Forum extends CB_Controller
 		$this->load->library('form_validation');
 
 		$config = array(
-				array(
-					'field' => 'comp_url',
-					'lable' => 'URL',
-					'rules' => 'prep_url|valid_url',
-				),
 				array(
 					'field' => 'frm_bat_close_datetime',
 					'lable' => '배팅 마감일',
@@ -565,8 +562,8 @@ class Forum extends CB_Controller
 
 			 // $upload_path => uploads/banner/
             $this->load->library('upload');
-			if (isset($_FILES) && isset($_FILES['ban_image']) && isset($_FILES['ban_image']['name']) && $_FILES['ban_image']['name']) {
-				$upload_path = config_item('uploads_dir') . '/banner/';
+			if (isset($_FILES) && isset($_FILES['frm_image']) && isset($_FILES['frm_image']['name']) && $_FILES['frm_image']['name']) {
+				$upload_path = config_item('uploads_dir') . '/forum/';
 				if (is_dir($upload_path) === false) {
 					mkdir($upload_path, 0707);
 					$file = $upload_path . 'index.php';
@@ -604,7 +601,7 @@ class Forum extends CB_Controller
 
 				$this->upload->initialize($uploadconfig);
 
-				if ($this->upload->do_upload('ban_image')) {
+				if ($this->upload->do_upload('frm_image')) {
 					$img = $this->upload->data();
 					$updatephoto = cdate('Y') . '/' . cdate('m') . '/' . element('file_name', $img);
 				} else {
@@ -618,20 +615,13 @@ class Forum extends CB_Controller
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
-			$ban_start_date = $this->input->post('ban_start_date') ? $this->input->post('ban_start_date') : null;
-			$ban_end_date = $this->input->post('ban_end_date') ? $this->input->post('ban_end_date') : null;
-			$ban_page = $this->input->post('ban_page') ? $this->input->post('ban_page') : 0;
-			$ban_disable_hours = $this->input->post('ban_disable_hours') ? $this->input->post('ban_disable_hours') : 0;
-			$ban_activated = $this->input->post('ban_activated') ? $this->input->post('ban_activated') : 0;
+			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
+			$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
+			
 
 			$updatedata = array(
-				'ban_title' => $this->input->post('ban_title', null, ''),
-				'ban_start_date' => $ban_start_date,
-				'ban_end_date' => $ban_end_date,
-				'ban_activated' => $ban_activated,
-                'ban_url'    =>  $this->input->post('ban_url', null, ''),
-                'ban_target' =>  $this->input->post('ban_target', null, ''),
-                'ban_order' =>  $this->input->post('ban_order', null, ''),
+				'frm_close_datetime' => $frm_close_datetime,
+				'frm_bat_close_datetime' => $frm_bat_close_datetime,
 			);
 
             if($updatephoto){
@@ -641,7 +631,7 @@ class Forum extends CB_Controller
 			 * 게시물을 수정하는 경우입니다
 			 */
 			if ($this->input->post($primary_key)) {
-				$this->{$this->modelname}->update($this->input->post($primary_key), $updatedata);
+				$this->Cic_forum_info_model->update($this->input->post($primary_key), $updatedata);
 				$this->session->set_flashdata(
 					'message',
 					'정상적으로 수정되었습니다'
@@ -650,16 +640,16 @@ class Forum extends CB_Controller
 				/**
 				 * 게시물을 새로 입력하는 경우입니다
 				 */
-				$updatedata['ban_datetime'] = cdate('Y-m-d H:i:s');
-				$updatedata['ban_ip'] = $this->input->ip_address();
-				$updatedata['mem_id'] = $this->member->item('mem_id');
-                $updatedata['ban_hit'] = 0;
+				// $updatedata['ban_datetime'] = cdate('Y-m-d H:i:s');
+				// $updatedata['ban_ip'] = $this->input->ip_address();
+				// $updatedata['mem_id'] = $this->member->item('mem_id');
+                // $updatedata['ban_hit'] = 0;
 
-				$this->{$this->modelname}->insert($updatedata);
-				$this->session->set_flashdata(
-					'message',
-					'정상적으로 입력되었습니다'
-				);
+				// $this->{$this->modelname}->insert($updatedata);
+				// $this->session->set_flashdata(
+				// 	'message',
+				// 	'정상적으로 입력되었습니다'
+				// );
 			}
 			//오늘 생성된 배너 캐시를 삭제합니다.
 			$this->cache->delete('banner/banner-info-' . cdate('Y-m-d'));
