@@ -2256,9 +2256,22 @@ class Postact extends CB_Controller
 		$this->form_validation->set_rules($config);
 		$form_validation = $this->form_validation->run();
 
-		$usePoint = (int) $this->input->post('usePoint');
-		$post_id = (int) $this->input->post('post_id');
-		$option = (int) $this->input->post('option');
+		if ($form_validation == false) {
+
+		}else {
+			$mem_id = $member_info['mem_id'];
+			$mem_cp = $member_info['mem_cp'];
+
+			$usePoint = (int) $this->input->post('usePoint');
+			$post_id = (int) $this->input->post('post_id');
+			$option = (int) $this->input->post('option');
+
+			/**
+			 * 포인트 차감
+			 * member
+			 */
+			$result = $this->Member_model->set_user_point($mem_id, $usePoint, $mem_cp);
+		}
 
 	}
 

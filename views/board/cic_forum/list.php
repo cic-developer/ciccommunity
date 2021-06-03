@@ -127,7 +127,7 @@
                             </td>
                             <td><?php echo display_datetime(element('frm_bat_close_datetime', $result), 'full'); ?></td>
                             <td><?php echo display_datetime(element('frm_close_datetime', $result), 'full'); ?></td>
-                            <td><p class="cyellow"><?php echo number_format(element('cic_forum_total_cp', $result), 2); ?></p></td>
+                            <td><p class="cyellow"><?php echo rs_number_format(element('cic_forum_total_cp', $result), 2, 0); ?></p></td>
                         </tr>
                         <!-- <tr>
                             <td>
