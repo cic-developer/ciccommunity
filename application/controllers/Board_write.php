@@ -896,9 +896,10 @@ class Board_write extends CB_Controller
 			if (element('use_category', $board)) {
 				$updatedata['post_category'] = $this->input->post('post_category', null, '');
 			}
+			
 			// 글쓰기가 승인대기 포럼인 경우, cate 1 (2는 반려)
 			if(element('brd_id', $board) == 6) {
-				$updatedata['post_userid'] = 1;
+				$updatedata['post_category'] = 1;
 			}
 
 			$updatedata['post_device']

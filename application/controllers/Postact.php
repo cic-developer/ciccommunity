@@ -2216,11 +2216,20 @@ class Postact extends CB_Controller
 		$eventname = 'event_postact_bat_forum';
 		$this->load->event($eventname);
 
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('before', $eventname);
 
 		$result = array();
 		$this->output->set_content_type('application/json');
+
+		// 회원 데이터 가져오기
+		$member_info = $this->member->get_member();
+		$view['member'] = $member_info;
 
 		/**
 		 * Validation 라이브러리를 가져옵니다
@@ -2229,9 +2238,19 @@ class Postact extends CB_Controller
 		
 		$config = array(
 			array(
-				'field' => 'money',
-				'label' => '금액',
-				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to['.$member_info['mem_cp'].']|callback__withdraw_minimum_check',
+				'field' => 'usePoint',
+				'label' => '배팅금액',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to['.$member_info['mem_cp'].']',
+			),
+			array(
+				'field' => 'post_id',
+				'label' => '게시물번호',
+				'rules' => 'trim|required|greater_than_equal_to[0]',
+			),
+			array(
+				'field' => 'option',
+				'label' => '의견',
+				'rules' => 'trim|required|greater_than_equal_to[0]',
 			),
 		);
 		$this->form_validation->set_rules($config);
@@ -2240,7 +2259,6 @@ class Postact extends CB_Controller
 		$usePoint = (int) $this->input->post('usePoint');
 		$post_id = (int) $this->input->post('post_id');
 		$option = (int) $this->input->post('option');
-
 
 	}
 
