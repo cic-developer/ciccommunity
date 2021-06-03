@@ -2544,7 +2544,161 @@ class Postact extends CB_Controller
 					 * 추가 배팅
 					 * cic_forum_cp
 					 */
-					$old_bat_cp = (int) $isBat[0]['cfc_cp'];
+					$old_bat_cp = (double) $isBat[0]['cfc_cp'];
+					$updatedata = array(
+						'cfc_cp' => $old_bat_cp + $usePoint,
+					);
+					$where = array(
+						'pst_id' => $post_id,
+						'mem_id' => $mem_id,
+						'cfc_option' => $option,
+					);
+					$this->load->model('CIC_forum_model');
+					$_result = $this->CIC_forum_model->more_bat('cic_forum_cp', $updatedata, $where);
+					if($_result != 1){
+						$result = array(
+							'state' => '0',
+							'message' => '배팅에 실패하셨습니다2 (관리자 문의)',
+						);
+						exit(json_encode($result));
+					}
+
+					$result = array(
+						'state' => '1',
+						'message' => '성공적으로 처리되었습니다',
+					);
+					exit(json_encode($result));
+				}
+			}
+		}
+	}
+
+	/**
+	 * 포럼 게시물 추가투표(배팅,참여) 하기
+	  */
+	public function change_bat(){
+
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_postact_change_bat';
+		$this->load->event($eventname);
+
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+
+		$result = array();
+		$this->output->set_content_type('application/json');
+
+		// 회원 데이터 가져오기
+		$member_info = $this->member->get_member();
+		$view['member'] = $member_info;
+
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+		
+		$config = array(
+			array(
+				'field' => 'post_id',
+				'label' => '게시물번호',
+				'rules' => 'trim|required|greater_than_equal_to[0]',
+			),
+			array(
+				'field' => 'option',
+				'label' => '의견',
+				'rules' => 'trim|required|greater_than_equal_to[0]',
+			),
+		);
+		$this->form_validation->set_rules($config);
+		$form_validation = $this->form_validation->run();
+
+		if ($form_validation == false) {
+			$result = array(
+				'state' => '0',
+				'message' => '의견변경에 실패하셨습니다1 (관리자 문의)',
+			);
+			exit(json_encode($result));
+		}else {
+			$mem_id = $member_info['mem_id'];
+			// $mem_cp = $member_info['mem_cp'];
+
+			$usePoint = (double) $this->input->post('usePoint');
+			
+			$post_id = (int) $this->input->post('post_id');
+			$option = (int) $this->input->post('option');
+
+			// 게시글 확인
+			$this->load->model('Post_model');
+			$post = $this->Post_model->get_one($post_id);
+			if(!$post){
+				$result = array(
+					'state' => '0',
+					'message' => '존재하지 않는 게시물입니다',
+				);
+				exit(json_encode($result));
+			}
+
+			// 추가참여 가능 여부 확인 (중복배팅 확인)
+			$where = array(
+				'pst_id' => $post_id,
+				'mem_id' => $mem_id,
+				'cfc_option' => $option,
+			);
+			$this->load->model('CIC_forum_model');
+			$isBat = $this->CIC_forum_model->get_forum_bat($where);
+			if(!$isBat){
+				$result = array(
+					'state' => '0',
+					'message' => '최초 1회 참여후 이용해주세요',
+				);
+				exit(json_encode($result));
+			}else {
+
+				if(count($isBat) != 1){
+					$result = array(
+						'state' => '0',
+						'message' => '다중배팅 오류 (관리자 문의)',
+					);
+					exit(json_encode($result));
+				}
+				(int) $isBat[0]['cfc_option'];
+
+
+
+
+
+
+
+				/**
+				 * 포인트 차감
+				 * member
+				 */
+				$this->load->model('Member_model');
+				$result = $this->Member_model->set_user_point($mem_id, $usePoint, $mem_cp);
+				if($result != 1){
+					$result = array(
+						'state' => '0',
+						'message' => '배팅에 실패하셨습니다1 (관리자 문의)',
+					);
+					exit(json_encode($result));
+				}else {
+					/**
+					 * cp 기록
+					 * cic_cp
+					 */
+					$this->load->model('CIC_cp_model');
+					$this->CIC_cp_model->set_cic_cp($mem_id, '-', -$usePoint, '@byself', $mem_id, '추가포럼배팅');
+
+					/**
+					 * 추가 배팅
+					 * cic_forum_cp
+					 */
+					$old_bat_cp = (double) $isBat[0]['cfc_cp'];
 					$updatedata = array(
 						'cfc_cp' => $old_bat_cp + $usePoint,
 					);

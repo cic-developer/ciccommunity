@@ -261,7 +261,7 @@ class CIC_forum_model extends CB_Model
 
 		$this->db->where($where);
 		$this->db->set($updatedata);
-		$result  = $this->db->update('cic_forum_cp');
+		$result = $this->db->update('cic_forum_cp');
 		
 		return $result;
 	}

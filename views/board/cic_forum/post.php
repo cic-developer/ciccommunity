@@ -204,27 +204,29 @@
 			return false;
 		}
 
-		const confirm_content = ' ' + (option === '1' ? 'A' :'B') + '의견을 ' + (option === '2' ? 'A' :'B') + '의견으로 변경 하시겠습니까?';
-		const confirm = confirm('')
+		const confirm_content = ' ' + (option === '1' ? 'A' :'B') + '의견을 ' + (option === '2' ? 'A' :'B') + '의견으로 변경 하시겠습니까? (1회)';
+		var isConfirm = confirm(confirm_content);
 
-		$.ajax({
-			url: cb_url + '/postact/change_bat',
-			type: 'POST',
-			data: {
-				post_id: post_id,
-				option: option,
-				csrf_test_name : cb_csrf_hash
-			},
-			dataType: 'json',
-			async: false,
-			cache: false,
-			success: function(data){
+		if(isConfirm){
+			$.ajax({
+				url: cb_url + '/postact/change_bat',
+				type: 'POST',
+				data: {
+					post_id: post_id,
+					option: option,
+					csrf_test_name : cb_csrf_hash
+				},
+				dataType: 'json',
+				async: false,
+				cache: false,
+				success: function(data){
 
-			},
-			error: function(){
-				alert('에러가 발생했습니다');
-			}
-		})
+				},
+				error: function(){
+					alert('에러가 발생했습니다');
+				}
+			})
+		}
 	}
 
 	// 추가참여 function
