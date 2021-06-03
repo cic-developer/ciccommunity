@@ -46,7 +46,7 @@
 							</li>
 							<li class="full">
 								<p class="btxt">포인트</p>
-								<p class="stxt"><?php echo number_format(element('cic_forum_total_cp', $forum), 2); ?></p>
+								<p class="stxt"><?php echo rs_number_format(element('cic_forum_total_cp', $forum), 2, 0); ?></p>
 							</li>
 						</ul>
 					</div>
@@ -81,7 +81,7 @@
 						<div class="bar">
 							<div class="vbar"></div>
 							<p class="percent"><span><?php echo number_format(element('A_per', $forum)); ?>%</span></p>
-							<p class="nums"><i class="counter"><?php echo number_format(element('cic_A_cp', $forum), 2); ?></i><span>cp</span></p>
+							<p class="nums"><i class="counter"><?php echo rs_number_format(element('cic_A_cp', $forum), 2, 0); ?></i><span>cp</span></p>
 							<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo1.png')?>" alt="" style="cursor:pointer;" /></p>
 							<a href="#n" id="btn_a"><span>A. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
 						</div>
@@ -93,7 +93,7 @@
 						<div class="bar">
 							<div class="vbar"></div>
 							<p class="percent"><span><?php echo number_format(element('B_per', $forum)); ?>%</span></p>
-							<p class="nums"><i class="counter"><?php echo number_format(element('cic_B_cp', $forum), 2); ?></i><span>cp</span></p>
+							<p class="nums"><i class="counter"><?php echo rs_number_format(element('cic_B_cp', $forum), 2, 0); ?></i><span>cp</span></p>
 							<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo2.png')?>" alt="" style="cursor:pointer;" /></p>
 							<a href="#n" id="btn_b"><span>A. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
 						</div>
@@ -108,15 +108,15 @@
 			</div>
 
 			<div class="result" style="display:none">
-				<?php if(element('my_bat', $forum) == 1){ ?>
+				<?php if(element('is_bat', $forum) == 1){ ?>
 					<p class="btxt">A. <?php echo element('extra_content', $view)[0]['output'] ?> <span>참여</span></p>
-				<?php }else if(element('my_bat', $forum) == 2) { ?>
+				<?php }else if(element('is_bat', $forum) == 2) { ?>
 					<p class="btxt">A. <?php echo element('extra_content', $view)[1]['output'] ?> <span>참여</span></p>
 				<?php }else { ?>
 					<p class="btxt"><span>미참여</span></p>
 				<?php } ?>
 				<div class="abr">
-					<p class="cp"><span>150</span> CP</p>
+					<p class="cp"><span><?php echo rs_number_format(element('bat_cp', $forum), 2, 0); ?></span> CP</p>
 					<a href="#n" id="more_btn"><span>추가 참여!</span></a>
 					<a href="#n"><span>의견 변경</span></a>
 				</div>
@@ -161,12 +161,13 @@
 <!-- e: #container-wrap //-->
 
 <script>
+	var regex = /^[0-9]+(\.[0-9]+)?$/g;
 	var reg_num = /^[0-9]*$/;
 	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
-	var my_bat = "<?php echo element('my_bat', $forum); ?>"
+	var is_bat = "<?php echo element('is_bat', $forum); ?>"
 
 	$(document).on('click', '#more_btn', function(){
-		update_forum_cp(post_id, my_bat);
+		update_forum_cp(post_id, is_bat);
 	})
 
 	$(document).on('click', '#btn_a', function(){
@@ -221,7 +222,7 @@
 					}
 					
 					//숫자를 잘 입력했나 검증
-					if(!reg_num.test(_point)){
+					if(!regex.test(_point)){
 						alert('숫자만 입력할 수 있습니다.');
 						return false;
 					}
@@ -295,7 +296,7 @@
 		}
         
 		//숫자를 잘 입력했나 검증
-		if(!reg_num.test(_point)){
+		if(!regex.test(_point)){
 			alert('숫자만 입력할 수 있습니다.');
 			return false;
 		}

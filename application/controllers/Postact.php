@@ -2528,7 +2528,7 @@ class Postact extends CB_Controller
 				if($result != 1){
 					$result = array(
 						'state' => '0',
-						'message' => '배팅에 실패하셨습니다 (관리자 문의)',
+						'message' => '배팅에 실패하셨습니다1 (관리자 문의)',
 					);
 					exit(json_encode($result));
 				}else {
@@ -2553,7 +2553,14 @@ class Postact extends CB_Controller
 						'cfc_option' => $option,
 					);
 					$this->load->model('CIC_forum_model');
-					$test = $this->CIC_forum_model->update('cic_forum_cp', $updatedata, $where);
+					$_result = $this->CIC_forum_model->more_bat('cic_forum_cp', $updatedata, $where);
+					if($_result != 1){
+						$result = array(
+							'state' => '0',
+							'message' => '배팅에 실패하셨습니다2 (관리자 문의)',
+						);
+						exit(json_encode($result));
+					}
 					
 					$result = array(
 						'state' => '1',

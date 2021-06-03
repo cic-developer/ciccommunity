@@ -518,7 +518,7 @@ class Board_post extends CB_Controller
 			$view['forum']['A_per'] = ($a_cp/$total_cp) * 100; // A cp %
 			$view['forum']['B_per'] = ($b_cp/$total_cp) * 100; // B cp %
 
-			// 투표진영 가져오기 (A:1, B:2, error:0)
+			// 투표진영 가져오기 (A:1, B:2, error:0) && 유저 배팅포인트 가져오기
 			$mem_id = (int) $this->member->item('mem_id');
 			$where = array(
 				'pst_id' => $post_id,
@@ -527,9 +527,10 @@ class Board_post extends CB_Controller
 			$this->load->model('CIC_forum_model');
 			$isBat = $this->CIC_forum_model->get_forum_bat($where);
 			if($isBat){
-				$view['forum']['my_bat'] = '';
+				$view['forum']['is_bat'] = '';
 				if(count($isBat) == 1){
-					$view['forum']['my_bat'] = $isBat[0]['cfc_option'];
+					$view['forum']['is_bat'] = $isBat[0]['cfc_option'];
+					$view['forum']['bat_cp'] = $isBat[0]['cfc_cp'];
 				}
 			}
 		}
