@@ -2210,7 +2210,39 @@ class Postact extends CB_Controller
 	/**
 	 * 포럼 게시물 투표하기
 	 */
-	// public function bat_forum
+	public function bat_forum(){
+
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_postact_bat_forum';
+		$this->load->event($eventname);
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+
+		$result = array();
+		$this->output->set_content_type('application/json');
+
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+		
+		$config = array(
+			array(
+				'field' => 'money',
+				'label' => '금액',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to['.$member_info['mem_cp'].']|callback__withdraw_minimum_check',
+			),
+		);
+		$this->form_validation->set_rules($config);
+		$form_validation = $this->form_validation->run();
+
+		$usePoint = (int) $this->input->post('usePoint');
+		$post_id = (int) $this->input->post('post_id');
+		$option = (int) $this->input->post('option');
+
+
+	}
 
 	/**
 	 * 게시물 비밀글 설정 및 해제 하기

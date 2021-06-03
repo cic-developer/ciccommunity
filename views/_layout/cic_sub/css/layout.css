@@ -1454,7 +1454,7 @@ body {
     margin-top: 15px;
 }
 
-.f-info .in-link li:nth-child(2) a {
+.f-info .in-link li:nth-child(1) a {
     color: #fff;
     font-weight: 400;
 }

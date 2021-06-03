@@ -205,11 +205,13 @@
 			return false;
 		}
 		$.ajax({
-			url: cb_url + '/postact/'+content_type+'_like/'+content_idx+'/'+(like_type === 'up' ? '1' :'2'),
-			csrf_test_name : cb_csrf_hash
+			url: cb_url + '/postact/bat_forum',
 			type: 'POST',
 			data: {
 				usePoint: Number(_point),
+				post_id: Number(post_id),
+				option: Number(option),
+				csrf_test_name : cb_csrf_hash
 			},
 			dataType: 'json',
 			async: false,
