@@ -22,10 +22,5 @@ class CIC_forum_info_model extends CB_Model
 		parent::__construct();
 	}
 
-    function __construct()
-	{
-		parent::__construct();
-	}
-
 
 }

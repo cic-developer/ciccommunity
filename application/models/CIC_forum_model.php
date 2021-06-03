@@ -91,9 +91,8 @@ class CIC_forum_model extends CB_Model
 		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
 
 		if ($where) {
-			print_r('ho');
-			exit;
 			$this->db->where($where);
+			$this->db->group_by('post.post_id');
 		}
 		if ($search_where) {
 			$this->db->where($search_where);
@@ -131,10 +130,6 @@ class CIC_forum_model extends CB_Model
 		}
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
-
-		// print_r($result['list']);
-		print_r($this->db->last_query());
-		exit;
 
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
