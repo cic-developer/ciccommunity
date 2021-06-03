@@ -566,6 +566,40 @@ class Forum extends CB_Controller
 			);
 
 		$this->form_validation->set_rules($config);	
+
+		if ($this->form_validation->run() === false) {
+
+			// 이벤트가 존재하면 실행합니다
+			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+
+			if ($pid) {
+				if (empty($getdata['ban_start_date']) OR $getdata['ban_start_date'] === '0000-00-00') {
+					$getdata['ban_start_date'] = '';
+				}
+				if (empty($getdata['ban_end_date']) OR $getdata['ban_end_date'] === '0000-00-00') {
+					$getdata['ban_end_date'] = '';
+				}
+				$view['view']['data'] = $getdata;
+			}
+
+			/**
+			 * primary key 정보를 저장합니다
+			 */
+			$view['view']['primary_key'] = $primary_key;
+
+			// 이벤트가 존재하면 실행합니다
+			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+			/**
+			 * 어드민 레이아웃을 정의합니다
+			 */
+			$layoutconfig = array('layout' => 'layout', 'skin' => 'write');
+			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+			$this->data = $view;
+			$this->layout = element('layout_skin_file', element('layout', $view));
+			$this->view = element('view_skin_file', element('layout', $view));
+
+		}
 	}
 
 

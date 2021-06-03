@@ -83,7 +83,7 @@ class CIC_forum_model extends CB_Model
 		}
 
 		$this->db->select('post.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point, cic_member_level_config.*, cic_forum_info.*');
-		// $this->db->select_sum('cic_forum_cp.cfc_cp', 'cic_forum_total_cp');
+		$this->db->select_sum('cic_forum_cp.cfc_cp', 'cic_forum_total_cp');
 		$this->db->from($this->_table);
 		$this->db->join('cic_forum_cp', 'post.post_id = cic_forum_cp.pst_id', 'left');
 		$this->db->join('cic_forum_info', 'post.post_id = cic_forum_info.pst_id', 'left');
@@ -130,7 +130,8 @@ class CIC_forum_model extends CB_Model
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
 
-		print_r($result['list']);
+		// print_r($result['list']);
+		print_r($this->db->last_query());
 		exit;
 
 		$this->db->select('count(*) as rownum');
