@@ -59,7 +59,7 @@
                                 <a href="#n"><span>참여하기!</span></a>
                             </div>
                         </div>
-                    </div><?php echo element('sort', $view); ?>
+                    </div>
                     <a href="#n" class="next"><span class="blind">다음</span></a>
                 </div>
             </div>

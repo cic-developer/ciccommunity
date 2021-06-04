@@ -1534,6 +1534,9 @@ class Board_post extends CB_Controller
 		}
 		// cic 진행중 포럼 && cic 마감 포럼
 		if($board['brd_id'] == 3){
+			$this->CIC_forum_model->allow_search_field = array('post_id', 'post_title', 'post_content', 'post_both', 'post_category', 'post_userid', 'post_nickname'); // 검색이 가능한 필드
+			$this->CIC_forum_model->search_field_equal = array('post_id', 'post_userid', 'post_nickname'); // 검색중 like 가 아닌 = 검색을 하는 필드
+
 			$type = $this->input->get('type');
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp());
 			if(!$type) {
