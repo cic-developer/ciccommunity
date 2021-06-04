@@ -512,7 +512,7 @@ class Forum extends CB_Controller
 			$a_cp = $getdata['cic_A_cp']; // A cp
 			$b_cp = $getdata['cic_B_cp']; // B cp
 
-			$view['view']['cic_A_cp'] = $a_cp['cic_A_cp']; // A cp
+			$view['view']['cic_A_cp'] = $a_cp; // A cp
 			$view['view']['cic_B_cp'] = $b_cp; // B cp
 			$view['view']['A_per'] = ($a_cp/$total_cp) * 100; // A cp %
 			$view['view']['B_per'] = ($b_cp/$total_cp) * 100; // B cp %
@@ -575,10 +575,23 @@ class Forum extends CB_Controller
 
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-			
 
+			// $total_cp - ()
+			$forum_commission = $this->input->post('forum_commission');
+			$writer_reward = $this->input->post('writer_reward');
+
+			print_r($writer_reward);
+			exit;
+
+
+
+
+			
 			$param =& $this->querystring;
-			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+			$redirecturl = admin_url($this->pagedir . '/close_forum');
+
+			$this->session->unset_userdata('total_cp');
+			$this->session->unset_userdata('win_cp');
 
 			redirect($redirecturl);
 		}
@@ -598,7 +611,7 @@ class Forum extends CB_Controller
 			return false;
 		}
 
-		$commission = $total_cp * ((int) $str / 100); 
+		$commission = $total_cp * ((double) $str / 100); 
 		if($win_cp < $commission){
 			$this->form_validation->set_message(
 				'_forum_commission_check',
@@ -607,37 +620,38 @@ class Forum extends CB_Controller
 			return false;
 		}
 
-		$this->session->unset_userdata('total_cp');
-		$this->session->unset_userdata('win_cp');
-
 		return true;
 	}
 
 	// 작성자 보상 확인
-	public function _forum_commission_check($str)
+	public function _writer_reward_check($str)
 	{
 		$total_cp = $this->session->userdata('total_cp');
 		$win_cp = $this->session->userdata('win_cp');
 
 		if(!$total_cp || !$win_cp){
 			$this->form_validation->set_message(
-				'_forum_commission_check',
+				'_writer_reward_check',
 				'포럼 cp오류 (관리자 문의)'
 			);
 			return false;
 		}
 
-		$commission = $total_cp * ((int) $str / 100); 
-		if($win_cp < $commission){
+		if((double) $total_cp - (double) $win_cp < 0){
 			$this->form_validation->set_message(
-				'_forum_commission_check',
-				'수수료 설정 오류'
+				'_writer_reward_check',
+				'포럼 cp오류 (관리자 문의)'
 			);
 			return false;
 		}
 
-		$this->session->unset_userdata('total_cp');
-		$this->session->unset_userdata('win_cp');
+		if((double) $total_cp - (double) $win_cp < (double) $str){
+			$this->form_validation->set_message(
+				'_writer_reward_check',
+				'보상 설정 오류'
+			);
+			return false;
+		}
 
 		return true;
 	}

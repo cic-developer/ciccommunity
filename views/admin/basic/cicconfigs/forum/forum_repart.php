@@ -30,7 +30,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">A 의견</label>
+				<label class="col-sm-2 control-label">A 의견 </label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="option_a" id="option_a" value="<?php echo number_format(element('cic_A_cp', $view), 2); ?>" disabled />
 					<progress value="<?php echo element('A_per', $view); ?>" max="100"><?php echo element('A_per', $view); ?> %</progress>
