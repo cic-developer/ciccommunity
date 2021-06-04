@@ -625,6 +625,9 @@ class Forum extends CB_Controller
 				'frm_close_datetime' => $frm_close_datetime,
 				'frm_bat_close_datetime' => $frm_bat_close_datetime,
 			);
+			$postupdatedata = array(
+				'brd_id' => 3
+			);
 
             if($updatephoto){
                 $updatedata['frm_image'] = $updatephoto;

@@ -2221,12 +2221,21 @@ class Postact extends CB_Controller
 		 */
 		required_user_login();
 
+		
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('before', $eventname);
-
+		
 		$result = array();
 		$this->output->set_content_type('application/json');
-
+		
+		if($this->member->is_admin() === 'super'){
+			$result = array(
+				'state' => '0',
+				'message' => '관리자는 참여할수 없습니다',
+			);
+			exit(json_encode($result));
+		}
+		
 		// 회원 데이터 가져오기
 		$member_info = $this->member->get_member();
 		$view['member'] = $member_info;
@@ -2269,10 +2278,12 @@ class Postact extends CB_Controller
 			$usePoint = (double) $this->input->post('usePoint');
 			$post_id = (int) $this->input->post('post_id');
 			$option = (int) $this->input->post('option');
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 
 			// 게시글 확인
-			$this->load->model('Post_model');
-			$post = $this->Post_model->get_one($post_id);
+			$this->load->model('CIC_forum_model');
+			$post = $this->CIC_forum_model->get_one($post_id);
+			// $post = $this->Post_model->get_one($post_id);
 			if(!$post){
 				$result = array(
 					'state' => '0',
@@ -2280,6 +2291,8 @@ class Postact extends CB_Controller
 				);
 				exit(json_encode($result));
 			}
+
+			if()
 
 			// 중복배팅 확인
 			$where = array(
@@ -2357,6 +2370,14 @@ class Postact extends CB_Controller
 
 		$result = array();
 		$this->output->set_content_type('application/json');
+
+		if($this->member->is_admin() === 'super'){
+			$result = array(
+				'state' => '0',
+				'message' => '관리자는 참여할수 없습니다',
+			);
+			exit(json_encode($result));
+		}
 
 		// 회원 데이터 가져오기
 		$member_info = $this->member->get_member();
@@ -2443,6 +2464,14 @@ class Postact extends CB_Controller
 		 * 로그인이 필요한 페이지입니다
 		 */
 		required_user_login();
+
+		if($this->member->is_admin() === 'super'){
+			$result = array(
+				'state' => '0',
+				'message' => '관리자는 참여할수 없습니다',
+			);
+			exit(json_encode($result));
+		}
 
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('before', $eventname);
