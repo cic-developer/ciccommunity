@@ -81,110 +81,141 @@
 	</div>
 </div>
 <!-- 모달 css -->
+<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css'); ?>
+<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
 <style>
-    #id_modal,
-		#pwd_modal {
-        display: none;
-        width: 300px;
-        padding: 20px 60px;
-        background-color: #fefefe;
-        border: 1px solid #888;
-        border-radius: 3px;
-    }
+/* The Modal (background) */
+.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 1; /* Sit on top */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	}
 
-    #id_modal .modal_close_btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
-		#pwd_modal .modal_close_btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
+	/* Modal Content/Box */
+	.modal-content {
+		background-color: #fefefe;
+		margin: 15% auto; /* 15% from the top and centered */
+		padding: 20px;
+		border: 1px solid #888;
+		width: 40%; /* Could be more or less, depending on screen size */                          
+	}
+
+	/* The Close Button */
+	.close {
+		color: #aaa;
+		float: right;
+		font-size: 28px;
+		font-weight: bold;
+	}
+	.close:hover,
+	.close:focus {
+		color: black;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	.modal-btn {
+		line-height: 35px;
+		border-radius: 35px;
+		font-size: 14px;
+		color: #fff;
+		background: #111;
+		font-weight: 500;
+		display: inline-block;
+		vertical-align: top;
+		margin-left: 15px;
+		min-width: 120px;
+		text-align: center;
+		box-sizing: border-box;
+	}
 </style>
 
 <!--아이디 Modal Start-->
-<div id="id_modal" style="width:600px;height:100px;">
-<h1 style="font-size:20px;margin-bottom:15px;">아이디 찾기</h1>
-<form action="">
-	<label>회원님의 아이디는 <b>----</b> 입니다.</label>
-			<a class="modal_close_btn">닫기</a>
-</form>
-</div>
+<div id="myModal_id" class="modal" style="z-index:1500;">
+				<div class="modal-content" style="z-index:1550;">
+							<p class="btxt">회원님의 아이디는 <b>----</b> 입니다.</p>
+				</div>
+			</div>
 <!--아이디 Modal End -->
 
 <!--비밀번호 Modal Start-->
-<div id="pwd_modal" style="width:600px;height:100px;">
-<h1 style="font-size:20px;margin-bottom:15px;">비밀번호 찾기</h1>
-<form action="">
-	<label>회원님의 아이디는 <b>----</b> 입니다.</label>
-			<a class="modal_close_btn">닫기</a>
-</form>
-</div>
+<div id="myModal_pwd" class="modal" style="z-index:1500;">
+				<div class="modal-content" style="z-index:1550;">
+					<ul class="entry modify-box">
+						<li class="ath-email-content">
+							<p class="btxt">이메일인증</p>
+							<div class="all-email-box">
+								<div class="field modify">
+									<p class="chk-input w380">
+										<input type="text" placeholder="인증번호를 입력해주세요" class="ath_num" name="ath_num" value="">
+									</p>
+									<a href="javascript:void(0);" data-type="phone" class="modify-btn send-ath-email">
+										<span>이메일인증</span>
+									</a>
+									<a href="javascript:void(0);" data-type="phone" class="modify-btn confirm-ath-email" style="display:none;">
+										<span>확인</span>
+									</a>
+									
+								</div>
+								<div class="phone-resend-email" style="display:none;">
+									<a href="javascript:void(0);" data-type="phone" class="modify-btn resend-ath-email" style="display:block;">
+										<span>인증번호 재전송</span>
+									</a>	
+								</div>
+								<div class="phone-timer-box" style="display:none;">
+									<span id="postTestMin1">00</span><!-- 분 -->
+									<span>:</span>
+									<span id="postTestSec1">10</span><!--초-->
+									<!-- <span id="postTestMilisec">00</span>밀리초 -->
+								</div>
+							</div>
+							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
+						</li>
+						<li class="wallet-modify-content">
+							<p class="btxt">새 핸드폰번호</p>
+							<div class="field modify">
+								<p class="chk-input w380">
+									<input type="text" placeholder="핸드폰번호" onkeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="" readonly disabled style="background-color:#efefef;">
+								</p>
+								<a href="javascript:void(0);" id="confirm_phone"  data-type="phone" class="modify-btn">
+									<span>확인</span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
 <!--비밀번호 Modal End -->
 
 <!-- 모달 스크립트 -->
 <script>
-function modal(id) {
-    var zIndex = 9999;
-    var modal = document.getElementById(id);
-
-    // 모달 div 뒤에 희끄무레한 레이어
-    var bg = document.createElement('div');
-    bg.setStyle({
-        position: 'fixed',
-        zIndex: zIndex,
-        left: '0px',
-        top: '0px',
-        width: '100%',
-        height: '100%',
-        overflow: 'auto',
-        // 레이어 색갈은 여기서 바꾸면 됨
-        backgroundColor: 'rgba(0,0,0,0.4)'
-    });
-    document.body.append(bg);
-
-    // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-    modal.querySelector('.modal_close_btn').addEventListener('click', function() {
-        bg.remove();
-        modal.style.display = 'none';
-    });
-
-    modal.setStyle({
-        position: 'fixed',
-        display: 'block',
-        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-
-        // 시꺼먼 레이어 보다 한1칸 위에 보이기
-        zIndex: zIndex + 1,
-
-        // div center 정렬
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        msTransform: 'translate(-50%, -50%)',
-        webkitTransform: 'translate(-50%, -50%)'
-    });
-}
-
-// Element 에 style 한번에 오브젝트로 설정하는 함수 추가
-Element.prototype.setStyle = function(styles) {
-    for (var k in styles) this.style[k] = styles[k];
-    return this;
-};
-
-document.getElementById('idModal').addEventListener('click', function(event) {
-    // 모달창 띄우기
-		event.preventDefault()
-    modal('id_modal');
-});
-
-document.getElementById('pwdModal').addEventListener('click', function(event) {
-    // 모달창 띄우기
-		event.preventDefault()
-    modal('pwd_modal');
-});
+var modal1 = document.getElementById('myModal_pwd');
+var btn1 = document.getElementById("pwdModal");
+btn1.onclick = function() {
+		modal1.style.display = "block";
+	}
+	window.onclick = function(event) {
+		if (event.target == modal1) {
+			modal1.style.display = "none";
+		}
+		if (event.target == modal2) {
+			modal2.style.display = "none";
+            
+			$('#myModal_password .ath-nice-content .all-nice-box > *').remove(); // 핸드폰인증 버튼 제거
+		}
+		if (event.target == modal3) {
+			modal3.style.display = "none";
+            
+			$('#myModal_wallet .ath-nice-content .all-nice-box > *').remove(); // 핸드폰인증 버튼 제거
+		}
+	}
 </script>
 
 <!-- 테스트 -->
