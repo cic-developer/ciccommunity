@@ -413,7 +413,7 @@ class Forum extends CB_Controller
 			'post_datetime' => $param->sort('post_datetime', 'asc'),
 			'cic_forum_info.frm_bat_close_datetime' => $param->sort('cic_forum_info.frm_bat_close_datetime', 'asc'),
 			'cic_forum_info.frm_close_datetime' => $param->sort('cic_forum_info.frm_close_datetime', 'asc'),
-			'cic_forum_info.frm_total_money' => $param->sort('cic_forum_info.frm_total_money', 'asc'),
+			'cic_forum_total_cp' => $param->sort('cic_forum_total_cp', 'asc'),
 		);
 		$findex = $this->input->get('findex', null, 'post_id');
 		$forder = $this->input->get('forder', null, 'desc');
@@ -427,7 +427,7 @@ class Forum extends CB_Controller
 		$this->{$this->modelname}->allow_search_field = array('post_id', 'post_title', 'post_content'); // 검색이 가능한 필드
 		$this->{$this->modelname}->search_field_equal = array('post_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('post_id', 'post_hit', 'post_datetime', 'cic_forum_info.frm_bat_close_datetime'
-																, 'cic_forum_info.frm_close_datetime', 'cic_forum_info.frm_total_money');
+																, 'cic_forum_info.frm_close_datetime', 'cic_forum_total_cp');
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp());
 		$where = array(
 			'brd_id' => 3,
@@ -509,8 +509,11 @@ class Forum extends CB_Controller
 		$view['view']['A_per'] = 0;
 		$view['view']['B_per'] = 0;
 		if($total_cp){
-			$b_cp = $view['view']['cic_B_cp']; // B cp
-			$a_cp = $view['view']['cic_A_cp']; // A cp
+			$b_cp = $getdata['cic_B_cp']; // B cp
+			$a_cp = $getdata['cic_A_cp']; // A cp
+
+			$view['view']['cic_A_cp'] = $getdata['cic_A_cp']; // A cp
+			$view['view']['cic_B_cp'] = $getdata['cic_B_cp']; // A cp
 			$view['view']['A_per'] = ($a_cp/$total_cp) * 100; // A cp %
 			$view['view']['B_per'] = ($b_cp/$total_cp) * 100; // B cp %
 		}

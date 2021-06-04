@@ -86,6 +86,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style>
+	.modal-dialog{
+		width:100%;
+	}
 	.idpwdModal{
 	position: fixed;
 	top: 50%;
