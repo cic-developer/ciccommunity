@@ -512,14 +512,17 @@ class Board_post extends CB_Controller
 		if($post['brd_id'] == 3){
 			$view['forum'] = $this->CIC_forum_model->get_one($post_id);
 			$total_cp = $view['forum']['cic_forum_total_cp']; // 총 cp
-			$a_cp = $view['forum']['cic_A_cp']; // A cp
-			$b_cp = $view['forum']['cic_B_cp']; // B cp
 			
-			$view['forum']['A_per'] = ($a_cp/$total_cp) * 100; // A cp %
-			$view['forum']['B_per'] = ($b_cp/$total_cp) * 100; // B cp %
-
-			print_r($total_cp);
-			exit;
+			$b_cp = 0;
+			$a_cp = 0;
+			$view['forum']['A_per'] = 0;
+			$view['forum']['B_per'] = 0;
+			if($total_cp){
+				$b_cp = $view['forum']['cic_B_cp']; // B cp
+				$a_cp = $view['forum']['cic_A_cp']; // A cp
+				$view['forum']['A_per'] = ($a_cp/$total_cp) * 100; // A cp %
+				$view['forum']['B_per'] = ($b_cp/$total_cp) * 100; // B cp %
+			}
 
 			// 투표진영 가져오기 (A:1, B:2, error:0) && 유저 배팅포인트 가져오기
 			$mem_id = (int) $this->member->item('mem_id');
@@ -1518,7 +1521,7 @@ class Board_post extends CB_Controller
 		// cic 진행중 포럼 && cic 마감 포럼
 		if($board['brd_id'] == 3){
 			$type = $this->input->get('type');
-			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp());
 			if(!$type) {
 				$type = 1;
 			}

@@ -2278,7 +2278,7 @@ class Postact extends CB_Controller
 			$usePoint = (double) $this->input->post('usePoint');
 			$post_id = (int) $this->input->post('post_id');
 			$option = (int) $this->input->post('option');
-			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp());
 
 			// 게시글 확인
 			$this->load->model('CIC_forum_model');
@@ -2536,7 +2536,7 @@ class Postact extends CB_Controller
 			$usePoint = (double) $this->input->post('usePoint');
 			$post_id = (int) $this->input->post('post_id');
 			$option = (int) $this->input->post('option');
-			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp());
 
 			// 게시글 확인
 			$this->load->model('CIC_forum_model');
@@ -2693,7 +2693,7 @@ class Postact extends CB_Controller
 			// $usePoint = (double) $this->input->post('usePoint');
 			$post_id = (int) $this->input->post('post_id');
 			$option = (int) $this->input->post('option');
-			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp());
 
 			// 게시글 확인
 			$this->load->model('Post_model');

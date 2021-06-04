@@ -41,6 +41,9 @@ class Attendance extends CB_Controller
 	 */
 	public function index()
 	{
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_attendance_index';
 		$this->load->event($eventname);

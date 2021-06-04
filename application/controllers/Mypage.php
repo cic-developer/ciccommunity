@@ -1781,6 +1781,12 @@ class Mypage extends CB_Controller
 	}
 
 	function charge(){
+		
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+
 		$mem_id = (int) $this->member->item('mem_id');
 
 		$view = array();
