@@ -80,8 +80,31 @@
 		<!-- page end // -->
 	</div>
 </div>
+<!-- 아이디 Modal -->
 
 
+
+<!-- -------------------------------- -->
+
+<!--비밀번호 Modal Start-->
+<div class="modal fade" id="infoModal" role="dialog" style="display:table;">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <?php echo $this->lang->line('modalContent') ?>
+    </div>
+</div>
+<!--비밀번호 Modal End -->
+<script>
+$(document).ready(function() {
+        let validation_err = '<?= isset($validation_err) ? $validation_err : '' ?>';
+        if (validation_err) {
+            alert(validation_err);
+        }
+        $("#infoModal").modal({
+            backdrop: 'static'
+        });
+    });
+</script>
 <script type="text/javascript">
 	//<![CDATA[
 	$(function () {
@@ -114,3 +137,4 @@
 
 	//]]>
 </script>
+
