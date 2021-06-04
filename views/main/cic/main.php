@@ -212,7 +212,7 @@
 						}
 						if ( ! element('list', element('popularpost', $view))) {
 						?>
-							<li style="text-align:center;">
+							<li style="text-align:center; padding: 9px 0;">
 								자료가 없습니다
 							</li>
 						<?php

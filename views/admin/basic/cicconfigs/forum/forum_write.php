@@ -1,3 +1,9 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <div class="box">
 	<div class="box-table">
 		<?php
@@ -32,8 +38,8 @@
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">포럼 마감일</label>
-				<div class="col-sm-10 form-inline">
-					<input type="text" class="form-control datepicker" name="frm_close_datetime" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('data', $view))); ?>" />
+				<div class="col-sm-10 form-inline" id="datetimepicker1">
+					<input type="text" class="form-control" name="frm_close_datetime" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('data', $view))); ?>" />
 					<p class="help-block">포럼 마감일은 배팅 마감일 이후로 설정해야합니다.</p>
 				</div>
 			</div>
@@ -50,16 +56,15 @@
 $(function() {
 	$('#fadminwrite').validate({
 		rules: {
-			ban_title: 'required',
-			ban_start_date: { alpha_dash:true, minlength:10, maxlength:10 },
-			ban_end_date: { alpha_dash:true, minlength:10, maxlength:10 },
-			bng_name: 'required',
-			ban_width: { number:true },
-			ban_height: { number:true },
-			ban_order: { number:true },
-			ban_activated: 'required'
+			frm_bat_close_datetime: { alpha_dash:true, minlength:10, maxlength:10 },
+			frm_close_datetime: { alpha_dash:true, minlength:10, maxlength:10 },
 		}
 	});
 });
 //]]>
+</script>
+<script>
+  $(function () {
+    $('#datetimepicker1').datetimepicker();
+ });
 </script>

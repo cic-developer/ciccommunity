@@ -105,10 +105,11 @@
 					<?php
 						if (element('list', element('data', $view))) {
 							foreach (element('list', element('data', $view)) as $result) {
+								$image_url = element('news_image', $result) ? element('news_image', $result) : base_url('assets/images/news-img02.png');
 								?>
 							<li>
 								<a href="<?php echo site_url('/news/news_url/'.element('news_id', $result)); ?>" target="_blank">
-									<div class="img"><img src="<?php echo html_escape(element('news_image', $result)) ?>" alt="">
+									<div class="img"><img src="<?php echo $image_url ?>" alt="">
 									</div>
 									<div class="txt">
 										<div class="vc">
