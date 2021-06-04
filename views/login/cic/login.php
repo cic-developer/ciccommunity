@@ -67,11 +67,11 @@
 				<ul>
 					<li>
 						<p>* 아이디를 잊어버렸나요?</p>
-						<a href="#n"><span>아이디 찾기</span></a>
+						<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">아이디 찾기</button>
 					</li>
 					<li>
 						<p>* 비밀번호를 잊어버렸나요? </p>
-						<a href="#n"><span>비밀번호 찾기</span></a>
+						<a href="#n"><span>비밀번호 찾기ㅎ</span></a>
 					</li>
 				</ul>
 			</div>
@@ -81,30 +81,39 @@
 	</div>
 </div>
 <!-- 아이디 Modal -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
 <!-- -------------------------------- -->
 
 <!--비밀번호 Modal Start-->
-<div class="modal fade" id="infoModal" role="dialog" style="display:table;">
-    <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <?php echo $this->lang->line('modalContent') ?>
-    </div>
-</div>
+
 <!--비밀번호 Modal End -->
-<script>
-$(document).ready(function() {
-        let validation_err = '<?= isset($validation_err) ? $validation_err : '' ?>';
-        if (validation_err) {
-            alert(validation_err);
-        }
-        $("#infoModal").modal({
-            backdrop: 'static'
-        });
-    });
-</script>
+
 <script type="text/javascript">
 	//<![CDATA[
 	$(function () {

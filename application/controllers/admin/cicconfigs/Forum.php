@@ -542,7 +542,7 @@ class Forum extends CB_Controller
 				array(
 					'field' => 'frm_bat_close_datetime',
 					'lable' => '배팅 마감일',
-					'rules' => 'trim|alpha_dash|exact_length[10]',
+					'rules' => 'trim|exact_length[10]',
 				),
 				// array(
 				// 	'field' => 'frm_close_datetime',
