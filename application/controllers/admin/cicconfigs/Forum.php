@@ -478,6 +478,29 @@ class Forum extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
+	public function forum_repart($pst_id = 0)
+	{
+		// 이벤트 라이브러리를 로딩합니다.
+		$eventname = 'event_admin_cicconfig_forum_repart';
+		$this->load->event($eventname);
+
+		$view = array();
+		$view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventame);
+
+		if($pst_id) {
+			$pst_id = (int) $pst_id;
+			if(empty($pst_id) OR $pst_id < 1 ){
+				show_404();
+			}
+		}
+
+		print_r("hi");
+		exit;
+	}
+
 	//승인대기 포럼을 진행중인 포럼으로 승격시 폼 벨리데이션을 통한 대표이미지 등록, 배팅마감시간, 포럼 마감시간 설정 함수
 	public function forum_write($pst_id = 0, $post_id = 0)
 	{
