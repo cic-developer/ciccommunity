@@ -133,6 +133,21 @@
 		text-align: center;
 		box-sizing: border-box;
 	}
+	.pwdBtn {
+		width:100px;
+		background-color: skyblue;
+		border: none;
+		color:#fff;
+		padding: 7px 0;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 15px;
+		margin-left: 4px;
+		cursor: pointer;
+		border-radius : 12px;
+}
+
 </style>
 
 <!--아이디 Modal Start-->
@@ -153,7 +168,7 @@
 								<p class="chk-input" style="width:60%">
 									<input id="mem_password" name="mem_password" type="email" placeholder="이메일 입력" value="">
 								</p>
-								<button type="submit" style="margin:0;padding:0">제출</button>
+								<button type="submit" class="pwdBtn">인증</button>
 								</form>
 						</li>
 						

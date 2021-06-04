@@ -67,6 +67,14 @@
 					<p class="repart-msg" style="color:red; display:none;">배분 시작금액이 승리의견금액 보다 낮습니다!</p>
 				</div>
 			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">배분 비율</label>
+				<div class="col-sm-10 repart-cp-box">
+					<input type="number" class="form-control" name="repart_ratio" id="repart_ratio" style="width:180px;" disabled required />
+					<p class="help-inline">CP &nbsp;&nbsp; 1cp당 지급 비율</p>
+					<p class="repart-msg" style="color:red; display:none;">배분 시작금액이 승리의견금액 보다 낮습니다!</p>
+				</div>
+			</div>
 
 			<div class="btn-group pull-right" role="group" aria-label="...">
 				<button type="button" class="btn btn-default btn-sm btn-history-back" >취소하기</button>
@@ -105,10 +113,13 @@ $(function() {
 
 		var writer_reward = $('#writer_reward').val(); // 작성자 보상
 		var commission = total_cp * (currentVal / 100); // 수수료
-
 		var repart_cp = Number(total_cp) - (Number(writer_reward) + Number(commission));
-
 		$('#repart_cp').val(repart_cp.toFixed(2));
+
+		if($('#repart_cp').val()){
+			var repart_ratio = repart_cp / Number(win_cp);
+			$('#repart_ratio').val(repart_ratio.toFixed(2));
+		}
 
 		if(Number(win_cp) > repart_cp){
 			$('.repart-msg').attr('style', "color:red; display:block;");
@@ -129,10 +140,13 @@ $(function() {
 
 		var commission = $('#forum_commission').val();
 		commission = total_cp * (commission / 100); // 수수료
-
 		var repart_cp = Number(total_cp) - (Number(currentVal) + Number(commission));
-		
 		$('#repart_cp').val(repart_cp.toFixed(2));
+
+		if($('#repart_cp').val()){
+			var repart_ratio = repart_cp / Number(win_cp);
+			$('#repart_ratio').val(repart_ratio.toFixed(2));
+		}
 
 		if(Number(win_cp) > repart_cp){
 			$('.repart-msg').attr('style', "color:red; display:block;");
@@ -142,4 +156,27 @@ $(function() {
 
 		oldVal2 = currentVal;
 	});
+
+	// 배분 비율 확인
+	// var oldVal3 = '';
+	// $(document).on("propertychange change keyup paste input","#forum_commission",function(){
+	// 	var currentVal = $(this).val();
+	// 	if(currentVal == oldVal3) {
+	// 		return;
+	// 	}
+
+	// 	var writer_reward = $('#writer_reward').val(); // 작성자 보상
+	// 	var commission = total_cp * (currentVal / 100); // 수수료
+	// 	var repart_cp = Number(total_cp) - (Number(writer_reward) + Number(commission));
+
+	// 	$('#repart_cp').val(repart_cp.toFixed(2));
+
+	// 	if(Number(win_cp) > repart_cp){
+	// 		$('.repart-msg').attr('style', "color:red; display:block;");
+	// 	}else{
+	// 		$('.repart-msg').attr('style', "display:none;");
+	// 	}
+
+	// 	oldVal3 = currentVal;
+	// });
 </script>
