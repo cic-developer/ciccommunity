@@ -24,7 +24,7 @@ class Forum extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_forum','Board', 'Post', 'Board_category', 'Post_file', 'CIC_forum_config', 'CIC_forum_info');
+	protected $models = array('CIC_forum', 'CIC_cp','Board', 'Post', 'Board_category', 'Post_file', 'CIC_forum_config', 'CIC_forum_info', 'Member');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
@@ -601,11 +601,35 @@ class Forum extends CB_Controller
 			);
 			$forum_bats = $this->CIC_forum_model->get_forum_bat($where);
 
+			if ($forum_bats && is_array($forum_bats)) {
+				foreach ($forum_bats as $key => $value) {
+					$mem_id = $value['mem_id'];
+					$cfc_cp = (double) $value['cfc_cp'];
+					$member_info = $this->Member_model->get_one($mem_id);
+					$changed_cp = $member_info['mem_cp'] + ( $cfc_cp * $repart_ratio);
 
+					// member테이블에 cp지급
+					$arr = array(
+						'mem_cp' => $changed_cp
+					);
+					$result = $this->Member_model->set_user_modify($mem_id, $arr);
+					if($result == 0){
+						// 회원정보 수정 실패
+					}
+					if($result == 1){
+						// 회원정보 수정 성공
+					}
 
+					// cic_cp테이블에 log기록
+					$logResult = $this->CIC_cp_model->set_cic_cp($memIdx, $content, $money, '@byadmin', $admin_info['mem_id'], '출금반려');
+					
+					print_r('<br>');
+					print_r($value['mem_id']);
+					print_r('<br>');
+					print_r('<hr>');
+				}
+			}
 			
-			
-			print_r($forum_bats);
 			exit;
 			
 			
