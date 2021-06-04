@@ -137,3 +137,104 @@ i {
     font-size: 15px;
     cursor: pointer;
 }
+
+
+/******버튼 정의******/
+
+.btn_box {
+    width: 100%;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.btn1,
+.btn_box .btn1 {
+    text-align: center;
+    display: inline-block;
+    transition: 0.5s;
+    padding: 0px 30px;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 20px;
+    border: 0;
+    box-sizing: border-box;
+}
+
+.btn_yellow,
+a.btn_yellow,
+.btn_box a.btn_yellow {
+    background: #fbb906;
+    color: #fff!important;
+}
+
+.btn_black,
+a.btn_black,
+.btn_box a.btn_black,
+.btn_yellow:hover,
+a.btn_yellow:hover {
+    background: #2a2a2a;
+    color: #fff!important;
+}
+
+.btn_black:hover,
+a.btn_black:hover {
+    background: #fbb906;
+}
+
+.btn_grey,
+a.btn_grey,
+.btn_box a.btn_grey {
+    background: #d3d3d3;
+    color: #434343!important;
+}
+
+.btn_line,
+a.btn_line,
+.btn_box a.btn_line,
+.btn_grey:hover,
+a.btn_grey:hover {
+    background: none;
+    border: 1px solid #ccc!important;
+    color: #2a2a2a;
+}
+
+.btn_line:hover,
+a.btn_line:hover {
+    background: #2a2a2a;
+    color: #fff;
+    transition: 1s;
+}
+
+.btn2 {
+    display: inline-block;
+    outline: none;
+    transition: 0.5s;
+    padding: 0px 15px;
+    height: 37px;
+    line-height: 37px;
+    vertical-align: middle;
+    font-weight: 500;
+    font-size: 13px;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+}
+
+.btn_box2 {
+    width: 100%;
+    margin: 20px 0 40px 0;
+    text-align: center;
+}
+
+.btn_mission {
+    background: #2a2a2a;
+    color: #fff!important;
+}
+
+.btn_mission:hover {
+    background: #fff;
+    color: #2a2a2a!important;
+    font-weight: 500;
+}

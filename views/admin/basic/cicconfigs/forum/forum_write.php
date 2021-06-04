@@ -51,7 +51,18 @@
 					});
 				</script>
 			</div>
-			<div class="form-group">
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			
+			<!-- <div class="form-group">
 				<label class="col-sm-2 control-label">포럼 마감일</label>
 				<div class="col-sm-10 form-inline" style="height:130px;">
 					<div class="form-group">
@@ -72,7 +83,7 @@
 						});
 					});
 				</script>
-			</div>
+			</div> -->
 			<!-- <div class="form-group">
 				<label class="col-sm-2 control-label">배팅 마감일</label>
 				<div class="col-sm-10 form-inline">
