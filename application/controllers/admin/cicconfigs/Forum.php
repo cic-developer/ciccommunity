@@ -528,9 +528,14 @@ class Forum extends CB_Controller
 		 */
 		$config = array(
 				array(
-					'field' => 'frm_bat_close_datetime',
-					'lable' => '배팅 마감일',
-					'rules' => 'trim|',
+					'field' => 'forum_commission',
+					'lable' => '수수료 설정',
+					'rules' => 'trim|greater_than_equal_to[0]',
+				),
+				array(
+					'field' => 'writer_reward',
+					'lable' => '작성자 보상 설정',
+					'rules' => 'trim|greater_than_equal_to[0]',
 				),
 			);
 

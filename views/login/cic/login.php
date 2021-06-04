@@ -67,7 +67,7 @@
 				<ul>
 					<li>
 						<p>* 아이디를 잊어버렸나요?</p>
-						<a id="idModal"><span>아이디 찾기</span></a>
+						<a id="idModal" ><span>아이디 찾기</span></a>
 					</li>
 					<li>
 						<p>* 비밀번호를 잊어버렸나요? </p>
@@ -143,7 +143,7 @@
 		text-decoration: none;
 		display: inline-block;
 		font-size: 15px;
-		margin-left: 4px;
+		margin-left: 15px;
 		cursor: pointer;
 		border-radius : 12px;
 }
@@ -151,11 +151,12 @@
 </style>
 
 <!--아이디 Modal Start-->
-<div id="myModal_id" class="modal" style="z-index:1500;">
-				<div class="modal-content" style="z-index:1550;">
-							<p class="chk-input">회원님의 아이디는 <b>----</b> 입니다.</p>
-				</div>
-			</div>
+	<div id="myModal_id" class="modal" style="z-index:1500;">
+		<div class="modal-content" style="z-index:1550;">
+					<!-- 휴대전화 번호 인증 후 화면 -->
+					<p class="chk-input">회원님의 아이디는 <b style="font-size:20px">----</b> 입니다.</p>
+		</div>
+	</div>
 <!--아이디 Modal End -->
 
 <!--비밀번호 Modal Start-->
@@ -171,7 +172,6 @@
 								<button type="submit" class="pwdBtn">인증</button>
 								</form>
 						</li>
-						
 					</ul>
 				</div>
 			</div>
