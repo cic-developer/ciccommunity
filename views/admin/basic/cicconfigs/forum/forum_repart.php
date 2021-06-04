@@ -61,9 +61,10 @@
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">배분시작금액</label>
-				<div class="col-sm-10">
+				<div class="col-sm-10 repart-cp-box">
 					<input type="number" class="form-control" name="repart_cp" id="repart_cp" style="width:180px;" disabled required />
-					<p class="help-inline">CP &nbsp;&nbsp; 수수료와 보상을 설정하면 확인할수 있습니다</p>
+					<p class="help-inline">CP &nbsp;&nbsp; 수수료와 보상을 설정하면 확인할수 있습니다 (배분 시작금액을 승리의견 금액보다 높게 설정해주세요)</p>
+					<p class="repart-msg" style="color:red; display:none;">배분 시작금액이 승리의견금액 보다 낮습니다!</p>
 				</div>
 			</div>
 
@@ -91,7 +92,8 @@ $(function() {
 
 <script>
 
-	var total_cp = "<?php echo element('total_cp', $view); ?>"
+	var total_cp = "<?php echo element('total_cp', $view); ?>";
+	var win_cp = "<?php echo element('cic_A_cp', $view) >= element('cic_B_cp', $view) ? element('cic_A_cp', $view) : element('cic_B_cp', $view); ?>";
 
 	// 수수료 설정
 	var oldVal1 = '';
@@ -106,8 +108,14 @@ $(function() {
 
 		var repart_cp = Number(total_cp) - (Number(writer_reward) + Number(commission));
 
-		$('#repart_cp').val(repart_cp);
-		
+		$('#repart_cp').val(repart_cp.toFixed(2));
+
+		if(Number(win_cp) > repart_cp){
+			$('.repart-msg').attr('style', "color:red; display:block;");
+		}else{
+			$('.repart-msg').attr('style', "display:none;");
+		}
+
 		oldVal1 = currentVal;
 	});
 
@@ -124,8 +132,14 @@ $(function() {
 
 		var repart_cp = Number(total_cp) - (Number(currentVal) + Number(commission));
 		
-		$('#repart_cp').val(repart_cp);
-		
+		$('#repart_cp').val(repart_cp.toFixed(2));
+
+		if(Number(win_cp) > repart_cp){
+			$('.repart-msg').attr('style', "color:red; display:block;");
+		}else{
+			$('.repart-msg').attr('style', "display:none;");
+		}
+
 		oldVal2 = currentVal;
 	});
 </script>

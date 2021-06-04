@@ -67,11 +67,11 @@
 				<ul>
 					<li>
 						<p>* 아이디를 잊어버렸나요?</p>
-						<a href="#" data-toggle="modal" data-target="#idModal"><span>아이디 찾기</span></a>
+						<a id="idModal"><span>아이디 찾기</span></a>
 					</li>
 					<li>
 						<p>* 비밀번호를 잊어버렸나요? </p>
-						<a id="popup_open_btn"><span>비밀번호 찾기</span></a>
+						<a id="pwdModal"><span>비밀번호 찾기</span></a>
 					</li>
 				</ul>
 			</div>
@@ -80,9 +80,10 @@
 		<!-- page end // -->
 	</div>
 </div>
-<!-- 모달 스크립트 -->
+<!-- 모달 css -->
 <style>
-    #my_modal {
+    #id_modal,
+		#pwd_modal {
         display: none;
         width: 300px;
         padding: 20px 60px;
@@ -91,27 +92,39 @@
         border-radius: 3px;
     }
 
-    #my_modal .modal_close_btn {
+    #id_modal .modal_close_btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+		#pwd_modal .modal_close_btn {
         position: absolute;
         top: 10px;
         right: 10px;
     }
 </style>
 
-<!-- 모달 스크립트 -->
+<!--아이디 Modal Start-->
+<div id="id_modal" style="width:600px;height:100px;">
+<h1 style="font-size:20px;margin-bottom:15px;">아이디 찾기</h1>
+<form action="">
+	<label>회원님의 아이디는 <b>----</b> 입니다.</label>
+			<a class="modal_close_btn">닫기</a>
+</form>
+</div>
+<!--아이디 Modal End -->
 
 <!--비밀번호 Modal Start-->
-
-
-<div id="my_modal">
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita dolore eveniet laborum repellat sit distinctio, ipsa rem dicta alias velit? Repellat doloribus mollitia dolorem voluptatum ex
-    reiciendis aut in incidunt?
-    <a class="modal_close_btn">닫기</a>
+<div id="pwd_modal" style="width:600px;height:100px;">
+<h1 style="font-size:20px;margin-bottom:15px;">비밀번호 찾기</h1>
+<form action="">
+	<label>회원님의 아이디는 <b>----</b> 입니다.</label>
+			<a class="modal_close_btn">닫기</a>
+</form>
 </div>
-
 <!--비밀번호 Modal End -->
 
-<!-- 테스트 -->
+<!-- 모달 스크립트 -->
 <script>
 function modal(id) {
     var zIndex = 9999;
@@ -143,7 +156,7 @@ function modal(id) {
         display: 'block',
         boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
 
-        // 시꺼먼 레이어 보다 한칸 위에 보이기
+        // 시꺼먼 레이어 보다 한1칸 위에 보이기
         zIndex: zIndex + 1,
 
         // div center 정렬
@@ -161,10 +174,16 @@ Element.prototype.setStyle = function(styles) {
     return this;
 };
 
-document.getElementById('popup_open_btn').addEventListener('click', function(event) {
+document.getElementById('idModal').addEventListener('click', function(event) {
     // 모달창 띄우기
 		event.preventDefault()
-    modal('my_modal');
+    modal('id_modal');
+});
+
+document.getElementById('pwdModal').addEventListener('click', function(event) {
+    // 모달창 띄우기
+		event.preventDefault()
+    modal('pwd_modal');
 });
 </script>
 
