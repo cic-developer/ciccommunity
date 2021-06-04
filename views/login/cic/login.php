@@ -113,7 +113,17 @@
         </div>
 		<!-- 핸드폰 본인인증 후 화면 -->
         <div class="modal-body">
-          <h3>회원님의 아이디는 ---- 입니다.</h3>
+		<?php 
+		if($this->item('check_phone')){
+			?>
+			<h3>회원님의 아이디는 ---- 입니다.</h3>
+			<?php
+		}else {
+			?>
+			<h3>입력하신 전화번호에 해당하는 회원의 아이디가 없습니다.</h3>
+			<?php
+		}
+		?>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

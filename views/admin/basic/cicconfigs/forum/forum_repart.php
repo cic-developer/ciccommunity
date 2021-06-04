@@ -33,14 +33,30 @@
 				<label class="col-sm-2 control-label">A 의견</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="post_id" id="post_id" value="<?php echo number_format(element('cic_A_cp', $view), 2); ?>" disabled required />
-					<p class="help-block"></p>
+					<progress value="<?php echo element('A_per', $view); ?>" max="100"><?php echo element('A_per', $view); ?> %</progress>
+					<p class="help-block"><?php echo number_format(element('A_per', $view), 2); ?> %</p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">B 의견</label>
 				<div class="col-sm-10">
-					<input style="" type="text" class="form-control" name="post_id" id="post_id" value="<?php echo number_format(element('cic_B_cp', $view), 2); ?>" disabled required />
-					<p class="help-block"></p>
+					<input style="backgoun" type="text" class="form-control" name="post_id" id="post_id" value="<?php echo number_format(element('cic_B_cp', $view), 2); ?>" disabled required />
+					<progress value="<?php echo element('B_per', $view); ?>" max="100"></progress>
+					<p class="help-block"><?php echo number_format(element('B_per', $view), 2); ?> %</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">수수료 설정</label>
+				<div class="col-sm-10">
+					<input type="number" class="form-control" name="forum_commission" id="forum_commission" />
+					<p class="help-inline">% &nbsp;&nbsp; 수수료를 설정해주세요.(예: 참여금액10,000cp -> *수수료10% -> 배분시작9,000cp)</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">작성자 보상 설정</label>
+				<div class="col-sm-10">
+					<input type="number" class="form-control" name="writer_reward" id="writer_reward" />
+					<p class="help-inline">CP &nbsp;&nbsp; 글 작성자에게 지급할 보상을 설정해주세요.(예: 배분시작9,000cp -> *보상지급1,000cp -> 승리진영에  배분시작8,000cp )</p>
 				</div>
 			</div>
 

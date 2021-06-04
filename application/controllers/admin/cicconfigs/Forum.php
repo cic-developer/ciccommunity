@@ -615,13 +615,13 @@ class Forum extends CB_Controller
 				array(
 					'field' => 'frm_bat_close_datetime',
 					'lable' => '배팅 마감일',
-					'rules' => 'trim|',
+					'rules' => 'trim|exact_length[18]',
 				),
-				// array(
-				// 	'field' => 'frm_close_datetime',
-				// 	'lable' => '포럼 마감일',
-				// 	'rules' => 'ttrim|alpha_dash|exact_length[10]',
-				// ),
+				array(
+					'field' => 'frm_close_datetime',
+					'lable' => '포럼 마감일',
+					'rules' => 'trim|exact_length[18]',
+				),
 			);
 
 		$this->form_validation->set_rules($config);	
@@ -639,9 +639,9 @@ class Forum extends CB_Controller
 				if (empty($getdata['frm_bat_close_datetime']) OR $getdata['frm_bat_close_datetime'] === '0000-00-00') {
 					$getdata['frm_bat_close_datetime'] = '';
 				}
-				// if (empty($getdata['frm_close_datetime']) OR $getdata['frm_close_datetime'] === '0000-00-00') {
-				// 	$getdata['frm_close_datetime'] = '';
-				// }
+				if (empty($getdata['frm_close_datetime']) OR $getdata['frm_close_datetime'] === '0000-00-00') {
+					$getdata['frm_close_datetime'] = '';
+				}
 				$view['view']['data'] = $getdata;
 			}
 
@@ -729,7 +729,7 @@ class Forum extends CB_Controller
 
 			$updatedata = array(
 				'frm_bat_close_datetime' => $frm_bat_close_datetime,
-				// 'frm_close_datetime' => $frm_close_datetime,
+				'frm_close_datetime' => $frm_close_datetime,
 			);
 			$postupdatedata = array(
 				'brd_id' => 3
@@ -747,6 +747,10 @@ class Forum extends CB_Controller
 				/**
 				 * 게시물을 새로 입력하는 경우입니다
 				 */
+				$this->session->set_flashdata(
+					'message',
+					'정상적으로 수정되었습니다'
+				);
 			}
 
 			if ($this->input->post($pst_id)) {
