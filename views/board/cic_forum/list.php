@@ -76,7 +76,7 @@
                 <div class="sel-box c02">
                     <a href="#n" class="sel-btn"><span>포럼마감순</span></a>
                     <ul>
-                        <li class="active"><a href="#n"><span>포럼진행순</span></a></li>
+                        <!-- <li class="active"><a href="#n"><span>포럼진행순</span></a></li> -->
                         <li><a href="<?php echo element('cic_forum_info.frm_close_datetime', element('sort', $view)); ?>"><span>포럼마감순</span></a></li>
                     </ul>
                 </div>
