@@ -48,7 +48,7 @@
                                     <div class="owl-item" style="width: 240px; margin-right: 20px;">
                                         <div class="item">
                                             <a>
-                                                <div class="img"><img src="https://dev.ciccommunity.com/assets/images/news-img01.png" alt="">
+                                                <div class="img"><img src="<?php echo base_url('/assets/images/news-img01.png'); ?>" alt="">
                                                 </div>
                                                 <div class="txt">
                                                     <p class="btxt">선택된 자료가 없습니다.</p>

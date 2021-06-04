@@ -59,7 +59,7 @@
                                 <a href="#n"><span>참여하기!</span></a>
                             </div>
                         </div>
-                    </div>
+                    </div><?php echo element('sort', $view); ?>
                     <a href="#n" class="next"><span class="blind">다음</span></a>
                 </div>
             </div>
@@ -77,15 +77,15 @@
                     <a href="#n" class="sel-btn"><span>포럼마감순</span></a>
                     <ul>
                         <li class="active"><a href="#n"><span>포럼진행순</span></a></li>
-                        <li><a href="#n"><span>포럼마감순</span></a></li>
+                        <li><a href="<?php echo element('cic_forum_info.frm_close_datetime', element('sort', $view)); ?>"><span>포럼마감순</span></a></li>
                     </ul>
                 </div>
                 <div class="sel-box">
                     <a href="#n" class="sel-btn"><span>최신순</span></a>
                     <ul>
-                        <li class="active"><a href="#n"><span>최신 순</span></a></li>
-                        <li><a href="#n"><span>관련도 순</span></a></li>
-                        <li><a href="#n"><span>인기 순</span></a></li>
+                        <li class="active"><a href="<?php echo element('post_id', element('sort', $view)); ?>"><span>최신 순</span></a></li>
+                        <li><a href="<?php echo element('post_title', element('sort', $view)); ?>"><span>관련도 순</span></a></li>
+                        <li><a href="<?php echo element('cic_forum_total_cp', element('sort', $view)); ?>"><span>인기 순</span></a></li>
                     </ul>
                 </div>
             </div>

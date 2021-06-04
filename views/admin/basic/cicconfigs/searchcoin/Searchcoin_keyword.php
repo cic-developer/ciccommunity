@@ -82,7 +82,7 @@
                             <div class="modal-header">
                                 <h4 class="modal-title text-left">검색키워드 수정 <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
                             </div>
-							<form method="get" action="https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/update_keyword">
+							<form method="get" action="<?php echo admin_url('/cicconfigs/searchcoin/update_keyword')?>">
                             <!-- Modal body -->
                                 <div class="modal-body">
                                 <!-- <label for="usr"></label> -->

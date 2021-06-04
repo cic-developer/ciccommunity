@@ -202,6 +202,17 @@ class Board_post extends CB_Controller
 
 		// CIC 포럼, forum
 		if(element('brd_id', element('board', $list)) == 3){
+			$param =& $this->querystring;
+			$view['view']['sort'] = array(
+				'post_id' => $param->sort('post_id', 'asc'),
+				'post_title' => $param->sort('post_title', 'asc'),
+				'post_content' => $param->sort('post_content', 'asc'),
+				'cic_forum_total_cp' => $param->sort('cic_forum_total_cp', 'asc'),
+				'cic_forum_info.frm_close_datetime' => $param->sort('cic_forum_info.frm_close_datetime', 'asc'),
+			);
+			$this->CIC_forum_model->allow_order_field = array('post_id', 'post_title', 'post_content', 'cic_forum_total_cp', 
+																	'cic_forum_info.frm_close_datetime');
+																	
 			// default cate = 1 (1진행중, 2마감)
 			$type = $this->input->get('type');
 			if(!$type) {
@@ -1523,14 +1534,6 @@ class Board_post extends CB_Controller
 		}
 		// cic 진행중 포럼 && cic 마감 포럼
 		if($board['brd_id'] == 3){
-			$view['view']['sort'] = array(
-				'post_id' => $param->sort('post_id', 'asc'),
-				'post_title' => $param->sort('post_title', 'asc'),
-				'post_content' => $param->sort('post_content', 'asc'),
-				'cic_forum_total_cp' => $param->sort('cic_forum_total_cp', 'asc'),
-				'cic_forum_info.frm_close_datetime' => $param->sort('cic_forum_info.frm_close_datetime', 'asc'),
-			);
-
 			$type = $this->input->get('type');
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp());
 			if(!$type) {
