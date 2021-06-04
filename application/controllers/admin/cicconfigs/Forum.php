@@ -497,8 +497,46 @@ class Forum extends CB_Controller
 			}
 		}
 
-		print_r("hi");
-		exit;
+		// get forum data && total cp, a cp, b cp
+		$getdata = array();
+		$getdata = $this->CIC_forum_model->get_one($pst_id);
+		$total_cp = $getdata['cic_forum_total_cp']; // 총 cp
+		$view['view']['total_cp'] = $total_cp;
+
+		$b_cp = 0;
+		$a_cp = 0;
+		$view['view']['A_per'] = 0;
+		$view['view']['B_per'] = 0;
+		if($total_cp){
+			$b_cp = $view['view']['cic_B_cp']; // B cp
+			$a_cp = $view['view']['cic_A_cp']; // A cp
+			$view['view']['A_per'] = ($a_cp/$total_cp) * 100; // A cp %
+			$view['view']['B_per'] = ($b_cp/$total_cp) * 100; // B cp %
+		}
+		
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+
+		/**
+		 * 전송된 데이터의 유효성을 체크합니다
+		 */
+		$config = array(
+				array(
+					'field' => 'frm_bat_close_datetime',
+					'lable' => '배팅 마감일',
+					'rules' => 'trim|',
+				),
+				// array(
+				// 	'field' => 'frm_close_datetime',
+				// 	'lable' => '포럼 마감일',
+				// 	'rules' => 'ttrim|alpha_dash|exact_length[10]',
+				// ),
+			);
+
+		$this->form_validation->set_rules($config);	
+
 	}
 
 	//승인대기 포럼을 진행중인 포럼으로 승격시 폼 벨리데이션을 통한 대표이미지 등록, 배팅마감시간, 포럼 마감시간 설정 함수
@@ -542,7 +580,7 @@ class Forum extends CB_Controller
 				array(
 					'field' => 'frm_bat_close_datetime',
 					'lable' => '배팅 마감일',
-					'rules' => 'trim|exact_length[10]',
+					'rules' => 'trim|',
 				),
 				// array(
 				// 	'field' => 'frm_close_datetime',
