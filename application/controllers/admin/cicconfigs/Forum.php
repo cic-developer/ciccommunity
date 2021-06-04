@@ -500,6 +500,9 @@ class Forum extends CB_Controller
 		// get forum data && total cp, a cp, b cp
 		$getdata = array();
 		$getdata = $this->CIC_forum_model->get_one($pst_id);
+
+		print_r($getdata);
+		exit;
 		$total_cp = $getdata['cic_forum_total_cp']; // 총 cp
 		$view['view']['forum'] = $getdata;
 		$view['view']['total_cp'] = $total_cp;
@@ -596,6 +599,10 @@ class Forum extends CB_Controller
 			// cfc_cp 칼럼의 cp*$repart_ratio를 한 값을 member테이블의 mem_cp에 저장한다.
 			// cic_cp 테이블에 cp 로그 기록한다.
 
+			// 관리자 id
+			$admin_id = $this->member->item('mem_id');
+
+			// 배팅 가져오기
 			$where = array(
 				'pst_id' => $pst_id
 			);
@@ -621,20 +628,9 @@ class Forum extends CB_Controller
 					}
 
 					// cic_cp테이블에 log기록
-					$logResult = $this->CIC_cp_model->set_cic_cp($memIdx, $content, $money, '@byadmin', $admin_info['mem_id'], '출금반려');
-					
-					print_r('<br>');
-					print_r($value['mem_id']);
-					print_r('<br>');
-					print_r('<hr>');
+					$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '-', $changed_cp, '@byadmin', $admin_id , '포럼보상지급');
 				}
 			}
-			
-			exit;
-			
-			
-			
-			
 			
 			$param =& $this->querystring;
 			$redirecturl = admin_url($this->pagedir . '/close_forum');
@@ -644,6 +640,8 @@ class Forum extends CB_Controller
 			
 			redirect($redirecturl);
 			// 게시물이 삭제될 경우, 모든 포인트 반환 및 원상복귀 && cic_forum_cp 데이터 삭제 필수 && cic_forum_info 데이터 삭제 필수
+			// 마감후 분배여부 status 필요
+			// 중도마감 흠
 		}
 	}
 

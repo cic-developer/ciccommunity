@@ -78,6 +78,7 @@
 
 			<div class="btn-group pull-right" role="group" aria-label="...">
 				<button type="button" class="btn btn-default btn-sm btn-history-back" >취소하기</button>
+				<!-- <?php echo element('B_per', $view); ?> -->
 				<button type="submit" class="btn btn-success btn-sm">보상배분</button>
 			</div>
 
