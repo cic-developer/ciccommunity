@@ -27,12 +27,14 @@
 				<label class="col-sm-2 control-label">배팅 마감일</label>
 				<div class="col-sm-10 form-inline">
 					<input type="text" class="form-control datepicker" name="frm_bat_close_datetime" value="<?php echo set_value('frm_bat_close_datetime', element('frm_bat_close_datetime', element('data', $view))); ?>" />
+					<p class="help-block">배팅 마감일은 포럼 마감일 이전으로 설정해야합니다.</p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">포럼 마감일</label>
 				<div class="col-sm-10 form-inline">
 					<input type="text" class="form-control datepicker" name="frm_close_datetime" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('data', $view))); ?>" />
+					<p class="help-block">포럼 마감일은 배팅 마감일 이후로 설정해야합니다.</p>
 				</div>
 			</div>
 			<div class="btn-group pull-right" role="group" aria-label="...">

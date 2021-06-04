@@ -518,6 +518,9 @@ class Board_post extends CB_Controller
 			$view['forum']['A_per'] = ($a_cp/$total_cp) * 100; // A cp %
 			$view['forum']['B_per'] = ($b_cp/$total_cp) * 100; // B cp %
 
+			print_r($total_cp);
+			exit;
+
 			// 투표진영 가져오기 (A:1, B:2, error:0) && 유저 배팅포인트 가져오기
 			$mem_id = (int) $this->member->item('mem_id');
 			$where = array(

@@ -2283,7 +2283,6 @@ class Postact extends CB_Controller
 			// 게시글 확인
 			$this->load->model('CIC_forum_model');
 			$post = $this->CIC_forum_model->get_one($post_id);
-			// $post = $this->Post_model->get_one($post_id);
 			if(!$post){
 				$result = array(
 					'state' => '0',
@@ -2292,7 +2291,23 @@ class Postact extends CB_Controller
 				exit(json_encode($result));
 			}
 
-			if()
+			// 배팀 참여 마감시간 확인
+			if(strtotime($checktime) - strtotime($post['frm_bat_close_datetime']) < 0){
+				$result = array(
+					'state' => '0',
+					'message' => '참여 마감시간이 지났습니다',
+				);
+				exit(json_encode($result));
+			}
+
+			// 포럼 마감시간 확인
+			if(strtotime($checktime) - strtotime($post['frm_close_datetime']) < 0){
+				$result = array(
+					'state' => '0',
+					'message' => '마감된 포럼입니다',
+				);
+				exit(json_encode($result));
+			}
 
 			// 중복배팅 확인
 			$where = array(
@@ -2417,8 +2432,8 @@ class Postact extends CB_Controller
 			$option = (int) $this->input->post('option');
 
 			// 게시글 확인
-			$this->load->model('Post_model');
-			$post = $this->Post_model->get_one($post_id);
+			$this->load->model('CIC_forum_model');
+			$post = $this->CIC_forum_model->get_one($post_id);
 			if(!$post){
 				$result = array(
 					'state' => '0',
@@ -2519,13 +2534,13 @@ class Postact extends CB_Controller
 			$mem_cp = $member_info['mem_cp'];
 
 			$usePoint = (double) $this->input->post('usePoint');
-			
 			$post_id = (int) $this->input->post('post_id');
 			$option = (int) $this->input->post('option');
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 
 			// 게시글 확인
-			$this->load->model('Post_model');
-			$post = $this->Post_model->get_one($post_id);
+			$this->load->model('CIC_forum_model');
+			$post = $this->CIC_forum_model->get_one($post_id);
 			if(!$post){
 				$result = array(
 					'state' => '0',
@@ -2533,6 +2548,25 @@ class Postact extends CB_Controller
 				);
 				exit(json_encode($result));
 			}
+
+			// 배팀 참여 마감시간 확인
+			if(strtotime($checktime) - strtotime($post['frm_bat_close_datetime']) < 0){
+				$result = array(
+					'state' => '0',
+					'message' => '참여 마감시간이 지났습니다',
+				);
+				exit(json_encode($result));
+			}
+
+			// 포럼 마감시간 확인
+			if(strtotime($checktime) - strtotime($post['frm_close_datetime']) < 0){
+				$result = array(
+					'state' => '0',
+					'message' => '마감된 포럼입니다',
+				);
+				exit(json_encode($result));
+			}
+
 
 			// 추가참여 가능 여부 확인 (중복배팅 확인)
 			$where = array(
@@ -2659,6 +2693,7 @@ class Postact extends CB_Controller
 			// $usePoint = (double) $this->input->post('usePoint');
 			$post_id = (int) $this->input->post('post_id');
 			$option = (int) $this->input->post('option');
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 
 			// 게시글 확인
 			$this->load->model('Post_model');
@@ -2670,6 +2705,25 @@ class Postact extends CB_Controller
 				);
 				exit(json_encode($result));
 			}
+
+			// 배팀 참여 마감시간 확인
+			if(strtotime($checktime) - strtotime($post['frm_bat_close_datetime']) < 0){
+				$result = array(
+					'state' => '0',
+					'message' => '참여 마감시간이 지났습니다',
+				);
+				exit(json_encode($result));
+			}
+
+			// 포럼 마감시간 확인
+			if(strtotime($checktime) - strtotime($post['frm_close_datetime']) < 0){
+				$result = array(
+					'state' => '0',
+					'message' => '마감된 포럼입니다',
+				);
+				exit(json_encode($result));
+			}
+
 
 			// 추가참여 가능 여부 확인 (중복배팅 확인)
 			$where = array(

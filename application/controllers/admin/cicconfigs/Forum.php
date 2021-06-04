@@ -479,14 +479,16 @@ class Forum extends CB_Controller
 	}
 
 	//승인대기 포럼을 진행중인 포럼으로 승격시 폼 벨리데이션을 통한 대표이미지 등록, 배팅마감시간, 포럼 마감시간 설정 함수
-	public function forum_write($pst_id = 0)
+	public function forum_write($pst_id = 0, $post_id = 0)
 	{
+		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_ciccinfigs_update_company';
 		$this->load->event($eventname);
 
 		$view = array();
 		$view['view'] = array();
 
+		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		if($pst_id) {
@@ -504,11 +506,15 @@ class Forum extends CB_Controller
 		} else {
 			// 기본값 설정
 		}
-		// print_r($this->db->last_query());
-		// exit;
 
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
 		$this->load->library('form_validation');
 
+		/**
+		 * 전송된 데이터의 유효성을 체크합니다
+		 */
 		$config = array(
 				array(
 					'field' => 'frm_bat_close_datetime',
@@ -524,12 +530,16 @@ class Forum extends CB_Controller
 
 		$this->form_validation->set_rules($config);	
 
+		/**
+		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
+		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
+		 */
 		if ($this->form_validation->run() === false) {
 
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 
-			if ($pid) {
+			if ($pst_id) {
 				if (empty($getdata['frm_bat_close_datetime']) OR $getdata['frm_bat_close_datetime'] === '0000-00-00') {
 					$getdata['frm_bat_close_datetime'] = '';
 				}
@@ -542,7 +552,7 @@ class Forum extends CB_Controller
 			/**
 			 * primary key 정보를 저장합니다
 			 */
-			$view['view']['primary_key'] = $primary_key;
+			// $view['view']['primary_key'] = $primary_key;
 
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
@@ -635,8 +645,16 @@ class Forum extends CB_Controller
 			/**
 			 * 게시물을 수정하는 경우입니다
 			 */
-			if ($this->input->post($primary_key)) {
-				$this->Cic_forum_info_model->update($this->input->post($primary_key), $updatedata);
+			if ($this->input->post($post_id)) {
+				$this->Post_model->update($this->input->post($post_id), $postupdatedata);
+			} else {
+				/**
+				 * 게시물을 새로 입력하는 경우입니다
+				 */
+			}
+
+			if ($this->input->post($pst_id)) {
+				$this->Cic_forum_info_model->update($this->input->post($pst_id), $updatedata);
 				$this->session->set_flashdata(
 					'message',
 					'정상적으로 수정되었습니다'
@@ -645,18 +663,8 @@ class Forum extends CB_Controller
 				/**
 				 * 게시물을 새로 입력하는 경우입니다
 				 */
-				// $updatedata['ban_datetime'] = cdate('Y-m-d H:i:s');
-				// $updatedata['ban_ip'] = $this->input->ip_address();
-				// $updatedata['mem_id'] = $this->member->item('mem_id');
-                // $updatedata['ban_hit'] = 0;
-
-				// $this->{$this->modelname}->insert($updatedata);
-				// $this->session->set_flashdata(
-				// 	'message',
-				// 	'정상적으로 입력되었습니다'
-				// );
 			}
-			//오늘 생성된 배너 캐시를 삭제합니다.
+			//생성된 캐시를 삭제합니다.
 			$this->cache->delete('forum/forum-info-get' . cdate('Y-m-d'));
 
 			// 이벤트가 존재하면 실행합니다
