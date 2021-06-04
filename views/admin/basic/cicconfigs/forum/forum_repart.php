@@ -40,7 +40,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">B 의견</label>
 				<div class="col-sm-10">
-					<input style="backgoun" type="text" class="form-control" name="option_b" id="option_b" value="<?php echo number_format(element('cic_B_cp', $view), 2); ?>" disabled required />
+					<input type="text" class="form-control" name="option_b" id="option_b" value="<?php echo number_format(element('cic_B_cp', $view), 2); ?>" disabled required />
 					<progress value="<?php echo element('B_per', $view); ?>" max="100"></progress>
 					<p class="help-block"><?php echo number_format(element('B_per', $view), 2); ?> %</p>
 				</div>
@@ -104,43 +104,28 @@ $(function() {
 		var writer_reward = $('#writer_reward').val(); // 작성자 보상
 		var commission = total_cp * (currentVal / 100); // 수수료
 
-		var repart_cp = total_cp - (writer_reward + commission);
+		var repart_cp = Number(total_cp) - (Number(writer_reward) + Number(commission));
 
-		alert(repart_cp);
-		
-		// password2 = $("#new_password_re").val();
-		// if(password2 != currentVal ){ // && currentVal.length > 0){
-		// 	$('.agree-password').remove();
-		// 	html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
-		// 	$('.password-modify-content').append(html);
-		// } else{
-		// 	$('.agree-password').remove();
-		// 	html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
-		// 	$('.password-modify-content').append(html);
-		// }
+		$('#repart_cp').val(repart_cp);
 		
 		oldVal1 = currentVal;
 	});
 
 	// 작성자 보상 설정
-	// var oldVal2 = '';
-	// $(document).on("propertychange change keyup paste input","#writer_reward",function(){
-	// 	var currentVal = $(this).val();
-	// 	if(currentVal == oldVal2) {
-	// 		return;
-	// 	}
+	var oldVal2 = '';
+	$(document).on("propertychange change keyup paste input","#writer_reward",function(){
+		var currentVal = $(this).val();
+		if(currentVal == oldVal2) {
+			return;
+		}
+
+		var commission = $('#forum_commission').val();
+		commission = total_cp * (commission / 100); // 수수료
+
+		var repart_cp = Number(total_cp) - (Number(currentVal) + Number(commission));
 		
-	// 	password1 = $("#new_password").val();
-	// 	if(password1 != currentVal ){ // && currentVal.length > 0){
-	// 		$('.agree-password').remove();
-	// 		html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';
-	// 		$('.password-modify-content').append(html);
-	// 	} else{
-	// 		$('.agree-password').remove();
-	// 		html = '<p class="agree-password cblue" class="rtxt mg10t">비밀번호가 일치합니다.</p>';
-	// 		$('.password-modify-content').append(html);
-	// 	}
+		$('#repart_cp').val(repart_cp);
 		
-	// 	oldVal2 = currentVal;
-	// });
+		oldVal2 = currentVal;
+	});
 </script>
