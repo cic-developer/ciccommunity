@@ -107,7 +107,7 @@
 							foreach (element('list', element('data', $view)) as $result) {
 								?>
 							<li>
-								<a href="<?php echo site_url('/news/news_url/'.element('news_id', $result)); ?>">
+								<a href="<?php echo site_url('/news/news_url/'.element('news_id', $result)); ?>" target="_blank">
 									<div class="img"><img src="<?php echo html_escape(element('news_image', $result)) ?>" alt="">
 									</div>
 									<div class="txt">

@@ -317,7 +317,7 @@
 								$image_url = element('news_image', $result) ? element('news_image', $result) : base_url('assets/images/news-img02.png');
 						?>
 						<li>
-							<a href="<?php echo site_url('/news/news_url/'.element('news_id', $result)); ?>">
+							<a href="<?php echo site_url('/news/news_url/'.element('news_id', $result)); ?>" target="_blank">
 								<div class="img"><img src="<?php echo html_escape($image_url) ?>" alt=""></div>
 								<div class="txt">
 									<div class="vc">
