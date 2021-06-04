@@ -81,8 +81,6 @@
 	</div>
 </div>
 <!-- 모달 css -->
-<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css'); ?>
-<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
 <style>
 /* The Modal (background) */
 .modal {
@@ -140,7 +138,7 @@
 <!--아이디 Modal Start-->
 <div id="myModal_id" class="modal" style="z-index:1500;">
 				<div class="modal-content" style="z-index:1550;">
-							<p class="btxt">회원님의 아이디는 <b>----</b> 입니다.</p>
+							<p class="chk-input">회원님의 아이디는 <b>----</b> 입니다.</p>
 				</div>
 			</div>
 <!--아이디 Modal End -->
@@ -150,45 +148,15 @@
 				<div class="modal-content" style="z-index:1550;">
 					<ul class="entry modify-box">
 						<li class="ath-email-content">
-							<p class="btxt">이메일인증</p>
-							<div class="all-email-box">
-								<div class="field modify">
-									<p class="chk-input w380">
-										<input type="text" placeholder="인증번호를 입력해주세요" class="ath_num" name="ath_num" value="">
-									</p>
-									<a href="javascript:void(0);" data-type="phone" class="modify-btn send-ath-email">
-										<span>이메일인증</span>
-									</a>
-									<a href="javascript:void(0);" data-type="phone" class="modify-btn confirm-ath-email" style="display:none;">
-										<span>확인</span>
-									</a>
-									
-								</div>
-								<div class="phone-resend-email" style="display:none;">
-									<a href="javascript:void(0);" data-type="phone" class="modify-btn resend-ath-email" style="display:block;">
-										<span>인증번호 재전송</span>
-									</a>	
-								</div>
-								<div class="phone-timer-box" style="display:none;">
-									<span id="postTestMin1">00</span><!-- 분 -->
-									<span>:</span>
-									<span id="postTestSec1">10</span><!--초-->
-									<!-- <span id="postTestMilisec">00</span>밀리초 -->
-								</div>
-							</div>
-							<div class="success" style="display:none;"><p class="cblue">인증이 완료되었습니다.</p></div>
-						</li>
-						<li class="wallet-modify-content">
-							<p class="btxt">새 핸드폰번호</p>
-							<div class="field modify">
-								<p class="chk-input w380">
-									<input type="text" placeholder="핸드폰번호" onkeyup="inputPhoneNumber(this);" id="new_phone" name="new_phone" value="" readonly disabled style="background-color:#efefef;">
+							<p class="btxt" style="font-size:18px"><b>비밀번호 찾기</b></p><br>
+								<form action="">
+								<p class="chk-input" style="width:60%">
+									<input id="mem_password" name="mem_password" type="email" placeholder="이메일 입력" value="">
 								</p>
-								<a href="javascript:void(0);" id="confirm_phone"  data-type="phone" class="modify-btn">
-									<span>확인</span>
-								</a>
-							</div>
+								<button type="submit" style="margin:0;padding:0">제출</button>
+								</form>
 						</li>
+						
 					</ul>
 				</div>
 			</div>
@@ -197,9 +165,14 @@
 <!-- 모달 스크립트 -->
 <script>
 var modal1 = document.getElementById('myModal_pwd');
+var modal2 = document.getElementById('myModal_id');
 var btn1 = document.getElementById("pwdModal");
+var btn2 = document.getElementById("idModal");
 btn1.onclick = function() {
 		modal1.style.display = "block";
+	}
+btn2.onclick = function() {
+		modal2.style.display = "block";
 	}
 	window.onclick = function(event) {
 		if (event.target == modal1) {
@@ -207,15 +180,9 @@ btn1.onclick = function() {
 		}
 		if (event.target == modal2) {
 			modal2.style.display = "none";
-            
-			$('#myModal_password .ath-nice-content .all-nice-box > *').remove(); // 핸드폰인증 버튼 제거
-		}
-		if (event.target == modal3) {
-			modal3.style.display = "none";
-            
-			$('#myModal_wallet .ath-nice-content .all-nice-box > *').remove(); // 핸드폰인증 버튼 제거
 		}
 	}
+
 </script>
 
 <!-- 테스트 -->
