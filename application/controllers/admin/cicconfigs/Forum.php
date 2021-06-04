@@ -509,13 +509,18 @@ class Forum extends CB_Controller
 		$view['view']['A_per'] = 0;
 		$view['view']['B_per'] = 0;
 		if($total_cp){
-			$b_cp = $getdata['cic_B_cp']; // B cp
 			$a_cp = $getdata['cic_A_cp']; // A cp
+			$b_cp = $getdata['cic_B_cp']; // B cp
 
-			$view['view']['cic_A_cp'] = $getdata['cic_A_cp']; // A cp
-			$view['view']['cic_B_cp'] = $getdata['cic_B_cp']; // A cp
+			$view['view']['cic_A_cp'] = $a_cp['cic_A_cp']; // A cp
+			$view['view']['cic_B_cp'] = $b_cp; // B cp
 			$view['view']['A_per'] = ($a_cp/$total_cp) * 100; // A cp %
 			$view['view']['B_per'] = ($b_cp/$total_cp) * 100; // B cp %
+
+			// validation을 위한 임시 데이터 저장
+			$win_cp = $a_cp >= $b_cp ? $a_cp : $b_cp;
+			$this->session->set_userdata('total_cp', $total_cp);
+			$this->session->set_userdata('win_cp', $win_cp);
 		}
 		
 		/**
@@ -530,12 +535,12 @@ class Forum extends CB_Controller
 				array(
 					'field' => 'forum_commission',
 					'lable' => '수수료 설정',
-					'rules' => 'trim|greater_than_equal_to[0]',
+					'rules' => 'trim|greater_than_equal_to[0]|callback__forum_commission_check',
 				),
 				array(
 					'field' => 'writer_reward',
 					'lable' => '작성자 보상 설정',
-					'rules' => 'trim|greater_than_equal_to[0]',
+					'rules' => 'trim|greater_than_equal_to[0]|callback__writer_reward_check',
 				),
 			);
 
@@ -577,6 +582,64 @@ class Forum extends CB_Controller
 
 			redirect($redirecturl);
 		}
+	}
+
+	// 수수료 확인
+	public function _forum_commission_check($str)
+	{
+		$total_cp = $this->session->userdata('total_cp');
+		$win_cp = $this->session->userdata('win_cp');
+
+		if(!$total_cp || !$win_cp){
+			$this->form_validation->set_message(
+				'_forum_commission_check',
+				'포럼 cp오류 (관리자 문의)'
+			);
+			return false;
+		}
+
+		$commission = $total_cp * ((int) $str / 100); 
+		if($win_cp < $commission){
+			$this->form_validation->set_message(
+				'_forum_commission_check',
+				'수수료 설정 오류'
+			);
+			return false;
+		}
+
+		$this->session->unset_userdata('total_cp');
+		$this->session->unset_userdata('win_cp');
+
+		return true;
+	}
+
+	// 작성자 보상 확인
+	public function _forum_commission_check($str)
+	{
+		$total_cp = $this->session->userdata('total_cp');
+		$win_cp = $this->session->userdata('win_cp');
+
+		if(!$total_cp || !$win_cp){
+			$this->form_validation->set_message(
+				'_forum_commission_check',
+				'포럼 cp오류 (관리자 문의)'
+			);
+			return false;
+		}
+
+		$commission = $total_cp * ((int) $str / 100); 
+		if($win_cp < $commission){
+			$this->form_validation->set_message(
+				'_forum_commission_check',
+				'수수료 설정 오류'
+			);
+			return false;
+		}
+
+		$this->session->unset_userdata('total_cp');
+		$this->session->unset_userdata('win_cp');
+
+		return true;
 	}
 
 	//승인대기 포럼을 진행중인 포럼으로 승격시 폼 벨리데이션을 통한 대표이미지 등록, 배팅마감시간, 포럼 마감시간 설정 함수
