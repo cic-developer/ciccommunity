@@ -114,6 +114,9 @@
                         $attributes = array('class' => 'search_box', 'name' => 'searchForm', 'id' => 'searchForm', 'method' => 'get');
                         echo form_open(base_url('/search'), $attributes);
                     ?>
+                    <input type="hidden" name="group_id" value="" />
+                    <input type="hidden" name="sfield" value="post_both" />
+                    <input type="hidden" name="sop" value="OR" />
 					<div class="ov">
 						<p class="chk-input"><input type="text" placeholder="" autocomplete="off" name="skeyword"></p>
 						<button class="enter"><span class="blind">검색</span></button>
@@ -173,12 +176,12 @@
 
 							</li>
 						</ul>
-						<div class="gnb mobile">	
+						<!-- <div class="gnb mobile">	
 							<ul class="language">
 								<li><a href="#n"><span>KOR</span></a></li>
 								<li><a href="#n"><span>ENG</span></a></li>
 							</ul>
-						</div>
+						</div> -->
 					</div>
 				</div>
 				<span class="mn-bar" style="height: 0px; display: none;">&nbsp;</span>

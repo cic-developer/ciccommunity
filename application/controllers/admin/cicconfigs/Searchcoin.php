@@ -290,13 +290,13 @@ class Searchcoin extends CB_Controller
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
 		//DELETE KEYWORD
-		$key_id = (int)$_GET['id'];
+		$key_id = (int)$this->input->get('id');
 		$deleted = $this->CIC_coin_keyword_model->delete_keyword($key_id);
 		if($deleted == 1){
-			redirect( "https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=".$_GET['pageId']."");
+			redirect( admin_url("/cicconfigs/searchcoin/CStock_keyword?id=".$this->input->get('pageId')));
 		}
 		else{
-			redirect( "https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=".$_GET['pageId']."");
+			redirect( admin_url("/cicconfigs/searchcoin/CStock_keyword?id=".$this->input->get('pageId')));
 		}
 
 	}
@@ -310,8 +310,8 @@ class Searchcoin extends CB_Controller
 		$view['view'] = array();			
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-		if(isset($_GET['id']) && !empty($_GET['id'])){
-			$id = $_GET['id'];
+		if(isset($this->input->get('id')) && !empty($this->input->get('id'))){
+			$id = $this->input->get('id');
 			$getKey = $this->CIC_coin_keyword_model -> getKeywordRow($id);
 			echo json_encode($getKey);
     	}
@@ -336,13 +336,13 @@ class Searchcoin extends CB_Controller
 		);
 		$data = array(
 			'_table' => 'cic_coin_keyword', // pass the real table name
-			'id' => $_GET['wid_idx1'],
-			'coin_keyword' => $_GET['cp_content1']
+			'id' => $this->input->get('wid_idx1'),
+			'coin_keyword' => $this->input->get('cp_content1')
 		);
 			
 		$update = $this->CIC_coin_keyword_model->update_keyword($data);
 		if($update){
-			redirect("https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=".$_GET['pageId']."");
+			redirect(admin_url("/cicconfigs/searchcoin/CStock_keyword?id=".$this->input->get('pageId')));
 		}
 		else{
 			return false;

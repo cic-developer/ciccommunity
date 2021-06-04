@@ -17,7 +17,7 @@
 			<div class="list-group">
 				<form class="form-inline">
 					<?php 
-					$myId = $_GET['id']; 
+					$myId = $this->input->get('id'); 
 					?>
 					<div class="form-group col-md-6">
 					<?php foreach($coin_list as $clists) { 
@@ -53,7 +53,7 @@
 						</tr>
 						<?php 
 						foreach($keylist as $stocks){ ?>
-						<?php $myId = $_GET['id']; ?> 
+						<?php $myId = $this->input->get('id'); ?> 
 							<?php if($myId == $stocks['coin_market']) { ?>
 							<tr>
 								<td>
@@ -65,7 +65,7 @@
 									<button type="button" class="btn btn-info btn-xs modal_open1" data-toggle="modal" 
                                             data-idx="<?php echo $stocks['idx']; ?>" id="<?php echo $stocks['idx']; ?>" >수정</button>								
 								</td>
-								<td><a onclick="deleteKeyword()" href="delete_keyword?id=<?php echo $stocks['idx'];?>&pageId=<?php echo $_GET['id'];?>"  class="btn btn-danger btn-xs bdelete" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
+								<td><a onclick="deleteKeyword()" href="delete_keyword?id=<?php echo $stocks['idx'];?>&pageId=<?php echo $this->input->get('id');?>"  class="btn btn-danger btn-xs bdelete" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
 							</tr>	
 							<?php } ?>	
 						<?php
@@ -88,7 +88,7 @@
                                 <!-- <label for="usr"></label> -->
                                     <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
 									<input type="hidden" name="coin_market" id="coin_market" value="" />
-									<input type="hidden" name="pageId" id="pageId" value="<?php echo $_GET['id']; ?>" />
+									<input type="hidden" name="pageId" id="pageId" value="<?php echo $this->input->get('id'); ?>" />
                                     <div class="form-group text-left">
                                         <label for="cp_content1" >키워드</label>
                                             <input class="form-control" rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요">

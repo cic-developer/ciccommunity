@@ -41,13 +41,15 @@ class Attendance extends CB_Controller
 	 */
 	public function index()
 	{
-		/**
-		 * 로그인이 필요한 페이지입니다
-		 */
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_attendance_index';
 		$this->load->event($eventname);
 
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+		
 		if ( ! $this->cbconfig->item('use_attendance')) {
 			alert('이 웹사이트는 출석체크 기능을 사용하지 않습니다');
 		}
@@ -149,6 +151,12 @@ class Attendance extends CB_Controller
 		if ( ! $this->cbconfig->item('use_attendance')) {
 			alert('이 웹사이트는 출석체크 기능을 사용하지 않습니다');
 		}
+
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+		
 
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('before', $eventname);
@@ -304,6 +312,12 @@ class Attendance extends CB_Controller
 		if ( ! $this->cbconfig->item('use_attendance')) {
 			alert('이 웹사이트는 출석체크 기능을 사용하지 않습니다');
 		}
+
+		/**
+		 * 로그인이 필요한 페이지입니다
+		 */
+		required_user_login();
+		
 
 		$view = array();
 		$view['view'] = array();

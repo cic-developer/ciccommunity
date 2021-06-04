@@ -212,9 +212,9 @@
 						}
 						if ( ! element('list', element('popularpost', $view))) {
 						?>
-							<tr>
-								<td colspan="12" class="nopost">자료가 없습니다</td>
-							</tr>
+							<li style="text-align:center;">
+								자료가 없습니다
+							</li>
 						<?php
 						}
 						?>
@@ -334,7 +334,7 @@
                 <div class="cont">
                     <ul>
                         <li>
-                            <a href="https://dev.ciccommunity.com/attendance">
+                            <a href="<?php echo $this->member->is_member() ? base_url('/attendance') : 'javascript:alert(\'로그인이 필요한 서비스입니다.\');';?>">
                                 <p class="desktop"><img src="<?php echo base_url('assets/images/use-img01.png') ?>"
                                         alt="" /></p>
                                 <p class="mobile"><img src="<?php echo base_url('assets/images/use-img01m.jpg') ?>"
@@ -342,7 +342,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="https://dev.ciccommunity.com/mypage/charge">
+                            <a href="<?php echo $this->member->is_member() ? base_url('/mypage/charge') : 'javascript:alert(\'로그인이 필요한 서비스입니다.\');';?>">
                                 <p class="desktop"><img src="<?php echo base_url('assets/images/use-img02.png') ?>"
                                         alt="" /></p>
                                 <p class="mobile"><img src="<?php echo base_url('assets/images/use-img02m.jpg') ?>"
