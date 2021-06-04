@@ -572,28 +572,54 @@ class Forum extends CB_Controller
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
 		}else {
-
+            
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+            
+			$_forum_commission = (double) $this->input->post('forum_commission');
+			$forum_commission = $total_cp * ($_forum_commission / 100);
+			$writer_reward = (double) $this->input->post('writer_reward');
+            
+			$repart_cp =  $total_cp - ( $writer_reward + $forum_commission);
+            
+			if($win_cp > $repart_cp){
+				$this->form_validation->set_message(
+					'_writer_reward_check',
+					'배분 시작금액이 승리의견금액 보다 낮습니다!'
+				);
+				return false;
+			}
+            
+			$repart_ratio = $repart_cp / $win_cp; // 1cp당 지급 비율
+            
+			// pst_id 에 해당하는 모든 데이터를 가져온다.
+			// cfc_cp 칼럼의 cp*$repart_ratio를 한 값을 member테이블의 mem_cp에 저장한다.
+			// cic_cp 테이블에 cp 로그 기록한다.
 
-			// $total_cp - ()
-			$forum_commission = $this->input->post('forum_commission');
-			$writer_reward = $this->input->post('writer_reward');
-
-			print_r($writer_reward);
-			exit;
-
+			$where = array(
+				'pst_id' => $pst_id
+			);
+			$forum_bats = $this->CIC_forum_model->get_forum_bat($where);
 
 
 
 			
+			
+			print_r($forum_bats);
+			exit;
+			
+			
+			
+			
+			
 			$param =& $this->querystring;
 			$redirecturl = admin_url($this->pagedir . '/close_forum');
-
+			
 			$this->session->unset_userdata('total_cp');
 			$this->session->unset_userdata('win_cp');
-
+			
 			redirect($redirecturl);
+			// 게시물이 삭제될 경우, 모든 포인트 반환 및 원상복귀 && cic_forum_cp 데이터 삭제 필수 && cic_forum_info 데이터 삭제 필수
 		}
 	}
 
