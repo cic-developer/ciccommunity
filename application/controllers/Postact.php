@@ -2772,7 +2772,7 @@ class Postact extends CB_Controller
 					'cfc_option' => $option,
 				);
 				$this->load->model('CIC_forum_model');
-				$_result = $this->CIC_forum_model->more_bat('cic_forum_cp', $updatedata, $where);
+				$_result = $this->CIC_forum_model->change_bat('cic_forum_cp', $updatedata, $where);
 
 				if($_result != 1){
 					$result = array(

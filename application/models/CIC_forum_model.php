@@ -275,4 +275,14 @@ class CIC_forum_model extends CB_Model
 		
 		return $result;
 	}
+	// 포럼 배분 완료
+	public function change_repart_state($primary_value = '', $updatedata = '', $where = '')
+	{
+
+		$this->db->where($where);
+		$this->db->set($updatedata);
+		$result = $this->db->update('cic_forum_info');
+		
+		return $result;
+	}
 }

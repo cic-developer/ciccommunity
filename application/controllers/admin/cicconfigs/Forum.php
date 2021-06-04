@@ -500,9 +500,13 @@ class Forum extends CB_Controller
 		// get forum data && total cp, a cp, b cp
 		$getdata = array();
 		$getdata = $this->CIC_forum_model->get_one($pst_id);
+        
+		// 배분이 끝난 게시물 접근 제한
+		if($getdata['frm_repart_state'] == 1){
+			$redirecturl = admin_url($this->pagedir . '/close_forum');
+			redirect($redirecturl);
+		}
 
-		print_r($getdata);
-		exit;
 		$total_cp = $getdata['cic_forum_total_cp']; // 총 cp
 		$view['view']['forum'] = $getdata;
 		$view['view']['total_cp'] = $total_cp;
@@ -628,9 +632,17 @@ class Forum extends CB_Controller
 					}
 
 					// cic_cp테이블에 log기록
-					$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '-', $changed_cp, '@byadmin', $admin_id , '포럼보상지급');
+					$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '-', $cfc_cp * $repart_ratio, '@byadmin', $admin_id , '포럼보상지급');
 				}
 			}
+
+			$updatedata = array(
+				'frm_repart_state' => 1
+			);
+			$where = array(
+				'pst_id' => $pst_id,
+			);
+			$result = $this->CIC_forum_model->change_bat('cic_forum_cp', $updatedata, $where);
 			
 			$param =& $this->querystring;
 			$redirecturl = admin_url($this->pagedir . '/close_forum');
