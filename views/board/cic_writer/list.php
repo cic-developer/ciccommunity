@@ -15,7 +15,7 @@
                 <div class="vnews-slide owl-loaded owl-drag">
                     <div class="owl-stage-outer">
                         <div class="owl-stage"
-                            style="transform: translate3d(-1040px, 0px, 0px); transition: all 0s ease 0s; width: 3900px;">
+                            style="transform: translate3d(-1040px, 0px, 0px); transition: all 0s ease 0s; width: 3900px; margin-bottom: 10px;">
                                 <?php
                                 if (element('list',element('bestpost', $view))) {
                                     foreach (element('list',element('bestpost', $view)) as $bestpost) {

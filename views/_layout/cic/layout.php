@@ -212,8 +212,8 @@
                     <div class="in-link">
                         <ul>
                             <li><a href="javascript:void(0);" style="cursor:text;"><span>tel. 07046470805  &nbsp; &nbsp;사업자번호. 848-87-01741   &nbsp;&nbsp;대표자. 배한규</span></a></li>
-                            <li><a href="https://dev.ciccommunity.com/document/provision"><span>이용약관</span></a></li>
-                            <li><a href="https://dev.ciccommunity.com/document/privacy"><span>개인정보처리방침</span></a></li>
+                            <li><a href="<?php echo base_url('/document/provision'); ?>"><span>이용약관</span></a></li>
+                            <li><a href="<?php echo base_url('/document/privacy'); ?>"><span>개인정보처리방침</span></a></li>
                             <li><a href="#n"><span>백서</span></a></li>
                             <li><a href="#n"><span>문의하기</span></a></li>
                         </ul>

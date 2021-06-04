@@ -1523,6 +1523,14 @@ class Board_post extends CB_Controller
 		}
 		// cic 진행중 포럼 && cic 마감 포럼
 		if($board['brd_id'] == 3){
+			$view['view']['sort'] = array(
+				'post_id' => $param->sort('post_id', 'asc'),
+				'post_title' => $param->sort('post_title', 'asc'),
+				'post_content' => $param->sort('post_content', 'asc'),
+				'cic_forum_total_cp' => $param->sort('cic_forum_total_cp', 'asc'),
+				'cic_forum_info.frm_close_datetime' => $param->sort('cic_forum_info.frm_close_datetime', 'asc'),
+			);
+
 			$type = $this->input->get('type');
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp());
 			if(!$type) {

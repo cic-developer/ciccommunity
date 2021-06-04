@@ -128,7 +128,7 @@ $('.modal_open1').click(function() {
 	var widIdx = $(this).data('idx');
 	$.ajax({
         method: "GET",
-        url: "https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/get_keyword",
+        url: "<?php echo admin_url('/cicconfigs/searchcoin/get_keyword'); ?>",
         data: { id: widIdx }, 
 		success: function(result){
 		result = JSON.parse(result);
