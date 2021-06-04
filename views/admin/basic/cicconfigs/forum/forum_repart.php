@@ -10,18 +10,8 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">대표 이미지 선택</label>
 				<div class="col-sm-10">
-					<?php
-					if (element('ban_image', element('data', $view))) {
-					?>
-						<img src="<?php echo banner_image_url(element('ban_image', element('data', $view)), '', 150); ?>" alt="배너 이미지" title="배너 이미지" />
-						<!-- <label for="ban_image_del">
-							<input type="checkbox" name="ban_image_del" id="ban_image_del" value="1" <?php echo set_checkbox('ban_image_del', '1'); ?> /> 삭제
-						</label> -->
-					<?php
-					}
-					?>
-					<input type="file" name="ban_image" id="ban_image" />
-					<p class="help-block">gif, jpg, png 파일 업로드가 가능합니다</p>
+					<input type="text" name="post_id" id="post_id" value="<?php echo element('pst_id', element('forum', $view)); ?>" />
+					<p class="help-block">post_id</p>
 				</div>
 			</div>
 			<div class="form-group">
@@ -32,23 +22,7 @@
 				</div>
 			</div>
 			
-					
-			<!-- <div class="form-group">
-				<label class="col-sm-2 control-label">배팅 마감일</label>
-				<div class='input-group date' id='datetimepicker1'>
-					<input type='text' class="form-control" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('data', $view))); ?>"/>
-					<p class="help-block">배팅 마감일은 포럼 마감일 이전으로 설정해야합니다.</p>
-					<span class="input-group-addon">
-						<span class="glyphicon glyphicon-calendar"></span>
-					</span>
-				</div>
-			</div>
-				<script type="text/javascript">
-					$(function () {
-						$('#datetimepicker1').datetimepicker();
-					});
-				</script>
-			</div> -->
+
 			<div class="form-group">
 				<label class="col-sm-2 control-label">포럼 마감일</label>
 				<div class="col-sm-10 form-inline" id="datetimepicker1">

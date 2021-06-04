@@ -501,6 +501,7 @@ class Forum extends CB_Controller
 		$getdata = array();
 		$getdata = $this->CIC_forum_model->get_one($pst_id);
 		$total_cp = $getdata['cic_forum_total_cp']; // 총 cp
+		$view['view']['forum'] = $getdata;
 		$view['view']['total_cp'] = $total_cp;
 
 		$b_cp = 0;
@@ -528,15 +529,46 @@ class Forum extends CB_Controller
 					'lable' => '배팅 마감일',
 					'rules' => 'trim|',
 				),
-				// array(
-				// 	'field' => 'frm_close_datetime',
-				// 	'lable' => '포럼 마감일',
-				// 	'rules' => 'ttrim|alpha_dash|exact_length[10]',
-				// ),
 			);
 
 		$this->form_validation->set_rules($config);	
 
+		/**
+		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
+		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
+		 */
+		if ($this->form_validation->run() === false) {
+			
+			// 이벤트가 존재하면 실행합니다
+			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+
+			/**
+			 * primary key 정보를 저장합니다
+			 */
+			// $view['view']['primary_key'] = $primary_key;
+
+			// 이벤트가 존재하면 실행합니다
+			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+			/**
+			 * 어드민 레이아웃을 정의합니다
+			 */
+			$layoutconfig = array('layout' => 'layout', 'skin' => 'forum_repart');
+			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+			$this->data = $view;
+			$this->layout = element('layout_skin_file', element('layout', $view));
+			$this->view = element('view_skin_file', element('layout', $view));
+		}else {
+
+			// 이벤트가 존재하면 실행합니다
+			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+			
+
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+
+			redirect($redirecturl);
+		}
 	}
 
 	//승인대기 포럼을 진행중인 포럼으로 승격시 폼 벨리데이션을 통한 대표이미지 등록, 배팅마감시간, 포럼 마감시간 설정 함수
