@@ -454,7 +454,7 @@ class Forum extends CB_Controller
 
 		$view['view']['data'] = $result;
 
-		$view['view']['primary_key'] = $this->Post_model->primary_key;
+		$view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
 
 		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
@@ -603,8 +603,22 @@ class Forum extends CB_Controller
 			// cfc_cp 칼럼의 cp*$repart_ratio를 한 값을 member테이블의 mem_cp에 저장한다.
 			// cic_cp 테이블에 cp 로그 기록한다.
 
-			// 관리자 id
-			$admin_id = $this->member->item('mem_id');
+			$post = $this->Post_model->get_one($pst_id); // 게시물 정보
+			$admin_id = $this->member->item('mem_id'); // 관리자 id
+			$writer_id = $post['mem_id']; // 작성자 id
+
+			$arr = array(
+				'mem_cp' => $changed_cp
+			);
+			$result = $this->Member_model->set_user_modify($writer_id, $arr);
+			if($result == 0){
+				// 회원정보 수정 실패
+			}
+			if($result == 1){
+				// 회원정보 수정 성공
+			}
+			// cic_cp테이블에 log기록
+			$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '작성자', $writer_reward, '@byadmin', $admin_id , '포럼보상지급');
 
 			// 배팅 가져오기
 			$where = array(
@@ -612,12 +626,14 @@ class Forum extends CB_Controller
 			);
 			$forum_bats = $this->CIC_forum_model->get_forum_bat($where);
 
+			// 배팅 분배
 			if ($forum_bats && is_array($forum_bats)) {
 				foreach ($forum_bats as $key => $value) {
 					$mem_id = $value['mem_id'];
 					$cfc_cp = (double) $value['cfc_cp'];
 					$member_info = $this->Member_model->get_one($mem_id);
-					$changed_cp = $member_info['mem_cp'] + ( $cfc_cp * $repart_ratio);
+					$give_cp =  round($cfc_cp * $repart_ratio, 2);
+					$changed_cp = $member_info['mem_cp'] + $give_cp;
 
 					// member테이블에 cp지급
 					$arr = array(
@@ -632,7 +648,7 @@ class Forum extends CB_Controller
 					}
 
 					// cic_cp테이블에 log기록
-					$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '-', $cfc_cp * $repart_ratio, '@byadmin', $admin_id , '포럼보상지급');
+					$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '투표자', $give_cp, '@byadmin', $admin_id , '포럼보상지급');
 				}
 			}
 
