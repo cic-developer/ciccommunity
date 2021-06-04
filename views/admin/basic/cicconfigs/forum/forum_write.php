@@ -29,7 +29,7 @@
 					<p class="help-block">gif, jpg, png 파일 업로드가 가능합니다</p>
 				</div>
 			</div>
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label class="col-sm-2 control-label">배팅 마감일</label>
 				<div class="col-sm-10 form-inline" style="height:130px;">
 					<div class="form-group">
@@ -50,18 +50,7 @@
 						});
 					});
 				</script>
-			</div>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			
+			</div> -->
 			<!-- <div class="form-group">
 				<label class="col-sm-2 control-label">포럼 마감일</label>
 				<div class="col-sm-10 form-inline" style="height:130px;">
@@ -84,20 +73,20 @@
 					});
 				</script>
 			</div> -->
-			<!-- <div class="form-group">
+			<div class="form-group">
 				<label class="col-sm-2 control-label">배팅 마감일</label>
 				<div class="col-sm-10 form-inline">
 					<input type="text" class="form-control datepicker" name="frm_bat_close_datetime" value="<?php echo set_value('frm_bat_close_datetime', element('frm_bat_close_datetime', element('data', $view))); ?>" />
-					<p class="help-block">배팅 마감일은 포럼 마감일 이전으로 설정해야합니다.</p>
+					<p class="help-block">배팅 마감일은 포럼 마감일 이전으로 설정해야합니다. ex) 2000-01-01 11:11:11</p>
 				</div>
-			</div> -->
-			<!-- <div class="form-group">
+			</div>
+			<div class="form-group">
 				<label class="col-sm-2 control-label">포럼 마감일</label>
 				<div class="col-sm-10 form-inline" id="datetimepicker1">
 					<input type="text" class="form-control" name="frm_close_datetime" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('data', $view))); ?>" />
-					<p class="help-block">포럼 마감일은 배팅 마감일 이후로 설정해야합니다.</p>
+					<p class="help-block">포럼 마감일은 배팅 마감일 이후로 설정해야합니다. ex) 2000-01-01 11:11:11</p>
 				</div>
-			</div>  -->
+			</div> 
 			<div class="btn-group pull-right" role="group" aria-label="...">
 				<button type="button" class="btn btn-default btn-sm btn-history-back" >취소하기</button>
 				<button type="submit" class="btn btn-success btn-sm">저장하기</button>
