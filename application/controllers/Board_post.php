@@ -69,8 +69,49 @@ class Board_post extends CB_Controller
 		);
 
 		if(element('brd_id', element('board', $list)) == 1){
+			//베스트 게시물 가져오기
+			$where = array(
+				'brd_id' => 1,
+				'post_best_state >' => 0,
+			);
+			$list_num = 1;
+			$bestpost = $this->Post_model
+			->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			if (element('list', $bestpost)) {
+				foreach (element('list', $bestpost) as $key => $val) {
+					$bestpost['list'][$key]['post_display_name'] = display_username(
+						element('post_userid', $val),
+						element('post_nickname', $val)
+					);
+					$bestpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+					$bestpost['list'][$key]['num'] = $list_num++;
+					if ($board) {
+						$bestpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+						$bestpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+					}
+					$bestpost['list'][$key]['category'] = '';
+					if (element('post_category', $val)) {
+						$bestpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+					}
+					if (element('post_image', $val)) {
+						$imagewhere = array(
+							'post_id' => element('post_id', $val),
+							'pfi_is_image' => 1,
+						);
+						// $file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+						// $bestpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+					} else {
+						$thumb_url = base_url('assets/images/news-img01.png');
+						$bestpost['list'][$key]['thumb_url'] = $thumb_url;
+							$bestpost['list'][$key]['origin_image_url'] = $thumb_url;
+					}
+				}
+			}
+
+			//인기 게시물 가져오기
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 			$where = array(
+				'brd_id' => 1,
 				'post_exept_state' => 0,
 				'post_datetime >=' => $checktime,
 				'post_del <>' => 2,
@@ -118,26 +159,28 @@ class Board_post extends CB_Controller
 		if(element('brd_id', element('board', $list)) == 2){
 			$limit = 8;
 			$where = array(
-				'post_best_state >' => 0
+				'brd_id' => 2,
+				'post_best_state >' => 0,
+				'post_del <>' => 2,
 			);
 			$list_num = 1;
-			$writerbest = $this->Post_model
+			$bestpost = $this->Post_model
 			->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-			if (element('list', $writerbest)) {
-				foreach (element('list', $writerbest) as $key => $val) {
-					$writerbest['list'][$key]['post_display_name'] = display_username(
+			if (element('list', $bestpost)) {
+				foreach (element('list', $bestpost) as $key => $val) {
+					$bestpost['list'][$key]['post_display_name'] = display_username(
 						element('post_userid', $val),
 						element('post_nickname', $val)
 					);
-					$writerbest['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-					$writerbest['list'][$key]['num'] = $list_num++;
+					$bestpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+					$bestpost['list'][$key]['num'] = $list_num++;
 					if ($board) {
-						$writerbest['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-						$writerbest['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+						$bestpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+						$bestpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
 					}
-					$writerbest['list'][$key]['category'] = '';
+					$bestpost['list'][$key]['category'] = '';
 					if (element('post_category', $val)) {
-						$writerbest['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+						$bestpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
 					}
 					if (element('post_image', $val)) {
 						$imagewhere = array(
@@ -145,11 +188,11 @@ class Board_post extends CB_Controller
 							'pfi_is_image' => 1,
 						);
 						$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-						$writerbest['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+						$bestpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
 					} else {
 						$thumb_url = base_url('assets/images/news-img01.png');
-						$writerbest['list'][$key]['thumb_url'] = $thumb_url;
-						$writerbest['list'][$key]['origin_image_url'] = $thumb_url;
+						$bestpost['list'][$key]['thumb_url'] = $thumb_url;
+						$bestpost['list'][$key]['origin_image_url'] = $thumb_url;
 					}
 				}
 			}
@@ -220,49 +263,9 @@ class Board_post extends CB_Controller
 			}
 		}
 		
-		if(element('brd_id', element('board', $list)) == 1 or 2){
-			$where = array(
-				'post_best_state >' => 0
-			);
-			$list_num = 1;
-			$bestpost = $this->Post_model
-			->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-			if (element('list', $bestpost)) {
-				foreach (element('list', $bestpost) as $key => $val) {
-					$bestpost['list'][$key]['post_display_name'] = display_username(
-						element('post_userid', $val),
-						element('post_nickname', $val)
-					);
-					$bestpost['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-					$bestpost['list'][$key]['num'] = $list_num++;
-					if ($board) {
-						$bestpost['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-						$bestpost['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
-					}
-					$bestpost['list'][$key]['category'] = '';
-					if (element('post_category', $val)) {
-						$bestpost['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
-					}
-					if (element('post_image', $val)) {
-						$imagewhere = array(
-							'post_id' => element('post_id', $val),
-							'pfi_is_image' => 1,
-						);
-						// $file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-						// $bestpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
-					} else {
-						$thumb_url = base_url('assets/images/news-img01.png');
-						$bestpost['list'][$key]['thumb_url'] = $thumb_url;
-							$bestpost['list'][$key]['origin_image_url'] = $thumb_url;
-					}
-				}
-			}
-		}
-		
 		
 		$view['view']['popularpost'] = $popularpost;
 		$view['view']['bestpost'] = $bestpost;
-		$view['view']['writerbest'] = $writerbest;
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

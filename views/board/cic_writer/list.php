@@ -17,18 +17,18 @@
                         <div class="owl-stage"
                             style="transform: translate3d(-1040px, 0px, 0px); transition: all 0s ease 0s; width: 3900px;">
                                 <?php
-                                if (element('list',element('writerbest', $view))) {
-                                    foreach (element('list',element('writerbest', $view)) as $writerbest) {
+                                if (element('list',element('bestpost', $view))) {
+                                    foreach (element('list',element('bestpost', $view)) as $bestpost) {
                                         ?>
                                         <div class="owl-item" style="width: 240px; margin-right: 20px;">
                                             <div class="item">
-                                                <a href="<?php echo goto_url(element('posturl', $writerbest)); ?>">
-                                                    <div class="img"><img src="<?php echo element('thumb_url',$writerbest)?>" alt="">
+                                                <a href="<?php echo goto_url(element('posturl', $bestpost)); ?>">
+                                                    <div class="img"><img src="<?php echo element('thumb_url',$bestpost)?>" alt="">
                                                     </div>
                                                     <div class="txt">
-                                                        <p class="btxt"><?php echo html_escape(cut_str(strip_tags(element('post_title', $writerbest)), 15)); ?></p>
-                                                        <p class="stxt"><?php echo html_escape(cut_str(strip_tags(element('post_content', $writerbest)), 20)); ?></p>
-                                                        <p class="ctxt vp"><?php echo number_format(element("post_like_point",$writerbest))?></p>
+                                                        <p class="btxt"><?php echo html_escape(cut_str(strip_tags(element('post_title', $bestpost)), 15)); ?></p>
+                                                        <p class="stxt"><?php echo html_escape(cut_str(strip_tags(element('post_content', $bestpost)), 20)); ?></p>
+                                                        <p class="ctxt vp"><?php echo number_format(element("post_like_point",$bestpost))?></p>
                                                     </div>
                                                 </a>
                                             </div>
@@ -44,12 +44,12 @@
                                     <div class="owl-item" style="width: 240px; margin-right: 20px;">
                                         <div class="item">
                                             <a>
-                                                <div class="img"><img src="https://dev.ciccommunity.com/assets/images/news-img01.png" alt="">
+                                                <div class="img"><img src="<?php echo base_url('/assets/images/news-img01.png') ?>" alt="">
                                                 </div>
                                                 <div class="txt">
                                                     <p class="btxt">선택된 자료가 없습니다.</p>
                                                     <p class="stxt">선택된 자료가 없습니다.</p>
-                                                    <p class="ctxt vp"><?php echo number_format(element("post_like_point",$writerbest))?></p>
+                                                    <p class="ctxt vp"><?php echo number_format(element("post_like_point",$bestpost))?></p>
                                                 </div>
                                             </a>
                                         </div>
