@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<input type="hidden" class="input px400" name="post_homepage" id="post_homepage" value="<?php echo set_value('post_homepage', element('post_homepage', element('post', $view))); ?>" />
 		<!-- page start // -->
 		<div class="board-wrap write">
-			<h3><?php echo html_escape(element('board_name', element('board', $view))); ?> 글쓰기</h3>
+			<h3><?php echo html_escape(element('board_name', element('board', $view))); ?> 문의하기</h3>
 			<div class="entry">
 				<ul>
 					<li class="title-box">
@@ -30,13 +30,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</div>
 					</li>
 					<li class="no-pad">
-						<?php echo display_dhtml_editor('post_content', set_value('post_content', element('post_content', element('post', $view))), $classname = 'form-control dhtmleditor', $is_dhtml_editor = element('use_dhtml', element('board', $view)), $editor_type = $this->cbconfig->item('post_editor_type')); ?>
+						<?php echo display_dhtml_editor('post_content', set_value('post_content', element('post_content', element('post', $view))), $classname = 'form-control dhtmleditor', $is_dhtml_editor = true, $editor_type = 'smarteditor'); ?>
 					</li>
-					<?php if (element('can_post_notice', element('post', $view))) { ?>
-					<div class="main-check">
-						<label> <input type="checkbox" class="checkbox" name="post_notice" value="1"> <p>메인으로 게시</p> </label>
-					</div>
-					<?php } ?>
+					<li class="title-box">
+						<p class="btxt">스팸방지</p>
+						<div class="field">
+							<p class="chk-input w100p">
+								<input id="post_title" type="text" name="post_title" placeholder="제목을 입력해주세요" value="<?php echo set_value('post_title', element('post_title', element('post', $view))); ?>" />
+							</p>
+						</div>
+					</li>
 				</ul>
 			</div>
 			<div class="lower">

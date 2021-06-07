@@ -40,13 +40,27 @@
 							</span>
 							</span>
 						</div>
-							<p class="help-block">배팅 마감일은 포럼 마감일 이전으로 설정해야합니다.</p>
+						<p class="help-block">배팅 마감일은 포럼 마감일 이전으로 설정해야합니다.</p>
+					</div>
+				</div>
+				<label class="col-sm-2 control-label">포럼 마감일</label>
+				<div class="col-sm-10 form-inline" style="height:130px;">
+					<div class="form-group">
+						<div class='input-group date' id='datetimepicker11'>
+							<input type='text' class="form-control" name="frm_bat_close_datetime" value="<?php echo set_value('frm_bat_close_datetime', element('frm_bat_close_datetime', element('data', $view))); ?>"/>
+							<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar">
+							</span>
+							</span>
+						</div>
+						<p class="help-block">배팅 마감일은 포럼 마감일 이전으로 설정해야합니다.</p>
 					</div>
 				</div>
 				<script type="text/javascript">
 					$(function () {
 						$('#datetimepicker11').datetimepicker({
-							daysOfWeekDisabled: [0, 6]
+							daysOfWeekDisabled: [0, 6],
+							format : 'YYYY-MM-DD HH:mm:ss'
 						});
 					});
 				</script>

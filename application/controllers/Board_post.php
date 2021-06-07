@@ -222,17 +222,32 @@ class Board_post extends CB_Controller
 
 			// 정렬순서
 			$view['view']['sorted'] = $this->input->get('findex');
-			// like 여부 status...
-			// $select = 'lik_id, lik_type';
+
+			// 배너 가져오기 시작
+			// $checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 			// $where = array(
-			// 	'target_id' => element('post_id', element('board', $list)),
-			// 	'target_type' => 1,
-			// 	'mem_id' => element('mem_id', element('board', $list)),
+			// 	'brd_id' => 1,
+			// 	'post_exept_state' => 0,
+			// 	'post_datetime >=' => $checktime,
+			// 	'post_del <>' => 2,
 			// );
-			// $exist = $this->Like_model->get_one('', $select, $where);
+			$_banner = $this->CIC_forum_model->get_post_list();
+			$banner = array();
 			
-			// $status = element('lik_type', $exist) === '1' ? '1' : '';
-			// $view['view']['like_type'] = $status;
+			if(element('list', $_banner)){
+				foreach (element('list', $_banner) as $key => $val) {
+					if ($val && $val['frm_image']) {
+						$banner['list'][$key] = $val;
+					}
+				}
+			}
+		
+			$view['view']['banner_count'] = count(element('list', $banner));
+			$view['view']['banner_noimage_count'] = 4 - $view['view']['banner_count'];
+			// 배너 가져오기 끝
+
+
+			// like 여부 status...
 		}
 
 		// 도전 CIC 포럼, userForum
