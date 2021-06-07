@@ -468,7 +468,7 @@ class Forum extends CB_Controller
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
-		$view['view']['list_delete_url'] = site_url('forum/listdelete');
+		$view['view']['list_delete_url'] = site_url('admin/cicconfigs/forum/closeForumListdelete');
 
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
@@ -482,24 +482,26 @@ class Forum extends CB_Controller
 	/**
 	 * 목록 페이지에서 선택삭제를 하는 경우 실행되는 메소드입니다
 	 */
-	public function listdelete()
+	public function closeForumListdelete()
 	{
-		print_r("hi");
-		exit;
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_forum_board_post_listdelete';
+		$eventname = 'event_admin_forum_closeForumListdelete';
 		$this->load->event($eventname);
-
+		
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('before', $eventname);
-
+		
 		/**
 		 * 체크한 게시물의 삭제를 실행합니다
 		 */
 		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
 			foreach ($this->input->post('chk') as $val) {
+
 				if ($val) {
-					$this->board->delete_post($val);
+					$getdata = $this->CIC_forum_model->get_one($pst_id);
+					if($getdata['frm_repart_state'] == 1){
+						$this->board->delete_post($val);
+					}
 				}
 			}
 		}
@@ -514,8 +516,10 @@ class Forum extends CB_Controller
 			'message',
 			'정상적으로 삭제되었습니다'
 		);
-		$param =& $this->querystring;
-		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+		// $param =& $this->querystring;
+		// $redirecturl = admin_url($this->pagedir . '?' . $param->output());
+		// redirect($redirecturl);
+		$redirecturl = admin_url($this->pagedir . '/close_forum');
 		redirect($redirecturl);
 	}
 
