@@ -794,12 +794,12 @@ class Forum extends CB_Controller
 			array(
 				'field' => 'frm_bat_close_datetime',
 				'label' => '배팅 종료일',
-				'rules' => 'trim|exact_length[19]',
+				'rules' => 'trim|required',
 			),
 			array(
 				'field' => 'frm_close_datetime',
 				'label' => '포럼 종료일',
-				'rules' => 'trim|exact_length[19]',
+				'rules' => 'trim|required',
 			),
 		);
 

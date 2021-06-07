@@ -35,8 +35,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<li class="title-box">
 						<p class="btxt">스팸방지</p>
 						<div class="field">
-							<p class="chk-input w100p">
-								<input id="post_title" type="text" name="post_title" placeholder="제목을 입력해주세요" value="<?php echo set_value('post_title', element('post_title', element('post', $view))); ?>" />
+							<p class="chk-input">
+                                <img src="<?php echo base_url('assets/images/preload.png'); ?>" width="160" height="40" id="captcha" alt="captcha" title="captcha" />
+                                <input type="text" class="input col-md-4" id="captcha_key" name="captcha_key" />
 							</p>
 						</div>
 					</li>
@@ -65,37 +66,6 @@ $(function() {
 	});
 });
 <?php } ?>
-
-	// var oldTitle= '';
-	// $(document).on("propertychange change keyup paste input","#post_title",function(){
-		
-	// 	var title = $(this).val();
-	// 	if(title == oldTitle) {
-	// 		return;
-	// 	}
-		
-	// 	$('#post_title-error').remove();
-		
-	// 	var titleLen = title.length;
-	// 	var html = '';	
-	// 	html += '<label id="post_title-error" class="error" for="post_title">';
-		
-	// 	if(titleLen < 2 || titleLen > 60){
-		
-	// 		if(titleLen == 0){
-	// 			html += '필수 항목입니다.';
-	// 		}else if(titleLen < 2){
-	// 			html += '최소 2자 이상 입력하세요.';
-	// 		}else if(titleLen  > 59){
-	// 			html += '60자를 넘을 수 없습니다.';
-	// 		}
-
-	// 		html += '</label>';
-	// 		$('.title-box').append(html)
-	// 	}
-		
-	// 	oldTitle = title;
-	// });
 
 function submitContents(f) {
 	if ($('#char_count')) {
@@ -144,13 +114,8 @@ function submitContents(f) {
 </script>
 
 <?php
-if ( element('is_use_captcha', element('board', $view)) ) {
-	if ($this->cbconfig->item('use_recaptcha')) {
-		$this->managelayout->add_js(base_url('assets/js/recaptcha.js'));
-	} else {
-		$this->managelayout->add_js(base_url('assets/js/captcha.js'));
-	}
-}
+    //Codeigniter Captcha
+    $this->managelayout->add_js(base_url('assets/js/captcha.js'));
 ?>
 <script type="text/javascript">
 //<![CDATA[
@@ -159,23 +124,7 @@ $(function() {
 		rules: {
 			post_title: {required :true, minlength:2, maxlength:60},
 			post_content : {<?php echo (element('use_dhtml', element('board', $view))) ? 'required_' . $this->cbconfig->item('post_editor_type') : 'required'; ?> : true }
-<?php if (element('is_post_name', element('post', $view))) { ?>
-			, post_nickname: {required :true, minlength:2, maxlength:20}
-			, post_email: {required :true, email:true}
-<?php } ?>
-<?php if ($this->member->is_member() === false) { ?>
-			, post_password: {required :true, minlength:4, maxlength:100}
-<?php } ?>
-<?php if ( element('is_use_captcha', element('board', $view)) ) { ?>
-<?php if ($this->cbconfig->item('use_recaptcha')) { ?>
-			, recaptcha : {recaptchaKey:true}
-<?php } else { ?>
 			, captcha_key : {required: true, captchaKey:true}
-<?php } ?>
-<?php } ?>
-<?php if (element('use_category', element('board', $view))) { ?>
-			, post_category : {required: true}
-<?php } ?>
 		},
 		messages: {
 			recaptcha: '',
@@ -183,8 +132,5 @@ $(function() {
 		}
 	});
 });
-
-<?php if (element('has_tempsave', $view)) { ?>get_tempsave(cb_board); <?php } ?>
-<?php if ( ! element('post_id', element('post', $view))) { ?>window.onbeforeunload = function () { auto_tempsave(cb_board); } <?php } ?>
 //]]>
 </script>

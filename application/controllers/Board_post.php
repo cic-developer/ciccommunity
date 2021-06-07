@@ -224,14 +224,14 @@ class Board_post extends CB_Controller
 			$view['view']['sorted'] = $this->input->get('findex');
 
 			// 배너 가져오기 시작
-			// $checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-			// $where = array(
-			// 	'brd_id' => 1,
-			// 	'post_exept_state' => 0,
-			// 	'post_datetime >=' => $checktime,
-			// 	'post_del <>' => 2,
-			// );
-			$_banner = $this->CIC_forum_model->get_post_list();
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp());
+			$where = array(
+				'brd_id' => 3,
+				'cic_forum_info.frm_bat_close_datetime >=' => $checktime,
+				'cic_forum_info.frm_close_datetime >=' => $checktime,
+				'post_del <>' => 2,
+			);
+			$_banner = $this->CIC_forum_model->get_post_list('', '', $where, '', '', '', '');
 			$banner = array();
 			
 			if(element('list', $_banner)){
