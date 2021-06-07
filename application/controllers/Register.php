@@ -281,13 +281,6 @@ class Register extends CB_Controller
 			redirect('register');
 		}
 
-		// // $this->session->unset_userdata('dec_data'); // 휴대폰 인증 데이터
-		// $this->session->unset_userdata('ath_num'); // 이메일 인증 번호
-		// $this->session->unset_userdata('ath_email'); // 이메일 인증에 사용된 이메일
-		// $this->session->unset_userdata('ath_mail_result'); // 이메일 인증 결과
-		// $this->session->unset_userdata('ath_nickname_result'); // 닉네임 인증 결과
-		
-		
 		$view = array();
 		$view['view'] = array();
 		
@@ -992,7 +985,13 @@ class Register extends CB_Controller
 			$insertdata = array();
 			$metadata = array();
 
-			$insertdata['mem_userid'] = $this->input->post('mem_userid');
+			// 추천인 코드 생성, => userid 컬럼에 저장하여 추천인 코드로 사용
+			$timestamp = $this->getMillisecond();
+			$cc32 = base_convert($timestamp, 10, 32);
+
+
+			// $insertdata['mem_userid'] = $this->input->post('mem_userid');
+			$insertdata['mem_userid'] = $cc32;
 			$insertdata['mem_email'] = $this->input->post('mem_email');
 			$insertdata['mem_password'] = password_hash($this->input->post('mem_password'), PASSWORD_BCRYPT);
 			$insertdata['mem_nickname'] = $this->input->post('mem_nickname');
@@ -2225,4 +2224,13 @@ class Register extends CB_Controller
 
 		return true;
 	}
+
+	private function getMillisecond()
+	{
+	list($microtime,$timestamp) = explode(' ',microtime());
+	$time = $timestamp.substr($microtime, 2, 3);
+	
+	return $time;
+	}
+
 }

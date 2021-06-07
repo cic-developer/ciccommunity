@@ -804,5 +804,30 @@ class Forum extends CB_Controller
 		);
 
 		$this->form_validation->set_rules($config);
+
+		if ($this->form_validation->run() === false) {
+
+			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+
+			if($pst_id) {
+				if(empty($getdata['frm_bat_close_datetime']) OR $getdata['frm_bat_close_datetime'] === '0000-00-00 00:00:00') {
+					$getdata['frm_bat_close_datetime'] = '';
+				}
+				if(empty($getdata['frm_close_datetime']) OR $getdata['frm_close_datetime'] === '0000-00-00 00:00:00') {
+					$getdata['frm_close_datetime'] = '';
+				}
+				$view['view']['data'] = $getdata;
+			}
+
+			$view['view']['primary_key'] = $primary_key;
+
+			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+			$layoutconfig = array('layout' => 'layout', 'skin' => 'forum_write');
+			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+			$this->data = $view;
+			$this->layout = element('layout_skin_file', element('layout', $view));
+			$this->view = element('view_skin_file', element('layout', $view));
+		}
 	}
 }
