@@ -281,11 +281,11 @@ class Register extends CB_Controller
 			redirect('register');
 		}
 
-		// $this->session->unset_userdata('dec_data'); // 휴대폰 인증 데이터
-		$this->session->unset_userdata('ath_num'); // 이메일 인증 번호
-		$this->session->unset_userdata('ath_email'); // 이메일 인증에 사용된 이메일
-		$this->session->unset_userdata('ath_mail_result'); // 이메일 인증 결과
-		$this->session->unset_userdata('ath_nickname_result'); // 닉네임 인증 결과
+		// // $this->session->unset_userdata('dec_data'); // 휴대폰 인증 데이터
+		// $this->session->unset_userdata('ath_num'); // 이메일 인증 번호
+		// $this->session->unset_userdata('ath_email'); // 이메일 인증에 사용된 이메일
+		// $this->session->unset_userdata('ath_mail_result'); // 이메일 인증 결과
+		// $this->session->unset_userdata('ath_nickname_result'); // 닉네임 인증 결과
 
 		$view = array();
 		$view['view'] = array();
@@ -1973,6 +1973,17 @@ class Register extends CB_Controller
 	 */
 	public function _mem_nickname_check($str)
 	{
+
+		// 이메일 인증 여부
+		// $nath_result = $this->session->userdata('ath_nickname_result');
+		// if( $nath_result != '1' ){
+		// 	$this->form_validation->set_message(
+		// 		'_mem_nickname_check',
+		// 		'닉네임 확인을 해주세요'
+		// 	);
+		// 	return false;
+		// }
+		
 		$this->load->helper('chkstring');
 		if (chkstring($str, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false) {
 			$this->form_validation->set_message(
@@ -2011,17 +2022,6 @@ class Register extends CB_Controller
 			$this->form_validation->set_message(
 				'_mem_nickname_check',
 				$str . ' 는 이미 다른 회원이 사용하고 있는 닉네임입니다'
-			);
-			return false;
-		}
-
-		// 이메일 인증 여부
-		$ath_result = $this->session->userdata('ath_nickname_result');
-
-		if( $ath_result != '1' ){
-			$this->form_validation->set_message(
-				'_mem_nickname_check',
-				'닉네임 중복확인 오류!'
 			);
 			return false;
 		}
