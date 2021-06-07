@@ -15,7 +15,7 @@
 					?>
 						<div class="btn-group pull-right" role="group" aria-label="...">
 							<!-- <a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a> -->
-							<!-- <button type="button" class="btn btn-outline btn-default btn-sm btn-list-delete btn-list-selected disabled" data-list-delete-url = "<?php echo element('list_delete_url', $view); ?>" >선택삭제</button> -->
+							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-delete btn-list-selected disabled" data-list-delete-url = "<?php echo element('list_delete_url', $view); ?>" >선택삭제</button>
 							<!-- <a href="<?php echo element('write_url', $view); ?>" class="btn btn-outline btn-danger btn-sm " >거래소 추가</a> -->
 						</div>
 					<?php
@@ -38,6 +38,7 @@
 								<th><a href="<?php echo element('cic_forum_info.frm_close_datetime', element('sort', $view)); ?>">포럼마감</a></th>
 								<th><a href="<?php echo element('cic_forum_total_cp', element('sort', $view)); ?>">참여금액</a></th>
 								<th>수정</th>
+								<th><input type="checkbox" name="chkall" id="chkall" /></th>
 								<!-- <th><input type="checkbox" name="chkall" id="chkall" /></th> -->
 							</tr>
 						</thead>
@@ -66,6 +67,7 @@
 									<p class="text-success">배분완료</p>
 									<?php } ?>
 								</td>
+								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" <?php echo element('frm_repart_state', $result) == 1 ? '' : 'disabled readonly' ?>/></td>
 							</tr>
 						<?php
 							}
