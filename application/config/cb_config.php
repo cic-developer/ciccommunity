@@ -68,8 +68,8 @@ $config['user_agent_parser'] = 'phpuseragent';  // phpuseragent , browscap ë‘˜ ì
  */
 $config['email_protocal'] = 'smtp'; // mail/sendmail/smtp
 $config['email_smtp_host'] = 'smtp.gmail.com';
-$config['email_smtp_user'] = 'rsteam.noreply@gmail.com';
-$config['email_smtp_pass'] = 'rs00mk@@';
+$config['email_smtp_user'] = 'support@ciccommunity.com';
+$config['email_smtp_pass'] = 'Cic0805!';
 $config['email_smtp_port'] = '465';
 $config['email_smtp_crypto'] = 'ssl'; // SMTP Encryption. Can be null, tls or ssl.
 
