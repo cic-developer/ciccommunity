@@ -83,9 +83,9 @@
                 <div class="sel-box">
                     <a href="#n" class="sel-btn"><span>최신순</span></a>
                     <ul>
-                        <li class="active"><a href="<?php echo element('post_id', element('sort', $view)); ?>"><span>최신 순</span></a></li>
-                        <li><a href="<?php echo element('post_title', element('sort', $view)); ?>"><span>관련도 순</span></a></li>
-                        <li><a href="<?php echo element('cic_forum_total_cp', element('sort', $view)); ?>"><span>인기 순</span></a></li>
+                        <li class="<?php echo element('sorted', $view) == 'post_id' ? 'active' : '' ?>"><a href="<?php echo element('post_id', element('sort', $view)); ?>"><span>최신 순</span></a></li>
+                        <li class="<?php echo element('sorted', $view) == 'post_title' ? 'active' : '' ?>"><a href="<?php echo element('post_title', element('sort', $view)); ?>"><span>관련도 순</span></a></li>
+                        <li class="<?php echo element('sorted', $view) == 'cic_forum_total_cp' ? 'active' : '' ?>"><a href="<?php echo element('cic_forum_total_cp', element('sort', $view)); ?>"><span>인기 순</span></a></li>
                     </ul>
                 </div>
             </div>

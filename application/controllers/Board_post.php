@@ -218,9 +218,9 @@ class Board_post extends CB_Controller
 			if(!$type) {
 				$type = 1;
 			}
-			
 			$view['view']['type'] = $type;
 
+			$view['view']['sorted'] = $this->input->get('findex');
 			// like 여부 status...
 			// $select = 'lik_id, lik_type';
 			// $where = array(
