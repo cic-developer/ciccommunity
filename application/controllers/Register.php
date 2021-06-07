@@ -2122,7 +2122,7 @@ class Register extends CB_Controller
 		if ($row === 0) {
 			$this->form_validation->set_message(
 				'_mem_recommend_check',
-				$str . ' 는 존재하지 않는 추천인 회원아이디입니다'
+				$str . ' 는 존재하지 않는 추천인 코드입니다'
 			);
 			return false;
 		}

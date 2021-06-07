@@ -213,7 +213,7 @@ class Board_post extends CB_Controller
 			$this->CIC_forum_model->allow_order_field = array('post_id', 'post_title', 'post_content', 'cic_forum_total_cp', 
 																	'cic_forum_info.frm_close_datetime');
 																	
-			// default cate = 1 (1진행중, 2마감)
+			// default type = 1 (1진행중, 2마감)
 			$type = $this->input->get('type');
 			if(!$type) {
 				$type = 1;
@@ -237,6 +237,14 @@ class Board_post extends CB_Controller
 
 		// 도전 CIC 포럼, userForum
 		if(element('brd_id', element('board', $list)) == 6){
+			$param =& $this->querystring;
+			$view['view']['sort'] = array(
+				'post_id' => $param->sort('post_id', 'asc'),
+				'post_title' => $param->sort('post_title', 'asc'),
+				'post_content' => $param->sort('post_content', 'asc'),
+			);
+			$this->CIC_forum_model->allow_order_field = array('post_id', 'post_title', 'post_content');
+
 			// default cate = 1 (1승인대기, 2반려)
 			$category_id = $this->input->get('category_id');
 			if(!$category_id) {
@@ -1560,7 +1568,7 @@ class Board_post extends CB_Controller
 		if($board['brd_id'] == 6){
 			$this->CIC_forum_model->allow_search_field = array('post_id', 'post_title', 'post_content', 'post_both', 'post_category', 'post_userid', 'post_nickname'); // 검색이 가능한 필드
 			$this->CIC_forum_model->search_field_equal = array('post_id', 'post_userid', 'post_nickname'); // 검색중 like 가 아닌 = 검색을 하는 필드
-			
+
 			$category_id = $this->input->get('category_id');
 			if(!$category_id) {
 				$category_id = 1;

@@ -12,13 +12,15 @@
 						<span style="font-size:14px;font-weight:bold;color:rgb(0,0,0)">Error Message</span>
 					</tr>
 					
-						<?php echo validation_errors('<tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td colspan="2" style="padding:10px 10px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><p>', '</p></td></tr>'); ?>
+						<!-- <?php echo validation_errors('<tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td colspan="2" style="padding:10px 10px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><p>', '</p></td></tr>'); ?> -->
+						<?php echo validation_errors('<script>alert("', '");</script>'); ?>
 						
 				</table>
 			<?php
 				}
 			?>
 			<?php
+			// echo show_alert_message($this->session->flashdata('message'), '<script>alert("', '");</script>');
 			echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
 			$attributes = array('class' => 'form-horizontal', 'name' => 'fregisterform', 'id' => 'fregisterform');
 			echo form_open_multipart(current_full_url(), $attributes);
