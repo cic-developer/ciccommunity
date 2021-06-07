@@ -286,10 +286,14 @@ class Register extends CB_Controller
 		// $this->session->unset_userdata('ath_email'); // 이메일 인증에 사용된 이메일
 		// $this->session->unset_userdata('ath_mail_result'); // 이메일 인증 결과
 		// $this->session->unset_userdata('ath_nickname_result'); // 닉네임 인증 결과
-
+		
+		
 		$view = array();
 		$view['view'] = array();
-
+		
+		$ath_result = $this->session->userdata('ath_mail_result');
+		$view['view']['ath_result'] = $ath_result;
+		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
@@ -1866,6 +1870,7 @@ class Register extends CB_Controller
 		$rand_num = sprintf('%06d',rand(000000,999999));
 		$email = $this->input->post('email');
 		// 세션에 인증번호 저장
+		$this->session->unset_userdata('ath_num');
 		$this->session->set_userdata('ath_num', $rand_num);
 		// 세션에 인증에 이용한 이메일 저장
 		$this->session->set_userdata('ath_email', $email);

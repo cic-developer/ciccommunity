@@ -468,59 +468,14 @@ class Forum extends CB_Controller
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
-		$view['view']['list_delete_url'] = site_url('admin/cicconfigs/forum/closeForumListdelete');
 
-		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+	$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'close_forum');
+	$layoutconfig = array('layout' => 'layout', 'skin' => 'close_forum');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
-	}
-
-	/**
-	 * 목록 페이지에서 선택삭제를 하는 경우 실행되는 메소드입니다
-	 */
-	public function closeForumListdelete()
-	{
-		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_forum_closeForumListdelete';
-		$this->load->event($eventname);
-		
-		// 이벤트가 존재하면 실행합니다
-		Events::trigger('before', $eventname);
-		
-		/**
-		 * 체크한 게시물의 삭제를 실행합니다
-		 */
-		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
-			foreach ($this->input->post('chk') as $val) {
-
-				if ($val) {
-					$getdata = $this->CIC_forum_model->get_one($pst_id);
-					if($getdata['frm_repart_state'] == 1){
-						$this->board->delete_post($val);
-					}
-				}
-			}
-		}
-
-		// 이벤트가 존재하면 실행합니다
-		Events::trigger('after', $eventname);
-
-		/**
-		 * 삭제가 끝난 후 목록페이지로 이동합니다
-		 */
-		$this->session->set_flashdata(
-			'message',
-			'정상적으로 삭제되었습니다'
-		);
-		// $param =& $this->querystring;
-		// $redirecturl = admin_url($this->pagedir . '?' . $param->output());
-		// redirect($redirecturl);
-		$redirecturl = admin_url($this->pagedir . '/close_forum');
-		redirect($redirecturl);
 	}
 
 	public function forum_repart($pst_id = 0)
@@ -800,10 +755,10 @@ class Forum extends CB_Controller
 	}
 
 	//승인대기 포럼을 진행중인 포럼으로 승격시 폼 벨리데이션을 통한 대표이미지 등록, 배팅마감시간, 포럼 마감시간 설정 함수
-	public function forum_write($pst_id = 0, $post_id = 0)
+	public function forum_write($pst_id = 0)
 	{
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_ciccinfigs_update_company';
+		$eventname = 'event_admin_cicconfig_forum_write';
 		$this->load->event($eventname);
 
 		$view = array();
@@ -812,196 +767,42 @@ class Forum extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		if($pst_id) {
+
+		/**
+		 * pst_id or post_id 숫자가 아닐경우 에러처리
+		 */
+		if ($pst_id) {
 			$pst_id = (int) $pst_id;
-			if(empty($pst_id) OR $pst_id < 1 ){
+			if (empty($pst_id) OR $pst_id < 1) {
 				show_404();
 			}
 		}
-		
-		// $primary_key = $this->CIC_forum_info_model->primary_key;
-		
+		$primary_key = $this->CIC_forum_info_model->primary_key;
+
+
+		/**
+		 * 수정 페이지일 경우 기존 데이터를 가져옵니다
+		 */
 		$getdata = array();
 		if ($pst_id) {
 			$getdata = $this->CIC_forum_info_model->get_one($pst_id);
-		} else {
-			// 기본값 설정
 		}
 
-		/**
-		 * Validation 라이브러리를 가져옵니다
-		 */
 		$this->load->library('form_validation');
 
-		/**
-		 * 전송된 데이터의 유효성을 체크합니다
-		 */
 		$config = array(
-				array(
-					'field' => 'frm_bat_close_datetime',
-					'lable' => '배팅 마감일',
-					'rules' => '',
-				),
-				array(
-					'field' => 'frm_close_datetime',
-					'lable' => '포럼 마감일',
-					'rules' => 'trim|exact_length[18]',
-				),
-			);
+			array(
+				'field' => 'ban_start_date',
+				'label' => '배너시작일',
+				'rules' => 'trim|exact_length[19]',
+			),
+			array(
+				'field' => 'ban_end_date',
+				'label' => '포럼 종료일',
+				'rules' => 'trim|exact_length[19]',
+			),
+		);
 
-		$this->form_validation->set_rules($config);	
-
-		/**
-		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
-		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
-		 */
-		if ($this->form_validation->run() === false) {
-
-			// 이벤트가 존재하면 실행합니다
-			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-
-			if ($pst_id) {
-				if (empty($getdata['frm_bat_close_datetime']) OR $getdata['frm_bat_close_datetime'] === '0000-00-00') {
-					$getdata['frm_bat_close_datetime'] = '';
-				}
-				if (empty($getdata['frm_close_datetime']) OR $getdata['frm_close_datetime'] === '0000-00-00') {
-					$getdata['frm_close_datetime'] = '';
-				}
-				$view['view']['data'] = $getdata;
-			}
-
-			/**
-			 * primary key 정보를 저장합니다
-			 */
-			// $view['view']['primary_key'] = $primary_key;
-
-			// 이벤트가 존재하면 실행합니다
-			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-
-			/**
-			 * 어드민 레이아웃을 정의합니다
-			 */
-			$layoutconfig = array('layout' => 'layout', 'skin' => 'forum_write');
-			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-			$this->data = $view;
-			$this->layout = element('layout_skin_file', element('layout', $view));
-			$this->view = element('view_skin_file', element('layout', $view));
-
-		}else {
-			/**
-			 * 유효성 검사를 통과한 경우입니다.
-			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
-			 */
-
-			 // $upload_path => uploads/banner/
-            $this->load->library('upload');
-			if (isset($_FILES) && isset($_FILES['frm_image']) && isset($_FILES['frm_image']['name']) && $_FILES['frm_image']['name']) {
-				$upload_path = config_item('uploads_dir') . '/forum/';
-				if (is_dir($upload_path) === false) {
-					mkdir($upload_path, 0707);
-					$file = $upload_path . 'index.php';
-					$f = @fopen($file, 'w');
-					@fwrite($f, '');
-					@fclose($f);
-					@chmod($file, 0644);
-				}
-				$upload_path .= cdate('Y') . '/';
-				if (is_dir($upload_path) === false) {
-					mkdir($upload_path, 0707);
-					$file = $upload_path . 'index.php';
-					$f = @fopen($file, 'w');
-					@fwrite($f, '');
-					@fclose($f);
-					@chmod($file, 0644);
-				}
-				$upload_path .= cdate('m') . '/';
-				if (is_dir($upload_path) === false) {
-					mkdir($upload_path, 0707);
-					$file = $upload_path . 'index.php';
-					$f = @fopen($file, 'w');
-					@fwrite($f, '');
-					@fclose($f);
-					@chmod($file, 0644);
-				}
-
-                $uploadconfig = array();
-				$uploadconfig['upload_path'] = $upload_path;
-				$uploadconfig['allowed_types'] = 'jpg|jpeg|png|gif';
-				$uploadconfig['max_size'] = '2000';
-				$uploadconfig['max_width'] = '1000';
-				$uploadconfig['max_height'] = '1000';
-				$uploadconfig['encrypt_name'] = true;
-
-				$this->upload->initialize($uploadconfig);
-
-				if ($this->upload->do_upload('frm_image')) {
-					$img = $this->upload->data();
-					$updatephoto = cdate('Y') . '/' . cdate('m') . '/' . element('file_name', $img);
-				} else {
-					$file_error = $this->upload->display_errors();
-                    print_r($file_error);
-                    exit;
-				}
-            }
-
-
-			// 이벤트가 존재하면 실행합니다
-			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-
-			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
-			$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
-			
-
-			$updatedata = array(
-				'frm_bat_close_datetime' => $frm_bat_close_datetime,
-				'frm_close_datetime' => $frm_close_datetime,
-			);
-			$postupdatedata = array(
-				'brd_id' => 3
-			);
-
-            if($updatephoto){
-                $updatedata['frm_image'] = $updatephoto;
-            }
-			/**
-			 * 게시물을 수정하는 경우입니다
-			 */
-			if ($this->input->post($post_id)) {
-				$this->Post_model->update($this->input->post($post_id), $postupdatedata);
-			} else {
-				/**
-				 * 게시물을 새로 입력하는 경우입니다
-				 */
-				$this->session->set_flashdata(
-					'message',
-					'정상적으로 수정되었습니다'
-				);
-			}
-
-			if ($this->input->post($pst_id)) {
-				$this->Cic_forum_info_model->update($this->input->post($pst_id), $updatedata);
-				$this->session->set_flashdata(
-					'message',
-					'정상적으로 수정되었습니다'
-				);
-			} else {
-				/**
-				 * 게시물을 새로 입력하는 경우입니다
-				 */
-			}
-			//생성된 캐시를 삭제합니다.
-			$this->cache->delete('forum/forum-info-get' . cdate('Y-m-d'));
-
-			// 이벤트가 존재하면 실행합니다
-			Events::trigger('after', $eventname);
-
-			/**
-			 * 게시물의 신규입력 또는 수정작업이 끝난 후 목록 페이지로 이동합니다
-			 */
-			$param =& $this->querystring;
-			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-
-			redirect($redirecturl);
-		}
+		$this->form_validation->set_rules($config);
 	}
 }

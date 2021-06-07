@@ -7,15 +7,15 @@
 			<?php
 				if(validation_errors('','')){
 			?>
-				<table width="600" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;">
+				<!-- <table width="600" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;">
 					<tr style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">
 						<span style="font-size:14px;font-weight:bold;color:rgb(0,0,0)">Error Message</span>
-					</tr>
+					</tr> -->
 					
 						<!-- <?php echo validation_errors('<tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td colspan="2" style="padding:10px 10px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><p>', '</p></td></tr>'); ?> -->
 						<?php echo validation_errors('<script>alert("', '");</script>'); ?>
 						
-				</table>
+				<!-- </table> -->
 			<?php
 				}
 			?>
@@ -188,6 +188,15 @@
 
 
 <script>
+	// $(window).load(function(){
+	// 	var ath_mail = "<?php echo element('ath_result', $view); ?>";
+	// 	if(ath_mail){
+	// 		var html = '<p class="success-email rtxt mg10t cblue">승인이 완료되었습니다</p>';
+	// 		html += '<input type="hidden" id="ath_num" name="ath_num" class="" required value="'+ ath_num +'" />'
+	// 		$('.mem_email').append(html); // 승인 메세지
+	// 	}
+	// })
+
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){
 
@@ -271,6 +280,7 @@
 
 				$('.success-email').remove();
 				$('.con-mail').remove();
+				$('#ath_num').remove();
 				if(state == 1){
 					html = '';
 					html += '<div class="field con-mail">'
