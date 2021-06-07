@@ -180,7 +180,20 @@ class Post extends CB_Controller
 		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
 			foreach ($this->input->post('chk') as $val) {
 				if ($val) {
-					$this->board->delete_post($val);
+					$post = $this->Post_model->get_one($val);
+
+					// 포럼 게시판 게시물 삭제 금지!
+					if(element('brd_id', $post) == 3 || element('brd_id', $post) == 6){
+						$this->session->set_flashdata(
+							'message',
+							'포럼글은 삭제할 수 없습니다.('.$val.')'
+						);
+						$param =& $this->querystring;
+						$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+						redirect($redirecturl);
+					}else{
+						$this->board->delete_post($val);
+					}
 				}
 			}
 		}

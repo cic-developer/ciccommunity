@@ -39,66 +39,19 @@
 
                         <?php for($i=0; $i<element('banner_noimage_count', $view); $i=$i+1){ ?>
                             <div class="item">
-                                <div class="img"><img src="<?php echo base_url('assets/images/noimage.jpg') ?>" alt="" />
+                                <div class="img"><img src="<?php echo base_url('uploads/forum_banner/2021/06/forum-img01.jpg') ?>" alt="" />
+                                <!-- <div class="img"><img src="<?php echo base_url('assets/images/noimage.jpg') ?>" alt="" /> -->
                                 </div>
 
                                 <div class="ov">
                                     <div class="txt">
-                                        <p class="btxt">“ 도지 코인” <br />1,000원 간다!</p>
+                                        <p class="btxt">빈 게시물 입니다 :)</p>
                                     </div>
-                                    <p class="stxt">총 3,145,789VP</p>
-                                    <a href="#n"><span>참여하기!</span></a>
+                                    <p class="stxt">총 0 CP</p>
+                                    <a href="#n"><span>참여불가!</span></a>
                                 </div>
                             </div>
                         <?php }?>
-
-
-                        <!-- <div class="item active">
-                            <div class="img"><img src="<?php echo base_url('assets/images/forum-img01.jpg')?>" alt="" />
-                            </div>
-                            <div class="ov">
-                                <div class="txt">
-                                    <p class="btxt">“ 도지 코인” <br />1,000원 간다!</p>
-                                </div>
-                                <p class="stxt">총 3,145,789VP</p>
-                                <a href="#n"><span>참여하기!</span></a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="img"><img src="<?php echo base_url('assets/images/forum-img02.jpg')?>" alt="" />
-                            </div>
-                            <div class="ov">
-                                <div class="txt">
-                                    <p class="btxt">“ 도지 코인” <br />1,000원 간다!</p>
-                                </div>
-                                <p class="stxt">총 3,145,789VP</p>
-                                <a href="#n"><span>참여하기!</span></a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="img"><img src="<?php echo base_url('assets/images/forum-img03.jpg')?>" alt="" />
-                            </div>
-                            <div class="ov">
-                                <div class="txt">
-                                    <p class="btxt">“ 도지 코인” <br />1,000원 간다!</p>
-                                </div>
-                                <p class="stxt">총 3,145,789VP</p>
-                                <a href="#n"><span>참여하기!</span></a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="img"><img src="<?php echo base_url('assets/images/forum-img04.jpg')?>" alt="" />
-                            </div>
-                            <div class="ov">
-                                <div class="txt">
-                                    <p class="btxt">“ 도지 코인” <br />1,000원 간다!</p>
-                                </div>
-                                <p class="stxt">총 3,145,789VP</p>
-                                <a href="#n"><span>참여하기!</span></a>
-                            </div>
-                        </div> -->
-
-
                         
                     </div>
                     <a href="#n" class="next"><span class="blind">다음</span></a>

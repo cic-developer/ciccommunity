@@ -928,7 +928,7 @@ class Forum extends CB_Controller
 	// }
 	//forum_write 끝
 
-	public function forum_write($pst_id = 0)
+	public function forum_write($pst_id = 0, $post_id = 0)
 	{
 		//
 		$eventname = 'event_admin_cicconfig_forum_write';
@@ -939,7 +939,7 @@ class Forum extends CB_Controller
 
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		if($pst_id) {
+		if($pst_id === $post_id) {
 			$pst_id = (int) $pst_id;
 			if(empty($pst_id) OR $pst_id < 1 ){
 				show_404();
@@ -1007,11 +1007,25 @@ class Forum extends CB_Controller
 		$param =& $this->querystring;
 		$getdata = array();
 		if ($pst_id) {
-			$getdata = $this->CIC_forum_info_model->get_one($comp_id);
+			$getdata = $this->CIC_forum_info_model->get_one($pst_id);
 		} else {
 			// 기본값 설정
 		}
 		//
+
+		$view['view']['data'] = $getdata;
+		$view['view']['list_url'] = admin_url($this->pagedir . '/disapproval_forum/?' . $param->output());
+
+		$view['view']['primary_key'] = $primary_key;
+
+		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'forum_write');
+		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
+
 	}
 
 }

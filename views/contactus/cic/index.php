@@ -50,19 +50,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <script type="text/javascript">
-// 글자수 제한
-var char_min = parseInt(<?php echo (int) element('contactus_min_length', element('board', $view)); ?>); // 최소
-var char_max = parseInt(<?php echo (int) element('contactus_max_length', element('board', $view)); ?>); // 최대
-
-<?php if ( ! element('use_dhtml', element('board', $view)) AND (element('contactus_min_length', element('board', $view)) OR element('contactus_max_length', element('board', $view)))) { ?>
-
-check_byte('contactus_content', 'char_count');
-$(function() {
-	$('#contactus_content').on('keyup', function() {
-		check_byte('contactus_content', 'char_count');
-	});
-});
-<?php } ?>
+$('#fwrite').on('submit', function(){
+    //여러번 클릭 방지
+    $('.enter-btn').attr('disabled', 'disabled');
+})
 
 function submitContents(f) {
 	if ($('#char_count')) {

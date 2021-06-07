@@ -200,7 +200,7 @@ var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
                             <li><a href="<?php echo base_url('/document/provision'); ?>"><span>이용약관</span></a></li>
                             <li><a href="<?php echo base_url('/document/privacy'); ?>"><span>개인정보처리방침</span></a></li>
                             <li><a href="<?php echo base_url('/WhitePaper')?>"><span>백서</span></a></li>
-                            <li><a href="#n"><span>문의하기</span></a></li>
+                            <li><a href="<?php echo base_url('/contactus')?>"><span>문의하기</span></a></li>
                         </ul>
                     </div>
                     <p class="in-copy">Copyright © CIC Community. All rights reserved.</p>

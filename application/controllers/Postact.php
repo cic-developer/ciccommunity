@@ -63,6 +63,12 @@ class Postact extends CB_Controller
 			show_404();
 		}
 
+		// 포럼 게시판 게시물 삭제 금지!
+		if(element('brd_id', $post) == 3 || element('brd_id', $post) == 6){
+			alert('이 게시판의 글은 관리자에 의해서만 삭제가 가능합니다');
+			return false;
+		}
+
 		$board = $this->board->item_all(element('brd_id', $post));
 		$mem_id = (int) $this->member->item('mem_id');
 
@@ -222,6 +228,12 @@ class Postact extends CB_Controller
 			if (empty($post_id) OR $post_id < 1) {
 				$result = array('error' => '잘못된 접근입니다');
 				exit(json_encode($result));
+			}
+
+			// 포럼 게시판 게시물 삭제 금지!
+			if(element('brd_id', $post) == 3 || element('brd_id', $post) == 6){
+				alert('이 게시판의 글은 관리자에 의해서만 삭제가 가능합니다');
+				return false;
 			}
 
 			$post = $this->Post_model->get_one($post_id);
