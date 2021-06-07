@@ -281,6 +281,12 @@ class Register extends CB_Controller
 			redirect('register');
 		}
 
+		// $this->session->unset_userdata('dec_data'); // 휴대폰 인증 데이터
+		$this->session->unset_userdata('ath_num'); // 이메일 인증 번호
+		$this->session->unset_userdata('ath_email'); // 이메일 인증에 사용된 이메일
+		$this->session->unset_userdata('ath_mail_result'); // 이메일 인증 결과
+		$this->session->unset_userdata('ath_nickname_result'); // 닉네임 인증 결과
+
 		$view = array();
 		$view['view'] = array();
 
@@ -1581,6 +1587,7 @@ class Register extends CB_Controller
 		$this->session->unset_userdata('ath_num'); // 이메일 인증 번호
 		$this->session->unset_userdata('ath_email'); // 이메일 인증에 사용된 이메일
 		$this->session->unset_userdata('ath_mail_result'); // 이메일 인증 결과
+		$this->session->unset_userdata('ath_nickname_result'); // 닉네임 인증 결과
 
 		if ( ! $this->session->flashdata('nickname')) {
 			redirect();
@@ -2013,7 +2020,7 @@ class Register extends CB_Controller
 
 		if( $ath_result != '1' ){
 			$this->form_validation->set_message(
-				'_mem_email_check',
+				'_mem_nickname_check',
 				'닉네임 중복확인 오류!'
 			);
 			return false;
