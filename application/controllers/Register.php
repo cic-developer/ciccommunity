@@ -1637,7 +1637,7 @@ class Register extends CB_Controller
 		if (empty($userid)) {
 			$result = array(
 				'result' => 'no',
-				'reason' => '아이디값이 넘어오지 않았습니다',
+				'reason' => '아이디를 입력해주세요',
 			);
 			exit(json_encode($result));
 		}
@@ -1698,7 +1698,7 @@ class Register extends CB_Controller
 		if (empty($email)) {
 			$result = array(
 				'result' => 'no',
-				'reason' => '이메일값이 넘어오지 않았습니다',
+				'reason' => '이메일을 입력해주세요',
 			);
 			exit(json_encode($result));
 		}
@@ -1759,7 +1759,7 @@ class Register extends CB_Controller
 		if (empty($password)) {
 			$result = array(
 				'result' => 'no',
-				'reason' => '패스워드값이 넘어오지 않았습니다',
+				'reason' => '패스워드를 입력해주세요',
 			);
 			exit(json_encode($result));
 		}
@@ -1794,15 +1794,17 @@ class Register extends CB_Controller
 
 		$nickname = trim($this->input->post('nickname'));
 		if (empty($nickname)) {
+			$this->session->set_userdata('ath_nickname_result', '');
 			$result = array(
 				'result' => 'no',
-				'reason' => '닉네임값이 넘어오지 않았습니다',
+				'reason' => '닉네임을 입력해주세요',
 			);
 			exit(json_encode($result));
 		}
 
 		if ($this->member->item('mem_nickname')
 			&& $this->member->item('mem_nickname') === $nickname) {
+			$this->session->set_userdata('ath_nickname_result', '1');
 			$result = array(
 				'result' => 'available',
 				'reason' => '사용 가능한 닉네임입니다',
@@ -1815,6 +1817,7 @@ class Register extends CB_Controller
 		);
 		$count = $this->Member_model->count_by($where);
 		if ($count > 0) {
+			$this->session->set_userdata('ath_nickname_result', '');
 			$result = array(
 				'result' => 'no',
 				'reason' => '이미 사용중인 닉네임입니다',
@@ -1823,6 +1826,7 @@ class Register extends CB_Controller
 		}
 
 		if ($this->_mem_nickname_check($nickname) === false) {
+			$this->session->set_userdata('ath_nickname_result', '');
 			$result = array(
 				'result' => 'no',
 				'reason' => '이미 사용중인 닉네임입니다',
@@ -1830,6 +1834,8 @@ class Register extends CB_Controller
 			exit(json_encode($result));
 		}
 
+		// 인증결과 세션 저장
+		$this->session->set_userdata('ath_nickname_result', '1');
 		$result = array(
 			'result' => 'available',
 			'reason' => '사용 가능한 닉네임입니다',
@@ -1907,7 +1913,7 @@ class Register extends CB_Controller
 		if (empty($_ath_num)) {
 			$result = array(
 				'result' => '0',
-				'reason' => '인증번호가 넘어오지 않았습니다',
+				'reason' => '인증번호를 입력해주세요',
 			);
 			exit(json_encode($result));
 		}
@@ -1998,6 +2004,17 @@ class Register extends CB_Controller
 			$this->form_validation->set_message(
 				'_mem_nickname_check',
 				$str . ' 는 이미 다른 회원이 사용하고 있는 닉네임입니다'
+			);
+			return false;
+		}
+
+		// 이메일 인증 여부
+		$ath_result = $this->session->userdata('ath_nickname_result');
+
+		if( $ath_result != '1' ){
+			$this->form_validation->set_message(
+				'_mem_email_check',
+				'닉네임 중복확인 오류!'
 			);
 			return false;
 		}
