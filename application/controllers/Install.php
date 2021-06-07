@@ -1630,7 +1630,7 @@ class Install extends CI_Controller
 				'unsigned' => true,
 				'default' => '0',
 			),
-			'mem_zipcode' => array(
+			'mem_' => array(
 				'type' => 'VARCHAR',
 				'constraint' => '7',
 				'default' => '',

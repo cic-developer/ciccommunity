@@ -837,7 +837,7 @@ class Forum extends CB_Controller
 			 // $upload_path => uploads/banner/
             $this->load->library('upload');
 			if (isset($_FILES) && isset($_FILES['frm_image']) && isset($_FILES['frm_image']['name']) && $_FILES['frm_image']['name']) {
-				$upload_path = config_item('uploads_dir') . '/banner/';
+				$upload_path = config_item('uploads_dir') . '/forum/';
 				if (is_dir($upload_path) === false) {
 					mkdir($upload_path, 0707);
 					$file = $upload_path . 'index.php';
@@ -874,7 +874,7 @@ class Forum extends CB_Controller
 
 				$this->upload->initialize($uploadconfig);
 
-				if ($this->upload->do_upload('ban_image')) {
+				if ($this->upload->do_upload('frm_image')) {
 					$img = $this->upload->data();
 					$updatephoto = cdate('Y') . '/' . cdate('m') . '/' . element('file_name', $img);
 				} else {
@@ -884,7 +884,39 @@ class Forum extends CB_Controller
 				}
             }
 
+			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
+			$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
+			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
+		
+			$updatedata = array(
+				'frm_bat_close_datetime' => $this->input->post('frm_bat_close_datetime', null, ''),
+				'frm_close_datetime' => $this->input->post('frm_close_datetime', null, ''),
+			);
+
+			if($updatephoto){
+                $updatedata['frm_image'] = $updatephoto;
+            }
+
+			if($this->input->post($primary_key)) {
+				$this->CIC_forum_info_model->update($this->input->post($primary_key, $updatedata));
+				$this->session->set_flashdata(
+					'message',
+					'정상적으로 등록되었습니다.'
+				);
+			}
+
+			Events::trigger('after', $eventname);
+
+			/**
+			 * 게시물의 신규입력 또는 수정작업이 끝난 후 목록 페이지로 이동합니다
+			 */
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+
+			redirect($redirecturl);
 		}
 	}
+	//forum_write 끝
+
 }
