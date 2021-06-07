@@ -2572,7 +2572,7 @@ class Membermodify extends CB_Controller
 			$_DI = $new_phone =  $this->member->item('mem_dup_info');
 
 			if($DI == $_DI){ // 인증완료
-				// 휴대폰 인증 결과 저장
+				// 인증 결과 저장
 				$this->session->set_userdata('password_modify_ath_nice_phone_result', '1');
 				// 휴대폰 인증 데이터 삭제
 				$this->session->unset_userdata('dec_data');
