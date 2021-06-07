@@ -828,6 +828,63 @@ class Forum extends CB_Controller
 			$this->data = $view;
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
+		} else {
+			/**
+			 * 유효성 검사를 통과한 경우입니다.
+			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
+			 */
+
+			 // $upload_path => uploads/banner/
+            $this->load->library('upload');
+			if (isset($_FILES) && isset($_FILES['frm_image']) && isset($_FILES['frm_image']['name']) && $_FILES['frm_image']['name']) {
+				$upload_path = config_item('uploads_dir') . '/banner/';
+				if (is_dir($upload_path) === false) {
+					mkdir($upload_path, 0707);
+					$file = $upload_path . 'index.php';
+					$f = @fopen($file, 'w');
+					@fwrite($f, '');
+					@fclose($f);
+					@chmod($file, 0644);
+				}
+				$upload_path .= cdate('Y') . '/';
+				if (is_dir($upload_path) === false) {
+					mkdir($upload_path, 0707);
+					$file = $upload_path . 'index.php';
+					$f = @fopen($file, 'w');
+					@fwrite($f, '');
+					@fclose($f);
+					@chmod($file, 0644);
+				}
+				$upload_path .= cdate('m') . '/';
+				if (is_dir($upload_path) === false) {
+					mkdir($upload_path, 0707);
+					$file = $upload_path . 'index.php';
+					$f = @fopen($file, 'w');
+					@fwrite($f, '');
+					@fclose($f);
+					@chmod($file, 0644);
+				}
+				$uploadconfig = array();
+				$uploadconfig['upload_path'] = $upload_path;
+				$uploadconfig['allowed_types'] = 'jpg|jpeg|png|gif';
+				$uploadconfig['max_size'] = '2000';
+				$uploadconfig['max_width'] = '1000';
+				$uploadconfig['max_height'] = '1000';
+				$uploadconfig['encrypt_name'] = true;
+
+				$this->upload->initialize($uploadconfig);
+
+				if ($this->upload->do_upload('ban_image')) {
+					$img = $this->upload->data();
+					$updatephoto = cdate('Y') . '/' . cdate('m') . '/' . element('file_name', $img);
+				} else {
+					$file_error = $this->upload->display_errors();
+                    print_r($file_error);
+                    exit;
+				}
+            }
+
+
 		}
 	}
 }

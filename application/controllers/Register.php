@@ -950,6 +950,13 @@ class Register extends CB_Controller
 			$meta_author = $this->cbconfig->item('site_meta_author_register_form');
 			$page_name = $this->cbconfig->item('site_page_name_register_form');
 
+			// 페이지 재 접근시 기존 인증 데이터 리셋
+			// $this->session->unset_userdata('dec_data'); // 휴대폰 인증 데이터
+			$this->session->unset_userdata('ath_num'); // 이메일 인증 번호
+			$this->session->unset_userdata('ath_email'); // 이메일 인증에 사용된 이메일
+			$this->session->unset_userdata('ath_mail_result'); // 이메일 인증 결과
+			$this->session->unset_userdata('ath_nickname_result'); // 닉네임 인증 결과
+
 			$layoutconfig = array(
 				'path' => 'register',
 				'layout' => 'layout',
