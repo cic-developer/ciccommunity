@@ -32,7 +32,7 @@ class Contactus extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('pagination', 'querystring'));
+		$this->load->library(array('pagination', 'querystring', 'email'));
 	}
 
 
@@ -64,12 +64,12 @@ class Contactus extends CB_Controller
 		 */
 		$config = array(
 			array(
-				'field' => 'post_title',
+				'field' => 'contactus_title',
 				'label' => '제목',
 				'rules' => 'trim|required',
 			),
 			array(
-				'field' => 'post_content',
+				'field' => 'contactus_content',
 				'label' => '내용',
 				'rules' => 'trim|required',
 			),
@@ -134,8 +134,23 @@ class Contactus extends CB_Controller
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
-			print_r($this->input->post());
-			exit;
+			// $to_email 	= "support@ciccommunity.com";
+			$to_email 	= "developer@rs-team.com";
+			$from_email = "support@ciccommunity.com";
+			$title 		= "[cic 문의 접수] ". $this->input->post('contactus_title');
+			$message 	= $this->input->post('contactus_content');
+			$this->email->from($from_email);
+			$this->email->to($to_email);
+			$this->email->subject($title);
+			$this->email->message($message);
+	
+			if ($this->email->send() === false) {
+				$this->session->set_flashdata('message', '등록중 오류가 발생했습니다.');
+				redirect('contactus');
+			} else {
+				$this->session->set_flashdata('message', '정상적으로 문의등록이 완료되었습니다.');
+				redirect('contactus');
+			}
 		}
 	}
 

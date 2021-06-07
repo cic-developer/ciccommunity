@@ -29,7 +29,7 @@
                                         <p class="btxt"><?php echo html_escape(element('post_title', $banner)); ?></p>
                                     </div>
                                     <p class="stxt">총 <?php echo rs_number_format(element('cic_forum_total_cp', $banner), 2, 0); ?> CP</p>
-                                    <a href="#n"><span>참여하기!</span></a>
+                                    <a href="<?php echo element('post_url', $banner); ?>"><span>참여하기!</span></a>
                                 </div>
                             </div>
                         <?php

@@ -238,12 +238,10 @@ class Board_post extends CB_Controller
 				foreach (element('list', $_banner) as $key => $val) {
 					if ($val && $val['frm_image']) {
 						$banner['list'][$key] = $val;
-						$banner['post_url'] = post_url(element('brd_key', $board), $val['post_id']);
-						print_r((element('brd_key', $board)));
+						$banner['list'][$key]['post_url'] = post_url('forum', $val['post_id'].'?type='.$type );
 					}
 				}
 			}
-
 			
 			$view['view']['banner'] = $banner;
 			$view['view']['banner_count'] = count(element('list', $banner));

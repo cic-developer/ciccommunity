@@ -8,26 +8,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div id="contents" class="div-cont">
 		<?php
 			echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
-			echo show_alert_message(element('message', $view), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
+			echo show_alert_message($this->session->flashdata('message'), '<script>alert("', '");</script>');
 			$attributes = array('class' => 'form-horizontal', 'name' => 'fwrite', 'id' => 'fwrite', 'onsubmit' => 'return submitContents(this)');
 			echo form_open_multipart(current_full_url(), $attributes);
 		?>
 		<input type="hidden" name="<?php echo element('primary_key', $view); ?>"	value="<?php echo element(element('primary_key', $view), element('post', $view)); ?>" />
 		<!-- page start // -->
 		<div class="board-wrap write">
-			<h3><?php echo html_escape(element('board_name', element('board', $view))); ?> 문의하기</h3>
+			<h3>문의하기</h3>
 			<div class="entry">
 				<ul>
 					<li class="title-box">
 						<p class="btxt">제목</p>
 						<div class="field">
 							<p class="chk-input w100p">
-								<input id="post_title" type="text" name="post_title" placeholder="제목을 입력해주세요" value="<?php echo set_value('post_title', element('post_title', element('post', $view))); ?>" />
+								<input id="contactus_title" type="text" name="contactus_title" placeholder="제목을 입력해주세요" value="<?php echo set_value('contactus_title', element('contactus_title', element('post', $view))); ?>" />
 							</p>
 						</div>
 					</li>
 					<li class="no-pad">
-						<?php echo display_dhtml_editor('post_content', set_value('post_content', element('post_content', element('post', $view))), $classname = 'form-control dhtmleditor', $is_dhtml_editor = true, $editor_type = 'smarteditor'); ?>
+						<?php echo display_dhtml_editor('contactus_content', set_value('contactus_content', element('contactus_content', element('post', $view))), $classname = 'form-control dhtmleditor', $is_dhtml_editor = true, $editor_type = 'smarteditor'); ?>
 					</li>
 					<li class="title-box">
 						<p class="btxt">스팸방지</p>
@@ -51,15 +51,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <script type="text/javascript">
 // 글자수 제한
-var char_min = parseInt(<?php echo (int) element('post_min_length', element('board', $view)); ?>); // 최소
-var char_max = parseInt(<?php echo (int) element('post_max_length', element('board', $view)); ?>); // 최대
+var char_min = parseInt(<?php echo (int) element('contactus_min_length', element('board', $view)); ?>); // 최소
+var char_max = parseInt(<?php echo (int) element('contactus_max_length', element('board', $view)); ?>); // 최대
 
-<?php if ( ! element('use_dhtml', element('board', $view)) AND (element('post_min_length', element('board', $view)) OR element('post_max_length', element('board', $view)))) { ?>
+<?php if ( ! element('use_dhtml', element('board', $view)) AND (element('contactus_min_length', element('board', $view)) OR element('contactus_max_length', element('board', $view)))) { ?>
 
-check_byte('post_content', 'char_count');
+check_byte('contactus_content', 'char_count');
 $(function() {
-	$('#post_content').on('keyup', function() {
-		check_byte('post_content', 'char_count');
+	$('#contactus_content').on('keyup', function() {
+		check_byte('contactus_content', 'char_count');
 	});
 });
 <?php } ?>
@@ -67,14 +67,14 @@ $(function() {
 function submitContents(f) {
 	if ($('#char_count')) {
 		if (char_min > 0 || char_max > 0) {
-			var cnt = parseInt(check_byte('post_content', 'char_count'));
+			var cnt = parseInt(check_byte('contactus_content', 'char_count'));
 			if (char_min > 0 && char_min > cnt) {
 				alert('내용은 ' + char_min + '글자 이상 쓰셔야 합니다.');
-				$('#post_content').focus();
+				$('#contactus_content').focus();
 				return false;
 			} else if (char_max > 0 && char_max < cnt) {
 				alert('내용은 ' + char_max + '글자 이하로 쓰셔야 합니다.');
-				$('#post_content').focus();
+				$('#contactus_content').focus();
 				return false;
 			}
 		}
@@ -85,8 +85,8 @@ function submitContents(f) {
 		url: cb_url + '/postact/filter_spam_keyword',
 		type: 'POST',
 		data: {
-			title: f.post_title.value,
-			content: f.post_content.value,
+			title: f.contactus_title.value,
+			content: f.contactus_content.value,
 			csrf_test_name : cb_csrf_hash
 		},
 		dataType: 'json',
@@ -99,12 +99,12 @@ function submitContents(f) {
 	});
 	if (title) {
 		alert('제목에 금지단어(\'' + title + '\')가 포함되어있습니다');
-		f.post_title.focus();
+		f.contactus_title.focus();
 		return false;
 	}
 	if (content) {
 		alert('내용에 금지단어(\'' + content + '\')가 포함되어있습니다');
-		f.post_content.focus();
+		f.contactus_content.focus();
 		return false;
 	}
 }
@@ -119,8 +119,8 @@ function submitContents(f) {
 $(function() {
 	$('#fwrite').validate({
 		rules: {
-			post_title: {required :true, minlength:2, maxlength:60},
-			post_content : {required_smarteditor : true }
+			contactus_title: {required :true, minlength:2, maxlength:60},
+			contactus_content : {required_smarteditor : true }
 			, captcha_key : {required: true, captchaKey:true}
 		},
 		messages: {

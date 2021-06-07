@@ -2117,7 +2117,7 @@ class Membermodify extends CB_Controller
 		$rand_num = sprintf('%06d',rand(000000,999999));
 		// 로그인한 회원 정보
 		$member_info = $this->member->get_member();
-		$email = $member_info['mem_email'];
+		$email = element('mem_email', $member_info);
 
 		// 세션에 인증번호 저장
 		if($type == 'phone'){
