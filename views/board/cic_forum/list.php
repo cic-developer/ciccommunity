@@ -21,9 +21,16 @@
                             foreach (element('list',element('banner', $view)) as $banner) {
                         ?>
                             <div class="item">
-                                <a href="<?php echo element('ban_url', $banner) ?>" target="<?php echo element('ban_target', $banner) ?>">
-                                    <img src="<?php echo base_url('uploads/forum_banner/'.element('frm_image', $banner)) ?>" alt="" />
-                                </a>
+                                <div class="img"><img src="<?php echo base_url('uploads/forum_banner/'.element('frm_image', $banner)) ?>" alt="" />
+                                </div>
+
+                                <div class="ov">
+                                    <div class="txt">
+                                        <p class="btxt"><?php echo html_escape(element('post_title', $banner)); ?></p>
+                                    </div>
+                                    <p class="stxt">총 <?php echo rs_number_format(element('cic_forum_total_cp', $banner), 2, 0); ?> CP</p>
+                                    <a href="#n"><span>참여하기!</span></a>
+                                </div>
                             </div>
                         <?php
                             }
@@ -31,10 +38,17 @@
                         ?>
 
                         <?php for($i=0; $i<element('banner_noimage_count', $view); $i=$i+1){ ?>
-                                <div class="item">
-                                <a href="#n">
-                                    <img src="<?php echo base_url('assets/images/noimage.jpg') ?>" alt="" />
-                                </a>
+                            <div class="item">
+                                <div class="img"><img src="<?php echo base_url('assets/images/noimage.jpg') ?>" alt="" />
+                                </div>
+
+                                <div class="ov">
+                                    <div class="txt">
+                                        <p class="btxt">“ 도지 코인” <br />1,000원 간다!</p>
+                                    </div>
+                                    <p class="stxt">총 3,145,789VP</p>
+                                    <a href="#n"><span>참여하기!</span></a>
+                                </div>
                             </div>
                         <?php }?>
 

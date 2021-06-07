@@ -902,7 +902,16 @@ class Forum extends CB_Controller
 				$this->CIC_forum_info_model->update($this->input->post($primary_key, $updatedata));
 				$this->session->set_flashdata(
 					'message',
-					'정상적으로 등록되었습니다.'
+					'정상적으로 수정되었습니다.'
+				);
+			} else {
+				/**
+				 * 게시물을 새로 입력하는 경우입니다
+				 */
+				$this->CIC_forum_info_model->update($this->input->post($primary_key, $updatedata));
+				$this->session->set_flashdata(
+					'message',
+					'정상적으로 수정되었습니다.'
 				);
 			}
 

@@ -337,6 +337,7 @@ class Banner extends CB_Controller
 			/**
 			 * 게시물을 수정하는 경우입니다
 			 */
+			
 			if ($this->input->post($primary_key)) {
 				$this->{$this->modelname}->update($this->input->post($primary_key), $updatedata);
 				$this->session->set_flashdata(

@@ -238,10 +238,14 @@ class Board_post extends CB_Controller
 				foreach (element('list', $_banner) as $key => $val) {
 					if ($val && $val['frm_image']) {
 						$banner['list'][$key] = $val;
+						$banner['post_url'] = post_url(element('brd_key', $board), $val['post_id']);
+						print_r((element('brd_key', $board)));
 					}
 				}
 			}
-		
+
+			
+			$view['view']['banner'] = $banner;
 			$view['view']['banner_count'] = count(element('list', $banner));
 			$view['view']['banner_noimage_count'] = 4 - $view['view']['banner_count'];
 			// 배너 가져오기 끝

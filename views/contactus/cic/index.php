@@ -13,9 +13,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo form_open_multipart(current_full_url(), $attributes);
 		?>
 		<input type="hidden" name="<?php echo element('primary_key', $view); ?>"	value="<?php echo element(element('primary_key', $view), element('post', $view)); ?>" />
-		<input type="hidden" class="input px150" name="post_nickname" id="post_nickname" value="<?php echo set_value('post_nickname', element('post_nickname', element('post', $view))); ?>" />
-		<input type="hidden" class="input px400" name="post_email" id="post_email" value="<?php echo set_value('post_email', element('post_email', element('post', $view))); ?>" />
-		<input type="hidden" class="input px400" name="post_homepage" id="post_homepage" value="<?php echo set_value('post_homepage', element('post_homepage', element('post', $view))); ?>" />
 		<!-- page start // -->
 		<div class="board-wrap write">
 			<h3><?php echo html_escape(element('board_name', element('board', $view))); ?> 문의하기</h3>
@@ -123,7 +120,7 @@ $(function() {
 	$('#fwrite').validate({
 		rules: {
 			post_title: {required :true, minlength:2, maxlength:60},
-			post_content : {<?php echo (element('use_dhtml', element('board', $view))) ? 'required_' . $this->cbconfig->item('post_editor_type') : 'required'; ?> : true }
+			post_content : {required_smarteditor : true }
 			, captcha_key : {required: true, captchaKey:true}
 		},
 		messages: {
