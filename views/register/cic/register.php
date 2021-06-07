@@ -283,7 +283,7 @@
 								
 								<!-- 본인인증 서비스 팝업을 호출하기 위해서는 다음과 같은 form이 필요합니다. -->
 								<!-- <form name="form_chk" method="post"> -->
-									<input type="hidden" name="m" value="checkplusService">														<!-- 필수 데이타로, 누락하시면 안됩니다. -->
+									<input type="hidden" name="m" value="checkplusService">				<!-- 필수 데이타로, 누락하시면 안됩니다. -->
 									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('enc_data', $view)); ?>">		<!-- 위에서 업체정보를 암호화 한 데이타입니다. -->
 									
 									<?php 
@@ -313,6 +313,7 @@
 	});
 
 	window.name ="Parent_window";
+
 	function fnPopup(){
 		// 체크여부 확인
 		if( $("input:checkbox[name=agree]").is(":checked") == true 
