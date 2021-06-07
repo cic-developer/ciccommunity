@@ -792,12 +792,12 @@ class Forum extends CB_Controller
 
 		$config = array(
 			array(
-				'field' => 'ban_start_date',
-				'label' => '배너시작일',
+				'field' => 'frm_bat_close_datetime',
+				'label' => '배팅 종료일',
 				'rules' => 'trim|exact_length[19]',
 			),
 			array(
-				'field' => 'ban_end_date',
+				'field' => 'frm_close_datetime',
 				'label' => '포럼 종료일',
 				'rules' => 'trim|exact_length[19]',
 			),

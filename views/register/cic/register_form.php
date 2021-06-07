@@ -218,7 +218,7 @@
 			if(password_re.length == 0) {alert('비밀번호 확인을 입력해주세요'); return;}
 			if(nickname.length == 0) {alert('닉네임을 입력해주세요'); return;}
 			// if(csrf.length == 0) {alert('(csrf 오류) 휴대폰 재인증이 필요합니다'); return;}
-			if(userid.length == 0) {alert('(Id 오류) 이메일 인증이 필요합니다'); return;}
+			if(userid.length == 0) {alert('이메일 인증이 필요합니다'); return;}
 			if(username.length == 0) {alert('(name 오류) 휴대폰 재인증이 필요합니다'); return;}
 			if(phone.length == 0) {alert('(phone 오류) 휴대폰 재인증이 필요합니다'); return;}
 			if(birthday.length == 0) {alert('(birtyday 오류) 휴대폰 재인증이 필요합니다'); return;}

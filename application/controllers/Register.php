@@ -1836,14 +1836,14 @@ class Register extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		if ($this->_mem_nickname_check($nickname) === false) {
-			$this->session->set_userdata('ath_nickname_result', '');
-			$result = array(
-				'result' => 'no',
-				'reason' => '이미 사용중인 닉네임입니다',
-			);
-			exit(json_encode($result));
-		}
+		// if ($this->_mem_nickname_check($nickname) === false) {
+		// 	$this->session->set_userdata('ath_nickname_result', '');
+		// 	$result = array(
+		// 		'result' => 'no',
+		// 		'reason' => '이미 사용중인 닉네임입니다',
+		// 	);
+		// 	exit(json_encode($result));
+		// }
 
 		// 인증결과 세션 저장
 		$this->session->set_userdata('ath_nickname_result', '1');
@@ -1980,14 +1980,14 @@ class Register extends CB_Controller
 	{
 
 		// 이메일 인증 여부
-		// $nath_result = $this->session->userdata('ath_nickname_result');
-		// if( $nath_result != '1' ){
-		// 	$this->form_validation->set_message(
-		// 		'_mem_nickname_check',
-		// 		'닉네임 확인을 해주세요'
-		// 	);
-		// 	return false;
-		// }
+		$nath_result = $this->session->userdata('ath_nickname_result');
+		if( $nath_result != '1' ){
+			$this->form_validation->set_message(
+				'_mem_nickname_check',
+				'닉네임 확인을 해주세요'
+			);
+			return false;
+		}
 		
 		$this->load->helper('chkstring');
 		if (chkstring($str, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false) {
