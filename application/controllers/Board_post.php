@@ -220,6 +220,7 @@ class Board_post extends CB_Controller
 			}
 			$view['view']['type'] = $type;
 
+			// 정렬순서
 			$view['view']['sorted'] = $this->input->get('findex');
 			// like 여부 status...
 			// $select = 'lik_id, lik_type';
@@ -272,6 +273,9 @@ class Board_post extends CB_Controller
 				// 예상 잔여 cp
 				$view['view']['change_cp'] = $mem_cp - $deposit_meta;
 			}
+
+			// 정렬순서
+			$view['view']['sorted'] = $this->input->get('findex');
 		}
 		
 		
@@ -1554,6 +1558,9 @@ class Board_post extends CB_Controller
 		}
 		// cic 대기 포럼 & 반려
 		if($board['brd_id'] == 6){
+			$this->CIC_forum_model->allow_search_field = array('post_id', 'post_title', 'post_content', 'post_both', 'post_category', 'post_userid', 'post_nickname'); // 검색이 가능한 필드
+			$this->CIC_forum_model->search_field_equal = array('post_id', 'post_userid', 'post_nickname'); // 검색중 like 가 아닌 = 검색을 하는 필드
+			
 			$category_id = $this->input->get('category_id');
 			if(!$category_id) {
 				$category_id = 1;
