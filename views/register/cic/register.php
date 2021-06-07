@@ -313,7 +313,6 @@
 	});
 
 	window.name ="Parent_window";
-
 	function fnPopup(){
 		// 체크여부 확인
 		if( $("input:checkbox[name=agree]").is(":checked") == true 
