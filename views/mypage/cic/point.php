@@ -68,7 +68,6 @@
 					</p>
 					<p class="chk-input">
 						<input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword', $view)); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
-						<!-- <a href="<?php echo base_url('mypage/post/5')?>" class="search-btn"><span>검색</span></a> -->
 						<button class="search-btn" name="search_submit" type="submit"></button>
 					</p>
 				</div>

@@ -14,7 +14,6 @@
 			<div class="entry">
 				<ul class="registerform">
 
-				<!--  -->
 				<?php
 				foreach (element('html_content', $view) as $key => $value) {
 					$hidden_field_name = array("mem_userid" ,"mem_username" ,"mem_sex" ,"mem_phone" ,"mem_birthday");
@@ -100,14 +99,6 @@
 
 
 <script>
-	// $(window).load(function(){
-	// 	var ath_mail = "<?php echo element('ath_result', $view); ?>";
-	// 	if(ath_mail){
-	// 		var html = '<p class="success-email rtxt mg10t cblue">승인이 완료되었습니다</p>';
-	// 		html += '<input type="hidden" id="ath_num" name="ath_num" class="" required value="'+ ath_num +'" />'
-	// 		$('.mem_email').append(html); // 승인 메세지
-	// 	}
-	// })
 
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){

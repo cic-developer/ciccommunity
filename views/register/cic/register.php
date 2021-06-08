@@ -278,21 +278,15 @@
 						<div class="txt">
 							<div class="vc">
 								<p>휴대폰으로 본인인증하기</p>
-								<!-- 휴대폰 본인 인증 후 submit 되고 핸드폰 인증해서 얻은 정보들 저장 부탁해요-->
-								<!-- <a id="submitButton" ><span>휴대폰 본인 인증</span></a> -->
-								
-								<!-- 본인인증 서비스 팝업을 호출하기 위해서는 다음과 같은 form이 필요합니다. -->
-								<!-- <form name="form_chk" method="post"> -->
 									<input type="hidden" name="m" value="checkplusService">				<!-- 필수 데이타로, 누락하시면 안됩니다. -->
 									<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('enc_data', $view)); ?>">		<!-- 위에서 업체정보를 암호화 한 데이타입니다. -->
 									
 									<?php 
 										if(html_escape(element('dec_data', $view))){
 									?>
-										<a id="submitButton" style="background-color:#fccb17;"> <span>이어서 가입</span></a>
+										<a id="submitButton" style="background-color:#fccb17; cursor:pointer;"> <span>이어서 가입</span></a>
 									<?php } else{ ?>
 										<a href="javascript:fnPopup();"> <span>휴대폰 본인 인증</span></a>
-										<!-- <button type="button" id="submitButton"> <span>hipass</span></button> -->
 									<?php
 									} ?>
 							</div>
