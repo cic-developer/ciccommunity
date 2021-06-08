@@ -2,6 +2,7 @@
 <div class="box">
 	<div class="box-table">
 		<?php
+		echo show_alert_message($this->session->flashdata('message'), '<script>alert("', '")</script>');
 		echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
 		$attributes = array('class' => 'form-horizontal', 'name' => 'fadminwrite', 'id' => 'fadminwrite');
 		echo form_open_multipart(current_full_url(), $attributes);

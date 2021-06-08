@@ -616,7 +616,8 @@ class Forum extends CB_Controller
 			$post = $this->Post_model->get_one($pst_id); // 게시물 정보
 			$writer_id = $post['mem_id']; // 작성자 id
 			$writer_info = $this->Member_model->get_one($writer_id);
-			$writer_changed_cp = $writer_info['mem_cp'] + $writer_reward;
+			$writer_cp = (double) $writer_info['mem_cp'];
+			$writer_changed_cp = $writer_cp + $writer_reward;
 
 			$arr = array(
 				'mem_cp' => $writer_changed_cp
@@ -721,48 +722,35 @@ class Forum extends CB_Controller
 			 */
 
 			 // 예치금 제거 + cp 반환
-			// if($mem_deposit){
-			// 	$arr = array(
-			// 		'mem_cp' => $mem_cp + $mem_deposit,
-			// 		'mem_deposit' => null,
-			// 	);
-			// 	$memResult = $this->Member_model->set_user_modify($mem_id, $arr);
+			if($writer_deposit){
+				$arr = array(
+					'mem_cp' => $writer_cp + $writer_deposit,
+					'mem_deposit' => null,
+				);
+				$memResult = $this->Member_model->set_user_modify($writer_id, $arr);
 				
-			// 	if($memResult == 1){
-			// 		// cp 로그 기록
-			// 		$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '', $mem_deposit, '@byself', $mem_id, '예치금 반환');
+				if($memResult == 1){
+					// cp 로그 기록
+					$logResult = $this->CIC_cp_model->set_cic_cp($writer_id, '포럼 마감 및 배분 완료', $writer_deposit, '@byadmin', $this->member->item('mem_id'), '예치금 반환');
 					
-			// 		$result = array(
-			// 			'state' => '1',
-			// 			'message' => '예치금이 반환 되었습니다',
-			// 		);
-			// 		exit(json_encode($result));
-	
-			// 		// $logResult false반환값 확인 필요7
-			// 		// if($logResult == 1){
-			// 		// }else {
-			// 		//     $result = array(
-			// 		//         'state' => '0',
-			// 		//         'message' => '예치금 반환후 로그기록에 실패하였습니다',
-			// 		//     );
-			// 		//     exit(json_encode($result));
-			// 		// }
-			// 	}else {
-			// 		$result = array(
-			// 			'state' => '0',
-			// 			'message' => '예치금이 반환에 실패하였습니다',
-			// 		);
-			// 		exit(json_encode($result));
-			// 	}
-			// }else {
-			// 	$result = array(
-			// 		'state' => '0',
-			// 		'message' => '반환할 예치금이 없습니다',
-			// 	);
-			// 	exit(json_encode($result));
-			// }
+					$this->session->set_flashdata(
+						'message',
+						'예치금이 반환 되었습니다'
+					);
+				}else {
+					$this->session->set_flashdata(
+						'message',
+						'예치금이 반환에 실패하였습니다'
+					);
+				}
+			}else {
+				$this->session->set_flashdata(
+					'message',
+					'반환할 예치금이 없습니다'
+				);
+			}
 
-			$param =& $this->querystring;
+			$param =& $this->querystring; 
 			$redirecturl = admin_url($this->pagedir . '/close_forum');
 			
 			$this->session->unset_userdata('total_cp');
@@ -934,15 +922,17 @@ class Forum extends CB_Controller
 				'brd_id' => 3,
 			);
 			$this->Post_model->update($pst_id, $postupdate, $where);
-			
+
+			// print_r($this->db->last_query());
+			// exit;
 
 			$where = array(
-				'pst_id' => $pst_id
+				'post_id' => $pst_id
 			);
 			$pevupdate = array(
 				'brd_id' => 3,
 			);
-			
+
 			$this->Post_extra_vars_model->update($pst_id, $pevupdate, $where);
 			if ($this->input->post($primary_key)) {
 				$this->CIC_forum_info_model->update($this->input->post($primary_key), $updatedata);
