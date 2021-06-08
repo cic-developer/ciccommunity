@@ -130,7 +130,7 @@ $(function() {
 	$('#fadminwrite').validate({
 		rules: {
 			frm_bat_close_datetime: 'required',
-			frm_close_datetime: 'required',
+		frm_close_datetime: 'required',
 		}
 	});
 });
