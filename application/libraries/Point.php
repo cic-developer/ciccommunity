@@ -464,8 +464,8 @@ class Point extends CI_Controller
 			$_levelConfig = $this->CI->CIC_member_level_config_model->get_by_pointSum($pointSum);
 			if($_levelConfig)
 			{
-				$_mlclevel = element('mlc_level' , $_levelConfig);
-				$_memLevel = element('mem_level', $memberInfo);
+				$_mlclevel = element('mlc_level' , $_levelConfig); // 적용될 레벨
+				$_memLevel = element('mem_level', $memberInfo); //기존 레벨
 				if($_mlclevel != $_memLevel)
 				{
 					$this->CI->Member_model->update($mem_id, array('mem_level' => $_mlclevel));

@@ -701,6 +701,7 @@ class Forum extends CB_Controller
 		$total_cp = $this->session->userdata('total_cp');
 		$win_cp = $this->session->userdata('win_cp');
 
+		// total cp 혹은 win cp가 존재하지 않는 경우
 		if(!$total_cp || !$win_cp){
 			$this->form_validation->set_message(
 				'_forum_commission_check',
@@ -709,11 +710,21 @@ class Forum extends CB_Controller
 			return false;
 		}
 
+		// 
 		$commission = $total_cp * ((double) $str / 100); 
 		if($win_cp < $commission){
 			$this->form_validation->set_message(
 				'_forum_commission_check',
 				'수수료 설정 오류'
+			);
+			return false;
+		}
+
+		$str = explode( '.', $_str );
+		if( strlen($str[1]) > 2){
+			$this->form_validation->set_message(
+				'_forum_commission_check',
+				'수수료 설정은 소수점 2자리 까지 설정이 가능합니다'
 			);
 			return false;
 		}
@@ -750,6 +761,16 @@ class Forum extends CB_Controller
 			);
 			return false;
 		}
+
+		$str = explode( '.', $_str );
+		if( strlen($str[1]) > 2){
+			$this->form_validation->set_message(
+				'_writer_reward_check',
+				'작성자 보상 설정은 소수점 2자리 까지 설정이 가능합니다'
+			);
+			return false;
+		}
+        
 
 		return true;
 	}
@@ -1051,5 +1072,4 @@ class Forum extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 
 	}
-
 }

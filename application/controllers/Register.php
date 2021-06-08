@@ -1201,7 +1201,7 @@ class Register extends CB_Controller
 				);	
 			}
 			
-			// cic에서 추가된 부분
+			// cic에서 추가된 부분 끝
 			$this->point->insert_point(
 				$mem_id,
 				$this->cbconfig->item('point_register'),
@@ -1576,7 +1576,7 @@ class Register extends CB_Controller
 					$mem_id
 				);
 			}
-			// echo '<script>alert("gg");</script>';
+			
 			redirect('register/result');
 		}
 	}

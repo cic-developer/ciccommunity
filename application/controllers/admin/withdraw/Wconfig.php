@@ -47,7 +47,7 @@ class Wconfig extends CB_Controller
 	}
 
 	/**
-	 * 관리자 출급요청목록 메인 페이지입니다.
+	 * 관리자 출급요청설정 메인 페이지입니다.
 	 */
 	public function index()
 	{
@@ -128,7 +128,7 @@ class Wconfig extends CB_Controller
 	}
 
 	/**
-	 * 
+	 * 소수점을 체크하는 콜백함수입니다.
 	 */
 	public function _deposit_decimal_check($_str)
 	{
@@ -146,7 +146,7 @@ class Wconfig extends CB_Controller
 	}
 	
 	/**
-	 * 
+	 * 소수점을 체크하는 콜백함수입니다.
 	 */
 	public function _minimum_decimal_check($_str)
 	{

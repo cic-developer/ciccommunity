@@ -2708,8 +2708,8 @@ class Postact extends CB_Controller
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp());
 
 			// 게시글 확인
-			$this->load->model('Post_model');
-			$post = $this->Post_model->get_one($post_id);
+			$this->load->model('CIC_forum_model');
+			$post = $this->CIC_forum_model->get_one($post_id);
 			if(!$post){
 				$result = array(
 					'state' => '0',
