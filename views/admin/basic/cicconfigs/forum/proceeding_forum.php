@@ -7,8 +7,6 @@
                         <li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/proceeding_forum'); ?>" onclick="return check_form_changed();">진행중포럼</a></li>
                         <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/close_forum'); ?>" onclick="return check_form_changed();">마감된포럼</a></li>
                         <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/return_forum'); ?>" onclick="return check_form_changed();">반려된포럼</a></li>
-                        <li role="presentation"><a href="<?php echo admin_url($this->pagedir . ''); ?>" onclick="return check_form_changed();"> - </a></li>
-                        <li role="presentation"><a href="<?php echo admin_url($this->pagedir . ''); ?>" onclick="return check_form_changed();"> - </a></li>
 					</ul>
 					<?php
 					ob_start();

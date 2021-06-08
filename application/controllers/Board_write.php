@@ -18,7 +18,7 @@ class Board_write extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Post', 'Post_link', 'Post_file', 'Post_extra_vars', 'Post_meta', 'CIC_forum_config');
+	protected $models = array('Post', 'Post_link', 'Post_file', 'Post_extra_vars', 'Post_meta', 'CIC_forum_config', 'CIC_forum');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -87,13 +87,8 @@ class Board_write extends CB_Controller
 				'mem_id' => $mem_id,
 				'post_category' => '1',
 			);
-			$select3 = 'post.*, cic_forum_info.* AS `cic_forum_info`';
-			$join3 = array(
-				'cic_forum_info',
-				'cic_forum_info.pst_id = post_id',
-				'left'
-			);
-			$post3 = $this->Post_model->get_one_join('', $select3, $where3, $join3);
+			$post3 = $this->CIC_forum_model->get_post_list('', '', $where3, '', '', '', '');
+			// $post3 = $this->Post_model->get_one('', '', $where3);
 			print_r($post3);
 			exit;
 			$post6 = $this->Post_model->get_one('', '', $where6);

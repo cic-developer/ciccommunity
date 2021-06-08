@@ -678,9 +678,9 @@ class Postact extends CB_Controller
 								$mem_id,
 								$usedPoint * $vp_recommended_point,
 								element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
-								'point_use',
+								'post_recommended',
 								$post_id,
-								'포인트 사용'
+								'게시글 추천받음'
 							);
 						}
 						if($vp_recommender_point){
@@ -688,9 +688,9 @@ class Postact extends CB_Controller
 								$mem_id,
 								$usedPoint * $vp_recommender_point,
 								element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
-								'point_use',
+								'post_recommender',
 								$post_id,
-								'포인트 사용'
+								'게시글 추천함'
 							);
 						}
 						if($cp_recommended_point){
@@ -698,9 +698,9 @@ class Postact extends CB_Controller
 								$mem_id,
 								$usedPoint * $cp_recommended_point,
 								element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
-								'point_use',
+								'post_recommended',
 								$post_id,
-								'포인트 사용'
+								'게시글 추천받음'
 							);
 						}
 						if($cp_recommender_point){
@@ -708,9 +708,9 @@ class Postact extends CB_Controller
 								$mem_id,
 								$usedPoint * $cp_recommender_point,
 								element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
-								'point_use',
+								'post_recommender',
 								$post_id,
-								'포인트 사용'
+								'게시글 추천함'
 							);
 						}
 					} else {

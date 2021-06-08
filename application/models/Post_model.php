@@ -941,40 +941,4 @@ class Post_model extends CB_Model
 
 		return $result;
 	}
-
-	public function get_one_join($primary_value = '', $select = '', $where = '', $join = '')
-	{
-		$result = $this->_get_join($primary_value, $select, $where, 1);
-		return $result->row_array();
-	}
-
-
-	public function _get_join($primary_value = '', $select = '', $where = '', $limit = '', $offset = 0, $findex = '', $forder = '', $join)
-	{
-		if ($select) {
-			$this->db->select($select);
-		}
-		$this->db->from($this->_table);
-		if ($primary_value) {
-			$this->db->where($this->primary_key, $primary_value);
-		}
-		if ($where) {
-			$this->db->where($where);
-		}
-		if ($findex) {
-			if (strtoupper($forder) === 'RANDOM') {
-				$forder = 'RANDOM';
-			} elseif (strtoupper($forder) === 'DESC') {
-				$forder = 'DESC';
-			} else {
-				$forder = 'ASC';
-			}
-			$this->db->order_by($findex, $forder);
-		}
-		if (is_numeric($limit) && is_numeric($offset)) {
-			$this->db->limit($limit, $offset);
-		}
-		$result = $this->db->get();
-		return $result;
-	}
 }
