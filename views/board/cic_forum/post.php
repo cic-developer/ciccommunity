@@ -287,8 +287,6 @@
 						alert('숫자만 입력할 수 있습니다.');
 						return false;
 					}
-					// alert(data.message);
-					// location.reload();
 
 					// 추가참여!
 					$.ajax({
@@ -401,10 +399,12 @@
 
 	// 전적 확인
 	$(document).on('click','.nickname', function(){
+		var id = $(this).data('id');
+
 		var isParent = $(this).closest('.info');
 		$(this).closest('.list').find('.item').removeClass('zdex')
 		$(this).closest('.item').addClass('zdex');
-		$('.layer-wrap.userInfo').bPopup({
+		$('.layer-wrap.userInfo-'+id).bPopup({
 			closeClass: "userInfo-close",
 			speed: 0,
 			appendTo: isParent,
@@ -418,100 +418,44 @@
 		});
 	})
 
-	// 댓글 수정
-	// $(document).on('click','.cmmt-modify-btn', function(){
-	// 	$('.cmmt-wrap').find('.singo-btn').removeClass('active');
-	// 		if ($(this).hasClass('active')) {
-	// 			$('.cmmt-btn').removeClass('active');
-	// 			$(this).removeClass('active');
-	// 			$(this).closest('.vcon').removeClass('active');
-	// 			$(this).closest('.reply1').removeClass('active');
-	// 			$(this).closest('.ctrls1').removeClass('active');
-	// 		} else {
-	// 			$('.cmmt-btn').removeClass('active');
-	// 			$(this).addClass('active');
-	// 			$(this).closest('.vcon').addClass('active');
-	// 			$(this).closest('.reply1').addClass('active');
-	// 			$(this).closest('.ctrls1').addClass('active');
-	// 		}
-	// 	$('.layer-wrap.singo').bPopup({
-	// 		speed: 0,
-	// 		follow: [false, false],
-	// 		position: [false, false],
-	// 		modalColor: false,
-	// 		modal: false,
-	// 		onClose: function () {
-	// 			$('.cmmt').find('.cread').removeClass('cread')
-	// 		},
-	// 	}).close();
-	// })
-
-	// 댓글 작성
-	// $(document).on('click','.cmmt-btn', function(){
-	// 	$('.cmmt-wrap').find('.singo-btn').removeClass('active');
-	// 		if ($(this).hasClass('active')) {
-	// 			$('.cmmt-modify-btn').removeClass('active');
-	// 			$(this).removeClass('active');
-	// 			$(this).closest('.vcon').removeClass('active');
-	// 			$(this).closest('.reply2').removeClass('active');
-	// 			$(this).closest('.ctrls2').removeClass('active');
-	// 		} else {
-	// 			$('.cmmt-modify-btn').removeClass('active');
-	// 			$(this).addClass('active');
-	// 			$(this).closest('.vcon').addClass('active');
-	// 			$(this).closest('.reply2').addClass('active');
-	// 			$(this).closest('.ctrls2').addClass('active');
-	// 		}
-	// 	$('.layer-wrap.singo').bPopup({
-	// 		speed: 0,
-	// 		follow: [false, false],
-	// 		position: [false, false],
-	// 		modalColor: false,
-	// 		modal: false,
-	// 		onClose: function () {
-	// 			$('.cmmt').find('.cread').removeClass('cread')
-	// 		},
-	// 	}).close();
-	// })
-
 	// 신고 하기
-	$(document).on('click','.singo-btn', function(){
-		$('.cmmt-wrap').find('.singo-btn').removeClass('active');
-			$(this).addClass('active');
-			$('.layer-wrap.singo').bPopup({
-				speed: 0,
-				follow: [false, false],
-				position: [false, false],
-				modalColor: false,
-				modal: false,
-				onClose: function () {
-					$('.cmmt').find('.cread').removeClass('cread')
-				},
-			}).close();
-		var obj = $(this).position();
-		var abj = $(this).position();
-		var thispar = $(this).closest('.ctrls');
-		$(this).closest('.ctrls').parent().addClass('cread');
-		$(this).closest('.ctrls').parent().parent('li').addClass('cread');
-		$('.layer-wrap.singo').css({
-			'top': obj.top,
-			'left': obj.left,
-			'margin-top': '20px',
-			'margin-left': '0'
-		});
-		$('.layer-wrap.singo').bPopup({
-			closeClass: "singo-close",
-			speed: 0,
-			appendTo: $(thispar),
-			onClose: function () {
-				$('.cmmt').find('.cread').removeClass('cread')
-			},
-			follow: [false, false],
-			position: [false, false],
-			modalColor: false,
-			modal: false,
-		});
-	})
+	// $(document).on('click','.singo-btn', function(){
+	// 	$('.cmmt-wrap').find('.singo-btn').removeClass('active');
+	// 		$(this).addClass('active');
+	// 		$('.layer-wrap.singo').bPopup({
+	// 			speed: 0,
+	// 			follow: [false, false],
+	// 			position: [false, false],
+	// 			modalColor: false,
+	// 			modal: false,
+	// 			onClose: function () {
+	// 				$('.cmmt').find('.cread').removeClass('cread')
+	// 			},
+	// 		}).close();
+	// 	var obj = $(this).position();
+	// 	var abj = $(this).position();
+	// 	var thispar = $(this).closest('.ctrls');
+	// 	$(this).closest('.ctrls').parent().addClass('cread');
+	// 	$(this).closest('.ctrls').parent().parent('li').addClass('cread');
+	// 	$('.layer-wrap.singo').css({
+	// 		'top': obj.top,
+	// 		'left': obj.left,
+	// 		'margin-top': '20px',
+	// 		'margin-left': '0'
+	// 	});
+	// 	$('.layer-wrap.singo').bPopup({
+	// 		closeClass: "singo-close",
+	// 		speed: 0,
+	// 		appendTo: $(thispar),
+	// 		onClose: function () {
+	// 			$('.cmmt').find('.cread').removeClass('cread')
+	// 		},
+	// 		follow: [false, false],
+	// 		position: [false, false],
+	// 		modalColor: false,
+	// 		modal: false,
+	// 	});
+	// })
 	
 </script>
 

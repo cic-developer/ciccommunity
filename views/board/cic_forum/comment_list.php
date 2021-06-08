@@ -16,14 +16,14 @@
 		}
 		?>
 			<!-- s: layer-wrap userInfo -->
-			<div class="layer-wrap userInfo">
-				<p>포럼 전적 <span><?php echo element('mem_forum_win', $result); ?>승<?php echo element('mem_forum_lose', $result); ?>패</span></p>
+			<div class="layer-wrap userInfo userInfo-<?php echo element('mem_id', $result); ?>">
+				<p>포럼 전적 <span><?php echo number_format(element('mem_forum_win', $result)); ?>승<?php echo number_format(element('mem_forum_lose', $result)); ?>패</span></p>
 			</div>
 			<!-- e: layer-wrap userInfo -->
 
 			<div class="<?php echo $_classname; ?>">
 				<div class="info">
-					<a href="#n" class="nickname">
+					<a href="#n" class="nickname" data-id="<?php echo element('mem_id', $result); ?>">
 						<p class="ico"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', $result)), 35, 35); ?>"
 								alt=""></p>
 						<p class="txt"><?php echo element('cmt_nickname', $result); ?></p>
