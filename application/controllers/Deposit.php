@@ -138,19 +138,20 @@ class Deposit extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-        
+        $checktime = cdate('Y-m-d H:i:s', ctimestamp());
         $mem_id = (int) $this->member->item('mem_id');
-        $mem_cp = $this->member->item('mem_cp');
-        $mem_deposit = $this->member->item('mem_deposit');
+        $mem_cp = (double) $this->member->item('mem_cp');
+        $mem_deposit = (double) $this->member->item('mem_deposit');
         
         $where3 = array(
             'brd_id' => 3,
             'mem_id' => $mem_id,
-            'post_category' => 1,
+            'cic_forum_info.frm_close_datetime >=' => $checktime,
         );
         $where6 = array(
             'brd_id' => 6,
             'mem_id' => $mem_id,
+            'post_category' => '1',
         );
         
         $post3 = $this->Post_model->get_one('', '', $where3);

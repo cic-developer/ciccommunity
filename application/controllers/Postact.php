@@ -663,7 +663,20 @@ class Postact extends CB_Controller
 		$like_max_vp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_max_vp'"));
 		$like_min_cp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_min_cp'"));
 		$like_max_cp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_max_cp'"));
-
+		if(in_array(element('brd_id', $post), array(1, 2))){
+			switch(element('brd_id', $post)){
+				case 1:{
+					//자유게시판의 경우
+					$vp_point = element('vpc_value' ,$this->CIC_vp_config_model->get_one('','',"vpc_id = 3 AND vpc_enable = 1"));
+					$cp_point = element('cpc_value' ,$this->CIC_cp_config_model->get_one('','',"cpc_id = 3 AND cpc_enable = 1"));
+				}
+				break;
+				case 2:{
+					//CIC WRITER의 경우
+				}
+				break;
+			}
+		}
 		if(element('brd_id', $post) != 6 && element('brd_id', $post) != 3) {
 			switch(element('cfg_value',$_defualt_using_point)){
 				case 'vp' : //vp가 기본 포인트일 경우

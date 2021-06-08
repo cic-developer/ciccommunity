@@ -18,7 +18,7 @@ class Board_write extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Post', 'Post_link', 'Post_file', 'Post_extra_vars', 'Post_meta', 'CIC_forum_config');
+	protected $models = array('Post', 'Post_link', 'Post_file', 'Post_extra_vars', 'Post_meta', 'CIC_forum_config', 'CIC_forum');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -70,7 +70,7 @@ class Board_write extends CB_Controller
 		}
 		// 도전 CIC 포럼, userForum
 		if($board_id == 6){
-			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp());
 			$mem_id = (int) $this->member->item('mem_id');
 			$mem_cp = $this->member->item('mem_cp');
 			$deposit_meta = (int)  $this->CIC_forum_config_model->item('forum_deposit');
@@ -79,7 +79,7 @@ class Board_write extends CB_Controller
 			$where3 = array(
 				'brd_id' => 3,
 				'mem_id' => $mem_id,
-				'post_datetime >=' => $checktime,
+				'cic_forum_info.frm_close_datetime >=' => $checktime,
 				// 'post_category' => 1,
 			);
 			$where6 = array(
@@ -87,8 +87,9 @@ class Board_write extends CB_Controller
 				'mem_id' => $mem_id,
 				'post_category' => '1',
 			);
-			$post3 = $this->Post_model->get_one('', '', $where3);
-			$post6 = $this->Post_model->get_one('', '', $where6);
+			$post3 = $this->CIC_forum_model->get_one('', '', $where3);
+			exit;
+			$post6 = $this->CIC_forum_model->get_one('', '', $where6);
 
 			// 관리자가 아닌 일반 유저인지 확인
 			if($this->member->is_admin()){

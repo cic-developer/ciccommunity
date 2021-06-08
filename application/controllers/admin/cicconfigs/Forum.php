@@ -911,30 +911,6 @@ class Forum extends CB_Controller
 			
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 			
-			$updatedata = array(
-				'pst_id' => $pst_id,
-				'frm_bat_close_datetime' => $this->input->post('frm_bat_close_datetime', null, ''),
-				'frm_close_datetime' => $this->input->post('frm_close_datetime', null, ''),
-			);
-
-			$where = array(
-				'post_id' => $pst_id,
-			);
-			$postupdate = array(
-				'brd_id' => 3,
-			);
-			$this->Post_model->update($pst_id, $postupdate, $where);
-
-			// print_r($this->db->last_query());
-			// exit;
-
-			$where = array(
-				'post_id' => $pst_id
-			);
-			$pevupdate = array(
-				'brd_id' => 3,
-			);
-
 			$this->load->library('upload');
 			if (isset($_FILES) && isset($_FILES['frm_image']) && isset($_FILES['frm_image']['name']) && $_FILES['frm_image']['name']) {
 				$upload_path = config_item('uploads_dir') . '/forum/';
@@ -985,6 +961,35 @@ class Forum extends CB_Controller
 				}
             }
 
+			$updatedata = array(
+				'pst_id' => $pst_id,
+				'frm_bat_close_datetime' => $this->input->post('frm_bat_close_datetime', null, ''),
+				'frm_close_datetime' => $this->input->post('frm_close_datetime', null, ''),
+			);
+
+			
+			$where = array(
+				'post_id' => $pst_id,
+			);
+			$postupdate = array(
+				'brd_id' => 3,
+			);
+			$this->Post_model->update($pst_id, $postupdate, $where);
+
+			// print_r($this->db->last_query());
+			// exit;
+
+			$where = array(
+				'post_id' => $pst_id
+			);
+			$pevupdate = array(
+				'brd_id' => 3,
+			);
+
+			
+
+			
+
 
 			$this->Post_extra_vars_model->update($pst_id, $pevupdate, $where);
 			if ($this->input->post($primary_key)) {
@@ -994,6 +999,9 @@ class Forum extends CB_Controller
 					'정상적으로 수정되었습니다'
 				);
 			} else {
+				if($updatephoto){
+                $updatedata['frm_image'] = $updatephoto;
+            	}
 				$pst_id = $this->CIC_forum_info_model->insert($updatedata);
 				$this->session->set_flashdata(
 					'message',
