@@ -168,27 +168,6 @@
             <!-- e: paging-wrap -->
             <!-- s: board-filter -->
             <div class="board-filter sel">
-                <!-- <p class="chk-select">
-					<select>
-						<option value="">제목</option>
-						<option value="">내용</option>
-					</select>
-				</p> -->
-                <!-- <div class="ov"> -->
-                    <!-- <div class="sel-box">
-                        <a href="#n" class="sel-btn"><span>제목</span></a>
-                        <ul>
-                            <li class="active"><a href="#n"><span>제목+내용</span></a></li>
-                            <li><a href="#n"><span>제목</span></a></li>
-                            <li><a href="#n"><span>내용</span></a></li>
-                            <li><a href="#n"><span>닉네임</span></a></li>
-                        </ul>
-                    </div>
-                    <p class="chk-input">
-                        <input type="text" placeholder="검색어를 입력해주세요" autocomplete="off" />
-                        <a href="#n" class="search-btn"><span>검색</span></a>
-                    </p> -->
-                <!-- </div> -->
                 <form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
                     <div class="board-filter">
                         <p class="chk-select">

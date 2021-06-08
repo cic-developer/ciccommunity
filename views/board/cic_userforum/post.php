@@ -24,7 +24,6 @@
 					<a href="<?php echo element('url', element('next_post', $view)); ?>" class="bw-btn"><span>다음</span></a>
 				</div>
 				<div class="tits vp">
-					<!-- <p class="logo"><img src="../_Img/Content/record-logo.jpg" alt=""/></p> -->
 					<h3><?php echo html_escape(element('post_title', element('post', $view))); ?></h3>
 					<ul>
 						<li>
@@ -123,15 +122,8 @@
 			</div>
 			<?php if(element('is_admin', $view)) {?>
 			<div class="lower r">
-				<!-- <?php if(element('modify_url', $view)){ ?>
-					<a href="<?php echo element('modify_url', $view); ?>" class="bw-btn"><span>수정</span></a>
-				<?php } ?> -->
 				<?php if(element('delete_url', $view)){ ?>
-				<!-- <a href="javascript:void(0);" class="bw-btn btn-one-delete" data-one-delete-url="<?php echo element('delete_url', $view); ?>"><span>삭제</span></a> -->
 				<?php } ?>
-				<!-- <?php if(element('report_url', $view)){ ?>
-				<a href="javascript:void(0);" class="bw-btn btn-one-report" data-one-delete-url="<?php echo element('report_url', $view); ?>"><span>신고</span></a>
-				<?php } ?> -->
 				<?php if ( ! element('post_del', element('post', $view)) && element('use_blame', element('board', $view)) && ( ! element('blame_blind_count', element('board', $view)) OR element('post_blame', element('post', $view)) < element('blame_blind_count', element('board', $view)))) { ?>
 					<button type="button" class="bw-btn btn btn-black" id="btn-blame" onClick="post_blame('<?php echo element('post_id', element('post', $view)); ?>', 'post-blame');">신고 <span class="post-blame"><?php echo element('post_blame', element('post', $view)) ? '+' . number_format(element('post_blame', element('post', $view))) : ''; ?></span></button>
 				<?php } ?>

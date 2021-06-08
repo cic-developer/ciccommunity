@@ -29,12 +29,6 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<!-- <th>
-								<p class="chk-check">
-									<input type="checkbox" id="vsel-all" /><label for="vsel-all"><span
-											class="blind">선택</span></label>
-								</p>
-							</th> -->
 							<th>
 								<p class="chk-check">
 									<input type="checkbox" name="vsel-all" id="vsel-all" />

@@ -7,7 +7,7 @@
 		<div class="member-wrap modify">
 
 		<?php
-			// echo validation_errors('<script>alert("', '");</script>');
+			echo validation_errors('<script>alert("', '");</script>');
 			echo show_alert_message($this->session->flashdata('message'), '<script>alert("', '");</script>');
 			$attributes = array('class' => 'form-horizontal', 'name' => 'fconfirmpassword', 'id' => 'fconfirmpassword');
 			echo form_open(current_url(), $attributes);
@@ -60,12 +60,4 @@
 	});
 	//]]>
 
-	// $(document).on('click', '.go-btn',function(){
-	// 	var password = $('#mem_password').val();
-	
-
-		// if((password.trim()).length < 4){
-		// 	alert('비밀번호를 4자 이상 입력해주세요');
-		// }
-	// })
 </script>

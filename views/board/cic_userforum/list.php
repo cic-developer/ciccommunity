@@ -278,19 +278,6 @@
 
 <script>
 
-    // $(document).on('click', '#deposit_subtract', function() {
-	// 	deposit_subtract_submit(document.flist, 'subtract', $(this).attr('data-deposit-url'));
-	// });
-
-    // function deposit_subtract_submit(f, acttype, actpage){
-
-    //     alert("예치한 금액이 전부 반환됩니다")
-
-    //     if (acttype === 'subtract' && ! confirm('선택한 요청을 정말 승인 하시겠습니까?')) return;
-    //     f.action = actpage;
-	// 	f.submit();
-    // }   
-
     // Get the modal
     var modal = document.getElementById('myModal_deposit');
 

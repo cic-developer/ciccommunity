@@ -38,9 +38,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<label> <input type="checkbox" class="checkbox" name="post_notice" value="1"> <p>메인으로 게시</p> </label>
 					</div>
 					<?php } ?>
-					<!-- <div class="main-check">
-						<label> <input type="checkbox" class="checkbox" value="1"> <p>대표 이미지삭제</p> </label>
-					</div> -->
 				</ul>
 			</div>
 
@@ -68,12 +65,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$del_column = $download_link ? 'post_file_del[' . element('pfi_id', element($i, element('file', $view))) . ']' : '';
 			?>
 				<div class="form-group">
-					<!-- <div class="thumbnail"><img src="../assets/images/visual-img03.jpg" alt="썸네일"></div> -->
-					<div id="div-pro-img"></div> <!-- 프로필 이미지 미리보기 -->
 					<div class="pre-pro-img" id="image_container"></div>
 					<label for="<?php echo $file_column; ?>" class="col-sm-2 control-label">대표이미지</label>
 					<div class="col-sm-10">
-						<!-- <input type="file" class="form-control" name="<?php echo $file_column; ?>" id="<?php echo $file_column; ?>" /> -->
 						<input 
 							type="file"
 							accept="image/png, image/jpeg"

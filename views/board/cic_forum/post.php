@@ -1,10 +1,6 @@
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
 <!-- s : #container-wrap //-->
 <div id="container-wrap">
-	<!-- <div id="top-vis" class="bg01">
-	<h2>Notice</h2>
-	<div class="img"><img src="<?php echo base_url('assets/images/top-vis01.jpg')?>" alt=""/></div>
-</div> -->
 	<div id="contents" class="div-cont">
 		<!-- page start // -->
 		<div class="board-wrap detail">
@@ -129,8 +125,6 @@
 		<div class="gap50"></div>
 		<!-- s: cmmt -->
 		<div class="cmmt-upper">
-			<!-- <a href="#n" class="cmmt-like">좋아요 <span><?php echo number_format(element('post_like', element('post', $view))); ?></span></a> -->
-
 			<?php if ( ! element('post_del', element('post', $view)) && (element('use_post_like', element('board', $view)) OR element('use_post_dislike', element('board', $view)))) { ?>
 				<div class="recommand vp-point">
 					<?php if (element('use_post_like', element('board', $view))) { ?>
@@ -141,7 +135,6 @@
 				</div>
 			<?php } ?>
 			<div style="position:absolute; right:0; top:-30%;">
-			<!-- <a href="#n" class="cmmt-singo">신고</a> -->
 			<?php if(element('modify_url', $view) && element('type', $forum) == 1){ ?>
 				<a href="<?php echo element('modify_url', $view); ?>" class="bw-btn"><span>수정</span></a>
 			<?php } ?>
@@ -520,90 +513,6 @@
 		});
 	})
 	
-    // ▲▲▲▲▲원본▲▲▲▲▲
-	// $(function () {
-	// 	$('.info').find('.nickname').click(function () {
-	// 		var isParent = $(this).closest('.info');
-	// 		$(this).closest('.list').find('.item').removeClass('zdex')
-	// 		$(this).closest('.item').addClass('zdex');
-	// 		$('.layer-wrap.userInfo').bPopup({
-	// 			closeClass: "userInfo-close",
-	// 			speed: 0,
-	// 			appendTo: isParent,
-	// 			follow: [false, false],
-	// 			position: [false, false],
-	// 			onClose: function () {
-	// 				$('.cmmt').find('.item').removeClass('zdex');
-	// 			},
-	// 			modalColor: 'transparent',
-	// 			modal: true,
-	// 		});
-	// 	});
-	// 	var istotal = $('.cmmt').find('.item').length;
-	// 	var ischk = (istotal / 2) + 1
-	// 	$('.cmmt').find('.item:nth-child(n+' + ischk + ')').addClass('vfm');
-	// 	$('.ctrls').find('.cmmt-btn').click(function () {
-	// 		$('.cmmt-wrap').find('.singo-btn').removeClass('active');
-	// 		if ($(this).hasClass('active')) {
-	// 			$(this).removeClass('active');
-	// 			$(this).closest('.vcon').removeClass('active');
-	// 			$(this).closest('.reply').removeClass('active');
-	// 			$(this).closest('.ctrls').removeClass('active');
-	// 		} else {
-	// 			$(this).addClass('active');
-	// 			$(this).closest('.vcon').addClass('active');
-	// 			$(this).closest('.reply').addClass('active');
-	// 			$(this).closest('.ctrls').addClass('active');
-	// 		}
-	// 		$('.layer-wrap.singo').bPopup({
-	// 			speed: 0,
-	// 			follow: [false, false],
-	// 			position: [false, false],
-	// 			modalColor: false,
-	// 			modal: false,
-	// 			onClose: function () {
-	// 				$('.cmmt').find('.cread').removeClass('cread')
-	// 			},
-	// 		}).close();
-	// 	});
-	// 	$('.cmmt-wrap').find('.singo-btn').click(function () {
-	// 		$('.cmmt-wrap').find('.singo-btn').removeClass('active');
-	// 		$(this).addClass('active');
-	// 		$('.layer-wrap.singo').bPopup({
-	// 			speed: 0,
-	// 			follow: [false, false],
-	// 			position: [false, false],
-	// 			modalColor: false,
-	// 			modal: false,
-	// 			onClose: function () {
-	// 				$('.cmmt').find('.cread').removeClass('cread')
-	// 			},
-	// 		}).close();
-	// 		var obj = $(this).position();
-	// 		var abj = $(this).position();
-	// 		var thispar = $(this).closest('.ctrls');
-	// 		$(this).closest('.ctrls').parent().addClass('cread');
-	// 		$(this).closest('.ctrls').parent().parent('li').addClass('cread');
-	// 		$('.layer-wrap.singo').css({
-	// 			'top': obj.top,
-	// 			'left': obj.left,
-	// 			'margin-top': '20px',
-	// 			'margin-left': '0'
-	// 		});
-	// 		$('.layer-wrap.singo').bPopup({
-	// 			closeClass: "singo-close",
-	// 			speed: 0,
-	// 			appendTo: $(thispar),
-	// 			onClose: function () {
-	// 				$('.cmmt').find('.cread').removeClass('cread')
-	// 			},
-	// 			follow: [false, false],
-	// 			position: [false, false],
-	// 			modalColor: false,
-	// 			modal: false,
-	// 		});
-	// 	});
-	// })
 </script>
 
 <script>
@@ -643,82 +552,3 @@
 		})
 	})
 </script>
-
-<!-- 
-
-<script>
-	var reg_num = /^[0-9]*$/;
-	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
-
-	$(document).on('click', '.up', function(){
-		const content_type = $(this).attr('data-contenttype');
-		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
-		update_vp(content_idx, content_type, 'up');
-	});
-	
-	$(document).on('click', '.down', function(){
-		const content_type = $(this).attr('data-contenttype');
-		const content_idx = content_type === 'post' ? post_id : $(this).attr('data-cmtidx');
-		update_vp(content_idx, content_type, 'down');
-	});
-
-	function update_vp(content_idx, content_type, like_type){
-		if(!is_member){
-			alert('로그인이 필요한 서비스입니다.');
-			return false;
-		}
-		const allowed_content_type = ['post', 'comment'];
-		const allowed_like_type = ['up', 'down'];
-
-		if(allowed_content_type.indexOf(content_type) == -1){
-			alert('비정상적인 시도입니다.1');
-			return false;
-		}
-		
-		if(!reg_num.test(content_idx)){
-			alert('비정상적인 시도입니다.2');
-			return false;
-		}
-
-		if(allowed_like_type.indexOf(like_type) == -1){
-			alert('비정상적인 시도입니다.3');
-			return false;
-		}
-
-		const title = 'VP를 '+ (like_type === 'up' ? 'UP' :'DOWN') + ' 합니다.';
-		const _point = prompt(title, 0);
-
-		//취소버튼 누를시
-		if(_point === null){
-			return false;
-		}
-
-		//숫자를 잘 입력했나 검증
-		if(!reg_num.test(_point)){
-			alert('숫자만 입력할 수 있습니다.');
-			return false;
-		}
-		$.ajax({
-			url: cb_url + '/postact/'+content_type+'_like/'+content_idx+'/'+(like_type === 'up' ? '1' :'2'),
-			type: 'get',
-			data: {
-				usePoint: Number(_point),
-			},
-			dataType: 'json',
-			async: false,
-			cache: false,
-			success: function(data) {
-				if(data.error !== undefined){
-					alert(data.error);
-				} else {
-					alert('성공적으로 처리되었습니다.');
-					location.reload();
-				}
-			},
-			error: function(){
-				alert('에러가 발생했습니다.');
-			}
-		});
-		return true;
-	}
-</script> -->

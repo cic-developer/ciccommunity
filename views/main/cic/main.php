@@ -131,38 +131,6 @@
                                     $i++;
                                 }
                             ?>
-                            <!-- <tr>
-                                <td>
-                                    <div class="vlogo">
-                                        <p class="img"><img
-                                                src="<?php echo base_url('assets/images/coin-logo02.png') ?>" alt="" />
-                                        </p>
-                                        <p class="txt">업비트 </p>
-                                    </div>
-                                </td>
-                                <td>2,520,261,975</td>
-                                <td>3,254.66</td>
-                                <td>59,025.200</td>
-                                <td>
-                                    <p class="percent down"><span>0.06 %</span></p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="vlogo">
-                                        <p class="img"><img
-                                                src="<?php echo base_url('assets/images/coin-logo03.png') ?>" alt="" />
-                                        </p>
-                                        <p class="txt">핫빗 </p>
-                                    </div>
-                                </td>
-                                <td>2,520,261,975</td>
-                                <td>3,254.66</td>
-                                <td>59,025.200</td>
-                                <td>
-                                    <p class="percent down"><span>0.06 %</span></p>
-                                </td>
-                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -176,19 +144,6 @@
                         <a href="/board/freetalk" class="more"><span>더보기</span></a>
                         <div class="list">
                             <ul>
-                                <!-- <li>
-                                    <a href="#n" class="new">
-                                        <p class="num">4</p>
-                                        <p class="btxt">
-                                            <span class="txt">업비트 싹 뺐습니다 지금 비트코인 어느정도 예상되는 어쩌고 텍스트 예시로 테스트 테스트 테스트 테스트</span>
-                                            <span class="hit">(12)</span>
-                                        </p>
-                                        <div>
-                                            <p class="stxt">블로서리 <span><img src="<?php echo base_url('assets/images/like-popo.png') ?>" alt="" /></span></p>
-                                            <p class="date">204 <span>49분전</span></p>
-                                        </div>
-                                    </a>
-                                </li> -->
 						<?php
 						if (element('list',element('popularpost', $view))) {
 							foreach (element('list',element('popularpost', $view)) as $popularpost) {

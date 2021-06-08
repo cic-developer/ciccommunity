@@ -38,25 +38,15 @@
 								<input type="text" id="mem_phone" name="mem_phone" placeholder=""
 									value="<?php echo $this->member->item('mem_phone'); ?>" readonly="">
 							</p>
-							<!-- <a href="#n" class="modify-btn"><span>핸드폰번호변경</span></a> -->
 							<a href="javascript:void(0);" id="modal_btn_phone" class="modify-btn"><span>핸드폰번호변경</span></a>
 						</div>
 					</li>
-					<!-- <li>
-						<p class="btxt">E-mail</p>
-						<div class="field">
-							<p class="chk-input w380">
-								<input type="text" placeholder="" value="dltngh2236@naver.com">
-							</p>
-						</div>
-					</li> -->
 					<li>
 						<p class="btxt">비밀번호</p>
 						<div class="field modify">
 							<p class="chk-input w380 readonly">
 								<input type="password" id="mem_password" name="mem_password" placeholder="" value="**************" readonly="">
 							</p>
-							<!-- <a href="#n" class="modify-btn"><span>비밀번호변경</span></a> -->
 							<a href="javascript:void(0);" id="modal_btn_password" class="modify-btn"><span>비밀번호변경</span></a>
 						</div>
 					</li>
@@ -66,7 +56,6 @@
 							<p class="chk-input w380 readonly">
 								<input type="text" id="mem_wallet" name="mem_wallet" placeholder="" value="<?php echo $this->member->item('mem_wallet_address'); ?>" readonly="">
 							</p>
-							<!-- <a href="#n" class="modify-btn"><span>지갑주소수정</span></a> -->
 							<a href="javascript:void(0);" id="modal_btn_wallet" class="modify-btn"><span>지갑주소수정</span></a>
 						</div>
 					</li>
