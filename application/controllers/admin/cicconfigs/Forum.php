@@ -506,8 +506,12 @@ class Forum extends CB_Controller
 
 					if($post['frm_repart_state'] == 1){
 						$this->board->delete_post($val);
-						$this->CIC_forum_model->delete_forum_info($val);
-						$this->CIC_forum_model->delete_forum_cp($val);
+
+						$where = array(
+							'pst_id' => $val
+						);
+						$this->CIC_forum_model->delete_forum_info($where, 'cic_forum_info');
+						$this->CIC_forum_model->delete_forum_cp($where, 'cic_forum_cp');
 					}
 				}
 			}
