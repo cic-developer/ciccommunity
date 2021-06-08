@@ -965,11 +965,7 @@ class Forum extends CB_Controller
 			// 기본값 설정
 		}
 		$post = $this->Post_model->get_one($pst_id);
-
-		$pev = $this->Post_extra_vars_model->get_all($pst_id);
-		
-		print_r($pev);
-		exit;
+		$pev = $this->Post_extra_vars_model->get($pst_id);
 		
 		$this->load->library('form_validation');
 
@@ -1016,6 +1012,16 @@ class Forum extends CB_Controller
 					'정상적으로 추가되었습니다'
 				);
 			}
+
+			$postupdate = array(
+				'brd_id' => 3,
+			);
+			$this->Post_model->update($pst_id, $postupdate);
+			
+			$pevupdate = array(
+				'brd_id' => 3,
+			);
+			$this->Post_extra_vars_model->update($pst_id, $pevupdate);
 
 
 			$redirecturl = admin_url($this->pagedir);

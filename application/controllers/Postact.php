@@ -2304,7 +2304,7 @@ class Postact extends CB_Controller
 			}
 
 			// 배팀 참여 마감시간 확인
-			if(strtotime($checktime) - strtotime($post['frm_bat_close_datetime']) < 0){
+			if(strtotime($checktime) - strtotime($post['frm_bat_close_datetime']) > 0){
 				$result = array(
 					'state' => '0',
 					'message' => '참여 마감시간이 지났습니다',
@@ -2313,7 +2313,7 @@ class Postact extends CB_Controller
 			}
 
 			// 포럼 마감시간 확인
-			if(strtotime($checktime) - strtotime($post['frm_close_datetime']) < 0){
+			if(strtotime($checktime) - strtotime($post['frm_close_datetime']) > 0){
 				$result = array(
 					'state' => '0',
 					'message' => '마감된 포럼입니다',
@@ -2562,7 +2562,7 @@ class Postact extends CB_Controller
 			}
 
 			// 배팀 참여 마감시간 확인
-			if(strtotime($checktime) - strtotime($post['frm_bat_close_datetime']) < 0){
+			if(strtotime($checktime) - strtotime($post['frm_bat_close_datetime']) > 0){
 				$result = array(
 					'state' => '0',
 					'message' => '참여 마감시간이 지났습니다',
@@ -2571,7 +2571,7 @@ class Postact extends CB_Controller
 			}
 
 			// 포럼 마감시간 확인
-			if(strtotime($checktime) - strtotime($post['frm_close_datetime']) < 0){
+			if(strtotime($checktime) - strtotime($post['frm_close_datetime']) > 0){
 				$result = array(
 					'state' => '0',
 					'message' => '마감된 포럼입니다',
@@ -2719,7 +2719,7 @@ class Postact extends CB_Controller
 			}
 
 			// 배팀 참여 마감시간 확인
-			if(strtotime($checktime) - strtotime($post['frm_bat_close_datetime']) < 0){
+			if(strtotime($checktime) - strtotime($post['frm_bat_close_datetime']) > 0){
 				$result = array(
 					'state' => '0',
 					'message' => '참여 마감시간이 지났습니다',
@@ -2728,7 +2728,7 @@ class Postact extends CB_Controller
 			}
 
 			// 포럼 마감시간 확인
-			if(strtotime($checktime) - strtotime($post['frm_close_datetime']) < 0){
+			if(strtotime($checktime) - strtotime($post['frm_close_datetime']) > 0){
 				$result = array(
 					'state' => '0',
 					'message' => '마감된 포럼입니다',

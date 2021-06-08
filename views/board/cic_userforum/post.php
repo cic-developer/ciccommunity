@@ -96,7 +96,7 @@
 										<p class="percent"><span>??</span></p>
 										<p class="nums"><i class="counter">0</i><span></span></p>
 										<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo2.png')?>" alt="" style="cursor:pointer;" /></p>
-										<a><span>A. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
+										<a><span>B. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
 									</div>
 								</li>
 							<?php
