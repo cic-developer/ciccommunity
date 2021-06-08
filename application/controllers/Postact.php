@@ -674,40 +674,44 @@ class Postact extends CB_Controller
 						$cp_recommended_point = element('cpc_value' ,$this->CIC_cp_config_model->get_one('','',"cpc_id = 6 AND cpc_enable = 1"));
 						$cp_recommender_point = element('cpc_value' ,$this->CIC_cp_config_model->get_one('','',"cpc_id = 8 AND cpc_enable = 1"));
 						if($vp_recommended_point){
+							$give_point = floor( $usedPoint * $vp_recommended_point );
 							$this->point->insert_vp(
 								$mem_id,
-								$usedPoint * $vp_recommended_point,
-								element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
+								$give_point,
+								element('board_name', $board) . ' ' . $give_point . ' 추천받음',
 								'post_recommended',
 								$post_id,
 								'게시글 추천받음'
 							);
 						}
 						if($vp_recommender_point){
+							$give_point = floor( $usedPoint * $vp_recommender_point );
 							$this->point->insert_vp(
 								$mem_id,
-								$usedPoint * $vp_recommender_point,
-								element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
+								$give_point,
+								element('board_name', $board) . ' ' . $give_point . ' 추천함',
 								'post_recommender',
 								$post_id,
 								'게시글 추천함'
 							);
 						}
 						if($cp_recommended_point){
+							$give_point = floor( $usedPoint * $cp_recommended_point * 100 ) / 100;
 							$this->point->insert_cp(
 								$mem_id,
-								$usedPoint * $cp_recommended_point,
-								element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
+								$give_point,
+								element('board_name', $board) . ' ' . $give_point . ' 추천받음',
 								'post_recommended',
 								$post_id,
 								'게시글 추천받음'
 							);
 						}
 						if($cp_recommender_point){
+							$give_point = floor( $usedPoint * $cp_recommender_point * 100 ) / 100;
 							$this->point->insert_cp(
 								$mem_id,
-								$usedPoint * $cp_recommender_point,
-								element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
+								$give_point,
+								element('board_name', $board) . ' ' . $give_point . ' 추천함',
 								'post_recommender',
 								$post_id,
 								'게시글 추천함'
@@ -715,6 +719,54 @@ class Postact extends CB_Controller
 						}
 					} else {
 						//비추천의 경우
+						$vp_recommended_point = element('vpc_value' ,$this->CIC_vp_config_model->get_one('','',"vpc_id = 7 AND vpc_enable = 1"));
+						$vp_recommender_point = element('vpc_value' ,$this->CIC_vp_config_model->get_one('','',"vpc_id = 9 AND vpc_enable = 1"));
+						$cp_recommended_point = element('cpc_value' ,$this->CIC_cp_config_model->get_one('','',"cpc_id = 7 AND cpc_enable = 1"));
+						$cp_recommender_point = element('cpc_value' ,$this->CIC_cp_config_model->get_one('','',"cpc_id = 9 AND cpc_enable = 1"));
+						if($vp_recommended_point){
+							$give_point = floor( $usedPoint * $vp_recommended_point );
+							$this->point->insert_vp(
+								$mem_id,
+								$give_point,
+								element('board_name', $board) . ' ' . $give_point . ' 추천받음',
+								'post_recommended',
+								$post_id,
+								'게시글 추천받음'
+							);
+						}
+						if($vp_recommender_point){
+							$give_point = floor( $usedPoint * $vp_recommender_point );
+							$this->point->insert_vp(
+								$mem_id,
+								$give_point,
+								element('board_name', $board) . ' ' . $give_point . ' 추천함',
+								'post_recommender',
+								$post_id,
+								'게시글 추천함'
+							);
+						}
+						if($cp_recommended_point){
+							$give_point = floor( $usedPoint * $cp_recommended_point * 100 ) / 100;
+							$this->point->insert_cp(
+								$mem_id,
+								$give_point,
+								element('board_name', $board) . ' ' . $give_point . ' 추천받음',
+								'post_recommended',
+								$post_id,
+								'게시글 추천받음'
+							);
+						}
+						if($cp_recommender_point){
+							$give_point = floor( $usedPoint * $cp_recommender_point * 100 ) / 100;
+							$this->point->insert_cp(
+								$mem_id,
+								$give_point,
+								element('board_name', $board) . ' ' . $give_point . ' 추천함',
+								'post_recommender',
+								$post_id,
+								'게시글 추천함'
+							);
+						}
 					}
 				}
 				break;
