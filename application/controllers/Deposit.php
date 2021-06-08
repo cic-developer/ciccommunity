@@ -18,7 +18,7 @@ class Deposit extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_cp', 'Member', 'CIC_forum', 'Post');
+	protected $models = array('CIC_cp', 'Member', 'CIC_forum_config', 'Post');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -70,10 +70,10 @@ class Deposit extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
         
         $mem_id = (int) $this->member->item('mem_id');
-        $mem_cp = $this->member->item('mem_cp');
-        $deposit_meta = (int)  $this->CIC_forum_model->item('forum_deposit');
-        $mem_deposit = $this->member->item('mem_deposit');
-        
+        $mem_cp = (double) $this->member->item('mem_cp');
+        $deposit_meta = (double) $this->CIC_forum_config_model->item('forum_deposit');
+        $mem_deposit = (double) $this->member->item('mem_deposit');
+
         if( $mem_cp - $deposit_meta < 0){
             $result = array(
                 'state' => '0',

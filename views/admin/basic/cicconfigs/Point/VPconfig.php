@@ -69,7 +69,7 @@
 				<div class="col-sm-8">
 					<label for="defualt_using_point" class="control-label">
 						<input type="checkbox" id="defualt_using_point" value="vp" <?php echo element('cfg_value',element('defualt_using_point',$view)) === 'vp' ? 'checked':''?> name="defualt_using_point"/>
-						VP를 기본 포인트로 사용합니다.(변경을 원할시 CP의 사용포인트 체크박스를 선택해주세요)
+						VP를 기본 포인트로 사용합니다.(변경을 원할시 CP의 사용포인트 체크박스를 선택해주세요/현재 작동하지 않습니다. 체크박스를 수정하지 말아주세요.)
 					</label>
 				</div>
 			</div>

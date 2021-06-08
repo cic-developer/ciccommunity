@@ -43,7 +43,7 @@ class Forum extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('pagination', 'querystring', 'member', ));
+		$this->load->library(array('pagination', 'querystring', 'member', 'upload'));
 	}
 
 	/**
@@ -617,6 +617,7 @@ class Forum extends CB_Controller
 			$writer_id = $post['mem_id']; // 작성자 id
 			$writer_info = $this->Member_model->get_one($writer_id);
 			$writer_cp = (double) $writer_info['mem_cp'];
+			$writer_deposit = (int) $writer_info['mem_deposit'];
 			$writer_changed_cp = $writer_cp + $writer_reward;
 
 			$arr = array(
@@ -721,7 +722,8 @@ class Forum extends CB_Controller
 			 * 배분 완료 state
 			 */
 
-			 // 예치금 제거 + cp 반환
+ 			// 1 2 3 test
+			// 예치금 제거 + cp 반환
 			if($writer_deposit){
 				$arr = array(
 					'mem_cp' => $writer_cp + $writer_deposit,
@@ -932,6 +934,57 @@ class Forum extends CB_Controller
 			$pevupdate = array(
 				'brd_id' => 3,
 			);
+
+			$this->load->library('upload');
+			if (isset($_FILES) && isset($_FILES['frm_image']) && isset($_FILES['frm_image']['name']) && $_FILES['frm_image']['name']) {
+				$upload_path = config_item('uploads_dir') . '/forum/';
+				if (is_dir($upload_path) === false) {
+					mkdir($upload_path, 0707);
+					$file = $upload_path . 'index.php';
+					$f = @fopen($file, 'w');
+					@fwrite($f, '');
+					@fclose($f);
+					@chmod($file, 0644);
+				}
+				$upload_path .= cdate('Y') . '/';
+				if (is_dir($upload_path) === false) {
+					mkdir($upload_path, 0707);
+					$file = $upload_path . 'index.php';
+					$f = @fopen($file, 'w');
+					@fwrite($f, '');
+					@fclose($f);
+					@chmod($file, 0644);
+				}
+				$upload_path .= cdate('m') . '/';
+				if (is_dir($upload_path) === false) {
+					mkdir($upload_path, 0707);
+					$file = $upload_path . 'index.php';
+					$f = @fopen($file, 'w');
+					@fwrite($f, '');
+					@fclose($f);
+					@chmod($file, 0644);
+				}
+
+                $uploadconfig = array();
+				$uploadconfig['upload_path'] = $upload_path;
+				$uploadconfig['allowed_types'] = 'jpg|jpeg|png|gif';
+				$uploadconfig['max_size'] = '2000';
+				$uploadconfig['max_width'] = '1000';
+				$uploadconfig['max_height'] = '1000';
+				$uploadconfig['encrypt_name'] = true;
+
+				$this->upload->initialize($uploadconfig);
+
+				if ($this->upload->do_upload('ban_image')) {
+					$img = $this->upload->data();
+					$updatephoto = cdate('Y') . '/' . cdate('m') . '/' . element('file_name', $img);
+				} else {
+					$file_error = $this->upload->display_errors();
+                    print_r($file_error);
+                    exit;
+				}
+            }
+
 
 			$this->Post_extra_vars_model->update($pst_id, $pevupdate, $where);
 			if ($this->input->post($primary_key)) {
