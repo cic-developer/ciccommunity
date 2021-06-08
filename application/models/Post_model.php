@@ -860,6 +860,7 @@ class Post_model extends CB_Model
 		$this->db->select('post.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point');
 		$this->db->from($this->_table);
 		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
+		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
 
 		if ($where) {
 			$this->db->where($where);
@@ -903,6 +904,8 @@ class Post_model extends CB_Model
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
 		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
+		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
+		
 		if ($where) {
 			$this->db->where($where);
 		}
@@ -942,6 +945,7 @@ class Post_model extends CB_Model
 		return $result;
 	}
 
+	// 포럼 관련 데이터를 join  하기 위하여 만들어진 함수입니다.
 	public function get_one_join($primary_value = '', $select = '', $where = '', $join = '')
 	{
 		$result = $this->_get_join($join, $primary_value, $select, $where, 1);

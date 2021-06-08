@@ -146,15 +146,22 @@ class Deposit extends CB_Controller
         $where3 = array(
             'brd_id' => 3,
             'mem_id' => $mem_id,
-            'cic_forum_info.frm_close_datetime >=' => $checktime,
+            'cic_forum_info.frm_repart_state' => null
         );
         $where6 = array(
             'brd_id' => 6,
             'mem_id' => $mem_id,
             'post_category' => '1',
         );
+
+        $select3 = 'post.*, cic_forum_info.frm_repart_state';
+			$join3 = array(
+				'cic_forum_info',
+				'post.post_id = cic_forum_info.pst_id',
+				'left'
+			);
         
-        $post3 = $this->Post_model->get_one('', '', $where3);
+        $post3 = $this->Post_model->get_one_join('', $select3, $where3, $join3);
         $post6 = $this->Post_model->get_one('', '', $where6);
 
         if($post3 || $post6) {

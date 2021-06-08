@@ -126,7 +126,7 @@
 									<a href="<?php echo goto_url(element('posturl', $like_point_ranking_freetalk)); ?>">
 										<span class="num"><?php echo number_format(element('num', $like_point_ranking_freetalk)); ?></span>
 										<div class="my-info">
-											<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>" alt=""></p>
+											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $like_point_ranking_freetalk), 30, 30)?>" alt=""></p>
 											<p class="rtxt"><?php echo html_escape(element('post_userid', $like_point_ranking_freetalk)); ?></p>
 										</div>
 										<span class="txt"><?php echo html_escape(element('post_title', $like_point_ranking_freetalk)); ?></span>
@@ -151,12 +151,13 @@
 						<?php
 						if (element('list',element('dislike_point_ranking_freetalk', $view))) {
 							foreach (element('list',element('dislike_point_ranking_freetalk', $view)) as $dislike_point_ranking_freetalk) {
+								print_r($dislike_point_ranking_freetalk);
 								?>
 								<li>
 									<a href="<?php echo goto_url(element('posturl', $dislike_point_ranking_freetalk)); ?>">
 										<span class="num"><?php echo number_format(element('num', $dislike_point_ranking_freetalk)); ?></span>
 										<div class="my-info">
-											<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>" alt=""></p>
+											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', $dislike_point_ranking_freetalk, 30, 30)?>" alt=""></p>
 											<p class="rtxt"><?php echo html_escape(element('post_userid', $dislike_point_ranking_freetalk)); ?></p>
 										</div>
 										<span class="txt"><?php echo html_escape(element('post_title', $dislike_point_ranking_freetalk)); ?></span>

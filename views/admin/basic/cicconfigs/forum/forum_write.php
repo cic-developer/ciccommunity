@@ -18,7 +18,7 @@
 					<?php
 					if (element('ban_image', element('data', $view))) {
 					?>
-						<img src="<?php echo banner_image_url(element('ban_image', element('data', $view)), '', 150); ?>" alt="배너 이미지" title="배너 이미지" />
+						<img src="<?php echo banner_image_url(element('frm_image', element('data', $view)), '', 150); ?>" alt="배너 이미지" title="배너 이미지" />
 						<!-- <label for="ban_image_del">
 							<input type="checkbox" name="ban_image_del" id="ban_image_del" value="1" <?php echo set_checkbox('ban_image_del', '1'); ?> /> 삭제
 						</label> -->

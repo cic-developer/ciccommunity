@@ -79,8 +79,7 @@ class Board_write extends CB_Controller
 			$where3 = array(
 				'brd_id' => 3,
 				'mem_id' => $mem_id,
-				// 'post_datetime >=' => $checktime,
-				// 'post_category' => 1,
+				'cic_forum_info.frm_repart_state' => null
 			);
 			$where6 = array(
 				'brd_id' => 6,
@@ -97,11 +96,6 @@ class Board_write extends CB_Controller
 
 			$post3 = $this->Post_model->get_one_join('', $select3, $where3, $join3);
 			$post6 = $this->Post_model->get_one('', '', $where6);
-
-
-
-			print_r($post3);
-			exit;
 
 			// 관리자가 아닌 일반 유저인지 확인
 			if($this->member->is_admin()){
