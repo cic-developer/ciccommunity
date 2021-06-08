@@ -533,6 +533,7 @@ class Forum extends CB_Controller
 
 			// validation을 위한 임시 데이터 저장
 			$win_cp = $a_cp >= $b_cp ? $a_cp : $b_cp;
+			$win_option = $a_cp >= $b_cp ? 1 : 2;
 			$this->session->set_userdata('total_cp', $total_cp);
 			$this->session->set_userdata('win_cp', $win_cp);
 		}
@@ -642,10 +643,19 @@ class Forum extends CB_Controller
 				'pst_id' => $pst_id
 			);
 			$forum_bats = $this->CIC_forum_model->get_forum_bat($where);
+
+			print_r($forum_bats);
+			exit;
             
 			// 배팅 분배
 			if ($forum_bats && is_array($forum_bats)) {
 				foreach ($forum_bats as $key => $value) {
+
+					// 패배 진영
+					if($value['cfc_option'] != $win_option){
+
+					}else {
+					// 승리 진영
 					$mem_id = $value['mem_id'];
 					$cfc_cp = (double) $value['cfc_cp'];
 					$member_info = $this->Member_model->get_one($mem_id);
@@ -666,6 +676,7 @@ class Forum extends CB_Controller
                     
 					// cic_cp테이블에 log기록
 					$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '투표자', $give_cp, '@byadmin', $admin_id , '포럼보상지급');
+					}
 				}
 			}
 			/**
