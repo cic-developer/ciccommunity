@@ -18,7 +18,7 @@ class Main extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Board', 'Post', 'Search_keyword', 'CIC_Banner','Post_meta', 'Post_extra_vars', 'CIC_member_level_config', 'CIC_forum');
+	protected $models = array('Board', 'Post', 'Search_keyword', 'CIC_Banner','Post_meta', 'Post_extra_vars', 'CIC_member_level_config', 'CIC_forum', 'Board_category');
 
 	/**
 	 * 헬퍼를 로딩합니다

@@ -18,14 +18,14 @@
 					<?php
 					if (element('ban_image', element('data', $view))) {
 					?>
-						<img src="<?php echo banner_image_url(element('frm_image', element('data', $view)), '', 150); ?>" alt="배너 이미지" title="배너 이미지" />
+						<img src="<?php echo banner_image_url(element('frm_image', element('data', $view)), '', 150); ?>" alt="포럼 이미지" title="포럼 이미지" />
 						<!-- <label for="ban_image_del">
 							<input type="checkbox" name="ban_image_del" id="ban_image_del" value="1" <?php echo set_checkbox('ban_image_del', '1'); ?> /> 삭제
 						</label> -->
 					<?php
 					}
 					?>
-					<input type="file" name="ban_image" id="ban_image" />
+					<input type="file" name="frm_image" id="frm_image" />
 					<p class="help-block">gif, jpg, png 파일 업로드가 가능합니다</p>
 				</div>
 			</div>

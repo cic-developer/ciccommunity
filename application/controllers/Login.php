@@ -29,6 +29,12 @@ class Login extends CB_Controller
 	{
 		parent::__construct();
 
+		/**
+		 * 라이브러리를 로딩합니다
+		 */
+		$this->load->library(array('checkplus'));
+
+
 	}
 
 
@@ -51,9 +57,13 @@ class Login extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
+		$view['view']['id_enc_data'] = $this->checkplus->main('login', 'id_auth_phone_success', 'id_auth_phone_fail');
+		$view['view']['pw_enc_data'] = $this->checkplus->main('login', 'pw_auth_phone_success', 'pw_auth_phone_fail');
+		// $view['view']['dec_data'] = $this->session->userdata('dec_data');
+
 		$this->load->library(array('form_validation'));
 
-		 if ( ! function_exists('password_hash')) {
+		if ( ! function_exists('password_hash')) {
 			$this->load->helper('password');
 		}
 

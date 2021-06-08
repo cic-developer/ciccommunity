@@ -66,8 +66,13 @@
 			<div class="other">
 				<ul>
 					<li>
-						<p>* 아이디를 잊어버렸나요?</p>
-						<a id="idModal" ><span>아이디 찾기</span></a>
+						<form name="form_chk1" action="post" id="id_form_chk">
+							<p>* 아이디를 잊어버렸나요?</p>
+							<input type="hidden" name="m" value="checkplusService">
+							<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('id_enc_data', $view)); ?>">
+							<a href="javascript:fnPopup1();" id="ath_nice_phone" class="modify-btn"><span>아이디 찾기</span></a>
+						</form>
+						<!-- <a id="idModal" ><span>아이디 찾기</span></a> -->
 					</li>
 					<li>
 						<p>* 비밀번호를 잊어버렸나요? </p>

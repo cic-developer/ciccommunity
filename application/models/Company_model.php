@@ -34,7 +34,8 @@ class Company_model extends CB_Model
 
     public function get_company_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
     {
-
+		print_r($orderby);
+		exit;
         if ( ! in_array(strtolower($orderby), $this->allow_order)) {
 			$orderby = 'comp_id asc';
 		}

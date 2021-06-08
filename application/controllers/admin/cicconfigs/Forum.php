@@ -1070,19 +1070,34 @@ class Forum extends CB_Controller
 				/**
 				 * 게시물을 새로 입력하는 경우입니다
 				 */
-				$updatedata['ban_datetime'] = cdate('Y-m-d H:i:s');
-				$updatedata['ban_ip'] = $this->input->ip_address();
-				$updatedata['mem_id'] = $this->member->item('mem_id');
-                $updatedata['ban_hit'] = 0;
+				$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
+				$updatedata['frm_close_datetime'] = $frm_close_datetime;
+				$updatedata['pst_id'] = $pst_id;
 
-				$this->{$this->modelname}->insert($updatedata);
+				$where = array(
+					'post_id' => $pst_id,
+				);
+				$postupdate = array(
+					'brd_id' => 3,
+				);
+				$this->Post_model->update($pst_id, $postupdate, $where);
+
+				$where = array(
+					'post_id' => $pst_id
+				);
+				$pevupdate = array(
+					'brd_id' => 3,
+				);
+				$this->Post_extra_vars_model->update($pst_id, $pevupdate, $where);
+
+				$this->CIC_forum_info_model->insert($updatedata);
 				$this->session->set_flashdata(
 					'message',
 					'정상적으로 입력되었습니다'
 				);
 			}
 			//오늘 생성된 배너 캐시를 삭제합니다.
-			$this->cache->delete('banner/banner-info-' . cdate('Y-m-d'));
+			$this->cache->delete('forum/forum-info-' . cdate('Y-m-d'));
 
 			// 이벤트가 존재하면 실행합니다
 			Events::trigger('after', $eventname);
