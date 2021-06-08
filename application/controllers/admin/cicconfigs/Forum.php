@@ -47,7 +47,7 @@ class Forum extends CB_Controller
 	}
 
 	/**
-	 * 관리자 출급요청목록 메인 페이지입니다.
+	 * 관리자 포럼설정 기본정보 페이지입니다
 	 */
 	public function index()
 	{
@@ -313,6 +313,7 @@ class Forum extends CB_Controller
 		redirect($redirecturl);
 	}
 
+	// 진행중포럼 페이지입니다
 	public function proceeding_forum()
 	{
 		$eventname = 'event_admin_cicconfigs_proceeding_forum_list';
@@ -345,7 +346,9 @@ class Forum extends CB_Controller
 		$this->{$this->modelname}->allow_search_field = array('post_id', 'post_title', 'post_content'); // 검색이 가능한 필드
 		$this->{$this->modelname}->search_field_equal = array('post_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('post_id', 'post_hit', 'post_datetime', 'cic_forum_info.frm_bat_close_datetime', 'cic_forum_info.frm_close_datetime', 'cic_forum_info.frm_total_money');
-		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
+
+		// 현재 시간이 포럼 마감시간보다 작을 경우
+		$checktime = cdate('Y-m-d H:i:s', ctimestamp());// - 24 * 60 * 60);
 		$where = array(
 			'brd_id' => 3,
 			'cic_forum_info.frm_close_datetime >=' => $checktime
@@ -395,6 +398,7 @@ class Forum extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
+	// 마감된포럼 페이지입니다
 	public function close_forum()
 	{
 		$eventname = 'event_admin_cicconfigs_close_forum_list';
@@ -428,6 +432,7 @@ class Forum extends CB_Controller
 		$this->{$this->modelname}->search_field_equal = array('post_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('post_id', 'post_hit', 'post_datetime', 'cic_forum_info.frm_bat_close_datetime'
 																, 'cic_forum_info.frm_close_datetime', 'cic_forum_total_cp');
+		// 현재 시간이 포럼 종료 시간보다 많을 경우
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp());
 		$where = array(
 			'brd_id' => 3,

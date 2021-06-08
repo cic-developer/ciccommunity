@@ -440,7 +440,6 @@ class Withdraws extends CB_Controller
 			/**
 			 * 반려한 출금 요청건의 상태를 0으로 수정합니다.
 			 * cic_withdraw
-			 * 리턴값이 무조건 1만나옴. ??????<=
 			 */
 			$result = $this->{$this->modelname}->set_withdraw_retire($widIdx, $content, $adminid, $adminip, $memo);
 		
