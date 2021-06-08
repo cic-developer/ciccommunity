@@ -198,10 +198,10 @@ class CIC_forum_model extends CB_Model
 		$this->db->from('cic_forum_info');
 		$this->db->join('cic_forum_cp', 'cic_forum_info.pst_id = cic_forum_cp.pst_id', 'left');
 
+		$this->db->where('cic_forum_info.pst_id', $primary_value);
 		if ($primary_value) {
 			$this->db->where($this->primary_key, $primary_value);
 		}
-		$this->db->where('cic_forum_info.pst_id', $primary_value);
 
 
 		if ($where) {
