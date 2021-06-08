@@ -678,7 +678,8 @@ class Forum extends CB_Controller
 						$cfc_cp = (double) $value['cfc_cp'];
 						// => 승리 배분 cp
 						$give_cp =  round($cfc_cp * $repart_ratio, 2);
-						$changed_cp = $member_info['mem_cp'] + $give_cp;
+						$mem_cp = (double) $member_info['mem_cp'];
+						$changed_cp = $mem_cp + $give_cp;
 						// => 회원 승리 전적
 						$mem_forum_win = (int) $member_info['mem_forum_win'];
 						$change_mem_forum_win = $mem_forum_win + 1;
@@ -718,6 +719,48 @@ class Forum extends CB_Controller
 			/**
 			 * 배분 완료 state
 			 */
+
+			 // 예치금 제거 + cp 반환
+			// if($mem_deposit){
+			// 	$arr = array(
+			// 		'mem_cp' => $mem_cp + $mem_deposit,
+			// 		'mem_deposit' => null,
+			// 	);
+			// 	$memResult = $this->Member_model->set_user_modify($mem_id, $arr);
+				
+			// 	if($memResult == 1){
+			// 		// cp 로그 기록
+			// 		$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '', $mem_deposit, '@byself', $mem_id, '예치금 반환');
+					
+			// 		$result = array(
+			// 			'state' => '1',
+			// 			'message' => '예치금이 반환 되었습니다',
+			// 		);
+			// 		exit(json_encode($result));
+	
+			// 		// $logResult false반환값 확인 필요7
+			// 		// if($logResult == 1){
+			// 		// }else {
+			// 		//     $result = array(
+			// 		//         'state' => '0',
+			// 		//         'message' => '예치금 반환후 로그기록에 실패하였습니다',
+			// 		//     );
+			// 		//     exit(json_encode($result));
+			// 		// }
+			// 	}else {
+			// 		$result = array(
+			// 			'state' => '0',
+			// 			'message' => '예치금이 반환에 실패하였습니다',
+			// 		);
+			// 		exit(json_encode($result));
+			// 	}
+			// }else {
+			// 	$result = array(
+			// 		'state' => '0',
+			// 		'message' => '반환할 예치금이 없습니다',
+			// 	);
+			// 	exit(json_encode($result));
+			// }
 
 			$param =& $this->querystring;
 			$redirecturl = admin_url($this->pagedir . '/close_forum');
@@ -816,181 +859,8 @@ class Forum extends CB_Controller
 		return true;
 	}
 
-	//승인대기 포럼을 진행중인 포럼으로 승격시 폼 벨리데이션을 통한 대표이미지 등록, 배팅마감시간, 포럼 마감시간 설정 함수
-	// public function forum_write($pst_id = 0)
-	// {
-	// 	// 이벤트 라이브러리를 로딩합니다
-	// 	$eventname = 'event_admin_cicconfig_forum_write';
-	// 	$this->load->event($eventname);
 
-	// 	$view = array();
-	// 	$view['view'] = array();
-
-	// 	// 이벤트가 존재하면 실행합니다
-	// 	$view['view']['event']['before'] = Events::trigger('before', $eventname);
-
-
-	// 	/**
-	// 	 * pst_id or post_id 숫자가 아닐경우 에러처리
-	// 	 */
-	// 	if ($pst_id) {
-	// 		$pst_id = (int) $pst_id;
-	// 		if (empty($pst_id) OR $pst_id < 1) {
-	// 			show_404();
-	// 		}
-	// 	}
-	// 	$primary_key = $this->CIC_forum_info_model->primary_key;
-
-
-	// 	/**
-	// 	 * 수정 페이지일 경우 기존 데이터를 가져옵니다
-	// 	 */
-	// 	$getdata = array();
-	// 	if ($pst_id) {
-	// 		$getdata = $this->CIC_forum_info_model->get_one($pst_id);
-	// 	}
-
-	// 	$this->load->library('form_validation');
-
-	// 	$config = array(
-	// 		array(
-	// 			'field' => 'frm_bat_close_datetime',
-	// 			'label' => '배팅 종료일',
-	// 			'rules' => 'trim|required',
-	// 		),
-	// 		array(
-	// 			'field' => 'frm_close_datetime',
-	// 			'label' => '포럼 종료일',
-	// 			'rules' => 'trim|required',
-	// 		),
-	// 	);
-
-	// 	$this->form_validation->set_rules($config);
-
-	// 	if ($this->form_validation->run() === false) {
-
-	// 		$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-
-	// 		if($pst_id) {
-	// 			if(empty($getdata['frm_bat_close_datetime']) OR $getdata['frm_bat_close_datetime'] === '0000-00-00 00:00:00') {
-	// 				$getdata['frm_bat_close_datetime'] = '';
-	// 			}
-	// 			if(empty($getdata['frm_close_datetime']) OR $getdata['frm_close_datetime'] === '0000-00-00 00:00:00') {
-	// 				$getdata['frm_close_datetime'] = '';
-	// 			}
-	// 			$view['view']['data'] = $getdata;
-	// 		}
-
-	// 		$view['view']['primary_key'] = $primary_key;
-
-	// 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-
-	// 		$layoutconfig = array('layout' => 'layout', 'skin' => 'forum_write');
-	// 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-	// 		$this->data = $view;
-	// 		$this->layout = element('layout_skin_file', element('layout', $view));
-	// 		$this->view = element('view_skin_file', element('layout', $view));
-	// 	} else {
-	// 		/**
-	// 		 * 유효성 검사를 통과한 경우입니다.
-	// 		 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
-	// 		 */
-
-	// 		 // $upload_path => uploads/banner/
-    //         $this->load->library('upload');
-	// 		if (isset($_FILES) && isset($_FILES['frm_image']) && isset($_FILES['frm_image']['name']) && $_FILES['frm_image']['name']) {
-	// 			$upload_path = config_item('uploads_dir') . '/forum/';
-	// 			if (is_dir($upload_path) === false) {
-	// 				mkdir($upload_path, 0707);
-	// 				$file = $upload_path . 'index.php';
-	// 				$f = @fopen($file, 'w');
-	// 				@fwrite($f, '');
-	// 				@fclose($f);
-	// 				@chmod($file, 0644);
-	// 			}
-	// 			$upload_path .= cdate('Y') . '/';
-	// 			if (is_dir($upload_path) === false) {
-	// 				mkdir($upload_path, 0707);
-	// 				$file = $upload_path . 'index.php';
-	// 				$f = @fopen($file, 'w');
-	// 				@fwrite($f, '');
-	// 				@fclose($f);
-	// 				@chmod($file, 0644);
-	// 			}
-	// 			$upload_path .= cdate('m') . '/';
-	// 			if (is_dir($upload_path) === false) {
-	// 				mkdir($upload_path, 0707);
-	// 				$file = $upload_path . 'index.php';
-	// 				$f = @fopen($file, 'w');
-	// 				@fwrite($f, '');
-	// 				@fclose($f);
-	// 				@chmod($file, 0644);
-	// 			}
-	// 			$uploadconfig = array();
-	// 			$uploadconfig['upload_path'] = $upload_path;
-	// 			$uploadconfig['allowed_types'] = 'jpg|jpeg|png|gif';
-	// 			$uploadconfig['max_size'] = '2000';
-	// 			$uploadconfig['max_width'] = '1000';
-	// 			$uploadconfig['max_height'] = '1000';
-	// 			$uploadconfig['encrypt_name'] = true;
-
-	// 			$this->upload->initialize($uploadconfig);
-
-	// 			if ($this->upload->do_upload('frm_image')) {
-	// 				$img = $this->upload->data();
-	// 				$updatephoto = cdate('Y') . '/' . cdate('m') . '/' . element('file_name', $img);
-	// 			} else {
-	// 				$file_error = $this->upload->display_errors();
-    //                 print_r($file_error);
-    //                 exit;
-	// 			}
-    //         }
-
-	// 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-
-	// 		$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
-	// 		$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
-		
-	// 		$updatedata = array(
-	// 			'frm_bat_close_datetime' => $this->input->post('frm_bat_close_datetime', null, ''),
-	// 			'frm_close_datetime' => $this->input->post('frm_close_datetime', null, ''),
-	// 		);
-
-	// 		if($updatephoto){
-    //             $updatedata['frm_image'] = $updatephoto;
-    //         }
-
-	// 		if($this->input->post($primary_key)) {
-	// 			$this->CIC_forum_info_model->update($this->input->post($primary_key, $updatedata));
-	// 			$this->session->set_flashdata(
-	// 				'message',
-	// 				'정상적으로 수정되었습니다.'
-	// 			);
-	// 		} else {
-	// 			/**
-	// 			 * 게시물을 새로 입력하는 경우입니다
-	// 			 */
-	// 			$this->CIC_forum_info_model->update($this->input->post($primary_key, $updatedata));
-	// 			$this->session->set_flashdata(
-	// 				'message',
-	// 				'정상적으로 수정되었습니다.'
-	// 			);
-	// 		}
-
-	// 		Events::trigger('after', $eventname);
-
-	// 		/**
-	// 		 * 게시물의 신규입력 또는 수정작업이 끝난 후 목록 페이지로 이동합니다
-	// 		 */
-	// 		$param =& $this->querystring;
-	// 		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-
-	// 		redirect($redirecturl);
-	// 	}
-	// }
-	//forum_write 끝
-
-	public function forum_write($pst_id = 0, $post_id = 0)
+	public function forum_write($pst_id = 0)
 	{
 		$eventname = 'event_admin_cicconfig_forum_write';
 		$this->load->event($eventname);
@@ -1017,7 +887,6 @@ class Forum extends CB_Controller
 		$primary_key = $this->CIC_forum_info_model->primary_key;
 
 
-
 		$getdata = array();
 		if ($pst_id) {
 			$getdata = $this->CIC_forum_info_model->get_one($pst_id);
@@ -1028,7 +897,7 @@ class Forum extends CB_Controller
 		$pev = $this->Post_extra_vars_model->get($pst_id);
 		
 		$this->load->library('form_validation');
-
+		
 		$config = array(
 			array(
 				'field' => 'frm_bat_close_datetime',
@@ -1041,7 +910,7 @@ class Forum extends CB_Controller
 				'rules' => 'trim|required',
 			),
 		);
-
+		
 		$this->form_validation->set_rules($config);
 		
 		if ($this->form_validation->run() === false) {
@@ -1058,6 +927,23 @@ class Forum extends CB_Controller
 				'frm_close_datetime' => $this->input->post('frm_close_datetime', null, ''),
 			);
 
+			$where = array(
+				'post_id' => $pst_id,
+			);
+			$postupdate = array(
+				'brd_id' => 3,
+			);
+			$this->Post_model->update($pst_id, $postupdate, $where);
+			
+
+			$where = array(
+				'pst_id' => $pst_id
+			);
+			$pevupdate = array(
+				'brd_id' => 3,
+			);
+			
+			$this->Post_extra_vars_model->update($pst_id, $pevupdate, $where);
 			if ($this->input->post($primary_key)) {
 				$this->CIC_forum_info_model->update($this->input->post($primary_key), $updatedata);
 				$this->session->set_flashdata(
@@ -1071,23 +957,6 @@ class Forum extends CB_Controller
 					'정상적으로 추가되었습니다'
 				);
 			}
-			// $postwhere = array(
-			// 	'post_id' => $pst_id,
-			// );
-			$postupdate = array(
-				'brd_id' => 3,
-			);
-			$this->Post_model->update($pst_id, $postupdate);
-			
-
-			// $pevwhere = array(
-			// 	'post_id' => $pst_id,
-			// );
-			$pevupdate = array(
-				'brd_id' => 3,
-			);
-			$this->Post_extra_vars_model->update($pst_id, $pevupdate);
-
 
 			$redirecturl = admin_url($this->pagedir);
 			redirect($redirecturl);

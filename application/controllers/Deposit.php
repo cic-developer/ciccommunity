@@ -100,15 +100,6 @@ class Deposit extends CB_Controller
                 );
                 exit(json_encode($result));
 
-                // $logResult false반환값 확인 필요
-                // if($logResult == 1) {
-                // }else {
-                //     $result = array(
-                //         'state' => '0',
-                //         'message' => '예치금을 넣은후 로그기록에 실패하였습니다',
-                //     );
-                //     exit(json_encode($result));
-                // }
             }else {
                 $result = array(
                     'state' => '0',
