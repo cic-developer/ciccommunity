@@ -107,7 +107,7 @@
 									<a href="<?php echo goto_url(element('posturl', $like_point_ranking_writer)); ?>">
 										<span class="num"><?php echo number_format(element('num', $like_point_ranking_writer)); ?></span>
 										<div class="my-info">
-											<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>" alt=""></p>
+											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $like_point_ranking_writer), 30, 30)?>" alt=""></p>
 											<p class="rtxt"><?php echo html_escape(element('post_userid', $like_point_ranking_writer)); ?></p>
 										</div>
 										<span class="txt"><?php echo html_escape(element('post_title', $like_point_ranking_writer)); ?></span>
@@ -137,7 +137,7 @@
 									<a href="<?php echo goto_url(element('posturl', $dislike_point_ranking_writer)); ?>">
 										<span class="num"><?php echo number_format(element('num', $dislike_point_ranking_writer)); ?></span>
 										<div class="my-info">
-											<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png') ?>" alt=""></p>
+											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $dislike_point_ranking_writer), 30, 30)?>" alt=""></p>
 											<p class="rtxt"><?php echo html_escape(element('post_userid', $dislike_point_ranking_writer)); ?></p>
 										</div>
 										<span class="txt"><?php echo html_escape(element('post_title', $dislike_point_ranking_writer)); ?></span>
