@@ -761,8 +761,7 @@ class Forum extends CB_Controller
 			return false;
 		}
 
-		// 총 cp보다 보상 cp가 많은 경우
-		if((double) $total_cp - (double) $str < 0){
+		if((double) $total_cp - (double) $win_cp < (double) $str){
 			$this->form_validation->set_message(
 				'_writer_reward_check',
 				'보상 설정 오류'
@@ -783,6 +782,7 @@ class Forum extends CB_Controller
 
 		return true;
 	}
+
 	//승인대기 포럼을 진행중인 포럼으로 승격시 폼 벨리데이션을 통한 대표이미지 등록, 배팅마감시간, 포럼 마감시간 설정 함수
 	// public function forum_write($pst_id = 0)
 	// {
@@ -1050,11 +1050,8 @@ class Forum extends CB_Controller
 			$this->Post_extra_vars_model->update($pst_id, $pevupdate);
 
 
-			$layoutconfig = array('layout' => 'layout', 'skin' => 'forum_write');
-			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-			$this->data = $view;
-			$this->layout = element('layout_skin_file', element('layout', $view));
-			$this->view = element('view_skin_file', element('layout', $view));
+			$redirecturl = admin_url($this->pagedir);
+			redirect($redirecturl);
 		}
 
 		$param =& $this->querystring;
