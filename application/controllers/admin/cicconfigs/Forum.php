@@ -1039,14 +1039,22 @@ class Forum extends CB_Controller
 				);
 			}
 
+			$postwhere = array(
+				'post_id' => $pst_id,
+			);
 			$postupdate = array(
 				'brd_id' => 3,
 			);
-			$this->Post_model->update($pst_id, $postupdate);
+			$this->Post_model->update($postwhere, $postupdate);
+			
+			
+			$pevwhere = array(
+				'post_id' => $pst_id,
+			);
 			$pevupdate = array(
 				'brd_id' => 3,
 			);
-			$this->Post_extra_vars_model->update($pst_id, $pevupdate);
+			$this->Post_extra_vars_model->update($pevwhere, $pevupdate);
 
 
 			$redirecturl = admin_url($this->pagedir);
