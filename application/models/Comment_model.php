@@ -99,7 +99,8 @@ class Comment_model extends CB_Model
 			}
 		}
 
-		$this->db->select('comment.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point, member.mem_level');
+		// member.mem_forum_win, member.mem_forum_lose를 추가하였습니다.
+		$this->db->select('comment.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point, member.mem_level, member.mem_forum_win, member.mem_forum_lose');
 		$this->db->from($this->_table);
 		$this->db->join('member', 'comment.mem_id = member.mem_id', 'left');
 

@@ -1,5 +1,4 @@
 
-
 <div class="list">
 	<ul>
 	<?php
@@ -16,6 +15,12 @@
 		<?php
 		}
 		?>
+			<!-- s: layer-wrap userInfo -->
+			<div class="layer-wrap userInfo">
+				<p>포럼 전적 <span><?php echo element('mem_forum_win', $result); ?>승<?php echo element('mem_forum_lose', $result); ?>패</span></p>
+			</div>
+			<!-- e: layer-wrap userInfo -->
+
 			<div class="<?php echo $_classname; ?>">
 				<div class="info">
 					<a href="#n" class="nickname">
@@ -56,9 +61,8 @@
 						</li>
 						<?php } ?>
 						<li><a href="javascript:;" class="cmmt-btn" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'c'); return false;"><span>답글</span></a></li>
-						<!-- <li><a href="#n" class="singo-btn"><span>신고</span></a></li> -->
 						<?php if (element('use_comment_blame', element('board', $view)) && ( ! element('comment_blame_blind_count', element('board', $view)) OR element('cmt_blame', $result) < element('comment_blame_blind_count', element('board', $view)))) { ?>
-							&nbsp;&nbsp;<a href="javascript:;" id="cmt-btn-blame" onClick="comment_blame('<?php echo element('cmt_id', $result); ?>', 'comment-blame-<?php echo element('cmt_id', $result); ?>');" title="신고하기"><i class="fa fa-bell fa-xs"></i>신고 <span class="comment-blame-<?php echo element('cmt_id', $result); ?>"><?php echo element('cmt_blame', $result) ? '+' . number_format(element('cmt_blame', $result)) : ''; ?></span></a>
+							<li><a href="javascript:;" id="cmt-btn-blame" onClick="comment_blame('<?php echo element('cmt_id', $result); ?>', 'comment-blame-<?php echo element('cmt_id', $result); ?>');" title="신고하기"><i class="fa fa-bell fa-xs"></i>신고 <span class="comment-blame-<?php echo element('cmt_id', $result); ?>"><?php echo element('cmt_blame', $result) ? '+' . number_format(element('cmt_blame', $result)) : ''; ?></span></a></li>
 						<?php } ?>
 					</ul>
 				</div>
@@ -115,11 +119,7 @@
 	</div>
 </div>
 <!-- s: layer-wrap.singo -->
-<!-- s: layer-wrap userInfo -->
-<div class="layer-wrap userInfo">
-	<p>포럼 전적 <span>7승3패</span></p>
-</div>
-<!-- e: layer-wrap userInfo -->
+
 
 <script>
 	$(function () {

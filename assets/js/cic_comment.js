@@ -186,6 +186,7 @@ if (typeof(CIC_COMMENT_JS) === 'undefined') {
     var save_html = document.getElementById('comment_write_box').innerHTML;
 
     function comment_box(cmt_id, work) {
+        console.log('comment_box clicked');
         var el_id;
         // 댓글 아이디가 넘어오면 답변, 수정
         if (cmt_id) {
@@ -198,13 +199,16 @@ if (typeof(CIC_COMMENT_JS) === 'undefined') {
             el_id = 'comment_write_box';
         }
 
+        console.log('comment_box clicked :: ' + el_id);
         if (save_before !== el_id) {
             if (save_before && save_before != 'comment_write_box') {
                 $('#' + save_before).css('display', 'none');
                 $('#' + save_before).html('');
             }
-
+            console.log('gogo');
+            console.log('comment_box clicked :: ' + $('#' + el_id).css('display'));
             $('#' + el_id).css('display', '');
+            console.log('comment_box clicked :: ' + $('#' + el_id).css('display'));
             $('#' + el_id).html(save_html);
             // 댓글 수정
             if (work === 'cu') {
