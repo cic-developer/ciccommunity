@@ -1043,7 +1043,6 @@ class Forum extends CB_Controller
 				'brd_id' => 3,
 			);
 			$this->Post_model->update($pst_id, $postupdate);
-			
 			$pevupdate = array(
 				'brd_id' => 3,
 			);
