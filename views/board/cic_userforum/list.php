@@ -22,46 +22,49 @@
                 <div class="cont">
                     <a href="#n" class="prev"><span class="blind">이전</span></a>
                     <div class="forum-slide">
-                        <div class="item active">
-                            <div class="img"><img src="<?php echo base_url('assets/images/forum-img01.jpg')?>" alt="" /></div>
-                            <div class="ov">
-                                <div class="txt">
-                                    <p class="btxt">“ 도지 코인” <br />1,000원 간다!</p>
+                        
+                        <?php
+                        if (element('list',element('banner', $view))) {
+                            foreach (element('list',element('banner', $view)) as $banner) {
+                        ?>
+                            <div class="item">
+                                <div class="img"><img src="<?php echo base_url('uploads/forum_banner/'.element('frm_image', $banner)) ?>" alt="" />
                                 </div>
-                                <p class="stxt">총 3,145,789VP</p>
-                                <a href="#n"><span>참여하기!</span></a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="img"><img src="<?php echo base_url('assets/images/forum-img02.jpg')?>" alt="" /></div>
-                            <div class="ov">
-                                <div class="txt">
-                                    <p class="btxt">“ 도지 코인” <br />1,000원 간다!</p>
+
+                                <div class="ov">
+                                    <div class="txt">
+                                        <p class="btxt"><?php echo html_escape(element('post_title', $banner)); ?></p>
+                                    </div>
+                                    <p class="stxt">총 <?php echo rs_number_format(element('cic_forum_total_cp', $banner), 2, 0); ?> CP</p>
+                                    <a href="<?php echo element('post_url', $banner); ?>"><span>참여하기!</span></a>
                                 </div>
-                                <p class="stxt">총 3,145,789VP</p>
-                                <a href="#n"><span>참여하기!</span></a>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="img"><img src="<?php echo base_url('assets/images/forum-img03.jpg')?>" alt="" /></div>
-                            <div class="ov">
-                                <div class="txt">
-                                    <p class="btxt">“ 도지 코인” <br />1,000원 간다!</p>
+                        <?php
+                            }
+                        }
+                        ?>
+
+                        <!-- 포럼 기본 이미지 입니다. 승인대기포럼 승인시 설정된 포럼 이미지가 없을 경우 해당 기본 이미지가 보여집니다 -->
+                        <!-- 슬라이드바에 보여지는 포럼은, 마감되지 않은 진행중인 포럼에 한해서만 보여집니다 -->
+                        <!-- 현재 기본이미지 경로는 두 경우가 있습니다. 편하신대로 사용하시면 됩니다. -->
+                        <!-- 1. assets/images/forum-img01.jpg -->
+                        <!-- 2. uploads/forum_banner/2021/06/forum-img01.jpg ( 이 이미지의 경로는 대기포럼 승인시 설정한 이미지가 저장되는 경로입니다 ) -->
+                        <?php for($i=0; $i<element('banner_noimage_count', $view); $i=$i+1){ ?>
+                            <div class="item">
+                                <div class="img"><img src="<?php echo base_url('uploads/forum_banner/2021/06/forum-img01.jpg') ?>" alt="" />
+                                <!-- <div class="img"><img src="<?php echo base_url('assets/images/noimage.jpg') ?>" alt="" /> -->
                                 </div>
-                                <p class="stxt">총 3,145,789VP</p>
-                                <a href="#n"><span>참여하기!</span></a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="img"><img src="<?php echo base_url('assets/images/forum-img04.jpg')?>" alt="" /></div>
-                            <div class="ov">
-                                <div class="txt">
-                                    <p class="btxt">“ 도지 코인” <br />1,000원 간다!</p>
+
+                                <div class="ov">
+                                    <div class="txt">
+                                        <p class="btxt">빈 게시물 입니다 :)</p>
+                                    </div>
+                                    <p class="stxt">총 0 CP</p>
+                                    <a href="#n"><span>참여불가!</span></a>
                                 </div>
-                                <p class="stxt">총 3,145,789VP</p>
-                                <a href="#n"><span>참여하기!</span></a>
                             </div>
-                        </div>
+                        <?php }?>
+
                     </div>
                     <a href="#n" class="next"><span class="blind">다음</span></a>
                 </div>

@@ -37,6 +37,11 @@
                         }
                         ?>
 
+                        <!-- 포럼 기본 이미지 입니다. 승인대기포럼 승인시 설정된 포럼 이미지가 없을 경우 해당 기본 이미지가 보여집니다 -->
+                        <!-- 슬라이드바에 보여지는 포럼은, 마감되지 않은 진행중인 포럼에 한해서만 보여집니다 -->
+                        <!-- 현재 기본이미지 경로는 두 경우가 있습니다. 편하신대로 사용하시면 됩니다. -->
+                        <!-- 1. assets/images/forum-img01.jpg -->
+                        <!-- 2. uploads/forum_banner/2021/06/forum-img01.jpg ( 이 이미지의 경로는 대기포럼 승인시 설정한 이미지가 저장되는 경로입니다 ) -->
                         <?php for($i=0; $i<element('banner_noimage_count', $view); $i=$i+1){ ?>
                             <div class="item">
                                 <div class="img"><img src="<?php echo base_url('uploads/forum_banner/2021/06/forum-img01.jpg') ?>" alt="" />

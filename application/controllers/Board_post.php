@@ -199,9 +199,12 @@ class Board_post extends CB_Controller
 
 			
 		}
-
-		// CIC 포럼, forum
+		
+		/**
+		 * CIC 포럼, forum
+		 */
 		if(element('brd_id', element('board', $list)) == 3){
+			// 검색 기능
 			$param =& $this->querystring;
 			$view['view']['sort'] = array(
 				'post_id' => $param->sort('post_id', 'asc'),
@@ -212,7 +215,7 @@ class Board_post extends CB_Controller
 			);
 			$this->CIC_forum_model->allow_order_field = array('post_id', 'post_title', 'post_content', 'cic_forum_total_cp', 
 																	'cic_forum_info.frm_close_datetime');
-																	
+			
 			// default type = 1 (1진행중, 2마감)
 			$type = $this->input->get('type');
 			if(!$type) {
@@ -252,7 +255,9 @@ class Board_post extends CB_Controller
 			// like 여부 status...
 		}
 
-		// 도전 CIC 포럼, userForum
+		/**
+		 * 도전 CIC 포럼, userForum
+		 */
 		if(element('brd_id', element('board', $list)) == 6){
 			$param =& $this->querystring;
 			$view['view']['sort'] = array(
