@@ -13,11 +13,6 @@
 					<?php
 					ob_start();
 					?>
-						<div class="btn-group pull-right" role="group" aria-label="...">
-							<!-- <a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a> -->
-							<!-- <button type="button" class="btn btn-outline btn-default btn-sm btn-list-delete btn-list-selected disabled" data-list-delete-url = "<?php echo element('list_delete_url', $view); ?>" >선택삭제</button> -->
-							<!-- <a href="<?php echo element('write_url', $view); ?>" class="btn btn-outline btn-danger btn-sm " >거래소 추가</a> -->
-						</div>
 					<?php
 					$buttons = ob_get_contents();
 					ob_end_flush();
@@ -100,36 +95,3 @@
 		</div>
 	</form>
 </div>
-<script>
-	$('.orderby_up').on('click', function(){
-		set_orderby(this, 'up');
-	});
-	$('.orderby_down').on('click', function(){
-		set_orderby(this, 'down');
-	});
-
-	function set_orderby(_this, type){
-		const cme_idx = $(_this).parents('tr').attr('data-idx');
-        $.ajax({
-            url: cb_admin_url + '/cicconfigs/maincoin/ajax_set_exchange_orderby',
-            type: 'post',
-            data: {
-                cme_idx: cme_idx,
-                type: type,
-                csrf_test_name: cb_csrf_hash
-            },
-            dataType: 'json',
-            async: false,
-            cache: false,
-            success: function(data) {
-				if(data.error){
-					alert(data.error);
-				}
-				if(data.success){
-					alert(data.success);
-					location.reload();
-				}
-            }
-        });
-	}
-</script>

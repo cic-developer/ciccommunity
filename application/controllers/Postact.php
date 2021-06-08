@@ -840,50 +840,7 @@ class Postact extends CB_Controller
 
 		$_writer_levelup = $this->point->setUserLevel(abs(element('mem_id', $post)));
 		$_user_levelup = $this->point->setUserLevel($mem_id);
-		$_vp_levelConf = $this->CIC_vp_config_model->get_one('','',"vpc_id = 2 AND vpc_enable = 1");
-		$_cp_levelConf = $this->CIC_cp_config_model->get_one('','',"cpc_id = 2 AND cpc_enable = 1");
 
-		if($_writer_levelup)
-		{
-			$this->point->insert_vp(
-				abs(element('mem_id', $post)),
-				element('vpc_value' ,$_vp_levelConf),
-				'Level UP 보상 VP 지급',
-				'Level Up',
-				$post_id,
-				'레벨 업'
-			);
-
-			$this->point->insert_cp(
-				abs(element('mem_id', $post)),
-				element('cpc_value' ,$_cp_levelConf),
-				'Level UP 보상 CP 지급',
-				'Level Up',
-				$post_id,
-				'레벨 업'
-			);
-		}
-
-		if($_user_levelup)
-		{
-			$this->point->insert_vp(
-				$mem_id,
-				element('vpc_value' ,$_vp_levelConf),
-				'Level UP 보상 VP 지급',
-				'Level Up',
-				$post_id,
-				'레벨 업'
-			);
-
-			$this->point->insert_cp(
-				$mem_id,
-				element('cpc_value' ,$_cp_levelConf),
-				'Level UP 보상 CP 지급',
-				'Level Up',
-				$post_id,
-				'레벨 업'
-			);
-		}
 
 		$insertdata = array(
 			'target_id' => $post_id,
@@ -1234,50 +1191,6 @@ class Postact extends CB_Controller
 
 		$_writer_levelup = $this->point->setUserLevel(abs(element('mem_id', $post)));
 		$_user_levelup = $this->point->setUserLevel($mem_id);
-		$_vp_levelConf = $this->CIC_vp_config_model->get_one('','',"vpc_id = 2 AND vpc_enable = 1");
-		$_cp_levelConf = $this->CIC_cp_config_model->get_one('','',"cpc_id = 2 AND cpc_enable = 1");
-
-		if($_writer_levelup)
-		{
-			$this->point->insert_vp(
-				abs(element('mem_id', $post)),
-				element('vpc_value' ,$_vp_levelConf),
-				'Level UP 보상 VP 지급',
-				'Level Up',
-				$cmt_id,
-				'레벨 업'
-			);
-
-			$this->point->insert_cp(
-				abs(element('mem_id', $post)),
-				element('cpc_value' ,$_cp_levelConf),
-				'Level UP 보상 CP 지급',
-				'Level Up',
-				$cmt_id,
-				'레벨 업'
-			);
-		}
-
-		if($_user_levelup)
-		{
-			$this->point->insert_vp(
-				$mem_id,
-				element('vpc_value' ,$_vp_levelConf),
-				'Level UP 보상 VP 지급',
-				'Level Up',
-				$cmt_id,
-				'레벨 업'
-			);
-
-			$this->point->insert_cp(
-				$mem_id,
-				element('cpc_value' ,$_cp_levelConf),
-				'Level UP 보상 CP 지급',
-				'Level Up',
-				$cmt_id,
-				'레벨 업'
-			);
-		}
 
 		$insertdata = array(
 			'target_id' => $cmt_id,

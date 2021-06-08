@@ -58,6 +58,7 @@
                             <td><?php echo html_escape(element('wid_state', $result)) != null ? (html_escape(element('wid_state', $result)) == 1 ? '<p class="text-success">승인</p>' : '<p class="text-danger">반려</p>' ) : '<p class="text-body">미처리</p>';?></td>
                             <td>
                                 <?php
+                                //  모달 데이터
                                 if (element('wid_state', $result) != null) {
                                 ?>
                                     <button type="button" class="text-primary withdraw-result modal_open3" 
@@ -350,25 +351,6 @@
     })
 
     // approve submit
-    // function wid_approve_submit(f, acttype, actpage) {
-	// 	var str = '';
-
-    //     // console.log(" => ", f)
-
-	// 	if (acttype === 'approve' && ! confirm('선택한 요청을 정말 승인 하시겠습니까?')) return;
-
-	// 	f.action = actpage;
-	// 	f.submit();
-	// }
-	// $(document).on('click', '.btn-approve', function() {
-	// 	var userid = $(this).data('userid');
-
-    //     $(".modal-body #wid_userid").val( userid ); // cic_withdraw_log
-
-	// 	wid_approve_submit(document.flist, 'approve', $(this).attr('data-one-wid-url'));
-	// });
-
-    // approve submit
     function wid_approve_submit(f, acttype, actpage){
         var cp_transaction = $('#cp_transaction').val().trim();
         if(cp_transaction.length < 1){
@@ -377,7 +359,6 @@
             return;
         }
 
-        // 0.01보다 작거나 숫자가 아닌경우도 검사해야 한다. ...
         var cp_percoin = $('#cp_percoin').val().trim();
         if(cp_percoin.length < 1){
             alert("필수값 입니다")
@@ -411,7 +392,7 @@
 		f.submit();
     }   
 
-    //
+    // btn click
     $(document).on('click', '.btn-approve', function() {
 		wid_approve_submit(document.flist, 'approve', $(this).attr('data-one-modal-url'));
 	});

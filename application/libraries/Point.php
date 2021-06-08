@@ -481,6 +481,27 @@ class Point extends CI_Controller
 					$this->CI->Member_level_history_model->insert($levelhistoryinsert);
 
 					if($_mlclevel > $_memLevel && !$_checkHis){
+						$this->CI->load->model('CIC_vp_config_model');
+						$_vp_levelConf = $this->CI->CIC_vp_config_model->get_one('','',"vpc_id = 2 AND vpc_enable = 1");
+						$_cp_levelConf = $this->CI->CIC_cp_config_model->get_one('','',"cpc_id = 2 AND cpc_enable = 1");
+						$this->insert_vp(
+							$mem_id,
+							element('vpc_value' ,$_vp_levelConf),
+							'Level UP 보상 VP 지급',
+							'Level Up',
+							$post_id,
+							'레벨 업'
+						);
+			
+						$this->insert_cp(
+							$mem_id,
+							element('cpc_value' ,$_cp_levelConf),
+							'Level UP 보상 CP 지급',
+							'Level Up',
+							$post_id,
+							'레벨 업'
+						);
+						
 						return $_mlclevel;
 					}else{
 						return false;

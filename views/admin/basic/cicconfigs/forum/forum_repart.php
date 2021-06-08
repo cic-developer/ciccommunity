@@ -101,8 +101,8 @@ $(function() {
 
 <script>
 
-	var total_cp = "<?php echo element('total_cp', $view); ?>";
-	var win_cp = "<?php echo element('cic_A_cp', $view) >= element('cic_B_cp', $view) ? element('cic_A_cp', $view) : element('cic_B_cp', $view); ?>";
+	var total_cp = "<?php echo element('total_cp', $view); ?>"; // 총 cp
+	var win_cp = "<?php echo element('cic_A_cp', $view) >= element('cic_B_cp', $view) ? element('cic_A_cp', $view) : element('cic_B_cp', $view); ?>"; // 승리 진영 cp
 
 	// 수수료 설정
 	var oldVal1 = '';
