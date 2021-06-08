@@ -1755,7 +1755,7 @@ class Boards extends CB_Controller
 	/**
 	 * 게시판관리> 글쓰기>카테고리 삭제
 	 */
-	public function write_category_delete($pid = 0, $bca_id = 0)
+	public function write_category_delete ($pid = 0, $bca_id = 0)
 	{
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_board_boards_write_category_delete';
