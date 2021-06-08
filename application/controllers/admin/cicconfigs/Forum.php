@@ -991,7 +991,7 @@ class Forum extends CB_Controller
 			 // $upload_path => uploads/banner/
             $this->load->library('upload');
 			if (isset($_FILES) && isset($_FILES['frm_image']) && isset($_FILES['frm_image']['name']) && $_FILES['frm_image']['name']) {
-				$upload_path = config_item('uploads_dir') . '/forum_banner/';
+				$upload_path = config_item('uploads_dir') . '/ban_image/';
 				if (is_dir($upload_path) === false) {
 					mkdir($upload_path, 0707);
 					$file = $upload_path . 'index.php';
