@@ -830,7 +830,9 @@ class Register extends CB_Controller
 							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>'; // form-control input
 						} elseif(element('field_name', $value) === 'mem_username'){
 							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . urldecode($data['name']) . '" ' . $required . '/>'; // form-control input
-						}else {
+						} elseif(element('field_name', $value) === 'mem_recommend'){
+							$html_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . urldecode($data['name']) . '" ' . $required . '/>'; // form-control input
+						} else {
 							$html_content[$k]['input'] .= '<input type="' . element('field_type', $value) . '" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>';
 						}
 					} elseif (element('field_type', $value) === 'textarea') {

@@ -41,6 +41,9 @@ class Referrer extends CB_Controller
 	 */
 	public function redirect($userid = '')
 	{
+		//기존 추천인코드 삭제
+		$this->session->set_userdata('ref_code', '');
+
 		//해당 아이디가 존재하는지 확인
 		$countwhere = array(
 			'mem_userid' => $userid,

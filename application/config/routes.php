@@ -86,3 +86,6 @@ $route['profile/([a-zA-Z0-9_-]+)'] = "profile/index/$1";
 $route['print/([0-9]+)'] = "board_post/post/$1/print";
 $route['sitemap\.xml'] = "sitemap";
 $route['sitemap_([0-9_-]+)\.xml'] = "sitemap/board/$1";
+
+//추천인 코드용 라우트
+$route['r/([a-z0-9]+)'] = "referrer/redirect/$1";

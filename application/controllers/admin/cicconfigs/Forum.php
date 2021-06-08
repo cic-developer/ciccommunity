@@ -982,6 +982,7 @@ class Forum extends CB_Controller
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
 			$updatedata = array(
+				'pst_id' => $this->input->post($primary_key),
 				'frm_bat_close_datetime' => $this->input->post('frm_bat_close_datetime', null, ''),
 				'frm_close_datetime' => $this->input->post('frm_close_datetime', null, ''),
 			);

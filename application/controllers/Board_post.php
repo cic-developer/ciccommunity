@@ -202,6 +202,7 @@ class Board_post extends CB_Controller
 		
 		/**
 		 * CIC 포럼, forum
+		 * 포럼에서 필요한 정보들을 가져오거나 설정합니다.
 		 */
 		if(element('brd_id', element('board', $list)) == 3){
 			// 검색 기능
@@ -257,8 +258,10 @@ class Board_post extends CB_Controller
 
 		/**
 		 * 도전 CIC 포럼, userForum
+		 * 도전 포럼에서 필요한 정보들을 가져오거나 설정합니다.
 		 */
 		if(element('brd_id', element('board', $list)) == 6){
+			// 검색 기능
 			$param =& $this->querystring;
 			$view['view']['sort'] = array(
 				'post_id' => $param->sort('post_id', 'asc'),
@@ -306,6 +309,31 @@ class Board_post extends CB_Controller
 
 			// 정렬순서
 			$view['view']['sorted'] = $this->input->get('findex');
+
+			// 배너 가져오기 시작
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp());
+			$where = array(
+				'brd_id' => 3,
+				'cic_forum_info.frm_bat_close_datetime >=' => $checktime,
+				'cic_forum_info.frm_close_datetime >=' => $checktime,
+				'post_del <>' => 2,
+			);
+			$_banner = $this->CIC_forum_model->get_post_list('', '', $where, '', '', '', '');
+			$banner = array();
+			
+			if(element('list', $_banner)){
+				foreach (element('list', $_banner) as $key => $val) {
+					if ($val && $val['frm_image']) {
+						$banner['list'][$key] = $val;
+						$banner['list'][$key]['post_url'] = post_url('forum', $val['post_id'].'?type='.$type );
+					}
+				}
+			}
+			
+			$view['view']['banner'] = $banner;
+			$view['view']['banner_count'] = count(element('list', $banner));
+			$view['view']['banner_noimage_count'] = 4 - $view['view']['banner_count'];
+			// 배너 가져오기 끝
 		}
 		
 		
@@ -1566,7 +1594,9 @@ class Board_post extends CB_Controller
 		if (empty($category_id) OR $category_id < 1) {
 			$category_id = '';
 		}
-		// cic 진행중 포럼 && cic 마감 포럼
+		/**
+		 * cic 진행중 포럼 && cic 마감 포럼
+		 */
 		if($board['brd_id'] == 3){
 			$this->CIC_forum_model->allow_search_field = array('post_id', 'post_title', 'post_content', 'post_both', 'post_category', 'post_userid', 'post_nickname'); // 검색이 가능한 필드
 			$this->CIC_forum_model->search_field_equal = array('post_id', 'post_userid', 'post_nickname'); // 검색중 like 가 아닌 = 검색을 하는 필드
@@ -1586,7 +1616,9 @@ class Board_post extends CB_Controller
 			$result = $this->CIC_forum_model
 				->get_post_list($per_page, $offset, $where, $category_id, $findex, $sfield, $skeyword);
 		}
-		// cic 대기 포럼 & 반려
+		/**
+		 * cic 대기 포럼 & 반려 ( category 1, 2)
+		 */
 		if($board['brd_id'] == 6){
 			$this->CIC_forum_model->allow_search_field = array('post_id', 'post_title', 'post_content', 'post_both', 'post_category', 'post_userid', 'post_nickname'); // 검색이 가능한 필드
 			$this->CIC_forum_model->search_field_equal = array('post_id', 'post_userid', 'post_nickname'); // 검색중 like 가 아닌 = 검색을 하는 필드
@@ -1597,7 +1629,10 @@ class Board_post extends CB_Controller
 			}
 		}
 		
-		if($board['brd_id'] != 3) { // && $board['brd_id'] != 6){
+		/**
+		 * brd_id =3 진행중 포럼 게시물 리스트는 다른 모델을 사용하여 리스트를 불러오기 때문에 제외했습니다.
+		 */
+		if($board['brd_id'] != 3) {
 			$result = $this->Post_model
 				->get_post_list($per_page, $offset, $where, $category_id, $findex, $sfield, $skeyword);
 		}

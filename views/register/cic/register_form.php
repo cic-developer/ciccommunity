@@ -5,22 +5,8 @@
 			<h2><span class="blind">cic community</span></h2>
 
 			<?php
-				if(validation_errors('','')){
-			?>
-				<!-- <table width="600" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;">
-					<tr style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">
-						<span style="font-size:14px;font-weight:bold;color:rgb(0,0,0)">Error Message</span>
-					</tr> -->
-					
-						<!-- <?php echo validation_errors('<tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td colspan="2" style="padding:10px 10px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><p>', '</p></td></tr>'); ?> -->
-						<?php echo validation_errors('<script>alert("', '");</script>'); ?>
-						
-				<!-- </table> -->
-			<?php
-				}
-			?>
-			<?php
-			// echo show_alert_message($this->session->flashdata('message'), '<script>alert("', '");</script>');
+			//에러가 발생 할 경우 알럿			
+			echo validation_errors('<script>alert("', '");</script>');
 			echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
 			$attributes = array('class' => 'form-horizontal', 'name' => 'fregisterform', 'id' => 'fregisterform');
 			echo form_open_multipart(current_full_url(), $attributes);
@@ -103,87 +89,13 @@
 					<?php
 					}
 					?>
-					<!-- <li>
-						<span>정보공개</span>
-						<div class="form-text text-primary group">
-							<label for="mem_open_profile"> -->
-								<input type="hidden" name="mem_open_profile" id="mem_open_profile" value="1" <?php echo set_checkbox('mem_open_profile', '1', true); ?> />
-								<!-- 다른분들이 나의 정보를 볼 수 있도록 합니다.
-							</label>
-							<?php if (element('open_profile_description', $view)) { ?>
-								<p class="help-block"><?php echo element('open_profile_description', $view); ?></p>
-							<?php } ?>
-						</div>
-					</li> -->
-					<!-- <?php if ($this->cbconfig->item('use_note')) { ?>
-						<li>
-							<span>쪽지기능사용</span>
-							<div class="form-text text-primary group">
-								<div class="checkbox">
-									<label for="mem_use_note"> -->
-										<input type="hidden" name="mem_use_note" id="mem_use_note" value="1" <?php echo set_checkbox('mem_use_note', '1', true); ?> />
-										<!-- 쪽지를 주고 받을 수 있습니다.
-									</label>
-									<?php if (element('use_note_description', $view)) { ?>
-										<p class="help-block"><?php echo element('use_note_description', $view); ?></p>
-									<?php } ?>
-								</div>
-							</div>
-						</li>
-					<?php } ?> -->
-					<!-- <li>
-						<span>이메일수신여부</span>
-						<div class="form-text text-primary group">
-							<div class="checkbox">
-								<label for="mem_receive_email" > -->
-									<input type="hidden" name="mem_receive_email" id="mem_receive_email" value="1" <?php echo set_checkbox('mem_receive_email', '1', true); ?> /> 
-									<!-- 수신 -->
-								<!-- </label>
-							</div>
-						</div>
-					</li> -->
-					<!-- <li>
-						<span>SMS 문자수신</span>
-						<div class="form-text text-primary group">
-							<div class="checkbox">
-								<label for="mem_receive_sms"> -->
-									<input type="hidden" name="mem_receive_sms" id="mem_receive_sms" value="1" <?php echo set_checkbox('mem_receive_sms', '1', true); ?> /> 
-									<!-- 수신 -->
-								<!-- </label>
-							</div>
-						</div>
-					</li> -->
-					<!-- <li>
-						<?php if ($this->cbconfig->item('use_recaptcha')) { ?>
-							<span></span>
-							<div class="form-text text-primary group captcha" id="recaptcha"><button type="button" id="captcha"></button></div>
-							<input type="hidden" name="recaptcha" />
-						<?php } else { ?>
-							<span><img src="<?php echo base_url('assets/images/preload.png'); ?>" width="160" height="40" id="captcha" alt="captcha" title="captcha" /></span>
-							<div class="form-text text-primary group">
-								<input type="text" name="captcha_key" id="captcha_key" class=" input px150" value="" />
-								<p class="help-block">좌측에 보이는 문자를 입력해주세요</p>
-							</div>
-						<?php } ?>
-					</li> -->
-					<!-- <li>
-						<span></span>
-						<div class="group">
-							<button type="submit" class="btn btn-success">회원가입</button>
-							<a href="<?php echo site_url(); ?>" class="btn btn-default">취소</a>
-						</div>
-					</li> -->
 				</ul>
 				<a id="submitButton" class="join-btn"><span>가입하기</span></a>
 			<?php echo form_close(); ?>
 			</div>
-			<a href="#" class="join-btn"></a>
 		</div>
-		<a href="#" class="join-btn">
-			<!-- page end // -->
-		</a>
+		<!-- page end // -->
 	</div>
-	<a href="#" class="join-btn"></a>
 </div>
 
 
