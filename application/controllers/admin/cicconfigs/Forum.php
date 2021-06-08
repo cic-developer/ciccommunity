@@ -502,24 +502,13 @@ class Forum extends CB_Controller
 		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
 			foreach ($this->input->post('chk') as $val) {
 				if ($val) {
-					// $post = $this->Post_model->get_one($val);
 					$post = $this->CIC_forum_model->get_one($val);
 
-					print_r($post);
-					exit;
-
-					// 포럼 게시판 게시물 삭제 금지!
-					// if(element('brd_id', $post) == 3 || element('brd_id', $post) == 6){
-					// 	$this->session->set_flashdata(
-					// 		'message',
-					// 		'포럼글은 삭제할 수 없습니다.('.$val.')'
-					// 	);
-					// 	$param =& $this->querystring;
-					// 	$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-					// 	redirect($redirecturl);
-					// }else{
-					// 	$this->board->delete_post($val);
-					// }
+					if($post['frm_repart_state'] == 1){
+						$this->board->delete_post($val);
+						$this->CIC_forum_model->delete_forum_info($val);
+						$this->CIC_forum_model->delete_forum_cp($val);
+					}
 				}
 			}
 		}
@@ -535,7 +524,7 @@ class Forum extends CB_Controller
 			'정상적으로 삭제되었습니다'
 		);
 		$param =& $this->querystring;
-		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+		$redirecturl = admin_url($this->pagedir . '/close_forum');
 		redirect($redirecturl);
 	}
 
@@ -1050,23 +1039,18 @@ class Forum extends CB_Controller
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
-			$ban_start_date = $this->input->post('ban_start_date') ? $this->input->post('ban_start_date') : null;
-			$ban_end_date = $this->input->post('ban_end_date') ? $this->input->post('ban_end_date') : null;
-			$ban_page = $this->input->post('ban_page') ? $this->input->post('ban_page') : 0;
-			$ban_disable_hours = $this->input->post('ban_disable_hours') ? $this->input->post('ban_disable_hours') : 0;
-			$ban_activated = $this->input->post('ban_activated') ? $this->input->post('ban_activated') : 0;
+			$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
+			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
+			
 
 			$updatedata = array(
-				'ban_start_date' => $ban_start_date,
-				'ban_end_date' => $ban_end_date,
-				'ban_activated' => $ban_activated,
-                'ban_url'    =>  $this->input->post('ban_url', null, ''),
-                'ban_target' =>  $this->input->post('ban_target', null, ''),
-                'ban_order' =>  $this->input->post('ban_order', null, ''),
+				'pst_id' => $pst_id,
+				'frm_bat_close_datetime' => $frm_bat_close_datetime,
+				'frm_close_datetime' => $frm_close_datetime,
 			);
 
             if($updatephoto){
-                $updatedata['ban_image'] = $updatephoto;
+                $updatedata['frm_image'] = $updatephoto;
             }
 			/**
 			 * 게시물을 수정하는 경우입니다

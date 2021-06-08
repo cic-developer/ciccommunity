@@ -30,7 +30,7 @@
 							<!-- <select name="comp_id" class="form-control" onChange="location.href='<?php echo current_url(); ?>?comp_id=' + this.value;"> -->
 							<select name="comp_id" class="form-control" onChange="location.href='<?php echo current_url(); ?>?comp_id=' + this.value;">
 								<option value="">전체신문사</option>
-								<?php foreach (element('companylist', $view) as $key => $value) { ?>
+								<?php foreach (element('list',element('companylist', $view)) as $key => $value) { ?>
 									<option value="<?php echo element('comp_id', $value); ?>" <?php echo set_select('comp_id', element('comp_id', $value), ($this->input->get('comp_id') === element('comp_id', $value) ? true : false)); ?>><?php echo html_escape(element('comp_name', $value)); ?></option>
 								<?php } ?>
 							</select>
@@ -58,7 +58,7 @@
 							foreach (element('list', element('data', $view)) as $result) {
 								?>
 							<tr>
-								<td><?php echo number_format(element('news_id', $result)); ?></td>
+								<td><?php echo number_format(element('num', $result)); ?></td>
 								<td>
 									<a href="<?php echo goto_url(element('companyurl', $result)); ?>">
 										<?php echo html_escape(element('comp_name', element('company', $result))); ?>

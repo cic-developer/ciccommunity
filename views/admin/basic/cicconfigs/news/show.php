@@ -45,7 +45,7 @@
 							foreach (element('list', element('data', $view)) as $result) {
 								?>
 							<tr>
-								<td><?php echo number_format(element('news_id', $result)); ?></td>
+								<td><?php echo number_format(element('num', $result)); ?></td>
 								<td><?php echo html_escape(element('news_title', $result)); ?></td>
 								<td><?php echo display_datetime(element('news_wdate', $result), 'full'); ?></td>
 								<td><?php echo number_format(element('news_reviews', $result)); ?></td>

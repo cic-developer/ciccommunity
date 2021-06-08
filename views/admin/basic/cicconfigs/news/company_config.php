@@ -48,7 +48,7 @@
 								foreach (element('list', element('data', $view)) as $result) {
 									?>
 								<tr>
-									<td><?php echo number_format(element('comp_id', $result)); ?></td>
+									<td><?php echo number_format(element('num', $result)); ?></td>
 									<td>
 										<a href="<?php echo goto_url(element('comp_url', $result)); ?>">
 											<?php echo html_escape(element('comp_name', element('company', $result))); ?>
