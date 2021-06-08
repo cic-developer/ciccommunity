@@ -643,39 +643,61 @@ class Forum extends CB_Controller
 				'pst_id' => $pst_id
 			);
 			$forum_bats = $this->CIC_forum_model->get_forum_bat($where);
-
-			print_r($forum_bats);
-			exit;
             
 			// 배팅 분배
 			if ($forum_bats && is_array($forum_bats)) {
 				foreach ($forum_bats as $key => $value) {
-
-					// 패배 진영
-					if($value['cfc_option'] != $win_option){
-
-					}else {
-					// 승리 진영
+					// => 회원id
 					$mem_id = $value['mem_id'];
-					$cfc_cp = (double) $value['cfc_cp'];
+					// => 회원 정보
 					$member_info = $this->Member_model->get_one($mem_id);
-					$give_cp =  round($cfc_cp * $repart_ratio, 2);
-					$changed_cp = $member_info['mem_cp'] + $give_cp;
                     
-					// member테이블에 cp지급
-					$arr = array(
-						'mem_cp' => $changed_cp
-					);
-					$result = $this->Member_model->set_user_modify($mem_id, $arr);
-					if($result == 0){
-						// 회원정보 수정 실패
-					}
-					if($result == 1){
-						// 회원정보 수정 성공
-					}
-                    
-					// cic_cp테이블에 log기록
-					$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '투표자', $give_cp, '@byadmin', $admin_id , '포럼보상지급');
+					if($value['cfc_option'] != $win_option){
+                        
+						// 패배 진영
+						// => 회원 패배 전적
+						$mem_forum_lose = (int) $member_info['mem_forum_lose'];
+						$change_mem_forum_lose = $mem_forum_lose + 1;
+                        
+						// 전적 갱신
+						$arr = array(
+							'mem_forum_lose' => $change_mem_forum_lose
+						);
+						$result = $this->Member_model->set_user_modify($mem_id, $arr);
+						if($result == 0){
+							// 회원정보 수정 실패
+						}
+						if($result == 1){
+							// 회원정보 수정 성공
+						}
+						
+					}else {
+                        
+						// 승리 진영
+						// => 회원 배팅 cp
+						$cfc_cp = (double) $value['cfc_cp'];
+						// => 승리 배분 cp
+						$give_cp =  round($cfc_cp * $repart_ratio, 2);
+						$changed_cp = $member_info['mem_cp'] + $give_cp;
+						// => 회원 승리 전적
+						$mem_forum_win = (int) $member_info['mem_forum_win'];
+						$change_mem_forum_win = $mem_forum_win + 1;
+						
+						// member테이블에 cp지급 & 전적 갱신
+						$arr = array(
+							'mem_cp' => $changed_cp,
+							'mem_forum_win' => $change_mem_forum_win
+						);
+						$result = $this->Member_model->set_user_modify($mem_id, $arr);
+						if($result == 0){
+							// 회원정보 수정 실패
+						}
+						if($result == 1){
+							// 회원정보 수정 성공
+						}
+						
+						// cic_cp테이블에 log기록
+						$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '투표자', $give_cp, '@byadmin', $admin_id , '포럼보상지급');
 					}
 				}
 			}
