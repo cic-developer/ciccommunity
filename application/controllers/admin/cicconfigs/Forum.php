@@ -965,8 +965,10 @@ class Forum extends CB_Controller
 			// 기본값 설정
 		}
 		$post = $this->Post_model->get_one($pst_id);
+
+		$pev = $this->Post_extra_vars_model->get_all($pst_id);
 		
-		print_r($post);
+		print_r($pev);
 		exit;
 		
 		$this->load->library('form_validation');

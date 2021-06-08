@@ -1509,53 +1509,13 @@ class Register extends CB_Controller
 						'회원가입추천인존재'
 					);
 				}
-				if ($this->cbconfig->item('vp_recommended')) {
-					// 추천인이 존재할 경우 추천된 사람
-					$this->point->insert_vp(
-						element('mem_id', $recommended),
-						$this->cbconfig->item('vp_recommended'),
-						$this->input->post('mem_nickname') . ' 님이 회원가입시 추천함',
-						'member_recommended',
-						$mem_id,
-						'회원가입추천'
-					);
-				}
-				if ($this->cbconfig->item('vp_recommender')) {
-					// 추천인이 존재할 경우 가입자에게
-					$this->point->insert_vp(
-						$mem_id,
-						$this->cbconfig->item('vp_recommender'),
-						'회원가입 추천인존재',
-						'member_recommender',
-						$mem_id,
-						'회원가입추천인존재'
-					);
-				}
-				if ($this->cbconfig->item('cp_recommended')) {
-					// 추천인이 존재할 경우 추천된 사람
-					$this->point->insert_cp(
-						element('mem_id', $recommended),
-						$this->cbconfig->item('cp_recommended'),
-						$this->input->post('mem_nickname') . ' 님이 회원가입시 추천함',
-						'member_recommended',
-						$mem_id,
-						'회원가입추천'
-					);
-				}
-				if ($this->cbconfig->item('cp_recommender')) {
-					// 추천인이 존재할 경우 가입자에게
-					$this->point->insert_cp(
-						$mem_id,
-						$this->cbconfig->item('cp_recommender'),
-						'회원가입 추천인존재',
-						'member_recommender',
-						$mem_id,
-						'회원가입추천인존재'
-					);
-				}
 			}
 
 			// cic에서 추가된 부분
+			
+			//기존 추천인코드 삭제
+			$this->session->set_userdata('ref_code', '');
+
 			if ($recommend_userid){
 				$recommend_user = $this->member_model->get_by_userid($recommend_userid);
 				$signid_user = $this->member_model->get_by_memid($mem_id);
@@ -1603,7 +1563,7 @@ class Register extends CB_Controller
 					'추천인 등록 CP 보상'
 				);
 			}
-			// cic에서 추가된 부분
+			// cic에서 추가된 부분 끝
 
 			$this->session->set_flashdata(
 				'nickname',

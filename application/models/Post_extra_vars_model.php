@@ -22,6 +22,8 @@ class Post_extra_vars_model extends CB_Model
 	 */
 	public $parent_key = 'post_id';
 
+	public $primary_key = 'post_id';
+
 	public $meta_key = 'pev_key';
 
 	public $meta_value = 'pev_value';

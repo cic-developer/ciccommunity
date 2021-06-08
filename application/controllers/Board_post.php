@@ -584,7 +584,9 @@ class Board_post extends CB_Controller
 				}
 			}
 		}
-		// CIC 포럼 게시물 가져오기
+		/**
+		 * CIC 포럼 게시물 가져오기
+		 */
 		if($post['brd_id'] == 3){
 			$view['forum'] = $this->CIC_forum_model->get_one($post_id);
 			$total_cp = $view['forum']['cic_forum_total_cp']; // 총 cp
@@ -618,6 +620,9 @@ class Board_post extends CB_Controller
 
 			// 의견 변경 state
 			$view['forum']['cfc_state'] = $isBat[0]['cfc_state'];
+
+			// 진행중 마감 type 1 0
+			$view['forum']['type'] = $this->input->get('type');
 		}
 		
 		$view['view']['like_point_ranking_freetalk'] = $like_point_ranking_freetalk;

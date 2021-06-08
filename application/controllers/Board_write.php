@@ -65,8 +65,8 @@ class Board_write extends CB_Controller
 
 		// CIC 포럼, forum
 		if($board_id == 3){
-			// print_r("here?");
-			// exit;
+			alert('해당 게시판은 작성이 불가합니다!');
+			return false;
 		}
 		// 도전 CIC 포럼, userForum
 		if($board_id == 6){
@@ -1387,10 +1387,11 @@ class Board_write extends CB_Controller
 		}
 
 		$board_id = element('brd_id', $post);
+		
 		// CIC 포럼, forum
-		if($board_id == 3){
-			// print_r("here?");
-			// exit;
+		if($board_id == 3 && $this->input->get('type') == 2){
+			alert('마감된 포럼은 수정할수 없습니다');
+			return false;
 		}
 		// 도전 CIC 포럼, userForum
 		if($board_id == 6){
