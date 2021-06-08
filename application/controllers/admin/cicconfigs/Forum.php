@@ -1038,23 +1038,22 @@ class Forum extends CB_Controller
 					'정상적으로 추가되었습니다'
 				);
 			}
-
-			$postwhere = array(
-				'post_id' => $pst_id,
-			);
+			// $postwhere = array(
+			// 	'post_id' => $pst_id,
+			// );
 			$postupdate = array(
 				'brd_id' => 3,
 			);
-			$this->Post_model->update($postwhere, $postupdate);
+			$this->Post_model->update($pst_id, $postupdate);
 			
-			
-			$pevwhere = array(
-				'post_id' => $pst_id,
-			);
+
+			// $pevwhere = array(
+			// 	'post_id' => $pst_id,
+			// );
 			$pevupdate = array(
 				'brd_id' => 3,
 			);
-			$this->Post_extra_vars_model->update($pevwhere, $pevupdate);
+			$this->Post_extra_vars_model->update($pst_id, $pevupdate);
 
 
 			$redirecturl = admin_url($this->pagedir);
