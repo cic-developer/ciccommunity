@@ -964,7 +964,11 @@ class Forum extends CB_Controller
 		} else {
 			// 기본값 설정
 		}
-
+		$post = $this->Post_model->get_one($pst_id);
+		
+		print_r($post);
+		exit;
+		
 		$this->load->library('form_validation');
 
 		$config = array(
@@ -981,16 +985,16 @@ class Forum extends CB_Controller
 		);
 
 		$this->form_validation->set_rules($config);
-
+		
 		if ($this->form_validation->run() === false) {
-
+			
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-
+			
 		} else {
-
+			
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-
+			
 			$updatedata = array(
 				'pst_id' => $pst_id,
 				'frm_bat_close_datetime' => $this->input->post('frm_bat_close_datetime', null, ''),
@@ -1011,11 +1015,6 @@ class Forum extends CB_Controller
 				);
 			}
 
-			$post = $this->Post_model->get_one($pst_id);
-			$post_extra_vars = $this->
-
-			print_r($post);
-			exit;
 
 			$redirecturl = admin_url($this->pagedir);
 			redirect($redirecturl);

@@ -7851,7 +7851,7 @@ label input[type='checkbox'] {
 
 /* 2021 06 08 구진모 추가 */
 
-#capcha {
+#captcha {
     float: left;
     padding-right: 5%;
 }
@@ -7859,6 +7859,7 @@ label input[type='checkbox'] {
 #captcha_key {
     width: 30%;
     min-height: 40px;
+    float: inherit;
 }
 
 .title-box .field .chk-input {

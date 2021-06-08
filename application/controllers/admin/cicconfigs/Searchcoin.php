@@ -310,7 +310,7 @@ class Searchcoin extends CB_Controller
 		$view['view'] = array();			
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-		if(isset($this->input->get('id')) && !empty($this->input->get('id'))){
+		if(!empty($this->input->get('id'))){
 			$id = $this->input->get('id');
 			$getKey = $this->CIC_coin_keyword_model -> getKeywordRow($id);
 			echo json_encode($getKey);

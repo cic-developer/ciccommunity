@@ -22,32 +22,33 @@
 				<label class="col-sm-2 control-label">포인트 기능</label>
 				<div class="col-sm-10">
 					<label for="use_point" class="checkbox-inline">
-						<input type="checkbox" name="use_point" id="use_point" value="1" <?php echo set_checkbox('use_point', '1', (element('use_point', element('data', $view)) ? true : false)); ?> /> 사용합니다
+						<input type="checkbox" name="use_point" id="use_point" value="1" checked="checked" disabled /> 사용합니다
+						<input type="hidden" name="use_point" id="use_point" value="1" />
 					</label>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">회원가입시 포인트</label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" name="point_register" id="point_register" value="<?php echo set_value('point_register', (int) element('point_register', element('data', $view))); ?>" />
+					<input type="number" class="form-control" name="point_register" id="point_register" value="<?php echo set_value('point_register', (int) element('point_register', element('data', $view))); ?>" readonly />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">로그인시 포인트</label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" name="point_login" id="point_login" value="<?php echo set_value('point_login', (int) element('point_login', element('data', $view))); ?>" /> 하루에 한번 적용
+					<input type="number" class="form-control" name="point_login" id="point_login" value="<?php echo set_value('point_login', (int) element('point_login', element('data', $view))); ?>" readonly /> 하루에 한번 적용
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">회원가입시 추천인에게 포인트</label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" name="point_recommended" id="point_recommended" value="<?php echo set_value('point_recommended', (int) element('point_recommended', element('data', $view))); ?>" />
+					<input type="number" class="form-control" name="point_recommended" id="point_recommended" value="<?php echo set_value('point_recommended', (int) element('point_recommended', element('data', $view))); ?>" readonly />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">추천인 존재시 가입자에게 포인트</label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" name="point_recommender" id="point_recommender" value="<?php echo set_value('point_recommender', (int) element('point_recommender', element('data', $view))); ?>" /> 회원가입 포인트와 별도로 적용됩니다
+					<input type="number" class="form-control" name="point_recommender" id="point_recommender" value="<?php echo set_value('point_recommender', (int) element('point_recommender', element('data', $view))); ?>" readonly /> 회원가입 포인트와 별도로 적용됩니다
 				</div>
 			</div>
 			<div class="form-group">

@@ -61,7 +61,7 @@
 			</div>
 			<div class="lower">
 				<!-- <a href="#n" class="enter-btn"><span>포럼 등록하기</span></a> -->
-				<button type="submit" class="enter-btn"><span>등록하기</span></button>
+				<button type="submit" class="enter-btn"><span>수정하기</span></button>
 			</div>
 		</div>
 		<?php echo form_close(); ?>
