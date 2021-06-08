@@ -7847,3 +7847,20 @@ label input[type='checkbox'] {
         font-size: 13px;
     }
 }
+
+
+/* 2021 06 08 구진모 추가 */
+
+#capcha {
+    float: left;
+    padding-right: 5%;
+}
+
+#captcha_key {
+    width: 30%;
+    min-height: 40px;
+}
+
+.title-box .field .chk-input {
+    width: 100%;
+}

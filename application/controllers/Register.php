@@ -1123,7 +1123,6 @@ class Register extends CB_Controller
 			// 	$this->Member_selfcert_history_model->update('', $selfcertupdatedata, $selfcertwhere);
 			// }
 			// ciboard 있던것
-			print_r($metadata);
 			$this->Member_meta_model->save($mem_id, $metadata);
 			$nickinsert = array(
 				'mem_id' => $mem_id,
@@ -1504,6 +1503,50 @@ class Register extends CB_Controller
 					$this->point->insert_point(
 						$mem_id,
 						$this->cbconfig->item('point_recommender'),
+						'회원가입 추천인존재',
+						'member_recommender',
+						$mem_id,
+						'회원가입추천인존재'
+					);
+				}
+				if ($this->cbconfig->item('vp_recommended')) {
+					// 추천인이 존재할 경우 추천된 사람
+					$this->point->insert_vp(
+						element('mem_id', $recommended),
+						$this->cbconfig->item('vp_recommended'),
+						$this->input->post('mem_nickname') . ' 님이 회원가입시 추천함',
+						'member_recommended',
+						$mem_id,
+						'회원가입추천'
+					);
+				}
+				if ($this->cbconfig->item('vp_recommender')) {
+					// 추천인이 존재할 경우 가입자에게
+					$this->point->insert_vp(
+						$mem_id,
+						$this->cbconfig->item('vp_recommender'),
+						'회원가입 추천인존재',
+						'member_recommender',
+						$mem_id,
+						'회원가입추천인존재'
+					);
+				}
+				if ($this->cbconfig->item('cp_recommended')) {
+					// 추천인이 존재할 경우 추천된 사람
+					$this->point->insert_cp(
+						element('mem_id', $recommended),
+						$this->cbconfig->item('cp_recommended'),
+						$this->input->post('mem_nickname') . ' 님이 회원가입시 추천함',
+						'member_recommended',
+						$mem_id,
+						'회원가입추천'
+					);
+				}
+				if ($this->cbconfig->item('cp_recommender')) {
+					// 추천인이 존재할 경우 가입자에게
+					$this->point->insert_cp(
+						$mem_id,
+						$this->cbconfig->item('cp_recommender'),
 						'회원가입 추천인존재',
 						'member_recommender',
 						$mem_id,

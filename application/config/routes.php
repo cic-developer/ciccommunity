@@ -88,4 +88,4 @@ $route['sitemap\.xml'] = "sitemap";
 $route['sitemap_([0-9_-]+)\.xml'] = "sitemap/board/$1";
 
 //추천인 코드용 라우트
-$route['r/([a-z0-9]+)'] = "referrer/redirect/$1";
+$route['r/([a-zA-Z0-9_-]+)'] = "referrer/redirect/$1";

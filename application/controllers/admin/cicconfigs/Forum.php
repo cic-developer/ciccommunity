@@ -24,7 +24,7 @@ class Forum extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_forum', 'CIC_cp','Board', 'Post', 'Board_category', 'Post_file', 'CIC_forum_config', 'CIC_forum_info', 'Member');
+	protected $models = array('CIC_forum', 'CIC_cp','Board', 'Post', 'Board_category', 'Post_file', 'Post_extra_vars', 'CIC_forum_config', 'CIC_forum_info', 'Member');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
@@ -931,22 +931,32 @@ class Forum extends CB_Controller
 	public function forum_write($pst_id = 0, $post_id = 0)
 	{
 		//
+
 		$eventname = 'event_admin_cicconfig_forum_write';
 		$this->load->event($eventname);
-
+		
 		$view = array();
 		$view['view'] = array();
-
+		
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-
-		if($pst_id === $post_id) {
+		
+		if($pst_id) {
 			$pst_id = (int) $pst_id;
 			if(empty($pst_id) OR $pst_id < 1 ){
 				show_404();
 			}
 		}
 
+		if($post_id) {
+			$post_id = (int) $post_id;
+			if(empty($post_id) OR $post_id < 1 ){
+				show_404();
+			}
+		}
+
 		$primary_key = $this->CIC_forum_info_model->primary_key;
+
+
 
 		$getdata = array();
 		if ($pst_id) {
@@ -982,7 +992,7 @@ class Forum extends CB_Controller
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
 			$updatedata = array(
-				'pst_id' => $this->input->post($primary_key),
+				'pst_id' => $pst_id,
 				'frm_bat_close_datetime' => $this->input->post('frm_bat_close_datetime', null, ''),
 				'frm_close_datetime' => $this->input->post('frm_close_datetime', null, ''),
 			);
@@ -1000,6 +1010,12 @@ class Forum extends CB_Controller
 					'정상적으로 추가되었습니다'
 				);
 			}
+
+			$post = $this->Post_model->get_one($pst_id);
+			$post_extra_vars = $this->
+
+			print_r($post);
+			exit;
 
 			$redirecturl = admin_url($this->pagedir);
 			redirect($redirecturl);
