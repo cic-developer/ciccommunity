@@ -21,6 +21,8 @@ class Company_model extends CB_Model
 	 */
 	public $primary_key = 'comp_id'; // 사용되는 테이블의 프라이머리키
 
+	public $allow_order_field = array();
+
 	public $cache_prefix = 'company/company-model-get-'; // 캐시 사용시 프리픽스
 
 	public $cache_time = 86400; // 캐시 저장시간
@@ -32,12 +34,10 @@ class Company_model extends CB_Model
 		check_cache_dir('company');
 	}
 
-    public function get_company_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
+    public function get_company_list($limit = '', $offset = '', $where = '', $findex = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
     {
-		print_r($orderby);
-		exit;
-        if ( ! in_array(strtolower($orderby), $this->allow_order)) {
-			$orderby = 'comp_id asc';
+        if ( ! in_array(strtolower($findex), $this->allow_order_field)) {
+			$findex = 'comp_id';
 		}
 		
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
@@ -116,7 +116,7 @@ class Company_model extends CB_Model
 			$this->db->group_end();
 		}
 
-		$this->db->order_by($orderby);
+		$this->db->order_by($findex, $orderby);
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}

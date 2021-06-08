@@ -237,5 +237,35 @@ btn2.onclick = function() {
 
 
 	//]]>
+
+/********************************************************/
+	/**
+	* 나이스 핸드폰인증 시작
+	*/
+	window.name ="Parent_window";
+		function fnPopup1(){
+			window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
+			document.form_chk1.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+			document.form_chk1.target = "popupChk";
+			document.form_chk1.submit();
+		}
+		function fnPopup2(){
+			window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
+			document.form_chk2.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+			document.form_chk2.target = "popupChk";
+			document.form_chk2.submit();
+		}
+
+		// var successNice = function(type){
+		// 	$('#myModal_' + type + ' > .modal-content > .ath-nice-content .all-nice-box').attr('style', "display:none"); // 인증버튼 제거
+		// 	$('#myModal_' + type + ' > .modal-content .ath-nice-content .success').attr('style', "display:block"); // 인증완료 메세지
+			
+		// 	$('#myModal_' + type + ' > .modal-content .ath-nice-content').addClass("agree") // 인증 완료 표식
+			
+		// 	isAgreeForModify(type);
+		// }
+	/**
+	* 나이스 핸드폰인증 끝
+	*/
 </script>
 

@@ -24,8 +24,8 @@ class News_model extends CB_Model
 
     public function get_news_list($limit = '', $offset = '', $where = '', $findex = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
     {
-		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
-			$orderby = 'news_id desc';
+		if ( ! in_array(strtolower($findex), $this->allow_order)) {
+			$findex = 'news_id';
 		}
 		
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
@@ -104,7 +104,7 @@ class News_model extends CB_Model
 			$this->db->group_end();
 		}
 
-		$this->db->order_by($orderby);
+		$this->db->order_by($findex, $orderby);
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}
@@ -148,8 +148,8 @@ class News_model extends CB_Model
 
 	public function most_view_news($limit = '', $offset = '', $where = '', $findex = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
-		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
-			$orderby = 'news_reviews desc';
+		if ( ! in_array(strtolower($findex), $this->allow_order)) {
+			$findex = 'news_reviews';
 		}
 		
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
@@ -228,7 +228,7 @@ class News_model extends CB_Model
 			$this->db->group_end();
 		}
 
-		$this->db->order_by($orderby);
+		$this->db->order_by($findex, $orderby);
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}

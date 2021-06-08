@@ -39,10 +39,14 @@ class News extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = 'news_id';
-		$forder = 'desc';
+		$findex = $this->input->get('findex', null, 'news_id');
+		$forder = $this->input->get('forder', null, 'desc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
+
+		$view['view']['sort'] = array(
+			'news_id' => $param->sort('news_id', 'asc'),
+		);
 
 		$per_page = admin_listnum();
 		$offset = ($page - 1) * $per_page;
@@ -66,7 +70,7 @@ class News extends CB_Controller
 		}
 
 		$result = $this->{$this->modelname}
-			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->get_news_list($per_page, $offset, $where, $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
@@ -144,10 +148,14 @@ class News extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = 'news_id';
-		$forder = 'desc';
+		$findex = $this->input->get('findex', null, 'news_id');
+		$forder = $this->input->get('forder', null, 'desc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
+
+		$view['view']['sort'] = array(
+			'news_id' => $param->sort('news_id', 'asc'),
+		);
 
 		$per_page = admin_listnum();
 		$offset = ($page - 1) * $per_page;
@@ -163,7 +171,7 @@ class News extends CB_Controller
 		);
 
 		$result = $this->{$this->modelname}
-			->get_news_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->get_news_list($per_page, $offset, $where, $findex, $forder, $sfield, $skeyword);
 
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
@@ -314,10 +322,14 @@ class News extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = 'news_id';
-		$forder = 'desc';
+		$findex = $this->input->get('findex', null, 'news_id');
+		$forder = $this->input->get('forder', null, 'desc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
+
+		$view['view']['sort'] = array(
+			'news_id' => $param->sort('news_id', 'asc'),
+		);
 
 		$per_page = admin_listnum();
 		$offset = ($page - 1) * $per_page;
@@ -342,7 +354,7 @@ class News extends CB_Controller
 		}
 
 		$result = $this->{$this->modelname}
-			->most_view_news($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->most_view_news($per_page, $offset, $where, $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 
 		if (element('list', $result)) {
@@ -522,19 +534,19 @@ class News extends CB_Controller
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
 		$findex = $this->input->get('findex', null, 'news_id');
-		$forder = $this->input->get('forder', null, 'asc');
+		$forder = $this->input->get('forder', null, 'desc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
+
+		$view['view']['sort'] = array(
+			'comp_id' => $param->sort('comp_id', 'asc'),
+		);
 
 		$per_page = admin_listnum();
 		$offset = ($page - 1) * $per_page;
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
-
-		$view['view']['sort'] = array(
-			'comp_id' => $param->sort('comp_id', 'desc'),
-		);
 
 		
 		$this->Company_model->allow_search_field = array('comp_id', 'comp_name'); // 검색이 가능한 필드
@@ -551,7 +563,7 @@ class News extends CB_Controller
 		}
 		
 		$result = $this->Company_model
-		->get_company_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+		->get_company_list($per_page, $offset, $where, $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		
 		if (element('list', $result)) {
