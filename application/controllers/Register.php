@@ -831,7 +831,7 @@ class Register extends CB_Controller
 						} elseif(element('field_name', $value) === 'mem_username'){
 							$html_content[$k]['input'] .= '<input type="hidden" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . urldecode($data['name']) . '" ' . $required . '/>'; // form-control input
 						} elseif(element('field_name', $value) === 'mem_recommend'){
-							$html_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . urldecode($data['name']) . '" ' . $required . '/>'; // form-control input
+							$html_content[$k]['input'] .= '<input type="text" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="" value="' . $this->session->userdata('ref_code') . '"/>'; // form-control input
 						} else {
 							$html_content[$k]['input'] .= '<input type="' . element('field_type', $value) . '" id="' . element('field_name', $value) . '" name="' . element('field_name', $value) . '" class="form-control input" value="' . set_value(element('field_name', $value)) . '" ' . $required . '/>';
 						}
