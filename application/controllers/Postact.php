@@ -667,8 +667,55 @@ class Postact extends CB_Controller
 			switch(element('brd_id', $post)){
 				case 1:{
 					//자유게시판의 경우
-					$vp_point = element('vpc_value' ,$this->CIC_vp_config_model->get_one('','',"vpc_id = 3 AND vpc_enable = 1"));
-					$cp_point = element('cpc_value' ,$this->CIC_cp_config_model->get_one('','',"cpc_id = 3 AND cpc_enable = 1"));
+					if(element('lik_type', $exist) == 1){
+						//추천의 경우
+						$vp_recommended_point = element('vpc_value' ,$this->CIC_vp_config_model->get_one('','',"vpc_id = 6 AND vpc_enable = 1"));
+						$vp_recommender_point = element('vpc_value' ,$this->CIC_vp_config_model->get_one('','',"vpc_id = 8 AND vpc_enable = 1"));
+						$cp_recommended_point = element('cpc_value' ,$this->CIC_cp_config_model->get_one('','',"cpc_id = 6 AND cpc_enable = 1"));
+						$cp_recommender_point = element('cpc_value' ,$this->CIC_cp_config_model->get_one('','',"cpc_id = 8 AND cpc_enable = 1"));
+						if($vp_recommended_point){
+							$this->point->insert_vp(
+								$mem_id,
+								$usedPoint * $vp_recommended_point,
+								element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
+								'point_use',
+								$post_id,
+								'포인트 사용'
+							);
+						}
+						if($vp_recommender_point){
+							$this->point->insert_vp(
+								$mem_id,
+								$usedPoint * $vp_recommender_point,
+								element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
+								'point_use',
+								$post_id,
+								'포인트 사용'
+							);
+						}
+						if($cp_recommended_point){
+							$this->point->insert_cp(
+								$mem_id,
+								$usedPoint * $cp_recommended_point,
+								element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
+								'point_use',
+								$post_id,
+								'포인트 사용'
+							);
+						}
+						if($cp_recommender_point){
+							$this->point->insert_cp(
+								$mem_id,
+								$usedPoint * $cp_recommender_point,
+								element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
+								'point_use',
+								$post_id,
+								'포인트 사용'
+							);
+						}
+					} else {
+						//비추천의 경우
+					}
 				}
 				break;
 				case 2:{

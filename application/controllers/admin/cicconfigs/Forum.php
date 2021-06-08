@@ -1034,6 +1034,10 @@ class Forum extends CB_Controller
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
+	}
 
+	public function return_forum()
+	{
+		print_r('kokokokokokokorea');
 	}
 }

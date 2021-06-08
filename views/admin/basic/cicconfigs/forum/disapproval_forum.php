@@ -11,7 +11,7 @@
 						<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/disapproval_forum'); ?>">승인대기포럼</a></li>
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/proceeding_forum'); ?>">진행중포럼</a></li>
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/close_forum'); ?>">마감된포럼</a></li>
-						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . ''); ?>"></a></li>
+						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/return_forum'); ?>"">반려된포럼</a></li>
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . ''); ?>"></a></li>
 					</ul>
 					<?php
