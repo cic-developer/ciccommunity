@@ -38,8 +38,6 @@
 								<th><a href="<?php echo element('post_datetime', element('sort', $view)); ?>">날짜</a></th>
 								<th><a href="<?php echo element('cic_forum_info.frm_bat_close_datetime', element('sort', $view)); ?>">배팅마감</a></th>
 								<th><a href="<?php echo element('cic_forum_info.frm_close_datetime', element('sort', $view)); ?>">포럼마감</a></th>
-								<th><a href="<?php echo element('cic_forum_total_cp', element('sort', $view)); ?>">참여금액</a></th>
-								<th>수정</th>
 								<th><input type="checkbox" name="chkall" id="chkall" /></th>
 							</tr>
 						</thead>
@@ -60,14 +58,14 @@
                                 <td><?php echo display_datetime(element('post_datetime', $result), 'full'); ?></td>
                                 <td><?php echo display_datetime(element('frm_bat_close_datetime', $result), 'full'); ?></td>
 								<td><?php echo display_datetime(element('frm_close_datetime', $result), 'full'); ?></td>
-                                <td><?php echo number_format(element('cic_forum_total_cp', $result), 2); ?></td>
-                                <td>
+
+                                <!-- <td>
 									<?php if( element('frm_repart_state', $result) != 1) { ?>
 									<a href="<?php echo admin_url($this->pagedir); ?>/forum_repart/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">포인트 배분</a>
 									<?php }else { ?>
 									<p class="text-success">배분완료</p>
 									<?php } ?>
-								</td>
+								</td> -->
 								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" <?php echo element('frm_repart_state', $result) == 1 ? '' : 'disabled readonly' ?>/></td>
 							</tr>
 						<?php

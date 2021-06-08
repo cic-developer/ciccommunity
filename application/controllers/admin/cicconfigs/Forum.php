@@ -1072,8 +1072,9 @@ class Forum extends CB_Controller
 		// 현재 시간이 포럼 종료 시간보다 많을 경우
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp());
 		$where = array(
-			'brd_id' => 3,
-			'cic_forum_info.frm_close_datetime <' => $checktime
+			'brd_id' => 6,
+			'post_category' => '2',
+			// 'cic_forum_info.frm_close_datetime <' => $checktime
 		);
 		
 		$result = $this->{$this->modelname}->get_post_list($per_page, $offset, $where, '', $findex, $sfield, $skeyword);
@@ -1113,7 +1114,7 @@ class Forum extends CB_Controller
 
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'close_forum');
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'return_forum');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));

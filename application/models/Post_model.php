@@ -942,19 +942,22 @@ class Post_model extends CB_Model
 		return $result;
 	}
 
-	public function get_one_join($primary_value = '', $select = '', $where = '')
+	public function get_one_join($primary_value = '', $select = '', $where = '', $join = '')
 	{
-		$result = $this->_get_join($primary_value, $select, $where, 1);
+		$result = $this->_get_join($join, $primary_value, $select, $where, 1);
 		return $result->row_array();
 	}
 
 
-	public function _get_join($primary_value = '', $select = '', $where = '', $limit = '', $offset = 0, $findex = '', $forder = '')
+	public function _get_join($join = '', $primary_value = '', $select = '', $where = '', $limit = '', $offset = 0, $findex = '', $forder = '')
 	{
 		if ($select) {
 			$this->db->select($select);
 		}
 		$this->db->from($this->_table);
+		if ($join) {
+			$this->db->join($join[0], $join[1], $join[2]);
+		}
 		if ($primary_value) {
 			$this->db->where($this->primary_key, $primary_value);
 		}
