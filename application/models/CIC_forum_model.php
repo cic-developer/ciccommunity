@@ -286,18 +286,18 @@ class CIC_forum_model extends CB_Model
 		return $result;
 	}
 
-	public function delete_where($where = '', $table = '')
+	public function delete_forum_where($where = '', $table = '')
 	{
 		if (empty($where)) {
 			return;
 		}
 
-		if (!$table){
-			$table = $this->_table;
-		}
-
 		$this->db->where($where);
-		$result = $this->db->delete($this->_table);
+		if ($table == ''){
+			$table = $this->_table;
+		}else{
+			$result = $this->db->delete($table);
+		}
 
 		return $result;
 	}

@@ -510,8 +510,8 @@ class Forum extends CB_Controller
 						$where = array(
 							'pst_id' => $val
 						);
-						$this->CIC_forum_model->delete_forum_info($where, 'cic_forum_info');
-						$this->CIC_forum_model->delete_forum_cp($where, 'cic_forum_cp');
+						$this->CIC_forum_model->delete_forum_where($where, 'cic_forum_info');
+						$this->CIC_forum_model->delete_forum_where($where, 'cic_forum_cp');
 					}
 				}
 			}
@@ -1061,7 +1061,7 @@ class Forum extends CB_Controller
 			 */
 			
 			if ($this->input->post($primary_key)) {
-				$this->{$this->modelname}->update($this->input->post($primary_key), $updatedata);
+				$this->CIC_forum_info_model->update($this->input->post($primary_key), $updatedata);
 				$this->session->set_flashdata(
 					'message',
 					'정상적으로 수정되었습니다'
