@@ -474,15 +474,16 @@ class Forum extends CB_Controller
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
 
-	$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-	$layoutconfig = array('layout' => 'layout', 'skin' => 'close_forum');
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'close_forum');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
+	// 마감된 포럼의 cp 포인트를 관리자가 분배하는 페이지
 	public function forum_repart($pst_id = 0)
 	{
 		// 이벤트 라이브러리를 로딩합니다.
@@ -495,6 +496,7 @@ class Forum extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventame);
 
+		// 해당 게시물이 존재하지 않는 경우
 		if($pst_id) {
 			$pst_id = (int) $pst_id;
 			if(empty($pst_id) OR $pst_id < 1 ){
@@ -588,12 +590,13 @@ class Forum extends CB_Controller
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
             
-			$_forum_commission = (double) $this->input->post('forum_commission');
-			$forum_commission = $total_cp * ($_forum_commission / 100);
-			$writer_reward = (double) $this->input->post('writer_reward');
+			$_forum_commission = (double) $this->input->post('forum_commission'); // 포럼 수수료
+			$forum_commission = $total_cp * ($_forum_commission / 100); // 포럼 수수료를 계산한 후 CP
+			$writer_reward = (double) $this->input->post('writer_reward'); // 게시물 작성자 지급 보상 CP
             
-			$repart_cp =  $total_cp - ( $writer_reward + $forum_commission);
+			$repart_cp =  $total_cp - ( $writer_reward + $forum_commission); // 수수료 보상을 계산후 실제 나누게 될 포인트( 배분 시작 금액)
             
+			// 배분 시작금액이 승리 의견금액보다 낮은경우
 			if($win_cp > $repart_cp){
 				$this->form_validation->set_message(
 					'_writer_reward_check',
@@ -603,10 +606,6 @@ class Forum extends CB_Controller
 			}
             
 			$repart_ratio = $repart_cp / $win_cp; // 1cp당 지급 비율
-            
-			// pst_id 에 해당하는 모든 데이터를 가져온다.
-			// cfc_cp 칼럼의 cp*$repart_ratio를 한 값을 member테이블의 mem_cp에 저장한다.
-			// cic_cp 테이블에 cp 로그 기록한다.
 
 			$admin_id = $this->member->item('mem_id'); // 관리자 id
 
@@ -638,7 +637,7 @@ class Forum extends CB_Controller
 			 * 투표자 보상 지급 시작
 			 */
             
-			// 배팅 가져오기
+			// 배팅 가져오기 ( 유저들의 배팅 정보들 )
 			$where = array(
 				'pst_id' => $pst_id
 			);
@@ -674,7 +673,7 @@ class Forum extends CB_Controller
 			 */
 
 			/**
-			 * 배분 완료 state
+			 * 배분 완료 = state 1로 변경 ( cic_forum_info table)
 			 */
 			$updatedata = array(
 				'frm_repart_state' => 1
@@ -715,7 +714,7 @@ class Forum extends CB_Controller
 			return false;
 		}
 
-		// 
+		// 포럼 수수료가 승리CP보다 많은 경우
 		$commission = $total_cp * ((double) $str / 100); 
 		if($win_cp < $commission){
 			$this->form_validation->set_message(
@@ -725,6 +724,7 @@ class Forum extends CB_Controller
 			return false;
 		}
 
+		// 소수점 2자리 검사
 		$str = explode( '.', $_str );
 		if( strlen($str[1]) > 2){
 			$this->form_validation->set_message(
@@ -743,6 +743,7 @@ class Forum extends CB_Controller
 		$total_cp = $this->session->userdata('total_cp');
 		$win_cp = $this->session->userdata('win_cp');
 
+		// total cp 혹은 win cp가 없는 경우
 		if(!$total_cp || !$win_cp){
 			$this->form_validation->set_message(
 				'_writer_reward_check',
@@ -751,6 +752,7 @@ class Forum extends CB_Controller
 			return false;
 		}
 
+		// 총 cp 가 승리진영 cp보다 적은 경우
 		if((double) $total_cp - (double) $win_cp < 0){
 			$this->form_validation->set_message(
 				'_writer_reward_check',
@@ -767,6 +769,7 @@ class Forum extends CB_Controller
 			return false;
 		}
 
+		// 소수점 2자리 검사
 		$str = explode( '.', $_str );
 		if( strlen($str[1]) > 2){
 			$this->form_validation->set_message(
