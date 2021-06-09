@@ -1824,10 +1824,30 @@ class Mypage extends CB_Controller
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
 
-				$where = array(
-					'cp_id' => element('cp_id', $val),
-				);
-				
+				if(element('cp_state', $val)){
+					switch(element('cp_state', $val)){
+						case 0: {
+							$result['list'][$key]['cp_state'] = '<p class="cred">실패</p>';
+						}
+						break;
+
+						case 1: {
+							$result['list'][$key]['cp_state'] = '<p class="">대기</p>';
+						}
+						break;
+
+						case 2:{
+							$result['list'][$key]['cp_state'] = '<p class="cblue">완료(문의)</p>';
+						}
+						break;
+
+						case 3: {
+							$result['list'][$key]['cp_state'] = '<p class="cblue">완료</p>';
+						}
+						break;
+					}
+				}
+
 				$result['list'][$key]['num'] = $list_num--;
 			}
 		}

@@ -411,9 +411,9 @@ $(document).on('ready', async function() {
         history.back();
     } else {
         console.log('klaytn : ', klaytn);
-        if (klaytn.selectedAddress.toLowerCase() != userWallet_in_mypage.toLowerCase()) {
-            alert('카이카스 지갑주소와 등록되어있는 지갑주소가 일치하지 않습니다.');
-        }
+        // if (klaytn.selectedAddress.toLowerCase() != userWallet_in_mypage.toLowerCase()) {
+        //     alert('카이카스 지갑주소와 등록되어있는 지갑주소가 일치하지 않습니다.');
+        // }
     }
 
     const PER = new caver.klay.Contract(token_abi, token_address);

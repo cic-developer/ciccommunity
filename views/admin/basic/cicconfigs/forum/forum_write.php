@@ -71,12 +71,14 @@
 
 				<?php
 					if (element('pevdata', $view)){
-						foreach (element('pevdata', $view) as $result) {
+						foreach (element('pevdata', $view) as $pev_value) {
+							print_r($pev_value[0]);
+							// exit;
 					?>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">투표 항목</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="pev_value" value="<?php echo set_value('pev_value', element('pev_value', $result)); ?>" />
+							<input type="text" class="form-control" name="pev_value_1" value="<?php echo set_value('pev_value', element('pev_value', $pev_value)); ?>" />
 						</div>
 					</div>
 					<?php
