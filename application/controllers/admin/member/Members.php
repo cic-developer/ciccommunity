@@ -212,6 +212,7 @@ class Members extends CB_Controller
 		}
 		$primary_key = $this->{$this->modelname}->primary_key;
 
+
 		/**
 		 * 수정 페이지일 경우 기존 데이터를 가져옵니다
 		 */

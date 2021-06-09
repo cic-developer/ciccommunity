@@ -919,16 +919,19 @@ class Forum extends CB_Controller
 			}
 		}
 		$primary_key = $this->CIC_forum_info_model->primary_key;
-		$_primary_key = $this->Post_model->primary_key;
+		// $_primary_key = $this->Post_model->primary_key;
 
 		/**
 		 * 수정 페이지일 경우 기존 데이터를 가져옵니다
 		 */
 
 
+
 		$getdata = array();
-		$_getdata = array();
+		$frminfo_getdata = array();
+		$pev_getdata = array();
 		if ($pst_id) {
+			$pev_getdata = $this->CIC_forum_info_model->get_one($pst_id);
 			$getdata = $this->Post_model->get_one($pst_id);
 			$_getdata = $this->Post_extra_vars_model->get($pst_id);
 		}
@@ -961,19 +964,49 @@ class Forum extends CB_Controller
 				'rules' => 'trim|required',
 			)
 		);
-		// if ($this->input->post($_primary_key)) {
-		// 	$config[] = array(
-		// 		'field' => 'post_title',
-		// 		'label' => '포럼 제목',
-		// 		'rules' => 'trim|required'
-		// 		);
-		// } else {
-		// 	$config[] = array(
-		// 		'field' => 'post_content',
-		// 		'label' => '포럼 내용',
-		// 		'rules' => 'trim|required'
-		// 	);
-		// }
+		if ($this->input->post($primary_key)) {
+			$config[] = array(
+				'field' => 'frm_bat_close_datetime',
+				'label' => '배팅 종료일',
+				'rules' => 'trim|required',
+			);
+			array(
+				'field' => 'frm_close_datetime',
+				'label' => '포럼 종료일',
+				'rules' => 'trim|required',
+			);
+			array(
+				'field' => 'post_title',
+				'label' => '포럼 제목',
+				'rules' => 'trim|required',
+			);
+			array(
+				'field' => 'post_content',
+				'label' => '포럼 제목',
+				'rules' => 'trim|required',
+			);
+		} else {
+			$config[] = array(
+				'field' => 'frm_bat_close_datetime',
+				'label' => '배팅 종료일',
+				'rules' => 'trim|required',
+			);
+			array(
+				'field' => 'frm_close_datetime',
+				'label' => '포럼 종료일',
+				'rules' => 'trim|required',
+			);
+			array(
+				'field' => 'post_title',
+				'label' => '포럼 제목',
+				'rules' => 'trim|required',
+			);
+			array(
+				'field' => 'post_content',
+				'label' => '포럼 제목',
+				'rules' => 'trim|required',
+			);
+		}
 
 		$this->form_validation->set_rules($config);
 

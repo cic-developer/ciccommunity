@@ -29,6 +29,7 @@
 						</li>
 						<li>등록일 : <?php echo element('display_datetime', element('post', $view)); ?> </li>
 						<li>조회 : <?php echo number_format(element('post_hit', element('post', $view))); ?> </li>
+						<li>좋아요 : <?php echo number_format(element('post_like', element('post', $view))); ?> </li>
 					</ul>
 					<div class="poll-abr">
 						<ul>
@@ -129,7 +130,7 @@
 				<div class="recommand vp-point">
 					<?php if (element('use_post_like', element('board', $view))) { ?>
 						<div class="btns">
-							<a class="cmmt-like" href="javascript:;" id="btn-post-like" onClick="post_like('<?php echo element('post_id', element('post', $view)); ?>', '1', 'post-like');" title="추천하기">좋아요<span class="post-like"></span><br /><i class="fa fa-thumbs-o-up fa-lg"></i></a>
+							<a class="cmmt-like" href="javascript:;" id="btn-post-like" onClick="post_like_forum('<?php echo element('post_id', element('post', $view)); ?>', '1', 'post-like');" title="추천하기">좋아요<span class="post-like"></span><br /><i class="fa fa-thumbs-o-up fa-lg"></i></a>
 						</div>
 					<?php } ?>
 				</div>
@@ -495,4 +496,34 @@
 			}
 		})
 	})
+</script>
+
+<script>
+	function post_like_forum(post_id, like_type, classname) {
+        var href;
+
+        if (post_id == "") {
+            return false;
+        }
+
+        href = cb_url + "/postact/post_like/" + post_id + "/" + like_type;
+
+        $.ajax({
+            url: href,
+            type: "get",
+            dataType: "json",
+            success: function(data) {
+                if (data.error) {
+                    alert(data.error);
+                    return false;
+                } else if (data.success) {
+                    //alert(data.success);
+                    // $("." + classname).text(number_format(String(data.count)));
+                    // $("#btn-" + classname).effect("highlight", { color: "#f37f60" }, 300);
+					alert(data.success);
+					location.reload(true);
+                }
+            },
+        });
+    }
 </script>
