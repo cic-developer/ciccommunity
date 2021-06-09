@@ -43,7 +43,7 @@ class Withdraws extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('pagination', 'querystring', 'member'));
+		$this->load->library(array('pagination', 'querystring', 'member', 'coinapi'));
 	}
 
 	/**
@@ -51,6 +51,19 @@ class Withdraws extends CB_Controller
 	 */
 	public function index()
 	{
+		$data1 = $this->coinapi->get_main_data();
+		print_r('테스트중');
+		print_r("<br>");
+		print_r("<hr>");
+		print_r("<br>");
+		foreach($data1 as $val){
+
+			print_r("<br>");
+			print_r($val);
+			print_r("<br>");
+			print_r("<hr>");
+		}
+		exit;
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_withdraw_withdraws_index';
 		$this->load->event($eventname);

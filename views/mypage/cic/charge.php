@@ -19,7 +19,7 @@
                             <a id="charge_button" href="#n" class="draw-btn"><span>충전하기</span></a>
                         </div>
                         <!-- 아래 100CP는, 메인페이지 거래소 가격 해서 1PER 당 n CP(CP는 100원) 비율로 나타냈으면 합니다. -->
-                        <div class="explan">1 PER 당 &rarr;<p style="display:inline;"> <?php echo rs_number_format((floor(element('price', $perPrice) / 10) * 10) / 100, 2); ?> CP 입니다.</p></div>
+                        <div class="explan">1 PER 당 &rarr;<p style="display:inline;"> <?php echo rs_number_format($per2cp, 2); ?> CP 입니다.</p></div>
                     </li>
                 </ul>
             </div>
@@ -65,4 +65,11 @@
         <!-- page end // -->
     </div>
 </div>
-<script type="text/javascript" src="<?php echo base_url('assets/js/chargecp.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/chargecp.js?v='.date('YmdHis')); ?>"></script>
+<script>
+    csrf_key = '<?php echo $this->security->get_csrf_token_name(); ?>';
+    csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
+    $("#charge_input").keyup(function(){
+        $(this).val( $(this).val().replace(/[^0-9]/g,""));
+    });
+</script>

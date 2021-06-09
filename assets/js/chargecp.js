@@ -391,6 +391,8 @@ const contract_abi = [{
 ]
 const contract_address = "0x5682461966BB835da2C55c883E5C5985c54829e6";
 const token_address = "0x7eee60a000986e9efe7f5c90340738558c24317b";
+let csrf_key = '';
+let csrf_token = '';
 
 $(document).on('ready', async function() {
     const klaytn = window.klaytn;
@@ -415,6 +417,22 @@ $(document).on('ready', async function() {
     try {
 
         $(document).on('click', '#charge_button', async function() {
+            if (!csrf_key || !csrf_token) {
+                alert('보안사항이 충족되지 않았습니다.');
+                return false;
+            }
+            var reg_num = /^[0-9]*$/;
+            let charge_value = $('#charge_input').val();
+            // 충전액 필숫값
+            if (!charge_value) {
+                alert('충전액을 입력해주십시오.');
+                return false;
+            }
+            // 숫자만 입력 가능
+            if (!reg_num.test(charge_value)) {
+                alert('충전액을 확인해주십시오.');
+                return false;
+            }
             await klaytn.enable();
             // 클레이튼에 접속되어있는 월렛주소
             const account = klaytn.selectedAddress;
@@ -439,8 +457,6 @@ $(document).on('ready', async function() {
                 location.reload();
                 return;
             }
-
-            let charge_value = $('#charge_input').val();
 
             const approve_data = caver.klay.abi.encodeFunctionCall({
                 name: "approve",

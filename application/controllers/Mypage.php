@@ -1764,40 +1764,21 @@ class Mypage extends CB_Controller
 		redirect('mypage/withdraw');
 	}
 
-	/**
-	 * 소수점을 체크하는 콜백함수입니다.
-	 */
-	public function _minimum_decimal_check($_str)
-	{
-        
-		$str = explode( '.', $_str );
-		if( strlen($str[1]) < 3){
-			return true;
-		}
-        
-		$this->form_validation->set_message(
-			'_minimum_decimal_check',
-			'출금요청 최소금액은 소수점 2자리 까지 설정이 가능합니다'
-		);
-		return false;
-	}
-
-	function _withdraw_minimum_check($str){
+	function _withdraw_minimum_check($_str){
 
 		$str = explode( '.', $_str );
 		if( strlen($str[1]) > 2){
 			$this->form_validation->set_message(
 				'_withdraw_minimum_check',
-				'출금요청 최소금액은 소수점 2자리 까지 설정이 가능합니다'
+				'출금요청 금액은 소수점 2자리 까지 설정이 가능합니다'
 			);
 			return false;
 		}
-		}
-    
+
 		// 최소 신청 금액
 		$withdraw_minimum = $this->CIC_wconfig_model->item('withdraw_minimum'); 
         
-		if($str < $withdraw_minimum){
+		if($_str < $withdraw_minimum){
 			$this->form_validation->set_message(
 				'_withdraw_minimum_check',
 				'최소 신청금액을 맞춰주세요 ('.$withdraw_minimum.')'
@@ -1808,7 +1789,7 @@ class Mypage extends CB_Controller
 		return true;
 	}
 
-	function charge(){
+	public function charge(){
 		
 		/**
 		 * 로그인이 필요한 페이지입니다
@@ -1821,7 +1802,11 @@ class Mypage extends CB_Controller
 		$view['view'] = array();
         
 		$this->load->library('coinapi');
-		$view['perPrice'] = $this->coinapi->get_coin_data('gdac', 'PER', 'KRW');
+		$per_gdac_price = element('price', $this->coinapi->get_coin_data('gdac', 'PER', 'KRW'));
+		$per2cp = (floor($per_gdac_price / 10) * 10) / 100;
+		$view['per2cp'] = $per2cp;
+		$this->session->set_userdata('per2cp', $per2cp);
+
 		$layoutconfig = array(
 			'path' => 'mypage',
 			'layout' => 'layout',
@@ -1837,6 +1822,10 @@ class Mypage extends CB_Controller
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
+	}
+
+	public function charge_ajax(){
+		
 	}
 
 	/**

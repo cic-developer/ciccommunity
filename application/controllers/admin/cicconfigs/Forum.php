@@ -918,6 +918,7 @@ class Forum extends CB_Controller
 			}
 		}
 		$primary_key = $this->CIC_forum_info_model->primary_key;
+		$_primary_key = $this->Post_model->primary_key;
 
 		/**
 		 * 수정 페이지일 경우 기존 데이터를 가져옵니다
@@ -971,19 +972,19 @@ class Forum extends CB_Controller
 				'rules' => 'trim|required',
 			)
 		);
-		if ($this->input->post($primary_key)) {
-			$config[] = array(
-				'field' => 'post_title',
-				'label' => '포럼 제목',
-				'rules' => 'trim|required',
-			);
-			$config[] = array(
-				'field' => 'post_content',
-				'label' => '포럼 내용',
-				'rules' => 'trim|required',
-			);
-		} else {
-		}
+		if ($this->input->post($_primary_key)) {
+				$config[] = array(
+						'field' => 'post_title',
+						'label' => '신문사 명',
+						'rules' => 'trim|required|min_length[2]|max_length[15]|is_unique[company.comp_name.comp_id.' . element('comp_id', $getdata) . ']',
+				);
+			} else {
+				$config[] = array(
+					'field' => 'post_content',
+						'label' => '신문사 명',
+						'rules' => 'trim|required|min_length[2]|max_length[15]|is_unique[company.comp_name]'
+				);
+			}
 
 		$this->form_validation->set_rules($config);
 
@@ -1080,22 +1081,16 @@ class Forum extends CB_Controller
 
 			$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
 			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
-			// $post_title = $getdata['post_title'];
-			// $post_content = $getdata['post_content'];
+			$post_title = $this->input->post('post_title', null, '');
+			$post_content = $this->input->post('post_content', null, '');
 			
 
-			$updatedata = array(
-				'pst_id' => $pst_id,
-				'frm_bat_close_datetime' => $frm_bat_close_datetime,
-				'frm_close_datetime' => $frm_close_datetime,
-			);
-			$_updatedata = array(
-				'post_title' => $this->input->post('post_title', null, ''),
-				'post_content' => $this->input->post('post_content', null, ''),
-			);
-
+			
+			// print_r($_updatedata['post_content']);
+			// exit;
+			
             if($updatephoto){
-                $updatedata['frm_image'] = $updatephoto;
+				$updatedata['frm_image'] = $updatephoto;
             }
 			/**
 			 * 게시물을 수정하는 경우입니다
@@ -1112,6 +1107,12 @@ class Forum extends CB_Controller
 				/**
 				 * 게시물을 새로 입력하는 경우입니다
 				 */
+				$updatedata = array(
+					'pst_id' => $pst_id,
+					'frm_bat_close_datetime' => $frm_bat_close_datetime,
+					'frm_close_datetime' => $frm_close_datetime,
+				);
+				
 				$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 				$updatedata['frm_close_datetime'] = $frm_close_datetime;
 				$updatedata['pst_id'] = $pst_id;
@@ -1122,6 +1123,8 @@ class Forum extends CB_Controller
 				);
 				$postupdate = array(
 					'brd_id' => 3,
+					'post_title' => $this->input->post('post_title', null, ''),
+					'post_content' => $this->input->post('post_content', null, ''),
 				);
 				$this->Post_model->update($pst_id, $postupdate, $where);
 
