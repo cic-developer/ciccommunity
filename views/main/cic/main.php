@@ -265,11 +265,11 @@
                                 <div class="txt">
                                     <div class="vc">
                                         <p>빈 게시물 입니다 :)</p>
-                                        <a href="#n"><span>이동불가!</span></a>
+                                        <a href="#n"><span>wait!</span></a>
                                     </div>
                                 </div>
                             </div>
-                            
+
                         <?php }?>
 
                         <!-- <div class="item">
