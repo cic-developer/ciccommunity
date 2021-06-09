@@ -145,10 +145,10 @@
             <div class="lower r">
                 <div class="ov">
                     <?php if (element('isDeposit', $view)) { ?>
-                    <a href="#n" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:inline-block;"><span>예치금 빼기</span></a>
+                    <a href="#n" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:inline-block;"><span>예치금 반환</span></a>
                     <a href="#n" class="by-btn" id="deposit_insert" style="display:none;"><span>예치금 넣기</span></a>
                     <?php }else { ?>
-                    <a href="#n" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:none;"><span>예치금 빼기</span></a>
+                    <a href="#n" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:none;"><span>예치금 반환</span></a>
                     <a href="#n" class="by-btn" id="deposit_insert" style="display:inline-block;"><span>예치금 넣기</span></a>
                     <?php } ?>
 
@@ -206,9 +206,11 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <a href="javascript:void(0);" id="deposit_insert_confirm"  data-type="phone" class="modify-btn" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>">
-                            <span>확인</span>
-                        </a>
+                        <div style="text-align:right;">
+                            <a href="javascript:void(0);" id="deposit_insert_confirm"  data-type="phone" class="by-btn" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="border-radius: 5px; margin-top:15px;">
+                                <span>예치</span>
+                            </a>
+                        </div>
 					<!-- </ul> -->
 				</div>
 			</div>
@@ -295,7 +297,7 @@
 
     $(document).on('click', '#deposit_insert_confirm', function() {
     
-        var isConfirm = confirm('선택한 요청을 정말 승인 하시겠습니까?');
+        var isConfirm = confirm('정말 예치하시겠습니까?');
         
         if(isConfirm){
         

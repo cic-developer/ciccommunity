@@ -70,9 +70,8 @@
 							<p>* 아이디를 잊어버렸나요?</p>
 							<input type="hidden" name="m" value="checkplusService">
 							<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('id_enc_data', $view)); ?>">
-							<a href="javascript:fnPopup1();" id="ath_nice_phone1" class="modify-btn"><span>아이디 찾기</span></a>
+							<a href="javascript:fnPopup1();" id="idModal" class="modify-btn"><span>아이디 찾기</span></a>
 						</form>
-						<!-- <a id="idModal" ><span>아이디 찾기</span></a> -->
 					</li>
 					<li>
 						<p>* 비밀번호를 잊어버렸나요? </p>
@@ -194,9 +193,9 @@
 	btn1.onclick = function() {
 		modal1.style.display = "block";
 		}
-	btn2.onclick = function() {
-		modal2.style.display = "block";
-	}
+	// btn2.onclick = function() {
+	// 	modal2.style.display = "block";
+	// }
 	window.onclick = function(event) {
 		if (event.target == modal1) {
 			modal1.style.display = "none";

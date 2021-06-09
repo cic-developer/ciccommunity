@@ -588,6 +588,8 @@ $config['csrf_exclude_uris'] = array();
 $config['csrf_exclude_uris'][] = 'editorfileupload/smarteditor/.*';
 $config['csrf_exclude_uris'][] = 'editorfileupload/ckeditor';
 $config['csrf_exclude_uris'][] = 'register/auth_success';
+$config['csrf_exclude_uris'][] = 'login/find_id_auth_phone_success';
+$config['csrf_exclude_uris'][] = 'login/find_pw_auth_phone_success';
 
 /*
 |--------------------------------------------------------------------------

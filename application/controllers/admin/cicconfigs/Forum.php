@@ -936,8 +936,6 @@ class Forum extends CB_Controller
 			$pev_getdata = $this->Post_extra_vars_model->get($pst_id);
 		}
 
-		// print_r($frminfo_getdata);
-		// exit;
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
@@ -985,9 +983,6 @@ class Forum extends CB_Controller
 				$view['view']['frminfodata'] = $frminfo_getdata;
 				$view['view']['postdata'] = $getdata;
 				$view['view']['pevdata'] = $pev_getdata;
-
-				// print_r($frminfo_getdata);
-				// exit;
 			}
 
 			/**
@@ -1106,6 +1101,7 @@ class Forum extends CB_Controller
 			if ($this->input->post($primary_key)) {
 				$this->Post_model->update($pst_id, $brd_updatedata, $where);
 				$this->Post_model->update($pst_id, $_updatedata, $where);
+				$this->CIC_info_model->update($pst_id, $updatedata, $where);
 				$this->Post_extra_vars_model->update($pst_id, $brd_updatedata, $where);
 				$this->Post_extra_vars_model->save($pst_id, 3, $pevupdate_0,);
 				$this->Post_extra_vars_model->save($pst_id, 3, $pevupdate_1);
