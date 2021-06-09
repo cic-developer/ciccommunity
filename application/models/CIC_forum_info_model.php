@@ -30,12 +30,12 @@ class CIC_forum_info_model extends CB_Model
             'pst_id' => $pst_id,
         );
         $updatedata = array(
-            'frm_bat_close_datetime' => cdate('YYYY-MM-DD 00:00:00'),
-            'from_close_datetime' => cdate('YYYY-MM-DD 00:00:00'),
-        );
-        $this->db->where($where);
-        $this->db->set($updatedata);
+            'frm_bat_close_datetime' => date('Y-m-d H:i:s'),
+            'from_close_datetime' => date('Y-m-d H:i:s'),
+        ); 
+        print_r($this->db->last_query());
+        exit;
 
-        return $this->db->update($this->_table);
+        return $this->update('', $updatedata, $where);
     }
 }

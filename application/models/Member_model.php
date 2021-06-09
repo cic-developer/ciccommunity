@@ -169,4 +169,28 @@ class Member_model extends CB_Model
 		$where = array('mem_wallet_address' => $mem_wallet);
 		return $this->get_one('', $select, $where);
 	}
+
+	public function get_memId_list_by_deposit($mem_wallet, $select = '')
+	{
+		if (empty($mem_wallet)) {
+			return false;
+		}
+		$where = array('mem_deposit <>' => null);
+		return $this->get_one('', $select, $where);
+
+
+
+		$join = array();
+		$select = 'member.mem_id';
+		$join[] = array('table' => 'post', 'on' => 'member.mem_id = post.mem_id', 'type' => 'left');
+		$where = array(
+			'mem_deposit <>' => null,
+			'post.brd_id' => 3 || 6,
+
+		);
+
+		$result = $this->_get_list_common($select = '', $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
+
+		return $result;
+	}
 }

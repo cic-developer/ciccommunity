@@ -67,6 +67,9 @@ class Forum extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
+		$getdata = $this->CIC_forum_config_model->get_all_meta();
+		$view['view']['data'] = $getdata;
+
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
@@ -117,10 +120,12 @@ class Forum extends CB_Controller
 
 			$this->CIC_forum_config_model->save($savedata);
 			$view['view']['alert_message'] = '기본정보 설정이 저장되었습니다';
-		}
 
-		$getdata = $this->CIC_forum_config_model->get_all_meta();
-		$view['view']['data'] = $getdata;
+			// 기존 설정 예치금과, 저장시 설정 예치금이 다를 경우
+			if($getdata['forum_deposit'] != $savedata['forum_deposit']){
+				// $this->member->
+			}
+		}
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
