@@ -1065,23 +1065,27 @@ class Forum extends CB_Controller
 				}
             }
 
-
+			
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-
+			
 			$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
 			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
 			$post_title = $this->input->post('post_title', null, '');
 			$post_content = $this->input->post('post_content', null, '');
 			$pev_value_0 = $this->input->post('pev_value_0', null, '');
 			$pev_value_1 = $this->input->post('pev_value_1', null, '');
-
 			
-
+			
+			$updatedata = array(
+				'pst_id' => $pst_id,
+				'frm_bat_close_datetime' => $frm_bat_close_datetime,
+				'frm_close_datetime' => $frm_close_datetime,
+			);
             if($updatephoto){
 				$updatedata['frm_image'] = $updatephoto;
             }
-
+			
 			/**
 			 * 게시물을 수정하는 경우입니다
 			 */
@@ -1096,16 +1100,11 @@ class Forum extends CB_Controller
 				/**
 				 * 게시물을 새로 입력하는 경우입니다
 				 */
-				$updatedata = array(
-					'pst_id' => $pst_id,
-					'frm_bat_close_datetime' => $frm_bat_close_datetime,
-					'frm_close_datetime' => $frm_close_datetime,
-				);
 				
 				$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 				$updatedata['frm_close_datetime'] = $frm_close_datetime;
 				$updatedata['pst_id'] = $pst_id;
-				$updatedata['frm_image'] = $updatephoto;
+				
 				
 				
 				$where = array(
@@ -1134,8 +1133,6 @@ class Forum extends CB_Controller
 					'B_opinion' => $pev_value_1
 				);
 
-				print_r($updatedata['frm_image']);
-				exit;
 
 				$this->CIC_forum_info_model->insert($updatedata);
 				$this->Post_extra_vars_model->update($pst_id, $brd_updatedata, $where);

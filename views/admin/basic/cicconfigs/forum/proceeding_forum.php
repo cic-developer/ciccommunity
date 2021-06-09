@@ -52,7 +52,7 @@
                                 <td><?php echo display_datetime(element('frm_bat_close_datetime', $result), 'full'); ?></td>
 								<td><?php echo display_datetime(element('frm_close_datetime', $result), 'full'); ?></td>
                                 <td><?php echo number_format(element('cic_forum_total_cp', $result), 2); ?></td>
-                                <td><a href="<?php echo admin_url($this->pagedir); ?>/exchange_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
+                                <td><a href="<?php echo admin_url($this->pagedir); ?>/forum_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
 							</tr>
 						<?php
 							}

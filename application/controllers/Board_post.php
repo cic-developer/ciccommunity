@@ -325,10 +325,10 @@ class Board_post extends CB_Controller
 			
 			if(element('list', $_banner)){
 				foreach (element('list', $_banner) as $key => $val) {
-					if ($val && $val['frm_image']) {
+					// if ($val && $val['frm_image']) {
 						$banner['list'][$key] = $val;
 						$banner['list'][$key]['post_url'] = post_url('forum', $val['post_id'].'?type='.$type );
-					}
+					// }
 				}
 			}
 			

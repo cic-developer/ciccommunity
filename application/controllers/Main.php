@@ -71,6 +71,32 @@ class Main extends CB_Controller
 		$view['view']['banner_noimage_count'] = 4 - $view['view']['banner_count'];
 		// 배너 가져오기 끝
 
+		// 포럼 배너 가져오기 시작
+		$checktime = cdate('Y-m-d H:i:s', ctimestamp());
+		$where = array(
+			'brd_id' => 3,
+			'cic_forum_info.frm_bat_close_datetime >=' => $checktime,
+			'cic_forum_info.frm_close_datetime >=' => $checktime,
+			'post_del <>' => 2,
+			'post_best_state' => 3
+		);
+		$_forum_banner = $this->CIC_forum_model->get_post_list('', '', $where, '', '', '', '');
+		$forum_banner = array();
+		
+		if(element('list', $_forum_banner)){
+			foreach (element('list', $_forum_banner) as $key => $val) {
+				// if ($val && $val['frm_image']) {
+					$forum_banner['list'][$key] = $val;
+					$forum_banner['list'][$key]['post_url'] = post_url('forum', $val['post_id'].'?type='.$type );
+				// }
+			}
+		}
+		
+		$view['view']['forum_banner'] = $forum_banner;
+		$view['view']['forum_banner_count'] = element('list', $forum_banner) ? count(element('list', $forum_banner)) : 0;
+		$view['view']['forum_banner_noimage_count'] = 3 - $view['view']['forum_banner_count'];
+		// 포럼 배너 가져오기 끝
+
 		$where = array(
 			'brd_search' => 1,
 		);
