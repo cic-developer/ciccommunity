@@ -188,7 +188,7 @@
     // per price
     var _price = "<?php echo element('price', $view) ?>";
     // 수수료
-    var _deposit = "<?php echo element('withdraw_deposit', $view); ?>";
+    var __deposit = "<?php echo element('withdraw_deposit', $view); ?>";
 
     // 모달
     // Get the modal
@@ -227,7 +227,7 @@
             var _money = $('.my-point').data('my-point');
             var money = parseFloat(_money); // 출금액
             var price = parseFloat(_price); // 퍼코인 가격
-            var _deposit = parseFloat(_deposit); 
+            var _deposit = parseFloat(__deposit); 
             var deposit = (_deposit / 100) * money; // 출금 수수료
             var cal_money = money - deposit; // 실제 퍼코인으로 교환될 , 수수료를 제한 cp
             
@@ -238,7 +238,7 @@
             
             $('.withdraw-point').text(currentVal);
             $('.preview-point').text(preview_point);
-            $('.preview-per').text(typeof deposit);
+            $('.preview-per').text(per_coin);
         }
 		
 		oldVal1 = currentVal;

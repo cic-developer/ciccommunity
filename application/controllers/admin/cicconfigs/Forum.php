@@ -1225,8 +1225,7 @@ class Forum extends CB_Controller
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
-		// $view['view']['list_delete_url'] = site_url('admin/cicconfigs/forum/listDeleteToCloseForum');
-		$view['view']['return_forum_delete_url'] = admin_url($this->pagedir . '/return_forum_delete/?' . $param->output());
+		$view['view']['returnlistdelete_url'] = admin_url($this->pagedir . '/returnlistdelete/?' . $param->output());
 
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
@@ -1237,10 +1236,10 @@ class Forum extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
-	public function return_forum_delete()
+	public function returnlistdelete()
 	{
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_return_forum_delete';
+		$eventname = 'event_admin_board_post_listdelete';
 		$this->load->event($eventname);
 
 		// 이벤트가 존재하면 실행합니다
@@ -1252,14 +1251,13 @@ class Forum extends CB_Controller
 		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
 			foreach ($this->input->post('chk') as $val) {
 				if ($val) {
-					$this->Post_model>delete($val);
+					$post = $this->Post_model->get_one($val);
+					$this->board->delete_post($val);
 				}
 			}
 		}
-
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('after', $eventname);
-
 		/**
 		 * 삭제가 끝난 후 목록페이지로 이동합니다
 		 */
@@ -1269,7 +1267,6 @@ class Forum extends CB_Controller
 		);
 		$param =& $this->querystring;
 		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-
 		redirect($redirecturl);
 	}
 }

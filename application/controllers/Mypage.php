@@ -1552,6 +1552,7 @@ class Mypage extends CB_Controller
 
 		// 코인 데이터
 		$coinData = $this->coinapi->get_coin_data('gdac', 'PER', 'KRW'); // price, price_usd, korea_premium, volume, change_rate
+		$view['view']['price'] = $coinData['price'];
 
 		// 출금 요청 url
 		$view['view']['req_url'] = site_url('mypage/withdraw_request');
