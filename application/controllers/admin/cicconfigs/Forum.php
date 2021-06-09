@@ -924,29 +924,16 @@ class Forum extends CB_Controller
 		 * 수정 페이지일 경우 기존 데이터를 가져옵니다
 		 */
 
-		// $getdata = array();
-		// $_getdata = array();
-		// $pev_getdata = array();
-		// if ($pst_id) {
-		// 	$getdata = $this->CIC_forum_info_model->get_one($pst_id);
-		// 	$_getdata = $this->Post_model->get_one($pst_id);
-		// 	$pev_getdata = $this->Post_extra_vars_model->get($pst_id);
-		// }
-
 
 		$getdata = array();
 		if ($pst_id) {
 			$getdata = $this->Post_model->get_one($pst_id);
 			// $getdata['pev_data'] = $this->Post_extra_vars_model->get($pst_id);
 		}
-
-
-
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
 		$this->load->library('form_validation');
-
 		/**
 		 * 전송된 데이터의 유효성을 체크합니다
 		 */
@@ -972,19 +959,19 @@ class Forum extends CB_Controller
 				'rules' => 'trim|required',
 			)
 		);
-		if ($this->input->post($_primary_key)) {
-				$config[] = array(
-						'field' => 'post_title',
-						'label' => '신문사 명',
-						'rules' => 'trim|required|min_length[2]|max_length[15]|is_unique[company.comp_name.comp_id.' . element('comp_id', $getdata) . ']',
-				);
-			} else {
-				$config[] = array(
-					'field' => 'post_content',
-						'label' => '신문사 명',
-						'rules' => 'trim|required|min_length[2]|max_length[15]|is_unique[company.comp_name]'
-				);
-			}
+		// if ($this->input->post($_primary_key)) {
+		// 	$config[] = array(
+		// 		'field' => 'post_title',
+		// 		'label' => '포럼 제목',
+		// 		'rules' => 'trim|required'
+		// 		);
+		// } else {
+		// 	$config[] = array(
+		// 		'field' => 'post_content',
+		// 		'label' => '포럼 내용',
+		// 		'rules' => 'trim|required'
+		// 	);
+		// }
 
 		$this->form_validation->set_rules($config);
 
@@ -1081,13 +1068,6 @@ class Forum extends CB_Controller
 
 			$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
 			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
-			$post_title = $this->input->post('post_title', null, '');
-			$post_content = $this->input->post('post_content', null, '');
-			
-
-			
-			// print_r($_updatedata['post_content']);
-			// exit;
 			
             if($updatephoto){
 				$updatedata['frm_image'] = $updatephoto;
@@ -1098,7 +1078,6 @@ class Forum extends CB_Controller
 			
 			if ($this->input->post($primary_key)) {
 				$this->CIC_forum_info_model->update($this->input->post($primary_key), $updatedata);
-				$this->Post_model->update($this->input->post($primary_key), $_updatedata);
 				$this->session->set_flashdata(
 					'message',
 					'정상적으로 수정되었습니다'
@@ -1112,6 +1091,10 @@ class Forum extends CB_Controller
 					'frm_bat_close_datetime' => $frm_bat_close_datetime,
 					'frm_close_datetime' => $frm_close_datetime,
 				);
+				$_updatedata = array(
+					'post_title' => $this->input->post('post_title', null, ''),
+					'post_content' => $this->input->post('post_content', null, ''),
+				);
 				
 				$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 				$updatedata['frm_close_datetime'] = $frm_close_datetime;
@@ -1123,19 +1106,17 @@ class Forum extends CB_Controller
 				);
 				$postupdate = array(
 					'brd_id' => 3,
-					'post_title' => $this->input->post('post_title', null, ''),
-					'post_content' => $this->input->post('post_content', null, ''),
 				);
 				$this->Post_model->update($pst_id, $postupdate, $where);
 
 				$where = array(
-					'post_id' => $pst_id
+					'post_id' => $pst_id,
+					'post_title', 'post_content'
 				);
 				$pevupdate = array(
 					'brd_id' => 3,
 				);
 				$this->Post_extra_vars_model->update($pst_id, $pevupdate, $where);
-				$this->Post_model->update($pst_id, $_updatedata, $where);
 				$this->CIC_forum_info_model->insert($updatedata);
 				$this->session->set_flashdata(
 					'message',

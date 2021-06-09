@@ -69,7 +69,7 @@
 <script>
     csrf_key = '<?php echo $this->security->get_csrf_token_name(); ?>';
     csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
-    $("#charge_input").keyup(function(){
-        $(this).val( $(this).val().replace(/[^0-9]/g,""));
+    $("#charge_input").bind("change keyup input",function(){
+        $(this).val( $(this).val().replace(/[^0-9]/g,"") );
     });
 </script>

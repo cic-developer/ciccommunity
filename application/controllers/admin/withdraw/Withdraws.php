@@ -52,17 +52,20 @@ class Withdraws extends CB_Controller
 	public function index()
 	{
 		$data1 = $this->coinapi->get_main_data();
-		print_r('테스트중');
-		print_r("<br>");
-		print_r("<hr>");
-		print_r("<br>");
-		foreach($data1 as $val){
+		// print_r('테스트중');
+		// print_r("<br>");
+		// print_r("<hr>");
+		// print_r("<br>");
+		// foreach($data1 as $val){
 
-			print_r("<br>");
-			print_r($val);
-			print_r("<br>");
-			print_r("<hr>");
-		}
+		// 	print_r("<br>");
+		// 	print_r($val);
+		// 	print_r("<br>");
+		// 	print_r("<hr>");
+		// }
+		$data2 = $this->coinapi->get_coin_data('gdac', 'PER');
+		$data3 = $this->coinapi->get_select_data('PER');
+		print_r($data2);
 		exit;
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_withdraw_withdraws_index';

@@ -1825,7 +1825,55 @@ class Mypage extends CB_Controller
 	}
 
 	public function charge_ajax(){
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+		/**
+		 * 전송된 데이터의 유효성을 체크합니다
+		 */
+		$config = array(
+			array(
+				'field' => 'transaction_hash',
+				'label' => '트랜젝션 해시',
+				'rules' => 'trim|required|callback__check_valid_transaction_hash',
+			),
+			array(
+				'field' => 'charge_input',
+				'label' => '충전액',
+				'rules' => 'trim|required|is_natural_no_zero',
+			),
+		);
+		$this->form_validation->set_rules($config);
+
+
+		/**
+		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
+		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
+		 */
+		if ($this->form_validation->run() === false) {
+			$return = array(
+				'result' => false,
+				'code' 	 => '0000',
+				'data'	 => "Invalid Request"
+			);
+		}
+
+		/*
+		 * 정상적으로 시도 한 경우
+		 */
+		$transaction_hash = $this->input->post('transaction_hash');
+		$charge_input = $this->input->post('charge_input');
+		$this->load->model('Charge_point_model');
+		// 트랜젝션 해시를 통해 해당 row 가져오기
 		
+		// 해당 PER 과 같은지 확인
+
+		// 세션에 있는 CP 가져오고 세션 지우기
+
+		// 기록남기기
+		
+		// PER * PER2CP 계산해서 CP 추가해주기
 	}
 
 	/**
@@ -1967,5 +2015,9 @@ class Mypage extends CB_Controller
 			);
 			redirect('mypage/comment');
 		}
+	}
+
+	public function _check_valid_transaction_hash($transaction_hash){
+		return TRUE;
 	}
 }
