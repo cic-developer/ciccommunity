@@ -932,8 +932,6 @@ class Forum extends CB_Controller
 			$getdata = $this->Post_model->get_one($pst_id);
 			$_getdata = $this->Post_extra_vars_model->get($pst_id);
 		}
-		print_r($_getdata[0]['post_id']);
-		exit;
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
@@ -1138,8 +1136,10 @@ class Forum extends CB_Controller
 					'pev_value' => $pev_value_1
 				);
 
-				$this->Post_extra_vars_model->update($pst_id, $pevupdate_0, $where_0);
-				$this->Post_extra_vars_model->update($pst_id, $pevupdate_1, $where_1);
+				// $this->Post_extra_vars_model->update($pst_id, $pevupdate_0, $where_0);
+				$this->Post_extra_vars_model->save($where_0, 6, $pevupdate_0,);
+				// $this->Post_extra_vars_model->update($pst_id, $pevupdate_1, $where_1);
+				$this->Post_extra_vars_model->save($where_1, 6, $pevupdate_1);
 				$this->CIC_forum_info_model->insert($updatedata);
 				$this->session->set_flashdata(
 					'message',

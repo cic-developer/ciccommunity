@@ -205,7 +205,6 @@ class Board_post extends CB_Controller
 		 * 포럼에서 필요한 정보들을 가져오거나 설정합니다.
 		 */
 		if(element('brd_id', element('board', $list)) == 3){
-			// 검색 기능
 			$param =& $this->querystring;
 			$view['view']['sort'] = array(
 				'post_id' => $param->sort('post_id', 'asc'),
@@ -269,7 +268,7 @@ class Board_post extends CB_Controller
 				'post_content' => $param->sort('post_content', 'asc'),
 				'post_hit' => $param->sort('post_hit', 'asc'),
 			);
-			$this->CIC_forum_model->allow_order_field = array('post_id', 'post_title', 'post_content');
+			$this->CIC_forum_model->allow_order_field = array('post_id', 'post_title', 'post_content', 'post_hit');
 
 			// default cate = 1 (1승인대기, 2반려)
 			$category_id = $this->input->get('category_id');

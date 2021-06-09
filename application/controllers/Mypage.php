@@ -2013,20 +2013,8 @@ class Mypage extends CB_Controller
 		// 세션에 있는 CP 가져오고 세션 지우기
 		$per2cp = $this->session->userdata('per2cp');
 		if(!$per2cp){
-			$update_data = array(
-				'cp_mdate'  => date('Y-m-d H:i:s'),
-				'cp_state'  => 0,
-				'cp_reason' => '세션이 입력되지 않고 입금요청을 진행할 수 없음. 확인요함',
-				'cp_ip'		=> $this->input->ip_address(),
-			);
-			$this->Charge_point_model->update(element('cp_id', $thisData), $update_data);
-			$return = array(
-				'result' => false,
-				'code' 	 => '0004',
-				'data'	 => "Invalid Request"
-			);
-			echo json_encode($return);
-			exit;
+			$per_gdac_price = element('price', $this->coinapi->get_coin_data('gdac', 'PER', 'KRW'));
+			$per2cp = (floor($per_gdac_price / 10) * 10) / 100;
 		}
 		$this->session->set_userdata('per2cp', '');
 

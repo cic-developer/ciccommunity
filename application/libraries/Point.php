@@ -187,8 +187,8 @@ class Point extends CI_Controller
 		// }
 
 		// 포인트가 없다면 업데이트 할 필요 없음
-		$point = (int) $point;
-		if (empty($point)) {
+		// $point = (int) $point;
+		if (empty((int) $point)) {
 			return false;
 		}
 
@@ -239,8 +239,6 @@ class Point extends CI_Controller
 			'cp_action' => $poi_action,
 		);
 		
-		print_r(json_encode($insertdata));
-		exit;
 		$this->CI->CIC_cp_model->insert($insertdata);
 
 		$sum = $this->CI->CIC_cp_model->get_point_sum($mem_id);
