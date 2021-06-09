@@ -542,7 +542,7 @@ class Login extends CB_Controller
 
 		// $email = $isDI['mem_email'];
 		$id = $isDI['mem_id'];
-		$name = $isDI['user_name'];
+		$name = $isDI['mem_username'];
 		
 		if($isDI){ // 중복 이면 인증완료
 			$_DI = $new_phone = $isDI['mem_dup_info'];

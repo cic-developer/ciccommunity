@@ -170,21 +170,15 @@
 		<ul class="entry modify-box">
 			<li class="ath-email-content">
 				<p class="btxt" style="font-size:18px"><b>비밀번호 찾기</b></p><br>
-					<!-- <form action="">
-					<p class="chk-input" style="width:60%">
-						<input id="mem_password" name="mem_password" type="email" placeholder="이메일 입력" value="">
-					</p>
-					<button type="submit" class="pwdBtn">인증</button>
-					</form> -->
 
-					<form name="form_chk2" action="post" id="id_form_chk2">
-						<input type="hidden" name="m" value="checkplusService">
-						<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('pw_enc_data', $view)); ?>">
-						<p class="chk-input" style="width:60%">
-							<input id="email" name="email" type="email" placeholder="이메일 입력" value="">
-						</p>
-						<a href="javascript:fnPopup2();" id="ath_nice_phone2" class="modify-btn pwdBtn"><span>인증</span></a>
-					</form>
+				<form name="form_chk2" action="post" id="id_form_chk2">
+					<input type="hidden" name="m" value="checkplusService">
+					<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('pw_enc_data', $view)); ?>">
+					<p class="chk-input" style="width:60%">
+						<input id="email" name="email" type="email" placeholder="이메일 입력" value="">
+					</p>
+					<a href="javascript:fnPopup2();" id="ath_nice_phone2" class="modify-btn pwdBtn"><span>인증</span></a>
+				</form>
 			</li>
 		</ul>
 	</div>
@@ -259,6 +253,14 @@
 			document.form_chk1.submit();
 		}
 		function fnPopup2(){
+			var email = $('#email').val();
+			var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+출처: https://solbel.tistory.com/375 [개발자의 끄적끄적]
+			if(email.length == 0){
+				alert('이메일을 입력해주세요');
+				return;
+			}
 			window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
 			document.form_chk2.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
 			document.form_chk2.target = "popupChk";
