@@ -68,8 +68,10 @@
 					<label class="col-sm-2 control-label">포럼 CONTENT</label>
 					<div class="col-sm-10">
 						<!-- <input type="text" class="form-control" name="post_content" value="<?php echo set_value('post_content', element('post_content', element('data', $view))); ?>" /> -->
-						<textarea class="form-control" rows="5" name="post_content"><?php echo html_escape('post_content', element('post_content', element('data', $view))); ?></textarea>
+						<textarea class="form-control" rows="5" name="post_content"><?php echo html_escape(element('post_content', element('data', $view))); ?></textarea>
+						
 					</div>
+					
 				</div>
 				<script type="text/javascript">
 					$(function () {
