@@ -159,7 +159,7 @@
 	<div id="myModal_id" class="modal" style="z-index:1500;">
 		<div class="modal-content" style="z-index:1550;">
 			<!-- 휴대전화 번호 인증 후 화면 -->
-			<p class="chk-input">회원님의 아이디는 <b id="find_id" style="font-size:20px">----</b> 입니다.</p>
+			<p class="chk-input">회원님의 아이디는 <b id="find_id" style="font-size:20px"></b> 입니다.</p>
 		</div>
 	</div>
 <!--아이디 Modal End -->
@@ -189,19 +189,19 @@ var modal2 = document.getElementById('myModal_id');
 var btn1 = document.getElementById("pwdModal");
 var btn2 = document.getElementById("idModal");
 btn1.onclick = function() {
-		modal1.style.display = "block";
+	modal1.style.display = "block";
 	}
 btn2.onclick = function() {
-		modal2.style.display = "block";
+	modal2.style.display = "block";
+}
+window.onclick = function(event) {
+	if (event.target == modal1) {
+		modal1.style.display = "none";
 	}
-	window.onclick = function(event) {
-		if (event.target == modal1) {
-			modal1.style.display = "none";
-		}
-		if (event.target == modal2) {
-			modal2.style.display = "none";
-		}
+	if (event.target == modal2) {
+		modal2.style.display = "none";
 	}
+}
 
 </script>
 

@@ -465,22 +465,23 @@ class Login extends CB_Controller
 				
 				echo("<script>");
 				echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
-				echo("window.opener.document.getElementById('find_id').innerText = '".$isDI['mem_email']."'"); // 인증완료 문구
-				echo("</script>");
-				exit;
+				echo("window.opener.document.getElementById('find_id').innerText = '".$isDI['mem_email']."';"); // 인증완료 문구
+				echo("var id_modal = window.opener.document.getElementById('myModal_id');");
+				echo("id_modal.setAttribute('style', 'z-index:1500; display:block;');");
 				echo("self.close();");
+				echo("</script>");
 				exit;
 			}else{
 				// 휴대폰 인증 결과 저장
-				$this->session->set_userdata('password_modify_ath_nice_phone_result', '');
+				$this->session->set_userdata('find_id_auth_phone_result', '');
 				// 휴대폰 인증 데이터 삭제
 				$this->session->unset_userdata('dec_data');
 
 				echo("<script>");
 				echo("alert('회원가입시 사용한 핸드폰번호를 이용해주세요');"); // 인증완료 문구
-				exit;
 				echo("self.close();");
 				echo("</script>");
+				exit;
 			}
 		} else {
 			// 휴대폰 인증 데이터 삭제

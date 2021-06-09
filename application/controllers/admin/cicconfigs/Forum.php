@@ -925,9 +925,7 @@ class Forum extends CB_Controller
 		$getdata = array();
 		if ($pst_id) {
 			$getdata = $this->CIC_forum_info_model->get_one($pst_id);
-		}
-		$pev_getdata = array();
-		if ($pst_id) {
+			$post_getdata = $this->Post_model->get_one($pst_id);
 			$pev_getdata = $this->Post_extra_vars_model->get($pst_id);
 		}
 
