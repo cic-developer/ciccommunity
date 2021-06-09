@@ -16,7 +16,7 @@
 				<label class="col-sm-2 control-label">대표 이미지 선택</label>
 				<div class="col-sm-10">
 					<?php
-					if (element('ban_image', element('data', $view))) {
+					if (element('frm_image', element('data', $view))) {
 					?>
 						<img src="<?php echo banner_image_url(element('frm_image', element('data', $view)), '', 150); ?>" alt="포럼 이미지" title="포럼 이미지" />
 						<!-- <label for="ban_image_del">
@@ -59,27 +59,41 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">포럼 TITLE</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="post_title" value="<?php echo set_value('post_title', element('post_title', element('data', $view))); ?>" />
+						<input type="text" class="form-control" name="post_title" value="<?php echo set_value('post_title', element('post_title', element('postdata', $view))); ?>" />
 					</div>
 				</div>
 				<br>
 				<br>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">포럼 CONTENT</label>
-					<!-- <div class="col-sm-10"> -->
-						<!-- <input type="text" class="form-control" name="post_content" value="<?php echo set_value('post_content', element('post_content', element('data', $view))); ?>" /> -->
-						<!-- <textarea class="form-control" rows="5" name="post_content"><?php echo html_escape(element('post_content', element('data', $view))); ?></textarea> -->
-					<!-- </div> -->
 					<div class="col-sm-10">
-					<!-- <div class="form-group col-sm-12">
-						<input type="text" class="form-control" name="post_content" id="post_content" value="<?php echo set_value('post_content', element('post_content', element('data', $view))); ?>" />
-					</div> -->
-					<div class="form-group col-sm-12">
-						<?php echo display_dhtml_editor('post_content', set_value('post_content', element('post_content', element('data', $view))), $classname = 'form-control dhtmleditor', $is_dhtml_editor = true, $editor_type = "smarteditor"); ?>
+						<div class="form-group col-sm-12">
+							<?php echo display_dhtml_editor('post_content', set_value('post_content', element('post_content', element('postdata', $view))), $classname = 'form-control dhtmleditor', $is_dhtml_editor = true, $editor_type = "smarteditor"); ?>
+						</div>
 					</div>
 				</div>
+
+
+				<?php
+					if (element('pevdata', $view)){
+						foreach (element('data', $view) as $result) {
+					?>
+					<?php
+						}
+					}
+				?>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">투표 A</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="ban_url" value="<?php echo set_value('pev_key', element('pev_key', element('pevdata', $view))); ?>" />
+					</div>
 				</div>
-				
+				<div class="form-group">
+					<label class="col-sm-2 control-label">투표 B</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="ban_url" value="<?php echo set_value('pev_key', element('pev_key', element('pevdata', $view))); ?>" />
+					</div>
+				</div>
 				<script type="text/javascript">
 					$(function () {
 						$('#datetimepicker10').datetimepicker({

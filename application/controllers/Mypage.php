@@ -1828,7 +1828,7 @@ class Mypage extends CB_Controller
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
-		$this->load->library('form_validation');
+		$this->load->library(array('form_validation', 'point'));
 		/**
 		 * 전송된 데이터의 유효성을 체크합니다
 		 */
@@ -1866,6 +1866,7 @@ class Mypage extends CB_Controller
 		 */
 		$transaction_hash = $this->input->post('transaction_hash');
 		$charge_input = $this->input->post('charge_input');
+		$memid = $this->member->is_member();
 		$this->load->model('Charge_point_model');
 		// 트랜젝션 해시를 통해 해당 row 가져오기
 		$thisData = $this->Charge_point_model->get_one('','',array('cp_transaction' => $transaction_hash));
@@ -1882,7 +1883,7 @@ class Mypage extends CB_Controller
 		$recorded_value = element('cp_value', $thisData);
 		if($recorded_value != $charge_input){
 			$update_data = array(
-				'cp_mem_id' => $this->member->is_member(),
+				'cp_mem_id' => $memid,
 				'cp_mdate'  => date('Y-m-d H:i:s'),
 				'cp_state'  => 0,
 				'cp_reason' => '입력한 PER토큰양과 실제 전송된 토큰양이 일치하지 않음',
@@ -1901,7 +1902,7 @@ class Mypage extends CB_Controller
 		$per2cp = $this->session->userdata('per2cp');
 		if($per2cp){
 			$update_data = array(
-				'cp_mem_id' => $this->member->is_member(),
+				'cp_mem_id' => $memid,
 				'cp_mdate'  => date('Y-m-d H:i:s'),
 				'cp_state'  => 0,
 				'cp_reason' => '세션이 입력되지 않고 입금요청을 진행할 수 없음. 확인요함',
@@ -1920,7 +1921,7 @@ class Mypage extends CB_Controller
 		// PER * PER2CP 계산해서 기록남기기
 		$total_charge_cp = $charge_input * $per2cp;
 		$update_data = array(
-			'cp_mem_id' => $this->member->is_member(),
+			'cp_mem_id' => $memid,
 			'cp_mdate'  => date('Y-m-d H:i:s'),
 			'cp_charge_point'  => $total_charge_cp,
 			'cp_state'  => 2,
@@ -1929,7 +1930,14 @@ class Mypage extends CB_Controller
 		$this->Charge_point_model->update(element('cp_id', $thisData), $update_data);
 		
 		//  CP 추가해주기
-		$this->point->insert_cp();
+		$this->point->insert_cp(
+			$memid,
+			$total_charge_cp,
+			'PER 토큰을 통한 충전',
+			'charge_point',
+			element('cp_id', $thisData),
+			'충전'
+		);
 
 		// CP 충전까지 완료
 		$update_data = array(
@@ -2088,6 +2096,24 @@ class Mypage extends CB_Controller
 	}
 
 	public function _check_valid_transaction_hash($transaction_hash){
-		return TRUE;
+		$url = 'https://caver.ciccommunity.com/proof/ciccommunity_charge_cp';    
+
+		$post_field_string = http_build_query(array('hash' => $transaction_hash));
+		$ch = curl_init();                                                            // curl 초기화
+		curl_setopt($ch, CURLOPT_URL, $url);                                 // url 지정하기
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);              // 요청결과를 문자열로 반환
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);               // connection timeout : 10초
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);                 // 원격 서버의 인증서가 유효한지 검사 여부
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $post_field_string);      // POST DATA
+		curl_setopt($ch, CURLOPT_POST, true);                               // POST 전송 여부
+		$response = curl_exec($ch);
+		curl_close ($ch);
+
+		$json = json_decode($response, true);
+		if(element('result', $json)){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
 	}
 }

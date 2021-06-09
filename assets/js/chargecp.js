@@ -417,6 +417,28 @@ $(document).on('ready', async function() {
     try {
 
         $(document).on('click', '#charge_button', async function() {
+            $.ajax({
+                url: cb_url + '/mypage/charge_ajax',
+                type: 'post',
+                data: {
+                    transaction_hash: '0xb8a28a39d1ff2e1d41f74f9ab494a575a6d535c3cfc42305d8018298ad2c932b',
+                    charge_input: 10,
+                    csrf_test_name: csrf_token
+                },
+                dataType: 'json',
+                async: false,
+                cache: false,
+                success: function(data) {
+                    if (data.result) {
+                        alert('성공적으로 충전되었습니다.');
+                        location.reload();
+                    } else {
+                        alert(data.data);
+                        return false;
+                    }
+                }
+            });
+            return;
             if (!csrf_key || !csrf_token) {
                 alert('보안사항이 충족되지 않았습니다.');
                 return false;
@@ -528,6 +550,27 @@ $(document).on('ready', async function() {
                     gas: 3000000,
                 }).on("transactionHash", async(transactionHash) => {
                     //여기서 AJAX 비동기 통신으로 데이터 넘겨주면 됩니다.
+                    $.ajax({
+                        url: cb_url + '/mypage/charge_ajax',
+                        type: 'post',
+                        data: {
+                            transaction_hash: transactionHash,
+                            charge_input: charge_value,
+                            csrf_test_name: csrf_token
+                        },
+                        dataType: 'json',
+                        async: false,
+                        cache: false,
+                        success: function(data) {
+                            if (data.result) {
+                                alert('성공적으로 충전되었습니다.');
+                                location.reload();
+                            } else {
+                                alert(data.data);
+                                return false;
+                            }
+                        }
+                    });
                 });
 
             }).on("error", (error) => {

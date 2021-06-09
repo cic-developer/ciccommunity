@@ -89,6 +89,7 @@
                                     <div class="btn-group btn-group-sm" role="group">
                                         <button type="button" class="btn btn-success modal_open1" 
                                             data-idx="<?php echo number_format(element('wid_idx', $result)); ?>" 
+                                                data-cal-money="<?php echo number_format(element('wid_cal_money', $result), 2); ?>"
                                         >
                                             승인
                                         </button>
@@ -339,6 +340,9 @@
 
     
 <script>
+    var deposit = "<?php echo element('deposit', $view) ?>"
+    var price = "<?php echo element('price', $view) ?>"
+
     // modal options
     $('.modal_open1').on('click', function(){
         $('#myModal-approve').modal({backdrop: false, keyboard: false});
@@ -402,8 +406,15 @@
 
     // set modal data
     $(document).on('click', '.modal_open1', function() {
-		var widIdx = $(this).data('idx');
+		var widIdx = $(this).data('idx'); // 신청 idx
+        var cal_money = $(this).data('cal-money'); // 수수료를 제한 출금할 cp 
+        
+        var _per_coin = (cal_money / price) * 100;
+
+        var per_coin = Math.floor((_per_coin * 100) / 100);
+
         $("#myModal-approve .modal-body #wid_idx1").val( widIdx ); 
+        $("#myModal-approve .modal-body #cp_percoin").val( price ); 
 	});
     $(document).on('click', '.modal_open2', function() {
 		var widIdx = $(this).data('idx');

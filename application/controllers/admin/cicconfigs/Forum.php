@@ -926,10 +926,14 @@ class Forum extends CB_Controller
 
 
 		$getdata = array();
+		$_getdata = array();
 		if ($pst_id) {
 			$getdata = $this->Post_model->get_one($pst_id);
-			// $getdata['pev_data'] = $this->Post_extra_vars_model->get($pst_id);
+			$_getdata = $this->Post_extra_vars_model->get($pst_id);
 		}
+
+		// print_r($_getdata);
+		// exit;
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
@@ -987,7 +991,8 @@ class Forum extends CB_Controller
 				if (empty($getdata['frm_close_datetime']) OR $getdata['frm_close_datetime'] === '0000-00-00 00:00:00') {
 					$getdata['frm_close_datetime'] = '';
 				}
-				$view['view']['data'] = $getdata;
+				$view['view']['postdata'] = $getdata;
+				$view['view']['pevdata'] = $_getdata;
 			}
 
 			/**
