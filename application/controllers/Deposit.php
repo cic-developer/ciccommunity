@@ -77,7 +77,7 @@ class Deposit extends CB_Controller
         if( $mem_cp - $deposit_meta < 0){
             $result = array(
                 'state' => '0',
-                'message' => '예치금이 부족합니다',
+                'message' => '보유한 CP가 부족합니다.',
             );
             exit(json_encode($result));
         }

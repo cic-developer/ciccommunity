@@ -1104,10 +1104,11 @@ class Forum extends CB_Controller
 			 */
 			
 			if ($this->input->post($primary_key)) {
-				$this->CIC_forum_info_model->update($this->input->post($primary_key), $updatedata, $pst_id);
+				$this->Post_model->update($pst_id, $brd_updatedata, $where);
+				$this->Post_model->update($pst_id, $_updatedata, $where);
 				$this->Post_extra_vars_model->update($pst_id, $brd_updatedata, $where);
-				$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_0,);
-				$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_1);
+				$this->Post_extra_vars_model->save($pst_id, 3, $pevupdate_0,);
+				$this->Post_extra_vars_model->save($pst_id, 3, $pevupdate_1);
 				$this->session->set_flashdata(
 					'message',
 					'정상적으로 수정되었습니다'

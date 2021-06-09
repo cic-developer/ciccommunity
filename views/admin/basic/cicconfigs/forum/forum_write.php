@@ -44,10 +44,6 @@
 				<div class="col-sm-10 form-inline" style="height:130px;">
 					<div class="form-group">
 						<div class='input-group date' id='datetimepicker11'>
-						<?php
-						print_r('frminfodata', $view);
-						exit;
-						?>
 							<input type='text' class="form-control" name="frm_close_datetime" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('frminfodata', $view))); ?>"/>
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
@@ -88,20 +84,12 @@
 						}
 					}
 				?>
-				<!-- <div class="form-group">
-					<label class="col-sm-2 control-label">투표 B</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" name="ban_url" value="<?php echo set_value('pev_key', element('pev_key', element('pevdata', $view))); ?>" />
-					</div>
-				</div> -->
 				<script type="text/javascript">
 					$(function () {
 						$('#datetimepicker10').datetimepicker({
-							daysOfWeekDisabled: [0, 6],
 							format : 'YYYY-MM-DD HH:mm:ss'
 						});
 						$('#datetimepicker11').datetimepicker({
-							daysOfWeekDisabled: [0, 6],
 							format : 'YYYY-MM-DD HH:mm:ss'
 						});
 					});

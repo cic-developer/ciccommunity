@@ -256,7 +256,7 @@
 		}
 
 		if(allowed_option.indexOf(option) == -1){
-			alert('비정상적인 시도입니다.3');
+			alert('투표 후 이용해주세요');
 			return false;
 		}
         
