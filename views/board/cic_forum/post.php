@@ -193,12 +193,12 @@
 		const allowed_option = ['1', '2'];
 
 		if(!reg_num.test(post_id)){
-			alert('비정상적인 시도입니다.2');
+			alert('비정상적인 시도입니다.');
 			return false;
 		}
 
 		if(allowed_option.indexOf(option) == -1){
-			alert('비정상적인 시도입니다.3');
+			alert('투표 후 이용해주세요');
 			return false;
 		}
 		
