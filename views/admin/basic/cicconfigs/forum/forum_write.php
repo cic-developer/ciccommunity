@@ -1,9 +1,6 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <div class="box">
 	<div class="box-table">
 		<?php
@@ -62,8 +59,6 @@
 						<input type="text" class="form-control" name="post_title" value="<?php echo set_value('post_title', element('post_title', element('postdata', $view))); ?>" />
 					</div>
 				</div>
-				<br>
-				<br>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">포럼 CONTENT</label>
 					<div class="col-sm-10">
@@ -107,12 +102,6 @@
 					});
 				</script>
 			</div>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
 			
 			<!-- <div class="form-group">
 				<label class="col-sm-2 control-label">포럼 마감일</label>
@@ -161,14 +150,14 @@
 <script type="text/javascript">
 //<![CDATA[
 $(function() {
-	// $('#fadminwrite').validate({
-	// 	rules: {
-	// 		frm_bat_close_datetime: {'required' : true},
-	// 		frm_close_datetime: {'required' : true},
-	// 		post_title: {'required' : true},
-	// 		post_content : {'required_smarteditor' : true },
-	// 	}
-	// });
+	$('#fadminwrite').validate({
+		rules: {
+			frm_bat_close_datetime: {'required' : true},
+			frm_close_datetime: {'required' : true},
+			post_title: {'required' : true},
+			post_content : {'required_smarteditor' : true },
+		}
+	});
 });
 //]]>
 </script>
