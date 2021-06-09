@@ -31,10 +31,8 @@ class CIC_forum_info_model extends CB_Model
         );
         $updatedata = array(
             'frm_bat_close_datetime' => date('Y-m-d H:i:s'),
-            'from_close_datetime' => date('Y-m-d H:i:s'),
+            'frm_close_datetime' => date('Y-m-d H:i:s'),
         ); 
-        print_r($this->db->last_query());
-        exit;
 
         return $this->update('', $updatedata, $where);
     }

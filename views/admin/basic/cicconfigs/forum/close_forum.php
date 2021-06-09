@@ -50,7 +50,7 @@
 						?>
 							<tr data-idx="<?php echo element('post_id', $result)?>">
                                 <td><?php echo number_format(element('num', $result)); ?></td>
-                                <td><img src="<?php echo forum_banner_image_url(element('frm_image', $result), '', 150); ?>" class="<?php echo element('frm_image', $result) ? 'thumbnail':'' ?> mg0" style="width:80px;" /></td>
+                                <td><?=element('frm_image', $result)?><img src="<?php echo forum_banner_image_url(element('frm_image', $result), '', 150); ?>" class="<?php echo element('frm_image', $result) ? 'thumbnail':'' ?> mg0" style="width:80px;" /></td>
                                 <td>
 									<?php if (element('category', $result)) { ?><span class="label label-default"><?php echo html_escape(element('bca_value', element('category', $result))); ?></span><?php } ?>
 									<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><?php echo html_escape(element('post_title', $result)); ?></a>

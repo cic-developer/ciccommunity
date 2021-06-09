@@ -170,23 +170,15 @@ class Member_model extends CB_Model
 		return $this->get_one('', $select, $where);
 	}
 
-	public function get_memId_list_by_deposit($mem_wallet, $select = '')
+	public function get_postIds_by_deposit_to_forum()
 	{
-		if (empty($mem_wallet)) {
-			return false;
-		}
-		$where = array('mem_deposit <>' => null);
-		return $this->get_one('', $select, $where);
-
-
 
 		$join = array();
-		$select = 'member.mem_id';
+		$select = 'member.* post.*';
 		$join[] = array('table' => 'post', 'on' => 'member.mem_id = post.mem_id', 'type' => 'left');
 		$where = array(
 			'mem_deposit <>' => null,
-			'post.brd_id' => 3 || 6,
-
+			'post.brd_id' => 3,
 		);
 
 		$result = $this->_get_list_common($select = '', $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
