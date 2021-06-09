@@ -41,22 +41,33 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <?php
+                    if (element('list', element('data', $view))) {
+                        foreach (element('list', element('data', $view)) as $result) {
+                    ?>
                         <tr>
+                            <td><?php echo html_escape(element('cp_wdate', $result)); ?></td>
+                            <td><?php echo element('cp_value', $result) != null ? (rs_number_format(element('cp_value', $result), 2, 0)).' PER': ''; ?></td>
+                            <td><?php echo element('cp_charge_point', $result) != null ? (rs_number_format(element('cp_charge_point', $result), 2, 0)).' CP': '0 CP'; ?></td>
+                            <td>
+                                <?php switch(element('cp_state', $result)){ ?>
+
+                                <?php } ?>
+                            </td>
+                        </tr>
+                    <?php
+                        }
+                    }
+					?>
+
+                        <!-- <tr>
                             <td>2021. 03. 21</td>
                             <td>20 PER</td>
                             <td>200,000 CP</td>
                             <td>
                                 <p class="cblue">완료</p>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>2021. 03. 21</td>
-                            <td>20 PER</td>
-                            <td>200,000 CP</td>
-                            <td>
-                                <p class="cred">취소</p>
-                            </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
                 <!-- 페이지네이션 가능하면 부탁드립니다. -->
@@ -69,6 +80,7 @@
 <script>
     csrf_key = '<?php echo $this->security->get_csrf_token_name(); ?>';
     csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
+    userWallet_in_mypage = '<?php echo $this->member->item('mem_wallet_address'); ?>';
     $("#charge_input").bind("change keyup input",function(){
         $(this).val( $(this).val().replace(/[^0-9]/g,"") );
     });

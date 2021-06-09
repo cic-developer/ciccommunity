@@ -1804,7 +1804,57 @@ class Mypage extends CB_Controller
 
 		$view = array();
 		$view['view'] = array();
-        
+
+		/**
+		 * 페이지에 숫자가 아닌 문자가 입력되거나 1보다 작은 숫자가 입력되면 에러 페이지를 보여줍니다.
+		 */
+		$param =& $this->querystring;
+		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
+		$findex = $this->input->get('findex', null, 'wid_idx');
+		$forder = $this->input->get('forder', null, 'desc');
+		$sfield = $this->input->get('sfield', null, '');
+		$skeyword = $this->input->get('skeyword', null, '');
+
+		$per_page = 10;
+		$offset = ($page - 1) * $per_page;
+
+		$this->load->model('Charge_point_model');
+		$result = $this->Charge_point_model->get_list($per_page, $offset, $where, $like, $findex, $forder, $sfield, $skeyword);
+		
+		if (element('list', $result)) {
+			foreach (element('list', $result) as $key => $val) {
+
+				$where = array(
+					'cp_id' => element('cp_id', $val),
+				);
+				
+				$result['list'][$key]['num'] = $list_num--;
+			}
+		}
+
+		$view['view']['data'] = $result;
+
+		/**
+		 * 페이지네이션을 생성합니다
+		 */
+		$config['base_url'] = site_url('mypage/charge') . '?' . $param->replace('page');
+		$config['total_rows'] = $result['total_rows'];
+		$config['per_page'] = $per_page;
+		$config['first_link'] = FALSE;
+		$config['last_link'] = FALSE;
+		$config['next_link'] = '다음';
+		$config['prev_link'] = '이전';
+		if ($this->cbconfig->get_device_view_type() === 'mobile') {
+			$config['num_links'] = element('mobile_page_count', $board)
+				? element('mobile_page_count', $board) : 3;
+		} else {
+			$config['num_links'] = element('page_count', $board)
+				? element('page_count', $board) : 5;
+		}
+		$this->pagination->initialize($config);
+		$view['view']['paging'] = $this->pagination->create_links();
+		$view['view']['page'] = $page;
+
 		$this->load->library('coinapi');
 		$per_gdac_price = element('price', $this->coinapi->get_coin_data('gdac', 'PER', 'KRW'));
 		$per2cp = (floor($per_gdac_price / 10) * 10) / 100;
@@ -1821,11 +1871,6 @@ class Mypage extends CB_Controller
 			'mobile_skin_dir' => 'cic',
 			'page_title' => '충전하기',
 		);
-
-
-		$this->load->model('Charge_point_model');
-		$list = $this->Charge_point_model->get_list($limit = '', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR');$this->load->model('Charge_point_model');
-		// exit;
 
 		$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
@@ -1912,7 +1957,7 @@ class Mypage extends CB_Controller
 			$update_data = array(
 				'cp_mdate'  => date('Y-m-d H:i:s'),
 				'cp_state'  => 0,
-				'cp_reason' => '입력한 PER토큰양과 실제 전송된 토큰양이 일치하지 않음',
+				'cp_reason' => '지갑주소 주인과 회원이 일치하지 않습니다.',
 				'cp_ip'		=> $this->input->ip_address(),
 			);
 			$this->Charge_point_model->update(element('cp_id', $thisData), $update_data);
