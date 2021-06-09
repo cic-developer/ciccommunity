@@ -255,10 +255,12 @@
 		function fnPopup2(){
 			var email = $('#email').val();
 			var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
-출처: https://solbel.tistory.com/375 [개발자의 끄적끄적]
 			if(email.length == 0){
 				alert('이메일을 입력해주세요');
+				return;
+			}
+			if (email.match(regExp) == null) {
+				alert('이메일 형식에 맞게 입력해주세요');
 				return;
 			}
 			window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
