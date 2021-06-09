@@ -224,17 +224,19 @@
             $('.withdraw-point').text('금액을 옳바르게 입력해주세요.');
             $('.preview-point').text('금액을 옳바르게 입력해주세요.');
         } else {
-            var _money = $('.my-point').data('my-point');
-            var money = parseFloat(_money); // 출금액
+            var _my_money = $('.my-point').data('my-point');
+            var my_money = parseFloat(_my_money);
+            
+            var req_money = parseFloat(currentVal); // 출금액
             var price = parseFloat(_price); // 퍼코인 가격
             var _deposit = parseFloat(__deposit); 
-            var deposit = (_deposit / 100) * money; // 출금 수수료
-            var cal_money = money - deposit; // 실제 퍼코인으로 교환될 , 수수료를 제한 cp
+            var deposit = (_deposit / 100) * req_money; // 출금 수수료
+            var cal_money = req_money - deposit; // 실제 퍼코인으로 교환될 , 수수료를 제한 cp
             
             var _per_coin = (cal_money / price) * 100; // 예상 퍼코인
             var per_coin = Math.floor((_per_coin * 100)) / 100; // 소수점 2자리
             
-            var preview_point = Number(money - currentVal);
+            var preview_point = Number(my_money - req_money);
             
             $('.withdraw-point').text(currentVal);
             $('.preview-point').text(preview_point);

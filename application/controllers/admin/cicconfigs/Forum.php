@@ -1077,11 +1077,8 @@ class Forum extends CB_Controller
 			$post_content = $this->input->post('post_content', null, '');
 			$pev_value = $this->input->post('pev_value', null, '');
 
-
-			print_r($pev_value);
+			print_r($post_content);
 			exit;
-
-			
 
             if($updatephoto){
 				$updatedata['frm_image'] = $updatephoto;
@@ -1116,13 +1113,15 @@ class Forum extends CB_Controller
 				);
 				$postupdate = array(
 					'brd_id' => 3,
-				);
-				$_updatedata = array(
 					'post_title' => $post_title,
 					'post_content' => $post_content,
 				);
+				// $_updatedata = array(
+				// 	'post_title' => $post_title,
+				// 	'post_content' => $post_content,
+				// );
 				$this->Post_model->update($pst_id, $postupdate, $where);
-				$this->Post_model->update($pst_id, $_updatedata, $where);
+				// $this->Post_model->update($pst_id, $_updatedata, $where);
 
 				$where = array(
 					'post_id' => $pst_id,
