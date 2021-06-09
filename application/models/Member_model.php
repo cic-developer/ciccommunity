@@ -170,18 +170,20 @@ class Member_model extends CB_Model
 		return $this->get_one('', $select, $where);
 	}
 
+	//
 	public function get_postIds_by_deposit_to_forum()
 	{
 
 		$join = array();
-		$select = 'member.* post.*';
+		// $select = 'member.* post.*';
+		$this->db->select('member.mem_id, post.post_id');
 		$join[] = array('table' => 'post', 'on' => 'member.mem_id = post.mem_id', 'type' => 'left');
 		$where = array(
 			'mem_deposit <>' => null,
 			'post.brd_id' => 3,
 		);
 
-		$result = $this->_get_list_common($select = '', $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
+		$result = $this->_get_list_common($select = '', $join, '', '', $where, '', '', '', '', '', '');
 
 		return $result;
 	}
