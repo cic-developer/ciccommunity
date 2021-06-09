@@ -83,7 +83,7 @@
                 <a href="#n" class="sel-btn"><span>
                     <?php if(element('sorted', $view) == 'post_id') { ?>
                         최신순
-                    <?php } else if(element('sorted', $view) == 'post_hit') { ?>
+                    <?php } else if(element('sorted', $view) == 'post_like') { ?>
                         인기순
                     <?php } else {?>
                         최신순
@@ -91,7 +91,7 @@
                     </span></a>
                     <ul>
                         <li class="<?php echo element('sorted', $view) == 'post_id' ? 'active' : '' ?>"><a href="<?php echo element('post_id', element('sort', $view)); ?>"><span>최신 순</span></a></li>
-                        <li class="<?php echo element('sorted', $view) == 'post_hit' ? 'active' : '' ?>"><a href="<?php echo element('post_hit', element('sort', $view)); ?>"><span>인기 순</span></a></li>
+                        <li class="<?php echo element('sorted', $view) == 'post_like' ? 'active' : '' ?>"><a href="<?php echo element('post_like', element('sort', $view)); ?>"><span>인기 순</span></a></li>
                     </ul>
                 </div>
             </div>

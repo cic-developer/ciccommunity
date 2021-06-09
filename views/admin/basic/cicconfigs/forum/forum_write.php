@@ -46,8 +46,7 @@
 						<div class='input-group date' id='datetimepicker11'>
 							<input type='text' class="form-control" name="frm_close_datetime" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('frminfodata', $view))); ?>"/>
 							<span class="input-group-addon">
-							<span class="glyphicon glyphicon-calendar">
-							</span>
+								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
 						</div>
 						<p class="help-block"> 포럼 마감일은 배팅 마감일 이후로 설정해야합니다.</p>

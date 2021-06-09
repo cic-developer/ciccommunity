@@ -935,6 +935,9 @@ class Forum extends CB_Controller
 			$frminfo_getdata = $this->CIC_forum_info_model->get_one($pst_id);
 			$pev_getdata = $this->Post_extra_vars_model->get($pst_id);
 		}
+
+		// print_r($frminfo_getdata);
+		// exit;
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
@@ -964,49 +967,6 @@ class Forum extends CB_Controller
 				'rules' => 'trim|required',
 			)
 		);
-		if ($this->input->post($primary_key)) {
-			$config[] = array(
-				'field' => 'frm_bat_close_datetime',
-				'label' => '배팅 종료일',
-				'rules' => 'trim|required',
-			);
-			array(
-				'field' => 'frm_close_datetime',
-				'label' => '포럼 종료일',
-				'rules' => 'trim|required',
-			);
-			array(
-				'field' => 'post_title',
-				'label' => '포럼 제목',
-				'rules' => 'trim|required',
-			);
-			array(
-				'field' => 'post_content',
-				'label' => '포럼 제목',
-				'rules' => 'trim|required',
-			);
-		} else {
-			$config[] = array(
-				'field' => 'frm_bat_close_datetime',
-				'label' => '배팅 종료일',
-				'rules' => 'trim|required',
-			);
-			array(
-				'field' => 'frm_close_datetime',
-				'label' => '포럼 종료일',
-				'rules' => 'trim|required',
-			);
-			array(
-				'field' => 'post_title',
-				'label' => '포럼 제목',
-				'rules' => 'trim|required',
-			);
-			array(
-				'field' => 'post_content',
-				'label' => '포럼 제목',
-				'rules' => 'trim|required',
-			);
-		}
 
 		$this->form_validation->set_rules($config);
 
