@@ -233,17 +233,17 @@ class Board_post extends CB_Controller
 				'cic_forum_info.frm_bat_close_datetime >=' => $checktime,
 				'cic_forum_info.frm_close_datetime >=' => $checktime,
 				'post_del <>' => 2,
-				'post_best_state' => 1,
+				'post_best_state' => 3,
 			);
 			$_banner = $this->CIC_forum_model->get_post_list('', '', $where, '', '', '', '');
 			$banner = array();
-			
+
 			if(element('list', $_banner)){
 				foreach (element('list', $_banner) as $key => $val) {
-					if ($val && $val['frm_image']) {
+					// if ($val && $val['frm_image']) {
 						$banner['list'][$key] = $val;
 						$banner['list'][$key]['post_url'] = post_url('forum', $val['post_id'].'?type='.$type );
-					}
+					// }
 				}
 			}
 			
@@ -318,7 +318,7 @@ class Board_post extends CB_Controller
 				'cic_forum_info.frm_bat_close_datetime >=' => $checktime,
 				'cic_forum_info.frm_close_datetime >=' => $checktime,
 				'post_del <>' => 2,
-				'post_best_state' => 1,
+				'post_best_state' => 3
 			);
 			$_banner = $this->CIC_forum_model->get_post_list('', '', $where, '', '', '', '');
 			$banner = array();

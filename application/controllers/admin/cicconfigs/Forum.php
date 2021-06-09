@@ -1082,7 +1082,6 @@ class Forum extends CB_Controller
 				$updatedata['frm_image'] = $updatephoto;
             }
 
-			print_r($updatephoto);
 			/**
 			 * 게시물을 수정하는 경우입니다
 			 */
@@ -1106,6 +1105,7 @@ class Forum extends CB_Controller
 				$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 				$updatedata['frm_close_datetime'] = $frm_close_datetime;
 				$updatedata['pst_id'] = $pst_id;
+				$updatedata['frm_image'] = $updatephoto;
 				
 				
 				$where = array(
@@ -1133,7 +1133,10 @@ class Forum extends CB_Controller
 				$pevupdate_1 = array(
 					'B_opinion' => $pev_value_1
 				);
-				
+
+				print_r($updatedata['frm_image']);
+				exit;
+
 				$this->CIC_forum_info_model->insert($updatedata);
 				$this->Post_extra_vars_model->update($pst_id, $brd_updatedata, $where);
 				$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_0,);
