@@ -1119,6 +1119,22 @@ class Forum extends CB_Controller
 				'frm_bat_close_datetime' => $frm_bat_close_datetime,
 				'frm_close_datetime' => $frm_close_datetime,
 			);
+			$_updatedata = array(
+				'post_title' => $post_title,
+				'post_content' => $post_content,
+			);
+			$postupdatedata = array(
+				'brd_id' => 3,
+			);
+			$brd_updatedata = array(
+				'brd_id' => 3,
+			);
+			$pevupdate_0 = array(
+				'A_opinion' => $pev_value_0
+			);
+			$pevupdate_1 = array(
+				'B_opinion' => $pev_value_1
+			);
             if($updatephoto){
 				$updatedata['frm_image'] = $updatephoto;
             }
@@ -1128,7 +1144,10 @@ class Forum extends CB_Controller
 			 */
 			
 			if ($this->input->post($primary_key)) {
-				$this->CIC_forum_info_model->update($this->input->post($primary_key), $updatedata);
+				$this->CIC_forum_info_model->update($this->input->post($primary_key), $updatedata, $pst_id);
+				$this->Post_extra_vars_model->update($pst_id, $brd_updatedata, $where);
+				$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_0,);
+				$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_1);
 				$this->session->set_flashdata(
 					'message',
 					'정상적으로 수정되었습니다'
@@ -1147,30 +1166,8 @@ class Forum extends CB_Controller
 				$where = array(
 					'post_id' => $pst_id,
 				);
-				$postupdate = array(
-					'brd_id' => 3,
-				);
-				$_updatedata = array(
-					'post_title' => $post_title,
-					'post_content' => $post_content,
-				);
-				$this->Post_model->update($pst_id, $postupdate, $where);
+				$this->Post_model->update($pst_id, $brd_updatedata, $where);
 				$this->Post_model->update($pst_id, $_updatedata, $where);
-
-				$where = array(
-					'post_id' => $pst_id
-				);
-				$brd_updatedata = array(
-					'brd_id' => 3,
-				);
-				$pevupdate_0 = array(
-					'A_opinion' => $pev_value_0
-				);
-				$pevupdate_1 = array(
-					'B_opinion' => $pev_value_1
-				);
-
-
 				$this->CIC_forum_info_model->insert($updatedata);
 				$this->Post_extra_vars_model->update($pst_id, $brd_updatedata, $where);
 				$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_0,);
