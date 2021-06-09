@@ -34,7 +34,7 @@ class Post_model extends CB_Model
 	 * List 페이지 커스테마이징 함수
 	 */
 	
-	public function get_post_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
+	public function get_post_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $forder = 'asc', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
 
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
@@ -125,7 +125,7 @@ class Post_model extends CB_Model
 			$this->db->group_end();
 		}
 
-		$this->db->order_by($orderby);
+		$this->db->order_by($orderby, $forder);
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}

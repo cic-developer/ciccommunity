@@ -1451,14 +1451,8 @@ class Board_post extends CB_Controller
 		$order_by_field = element('order_by_field', $board)
 			? element('order_by_field', $board)
 			: 'post_num, post_reply';
-			$view['view']['sort'] = array(
-				'post_id' => $param->sort('post_id', 'asc'),
-				'post_title' => $param->sort('post_title', 'asc'),
-				'post_content' => $param->sort('post_content', 'asc'),
-				'post_hit' => $param->sort('post_hit', 'asc'),
-				'post_like' => $param->sort('post_like', 'asc'),
-			);
 		$findex = $this->input->get('findex', null, $order_by_field);
+		$forder = $this->input->get('forder', null, 'desc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 		if ($this->cbconfig->get_device_view_type() === 'mobile') {
@@ -1473,6 +1467,8 @@ class Board_post extends CB_Controller
 		$this->Post_model->allow_search_field = array('post_id', 'post_title', 'post_content', 'post_both', 'post_category', 'post_userid', 'post_nickname'); // 검색이 가능한 필드
 		$this->Post_model->search_field_equal = array('post_id', 'post_userid', 'post_nickname'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->Post_model->allow_order_field = array('post_id', 'post_title', 'post_content', 'post_hit', 'post_like');
+		$this->CIC_forum_model->allow_order_field = array('post_id', 'post_title', 'post_content', 'cic_forum_total_cp', 
+																	'cic_forum_info.frm_close_datetime');
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['step1'] = Events::trigger('list_step1', $eventname);
@@ -1630,7 +1626,7 @@ class Board_post extends CB_Controller
 			}
 
 			$result = $this->CIC_forum_model
-				->get_post_list($per_page, $offset, $where, $category_id, $findex, $sfield, $skeyword);
+				->get_post_list($per_page, $offset, $where, $category_id, $findex, $forder, $sfield, $skeyword);
 		}
 		/**
 		 * cic 대기 포럼 & 반려 ( category 1, 2)
@@ -1650,7 +1646,7 @@ class Board_post extends CB_Controller
 		 */
 		if($board['brd_id'] != 3) {
 			$result = $this->Post_model
-				->get_post_list($per_page, $offset, $where, $category_id, $findex, $sfield, $skeyword);
+				->get_post_list($per_page, $offset, $where, $category_id, $findex, $forder, $sfield, $skeyword);
 		}
 			
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;

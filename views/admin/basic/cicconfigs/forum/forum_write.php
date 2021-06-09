@@ -44,6 +44,10 @@
 				<div class="col-sm-10 form-inline" style="height:130px;">
 					<div class="form-group">
 						<div class='input-group date' id='datetimepicker11'>
+						<?php
+						print_r('frminfodata', $view);
+						exit;
+						?>
 							<input type='text' class="form-control" name="frm_close_datetime" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('frminfodata', $view))); ?>"/>
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
