@@ -1075,6 +1075,8 @@ class Forum extends CB_Controller
 				'pst_id' => $pst_id,
 				'frm_bat_close_datetime' => $frm_bat_close_datetime,
 				'frm_close_datetime' => $frm_close_datetime,
+				'post_title'    =>  $this->input->post('post_title', null, ''),
+				'post_content'    =>  $this->input->post('post_content', null, ''),
 			);
 
             if($updatephoto){
@@ -1086,6 +1088,7 @@ class Forum extends CB_Controller
 			
 			if ($this->input->post($primary_key)) {
 				$this->CIC_forum_info_model->update($this->input->post($primary_key), $updatedata);
+				$this->Post_model->update($this->input->post($primary_key), $updatedata);
 				$this->session->set_flashdata(
 					'message',
 					'정상적으로 수정되었습니다'
