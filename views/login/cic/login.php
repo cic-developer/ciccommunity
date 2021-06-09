@@ -158,28 +158,28 @@
 <!--아이디 Modal Start-->
 	<div id="myModal_id" class="modal" style="z-index:1500;">
 		<div class="modal-content" style="z-index:1550;">
-					<!-- 휴대전화 번호 인증 후 화면 -->
-					<p class="chk-input">회원님의 아이디는 <b style="font-size:20px">----</b> 입니다.</p>
+			<!-- 휴대전화 번호 인증 후 화면 -->
+			<p class="chk-input">회원님의 아이디는 <b id="find_id" style="font-size:20px">----</b> 입니다.</p>
 		</div>
 	</div>
 <!--아이디 Modal End -->
 
 <!--비밀번호 Modal Start-->
 <div id="myModal_pwd" class="modal" style="z-index:1500;">
-				<div class="modal-content" style="z-index:1550;">
-					<ul class="entry modify-box">
-						<li class="ath-email-content">
-							<p class="btxt" style="font-size:18px"><b>비밀번호 찾기</b></p><br>
-								<form action="">
-								<p class="chk-input" style="width:60%">
-									<input id="mem_password" name="mem_password" type="email" placeholder="이메일 입력" value="">
-								</p>
-								<button type="submit" class="pwdBtn">인증</button>
-								</form>
-						</li>
-					</ul>
-				</div>
-			</div>
+	<div class="modal-content" style="z-index:1550;">
+		<ul class="entry modify-box">
+			<li class="ath-email-content">
+				<p class="btxt" style="font-size:18px"><b>비밀번호 찾기</b></p><br>
+					<form action="">
+					<p class="chk-input" style="width:60%">
+						<input id="mem_password" name="mem_password" type="email" placeholder="이메일 입력" value="">
+					</p>
+					<button type="submit" class="pwdBtn">인증</button>
+					</form>
+			</li>
+		</ul>
+	</div>
+</div>
 <!--비밀번호 Modal End -->
 
 <!-- 모달 스크립트 -->

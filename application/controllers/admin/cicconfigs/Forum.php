@@ -961,13 +961,19 @@ class Forum extends CB_Controller
 				'rules' => 'trim|required',
 			)
 		);
-		// $pevconfig = array(
-		// 	array(
-		// 		'field' => '',
-		// 		'label' => 'pev_key',
-		// 		'rules' => 'trim|required',
-		// 	),
-		// );
+		if ($this->input->post($primary_key)) {
+			$config[] = array(
+				'field' => 'post_title',
+				'label' => '포럼 제목',
+				'rules' => 'trim|required',
+			);
+			$config[] = array(
+				'field' => 'post_content',
+				'label' => '포럼 내용',
+				'rules' => 'trim|required',
+			);
+		} else {
+		}
 
 		$this->form_validation->set_rules($config);
 

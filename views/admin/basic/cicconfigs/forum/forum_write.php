@@ -62,6 +62,8 @@
 						<input type="text" class="form-control" name="post_title" value="<?php echo set_value('post_title', element('post_title', element('data', $view))); ?>" />
 					</div>
 				</div>
+				<br>
+				<br>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">포럼 CONTENT</label>
 					<div class="col-sm-10">
@@ -81,10 +83,6 @@
 					});
 				</script>
 			</div>
-			<br>
-			<br>
-			<br>
-			<br>
 			<br>
 			<br>
 			<br>

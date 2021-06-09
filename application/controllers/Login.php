@@ -456,8 +456,7 @@ class Login extends CB_Controller
 		
 		if($isDI){ // 중복 이면 인증완료
 			$_DI = $new_phone = $isDI['mem_dup_info'];
-			
-			print_r($DI);
+
 			if($DI == $_DI){ // 인증완료
 				// 인증 결과 저장
 				$this->session->set_userdata('find_id_auth_phone_result', '1');
@@ -466,9 +465,10 @@ class Login extends CB_Controller
 				
 				echo("<script>");
 				echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
+				echo("window.opener.document.getElementById('find_id').innerText = '".$isDI['mem_email']."'"); // 인증완료 문구
+				echo("</script>");
 				exit;
 				echo("self.close();");
-				echo("</script>");
 				exit;
 			}else{
 				// 휴대폰 인증 결과 저장
