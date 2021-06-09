@@ -264,17 +264,53 @@
 			document.form_chk2.target = "popupChk";
 			document.form_chk2.submit();
 		}
-
-		// var successNice = function(type){
-		// 	$('#myModal_' + type + ' > .modal-content > .ath-nice-content .all-nice-box').attr('style', "display:none"); // 인증버튼 제거
-		// 	$('#myModal_' + type + ' > .modal-content .ath-nice-content .success').attr('style', "display:block"); // 인증완료 메세지
-			
-		// 	$('#myModal_' + type + ' > .modal-content .ath-nice-content').addClass("agree") // 인증 완료 표식
-			
-		// 	isAgreeForModify(type);
-		// }
 	/**
 	* 나이스 핸드폰인증 끝
+	*/
+
+	/**
+	* 이메일 전송 시작
+	*/
+	var send_email = function(){
+
+		var state ='';
+		var message = '';
+		$.ajax({
+			url: cb_url + '/login/ajax_modify_email_send',
+			type: 'POST',
+			data: {
+				type: type,
+				csrf_test_name : cb_csrf_hash
+			},
+			dataType: 'json',
+			async: false,
+			cache: false,
+			success: function(data) {
+				state = data.state;
+				message = data.message;
+				
+				// 성공
+				if(state == 1){
+					// 성공 메세지
+					alert(message);
+					
+					$('#myModal_' + type + ' .ath-email-content .send-ath-email').attr('style', "display:none;"); // 이메일 전송 버튼 제거
+					$('#myModal_' + type + ' .ath-email-content .confirm-ath-email').attr('style', "display:block;"); // 이메일 인증 버튼 생성
+					$('#myModal_' + type + ' .ath-email-content .' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;"); // 이메일 인증 버튼 생성
+				}
+				// 실패
+				if(state == 0){
+					// 실패 메세지
+					alert(message);
+				}
+			},
+			error: function() {
+				alert("에러가 발생했습니다");
+			}
+		});
+	}
+	/**
+	* 이메일 전송 끝
 	*/
 </script>
 

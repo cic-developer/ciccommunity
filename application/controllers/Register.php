@@ -327,46 +327,6 @@ class Register extends CB_Controller
 			return false;
 		}
 
-		// ciboard 있던것
-		// if ($this->cbconfig->item('use_selfcert') && $this->cbconfig->item('use_selfcert_required') && ! $this->session->userdata('selfcertinfo')) {
-		// 	if ( ! $this->session->userdata('selfcertinfo')) {
-		// 		$this->session->set_flashdata(
-		// 			'message',
-		// 			'본인 확인 후에 회원가입이 가능합니다.'
-		// 		);
-		// 		redirect('register');
-		// 	}
-		// }
-
-		// $selfcert_phone = $selfcert_username = $selfcert_birthday = $selfcert_sex = '';
-		// $selfcert_meta = '';
-
-		// if ($this->cbconfig->item('use_selfcert') && $this->session->userdata('selfcertinfo')) {
-		// 	$selfcertinfo = $this->session->userdata('selfcertinfo');
-		// 	if (element('selfcert_type', $selfcertinfo) == 'phone') {
-		// 		if ($this->cbconfig->item('use_selfcert_phone') == 'kcb' OR $this->cbconfig->item('use_selfcert_phone') == 'kcp') {
-		// 			$selfcert_phone = element('selfcert_phone', $selfcertinfo);
-		// 			$selfcert_username = element('selfcert_username', $selfcertinfo);
-		// 			$selfcert_birthday = element('selfcert_birthday', $selfcertinfo);
-		// 			$selfcert_sex = element('selfcert_sex', $selfcertinfo);
-		// 			$selfcert_key = element('selfcert_key', $selfcertinfo);
-		// 			$selfcert_local_code = element('selfcert_local_code', $selfcertinfo);
-		// 			$selfcert_meta = array(
-		// 				'selfcert_type' => element('selfcert_type', $selfcertinfo),
-		// 				'selfcert_company' => $this->cbconfig->item('use_selfcert_phone'),
-		// 				'selfcert_comm_id' => element('selfcert_comm_id', $selfcertinfo),
-		// 				'selfcert_phone' => $selfcert_phone,
-		// 				'selfcert_username' => $selfcert_username,
-		// 				'selfcert_birthday' => $selfcert_birthday,
-		// 				'selfcert_sex' => $selfcert_sex,
-		// 				'selfcert_key' => $selfcert_key,
-		// 				'selfcert_local_code' => $selfcert_local_code,
-		// 			);
-		// 		}
-		// 	}
-		// }
-		// ciboard 있던것
-
 		$password_length = $this->cbconfig->item('password_length');
 		$email_description = '';
 		if ($this->cbconfig->item('use_register_email_auth')) {
@@ -418,22 +378,11 @@ class Register extends CB_Controller
 			'label' => '패스워드 확인',
 			'rules' => 'trim|required|min_length[' . $password_length . ']|matches[mem_password]',
 		);
-		// ciboard 있던것
-		// if ( ! $selfcert_username) {
-		// 	$configbasic['mem_username'] = array(
-		// 		'field' => 'mem_username',
-		// 		'label' => '이름',
-		// 		'rules' => 'trim|min_length[2]|max_length[20]',
-		// 	);
-		// }
-		// ciboard 있던것
-		// 위의 ciboard원본에서 cic로 변경된 부분
 		$configbasic['mem_username'] = array(
 			'field' => 'mem_username',
 			'label' => '이름',
 			'rules' => 'trim|min_length[2]|max_length[20]',
 		);
-		// 위의 ciboard원본에서 cic로 변경된 부분
 		$configbasic['mem_nickname'] = array(
 			'field' => 'mem_nickname',
 			'label' => '닉네임',
@@ -459,30 +408,6 @@ class Register extends CB_Controller
 			'description' => 'Kaikas 지갑주소 입력은 선택사항 입니다. <br>지갑주소를 등록하여 다양한 혜택을 즐겨보세요.</p>',
 		);
 		// 추가한 것
-		// ciboard 있던것
-		// if ( ! $selfcert_phone) {
-		// 	$configbasic['mem_phone'] = array(
-		// 		'field' => 'mem_phone',
-		// 		'label' => '전화번호',
-		// 		'rules' => 'trim|valid_phone',
-		// 	);
-		// }
-		// if ( ! $selfcert_birthday) {
-		// 	$configbasic['mem_birthday'] = array(
-		// 		'field' => 'mem_birthday',
-		// 		'label' => '생년월일',
-		// 		'rules' => 'trim|exact_length[10]',
-		// 	);
-		// }
-		// if ( ! $selfcert_sex) {
-		// 	$configbasic['mem_sex'] = array(
-		// 		'field' => 'mem_sex',
-		// 		'label' => '성별',
-		// 		'rules' => 'trim|exact_length[1]',
-		// 	);
-		// }
-		// ciboard 있던것
-		// 위의 ciboard원본에서 cic로 변경된 부분
 		$configbasic['mem_phone'] = array(
 			'field' => 'mem_phone',
 			'label' => '전화번호',
@@ -498,7 +423,6 @@ class Register extends CB_Controller
 			'label' => '성별',
 			'rules' => 'trim|exact_length[1]',
 		);
-		// 위의 ciboard원본에서 cic로 변경된 부분
 		$configbasic['mem_zipcode'] = array(
 			'field' => 'mem_zipcode',
 			'label' => '우편번호',
@@ -580,20 +504,6 @@ class Register extends CB_Controller
 					continue;
 				}
 				if (element('func', $value) === 'basic') {
-					// ciboard 있던것
-					// if ($key == 'mem_username' && $selfcert_username) {
-					// 	continue;
-					// }
-					// if ($key == 'mem_phone' && $selfcert_phone) {
-					// 	continue;
-					// }
-					// if ($key == 'mem_birthday' && $selfcert_birthday) {
-					// 	continue;
-					// }
-					// if ($key == 'mem_sex' && $selfcert_sex) {
-					// 	continue;
-					// }
-					// ciboard 있던것
 
 					if ($key === 'mem_address') {
 						if (element('required', $value) === '1') {
@@ -776,11 +686,6 @@ class Register extends CB_Controller
 		 */
 		if ($form_validation === false OR $file_error !== '' OR $file_error2 !== '') {
 
-			// if($this->form_validation->error_string()){
-			// 	echo $this->form_validation->error_string().'<br/>';
-			// 	exit('에러발생');
-			// }
-
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 
@@ -791,21 +696,6 @@ class Register extends CB_Controller
 					if ( ! element('use', $value)) {
 						continue;
 					}
-					// ciboard 있던것
-					// if (element('field_name', $value) === 'mem_username' && $selfcert_username) {
-					// 	continue;
-					// }
-					// if (element('field_name', $value) === 'mem_phone' && $selfcert_phone) {
-					// 	continue;
-					// }
-					// if (element('field_name', $value) === 'mem_birthday' && $selfcert_birthday) {
-					// 	continue;
-					// }
-					// if (element('field_name', $value) === 'mem_sex' && $selfcert_sex) {
-					// 	continue;
-					// }
-					// ciboard 있던것
-
 					$required = element('required', $value) ? 'required' : '';
 
 					$html_content[$k]['field_name'] = element('field_name', $value);
@@ -1007,34 +897,6 @@ class Register extends CB_Controller
 			$metadata['meta_nickname_datetime'] = cdate('Y-m-d H:i:s');
 			$insertdata['mem_level'] = 0;// 시작 레벨은 무조건 0 // => ciboard원본 $mem_level;
 
-
-			// ciboard 있던것
-			// if ($selfcert_username) {
-			// 	$insertdata['mem_username'] = $selfcert_username;
-			// } else if (isset($form['mem_username']['use']) && $form['mem_username']['use']) {
-			// 	$insertdata['mem_username'] = $this->input->post('mem_username', null, '');
-			// }
-			// if (isset($form['mem_homepage']['use']) && $form['mem_homepage']['use']) {
-			// 	$insertdata['mem_homepage'] = $this->input->post('mem_homepage', null, '');
-			// }
-			// if ($selfcert_phone) {
-			// 	$insertdata['mem_phone'] = $selfcert_phone;
-			// } else if (isset($form['mem_phone']['use']) && $form['mem_phone']['use']) {
-			// 	$insertdata['mem_phone'] = $this->input->post('mem_phone', null, '');
-			// }
-			// if ($selfcert_birthday) {
-			// 	$insertdata['mem_birthday'] = $selfcert_birthday;
-			// } else if (isset($form['mem_birthday']['use']) && $form['mem_birthday']['use']) {
-			// 	$insertdata['mem_birthday'] = $this->input->post('mem_birthday', null, '');
-			// }
-			// if ($selfcert_sex) {
-			// 	$insertdata['mem_sex'] = $selfcert_sex;
-			// } else if (isset($form['mem_sex']['use']) && $form['mem_sex']['use']) {
-			// 	$insertdata['mem_sex'] = $this->input->post('mem_sex', null, '');
-			// }
-			// ciboard 있던것
-
-			// 위의 ciboard원본에서 cic로 변경된 부분
 			if (isset($form['mem_username']['use']) && $form['mem_username']['use']) {
 				$insertdata['mem_username'] = $this->input->post('mem_username', null, '');
 			}
@@ -1050,7 +912,6 @@ class Register extends CB_Controller
 			if (isset($form['mem_sex']['use']) && $form['mem_sex']['use']) {
 				$insertdata['mem_sex'] = $this->input->post('mem_sex', null, '');
 			}
-			// 위의 ciboard원본에서 cic로 변경된 부분
 			if (isset($form['mem_address']['use']) && $form['mem_address']['use']) {
 				$insertdata['mem_zipcode'] = $this->input->post('mem_zipcode', null, '');
 				$insertdata['mem_address1'] = $this->input->post('mem_address1', null, '');
@@ -1105,24 +966,6 @@ class Register extends CB_Controller
 				'mem_userid' => $this->input->post('mem_userid'),
 			);
 			$this->Member_userid_model->insert($useridinsertdata);
-
-			// ciboard 있던것
-			// if ($selfcert_meta) {
-			// 	foreach ($selfcert_meta as $certkey => $certvalue) {
-			// 		$metadata[$certkey] = $certvalue;
-			// 	}
-
-			// 	$selfcertupdatedata = array(
-			// 		'mem_id' => $mem_id
-			// 	);
-			// 	$selfcertwhere = array(
-			// 		'msh_cert_key' => $selfcert_key,
-			// 	);
-
-			// 	$this->load->model('Member_selfcert_history_model');
-			// 	$this->Member_selfcert_history_model->update('', $selfcertupdatedata, $selfcertwhere);
-			// }
-			// ciboard 있던것
 			$this->Member_meta_model->save($mem_id, $metadata);
 			$nickinsert = array(
 				'mem_id' => $mem_id,
@@ -1174,7 +1017,6 @@ class Register extends CB_Controller
 				}
 			}
 
-			// cic에서 추가된 부분
 			$this->load->model(array('CIC_vp_config_model', 'CIC_cp_config_model', 'CIC_vp_model', 'CIC_cp_model'));
 			$_vpConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 1 AND vpc_enable = 1 AND vpc_value > 0");
 			$_cpConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 1 AND cpc_enable = 1 AND cpc_value > 0");
@@ -1201,7 +1043,6 @@ class Register extends CB_Controller
 				);	
 			}
 			
-			// cic에서 추가된 부분 끝
 			$this->point->insert_point(
 				$mem_id,
 				$this->cbconfig->item('point_register'),
@@ -1510,8 +1351,6 @@ class Register extends CB_Controller
 					);
 				}
 			}
-
-			// cic에서 추가된 부분
 			
 			//기존 추천인코드 삭제
 			$this->session->set_userdata('ref_code', '');
@@ -1563,7 +1402,6 @@ class Register extends CB_Controller
 					'추천인 등록 CP 보상'
 				);
 			}
-			// cic에서 추가된 부분 끝
 
 			$this->session->set_flashdata(
 				'nickname',
@@ -2239,10 +2077,10 @@ class Register extends CB_Controller
 
 	private function getMillisecond()
 	{
-	list($microtime,$timestamp) = explode(' ',microtime());
-	$time = $timestamp.substr($microtime, 2, 3);
-	
-	return $time;
+		list($microtime,$timestamp) = explode(' ',microtime());
+		$time = $timestamp.substr($microtime, 2, 3);
+		
+		return $time;
 	}
 
 }

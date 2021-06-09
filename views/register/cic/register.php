@@ -15,6 +15,7 @@
 					<h4>회원가입 약관 동의</h4>
 					<div class="agree-txt">
 						<?php echo nl2br(html_escape(element('member_register_policy1', $view))) ?>
+						<!-- <?php echo nl2br(html_escape(element('member_register_policy1', $view))) ?> -->
 						<!-- <p>제 1 장 &nbsp;&nbsp;총 칙</p>
 						<p>&nbsp;</p>
 						<p>제 1 조 &nbsp;(목 적)<br>

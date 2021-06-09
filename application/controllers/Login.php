@@ -549,7 +549,7 @@ class Login extends CB_Controller
 
 			if($DI == $_DI){ // 인증완료
 				// 인증 결과 저장
-				// $this->session->set_userdata('find_pw_auth_phone_result', '1');
+				$this->session->set_userdata('find_pw_auth_phone_result', '1');
 				// 휴대폰 인증 데이터 삭제
 				$this->session->unset_userdata('dec_data');
 				
@@ -563,7 +563,7 @@ class Login extends CB_Controller
 				exit;
 			}else{
 				// 휴대폰 인증 결과 저장
-				// $this->session->set_userdata('find_pw_auth_phone_result', '');
+				$this->session->set_userdata('find_pw_auth_phone_result', '');
 				// 휴대폰 인증 데이터 삭제
 				$this->session->unset_userdata('dec_data');
 
@@ -608,5 +608,76 @@ class Login extends CB_Controller
 	}
 	/**
 	 * 비밀번호 찾기 끝
+	 */
+
+	/**
+	 * 이메일 전송 시작
+	 */
+	public function ajax_modify_email_send() {
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_membermodify_ajax_modify_email_send';
+		$this->load->event($eventname);
+		
+		$view = array();
+		$view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		// 비밀번호 찾기 이메일 전송을 위한, 핸드폰인증 여부 확인
+		$isMobileAth = $this->session->userdata('find_pw_auth_phone_result');
+
+		// 임시 비밀번호 생성
+		$timestamp = $this->getMillisecond();
+		$cc32 = base_convert($timestamp, 10, 32);
+		$imPw = $cc32.''.'@';
+
+		// 이메일에 포함될 데이터
+		$getdata['imPw'] = $imPw;
+		$getdata['name'] = $member_info['mem_username'];
+		$getdata['site_title'] = $this->cbconfig->item('site_title');
+		$getdata['webmaster_email'] = $this->cbconfig->item('webmaster_email');
+		$getdata['webmaster_name'] = $this->cbconfig->item('webmaster_name');
+		
+		$this->load->library('email');
+		$emailform['emailform'] = $getdata;
+		$message = $this->load->view('mypage/cic/email_form', $emailform, true);
+		$this->email->from(element('webmaster_email', $getdata), element('webmaster_name', $getdata));
+		$this->email->to($email);
+		if($type == 'phone'){
+			$this->email->subject('[CIC Community] 핸드폰번호변경 이메일 인증 안내메일입니다');
+		}
+		if($type == 'password'){
+			$this->email->subject('[CIC Community] 비밀번호변경 이메일 인증 안내메일입니다');
+		}
+		if($type == 'wallet'){
+			$this->email->subject('[CIC Community] 지갑주소변경 이메일 인증 안내메일입니다');
+		}
+		$this->email->message($message);
+
+		if ($this->email->send() === false) {
+			$result = array(
+				'state' => '0',
+				'message' => '이메일을 발송하지 못하였습니다. 메일 설정을 확인하여주세요',
+			);
+			exit(json_encode($result));
+		} else {
+			$result = array(
+				'state' => '1',
+				'message' => '해당 이메일로 인증 번호를 발송하였습니다',
+			);
+			exit(json_encode($result));
+		}
+	}
+
+	private function getMillisecond()
+	{
+		list($microtime,$timestamp) = explode(' ',microtime());
+		$time = $timestamp.substr($microtime, 2, 3);
+		
+		return $time;
+	}
+	/**
+	 * 이메일 전송 끝
 	 */
 }
