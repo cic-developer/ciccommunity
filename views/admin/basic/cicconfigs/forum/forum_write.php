@@ -68,7 +68,8 @@
 					<label class="col-sm-2 control-label">포럼 CONTENT</label>
 					<div class="col-sm-10">
 						<div class="form-group col-sm-12">
-							<?php echo display_dhtml_editor('post_content', set_value('post_content', element('post_content', element('postdata', $view))), $classname = 'form-control dhtmleditor', $is_dhtml_editor = true, $editor_type = "smarteditor"); ?>
+							<?php //echo display_dhtml_editor('post_content', element('post_content', element('postdata', $view)), $classname = 'form-control dhtmleditor',  $is_dhtml_editor = true,  $editor_type = "smarteditor"); ?>
+							<?php echo display_dhtml_editor('post_content', set_value('post_content', element('post_content', element('postdata', $view))), $classname = 'form-control dhtmleditor', $is_dhtml_editor = true, $editor_type = $this->cbconfig->item('post_editor_type')); ?>
 						</div>
 					</div>
 				</div>
