@@ -271,9 +271,9 @@
 	/**
 	* 이메일 전송 시작
 	*/
-	var send_email = function(email, name){
+	var send_email = function(id, name){
 
-		$mem_password
+		var email = $('#email').val();
 
 		var state ='';
 		var message = '';
@@ -281,6 +281,7 @@
 			url: cb_url + '/login/ajax_imsh_pw_email_send',
 			type: 'POST',
 			data: {
+				id: id,
 				email: email,
 				name: name,
 				csrf_test_name : cb_csrf_hash

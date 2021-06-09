@@ -540,7 +540,8 @@ class Login extends CB_Controller
 		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
 
-		$email = $isDI['mem_email'];
+		// $email = $isDI['mem_email'];
+		$id = $isDI['mem_id'];
 		$name = $isDI['user_name'];
 		
 		if($isDI){ // 중복 이면 인증완료
@@ -554,7 +555,7 @@ class Login extends CB_Controller
 				
 				echo("<script>");
 				echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
-				echo("window.opener.send_email('".$email."', '".$name."');"); // 이메일 전송 실행
+				echo("window.opener.send_email('".$id.'", "'.$name."');"); // 이메일 전송 실행
 				echo("self.close();");
 				echo("</script>");
 				exit;
@@ -621,6 +622,7 @@ class Login extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
+		$id = $this->input->post('id');
 		$email = $this->input->post('email');
 		$name = $this->input->post('name');
 
@@ -631,6 +633,22 @@ class Login extends CB_Controller
 		$timestamp = $this->getMillisecond();
 		$cc32 = base_convert($timestamp, 10, 32);
 		$imPw = $cc32.''.'@';
+
+		// => 비밀번호 변경 시작
+		$new_password = password_hash($imPw, PASSWORD_BCRYPT);
+		$arr = array(
+			'mem_password' => $new_password,
+		);
+		$result = $this->Member_model->set_user_modify($id, $arr);
+        
+		if($result == 0){
+			$result = array(
+				'state' => '0',
+				'message' => '이메일을 발송하지 못하였습니다. (관리자 문의)',
+			);
+			exit(json_encode($result));
+		}
+		// => 비밀번호 변경 끝
 
 		// 이메일에 포함될 데이터
 		$getdata['imPw'] = $imPw;
@@ -645,9 +663,9 @@ class Login extends CB_Controller
 		$this->email->from(element('webmaster_email', $getdata), element('webmaster_name', $getdata));
 		$this->email->to($email);
 		$this->email->subject('[CIC Community] 비밀번호 찾기 안내메일입니다');
-
+        
 		$this->email->message($message);
-
+        
 		if ($this->email->send() === false) {
 			$result = array(
 				'state' => '0',
