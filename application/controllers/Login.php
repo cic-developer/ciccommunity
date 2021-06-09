@@ -58,7 +58,7 @@ class Login extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
 		$view['view']['id_enc_data'] = $this->checkplus->main('login', 'find_id_auth_phone_success', 'find_id_auth_phone_fail');
-		$view['view']['pw_enc_data'] = $this->checkplus->main('login', 'pw_auth_phone_success', 'pw_auth_phone_fail');
+		$view['view']['pw_enc_data'] = $this->checkplus->main('login', 'find_pw_auth_phone_success', 'find_pw_auth_phone_fail');
 		// $view['view']['dec_data'] = $this->session->userdata('dec_data');
 
 		$this->load->library(array('form_validation'));
@@ -436,7 +436,9 @@ class Login extends CB_Controller
 		redirect($url_after_logout, 'refresh');
 	}
 
-	// 비밀번호 변경
+	/**
+	 * 아이디 찾기 시작
+	 */
 	public function find_id_auth_phone_success(){
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_login_find_id_auth_phone_success';
@@ -459,7 +461,7 @@ class Login extends CB_Controller
 
 			if($DI == $_DI){ // 인증완료
 				// 인증 결과 저장
-				$this->session->set_userdata('find_id_auth_phone_result', '1');
+				// $this->session->set_userdata('find_id_auth_phone_result', '1');
 				// 휴대폰 인증 데이터 삭제
 				$this->session->unset_userdata('dec_data');
 				
@@ -473,7 +475,7 @@ class Login extends CB_Controller
 				exit;
 			}else{
 				// 휴대폰 인증 결과 저장
-				$this->session->set_userdata('find_id_auth_phone_result', '');
+				// $this->session->set_userdata('find_id_auth_phone_result', '');
 				// 휴대폰 인증 데이터 삭제
 				$this->session->unset_userdata('dec_data');
 
@@ -492,16 +494,11 @@ class Login extends CB_Controller
 		}
 	}
 
-	public function password_auth_phone_fail(){
+	public function find_id_auth_phone_fail(){
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_membermodify_password_auth_phone_fail';
+		$eventname = 'event_login_find_id_auth_phone_fail';
 		$this->load->event($eventname);
 		$EncodeData = $this->input->get("EncodeData") ? $this->input->get("EncodeData") : $this->input->post("EncodeData");
-
-		/**
-		 * 로그인이 필요한 페이지입니다
-		 */
-		required_user_login();
 
 		$view = array();
 		$view['view'] = array();
@@ -509,7 +506,7 @@ class Login extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		$this->session->set_userdata('password_modify_ath_nice_phone_result', '');
+		// $this->session->set_userdata('find_id_auth_phone_result', '');
 
 		if($EncodeData){
 			$this->checkplus->fail($EncodeData);
@@ -521,4 +518,95 @@ class Login extends CB_Controller
 		echo("<script>alert('인증에 실패하였습니다!');</script>");
 		echo("<script>self.close()</script>");
 	}
+	/**
+	 * 아이디 찾기 끝
+	 */
+
+	/**
+	 * 비밀번호 찾기 시작
+	 */
+	public function find_pw_auth_phone_success(){
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_login_find_pw_auth_phone_success';
+		$this->load->event($eventname);
+
+		
+		print_r('hi');
+		exit;
+		
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		
+		$EncodeData = $this->input->get("EncodeData") ? $this->input->get("EncodeData") : $this->input->post("EncodeData");
+		$this->checkplus->success($EncodeData);
+		
+		$data = $this->session->userdata('dec_data');
+		$DI = $data['dupinfo'];
+		
+		$isDI = $this->Member_model->get_by_memDI($DI, '');
+		
+		if($isDI){ // 중복 이면 인증완료
+			$_DI = $new_phone = $isDI['mem_dup_info'];
+
+			if($DI == $_DI){ // 인증완료
+				// 인증 결과 저장
+				// $this->session->set_userdata('find_pw_auth_phone_result', '1');
+				// 휴대폰 인증 데이터 삭제
+				$this->session->unset_userdata('dec_data');
+				
+				echo("<script>");
+				echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
+				echo("window.opener.document.getElementById('find_id').innerText = '".$isDI['mem_email']."';"); // 인증완료 문구
+				echo("var id_modal = window.opener.document.getElementById('myModal_id');");
+				echo("id_modal.setAttribute('style', 'z-index:1500; display:block;');");
+				echo("self.close();");
+				echo("</script>");
+				exit;
+			}else{
+				// 휴대폰 인증 결과 저장
+				// $this->session->set_userdata('find_pw_auth_phone_result', '');
+				// 휴대폰 인증 데이터 삭제
+				$this->session->unset_userdata('dec_data');
+
+				echo("<script>");
+				echo("alert('회원가입시 사용한 핸드폰번호를 이용해주세요');"); // 인증완료 문구
+				echo("self.close();");
+				echo("</script>");
+				exit;
+			}
+		} else {
+			// 휴대폰 인증 데이터 삭제
+			$this->session->unset_userdata('dec_data');
+
+			echo("<script>alert('인증에 실패하였습니다');</script>");
+			echo("<script>self.close()</script>");
+		}
+	}
+
+	public function find_pw_auth_phone_fail(){
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_login_find_pw_auth_phone_fail';
+		$this->load->event($eventname);
+		$EncodeData = $this->input->get("EncodeData") ? $this->input->get("EncodeData") : $this->input->post("EncodeData");
+
+		$view = array();
+		$view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		// $this->session->set_userdata('find_pw_auth_phone_result', '');
+
+		if($EncodeData){
+			$this->checkplus->fail($EncodeData);
+			
+			echo("<script>alert('인증에 실패하였습니다!');</script>");
+			echo("<script>self.close()</script>");
+		} 
+
+		echo("<script>alert('인증에 실패하였습니다!');</script>");
+		echo("<script>self.close()</script>");
+	}
+	/**
+	 * 비밀번호 찾기 끝
+	 */
 }

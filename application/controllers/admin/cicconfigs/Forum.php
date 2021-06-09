@@ -922,12 +922,24 @@ class Forum extends CB_Controller
 		/**
 		 * 수정 페이지일 경우 기존 데이터를 가져옵니다
 		 */
+
+		// $getdata = array();
+		// $_getdata = array();
+		// $pev_getdata = array();
+		// if ($pst_id) {
+		// 	$getdata = $this->CIC_forum_info_model->get_one($pst_id);
+		// 	$_getdata = $this->Post_model->get_one($pst_id);
+		// 	$pev_getdata = $this->Post_extra_vars_model->get($pst_id);
+		// }
+
+
 		$getdata = array();
 		if ($pst_id) {
-			$getdata = $this->CIC_forum_info_model->get_one($pst_id);
-			$post_getdata = $this->Post_model->get_one($pst_id);
-			$pev_getdata = $this->Post_extra_vars_model->get($pst_id);
+			$getdata = $this->Post_model->get_one($pst_id);
+			// $getdata['pev_data'] = $this->Post_extra_vars_model->get($pst_id);
 		}
+
+
 
 		/**
 		 * Validation 라이브러리를 가져옵니다
@@ -1068,14 +1080,16 @@ class Forum extends CB_Controller
 
 			$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
 			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
+			$post_title = $getdata['post_title'];
+			$post_content = $getdata['post_content'];
 			
 
 			$updatedata = array(
 				'pst_id' => $pst_id,
 				'frm_bat_close_datetime' => $frm_bat_close_datetime,
 				'frm_close_datetime' => $frm_close_datetime,
-				'post_title'    =>  $this->input->post('post_title', null, ''),
-				'post_content'    =>  $this->input->post('post_content', null, ''),
+				'post_title'    =>  $post_title,
+				'post_content'    =>  $post_content
 			);
 
             if($updatephoto){
@@ -1099,6 +1113,8 @@ class Forum extends CB_Controller
 				$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 				$updatedata['frm_close_datetime'] = $frm_close_datetime;
 				$updatedata['pst_id'] = $pst_id;
+				$updatedata['post_title'] = $post_title;
+				$updatedata['post_content'] = $post_content;
 
 				$where = array(
 					'post_id' => $pst_id,

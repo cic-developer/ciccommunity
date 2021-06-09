@@ -70,7 +70,7 @@
 							<p>* 아이디를 잊어버렸나요?</p>
 							<input type="hidden" name="m" value="checkplusService">
 							<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('id_enc_data', $view)); ?>">
-							<a href="javascript:fnPopup1();" id="ath_nice_phone" class="modify-btn"><span>아이디 찾기</span></a>
+							<a href="javascript:fnPopup1();" id="ath_nice_phone1" class="modify-btn"><span>아이디 찾기</span></a>
 						</form>
 						<!-- <a id="idModal" ><span>아이디 찾기</span></a> -->
 					</li>
@@ -170,11 +170,20 @@
 		<ul class="entry modify-box">
 			<li class="ath-email-content">
 				<p class="btxt" style="font-size:18px"><b>비밀번호 찾기</b></p><br>
-					<form action="">
+					<!-- <form action="">
 					<p class="chk-input" style="width:60%">
 						<input id="mem_password" name="mem_password" type="email" placeholder="이메일 입력" value="">
 					</p>
 					<button type="submit" class="pwdBtn">인증</button>
+					</form> -->
+
+					<form name="form_chk2" action="post" id="id_form_chk2">
+						<input type="hidden" name="m" value="checkplusService">
+						<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('pw_enc_data', $view)); ?>">
+						<p class="chk-input" style="width:60%">
+							<input id="mem_password" name="mem_password" type="email" placeholder="이메일 입력" value="">
+						</p>
+						<a href="javascript:fnPopup2();" id="ath_nice_phone2" class="modify-btn pwdBtn"><span>인증</span></a>
 					</form>
 			</li>
 		</ul>
@@ -184,24 +193,24 @@
 
 <!-- 모달 스크립트 -->
 <script>
-var modal1 = document.getElementById('myModal_pwd');
-var modal2 = document.getElementById('myModal_id');
-var btn1 = document.getElementById("pwdModal");
-var btn2 = document.getElementById("idModal");
-btn1.onclick = function() {
-	modal1.style.display = "block";
+	var modal1 = document.getElementById('myModal_pwd');
+	var modal2 = document.getElementById('myModal_id');
+	var btn1 = document.getElementById("pwdModal");
+	var btn2 = document.getElementById("idModal");
+	btn1.onclick = function() {
+		modal1.style.display = "block";
+		}
+	btn2.onclick = function() {
+		modal2.style.display = "block";
 	}
-btn2.onclick = function() {
-	modal2.style.display = "block";
-}
-window.onclick = function(event) {
-	if (event.target == modal1) {
-		modal1.style.display = "none";
+	window.onclick = function(event) {
+		if (event.target == modal1) {
+			modal1.style.display = "none";
+		}
+		if (event.target == modal2) {
+			modal2.style.display = "none";
+		}
 	}
-	if (event.target == modal2) {
-		modal2.style.display = "none";
-	}
-}
 
 </script>
 
