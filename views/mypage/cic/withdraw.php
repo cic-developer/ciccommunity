@@ -219,14 +219,17 @@
 			return;
 		}
 
-        var currentValArr = currentVal.split('.');
-        if(currentValArr[1].length > 2){
-            alert('금액은 소수점 2자리 까지 입력할수 있습니다');
-            $(this).val(oldVal1);
-            return;
+        if(currentVal.indexOf('.') == 1){
+            var currentValArr = currentVal.split('.');
+            if(currentValArr[1].length > 2){
+                alert('금액은 소수점 2자리 까지 입력할수 있습니다');
+                $(this).val(oldVal1);
+                return;
+            }
         }
 
         // If x is Not a Number or less than one or greater than 10
+        // if (!isNumeric(currentVal)) {
         if (!isNumeric(currentVal)) {
             $('.withdraw-point').text('금액을 옳바르게 입력해주세요.');
             $('.preview-point').text('금액을 옳바르게 입력해주세요.');
@@ -266,13 +269,14 @@
         // 좌우 trim(공백제거)을 해준다.
         num = String(num).replace(/^\s+|\s+$/g, "");
 
-
         var regex = /^[0-9]+(\.[0-9]+)?$/g;
         
         if( regex.test(num) ){
             num = num.replace(/,/g, "");
             return isNaN(num) ? false : true;
-        }else{ return false;  }
+        }else{
+            return false;  
+        }
     }
 
     // 출금금액 validation

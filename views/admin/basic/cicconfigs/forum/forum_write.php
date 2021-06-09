@@ -69,7 +69,6 @@
 					<div class="col-sm-10">
 						<div class="form-group col-sm-12">
 							<?php echo display_dhtml_editor('post_content', set_value('post_content', element('post_content', element('postdata', $view))), $classname = 'form-control dhtmleditor', $is_dhtml_editor = true, $editor_type = "smarteditor"); ?>
-							
 						</div>
 					</div>
 				</div>
@@ -162,12 +161,14 @@
 <script type="text/javascript">
 //<![CDATA[
 $(function() {
-	$('#fadminwrite').validate({
-		rules: {
-			frm_bat_close_datetime: 'required',
-		frm_close_datetime: 'required',
-		}
-	});
+	// $('#fadminwrite').validate({
+	// 	rules: {
+	// 		frm_bat_close_datetime: {'required' : true},
+	// 		frm_close_datetime: {'required' : true},
+	// 		post_title: {'required' : true},
+	// 		post_content : {'required_smarteditor' : true },
+	// 	}
+	// });
 });
 //]]>
 </script>
