@@ -233,6 +233,7 @@ class Board_post extends CB_Controller
 				'cic_forum_info.frm_bat_close_datetime >=' => $checktime,
 				'cic_forum_info.frm_close_datetime >=' => $checktime,
 				'post_del <>' => 2,
+				'post_best_state' => 1,
 			);
 			$_banner = $this->CIC_forum_model->get_post_list('', '', $where, '', '', '', '');
 			$banner = array();
@@ -317,6 +318,7 @@ class Board_post extends CB_Controller
 				'cic_forum_info.frm_bat_close_datetime >=' => $checktime,
 				'cic_forum_info.frm_close_datetime >=' => $checktime,
 				'post_del <>' => 2,
+				'post_best_state' => 1,
 			);
 			$_banner = $this->CIC_forum_model->get_post_list('', '', $where, '', '', '', '');
 			$banner = array();

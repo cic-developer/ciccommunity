@@ -1081,6 +1081,8 @@ class Forum extends CB_Controller
             if($updatephoto){
 				$updatedata['frm_image'] = $updatephoto;
             }
+
+			print_r($updatephoto);
 			/**
 			 * 게시물을 수정하는 경우입니다
 			 */
@@ -1119,28 +1121,23 @@ class Forum extends CB_Controller
 				$this->Post_model->update($pst_id, $postupdate, $where);
 				$this->Post_model->update($pst_id, $_updatedata, $where);
 
-				$where_0 = array(
-					'post_id' => $pst_id,
-					'pev_key' => 'A_opinion'
+				$where = array(
+					'post_id' => $pst_id
 				);
-				$where_1 = array(
-					'post_id' => $pst_id,
-					'pev_key' => 'B_opinion'
+				$brd_updatedata = array(
+					'brd_id' => 3,
 				);
 				$pevupdate_0 = array(
-					// 'brd_id' => 3,
 					'A_opinion' => $pev_value_0
 				);
 				$pevupdate_1 = array(
-					// 'brd_id' => 3,
 					'B_opinion' => $pev_value_1
 				);
-
-				// $this->Post_extra_vars_model->update($pst_id, $pevupdate_0, $where_0);
-				$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_0,);
-				// $this->Post_extra_vars_model->update($pst_id, $pevupdate_1, $where_1);
-				$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_1);
+				
 				$this->CIC_forum_info_model->insert($updatedata);
+				$this->Post_extra_vars_model->update($pst_id, $brd_updatedata, $where);
+				$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_0,);
+				$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_1);
 				$this->session->set_flashdata(
 					'message',
 					'정상적으로 입력되었습니다'
