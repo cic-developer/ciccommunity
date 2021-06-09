@@ -442,33 +442,31 @@ class Login extends CB_Controller
 		$eventname = 'event_login_find_id_auth_phone_success';
 		$this->load->event($eventname);
 
-		/**
-		 * 로그인이 필요한 페이지입니다
-		 */
-		required_user_login();
-
+		
+		
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-
+		
 		$EncodeData = $this->input->get("EncodeData") ? $this->input->get("EncodeData") : $this->input->post("EncodeData");
 		$this->checkplus->success($EncodeData);
-
+		
 		$data = $this->session->userdata('dec_data');
 		$DI = $data['dupinfo'];
 		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
-
-		if($isDI){ // 중복 이면
-			$_DI = $new_phone =  $this->member->item('mem_dup_info');
-
+		
+		if($isDI){ // 중복 이면 인증완료
+			$_DI = $new_phone = $isDI['mem_dup_info'];
+			
+			print_r($DI);
 			if($DI == $_DI){ // 인증완료
 				// 인증 결과 저장
-				$this->session->set_userdata('password_modify_ath_nice_phone_result', '1');
+				$this->session->set_userdata('find_id_auth_phone_result', '1');
 				// 휴대폰 인증 데이터 삭제
 				$this->session->unset_userdata('dec_data');
-
+				
 				echo("<script>");
 				echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
-				echo("window.opener.successNice('password');"); // 패스워드 변경 폼 생성
+				exit;
 				echo("self.close();");
 				echo("</script>");
 				exit;
@@ -480,9 +478,9 @@ class Login extends CB_Controller
 
 				echo("<script>");
 				echo("alert('회원가입시 사용한 핸드폰번호를 이용해주세요');"); // 인증완료 문구
+				exit;
 				echo("self.close();");
 				echo("</script>");
-				exit;
 			}
 		} else {
 			// 휴대폰 인증 데이터 삭제

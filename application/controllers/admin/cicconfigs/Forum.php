@@ -931,9 +931,6 @@ class Forum extends CB_Controller
 			$pev_getdata = $this->Post_extra_vars_model->get($pst_id);
 		}
 
-		print_r($pev_getdata);
-		exit;
-
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
@@ -1058,8 +1055,6 @@ class Forum extends CB_Controller
 					$updatephoto = cdate('Y') . '/' . cdate('m') . '/' . element('file_name', $img);
 				} else {
 					$file_error = $this->upload->display_errors();
-                    print_r($file_error);
-                    exit;
 				}
             }
 

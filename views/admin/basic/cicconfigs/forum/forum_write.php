@@ -56,6 +56,18 @@
 						<p class="help-block"> 포럼 마감일은 배팅 마감일 이후로 설정해야합니다.</p>
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">포럼 TITLE</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="post_title" value="<?php echo set_value('post_title', element('post_title', element('data', $view))); ?>" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">포럼 CONTENT</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="post_content" value="<?php echo set_value('post_content', element('post_content', element('data', $view))); ?>" />
+					</div>
+				</div>
 				<script type="text/javascript">
 					$(function () {
 						$('#datetimepicker10').datetimepicker({
