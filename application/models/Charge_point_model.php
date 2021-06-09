@@ -27,4 +27,6 @@ class Charge_point_model extends CB_Model
 		parent::__construct();
 	}
 
+	
+
 }

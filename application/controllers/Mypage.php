@@ -1822,6 +1822,11 @@ class Mypage extends CB_Controller
 			'page_title' => '충전하기',
 		);
 
+
+		$this->load->model('Charge_point_model');
+		$list = $this->Charge_point_model->get_list($limit = '', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR');$this->load->model('Charge_point_model');
+		// exit;
+
 		$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
@@ -1887,7 +1892,6 @@ class Mypage extends CB_Controller
 		$recorded_value = element('cp_value', $thisData);
 		if($recorded_value != $charge_input){
 			$update_data = array(
-				'cp_mem_id' => $memid,
 				'cp_mdate'  => date('Y-m-d H:i:s'),
 				'cp_state'  => 0,
 				'cp_reason' => '입력한 PER토큰양과 실제 전송된 토큰양이 일치하지 않음',
@@ -1902,14 +1906,13 @@ class Mypage extends CB_Controller
 			echo json_encode($return);
 			exit;
 		}
-		// 세션에 있는 CP 가져오고 세션 지우기
-		$per2cp = $this->session->userdata('per2cp');
-		if(!$per2cp){
+		// 해당 PER 과 같은지 확인
+		$recorded_memid = element('cp_mem_id', $thisData);
+		if($recorded_memid != $memid){
 			$update_data = array(
-				'cp_mem_id' => $memid,
 				'cp_mdate'  => date('Y-m-d H:i:s'),
 				'cp_state'  => 0,
-				'cp_reason' => '세션이 입력되지 않고 입금요청을 진행할 수 없음. 확인요함',
+				'cp_reason' => '입력한 PER토큰양과 실제 전송된 토큰양이 일치하지 않음',
 				'cp_ip'		=> $this->input->ip_address(),
 			);
 			$this->Charge_point_model->update(element('cp_id', $thisData), $update_data);
@@ -1921,12 +1924,29 @@ class Mypage extends CB_Controller
 			echo json_encode($return);
 			exit;
 		}
+		// 세션에 있는 CP 가져오고 세션 지우기
+		$per2cp = $this->session->userdata('per2cp');
+		if(!$per2cp){
+			$update_data = array(
+				'cp_mdate'  => date('Y-m-d H:i:s'),
+				'cp_state'  => 0,
+				'cp_reason' => '세션이 입력되지 않고 입금요청을 진행할 수 없음. 확인요함',
+				'cp_ip'		=> $this->input->ip_address(),
+			);
+			$this->Charge_point_model->update(element('cp_id', $thisData), $update_data);
+			$return = array(
+				'result' => false,
+				'code' 	 => '0004',
+				'data'	 => "Invalid Request"
+			);
+			echo json_encode($return);
+			exit;
+		}
 		$this->session->set_userdata('per2cp', '');
 
 		// PER * PER2CP 계산해서 기록남기기
 		$total_charge_cp = $charge_input * $per2cp;
 		$update_data = array(
-			'cp_mem_id' => $memid,
 			'cp_mdate'  => date('Y-m-d H:i:s'),
 			'cp_charge_point'  => $total_charge_cp,
 			'cp_state'  => 2,

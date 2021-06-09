@@ -1012,9 +1012,6 @@ class Forum extends CB_Controller
 			$this->view = element('view_skin_file', element('layout', $view));
 
 		} else {
-			$test = $this->input->post('post_content');
-			print_r($test);
-			exit;
 			/**
 			 * 유효성 검사를 통과한 경우입니다.
 			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
@@ -1077,6 +1074,13 @@ class Forum extends CB_Controller
 			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
 			$post_title = $this->input->post('post_title', null, '');
 			$post_content = $this->input->post('post_content', null, '');
+			
+			foreach($this->input->post('pev_value', null, '') as $pev_value );
+
+			print_r($pev_value);
+			exit;
+
+			
 
 			
 
