@@ -233,6 +233,7 @@
         if (!isNumeric(currentVal)) {
             $('.withdraw-point').text('금액을 옳바르게 입력해주세요.');
             $('.preview-point').text('금액을 옳바르게 입력해주세요.');
+            $('.preview-per').text('금액을 옳바르게 입력해주세요.');
         } else {
             // 보유 포인트
             var _my_money = $('.my-point').data('my-point');
@@ -255,7 +256,8 @@
             var _per_coin = (cal_money / price) * 100;
             var per_coin = Math.floor((_per_coin * 100)) / 100;
             
-            var preview_point = Number(my_money - req_money);
+            var _preview_point = Number(my_money - req_money);
+            var preview_point = number_format(_preview_point.toString());
             
             $('.withdraw-point').text(currentVal); // 출금액
             $('.preview-point').text(preview_point); // 예상 잔여 cp

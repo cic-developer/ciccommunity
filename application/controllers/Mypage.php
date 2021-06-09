@@ -1874,6 +1874,7 @@ class Mypage extends CB_Controller
 		$this->pagination->initialize($config);
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;
+		// 
 
 		$this->load->library('coinapi');
 		$per_gdac_price = element('price', $this->coinapi->get_coin_data('gdac', 'PER', 'KRW'));
@@ -1971,13 +1972,13 @@ class Mypage extends CB_Controller
 			echo json_encode($return);
 			exit;
 		}
-		// 해당 PER 과 같은지 확인
+		// 해당 memid 와 같은지 확인
 		$recorded_memid = element('cp_mem_id', $thisData);
 		if($recorded_memid != $memid){
 			$update_data = array(
 				'cp_mdate'  => date('Y-m-d H:i:s'),
 				'cp_state'  => 0,
-				'cp_reason' => '지갑주소 주인과 회원이 일치하지 않습니다.',
+				'cp_reason' => '송금회원과 로그인회원이 일치하지 않습니다.',
 				'cp_ip'		=> $this->input->ip_address(),
 			);
 			$this->Charge_point_model->update(element('cp_id', $thisData), $update_data);

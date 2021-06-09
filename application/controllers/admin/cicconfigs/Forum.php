@@ -1074,14 +1074,8 @@ class Forum extends CB_Controller
 			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
 			$post_title = $this->input->post('post_title', null, '');
 			$post_content = $this->input->post('post_content', null, '');
-			$pev_value = $this->input->post('pev_value');
-			
-			// foreach($this->input->post('pev_value', null, '') as $pev_value => $sangwon);
-
-			print_r($pev_value);
-			exit;
-
-			
+			$pev_value_0 = $this->input->post('pev_value_0', null, '');
+			$pev_value_1 = $this->input->post('pev_value_1', null, '');
 
 			
 
@@ -1132,7 +1126,8 @@ class Forum extends CB_Controller
 				);
 				$pevupdate = array(
 					'brd_id' => 3,
-					'pev_value' => $this->input->post('pev_value', null, ''),
+					$_getdata[0] => $this->input->post('pev_value_0', null, ''),
+					$_getdata[1] => $this->input->post('pev_value_1', null, ''),
 				);
 
 				$this->Post_extra_vars_model->update($pst_id, $pevupdate, $where);
