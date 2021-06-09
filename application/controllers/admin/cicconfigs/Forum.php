@@ -1080,16 +1080,15 @@ class Forum extends CB_Controller
 
 			$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
 			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
-			$post_title = $getdata['post_title'];
-			$post_content = $getdata['post_content'];
-			
+			// $post_title = $this->input->post('post_title', null, ''),
+			// $post_content = $this->input->post('comp_name', null, ''),
 
 			$updatedata = array(
 				'pst_id' => $pst_id,
 				'frm_bat_close_datetime' => $frm_bat_close_datetime,
 				'frm_close_datetime' => $frm_close_datetime,
-				'post_title'    =>  $post_title,
-				'post_content'    =>  $post_content
+				'post_title'    =>  $this->input->post('post_title', null, ''),
+				'post_content'    =>  $this->input->post('post_content', null, ''),
 			);
 
             if($updatephoto){
@@ -1133,6 +1132,7 @@ class Forum extends CB_Controller
 				$this->Post_extra_vars_model->update($pst_id, $pevupdate, $where);
 
 				$this->CIC_forum_info_model->insert($updatedata);
+				$this->Post_model->insert($updatedata);
 				$this->session->set_flashdata(
 					'message',
 					'정상적으로 입력되었습니다'

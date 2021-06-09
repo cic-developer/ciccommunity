@@ -66,11 +66,20 @@
 				<br>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">포럼 CONTENT</label>
-					<div class="col-sm-10">
+					<!-- <div class="col-sm-10"> -->
 						<!-- <input type="text" class="form-control" name="post_content" value="<?php echo set_value('post_content', element('post_content', element('data', $view))); ?>" /> -->
-						<textarea class="form-control" rows="5" name="post_content"><?php echo html_escape(element('post_content', element('data', $view))); ?></textarea>
+						<!-- <textarea class="form-control" rows="5" name="post_content"><?php echo html_escape(element('post_content', element('data', $view))); ?></textarea> -->
+					<!-- </div> -->
+					<div class="col-sm-10">
+					<!-- <div class="form-group col-sm-12">
+						<input type="text" class="form-control" name="post_content" id="post_content" value="<?php echo set_value('post_content', element('post_content', element('data', $view))); ?>" />
+					</div> -->
+					<div class="form-group col-sm-12">
+						<?php echo display_dhtml_editor('post_content', set_value('post_content', element('post_content', element('data', $view))), $classname = 'form-control dhtmleditor', $is_dhtml_editor = true, $editor_type = "smarteditor"); ?>
 					</div>
 				</div>
+				</div>
+				
 				<script type="text/javascript">
 					$(function () {
 						$('#datetimepicker10').datetimepicker({
