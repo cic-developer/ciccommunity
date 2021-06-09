@@ -928,12 +928,12 @@ class Forum extends CB_Controller
 
 
 		$getdata = array();
-		$frminfo_getdata = array();
 		$pev_getdata = array();
+		$frminfo_getdata = array();
 		if ($pst_id) {
-			$pev_getdata = $this->CIC_forum_info_model->get_one($pst_id);
 			$getdata = $this->Post_model->get_one($pst_id);
-			$_getdata = $this->Post_extra_vars_model->get($pst_id);
+			$frminfo_getdata = $this->CIC_forum_info_model->get_one($pst_id);
+			$pev_getdata = $this->Post_extra_vars_model->get($pst_id);
 		}
 		/**
 		 * Validation 라이브러리를 가져옵니다
@@ -1016,14 +1016,14 @@ class Forum extends CB_Controller
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 
 			if ($pst_id) {
-				if (empty($getdata['frm_bat_close_datetime']) OR $getdata['frm_bat_close_datetime'] === '0000-00-00 00:00:00') {
-					$getdata['frm_bat_close_datetime'] = '';
+				if (empty($frminfo_getdata['frm_bat_close_datetime']) OR $frminfo_getdata['frm_bat_close_datetime'] === '0000-00-00 00:00:00') {
+					$frminfo_getdata['frm_bat_close_datetime'] = '';
 				}
-				if (empty($getdata['frm_close_datetime']) OR $getdata['frm_close_datetime'] === '0000-00-00 00:00:00') {
-					$getdata['frm_close_datetime'] = '';
+				if (empty($frminfo_getdata['frm_close_datetime']) OR $frminfo_getdata['frm_close_datetime'] === '0000-00-00 00:00:00') {
+					$frminfo_getdata['frm_close_datetime'] = '';
 				}
 				$view['view']['postdata'] = $getdata;
-				$view['view']['pevdata'] = $_getdata;
+				$view['view']['pevdata'] = $pev_getdata;
 			}
 
 			/**
