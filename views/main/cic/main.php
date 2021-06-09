@@ -153,11 +153,11 @@
                                     <p class="num"><?php echo number_format(element('num', $popularpost));?></p>
                                     <p class="btxt">
                                         <span class="txt"><?php echo html_escape(element('post_title', $popularpost));?></span>
-                                        <span class="hit">(<?php echo number_format(element('post_hit', $popularpost));?>)</span>
+                                        <span class="hit">(<?php echo number_format(element('post_comment_count', $popularpost));?>)</span>
                                     </p>
                                     <div>
                                         <p class="stxt"><?php echo element('post_userid', $popularpost); ?><span><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $popularpost), 30, 30); ?>"alt="" /></span></p>
-                                        <p class="date"><?php echo number_format(element('post_comment_count', $popularpost)); ?>
+                                        <p class="date"><?php echo number_format(element('post_hit', $popularpost)); ?>
                                         <span><?php echo display_datetime(element('post_datetime', $popularpost), 'full'); ?></span></p>
                                     </div>                        
                                 </a>

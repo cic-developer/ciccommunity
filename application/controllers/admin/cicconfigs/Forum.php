@@ -932,7 +932,8 @@ class Forum extends CB_Controller
 			$getdata = $this->Post_model->get_one($pst_id);
 			$_getdata = $this->Post_extra_vars_model->get($pst_id);
 		}
-
+		print_r($_getdata[0]['post_id']);
+		exit;
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
@@ -1120,17 +1121,25 @@ class Forum extends CB_Controller
 				$this->Post_model->update($pst_id, $postupdate, $where);
 				$this->Post_model->update($pst_id, $_updatedata, $where);
 
-				$where = array(
+				$where_0 = array(
 					'post_id' => $pst_id,
-					'post_title', 'post_content'
+					'pev_key' => 'A_opinion'
 				);
-				$pevupdate = array(
+				$where_1 = array(
+					'post_id' => $pst_id,
+					'pev_key' => 'B_opinion'
+				);
+				$pevupdate_0 = array(
 					'brd_id' => 3,
-					$_getdata[0] => $this->input->post('pev_value_0', null, ''),
-					$_getdata[1] => $this->input->post('pev_value_1', null, ''),
+					'pev_value' => $pev_value_0
+				);
+				$pevupdate_1 = array(
+					'brd_id' => 3,
+					'pev_value' => $pev_value_1
 				);
 
-				$this->Post_extra_vars_model->update($pst_id, $pevupdate, $where);
+				$this->Post_extra_vars_model->update($pst_id, $pevupdate_0, $where_0);
+				$this->Post_extra_vars_model->update($pst_id, $pevupdate_1, $where_1);
 				$this->CIC_forum_info_model->insert($updatedata);
 				$this->session->set_flashdata(
 					'message',

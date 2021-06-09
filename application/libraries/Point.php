@@ -238,6 +238,9 @@ class Point extends CI_Controller
 			'cp_related_id' => $poi_related_id,
 			'cp_action' => $poi_action,
 		);
+		
+		print_r(json_encode($insertdata));
+		exit;
 		$this->CI->CIC_cp_model->insert($insertdata);
 
 		$sum = $this->CI->CIC_cp_model->get_point_sum($mem_id);

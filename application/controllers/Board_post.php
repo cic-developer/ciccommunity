@@ -261,12 +261,13 @@ class Board_post extends CB_Controller
 		 * 도전 포럼에서 필요한 정보들을 가져오거나 설정합니다.
 		 */
 		if(element('brd_id', element('board', $list)) == 6){
-			// 검색 기능
+			
 			$param =& $this->querystring;
 			$view['view']['sort'] = array(
 				'post_id' => $param->sort('post_id', 'asc'),
 				'post_title' => $param->sort('post_title', 'asc'),
 				'post_content' => $param->sort('post_content', 'asc'),
+				'post_hit' => $param->sort('post_hit', 'asc'),
 			);
 			$this->CIC_forum_model->allow_order_field = array('post_id', 'post_title', 'post_content');
 

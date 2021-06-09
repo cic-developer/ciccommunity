@@ -59,6 +59,10 @@
                 </table>
                 <!-- 페이지네이션 가능하면 부탁드립니다. -->
             </div>
+
+            <div class="paging-wrap">
+				<?php echo element('paging', $view); ?>
+			</div>
         </div>
         <!-- page end // -->
     </div>
