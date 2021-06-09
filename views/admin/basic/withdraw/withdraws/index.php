@@ -53,7 +53,7 @@
                             <td><?php echo html_escape(element('wid_userip', $result)); ?></td>
                             <td><?php echo element('display_name', $result); ?></td>
                             <td><?php echo html_escape(element('wid_wallet_address', $result)); ?></td>
-                            <td><?php echo number_format(element('wid_req_money', $result), 2); ?></td>
+                            <td><?php echo rs_number_format(element('wid_req_money', $result), 2, 0); ?></td>
                             <td><?php echo html_escape(element('wid_req_datetime', $result)); ?></td>
                             <td><?php echo html_escape(element('wid_state', $result)) != null ? (html_escape(element('wid_state', $result)) == 1 ? '<p class="text-success">승인</p>' : '<p class="text-danger">반려</p>' ) : '<p class="text-body">미처리</p>';?></td>
                             <td>
@@ -68,16 +68,16 @@
                                                     data-userip="<?php echo html_escape(element('wid_userip', $result)); ?>"
                                                         data-nickname="<?php echo html_escape(element('wid_nickname', $result)); ?>"
                                                             data-wallet-address="<?php echo html_escape(element('wid_wallet_address', $result)); ?>"
-                                                                data-commission="<?php echo number_format(element('wid_commission', $result), 2); ?>"
-                                                                    data-req-money="<?php echo number_format(element('wid_req_money', $result), 2); ?>"
-                                                                        data-cal-money="<?php echo number_format(element('wid_cal_money', $result), 2); ?>"
+                                                                data-commission="<?php echo rs_number_format(element('wid_commission', $result), 2, 0); ?>"
+                                                                    data-req-money="<?php echo rs_number_format(element('wid_req_money', $result), 2, 0); ?>"
+                                                                        data-cal-money="<?php echo rs_number_format(element('wid_cal_money', $result), 2, 0); ?>"
                                                                             data-req-datetime="<?php echo html_escape(element('wid_req_datetime', $result)); ?>"
                                             data-adminid="<?php echo html_escape(element('wid_admin_id', $result)); ?>"
                                                 data-adminip="<?php echo html_escape(element('wid_admin_ip', $result)); ?>"           
                                             data-res-datetime="<?php echo html_escape(element('wid_res_datetime', $result)); ?>"
                                                 data-state="<?php echo html_escape(element('wid_state', $result)) != null ? (html_escape(element('wid_state', $result)) == 1 ? '승인' : '반려' ) : '';?>"
                                                     data-content="<?php echo html_escape(element('wid_content', $result)); ?>"
-                                            data-percoin="<?php echo element('wid_percoin', $result) != null ? (number_format(element('wid_percoin', $result), 2)) : ''; ?>"
+                                            data-percoin="<?php echo element('wid_percoin', $result) != null ? (rs_number_format(element('wid_percoin', $result), 2, 0)) : ''; ?>"
                                                 data-transaction="<?php echo html_escape(element('wid_transaction', $result)); ?>"
                                             data-memo="<?php echo html_escape(element('wid_memo', $result)); ?>"       
                                     >
@@ -89,7 +89,7 @@
                                     <div class="btn-group btn-group-sm" role="group">
                                         <button type="button" class="btn btn-success modal_open1" 
                                             data-idx="<?php echo number_format(element('wid_idx', $result)); ?>" 
-                                                data-cal-money="<?php echo number_format(element('wid_cal_money', $result), 2); ?>"
+                                                data-cal-money="<?php echo element('wid_cal_money', $result); ?>"
                                         >
                                             승인
                                         </button>
@@ -134,8 +134,8 @@
                                                     <textarea class="form-control" rows="1" cols="75" id="cp_transaction" name="cp_transaction" placeholder="트랜잭션을 입력해주세요" required style="width:100%;"></textarea>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="cp_percoin">퍼코인*:</label>
-                                                    <textarea class="form-control" rows="1" cols="75" id="cp_percoin" name="cp_percoin" placeholder="퍼코인을 입력해주세요" required style="width:100%;"></textarea>
+                                                    <label for="cp_percoin">예상 퍼코인*:</label>
+                                                    <textarea class="form-control" rows="1" cols="75" id="cp_percoin" name="cp_percoin" placeholder="퍼코인을 입력해주세요" style="width:100%;" readonly></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="cp_content1">사유*:</label>
@@ -408,19 +408,16 @@
     $(document).on('click', '.modal_open1', function() {
 		var widIdx = $(this).data('idx'); // 신청 idx
         var _cal_money = $(this).data('cal-money'); // 수수료를 제한 출금할 cp 
-
-        var cal_money = _cal_money.replace(",");
-        var price = _price.replace(",");
-        // cal_money = parseFloat(cal_money);
-        price = parseFloat(price);
-
         
+        cal_money = parseFloat(_cal_money);
+        price = parseFloat(_price);
+
         var _per_coin = (cal_money / price) * 100;
 
-        var per_coin = Math.floor((_per_coin * 100) / 100);
+        var per_coin = Math.floor((_per_coin * 100)) / 100;
 
         $("#myModal-approve .modal-body #wid_idx1").val( widIdx ); 
-        $("#myModal-approve .modal-body #cp_percoin").val( cal_money ); 
+        $("#myModal-approve .modal-body #cp_percoin").val( per_coin ); 
 	});
     $(document).on('click', '.modal_open2', function() {
 		var widIdx = $(this).data('idx');

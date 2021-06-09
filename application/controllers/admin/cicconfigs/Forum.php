@@ -1180,8 +1180,7 @@ class Forum extends CB_Controller
 		
 		$this->{$this->modelname}->allow_search_field = array('post_id', 'post_title', 'post_content'); // 검색이 가능한 필드
 		$this->{$this->modelname}->search_field_equal = array('post_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->{$this->modelname}->allow_order_field = array('post_id', 'post_hit', 'post_datetime', 'cic_forum_info.frm_bat_close_datetime'
-																, 'cic_forum_info.frm_close_datetime', 'cic_forum_total_cp');
+		$this->{$this->modelname}->allow_order_field = array('post_id', 'post_hit', 'post_datetime', 'cic_forum_info.frm_bat_close_datetime', 'cic_forum_info.frm_close_datetime', 'cic_forum_total_cp');
 		// 현재 시간이 포럼 종료 시간보다 많을 경우
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp());
 		$where = array(
@@ -1224,6 +1223,8 @@ class Forum extends CB_Controller
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
+		// $view['view']['list_delete_url'] = site_url('admin/cicconfigs/forum/listDeleteToCloseForum');
+		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listDeleteToCloseForum/?' . $param->output());
 
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
