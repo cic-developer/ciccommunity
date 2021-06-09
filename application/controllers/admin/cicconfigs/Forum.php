@@ -953,6 +953,16 @@ class Forum extends CB_Controller
 				'label' => '포럼 종료일',
 				'rules' => 'trim|required',
 			),
+			array(
+				'field' => 'post_title',
+				'label' => '포럼 제목',
+				'rules' => 'trim|required',
+			),
+			array(
+				'field' => 'post_content',
+				'label' => '포럼 제목',
+				'rules' => 'trim|required',
+			)
 		);
 		// $pevconfig = array(
 		// 	array(
