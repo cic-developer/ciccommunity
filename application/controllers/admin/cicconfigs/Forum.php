@@ -1080,15 +1080,18 @@ class Forum extends CB_Controller
 
 			$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
 			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
-			// $post_title = $this->input->post('post_title', null, ''),
-			// $post_content = $this->input->post('comp_name', null, ''),
+			// $post_title = $getdata['post_title'];
+			// $post_content = $getdata['post_content'];
+			
 
 			$updatedata = array(
 				'pst_id' => $pst_id,
 				'frm_bat_close_datetime' => $frm_bat_close_datetime,
 				'frm_close_datetime' => $frm_close_datetime,
-				'post_title'    =>  $this->input->post('post_title', null, ''),
-				'post_content'    =>  $this->input->post('post_content', null, ''),
+			);
+			$_updatedata = array(
+				'post_title' => $this->input->post('post_title', null, ''),
+				'post_content' => $this->input->post('post_content', null, ''),
 			);
 
             if($updatephoto){
@@ -1100,7 +1103,7 @@ class Forum extends CB_Controller
 			
 			if ($this->input->post($primary_key)) {
 				$this->CIC_forum_info_model->update($this->input->post($primary_key), $updatedata);
-				$this->Post_model->update($this->input->post($primary_key), $updatedata);
+				$this->Post_model->update($this->input->post($primary_key), $_updatedata);
 				$this->session->set_flashdata(
 					'message',
 					'정상적으로 수정되었습니다'
@@ -1112,8 +1115,7 @@ class Forum extends CB_Controller
 				$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 				$updatedata['frm_close_datetime'] = $frm_close_datetime;
 				$updatedata['pst_id'] = $pst_id;
-				$updatedata['post_title'] = $post_title;
-				$updatedata['post_content'] = $post_content;
+				
 
 				$where = array(
 					'post_id' => $pst_id,
@@ -1130,9 +1132,8 @@ class Forum extends CB_Controller
 					'brd_id' => 3,
 				);
 				$this->Post_extra_vars_model->update($pst_id, $pevupdate, $where);
-
+				$this->Post_model->update($pst_id, $_updatedata, $where);
 				$this->CIC_forum_info_model->insert($updatedata);
-				$this->Post_model->insert($updatedata);
 				$this->session->set_flashdata(
 					'message',
 					'정상적으로 입력되었습니다'

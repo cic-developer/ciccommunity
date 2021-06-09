@@ -118,6 +118,7 @@
                     </thead>
                     <tbody>
                     <?php
+                    
                     if (element('list', element('data', element('list', $view)))) {
                         foreach (element('list', element('data', element('list', $view))) as $result) {
                     ?>

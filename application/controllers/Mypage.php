@@ -23,7 +23,7 @@ class Mypage extends CB_Controller
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
-	protected $helpers = array('form', 'array');
+	protected $helpers = array('form', 'array', 'coin_price');
 
 	function __construct()
 	{
@@ -1764,7 +1764,35 @@ class Mypage extends CB_Controller
 		redirect('mypage/withdraw');
 	}
 
+	/**
+	 * 소수점을 체크하는 콜백함수입니다.
+	 */
+	public function _minimum_decimal_check($_str)
+	{
+        
+		$str = explode( '.', $_str );
+		if( strlen($str[1]) < 3){
+			return true;
+		}
+        
+		$this->form_validation->set_message(
+			'_minimum_decimal_check',
+			'출금요청 최소금액은 소수점 2자리 까지 설정이 가능합니다'
+		);
+		return false;
+	}
+
 	function _withdraw_minimum_check($str){
+
+		$str = explode( '.', $_str );
+		if( strlen($str[1]) > 2){
+			$this->form_validation->set_message(
+				'_withdraw_minimum_check',
+				'출금요청 최소금액은 소수점 2자리 까지 설정이 가능합니다'
+			);
+			return false;
+		}
+		}
     
 		// 최소 신청 금액
 		$withdraw_minimum = $this->CIC_wconfig_model->item('withdraw_minimum'); 
@@ -1792,9 +1820,8 @@ class Mypage extends CB_Controller
 		$view = array();
 		$view['view'] = array();
         
-        // if(!$mem_id || is_numeric($mem_id)){
-        //     alert('유저 정보가 없습니다.\n로그인후 다시 시도해주세요' , '/');
-        // }
+		$this->load->library('coinapi');
+		$view['perPrice'] = $this->coinapi->get_coin_data('gdac', 'PER', 'KRW');
 		$layoutconfig = array(
 			'path' => 'mypage',
 			'layout' => 'layout',

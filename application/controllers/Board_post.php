@@ -248,7 +248,7 @@ class Board_post extends CB_Controller
 			}
 			
 			$view['view']['banner'] = $banner;
-			$view['view']['banner_count'] = count(element('list', $banner));
+			$view['view']['banner_count'] = element('list', $banner) ? count(element('list', $banner)) : 0;
 			$view['view']['banner_noimage_count'] = 4 - $view['view']['banner_count'];
 			// 배너 가져오기 끝
 
@@ -331,7 +331,7 @@ class Board_post extends CB_Controller
 			}
 			
 			$view['view']['banner'] = $banner;
-			$view['view']['banner_count'] = count(element('list', $banner));
+			$view['view']['banner_count'] = element('list', $banner) ? count(element('list', $banner)) : 0;
 			$view['view']['banner_noimage_count'] = 4 - $view['view']['banner_count'];
 			// 배너 가져오기 끝
 		}
