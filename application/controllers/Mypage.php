@@ -1900,7 +1900,7 @@ class Mypage extends CB_Controller
 		}
 		// 세션에 있는 CP 가져오고 세션 지우기
 		$per2cp = $this->session->userdata('per2cp');
-		if($per2cp){
+		if(!$per2cp){
 			$update_data = array(
 				'cp_mem_id' => $memid,
 				'cp_mdate'  => date('Y-m-d H:i:s'),
@@ -1917,6 +1917,7 @@ class Mypage extends CB_Controller
 			echo json_encode($return);
 			exit;
 		}
+		$this->session->set_userdata('per2cp', '');
 
 		// PER * PER2CP 계산해서 기록남기기
 		$total_charge_cp = $charge_input * $per2cp;
@@ -2113,6 +2114,19 @@ class Mypage extends CB_Controller
 		if(element('result', $json)){
 			return TRUE;
 		} else {
+			$this->load->model('Charge_point_model');
+			$insert_data = array(
+				'cp_transaction' => $transaction_hash,
+				'cp_from' => '',
+				'cp_to' => '',
+				'cp_value' => 0,
+				'cp_mem_id' => $this->member->is_member(),
+				'cp_wdate'  => date('Y-m-d H:i:s'),
+				'cp_state'  => 0,
+				'cp_reason' => element('data', $json),
+				'cp_ip'		=> $this->input->ip_address(),
+			);
+			$this->Charge_point_model->insert($insert_data);
 			return FALSE;
 		}
 	}

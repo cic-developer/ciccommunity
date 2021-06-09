@@ -932,8 +932,6 @@ class Forum extends CB_Controller
 			$_getdata = $this->Post_extra_vars_model->get($pst_id);
 		}
 
-		// print_r($_getdata);
-		// exit;
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
@@ -1076,8 +1074,7 @@ class Forum extends CB_Controller
 			$post_title = $this->input->post('post_title', null, '');
 			$post_content = $this->input->post('post_content', null, '');
 
-			print_r(element('data', $view));
-			exit;
+			
 
             if($updatephoto){
 				$updatedata['frm_image'] = $updatephoto;
@@ -1126,6 +1123,7 @@ class Forum extends CB_Controller
 				);
 				$pevupdate = array(
 					'brd_id' => 3,
+					'pev_value' => $this->input->post('pev_value', null, ''),
 				);
 
 				$this->Post_extra_vars_model->update($pst_id, $pevupdate, $where);

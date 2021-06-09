@@ -76,24 +76,24 @@
 
 				<?php
 					if (element('pevdata', $view)){
-						foreach (element('data', $view) as $result) {
+						foreach (element('pevdata', $view) as $result) {
 					?>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">투표 항목</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="pev_value" value="<?php echo set_value('pev_value', element('pev_value', $result)); ?>" />
+						</div>
+					</div>
 					<?php
 						}
 					}
 				?>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">투표 A</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" name="ban_url" value="<?php echo set_value('pev_key', element('pev_key', element('pevdata', $view))); ?>" />
-					</div>
-				</div>
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label class="col-sm-2 control-label">투표 B</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" name="ban_url" value="<?php echo set_value('pev_key', element('pev_key', element('pevdata', $view))); ?>" />
 					</div>
-				</div>
+				</div> -->
 				<script type="text/javascript">
 					$(function () {
 						$('#datetimepicker10').datetimepicker({

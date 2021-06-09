@@ -341,7 +341,7 @@
     
 <script>
     var deposit = "<?php echo element('deposit', $view) ?>"
-    var price = "<?php echo element('price', $view) ?>"
+    var _price = "<?php echo element('price', $view) ?>";
 
     // modal options
     $('.modal_open1').on('click', function(){
@@ -407,14 +407,20 @@
     // set modal data
     $(document).on('click', '.modal_open1', function() {
 		var widIdx = $(this).data('idx'); // 신청 idx
-        var cal_money = $(this).data('cal-money'); // 수수료를 제한 출금할 cp 
+        var _cal_money = $(this).data('cal-money'); // 수수료를 제한 출금할 cp 
+
+        var cal_money = _cal_money.replace(",");
+        var price = _price.replace(",");
+        // cal_money = parseFloat(cal_money);
+        price = parseFloat(price);
+
         
         var _per_coin = (cal_money / price) * 100;
 
         var per_coin = Math.floor((_per_coin * 100) / 100);
 
         $("#myModal-approve .modal-body #wid_idx1").val( widIdx ); 
-        $("#myModal-approve .modal-body #cp_percoin").val( price ); 
+        $("#myModal-approve .modal-body #cp_percoin").val( cal_money ); 
 	});
     $(document).on('click', '.modal_open2', function() {
 		var widIdx = $(this).data('idx');
