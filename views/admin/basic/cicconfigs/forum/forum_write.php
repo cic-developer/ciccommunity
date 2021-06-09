@@ -31,7 +31,7 @@
 				<div class="col-sm-10 form-inline" style="height:130px;">
 					<div class="form-group">
 						<div class='input-group date' id='datetimepicker10'>
-							<input type='text' class="form-control" name="frm_bat_close_datetime" value="<?php echo set_value('frm_bat_close_datetime', element('frm_bat_close_datetime', element('data', $view))); ?>"/>
+							<input type='text' class="form-control" name="frm_bat_close_datetime" value="<?php echo element('frm_bat_close_datetime', element('frminfodata', $view)); ?>"/>
 							<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar">
 							</span>
@@ -44,7 +44,7 @@
 				<div class="col-sm-10 form-inline" style="height:130px;">
 					<div class="form-group">
 						<div class='input-group date' id='datetimepicker11'>
-							<input type='text' class="form-control" name="frm_close_datetime" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('data', $view))); ?>"/>
+							<input type='text' class="form-control" name="frm_close_datetime" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('frminfodata', $view))); ?>"/>
 							<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar">
 							</span>

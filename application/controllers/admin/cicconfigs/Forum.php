@@ -919,7 +919,7 @@ class Forum extends CB_Controller
 			}
 		}
 		$primary_key = $this->CIC_forum_info_model->primary_key;
-		// $_primary_key = $this->Post_model->primary_key;
+		// $_primary_key = $this->Post_model->pris
 
 		/**
 		 * 수정 페이지일 경우 기존 데이터를 가져옵니다
@@ -1022,8 +1022,12 @@ class Forum extends CB_Controller
 				if (empty($frminfo_getdata['frm_close_datetime']) OR $frminfo_getdata['frm_close_datetime'] === '0000-00-00 00:00:00') {
 					$frminfo_getdata['frm_close_datetime'] = '';
 				}
+				$view['view']['frminfodata'] = $frminfo_getdata;
 				$view['view']['postdata'] = $getdata;
 				$view['view']['pevdata'] = $pev_getdata;
+
+				// print_r($frminfo_getdata);
+				// exit;
 			}
 
 			/**
