@@ -24,5 +24,18 @@ class CIC_forum_info_model extends CB_Model
 		parent::__construct();
 	}
 
+    public function forum_midway_closing($pst_id)
+    {
+        $where = array(
+            'pst_id' => $pst_id,
+        );
+        $updatedata = array(
+            'frm_bat_close_datetime' => cdate('YYYY-MM-DD 00:00:00'),
+            'from_close_datetime' => cdate('YYYY-MM-DD 00:00:00'),
+        );
+        $this->db->where($where);
+        $this->db->set($updatedata);
 
+        return $this->db->update($this->_table);
+    }
 }

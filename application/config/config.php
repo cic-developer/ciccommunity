@@ -590,6 +590,8 @@ $config['csrf_exclude_uris'][] = 'editorfileupload/ckeditor';
 $config['csrf_exclude_uris'][] = 'register/auth_success';
 $config['csrf_exclude_uris'][] = 'login/find_id_auth_phone_success';
 $config['csrf_exclude_uris'][] = 'login/find_pw_auth_phone_success';
+$config['csrf_exclude_uris'][] = 'membermodify/password_auth_phone_success';
+$config['csrf_exclude_uris'][] = 'membermodify/wallet_auth_phone_success';
 
 /*
 |--------------------------------------------------------------------------

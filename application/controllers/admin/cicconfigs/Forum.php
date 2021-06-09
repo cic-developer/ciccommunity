@@ -388,6 +388,7 @@ class Forum extends CB_Controller
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
+		$view['view']['forum_midway_closing_url'] = admin_url($this->pagedir . '/forum_midway_closing/?' . $param->output());
 
 	$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
@@ -1101,7 +1102,7 @@ class Forum extends CB_Controller
 			if ($this->input->post($primary_key)) {
 				$this->Post_model->update($pst_id, $brd_updatedata, $where);
 				$this->Post_model->update($pst_id, $_updatedata, $where);
-				$this->CIC_info_model->update($pst_id, $updatedata, $where);
+				$this->CIC_forum_info_model->update($pst_id, $updatedata, $where);
 				$this->Post_extra_vars_model->update($pst_id, $brd_updatedata, $where);
 				$this->Post_extra_vars_model->save($pst_id, 3, $pevupdate_0,);
 				$this->Post_extra_vars_model->save($pst_id, 3, $pevupdate_1);
@@ -1235,4 +1236,37 @@ class Forum extends CB_Controller
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
+
+	public function forum_midway_closing()
+	{
+				// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_admin_update_forum_midway_closing';
+		$this->load->event($eventname);
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+		/**
+		 * 체크한 게시물의 삭제를 실행합니다
+		 */
+		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
+			foreach ($this->input->post('chk') as $val) {
+				if ($val) {
+					$this->CIC_forum_info_model->forum_midway_closing($val);
+				}
+			}
+		}
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('after', $eventname);
+		/**
+		 * 삭제가 끝난 후 목록페이지로 이동합니다
+		 */
+		$this->session->set_flashdata(
+			'message',
+			'정상적으로 비활성화 되었습니다.'
+		);
+		$param =& $this->querystring;
+		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+		redirect($redirecturl);
+	}
+
 }

@@ -1,4 +1,5 @@
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
+<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/modal.css'); ?>
 <div id="container-wrap" class="login-bg">
 	<div id="contents" class="div-cont">
 		<!-- page start // -->
@@ -84,75 +85,6 @@
 		<!-- page end // -->
 	</div>
 </div>
-<!-- 모달 css -->
-<style>
-/* The Modal (background) */
-.modal {
-		display: none; /* Hidden by default */
-		position: fixed; /* Stay in place */
-		z-index: 1; /* Sit on top */
-		left: 0;
-		top: 0;
-		width: 100%; /* Full width */
-		height: 100%; /* Full height */
-		overflow: auto; /* Enable scroll if needed */
-		background-color: rgb(0,0,0); /* Fallback color */
-		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-	}
-
-	/* Modal Content/Box */
-	.modal-content {
-		background-color: #fefefe;
-		margin: 15% auto; /* 15% from the top and centered */
-		padding: 20px;
-		border: 1px solid #888;
-		width: 40%; /* Could be more or less, depending on screen size */                          
-	}
-
-	/* The Close Button */
-	.close {
-		color: #aaa;
-		float: right;
-		font-size: 28px;
-		font-weight: bold;
-	}
-	.close:hover,
-	.close:focus {
-		color: black;
-		text-decoration: none;
-		cursor: pointer;
-	}
-
-	.modal-btn {
-		line-height: 35px;
-		border-radius: 35px;
-		font-size: 14px;
-		color: #fff;
-		background: #111;
-		font-weight: 500;
-		display: inline-block;
-		vertical-align: top;
-		margin-left: 15px;
-		min-width: 120px;
-		text-align: center;
-		box-sizing: border-box;
-	}
-	.pwdBtn {
-		width:100px;
-		background-color: skyblue;
-		border: none;
-		color:#fff;
-		padding: 7px 0;
-		text-align: center;
-		text-decoration: none;
-		display: inline-block;
-		font-size: 15px;
-		margin-left: 15px;
-		cursor: pointer;
-		border-radius : 12px;
-}
-
-</style>
 
 <!--아이디 Modal Start-->
 	<div id="myModal_id" class="modal" style="z-index:1500;">

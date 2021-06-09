@@ -36,6 +36,10 @@
 
 
 <script type="text/javascript">
+	$(document).on('click', '.leave-btn', function(){
+		history.back();
+	});
+
 	$.validator.setDefaults({
 		onkeyup:false,
 		onclick:false,

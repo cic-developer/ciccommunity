@@ -11,6 +11,9 @@
 					<?php
 					ob_start();
 					?>
+					<div class="btn-group pull-right" role="group" aria-label="...">
+						<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('forum_midway_closing_url', $view); ?>" >선택 중도마감</button>
+					</div>
 					<?php
 					$buttons = ob_get_contents();
 					ob_end_flush();
@@ -31,6 +34,7 @@
 								<th><a href="<?php echo element('cic_forum_info.frm_close_datetime', element('sort', $view)); ?>">포럼마감</a></th>
 								<th><a href="<?php echo element('cic_forum_total_cp', element('sort', $view)); ?>">참여금액</a></th>
 								<th>수정</th>
+								<th><input type="checkbox" name="chkall" id="chkall" /></th>
 								<!-- <th><input type="checkbox" name="chkall" id="chkall" /></th> -->
 							</tr>
 						</thead>
@@ -53,6 +57,7 @@
 								<td><?php echo display_datetime(element('frm_close_datetime', $result), 'full'); ?></td>
                                 <td><?php echo number_format(element('cic_forum_total_cp', $result), 2); ?></td>
                                 <td><a href="<?php echo admin_url($this->pagedir); ?>/forum_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
+								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
 							</tr>
 						<?php
 							}

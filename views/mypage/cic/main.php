@@ -8,8 +8,8 @@
                     <div class="photo" title="프로필 이미지"><img src="<?php echo base_url('assets/images/mypage-photo.png')?>" alt="">
                 </div>
                     <div class="my">
-                        <p class="btxt" alt="name" title = "이름"> <?=$member['mem_nickname']?> </p>
-                        <p class="stxt" title = "text">(가나다 라마바사 아자차 가나다라 마바사 아자차)</p>
+                        <p class="btxt" alt="name" title = "이름"> <?=$member['mem_username']?> </p>
+                        <p class="stxt" title = "text">(<?=$member['mem_nickname']?>)</p>
                         <a href="<?php echo base_url('/membermodify/modify')?>" class="modify-btn"><span>수정</span></a>
                     </div>
 

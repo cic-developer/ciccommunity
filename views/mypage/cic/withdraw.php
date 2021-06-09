@@ -1,5 +1,6 @@
 
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/tooltip.css'); ?>
+<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/modal.css'); ?>
 <div id="container-wrap">
     <div id="contents" class="div-cont">
         
@@ -27,7 +28,7 @@
                             <p class="ctxt">CP</p>
                             <a href='javascript:void(0);' id="withdraw-request" class="draw-btn withdraw-request" onclick="validateForm()" data-wid-req-url="<?php echo element('req_url', $view); ?>"><span>출금요청</span></a>
                         </div>
-                            <a href='javascript:void(0);' id="withdraw_info" class="draw-btn"><span>출금정보 확인</span></a>
+                            <!-- <a href='javascript:void(0);' id="withdraw_info" class="draw-btn"><span>출금정보 확인</span></a> -->
                         <p id="help-text" style="color:red;"></p>
                     </li>
                 </ul>
@@ -83,190 +84,57 @@
 			</div>
 
             <!-- modal -->
-            <div id="myModal_withdraw" class="modal">
+            <!-- <div id="myModal_withdraw" class="modal">
 				<div class="modal-content">
-					<!-- <ul class="entry modify-box"> -->
-                        <table>
-                            <colgroup>
-                            </colgroup>
-                            <tbody>
-                                <tr>
-                                    <th>최소신청금액(CP)</th>
-                                    <td><?php echo number_format(element('withdraw_minimum', $view), 2); ?></td>
-                                </tr>
-                                <tr>
-                                    <th>출금수수료(%)</th>
-                                    <td><?php echo number_format(element('withdraw_deposit', $view), 2); ?></td>
-                                </tr>
-                                <tr>
-                                    <th>보유포인트(CP)</th>
-                                    <td class="my-point" data-my-point="<?php echo element('mem_cp', $view); ?>"><?php echo number_format(element('mem_cp', $view), 2); ?></td>
-                                </tr>
-                                <tr>
-                                    <th>신청포인트(CP)</th>
-                                    <td class="withdraw-point">0</td>
-                                </tr>
-                                <tr>
-                                    <th>예상 잔여포인트(CP)</th>
-                                    <td class="preview-point"><?php echo number_format(element('mem_cp', $view), 2); ?></td>
-                                </tr>
-                                <tr>
-                                    <th>예상 교환포인트(PER))</th>
-                                    <td class="preview-per">0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <!-- <a href="javascript:void(0);" id="deposit_insert_confirm"  class="modify-btn" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>">
-                            <span>확인</span>
-                        </a> -->
-					<!-- </ul> -->
+                    <table>
+                        <colgroup>
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th>최소신청금액(CP)</th>
+                                <td>
+                                    <?php //echo number_format(element('withdraw_minimum', $view), 2); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>출금수수료(%)</th>
+                                <td>
+                                    <?php //echo number_format(element('withdraw_deposit', $view), 2); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>보유포인트(CP)</th>
+                                <td class="my-point" data-my-point="
+                                    <?php //echo element('mem_cp', $view); ?>
+                                ">
+                                    <?php //echo number_format(element('mem_cp', $view), 2); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>신청포인트(CP)</th>
+                                <td class="withdraw-point">0</td>
+                            </tr>
+                            <tr>
+                                <th>예상 잔여포인트(CP)</th>
+                                <td class="preview-point">
+                                    <?php //echo number_format(element('mem_cp', $view), 2); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>예상 교환포인트(PER))</th>
+                                <td class="preview-per">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
 				</div>
-			</div>
+			</div> -->
 
         </div>
         <!-- page end // -->
     </div>
 </div>
 
-<!-- modal 디자인 -->
-<style>
-
-	/* The Modal (background) */
-	.modal {
-		display: none; /* Hidden by default */
-		position: fixed; /* Stay in place */
-		z-index: 1; /* Sit on top */
-		left: 0;
-		top: 0;
-		width: 100%; /* Full width */
-		height: 100%; /* Full height */
-		overflow: auto; /* Enable scroll if needed */
-		background-color: rgb(0,0,0); /* Fallback color */
-		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-	}
-
-	/* Modal Content/Box */
-	.modal-content {
-		background-color: #fefefe;
-		margin: 15% auto; /* 15% from the top and centered */
-		padding: 20px;
-		border: 1px solid #888;
-		width: 25%; /* Could be more or less, depending on screen size */                          
-	}
-
-	/* The Close Button */
-	.close {
-		color: #aaa;
-		float: right;
-		font-size: 28px;
-		font-weight: bold;
-	}
-	.close:hover,
-	.close:focus {
-		color: black;
-		text-decoration: none;
-		cursor: pointer;
-	}
-
-	.modal-btn {
-		line-height: 35px;
-		border-radius: 35px;
-		font-size: 14px;
-		color: #fff;
-		background: #111;
-		font-weight: 500;
-		display: inline-block;
-		vertical-align: top;
-		margin-left: 15px;
-		min-width: 120px;
-		text-align: center;
-		box-sizing: border-box;
-	}
-</style>
-
 <script>   
-    // per price
-    var _price = "<?php echo element('price', $view) ?>";
-    // 수수료
-    var __deposit = "<?php echo element('withdraw_deposit', $view); ?>";
-
-    // 모달
-    // Get the modal
-    var modal = document.getElementById('myModal_withdraw');
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("withdraw_info");
-
-    // When the user clicks on the button, open the modal 
-	btn.onclick = function() {
-		modal.style.display = "block";
-	}
-
-    // When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
-		if (event.target == modal) {
-			modal.style.display = "none";
-		}
-	}
-
-    /*
-     * 출금정보 확인
-     */
-	oldVal1 = '';
-	$("#money").on("propertychange change keyup paste input", function() {
-		var currentVal = $(this).val();
-		if(currentVal == oldVal1) {
-			return;
-		}
-
-        if(currentVal.indexOf('.') == 1){
-            var currentValArr = currentVal.split('.');
-            if(currentValArr[1].length > 2){
-                alert('금액은 소수점 2자리 까지 입력할수 있습니다');
-                $(this).val(oldVal1);
-                return;
-            }
-        }
-
-        // If x is Not a Number or less than one or greater than 10
-        // if (!isNumeric(currentVal)) {
-        if (!isNumeric(currentVal)) {
-            $('.withdraw-point').text('금액을 옳바르게 입력해주세요.');
-            $('.preview-point').text('금액을 옳바르게 입력해주세요.');
-            $('.preview-per').text('금액을 옳바르게 입력해주세요.');
-        } else {
-            // 보유 포인트
-            var _my_money = $('.my-point').data('my-point');
-            var my_money = parseFloat(_my_money);
-            
-            // 출금액
-            var req_money = parseFloat(currentVal);
-
-            // 퍼코인 가격
-            var price = parseFloat(_price); 
-
-            // 출금 수수료
-            var _deposit = parseFloat(__deposit); 
-            var deposit = (_deposit / 100) * req_money;
-
-            // 출금 수수료를 뺀 신청금액
-            var cal_money = req_money - deposit; 
-            
-            // 예상 퍼코인 && 소수점 2자리까지
-            var _per_coin = (cal_money / price) * 100;
-            var per_coin = Math.floor((_per_coin * 100)) / 100;
-            
-            var _preview_point = Number(my_money - req_money);
-            var preview_point = number_format(_preview_point.toString());
-            
-            $('.withdraw-point').text(currentVal); // 출금액
-            $('.preview-point').text(preview_point); // 예상 잔여 cp
-            $('.preview-per').text(per_coin); // 예상 지금 per
-        }
-		
-		oldVal1 = currentVal;
-	});
-
     function isNumeric(num){
         // 좌우 trim(공백제거)을 해준다.
         num = String(num).replace(/^\s+|\s+$/g, "");
@@ -327,4 +195,89 @@
             event.preventDefault();
         };
     }); 
+</script>
+
+
+<script>
+    // // per price
+    // var _price = "<?php echo element('price', $view) ?>";
+    // // 수수료
+    // var __deposit = "<?php echo element('withdraw_deposit', $view); ?>";
+
+    // // 모달
+    // // Get the modal
+    // var modal = document.getElementById('myModal_withdraw');
+
+    // // Get the button that opens the modal
+    // var btn = document.getElementById("withdraw_info");
+
+    // // When the user clicks on the button, open the modal 
+	// btn.onclick = function() {
+	// 	modal.style.display = "block";
+	// }
+
+    // // When the user clicks anywhere outside of the modal, close it
+	// window.onclick = function(event) {
+	// 	if (event.target == modal) {
+	// 		modal.style.display = "none";
+	// 	}
+	// }
+
+    /*
+     * 출금정보 확인
+     */
+	// oldVal1 = '';
+	// $("#money").on("propertychange change keyup paste input", function() {
+	// 	var currentVal = $(this).val();
+	// 	if(currentVal == oldVal1) {
+	// 		return;
+	// 	}
+
+    //     if(currentVal.indexOf('.') == 1){
+    //         var currentValArr = currentVal.split('.');
+    //         if(currentValArr[1].length > 2){
+    //             alert('금액은 소수점 2자리 까지 입력할수 있습니다');
+    //             $(this).val(oldVal1);
+    //             return;
+    //         }
+    //     }
+
+    //     // If x is Not a Number or less than one or greater than 10
+    //     // if (!isNumeric(currentVal)) {
+    //     if (!isNumeric(currentVal)) {
+    //         $('.withdraw-point').text('금액을 옳바르게 입력해주세요.');
+    //         $('.preview-point').text('금액을 옳바르게 입력해주세요.');
+    //         $('.preview-per').text('금액을 옳바르게 입력해주세요.');
+    //     } else {
+    //         // 보유 포인트
+    //         var _my_money = $('.my-point').data('my-point');
+    //         var my_money = parseFloat(_my_money);
+            
+    //         // 출금액
+    //         var req_money = parseFloat(currentVal);
+
+    //         // 퍼코인 가격
+    //         var price = parseFloat(_price); 
+
+    //         // 출금 수수료
+    //         var _deposit = parseFloat(__deposit); 
+    //         var deposit = (_deposit / 100) * req_money;
+
+    //         // 출금 수수료를 뺀 신청금액
+    //         var cal_money = req_money - deposit; 
+            
+    //         // 예상 퍼코인 && 소수점 2자리까지
+    //         var _per_coin = (cal_money / price) * 100;
+    //         var per_coin = Math.floor((_per_coin * 100)) / 100;
+            
+    //         var _preview_point = Number(my_money - req_money);
+    //         var preview_point = number_format(_preview_point.toString());
+            
+    //         $('.withdraw-point').text(currentVal); // 출금액
+    //         $('.preview-point').text(preview_point); // 예상 잔여 cp
+    //         $('.preview-per').text(per_coin); // 예상 지금 per
+    //     }
+		
+	// 	oldVal1 = currentVal;
+	// });
 </script>
