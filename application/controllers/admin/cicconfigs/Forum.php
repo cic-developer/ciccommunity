@@ -959,7 +959,7 @@ class Forum extends CB_Controller
 			),
 			array(
 				'field' => 'post_content',
-				'label' => '포럼 제목',
+				'label' => '포럼 내용',
 				'rules' => 'trim|required',
 			)
 		);
@@ -1075,6 +1075,11 @@ class Forum extends CB_Controller
 			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
 			$post_title = $this->input->post('post_title', null, '');
 			$post_content = $this->input->post('post_content', null, '');
+			$pev_value = $this->input->post('pev_value', null, '');
+
+
+			print_r($pev_value);
+			exit;
 
 			
 
