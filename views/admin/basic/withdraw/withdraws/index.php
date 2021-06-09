@@ -340,7 +340,7 @@
 
     
 <script>
-    var deposit = "<?php echo element('deposit', $view) ?>"
+    // per price
     var _price = "<?php echo element('price', $view) ?>";
 
     // modal options
@@ -409,8 +409,8 @@
 		var widIdx = $(this).data('idx'); // 신청 idx
         var _cal_money = $(this).data('cal-money'); // 수수료를 제한 출금할 cp 
         
-        cal_money = parseFloat(_cal_money);
-        price = parseFloat(_price);
+        var cal_money = parseFloat(_cal_money);
+        var price = parseFloat(_price);
 
         var _per_coin = (cal_money / price) * 100;
 

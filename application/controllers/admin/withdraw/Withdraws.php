@@ -135,8 +135,6 @@ class Withdraws extends CB_Controller
 
 		$view['view']['data'] = $result;
 
-		// 신청수수료
-		$withdraw_deposit = $this->CIC_wconfig_model->item('withdraw_deposit');
 		// 코인 데이터
 		$coinData = $this->coinapi->get_coin_data('gdac', 'PER', 'KRW'); // price, price_usd, korea_premium, volume, change_rate
 		

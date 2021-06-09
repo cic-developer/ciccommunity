@@ -32,7 +32,7 @@ class Mypage extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('pagination', 'querystring','member'));
+		$this->load->library(array('pagination', 'querystring','member', 'coinapi'));
 
 	}
 
@@ -1549,6 +1549,9 @@ class Mypage extends CB_Controller
 		$view['view']['mem_cp'] = $member_info['mem_cp'];
 		$where['wid_mem_idx'] = $member_info['mem_id'];
 		// $view['view']['mem_id'] = $member_info['mem_id'];
+
+		// 코인 데이터
+		$coinData = $this->coinapi->get_coin_data('gdac', 'PER', 'KRW'); // price, price_usd, korea_premium, volume, change_rate
 
 		// 출금 요청 url
 		$view['view']['req_url'] = site_url('mypage/withdraw_request');

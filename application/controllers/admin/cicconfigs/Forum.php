@@ -532,6 +532,8 @@ class Forum extends CB_Controller
 		redirect($redirecturl);
 	}
 
+	
+
 	// 마감된 포럼의 cp 포인트를 관리자가 분배하는 페이지
 	public function forum_repart($pst_id = 0)
 	{
@@ -1224,7 +1226,7 @@ class Forum extends CB_Controller
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
 		// $view['view']['list_delete_url'] = site_url('admin/cicconfigs/forum/listDeleteToCloseForum');
-		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listDeleteToCloseForum/?' . $param->output());
+		$view['view']['return_forum_delete_url'] = admin_url($this->pagedir . '/return_forum_delete/?' . $param->output());
 
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
@@ -1233,5 +1235,41 @@ class Forum extends CB_Controller
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
+	}
+
+	public function return_forum_delete()
+	{
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_admin_return_forum_delete';
+		$this->load->event($eventname);
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+
+		/**
+		 * 체크한 게시물의 삭제를 실행합니다
+		 */
+		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
+			foreach ($this->input->post('chk') as $val) {
+				if ($val) {
+					$this->Post_model>delete($val);
+				}
+			}
+		}
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('after', $eventname);
+
+		/**
+		 * 삭제가 끝난 후 목록페이지로 이동합니다
+		 */
+		$this->session->set_flashdata(
+			'message',
+			'정상적으로 삭제되었습니다'
+		);
+		$param =& $this->querystring;
+		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+
+		redirect($redirecturl);
 	}
 }

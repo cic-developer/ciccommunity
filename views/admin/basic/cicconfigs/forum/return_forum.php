@@ -18,7 +18,7 @@
 					?>
 						<div class="btn-group pull-right" role="group" aria-label="...">
 						<!-- 분배가 완료된 게시물만 삭제가 가능합니다 -->
-							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-delete btn-list-selected disabled" data-list-delete-url = "<?php echo element('list_delete_url', $view); ?>" >선택삭제</button>
+							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-delete btn-list-selected disabled" data-list-delete-url = "<?php echo element('return_forum_delete_url', $view); ?>" >선택삭제</button>
 						</div>
 					<?php
 					$buttons = ob_get_contents();
@@ -58,15 +58,7 @@
                                 <td><?php echo display_datetime(element('post_datetime', $result), 'full'); ?></td>
                                 <td><?php echo display_datetime(element('frm_bat_close_datetime', $result), 'full'); ?></td>
 								<td><?php echo display_datetime(element('frm_close_datetime', $result), 'full'); ?></td>
-
-                                <!-- <td>
-									<?php if( element('frm_repart_state', $result) != 1) { ?>
-									<a href="<?php echo admin_url($this->pagedir); ?>/forum_repart/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">포인트 배분</a>
-									<?php }else { ?>
-									<p class="text-success">배분완료</p>
-									<?php } ?>
-								</td> -->
-								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" <?php echo element('frm_repart_state', $result) == 1 ? '' : 'disabled readonly' ?>/></td>
+								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>"/></td>
 							</tr>
 						<?php
 							}

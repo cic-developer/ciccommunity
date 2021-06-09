@@ -100,7 +100,7 @@
                                 </tr>
                                 <tr>
                                     <th>보유포인트(CP)</th>
-                                    <td class="my-point" data-my-point="<?php echo number_format(element('mem_cp', $view), 2); ?>"><?php echo number_format(element('mem_cp', $view), 2); ?></td>
+                                    <td class="my-point" data-my-point="<?php echo element('mem_cp', $view); ?>"><?php echo number_format(element('mem_cp', $view), 2); ?></td>
                                 </tr>
                                 <tr>
                                     <th>신청포인트(CP)</th>
@@ -112,7 +112,7 @@
                                 </tr>
                                 <tr>
                                     <th>예상 교환포인트(PER))</th>
-                                    <td>????</td>
+                                    <td class="preview-per">0</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -185,6 +185,11 @@
 </style>
 
 <script>   
+    // per price
+    var _price = "<?php echo element('price', $view) ?>";
+    // 수수료
+    var _deposit = "<?php echo element('withdraw_deposit', $view); ?>";
+
     // 모달
     // Get the modal
     var modal = document.getElementById('myModal_withdraw');
@@ -220,12 +225,20 @@
             $('.preview-point').text('금액을 옳바르게 입력해주세요.');
         } else {
             var _money = $('.my-point').data('my-point');
-            var money = _money.replace(',', '');
-
+            var money = parseFloat(_money); // 출금액
+            var price = parseFloat(_price); // 퍼코인 가격
+            var _deposit = parseFloat(_deposit); 
+            var deposit = (_deposit / 100) * money; // 출금 수수료
+            var cal_money = money - deposit; // 실제 퍼코인으로 교환될 , 수수료를 제한 cp
+            
+            var _per_coin = (cal_money / price) * 100; // 예상 퍼코인
+            var per_coin = Math.floor((_per_coin * 100)) / 100; // 소수점 2자리
+            
             var preview_point = Number(money - currentVal);
-
+            
             $('.withdraw-point').text(currentVal);
             $('.preview-point').text(preview_point);
+            $('.preview-per').text(typeof deposit);
         }
 		
 		oldVal1 = currentVal;
@@ -248,11 +261,11 @@
     function validateForm() {
         var x, text;
         var mem_cp = $("#html_mem_cp").val();
-
+        
         // // Get the value of the input field with id="numb"
         x = document.getElementById("money").value;
         btn = document.getElementById("withdraw-request");
-
+        
         // // If x is Not a Number or less than one or greater than 10
         if (!isNumeric(x) || x < 1 || x > Number(mem_cp)) {
             text = "금액을 올바르게 입력해주세요.";
@@ -261,7 +274,7 @@
             // document.flist.submit();
             wid_req_submit(document.flist, 'req', btn.getAttribute('data-wid-req-url'));
         }
-
+        
         if(text != undefined){
             document.getElementById("help-text").innerHTML = text;
         }
@@ -270,17 +283,17 @@
     // 출금금액 요청 submit
     function wid_req_submit(f, acttype, actpage){
         var money = '';
-
+        
         money = document.getElementById('money').value;
-
+        
         if(!money){
             alert("warnning!")
         }
-
+        
         alert('출금정보 확인후 신청해주세요');
-
+        
         if(acttype === 'req' && ! confirm('입력한 금액을 정말로 출금 하시겠습니까?')) return;
-
+        
         f.action = actpage;
 		f.submit();
     }
