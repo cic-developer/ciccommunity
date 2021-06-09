@@ -63,7 +63,6 @@ class Post_extra_vars_model extends CB_Model
 		return isset($data['result']) ? $data['result'] : false;
 	}
 
-
 	public function save($post_id = 0, $brd_id = 0, $savedata = '')
 	{
 		if (empty($post_id)) {

@@ -1128,18 +1128,18 @@ class Forum extends CB_Controller
 					'pev_key' => 'B_opinion'
 				);
 				$pevupdate_0 = array(
-					'brd_id' => 3,
-					'pev_value' => $pev_value_0
+					// 'brd_id' => 3,
+					'A_opinion' => $pev_value_0
 				);
 				$pevupdate_1 = array(
-					'brd_id' => 3,
-					'pev_value' => $pev_value_1
+					// 'brd_id' => 3,
+					'B_opinion' => $pev_value_1
 				);
 
 				// $this->Post_extra_vars_model->update($pst_id, $pevupdate_0, $where_0);
-				$this->Post_extra_vars_model->save($where_0, 6, $pevupdate_0,);
+				$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_0,);
 				// $this->Post_extra_vars_model->update($pst_id, $pevupdate_1, $where_1);
-				$this->Post_extra_vars_model->save($where_1, 6, $pevupdate_1);
+				$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_1);
 				$this->CIC_forum_info_model->insert($updatedata);
 				$this->session->set_flashdata(
 					'message',

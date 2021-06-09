@@ -128,7 +128,7 @@ class Bestpost extends CB_Controller
 
 		$select = 'brd_id, brd_name';
 		$where = array(
-			'brd_id <' => 3
+			'brd_id <' => 6
 		);
 		$view['view']['boardlist'] = $this->Board_model->get_board_list($where);
 
