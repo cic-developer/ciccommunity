@@ -1857,6 +1857,8 @@ class Mypage extends CB_Controller
 				'code' 	 => '0000',
 				'data'	 => "Invalid Request"
 			);
+			echo json_encode($return);
+			exit;
 		}
 
 		/*
@@ -1866,14 +1868,82 @@ class Mypage extends CB_Controller
 		$charge_input = $this->input->post('charge_input');
 		$this->load->model('Charge_point_model');
 		// 트랜젝션 해시를 통해 해당 row 가져오기
-		
+		$thisData = $this->Charge_point_model->get_one('','',array('cp_transaction' => $transaction_hash));
+		if(!$thisData){
+			$return = array(
+				'result' => false,
+				'code' 	 => '0001',
+				'data'	 => "No Transaction Found"
+			);
+			echo json_encode($return);
+			exit;
+		}
 		// 해당 PER 과 같은지 확인
-
+		$recorded_value = element('cp_value', $thisData);
+		if($recorded_value != $charge_input){
+			$update_data = array(
+				'cp_mem_id' => $this->member->is_member(),
+				'cp_mdate'  => date('Y-m-d H:i:s'),
+				'cp_state'  => 0,
+				'cp_reason' => '입력한 PER토큰양과 실제 전송된 토큰양이 일치하지 않음',
+				'cp_ip'		=> $this->input->ip_address(),
+			);
+			$this->Charge_point_model->update(element('cp_id', $thisData), $update_data);
+			$return = array(
+				'result' => false,
+				'code' 	 => '0002',
+				'data'	 => "Invalid Request"
+			);
+			echo json_encode($return);
+			exit;
+		}
 		// 세션에 있는 CP 가져오고 세션 지우기
+		$per2cp = $this->session->userdata('per2cp');
+		if($per2cp){
+			$update_data = array(
+				'cp_mem_id' => $this->member->is_member(),
+				'cp_mdate'  => date('Y-m-d H:i:s'),
+				'cp_state'  => 0,
+				'cp_reason' => '세션이 입력되지 않고 입금요청을 진행할 수 없음. 확인요함',
+				'cp_ip'		=> $this->input->ip_address(),
+			);
+			$this->Charge_point_model->update(element('cp_id', $thisData), $update_data);
+			$return = array(
+				'result' => false,
+				'code' 	 => '0003',
+				'data'	 => "Invalid Request"
+			);
+			echo json_encode($return);
+			exit;
+		}
 
-		// 기록남기기
+		// PER * PER2CP 계산해서 기록남기기
+		$total_charge_cp = $charge_input * $per2cp;
+		$update_data = array(
+			'cp_mem_id' => $this->member->is_member(),
+			'cp_mdate'  => date('Y-m-d H:i:s'),
+			'cp_charge_point'  => $total_charge_cp,
+			'cp_state'  => 2,
+			'cp_ip'		=> $this->input->ip_address(),
+		);
+		$this->Charge_point_model->update(element('cp_id', $thisData), $update_data);
 		
-		// PER * PER2CP 계산해서 CP 추가해주기
+		//  CP 추가해주기
+		$this->point->insert_cp();
+
+		// CP 충전까지 완료
+		$update_data = array(
+			'cp_state'  => 3,
+		);
+		$this->Charge_point_model->update(element('cp_id', $thisData), $update_data);
+
+		$return = array(
+			'result' => true,
+			'code' 	 => '1000',
+			'data'	 => "Success"
+		);
+		echo json_encode($return);
+		exit;
 	}
 
 	/**

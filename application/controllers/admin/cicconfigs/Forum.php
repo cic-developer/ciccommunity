@@ -1068,7 +1068,12 @@ class Forum extends CB_Controller
 
 			$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
 			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
-			
+			$post_title = $this->input->post('post_title', null, '');
+			$post_content = $this->input->post('post_content', null, '');
+
+			print_r(element('data', $view));
+			exit;
+
             if($updatephoto){
 				$updatedata['frm_image'] = $updatephoto;
             }
@@ -1091,23 +1096,24 @@ class Forum extends CB_Controller
 					'frm_bat_close_datetime' => $frm_bat_close_datetime,
 					'frm_close_datetime' => $frm_close_datetime,
 				);
-				$_updatedata = array(
-					'post_title' => $this->input->post('post_title', null, ''),
-					'post_content' => $this->input->post('post_content', null, ''),
-				);
 				
 				$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 				$updatedata['frm_close_datetime'] = $frm_close_datetime;
 				$updatedata['pst_id'] = $pst_id;
 				
-
+				
 				$where = array(
 					'post_id' => $pst_id,
 				);
 				$postupdate = array(
 					'brd_id' => 3,
 				);
+				$_updatedata = array(
+					'post_title' => $post_title,
+					'post_content' => $post_content,
+				);
 				$this->Post_model->update($pst_id, $postupdate, $where);
+				$this->Post_model->update($pst_id, $_updatedata, $where);
 
 				$where = array(
 					'post_id' => $pst_id,
@@ -1116,6 +1122,7 @@ class Forum extends CB_Controller
 				$pevupdate = array(
 					'brd_id' => 3,
 				);
+
 				$this->Post_extra_vars_model->update($pst_id, $pevupdate, $where);
 				$this->CIC_forum_info_model->insert($updatedata);
 				$this->session->set_flashdata(

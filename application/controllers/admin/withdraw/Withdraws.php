@@ -24,7 +24,7 @@ class Withdraws extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_withdraw', 'CIC_cp', 'Member');
+	protected $models = array('CIC_withdraw', 'CIC_cp', 'Member', 'CIC_wconfig');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
@@ -51,22 +51,7 @@ class Withdraws extends CB_Controller
 	 */
 	public function index()
 	{
-		$data1 = $this->coinapi->get_main_data();
-		// print_r('테스트중');
-		// print_r("<br>");
-		// print_r("<hr>");
-		// print_r("<br>");
-		// foreach($data1 as $val){
 
-		// 	print_r("<br>");
-		// 	print_r($val);
-		// 	print_r("<br>");
-		// 	print_r("<hr>");
-		// }
-		$data2 = $this->coinapi->get_coin_data('gdac', 'PER');
-		$data3 = $this->coinapi->get_select_data('PER');
-		print_r($data2);
-		exit;
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_withdraw_withdraws_index';
 		$this->load->event($eventname);
@@ -149,7 +134,14 @@ class Withdraws extends CB_Controller
 		}
 
 		$view['view']['data'] = $result;
-		// $view['view']['all_group'] = $this->Member_group_model->get_all_group();
+
+		// 신청수수료
+		$withdraw_deposit = $this->CIC_wconfig_model->item('withdraw_deposit');
+		// 코인 데이터
+		$coinData = $this->coinapi->get_coin_data('gdac', 'PER', 'KRW'); // price, price_usd, korea_premium, volume, change_rate
+		
+		$view['view']['deposit'] = $withdraw_deposit;
+		$view['view']['price'] = $coinData['price'];
 
 		/**
 		 * primary key 정보를 저장합니다
