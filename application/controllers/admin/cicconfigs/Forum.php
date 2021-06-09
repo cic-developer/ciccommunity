@@ -532,8 +532,6 @@ class Forum extends CB_Controller
 		redirect($redirecturl);
 	}
 
-	
-
 	// 마감된 포럼의 cp 포인트를 관리자가 분배하는 페이지
 	public function forum_repart($pst_id = 0)
 	{
@@ -903,6 +901,7 @@ class Forum extends CB_Controller
 
 	public function forum_write($pst_id = 0)
 	{
+	
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_cicconfig_banner_write';
 		$this->load->event($eventname);
@@ -959,7 +958,7 @@ class Forum extends CB_Controller
 			),
 			array(
 				'field' => 'post_content',
-				'label' => '포럼 내용',
+				'label' => '포럼 제목',
 				'rules' => 'trim|required',
 			)
 		);
@@ -1013,6 +1012,9 @@ class Forum extends CB_Controller
 			$this->view = element('view_skin_file', element('layout', $view));
 
 		} else {
+			$test = $this->input->post('post_content');
+			print_r($test);
+			exit;
 			/**
 			 * 유효성 검사를 통과한 경우입니다.
 			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
@@ -1075,10 +1077,8 @@ class Forum extends CB_Controller
 			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
 			$post_title = $this->input->post('post_title', null, '');
 			$post_content = $this->input->post('post_content', null, '');
-			$pev_value = $this->input->post('pev_value', null, '');
 
-			print_r($post_content);
-			exit;
+			
 
             if($updatephoto){
 				$updatedata['frm_image'] = $updatephoto;
@@ -1113,15 +1113,13 @@ class Forum extends CB_Controller
 				);
 				$postupdate = array(
 					'brd_id' => 3,
+				);
+				$_updatedata = array(
 					'post_title' => $post_title,
 					'post_content' => $post_content,
 				);
-				// $_updatedata = array(
-				// 	'post_title' => $post_title,
-				// 	'post_content' => $post_content,
-				// );
 				$this->Post_model->update($pst_id, $postupdate, $where);
-				// $this->Post_model->update($pst_id, $_updatedata, $where);
+				$this->Post_model->update($pst_id, $_updatedata, $where);
 
 				$where = array(
 					'post_id' => $pst_id,
@@ -1229,7 +1227,8 @@ class Forum extends CB_Controller
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
-		$view['view']['returnlistdelete_url'] = admin_url($this->pagedir . '/returnlistdelete/?' . $param->output());
+		// $view['view']['list_delete_url'] = site_url('admin/cicconfigs/forum/listDeleteToCloseForum');
+		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listDeleteToCloseForum/?' . $param->output());
 
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
@@ -1238,39 +1237,5 @@ class Forum extends CB_Controller
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
-	}
-
-	public function returnlistdelete()
-	{
-		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_board_post_listdelete';
-		$this->load->event($eventname);
-
-		// 이벤트가 존재하면 실행합니다
-		Events::trigger('before', $eventname);
-
-		/**
-		 * 체크한 게시물의 삭제를 실행합니다
-		 */
-		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
-			foreach ($this->input->post('chk') as $val) {
-				if ($val) {
-					$post = $this->Post_model->get_one($val);
-					$this->board->delete_post($val);
-				}
-			}
-		}
-		// 이벤트가 존재하면 실행합니다
-		Events::trigger('after', $eventname);
-		/**
-		 * 삭제가 끝난 후 목록페이지로 이동합니다
-		 */
-		$this->session->set_flashdata(
-			'message',
-			'정상적으로 삭제되었습니다'
-		);
-		$param =& $this->querystring;
-		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-		redirect($redirecturl);
 	}
 }

@@ -47,6 +47,8 @@ if ( ! function_exists('display_dhtml_editor')) {
 		}
 		$html .= "\n<textarea id=\"" . $name . "\" name=\"" . $name . "\" class=\"" . $editorclassname . ' ' . $classname . "\" " . $style . ">" . $content . "</textarea>";
 
+		print_r($html);
+		exit;
 		return $html;
 	}
 }

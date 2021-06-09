@@ -41,6 +41,8 @@ class Board_write extends CB_Controller
 	 */
 	public function write($brd_key = '')
 	{
+
+		
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_board_write_write';
 		$this->load->event($eventname);
