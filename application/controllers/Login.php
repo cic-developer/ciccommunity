@@ -529,10 +529,6 @@ class Login extends CB_Controller
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_login_find_pw_auth_phone_success';
 		$this->load->event($eventname);
-
-		
-		print_r('hi');
-		exit;
 		
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 		
@@ -543,6 +539,9 @@ class Login extends CB_Controller
 		$DI = $data['dupinfo'];
 		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
+
+		$email = $isDI['mem_email'];
+		$name = $isDI['user_name'];
 		
 		if($isDI){ // 중복 이면 인증완료
 			$_DI = $new_phone = $isDI['mem_dup_info'];
@@ -555,9 +554,7 @@ class Login extends CB_Controller
 				
 				echo("<script>");
 				echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
-				echo("window.opener.document.getElementById('find_id').innerText = '".$isDI['mem_email']."';"); // 인증완료 문구
-				echo("var id_modal = window.opener.document.getElementById('myModal_id');");
-				echo("id_modal.setAttribute('style', 'z-index:1500; display:block;');");
+				echo("window.opener.send_email('".$email."''".$name."');"); // 이메일 전송 실행
 				echo("self.close();");
 				echo("</script>");
 				exit;
@@ -613,9 +610,9 @@ class Login extends CB_Controller
 	/**
 	 * 이메일 전송 시작
 	 */
-	public function ajax_modify_email_send() {
+	public function ajax_imsh_pw_email_send() {
 		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_membermodify_ajax_modify_email_send';
+		$eventname = 'event_login_ajax_imsh_pw_email_send';
 		$this->load->event($eventname);
 		
 		$view = array();
@@ -623,6 +620,9 @@ class Login extends CB_Controller
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+		$email = $this->input->post('email');
+		$name = $this->input->post('name');
 
 		// 비밀번호 찾기 이메일 전송을 위한, 핸드폰인증 여부 확인
 		$isMobileAth = $this->session->userdata('find_pw_auth_phone_result');
@@ -634,25 +634,18 @@ class Login extends CB_Controller
 
 		// 이메일에 포함될 데이터
 		$getdata['imPw'] = $imPw;
-		$getdata['name'] = $member_info['mem_username'];
+		$getdata['name'] = $name;
 		$getdata['site_title'] = $this->cbconfig->item('site_title');
 		$getdata['webmaster_email'] = $this->cbconfig->item('webmaster_email');
 		$getdata['webmaster_name'] = $this->cbconfig->item('webmaster_name');
 		
 		$this->load->library('email');
 		$emailform['emailform'] = $getdata;
-		$message = $this->load->view('mypage/cic/email_form', $emailform, true);
+		$message = $this->load->view('login/cic/email_form', $emailform, true);
 		$this->email->from(element('webmaster_email', $getdata), element('webmaster_name', $getdata));
 		$this->email->to($email);
-		if($type == 'phone'){
-			$this->email->subject('[CIC Community] 핸드폰번호변경 이메일 인증 안내메일입니다');
-		}
-		if($type == 'password'){
-			$this->email->subject('[CIC Community] 비밀번호변경 이메일 인증 안내메일입니다');
-		}
-		if($type == 'wallet'){
-			$this->email->subject('[CIC Community] 지갑주소변경 이메일 인증 안내메일입니다');
-		}
+		$this->email->subject('[CIC Community] 비밀번호 찾기 안내메일입니다');
+
 		$this->email->message($message);
 
 		if ($this->email->send() === false) {
@@ -664,7 +657,7 @@ class Login extends CB_Controller
 		} else {
 			$result = array(
 				'state' => '1',
-				'message' => '해당 이메일로 인증 번호를 발송하였습니다',
+				'message' => '해당 이메일로 임시 비밀번호를 발송하였습니다',
 			);
 			exit(json_encode($result));
 		}

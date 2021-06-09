@@ -46,7 +46,7 @@
 				<label class="col-sm-2 control-label">포럼 마감일</label>
 				<div class="col-sm-10 form-inline" style="height:130px;">
 					<div class="form-group">
-						<div class='input-group dateㄴ' id='datetimepicker11'>
+						<div class='input-group date' id='datetimepicker11'>
 							<input type='text' class="form-control" name="frm_close_datetime" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('data', $view))); ?>"/>
 							<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar">
@@ -67,7 +67,8 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">포럼 CONTENT</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="post_content" value="<?php echo set_value('post_content', element('post_content', element('data', $view))); ?>" />
+						<!-- <input type="text" class="form-control" name="post_content" value="<?php echo set_value('post_content', element('post_content', element('data', $view))); ?>" /> -->
+						<textarea class="form-control" rows="5" name="post_content"><?php echo html_escape('post_content', element('post_content', element('data', $view))); ?></textarea>
 					</div>
 				</div>
 				<script type="text/javascript">

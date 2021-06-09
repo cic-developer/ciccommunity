@@ -271,15 +271,16 @@
 	/**
 	* 이메일 전송 시작
 	*/
-	var send_email = function(){
+	var send_email = function(email, name){
 
 		var state ='';
 		var message = '';
 		$.ajax({
-			url: cb_url + '/login/ajax_modify_email_send',
+			url: cb_url + '/login/ajax_imsh_pw_email_send',
 			type: 'POST',
 			data: {
-				type: type,
+				email: email,
+				name: name,
 				csrf_test_name : cb_csrf_hash
 			},
 			dataType: 'json',
@@ -293,10 +294,6 @@
 				if(state == 1){
 					// 성공 메세지
 					alert(message);
-					
-					$('#myModal_' + type + ' .ath-email-content .send-ath-email').attr('style', "display:none;"); // 이메일 전송 버튼 제거
-					$('#myModal_' + type + ' .ath-email-content .confirm-ath-email').attr('style', "display:block;"); // 이메일 인증 버튼 생성
-					$('#myModal_' + type + ' .ath-email-content .' + type + '-resend-email').attr('style', "display:block; margin-top: 20px;"); // 이메일 인증 버튼 생성
 				}
 				// 실패
 				if(state == 0){
