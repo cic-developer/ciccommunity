@@ -219,28 +219,44 @@
 			return;
 		}
 
+        var currentValArr = currentVal.split('.');
+        if(currentValArr[1].length > 2){
+            alert('금액은 소수점 2자리 까지 입력할수 있습니다');
+            $(this).val(oldVal1);
+            return;
+        }
+
         // If x is Not a Number or less than one or greater than 10
         if (!isNumeric(currentVal)) {
             $('.withdraw-point').text('금액을 옳바르게 입력해주세요.');
             $('.preview-point').text('금액을 옳바르게 입력해주세요.');
         } else {
+            // 보유 포인트
             var _my_money = $('.my-point').data('my-point');
             var my_money = parseFloat(_my_money);
             
-            var req_money = parseFloat(currentVal); // 출금액
-            var price = parseFloat(_price); // 퍼코인 가격
+            // 출금액
+            var req_money = parseFloat(currentVal);
+
+            // 퍼코인 가격
+            var price = parseFloat(_price); 
+
+            // 출금 수수료
             var _deposit = parseFloat(__deposit); 
-            var deposit = (_deposit / 100) * req_money; // 출금 수수료
-            var cal_money = req_money - deposit; // 실제 퍼코인으로 교환될 , 수수료를 제한 cp
+            var deposit = (_deposit / 100) * req_money;
+
+            // 출금 수수료를 뺀 신청금액
+            var cal_money = req_money - deposit; 
             
-            var _per_coin = (cal_money / price) * 100; // 예상 퍼코인
-            var per_coin = Math.floor((_per_coin * 100)) / 100; // 소수점 2자리
+            // 예상 퍼코인 && 소수점 2자리까지
+            var _per_coin = (cal_money / price) * 100;
+            var per_coin = Math.floor((_per_coin * 100)) / 100;
             
             var preview_point = Number(my_money - req_money);
             
-            $('.withdraw-point').text(currentVal);
-            $('.preview-point').text(preview_point);
-            $('.preview-per').text(per_coin);
+            $('.withdraw-point').text(currentVal); // 출금액
+            $('.preview-point').text(preview_point); // 예상 잔여 cp
+            $('.preview-per').text(per_coin); // 예상 지금 per
         }
 		
 		oldVal1 = currentVal;
