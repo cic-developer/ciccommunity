@@ -554,7 +554,7 @@ class Login extends CB_Controller
 				
 				echo("<script>");
 				echo("alert('핸드폰 인증이 완료되었습니다');"); // 인증완료 문구
-				echo("window.opener.send_email('".$email."''".$name."');"); // 이메일 전송 실행
+				echo("window.opener.send_email('".$email."', '".$name."');"); // 이메일 전송 실행
 				echo("self.close();");
 				echo("</script>");
 				exit;

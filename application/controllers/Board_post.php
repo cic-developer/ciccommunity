@@ -1237,7 +1237,7 @@ class Board_post extends CB_Controller
 				$view['view']['prev_post']['url'] = post_url(element('brd_key', $board), element('post_id', $prev_post)) . '?' . $param->output();
 			}
 		}
-
+		
 		$view['view']['comment']['can_comment_write'] = $can_comment_write;
 		$view['view']['comment']['can_comment_write_message']
 			= $can_comment_write_message;

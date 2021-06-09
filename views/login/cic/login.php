@@ -181,7 +181,7 @@
 						<input type="hidden" name="m" value="checkplusService">
 						<input type="hidden" name="EncodeData" value="<?php echo html_escape(element('pw_enc_data', $view)); ?>">
 						<p class="chk-input" style="width:60%">
-							<input id="mem_password" name="mem_password" type="email" placeholder="이메일 입력" value="">
+							<input id="email" name="email" type="email" placeholder="이메일 입력" value="">
 						</p>
 						<a href="javascript:fnPopup2();" id="ath_nice_phone2" class="modify-btn pwdBtn"><span>인증</span></a>
 					</form>
@@ -272,6 +272,8 @@
 	* 이메일 전송 시작
 	*/
 	var send_email = function(email, name){
+
+		$mem_password
 
 		var state ='';
 		var message = '';
