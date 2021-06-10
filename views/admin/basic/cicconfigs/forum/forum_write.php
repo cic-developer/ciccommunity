@@ -97,10 +97,11 @@
 					$(document).ready(function() {
 						$('#datetimepicker10').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
+							startDate : '+1d'
 						});
-						$('#datetimepicker11').datetimepicker({
-							format : 'YYYY-MM-DD HH:mm:ss',
-						});
+						// $('#datetimepicker11').datetimepicker({
+						// 	format : 'YYYY-MM-DD HH:mm:ss',
+						// });
 					});
 				</script>
 			</div>

@@ -111,10 +111,10 @@ class Board_write extends CB_Controller
 				return false;
 			}
 			// 예치금이 충분히 있는지 확인
-			if( $mem_deposit - $deposit_meta < 0){
-				alert('예치금이 부족합니다, 예치금 반환후 다시 예치해주세요');
-				return false;
-			}
+			// if( $mem_deposit - $deposit_meta < 0){
+			// 	alert('예치금이 부족합니다, 예치금 반환후 다시 예치해주세요');
+			// 	return false;
+			// }
 
 			// print_r($post6);
 			// exit;

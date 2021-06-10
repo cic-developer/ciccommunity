@@ -541,6 +541,7 @@
 }
 
 .member-wrap.mypage .myinfo .fl .state ul li .recomm {
+    padding-left: 0px;
     font-family: 'GmarketSans';
     font-size: 14px;
     color: #fff;
@@ -549,6 +550,32 @@
     line-height: 1.2em;
     height: 30px;
     line-height: 32px;
+}
+
+#respon_wallet {
+    outline: none;
+    color: #fff;
+    border-style: none;
+    border-bottom: 1px solid #fff;
+    background: inherit;
+    font-size: 17px;
+}
+
+.copyButton {
+    margin-left: 10px;
+    background: #ddd;
+    color: #444;
+    border: none;
+    height: 30px;
+    font-size: 0.8em;
+    padding: 0 1em;
+    cursor: pointer;
+    transition: 600ms ease all;
+    outline: none;
+}
+
+.copyButton:hover {
+    background: #fbb906;
 }
 
 .member-wrap.mypage .myinfo .fl .state ul li:nth-child(1) p {

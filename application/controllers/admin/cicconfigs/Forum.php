@@ -124,11 +124,17 @@ class Forum extends CB_Controller
 			// 기존 설정 예치금과, 저장시 설정 예치금이 다를 경우
 			if($getdata['forum_deposit'] != $savedata['forum_deposit']){
 
-				$mem_ids_forum = $this->Member_model->getMemIdsForReturnToCp_forum();
-				$mem_ids_userforum = $this->Member_model->getMemIdsForReturnToCp_userforum();
-				$mem_ids = array_merge($mem_ids_forum['list'], $mem_ids_userforum['list']);
-				
-				foreach($mem_ids as $val){
+				// 예치금이 있는 유저
+				$members_Is_deposit = $this->Member_model->getMembersIsDeposit();
+
+				// 1. 예치금 설정이 변경되면 실행
+				// 2. 예치금이 존재하는 유저들의 정보를 가져옴
+				// 3. 해당 유저가 작성한 포럼 게시물이 있는지 확인
+				// 4. 해당 유저가 작성한 포럼 게시물이 있으면, 분배가 이루어지지 않은 진행중인 포럼이 있는지 확인 (없으면 반환, 게시물은 존재하나 분배가 완료된 게시물임)
+				// 5. 해당 유저가 작성한 포럼 게시물이 없으면, 해당 유저가 작성한 승인대기 포럼 게시물이 있는지 확인
+				// 6. 해당 유저가 작성한 승인대기 포럼 게시물이 있으면, 반려되지 않은 포럼이 있는지 확인 (없으면 반환, 게시물은 존재하나 반려된 게시물임)
+				// 7. 해당 유저가 작성한 승인대기 포럼 게시물이 없으면, 반환 (모든 게시물이 존재하지 않음)
+				foreach($members_Is_deposit['list'] as $val){
 
 					$mem_id = (int) $val['mem_id'];
 					$mem_cp = (double) $val['mem_cp'];
@@ -136,24 +142,109 @@ class Forum extends CB_Controller
 					$return_cp = $mem_cp + $mem_deposit;
 					$admin_id = (int) $this->member->item('mem_id');
 
-					// cp 반환
-					$arr = array(
-						'mem_deposit' => null,
-						'mem_cp' => $return_cp,
+					$forumWhere = array(
+						'brd_id' => 3,
+						'mem_id' => $mem_id
 					);
-					$where = array(
-					);
-					$result = $this->Member_model->set_user_modify($mem_id, $arr);
-					
-					// 반환 기록
-					if($result == 1){
-						$content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
-						$action = '포럼예치금 반환';
-						$this->CIC_cp_model->set_cic_cp($mem_id, $content, $money, '@byadmin', $admin_id, $action);
-					}
+					$forum = $this->Post_model->get_one('', '', $forumWhere);
+					if($forum){
+						// 포럼 게시물이 있으면
 
+						$forumRepartWhere = array(
+							'brd_id' => 3,
+							'mem_id' => $mem_id,
+							'cic_forum_info.frm_repart_state' => null
+						);
+						$select = 'post.*, cic_forum_info.frm_repart_state';
+						$join = array(
+							'cic_forum_info',
+							'post.post_id = cic_forum_info.pst_id',
+							'left'
+						);
+
+						$forum_repart_null = $this->Post_model->get_one_join('', $select, $where3, $join);
+						if($forum_repart_null){
+							// 존재하는 포럼 게시물 중, 분배가 완료되지 않은 게시물이 있으면 
+							// 반환 안됨
+						}else {
+							// 존재하는 포럼 게시물 중, 분배가 완료되지 않은 게시물이 없으면
+
+							// cp 반환
+							$arr = array(
+								'mem_deposit' => null,
+								'mem_cp' => $return_cp,
+							);
+							$where = array(
+							);
+							$result = $this->Member_model->set_user_modify($mem_id, $arr);
+							
+							// 반환 기록
+							if($result == 1){
+								$content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
+								$action = '포럼예치금 반환';
+								$this->CIC_cp_model->set_cic_cp($mem_id, $content, $money, '@byadmin', $admin_id, $action);
+							}
+						}
+					}else {
+						// 포럼 게시물이 없으면
+
+						$userforumWhere = array(
+							'brd_id' => 6,
+							'mem_id' => $mem_id
+						);
+						$userforum = $this->Post_model->get_one('', '', $userforumWhere);
+						if($userforum){
+							// 승인대기 포럼 게시물이 있으면
+							$userforumCateWhere = array(
+								'brd_id' => 6,
+								'mem_id' => $mem_id,
+								'post_category' => 1
+							);
+							$userforum_cate_one = $this->Post_model->get_one('', '', $userforumCateWhere);
+
+							if($userforum_cate_one){
+								// 반려되지 않은 진행중인 승인대기 포럼 게시물이 있으면
+								// 반환 안됨
+							}else{
+								// 반려되지 않은 진행중이 승인대기 포럼 게시물이 없으면
+
+								// cp 반환
+								$arr = array(
+									'mem_deposit' => null,
+									'mem_cp' => $return_cp,
+								);
+								$where = array(
+								);
+								$result = $this->Member_model->set_user_modify($mem_id, $arr);
+								
+								// 반환 기록
+								if($result == 1){
+									$content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
+									$action = '포럼예치금 반환';
+									$this->CIC_cp_model->set_cic_cp($mem_id, $content, $money, '@byadmin', $admin_id, $action);
+								}
+							}
+						}else {
+							// 승인대기 포람 게시물이 없으면
+
+							// cp 반환
+							$arr = array(
+								'mem_deposit' => null,
+								'mem_cp' => $return_cp,
+							);
+							$where = array(
+							);
+							$result = $this->Member_model->set_user_modify($mem_id, $arr);
+							
+							// 반환 기록
+							if($result == 1){
+								$content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
+								$action = '포럼예치금 반환';
+								$this->CIC_cp_model->set_cic_cp($mem_id, $content, $money, '@byadmin', $admin_id, $action);
+							}
+						}
+					}
 				}
-				exit;
 			}
 		}
 		
@@ -983,7 +1074,7 @@ class Forum extends CB_Controller
 			array(
 				'field' => 'frm_bat_close_datetime',
 				'label' => '배팅 종료일',
-				'rules' => 'trim|required|',
+				'rules' => 'trim|required',
 			),
 			array(
 				'field' => 'frm_close_datetime',
