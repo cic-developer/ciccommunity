@@ -23,7 +23,7 @@ class Mypage extends CB_Controller
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
-	protected $helpers = array('form', 'array', 'coin_price');
+	protected $helpers = array('form', 'array', 'coin_price', 'chk_birthday');
 
 	function __construct()
 	{
@@ -1811,9 +1811,10 @@ class Mypage extends CB_Controller
 		$now_m = date('m');
 		$now_d = date('d');
 
-		$year = substr($userdate,0,4);
+		$now_y = substr($userdate,0,4);
 		$mon = substr($userdate, 5,2);
 		$day = substr($userdate, 8,2);
+
 		// if($memdata['mem_birthday'] + )
 		print_r($now_d );
 		exit;

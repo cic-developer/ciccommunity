@@ -1244,25 +1244,38 @@ class Forum extends CB_Controller
 				 */
 				
 				$postUpdatedata = array(
-					'post_reply' => $post_reply,
 					'post_title' => $post_title,
 					'post_content' => $post_content,
 					'post_datetime' => cdate('Y-m-d H:i:s'),
 					'post_updated_datetime' => cdate('Y-m-d H:i:s'),
 					'post_ip' => $this->input->ip_address(),
 					'brd_id' => 1,
+					'mem_id' => $this->member->item('mem_id'),
+					'post_userid' => $this->member->item('mem_userid'),
+					'post_username' => $this->member->item('mem_username'),
+					'post_nickname' => $this->member->item('mem_nickname'),
+					'post_email' => $this->member->item('mem_email'),
+					'post_homepage' => '',
+
 				);
+				$postUpdatedata['post_device']
+				= ($this->cbconfig->get_device_type() === 'mobile') ? 'mobile' : 'desktop';
 
 				$post_id = $this->Post_model->insert($postUpdatedata);
+
 
 				$forumInfoUpdatedata = array(
 					'frm_bat_close_datetime' => $frm_bat_close_datetime,
 					'frm_close_datetime' => $frm_close_datetime,
 					'pst_id' => $post_id
 				);
+				$test = $this->CIC_forum_info_model->insert($forumInfoUpdatedata);
 
-				$this->Post_extra_vars_model->save($post_id, 6, $pevupdate_0,);
-				$this->Post_extra_vars_model->save($post_id, 6, $pevupdate_1);
+				print_r($test);
+				exit;
+
+				$this->Post_extra_vars_model->save($post_id, 3, $pevupdate_0,);
+				$this->Post_extra_vars_model->save($post_id, 3, $pevupdate_1);
 
 				// print_r($post_title);
 				// print_r('<br>');
