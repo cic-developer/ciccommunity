@@ -87,10 +87,13 @@
 				<script type="text/javascript">
 					$(function () {
 						$('#datetimepicker10').datetimepicker({
-							format : 'YYYY-MM-DD HH:mm:ss'
+							format : 'YYYY-MM-DD HH:mm:ss',
+							
+							// min : date('Y-m-d H:i:s'),
 						});
 						$('#datetimepicker11').datetimepicker({
-							format : 'YYYY-MM-DD HH:mm:ss'
+							format : 'YYYY-MM-DD HH:mm:ss',
+							
 						});
 					});
 				</script>
