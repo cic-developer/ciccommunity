@@ -171,20 +171,40 @@ class Member_model extends CB_Model
 	}
 
 	//
-	public function get_postIds_by_deposit_to_forum()
+	public function getMemIdsForReturnToCp_forum()
 	{
-
+        
 		$join = array();
 		// $select = 'member.* post.*';
-		$this->db->select('member.mem_id, post.post_id');
+		$this->db->select('member.mem_id, post.post_id, cic_forum_info.frm_repart_state');
 		$join[] = array('table' => 'post', 'on' => 'member.mem_id = post.mem_id', 'type' => 'left');
+		$join[] = array('table' => 'cic_forum_info', 'on' => 'cic_forum_info.pst_id = post.post_id', 'type' => 'left');
 		$where = array(
 			'mem_deposit <>' => null,
 			'post.brd_id' => 3,
+			'cic_forum_info.frm_repart_state' => null,
 		);
-
+        
 		$result = $this->_get_list_common($select = '', $join, '', '', $where, '', '', '', '', '', '');
+        
+		return $result;
+	}
 
+	public function getMemIdsForReturnToCp_userforum()
+	{
+        
+		$join = array();
+		// $select = 'member.* post.*';
+		$this->db->select('member.mem_id, post.post_id, post.post_category');
+		$join[] = array('table' => 'post', 'on' => 'member.mem_id = post.mem_id', 'type' => 'left');
+		$where = array(
+			'mem_deposit <>' => null,
+			'post.brd_id' => 6,
+			'post.post_category <>' => 2,
+		);
+        
+		$result = $this->_get_list_common($select = '', $join, '', '', $where, '', '', '', '', '', '');
+        
 		return $result;
 	}
 }

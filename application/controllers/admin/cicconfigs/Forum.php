@@ -123,9 +123,9 @@ class Forum extends CB_Controller
 
 			// 기존 설정 예치금과, 저장시 설정 예치금이 다를 경우
 			if($getdata['forum_deposit'] != $savedata['forum_deposit']){
-				$test = $this->Member_model->get_postIds_by_deposit_to_forum();
-				print_r($test);
-				exit;
+				$mem_ids_forum = $this->Member_model->getMemIdsForReturnToCp_forum();
+				$mem_ids_userforum = $this->Member_model->getMemIdsForReturnToCp_userforum();
+				
 			}
 		}
 		
