@@ -159,6 +159,13 @@
                     </tbody>
                 </table>
             </div>
+            <div class="lower r">
+                <div class="ov">
+                    <?php if (element('write_url', element('list', $view))) { ?>
+                        <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn">글쓰기</a>
+                    <?php } ?>
+                </div>
+            </div>
             <!-- s: paging-wrap -->
             <div class="paging-wrap">
                 <?php echo element('paging', element('list', $view)); ?>

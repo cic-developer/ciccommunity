@@ -66,7 +66,7 @@ class Board_write extends CB_Controller
 		}
 
 		// CIC 포럼, forum
-		if($board_id == 3){
+		if($board_id == 3 && $this->member->is_admin() !== 'super'){
 			alert('해당 게시판은 작성이 불가합니다!');
 			return false;
 		}
@@ -100,10 +100,10 @@ class Board_write extends CB_Controller
 			$post6 = $this->Post_model->get_one('', '', $where6);
 
 			// 관리자가 아닌 일반 유저인지 확인
-			if($this->member->is_admin()){
-				alert('관리자는 포럼을 작성할수 없습니다');
-				return false;
-			}
+			// if($this->member->is_admin()){
+			// 	alert('관리자는 포럼을 작성할수 없습니다');
+			// 	return false;
+			// }
 
 			// 이미 예치된 금액이 있는지 확인
 			if(!$mem_deposit){

@@ -85,20 +85,19 @@
 					}
 				?>
 				<script type="text/javascript">
-					// $(function () {
-					// 	$('#datetimepicker10').datetimepicker({
-					// 		format : 'YYYY-MM-DD HH:mm:ss',
-					// 		startDate: 'd',
-					// 	});
-					// 	$('#datetimepicker11').datetimepicker({
-					// 		format : 'YYYY-MM-DD HH:mm:ss',
-					// 	});
-					// });
-					$(document).ready(function() {
+					$(function () {
 						$('#datetimepicker10').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
-							startDate : '+1d'
 						});
+						$('#datetimepicker11').datetimepicker({
+							format : 'YYYY-MM-DD HH:mm:ss',
+						});
+					});
+					// $(document).ready(function() {
+					// 	$('#datetimepicker10').datetimepicker({
+					// 		format : 'YYYY-MM-DD HH:mm:ss',
+					// 		minViewMode : 0'days'
+					// 	});
 						// $('#datetimepicker11').datetimepicker({
 						// 	format : 'YYYY-MM-DD HH:mm:ss',
 						// });

@@ -407,6 +407,9 @@
     .member-wrap.login {
         padding: 40px 15px;
     }
+    .copyButton {
+        margin-top: 10px;
+    }
 }
 
 
@@ -558,7 +561,7 @@
     border-style: none;
     border-bottom: 1px solid #fff;
     background: inherit;
-    font-size: 17px;
+    font-size: 14px;
 }
 
 .copyButton {
@@ -597,7 +600,7 @@
 
 .member-wrap.mypage .myinfo .fl .state ul li .point {
     position: relative;
-    top: 25px;
+    top: -48px;
     right: 200px;
     padding-left: 0;
     display: inline-block;
@@ -708,7 +711,7 @@
         line-height: 37px;
         height: 35px;
         position: relative;
-        top: 0px;
+        top: px;
         right: 110px;
     }
 }

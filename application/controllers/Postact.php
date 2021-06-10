@@ -2153,13 +2153,13 @@ class Postact extends CB_Controller
 		$result = array();
 		$this->output->set_content_type('application/json');
 		
-		if($this->member->is_admin() === 'super'){
-			$result = array(
-				'state' => '0',
-				'message' => '관리자는 참여할수 없습니다',
-			);
-			exit(json_encode($result));
-		}
+		// if($this->member->is_admin() === 'super'){
+		// 	$result = array(
+		// 		'state' => '0',
+		// 		'message' => '관리자는 참여할수 없습니다',
+		// 	);
+		// 	exit(json_encode($result));
+		// }
 		
 		// 회원 데이터 가져오기
 		$member_info = $this->member->get_member();
@@ -2311,13 +2311,13 @@ class Postact extends CB_Controller
 		$result = array();
 		$this->output->set_content_type('application/json');
 
-		if($this->member->is_admin() === 'super'){
-			$result = array(
-				'state' => '0',
-				'message' => '관리자는 참여할수 없습니다',
-			);
-			exit(json_encode($result));
-		}
+		// if($this->member->is_admin() === 'super'){
+		// 	$result = array(
+		// 		'state' => '0',
+		// 		'message' => '관리자는 참여할수 없습니다',
+		// 	);
+		// 	exit(json_encode($result));
+		// }
 
 		// 회원 데이터 가져오기
 		$member_info = $this->member->get_member();
@@ -2405,13 +2405,13 @@ class Postact extends CB_Controller
 		 */
 		required_user_login();
 
-		if($this->member->is_admin() === 'super'){
-			$result = array(
-				'state' => '0',
-				'message' => '관리자는 참여할수 없습니다',
-			);
-			exit(json_encode($result));
-		}
+		// if($this->member->is_admin() === 'super'){
+		// 	$result = array(
+		// 		'state' => '0',
+		// 		'message' => '관리자는 참여할수 없습니다',
+		// 	);
+		// 	exit(json_encode($result));
+		// }
 
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('before', $eventname);
