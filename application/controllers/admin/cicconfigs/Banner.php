@@ -295,9 +295,9 @@ class Banner extends CB_Controller
                 $uploadconfig = array();
 				$uploadconfig['upload_path'] = $upload_path;
 				$uploadconfig['allowed_types'] = 'jpg|jpeg|png|gif';
-				$uploadconfig['max_size'] = '2000';
-				$uploadconfig['max_width'] = '1000';
-				$uploadconfig['max_height'] = '1000';
+				$uploadconfig['max_size'] = 12 * 1024;
+				// $uploadconfig['max_width'] = '1000';
+				// $uploadconfig['max_height'] = '1000';
 				$uploadconfig['encrypt_name'] = true;
 
 				$this->upload->initialize($uploadconfig);
@@ -306,9 +306,16 @@ class Banner extends CB_Controller
 					$img = $this->upload->data();
 					$updatephoto = cdate('Y') . '/' . cdate('m') . '/' . element('file_name', $img);
 				} else {
-					$file_error = $this->upload->display_errors();
-                    print_r($file_error);
-                    exit;
+					$file_error = $this->upload->display_errors('','');
+					$this->session->set_flashdata(
+						'message',
+						$file_error
+					);
+	
+					$param =& $this->querystring;
+					$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+		
+					redirect($redirecturl);
 				}
             }
 

@@ -827,6 +827,9 @@ class Forum extends CB_Controller
 			);
 			$forum_bats = $this->CIC_forum_model->get_forum_bat($where);
             
+			// 실제 배분될 총 cp를 계산할 변수
+			$repart_real_cp = 0;
+
 			// 배팅 분배
 			if ($forum_bats && is_array($forum_bats)) {
 				foreach ($forum_bats as $key => $value) {
@@ -866,6 +869,8 @@ class Forum extends CB_Controller
 						// => 회원 승리 전적
 						$mem_forum_win = (int) $member_info['mem_forum_win'];
 						$change_mem_forum_win = $mem_forum_win + 1;
+
+						$repart_real_cp .= $give_cp;
 						
 						// member테이블에 cp지급 & 전적 갱신
 						$arr = array(
@@ -893,7 +898,12 @@ class Forum extends CB_Controller
 			 * 배분 완료 = state 1로 변경 ( cic_forum_info table)
 			 */
 			$updatedata = array(
-				'frm_repart_state' => 1
+				'frm_repart_state' => 1,
+				'frm_repart_commission' => $_forum_commission,
+				'frm_repart_reward' => $writer_reward,
+				'frm_repart_cp' => $repart_cp,
+				'frm_repart_ratio' => $repart_ratio,
+				'frm_repart_real_cp' => $repart_real_cp,
 			);
 			$where = array(
 				'pst_id' => $pst_id,
@@ -1185,7 +1195,30 @@ class Forum extends CB_Controller
 			$pev_value_0 = $this->input->post('pev_value_0', null, '');
 			$pev_value_1 = $this->input->post('pev_value_1', null, '');
 
+			if($this->input->post($primary_key)){
+				if(empty($cfidata)){
 
+				}else{
+
+				}
+			}else{
+				/**
+				 * 게시물을 새로 입력하는 경우입니다
+				 */
+			}
+			$this->cache->delete('forum/forum-info-' . cdate('Y-m-d'));
+
+			// 이벤트가 존재하면 실행합니다
+			Events::trigger('after', $eventname);
+
+			/**
+			 * 게시물의 신규입력 또는 수정작업이 끝난 후 목록 페이지로 이동합니다
+			 */
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '/proceeding_forum' . $param->output());
+
+			redirect($redirecturl);
+		}
 	}
 
 	public function return_forum()
