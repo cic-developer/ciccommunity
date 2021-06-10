@@ -34,6 +34,18 @@
     /* Could be more or less, depending on screen size */
 }
 
+@media only screen and (min-width: 1000px) and (max-width: 1299px) {
+    .modal-content {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 999px) {
+    .modal-content {
+        width: 100%;
+    }
+}
+
 
 /* The Close Button */
 

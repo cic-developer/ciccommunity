@@ -243,6 +243,18 @@
 		width: 20%; /* Could be more or less, depending on screen size */                          
 	}
 
+    @media only screen and (min-width: 1000px) and (max-width: 1299px) {
+        .modal-content {
+            width: 50%;
+        }
+    }
+
+    @media only screen and (max-width: 999px) {
+        .modal-content {
+            width: 80%;
+        }
+    }
+
 	/* The Close Button */
 	.close {
 		color: #aaa;

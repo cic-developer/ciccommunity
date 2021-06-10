@@ -67,7 +67,7 @@
         <!-- page end // -->
     </div>
 </div>
-<script type="text/javascript" src="<?php echo base_url('assets/js/chargecp.js?v='.date('YmdHis')); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/chargecp.js'); ?>"></script>
 <script>
     csrf_key = '<?php echo $this->security->get_csrf_token_name(); ?>';
     csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';

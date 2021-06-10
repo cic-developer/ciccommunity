@@ -24,7 +24,7 @@
                             <li>
                             <p class="recomm">추천인 코드</p> 
                             <input id="respon_wallet" type="text" readonly="" value="<?= element('mem_userid', $member) ?>">
-                            <button type="button" class="copyButton" onclick="copy_to_clipboard()">복사</button>
+                            <button type="button" class="copyButton" onclick="copyToClipboard('<?= base_url('r/'.element('mem_userid', $member)) ?>')">복사</button>
                             </li>
                             <!-- <li>
                                 <p class="point"><?php //echo number_format($member['mem_point']) ?></p>   
@@ -80,3 +80,14 @@
         <!-- page end // -->
     </div>
 </div>
+<script>
+    function copyToClipboard(val) {
+        const t = document.createElement("textarea");
+        document.body.appendChild(t);
+        t.value = val;
+        t.select();
+        document.execCommand('copy');
+        document.body.removeChild(t);
+        alert('복사되었습니다.')
+    }
+</script>
