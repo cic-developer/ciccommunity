@@ -57,7 +57,7 @@
 									</td>
 									<td>
 										<a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank">
-											<?php echo html_escape(strip_tags(element('post_content', $result))); ?>
+											<?php echo html_escape(str_replace("&nbsp;"," ",strip_tags(element('post_content', $result)))); ?>
 										</a>
 									</td>
 									<td><?php echo element('post_display_name', $result); ?> <?php if (element('post_userid', $result)) { ?> ( <a href="?sfield=mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('post_userid', $result)); ?></a> ) <?php } ?></td>

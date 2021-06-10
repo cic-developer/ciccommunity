@@ -57,7 +57,7 @@
 							<td><a href="?brd_id=<?php echo element('brd_id', $result); ?>"><?php echo html_escape(element('brd_name', element('board', $result))); ?></a> <a href="<?php echo goto_url(element('boardurl', $result)); ?>" target="_blank"><span class="fa fa-external-link"></span></a></td>
 							<td><a href="?sfield=comment.post_id&amp;skeyword=<?php echo element('post_id', $result); ?>"><?php echo html_escape(element('post_title', $result)); ?></a> <a href="<?php echo goto_url(element('posturl', $result)); ?>" target="_blank"><span class="fa fa-external-link"></span></a></td>
 							<td><?php echo element('post_display_name', $result); ?> <?php if (element('post_userid', $result)) { ?> ( <a href="?sfield=post.mem_id&amp;skeyword=<?php echo element('post_mem_id', $result); ?>"><?php echo html_escape(element('post_userid', $result)); ?></a> ) <?php } ?></td>
-							<td><a href="<?php echo goto_url(element('commenturl', $result)); ?>" target="_blank"><?php echo html_escape(cut_str(strip_tags(element('cmt_content', $result)),50)); ?></a></td>
+							<td><a href="<?php echo goto_url(element('commenturl', $result)); ?>" target="_blank"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('cmt_content', $result))),50)); ?></a></td>
 							<td><?php echo element('display_name', $result); ?> <?php if (element('cmt_userid', $result)) { ?> ( <a href="?sfield=comment.mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('cmt_userid', $result)); ?></a> ) <?php } ?></td>
 							<td><?php echo number_format(element('cmt_like', $result)); ?> / <?php echo number_format(element('cmt_dislike', $result)); ?></td>
 							<td><?php echo display_datetime(element('cmt_datetime', $result), 'full'); ?></td>

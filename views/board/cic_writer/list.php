@@ -26,8 +26,8 @@
                                                     <div class="img"><img src="<?php echo element('thumb_url',$bestpost)?>" alt="">
                                                     </div>
                                                     <div class="txt">
-                                                        <p class="btxt"><?php echo html_escape(cut_str(strip_tags(element('post_title', $bestpost)), 15)); ?></p>
-                                                        <p class="stxt"><?php echo html_escape(cut_str(strip_tags(element('post_content', $bestpost)), 20)); ?></p>
+                                                        <p class="btxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('post_title', $bestpost))), 15)); ?></p>
+                                                        <p class="stxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('post_content', $bestpost))), 20)); ?></p>
                                                         <p class="ctxt vp"><?php echo number_format(element("post_like_point",$bestpost))?></p>
                                                     </div>
                                                 </a>
@@ -84,7 +84,7 @@
                             <div class="txt">
                                 <div class="vc">
                                     <p class="btxt"><?php echo html_escape(element('title', $result)); ?> <span>(<?php echo element('post_comment_count', $result); ?>)</span></p>
-                                    <p class="stxt"><?php echo html_escape(cut_str(strip_tags(element('post_content', $result)), 60)); ?>
+                                    <p class="stxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('post_content', $result))), 60)); ?>
                                     </p>
                                     <p class="ctxt">
                                         <span><?php echo html_escape(element('post_nickname', $result)); ?></span>

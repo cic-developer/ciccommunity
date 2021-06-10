@@ -28,8 +28,8 @@
 															src="<?php echo html_escape(element('news_image', $most_view)) ?>" alt="">
 													</div>
 													<div class="txt">
-														<p class="btxt"><?php echo html_escape(cut_str(strip_tags(element('news_title', $most_view)), 10)); ?></p>
-														<p class="stxt"><?php echo html_escape(cut_str(strip_tags(element('news_contents', $most_view)), 10)); ?></p>
+														<p class="btxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('news_title', $most_view))), 10)); ?></p>
+														<p class="stxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('news_contents', $most_view))), 10)); ?></p>
 														<p class="ctxt"><?php echo html_escape(element('comp_name', element('company', $most_view))); ?>
 															<span><?php echo display_datetime(element('news_wdate', $most_view)); ?></span>
 														</p>

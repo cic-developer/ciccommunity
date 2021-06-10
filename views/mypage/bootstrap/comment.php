@@ -42,7 +42,7 @@
 		?>
 			<tr>
 				<td><?php echo element('num', $result); ?></td>
-				<td><a href="<?php echo element('comment_url', $result); ?>" target="new"><?php echo cut_str(html_escape(strip_tags(element('cmt_content', $result))), 200); ?></a>
+				<td><a href="<?php echo element('comment_url', $result); ?>" target="new"><?php echo cut_str(html_escape(str_replace("&nbsp;"," ",strip_tags(element('cmt_content', $result)))), 200); ?></a>
 					<?php if (element('cmt_like', $result)) { ?><span class="label label-info">+ <?php echo element('cmt_like', $result); ?></span><?php } ?>
 					<?php if (element('cmt_dislike', $result)) { ?><span class="label label-danger">- <?php echo element('cmt_dislike', $result); ?></span><?php } ?>
 				</td>

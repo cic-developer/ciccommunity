@@ -1079,7 +1079,7 @@ public function forum_write($post_id = 0)
 			array(
 				'field' => 'frm_bat_close_datetime',
 				'label' => '배팅 종료일',
-				'rules' => 'trim|required',
+				'rules' => 'trim|required|',
 			),
 			array(
 				'field' => 'frm_close_datetime',
@@ -1201,13 +1201,11 @@ public function forum_write($post_id = 0)
 			$pev_value_1 = $this->input->post('pev_value_1', null, '');
 			
 			
-			if($this->input->post($primary_key)){
+			if ($this->input->post($primary_key)){
 				if(empty($cfidata)){
-					
 					/**
 					 * 승인대기 포럼에서 진행중인 포럼으로 승격시 진행되는 부분입니다.
 					 */
-
 					$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 					$updatedata['frm_close_datetime'] = $frm_close_datetime;
 					$updatedata['pst_id'] = $pst_id;

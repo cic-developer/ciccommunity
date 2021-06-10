@@ -39,8 +39,8 @@
 						foreach (element('list', element('data', $view)) as $result) {
 					?>
 						<tr>
-							<td><?php echo cut_str(html_escape(strip_tags(element('faq_title', $result))),100); ?></td>
-							<td><?php echo cut_str(html_escape(strip_tags(element('faq_content', $result))),100); ?></td>
+							<td><?php echo cut_str(html_escape(str_replace("&nbsp;"," ",strip_tags(element('faq_title', $result)))),100); ?></td>
+							<td><?php echo cut_str(html_escape(str_replace("&nbsp;"," ",strip_tags(element('faq_content', $result)))),100); ?></td>
 							<td><?php echo number_format(element('faq_order', $result)); ?></td>
 							<td><?php echo display_datetime(element('faq_datetime', $result), 'full'); ?></td>
 							<td><?php echo element('display_name', $result); ?> <?php if (element('mem_userid', $result)) { ?> ( <a href="?fgr_id=<?php echo $this->input->get('fgr_id'); ?>&amp;sfield=faq.mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('mem_userid', $result)); ?></a> ) <?php } ?></td>

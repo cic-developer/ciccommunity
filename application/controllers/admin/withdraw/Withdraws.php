@@ -443,11 +443,23 @@ class Withdraws extends CB_Controller
 			$memo = $this->input->post('cp_memo2');
 			$logResult = $this->CIC_cp_model->set_cic_cp($memIdx, $content, $money, '@byadmin', $admin_info['mem_id'], '출금반려');
 
+			if($logResult == 0){
+				// $this->session->set_flashdata(
+				// 	'message',
+				// 	'cp 로그 기록에 실패!'
+				// );
+				// $param =& $this->querystring;
+				// $redirecturl = admin_url($this->pagedir . '?' . $param->output());
+				// redirect($redirecturl);
+			}
 			/**
 			 * 반려한 출금 요청건의 상태를 0으로 수정합니다.
 			 * cic_withdraw
 			 */
 			$result = $this->{$this->modelname}->set_withdraw_retire($widIdx, $content, $adminid, $adminip, $memo);
+
+			// print_R()
+			// exit;
 		
 			// 이벤트가 존재하면 실행합니다
 			Events::trigger('after', $eventname);

@@ -123,7 +123,7 @@
 				foreach (element('list', element('latest_comment', $view)) as $key => $value) {
 			?>
 				<tr>
-					<td><a href="<?php echo element('post_url', $value); ?>"><?php echo cut_str(html_escape(strip_tags(element('cmt_content', $value))),50); ?></a></td>
+					<td><a href="<?php echo element('post_url', $value); ?>"><?php echo cut_str(html_escape(str_replace("&nbsp;"," ",strip_tags(element('cmt_content', $value)))),50); ?></a></td>
 					<td><?php echo element('display_name', $value); ?></td>
 					<td class="text-right"><?php echo display_datetime(element('cmt_datetime', $value)); ?></td>
 				</tr>
