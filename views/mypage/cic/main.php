@@ -23,7 +23,7 @@
                             </li>
                             <li>
                             <p class="recomm">추천인 코드</p> 
-                            <input id="respon_wallet" type="text" readonly="" value="0x148c7f3d1f883b4069a734ac83acb926b5bb5226">
+                            <input id="respon_wallet" type="text" readonly="" value="<?= element('mem_userid', $member) ?>">
                             <button type="button" class="copyButton" onclick="copy_to_clipboard()">복사</button>
                             </li>
                             <!-- <li>

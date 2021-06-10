@@ -92,7 +92,7 @@ class Deposit extends CB_Controller
             
             if($memResult == 1){
                 // cp 로그 기록
-                $logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '', -$deposit_meta, '@byself', $mem_id, '예치금 넣기');
+                $logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '예치금 넣기', -$deposit_meta, '@byself', $mem_id, '예치금 넣기');
                 
                 $result = array(
                     'state' => '1',
@@ -182,7 +182,7 @@ class Deposit extends CB_Controller
             
             if($memResult == 1){
                 // cp 로그 기록
-                $logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '', $mem_deposit, '@byself', $mem_id, '예치금 반환');
+                $logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '예치금 반환', $mem_deposit, '@byself', $mem_id, '예치금 반환');
                 
                 $result = array(
                     'state' => '1',

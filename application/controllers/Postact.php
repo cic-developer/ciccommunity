@@ -2267,7 +2267,7 @@ class Postact extends CB_Controller
 				 * cic_cp
 				 */
 				$this->load->model('CIC_cp_model');
-				$this->CIC_cp_model->set_cic_cp($mem_id, '-', -$usePoint, '@byself', $mem_id, '포럼배팅');
+				$this->CIC_cp_model->set_cic_cp($mem_id, '포럼배팅', -$usePoint, '@byself', $mem_id, '포럼배팅');
 
 				/**
 				 * 배팅
@@ -2533,7 +2533,7 @@ class Postact extends CB_Controller
 					 * cic_cp
 					 */
 					$this->load->model('CIC_cp_model');
-					$this->CIC_cp_model->set_cic_cp($mem_id, '-', -$usePoint, '@byself', $mem_id, '추가포럼배팅');
+					$this->CIC_cp_model->set_cic_cp($mem_id, '추가포럼배팅', -$usePoint, '@byself', $mem_id, '추가포럼배팅');
 
 					/**
 					 * 추가 배팅
@@ -2725,7 +2725,7 @@ class Postact extends CB_Controller
 				} else{
 					// cp 로그
 					$this->load->model('CIC_cp_model');
-					$this->CIC_cp_model->set_cic_cp($mem_id, '-', -$need_deposit_cp, '@byself', $mem_id, '포럼 의견변경');
+					$this->CIC_cp_model->set_cic_cp($mem_id, '포럼 의견변경', -$need_deposit_cp, '@byself', $mem_id, '포럼 의견변경');
 
 					/**
 					 * 배팅 진영 변경
