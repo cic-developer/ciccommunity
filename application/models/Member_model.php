@@ -180,7 +180,7 @@ class Member_model extends CB_Model
 		$join[] = array('table' => 'post', 'on' => 'member.mem_id = post.mem_id', 'type' => 'left');
 		$join[] = array('table' => 'cic_forum_info', 'on' => 'cic_forum_info.pst_id = post.post_id', 'type' => 'left');
 		$where = array(
-			'mem_deposit <>' => null,
+			'member.mem_deposit <>' => null,
 			'post.brd_id' => 3,
 			'cic_forum_info.frm_repart_state' => null,
 		);
@@ -198,7 +198,7 @@ class Member_model extends CB_Model
 		$this->db->select('member.mem_id, member.mem_deposit, member.mem_cp'); //, post.post_id, post.post_category');
 		$join[] = array('table' => 'post', 'on' => 'member.mem_id = post.mem_id', 'type' => 'left');
 		$where = array(
-			'mem_deposit <>' => null,
+			'member.mem_deposit <>' => null,
 			'post.brd_id' => 6,
 			'post.post_category <>' => 2,
 		);
