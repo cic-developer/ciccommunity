@@ -132,10 +132,12 @@
 			$("#fregisterform").submit();
 		});
 	});
-
+	var _is_sended = false;
 	// 이메일 확인 + 인증번호 보내기
 	$(document).ready(function(){
 		$("#ath_email").on('click', function(){
+			if(_is_sended) return false;
+			_is_sended = true;
 			var _email = $("#mem_email").val();
 
 			var result = '';
@@ -150,59 +152,66 @@
 					csrf_test_name : cb_csrf_hash
 				},
 				dataType: 'json',
-				async: false,
+				async: true,
 				cache: false,
 				success: function(data) {
 					result = data.result;
 					reason = data.reason;
+					if(result == "no"){
+						alert(reason);
+						_is_sended = false;
+					}
+
+					if(result == "available"){
+						$('#ath_email > span').text('발송중...');
+						alert(reason);
+						$.ajax({
+							url: cb_url + '/register/ajax_email_send',
+							type: 'POST',
+							data: {
+								email: _email,
+								csrf_test_name : cb_csrf_hash
+							},
+							dataType: 'json',
+							async: true,
+							cache: false,
+							success: function(data) {
+								state = data.state;
+								message = data.message;
+								$('#ath_email > span').text('발송완료');
+								$('#ath_email').attr('disabled', 'disabled');
+								
+								alert(message);
+
+								$('.success-email').remove();
+								$('.con-mail').remove();
+								$('#ath_num').remove();
+								if(state == 1){
+									html = '';
+									html += '<div class="field con-mail">'
+									html += '<p class="chk-input">'
+									html += '<input type="text" id="ath_num" name="ath_num" class="" required />'
+									html += '<p class="rtxt mg10t">'
+									html += '<a class="con-mail-btn cerfity-btn" id="con-mail-btn">메일인증 확인</a>'
+									html += '</p>'
+									html += '</p>'
+									html += '</div>'
+									$('.mem_email').append(html);
+								}
+							}
+						});
+
+					}
 				}
 			});
-			if(result == "no"){
-				alert(reason);
-			}
-
-			if(result == "available"){
-				alert(reason);
-
-				$.ajax({
-					url: cb_url + '/register/ajax_email_send',
-					type: 'POST',
-					data: {
-						email: _email,
-						csrf_test_name : cb_csrf_hash
-					},
-					dataType: 'json',
-					async: false,
-					cache: false,
-					success: function(data) {
-						state = data.state;
-						message = data.message;
-					}
-				});
-
-				alert(message);
-
-				$('.success-email').remove();
-				$('.con-mail').remove();
-				$('#ath_num').remove();
-				if(state == 1){
-					html = '';
-					html += '<div class="field con-mail">'
-					html += '<p class="chk-input">'
-					html += '<input type="text" id="ath_num" name="ath_num" class="" required />'
-					html += '<p class="rtxt mg10t">'
-					html += '<a class="con-mail-btn cerfity-btn" id="con-mail-btn">메일인증 확인</a>'
-					html += '</p>'
-					html += '</p>'
-					html += '</div>'
-					$('.mem_email').append(html);
-				}
-			}
 		})
 	})
 
 	// 이메일 인증 하기
+	var _is_authorizing = false;
 	$(document).on('click', "#con-mail-btn", function(){
+		if(_is_authorizing) return false;
+		_is_authorizing = true;
 		var ath_num = $("#ath_num").val();
 
 		var result = '';
@@ -215,31 +224,32 @@
 				csrf_test_name : cb_csrf_hash
 			},
 			dataType: 'json',
-			async: false,
+			async: true,
 			cache: false,
 			success: function(data) {
 				result = data.result;
 				reason = data.reason;
+				
+				// 실패
+				if(result == 0){
+					_is_authorizing = false;
+					alert(reason);
+				}
+
+				//성공
+				if(result == 1) {
+					var _email = $("#mem_email").val();
+					_email = _email.split('@');
+
+					var html = '<p class="success-email rtxt mg10t cblue">승인이 완료되었습니다</p>';
+					html += '<input type="hidden" id="ath_num" name="ath_num" class="" required value="'+ ath_num +'" />'
+
+					$('.con-mail').remove(); // 인증 박스 삭제
+					$("#mem_userid").val(_email[0] + '' + ath_num); // 유저 아이디 
+					$('.mem_email').append(html); // 승인 메세지
+				}
 			}
 		});
-
-		// 실패
-		if(result == 0){
-			alert(reason);
-		}
-
-		//성공
-		if(result == 1) {
-			var _email = $("#mem_email").val();
-			_email = _email.split('@');
-
-			var html = '<p class="success-email rtxt mg10t cblue">승인이 완료되었습니다</p>';
-			html += '<input type="hidden" id="ath_num" name="ath_num" class="" required value="'+ ath_num +'" />'
-
-			$('.con-mail').remove(); // 인증 박스 삭제
-			$("#mem_userid").val(_email[0] + '' + ath_num); // 유저 아이디 
-			$('.mem_email').append(html); // 승인 메세지
-		}
 	});
 
 	// 닉네임 확인

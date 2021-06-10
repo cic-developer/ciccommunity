@@ -947,4 +947,30 @@ class News extends CB_Controller
         $redirecturl = admin_url($this->pagedir . '?' . $param->output());
         redirect($redirecturl);
 	}
+
+	public function update_news_important_0()
+	{
+		$eventname = 'event_admin_news_delete';
+        $this->load->event($eventname);
+
+        Events::trigger('before', $eventname);
+
+        if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
+            foreach ($this->input->post('chk') as $val) {
+                if ($val) {
+                    $this->News_model->update_news_important_0($val);
+                }
+            }
+        }
+
+        Events::trigger('after', $eventname);
+
+        $this->session->set_flashdata(
+            'message',
+            '주요 뉴스에서 해지되었습니다.'
+        );
+        $param =& $this->querystring;
+        $redirecturl = admin_url($this->pagedir . '?' . $param->output());
+        redirect($redirecturl);
+	}
 }
