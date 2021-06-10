@@ -326,9 +326,14 @@ class Forum extends CB_Controller
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 		
 		$param =& $this->querystring;
+		$view['view']['sort'] = array(
+			'post_id' => $param->sort('post_id', 'asc'),
+			'post_datetime' => $param->sort('post_datetime', 'asc'),
+			'post_like' => $param->sort('post_like', 'asc'),
+		);
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = 'post_id';
-		$forder = 'desc';
+		$findex = $this->input->get('findex', null, 'post_id');
+		$forder = $this->input->get('forder', null, 'desc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 		
@@ -337,7 +342,7 @@ class Forum extends CB_Controller
 		
 		$this->Post_model->allow_search_field = array('post_id', 'post_title', 'post_content', 'post.brd_id',); // 검색이 가능한 필드
 		$this->Post_model->search_field_equal = array('post_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->Post_model->allow_order_field = array('post_id');
+		$this->Post_model->allow_order_field = array('post_id','post_datetime','post_like');
 		
 		
 		

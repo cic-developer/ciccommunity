@@ -67,7 +67,6 @@ class Popularpost extends CB_Controller
 		 */
 		$param =& $this->querystring;
 		$view['view']['sort'] = array(
-			'post_id' => $param->sort('post_id', 'asc'),
 			'post_datetime' => $param->sort('post_datetime', 'asc'),
 			'post_like_point' => $param->sort('post_like_point', 'asc'),
 			'post_dislike_point' => $param->sort('post_dislike_point', 'asc'),

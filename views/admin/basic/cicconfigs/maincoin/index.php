@@ -47,7 +47,7 @@
 								<td><img src="<?php echo element('cme_logo', $result); ?>" alt="거래소 로고" style="height:20px; width:auto;"/>  <?php echo html_escape(element('cme_korean_nm', $result)); ?></td>
 								<td><?php echo html_escape(element('cme_market', $result)); ?></td>
 								<td><?php echo (element('cme_default', $result) == 1) ? '기본' : ''; ?></td>
-								<td><span class="orderby_up" style="cursor:pointer;">업</span> / <span class="orderby_down" style="cursor:pointer;">다운</span></td>
+								<td><span class="orderby_up" style="cursor:pointer;">▲</span> / <span class="orderby_down" style="cursor:pointer;">▼</span></td>
 								<td><a href="<?php echo admin_url($this->pagedir); ?>/exchange_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">수정</a></td>
 								<!-- <td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td> -->
 							</tr>

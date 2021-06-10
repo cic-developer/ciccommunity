@@ -750,7 +750,7 @@ class Post_model extends CB_Model
 			$this->db->group_end();
 		}
 
-		$this->db->order_by($orderby);
+		$this->db->order_by($findex, $orderby);
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}

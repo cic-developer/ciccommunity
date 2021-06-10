@@ -38,7 +38,7 @@
 					<table class="table table-hover table-striped table-bordered">
 						<thead>
 							<tr>
-								<th><a href="<?php echo element('post_id', element('sort', $view)); ?>">번호</a></th>
+								<th><a href="<?php echo element('post_like_point', element('sort', $view)); ?>">번호</a></th>
 								<th>게시판</th>
 								<th>이미지</th>
 								<th>제목</th>

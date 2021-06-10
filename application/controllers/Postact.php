@@ -2658,10 +2658,6 @@ class Postact extends CB_Controller
 			);
 			$this->load->model('CIC_forum_model');
 			$isBat = $this->CIC_forum_model->get_forum_bat($where);
-
-
-			print_r($isBat);
-			exit;
 			if(!$isBat){
 				$result = array(
 					'state' => '0',
@@ -2716,16 +2712,45 @@ class Postact extends CB_Controller
 				 * member
 				 */
 				// 진영 변경시 수수료
+				$this->load->model('CIC_forum_config_model');
 				$deposit_meta = (double) $this->CIC_forum_config_model->item('forum_bat_change_commission');
-				// 현재 배팅 금액
-				$cfc_cp = $isBat['cfc_cp'];
-				// $result = $this->Member_model->set_user_point($mem_id, $_money, $mem_cp);
 
-				$result = array(
-					'state' => '1',
-					'message' => '성공적으로 처리되었습니다',
-				);
-				exit(json_encode($result));
+				// 현재 배팅 금액
+				$cfc_cp = (double) $isBat['cfc_cp'];
+				
+				// 지급해야할 수수료
+				$need_deposit_cp = $cfc_cp * ($deposit_meta /100);
+
+				$mem_cp = (double) $member_info['mem_cp'];
+				if( $need_deposit_cp > $mem_cp){
+					$result = array(
+						'state' => '0',
+						'message' => '보유 포인트가 부족합니다 (변경수수료: '.$need_deposit_cp.' cp)',
+					);
+					exit(json_encode($result));
+				}
+
+				// 수수료 출금
+				$this->load->model('Member_model');
+				$result0 = $this->Member_model->set_user_point($mem_id, $need_deposit_cp, $mem_cp);
+				if($result0 != 1){
+					$result = array(
+						'state' => '0',
+						'message' => '수수료 출금에 실패하였습니다 (문의)',
+					);
+					exit(json_encode($result));
+				} else{
+					// cp 로그
+					$this->CIC_cp_model->set_cic_cp($mem_id, '-', -$need_deposit_cp, '@byself', $mem_id, '포럼 의견변경');
+
+					// 성공
+					$result = array(
+						'state' => '1',
+						'message' => '성공적으로 처리되었습니다',
+					);
+					exit(json_encode($result));
+				}
+
 			}
 		}
 	}

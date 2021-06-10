@@ -37,8 +37,8 @@
 								<th>제목</th>
 								<th>내용</th>
 								<th>작성자</th>
-								<th>날짜</th>
-								<th>좋아요</th>
+								<th><a href="<?php echo element('post_id', element('sort', $view)); ?>">날짜</a></th>
+								<th><a href="<?php echo element('post_id', element('sort', $view)); ?>">좋아요</a></th>
 								<th>승인</th>
 								<th><input type="checkbox" name="chkall" id="chkall" /></th>
 							</tr>
