@@ -124,12 +124,11 @@ class Forum extends CB_Controller
 			// 기존 설정 예치금과, 저장시 설정 예치금이 다를 경우
 			if($getdata['forum_deposit'] != $savedata['forum_deposit']){
 
-				// 예치금이 있는 유저
-				$members_Is_deposit = $this->Member_model->getMembersIsDeposit();
-				// $mem_ids_userforum = $this->Member_model->getMemIdsForReturnToCp_userforum();
-				// $mem_ids = array_merge($mem_ids_forum['list'], $mem_ids_userforum['list']);
+				$mem_ids_forum = $this->Member_model->getMemIdsForReturnToCp_forum();
+				$mem_ids_userforum = $this->Member_model->getMemIdsForReturnToCp_userforum();
+				$mem_ids = array_merge($mem_ids_forum['list'], $mem_ids_userforum['list']);
 				
-				foreach($members_Is_deposit['list'] as $val){
+				foreach($mem_ids as $val){
 
 					$mem_id = (int) $val['mem_id'];
 					$mem_cp = (double) $val['mem_cp'];
@@ -137,41 +136,21 @@ class Forum extends CB_Controller
 					$return_cp = $mem_cp + $mem_deposit;
 					$admin_id = (int) $this->member->item('mem_id');
 
-					$forumWhere = array(
-						'brd_id' => 3,
-						'mem_id' => $mem_id
+					// cp 반환
+					$arr = array(
+						'mem_deposit' => null,
+						'mem_cp' => $return_cp,
 					);
-					$forum = $this->Post_model->get_one('', '', $forumWhere);
-					if($forum){
-						// 포럼 게시물이 있으면
-
-					}else {
-						$userforumWhere = array(
-							'brd_id' => 6,
-							'mem_id' => $mem_id
-						);
-						$userforum = $this->Post_model->get_one('', '', $userforumWhere);
+					$where = array(
+					);
+					$result = $this->Member_model->set_user_modify($mem_id, $arr);
+					
+					// 반환 기록
+					if($result == 1){
+						$content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
+						$action = '포럼예치금 반환';
+						$this->CIC_cp_model->set_cic_cp($mem_id, $content, $money, '@byadmin', $admin_id, $action);
 					}
-					
-
-					print_r($post);
-					print_r('<br>');
-
-					// // cp 반환
-					// $arr = array(
-					// 	'mem_deposit' => null,
-					// 	'mem_cp' => $return_cp,
-					// );
-					// $where = array(
-					// );
-					// $result = $this->Member_model->set_user_modify($mem_id, $arr);
-					
-					// // 반환 기록
-					// if($result == 1){
-					// 	$content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
-					// 	$action = '포럼예치금 반환';
-					// 	$this->CIC_cp_model->set_cic_cp($mem_id, $content, $money, '@byadmin', $admin_id, $action);
-					// }
 
 				}
 				exit;

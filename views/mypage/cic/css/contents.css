@@ -540,6 +540,17 @@
     line-height: 32px;
 }
 
+.member-wrap.mypage .myinfo .fl .state ul li .recomm {
+    font-family: 'GmarketSans';
+    font-size: 14px;
+    color: #fff;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.2em;
+    height: 30px;
+    line-height: 32px;
+}
+
 .member-wrap.mypage .myinfo .fl .state ul li:nth-child(1) p {
     background: url(/assets/images/mypage-email.png) no-repeat left center;
 }
