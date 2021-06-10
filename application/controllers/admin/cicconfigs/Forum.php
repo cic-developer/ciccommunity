@@ -125,9 +125,31 @@ class Forum extends CB_Controller
 			if($getdata['forum_deposit'] != $savedata['forum_deposit']){
 				$mem_ids_forum = $this->Member_model->getMemIdsForReturnToCp_forum();
 				$mem_ids_userforum = $this->Member_model->getMemIdsForReturnToCp_userforum();
+
+				$mem_ids = array_merge($mem_ids_forum['list'], $mem_ids_userforum['list']);
 				
+				foreach($mem_ids as $val){
+					$mem_id = (int) $val['mem_id'];
+					$mem_cp = (double) $val['mem_cp'];
+					$mem_deposit = (double) $val['mem_deposit'];
+
+					$test = $mem_cp + $mem_deposit;
+					print_r($test);
+					print_r('<br>');
+					// $arr = array(
+					// 	'mem_deposit' => null,
+					// 	'mem_cp' => $new_password,
+					// );
+
+					// $result = $this->Member_model->set_user_modify($mem_id, $arr);
+				}
+				exit;
+
 			}
 		}
+
+
+
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

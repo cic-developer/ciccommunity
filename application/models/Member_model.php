@@ -176,7 +176,7 @@ class Member_model extends CB_Model
         
 		$join = array();
 		// $select = 'member.* post.*';
-		$this->db->select('member.mem_id, post.post_id, cic_forum_info.frm_repart_state');
+		$this->db->select('member.mem_id, member.mem_deposit, member.mem_cp'); //, post.post_id, cic_forum_info.frm_repart_state');
 		$join[] = array('table' => 'post', 'on' => 'member.mem_id = post.mem_id', 'type' => 'left');
 		$join[] = array('table' => 'cic_forum_info', 'on' => 'cic_forum_info.pst_id = post.post_id', 'type' => 'left');
 		$where = array(
@@ -195,7 +195,7 @@ class Member_model extends CB_Model
         
 		$join = array();
 		// $select = 'member.* post.*';
-		$this->db->select('member.mem_id, post.post_id, post.post_category');
+		$this->db->select('member.mem_id, member.mem_deposit, member.mem_cp'); //, post.post_id, post.post_category');
 		$join[] = array('table' => 'post', 'on' => 'member.mem_id = post.mem_id', 'type' => 'left');
 		$where = array(
 			'mem_deposit <>' => null,
