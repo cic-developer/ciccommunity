@@ -1515,7 +1515,24 @@ class Mypage extends CB_Controller
 		/**
 		 * 로그인이 필요한 페이지입니다
 		 */
+		
 		required_user_login();
+		
+		$mem_id = (int) $this->member->item('mem_id');
+		
+		$memdata = $this->Member_model->get_one($mem_id);
+
+		
+		$userdate = $memdata['mem_birthday'];
+
+		$year = substr($userdate,0,4);
+		$mon = substr($userdate, 5,2);
+		$day = substr($userdate, 8,2);
+
+		$check = international_age($year, $mon, $day);
+		if($check < 19){
+			alert('만 19세 미만 회원은 이용할 수 없습니다.');
+		}
 
 		$view = array();
 		$view['view'] = array();
@@ -1812,7 +1829,6 @@ class Mypage extends CB_Controller
 		$day = substr($userdate, 8,2);
 
 		$check = international_age($year, $mon, $day);
-		
 		if($check < 19){
 			alert('만 19세 미만 회원은 이용할 수 없습니다.');
 		}

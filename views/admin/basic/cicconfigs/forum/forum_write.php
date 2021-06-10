@@ -103,9 +103,11 @@
 					$(function () {
 						$('#datetimepicker10').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
+							minDate: new Date(),
 						});
 						$('#datetimepicker11').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
+							minDate: new Date(),
 						});
 					});
 					// $(document).ready(function() {

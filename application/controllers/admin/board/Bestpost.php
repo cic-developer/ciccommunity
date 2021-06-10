@@ -82,7 +82,7 @@ class Bestpost extends CB_Controller
 		$this->{$this->modelname}->allow_order_field = array('post_id'); // 정렬이 가능한 필드
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 		$where = array(
-			'brd_id <' => 7,
+			'brd_id <' => 6,
 			'post_exept_state' => 0,
 			'post_datetime >=' => $checktime,
 			'post_del <>' => 2,
@@ -128,7 +128,7 @@ class Bestpost extends CB_Controller
 
 		$select = 'brd_id, brd_name';
 		$where = array(
-			'brd_id <' => 7
+			'brd_id <' => 6
 		);
 		$view['view']['boardlist'] = $this->Board_model->get_board_list($where);
 
@@ -246,7 +246,7 @@ class Bestpost extends CB_Controller
 
 		$select = 'brd_id, brd_name';
 		$where = array(
-			'brd_id <' => 7
+			'brd_id <' => 6
 		);
 		$view['view']['boardlist'] = $this->Board_model->get_board_list($where);
 
