@@ -13,3 +13,19 @@ input[type="checkbox"] {
     -moz-appearance: auto;
     appearance: auto;
 }
+
+
+/* 프로파일 이미지 */
+
+.pre-pro-img {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.pre-pro-img>img {
+    border: 2px solid black;
+    border-radius: 33.333%;
+    width: 100px;
+    height: 100px;
+    margin-top: -100px;
+}

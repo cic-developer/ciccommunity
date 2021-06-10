@@ -75,8 +75,10 @@ class Board_post extends CB_Controller
 				'post_best_state >' => 0,
 			);
 			$list_num = 1;
+			$findex = 'post_best_state';
+			$forder = 'desc';
 			$bestpost = $this->Post_model
-			->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+				->get_like_point_ranking_list($limit, $offset, $where, $findex, $forder, $sfield, $skeyword);
 			if (element('list', $bestpost)) {
 				foreach (element('list', $bestpost) as $key => $val) {
 					$bestpost['list'][$key]['post_display_name'] = display_username(
@@ -119,8 +121,10 @@ class Board_post extends CB_Controller
 			$limit = 10;
 
 			$list_num = 1;
+			$findex = 'post_like_point';
+			$forder = 'desc';
 			$popularpost = $this->Post_model
-				->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+				->get_like_point_ranking_list($limit, $offset, $where, $findex, $forder, $sfield, $skeyword);
 			if (element('list', $popularpost)) {
 				foreach (element('list', $popularpost) as $key => $val) {
 					$popularpost['list'][$key]['post_display_name'] = display_username(
@@ -434,8 +438,10 @@ class Board_post extends CB_Controller
 			);
 			$limit = 10;
 			$list_num = 1;
+			$findex = 'post_like_point';
+			$forder = 'desc';
 			$like_point_ranking_freetalk = $this->Post_model
-				->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+				->get_like_point_ranking_list($limit, $offset, $where, $findex, $forder, $sfield, $skeyword);
 					if (element('list', $like_point_ranking_freetalk)) {
 						foreach (element('list', $like_point_ranking_freetalk) as $key => $val) {
 							$like_point_ranking_freetalk['list'][$key]['post_display_name'] = display_username(
@@ -474,8 +480,10 @@ class Board_post extends CB_Controller
 				);
 				$limit = 10;
 				$list_num = 1;
+				$findex = 'post_dislike_point';
+				$forder = 'desc';
 				$dislike_point_ranking_freetalk = $this->Post_model
-					->get_dislike_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+					->get_dislike_point_ranking_list($limit, $offset, $where, $findex, $forder, $sfield, $skeyword);
 						if (element('list', $dislike_point_ranking_freetalk)) {
 							foreach (element('list', $dislike_point_ranking_freetalk) as $key => $val) {
 							$dislike_point_ranking_freetalk['list'][$key]['post_display_name'] = display_username(

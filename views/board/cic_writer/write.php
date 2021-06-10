@@ -65,7 +65,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$del_column = $download_link ? 'post_file_del[' . element('pfi_id', element($i, element('file', $view))) . ']' : '';
 			?>
 				<div class="form-group">
-					<div class="pre-pro-img" id="image_container"></div>
+				<!-- <div id="div-pro-img"></div> 프로필 이미지 미리보기 -->
+				<div class="pre-pro-img" id="image_container"></div>
 					<label for="<?php echo $file_column; ?>" class="col-sm-2 control-label">대표이미지</label>
 					<div class="col-sm-10">
 						<input 

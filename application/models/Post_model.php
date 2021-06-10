@@ -803,10 +803,10 @@ class Post_model extends CB_Model
 		return $result;
 	}
 
-	public function get_dislike_point_ranking_list($limit = '', $offset = '', $where = '', $category_id = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
+	public function get_dislike_point_ranking_list($limit = '', $offset = '', $where = '', $findex = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
-		if ( ! in_array(strtolower($orderby), $this->allow_order)) {
-			$orderby = 'post_dislike_point desc';
+		if ( ! in_array(strtolower($findex), $this->allow_order)) {
+			$findex = 'post_dislike_point';
 		}
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
 		if (empty($sfield)) {
@@ -895,7 +895,7 @@ class Post_model extends CB_Model
 			$this->db->group_end();
 		}
 
-		$this->db->order_by($orderby);
+		$this->db->order_by($findex, $orderby);
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}
