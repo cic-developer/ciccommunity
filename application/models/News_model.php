@@ -762,10 +762,10 @@ class News_model extends CB_Model
 		return $this->db->update($this->_table);
 	}
 
-	public function update_news_important_0($news_important)
+	public function update_news_important_0($news_id)
 	{
 		$where = array(
-			'news_important' => $news_important,
+			'news_id' => $news_id,
 		);
 
 		$updatedata = array(

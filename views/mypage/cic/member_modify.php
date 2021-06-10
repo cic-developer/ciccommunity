@@ -410,8 +410,11 @@
 		startTime(type);
 	}
 
+	var _is_re_sended = false;
 	$(document).ready(function(){
 		$('.resend-ath-email').on('click', function() {
+			if(_is_re_sended) return false;
+			_is_re_sended = true;
 			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.
 
 			var state ='';
@@ -424,7 +427,7 @@
 					csrf_test_name : cb_csrf_hash
 				},
 				dataType: 'json',
-				async: false,
+				async: true,
 				cache: false,
 				// beforeSend: function () {
 				// var vm = this;
@@ -461,9 +464,14 @@
 /**
  * 이메일 전송 시작
  */
+	var _is_sended = false;
 	$(document).ready(function(){
 		$(".send-ath-email").on('click', function() {
+			if(_is_sended) return false;
+			_is_sended = true;
 			var type = $(this).data('type'); // 해당 type으로 통일된 인증번호 로직 내에서, 'phone' 'password' wallet', 어떠한 값변경을 위한 인증로직인지 구분합니다.
+
+			$('.send-ath-email > span').text('발송중...');
 
 			var state ='';
 			var message = '';
@@ -475,7 +483,7 @@
 					csrf_test_name : cb_csrf_hash
 				},
 				dataType: 'json',
-				async: false,
+				async: true,
 				cache: false,
 				success: function(data) {
 					state = data.state;
@@ -485,6 +493,8 @@
 					if(state == 1){
 						// 성공 메세지
                         alert(message);
+						$('.send-ath-email > span').text('발송완료');
+						$('.send-ath-email').attr('disabled', 'disabled');
                         
 						$('#myModal_' + type + ' .ath-email-content .send-ath-email').attr('style', "display:none;"); // 이메일 전송 버튼 제거
 						$('#myModal_' + type + ' .ath-email-content .confirm-ath-email').attr('style', "display:block;"); // 이메일 인증 버튼 생성

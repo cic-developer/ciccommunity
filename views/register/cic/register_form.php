@@ -241,12 +241,12 @@
 					var _email = $("#mem_email").val();
 					_email = _email.split('@');
 
-					var html = '<p class="success-email rtxt mg10t cblue">승인이 완료되었습니다</p>';
+					var html = '<p class="success-email rtxt mg10t cblue">이메일 인증이 완료되었습니다</p>';
 					html += '<input type="hidden" id="ath_num" name="ath_num" class="" required value="'+ ath_num +'" />'
-
 					$('.con-mail').remove(); // 인증 박스 삭제
 					$("#mem_userid").val(_email[0] + '' + ath_num); // 유저 아이디 
 					$('.mem_email').append(html); // 승인 메세지
+					$('#ath_email > span').text('인증완료');
 				}
 			}
 		});
@@ -268,20 +268,20 @@
 					csrf_test_name : cb_csrf_hash
 				},
 				dataType: 'json',
-				async: false,
+				async: true,
 				cache: false,
 				success: function(data) {
 					result = data.result;
 					reason = data.reason;
+					if(result == "no"){
+						alert(reason);
+					}
+
+					if(result == "available"){
+						alert(reason);
+					}
 				}
 			});
-			if(result == "no"){
-				alert(reason);
-			}
-
-			if(result == "available"){
-				alert(reason);
-			}
 		})
 	})
 
