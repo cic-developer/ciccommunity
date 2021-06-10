@@ -20,7 +20,7 @@
 					}
 					?>
 					<input type="file" name="ban_image" id="ban_image" />
-					<p class="help-block">gif, jpg, png 파일 업로드가 가능합니다</p>
+					<p class="help-block">gif, jpg, png 파일 업로드가 가능합니다( 최대 10 MB )</p>
 				</div>
 			</div>
 			<div class="form-group">

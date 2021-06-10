@@ -1061,7 +1061,7 @@ public function forum_write($post_id = 0)
 			}
 		}
 		
-		$primary_key = $this->Post_model->primary_key;
+		$primary_key = $this->CIC_forum_info_model->primary_key;
 		
 		$postdata = array();
 		$pevdata = array();
@@ -1079,7 +1079,7 @@ public function forum_write($post_id = 0)
 			array(
 				'field' => 'frm_bat_close_datetime',
 				'label' => '배팅 종료일',
-				'rules' => 'trim|required|',
+				'rules' => 'trim|required',
 			),
 			array(
 				'field' => 'frm_close_datetime',
@@ -1201,7 +1201,7 @@ public function forum_write($post_id = 0)
 			$pev_value_1 = $this->input->post('pev_value_1', null, '');
 			
 			
-			if ($this->input->post($primary_key)){
+			if ($this->input->post($primary_key)) {
 				if(empty($cfidata)){
 					/**
 					 * 승인대기 포럼에서 진행중인 포럼으로 승격시 진행되는 부분입니다.
@@ -1255,7 +1255,6 @@ public function forum_write($post_id = 0)
 					'post_nickname' => $this->member->item('mem_nickname'),
 					'post_email' => $this->member->item('mem_email'),
 					'post_homepage' => '',
-
 				);
 				$postUpdatedata['post_device']
 				= ($this->cbconfig->get_device_type() === 'mobile') ? 'mobile' : 'desktop';

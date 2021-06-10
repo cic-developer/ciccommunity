@@ -286,6 +286,9 @@ class Withdraws extends CB_Controller
 				$memo = $this->input->post('cp_memo');
 
 				$result = $this->{$this->modelname}->set_withdraw_approve($widIdx, $adminid, $adminip, $transaction, $percoin, $content, $memo);
+				if($result != 1){
+					// 실패
+				}
 			} else {
 				$this->session->set_flashdata(
 					'message',
@@ -442,24 +445,40 @@ class Withdraws extends CB_Controller
 			$content = $this->input->post('cp_content2');
 			$memo = $this->input->post('cp_memo2');
 			$logResult = $this->CIC_cp_model->set_cic_cp($memIdx, $content, $money, '@byadmin', $admin_info['mem_id'], '출금반려');
-
+            
 			if($logResult == 0){
-				// $this->session->set_flashdata(
-				// 	'message',
-				// 	'cp 로그 기록에 실패!'
-				// );
-				// $param =& $this->querystring;
-				// $redirecturl = admin_url($this->pagedir . '?' . $param->output());
-				// redirect($redirecturl);
+				// 실패
+				// 이전 실행을 리셋
+				$this->Member_model->set_user_point($memIdx, $money, $mem_cp);
+                
+				$this->session->set_flashdata(
+					'message',
+					'포인트 반환에 실패하였습니다'
+				);
+				$param =& $this->querystring;
+				$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+				redirect($redirecturl);
 			}
 			/**
 			 * 반려한 출금 요청건의 상태를 0으로 수정합니다.
 			 * cic_withdraw
 			 */
-			$result = $this->{$this->modelname}->set_withdraw_retire(null, $content, null, $adminip, $memo);
+			$result = $this->{$this->modelname}->set_withdraw_retire($widIdx, $content, $adminid, $adminip, $memo);
 
-			print_r($result);
-			exit;
+			if($result != 1){
+				// 실패
+				// 이전 실행을 리셋
+				$this->CIC_cp_model->set_cic_cp($memIdx, $content, -$money, '@byadmin', $admin_info['mem_id'], '출금반려 실패');
+				$this->Member_model->set_user_point($memIdx, $money, $mem_cp);
+                
+				$this->session->set_flashdata(
+					'message',
+					'포인트 반환에 실패하였습니다'
+				);
+				$param =& $this->querystring;
+				$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+				redirect($redirecturl);
+			}
 		
 			// 이벤트가 존재하면 실행합니다
 			Events::trigger('after', $eventname);
