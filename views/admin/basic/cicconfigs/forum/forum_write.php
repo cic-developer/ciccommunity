@@ -84,41 +84,40 @@
 						}
 					}else {
 					?>
-						<?php
-						if (element('extra_content', $view)) {
-							foreach (element('extra_content', $view) as $key => $value) {
-								if(element('field_name', $value) == 'A_opinion' 
-										|| element('field_name', $value) == 'B_opinion' ){
-						?>
-							<span><?php echo element('display_name', $value); ?></span>
-							<?php echo element('input', $value); ?>
-						<?php
-										}
-							}
-						}
-						?>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">투표 항목</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="pev_value_0">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">투표 항목</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="pev_value_1">
+							</div>
+						</div>
 				<?php
 					}
 				?>
 				<script type="text/javascript">
-					// $(function () {
-					// 	$('#datetimepicker10').datetimepicker({
-					// 		format : 'YYYY-MM-DD HH:mm:ss',
-					// 	});
-					// 	$('#datetimepicker11').datetimepicker({
-					// 		format : 'YYYY-MM-DD HH:mm:ss',
-					// 	});
-					// });
-					$(document).ready(function() {
-						$('#datetimepicker10').data(datetimepicker).OPTION({
+					$(function () {
+						$('#datetimepicker10').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
-							// minViewMode : 0'days'
 						});
-						$('#datetimepicker11').data(datetimepicker).OPTION({
+						$('#datetimepicker11').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
-							// minViewMode : 0'days'
 						});
 					});
+					// $(document).ready(function() {
+					// 	$('#datetimepicker10').data(datetimepicker).OPTION({
+					// 		format : 'YYYY-MM-DD HH:mm:ss',
+					// 		// minViewMode : 0'days'
+					// 	});
+					// 	$('#datetimepicker11').data(datetimepicker).OPTION({
+					// 		format : 'YYYY-MM-DD HH:mm:ss',
+					// 		// minViewMode : 0'days'
+					// 	});
+					// });
 				</script>
 			</div>
 			

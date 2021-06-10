@@ -1804,10 +1804,14 @@ class Mypage extends CB_Controller
 		
 		$memdata = $this->Member_model->get_one($mem_id);
 
-		$targetdate = date('Y-m-d');
+		
 		$userdate = $memdata['mem_birthday'];
+
+		$year = substr($userdate,0,4);
+		$mon = substr($userdate, 5,2);
+		$day = substr($userdate, 8,2);
 		// if($memdata['mem_birthday'] + )
-		print_r($targetdate - $userdate);
+		print_r($day);
 		exit;
 
 		$view = array();

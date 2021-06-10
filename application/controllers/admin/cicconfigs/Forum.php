@@ -1242,6 +1242,28 @@ class Forum extends CB_Controller
 				 * 게시물을 새로 입력하는 경우입니다
 				 */
 				
+
+				print_r($post_title);
+				print_r('<br>');
+				print_r($post_content);
+				print_r('<br>');
+				print_r($frm_bat_close_datetime);
+				print_r('<br>');
+				print_r($frm_close_datetime);
+				print_r('<br>');
+				print_r($pst_id);
+				print_r('<br>');
+				print_r($brd_updatedata);
+				print_r('<br>');
+				print_r($_updatedata);
+				print_r('<br>');
+				print_r($where);
+				print_r('<br>');
+				print_r($pevupdate_0);
+				print_r('<br>');
+				print_r($pevupdate_1);
+				print_r('<br>');
+				exit;
 				$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 				$updatedata['frm_close_datetime'] = $frm_close_datetime;
 				$updatedata['pst_id'] = $pst_id;
