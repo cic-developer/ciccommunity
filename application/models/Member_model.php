@@ -182,7 +182,7 @@ class Member_model extends CB_Model
 		$where = array(
 			'member.mem_deposit <>' => null,
 			'post.brd_id' => 3,
-			'cic_forum_info.frm_repart_state' => null,
+			// 'cic_forum_info.frm_repart_state' => null,
 		);
         
 		$result = $this->_get_list_common($select = '', $join, '', '', $where, '', '', '', '', '', '');
@@ -200,7 +200,7 @@ class Member_model extends CB_Model
 		$where = array(
 			'member.mem_deposit <>' => null,
 			'post.brd_id' => 6,
-			'post.post_category <>' => 2,
+			// 'post.post_category <>' => 2,
 		);
         
 		$result = $this->_get_list_common($select = '', $join, '', '', $where, '', '', '', '', '', '');

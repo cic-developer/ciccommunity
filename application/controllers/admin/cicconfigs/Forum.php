@@ -123,6 +123,7 @@ class Forum extends CB_Controller
 
 			// 기존 설정 예치금과, 저장시 설정 예치금이 다를 경우
 			if($getdata['forum_deposit'] != $savedata['forum_deposit']){
+
 				$mem_ids_forum = $this->Member_model->getMemIdsForReturnToCp_forum();
 				$mem_ids_userforum = $this->Member_model->getMemIdsForReturnToCp_userforum();
 				$mem_ids = array_merge($mem_ids_forum['list'], $mem_ids_userforum['list']);
@@ -140,13 +141,19 @@ class Forum extends CB_Controller
 						'mem_deposit' => null,
 						'mem_cp' => $return_cp,
 					);
-					$this->Member_model->set_user_modify($mem_id, $arr);
-
+					$where = array(
+					);
+					$result = $this->Member_model->set_user_modify($mem_id, $arr);
+					
 					// 반환 기록
-					$content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
-					$action = '포럼예치금 반환';
-					$this->CIC_cp_model->set_cic_cp($mem_id, $content, $money, '@byadmin', $admin_id, $action);
+					if($result == 1){
+						$content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
+						$action = '포럼예치금 반환';
+						$this->CIC_cp_model->set_cic_cp($mem_id, $content, $money, '@byadmin', $admin_id, $action);
+					}
+
 				}
+				exit;
 			}
 		}
 		
@@ -976,7 +983,7 @@ class Forum extends CB_Controller
 			array(
 				'field' => 'frm_bat_close_datetime',
 				'label' => '배팅 종료일',
-				'rules' => 'trim|required',
+				'rules' => 'trim|required|',
 			),
 			array(
 				'field' => 'frm_close_datetime',
