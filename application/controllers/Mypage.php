@@ -1807,11 +1807,15 @@ class Mypage extends CB_Controller
 		
 		$userdate = $memdata['mem_birthday'];
 
+		$now_y = date('Y');
+		$now_m = date('m');
+		$now_d = date('d');
+
 		$year = substr($userdate,0,4);
 		$mon = substr($userdate, 5,2);
 		$day = substr($userdate, 8,2);
 		// if($memdata['mem_birthday'] + )
-		print_r($day);
+		print_r($now_d );
 		exit;
 
 		$view = array();

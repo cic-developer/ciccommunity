@@ -87,13 +87,13 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">투표 항목</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" name="pev_value_0">
+								<input type="text" class="form-control" name="A_opinion">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label">투표 항목</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" name="pev_value_1">
+								<input type="text" class="form-control" name="B_opinion">
 							</div>
 						</div>
 				<?php
