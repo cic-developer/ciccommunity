@@ -82,6 +82,22 @@
 					</div>
 					<?php
 						}
+					}else {
+					?>
+						<?php
+						if (element('extra_content', $view)) {
+							foreach (element('extra_content', $view) as $key => $value) {
+								if(element('field_name', $value) == 'A_opinion' 
+										|| element('field_name', $value) == 'B_opinion' ){
+						?>
+							<span><?php echo element('display_name', $value); ?></span>
+							<?php echo element('input', $value); ?>
+						<?php
+										}
+							}
+						}
+						?>
+				<?php
 					}
 				?>
 				<script type="text/javascript">
