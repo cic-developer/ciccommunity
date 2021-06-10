@@ -1249,7 +1249,7 @@ class Forum extends CB_Controller
 					'post_datetime' => cdate('Y-m-d H:i:s'),
 					'post_updated_datetime' => cdate('Y-m-d H:i:s'),
 					'post_ip' => $this->input->ip_address(),
-					'brd_id' => 1,
+					'brd_id' => 3,
 					'mem_id' => $this->member->item('mem_id'),
 					'post_userid' => $this->member->item('mem_userid'),
 					'post_username' => $this->member->item('mem_username'),
@@ -1269,59 +1269,12 @@ class Forum extends CB_Controller
 					'frm_close_datetime' => $frm_close_datetime,
 					'pst_id' => $post_id
 				);
-				$test = $this->CIC_forum_info_model->insert($forumInfoUpdatedata);
+				$this->CIC_forum_info_model->insert($forumInfoUpdatedata);
 
-				print_r($test);
-				exit;
-
-				$this->Post_extra_vars_model->save($post_id, 3, $pevupdate_0,);
-				$this->Post_extra_vars_model->save($post_id, 3, $pevupdate_1);
-
-				// print_r($post_title);
-				// print_r('<br>');
-				// print_r($post_content);
-				// print_r('<br>');
-				// print_r($frm_bat_close_datetime);
-				// print_r('<br>');
-				// print_r($frm_close_datetime);
-				// print_r('<br>');
-				// print_r($pst_id);
-				// print_r('<br>');
-				// print_r($brd_updatedata);
-				// print_r('<br>');
-				// print_r($_updatedata);
-				// print_r('<br>');
-				// print_r($where);
-				// print_r('<br>');
-				// print_r($pevupdate_0);
-				// print_r('<br>');
-				// print_r($pevupdate_1);
-				// print_r('<br>');
-				// exit;
-				// $updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
-				// $updatedata['frm_close_datetime'] = $frm_close_datetime;
-				// $updatedata['pst_id'] = $pst_id;
-
-				// $updatedata = array(
-				// 	'post_title' => $post_title,
-				// 	'post_content' => $post_content,
-				// 	'post_datetime' => cdate('Y-m-d H:i:s'),
-				// 	'post_updated_datetime' => cdate('Y-m-d H:i:s'),
-				// 	'post_ip' => $this->input->ip_address(),
-				// 	'brd_id' => element('brd_id', $board),
-				// );
 				
-				
-				
-				// $where = array(
-				// 	'post_id' => $pst_id,
-				// );
-				// $this->Post_model->update($pst_id, $brd_updatedata, $where);
-				// $this->Post_model->update($pst_id, $_updatedata, $where);
-				// $this->CIC_forum_info_model->insert($updatedata);
-				// $this->Post_extra_vars_model->update($pst_id, $brd_updatedata, $where);
-				// $this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_0,);
-				// $this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_1);
+				$this->Post_extra_vars_model->add_meta($post_id, 3, 'A_opinion' , $pev_value_0);
+				$this->Post_extra_vars_model->add_meta($post_id, 3, 'B_opinion' , $pev_value_1);
+
 				$this->session->set_flashdata(
 					'message',
 					'정상적으로 입력되었습니다'
