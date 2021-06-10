@@ -1807,17 +1807,18 @@ class Mypage extends CB_Controller
 		
 		$userdate = $memdata['mem_birthday'];
 
-		$now_y = date('Y');
-		$now_m = date('m');
-		$now_d = date('d');
-
-		$now_y = substr($userdate,0,4);
+		$year = substr($userdate,0,4);
 		$mon = substr($userdate, 5,2);
 		$day = substr($userdate, 8,2);
 
+		$check = international_age($year, $mon, $day);
+		
+		if($check < 19){
+			alert('만 19세 미만 회원은 이용할 수 없습니다.');
+		}
+
+
 		// if($memdata['mem_birthday'] + )
-		print_r($now_d );
-		exit;
 
 		$view = array();
 		$view['view'] = array();

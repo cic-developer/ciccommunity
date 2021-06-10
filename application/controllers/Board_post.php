@@ -231,7 +231,7 @@ class Board_post extends CB_Controller
 				'cic_forum_info.frm_bat_close_datetime >=' => $checktime,
 				'cic_forum_info.frm_close_datetime >=' => $checktime,
 				'post_del <>' => 2,
-				'post_best_state' => 3,
+				'post_best_state >' => 0,
 			);
 			$_banner = $this->CIC_forum_model->get_post_list('', '', $where, '', '', '', '');
 			$banner = array();
@@ -248,6 +248,7 @@ class Board_post extends CB_Controller
 			$view['view']['banner'] = $banner;
 			$view['view']['banner_count'] = element('list', $banner) ? count(element('list', $banner)) : 0;
 			$view['view']['banner_noimage_count'] = 4 - $view['view']['banner_count'];
+
 			// 배너 가져오기 끝
 
 
@@ -316,7 +317,7 @@ class Board_post extends CB_Controller
 				'cic_forum_info.frm_bat_close_datetime >=' => $checktime,
 				'cic_forum_info.frm_close_datetime >=' => $checktime,
 				'post_del <>' => 2,
-				'post_best_state' => 3
+				'post_best_state > ' => 0
 			);
 			$_banner = $this->CIC_forum_model->get_post_list('', '', $where, '', '', '', '');
 			$banner = array();

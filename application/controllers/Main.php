@@ -78,7 +78,7 @@ class Main extends CB_Controller
 			'cic_forum_info.frm_bat_close_datetime >=' => $checktime,
 			'cic_forum_info.frm_close_datetime >=' => $checktime,
 			'post_del <>' => 2,
-			'post_best_state' => 3
+			'post_best_state >' => 0
 		);
 		$_forum_banner = $this->CIC_forum_model->get_post_list('', '', $where, '', '', '', '');
 		$forum_banner = array();

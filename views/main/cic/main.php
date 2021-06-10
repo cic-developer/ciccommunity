@@ -235,7 +235,7 @@
                         ?>
                             <div class="item">
                                 <div class="img">
-                                    <img src="<?php echo element('frm_image', $forum_banner) ? base_url('uploads/forum_banner/'.element('frm_image', $forum_banner)) : base_url('uploads/forum_banner/2021/06/forum-img01.jpg') ?>" alt="" />
+                                    <img src="<?php echo element('frm_image', $forum_banner) ? base_url('uploads/forum_image/'.element('frm_image', $forum_banner)) : base_url('uploads/forum_banner/2021/06/forum-img01.jpg') ?>" alt="" />
                                 </div>
 
                                 <div class="txt">

@@ -21,7 +21,8 @@
                             foreach (element('list',element('banner', $view)) as $banner) {
                         ?>
                             <div class="item">
-                                <div class="img"><img src="<?php echo element('frm_image', $banner) ? base_url('uploads/forum_banner/'.element('frm_image', $banner)) : base_url('uploads/forum_banner/2021/06/forum-img01.jpg') ?>" alt="" />
+                                <div class="img">
+                                    <img src="<?php echo element('frm_image', $banner) ? base_url('uploads/forum_image/'.element('frm_image', $banner)) : base_url('uploads/forum_banner/2021/06/forum-img01.jpg') ?>" alt="" />
                                 </div>
 
                                 <div class="ov">
