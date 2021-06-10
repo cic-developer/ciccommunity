@@ -495,7 +495,7 @@ class CICPoints extends CB_Controller
 			 * 게시물의 신규입력 또는 수정작업이 끝난 후 목록 페이지로 이동합니다
 			 */
 			$param =& $this->querystring;
-			$redirecturl = admin_url($this->pagedir. '?' . $param->output());
+			$redirecturl = admin_url($this->pagedir. ($pointType === 'vp' ? '?' : '/cp?') . $param->output());
 			redirect($redirecturl);
 		}
 	}

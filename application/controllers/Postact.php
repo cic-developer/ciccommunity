@@ -2193,7 +2193,7 @@ class Postact extends CB_Controller
 		if ($form_validation == false) {
 			$result = array(
 				'state' => '0',
-				'message' => '배팅에 실패하셨습니다1 (관리자 문의)',
+				'message' => '보유 cp가 부족합니다',
 			);
 			exit(json_encode($result));
 		}else {
@@ -2492,7 +2492,6 @@ class Postact extends CB_Controller
 				exit(json_encode($result));
 			}
 
-
 			// 추가참여 가능 여부 확인 (중복배팅 확인)
 			$where = array(
 				'pst_id' => $post_id,
@@ -2512,12 +2511,20 @@ class Postact extends CB_Controller
 				 * 포인트 차감
 				 * member
 				 */
+				if($mem_cp < $usePoint){
+					$result = array(
+						'state' => '0',
+						'message' => '보유 cp가 부족합니다',
+					);
+					exit(json_encode($result));
+				}
+
 				$this->load->model('Member_model');
 				$result = $this->Member_model->set_user_point($mem_id, $usePoint, $mem_cp);
 				if($result != 1){
 					$result = array(
 						'state' => '0',
-						'message' => '배팅에 실패하셨습니다1 (관리자 문의)',
+						'message' => '배팅에 실패하셨습니다1 (문의)',
 					);
 					exit(json_encode($result));
 				}else {
