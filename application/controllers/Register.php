@@ -1435,6 +1435,8 @@ class Register extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
+		redirect();
+
 		$this->session->keep_flashdata('email_auth_message');
 		$this->session->unset_userdata('dec_data'); // 휴대폰 인증 데이터
 		$this->session->unset_userdata('ath_num'); // 이메일 인증 번호
