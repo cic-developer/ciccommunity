@@ -456,10 +456,10 @@ class Withdraws extends CB_Controller
 			 * 반려한 출금 요청건의 상태를 0으로 수정합니다.
 			 * cic_withdraw
 			 */
-			$result = $this->{$this->modelname}->set_withdraw_retire($widIdx, $content, $adminid, $adminip, $memo);
+			$result = $this->{$this->modelname}->set_withdraw_retire(null, $content, null, $adminip, $memo);
 
-			// print_R()
-			// exit;
+			print_r($result);
+			exit;
 		
 			// 이벤트가 존재하면 실행합니다
 			Events::trigger('after', $eventname);
