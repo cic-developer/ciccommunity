@@ -2658,6 +2658,10 @@ class Postact extends CB_Controller
 			);
 			$this->load->model('CIC_forum_model');
 			$isBat = $this->CIC_forum_model->get_forum_bat($where);
+
+
+			print_r($isBat);
+			exit;
 			if(!$isBat){
 				$result = array(
 					'state' => '0',
@@ -2706,6 +2710,16 @@ class Postact extends CB_Controller
 					);
 					exit(json_encode($result));
 				}
+
+				/**
+				 * 포인트 차감
+				 * member
+				 */
+				// 진영 변경시 수수료
+				$deposit_meta = (double) $this->CIC_forum_config_model->item('forum_bat_change_commission');
+				// 현재 배팅 금액
+				$cfc_cp = $isBat['cfc_cp'];
+				// $result = $this->Member_model->set_user_point($mem_id, $_money, $mem_cp);
 
 				$result = array(
 					'state' => '1',

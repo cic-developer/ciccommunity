@@ -66,10 +66,11 @@ class Banner extends CB_Controller
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
 		$view['view']['sort'] = array(
-			'ban_title' => $param->sort('ban_title', 'asc'),
-			'ban_device' => $param->sort('ban_device', 'asc'),
+			'ban_id' => $param->sort('ban_id', 'asc'),
 			'ban_start_date' => $param->sort('ban_start_date', 'asc'),
 			'ban_end_date' => $param->sort('ban_end_date', 'asc'),
+			'ban_hit' => $param->sort('ban_hit', 'asc'),
+			'ban_order' => $param->sort('ban_order', 'asc'),
 			'ban_activated' => $param->sort('ban_activated', 'asc'),
 		);
 		$findex = $this->input->get('findex') ? $this->input->get('findex') : $this->{$this->modelname}->primary_key;
@@ -85,7 +86,7 @@ class Banner extends CB_Controller
 		 */
 		$this->{$this->modelname}->allow_search_field = array('ban_id', 'ban_title', 'ban_content'); // 검색이 가능한 필드
 		$this->{$this->modelname}->search_field_equal = array('ban_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->{$this->modelname}->allow_order_field = array('ban_title', 'ban_device', 'ban_start_date', 'ban_end_date', 'ban_activated'); // 정렬이 가능한 필드
+		$this->{$this->modelname}->allow_order_field = array('ban_id', 'ban_start_date', 'ban_end_date', 'ban_hit', 'ban_order', 'ban_activated'); // 정렬이 가능한 필드
 
 		$where = array();
 		if ($this->input->get('ban_activated') === 'Y') {

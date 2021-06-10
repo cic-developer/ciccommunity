@@ -22,7 +22,7 @@
 				ob_end_flush();
 				?>
 				<div class="btn-group btn-group-sm pull-right" role="group">
-					<a href="?" class="btn btn-sm <?php echo ($this->input->get('ban_activated') !== 'Y' && $this->input->get('ban_activated') !== 'N') ? 'btn-success' : 'btn-default'; ?>">전체배너</a>
+					<!-- <a href="?" class="btn btn-sm <?php echo ($this->input->get('ban_activated') !== 'Y' && $this->input->get('ban_activated') !== 'N') ? 'btn-success' : 'btn-default'; ?>">전체배너</a> -->
 					<a href="?ban_activated=Y" class="btn btn-sm <?php echo ($this->input->get('ban_activated') === 'Y') ? 'btn-success' : 'btn-default'; ?>">활성</a>
 					<a href="?ban_activated=N" class="btn btn-sm <?php echo ($this->input->get('ban_activated') === 'N') ? 'btn-success' : 'btn-default'; ?>">비활성</a>
 				</div>
@@ -34,7 +34,7 @@
 						<tr>
 							<th><a href="<?php echo element('ban_id', element('sort', $view)); ?>">번호</a></th>
 							<th>이미지</th>
-							<th><a href="<?php echo element('ban_url', element('sort', $view)); ?>">URL</a></th>
+							<th>URL</th>
 							<th><a href="<?php echo element('ban_start_date', element('sort', $view)); ?>">시작일시</a></th>
 							<th><a href="<?php echo element('ban_end_date', element('sort', $view)); ?>">종료일시</a></th>
 							<th><a href="<?php echo element('ban_hit', element('sort', $view)); ?>">클릭수</a></th>

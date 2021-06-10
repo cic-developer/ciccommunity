@@ -110,16 +110,6 @@
 							minDate: new Date(),
 						});
 					});
-					// $(document).ready(function() {
-					// 	$('#datetimepicker10').data(datetimepicker).OPTION({
-					// 		format : 'YYYY-MM-DD HH:mm:ss',
-					// 		// minViewMode : 0'days'
-					// 	});
-					// 	$('#datetimepicker11').data(datetimepicker).OPTION({
-					// 		format : 'YYYY-MM-DD HH:mm:ss',
-					// 		// minViewMode : 0'days'
-					// 	});
-					// });
 				</script>
 			</div>
 			

@@ -43,10 +43,10 @@
 								<th>이미지</th>
 								<th>제목</th>
 								<th>작성자</th>
-								<th>작성일</th>
-								<th>추천수</th>
-								<th>비추천수</th>
-								<th>조회</th>
+								<th><a href="<?php echo element('post_datetime', element('sort', $view)); ?>">작성일</a></th>
+								<th><a href="<?php echo element('post_like_point', element('sort', $view)); ?>">추천수</a></th>
+								<th><a href="<?php echo element('post_dislike_point', element('sort', $view)); ?>">비추천수</a></th>
+								<th><a href="<?php echo element('post_hit', element('sort', $view)); ?>">조회</a></th>
 								<th>상태</th>
 								<th><input type="checkbox" name="chkall" id="chkall" /></th>
 							</tr>
