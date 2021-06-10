@@ -1315,11 +1315,8 @@ class Forum extends CB_Controller
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
 		$view['view']['sort'] = array(
 			'post_id' => $param->sort('post_id', 'asc'),
-			'post_hit' => $param->sort('post_hit', 'asc'),
 			'post_datetime' => $param->sort('post_datetime', 'asc'),
-			'cic_forum_info.frm_bat_close_datetime' => $param->sort('cic_forum_info.frm_bat_close_datetime', 'asc'),
-			'cic_forum_info.frm_close_datetime' => $param->sort('cic_forum_info.frm_close_datetime', 'asc'),
-			'cic_forum_total_cp' => $param->sort('cic_forum_total_cp', 'asc'),
+			'post_hit' => $param->sort('post_hit', 'asc'),
 		);
 		$findex = $this->input->get('findex', null, 'post_id');
 		$forder = $this->input->get('forder', null, 'desc');
@@ -1332,7 +1329,7 @@ class Forum extends CB_Controller
 		
 		$this->{$this->modelname}->allow_search_field = array('post_id', 'post_title', 'post_content'); // 검색이 가능한 필드
 		$this->{$this->modelname}->search_field_equal = array('post_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->{$this->modelname}->allow_order_field = array('post_id', 'post_hit', 'post_datetime', 'cic_forum_info.frm_bat_close_datetime', 'cic_forum_info.frm_close_datetime', 'cic_forum_total_cp');
+		$this->{$this->modelname}->allow_order_field = array('post_id', 'post_hit', 'post_datetime',);
 		// 현재 시간이 포럼 종료 시간보다 많을 경우
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp());
 		$where = array(
@@ -1375,8 +1372,7 @@ class Forum extends CB_Controller
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
-		// $view['view']['list_delete_url'] = site_url('admin/cicconfigs/forum/listDeleteToCloseForum');
-		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listDeleteToCloseForum/?' . $param->output());
+		$view['view']['listdelete_url'] = admin_url($this->pagedir . '/listdelete/?' . $param->output());
 
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
@@ -1416,6 +1412,42 @@ class Forum extends CB_Controller
 		);
 		$param =& $this->querystring;
 		$redirecturl = admin_url($this->pagedir . '/proceeding_forum?' . $param->output());
+		redirect($redirecturl);
+	}
+
+	public function listdelete()
+	{
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_admin_board_post_listdelete';
+		$this->load->event($eventname);
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+
+		/**
+		 * 체크한 게시물의 삭제를 실행합니다
+		 */
+		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
+			foreach ($this->input->post('chk') as $val) {
+				if ($val) {
+					$post = $this->Post_model->get_one($val);
+					$this->board->delete_post($val);
+				}
+			}
+		}
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('after', $eventname);
+
+		/**
+		 * 삭제가 끝난 후 목록페이지로 이동합니다
+		 */
+		$this->session->set_flashdata(
+			'message',
+			'정상적으로 삭제되었습니다'
+		);
+		$param =& $this->querystring;
+		$redirecturl = admin_url($this->pagedir . '/return_forum' . $param->output());
 		redirect($redirecturl);
 	}
 

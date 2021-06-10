@@ -2658,6 +2658,7 @@ class Postact extends CB_Controller
 			);
 			$this->load->model('CIC_forum_model');
 			$isBat = $this->CIC_forum_model->get_forum_bat($where);
+
 			if(!$isBat){
 				$result = array(
 					'state' => '0',
@@ -2683,31 +2684,6 @@ class Postact extends CB_Controller
 				}
 
 				/**
-				 * 배팅 진영 변경
-				 * cic_forum_cp
-				 */
-				$new_cfc_option = $option == 1 ? 2 : 1;
-				$updatedata = array(
-					'cfc_option' => $new_cfc_option,
-					'cfc_state' => 1
-				);
-				$where = array(
-					'pst_id' => $post_id,
-					'mem_id' => $mem_id,
-					'cfc_option' => $option,
-				);
-				$this->load->model('CIC_forum_model');
-				$_result = $this->CIC_forum_model->change_bat('cic_forum_cp', $updatedata, $where);
-
-				if($_result != 1){
-					$result = array(
-						'state' => '0',
-						'message' => '의견 변경에 실패 하였습니다',
-					);
-					exit(json_encode($result));
-				}
-
-				/**
 				 * 포인트 차감
 				 * member
 				 */
@@ -2716,7 +2692,7 @@ class Postact extends CB_Controller
 				$deposit_meta = (double) $this->CIC_forum_config_model->item('forum_bat_change_commission');
 
 				// 현재 배팅 금액
-				$cfc_cp = (double) $isBat['cfc_cp'];
+				$cfc_cp = (double) $isBat[0]['cfc_cp'];
 				
 				// 지급해야할 수수료
 				$need_deposit_cp = $cfc_cp * ($deposit_meta /100);
@@ -2741,16 +2717,44 @@ class Postact extends CB_Controller
 					exit(json_encode($result));
 				} else{
 					// cp 로그
+					$this->load->model('CIC_cp_model');
 					$this->CIC_cp_model->set_cic_cp($mem_id, '-', -$need_deposit_cp, '@byself', $mem_id, '포럼 의견변경');
 
-					// 성공
-					$result = array(
-						'state' => '1',
-						'message' => '성공적으로 처리되었습니다',
+					/**
+					 * 배팅 진영 변경
+					 * cic_forum_cp
+					 */
+					$new_cfc_option = $option == 1 ? 2 : 1;
+					$updatedata = array(
+						'cfc_option' => $new_cfc_option,
+						'cfc_state' => 1
 					);
-					exit(json_encode($result));
+					$where = array(
+						'pst_id' => $post_id,
+						'mem_id' => $mem_id,
+						'cfc_option' => $option,
+					);
+					$this->load->model('CIC_forum_model');
+					$_result = $this->CIC_forum_model->change_bat('cic_forum_cp', $updatedata, $where);
+
+					if($_result != 1){
+						$result = array(
+							'state' => '0',
+							'message' => '의견 변경에 실패 하였습니다',
+						);
+						exit(json_encode($result));
+					}else {
+						// 성공
+						$result = array(
+							'state' => '1',
+							'message' => '성공적으로 처리되었습니다',
+						);
+						exit(json_encode($result));
+					}
 				}
 
+
+				
 			}
 		}
 	}

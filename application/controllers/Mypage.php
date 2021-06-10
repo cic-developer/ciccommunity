@@ -1518,8 +1518,10 @@ class Mypage extends CB_Controller
 		
 		required_user_login();
 		
-		$mem_id = (int) $this->member->item('mem_id');
-		
+		$memdata = $this->member->item('mem_birthday');
+		print_r($memdata);
+		exit;
+
 		$memdata = $this->Member_model->get_one($mem_id);
 
 		

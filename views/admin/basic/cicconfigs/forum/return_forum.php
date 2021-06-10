@@ -35,8 +35,8 @@
 								<th>작성자</th>
 								<th><a href="<?php echo element('post_hit', element('sort', $view)); ?>">조회</a></th>
 								<th><a href="<?php echo element('post_datetime', element('sort', $view)); ?>">날짜</a></th>
-								<th><a href="<?php echo element('cic_forum_info.frm_bat_close_datetime', element('sort', $view)); ?>">배팅마감</a></th>
-								<th><a href="<?php echo element('cic_forum_info.frm_close_datetime', element('sort', $view)); ?>">포럼마감</a></th>
+								<th>배팅마감</th>
+								<th>포럼마감</th>
 								<th><input type="checkbox" name="chkall" id="chkall" /></th>
 							</tr>
 						</thead>
