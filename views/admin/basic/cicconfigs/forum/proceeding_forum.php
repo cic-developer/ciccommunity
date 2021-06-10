@@ -18,6 +18,7 @@
 					?>
 					<div class="btn-group pull-right" role="group" aria-label="...">
 						<button type="button" class="btn btn-outline btn-default btn-sm btn-list-update btn-list-selected disabled" data-list-update-url = "<?php echo element('forum_midway_closing_url', $view); ?>" >선택 중도마감</button>
+						<a href="<?php echo admin_url($this->pagedir); ?>/forum_write/<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-sm">글쓰기</a>
 					</div>
 					<?php
 					$buttons = ob_get_contents();

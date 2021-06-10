@@ -85,22 +85,23 @@
 					}
 				?>
 				<script type="text/javascript">
-					$(function () {
-						$('#datetimepicker10').datetimepicker({
-							format : 'YYYY-MM-DD HH:mm:ss',
-						});
-						$('#datetimepicker11').datetimepicker({
-							format : 'YYYY-MM-DD HH:mm:ss',
-						});
-					});
-					// $(document).ready(function() {
+					// $(function () {
 					// 	$('#datetimepicker10').datetimepicker({
 					// 		format : 'YYYY-MM-DD HH:mm:ss',
-					// 		minViewMode : 0'days'
 					// 	});
-						// $('#datetimepicker11').datetimepicker({
-						// 	format : 'YYYY-MM-DD HH:mm:ss',
-						// });
+					// 	$('#datetimepicker11').datetimepicker({
+					// 		format : 'YYYY-MM-DD HH:mm:ss',
+					// 	});
+					// });
+					$(document).ready(function() {
+						$('#datetimepicker10').data(datetimepicker).OPTION({
+							format : 'YYYY-MM-DD HH:mm:ss',
+							// minViewMode : 0'days'
+						});
+						$('#datetimepicker11').data(datetimepicker).OPTION({
+							format : 'YYYY-MM-DD HH:mm:ss',
+							// minViewMode : 0'days'
+						});
 					});
 				</script>
 			</div>
