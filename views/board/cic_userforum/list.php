@@ -143,20 +143,28 @@
             </div>
             <div class="lower r">
                 <div class="ov">
-                    <?php if (element('isDeposit', $view)) { ?>
-                    <a href="#n" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:inline-block;"><span>예치금 반환</span></a>
-                    <a href="#n" class="by-btn" id="deposit_insert" style="display:none;"><span>예치금 넣기</span></a>
+                    <?php 
+                    if(element('write_url', element('list', $view))){
+                        if (element('isDeposit', $view)) { 
+                    ?>
+                        <a href="#n" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:inline-block;"><span>예치금 반환</span></a>
+                        <a href="#n" class="by-btn" id="deposit_insert" style="display:none;"><span>예치금 넣기</span></a>
                     <?php }else { ?>
-                    <a href="#n" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:none;"><span>예치금 반환</span></a>
-                    <a href="#n" class="by-btn" id="deposit_insert" style="display:inline-block;"><span>예치금 넣기</span></a>
-                    <?php } ?>
+                        <a href="#n" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:none;"><span>예치금 반환</span></a>
+                        <a href="#n" class="by-btn" id="deposit_insert" style="display:inline-block;"><span>예치금 넣기</span></a>
+                    <?php 
+                        }
+                    } 
+                    ?>
 
                     <?php if (element('write_url', element('list', $view))) { ?>
                         <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn">글쓰기</a>
                     <?php } ?>
                     <!-- 글쓰기시 관리자가 설정한 포인트보다 적으면... alert하면 어떨까 -->
                     
+                    <?php if (element('write_url', element('list', $view))) { ?>
                     <p class="ex-cp">보유 예치금 : <?php echo number_format(element('mem_deposit', $view)); ?> CP</p>
+                    <?php } ?>
                 </div>
             </div>
             <!-- s: paging-wrap -->

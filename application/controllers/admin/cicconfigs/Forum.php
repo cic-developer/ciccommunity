@@ -896,11 +896,13 @@ class Forum extends CB_Controller
 
 			/**
 			 * 배분 완료 = state 1로 변경 ( cic_forum_info table)
+			 * cic_forum_info 컬럼 디자인을 보시면 확인할수 있습니다.
 			 */
 			$updatedata = array(
 				'frm_repart_state' => 1,
 				'frm_repart_commission' => $_forum_commission,
 				'frm_repart_reward' => $writer_reward,
+				'frm_total_cp' => $total_cp,
 				'frm_repart_cp' => $repart_cp,
 				'frm_repart_ratio' => $repart_ratio,
 				'frm_repart_real_cp' => $repart_real_cp,
@@ -1041,7 +1043,7 @@ class Forum extends CB_Controller
 	}
 
 
-	public function forum_write($post_id = 0)
+public function forum_write($post_id = 0)
 	{
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_cicconfig_banner_write';
@@ -1058,16 +1060,17 @@ class Forum extends CB_Controller
 				show_404();
 			}
 		}
-
+		
 		$primary_key = $this->Post_model->primary_key;
-
+		
 		$postdata = array();
 		$pevdata = array();
 		$cfidata = array();
 		if($post_id) {
 			$postdata = $this->Post_model->get_one($post_id);
-			$pevdata = $this->Post_extra_vars->get($post_id);
+			$pevdata = $this->Post_extra_vars_model->get($post_id);
 			$cfidata = $this->CIC_forum_info_model->get_one($post_id);
+
 		}
 
 		$this->load->library('form_validation');
@@ -1130,13 +1133,14 @@ class Forum extends CB_Controller
 			$this->data = $view;
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
+			
 
 			} else {
 			/**
 			 * 유효성 검사를 통과한 경우입니다.
 			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
 			 */
-
+			
 			 // $upload_path => uploads/banner/
             $this->load->library('upload');
 			if (isset($_FILES) && isset($_FILES['frm_image']) && isset($_FILES['frm_image']['name']) && $_FILES['frm_image']['name']) {
@@ -1185,6 +1189,7 @@ class Forum extends CB_Controller
 					$file_error = $this->upload->display_errors();
 				}
             }
+			
 
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
@@ -1194,17 +1199,82 @@ class Forum extends CB_Controller
 			$post_content = $this->input->post('post_content', null, '');
 			$pev_value_0 = $this->input->post('pev_value_0', null, '');
 			$pev_value_1 = $this->input->post('pev_value_1', null, '');
-
+			
+			
 			if($this->input->post($primary_key)){
 				if(empty($cfidata)){
+					
+					/**
+					 * 승인대기 포럼에서 진행중인 포럼으로 승격시 진행되는 부분입니다.
+					 */
 
+					$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
+					$updatedata['frm_close_datetime'] = $frm_close_datetime;
+					$updatedata['pst_id'] = $pst_id;
+					
+					$where = array(
+						'post_id' => $pst_id,
+					);
+					$this->Post_model->update($pst_id, $brd_updatedata, $where);
+					$this->Post_model->update($pst_id, $_updatedata, $where);
+					$this->CIC_forum_info_model->insert($updatedata);
+					$this->Post_extra_vars_model->update($pst_id, $brd_updatedata, $where);
+					$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_0,);
+					$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_1);
+					$this->session->set_flashdata(
+						'message',
+						'정상적으로 입력되었습니다'
+					);
 				}else{
-
+					/**
+					 * 진행중인 포럼에서 수정하는 경우입니다.
+					 */
+					$this->Post_model->update($pst_id, $brd_updatedata, $where);
+					$this->Post_model->update($pst_id, $_updatedata, $where);
+					$this->CIC_forum_info_model->update($pst_id, $updatedata, $where);
+					$this->Post_extra_vars_model->update($pst_id, $brd_updatedata, $where);
+					$this->Post_extra_vars_model->save($pst_id, 3, $pevupdate_0,);
+					$this->Post_extra_vars_model->save($pst_id, 3, $pevupdate_1);
+					$this->session->set_flashdata(
+						'message',
+						'정상적으로 수정되었습니다'
+					);
 				}
-			}else{
+			}else if(empty($post_id)){
 				/**
 				 * 게시물을 새로 입력하는 경우입니다
 				 */
+				$postUpdatedata = array(
+					'post_title' => $post_title,
+					'post_content' => $post_content,
+					'post_datetime' => cdate('Y-m-d H:i:s'),
+					'post_updated_datetime' => cdate('Y-m-d H:i:s'),
+					'post_ip' => $this->input->ip_address(),
+					'brd_id' => 3,
+					'mem_id' => $this->member->item('mem_id'),
+					'post_userid' => $this->member->item('mem_userid'),
+					'post_username' => $this->member->item('mem_username'),
+					'post_nickname' => $this->member->item('mem_nickname'),
+					'post_email' => $this->member->item('mem_email'),
+					'post_homepage' => '',
+
+				);
+				$postUpdatedata['post_device']
+				= ($this->cbconfig->get_device_type() === 'mobile') ? 'mobile' : 'desktop';
+
+				$post_id = $this->Post_model->insert($postUpdatedata);
+
+
+				$forumInfoUpdatedata = array(
+					'frm_bat_close_datetime' => $frm_bat_close_datetime,
+					'frm_close_datetime' => $frm_close_datetime,
+					'pst_id' => $post_id
+				);
+				$this->CIC_forum_info_model->insert($forumInfoUpdatedata);
+
+				
+				$this->Post_extra_vars_model->add_meta($post_id, 3, 'A_opinion' , $pev_value_0);
+				$this->Post_extra_vars_model->add_meta($post_id, 3, 'B_opinion' , $pev_value_1);
 			}
 			$this->cache->delete('forum/forum-info-' . cdate('Y-m-d'));
 
