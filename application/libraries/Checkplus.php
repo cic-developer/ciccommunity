@@ -272,7 +272,7 @@ class Checkplus extends CI_Controller
     }
 
 	//********************************************************************************************
-    //해당 함수에서 에러 발생 시(int)$len => (int)$len 로 수정 후 사용하시기 바랍니다. (하기소스 참고)
+    //해당 함수에서 에러 발생 시 $len => (int)$len 로 수정 후 사용하시기 바랍니다. (하기소스 참고)
     //********************************************************************************************
     function GetValue($str , $name)
     {
@@ -284,13 +284,13 @@ class Checkplus extends CI_Controller
         {
             $pos2 = strpos( $str , ":" , $pos1);
             $len = substr($str , $pos1 , $pos2 - $pos1);
-            $key = substr($str , $pos2 + 1 , $len);
-            $pos1 = $pos2 + $len + 1;
+            $key = substr($str , $pos2 + 1 , (int)$len);
+            $pos1 = $pos2 + (int)$len + 1;
             if( $key == $name )
             {
                 $pos2 = strpos( $str , ":" , $pos1);
                 $len = substr($str , $pos1 , $pos2 - $pos1);
-                $value = substr($str , $pos2 + 1 , $len);
+                $value = substr($str , $pos2 + 1 , (int)$len);
                 return $value;
             }
             else
@@ -298,7 +298,7 @@ class Checkplus extends CI_Controller
                 // 다르면 스킵한다.
                 $pos2 = strpos( $str , ":" , $pos1);
                 $len = substr($str , $pos1 , $pos2 - $pos1);
-                $pos1 = $pos2 + $len + 1;
+                $pos1 = $pos2 + (int)$len + 1;
             }            
         }
     }
