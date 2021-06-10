@@ -1517,15 +1517,8 @@ class Mypage extends CB_Controller
 		 */
 		
 		required_user_login();
-		
-		$memdata = $this->member->item('mem_birthday');
-		print_r($memdata);
-		exit;
 
-		$memdata = $this->Member_model->get_one($mem_id);
-
-		
-		$userdate = $memdata['mem_birthday'];
+		$userdate = $this->member->item('mem_birthday');
 
 		$year = substr($userdate,0,4);
 		$mon = substr($userdate, 5,2);
@@ -1534,6 +1527,7 @@ class Mypage extends CB_Controller
 		$check = international_age($year, $mon, $day);
 		if($check < 19){
 			alert('만 19세 미만 회원은 이용할 수 없습니다.');
+			exit;
 		}
 
 		$view = array();
@@ -1645,6 +1639,18 @@ class Mypage extends CB_Controller
 		 * 로그인이 필요한 페이지입니다
 		 */
 		required_user_login();
+
+		$userdate = $this->member->item('mem_birthday');;
+
+		$year = substr($userdate,0,4);
+		$mon = substr($userdate, 5,2);
+		$day = substr($userdate, 8,2);
+
+		$check = international_age($year, $mon, $day);
+		if($check < 19){
+			alert('만 19세 미만 회원은 이용할 수 없습니다.');
+			exit;
+		}
 
 		// 데이터 빡스~
 		$view = array();
@@ -1819,12 +1825,7 @@ class Mypage extends CB_Controller
 		 */
 		required_user_login();
 
-		$mem_id = (int) $this->member->item('mem_id');
-		
-		$memdata = $this->Member_model->get_one($mem_id);
-
-		
-		$userdate = $memdata['mem_birthday'];
+		$userdate = $this->member->item('mem_birthday');;
 
 		$year = substr($userdate,0,4);
 		$mon = substr($userdate, 5,2);
@@ -1833,6 +1834,7 @@ class Mypage extends CB_Controller
 		$check = international_age($year, $mon, $day);
 		if($check < 19){
 			alert('만 19세 미만 회원은 이용할 수 없습니다.');
+			exit;
 		}
 
 
@@ -1956,6 +1958,23 @@ class Mypage extends CB_Controller
 	}
 
 	public function charge_ajax(){
+		
+		$userdate = $this->member->item('mem_birthday');;
+
+		$year = substr($userdate,0,4);
+		$mon = substr($userdate, 5,2);
+		$day = substr($userdate, 8,2);
+
+		$check = international_age($year, $mon, $day);
+		if($check < 19){
+			$return = array(
+				'result' => false,
+				'code' 	 => '0019',
+				'data'	 => "만 19세 미만 회원은 이용할 수 없습니다."
+			);
+			echo json_encode($return, JSON_UNESCAPED_UNICODE);
+			exit;
+		}
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */

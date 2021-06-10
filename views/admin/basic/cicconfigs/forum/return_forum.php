@@ -18,7 +18,7 @@
 					?>
 						<div class="btn-group pull-right" role="group" aria-label="...">
 						<!-- 분배가 완료된 게시물만 삭제가 가능합니다 -->
-							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-delete btn-list-selected disabled" data-list-delete-url = "<?php echo element('returnlistdelete_url', $view); ?>" >선택삭제</button>
+							<button type="button" class="btn btn-outline btn-default btn-sm btn-list-delete btn-list-selected disabled" data-list-delete-url = "<?php echo element('listdelete_url', $view); ?>" >선택삭제</button>
 						</div>
 					<?php
 					$buttons = ob_get_contents();
