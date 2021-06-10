@@ -4109,9 +4109,14 @@
     opacity: 0.3;
 }
 
-.cmmt-wrap .reply .comment {
+
+/* .cmmt-wrap .reply .comment {
     border: 1px solid #ccc;
     display: none;
+} */
+
+.cmmt-wrap .reply .comment form {
+    border: 1px solid #ccc;
 }
 
 .cmmt-wrap .reply.active .comment {
