@@ -41,6 +41,7 @@
     left: 0;
     top: 17px;
     padding-left: 37px;
+    width: 100%;
 }
 
 .member-wrap.modify .entry li .btxt span {
@@ -5043,6 +5044,7 @@
     position: absolute;
     left: 0;
     top: 0;
+    width: 100%;
 }
 
 .member-wrap.join .entry li .field {
