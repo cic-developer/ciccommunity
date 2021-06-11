@@ -182,14 +182,14 @@ class Searchcoin extends CB_Controller
 				}	
 			}
 		}
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin');
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'index');
 		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
-	public function CStock_keyword($id)
+	public function CStock_keyword($id = '')
 	{
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_amdmin_coin_keyword';
@@ -218,7 +218,63 @@ class Searchcoin extends CB_Controller
 		$this->form_validation->set_rules($config);
 		if($this->form_validation->run() == FALSE){
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+			$coin = $this->CIC_coin_list_model->get_one($id);
+			if(!$coin){
+				show_404();
+			}
+			$where = array(
+				'coin_market' => $id,
+			);
+			$keyword_list = $this->CIC_coin_keyword_model->get('','',$where);
+			//INSERT KEYWORDS IN DB 
+			// $keyword_list = $this->CIC_coin_keyword_model->get_keyword();
+			// $keyword_arr = array();
+			// foreach($keyword_list as $value){
+			// 	$keyword_arr[] = element('coin_keyword', $value);
+			// }
+			// $stockKey = $this->CIC_coin_list_model->getstockData();
+			// foreach($stockKey as $getList){
+			// 	$data = array(
+			// 		array(
+			// 			'coin_market'=> $getList['clist_market'],
+			// 			'coin_keyword'=>$getList['clist_name_ko']
+			// 		),
+			// 		array(
+			// 			'coin_market'=> $getList['clist_market'],
+			// 			'coin_keyword'=>$getList['clist_name_en']
+			// 		),
+			// 		array(
+			// 			'coin_market'=> $getList['clist_market'],
+			// 			'coin_keyword'=> $getList['clist_market'],
+			// 		),
+			// 	);
+			// 	if(isset($data) && !empty($data)){
+			// 		foreach($data as $thisData){
+			// 			if(in_array($thisData['coin_keyword'], $keyword_arr)){	
+			// 				continue;
+			// 			} else {
+			// 				$this->CIC_coin_keyword_model->refresh_keyword_list($thisData);
+			// 			}	
+			// 		} 
+			// 	}	
+			// }	
+			//SHOWING LIST TO VIEW KEYWORD TO LIST
+			$view['coin'] = $coin;
+			$view['keyword_list'] = $keyword_list;
+	
+			//이벤트가 존재하면 실행합니다
+			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+	
+			/**
+			* 어드민 레이아웃을 정의합니다
+			*/
+			$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin_keyword');
+			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+			$this->data = $view;
+			$this->layout = element('layout_skin_file', element('layout', $view));
+			$this->view = element('view_skin_file', element('layout', $view));
 		}else{
+			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 			$is_data = $this->CIC_coin_keyword_model->get_one('','',array('coin_keyword' => $this -> input -> post('keyword')));
 			if(!$is_data){
 				$data = array(
@@ -232,57 +288,6 @@ class Searchcoin extends CB_Controller
 			}
 			redirect(admin_url($this->pagedir.'/CStock_keyword/'.$id));
 		}
-		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-
-		//INSERT KEYWORDS IN DB 
-		$keyword_list = $this->CIC_coin_keyword_model->get_keyword();
-		$keyword_arr = array();
-		foreach($keyword_list as $value){
-			$keyword_arr[] = element('coin_keyword', $value);
-		}
-		$stockKey = $this->CIC_coin_list_model->getstockData();
-		foreach($stockKey as $getList){
-			$data = array(
-				array(
-					'coin_market'=> $getList['clist_market'],
-					'coin_keyword'=>$getList['clist_name_ko']
-				),
-				array(
-					'coin_market'=> $getList['clist_market'],
-					'coin_keyword'=>$getList['clist_name_en']
-				),
-				array(
-					'coin_market'=> $getList['clist_market'],
-					'coin_keyword'=> $getList['clist_market'],
-				),
-			);
-			if(isset($data) && !empty($data)){
-				foreach($data as $thisData){
-					if(in_array($thisData['coin_keyword'], $keyword_arr)){	
-						continue;
-					} else {
-						$this->CIC_coin_keyword_model->refresh_keyword_list($thisData);
-					}	
-				} 
-			}	
-		}	
-		//SHOWING LIST TO VIEW KEYWORD TO LIST
-		$keylist = $this -> CIC_coin_keyword_model->get_keyword();
-		$view['keylist'] = $keylist;
-		$coin_list = $this->CIC_coin_list_model->getstockData();
-		$view['coin_list'] = $coin_list;
-
-		//이벤트가 존재하면 실행합니다
-		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-
-		/**
-		* 어드민 레이아웃을 정의합니다
-		*/
-		$layoutconfig = array('layout' => 'layout', 'skin' => 'Searchcoin_keyword');
-		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-		$this->data = $view;
-		$this->layout = element('layout_skin_file', element('layout', $view));
-		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
 	function delete_keyword(){

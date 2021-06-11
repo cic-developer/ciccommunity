@@ -43,10 +43,10 @@
 						?>
 							<tr>
 								<td><?php echo number_format(element('num', $result)); ?></td>
-								<td><a href='https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=<?php echo element('clist_market', $result); ?>'><?php echo html_escape(element('clist_market', $result)); ?></a></td>
+								<td><a href="<?php echo admin_url($this->pagedir.'/CStock_keyword/'.element('clist_market', $result).'?'.$this->input->server('QUERY_STRING', null, '')); ?>"><?php echo html_escape(element('clist_market', $result)); ?></a></td>
 								<td><?php echo element('clist_name_ko', $result); ?></td>
 								<td><?php echo element('clist_name_en', $result); ?></td>
-								<td><button  type="button" id="myBtn" class="btn btn-default btn-xs" onClick="document.location.href='https://dev.ciccommunity.com/admin/cicconfigs/searchcoin/CStock_keyword?id=<?php echo element('clist_market', $result); ?>'">설정</button></td>
+								<td><button  type="button" id="myBtn" class="btn btn-default btn-xs" onClick="document.location.href='<?php echo admin_url($this->pagedir.'/CStock_keyword/'.element('clist_market', $result).'?'.$this->input->server('QUERY_STRING', null, '')); ?>'">설정</button></td>
 							</tr>
 						<?php
 							}

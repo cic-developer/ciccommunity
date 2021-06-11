@@ -1211,6 +1211,10 @@ public function forum_write($post_id = 0)
 				$updatedata['frm_image'] = $updatephoto;
             }
 			if($post_id){
+
+				print_r($cfidata);
+				exit;
+
 				if($this->input->get('type') == 1){
 					$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 					$updatedata['frm_close_datetime'] = $frm_close_datetime;
@@ -1229,7 +1233,7 @@ public function forum_write($post_id = 0)
 						'정상적으로 입력되었습니다'
 					);
 					
-				}else{
+				}else if($this->input->get('type') == 2){
 					$this->Post_model->update($post_id, $brd_updatedata, $where);
 					$this->Post_model->update($post_id, $_updatedata, $where);
 					$this->CIC_forum_info_model->update($post_id, $updatedata, $where);
@@ -1277,7 +1281,7 @@ public function forum_write($post_id = 0)
 				$this->Post_extra_vars_model->add_meta($post_id, 3, 'A_opinion' , $pev_value_0);
 				$this->Post_extra_vars_model->add_meta($post_id, 3, 'B_opinion' , $pev_value_1);
 			}
-			
+
 			$this->cache->delete('forum/forum-info-' . cdate('Y-m-d'));
 
 			// 이벤트가 존재하면 실행합니다

@@ -10,26 +10,20 @@
 
 		<div class="box-table-header">
 			<div class="btn-group pull-right" role="group" aria-label="...">
-				<a href="<?php echo admin_url('/cicconfigs/searchcoin'); ?>" class="btn btn-outline btn-default btn-sm">목록</a>
+				<a href="<?php echo admin_url($this->pagedir.'?'.$this->input->server('QUERY_STRING', null, '')); ?>" class="btn btn-outline btn-default btn-sm">목록</a>
 			</div>
 
 		</div>
 
 			<div class="list-group">
 				<form class="form-inline">
-					<?php 
-					$myId = $this->input->get('id'); 
-					?>
 					<div class="form-group col-md-6">
-					<?php foreach($coin_list as $clists) { 
-						if($myId == $clists['clist_market']) {?>
-					<div class="form-group col-md-6">
-						<label><?php echo $clists['clist_market']. " - " .$clists['clist_name_ko']; ?></label>
-					</div>
-					<?php } }?>
+						<div class="form-group col-md-6">
+							<label><?php echo element('clist_market', $coin). " - " . element('clist_name_ko', $coin); ?></label>
+						</div>
 					</div>
 					<div class="input-group col-md-6">
-						<input type="hidden" name="coin_market" value = "<?php echo $myId; ?>" >
+						<input type="hidden" name="coin_market" value = "<?php echo element('clist_market', $coin);?>" >
 						<input type="text" class="form-control" name = "keyword" placeholder = "Keyword">
 						<span class=input-group-btn>
 							<input type="submit" class="btn btn-primary" value='추가'>
@@ -53,22 +47,19 @@
 
 						</tr>
 						<?php 
-						foreach($keylist as $stocks){ ?>
-						<?php $myId = $this->input->get('id'); ?> 
-							<?php if($myId == $stocks['coin_market']) { ?>
+						foreach($keyword_list as $stocks){ ?>
 							<tr>
 								<td>
 									<?php 
-									echo $stocks['coin_keyword'];
+										echo $stocks['coin_keyword'];
 									?>
 								</td>
 								<td>
 									<button type="button" class="btn btn-info btn-xs modal_open1" data-toggle="modal" 
                                             data-idx="<?php echo $stocks['idx']; ?>" id="<?php echo $stocks['idx']; ?>" >수정</button>								
 								</td>
-								<td><a onclick="deleteKeyword()" href="delete_keyword?id=<?php echo $stocks['idx'];?>&pageId=<?php echo $this->input->get('id');?>"  class="btn btn-danger btn-xs bdelete" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
+								<td><a onclick="deleteKeyword()" href="delete_keyword?id=<?php echo $stocks['idx'];?>&pageId=<?php echo element('clist_market', $coin);?>"  class="btn btn-danger btn-xs bdelete" name='deleted' value = "<?php echo $stocks['idx']; ?>">삭제 </a></td> 
 							</tr>	
-							<?php } ?>	
 						<?php
 						}
 						?>
@@ -89,7 +80,7 @@
                                 <!-- <label for="usr"></label> -->
                                     <input type="hidden" name="wid_idx1" id="wid_idx1" value="" />
 									<input type="hidden" name="coin_market" id="coin_market" value="" />
-									<input type="hidden" name="pageId" id="pageId" value="<?php echo $this->input->get('id'); ?>" />
+									<input type="hidden" name="pageId" id="pageId" value="<?php echo element('clist_market', $coin); ?>" />
                                     <div class="form-group text-left">
                                         <label for="cp_content1" >키워드</label>
                                             <input class="form-control" rows="3" cols="75" id="cp_content1" name="cp_content1" placeholder="처리사유를 입력해주세요">
