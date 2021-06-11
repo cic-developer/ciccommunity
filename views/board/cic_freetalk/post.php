@@ -47,14 +47,16 @@
 						<?php 
 						} 
 						?>
-<!-- 공지사항일때 없앨 부분 -->
+
+						<?php if(html_escape(element('post_notice', element('post', $view))) == 0){ ?>
 						<div class="vp-point">
 							<ul>
 								<li><a href="#n" class="up" data-contenttype="post"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>
 								<li><a href="#n" class="down" data-contenttype="post"><?php echo number_format(element('post_dislike_point', element('post', $view))); ?></a></li>
 							</ul>
 						</div>
-<!-- 공지사항일때 없앨 부분 -->
+						<?php } ?>
+
 					</div>
 				</div>
 				<div class="cons">
@@ -63,14 +65,16 @@
 						<?php echo element('content', element('post', $view)); ?>
 					</div>
 					<!-- 본문 내용 끝 -->
-<!-- 공지사항일때 없앨 부분 -->
+
+					<?php if(html_escape(element('post_notice', element('post', $view))) == 0){ ?>
 					<div class="vp-point">
 						<ul>
 							<li><a href="#n" class="up" data-contenttype="post"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>
 							<li><a href="#n" class="down" data-contenttype="post"><?php echo number_format(element('post_dislike_point', element('post', $view))); ?></a></li>
 						</ul>
 					</div>
-<!-- 공지사항일때 없앨 부분 -->
+					<?php } ?>
+
 					<!-- <div class="modify">
 						<?php //if (element('modify_url', $view)) { ?>
 						<a href="<?php //echo element('modify_url', $view); ?>" class="mo-btn">
@@ -118,7 +122,7 @@
 				<?php } ?>
 			</div>
 			<div class="gap60"></div>
-<!-- 공지사항일때 없앨 부분 -->
+			<?php if(html_escape(element('post_notice', element('post', $view))) == 0){ ?>
 			<div class="best">
 				<div class="fl">
 					<h4>BEST VP UP</h4>
@@ -132,10 +136,10 @@
 										<span class="num"><?php echo number_format(element('num', $like_point_ranking_freetalk)); ?></span>
 										<div class="my-info">
 											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $like_point_ranking_freetalk), 30, 30)?>" alt=""></p>
-											<p class="rtxt"><?php echo html_escape(element('post_userid', $like_point_ranking_freetalk)); ?></p>
+											<p class="rtxt"><?php echo html_escape(element('cmt_nickname', $like_point_ranking_freetalk)); ?></p>
 										</div>
-										<span class="txt"><?php echo html_escape(element('post_title', $like_point_ranking_freetalk)); ?></span>
-										<span class="vp"><?php echo number_format(element('post_like_point', $like_point_ranking_freetalk)); ?></span>
+										<span class="txt"><?php echo html_escape(element('cmt_content', $like_point_ranking_freetalk)); ?></span>
+										<span class="vp"><?php echo number_format(element('cmt_like_point', $like_point_ranking_freetalk)); ?></span>
 									</a>
 								</li>
 						<?php
@@ -162,10 +166,10 @@
 										<span class="num"><?php echo number_format(element('num', $dislike_point_ranking_freetalk)); ?></span>
 										<div class="my-info">
 											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $dislike_point_ranking_freetalk), 30, 30)?>" alt=""></p>
-											<p class="rtxt"><?php echo html_escape(element('post_userid', $dislike_point_ranking_freetalk)); ?></p>
+											<p class="rtxt"><?php echo html_escape(element('cmt_nickname', $dislike_point_ranking_freetalk)); ?></p>
 										</div>
-										<span class="txt"><?php echo html_escape(element('post_title', $dislike_point_ranking_freetalk)); ?></span>
-										<span class="vp"><?php echo number_format(element('post_dislike_point', $dislike_point_ranking_freetalk)); ?></span>
+										<span class="txt"><?php echo html_escape(element('cmt_content', $dislike_point_ranking_freetalk)); ?></span>
+										<span class="vp"><?php echo number_format(element('cmt_dislike_point', $dislike_point_ranking_freetalk)); ?></span>
 									</a>
 								</li>
 						<?php
@@ -181,12 +185,12 @@
 					</ul>
 				</div>
 			</div>
-<!-- 공지사항일때 없앨 부분 -->
+			<?php } ?>
 		</div>
 
 		<div class="gap60"></div>
 		<!-- s: cmmt -->
-<!-- 공지사항일때 없앨 부분 -->
+		<?php if(html_escape(element('post_notice', element('post', $view))) == 0){ ?>
 		<div class="cmmt-wrap">
 			<div class="comment">
 				<h4>댓글 <span><?php echo number_format(element('post_comment_count', element('post', $view))); ?></span></h4>
@@ -201,7 +205,7 @@
 			<div class="cmmt" id="viewcomment">
 			</div>
 		</div>
-<!-- 공지사항일때 없앨 부분 -->
+		<?php } ?>
 		<!-- e: cmmt -->
 		<!-- page end // -->
 	</div>

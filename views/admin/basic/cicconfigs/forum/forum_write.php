@@ -105,17 +105,30 @@
 				<script type="text/javascript">
 				var frmbatclosedatetime = "<?php echo set_value('frm_bat_lose_datetime', element('frm_bat_close_datetime', element('frminfodata', $view))); ?>";
 				var frmclosedatetime = "<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('frminfodata', $view))); ?>";
-					$(function () {
+					// $(function () {
+					// 	$('#datetimepicker10').datetimepicker({
+					// 		format : 'YYYY-MM-DD HH:mm:ss',
+					// 		minDate : new Date(),
+					// 		defaultDate : frmbatclosedatetime ? frmbatclosedatetime : new Date(),
+							
+					// 	});
+					// 	$('#datetimepicker11').datetimepicker({
+					// 		format : 'YYYY-MM-DD HH:mm:ss',
+					// 		minDAte : new Date(),
+					// 		defaultDate : frmclosedatetime ? frmclosedatetime : new Date(),
+							
+					// 	});
+					// });
+					$(document).ready(function(){
 						$('#datetimepicker10').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
-							defaultDate : frmbatclosedatetime ? frmbatclosedatetime : new Date(),
-							
+							defaultDate : frmbatclosedatetime ? frmbatclosedatetime : new Date()
 						});
 						$('#datetimepicker11').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
-							defaultDate : frmclosedatetime ? frmclosedatetime : new Date(),
+							defaultDate : frmbatclosedatetime ? frmbatclosedatetime : new Date()
 						});
-					});
+					})
 				</script>
 			</div>
 			
