@@ -1725,26 +1725,16 @@ class Mypage extends CB_Controller
                 
 				if($result == 0 ){
 					/**
-					 * 출금 신청 실패로 인한, 차감포인트 리셋
-					 * member
+					 * 
 					 */
-					// 차감 후의 포인트 가져오기
-					$new_mem_cp = $this->Member_model->get_by_memid($mem_id, 'mem_cp');
-					$result = $this->Member_model->set_user_point($mem_id, -$_money, $new_mem_cp['mem_cp']);
-                    
-					if($result != 1){
-						$this->session->set_flashdata(
-							'message',
-							'포인트 차감후 신청 및 포인트 리셋에 실패하였습니다 (관리자문의)'
-						);
-					} 
-                    
 					$this->session->set_flashdata(
 						'message',
 						'출금 신청에 실패하였습니다 (관리자 문의)'
 					);
 				} else{
-					$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '-', -$_money, '@byself', $mem_id, '출금신청');
+
+					// insert cp
+					$this->point->insert_cp($mem_id, '출금신청', -$_money, 'withdraw', $result, '출금신청');
 
 					$this->session->set_flashdata(
 						'message',

@@ -85,30 +85,19 @@ class Deposit extends CB_Controller
         // 예치금 추가 + cp 차감
         if(!$mem_deposit){
             $arr = array(
-                // 'mem_cp' => $mem_cp - $deposit_meta,
                 'mem_deposit' => $deposit_meta,
             );
             $this->Member_model->set_user_modify($mem_id, $arr);
 
+            // insert cp
             $this->point->insert_cp($mem_id, '포럼 예치금', -$deposit_meta, 'member', $mem_id, '포럼예치금입금');
             
-            if($memResult == 1){
-                // cp 로그 기록
-                $logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '예치금 넣기', -$deposit_meta, '@byself', $mem_id, '예치금 넣기');
-                
-                $result = array(
-                    'state' => '1',
-                    'message' => $deposit_meta.'cp를 예치하였습니다',
-                );
-                exit(json_encode($result));
+            $result = array(
+                'state' => '1',
+                'message' => $deposit_meta.'cp를 예치하였습니다',
+            );
+            exit(json_encode($result));
 
-            }else {
-                $result = array(
-                    'state' => '0',
-                    'message' => 'cp 예치에 실패하였습니다',
-                );
-                exit(json_encode($result));
-            }
         }else {
             $result = array(
 				'state' => '0',
@@ -177,37 +166,19 @@ class Deposit extends CB_Controller
         // 예치금 제거 + cp 반환
         if($mem_deposit){
             $arr = array(
-                'mem_cp' => $mem_cp + $mem_deposit,
+                // 'mem_cp' => $mem_cp + $mem_deposit,
                 'mem_deposit' => null,
             );
-            $memResult = $this->Member_model->set_user_modify($mem_id, $arr);
-            
-            if($memResult == 1){
-                // cp 로그 기록
-                $logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '예치금 반환', $mem_deposit, '@byself', $mem_id, '예치금 반환');
-                
-                $result = array(
-                    'state' => '1',
-                    'message' => '예치금이 반환 되었습니다',
-                );
-                exit(json_encode($result));
+            $this->Member_model->set_user_modify($mem_id, $arr);
 
-                // $logResult false반환값 확인 필요7
-                // if($logResult == 1){
-                // }else {
-                //     $result = array(
-                //         'state' => '0',
-                //         'message' => '예치금 반환후 로그기록에 실패하였습니다',
-                //     );
-                //     exit(json_encode($result));
-                // }
-            }else {
-                $result = array(
-                    'state' => '0',
-                    'message' => '예치금이 반환에 실패하였습니다',
-                );
-                exit(json_encode($result));
-            }
+            // insert cp
+            $this->point->insert_cp($mem_id, '포럼예치금', $mem_deposit, 'member', $mem_id, '포럼예치금반환');
+                
+            $result = array(
+                'state' => '1',
+                'message' => '예치금이 반환 되었습니다',
+            );
+            exit(json_encode($result));
         }else {
             $result = array(
 				'state' => '0',

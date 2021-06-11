@@ -188,11 +188,13 @@ class Searchcoin extends CB_Controller
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
-	public function CStock_keyword(){
+
+	public function CStock_keyword()
+	{
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_amdmin_coin_keyword';
 		$this->load->event($eventname);
-	    $this->load->helper('url');
+		$this->load->helper('url');
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 		$view = array();

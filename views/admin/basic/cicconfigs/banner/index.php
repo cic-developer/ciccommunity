@@ -6,9 +6,11 @@
 		echo form_open(current_full_url(), $attributes);
 		?>
 			<div class="box-table-header">
-				<ul class="nav nav-pills">
-					<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir); ?>">배너관리</a></li>
-				</ul>
+				<div class="btn-group btn-group-sm" role="group">
+					<a href="?" class="btn btn-sm <?php echo ($this->input->get('ban_activated') !== 'Y' && $this->input->get('ban_activated') !== 'N') ? 'btn-success' : 'btn-default'; ?>">전체배너</a>
+					<a href="?ban_activated=Y" class="btn btn-sm <?php echo ($this->input->get('ban_activated') === 'Y') ? 'btn-success' : 'btn-default'; ?>">활성</a>
+					<a href="?ban_activated=N" class="btn btn-sm <?php echo ($this->input->get('ban_activated') === 'N') ? 'btn-success' : 'btn-default'; ?>">비활성</a>
+				</div>
 				<?php
 				ob_start();
 				?>
@@ -21,11 +23,6 @@
 				$buttons = ob_get_contents();
 				ob_end_flush();
 				?>
-				<div class="btn-group btn-group-sm pull-right" role="group">
-					<a href="?" class="btn btn-sm <?php echo ($this->input->get('ban_activated') !== 'Y' && $this->input->get('ban_activated') !== 'N') ? 'btn-success' : 'btn-default'; ?>">전체배너</a>
-					<a href="?ban_activated=Y" class="btn btn-sm <?php echo ($this->input->get('ban_activated') === 'Y') ? 'btn-success' : 'btn-default'; ?>">활성</a>
-					<a href="?ban_activated=N" class="btn btn-sm <?php echo ($this->input->get('ban_activated') === 'N') ? 'btn-success' : 'btn-default'; ?>">비활성</a>
-				</div>
 			</div>
 			<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
 			<div class="table-responsive">

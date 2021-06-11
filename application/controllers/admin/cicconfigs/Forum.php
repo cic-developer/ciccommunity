@@ -1192,8 +1192,95 @@ public function forum_write($post_id = 0)
 			$post_content = $this->input->post('post_content', null, '');
 			$pev_value_0 = $this->input->post('pev_value_0', null, '');
 			$pev_value_1 = $this->input->post('pev_value_1', null, '');
+
+			$updatedata = array(
+				'pst_id' => $pst_id,
+				'frm_bat_close_datetime' => $frm_bat_close_datetime,
+				'frm_close_datetime' => $frm_close_datetime,
+			);
+			$_updatedata = array(
+				'post_title' => $post_title,
+				'post_content' => $post_content,
+			);
+			$postupdatedata = array(
+				'brd_id' => 3,
+			);
+			$brd_updatedata = array(
+				'brd_id' => 3,
+			);
+			$pevupdate_0 = array(
+				'A_opinion' => $pev_value_0
+			);
+			$pevupdate_1 = array(
+				'B_opinion' => $pev_value_1
+			);
+            if($updatephoto){
+				$updatedata['frm_image'] = $updatephoto;
+            }
 			
-			
+			if(empty($post_id)){
+				$postUpdatedata = array(
+					'post_title' => $post_title,
+					'post_content' => $post_content,
+					'post_datetime' => cdate('Y-m-d H:i:s'),
+					'post_updated_datetime' => cdate('Y-m-d H:i:s'),
+					'post_ip' => $this->input->ip_address(),
+					'brd_id' => 3,
+					'mem_id' => $this->member->item('mem_id'),
+					'post_userid' => $this->member->item('mem_userid'),
+					'post_username' => $this->member->item('mem_username'),
+					'post_nickname' => $this->member->item('mem_nickname'),
+					'post_email' => $this->member->item('mem_email'),
+					'post_homepage' => '',
+
+				);
+				$postUpdatedata['post_device']
+				= ($this->cbconfig->get_device_type() === 'mobile') ? 'mobile' : 'desktop';
+
+				$post_id = $this->Post_model->insert($postUpdatedata);
+
+
+				$forumInfoUpdatedata = array(
+					'frm_bat_close_datetime' => $frm_bat_close_datetime,
+					'frm_close_datetime' => $frm_close_datetime,
+					'pst_id' => $post_id
+				);
+				$this->CIC_forum_info_model->insert($forumInfoUpdatedata);
+
+				
+				$this->Post_extra_vars_model->add_meta($post_id, 3, 'A_opinion' , $pev_value_0);
+				$this->Post_extra_vars_model->add_meta($post_id, 3, 'B_opinion' , $pev_value_1);
+			} else if($post_id){
+				if(empty($cfidata['frm_bat_close_datetime'])){
+					$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
+					$updatedata['frm_close_datetime'] = $frm_close_datetime;
+					$updatedata['pst_id'] = $post_id;
+					$where = array(
+						'post_id' => $post_id,
+					);
+					$this->Post_model->update($post_id, $brd_updatedata, $where);
+					$this->Post_model->update($post_id, $_updatedata, $where);
+					$this->CIC_forum_info_model->insert($updatedata);
+					$this->Post_extra_vars_model->update($post_id, $brd_updatedata, $where);
+					$this->Post_extra_vars_model->save($post_id, 6, $pevupdate_0,);
+					$this->Post_extra_vars_model->save($post_id, 6, $pevupdate_1);
+					$this->session->set_flashdata(
+						'message',
+						'정상적으로 입력되었습니다'
+					);
+				}else{
+					$this->Post_model->update($pst_id, $brd_updatedata, $where);
+					$this->Post_model->update($pst_id, $_updatedata, $where);
+					$this->CIC_forum_info_model->update($pst_id, $updatedata, $where);
+					$this->Post_extra_vars_model->update($pst_id, $brd_updatedata, $where);
+					$this->Post_extra_vars_model->save($pst_id, 3, $pevupdate_0,);
+					$this->Post_extra_vars_model->save($pst_id, 3, $pevupdate_1);
+					$this->session->set_flashdata(
+						'message',
+						'정상적으로 수정되었습니다'
+					);
+				}
+			}
 		}
 	}
 

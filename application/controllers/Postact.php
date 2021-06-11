@@ -2266,8 +2266,8 @@ class Postact extends CB_Controller
 				 * cp 기록
 				 * cic_cp
 				 */
-				$this->load->model('CIC_cp_model');
-				$this->CIC_cp_model->set_cic_cp($mem_id, '포럼배팅', -$usePoint, '@byself', $mem_id, '포럼배팅');
+				// insert cp
+				$this->point->insert_cp($mem_id, '포럼배팅', -$usePoint, 'post', $post_id, '포럼배팅');
 
 				/**
 				 * 배팅
@@ -2532,8 +2532,8 @@ class Postact extends CB_Controller
 					 * cp 기록
 					 * cic_cp
 					 */
-					$this->load->model('CIC_cp_model');
-					$this->CIC_cp_model->set_cic_cp($mem_id, '추가포럼배팅', -$usePoint, '@byself', $mem_id, '추가포럼배팅');
+					// insert cp
+					$this->point->insert_cp($mem_id, '추가포럼배팅', -$usePoint, 'post', $post_id, '추가포럼배팅');
 
 					/**
 					 * 추가 배팅
