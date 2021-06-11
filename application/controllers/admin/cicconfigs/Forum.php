@@ -183,7 +183,7 @@ class Forum extends CB_Controller
 								$action = '포럼예치금 반환';
 
 								// insert_cp +
-								$this->point->insert_cp($mem_id, $content, $mem_deposit, 'member', $mem_id, $action);
+								$this->point->insert_cp($mem_id, $mem_deposit, $content, 'member', $mem_id, $action);
 
 							}
 						}
@@ -224,7 +224,7 @@ class Forum extends CB_Controller
 									$action = '포럼예치금 반환';
 
 									// insert_cp
-									$this->point->insert_cp($mem_id, $content, $mem_deposit, 'member', $mem_id, $action);
+									$this->point->insert_cp($mem_id, $mem_deposit, $content, 'member', $mem_id, $action);
 								}
 							}
 						}else {
@@ -244,7 +244,7 @@ class Forum extends CB_Controller
 								$action = '포럼예치금 반환';
 								
 								// insert_cp
-								$this->point->insert_cp($mem_id, $content, $mem_deposit, 'member', $mem_id, $action);
+								$this->point->insert_cp($mem_id, $mem_deposit, $content, 'member', $mem_id, $action);
 							}
 						}
 					}
@@ -806,7 +806,7 @@ class Forum extends CB_Controller
 			$writer_changed_cp = $writer_cp + $writer_reward;
 
 			// insert_cp
-			$this->point->insert_cp($writer_id, '포럼 게시물 작성자', $writer_reward, 'post', $pst_id, '포럼보상지급');
+			$this->point->insert_cp($writer_id, $writer_reward, '포럼 게시물 작성자', 'post', $pst_id, '포럼보상지급');
 
 			/**
 			 * 투표자 보상 지급 시작
@@ -869,7 +869,7 @@ class Forum extends CB_Controller
 						$this->Member_model->set_user_modify($mem_id, $arr);
 
 						// insert cp
-						$this->point->insert_cp($mem_id, '포럼승리 포인트 배분', $give_cp, 'post', $pst_id, '포럼보상지급');
+						$this->point->insert_cp($mem_id, $give_cp, '포럼승리 포인트 배분', 'post', $pst_id, '포럼보상지급');
 					}
 				}
 			}
@@ -909,7 +909,7 @@ class Forum extends CB_Controller
 				if($memResult == 1){
 
 					// insert_cp
-					$this->point->insert_cp($writer_id, '포럼 마감 및 배분 완료', $writer_deposit, 'member', $writer_id, '예치금 반환');
+					$this->point->insert_cp($writer_id, $writer_deposit, '포럼 마감 및 배분 완료', 'member', $writer_id, '예치금 반환');
 					
 					$this->session->set_flashdata(
 						'message',
@@ -1213,7 +1213,7 @@ class Forum extends CB_Controller
             }
 			if($post_id){
 
-				if($this->input->get('type') == 1){
+				if($this->input->get('type') == 'a'){
 					$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 					$updatedata['frm_close_datetime'] = $frm_close_datetime;
 					$updatedata['pst_id'] = $post_id;
@@ -1231,7 +1231,7 @@ class Forum extends CB_Controller
 						'정상적으로 입력되었습니다'
 					);
 					
-				}else if($this->input->get('type') == 2){
+				}else if($this->input->get('type') == 'b'){
 					$this->Post_model->update($post_id, $brd_updatedata, $where);
 					$this->Post_model->update($post_id, $_updatedata, $where);
 					$this->CIC_forum_info_model->update($post_id, $updatedata, $where);
@@ -1242,15 +1242,6 @@ class Forum extends CB_Controller
 						'message',
 						'정상적으로 수정되었습니다'
 					);
-					Events::trigger('after', $eventname);
-
-					/**
-					 * 게시물의 신규입력 또는 수정작업이 끝난 후 목록 페이지로 이동합니다
-					 */
-					$param =& $this->querystring;
-					$redirecturl = admin_url($this->pagedir . '/proceeding_forum' . $param->output());
-
-					redirect($redirecturl);
 				}
 			} else {
 				/**

@@ -62,7 +62,7 @@
                                 <td><?php echo display_datetime(element('frm_bat_close_datetime', $result), 'full'); ?></td>
 								<td><?php echo display_datetime(element('frm_close_datetime', $result), 'full'); ?></td>
                                 <td><?php echo number_format(element('cic_forum_total_cp', $result), 2); ?></td>
-                                <td><a href="<?php echo admin_url($this->pagedir); ?>/forum_write/<?php echo element(element('primary_key', $view), $result); ?>?type=2" class="btn btn-outline btn-default btn-xs">수정</a></td>
+                                <td><a href="<?php echo admin_url($this->pagedir); ?>/forum_write/<?php echo element(element('primary_key', $view), $result); ?>?type=b" class="btn btn-outline btn-default btn-xs">수정</a></td>
 								<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
 							</tr>
 						<?php

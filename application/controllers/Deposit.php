@@ -90,7 +90,7 @@ class Deposit extends CB_Controller
             $this->Member_model->set_user_modify($mem_id, $arr);
 
             // insert cp -
-            $this->point->insert_cp($mem_id, '포럼 예치금', -$deposit_meta, 'member', $mem_id, '포럼예치금입금');
+            $this->point->insert_cp($mem_id, -$deposit_meta, '포럼 예치금', 'member', $mem_id, '포럼예치금입금');
             
             $result = array(
                 'state' => '1',
@@ -168,11 +168,11 @@ class Deposit extends CB_Controller
             $arr = array(
                 'mem_deposit' => null,
             );
-            $this->Member_model->set_user_modify($mem_id, $arr);
+            // $this->Member_model->set_user_modify($mem_id, $arr);
 
             // insert cp +
-            $this->point->insert_cp($mem_id, '포럼예치금', $mem_deposit, 'member', $mem_id, '포럼예치금반환');
-                
+            $result = $this->point->insert_cp($mem_id, $mem_deposit, '포럼예치금', 'member', $mem_id, '포럼예치금반환');
+            
             $result = array(
                 'state' => '1',
                 'message' => '예치금이 반환 되었습니다',

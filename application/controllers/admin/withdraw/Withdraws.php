@@ -439,7 +439,7 @@ class Withdraws extends CB_Controller
 		$content = $this->input->post('cp_content2');
 		$memo = $this->input->post('cp_memo2');
 		// insert_cp +
-		$this->point->insert_cp($memIdx, $content, $money, 'withdraw', $widIdx, '출금반려');
+		$this->point->insert_cp($memIdx, $money, $content, 'withdraw', $widIdx, '출금반려');
 	
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('after', $eventname);

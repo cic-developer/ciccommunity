@@ -1721,7 +1721,7 @@ class Mypage extends CB_Controller
 			} else{
 
 				// insert cp -
-				$this->point->insert_cp($mem_id, '출금신청', -$_money, 'withdraw', $result, '출금신청');
+				$this->point->insert_cp($mem_id, -$_money, '출금신청', 'withdraw', $result, '출금신청');
 
 				$this->session->set_flashdata(
 					'message',

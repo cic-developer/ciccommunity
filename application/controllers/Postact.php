@@ -2267,7 +2267,7 @@ class Postact extends CB_Controller
 				 * cic_cp
 				 */
 				// insert cp -
-				$this->point->insert_cp($mem_id, '포럼배팅', -$usePoint, 'post', $post_id, '포럼배팅');
+				$this->point->insert_cp($mem_id, -$usePoint, '포럼배팅', 'post', $post_id, '포럼배팅');
 
 				/**
 				 * 배팅
