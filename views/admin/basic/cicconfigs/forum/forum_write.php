@@ -5,6 +5,7 @@
 
 
 	<div class="box-table">
+	
 		<?php
 		echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
 		$attributes = array('class' => 'form-horizontal', 'name' => 'fadminwrite', 'id' => 'fadminwrite');
@@ -102,15 +103,17 @@
 					}
 				?>
 				<script type="text/javascript">
+				var frmbatclosedatetime = "<?php echo set_value('frm_bat_lose_datetime', element('frm_bat_close_datetime', element('frminfodata', $view))); ?>";
+				var frmclosedatetime = "<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('frminfodata', $view))); ?>";
 					$(function () {
 						$('#datetimepicker10').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
-							minDate:  new Date(),
+							minDate: frmbatclosedatetime ? frmbatclosedatetime : new Date(),
 							
 						});
 						$('#datetimepicker11').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
-							minDate:  new Date(),
+							minDate: frmclosedatetime ? frmclosedatetime : new Date(),
 						});
 					});
 				</script>
