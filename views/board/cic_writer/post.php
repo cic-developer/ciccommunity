@@ -85,33 +85,20 @@
 			<div class="best">
 				<div class="fl">
 					<h4>BEST VP UP</h4>
-					<ul>
-						<!-- <li>
-							<a href="#n">
-								<span class="num">1</span>
-								<div class="my-info">
-									<p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>"
-											alt=""></p>
-									<p class="rtxt">코린이1235</p>
-								</div>
-								<span class="txt">[스압] 월급루팡이 만들어지는 과정 (5)</span>
-								<span class="vp">102,522</span>
-							</a>
-						</li> -->
-						
+					<ul>						
 						<?php
-						if (element('list',element('like_point_ranking_writer', $view))) {
-							foreach (element('list',element('like_point_ranking_writer', $view)) as $like_point_ranking_writer) {
+						if (element('list',element('like_point_ranking', $view))) {
+							foreach (element('list',element('like_point_ranking', $view)) as $like_point_ranking) {
 								?>
 								<li>
-									<a href="<?php echo goto_url(element('posturl', $like_point_ranking_writer)); ?>">
-										<span class="num"><?php echo number_format(element('num', $like_point_ranking_writer)); ?></span>
+									<a href="javascript:void(0);" style="cursor:text;">
+										<span class="num"><?php echo number_format(element('num', $like_point_ranking)); ?></span>
 										<div class="my-info">
-											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $like_point_ranking_writer), 30, 30)?>" alt=""></p>
-											<p class="rtxt"><?php echo html_escape(element('post_userid', $like_point_ranking_writer)); ?></p>
+											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $like_point_ranking), 30, 30)?>" alt=""></p>
+											<p class="rtxt"><?php echo html_escape(element('cmt_nickname', $like_point_ranking)); ?></p>
 										</div>
-										<span class="txt"><?php echo html_escape(element('post_title', $like_point_ranking_writer)); ?></span>
-										<span class="vp"><?php echo number_format(element('post_like_point', $like_point_ranking_writer)); ?></span>
+										<span class="txt"><?php echo html_escape(element('cmt_content', $like_point_ranking)); ?></span>
+										<span class="vp"><?php echo number_format(element('cmt_like_point', $like_point_ranking)); ?></span>
 									</a>
 								</li>
 						<?php
@@ -130,18 +117,18 @@
 					<h4>BEST VP DOWN</h4>
 					<ul>
 						<?php
-						if (element('list',element('dislike_point_ranking_writer', $view))) {
-							foreach (element('list',element('dislike_point_ranking_writer', $view)) as $dislike_point_ranking_writer) {
+						if (element('list',element('dislike_point_ranking', $view))) {
+							foreach (element('list',element('dislike_point_ranking', $view)) as $dislike_point_ranking) {
 								?>
 								<li>
-									<a href="<?php echo goto_url(element('posturl', $dislike_point_ranking_writer)); ?>">
-										<span class="num"><?php echo number_format(element('num', $dislike_point_ranking_writer)); ?></span>
+									<a href="javascript:void(0);" style="cursor:text;">
+										<span class="num"><?php echo number_format(element('num', $dislike_point_ranking)); ?></span>
 										<div class="my-info">
-											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $dislike_point_ranking_writer), 30, 30)?>" alt=""></p>
-											<p class="rtxt"><?php echo html_escape(element('post_userid', $dislike_point_ranking_writer)); ?></p>
+											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $dislike_point_ranking), 30, 30)?>" alt=""></p>
+											<p class="rtxt"><?php echo html_escape(element('cmt_nickname', $dislike_point_ranking)); ?></p>
 										</div>
-										<span class="txt"><?php echo html_escape(element('post_title', $dislike_point_ranking_writer)); ?></span>
-										<span class="vp"><?php echo number_format(element('post_dislike_point', $dislike_point_ranking_writer)); ?></span>
+										<span class="txt"><?php echo html_escape(element('cmt_content', $dislike_point_ranking)); ?></span>
+										<span class="vp"><?php echo number_format(element('cmt_dislike_point', $dislike_point_ranking)); ?></span>
 									</a>
 								</li>
 						<?php

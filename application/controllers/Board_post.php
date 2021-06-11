@@ -428,7 +428,7 @@ class Board_post extends CB_Controller
 		$post['extravars'] = $this->Post_extra_vars_model->get_all_meta($post_id);
 		$view['view']['post'] = $post;
 
-		if($post['brd_id'] == 1){
+		if($post['brd_id'] == 1 || $post['brd_id'] == 2){
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 			$where = array(
 				'post_id' => $post_id,
@@ -438,15 +438,15 @@ class Board_post extends CB_Controller
 			$limit = 10;
 			$list_num = 1;
 			$orderby = 'cmt_like_point desc';
-			$like_point_ranking_freetalk = $this->Comment_model
+			$like_point_ranking = $this->Comment_model
 				->get_comment_list($limit, $offset, $where, '', $orderby);
-			if (element('list', $like_point_ranking_freetalk)) {
-				foreach (element('list', $like_point_ranking_freetalk) as $key => $val) {
-					$like_point_ranking_freetalk['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-					$like_point_ranking_freetalk['list'][$key]['num'] = $list_num++;
+			if (element('list', $like_point_ranking)) {
+				foreach (element('list', $like_point_ranking) as $key => $val) {
+					$like_point_ranking['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+					$like_point_ranking['list'][$key]['num'] = $list_num++;
 					if ($board) {
-						$like_point_ranking_freetalk['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-						$like_point_ranking_freetalk['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+						$like_point_ranking['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+						$like_point_ranking['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
 					}
 				}
 			}
@@ -458,96 +458,16 @@ class Board_post extends CB_Controller
 			);
 			$limit = 10;
 			$list_num = 1;
-			// $findex = 'post_dislike_point';
 			$orderby = 'cmt_dislike_point desc';
-			$dislike_point_ranking_freetalk = $this->Comment_model
+			$dislike_point_ranking = $this->Comment_model
 				->get_comment_list($limit, $offset, $where, '', $orderby);
-			if (element('list', $dislike_point_ranking_freetalk)) {
-				foreach (element('list', $dislike_point_ranking_freetalk) as $key => $val) {;
-					$dislike_point_ranking_freetalk['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-					$dislike_point_ranking_freetalk['list'][$key]['num'] = $list_num++;
+			if (element('list', $dislike_point_ranking)) {
+				foreach (element('list', $dislike_point_ranking) as $key => $val) {;
+					$dislike_point_ranking['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+					$dislike_point_ranking['list'][$key]['num'] = $list_num++;
 					if ($board) {
-						$dislike_point_ranking_freetalk['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-						$dislike_point_ranking_freetalk['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
-					}
-				}
-			}
-		}
-		
-		if($post['brd_id'] == 2){
-			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-			$where = array(
-				'brd_id' => 2,
-				'post_datetime >=' => $checktime,
-			);
-			$limit = 10;
-			$list_num = 1;
-			$like_point_ranking_writer = $this->Post_model
-				->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-					if (element('list', $like_point_ranking_writer)) {
-						foreach (element('list', $like_point_ranking_writer) as $key => $val) {
-							$like_point_ranking_writer['list'][$key]['post_display_name'] = display_username(
-								element('post_userid', $val),
-								element('post_nickname', $val)
-							);
-							$like_point_ranking_writer['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-							$like_point_ranking_writer['list'][$key]['num'] = $list_num++;
-							if ($board) {
-								$like_point_ranking_writer['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-								$like_point_ranking_writer['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
-							}
-							$like_point_ranking_writer['list'][$key]['category'] = '';
-							if (element('post_category', $val)) {
-								$like_point_ranking_writer['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
-							}
-							if (element('post_image', $val)) {
-								$this->load->model('Post_file_model');
-								$imagewhere = array(
-									'post_id' => element('post_id', $val),
-									'pfi_is_image' => 1,
-								);
-								$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-								$like_point_ranking_writer['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
-							} else {
-								$like_point_ranking_writer['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
-								}
-							}
-						}
-				$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-				$where = array(
-					'brd_id' => 2,
-					'post_datetime >=' => $checktime,
-				);
-				$limit = 10;
-				$list_num = 1;
-				$dislike_point_ranking_writer = $this->Post_model
-					->get_dislike_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
-						if (element('list', $dislike_point_ranking_writer)) {
-							foreach (element('list', $dislike_point_ranking_writer) as $key => $val) {
-							$dislike_point_ranking_writer['list'][$key]['post_display_name'] = display_username(
-							element('post_userid', $val),
-							element('post_nickname', $val)
-							);
-						$dislike_point_ranking_writer['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-						$dislike_point_ranking_writer['list'][$key]['num'] = $list_num++;
-					if ($board) {
-							$dislike_point_ranking_writer['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-							$dislike_point_ranking_writer['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
-						}
-					$dislike_point_ranking_writer['list'][$key]['category'] = '';
-					if (element('post_category', $val)) {
-							$dislike_point_ranking_writer['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
-						}
-					if (element('post_image', $val)) {
-						$this->load->model('Post_file_model');
-						$imagewhere = array(
-							'post_id' => element('post_id', $val),
-							'pfi_is_image' => 1,
-						);
-						$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-						$dislike_point_ranking_freetalk['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
-					} else {
-						$dislike_point_ranking_freetalk['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
+						$dislike_point_ranking['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+						$dislike_point_ranking['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
 					}
 				}
 			}
@@ -601,10 +521,8 @@ class Board_post extends CB_Controller
 
 		}
 		
-		$view['view']['like_point_ranking_freetalk'] = $like_point_ranking_freetalk;
-		$view['view']['dislike_point_ranking_freetalk'] = $dislike_point_ranking_freetalk;
-		$view['view']['like_point_ranking_writer'] = $like_point_ranking_writer;
-		$view['view']['dislike_point_ranking_writer'] = $dislike_point_ranking_writer;
+		$view['view']['like_point_ranking'] = $like_point_ranking;
+		$view['view']['dislike_point_ranking'] = $dislike_point_ranking;
 		
 		$mem_id = (int) $this->member->item('mem_id');
 		
