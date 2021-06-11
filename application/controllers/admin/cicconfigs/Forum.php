@@ -183,7 +183,7 @@ class Forum extends CB_Controller
 								$action = '포럼예치금 반환';
 
 								// insert_cp +
-								$this->point->insert_cp($mem_id, $mem_deposit, $content, 'member', $mem_id, $action);
+								$this->point->insert_cp($mem_id, $mem_deposit, $content, 'member', $mem_id, $this->member->item('mem_id') . '-' . uniqid(''));
 
 							}
 						}
@@ -224,7 +224,7 @@ class Forum extends CB_Controller
 									$action = '포럼예치금 반환';
 
 									// insert_cp
-									$this->point->insert_cp($mem_id, $mem_deposit, $content, 'member', $mem_id, $action);
+									$this->point->insert_cp($mem_id, $mem_deposit, $content, 'member', $mem_id, $this->member->item('mem_id') . '-' . uniqid(''));
 								}
 							}
 						}else {
@@ -244,7 +244,7 @@ class Forum extends CB_Controller
 								$action = '포럼예치금 반환';
 								
 								// insert_cp
-								$this->point->insert_cp($mem_id, $mem_deposit, $content, 'member', $mem_id, $action);
+								$this->point->insert_cp($mem_id, $mem_deposit, $content, 'member', $mem_id, $this->member->item('mem_id') . '-' . uniqid(''));
 							}
 						}
 					}
@@ -806,7 +806,7 @@ class Forum extends CB_Controller
 			$writer_changed_cp = $writer_cp + $writer_reward;
 
 			// insert_cp
-			$this->point->insert_cp($writer_id, $writer_reward, '포럼 게시물 작성자', 'post', $pst_id, '포럼보상지급');
+			$this->point->insert_cp($writer_id, $writer_reward, '포럼 게시물 작성자', 'post', $pst_id,  $this->member->item('mem_id') . '-' . uniqid(''));
 
 			/**
 			 * 투표자 보상 지급 시작
@@ -869,7 +869,7 @@ class Forum extends CB_Controller
 						$this->Member_model->set_user_modify($mem_id, $arr);
 
 						// insert cp
-						$this->point->insert_cp($mem_id, $give_cp, '포럼승리 포인트 배분', 'post', $pst_id, '포럼보상지급');
+						$this->point->insert_cp($mem_id, $give_cp, '포럼승리 포인트 배분', 'post', $pst_id,  $this->member->item('mem_id') . '-' . uniqid(''));
 					}
 				}
 			}
@@ -909,7 +909,7 @@ class Forum extends CB_Controller
 				if($memResult == 1){
 
 					// insert_cp
-					$this->point->insert_cp($writer_id, $writer_deposit, '포럼 마감 및 배분 완료', 'member', $writer_id, '예치금 반환');
+					$this->point->insert_cp($writer_id, $writer_deposit, '포럼 마감 및 배분 완료', 'member', $writer_id, $this->member->item('mem_id') . '-' . uniqid(''));
 					
 					$this->session->set_flashdata(
 						'message',
@@ -1209,6 +1209,7 @@ class Forum extends CB_Controller
 			);
             if($updatephoto){
 				$updatedata['frm_image'] = $updatephoto;
+				$forumInfoUpdatedata['frm_image'] = $updatephoto;
             }
 			if($post_id){
 

@@ -188,7 +188,7 @@ class Point extends CI_Controller
 
 		// 포인트가 없다면 업데이트 할 필요 없음
 		// $point = (int) $point;
-		if (empty((int) $point)) {
+		if (empty((double) $point)) {
 			return false;
 		}
 

@@ -2708,8 +2708,6 @@ class Postact extends CB_Controller
 				// insert_cp -
 				$this->point->insert_cp($mem_id, -$need_deposit_cp, '포럼 의견변경', 'post', $post_id, $this->member->item('mem_id') . '-' . uniqid(''));
 
-
-				exit;
 				/**
 				 * 배팅 진영 변경
 				 * cic_forum_cp
