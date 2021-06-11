@@ -134,8 +134,8 @@ class Contactus extends CB_Controller
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
-			// $to_email 	= "support@ciccommunity.com";
-			$to_email 	= "developer@rs-team.com";
+			$to_email 	= "support@ciccommunity.com";
+			// $to_email 	= "developer@rs-team.com";
 			$from_email = "support@ciccommunity.com";
 			$title 		= "[cic 문의 접수] ". $this->input->post('contactus_title');
 			$message 	= $this->input->post('contactus_content');

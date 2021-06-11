@@ -783,13 +783,13 @@ class Forum extends CB_Controller
 			$repart_cp =  $total_cp - ( $writer_reward + $forum_commission); // 수수료 보상을 계산후 실제 나누게 될 포인트( 배분 시작 금액)
             
 			// 배분 시작금액이 승리 의견금액보다 낮은경우
-			if($win_cp > $repart_cp){
-				$this->form_validation->set_message(
-					'_writer_reward_check',
-					'배분 시작금액이 승리의견금액 보다 낮습니다!'
-				);
-				return false;
-			}
+			// if($win_cp > $repart_cp){
+			// 	$this->form_validation->set_message(
+			// 		'_writer_reward_check',
+			// 		'배분 시작금액이 승리의견금액 보다 낮습니다!'
+			// 	);
+			// 	return false;
+			// }
             
 			$repart_ratio = $repart_cp / $win_cp; // 1cp당 지급 비율
 
@@ -957,14 +957,14 @@ class Forum extends CB_Controller
 		}
 
 		// 포럼 수수료가 승리CP보다 많은 경우
-		$commission = $total_cp * ((double) $str / 100); 
-		if($win_cp < $commission){
-			$this->form_validation->set_message(
-				'_forum_commission_check',
-				'수수료 설정 오류'
-			);
-			return false;
-		}
+		// $commission = $total_cp * ((double) $str / 100); 
+		// if($win_cp < $commission){
+		// 	$this->form_validation->set_message(
+		// 		'_forum_commission_check',
+		// 		'수수료 설정 오류'
+		// 	);
+		// 	return false;
+		// }
 
 		// 소수점 2자리 검사
 		$str = explode( '.', $_str );
@@ -1003,13 +1003,13 @@ class Forum extends CB_Controller
 			return false;
 		}
 
-		if((double) $total_cp - (double) $win_cp < (double) $str){
-			$this->form_validation->set_message(
-				'_writer_reward_check',
-				'보상 설정 오류'
-			);
-			return false;
-		}
+		// if((double) $total_cp - (double) $win_cp < (double) $str){
+		// 	$this->form_validation->set_message(
+		// 		'_writer_reward_check',
+		// 		'보상 설정 오류'
+		// 	);
+		// 	return false;
+		// }
 
 		// 소수점 2자리 검사
 		$str = explode( '.', $_str );
