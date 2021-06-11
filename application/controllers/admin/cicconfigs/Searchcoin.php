@@ -30,7 +30,7 @@ class Searchcoin extends CB_Controller
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
-	protected $helpers = array('form', 'array', 'dhtml_editor');
+	protected $helpers = array('form', 'array', 'dhtml_editor','url');
 
 	function __construct()
 	{
@@ -194,7 +194,6 @@ class Searchcoin extends CB_Controller
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_amdmin_coin_keyword';
 		$this->load->event($eventname);
-		$this->load->helper('url');
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 		$view = array();
@@ -217,14 +216,17 @@ class Searchcoin extends CB_Controller
 		if($this->form_validation -> run () == FALSE){
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 		}else{
-			$data = array(
-				'coin_market' => $this -> input -> post('coin_market'),
-				'coin_keyword' => $this -> input -> post('keyword'),
-
-			);
-			if(isset($data) && !empty($data)){
-				$this->CIC_coin_keyword_model->insert_keyword($data);
-				$view['view']['alert_message'] = '수정 완료되었습니다';
+			$is_data = $this->CIC_coin_keyword_model->get_one('','',array('coin_keyword' => $this -> input -> post('keyword')));
+			if(!$is_data){
+				$data = array(
+					'coin_market' => $this -> input -> post('coin_market'),
+					'coin_keyword' => $this -> input -> post('keyword'),
+	
+				);
+				$this->CIC_coin_keyword_model->insert($data);
+				$view['view']['alert_message'] = '수정 완료되었습니다.';
+			} else {
+				$view['view']['alert_warning_message'] = '이미 등록되어있는 키워드입니다.';
 			}
 		}
 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
@@ -257,7 +259,7 @@ class Searchcoin extends CB_Controller
 						continue;
 					}
 					else{
-						$this->CIC_coin_keyword_model->rafresh_keyword_list($thisData);
+						$this->CIC_coin_keyword_model->refresh_keyword_list($thisData);
 					}	
 				} 
 			}	

@@ -1701,66 +1701,32 @@ class Mypage extends CB_Controller
 			}
 
 			/**
-			 * 포인트 차감
-			 * member
+			 * 출금 신청
+			 * cic_withdraw
 			 */
+			$withdraw_deposit = $this->CIC_wconfig_model->item('withdraw_deposit');  // 신청 수수료
+
+			$money = $_money - ($_money * ($withdraw_deposit/100));
+
+			$result = $this->CIC_withdraw_model->set_withdraw($mem_id, $mem_userid, $mem_userip, $mem_nickname, $mem_wallet_address, $_money, $money, $withdraw_deposit);
 			
-			$result = $this->Member_model->set_user_point($mem_id, $_money, $mem_cp);
-			
-			if($result != 1){
+			if($result == 0 ){
+				/**
+				 * 
+				 */
 				$this->session->set_flashdata(
 					'message',
 					'출금 신청에 실패하였습니다 (관리자 문의)'
 				);
 			} else{
-				/**
-				 * 출금 신청
-				 * cic_withdraw
-				 */
-                $withdraw_deposit = $this->CIC_wconfig_model->item('withdraw_deposit');  // 신청 수수료
 
-				$money = $_money - ($_money * ($withdraw_deposit/100));
+				// insert cp
+				$this->point->insert_cp($mem_id, '출금신청', -$_money, 'withdraw', $result, '출금신청');
 
-				$result = $this->CIC_withdraw_model->set_withdraw($mem_id, $mem_userid, $mem_userip, $mem_nickname, $mem_wallet_address, $_money, $money, $withdraw_deposit);
-                
-				if($result == 0 ){
-					/**
-					 * 
-					 */
-					$this->session->set_flashdata(
-						'message',
-						'출금 신청에 실패하였습니다 (관리자 문의)'
-					);
-				} else{
-
-					// insert cp
-					$this->point->insert_cp($mem_id, '출금신청', -$_money, 'withdraw', $result, '출금신청');
-
-					$this->session->set_flashdata(
-						'message',
-						'정상적으로 신청되었습니다'
-					);
-				}
-				
-				// else{
-					/**
-					 * 신청 로그를 남깁니다.
-					 * cic_withdraw_log
-					 */
-					// $result = $this->CIC_withdraw_log_model->set_withdraw_log('유저 출금신청', $mem_wallet_address, '', '', $mem_userid, $mem_userip, $money, '');
-
-					// if($result == 0){
-					// 	$this->session->set_flashdata(
-					// 		'message',
-					// 		'정상 처리후 로그오류입니다 (관리자 문의)'
-					// 	);
-					// } else{
-					// 	$this->session->set_flashdata(
-					// 		'message',
-					// 		'정상적으로 신청되었습니다'
-					// 	);
-					// }
-				// }
+				$this->session->set_flashdata(
+					'message',
+					'정상적으로 신청되었습니다'
+				);
 			}
 
 		} else {

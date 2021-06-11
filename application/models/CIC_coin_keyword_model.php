@@ -27,14 +27,6 @@ class CIC_Coin_keyword_model extends CB_Model
 	/**
 	 * Get RealTime Coin Price
 	 */
-    function insert_keyword($data){
-        if(isset($data) && !empty($data)){
-            $result = $this->db->insert('cic_coin_keyword', $data);
-            return $result;
-        }else{
-            return false;
-        }
-    }
     function get_keyword(){
         $this->db->select('cic_coin_list.*');
         $this->db->select('cic_coin_keyword.*');
@@ -71,7 +63,7 @@ class CIC_Coin_keyword_model extends CB_Model
 		$result = $this->db->get('cic_coin_list')->row_array();
         return $result;
     }
-    function rafresh_keyword_list($data){
+    function refresh_keyword_list($data){
         $this-> db -> where('coin_keyword', $coin_keyword);
         $query = $this->db->get('cic_coin_keyword');
         $refresh_ = $this -> input -> post('refresh_');

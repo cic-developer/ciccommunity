@@ -166,7 +166,6 @@ class Deposit extends CB_Controller
         // 예치금 제거 + cp 반환
         if($mem_deposit){
             $arr = array(
-                // 'mem_cp' => $mem_cp + $mem_deposit,
                 'mem_deposit' => null,
             );
             $this->Member_model->set_user_modify($mem_id, $arr);

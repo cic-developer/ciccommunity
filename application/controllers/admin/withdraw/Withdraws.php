@@ -428,7 +428,7 @@ class Withdraws extends CB_Controller
 		 * 출금 요청한 금액을 반환합니다.
 		 * member
 		 */
-		$result = $this->Member_model->set_user_point($memIdx, -$money, $mem_cp);
+		// $result = $this->Member_model->set_user_point($memIdx, -$money, $mem_cp);
 		if($result != 1){
 			$this->session->set_flashdata(
 				'message',
@@ -445,6 +445,9 @@ class Withdraws extends CB_Controller
 			$content = $this->input->post('cp_content2');
 			$memo = $this->input->post('cp_memo2');
 			$logResult = $this->CIC_cp_model->set_cic_cp($memIdx, $content, $money, '@byadmin', $admin_info['mem_id'], '출금반려');
+
+			// insert_cp
+			$this->point->insert_cp($memIdx, $content, $money, 'post', $pst_id, '출금반려');
             
 			if($logResult == 0){
 				// 실패

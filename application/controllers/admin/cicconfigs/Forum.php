@@ -172,7 +172,6 @@ class Forum extends CB_Controller
 							// cp 반환
 							$arr = array(
 								'mem_deposit' => null,
-								'mem_cp' => $return_cp,
 							);
 							$where = array(
 							);
@@ -182,7 +181,10 @@ class Forum extends CB_Controller
 							if($result == 1){
 								$content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
 								$action = '포럼예치금 반환';
-								$this->CIC_cp_model->set_cic_cp($mem_id, $content, $money, '@byadmin', $admin_id, $action);
+
+								// insert_cp
+								$this->point->insert_cp($mem_id, $content, $mem_deposit, 'member', $mem_id, $action);
+
 							}
 						}
 					}else {
@@ -211,7 +213,6 @@ class Forum extends CB_Controller
 								// cp 반환
 								$arr = array(
 									'mem_deposit' => null,
-									'mem_cp' => $return_cp,
 								);
 								$where = array(
 								);
@@ -221,7 +222,9 @@ class Forum extends CB_Controller
 								if($result == 1){
 									$content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
 									$action = '포럼예치금 반환';
-									$this->CIC_cp_model->set_cic_cp($mem_id, $content, $money, '@byadmin', $admin_id, $action);
+
+									// insert_cp
+									$this->point->insert_cp($mem_id, $content, $mem_deposit, 'member', $mem_id, $action);
 								}
 							}
 						}else {
@@ -230,7 +233,6 @@ class Forum extends CB_Controller
 							// cp 반환
 							$arr = array(
 								'mem_deposit' => null,
-								'mem_cp' => $return_cp,
 							);
 							$where = array(
 							);
@@ -240,7 +242,9 @@ class Forum extends CB_Controller
 							if($result == 1){
 								$content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
 								$action = '포럼예치금 반환';
-								$this->CIC_cp_model->set_cic_cp($mem_id, $content, $money, '@byadmin', $admin_id, $action);
+								
+								// insert_cp
+								$this->point->insert_cp($mem_id, $content, $mem_deposit, 'member', $mem_id, $action);
 							}
 						}
 					}
@@ -801,26 +805,12 @@ class Forum extends CB_Controller
 			$writer_deposit = (int) $writer_info['mem_deposit'];
 			$writer_changed_cp = $writer_cp + $writer_reward;
 
-			$arr = array(
-				'mem_cp' => $writer_changed_cp
-			);
-			$result = $this->Member_model->set_user_modify($writer_id, $arr);
-			if($result == 0){
-				// 회원정보 수정 실패
-			}
-			if($result == 1){
-				// 회원정보 수정 성공
-			}
-			// cic_cp테이블에 log기록
-			$logResult = $this->CIC_cp_model->set_cic_cp($writer_id, '작성자', $writer_reward, '@byadmin', $admin_id , '포럼보상지급');
-			/**
-			 * 작성자 보상 지급 끝
-			 */
+			// insert_cp
+			$this->point->insert_cp($writer_id, '포럼 게시물 작성자', $writer_reward, 'post', $pst_id, '포럼보상지급');
 
 			/**
 			 * 투표자 보상 지급 시작
 			 */
-            
 			// 배팅 가져오기 ( 유저들의 배팅 정보들 )
 			$where = array(
 				'pst_id' => $pst_id
@@ -912,14 +902,14 @@ class Forum extends CB_Controller
 			// 예치금 제거 + cp 반환
 			if($writer_deposit){
 				$arr = array(
-					'mem_cp' => $writer_cp + $writer_deposit,
 					'mem_deposit' => null,
 				);
 				$memResult = $this->Member_model->set_user_modify($writer_id, $arr);
 				
 				if($memResult == 1){
-					// cp 로그 기록
-					$logResult = $this->CIC_cp_model->set_cic_cp($writer_id, '포럼 마감 및 배분 완료', $writer_deposit, '@byadmin', $this->member->item('mem_id'), '예치금 반환');
+
+					// insert_cp
+					$this->point->insert_cp($writer_id, '포럼 마감 및 배분 완료', $writer_deposit, 'member', $writer_id, '예치금 반환');
 					
 					$this->session->set_flashdata(
 						'message',
@@ -1218,7 +1208,7 @@ public function forum_write($post_id = 0)
 				$updatedata['frm_image'] = $updatephoto;
             }
 			
-			if(empty($post_id)){
+			if(! ($post_id)){
 				$postUpdatedata = array(
 					'post_title' => $post_title,
 					'post_content' => $post_content,
@@ -1251,6 +1241,8 @@ public function forum_write($post_id = 0)
 				$this->Post_extra_vars_model->add_meta($post_id, 3, 'A_opinion' , $pev_value_0);
 				$this->Post_extra_vars_model->add_meta($post_id, 3, 'B_opinion' , $pev_value_1);
 			} else if($post_id){
+				print_r('123');
+				exit;
 				if(empty($cfidata['frm_bat_close_datetime'])){
 					$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 					$updatedata['frm_close_datetime'] = $frm_close_datetime;

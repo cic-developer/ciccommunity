@@ -3,13 +3,14 @@
 		<?php
 		echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
 		echo show_alert_message(element('alert_message', $view), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
+		echo show_alert_message(element('alert_warning_message', $view), '<div class="alert alert-auto-close alert-dismissible alert-warning"><button type="button" class="close alertclose" >&times;</button>', '</div>');
 		$attributes = array('class' => 'form-horizontal', 'name' => 'flist', 'id' => 'flist');
 		echo form_open(current_full_url(), $attributes);
 		?>
 
 		<div class="box-table-header">
 			<div class="btn-group pull-right" role="group" aria-label="...">
-				<input type="submit" id = "refresh_" name="refresh_" class="btn btn-outline btn-default btn-sm" value="코인목록 갱신">
+				<a href="<?php echo admin_url('/cicconfigs/searchcoin'); ?>" class="btn btn-outline btn-default btn-sm">목록</a>
 			</div>
 
 		</div>
