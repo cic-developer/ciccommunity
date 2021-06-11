@@ -32,7 +32,7 @@ class Mypage extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('pagination', 'querystring','member', 'coinapi'));
+		$this->load->library(array('pagination', 'querystring','member', 'coinapi', 'point'));
 
 	}
 
@@ -1732,10 +1732,6 @@ class Mypage extends CB_Controller
 		} else {
 			$withdraw_minimum = $this->CIC_wconfig_model->item('withdraw_minimum'); 
 
-			$this->session->set_flashdata(
-				'message',
-				'금액을 옳바르게 입력해주세요 (최소금액: '.$withdraw_minimum.')'
-			);
 		}
 
 		// 이벤트가 존재하면 실행합니다
@@ -1757,15 +1753,24 @@ class Mypage extends CB_Controller
 				'_withdraw_minimum_check',
 				'출금요청 금액은 소수점 2자리 까지 설정이 가능합니다'
 			);
+			$this->session->set_flashdata(
+				'message',
+				'출금요청 금액은 소수점 2자리 까지 설정이 가능합니다'
+			);
 			return false;
 		}
 
 		// 최소 신청 금액
-		$withdraw_minimum = $this->CIC_wconfig_model->item('withdraw_minimum'); 
+		$withdraw_minimum = (double) $this->CIC_wconfig_model->item('withdraw_minimum'); 
+		$str = (double) $_str;
         
-		if($_str < $withdraw_minimum){
+		if($str < $withdraw_minimum){
 			$this->form_validation->set_message(
 				'_withdraw_minimum_check',
+				'최소 신청금액을 맞춰주세요 ('.$withdraw_minimum.')'
+			);
+			$this->session->set_flashdata(
+				'message',
 				'최소 신청금액을 맞춰주세요 ('.$withdraw_minimum.')'
 			);
 			return false;

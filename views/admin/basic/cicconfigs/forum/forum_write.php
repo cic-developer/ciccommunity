@@ -102,17 +102,15 @@
 					}
 				?>
 				<script type="text/javascript">
-
-					var frmbatclosedata = "<?php echo set_value('frm_bat_close_datetime',element('frm_bat_close_datetime', element('frminfodata', $view))); ?>"
-					var frmclosedata = "<?php echo set_value('frm_close_datetime',element('frm_close_datetime', element('frminfodata', $view))); ?>"
 					$(function () {
 						$('#datetimepicker10').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
-							minDate: frmbatclosedata ? frmbatclosedata : new Date(),
+							minDate:  new Date(),
+							
 						});
 						$('#datetimepicker11').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
-							minDate: frmclosedata ? frmclosedata : new Date(),
+							minDate:  new Date(),
 						});
 					});
 				</script>

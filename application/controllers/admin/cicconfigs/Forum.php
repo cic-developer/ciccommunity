@@ -1187,6 +1187,9 @@ class Forum extends CB_Controller
 			$pev_value_0 = $this->input->post('pev_value_0', null, '');
 			$pev_value_1 = $this->input->post('pev_value_1', null, '');
 
+			print_r($frm_bat_close_datetime);
+			exit;
+
 			$updatedata = array(
 				'frm_bat_close_datetime' => $frm_bat_close_datetime,
 				'frm_close_datetime' => $frm_close_datetime,
@@ -1207,6 +1210,9 @@ class Forum extends CB_Controller
 			$pevupdate_1 = array(
 				'B_opinion' => $pev_value_1
 			);
+			$where = array(
+				'post_id' => $post_id,
+			);
             if($updatephoto){
 				$updatedata['frm_image'] = $updatephoto;
             }
@@ -1216,9 +1222,6 @@ class Forum extends CB_Controller
 					$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 					$updatedata['frm_close_datetime'] = $frm_close_datetime;
 					$updatedata['pst_id'] = $post_id;
-					$where = array(
-						'post_id' => $post_id,
-					);
 					$this->Post_model->update($post_id, $brd_updatedata, $where);
 					$this->Post_model->update($post_id, $_updatedata, $where);
 					$this->CIC_forum_info_model->insert($updatedata);
@@ -1227,7 +1230,7 @@ class Forum extends CB_Controller
 					$this->Post_extra_vars_model->save($post_id, 6, $pevupdate_1);
 					$this->session->set_flashdata(
 						'message',
-						'정상적으로 입력되었습니다'
+						'정상적으로 승인되었습니다'
 					);
 					
 				}else if($this->input->get('type') == 'b'){
