@@ -189,7 +189,7 @@ class Searchcoin extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
-	public function CStock_keyword()
+	public function CStock_keyword($id)
 	{
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_amdmin_coin_keyword';
@@ -213,7 +213,7 @@ class Searchcoin extends CB_Controller
 		);
 		//$getList = $this -> CIC_coin_list_model->retrieve_api();
 		$this->form_validation->set_rules($config);
-		if($this->form_validation -> run () == FALSE){
+		if($this->form_validation->run() == FALSE){
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 		}else{
 			$is_data = $this->CIC_coin_keyword_model->get_one('','',array('coin_keyword' => $this -> input -> post('keyword')));
@@ -221,13 +221,13 @@ class Searchcoin extends CB_Controller
 				$data = array(
 					'coin_market' => $this -> input -> post('coin_market'),
 					'coin_keyword' => $this -> input -> post('keyword'),
-	
 				);
 				$this->CIC_coin_keyword_model->insert($data);
-				$view['view']['alert_message'] = '수정 완료되었습니다.';
+				$this->session->set_flashdata('alert_message', '수정 완료되었습니다.');
 			} else {
-				$view['view']['alert_warning_message'] = '이미 등록되어있는 키워드입니다.';
+				$this->session->set_flashdata('alert_warning_message', '이미 등록되어있는 키워드입니다.');
 			}
+			redirect(admin_url($this->pagedir.'/CStock_keyword/'.$id));
 		}
 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 

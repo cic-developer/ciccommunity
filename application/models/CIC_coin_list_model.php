@@ -37,10 +37,12 @@ class CIC_Coin_list_model extends CB_Model
             return $result;
         }
     } 
+    
     function getstockData(){
         $result = $this->db->get('cic_coin_list');
         return $result->result_array(); 
     }
+
     function get_coin_list($limit ='', $offset = '', $where = '', $like = '', $findex = '', $forder = '', $sfield = '', $skeyword = '', $sop = 'OR'){
         $search_where = array();
 		$search_like = array();

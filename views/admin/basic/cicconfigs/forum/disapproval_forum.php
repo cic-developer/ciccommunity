@@ -4,10 +4,15 @@
 			echo show_alert_message($this->session->flashdata('message'), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
 			$attributes = array('class' => 'form-inline', 'name' => 'flist', 'id' => 'flist');
 			echo form_open(current_full_url(), $attributes);
+			
 			?>
 				<div class="box-table-header">
 					<ul class="nav nav-pills">
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir); ?>">기본정보</a></li>
+						<!-- <?php
+						// print_r(admin_url($this->pagedir. '/diss'));
+						// exit;
+						?> -->
 						<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/disapproval_forum'); ?>">승인대기포럼</a></li>
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/proceeding_forum'); ?>">진행중포럼</a></li>
 						<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/close_forum'); ?>">마감된포럼</a></li>
@@ -63,7 +68,7 @@
 									<td><?php echo element('post_display_name', $result); ?> <?php if (element('post_userid', $result)) { ?> ( <a href="?sfield=mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('post_userid', $result)); ?></a> ) <?php } ?></td>
 									<td><?php echo display_datetime(element('post_datetime', $result))?></td>
 									<td><?php echo number_format(element('post_like', $result))?></td>
-									<td><a href="<?php echo admin_url($this->pagedir); ?>/forum_write/<?php echo element(element('primary_key', $view), $result); ?>?<?php echo $this->input->server('QUERY_STRING', null, ''); ?>" class="btn btn-outline btn-default btn-xs">승인</a></td>
+									<td><a href="<?php echo admin_url($this->pagedir); ?>/forum_write/<?php echo element(element('primary_key', $view), $result); ?>?type=1" class="btn btn-outline btn-default btn-xs">승인</a></td>
 									<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
 								</tr>
 								<?php

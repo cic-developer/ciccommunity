@@ -1044,7 +1044,10 @@ public function forum_write($post_id = 0)
 			}
 		}
 		
-		$primary_key = $this->CIC_forum_info_model->primary_key;
+		$primary_key = $this->Post_model->primary_key;
+
+		
+
 		
 		$postdata = array();
 		$pevdata = array();
@@ -1207,8 +1210,86 @@ public function forum_write($post_id = 0)
             if($updatephoto){
 				$updatedata['frm_image'] = $updatephoto;
             }
+			if($post_id){
+				if($this->input->get('type') == 1){
+					$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
+					$updatedata['frm_close_datetime'] = $frm_close_datetime;
+					$updatedata['pst_id'] = $post_id;
+					$where = array(
+						'post_id' => $post_id,
+					);
+					$this->Post_model->update($post_id, $brd_updatedata, $where);
+					$this->Post_model->update($post_id, $_updatedata, $where);
+					$this->CIC_forum_info_model->insert($updatedata);
+					$this->Post_extra_vars_model->update($post_id, $brd_updatedata, $where);
+					$this->Post_extra_vars_model->save($post_id, 6, $pevupdate_0,);
+					$this->Post_extra_vars_model->save($post_id, 6, $pevupdate_1);
+					$this->session->set_flashdata(
+						'message',
+						'정상적으로 입력되었습니다'
+					);
+					
+				}else{
+					$this->Post_model->update($post_id, $brd_updatedata, $where);
+					$this->Post_model->update($post_id, $_updatedata, $where);
+					$this->CIC_forum_info_model->update($post_id, $updatedata, $where);
+					$this->Post_extra_vars_model->update($post_id, $brd_updatedata, $where);
+					$this->Post_extra_vars_model->save($post_id, 3, $pevupdate_0,);
+					$this->Post_extra_vars_model->save($post_id, 3, $pevupdate_1);
+					$this->session->set_flashdata(
+						'message',
+						'정상적으로 수정되었습니다'
+					);
+				}
+			} else {
+				/**
+				 *  관리자 페이지에서 새로운 글 작성 
+				 */
+				$postUpdatedata = array(
+					'post_title' => $post_title,
+					'post_content' => $post_content,
+					'post_datetime' => cdate('Y-m-d H:i:s'),
+					'post_updated_datetime' => cdate('Y-m-d H:i:s'),
+					'post_ip' => $this->input->ip_address(),
+					'brd_id' => 3,
+					'mem_id' => $this->member->item('mem_id'),
+					'post_userid' => $this->member->item('mem_userid'),
+					'post_username' => $this->member->item('mem_username'),
+					'post_nickname' => $this->member->item('mem_nickname'),
+					'post_email' => $this->member->item('mem_email'),
+					'post_homepage' => '',
+
+				);
+				$postUpdatedata['post_device']
+				= ($this->cbconfig->get_device_type() === 'mobile') ? 'mobile' : 'desktop';
+
+				$post_id = $this->Post_model->insert($postUpdatedata);
+
+
+				$forumInfoUpdatedata = array(
+					'frm_bat_close_datetime' => $frm_bat_close_datetime,
+					'frm_close_datetime' => $frm_close_datetime,
+					'pst_id' => $post_id
+				);
+				$this->CIC_forum_info_model->insert($forumInfoUpdatedata);
+
+				
+				$this->Post_extra_vars_model->add_meta($post_id, 3, 'A_opinion' , $pev_value_0);
+				$this->Post_extra_vars_model->add_meta($post_id, 3, 'B_opinion' , $pev_value_1);
+			}
 			
-			
+			$this->cache->delete('forum/forum-info-' . cdate('Y-m-d'));
+
+			// 이벤트가 존재하면 실행합니다
+			Events::trigger('after', $eventname);
+
+			/**
+			 * 게시물의 신규입력 또는 수정작업이 끝난 후 목록 페이지로 이동합니다
+			 */
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '/proceeding_forum' . $param->output());
+
+			redirect($redirecturl);
 		}
 	}
 
