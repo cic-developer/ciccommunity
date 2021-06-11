@@ -214,6 +214,19 @@ class Point extends CI_Controller
 
 		$this->CI->load->model('CIC_cp_model');
 
+		// print_r($mem_id);
+		// print_r('<br>');
+		// print_r($point);
+		// print_r('<br>');
+		// print_r($content);
+		// print_r('<br>');
+		// print_r($poi_type);
+		// print_r('<br>');
+		// print_r($poi_related_id);
+		// print_r('<br>');
+		// print_r($poi_action);
+		// exit;
+
 		// 이미 등록된 내역이라면 건너뜀
 		if ($poi_type OR $poi_related_id OR $poi_action) {
 			$where = array(

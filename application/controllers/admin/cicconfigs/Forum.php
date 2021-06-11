@@ -1188,7 +1188,6 @@ class Forum extends CB_Controller
 			$pev_value_1 = $this->input->post('pev_value_1', null, '');
 
 			$updatedata = array(
-				'pst_id' => $pst_id,
 				'frm_bat_close_datetime' => $frm_bat_close_datetime,
 				'frm_close_datetime' => $frm_close_datetime,
 			);
@@ -1232,9 +1231,12 @@ class Forum extends CB_Controller
 					);
 					
 				}else if($this->input->get('type') == 'b'){
+					$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
+					$updatedata['frm_close_datetime'] = $frm_close_datetime;
+
 					$this->Post_model->update($post_id, $brd_updatedata, $where);
 					$this->Post_model->update($post_id, $_updatedata, $where);
-					$this->CIC_forum_info_model->update($post_id, $updatedata, $where);
+					$this->CIC_forum_info_model->update($post_id, $updatedata, $post_id);
 					$this->Post_extra_vars_model->update($post_id, $brd_updatedata, $where);
 					$this->Post_extra_vars_model->save($post_id, 3, $pevupdate_0,);
 					$this->Post_extra_vars_model->save($post_id, 3, $pevupdate_1);
@@ -1289,7 +1291,7 @@ class Forum extends CB_Controller
 			 * 게시물의 신규입력 또는 수정작업이 끝난 후 목록 페이지로 이동합니다
 			 */
 			$param =& $this->querystring;
-			$redirecturl = admin_url($this->pagedir . '/proceeding_forum' . $param->output());
+			$redirecturl = admin_url($this->pagedir . '/proceeding_forum');
 
 			redirect($redirecturl);
 		}
