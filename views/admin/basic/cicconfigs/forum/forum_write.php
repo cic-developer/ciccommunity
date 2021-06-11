@@ -114,7 +114,7 @@
 					// 	});
 					// 	$('#datetimepicker11').datetimepicker({
 					// 		format : 'YYYY-MM-DD HH:mm:ss',
-					// 		minDAte : new Date(),
+					// 		minDAte : new Date(),3
 					// 		defaultDate : frmclosedatetime ? frmclosedatetime : new Date(),
 							
 					// 	});

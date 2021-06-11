@@ -54,7 +54,7 @@
 						<li>
 							<a href="javascript:;" class="cmmt-modify-btn" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'cu'); return false;">수정</a>
 						</li>
-						<?php } ?>
+						<?php } var_dump((element('can_delete', $result)) ); ?>
 						<?php if (element('can_delete', $result)) { ?>
 						<li>
 							<a href="javascript:;" onClick="delete_comment('<?php echo element('cmt_id', $result); ?>', '<?php echo element('post_id', $result); ?>', '<?php echo element('page', $view); ?>');">삭제</a>

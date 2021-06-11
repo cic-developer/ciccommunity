@@ -22,7 +22,7 @@ class Comment_model extends CB_Model
 	 */
 	public $primary_key = 'cmt_id'; // 사용되는 테이블의 프라이머리키
 
-	public $allow_order = array('cmt_num, cmt_reply', 'cmt_num desc, cmt_reply');
+	public $allow_order = array('cmt_num, cmt_reply', 'cmt_num desc, cmt_reply', 'cmt_like_point','cmt_dislike_point');
 
 
 	function __construct()
@@ -103,7 +103,6 @@ class Comment_model extends CB_Model
 		$this->db->select('comment.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point, member.mem_level, member.mem_forum_win, member.mem_forum_lose', 'cic_member_level_config.*');
 		$this->db->from($this->_table);
 		$this->db->join('member', 'comment.mem_id = member.mem_id', 'left');
-		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
 
 		if ($where) {
 			$this->db->where($where);

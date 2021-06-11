@@ -132,7 +132,7 @@
 							foreach (element('list',element('like_point_ranking_freetalk', $view)) as $like_point_ranking_freetalk) {
 								?>
 								<li>
-									<a href="<?php echo goto_url(element('posturl', $like_point_ranking_freetalk)); ?>">
+									<a href="javascript:void(0);" style="cursor:text;">
 										<span class="num"><?php echo number_format(element('num', $like_point_ranking_freetalk)); ?></span>
 										<div class="my-info">
 											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $like_point_ranking_freetalk), 30, 30)?>" alt=""></p>
@@ -162,7 +162,7 @@
 							foreach (element('list',element('dislike_point_ranking_freetalk', $view)) as $dislike_point_ranking_freetalk) {
 								?>
 								<li>
-									<a href="<?php echo goto_url(element('posturl', $dislike_point_ranking_freetalk)); ?>">
+									<a href="javascript:void(0);" style="cursor:text;">
 										<span class="num"><?php echo number_format(element('num', $dislike_point_ranking_freetalk)); ?></span>
 										<div class="my-info">
 											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $dislike_point_ranking_freetalk), 30, 30)?>" alt=""></p>

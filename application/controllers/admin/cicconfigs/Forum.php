@@ -1072,7 +1072,7 @@ class Forum extends CB_Controller
 			array(
 				'field' => 'frm_close_datetime',
 				'label' => '포럼 종료일',
-				'rules' => 'trim|required',
+				'rules' => 'trim|required|callback__minfrmclosetime',
 			),
 			array(
 				'field' => 'post_title',
@@ -1448,4 +1448,10 @@ class Forum extends CB_Controller
 		redirect($redirecturl);
 	}
 	
+	public function _minfrmclosetime($frmclose)
+	{
+		$batclose = $this->input->post('frm_bat_close_datetime');
+		print_r($batclose);
+		exit;
+	}
 }
