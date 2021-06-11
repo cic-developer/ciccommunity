@@ -1242,6 +1242,15 @@ class Forum extends CB_Controller
 						'message',
 						'정상적으로 수정되었습니다'
 					);
+					Events::trigger('after', $eventname);
+
+					/**
+					 * 게시물의 신규입력 또는 수정작업이 끝난 후 목록 페이지로 이동합니다
+					 */
+					$param =& $this->querystring;
+					$redirecturl = admin_url($this->pagedir . '/proceeding_forum' . $param->output());
+
+					redirect($redirecturl);
 				}
 			} else {
 				/**

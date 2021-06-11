@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
 <div class="box">
 
-<?php print_r(element('frm_bat_close_datetime', element('frminfodata', $view))); exit;?>
+
 	<div class="box-table">
 		<?php
 		echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
@@ -33,7 +33,7 @@
 				<div class="col-sm-10 form-inline" style="height:130px;">
 					<div class="form-group">
 						<div class='input-group date' id='datetimepicker10'>
-							<input type='text' class="form-control" name="frm_bat_close_datetime" value="<?php echo set_value('frm_close_datetime',element('frm_bat_close_datetime', element('frminfodata', $view))); ?>"/>
+							<input type='text' class="form-control" name="frm_bat_close_datetime" value="<?php echo set_value('frm_bat_close_datetime',element('frm_bat_close_datetime', element('frminfodata', $view))); ?>"/>
 							<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar">
 							</span>
@@ -102,14 +102,18 @@
 					}
 				?>
 				<script type="text/javascript">
+
+					var frmbatclosedata = "<?php echo set_value('frm_bat_close_datetime',element('frm_bat_close_datetime', element('frminfodata', $view))); ?>"
+					var frmclosedata = "<?php echo set_value('frm_close_datetime',element('frm_close_datetime', element('frminfodata', $view))); ?>"
 					$(function () {
 						$('#datetimepicker10').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
-							minDate: new Date(),
+							minDate: frmbatclosedata ? frmbatclosedata : new Date(),
+							
 						});
 						$('#datetimepicker11').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
-							minDate: new Date(),
+							minDate: frmclosedata ? frmclosedata : new Date(),
 						});
 					});
 				</script>
