@@ -1063,7 +1063,6 @@ class Forum extends CB_Controller
 		$this->load->library('form_validation');
 		$batclose = $this->input->post('frm_bat_close_datetime');
 		$frmclose = $this->input->post('frm_close_datetime');
-		$closetimeconfig = $frmclose > $batclose;
 		$config = array(
 			array(
 				'field' => 'frm_bat_close_datetime',
@@ -1073,7 +1072,7 @@ class Forum extends CB_Controller
 			array(
 				'field' => 'frm_close_datetime',
 				'label' => '포럼 종료일',
-				'rules' => 'trim|required|callback__closetimeconfig' . $closetimeconfig,
+				'rules' => 'trim|required',
 			),
 			array(
 				'field' => 'post_title',
@@ -1448,5 +1447,5 @@ class Forum extends CB_Controller
 		$redirecturl = admin_url($this->pagedir . '/return_forum' . $param->output());
 		redirect($redirecturl);
 	}
-
+	
 }

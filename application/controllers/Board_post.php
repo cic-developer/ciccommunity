@@ -18,7 +18,7 @@ class Board_post extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Like', 'Post', 'Post_meta', 'Post_extra_vars', 'CIC_member_level_config', 'CIC_forum', 'CIC_forum_config','Board_category');
+	protected $models = array('Like', 'Post', 'Post_meta', 'Post_extra_vars', 'CIC_member_level_config', 'CIC_forum', 'CIC_forum_config','Board_category', 'Comment');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -440,37 +440,39 @@ class Board_post extends CB_Controller
 			$list_num = 1;
 			$findex = 'post_like_point';
 			$forder = 'desc';
-			$like_point_ranking_freetalk = $this->Post_model
-				->get_like_point_ranking_list($limit, $offset, $where, $findex, $forder, $sfield, $skeyword);
-					if (element('list', $like_point_ranking_freetalk)) {
-						foreach (element('list', $like_point_ranking_freetalk) as $key => $val) {
-							$like_point_ranking_freetalk['list'][$key]['post_display_name'] = display_username(
-								element('post_userid', $val),
-								element('post_nickname', $val)
-							);
-							$like_point_ranking_freetalk['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
-							$like_point_ranking_freetalk['list'][$key]['num'] = $list_num++;
-							if ($board) {
-								$like_point_ranking_freetalk['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
-								$like_point_ranking_freetalk['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
-							}
-							$like_point_ranking_freetalk['list'][$key]['category'] = '';
-							if (element('post_category', $val)) {
-								$like_point_ranking_freetalk['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
-							}
-							if (element('post_image', $val)) {
-								$this->load->model('Post_file_model');
-								$imagewhere = array(
-									'post_id' => element('post_id', $val),
-									'pfi_is_image' => 1,
-								);
-								$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-								$like_point_ranking_freetalk['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
-							} else {
-								$like_point_ranking_freetalk['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
-								}
-							}
+			// $like_point_ranking_freetalk = $this->Post_model
+			// 	->get_like_point_ranking_list($limit, $offset, $where, $findex, $forder, $sfield, $skeyword);
+			$like_point_ranking_freetalk = $this->Comment_model
+				->get($limit, $offset, $where, $findex, $forder, $sfield, $skeyword);
+			if (element('list', $like_point_ranking_freetalk)) {
+				foreach (element('list', $like_point_ranking_freetalk) as $key => $val) {
+					$like_point_ranking_freetalk['list'][$key]['post_display_name'] = display_username(
+						element('post_userid', $val),
+						element('post_nickname', $val)
+					);
+					$like_point_ranking_freetalk['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+					$like_point_ranking_freetalk['list'][$key]['num'] = $list_num++;
+					if ($board) {
+						$like_point_ranking_freetalk['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+						$like_point_ranking_freetalk['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+					}
+					$like_point_ranking_freetalk['list'][$key]['category'] = '';
+					if (element('post_category', $val)) {
+						$like_point_ranking_freetalk['list'][$key]['category'] = $this->Board_category_model->get_category_info(element('brd_id', $val), element('post_category', $val));
+					}
+					if (element('post_image', $val)) {
+						$this->load->model('Post_file_model');
+						$imagewhere = array(
+							'post_id' => element('post_id', $val),
+							'pfi_is_image' => 1,
+						);
+						$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+						$like_point_ranking_freetalk['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+					} else {
+						$like_point_ranking_freetalk['list'][$key]['thumb_url'] = get_post_image_url(element('post_content', $val), 80);
 						}
+					}
+				}
 				$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 				$where = array(
 					'brd_id' => 1,
@@ -632,6 +634,14 @@ class Board_post extends CB_Controller
 
 			// 진행중 마감 type 1 0
 			$view['forum']['type'] = $this->input->get('type');
+		}
+		/**
+		 * 공지사항 게시판
+		 */
+		if($post['brd_id'] == 5){
+
+		}else{
+
 		}
 		
 		$view['view']['like_point_ranking_freetalk'] = $like_point_ranking_freetalk;

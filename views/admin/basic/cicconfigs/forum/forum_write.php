@@ -108,12 +108,12 @@
 					$(function () {
 						$('#datetimepicker10').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
-							minDate: new Date(),
+							defaultDate : frmbatclosedatetime ? frmbatclosedatetime : new Date(),
 							
 						});
 						$('#datetimepicker11').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
-							minDate: frmclosedatetime ? frmclosedatetime : new Date(),
+							defaultDate : frmclosedatetime ? frmclosedatetime : new Date(),
 						});
 					});
 				</script>

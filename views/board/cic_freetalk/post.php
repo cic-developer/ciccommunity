@@ -47,12 +47,14 @@
 						<?php 
 						} 
 						?>
+<!-- 공지사항일때 없앨 부분 -->
 						<div class="vp-point">
 							<ul>
 								<li><a href="#n" class="up" data-contenttype="post"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>
 								<li><a href="#n" class="down" data-contenttype="post"><?php echo number_format(element('post_dislike_point', element('post', $view))); ?></a></li>
 							</ul>
 						</div>
+<!-- 공지사항일때 없앨 부분 -->
 					</div>
 				</div>
 				<div class="cons">
@@ -61,12 +63,14 @@
 						<?php echo element('content', element('post', $view)); ?>
 					</div>
 					<!-- 본문 내용 끝 -->
+<!-- 공지사항일때 없앨 부분 -->
 					<div class="vp-point">
 						<ul>
 							<li><a href="#n" class="up" data-contenttype="post"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>
 							<li><a href="#n" class="down" data-contenttype="post"><?php echo number_format(element('post_dislike_point', element('post', $view))); ?></a></li>
 						</ul>
 					</div>
+<!-- 공지사항일때 없앨 부분 -->
 					<!-- <div class="modify">
 						<?php //if (element('modify_url', $view)) { ?>
 						<a href="<?php //echo element('modify_url', $view); ?>" class="mo-btn">
@@ -114,6 +118,7 @@
 				<?php } ?>
 			</div>
 			<div class="gap60"></div>
+<!-- 공지사항일때 없앨 부분 -->
 			<div class="best">
 				<div class="fl">
 					<h4>BEST VP UP</h4>
@@ -176,10 +181,12 @@
 					</ul>
 				</div>
 			</div>
+<!-- 공지사항일때 없앨 부분 -->
 		</div>
 
 		<div class="gap60"></div>
 		<!-- s: cmmt -->
+<!-- 공지사항일때 없앨 부분 -->
 		<div class="cmmt-wrap">
 			<div class="comment">
 				<h4>댓글 <span><?php echo number_format(element('post_comment_count', element('post', $view))); ?></span></h4>
@@ -194,6 +201,7 @@
 			<div class="cmmt" id="viewcomment">
 			</div>
 		</div>
+<!-- 공지사항일때 없앨 부분 -->
 		<!-- e: cmmt -->
 		<!-- page end // -->
 	</div>
