@@ -424,11 +424,8 @@ class Withdraws extends CB_Controller
 			redirect($redirecturl);
 		}
 
-		/**
-		 * 출금 요청한 금액을 반환합니다.
-		 * member
-		 */
-		// $result = $this->Member_model->set_user_point($memIdx, -$money, $mem_cp);
+		$result = $this->{$this->modelname}->set_withdraw_retire($widIdx, $content, $adminid, $adminip, $memo);
+
 		if($result != 1){
 			$this->session->set_flashdata(
 				'message',
@@ -437,66 +434,27 @@ class Withdraws extends CB_Controller
 			$param =& $this->querystring;
 			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
 			redirect($redirecturl);
-		} else{
-			/**
-			 * 반환 로그를 기록합니다.
-			 * cic_cp
-			 */
-			$content = $this->input->post('cp_content2');
-			$memo = $this->input->post('cp_memo2');
-			$logResult = $this->CIC_cp_model->set_cic_cp($memIdx, $content, $money, '@byadmin', $admin_info['mem_id'], '출금반려');
-
-			// insert_cp
-			$this->point->insert_cp($memIdx, $content, $money, 'post', $pst_id, '출금반려');
-            
-			if($logResult == 0){
-				// 실패
-				// 이전 실행을 리셋
-				$this->Member_model->set_user_point($memIdx, $money, $mem_cp);
-                
-				$this->session->set_flashdata(
-					'message',
-					'포인트 반환에 실패하였습니다'
-				);
-				$param =& $this->querystring;
-				$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-				redirect($redirecturl);
-			}
-			/**
-			 * 반려한 출금 요청건의 상태를 0으로 수정합니다.
-			 * cic_withdraw
-			 */
-			$result = $this->{$this->modelname}->set_withdraw_retire($widIdx, $content, $adminid, $adminip, $memo);
-
-			if($result != 1){
-				// 실패
-				// 이전 실행을 리셋
-				$this->CIC_cp_model->set_cic_cp($memIdx, $content, -$money, '@byadmin', $admin_info['mem_id'], '출금반려 실패');
-				$this->Member_model->set_user_point($memIdx, $money, $mem_cp);
-                
-				$this->session->set_flashdata(
-					'message',
-					'포인트 반환에 실패하였습니다'
-				);
-				$param =& $this->querystring;
-				$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-				redirect($redirecturl);
-			}
-		
-			// 이벤트가 존재하면 실행합니다
-			Events::trigger('after', $eventname);
-			/**
-			 * 처리가 끝난 후 목록페이지로 이동합니다
-			 */
-			$this->session->set_flashdata(
-				'message',
-				'정상적으로 처리되었습니다.'
-			);
-			$param =& $this->querystring;
-			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-
-			redirect($redirecturl);
 		}
+
+		$content = $this->input->post('cp_content2');
+		$memo = $this->input->post('cp_memo2');
+		// insert_cp +
+		$this->point->insert_cp($memIdx, $content, $money, 'withdraw', $widIdx, '출금반려');
+	
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('after', $eventname);
+		/**
+		 * 처리가 끝난 후 목록페이지로 이동합니다
+		 */
+		$this->session->set_flashdata(
+			'message',
+			'정상적으로 처리되었습니다.'
+		);
+		$param =& $this->querystring;
+		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+
+		redirect($redirecturl);
+
 	}
 
 	/**

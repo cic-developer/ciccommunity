@@ -1030,7 +1030,7 @@ class Postact extends CB_Controller
 					$result = array('error' => '보유 포인트가 부족합니다.');
 					exit(json_encode($result));
 				}
-				 
+				
 				$this->point->insert_vp(
 					$mem_id,
 					$usedPoint * -1,
@@ -2266,7 +2266,7 @@ class Postact extends CB_Controller
 				 * cp 기록
 				 * cic_cp
 				 */
-				// insert cp
+				// insert cp -
 				$this->point->insert_cp($mem_id, '포럼배팅', -$usePoint, 'post', $post_id, '포럼배팅');
 
 				/**
@@ -2532,7 +2532,7 @@ class Postact extends CB_Controller
 					 * cp 기록
 					 * cic_cp
 					 */
-					// insert cp
+					// insert cp -
 					$this->point->insert_cp($mem_id, '추가포럼배팅', -$usePoint, 'post', $post_id, '추가포럼배팅');
 
 					/**
@@ -2724,8 +2724,8 @@ class Postact extends CB_Controller
 					exit(json_encode($result));
 				} else{
 					// cp 로그
-					$this->load->model('CIC_cp_model');
-					$this->CIC_cp_model->set_cic_cp($mem_id, '포럼 의견변경', -$need_deposit_cp, '@byself', $mem_id, '포럼 의견변경');
+					// insert_cp -
+					$this->point->insert_cp($mem_id, '포럼 의견변경', -$need_deposit_cp, 'post', $post_id, '포럼 의견변경');
 
 					/**
 					 * 배팅 진영 변경

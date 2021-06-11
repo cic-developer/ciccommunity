@@ -231,7 +231,7 @@ class Searchcoin extends CB_Controller
 		}
 		$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
-		//INSERT KEYWORDS IN DB
+		//INSERT KEYWORDS IN DB 
 		$keyword_list = $this->CIC_coin_keyword_model->get_keyword();
 		$keyword_arr = array();
 		foreach($keyword_list as $value){
@@ -257,8 +257,7 @@ class Searchcoin extends CB_Controller
 				foreach($data as $thisData){
 					if(in_array($thisData['coin_keyword'], $keyword_arr)){	
 						continue;
-					}
-					else{
+					} else {
 						$this->CIC_coin_keyword_model->refresh_keyword_list($thisData);
 					}	
 				} 

@@ -182,7 +182,7 @@ class Forum extends CB_Controller
 								$content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
 								$action = '포럼예치금 반환';
 
-								// insert_cp
+								// insert_cp +
 								$this->point->insert_cp($mem_id, $content, $mem_deposit, 'member', $mem_id, $action);
 
 							}
@@ -1208,7 +1208,7 @@ public function forum_write($post_id = 0)
 				$updatedata['frm_image'] = $updatephoto;
             }
 			
-			if(! ($post_id)){
+			if(! $post_id){
 				$postUpdatedata = array(
 					'post_title' => $post_title,
 					'post_content' => $post_content,
@@ -1240,9 +1240,8 @@ public function forum_write($post_id = 0)
 				
 				$this->Post_extra_vars_model->add_meta($post_id, 3, 'A_opinion' , $pev_value_0);
 				$this->Post_extra_vars_model->add_meta($post_id, 3, 'B_opinion' , $pev_value_1);
-			} else if($post_id){
-				print_r('123');
-				exit;
+			} else if( ! $cfidata){
+				
 				if(empty($cfidata['frm_bat_close_datetime'])){
 					$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 					$updatedata['frm_close_datetime'] = $frm_close_datetime;
