@@ -32,7 +32,7 @@ class Deposit extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('pagination', 'querystring', 'member'));
+		$this->load->library(array('pagination', 'querystring', 'member', 'point'));
 	}
 
 	/**
@@ -85,10 +85,12 @@ class Deposit extends CB_Controller
         // 예치금 추가 + cp 차감
         if(!$mem_deposit){
             $arr = array(
-                'mem_cp' => $mem_cp - $deposit_meta,
+                // 'mem_cp' => $mem_cp - $deposit_meta,
                 'mem_deposit' => $deposit_meta,
             );
-            $memResult = $this->Member_model->set_user_modify($mem_id, $arr);
+            $this->Member_model->set_user_modify($mem_id, $arr);
+
+            $this->point->insert_cp($mem_id, '포럼 예치금', -$deposit_meta, 'member', $mem_id, '포럼예치금입금');
             
             if($memResult == 1){
                 // cp 로그 기록

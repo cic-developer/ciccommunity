@@ -43,7 +43,7 @@ class Forum extends CB_Controller
 		/**
 		 * 라이브러리를 로딩합니다
 		 */
-		$this->load->library(array('pagination', 'querystring', 'member', 'upload'));
+		$this->load->library(array('pagination', 'querystring', 'member', 'upload', 'point'));
 	}
 
 	/**
@@ -872,21 +872,14 @@ class Forum extends CB_Controller
 
 						$repart_real_cp .= $give_cp;
 						
-						// member테이블에 cp지급 & 전적 갱신
+						// member테이블에 전적 갱신
 						$arr = array(
-							'mem_cp' => $changed_cp,
 							'mem_forum_win' => $change_mem_forum_win
 						);
-						$result = $this->Member_model->set_user_modify($mem_id, $arr);
-						if($result == 0){
-							// 회원정보 수정 실패
-						}
-						if($result == 1){
-							// 회원정보 수정 성공
-						}
-						
-						// cic_cp테이블에 log기록
-						$logResult = $this->CIC_cp_model->set_cic_cp($mem_id, '투표자', $give_cp, '@byadmin', $admin_id , '포럼보상지급');
+						$this->Member_model->set_user_modify($mem_id, $arr);
+
+						// insert cp
+						$this->point->insert_cp($mem_id, '포럼승리 포인트 배분', $give_cp, 'post', $pst_id, '포럼보상지급');
 					}
 				}
 			}
@@ -1201,33 +1194,6 @@ public function forum_write($post_id = 0)
 			$pev_value_1 = $this->input->post('pev_value_1', null, '');
 			
 			
-			if ($this->input->post($primary_key)) {
-				if(1){
-					/**
-					 * 승인대기 포럼에서 진행중인 포럼으로 승격시 진행되는 부분입니다.
-					 */
-				}else{
-					/**
-					 * 진행중인 포럼에서 수정하는 경우입니다.
-					 */
-				}
-			}else if(1){
-				/**
-				 * 게시물을 새로 입력하는 경우입니다
-				 */
-			}
-			$this->cache->delete('forum/forum-info-' . cdate('Y-m-d'));
-
-			// 이벤트가 존재하면 실행합니다
-			Events::trigger('after', $eventname);
-
-			/**
-			 * 게시물의 신규입력 또는 수정작업이 끝난 후 목록 페이지로 이동합니다
-			 */
-			$param =& $this->querystring;
-			$redirecturl = admin_url($this->pagedir . '/proceeding_forum' . $param->output());
-
-			redirect($redirecturl);
 		}
 	}
 

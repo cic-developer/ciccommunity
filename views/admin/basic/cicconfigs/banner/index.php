@@ -22,7 +22,7 @@
 				ob_end_flush();
 				?>
 				<div class="btn-group btn-group-sm pull-right" role="group">
-					<!-- <a href="?" class="btn btn-sm <?php echo ($this->input->get('ban_activated') !== 'Y' && $this->input->get('ban_activated') !== 'N') ? 'btn-success' : 'btn-default'; ?>">전체배너</a> -->
+					<a href="?" class="btn btn-sm <?php echo ($this->input->get('ban_activated') !== 'Y' && $this->input->get('ban_activated') !== 'N') ? 'btn-success' : 'btn-default'; ?>">전체배너</a>
 					<a href="?ban_activated=Y" class="btn btn-sm <?php echo ($this->input->get('ban_activated') === 'Y') ? 'btn-success' : 'btn-default'; ?>">활성</a>
 					<a href="?ban_activated=N" class="btn btn-sm <?php echo ($this->input->get('ban_activated') === 'N') ? 'btn-success' : 'btn-default'; ?>">비활성</a>
 				</div>
