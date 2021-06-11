@@ -196,6 +196,9 @@ class Searchcoin extends CB_Controller
 		$this->load->event($eventname);
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		if(!$id){
+			show_404();
+		}
 		$view = array();
 		$view['view'] = array();
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
