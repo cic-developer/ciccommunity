@@ -1024,10 +1024,11 @@ class Forum extends CB_Controller
 
 		return true;
 	}
-
-
-public function forum_write($post_id = 0)
+	
+	
+	public function forum_write($post_id = 0)
 	{
+		
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_cicconfig_banner_write';
 		$this->load->event($eventname);
@@ -1120,7 +1121,7 @@ public function forum_write($post_id = 0)
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
 			
-
+			
 			} else {
 			/**
 			 * 유효성 검사를 통과한 경우입니다.
@@ -1211,9 +1212,6 @@ public function forum_write($post_id = 0)
 				$updatedata['frm_image'] = $updatephoto;
             }
 			if($post_id){
-
-				print_r($cfidata);
-				exit;
 
 				if($this->input->get('type') == 1){
 					$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
