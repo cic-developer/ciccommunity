@@ -1202,76 +1202,19 @@ public function forum_write($post_id = 0)
 			
 			
 			if ($this->input->post($primary_key)) {
-				if(empty($cfidata)){
+				if(1){
 					/**
 					 * 승인대기 포럼에서 진행중인 포럼으로 승격시 진행되는 부분입니다.
 					 */
-					$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
-					$updatedata['frm_close_datetime'] = $frm_close_datetime;
-					$updatedata['pst_id'] = $pst_id;
-					
-					$where = array(
-						'post_id' => $pst_id,
-					);
-					$this->Post_model->update($pst_id, $brd_updatedata, $where);
-					$this->Post_model->update($pst_id, $_updatedata, $where);
-					$this->CIC_forum_info_model->insert($updatedata);
-					$this->Post_extra_vars_model->update($pst_id, $brd_updatedata, $where);
-					$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_0,);
-					$this->Post_extra_vars_model->save($pst_id, 6, $pevupdate_1);
-					$this->session->set_flashdata(
-						'message',
-						'정상적으로 입력되었습니다'
-					);
 				}else{
 					/**
 					 * 진행중인 포럼에서 수정하는 경우입니다.
 					 */
-					$this->Post_model->update($pst_id, $brd_updatedata, $where);
-					$this->Post_model->update($pst_id, $_updatedata, $where);
-					$this->CIC_forum_info_model->update($pst_id, $updatedata, $where);
-					$this->Post_extra_vars_model->update($pst_id, $brd_updatedata, $where);
-					$this->Post_extra_vars_model->save($pst_id, 3, $pevupdate_0,);
-					$this->Post_extra_vars_model->save($pst_id, 3, $pevupdate_1);
-					$this->session->set_flashdata(
-						'message',
-						'정상적으로 수정되었습니다'
-					);
 				}
-			}else if(empty($post_id)){
+			}else if(1){
 				/**
 				 * 게시물을 새로 입력하는 경우입니다
 				 */
-				$postUpdatedata = array(
-					'post_title' => $post_title,
-					'post_content' => $post_content,
-					'post_datetime' => cdate('Y-m-d H:i:s'),
-					'post_updated_datetime' => cdate('Y-m-d H:i:s'),
-					'post_ip' => $this->input->ip_address(),
-					'brd_id' => 3,
-					'mem_id' => $this->member->item('mem_id'),
-					'post_userid' => $this->member->item('mem_userid'),
-					'post_username' => $this->member->item('mem_username'),
-					'post_nickname' => $this->member->item('mem_nickname'),
-					'post_email' => $this->member->item('mem_email'),
-					'post_homepage' => '',
-				);
-				$postUpdatedata['post_device']
-				= ($this->cbconfig->get_device_type() === 'mobile') ? 'mobile' : 'desktop';
-
-				$post_id = $this->Post_model->insert($postUpdatedata);
-
-
-				$forumInfoUpdatedata = array(
-					'frm_bat_close_datetime' => $frm_bat_close_datetime,
-					'frm_close_datetime' => $frm_close_datetime,
-					'pst_id' => $post_id
-				);
-				$this->CIC_forum_info_model->insert($forumInfoUpdatedata);
-
-				
-				$this->Post_extra_vars_model->add_meta($post_id, 3, 'A_opinion' , $pev_value_0);
-				$this->Post_extra_vars_model->add_meta($post_id, 3, 'B_opinion' , $pev_value_1);
 			}
 			$this->cache->delete('forum/forum-info-' . cdate('Y-m-d'));
 
