@@ -346,7 +346,7 @@ class Comment_list extends CB_Controller
 							}
 						}
 					}
-					if (element('block_delete', $board) && $is_admin === false) {
+					if (element('block_delete', $board) && $is_admin === false && (element('brd_id', $board) != 3)) {
 						$result['list'][$key]['can_delete'] = false;
 					}
 					if (strlen(element('cmt_reply', $val)) < 5 && $can_comment_write === true) {

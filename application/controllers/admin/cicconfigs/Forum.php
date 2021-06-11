@@ -1067,7 +1067,7 @@ class Forum extends CB_Controller
 			array(
 				'field' => 'frm_bat_close_datetime',
 				'label' => '배팅 종료일',
-				'rules' => 'trim|required',
+				'rules' => 'trim|required|callback__minbatclosetime',
 			),
 			array(
 				'field' => 'frm_close_datetime',
@@ -1451,7 +1451,29 @@ class Forum extends CB_Controller
 	public function _minfrmclosetime($frmclose)
 	{
 		$batclose = $this->input->post('frm_bat_close_datetime');
-		print_r($batclose);
-		exit;
+		
+		if($frmclose < $batclose){
+			$this->form_validation->set_message(
+				'_minfrmclosetime',
+				'포럼 마감일은 배팅 마감일보다 이후로 설정해야합니다.'
+			);
+			return false;
+		}
+		return true;
+	}
+
+
+
+	public function _minbatclosetime($batclose)
+	{
+		$now = cdate('Y-m-d H:i:s');
+		if($batclose < $now){
+			$this->form_validation->set_message(
+				'_minbatclosetime',
+				'배팅 마감일은 현재 시간 이후로 설정해야합니다.'
+			);
+			return false;
+		} 
+		return true;
 	}
 }

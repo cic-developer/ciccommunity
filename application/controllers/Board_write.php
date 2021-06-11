@@ -317,7 +317,7 @@ class Board_write extends CB_Controller
 
 		if ($this->session->userdata('lastest_post_time') && $this->cbconfig->item('new_post_second')) {
 			if ($this->session->userdata('lastest_post_time') >= ( ctimestamp() - $this->cbconfig->item('new_post_second')) && $is_admin === false) {
-				alert('너무 빠른 시간내에 게시물을 연속해서 올릴 수 없습니다.\\n\\n' . ($this->cbconfig->item('new_post_second') - (ctimestamp() - $this->session->userdata('lastest_post_time'))) . '초 후 글쓰기가 가능합니다');
+				alert('너무 빠른 시간내에 게시물을 연속해서 올릴 수 없습니다.' . ($this->cbconfig->item('new_post_second') - (ctimestamp() - $this->session->userdata('lastest_post_time'))) . '초 후 글쓰기가 가능합니다');
 			}
 		}
 

@@ -433,7 +433,7 @@ class Board extends CI_Controller
 		);
 		$can_delete_comment = false;
 
-		if (element('block_delete', $board) && $is_admin === false) {
+		if (element('block_delete', $board) && $is_admin === false && (element('brd_id', $board) != 3)) {
 			$result = array('error' => '이 게시판의 글은 관리자에 의해서만 삭제가 가능합니다');
 			return json_encode($result);
 		}

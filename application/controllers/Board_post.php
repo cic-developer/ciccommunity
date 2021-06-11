@@ -430,12 +430,6 @@ class Board_post extends CB_Controller
 
 		if($post['brd_id'] == 1){
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
-			// $where = array(
-			// 	'brd_id' => 1,
-			// 	'post_exept_state' => 0,
-			// 	'post_datetime >=' => $checktime,
-			// 	'post_del <>' => 2,
-			// );
 			$where = array(
 				'post_id' => $post_id,
 				'cmt_datetime >=' => $checktime,
@@ -443,13 +437,9 @@ class Board_post extends CB_Controller
 			);
 			$limit = 10;
 			$list_num = 1;
-			// $findex = 'post_like_point';
-			$findex = 'cmt_like_point';
-			$forder = 'desc';
-			// $like_point_ranking_freetalk = $this->Post_model
-			// 	->get_like_point_ranking_list($limit, $offset, $where, $findex, $forder, $sfield, $skeyword);
+			$orderby = 'cmt_like_point desc';
 			$like_point_ranking_freetalk = $this->Comment_model
-				->get_comment_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+				->get_comment_list($limit, $offset, $where, '', $orderby);
 			if (element('list', $like_point_ranking_freetalk)) {
 				foreach (element('list', $like_point_ranking_freetalk) as $key => $val) {
 					$like_point_ranking_freetalk['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
@@ -466,19 +456,12 @@ class Board_post extends CB_Controller
 				'cmt_datetime >=' => $checktime,
 				'cmt_del <>' => 2,
 			);
-			// $where = array(
-			// 	'brd_id' => 1,
-			// 	'post_exept_state' => 0,
-			// 	'post_datetime >=' => $checktime,
-			// 	'post_del <>' => 2,
-			// );
 			$limit = 10;
 			$list_num = 1;
 			// $findex = 'post_dislike_point';
-			$findex = 'cmt_dislike_point';
-			$forder = 'desc';
+			$orderby = 'cmt_dislike_point desc';
 			$dislike_point_ranking_freetalk = $this->Comment_model
-				->get_comment_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+				->get_comment_list($limit, $offset, $where, '', $orderby);
 			if (element('list', $dislike_point_ranking_freetalk)) {
 				foreach (element('list', $dislike_point_ranking_freetalk) as $key => $val) {;
 					$dislike_point_ranking_freetalk['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));

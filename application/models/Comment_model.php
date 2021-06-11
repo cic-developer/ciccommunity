@@ -22,7 +22,7 @@ class Comment_model extends CB_Model
 	 */
 	public $primary_key = 'cmt_id'; // 사용되는 테이블의 프라이머리키
 
-	public $allow_order = array('cmt_num, cmt_reply', 'cmt_num desc, cmt_reply', 'cmt_like_point','cmt_dislike_point');
+	public $allow_order = array('cmt_num, cmt_reply', 'cmt_num desc, cmt_reply', 'cmt_like_point desc','cmt_dislike_point desc');
 
 
 	function __construct()
