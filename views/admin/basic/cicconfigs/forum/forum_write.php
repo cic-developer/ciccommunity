@@ -108,7 +108,7 @@
 					$(function () {
 						$('#datetimepicker10').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
-							minDate: frmbatclosedatetime ? frmbatclosedatetime : new Date(),
+							minDate: new Date(),
 							
 						});
 						$('#datetimepicker11').datetimepicker({

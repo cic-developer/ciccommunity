@@ -1061,7 +1061,9 @@ class Forum extends CB_Controller
 		}
 
 		$this->load->library('form_validation');
-
+		$batclose = $this->input->post('frm_bat_close_datetime');
+		$frmclose = $this->input->post('frm_close_datetime');
+		$closetimeconfig = $frmclose > $batclose;
 		$config = array(
 			array(
 				'field' => 'frm_bat_close_datetime',
@@ -1071,7 +1073,7 @@ class Forum extends CB_Controller
 			array(
 				'field' => 'frm_close_datetime',
 				'label' => '포럼 종료일',
-				'rules' => 'trim|required',
+				'rules' => 'trim|required|callback__closetimeconfig' . $closetimeconfig,
 			),
 			array(
 				'field' => 'post_title',
@@ -1209,7 +1211,6 @@ class Forum extends CB_Controller
 			);
             if($updatephoto){
 				$updatedata['frm_image'] = $updatephoto;
-				$forumInfoUpdatedata['frm_image'] = $updatephoto;
             }
 			if($post_id){
 
@@ -1273,6 +1274,7 @@ class Forum extends CB_Controller
 					'frm_close_datetime' => $frm_close_datetime,
 					'pst_id' => $post_id
 				);
+				$forumInfoUpdatedata['frm_image'] = $updatephoto;
 				$this->CIC_forum_info_model->insert($forumInfoUpdatedata);
 
 				
