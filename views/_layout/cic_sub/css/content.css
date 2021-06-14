@@ -7624,7 +7624,7 @@ label input[type='checkbox'] {
 
 @media only screen and (max-width: 480px) {
     .poll-wrap .cont {
-        padding: 30px 30px 50px 30px;
+        padding: 30px 30px 90px 30px;
     }
     .poll-wrap .cont h3 {
         font-size: 19px;
@@ -7659,6 +7659,18 @@ label input[type='checkbox'] {
         right: 13px;
         left: auto;
     }
+    .poll-wrap .cont li a {
+        position: absolute;
+        left: 50%;
+        bottom: -20%;
+        width: 150px;
+        margin-left: -75px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #333;
+        letter-spacing: -0.03em;
+        text-align: center;
+    }
     .poll-wrap .cont li .nums span {
         font-size: 14px;
     }
@@ -7667,6 +7679,20 @@ label input[type='checkbox'] {
     }
     .poll-wrap .cont li a {
         font-size: 16px;
+        line-height: 20px
+    }
+    .poll-wrap .cont li .tx {
+        position: absolute;
+        left: 50%;
+        bottom: -17%;
+        width: 150px;
+        margin-left: -75px;
+        font-size: 18px;
+        font-weight: 700;
+        color: #333;
+        letter-spacing: -0.03em;
+        text-align: center;
+        line-height: 26px;
     }
 }
 

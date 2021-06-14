@@ -428,6 +428,7 @@ class Board_post extends CB_Controller
 		$post['extravars'] = $this->Post_extra_vars_model->get_all_meta($post_id);
 		$view['view']['post'] = $post;
 
+		//게시물 열람시 인기 게시글 
 		if($post['brd_id'] == 1 || $post['brd_id'] == 2){
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 			$where = array(
