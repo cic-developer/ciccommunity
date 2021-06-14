@@ -166,6 +166,7 @@
 	var post_id = "<?php echo element('post_id', element('post', $view)); ?>"
 	var is_bat = "<?php echo element('is_bat', $forum); ?>" // 유저 배팅 진영 1, 2
 	var cfc_state = "<?php echo element('cfc_state', $forum); ?>" // 유저 배팅 진영 1, 2
+	var forum_bat_max = "<?php echo element('forum_bat_max', $forum); ?>" // 최대 배팅 금액
 
 	// 의견 변경
 	$(document).on('click', '#change_btn', function(){
@@ -282,7 +283,7 @@
 			success: function(data) {
 				if(data.state == 1){
 
-					const title = 'CP를 '+ (option === '1' ? 'A' :'B') + '의견에 추가 참여합니다.';
+					const title = 'CP를 '+ (option === '1' ? 'A' :'B') + '의견에 추가 참여합니다. (최대 총 배팅금액: ' + forum_bat_max + ')';
 					const _point = prompt(title, 0);
 					
 					//취소버튼 누를시
@@ -356,7 +357,7 @@
 			return false;
 		}
         
-		const title = 'CP를 '+ (option === 1 ? 'A' :'B') + '의견에 투표합니다.';
+		const title = 'CP를 '+ (option === 1 ? 'A' :'B') + '의견에 투표합니다. (최대 배팅금액: ' + forum_bat_max + ')';
 		const _point = prompt(title, 0);
         
 		//취소버튼 누를시

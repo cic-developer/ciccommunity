@@ -2326,6 +2326,17 @@ class Postact extends CB_Controller
 				exit(json_encode($result));
 			}
 
+			// 최대 배팅금액 설정값
+			$this->load->model('CIC_forum_config_model');
+			$forum_bat_max = (double) $this->CIC_forum_config_model->item('forum_bat_max');
+			if($usePoint > $forum_bat_max){
+				$result = array(
+					'state' => '0',
+					'message' => '최대 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다',
+				);
+				exit(json_encode($result));
+			}
+
 			/**
 			 * 포인트 차감
 			 * member
@@ -2528,7 +2539,7 @@ class Postact extends CB_Controller
 		if ($form_validation == false) {
 			$result = array(
 				'state' => '0',
-				'message' => '추가참여에 실패하셨습니다 (관리자 문의)',
+				'message' => '보유 cp가 부족합니다',
 			);
 			exit(json_encode($result));
 		}else {
@@ -2584,6 +2595,30 @@ class Postact extends CB_Controller
 				);
 				exit(json_encode($result));
 			}else {
+
+				// 소수점 2자리 확인
+				$isDecimal_usePoint = explode( '.', $usePoint );
+				if( strlen($isDecimal_usePoint[1]) < 3){
+					// return true;
+				} else{
+					$result = array(
+						'state' => '0',
+						'message' => '배팅 금액은 소수점 2자리 까지 입력할 수 있습니다'
+					);
+					exit(json_encode($result));
+				}
+
+				// 최대 배팅금액 설정값
+				$this->load->model('CIC_forum_config_model');
+				$forum_bat_max = (double) $this->CIC_forum_config_model->item('forum_bat_max');
+				if($usePoint > $forum_bat_max){
+					$result = array(
+						'state' => '0',
+						'message' => '최대 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다',
+					);
+					exit(json_encode($result));
+				}
+
 				/**
 				 * 포인트 차감
 				 * member

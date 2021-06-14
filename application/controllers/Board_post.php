@@ -511,6 +511,11 @@ class Board_post extends CB_Controller
 
 			// 진행중 마감 type 1 0
 			$view['forum']['type'] = $this->input->get('type');
+
+			// 최대 배팅금액 설정값
+			$this->load->model('CIC_forum_config_model');
+			$forum_bat_max = (double) $this->CIC_forum_config_model->item('forum_bat_max');
+			$view['forum']['forum_bat_max'] = $forum_bat_max;
 		}
 		/**
 		 * 공지사항 게시판
