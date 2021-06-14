@@ -2346,7 +2346,7 @@ class Postact extends CB_Controller
 		if ($form_validation == false) {
 			$result = array(
 				'state' => '0',
-				'message' => '추가참여에 실패하셨습니다1 (관리자 문의)',
+				'message' => '추가참여에 실패하셨습니다 (관리자 문의)',
 			);
 			exit(json_encode($result));
 		}else {
@@ -2451,7 +2451,7 @@ class Postact extends CB_Controller
 		if ($form_validation == false) {
 			$result = array(
 				'state' => '0',
-				'message' => '추가참여에 실패하셨습니다1 (관리자 문의)',
+				'message' => '추가참여에 실패하셨습니다 (관리자 문의)',
 			);
 			exit(json_encode($result));
 		}else {
