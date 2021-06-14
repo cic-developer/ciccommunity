@@ -2132,6 +2132,7 @@ class Postact extends CB_Controller
 
 	}
 
+	// 최대 배팅금액 
 	public function _usePoint_max_check($_str)
 	{
 
@@ -2154,17 +2155,16 @@ class Postact extends CB_Controller
 		$this->load->model('CIC_forum_model');
 		$isBat = $this->CIC_forum_model->get_forum_bat($where);
 
-
-		print_r($usePoint);
-		print_r('<br>');
-		print_r($option);
-		print_r('<br>');
-		print_r($post_id);
-		print_r('<br>');
-		print_r($isBat);
-		exit;
 		// 첫 배팅시
 		if(!$isBat){
+			if($usePoint > $forum_bat_max){
+				$this->form_validation->set_message(
+					'_usePoint_max_check',
+					'최대 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다'
+				);
+				return false;
+			}
+			
 			return true;
 		}
 
