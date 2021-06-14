@@ -99,14 +99,12 @@
 
 
 <script>
-	var email_ath_result;
-	var nickname_ath_result;
+	var email_ath_result = 0;
+	var nickname_ath_result  = 0;
 
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){
 			
-			email_ath_result = <?php echo element('ath_mail_result', $view); ?>;
-			nickname_ath_result = <?php echo element('ath_nickname_result', $view); ?>;
 			var email = $("#mem_email").val();
 			var password = $("#mem_password").val();
 			var password_re = $("#mem_password_re").val();
@@ -245,6 +243,7 @@
 
 				//성공
 				if(result == 1) {
+					email_ath_result = 1;
 					var _email = $("#mem_email").val();
 					_email = _email.split('@');
 
@@ -285,6 +284,7 @@
 					}
 
 					if(result == "available"){
+						nickname_ath_result = 1;
 						alert(reason);
 					}
 				}

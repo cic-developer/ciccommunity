@@ -1120,7 +1120,8 @@ class Forum extends CB_Controller
 				}
 				$view['view']['postdata'] = $postdata;
 				$view['view']['frminfodata'] = $cfidata;
-				$view['view']['pevdata'] = $pevdata;
+				$view['view']['pevdata0'] = $pevdata[0];
+				$view['view']['pevdata1'] = $pevdata[1];
 			}
 
 			/**

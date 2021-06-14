@@ -69,39 +69,30 @@
 						</div>
 					</div>
 				</div>
-
-
-				<?php
-					if (element('pevdata', $view)){
-						foreach (element('pevdata', $view) as $key => $pev_value) {
-							// print_r($key);
-							// exit;
-					?>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">투표 항목</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" name="pev_value_<?php echo $key ?>" value="<?php echo set_value('pev_value', element('pev_value', $pev_value)); ?>" />
-						</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">투표 A</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="pev_value_0" value="<?php echo set_value('pev_value_0', element('pev_value', element('pevdata0', $view))); ?>" />
 					</div>
-					<?php
-						}
-					}else {
-					?>
-						<div class="form-group">
-							<label class="col-sm-2 control-label">투표 항목</label>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">투표 B</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="pev_value_1" value="<?php echo set_value('pev_value_1', element('pev_value', element('pevdata1', $view))); ?>" />
+					</div>
+				</div>
+						<!-- <div class="form-group">
+							<label class="col-sm-2 control-label">투표 A</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" name="pev_value_0">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-2 control-label">투표 항목</label>
+							<label class="col-sm-2 control-label">투표 B</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" name="pev_value_1">
 							</div>
-						</div>
-				<?php
-					}
-				?>
+						</div> -->
 				<script type="text/javascript">
 				var frmbatclosedatetime = "<?php echo set_value('frm_bat_lose_datetime', element('frm_bat_close_datetime', element('frminfodata', $view))); ?>";
 				var frmclosedatetime = "<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('frminfodata', $view))); ?>";

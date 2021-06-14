@@ -303,10 +303,10 @@ class Register extends CB_Controller
 		$view = array();
 		$view['view'] = array();
 		
-		$ath_mail_result = $this->session->userdata('ath_mail_result');
-		$ath_nickname_result = $this->session->userdata('ath_nickname_result');
-		$view['view']['ath_mail_result'] = $ath_mail_result == '1' ? 1 : 0;
-		$view['view']['ath_nickname_result'] = $ath_nickname_result == '1' ? 1 : 0;
+		// $ath_mail_result = $this->session->userdata('ath_mail_result');
+		// $ath_nickname_result = $this->session->userdata('ath_nickname_result');
+		// $view['view']['ath_mail_result'] = $ath_mail_result == '1' ? 1 : 0;
+		// $view['view']['ath_nickname_result'] = $ath_nickname_result == '1' ? 1 : 0;
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
@@ -1686,37 +1686,50 @@ class Register extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		if ($this->member->item('mem_nickname')
-			&& $this->member->item('mem_nickname') === $nickname) {
-			$this->session->set_userdata('ath_nickname_result', '1');
-			$result = array(
-				'result' => 'available',
-				'reason' => '사용 가능한 닉네임입니다',
-			);
-			exit(json_encode($result));
-		}
-
-		$where = array(
-			'mem_nickname' => $nickname,
-		);
-		$count = $this->Member_model->count_by($where);
-		if ($count > 0) {
+		$this->load->helper('chkstring');
+		if (chkstring($nickname, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false) {
 			$this->session->set_userdata('ath_nickname_result', '');
 			$result = array(
 				'result' => 'no',
-				'reason' => '이미 사용중인 닉네임입니다',
+				'reason' => '닉네임은 공백없이 한글, 영문, 숫자만 입력 가능합니다',
 			);
 			exit(json_encode($result));
 		}
 
-		// if ($this->_mem_nickname_check($nickname) === false) {
-		// 	$this->session->set_userdata('ath_nickname_result', '');
-		// 	$result = array(
-		// 		'result' => 'no',
-		// 		'reason' => '이미 사용중인 닉네임입니다',
-		// 	);
-		// 	exit(json_encode($result));
-		// }
+		if (preg_match("/[\,]?{$nickname}/i", $this->cbconfig->item('denied_nickname_list'))) {
+			$this->session->set_userdata('ath_nickname_result', '');
+			$result = array(
+				'result' => 'no',
+				'reason' => $nickname . ' 은(는) 예약어로 사용하실 수 없는 닉네임입니다'
+			);
+			exit(json_encode($result));
+		}
+
+		$countwhere = array(
+			'mem_nickname' => $nickname,
+		);
+		$row = $this->Member_model->count_by($countwhere);
+		if ($row > 0) {
+			$this->session->set_userdata('ath_nickname_result', '');
+			$result = array(
+				'result' => 'no',
+				'reason' => $nickname . ' 는 이미 다른 회원이 사용하고 있는 닉네임입니다'
+			);
+			exit(json_encode($result));
+		}
+
+		$countwhere = array(
+			'mem_nickname' => $nickname,
+		);
+		$row = $this->Member_nickname_model->count_by($countwhere);
+		if ($row > 0) {
+			$this->session->set_userdata('ath_nickname_result', '');
+			$result = array(
+				'result' => 'no',
+				'reason' => $nickname . ' 는 이미 다른 회원이 사용하고 있는 닉네임입니다'
+			);
+			exit(json_encode($result));
+		}
 
 		// 인증결과 세션 저장
 		$this->session->set_userdata('ath_nickname_result', '1');
