@@ -1102,6 +1102,18 @@ class Board_post extends CB_Controller
 			if (element('use_personal', $board) && $is_admin === false) {
 				$where['post.mem_id'] = $mem_id;
 			}
+			if(element('brd_id', $board) == 3){
+				$type = $this->input->get('type');
+				$checktime = cdate('Y-m-d H:i:s', ctimestamp());
+				if(!$type) {
+					$type = 1;
+				}
+				if($type == 1){
+					$where['cic_forum_info.frm_close_datetime >='] = $checktime;
+				}else if($type == 2){
+					$where['cic_forum_info.frm_close_datetime <'] = $checktime;
+				}
+			}
 			$sfield = $sfieldchk = $this->input->get('sfield', null, '');
 			if ($sfield === 'post_both') {
 				$sfield = array('post_title', 'post_content');
@@ -1117,6 +1129,8 @@ class Board_post extends CB_Controller
 					$sfield,
 					$skeyword
 				);
+				echo $this->db->last_query();
+				exit;
 
 			if (element('post_id', $next_post)) {
 				$view['view']['next_post']['url'] = post_url(element('brd_key', $board), element('post_id', $next_post)) . '?' . $param->output();

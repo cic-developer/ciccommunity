@@ -510,6 +510,25 @@ class Login extends CB_Controller
 
 		if($EncodeData){
 			$this->checkplus->fail($EncodeData);
+
+			$returnMsg = $this->session->userdata('returnMsg');
+			if($returnMsg){
+				$data = array('returnMsg' => $returnMsg);
+			}else{
+				$requestnumber = $this->session->userdata('requestnumber');
+				$errcode = $this->session->userdata('errcode');
+				$authtype = $this->session->userdata('authtype');
+                
+				$data = array(
+					'requestnumber' => $requestnumber,
+					'errcode' => $errcode,
+					'authtype' => $authtype,
+				);
+			}
+			
+			log_message('error', '======== 아이디찾기 폰 인증 Error! Start ========');
+			log_message('error', json_encode($data, JSON_UNESCAPED_UNICODE));
+			log_message('error', '======== 아이디찾기 폰 인증 Error! End ========');
 			
 			echo("<script>alert('인증에 실패하였습니다!');</script>");
 			echo("<script>self.close()</script>");
@@ -596,6 +615,25 @@ class Login extends CB_Controller
 
 		if($EncodeData){
 			$this->checkplus->fail($EncodeData);
+
+			$returnMsg = $this->session->userdata('returnMsg');
+			if($returnMsg){
+				$data = array('returnMsg' => $returnMsg);
+			}else{
+				$requestnumber = $this->session->userdata('requestnumber');
+				$errcode = $this->session->userdata('errcode');
+				$authtype = $this->session->userdata('authtype');
+                
+				$data = array(
+					'requestnumber' => $requestnumber,
+					'errcode' => $errcode,
+					'authtype' => $authtype,
+				);
+			}
+			
+			log_message('error', '======== 비번찾기 폰 인증 Error! Start ========');
+			log_message('error', json_encode($data, JSON_UNESCAPED_UNICODE));
+			log_message('error', '======== 비번찾기 폰 인증 Error! End ========');
 			
 			echo("<script>alert('인증에 실패하였습니다!');</script>");
 			echo("<script>self.close()</script>");

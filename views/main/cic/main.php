@@ -22,7 +22,7 @@
                 </div>
                 <!-- banner start; -->
                 <div class="vis">
-                    <a href="#n" class="prev"><span class="blind">이전</span></a>
+                    <a href="javascript:void(0);" class="prev"><span class="blind">이전</span></a>
                     <div class="visual-slide">
                     
                     <?php
@@ -41,14 +41,14 @@
 
                     <?php for($i=0; $i<element('banner_noimage_count', $view); $i=$i+1){ ?>
                             <div class="item">
-                            <a href="#n">
+                            <a href="javascript:void(0);">
                                 <img src="<?php echo base_url('assets/images/noimage.jpg') ?>" alt="" />
                             </a>
                         </div>
                     <?php }?>
 
                     </div>
-                    <a href="#n" class="next"><span class="blind">다음</span></a>
+                    <a href="javascript:void(0);" class="next"><span class="blind">다음</span></a>
                 </div>
                 <!-- banner end; -->
             </div>
@@ -65,13 +65,13 @@
                             foreach(element('coin', element('maincoin', $view)) as  $thisCoin){
                         ?>
                             <li <?php echo  $i == 0 ? 'class="active"' : '' ?>>
-                                <a href="#n" class="maincoin_symbol" data-symbol="<?php echo element('cmc_symbol', $thisCoin); ?>"><span><?php echo element('cmc_symbol' ,$thisCoin); ?></span></a>
+                                <a href="javascript:void(0);" class="maincoin_symbol" data-symbol="<?php echo element('cmc_symbol', $thisCoin); ?>"><span><?php echo element('cmc_symbol' ,$thisCoin); ?></span></a>
                             </li>
                         <?php
                                 $i++;
                             }
                         ?>
-                        <li class="cyellow"><a href="#n" class="maincoin_symbol" data-symbol="PER"><span>PER</span></a></li>
+                        <li class="cyellow"><a href="javascript:void(0);" class="maincoin_symbol" data-symbol="PER"><span>PER</span></a></li>
                     </ul>
                     <a href="<?php echo $this->member->is_member() ? base_url('/main/coin') : 'javascript:alert(\'로그인이 필요한 서비스입니다.\');'?>" class="more"><span>더 많은 코인 보기</span></a>
                 </div>
@@ -181,8 +181,8 @@
                         <div class="ov">
                             <div class="tab">
                                 <ul>
-                                    <li class="active"><a href="#n" data-tabs="#rtab01"><span>1~10위</span></a></li>
-                                    <li><a href="#n" data-tabs="#rtab02"><span>11~20위</span></a></li>
+                                    <li class="active"><a href="javascript:void(0);" data-tabs="#rtab01"><span>1~10위</span></a></li>
+                                    <li><a href="javascript:void(0);" data-tabs="#rtab02"><span>11~20위</span></a></li>
                                 </ul>
                             </div>
                             <div class="list tab-con" id="rtab01">
@@ -226,7 +226,7 @@
                     <a href="<?php echo base_url('/board/forum')?>" class="more"><span>바로가기</span></a>
                 </div>
                 <div class="cont">
-                    <a href="#n" class="prev"><span class="blind">이전</span></a>
+                    <a href="javascript:void(0);" class="prev"><span class="blind">이전</span></a>
                     <div class="forum-slide">
 
                         <?php
@@ -265,7 +265,7 @@
                                 <div class="txt">
                                     <div class="vc">
                                         <p>빈 게시물 입니다 :)</p>
-                                        <a href="#n"><span>wait!</span></a>
+                                        <a href="javascript:void(0);"><span>wait!</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -279,7 +279,7 @@
                             <div class="txt">
                                 <div class="vc">
                                     <p>‘PER’ 코인 <span class="b">떡락</span> vs <span class="b">떡상</span></p>
-                                    <a href="#n"><span>click</span></a>
+                                    <a href="javascript:void(0);"><span>click</span></a>
                                 </div>
                             </div>
                         </div>
@@ -290,7 +290,7 @@
                             <div class="txt">
                                 <div class="vc">
                                     <p>코로나 백신 출시 text <br />두줄 텍스트 예시 입니다. <br />세줄 텍스트 예시 입니다.</p>
-                                    <a href="#n"><span>click</span></a>
+                                    <a href="javascript:void(0);"><span>click</span></a>
                                 </div>
                             </div>
                         </div>
@@ -301,12 +301,12 @@
                             <div class="txt">
                                 <div class="vc">
                                     <p>코로나 백신 출시 text</p>
-                                    <a href="#n"><span>click</span></a>
+                                    <a href="javascript:void(0);"><span>click</span></a>
                                 </div>
                             </div>
                         </div> -->
                     </div>
-                    <a href="#n" class="next"><span class="blind">이전</span></a>
+                    <a href="javascript:void(0);" class="next"><span class="blind">이전</span></a>
                 </div>
             </div>
             <!-- e : msec-03 -->

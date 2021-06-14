@@ -51,8 +51,8 @@
 						<?php if(html_escape(element('post_notice', element('post', $view))) == 0){ ?>
 						<div class="vp-point">
 							<ul>
-								<li><a href="#n" class="up" data-contenttype="post"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>
-								<li><a href="#n" class="down" data-contenttype="post"><?php echo number_format(element('post_dislike_point', element('post', $view))); ?></a></li>
+								<li><a href="javascript:void(0);" class="up" data-contenttype="post"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>
+								<li><a href="javascript:void(0);" class="down" data-contenttype="post"><?php echo number_format(element('post_dislike_point', element('post', $view))); ?></a></li>
 							</ul>
 						</div>
 						<?php } ?>
@@ -69,8 +69,8 @@
 					<?php if(html_escape(element('post_notice', element('post', $view))) == 0){ ?>
 					<div class="vp-point">
 						<ul>
-							<li><a href="#n" class="up" data-contenttype="post"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>
-							<li><a href="#n" class="down" data-contenttype="post"><?php echo number_format(element('post_dislike_point', element('post', $view))); ?></a></li>
+							<li><a href="javascript:void(0);" class="up" data-contenttype="post"><?php echo number_format(element('post_like_point', element('post', $view))); ?></a></li>
+							<li><a href="javascript:void(0);" class="down" data-contenttype="post"><?php echo number_format(element('post_dislike_point', element('post', $view))); ?></a></li>
 						</ul>
 					</div>
 					<?php } ?>
@@ -199,7 +199,7 @@
 					?>
 					<!-- <textarea placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
 					<div class="btns">
-						<a href="#n" class="write-btn"><span>댓글등록</span></a>
+						<a href="javascript:void(0);" class="write-btn"><span>댓글등록</span></a>
 					</div> -->
 			</div>
 			<div class="cmmt" id="viewcomment">

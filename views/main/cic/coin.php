@@ -21,7 +21,7 @@
                                     foreach(element('except_exchange_list',$view) as $l){
                                 ?>
                                     <li <?php echo $i == 0 ? 'class="active"' : '' ?> data-value="<?php echo element('cme_idx', $l) ?>">
-                                        <a href="#n" class="ibtn">
+                                        <a href="javascript:void(0);" class="ibtn">
                                             <span><?php echo element('cme_korean_nm', $l); ?></span>
                                         </a>
                                     </li>
@@ -32,11 +32,11 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="#n" class="vsel-btn"><span>선택</span></a>
+                    <a href="javascript:void(0);" class="vsel-btn"><span>선택</span></a>
                     <div class="item fr">
                         <h4>선택한 거래소</h4>
-                        <a href="#n" class="up-btn"><span class="blind">위로<span></span></span></a>
-                        <a href="#n" class="down-btn"><span class="blind">아래로<span></span></span></a>
+                        <a href="javascript:void(0);" class="up-btn"><span class="blind">위로<span></span></span></a>
+                        <a href="javascript:void(0);" class="down-btn"><span class="blind">아래로<span></span></span></a>
                         <div class="c02">
                             <ul>
                                 <?php
@@ -44,7 +44,7 @@
                                     foreach(element('my_exchange_list',$view) as $l){
                                 ?>
                                     <li <?php echo $i == 0 ? 'class="active"' : '' ?> data-value="<?php echo element('cme_idx', $l) ?>">
-                                        <a href="#n" class="ibtn">
+                                        <a href="javascript:void(0);" class="ibtn">
                                             <span><?php echo element('cme_korean_nm', $l); ?></span>
                                         </a>
                                         <button class="delete">
@@ -70,7 +70,7 @@
                                     foreach(element('except_coin_list',$view) as $l){
                                 ?>
                                 <li <?php echo $i == 0 ? 'class="active"' : '' ?> data-value="<?php echo element('cmc_idx', $l) ?>">
-                                    <a href="#n" class="ibtn">
+                                    <a href="javascript:void(0);" class="ibtn">
                                         <span><?php echo element('cmc_symbol', $l); ?> (<?php echo element('cmc_korean_nm', $l); ?>)</span>
                                     </a>
                                 </li>
@@ -81,11 +81,11 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="#n" class="vsel-btn"><span>선택</span></a>
+                    <a href="javascript:void(0);" class="vsel-btn"><span>선택</span></a>
                     <div class="item fr">
                         <h4>선택한 암호화폐</h4>
-                        <a href="#n" class="up-btn"><span class="blind">위로<span></span></span></a>
-                        <a href="#n" class="down-btn"><span class="blind">아래로<span></span></span></a>
+                        <a href="javascript:void(0);" class="up-btn"><span class="blind">위로<span></span></span></a>
+                        <a href="javascript:void(0);" class="down-btn"><span class="blind">아래로<span></span></span></a>
                         <div class="c02">
                             <ul>
                                 <?php
@@ -93,7 +93,7 @@
                                     foreach(element('my_coin_list',$view) as $l){
                                 ?>
                                 <li <?php echo $i == 0 ? 'class="active"' : '' ?> data-value="<?php echo element('cmc_idx', $l) ?>">
-                                    <a href="#n" class="ibtn">
+                                    <a href="javascript:void(0);" class="ibtn">
                                         <span><?php echo element('cmc_symbol', $l); ?> (<?php echo element('cmc_korean_nm', $l); ?>)</span>
                                     </a>
                                     <button class="delete">
@@ -104,7 +104,7 @@
                                         $i++;
                                     }
                                 ?>
-                                <li class="per"><a href="#n"><span>PER (퍼토큰)</span></a></li>
+                                <li class="per"><a href="javascript:void(0);"><span>PER (퍼토큰)</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
                                     var per_html = $(this).closest('.set-list').find('.c02 > ul > .per').html();
                                     $(this).closest('.set-list').find('.c02 > ul > .per').remove();
                                     $(this).closest('.set-list').find('.c02 > ul').append(
-                                        '<li class="active" data-value="'+isvalue+'"><a href="#n" class="ibtn"><span>' + istxt +
+                                        '<li class="active" data-value="'+isvalue+'"><a href="javascript:void(0);" class="ibtn"><span>' + istxt +
                                         '</span></a><button class="delete"><span class="blind">삭제</span></button></li>'
                                     );
                                     $(this).closest('.set-list').find('.c02 > ul').append(
@@ -138,7 +138,7 @@
                                     );
                                 } else {
                                     $(this).closest('.set-list').find('.c02 > ul').append(
-                                        '<li class="active" data-value="'+isvalue+'"><a href="#n" class="ibtn"><span>' + istxt +
+                                        '<li class="active" data-value="'+isvalue+'"><a href="javascript:void(0);" class="ibtn"><span>' + istxt +
                                         '</span></a><button class="delete"><span class="blind">삭제</span></button></li>'
                                     );
                                 }
@@ -149,7 +149,7 @@
                         $(document).on("click", ".delete", function () {
                             var istxt = $(this).closest('li').find('a.ibtn > span').text();
                             $(this).closest('.set-list').find('.c01 > ul').append(
-                                '<li><a href="#n" class="ibtn"><span>' + istxt +
+                                '<li><a href="javascript:void(0);" class="ibtn"><span>' + istxt +
                                 '</span></a></li>'
                             );
                             $(this).closest('li').remove();
@@ -215,7 +215,7 @@
             <div class="lower">
                 <p class="ex">※ 가상화폐는 최대 8개까지 선택할 수 있으며, PER 코인은 고정입니다.</p>
                 <a href="javascript:void(0);" class="save-btn"><span>저장</span></a>
-                <a href="#n" class="refresh-btn"><span>초기화</span></a>
+                <a href="javascript:void(0);" class="refresh-btn"><span>초기화</span></a>
             </div>
             <?php echo form_close(); ?>
         </div>

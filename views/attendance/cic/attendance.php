@@ -53,7 +53,7 @@
 									<td>
 										<div class="con <?php echo $_active ? 'active' : ''; ?>">
 											<p class="day"><?php echo $n++ ?></p>
-											<a href="#n" class="chk-btn"><span class="blind">출석체크</span></a>
+											<a href="javascript:void(0);" class="chk-btn"><span class="blind">출석체크</span></a>
 										</div>
 									</td>
 										

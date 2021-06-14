@@ -20,7 +20,7 @@
             <div class="forums">
                 <h3>진행중인 <span>BEST</span> 포럼</h3>
                 <div class="cont">
-                    <a href="#n" class="prev"><span class="blind">이전</span></a>
+                    <a href="javascript:void(0);" class="prev"><span class="blind">이전</span></a>
                     <div class="forum-slide">
                         
                         <?php
@@ -60,13 +60,13 @@
                                         <p class="btxt">빈 게시물 입니다 :)</p>
                                     </div>
                                     <p class="stxt">총 0 CP</p>
-                                    <a href="#n"><span>참여불가!</span></a>
+                                    <a href="javascript:void(0);"><span>참여불가!</span></a>
                                 </div>
                             </div>
                         <?php }?>
 
                     </div>
-                    <a href="#n" class="next"><span class="blind">다음</span></a>
+                    <a href="javascript:void(0);" class="next"><span class="blind">다음</span></a>
                 </div>
             </div>
             <div class="gap50"></div>
@@ -80,7 +80,7 @@
             <div class="gap20"></div>
             <div class="forum-filter">
                 <div class="sel-box c03">
-                <a href="#n" class="sel-btn"><span>
+                <a href="javascript:void(0);" class="sel-btn"><span>
                     <?php if(element('sorted', $view) == 'post_id') { ?>
                         최신순
                     <?php } else if(element('sorted', $view) == 'post_like') { ?>
@@ -147,11 +147,11 @@
                     if(element('write_url', element('list', $view))){
                         if (element('isDeposit', $view)) { 
                     ?>
-                        <a href="#n" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:inline-block;"><span>예치금 반환</span></a>
-                        <a href="#n" class="by-btn" id="deposit_insert" style="display:none;"><span>예치금 넣기</span></a>
+                        <a href="javascript:void(0);" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:inline-block;"><span>예치금 반환</span></a>
+                        <a href="javascript:void(0);" class="by-btn" id="deposit_insert" style="display:none;"><span>예치금 넣기</span></a>
                     <?php }else { ?>
-                        <a href="#n" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:none;"><span>예치금 반환</span></a>
-                        <a href="#n" class="by-btn" id="deposit_insert" style="display:inline-block;"><span>예치금 넣기</span></a>
+                        <a href="javascript:void(0);" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:none;"><span>예치금 반환</span></a>
+                        <a href="javascript:void(0);" class="by-btn" id="deposit_insert" style="display:inline-block;"><span>예치금 넣기</span></a>
                     <?php 
                         }
                     } 

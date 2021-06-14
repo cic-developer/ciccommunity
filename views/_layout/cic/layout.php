@@ -106,9 +106,9 @@
 			</div>
 			<div class="inner">
 				<h1 id="logo"><a href="/"><span class="blind">cic+community</span></a></h1>
-				<a href="#n" class="bt-mnall"><span class="blind">메뉴</span></a>
-				<a href="#n" class="bt-mnclose"><span class="blind">메뉴닫기</span></a>
-				<a href="#n" class="bt-search"><span class="blind">검색</span></a>
+				<a href="javascript:void(0);" class="bt-mnall"><span class="blind">메뉴</span></a>
+				<a href="javascript:void(0);" class="bt-mnclose"><span class="blind">메뉴닫기</span></a>
+				<a href="javascript:void(0);" class="bt-search"><span class="blind">검색</span></a>
 				<div class="top-search">
                     <?php 
                         $attributes = array('class' => 'search_box', 'name' => 'searchForm', 'id' => 'searchForm', 'method' => 'get');
@@ -155,7 +155,7 @@
 								</div>
 							</li>
 							<li class="mn_l1 has-sub is-cloose" style="width: auto;">
-								<a href="#n" class="mn_a1"><span>코인헬퍼</span></a>
+								<a href="javascript:void(0);" class="mn_a1"><span>코인헬퍼</span></a>
 								<div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1; overflow: hidden;">
 								</div>
 							</li>

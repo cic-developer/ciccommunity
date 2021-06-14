@@ -335,6 +335,7 @@ class Post_model extends CB_Model
 		$this->db->select('post.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point');
 		$this->db->from($this->_table);
 		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
+		$this->db->join('cic_forum_info', 'post.post_id = cic_forum_info.pst_id', 'left');
 
 		if ($type === 'next') {
 			$where['post_num >'] = $post_num;

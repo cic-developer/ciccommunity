@@ -270,6 +270,13 @@ class Checkplus extends CI_Controller
 				$errcode = GetValue($plaindata , "ERR_CODE");
 				$authtype = GetValue($plaindata , "AUTH_TYPE");
 			}
+			if($returnMsg){
+				$this->CI->session->set_userdata('returnMsg', $returnMsg);
+			} else{
+				$this->CI->session->set_userdata('requestnumber', $requestnumber);
+				$this->CI->session->set_userdata('errcode', $errcode);
+				$this->CI->session->set_userdata('authtype', $authtype);
+			}
 		}
     }
 

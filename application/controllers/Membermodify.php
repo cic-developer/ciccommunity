@@ -2685,6 +2685,30 @@ class Membermodify extends CB_Controller
 
 		if($EncodeData){
 			$this->checkplus->fail($EncodeData);
+
+			$mem_id = $this->member->item('mem_id');
+			$returnMsg = $this->session->userdata('returnMsg');
+			if($returnMsg){
+				$data = array(
+					'mem_id' => $mem_id,
+					'returnMsg' => $returnMsg,
+				);
+			}else{
+				$requestnumber = $this->session->userdata('requestnumber');
+				$errcode = $this->session->userdata('errcode');
+				$authtype = $this->session->userdata('authtype');
+                
+				$data = array(
+					'mem_id' => $mem_id,
+					'requestnumber' => $requestnumber,
+					'errcode' => $errcode,
+					'authtype' => $authtype,
+				);
+			}
+			
+			log_message('error', '======== 비밀번호 변경 폰 인증 Error! Start ========');
+			log_message('error', json_encode($data, JSON_UNESCAPED_UNICODE));
+			log_message('error', '======== 비밀번호 변경 폰 인증 Error! End ========');
 			
 			echo("<script>alert('인증에 실패하였습니다!');</script>");
 			echo("<script>self.close()</script>");
@@ -2715,6 +2739,30 @@ class Membermodify extends CB_Controller
 
 		if($EncodeData){
 			$this->checkplus->fail($EncodeData);
+
+			$mem_id = $this->member->item('mem_id');
+			$returnMsg = $this->session->userdata('returnMsg');
+			if($returnMsg){
+				$data = array(
+					'mem_id' => $mem_id,
+					'returnMsg' => $returnMsg,
+				);
+			}else{
+				$requestnumber = $this->session->userdata('requestnumber');
+				$errcode = $this->session->userdata('errcode');
+				$authtype = $this->session->userdata('authtype');
+                
+				$data = array(
+					'mem_id' => $mem_id,
+					'requestnumber' => $requestnumber,
+					'errcode' => $errcode,
+					'authtype' => $authtype,
+				);
+			}
+			
+			log_message('error', '======== 지갑주소 변경 폰 인증 Error! Start ========');
+			log_message('error', json_encode($data, JSON_UNESCAPED_UNICODE));
+			log_message('error', '======== 지갑주소 변경 폰 인증 Error! End ========');
 			
 			echo("<script>alert('인증에 실패하였습니다!');</script>");
 			echo("<script>self.close()</script>");

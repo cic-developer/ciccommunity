@@ -80,7 +80,7 @@
 							<p class="percent"><span><?php echo element('A_per', $forum) ? number_format(element('A_per', $forum)) : 'NAN' ?>%</span></p>
 							<p class="nums"><i class="counter"><?php echo rs_number_format(element('cic_A_cp', $forum), 2, 0); ?></i><span>cp</span></p>
 							<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo1.png')?>" alt="" style="cursor:pointer;" /></p>
-							<a href="#n" id="btn_a"><p>A. <?php echo nl2br(html_escape(element('output', $value))); ?></p></a>
+							<a href="javascript:void(0);" id="btn_a"><p>A. <?php echo nl2br(html_escape(element('output', $value))); ?></p></a>
 						</div>
 					</li>
 				<?php
@@ -92,7 +92,7 @@
 							<p class="percent"><span><?php echo element('B_per', $forum) ? number_format(element('B_per', $forum)) : 'NAN' ?>%</span></p>
 							<p class="nums"><i class="counter"><?php echo rs_number_format(element('cic_B_cp', $forum), 2, 0); ?></i><span>cp</span></p>
 							<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo2.png')?>" alt="" style="cursor:pointer;" /></p>
-							<a href="#n" id="btn_b"><span>B. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
+							<a href="javascript:void(0);" id="btn_b"><span>B. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
 						</div>
 					</li>
 				<?php
@@ -114,13 +114,13 @@
 				<?php } ?>
 				<div class="abr">
 					<p class="cp"><span><?php echo rs_number_format(element('bat_cp', $forum), 2, 0); ?></span> CP</p>
-					<a href="#n" id="more_btn"><span>추가 참여!</span></a>
-					<a href="#n" id="change_btn"><span>의견 변경</span></a>
+					<a href="javascript:void(0);" id="more_btn"><span>추가 참여!</span></a>
+					<a href="javascript:void(0);" id="change_btn"><span>의견 변경</span></a>
 				</div>
 			</div>
 			<?php if(element('is_bat', $forum) == 1 || element('is_bat', $forum) == 2){ ?>
 				<div class="btns">
-					<a href="#n" class="enter"><span>투표 참여하기</span></a>
+					<a href="javascript:void(0);" class="enter"><span>투표 참여하기</span></a>
 				</div>
 			<?php }?>
 		</div>

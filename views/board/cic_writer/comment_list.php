@@ -16,7 +16,7 @@
 		?>
 			<div class="<?php echo $_classname; ?>">
 				<div class="info">
-					<a href="#n" class="nickname">
+					<a href="javascript:void(0);" class="nickname">
 						<p class="ico"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', $result)), 35, 35); ?>"
 								alt="" ></p>
 						<p class="txt"><?php echo element('cmt_nickname', $result); ?></p>
@@ -84,7 +84,7 @@
 <div class="layer-wrap singo">
 	<div class="is-top">
 		<h2>신고하기</h2>
-		<a href="#n" class="close singo-close"><span class="blind">닫기</span></a>
+		<a href="javascript:void(0);" class="close singo-close"><span class="blind">닫기</span></a>
 	</div>
 	<div class="is-con">
 		<div class="sel">
@@ -102,8 +102,8 @@
 		<textarea placeholder="신고내용을 작성해주세요"></textarea>
 	</div>
 	<div class="is-btm">
-		<a href="#n" class="enter-btn singo-close"><span>확인</span></a>
-		<a href="#n" class="cancel-btn singo-close"><span>취소</span></a>
+		<a href="javascript:void(0);" class="enter-btn singo-close"><span>확인</span></a>
+		<a href="javascript:void(0);" class="cancel-btn singo-close"><span>취소</span></a>
 	</div>
 </div>
 <!-- s: layer-wrap.singo -->

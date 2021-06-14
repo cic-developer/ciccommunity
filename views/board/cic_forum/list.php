@@ -13,7 +13,7 @@
             <div class="forums">
                 <h3>진행중인 <span>BEST</span> 포럼</h3>
                 <div class="cont">
-                    <a href="#n" class="prev"><span class="blind">이전</span></a>
+                    <a href="javascript:void(0);" class="prev"><span class="blind">이전</span></a>
                     <div class="forum-slide">
 
                         <?php
@@ -54,13 +54,13 @@
                                         <p class="btxt">빈 게시물 입니다 :)</p>
                                     </div>
                                     <p class="stxt">총 0 CP</p>
-                                    <a href="#n"><span>참여불가!</span></a>
+                                    <a href="javascript:void(0);"><span>참여불가!</span></a>
                                 </div>
                             </div>
                         <?php }?>
                         
                     </div>
-                    <a href="#n" class="next"><span class="blind">다음</span></a>
+                    <a href="javascript:void(0);" class="next"><span class="blind">다음</span></a>
                 </div>
             </div>
             <div class="gap50"></div>
@@ -74,14 +74,14 @@
             <div class="gap20"></div>
             <div class="forum-filter">
                 <div class="sel-box c02">
-                    <a href="#n" class="sel-btn"><span>포럼마감순</span></a>
+                    <a href="javascript:void(0);" class="sel-btn"><span>포럼마감순</span></a>
                     <ul>
-                        <!-- <li class="active"><a href="#n"><span>포럼진행순</span></a></li> -->
+                        
                         <li><a href="<?php echo element('cic_forum_info.frm_close_datetime', element('sort', $view)); ?>"><span>포럼마감순</span></a></li>
                     </ul>
                 </div>
                 <div class="sel-box">
-                    <a href="#n" class="sel-btn"><span>
+                    <a href="javascript:void(0);" class="sel-btn"><span>
                     <?php if(element('sorted', $view) == 'post_id') { ?>
                         최신순
                     <?php } else if(element('sorted', $view) == 'cic_forum_total_cp') { ?>
