@@ -91,6 +91,11 @@ class Forum extends CB_Controller
 				'label' => '포럼 최대 배팅금액',
 				'rules' => 'trim|required|greater_than_equal_to[0]|callback__bat_max_decimal_check',
 			),
+			array(
+				'field' => 'forum_bat_min',
+				'label' => '포럼 최소 배팅금액',
+				'rules' => 'trim|required|greater_than_equal_to[0]|callback__bat_min_decimal_check',
+			),
 		);
 		$this->form_validation->set_rules($config);
 
@@ -113,6 +118,7 @@ class Forum extends CB_Controller
 				'forum_deposit',
 				'forum_bat_change_commission',
 				'forum_bat_max',
+				'forum_bat_min',
 			);
 			foreach ($array as $value) {
 				$savedata[$value] = $this->input->post($value, null, '');
@@ -333,6 +339,24 @@ class Forum extends CB_Controller
 		$this->form_validation->set_message(
 			'_bat_max_decimal_check',
 			'최대 배팅금액은 소수점 2자리 까지 설정이 가능합니다'
+		);
+		return false;
+	}
+
+	/**
+	 * 최소 배팅금액 설정, 소수점 두자리 이내 확인
+	 */
+	public function _bat_min_decimal_check($_str)
+	{
+		
+		$str = explode( '.', $_str );
+		if( strlen($str[1]) < 3){
+			return true;
+		}
+        
+		$this->form_validation->set_message(
+			'_bat_min_decimal_check',
+			'최소 배팅금액은 소수점 2자리 까지 설정이 가능합니다'
 		);
 		return false;
 	}

@@ -32,7 +32,13 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">포럼 최대 배팅금액</label>
 					<div class="col-sm-10">
-						<input type="number" class="form-control" name="forum_bat_max" id="forum_bat_max" value="<?php echo set_value('forum_bat_max', element('forum_bat_max', element('data', $view))); ?>" style="width:180px;" /> CP &nbsp;&nbsp;&nbsp; CIC포럼 최대 배팅금액을 설정할 수 있습니다.
+						<input type="number" class="form-control" name="forum_bat_max" id="forum_bat_max" value="<?php echo set_value('forum_bat_max', element('forum_bat_max', element('data', $view))); ?>" style="width:180px;" /> CP &nbsp;&nbsp;&nbsp; CIC포럼 최대 배팅금액을 설정할 수 있습니다. (0 입력시 해당 설정이 비활성화 됩니다. )
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">포럼 최소 배팅금액</label>
+					<div class="col-sm-10">
+						<input type="number" class="form-control" name="forum_bat_min" id="forum_bat_min" value="<?php echo set_value('forum_bat_min', element('forum_bat_min', element('data', $view))); ?>" style="width:180px;" /> CP &nbsp;&nbsp;&nbsp; CIC포럼 최소 배팅금액을 설정할 수 있습니다. (0 입력시 해당 설정이 비활성화 됩니다. )
 					</div>
 				</div>
 

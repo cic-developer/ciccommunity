@@ -1686,6 +1686,7 @@ class Register extends CB_Controller
 			exit(json_encode($result));
 		}
 
+		
 		$this->load->helper('chkstring');
 		if (chkstring($nickname, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false) {
 			$this->session->set_userdata('ath_nickname_result', '');
@@ -1695,7 +1696,7 @@ class Register extends CB_Controller
 			);
 			exit(json_encode($result));
 		}
-
+		
 		if (preg_match("/[\,]?{$nickname}/i", $this->cbconfig->item('denied_nickname_list'))) {
 			$this->session->set_userdata('ath_nickname_result', '');
 			$result = array(
@@ -1704,7 +1705,7 @@ class Register extends CB_Controller
 			);
 			exit(json_encode($result));
 		}
-
+		
 		$countwhere = array(
 			'mem_nickname' => $nickname,
 		);
@@ -1717,20 +1718,7 @@ class Register extends CB_Controller
 			);
 			exit(json_encode($result));
 		}
-
-		$countwhere = array(
-			'mem_nickname' => $nickname,
-		);
-		$row = $this->Member_nickname_model->count_by($countwhere);
-		if ($row > 0) {
-			$this->session->set_userdata('ath_nickname_result', '');
-			$result = array(
-				'result' => 'no',
-				'reason' => $nickname . ' 는 이미 다른 회원이 사용하고 있는 닉네임입니다'
-			);
-			exit(json_encode($result));
-		}
-
+		
 		// 인증결과 세션 저장
 		$this->session->set_userdata('ath_nickname_result', '1');
 		$result = array(

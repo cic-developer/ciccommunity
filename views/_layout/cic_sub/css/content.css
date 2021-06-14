@@ -7429,6 +7429,8 @@ label input[type='checkbox'] {
     padding-left: 40px;
 }
 
+.poll-wrap .cont li .tx {}
+
 .poll-wrap .cont li .nums span {
     font-size: 20px;
     margin-left: 4px;
@@ -7467,7 +7469,8 @@ label input[type='checkbox'] {
     line-height: 30px;
 }
 
-.poll-wrap .cont li p {
+
+/* .poll-wrap .cont li p {
     position: absolute;
     left: 50%;
     bottom: -15%;
@@ -7482,7 +7485,7 @@ label input[type='checkbox'] {
     text-align: center;
     line-height: 30px;
     outline: 1px dotted red;
-}
+} */
 
 .poll-wrap .cont li a.active {
     color: #2667a2;
