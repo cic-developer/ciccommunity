@@ -9,6 +9,7 @@
 		<div class="member-wrap modify">
 			<?php
 			$attributes = array('class' => 'form-horizontal', 'name' => 'fregisterform', 'id' => 'fregisterform');
+			
 			echo form_open_multipart('membermodify/update', $attributes);
 		?>
 			<h3>개인정보변경</h3>

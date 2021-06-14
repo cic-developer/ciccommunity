@@ -2673,12 +2673,11 @@ class Membermodify extends CB_Controller
 		 * 로그인이 필요한 페이지입니다
 		 */
 		required_user_login();
-		
+
+
 		$view = array();
 		$view['view'] = array();
-		
-		print_r($EncodeData);
-		exit;
+
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 

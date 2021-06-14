@@ -108,6 +108,8 @@ class Checkplus extends CI_Controller
 			$enc_data = "";
 		}
 
+		
+
 		return $enc_data;
 	}
 
