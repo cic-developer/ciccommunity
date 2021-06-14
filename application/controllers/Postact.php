@@ -2132,71 +2132,6 @@ class Postact extends CB_Controller
 
 	}
 
-	// 최대 배팅금액 + 소수 2자리
-	public function _usePoint_max_check($_str)
-	{
-
-		$str = explode( '.', $_str );
-		if( strlen($str[1]) < 3){
-			// return true;
-		} else{
-			$this->form_validation->set_message(
-				'_usePoint_max_check',
-				'배팅 금액은 소수점 2자리 까지 입력할 수 있습니다'
-			);
-			
-			return false;
-		}
-
-		$mem_id = (int) $this->member->item('mem_id'); // 회원 id
-		$usePoint = (double) $this->input->post('usePoint'); // 배팅금액
-		$post_id = (int) $this->input->post('post_id'); // 게시물 id
-		$option = (int) $this->input->post('option'); // 배팅 진영
-		
-		// 최대 배팅금액 설정값
-		$this->load->model('CIC_forum_config_model');
-		$forum_bat_max = (double) $this->CIC_forum_config_model->item('forum_bat_max');
-
-		// 추가참여 가능 여부 확인 (중복배팅 확인)
-		$where = array(
-			'pst_id' => $post_id,
-			'mem_id' => $mem_id,
-			'cfc_option' => $option,
-		);
-		
-		$this->load->model('CIC_forum_model');
-		$isBat = $this->CIC_forum_model->get_forum_bat($where);
-
-		// 첫 배팅시
-		if(!$isBat){
-			if($usePoint > $forum_bat_max){
-				$this->form_validation->set_message(
-					'_usePoint_max_check',
-					'최대 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다'
-				);
-				return false;
-			}
-			
-			return true;
-		}
-
-		// 첫배팅 아닐시( 추가배팅 )
-		if($isBat){
-			$cfc_cp = (double) $isBat['cfc_cp']; // 배팅금액
-			$total_cfc_cp = $cfc_cp + $usePoint;
-
-			if($total_cfc_cp > $forum_bat_max){
-				$this->form_validation->set_message(
-					'_usePoint_max_check',
-					'총 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다'
-				);
-				return false;
-			}
-
-			return true;
-		}
-	}
-
 	/**
 	 * 포럼 게시물 투표(참여,배팅)하기
 	 */
@@ -2329,12 +2264,27 @@ class Postact extends CB_Controller
 			// 최대 배팅금액 설정값
 			$this->load->model('CIC_forum_config_model');
 			$forum_bat_max = (double) $this->CIC_forum_config_model->item('forum_bat_max');
-			if($usePoint > $forum_bat_max){
-				$result = array(
-					'state' => '0',
-					'message' => '최대 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다',
-				);
-				exit(json_encode($result));
+			if($forum_bat_max != 0){
+				if($usePoint > $forum_bat_max){
+					$result = array(
+						'state' => '0',
+						'message' => '최대 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다',
+					);
+					exit(json_encode($result));
+				}
+			}
+
+			// 최소 배팅금액 설정값
+			$this->load->model('CIC_forum_config_model');
+			$forum_bat_min = (double) $this->CIC_forum_config_model->item('forum_bat_min');
+			if($forum_bat_min != 0){
+				if($usePoint < $forum_bat_min){
+					$result = array(
+						'state' => '0',
+						'message' => '최소 배팅금액 ('. $forum_bat_min .')미만일 수 없습니다',
+					);
+					exit(json_encode($result));
+				}
 			}
 
 			/**
@@ -2611,12 +2561,27 @@ class Postact extends CB_Controller
 				// 최대 배팅금액 설정값
 				$this->load->model('CIC_forum_config_model');
 				$forum_bat_max = (double) $this->CIC_forum_config_model->item('forum_bat_max');
-				if($usePoint > $forum_bat_max){
-					$result = array(
-						'state' => '0',
-						'message' => '최대 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다',
-					);
-					exit(json_encode($result));
+				if($forum_bat_max != 0){
+					if($usePoint > $forum_bat_max){
+						$result = array(
+							'state' => '0',
+							'message' => '최대 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다',
+						);
+						exit(json_encode($result));
+					}
+				}
+
+				// 최소 배팅금액 설정값
+				$this->load->model('CIC_forum_config_model');
+				$forum_bat_min = (double) $this->CIC_forum_config_model->item('forum_bat_min');
+				if($forum_bat_min != 0){
+					if($usePoint < $forum_bat_min){
+						$result = array(
+							'state' => '0',
+							'message' => '최소 배팅금액 ('. $forum_bat_min .')미만일 수 없습니다',
+						);
+						exit(json_encode($result));
+					}
 				}
 
 				/**
