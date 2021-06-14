@@ -3278,7 +3278,7 @@
     letter-spacing: -0.03em;
     font-weight: 300;
     line-height: 1.5em;
-    word-break: keep-all;
+    word-break: break-all;
 }
 
 .board-wrap.detail .cons .img {

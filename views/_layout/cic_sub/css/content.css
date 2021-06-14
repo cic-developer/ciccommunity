@@ -7659,7 +7659,7 @@ label input[type='checkbox'] {
         right: 13px;
         left: auto;
     }
-    .poll-wrap .cont li a {
+    /* .poll-wrap .cont li a {
         position: absolute;
         left: 50%;
         bottom: -20%;
@@ -7670,7 +7670,7 @@ label input[type='checkbox'] {
         color: #333;
         letter-spacing: -0.03em;
         text-align: center;
-    }
+    } */
     .poll-wrap .cont li .nums span {
         font-size: 14px;
     }
@@ -7678,7 +7678,7 @@ label input[type='checkbox'] {
         font-size: 14px;
     }
     .poll-wrap .cont li a {
-        font-size: 16px;
+        font-size: 13px;
         line-height: 20px
     }
     .poll-wrap .cont li .tx {

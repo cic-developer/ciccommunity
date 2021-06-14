@@ -1074,12 +1074,12 @@ class Forum extends CB_Controller
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_cicconfig_banner_write';
 		$this->load->event($eventname);
-
+		
 		$view = array();
 		$view['view'] = array();
-
+		
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-
+		
 		if ($post_id) {
 			$post_id = (int) $post_id;
 			if (empty($post_id) OR $post_id < 1) {
@@ -1088,9 +1088,9 @@ class Forum extends CB_Controller
 		}
 		
 		$primary_key = $this->Post_model->primary_key;
-
 		
-
+		
+		
 		
 		$postdata = array();
 		$pevdata = array();
@@ -1099,9 +1099,9 @@ class Forum extends CB_Controller
 			$postdata = $this->Post_model->get_one($post_id);
 			$pevdata = $this->Post_extra_vars_model->get($post_id);
 			$cfidata = $this->CIC_forum_info_model->get_one($post_id);
-
+			
 		}
-
+		
 		$this->load->library('form_validation');
 		$batclose = $this->input->post('frm_bat_close_datetime');
 		$frmclose = $this->input->post('frm_close_datetime');
@@ -1125,37 +1125,37 @@ class Forum extends CB_Controller
 				'field' => 'post_content',
 				'label' => '포럼 제목',
 				'rules' => 'trim|required',
-			)
-		);
-
-		$this->form_validation->set_rules($config);
-
-		if ($this->form_validation->run() === false) {
-
-			// 이벤트가 존재하면 실행합니다
-			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-
-			if ($post_id) {
-				if (empty($cfidata['frm_bat_close_datetime']) OR $cfidata['frm_bat_close_datetime'] === '0000-00-00 00:00:00') {
-					$cfidata['frm_bat_close_datetime'] = '';
-				}
-				if (empty($cfidata['frm_close_datetime']) OR $cfidata['frm_close_datetime'] === '0000-00-00 00:00:00') {
-					$cfidata['frm_close_datetime'] = '';
-				}
+				)
+			);
+			
+			$this->form_validation->set_rules($config);
+			
+			if ($this->form_validation->run() === false) {
+				
+				// 이벤트가 존재하면 실행합니다
+				$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+				
+				if ($post_id) {
+					if (empty($cfidata['frm_bat_close_datetime']) OR $cfidata['frm_bat_close_datetime'] === '0000-00-00 00:00:00') {
+						$cfidata['frm_bat_close_datetime'] = '';
+					}
+					if (empty($cfidata['frm_close_datetime']) OR $cfidata['frm_close_datetime'] === '0000-00-00 00:00:00') {
+						$cfidata['frm_close_datetime'] = '';
+					}
 				$view['view']['postdata'] = $postdata;
 				$view['view']['frminfodata'] = $cfidata;
 				$view['view']['pevdata0'] = $pevdata[0];
 				$view['view']['pevdata1'] = $pevdata[1];
 			}
-
+			
 			/**
 			 * primary key 정보를 저장합니다
 			 */
 			$view['view']['primary_key'] = $primary_key;
-
+			
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-
+			
 			/**
 			 * 어드민 레이아웃을 정의합니다
 			 */
@@ -1166,13 +1166,13 @@ class Forum extends CB_Controller
 			$this->view = element('view_skin_file', element('layout', $view));
 			
 			
-			} else {
+		} else {
 			/**
 			 * 유효성 검사를 통과한 경우입니다.
 			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
 			 */
 			
-			 // $upload_path => uploads/forum_image/
+			// $upload_path => uploads/forum_image/
             $this->load->library('upload');
 			if (isset($_FILES) && isset($_FILES['frm_image']) && isset($_FILES['frm_image']['name']) && $_FILES['frm_image']['name']) {
 				$upload_path = config_item('uploads_dir') . '/forum_image/';
@@ -1202,7 +1202,7 @@ class Forum extends CB_Controller
 					@fclose($f);
 					@chmod($file, 0644);
 				}
-
+				
                 $uploadconfig = array();
 				$uploadconfig['upload_path'] = $upload_path;
 				$uploadconfig['allowed_types'] = 'jpg|jpeg|png|gif';
@@ -1210,9 +1210,9 @@ class Forum extends CB_Controller
 				$uploadconfig['max_width'] = '1000';
 				$uploadconfig['max_height'] = '1000';
 				$uploadconfig['encrypt_name'] = true;
-
+				
 				$this->upload->initialize($uploadconfig);
-
+				
 				if ($this->upload->do_upload('frm_image')) {
 					$img = $this->upload->data();
 					$updatephoto = cdate('Y') . '/' . cdate('m') . '/' . element('file_name', $img);
@@ -1221,9 +1221,9 @@ class Forum extends CB_Controller
 				}
             }
 			
-
+			
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
-
+			
 			//set value
 			$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
 			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
@@ -1231,7 +1231,8 @@ class Forum extends CB_Controller
 			$post_content = $this->input->post('post_content', null, '');
 			$pev_value_0 = $this->input->post('pev_value_0', null, '');
 			$pev_value_1 = $this->input->post('pev_value_1', null, '');
-
+			
+			
 			//set value 이외 update data
 			$updatedata = array(				
 				'frm_bat_close_datetime' => $frm_bat_close_datetime,
