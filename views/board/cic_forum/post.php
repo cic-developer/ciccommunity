@@ -80,7 +80,7 @@
 							<p class="percent"><span><?php echo element('A_per', $forum) ? number_format(element('A_per', $forum)) : 'NAN' ?>%</span></p>
 							<p class="nums"><i class="counter"><?php echo rs_number_format(element('cic_A_cp', $forum), 2, 0); ?></i><span>cp</span></p>
 							<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo1.png')?>" alt="" style="cursor:pointer;" /></p>
-							<a href="#n" id="btn_a"><span>A. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
+							<a href="#n" id="btn_a"><p>A. <?php echo nl2br(html_escape(element('output', $value))); ?></p></a>
 						</div>
 					</li>
 				<?php

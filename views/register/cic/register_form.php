@@ -33,7 +33,6 @@
 							<p class="chk-input">
 								<?php echo element('input', $value); ?>
 							</p>
-
 							<!-- 이메일 인증 버튼 -->
 							<?php
 								if(element('field_name', $value) == "mem_email"){

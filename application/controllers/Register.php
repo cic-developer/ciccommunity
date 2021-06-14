@@ -685,7 +685,6 @@ class Register extends CB_Controller
 		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
 		 */
 		if ($form_validation === false OR $file_error !== '' OR $file_error2 !== '') {
-
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 
