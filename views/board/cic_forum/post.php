@@ -283,7 +283,7 @@
 			success: function(data) {
 				if(data.state == 1){
 
-					const title = 'CP를 '+ (option === '1' ? 'A' :'B') + '의견에 추가 참여합니다. (최대 총 배팅금액: ' + forum_bat_max + ')';
+					const title = 'CP를 '+ (option === '1' ? 'A' :'B') + '의견에 추가 참여합니다. (최대 총 배팅금액: ' + priceToString(forum_bat_max) + ')';
 					const _point = prompt(title, 0);
 					
 					//취소버튼 누를시
@@ -357,7 +357,7 @@
 			return false;
 		}
         
-		const title = 'CP를 '+ (option === 1 ? 'A' :'B') + '의견에 투표합니다. (최대 배팅금액: ' + forum_bat_max + ')';
+		const title = 'CP를 '+ (option === 1 ? 'A' :'B') + '의견에 투표합니다. (최대 배팅금액: ' + priceToString(forum_bat_max) + ')';
 		const _point = prompt(title, 0);
         
 		//취소버튼 누를시
@@ -534,4 +534,8 @@
             },
         });
     }
+
+	function priceToString(price) {
+		return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	}
 </script>

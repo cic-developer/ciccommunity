@@ -177,7 +177,7 @@
                         </div>
                     </div>
                     <div class="fr tab-ov">
-                        <h3>실시간 인기</h3>
+                        <h3>실시간 인기 검색어</h3>
                         <div class="ov">
                             <div class="tab">
                                 <ul>
@@ -206,7 +206,7 @@
                                         for($i = 10; $i < 20; $i++){
                                             $val = element($i, element('searchrank', $view));
                                     ?>
-                                        <li><a href="#n"><span><?php echo $i + 1; ?></span><?php echo element('key', $val); ?></a></li>
+                                        <li><a href="/search?group_id=&sfield=post_both&skeyword=<?php echo element('key', $val); ?>&sop=OR"><span><?php echo $i + 1; ?></span><?php echo element('key', $val); ?></a></li>
                                     <?php 
                                         }
                                     }
