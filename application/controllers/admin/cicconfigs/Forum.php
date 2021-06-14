@@ -479,8 +479,16 @@ class Forum extends CB_Controller
 
 					$post = $this->Post_model->get_one($val);
 					$writer_id = $val['mem_id'];
-					
-					exit;
+					$writer_info = $this->Member_model->get_one($writer_id);
+					$writer_deposit = (int) $writer_info['mem_deposit'];
+
+					$arr = array(
+						'mem_deposit' => null,
+					);
+					$memResult = $this->Member_model->set_user_modify($writer_id, $arr);
+
+					$this->point->insert_cp($writer_id, $writer_deposit, '포럼 마감 및 배분 완료', 'member', $writer_id, $this->member->item('mem_id') . '-' . uniqid(''));
+
 					$this->Post_model->upadte_forum_return($val);
 				}
 			}
@@ -1027,7 +1035,7 @@ class Forum extends CB_Controller
 	}
 	
 	// 포럼 폼벨리데이션
-	public function forum_write($post_id = 0)
+		public function forum_write($post_id = 0)
 	{
 		
 		// 이벤트 라이브러리를 로딩합니다
@@ -1269,7 +1277,7 @@ class Forum extends CB_Controller
 					'post_email' => $this->member->item('mem_email'),
 					'post_homepage' => '',
 				);
-				
+
 				$postcontent = array(
 					'post_content' => $post_content	
 				);
@@ -1278,7 +1286,7 @@ class Forum extends CB_Controller
 				= ($this->cbconfig->get_device_type() === 'mobile') ? 'mobile' : 'desktop';
 				
 				$post_id = $this->Post_model->insert($postUpdatedata);
-				$this->Post_model->update($post_id, $_updatedata, $where);
+				$this->Post_model->update($post_id, $postcontent, $post_id);
 
 
 				$forumInfoUpdatedata = array(
@@ -1310,6 +1318,7 @@ class Forum extends CB_Controller
 			redirect($redirecturl);
 		}
 	}
+
 
 	public function return_forum()
 	{
