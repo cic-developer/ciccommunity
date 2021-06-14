@@ -480,6 +480,16 @@ class Forum extends CB_Controller
 				}
 			}
 		}
+
+		$arr = array(
+			'mem_deposit' => null,
+		);
+		$memResult = $this->Member_model->set_user_modify($writer_id, $arr);
+
+		$this->point->insert_cp($writer_id, $writer_deposit, '포럼 마감 및 배분 완료', 'member', $writer_id, $this->member->item('mem_id') . '-' . uniqid(''));
+
+		
+
 		Events::trigger('after', $eventname);
 		$this->session->set_flashdata(
 			'message',
@@ -1455,6 +1465,7 @@ class Forum extends CB_Controller
 				}
 			}
 		}
+		
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('after', $eventname);
 		/**
