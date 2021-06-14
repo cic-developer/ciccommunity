@@ -7559,7 +7559,7 @@ label input[type='checkbox'] {
 
 @media only screen and (max-width: 680px) {
     .poll-wrap .cont {
-        padding: 40px 50px 50px 50px;
+        padding: 40px 50px 130px 50px;
     }
     .poll-wrap .cont h3 {
         font-size: 23px;
@@ -7588,6 +7588,19 @@ label input[type='checkbox'] {
         text-align: center;
         box-sizing: border-box;
         padding-left: 40px;
+    }
+    .poll-wrap .cont li .tx {
+        position: absolute;
+        left: 50%;
+        bottom: -17%;
+        width: 150px;
+        margin-left: -75px;
+        font-size: 18px;
+        font-weight: 700;
+        color: #333;
+        letter-spacing: -0.03em;
+        text-align: center;
+        line-height: 26px;
     }
     .poll-wrap .cont li .popo img {
         width: 80%;
