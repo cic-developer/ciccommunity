@@ -777,12 +777,12 @@ class Forum extends CB_Controller
 				array(
 					'field' => 'forum_commission',
 					'lable' => '수수료 설정',
-					'rules' => 'trim|greater_than_equal_to[0]|callback__forum_commission_check',
+					'rules' => 'trim|greater_than_equal_to[0]|less_than_equal_to[100]|callback__forum_commission_check',
 				),
 				array(
 					'field' => 'writer_reward',
 					'lable' => '작성자 보상 설정',
-					'rules' => 'trim|greater_than_equal_to[0]|callback__writer_reward_check',
+					'rules' => 'trim|greater_than_equal_to[0]|less_than_equal_to['.$total_cp.']|callback__writer_reward_check',
 				),
 			);
 
@@ -804,6 +804,9 @@ class Forum extends CB_Controller
 
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+			$this->session->unset_userdata('total_cp');
+			$this->session->unset_userdata('win_cp');
 
 			/**
 			 * 어드민 레이아웃을 정의합니다
@@ -984,19 +987,19 @@ class Forum extends CB_Controller
 	}
 
 	// 수수료 확인
-	public function _forum_commission_check($str)
+	public function _forum_commission_check($_str)
 	{
 		$total_cp = $this->session->userdata('total_cp');
 		$win_cp = $this->session->userdata('win_cp');
 
 		// total cp 혹은 win cp가 존재하지 않는 경우
-		if(!$total_cp || !$win_cp){
-			$this->form_validation->set_message(
-				'_forum_commission_check',
-				'포럼 cp오류 (관리자 문의)'
-			);
-			return false;
-		}
+		// if(!$total_cp || !$win_cp){
+		// 	$this->form_validation->set_message(
+		// 		'_forum_commission_check',
+		// 		'포럼 cp오류 (관리자 문의)'
+		// 	);
+		// 	return false;
+		// }
 
 		// 포럼 수수료가 승리CP보다 많은 경우
 		// $commission = $total_cp * ((double) $str / 100); 
@@ -1022,19 +1025,19 @@ class Forum extends CB_Controller
 	}
 
 	// 작성자 보상 확인
-	public function _writer_reward_check($str)
+	public function _writer_reward_check($_str)
 	{
 		$total_cp = $this->session->userdata('total_cp');
 		$win_cp = $this->session->userdata('win_cp');
 
 		// total cp 혹은 win cp가 없는 경우
-		if(!$total_cp || !$win_cp){
-			$this->form_validation->set_message(
-				'_writer_reward_check',
-				'포럼 cp오류 (관리자 문의)'
-			);
-			return false;
-		}
+		// if(!$total_cp || !$win_cp){
+		// 	$this->form_validation->set_message(
+		// 		'_writer_reward_check',
+		// 		'포럼 cp오류 (관리자 문의)'
+		// 	);
+		// 	return false;
+		// }
 
 		// 총 cp 가 승리진영 cp보다 적은 경우
 		if((double) $total_cp - (double) $win_cp < 0){

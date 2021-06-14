@@ -7681,7 +7681,7 @@ label input[type='checkbox'] {
         font-size: 13px;
         line-height: 20px
     }
-    .poll-wrap .cont li .tx {
+    /* .poll-wrap .cont li .tx {
         position: absolute;
         left: 50%;
         bottom: -17%;
@@ -7693,6 +7693,12 @@ label input[type='checkbox'] {
         letter-spacing: -0.03em;
         text-align: center;
         line-height: 26px;
+    } */
+    .poll-wrap .cont li p {
+        width: 50%;
+        left: 20px;
+        padding-right: 30px;
+        position: sticky;
     }
 }
 
