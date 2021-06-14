@@ -476,13 +476,16 @@ class Forum extends CB_Controller
 		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
 			foreach ($this->input->post('chk') as $val) {
 				if ($val) {
+
+					$post = $this->Post_model->get_one($val);
+					$writer_id = $val['mem_id'];
+					
+					exit;
 					$this->Post_model->upadte_forum_return($val);
 				}
 			}
 		}
 
-		print_r($val);
-		exit;
 
 		// $deposit = ???;
 
@@ -776,8 +779,6 @@ class Forum extends CB_Controller
 			// validation을 위한 임시 데이터 저장
 			$win_cp = $a_cp >= $b_cp ? $a_cp : $b_cp;
 			$win_option = $a_cp >= $b_cp ? 1 : 2;
-			$this->session->set_userdata('total_cp', $total_cp);
-			$this->session->set_userdata('win_cp', $win_cp);
 		}
 		$total_cp_vali = $total_cp ? $total_cp : 0;
 		
@@ -821,9 +822,6 @@ class Forum extends CB_Controller
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-			$this->session->unset_userdata('total_cp');
-			$this->session->unset_userdata('win_cp');
-
 			/**
 			 * 어드민 레이아웃을 정의합니다
 			 */
@@ -843,14 +841,6 @@ class Forum extends CB_Controller
             
 			$repart_cp =  $total_cp - ( $writer_reward + $forum_commission); // 수수료 보상을 계산후 실제 나누게 될 포인트( 배분 시작 금액)
             
-			// 배분 시작금액이 승리 의견금액보다 낮은경우
-			// if($win_cp > $repart_cp){
-			// 	$this->form_validation->set_message(
-			// 		'_writer_reward_check',
-			// 		'배분 시작금액이 승리의견금액 보다 낮습니다!'
-			// 	);
-			// 	return false;
-			// }
             if($total_cp_vali == 0){
 				$repart_ratio = 0;
 			}else {
@@ -996,9 +986,6 @@ class Forum extends CB_Controller
 			$param =& $this->querystring; 
 			$redirecturl = admin_url($this->pagedir . '/close_forum');
 			
-			$this->session->unset_userdata('total_cp');
-			$this->session->unset_userdata('win_cp');
-			
 			redirect($redirecturl);
 			// 게시물이 삭제될 경우, 모든 포인트 반환 및 원상복귀 && cic_forum_cp 데이터 삭제 필수 && cic_forum_info 데이터 삭제 필수
 			// 마감후 분배여부 status 필요
@@ -1009,28 +996,6 @@ class Forum extends CB_Controller
 	// 수수료 확인
 	public function _forum_commission_check($_str)
 	{
-		$total_cp = $this->session->userdata('total_cp');
-		$win_cp = $this->session->userdata('win_cp');
-
-		// total cp 혹은 win cp가 존재하지 않는 경우
-		// if(!$total_cp || !$win_cp){
-		// 	$this->form_validation->set_message(
-		// 		'_forum_commission_check',
-		// 		'포럼 cp오류 (관리자 문의)'
-		// 	);
-		// 	return false;
-		// }
-
-		// 포럼 수수료가 승리CP보다 많은 경우
-		// $commission = $total_cp * ((double) $str / 100); 
-		// if($win_cp < $commission){
-		// 	$this->form_validation->set_message(
-		// 		'_forum_commission_check',
-		// 		'수수료 설정 오류'
-		// 	);
-		// 	return false;
-		// }
-
 		// 소수점 2자리 검사
 		$str = explode( '.', $_str );
 		if( strlen($str[1]) > 2){
@@ -1047,35 +1012,6 @@ class Forum extends CB_Controller
 	// 작성자 보상 확인
 	public function _writer_reward_check($_str)
 	{
-		$total_cp = $this->session->userdata('total_cp');
-		$win_cp = $this->session->userdata('win_cp');
-
-		// total cp 혹은 win cp가 없는 경우
-		// if(!$total_cp || !$win_cp){
-		// 	$this->form_validation->set_message(
-		// 		'_writer_reward_check',
-		// 		'포럼 cp오류 (관리자 문의)'
-		// 	);
-		// 	return false;
-		// }
-
-		// 총 cp 가 승리진영 cp보다 적은 경우
-		if((double) $total_cp - (double) $win_cp < 0){
-			$this->form_validation->set_message(
-				'_writer_reward_check',
-				'포럼 cp오류 (관리자 문의)'
-			);
-			return false;
-		}
-
-		// if((double) $total_cp - (double) $win_cp < (double) $str){
-		// 	$this->form_validation->set_message(
-		// 		'_writer_reward_check',
-		// 		'보상 설정 오류'
-		// 	);
-		// 	return false;
-		// }
-
 		// 소수점 2자리 검사
 		$str = explode( '.', $_str );
 		if( strlen($str[1]) > 2){
@@ -1321,7 +1257,7 @@ class Forum extends CB_Controller
 				$postUpdatedata = array(
 					'post_num' => $this->Post_model->next_post_num(),
 					'post_title' => $post_title,
-					'post_content' => $post_content,
+					// 'post_content' => $post_content,
 					'post_datetime' => cdate('Y-m-d H:i:s'),
 					'post_updated_datetime' => cdate('Y-m-d H:i:s'),
 					'post_ip' => $this->input->ip_address(),
@@ -1332,12 +1268,17 @@ class Forum extends CB_Controller
 					'post_nickname' => $this->member->item('mem_nickname'),
 					'post_email' => $this->member->item('mem_email'),
 					'post_homepage' => '',
-
 				);
+				
+				$postcontent = array(
+					'post_content' => $post_content	
+				);
+
 				$postUpdatedata['post_device']
 				= ($this->cbconfig->get_device_type() === 'mobile') ? 'mobile' : 'desktop';
-
+				
 				$post_id = $this->Post_model->insert($postUpdatedata);
+				$this->Post_model->update($post_id, $_updatedata, $where);
 
 
 				$forumInfoUpdatedata = array(
