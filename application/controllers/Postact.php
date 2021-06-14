@@ -2132,6 +2132,47 @@ class Postact extends CB_Controller
 
 	}
 
+	public function _usePoint_max_check($_str)
+	{
+
+		$usePoint = (double) $this->input->post('usePoint'); // 배팅금액
+		$post_id = (int) $this->input->post('post_id'); // 게시물 id
+		$option = (int) $this->input->post('option'); // 배팅 진영
+		
+		// 최대 배팅금액 설정값
+		$this->load->model('CIC_forum_config_model');
+		$forum_bat_max = (double) $this->CIC_forum_config_model->item('forum_bat_max');
+
+		// 추가참여 가능 여부 확인 (중복배팅 확인)
+		$where = array(
+			'pst_id' => $post_id,
+			'mem_id' => $mem_id,
+			'cfc_option' => $option,
+		);
+		
+		$this->load->model('CIC_forum_model');
+		$isBat = $this->CIC_forum_model->get_forum_bat($where);
+
+		// 첫 배팅시 통과
+		if(!$isBat){
+			return true;
+		}
+
+		// 첫배팅 아닐시 배팅금액 vs 최대 배팅금액 검사
+		if($isBat){
+
+		}
+
+		print_r($isBat);
+		exit;
+        
+		$this->form_validation->set_message(
+			'_usePoint_max_check',
+			'포럼 예치금은 소수점 2자리 까지 설정이 가능합니다'
+		);
+		return false;
+	}
+
 	/**
 	 * 포럼 게시물 투표(참여,배팅)하기
 	 */
@@ -2174,7 +2215,7 @@ class Postact extends CB_Controller
 			array(
 				'field' => 'usePoint',
 				'label' => '배팅금액',
-				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to['.$member_info['mem_cp'].']',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to['.$member_info['mem_cp'].']|callback__usePoint_max_check',
 			),
 			array(
 				'field' => 'post_id',

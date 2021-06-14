@@ -2811,8 +2811,7 @@ class Membermodify extends CB_Controller
 			$this->session->set_userdata(
 				'membermodify',
 				''
-			);
-			// echo("<script>alert('정보수정이 완료되었습니다.');</script>");
+			);			
 			$this->session->set_flashdata('message', '정보수정이 완료되었습니다');
 			redirect('mypage');
 		}
