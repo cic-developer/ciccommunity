@@ -2135,6 +2135,7 @@ class Postact extends CB_Controller
 	public function _usePoint_max_check($_str)
 	{
 
+		$mem_id = (int) $this->member->item('mem_id'); // 회원 id
 		$usePoint = (double) $this->input->post('usePoint'); // 배팅금액
 		$post_id = (int) $this->input->post('post_id'); // 게시물 id
 		$option = (int) $this->input->post('option'); // 배팅 진영
@@ -2153,14 +2154,23 @@ class Postact extends CB_Controller
 		$this->load->model('CIC_forum_model');
 		$isBat = $this->CIC_forum_model->get_forum_bat($where);
 
-		// 첫 배팅시 통과
+
+		print_r($usePoint);
+		print_r('<br>');
+		print_r($option);
+		print_r('<br>');
+		print_r($post_id);
+		print_r('<br>');
+		print_r($isBat);
+		exit;
+		// 첫 배팅시
 		if(!$isBat){
 			return true;
 		}
 
-		// 첫배팅 아닐시 배팅금액 vs 최대 배팅금액 검사
+		// 첫배팅 아닐시( 추가배팅 )
 		if($isBat){
-
+			$cfc_cp = $isBat['cfc_cp']; // 배팅금액
 		}
 
 		print_r($isBat);
