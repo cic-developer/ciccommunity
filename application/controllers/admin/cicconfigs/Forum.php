@@ -81,15 +81,15 @@ class Forum extends CB_Controller
 				'label' => '포럼 예치금',
 				'rules' => 'trim|required|greater_than_equal_to[0]|callback__deposit_decimal_check',
 			),
-			// array(
-			// 	'field' => 'forum_writer_commission',
-			// 	'label' => '포럼 작성자 지급 포인트 수수료',
-			// 	'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[100]|callback__writer_commission_decimal_check',
-			// ),
 			array(
 				'field' => 'forum_bat_change_commission',
 				'label' => '포럼 배팅 진영 변경 수수료',
 				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[100]|callback__bat_change_commission_decimal_check',
+			),
+			array(
+				'field' => 'forum_bat_max',
+				'label' => '포럼 최대 배팅금액',
+				'rules' => 'trim|required|greater_than_equal_to[0]|callback__writer_commission_decimal_check',
 			),
 		);
 		$this->form_validation->set_rules($config);
@@ -111,8 +111,8 @@ class Forum extends CB_Controller
 
 			$array = array(
 				'forum_deposit',
-				// 'forum_writer_commission',
-				'forum_bat_change_commission'
+				'forum_bat_change_commission',
+				'forum_bat_max',
 			);
 			foreach ($array as $value) {
 				$savedata[$value] = $this->input->post($value, null, '');

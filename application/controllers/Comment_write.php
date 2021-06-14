@@ -189,7 +189,7 @@ class Comment_write extends CB_Controller
 			&& $this->cbconfig->item('new_post_second')) {
 			if ($this->session->userdata('lastest_post_time') >= ( ctimestamp() - $this->cbconfig->item('new_post_second')) && $is_admin === false) {
 				$result = array('error' => '너무 빠른 시간내에 게시물을 연속해서 올릴 수 없습니다.'
-					. ($this->cbconfig->item('new_post_second') - (ctimestamp() - $this->session->userdata('lastest_post_time'))) . '초 후 글쓰기가 가능합니 \n\n \\n \\n\\n \n <br> \<br> \\<br> &nbsp; \&nbsp; \\&nbsp; `\`\ 다');
+					. ($this->cbconfig->item('new_post_second') - (ctimestamp() - $this->session->userdata('lastest_post_time'))) . '초 후 글쓰기가 가능합니다');
 				
 				exit(json_encode($result));
 			}

@@ -862,9 +862,11 @@
         
 		isAgreeForModify(type);
 	}
-/**
- * 나이스 핸드폰인증 끝
- */
+	/**
+	* 나이스 핸드폰인증 끝
+	*/
 
-
+	$(".ath_num").bind("change keyup input",function(){ 
+		$(this).val( $(this).val().replace(/[^0-9]/g,"").substr(0,6) ); 
+	});
 </script>
