@@ -303,8 +303,10 @@ class Register extends CB_Controller
 		$view = array();
 		$view['view'] = array();
 		
-		$ath_result = $this->session->userdata('ath_mail_result');
-		$view['view']['ath_result'] = $ath_result;
+		$ath_mail_result = $this->session->userdata('ath_mail_result');
+		$ath_nickname_result = $this->session->userdata('ath_nickname_result');
+		$view['view']['ath_mail_result'] = $ath_mail_result == '1' ? 1 : 0;
+		$view['view']['ath_nickname_result'] = $ath_nickname_result == '1' ? 1 : 0;
 		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);

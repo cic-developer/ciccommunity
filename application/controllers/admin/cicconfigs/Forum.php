@@ -1266,6 +1266,7 @@ class Forum extends CB_Controller
 				 *  관리자 페이지에서 새로운 글 작성 
 				 */
 				$postUpdatedata = array(
+					'post_num' => $this->Post_model->next_post_num(),
 					'post_title' => $post_title,
 					'post_content' => $post_content,
 					'post_datetime' => cdate('Y-m-d H:i:s'),

@@ -78,14 +78,14 @@
 			<div class="gap60"></div>
 			<div class="vtab">
 				<ul>
-					<li class="active"><a href="#n"><span>주요뉴스</span></a></li>
+					<li class="active"><a href="javascript:void(0);"><span>주요뉴스</span></a></li>
 					<li><a href="/news/latestnews"><span>최신뉴스</span></a></li>
 				</ul>
 			</div>
 			<div class="list vimg">
 				<ul>
 					<!-- <li>
-						<a href="#n">
+						<a href="javascript:void(0);">
 							<div class="img"><img src="<?php echo base_url('assets/images/news-img02.png') ?>" alt="">
 							</div>
 							<div class="txt">

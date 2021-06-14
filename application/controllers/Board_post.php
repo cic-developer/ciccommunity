@@ -1129,8 +1129,6 @@ class Board_post extends CB_Controller
 					$sfield,
 					$skeyword
 				);
-				echo $this->db->last_query();
-				exit;
 
 			if (element('post_id', $next_post)) {
 				$view['view']['next_post']['url'] = post_url(element('brd_key', $board), element('post_id', $next_post)) . '?' . $param->output();

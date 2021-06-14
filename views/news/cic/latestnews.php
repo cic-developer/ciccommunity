@@ -151,10 +151,10 @@
 				<a href="#" class="prev ctrl"><span>이전</span></a>
 				<ul>
 					<li><a href="#" class="active">1</a></li>
-					<li><a href="#n">2</a></li>
-					<li><a href="#n">3</a></li>
-					<li><a href="#n">4</a></li>
-					<li><a href="#n">5</a></li>
+					<li><a href="javascript:void(0);">2</a></li>
+					<li><a href="javascript:void(0);">3</a></li>
+					<li><a href="javascript:void(0);">4</a></li>
+					<li><a href="javascript:void(0);">5</a></li>
 				</ul>
 				<p class="num"><span>1</span> / 10 </p>
 				<a href="#" class="next ctrl"><span>다음</span></a>

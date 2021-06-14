@@ -99,10 +99,14 @@
 
 
 <script>
+	var email_ath_result;
+	var nickname_ath_result;
 
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){
-
+			
+			email_ath_result = <?php echo element('ath_mail_result', $view); ?>;
+			nickname_ath_result = <?php echo element('ath_nickname_result', $view); ?>;
 			var email = $("#mem_email").val();
 			var password = $("#mem_password").val();
 			var password_re = $("#mem_password_re").val();
@@ -114,6 +118,8 @@
 			var birthday = $("#mem_birthday").val();
 			var sex = $("#mem_sex").val();
 
+			if(email_ath_result == 0) {alert('이메일 인증을 진행해주세요'); return;}
+			if(nickname_ath_result == 0) {alert('닉네임 인증을 진행해주세요'); return;}
 			if(email.length == 0) {alert('이메일을 입력해주세요'); return;}
 			if(password.length == 0) {alert('비밀번호를 입력해주세요'); return;}
 			if(password.length < 4) {alert('비밀번호를 4자리 이상 입력해주세요'); return;}
