@@ -159,7 +159,7 @@ class Board_post extends CB_Controller
 		}
 		
 	
-		
+		//writer
 		if(element('brd_id', element('board', $list)) == 2){
 			$limit = 8;
 			$where = array(

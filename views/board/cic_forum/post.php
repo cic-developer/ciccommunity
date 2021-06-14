@@ -81,8 +81,7 @@
 							<p class="nums"><i class="counter"><?php echo rs_number_format(element('cic_A_cp', $forum), 2, 0); ?></i><span>cp</span></p>
 							<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo1.png')?>" alt="" style="cursor:pointer;" /></p>
 							<div class="tx">
-							<a href="javascript:void(0);" id="btn_a"><p>A. <?php echo nl2br(html_escape(element('output', $value))); ?></p></a>
-							<!-- 가나다라 마바사 아자차카 타파하 키키 -->
+							<a href="javascript:void(0);" id="btn_a"><p>A.가나다라 마바사 아자차카 타파하 키키 <?php echo nl2br(html_escape(element('output', $value))); ?></p></a>
 							</div>
 						</div>
 					</li>
@@ -96,7 +95,7 @@
 							<p class="nums"><i class="counter"><?php echo rs_number_format(element('cic_B_cp', $forum), 2, 0); ?></i><span>cp</span></p>
 							<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo2.png')?>" alt="" style="cursor:pointer;" /></p>
 							<div class="tx">
-							<a href="javascript:void(0);" id="btn_b"><span>B. <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
+							<a href="javascript:void(0);" id="btn_b"><span>B.  <?php echo nl2br(html_escape(element('output', $value))); ?></span></a>
 							</div>
 						</div>
 					</li>
