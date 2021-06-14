@@ -701,6 +701,7 @@ class Register extends CB_Controller
 					$html_content[$k]['field_name'] = element('field_name', $value);
 					$html_content[$k]['display_name'] = element('display_name', $value);
 					$html_content[$k]['input'] = '';
+					$html_content[$k]['required'] = element('required', $value);
 
 					//field_type : text, url, email, phone, textarea, radio, select, checkbox, date
 					if (element('field_type', $value) === 'text'
@@ -812,6 +813,7 @@ class Register extends CB_Controller
 						$html_content[$k]['field_name'] = 'mem_password_re';
 						$html_content[$k]['display_name'] = '비밀번호 확인';
 						$html_content[$k]['input'] = '<input type="password" id="mem_password_re" name="mem_password_re" class="form-control input" minlength="' . $password_length . '" />';
+						$html_content[$k]['required'] = 1;
 					}
 					$k++;
 				}

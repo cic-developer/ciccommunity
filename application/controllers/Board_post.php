@@ -1084,7 +1084,7 @@ class Board_post extends CB_Controller
 		if ($use_prev_next) {
 			$where = array();
 			$where['brd_id'] = element('brd_id', $post);
-			$where['post_del <>'] =2;
+			$where['post_del <>'] = 2;
 			$where['post_secret'] = 0;
 			if (element('except_notice', $board)
 				&& $this->cbconfig->get_device_view_type() !== 'mobile') {

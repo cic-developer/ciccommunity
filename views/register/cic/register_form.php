@@ -28,7 +28,7 @@
 					
 					<!-- 기본 회원가입 폼 엘리먼트 그리기 -->
 					<li class="<?php echo element('field_name', $value) ?>">
-						<p class="btxt"><?php echo element('display_name', $value); ?></p>
+						<p class="btxt"><?php echo element('display_name', $value); echo element('required', $value) ? ' *' : ''; ?></p>
 						<div class="field">
 							<p class="chk-input">
 								<?php echo element('input', $value); ?>

@@ -69,7 +69,7 @@ class Forum extends CB_Controller
 
 		$getdata = $this->CIC_forum_config_model->get_all_meta();
 		$view['view']['data'] = $getdata;
-
+		
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
@@ -89,7 +89,7 @@ class Forum extends CB_Controller
 			array(
 				'field' => 'forum_bat_max',
 				'label' => '포럼 최대 배팅금액',
-				'rules' => 'trim|required|greater_than_equal_to[0]|callback__writer_commission_decimal_check',
+				'rules' => 'trim|required|greater_than_equal_to[0]|callback__bat_max_decimal_check',
 			),
 		);
 		$this->form_validation->set_rules($config);
@@ -315,6 +315,24 @@ class Forum extends CB_Controller
 		$this->form_validation->set_message(
 			'_bat_change_commission_decimal_check',
 			'포럼 배팅 진영 변경 수수료는 소수점 2자리 까지 설정이 가능합니다'
+		);
+		return false;
+	}
+
+	/**
+	 * 최대 배팅금액 설정, 소수점 두자리 이내 확인
+	 */
+	public function _bat_max_decimal_check($_str)
+	{
+		
+		$str = explode( '.', $_str );
+		if( strlen($str[1]) < 3){
+			return true;
+		}
+        
+		$this->form_validation->set_message(
+			'_bat_max_decimal_check',
+			'최대 배팅금액은 소수점 2자리 까지 설정이 가능합니다'
 		);
 		return false;
 	}
