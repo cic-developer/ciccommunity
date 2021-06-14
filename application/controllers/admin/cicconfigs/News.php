@@ -22,6 +22,7 @@ class News extends CB_Controller
         $this->load->library(array('pagination', 'querystring', 'cic_company')); 
     }
 
+	// 관리자 뉴스 index 뉴스 목록
 	public function index()
     {
  		// 이벤트 라이브러리를 로딩합니다
@@ -89,6 +90,7 @@ class News extends CB_Controller
 		}
 		$view['view']['data'] = $result;
 
+		//신문사 리스트
 		$select ='comp_id, comp_name';
 		$view['view']['companylist'] = $this->Company_model->get_company_list();
 
@@ -131,6 +133,7 @@ class News extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
     }
 
+	//비 활성화 뉴스 목록
 	public function enable()
 	{
 		// 이벤트 라이브러리를 로딩합니다
@@ -220,6 +223,7 @@ class News extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
+	//비공개 뉴스 목록
 	public function show()
 	{
 		// 이벤트 라이브러리를 로딩합니다
@@ -309,6 +313,7 @@ class News extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
+	//많이 본 뉴스 목록
 	public function most_view_news()
 	{
 		// 이벤트 라이브러리를 로딩합니다
@@ -416,6 +421,7 @@ class News extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
+	//주요 뉴스 목록
 	public function important()
 	{
  		// 이벤트 라이브러리를 로딩합니다
@@ -520,6 +526,7 @@ class News extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
+	//신문사 목록
 	public function company_config()
 	{
  		// 이벤트 라이브러리를 로딩합니다

@@ -1067,7 +1067,7 @@ class Forum extends CB_Controller
 		return true;
 	}
 	
-	
+	// 포럼 폼벨리데이션
 	public function forum_write($post_id = 0)
 	{
 		
@@ -1172,7 +1172,7 @@ class Forum extends CB_Controller
 			 * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
 			 */
 			
-			 // $upload_path => uploads/banner/
+			 // $upload_path => uploads/forum_image/
             $this->load->library('upload');
 			if (isset($_FILES) && isset($_FILES['frm_image']) && isset($_FILES['frm_image']['name']) && $_FILES['frm_image']['name']) {
 				$upload_path = config_item('uploads_dir') . '/forum_image/';
@@ -1224,6 +1224,7 @@ class Forum extends CB_Controller
 
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
+			//set value
 			$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
 			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
 			$post_title = $this->input->post('post_title', null, '');
@@ -1231,6 +1232,7 @@ class Forum extends CB_Controller
 			$pev_value_0 = $this->input->post('pev_value_0', null, '');
 			$pev_value_1 = $this->input->post('pev_value_1', null, '');
 
+			//set value 이외 update data
 			$updatedata = array(				
 				'frm_bat_close_datetime' => $frm_bat_close_datetime,
 				'frm_close_datetime' => $frm_close_datetime,
@@ -1257,6 +1259,7 @@ class Forum extends CB_Controller
 			if($post_id){
 
 				if($this->input->get('type') == 'a'){
+					//도전 cic 포럼에서 진행중인 포럼으로 승격
 					$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 					$updatedata['frm_close_datetime'] = $frm_close_datetime;
 					$updatedata['pst_id'] = $post_id;
@@ -1275,6 +1278,7 @@ class Forum extends CB_Controller
 					);
 					
 				}else if($this->input->get('type') == 'b'){
+					// 진행중인 포럼에서 수정
 					$this->Post_model->update($post_id, $brd_updatedata, $where);
 					$this->Post_model->update($post_id, $_updatedata, $where);
 					$this->CIC_forum_info_model->update($post_id, $updatedata, $where);
