@@ -2132,9 +2132,21 @@ class Postact extends CB_Controller
 
 	}
 
-	// 최대 배팅금액 
+	// 최대 배팅금액 + 소수 2자리
 	public function _usePoint_max_check($_str)
 	{
+
+		$str = explode( '.', $_str );
+		if( strlen($str[1]) < 3){
+			// return true;
+		} else{
+			$this->form_validation->set_message(
+				'_usePoint_max_check',
+				'배팅 금액은 소수점 2자리 까지 입력할 수 있습니다'
+			);
+			
+			return false;
+		}
 
 		$mem_id = (int) $this->member->item('mem_id'); // 회원 id
 		$usePoint = (double) $this->input->post('usePoint'); // 배팅금액
@@ -2170,17 +2182,19 @@ class Postact extends CB_Controller
 
 		// 첫배팅 아닐시( 추가배팅 )
 		if($isBat){
-			$cfc_cp = $isBat['cfc_cp']; // 배팅금액
-		}
+			$cfc_cp = (double) $isBat['cfc_cp']; // 배팅금액
+			$total_cfc_cp = $cfc_cp + $usePoint;
 
-		print_r($isBat);
-		exit;
-        
-		$this->form_validation->set_message(
-			'_usePoint_max_check',
-			'포럼 예치금은 소수점 2자리 까지 설정이 가능합니다'
-		);
-		return false;
+			if($total_cfc_cp > $forum_bat_max){
+				$this->form_validation->set_message(
+					'_usePoint_max_check',
+					'총 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다'
+				);
+				return false;
+			}
+
+			return true;
+		}
 	}
 
 	/**
@@ -2225,7 +2239,7 @@ class Postact extends CB_Controller
 			array(
 				'field' => 'usePoint',
 				'label' => '배팅금액',
-				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to['.$member_info['mem_cp'].']|callback__usePoint_max_check',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to['.$member_info['mem_cp'].']',
 			),
 			array(
 				'field' => 'post_id',
@@ -2281,6 +2295,18 @@ class Postact extends CB_Controller
 				$result = array(
 					'state' => '0',
 					'message' => '마감된 포럼입니다',
+				);
+				exit(json_encode($result));
+			}
+
+			// 소수점 2자리 확인
+			$isDecimal_usePoint = explode( '.', $usePoint );
+			if( strlen($isDecimal_usePoint[1]) < 3){
+				// return true;
+			} else{
+				$result = array(
+					'state' => '0',
+					'message' => '배팅 금액은 소수점 2자리 까지 입력할 수 있습니다'
 				);
 				exit(json_encode($result));
 			}
