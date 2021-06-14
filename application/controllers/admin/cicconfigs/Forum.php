@@ -483,10 +483,10 @@ class Forum extends CB_Controller
 		Events::trigger('after', $eventname);
 		$this->session->set_flashdata(
 			'message',
-			'베스트 게시물에서 제외되었습니다'
+			'성공적으로 반려되었습니다.'
 		);
 		$param =& $this->querystring;
-		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+		$redirecturl = admin_url($this->pagedir . '/disapproval_forum' . $param->output());
 		redirect($redirecturl);
 	}
 
@@ -741,7 +741,7 @@ class Forum extends CB_Controller
 			redirect($redirecturl);
 		}
 
-		$total_cp = $getdata['cic_forum_total_cp']; // 총 cp
+		$total_cp = (double) $getdata['cic_forum_total_cp']; // 총 cp
 		$view['view']['forum'] = $getdata;
 		$view['view']['total_cp'] = $total_cp;
 
@@ -750,8 +750,8 @@ class Forum extends CB_Controller
 		$view['view']['A_per'] = 0;
 		$view['view']['B_per'] = 0;
 		if($total_cp){
-			$a_cp = $getdata['cic_A_cp']; // A cp
-			$b_cp = $getdata['cic_B_cp']; // B cp
+			$a_cp = (double) $getdata['cic_A_cp']; // A cp
+			$b_cp = (double) $getdata['cic_B_cp']; // B cp
 
 			$view['view']['cic_A_cp'] = $a_cp; // A cp
 			$view['view']['cic_B_cp'] = $b_cp; // B cp
@@ -764,6 +764,7 @@ class Forum extends CB_Controller
 			$this->session->set_userdata('total_cp', $total_cp);
 			$this->session->set_userdata('win_cp', $win_cp);
 		}
+		$total_cp_vali = $total_cp ? $total_cp : 0;
 		
 		/**
 		 * Validation 라이브러리를 가져옵니다
@@ -782,7 +783,7 @@ class Forum extends CB_Controller
 				array(
 					'field' => 'writer_reward',
 					'lable' => '작성자 보상 설정',
-					'rules' => 'trim|greater_than_equal_to[0]|less_than_equal_to['.$total_cp.']|callback__writer_reward_check',
+					'rules' => 'trim|greater_than_equal_to[0]|less_than_equal_to['.$total_cp_vali.']|callback__writer_reward_check',
 				),
 			);
 
@@ -835,8 +836,11 @@ class Forum extends CB_Controller
 			// 	);
 			// 	return false;
 			// }
-            
-			$repart_ratio = $repart_cp / $win_cp; // 1cp당 지급 비율
+            if($total_cp_vali == 0){
+				$repart_ratio = 0;
+			}else {
+				$repart_ratio = $repart_cp / $win_cp; // 1cp당 지급 비율
+			}
 
 			$admin_id = $this->member->item('mem_id'); // 관리자 id
 
@@ -926,11 +930,12 @@ class Forum extends CB_Controller
 			 * 배분 완료 = state 1로 변경 ( cic_forum_info table)
 			 * cic_forum_info 컬럼 디자인을 보시면 확인할수 있습니다.
 			 */
+
 			$updatedata = array(
 				'frm_repart_state' => 1,
 				'frm_repart_commission' => $_forum_commission,
 				'frm_repart_reward' => $writer_reward,
-				'frm_total_cp' => $total_cp,
+				'frm_total_cp' => $total_cp_vali,
 				'frm_repart_cp' => $repart_cp,
 				'frm_repart_ratio' => $repart_ratio,
 				'frm_repart_real_cp' => $repart_real_cp,
@@ -1457,7 +1462,7 @@ class Forum extends CB_Controller
 		 */
 		$this->session->set_flashdata(
 			'message',
-			'정상적으로 비활성화 되었습니다.'
+			'정상적으로 중도마감 되었습니다.'
 		);
 		$param =& $this->querystring;
 		$redirecturl = admin_url($this->pagedir . '/proceeding_forum?' . $param->output());
