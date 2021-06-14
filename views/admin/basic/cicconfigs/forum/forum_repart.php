@@ -90,10 +90,11 @@
 <script type="text/javascript">
 //<![CDATA[
 $(function() {
+
 	$('#fadminwrite').validate({
 		rules: {
-			forum_commission: { },
-			writer_reward: { },
+			forum_commission: { required: true, min:0 , max: 100 },
+			writer_reward: { required: true, min: 0 }//, max: total_cp },
 		}
 	});
 });

@@ -481,12 +481,17 @@ class Forum extends CB_Controller
 			}
 		}
 
-		$arr = array(
-			'mem_deposit' => null,
-		);
-		$memResult = $this->Member_model->set_user_modify($writer_id, $arr);
+		print_r($val);
+		exit;
 
-		$this->point->insert_cp($writer_id, $writer_deposit, '포럼 마감 및 배분 완료', 'member', $writer_id, $this->member->item('mem_id') . '-' . uniqid(''));
+		// $deposit = ???;
+
+		// $arr = array(
+		// 	'mem_deposit' => null,
+		// );
+		// $memResult = $this->Member_model->set_user_modify($writer_id, $arr);
+
+		// $this->point->insert_cp($writer_id, $deposit, '포럼 마감 및 배분 완료', 'member', $writer_id, $this->member->item('mem_id') . '-' . uniqid(''));
 
 		
 
