@@ -172,6 +172,11 @@
 		change_forum_bat(post_id, is_bat);
 	})
 
+	// 포포클릭
+	$(document).on('click', '.popo', function(){
+		$(this).parent().find('#btn_a, #btn_b').trigger('click');
+	})
+
 	// 추가참여!
 	$(document).on('click', '#more_btn', function(){
 		update_forum_cp(post_id, is_bat);

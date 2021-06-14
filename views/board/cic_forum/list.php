@@ -67,7 +67,7 @@
             <div class="ftab">
                 <ul>
                     <li class="<?php echo element('type', $view) == 1 ? 'active' : ';' ?>"><a href="<?php echo base_url('board/forum?type=1')?>"><span>진행중 포럼</span></a></li>
-                    <li><a href="<?php echo base_url('board/userforum')?>"><span>승인대기 포럼</span></a></li>
+                    <li><a href="<?php echo base_url('board/userforum')?>"><span>도전! CIC 포럼</span></a></li>
                     <li class="<?php echo element('type', $view) == 2 ? 'active' : ';' ?>"><a href="<?php echo base_url('board/forum?type=2')?>"><span>마감된 포럼</span></a></li>
                 </ul>
             </div>

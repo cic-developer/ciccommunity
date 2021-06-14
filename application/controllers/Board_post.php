@@ -1343,7 +1343,7 @@ class Board_post extends CB_Controller
 			? element('order_by_field', $board)
 			: 'post_num, post_reply';
 		$findex = $this->input->get('findex', null, $order_by_field);
-		$forder = $this->input->get('forder', null, 'desc');
+		$forder = $this->input->get('forder', null, 'asc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 		if ($this->cbconfig->get_device_view_type() === 'mobile') {
