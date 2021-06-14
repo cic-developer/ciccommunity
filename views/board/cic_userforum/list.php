@@ -44,7 +44,7 @@
                         }
                         ?>
 
-                        <!-- 포럼 기본 이미지 입니다. 승인대기포럼 승인시 설정된 포럼 이미지가 없을 경우 해당 기본 이미지가 보여집니다 -->
+                        <!-- 포럼 기본 이미지 입니다. 도전! CIC포럼 승인시 설정된 포럼 이미지가 없을 경우 해당 기본 이미지가 보여집니다 -->
                         <!-- 슬라이드바에 보여지는 포럼은, 마감되지 않은 진행중인 포럼에 한해서만 보여집니다 -->
                         <!-- 현재 기본이미지 경로는 두 경우가 있습니다. 편하신대로 사용하시면 됩니다. -->
                         <!-- 1. assets/images/forum-img01.jpg -->
@@ -232,7 +232,7 @@
 	.modal {
 		display: none; /* Hidden by default */
 		position: fixed; /* Stay in place */
-		z-index: 1; /* Sit on top */
+		z-index: 9999; /* Sit on top */
 		left: 0;
 		top: 0;
 		width: 100%; /* Full width */

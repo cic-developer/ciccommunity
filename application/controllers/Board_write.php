@@ -906,7 +906,7 @@ class Board_write extends CB_Controller
 				$updatedata['post_category'] = $this->input->post('post_category', null, '');
 			}
 			
-			// 글쓰기가 승인대기 포럼인 경우, cate 1 (2는 반려)
+			// 글쓰기가 도전! CIC 포럼인 경우, cate 1 (2는 반려)
 			if(element('brd_id', $board) == 6) {
 				$updatedata['post_category'] = 1;
 			}
@@ -1404,7 +1404,7 @@ class Board_write extends CB_Controller
 		}
 		// 도전 CIC 포럼, userForum
 		if($board_id == 6){
-			alert('승인대기 포럼은 수정할수 없습니다');
+			alert('도전! CIC 포럼은 수정할수 없습니다');
 			return false;
 		}
 

@@ -139,6 +139,7 @@
 			if(_is_sended) return false;
 			_is_sended = true;
 			var _email = $("#mem_email").val();
+			$('#mem_email').attr('readonly', 'readonly'); // 승인 메세지
 
 			var result = '';
 			var reason = '';
@@ -160,6 +161,7 @@
 					if(result == "no"){
 						alert(reason);
 						_is_sended = false;
+						$('#mem_email').removeAttr('readonly'); // readonly 제거
 					}
 
 					if(result == "available"){
@@ -328,6 +330,9 @@
 		oldVal2 = currentVal;
 	});
 
+	$(document).on("change keyup input", '#ath_num', function(){
+		$(this).val( $(this).val().replace(/[^0-9]/g,"").substr(0,6) );
+	});
 </script>
 
 

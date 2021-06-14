@@ -102,8 +102,8 @@ class Wconfig extends CB_Controller
 			 */
 
 			$array = array(
-				'withdraw_deposit',
-				'withdraw_minimum',
+				'withdraw_deposit', // 출금요청 수수료
+				'withdraw_minimum', // 출금요청 최소금액
 			);
 			foreach ($array as $value) {
 				$savedata[$value] = $this->input->post($value, null, '');

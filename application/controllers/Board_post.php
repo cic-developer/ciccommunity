@@ -274,7 +274,7 @@ class Board_post extends CB_Controller
 				'post_like' => $param->sort('post_like', 'asc'),
 			);
 
-			// default cate = 1 (1승인대기, 2반려)
+			// default cate = 1 (1도전! CIC, 2반려)
 			$category_id = $this->input->get('category_id');
 			if(!$category_id) {
 				$category_id = 1;

@@ -131,9 +131,9 @@ class Forum extends CB_Controller
 				// 2. 예치금이 존재하는 유저들의 정보를 가져옴
 				// 3. 해당 유저가 작성한 포럼 게시물이 있는지 확인
 				// 4. 해당 유저가 작성한 포럼 게시물이 있으면, 분배가 이루어지지 않은 진행중인 포럼이 있는지 확인 (없으면 반환, 게시물은 존재하나 분배가 완료된 게시물임)
-				// 5. 해당 유저가 작성한 포럼 게시물이 없으면, 해당 유저가 작성한 승인대기 포럼 게시물이 있는지 확인
-				// 6. 해당 유저가 작성한 승인대기 포럼 게시물이 있으면, 반려되지 않은 포럼이 있는지 확인 (없으면 반환, 게시물은 존재하나 반려된 게시물임)
-				// 7. 해당 유저가 작성한 승인대기 포럼 게시물이 없으면, 반환 (모든 게시물이 존재하지 않음)
+				// 5. 해당 유저가 작성한 포럼 게시물이 없으면, 해당 유저가 작성한 도전! CIC 포럼 게시물이 있는지 확인
+				// 6. 해당 유저가 작성한 도전! CIC 포럼 게시물이 있으면, 반려되지 않은 포럼이 있는지 확인 (없으면 반환, 게시물은 존재하나 반려된 게시물임)
+				// 7. 해당 유저가 작성한 도전! CIC 포럼 게시물이 없으면, 반환 (모든 게시물이 존재하지 않음)
 				foreach($members_Is_deposit['list'] as $val){
 
 					$mem_id = (int) $val['mem_id'];
@@ -196,7 +196,7 @@ class Forum extends CB_Controller
 						);
 						$userforum = $this->Post_model->get_one('', '', $userforumWhere);
 						if($userforum){
-							// 승인대기 포럼 게시물이 있으면
+							// 도전! CIC 포럼 게시물이 있으면
 							$userforumCateWhere = array(
 								'brd_id' => 6,
 								'mem_id' => $mem_id,
@@ -205,10 +205,10 @@ class Forum extends CB_Controller
 							$userforum_cate_one = $this->Post_model->get_one('', '', $userforumCateWhere);
 
 							if($userforum_cate_one){
-								// 반려되지 않은 진행중인 승인대기 포럼 게시물이 있으면
+								// 반려되지 않은 진행중인 도전! CIC 포럼 게시물이 있으면
 								// 반환 안됨
 							}else{
-								// 반려되지 않은 진행중이 승인대기 포럼 게시물이 없으면
+								// 반려되지 않은 진행중이 도전! CIC 포럼 게시물이 없으면
 
 								// cp 반환
 								$arr = array(
@@ -228,7 +228,7 @@ class Forum extends CB_Controller
 								}
 							}
 						}else {
-							// 승인대기 포람 게시물이 없으면
+							// 도전! CIC 포람 게시물이 없으면
 
 							// cp 반환
 							$arr = array(
@@ -442,7 +442,7 @@ class Forum extends CB_Controller
 		
 	}
 
-	// 승인대기 포럼을 반려하는 함수 
+	// 도전! CIC 포럼을 반려하는 함수 
 	public function upadte_forum_return()
 	{
 		

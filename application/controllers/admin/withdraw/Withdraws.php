@@ -138,7 +138,7 @@ class Withdraws extends CB_Controller
 		// 코인 데이터
 		$coinData = $this->coinapi->get_coin_data('gdac', 'PER', 'KRW'); // price, price_usd, korea_premium, volume, change_rate
 		
-		$view['view']['deposit'] = $withdraw_deposit;
+		// 코인가격
 		$view['view']['price'] = $coinData['price'];
 
 		/**

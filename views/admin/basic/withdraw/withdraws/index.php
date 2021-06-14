@@ -414,7 +414,7 @@
 
         var _per_coin = (cal_money / price) * 100;
 
-        var per_coin = Math.floor((_per_coin * 100)) / 100;
+        var per_coin = Math.floor((_per_coin * 100)) / 100; // 예상 퍼코인
 
         $("#myModal-approve .modal-body #wid_idx1").val( widIdx ); 
         $("#myModal-approve .modal-body #cp_percoin").val( per_coin ); 
