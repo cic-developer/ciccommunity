@@ -639,6 +639,8 @@ class News extends CB_Controller
 	/**
 	 * 목록 페이지에서 선택삭제를 하는 경우 실행되는 메소드입니다
 	 */
+
+	//신문사 삭제
 	public function company_config_listdelete()
 	{
 		// 이벤트 라이브러리를 로딩합니다
@@ -675,6 +677,7 @@ class News extends CB_Controller
 		redirect($redirecturl);
 	}
 
+	//신문사 목록 폼벨리데이션
 	public function company_write($comp_id = 0)
 	{
 		
@@ -810,6 +813,7 @@ class News extends CB_Controller
 		
 	}
 
+	//뉴스 비활성화 함수
     public function update_news_enable_0()
 	{
 		// 이벤트 라이브러리를 로딩합니다
@@ -845,6 +849,8 @@ class News extends CB_Controller
 		redirect($redirecturl);
 	}
 
+
+	// 뉴스 활성화 함수
 	public function update_news_enable_1()
 	{
 		// 이벤트 라이브러리를 로딩합니다
@@ -877,6 +883,7 @@ class News extends CB_Controller
 		redirect($redirecturl);
 	}
 
+	//뉴스 비공개 설정 함수
 	public function update_news_show_0()
     {
         $eventname = 'event_admin_news_delete';
@@ -903,6 +910,7 @@ class News extends CB_Controller
         redirect($redirecturl);
     }
 
+	//뉴스 공개 설정 함수
 	public function update_news_show_1()
     {
         $eventname = 'event_admin_news_delete';
@@ -929,6 +937,7 @@ class News extends CB_Controller
         redirect($redirecturl);
     }
 
+	//주요뉴스 선정 함수
 	public function update_news_important()
 	{
 		$eventname = 'event_admin_news_delete';
@@ -955,6 +964,7 @@ class News extends CB_Controller
         redirect($redirecturl);
 	}
 
+	//주요뉴스 해제 함수
 	public function update_news_important_0()
 	{
 		$eventname = 'event_admin_news_delete';

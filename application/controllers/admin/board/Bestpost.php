@@ -50,6 +50,8 @@ class Bestpost extends CB_Controller
 	/**
 	 * 목록을 가져오는 메소드입니다
 	 */
+
+	//비선정 게시물 목록
 	public function index()
 	{
 		// 이벤트 라이브러리를 로딩합니다
@@ -178,6 +180,7 @@ class Bestpost extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
+	//베스트 게시물 목록
 	public function bestpost()
 	{
 		// 이벤트 라이브러리를 로딩합니다
@@ -304,6 +307,8 @@ class Bestpost extends CB_Controller
 	/**
 	 * 목록 페이지에서 선택삭제를 하는 경우 실행되는 메소드입니다
 	 */
+
+	//
 	public function listupdate()
 	{
 		// 이벤트 라이브러리를 로딩합니다
@@ -338,6 +343,7 @@ class Bestpost extends CB_Controller
 		redirect($redirecturl);
 	}
 
+	//베스트 게시글 선정 함수
 	public function bestpostupdate()
 	{
 		// 이벤트 라이브러리를 로딩합니다
@@ -372,6 +378,7 @@ class Bestpost extends CB_Controller
 		redirect($redirecturl);
 	}
 
+	//베스트 게시글 제외 함수
 	public function bestpostexept()
 	{
 		// 이벤트 라이브러리를 로딩합니다

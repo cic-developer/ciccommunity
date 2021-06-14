@@ -81,7 +81,8 @@
 							<p class="nums"><i class="counter"><?php echo rs_number_format(element('cic_A_cp', $forum), 2, 0); ?></i><span>cp</span></p>
 							<p class="popo"><img src="<?php echo base_url('assets/images/forum_popo1.png')?>" alt="" style="cursor:pointer;" /></p>
 							<div class="tx">
-							<a href="javascript:void(0);" id="btn_a"><p>A. 가나다라 마바사 아자차카 타파하 키키 <?php echo nl2br(html_escape(element('output', $value))); ?></p></a>
+							<a href="javascript:void(0);" id="btn_a"><p>A. <?php echo nl2br(html_escape(element('output', $value))); ?></p></a>
+							<!-- 가나다라 마바사 아자차카 타파하 키키 -->
 							</div>
 						</div>
 					</li>
@@ -171,6 +172,7 @@
 	var is_bat = "<?php echo element('is_bat', $forum); ?>" // 유저 배팅 진영 1, 2
 	var cfc_state = "<?php echo element('cfc_state', $forum); ?>" // 유저 배팅 진영 1, 2
 	var forum_bat_max = "<?php echo element('forum_bat_max', $forum); ?>" // 최대 배팅 금액
+	var forum_bat_min = "<?php echo element('forum_bat_min', $forum); ?>" // 최소 배팅 금액
 
 	// 의견 변경
 	$(document).on('click', '#change_btn', function(){
@@ -216,7 +218,7 @@
 		}
 		
 		const num = cfc_state == 1 ? 0 : 1;
-		const confirm_content = ' ' + (option === '1' ? 'A' :'B') + '의견을 ' + (option === '2' ? 'A' :'B') + '의견으로 변경 하시겠습니까? (기회 ' + num + '회 남음)';
+		const confirm_content = ' ' + (option === 1 ? 'A' :'B') + '의견을 ' + (option === '2' ? 'A' :'B') + '의견으로 변경 하시겠습니까? (기회 ' + num + '회 남음)';
 		var isConfirm = confirm(confirm_content);
 
 		if(cfc_state == 1) {
@@ -287,7 +289,16 @@
 			success: function(data) {
 				if(data.state == 1){
 
-					const title = 'CP를 '+ (option === '1' ? 'A' :'B') + '의견에 추가 참여합니다. (최대 총 배팅금액: ' + priceToString(forum_bat_max) + ')';
+					var title = 'CP를 '+ (option === 1 ? 'A' :'B') + '의견에 투표합니다. ';
+					var max = '';
+					var min = '';
+					if(priceToString(forum_bat_max) != 0){
+						max = '(최대 배팅금액: ' + priceToString(forum_bat_max) + ')';
+					}
+					if(priceToString(forum_bat_min) != 0){
+						min = '(최소 배팅금액: ' + priceToString(forum_bat_min) + ')';
+					}
+					title = title + max + min;
 					const _point = prompt(title, 0);
 					
 					//취소버튼 누를시
@@ -361,7 +372,16 @@
 			return false;
 		}
         
-		const title = 'CP를 '+ (option === 1 ? 'A' :'B') + '의견에 투표합니다. (최대 배팅금액: ' + priceToString(forum_bat_max) + ')';
+		var title = 'CP를 '+ (option === 1 ? 'A' :'B') + '의견에 투표합니다. ';
+		var max = '';
+		var min = '';
+		if(priceToString(forum_bat_max) != 0){
+			max = '(최대 배팅금액: ' + priceToString(forum_bat_max) + ')';
+		}
+		if(priceToString(forum_bat_min) != 0){
+			min = '(최소 배팅금액: ' + priceToString(forum_bat_min) + ')';
+		}
+		title = title + max + min;
 		const _point = prompt(title, 0);
         
 		//취소버튼 누를시

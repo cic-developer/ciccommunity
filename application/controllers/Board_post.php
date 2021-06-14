@@ -515,7 +515,9 @@ class Board_post extends CB_Controller
 			// 최대 배팅금액 설정값
 			$this->load->model('CIC_forum_config_model');
 			$forum_bat_max = (double) $this->CIC_forum_config_model->item('forum_bat_max');
+			$forum_bat_min = (double) $this->CIC_forum_config_model->item('forum_bat_min');
 			$view['forum']['forum_bat_max'] = $forum_bat_max;
+			$view['forum']['forum_bat_min'] = $forum_bat_min;
 		}
 		/**
 		 * 공지사항 게시판

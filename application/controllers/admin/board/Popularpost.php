@@ -101,12 +101,6 @@ class Popularpost extends CB_Controller
 		$result = $this->{$this->modelname}
 			->get_like_point_ranking_list($per_page, $offset, $where, $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
-
-
-		// print_r($this->db->last_query());
-		// exit;
-
-
 		
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
@@ -171,9 +165,6 @@ class Popularpost extends CB_Controller
 		$view['view']['list_update_url'] = admin_url($this->pagedir . '/listupdate/?' . $param->output());
 		$view['view']['list_bestpost_url'] = admin_url($this->pagedir . '/bestpostupdate/?' . $param->output());
 
-		// print_r($view['view']['list_bestpost_url']);
-		// exit;
-		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
@@ -187,6 +178,7 @@ class Popularpost extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
 
+	//인기 게시물 제외 목록
 	public function exeptpost()
 	{
 		// 이벤트 라이브러리를 로딩합니다
@@ -314,6 +306,8 @@ class Popularpost extends CB_Controller
 	/**
 	 * 목록 페이지에서 선택삭제를 하는 경우 실행되는 메소드입니다
 	 */
+
+	//인기 게시물 제외 함수
 	public function listupdate()
 	{
 		// 이벤트 라이브러리를 로딩합니다
@@ -348,6 +342,7 @@ class Popularpost extends CB_Controller
 		redirect($redirecturl);
 	}
 
+	// 인기 게시물 제외 해지
 	public function listreturn()
 	{
 		// 이벤트 라이브러리를 로딩합니다
@@ -382,6 +377,7 @@ class Popularpost extends CB_Controller
 		redirect($redirecturl);
 	}
 
+	
 	public function bestpostexept()
 	{
 		// 이벤트 라이브러리를 로딩합니다
