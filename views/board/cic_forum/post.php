@@ -118,9 +118,11 @@
 					<a href="#n" id="change_btn"><span>의견 변경</span></a>
 				</div>
 			</div>
-			<div class="btns">
-				<a href="#n" class="enter"><span>투표 참여하기</span></a>
-			</div>
+			<?php if(element('is_bat', $forum) == 1 || element('is_bat', $forum) == 2){ ?>
+				<div class="btns">
+					<a href="#n" class="enter"><span>투표 참여하기</span></a>
+				</div>
+			<?php }?>
 		</div>
 		<div class="gap50"></div>
 		<div class="gap50"></div>
