@@ -50,4 +50,26 @@ class Paper extends CB_Controller
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
     }
+
+    function provision(){
+		$layout_dir = element('doc_layout', $data) ? element('doc_layout', $data) : $this->cbconfig->item('layout_document');
+		$mobile_layout_dir = element('doc_mobile_layout', $data) ? element('doc_mobile_layout', $data) : $this->cbconfig->item('mobile_layout_document');
+		$skin_dir = element('doc_skin', $data) ? element('doc_skin', $data) : $this->cbconfig->item('skin_document');
+		$mobile_skin_dir = element('doc_mobile_skin', $data) ? element('doc_mobile_skin', $data) : $this->cbconfig->item('mobile_skin_document');
+		$layoutconfig = array(
+			'path' => 'paper',
+			'layout' => 'layout',
+			'skin' => 'provision',
+			'layout_dir' => 'cic',
+			'mobile_layout_dir' => 'cic',
+			'skin_dir' => 'cic',
+			'mobile_skin_dir' => 'cic',
+			'page_title' => '서비스 이용약관',
+			'page_name' => '서비스 이용약관',
+		);
+		$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
+    }
 }

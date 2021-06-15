@@ -147,7 +147,7 @@
 						} else {
 						?>
 							<li>
-								<span class="nopost">자료가 없습니다</span>
+								<span class="nopost">댓글이 없습니다</span>
 							</li>
 						<?php
 						}
@@ -177,7 +177,7 @@
 						} else {
 						?>
 							<li>
-								<span class="nopost">자료가 없습니다</span>
+								<span class="nopost">댓글이 없습니다</span>
 							</li>
 						<?php
 						}

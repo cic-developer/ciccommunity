@@ -430,10 +430,8 @@ class Board_post extends CB_Controller
 
 		//게시물 열람시 인기 게시글 
 		if($post['brd_id'] == 1 || $post['brd_id'] == 2){
-			$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);
 			$where = array(
 				'post_id' => $post_id,
-				'cmt_datetime >=' => $checktime,
 				'cmt_del <>' => 2,
 			);
 			$limit = 10;
@@ -454,7 +452,6 @@ class Board_post extends CB_Controller
 			
 			$where = array(
 				'post_id' => $post_id,
-				'cmt_datetime >=' => $checktime,
 				'cmt_del <>' => 2,
 			);
 			$limit = 10;
