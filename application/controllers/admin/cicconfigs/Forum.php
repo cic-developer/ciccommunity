@@ -1269,6 +1269,7 @@ class Forum extends CB_Controller
 					'post_datetime' => cdate('Y-m-d H:i:s'),
 					'post_updated_datetime' => cdate('Y-m-d H:i:s'),
 					'post_ip' => $this->input->ip_address(),
+					'post_html' => 1,
 					'brd_id' => 3,
 					'mem_id' => $this->member->item('mem_id'),
 					'post_userid' => $this->member->item('mem_userid'),
