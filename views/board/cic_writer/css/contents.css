@@ -2384,6 +2384,7 @@
         line-height: 22px;
         font-size: 13px;
         max-width: none;
+        margin-left: 5px;
     }
     .board-wrap.list .list.vimg.vp li .vp {
         margin-left: 12px;
@@ -2399,7 +2400,8 @@
         padding-left: 24px;
     }
     .board-wrap.list .list.vimg.vp li .pimg img {
-        width: 16px;
+        width: 30px;
+        height: auto;
     }
     .board-wrap.list .list.vimg.vp li .rtxt {
         line-height: 18px;

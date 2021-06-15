@@ -2833,6 +2833,7 @@
     width: 36px;
     height: auto;
     margin-top: -6px;
+    margin-right: -8px;
     /* vertical-align: top; */
 }
 
@@ -2930,7 +2931,7 @@
     }
     .board-wrap.list .list.forum table tbody tr {
         display: block;
-        padding: 15px 15px 35px 15px;
+        padding: 15px 15px 41px 15px;
         position: relative;
         border-bottom: 1px solid #ddd;
     }
@@ -2973,7 +2974,9 @@
         min-width: auto;
     }
     .board-wrap.list .list.forum .my-info .pimg img {
-        height: 18px;
+        height: auto;
+        width: 32px;
+        margin-right: -12px;
     }
     .board-wrap.list .list.forum .my-info .rtxt {
         line-height: 18px;
@@ -2984,7 +2987,7 @@
 
 @media only screen and (max-width: 680px) {
     .board-wrap.list .list.forum table tbody tr {
-        padding: 10px 15px 30px 15px;
+        padding: 10px 15px 35px 15px;
     }
     .board-wrap.list .list.forum table tbody td:nth-child(1) {
         bottom: 8px;
