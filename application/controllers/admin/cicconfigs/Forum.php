@@ -1294,10 +1294,6 @@ class Forum extends CB_Controller
 				$forumInfoUpdatedata['frm_image'] = $updatephoto;
 				$this->CIC_forum_info_model->insert($forumInfoUpdatedata);
 				
-				$test = array(
-					'post_content' => $post_content,
-				);
-				$this->Post_model->update($post_id, $test, $post_id);
 				
 				$this->Post_extra_vars_model->add_meta($post_id, 3, 'A_opinion' , $pev_value_0);
 				$this->Post_extra_vars_model->add_meta($post_id, 3, 'B_opinion' , $pev_value_1);
