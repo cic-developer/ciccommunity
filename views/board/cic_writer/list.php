@@ -96,7 +96,7 @@
                             <div class="abr">
                                 <div class="photo">
                                     <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30);?>"
-                                            alt="<?php echo element('mlc_title', $result); ?>" style="width:28px; height:auto;"></p>
+                                            alt="<?php echo element('mlc_title', $result); ?>"></p>
                                     <p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
                                 </div>
                                 <p class="vp"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?> VP</p>

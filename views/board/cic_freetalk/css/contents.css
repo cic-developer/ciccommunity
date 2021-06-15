@@ -2522,8 +2522,8 @@
 }
 
 .board-wrap.list .list.community .my-info .pimg img {
-    width: 32px;
-    vertical-align: top;
+    width: 39px;
+    height: auto;
 }
 
 .board-wrap.list .list.community .my-info .rtxt {

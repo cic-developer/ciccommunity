@@ -90,7 +90,7 @@
                             <td>
                                 <div class="my-info">
                                     <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30)?>"
-                                            alt="" style="width:28px; height:auto;"></p>
+                                            alt="" style="width: 39px; height:auto;"></p>
                                     <p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
                                 </div>
                             </td>
@@ -115,7 +115,7 @@
                             <td>
                                 <div class="my-info">
                                     <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 28, 28); ?>"
-                                            alt="<?php echo element('mlc_title', $result); ?>" style="width:28px; height:auto;"></p>
+                                            alt="<?php echo element('mlc_title', $result); ?>"></p>
                                     <p class="rtxt"><?php echo html_escape(element('post_nickname', $result)); ?></p>
                                 </div>
                             </td>

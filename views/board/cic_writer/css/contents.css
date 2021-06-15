@@ -2325,8 +2325,9 @@
 }
 
 .board-wrap.list .list.vimg.vp li .pimg img {
-    width: 32px;
-    vertical-align: top;
+    width: 39px;
+    /* vertical-align: top; */
+    height: auto;
 }
 
 .board-wrap.list .list.vimg.vp li .rtxt {
