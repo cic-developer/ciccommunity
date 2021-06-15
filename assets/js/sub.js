@@ -104,13 +104,14 @@ $(function() {
             },
         },
     });
+    //forums 슬라이드 포럼 슬라이드
     $(".forums")
-        .find(".prev")
+        .find(".next")
         .click(function() {
             $(".forum-slide").trigger("next.owl.carousel");
         });
     $(".forums")
-        .find(".next")
+        .find(".prev")
         .click(function() {
             $(".forum-slide").trigger("prev.owl.carousel", [600]);
         });

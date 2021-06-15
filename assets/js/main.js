@@ -1,17 +1,20 @@
 $(function() {
     // tab
-    $('.tab').find('li > a').click(function() {
-        var tabv = $(this).attr('data-tabs');
-        $(this).parent().addClass('active');
-        $(this).parent().siblings('li').removeClass('active');
-        $(this).closest('.tab-ov').find('.tab-con').addClass('hide');
-        $(this).closest('.tab-ov').find('.tab-con' + tabv).removeClass('hide');
-
-
-    });
+    $(".tab")
+        .find("li > a")
+        .click(function() {
+            var tabv = $(this).attr("data-tabs");
+            $(this).parent().addClass("active");
+            $(this).parent().siblings("li").removeClass("active");
+            $(this).closest(".tab-ov").find(".tab-con").addClass("hide");
+            $(this)
+                .closest(".tab-ov")
+                .find(".tab-con" + tabv)
+                .removeClass("hide");
+        });
 
     // visual-slide
-    $('.visual-slide').owlCarousel({
+    $(".visual-slide").owlCarousel({
         items: 4,
         autoHeight: false,
         loop: true,
@@ -42,17 +45,22 @@ $(function() {
                 items: 4,
                 margin: 35,
             },
-        }
+        },
     });
-    $('.vis').find('.prev').click(function() {
-        $('.visual-slide').trigger('next.owl.carousel');
-    })
-    $('.vis').find('.next').click(function() {
-        $('.visual-slide').trigger('prev.owl.carousel', [600]);
-    });
+    // banner 슬라이드 수정
+    $(".vis")
+        .find(".next")
+        .click(function() {
+            $(".visual-slide").trigger("next.owl.carousel");
+        });
+    $(".vis")
+        .find(".prev")
+        .click(function() {
+            $(".visual-slide").trigger("prev.owl.carousel", [600]);
+        });
 
     // forum-slide
-    $('.forum-slide').owlCarousel({
+    $(".forum-slide").owlCarousel({
         items: 3,
         autoHeight: false,
         loop: true,
@@ -83,25 +91,28 @@ $(function() {
                 items: 3,
                 margin: 30,
             },
-        }
+        },
     });
-    $('.msec-03').find('.prev').click(function() {
-        $('.forum-slide').trigger('next.owl.carousel');
-    })
-    $('.msec-03').find('.next').click(function() {
-        $('.forum-slide').trigger('prev.owl.carousel', [600]);
-    });
+    // 메인 포럼(forum 슬라이드) 포럼 슬라이드
+    $(".msec-03")
+        .find(".next")
+        .click(function() {
+            $(".forum-slide").trigger("next.owl.carousel");
+        });
+    $(".msec-03")
+        .find(".prev")
+        .click(function() {
+            $(".forum-slide").trigger("prev.owl.carousel", [600]);
+        });
 });
 
 function sizeControlMain(width) {
     width = parseInt(width);
     var bodyHeight = document.documentElement.clientHeight;
     var bodyWidth = document.documentElement.clientWidth;
-    var chkHeader = $('#header-wrap').outerHeight();
-    var chkFooter = $('#footer').outerHeight();
+    var chkHeader = $("#header-wrap").outerHeight();
+    var chkFooter = $("#footer").outerHeight();
     var docW = window.innerWidth;
-
-
 }
 jQuery(function($) {
     sizeControlMain($(this).width());
@@ -110,14 +121,13 @@ jQuery(function($) {
             clearTimeout(this.resizeTO);
         }
         this.resizeTO = setTimeout(function() {
-            $(this).trigger('resizeEnd');
+            $(this).trigger("resizeEnd");
         }, 10);
     });
 });
-$(window).on('resizeEnd', function() {
+$(window).on("resizeEnd", function() {
     sizeControlMain($(this).width());
 });
 $(window).load(function() {
     sizeControlMain($(this).width());
-
 });
