@@ -1265,7 +1265,7 @@ class Forum extends CB_Controller
 				$postUpdatedata = array(
 					'post_num' => $this->Post_model->next_post_num(),
 					'post_title' => $post_title,
-					// 'post_content' => $post_content,
+					'post_content' => $post_content,
 					'post_datetime' => cdate('Y-m-d H:i:s'),
 					'post_updated_datetime' => cdate('Y-m-d H:i:s'),
 					'post_ip' => $this->input->ip_address(),
@@ -1278,17 +1278,14 @@ class Forum extends CB_Controller
 					'post_homepage' => '',
 				);
 
-				$postcontent = array(
-					'post_content' => $post_content	
-				);
 
 				$postUpdatedata['post_device']
 				= ($this->cbconfig->get_device_type() === 'mobile') ? 'mobile' : 'desktop';
 				
 				$post_id = $this->Post_model->insert($postUpdatedata);
-				$this->Post_model->update($post_id, $postcontent, $post_id);
 
-
+				
+				
 				$forumInfoUpdatedata = array(
 					'frm_bat_close_datetime' => $frm_bat_close_datetime,
 					'frm_close_datetime' => $frm_close_datetime,
@@ -1296,7 +1293,11 @@ class Forum extends CB_Controller
 				);
 				$forumInfoUpdatedata['frm_image'] = $updatephoto;
 				$this->CIC_forum_info_model->insert($forumInfoUpdatedata);
-
+				
+				$test = array(
+					'post_content' => $post_content,
+				);
+				$this->Post_model->update($post_id, $test, $post_id);
 				
 				$this->Post_extra_vars_model->add_meta($post_id, 3, 'A_opinion' , $pev_value_0);
 				$this->Post_extra_vars_model->add_meta($post_id, 3, 'B_opinion' , $pev_value_1);
