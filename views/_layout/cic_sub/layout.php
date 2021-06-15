@@ -143,7 +143,7 @@ var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
 								</div>
 							</li>
 							<li class="mn_l1 has-sub is-cloose" style="width: auto;">
-								<a href="#n" class="mn_a1"><span>코인헬퍼</span></a>
+								<a href="javascript:alert('현재 준비중입니다.');" class="mn_a1"><span>코인헬퍼</span></a>
 								<div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1; overflow: hidden;">
 								</div>
 							</li>
