@@ -2326,7 +2326,7 @@
 
 .board-wrap.list .list.vimg.vp li .pimg img {
     width: 39px;
-    /* vertical-align: top; */
+    margin-left: -6px;
     height: auto;
 }
 
@@ -2376,7 +2376,9 @@
         overflow: visible;
     }
     .board-wrap.list .list.vimg.vp li .pimg img {
-        width: 20px;
+        width: 33px;
+        height: auto;
+        margin-top: -5px;
     }
     .board-wrap.list .list.vimg.vp li .rtxt {
         line-height: 22px;

@@ -2617,7 +2617,7 @@
     }
     .board-wrap.list .list.community table tbody tr {
         display: block;
-        padding: 15px 15px 35px 15px;
+        padding: 15px 15px 37px 15px;
         position: relative;
         border-bottom: 1px solid #ddd;
     }
@@ -2659,7 +2659,11 @@
         padding-right: 24px;
     }
     .board-wrap.list .list.community .my-info .pimg img {
-        width: 18px;
+        width: 28px;
+        height: auto;
+        /* margin-left: 10px; */
+        margin-top: -3px;
+        margin-right: -7px;
     }
     .board-wrap.list .list.community .my-info .rtxt {
         line-height: 21px;
