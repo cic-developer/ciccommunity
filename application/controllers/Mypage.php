@@ -1818,53 +1818,39 @@ class Mypage extends CB_Controller
 		$offset = ($page - 1) * $per_page;
 
 		$where = array(
-			'cp_mem_id' => $mem_id
+			'cp_mem_id' => $this->member->is_member()
 		);
 
 		$this->load->model('Charge_point_model');
-		$result = $this->Charge_point_model->get_list($per_page, $offset, $where, $like, $findex, $forder, $sfield, $skeyword);
+		$result = $this->Charge_point_model->get_list($per_page, $offset, $where);
 		
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
 
-				// if(element('cp_state', $val)){
-				// 	switch(element('cp_state', $val)){
-				// 		case 0: {
-				// 			$result['list'][$key]['cp_state'] = '<p class="cred">실패</p>';
-				// 		}
-				// 		break;
-
-				// 		case 1: {
-				// 			$result['list'][$key]['cp_state'] = '<p class="">대기</p>';
-				// 		}
-				// 		break;
-
-				// 		case 2:{
-				// 			$result['list'][$key]['cp_state'] = '<p class="cblue">완료(문의)</p>';
-				// 		}
-				// 		break;
-
-				// 		case 3: {
-				// 			$result['list'][$key]['cp_state'] = '<p class="cblue">완료</p>';
-				// 		}
-				// 		break;
-				// 	}
-				// }
-
-				if(element('cp_state', $val)){
-					if(element('cp_state', $val) == 0){
+				switch(element('cp_state', $val)){
+					case 0: {
 						$result['list'][$key]['cp_state'] = '<p class="cred">실패</p>';
-					} elseif(element('cp_state', $val) == 1){
+					}
+					break;
+
+					case 1: {
 						$result['list'][$key]['cp_state'] = '<p class="">대기</p>';
-					} elseif(element('cp_state', $val) == 2){
+					}
+					break;
+
+					case 2:{
 						$result['list'][$key]['cp_state'] = '<p class="cblue">완료(문의)</p>';
-					} elseif(element('cp_state', $val) == 3){
+					}
+					break;
+
+					case 3: {
 						$result['list'][$key]['cp_state'] = '<p class="cblue">완료</p>';
-					} else{
+					}
+					break;
+
+					default: {
 						$result['list'][$key]['cp_state'] = '<p class="cred"> - </p>';
 					}
-				} else{
-					$result['list'][$key]['cp_state'] = '<p class=""> - </p>';
 				}
 
 				$result['list'][$key]['num'] = $list_num--;
