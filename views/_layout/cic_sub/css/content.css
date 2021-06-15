@@ -7334,6 +7334,9 @@ label input[type='checkbox'] {
     .price-wrap .set-list .item ul li:nth-child(n + 2) {
         margin-top: 1px;
     }
+    .poll-wrap .cont li .OpinionB {
+        margin-left: 30px;
+    }
 }
 
 
