@@ -16,7 +16,7 @@
 		<input type="hidden" class="input px400" name="post_homepage" id="post_homepage" value="<?php echo set_value('post_homepage', element('post_homepage', element('post', $view))); ?>" />
 		<!-- page start // -->
 		<div class="board-wrap write">
-			<h3>도전 포럼 등록 <span>설명 텍스트 입니다.설명 텍스트 입니다.설명 텍스트 입니다.설명 텍스트 입니다.설명 텍스트 입니다.</span></h3>
+			<h3>도전 포럼 등록 <p style="font-size: 13px; margin-top: 9px; color: red;">cic 포럼은 한번에 하나의 포럼만 개설 하실 수 있으며 포럼 개설 신청 후 승인-마감 혹은 반려 전까지 다른 포럼을 개설 하실수 없습니다 포럼 개설 신청은 신중하게 진행해 주세요 </p></h3>
 			<div class="entry">
 				<ul>
 					<li>
