@@ -7475,7 +7475,7 @@ label input[type='checkbox'] {
     line-height: 26px;
 }
 
-.poll-wrap .cont .btnvote {
+.btnvote {
     margin-left: 10px;
     width: 95px;
     height: 43px;
@@ -7492,6 +7492,12 @@ label input[type='checkbox'] {
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
+}
+
+.btnvote:hover {
+    background-color: #333;
+    box-shadow: 0px 15px 20px rgba(39, 39, 39, 0.274);
+    color: #fff;
 }
 
 .poll-wrap .cont li a.active {
