@@ -8,6 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @author RSTEAM (developer@rs-team.com)
  */
+
 /**
  * 관리자>페이지설정>검색 코인관리 controller 입니다.
  */
@@ -308,8 +309,8 @@ class Searchcoin extends CB_Controller
 		else{
 			redirect( admin_url("/cicconfigs/searchcoin/CStock_keyword?id=".$this->input->get('pageId')));
 		}
-
 	}
+
 	function get_keyword(){
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_amdmin_coin_get';
@@ -324,9 +325,9 @@ class Searchcoin extends CB_Controller
 			$id = $this->input->get('id');
 			$getKey = $this->CIC_coin_keyword_model -> getKeywordRow($id);
 			echo json_encode($getKey);
-    	}
-
+			}
 	}
+
 	function update_keyword(){
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_amdmin_coin_update';
