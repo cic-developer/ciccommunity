@@ -22,7 +22,6 @@ $(function() {
         mouseDrag: true,
         touchDrag: true,
         nav: false,
-        rtl: false,
         autoplay: true,
         dots: true,
         autoplayTimeout: 6000,
