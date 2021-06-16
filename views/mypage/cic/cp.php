@@ -42,8 +42,8 @@
 							<tr>
 								<td><span><?php echo number_format(element('num', $post));?></span></td>
 								<td><span><?php echo html_escape(element('cp_point', $post));?></span></td>
-								<td><?php echo html_escape(element('cp_action', $post));?></td>
 								<td class="l_memo"><span><?php echo html_escape(element('cp_content', $post));?></span></td>
+								<td><?php echo html_escape(element('cp_action', $post));?></td>
 								<td><?php echo display_datetime(element('cp_datetime', $post), 'full'); ?></td>
 							</tr>
 						<?php } ?>
