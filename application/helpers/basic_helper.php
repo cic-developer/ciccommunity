@@ -673,6 +673,14 @@ if ( ! function_exists('display_html_content')) {
 					$content
 				); // Google Map
 			}
+			//20210616 구진모 추가
+			if(mb_strlen($content) > 200){
+				$content = mb_substr($content, 0, 100).'<p class="show more">더보기</p>';
+			}
+
+			// if(substr_count($content, '<br>') > 5){
+			// 	$content = mb_substr($content, 0, );
+			// }
 
 			return $content;
 		}

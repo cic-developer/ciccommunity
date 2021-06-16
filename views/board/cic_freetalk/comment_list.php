@@ -34,7 +34,7 @@
 					</div>
 					
 				</div>
-				<div class="vtxt">
+				<div class="vtxt" comment-data="<?php echo element('cmt_id', $result); ?>">
 					<?php echo element('content', $result); ?>
 				</div>
 				<div class="ctrls">
