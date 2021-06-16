@@ -320,7 +320,7 @@
                     <div class="img">
                         <a href="https://www.youtube.com/watch?v=bMqQXK64jac" class="play-btn" target="_blink"><span
                                 class="blind">재생</span></a>
-                        <p><img src="<?php echo base_url('assets/images/movie-img.png') ?>" alt="" /></p>
+                        <p><img src="<?php echo base_url('assets/images/movie-test02.png') ?>" alt="" /></p>
                     </div>
                 </div>
             </div>

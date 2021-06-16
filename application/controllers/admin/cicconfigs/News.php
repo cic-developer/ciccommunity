@@ -1,6 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * News class
+ *
+ * Copyright (c) RSTEAM <www.rs-team.com>
+ *
+ * @author RSTEAM (developer@rs-team.com)
+ */
 
 class News extends CB_Controller
 {
