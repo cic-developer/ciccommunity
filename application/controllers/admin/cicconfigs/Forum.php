@@ -2,11 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Main class
+ * Forum class
  *
- * Copyright (c) CIBoard <www.ciboard.co.kr>
+ * Copyright (c) RSTEAM <www.rs-team.com>
  *
- * @author CIBoard (develop@ciboard.co.kr)
+ * @author RSTEAM (developer@rs-team.com)
  */
 
 /**

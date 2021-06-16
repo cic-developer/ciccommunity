@@ -3,11 +3,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Post class
+ * Popularpost class
  *
- * Copyright (c) CIBoard <www.ciboard.co.kr>
+ * Copyright (c) RSTEAM <www.rs-team.com>
  *
- * @author CIBoard (develop@ciboard.co.kr)
+ * @author RSTEAM (developer@rs-team.com)
  */
 
 /**
@@ -377,86 +377,4 @@ class Popularpost extends CB_Controller
 		redirect($redirecturl);
 	}
 
-	
-	public function bestpostexept()
-	{
-		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_board_post_bestpost';
-		$this->load->event($eventname);
-
-		// 이벤트가 존재하면 실행합니다
-		Events::trigger('before', $eventname);
-		/**
-		 * 체크한 게시물의 삭제를 실행합니다
-		 */
-		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
-			foreach ($this->input->post('chk') as $val) {
-				if ($val) {
-					$this->Post_model->upadte_post_best_state_exept($val);
-				}
-			}
-		}
-
-		// 이벤트가 존재하면 실행합니다
-		Events::trigger('after', $eventname);
-
-		/**
-		 * 삭제가 끝난 후 목록페이지로 이동합니다
-		 */
-		$this->session->set_flashdata(
-			'message',
-			'베스트 게시물에서 제외되었습니다'
-		);
-		$param =& $this->querystring;
-		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-		redirect($redirecturl);
-	}
-
-	/**
-	 * 목록 페이지에서 휴지통을 클릭한 경우 실행되는 메소드입니다
-	 */
-	public function listtr∫ash()
-	{
-		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_admin_board_post_listtrash';
-		$this->load->event($eventname);
-
-		// 이벤트가 존재하면 실행합니다
-		Events::trigger('before', $eventname);
-
-		/**
-		 * 체크한 게시물의 삭제를 실행합니다
-		 */
-		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
-			foreach ($this->input->post('chk') as $val) {
-				if ($val) {
-					$updatedata = array(
-						'post_del' => 2,
-					);
-					$this->Post_model->update($val, $updatedata);
-					$metadata = array(
-						'trash_mem_id' => $this->member->item('mem_id'),
-						'trash_datetime' => cdate('Y-m-d H:i:s'),
-						'trash_ip' => $this->input->ip_address(),
-					);
-					$board = $this->Post_model->get_one($val, 'brd_id');
-					$this->Post_meta_model->save($val, element('brd_id', $board), $metadata);
-				}
-			}
-		}
-
-		// 이벤트가 존재하면 실행합니다
-		Events::trigger('after', $eventname);
-
-		/**
-		 * 삭제가 끝난 후 목록페이지로 이동합니다
-		 */
-		$this->session->set_flashdata(
-			'message',
-			'정상적으로 휴지통으로 이동되었습니다'
-		);
-		$param =& $this->querystring;
-		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-		redirect($redirecturl);
-	}
 }
