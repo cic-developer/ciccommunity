@@ -408,14 +408,17 @@ $(document).on('ready', async function() {
     $('.btn btn-success modal_open1').on('click', async function() {
         var reg_num = /^[0-9]*$/;
         let closest_tr = $(this).closest('tr');
-        let charge_value = $('#charge_input').val();
+        let children_td = closest_tr.find('td');
+        let _price = $(this).data('cal-money'); // 수수료를 제한 출금할 cp 
+        let _userAddress = children_td[4].text();
+
         // 충전액 필숫값
-        if (!charge_value) {
+        if (!_price) {
             alert('충전액을 입력해주십시오.');
             return false;
         }
         // 숫자만 입력 가능
-        if (!reg_num.test(charge_value)) {
+        if (!reg_num.test(_price)) {
             alert('충전액을 확인해주십시오.');
             return false;
         }
@@ -445,69 +448,33 @@ $(document).on('ready', async function() {
         }
 
         const sendToPerWallet_data = await caver.klay.abi.encodeFunctionCall({
-            name: "deposit_enter",
+            name: "transfer",
             type: "function",
             inputs: [{
-                    "name": "_from",
-                    "type": "address"
-                },
-                {
                     "name": "_to",
                     "type": "address"
                 },
                 {
                     "name": "_value",
                     "type": "uint256"
-                },
-                {
-                    "name": "_url",
-                    "type": "string"
-                },
-                {
-                    "name": "_id",
-                    "type": "string"
                 }
             ],
         }, [
-            account,
-            contract_address,
+            _userAddress,
             caver.utils
-            .toBN(charge_value)
+            .toBN(_price)
             .mul(caver.utils.toBN(Number(`1e${18}`)))
-            .toString(),
-            window.location.hostname,
-            mem_id
+            .toString()
         ]);
 
         const sendToPerWallet = await caver.klay.sendTransaction({
             type: "SMART_CONTRACT_EXECUTION",
             account,
-            to: contract_address,
+            to: token_address,
             data: sendToPerWallet_data,
             gas: 3000000,
         }).on("transactionHash", async(transactionHash) => {
-            //여기서 AJAX 비동기 통신으로 데이터 넘겨주면 됩니다.
-            $.ajax({
-                url: cb_url + '/mypage/charge_ajax',
-                type: 'post',
-                data: {
-                    transaction_hash: transactionHash,
-                    charge_input: charge_value,
-                    csrf_test_name: csrf_token
-                },
-                dataType: 'json',
-                async: false,
-                cache: false,
-                success: function(data) {
-                    if (data.result) {
-                        alert('성공적으로 충전되었습니다.');
-                        location.reload();
-                    } else {
-                        alert(data.data);
-                        return false;
-                    }
-                }
-            });
+            $("#cp_transaction").val(transactionHash);
         });
     });
 });

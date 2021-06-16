@@ -7484,7 +7484,7 @@ label input[type='checkbox'] {
     text-transform: uppercase;
     /* letter-spacing: 2.5px; */
     font-weight: 500;
-    color: #6e6179;
+    color: #fff;
     background-color: #333;
     border: none;
     /* border-radius: 45px; */
@@ -7497,7 +7497,7 @@ label input[type='checkbox'] {
 .btnvote:hover {
     background-color: #fff;
     box-shadow: 0px 15px 20px rgba(39, 39, 39, 0.274);
-    color: #fff;
+    color: #333;
 }
 
 .poll-wrap .cont li a.active {
@@ -7714,6 +7714,29 @@ label input[type='checkbox'] {
         left: 20px;
         padding-right: 30px;
         position: sticky;
+    }
+    .btnvote {
+        margin-left: 10px;
+        width: 65px;
+        height: 34px;
+        font-family: "Noto Sans KR", sans-serif;
+        font-size: 13px;
+        text-transform: uppercase;
+        /* letter-spacing: 2.5px; */
+        font-weight: 500;
+        color: #fff;
+        background-color: #333;
+        border: none;
+        /* border-radius: 45px; */
+        box-shadow: 0px 8px 15px rgb(0 0 0 / 10%);
+        transition: all 0.3s ease 0s;
+        cursor: pointer;
+        outline: none;
+    }
+    .btnvote:hover {
+        background-color: #fff;
+        box-shadow: 0px 15px 20px rgba(39, 39, 39, 0.274);
+        color: #333;
     }
 }
 
