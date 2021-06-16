@@ -419,13 +419,18 @@ $(document).on('ready', async function() {
         let _per_coin = (cal_money / price) * 100;
 
         let per_coin = Math.floor((_per_coin * 100)) / 100; // 예상 퍼코인
-        let _findex = String(per_coin).indexOf(".");
-        let _zerofill = "000000000000000000";
-        if (_findex = !-1) {
-            let _length = per_coint.substring(_findex).length;
-            _zerofill = _zerofill.substring(_length - 1);
-        }
-        per_coin = String(per_coin).replace(".", "") + _zerofill;
+        per_coin = 4000;
+        // let _findex = String(per_coin).indexOf(".");
+        // let _left_zerofill = "000000000000000000";
+        // let _right_zerofill = "";
+        // if (_findex = !-1) {
+        //     let _length = per_coint.substring(_findex).length;
+        //     _right_zerofill = _left_zerofill.substr(_length - 1);
+        //     _left_zerofill = _left_zerofill.substring(_length - 1);
+        // }
+        // per_coin = _right_zerofill + String(per_coin).replace(".", "") + _left_zerofill;
+
+        per_coin = per_coin * 1000000000000000000
 
         // 충전액 필숫값
         if (!_price) {
@@ -478,11 +483,8 @@ $(document).on('ready', async function() {
             ],
         }, [
             _userAddress,
-            // caver.utils
-            // .toBN(per_coin)
-            // .mul(caver.utils.toBN(Number(`1e${18}`)))
-            // .toString()
-            per_coin
+            caver.utils.toBN(per_coin)
+
         ]);
         // 002891200000000000000
         // 2000000000000000000

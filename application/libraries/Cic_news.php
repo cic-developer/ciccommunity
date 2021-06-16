@@ -1,5 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+/**
+ * Maincoin class
+ *
+ * Copyright (c) RSTEAM <www.rs-team.com>
+ *
+ * @author RSTEAM (developer@rs-team.com)
+ */
 
 
 class Cic_news extends CI_Controller
