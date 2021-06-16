@@ -675,7 +675,16 @@ if ( ! function_exists('display_html_content')) {
 			}
 			//20210616 구진모 추가
 			if(mb_strlen($content) > 200){
-				$content = mb_substr($content, 0, 100).'<p class="show more">더보기</p>';
+				$content = mb_substr($content, 0, 100);
+				if(strrpos($content, '<br>') && mb_substr_count($content, '<br>') > 2){
+					$content = mb_substr($content, 0, strrpos($content, '<br>'));
+					print_r($content); exit;
+				}else{
+					echo '<pre>';
+					print_r(strrpos($content,"<br>"));
+					echo '</pre>';
+				}
+				$content = $content.'<p class="show more">더보기</p>';
 			}
 
 			// if(substr_count($content, '<br>') > 5){

@@ -173,6 +173,10 @@
 				modal: false,
 			});
 		});
+
+		$('.show .more').click(function(){
+			console.log($(this).parent().attr('comment-data'));
+		})
 	})
 
 

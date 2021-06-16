@@ -52,7 +52,15 @@ $(function() {
         .find(".next")
         .click(function() {
             $(".visual-slide").trigger("next.owl.carousel");
-            $(".visual-slide").trigger('play.owl.autoplay', [6000]);
+            var $owl = $(element).owlCarousel(options);
+            var autoplayDelay = 6000;
+
+            if (autoplayDelay) {
+                $owl.trigger('stop.owl.autoplay');
+                setTimeout(function() {
+                    $owl.trigger('play.owl.autoplay');
+                }, autoplayDelay);
+            }
         });
     $(".vis")
         .find(".prev")
