@@ -108,6 +108,36 @@
 </div>
 <!-- s: layer-wrap.singo -->
 <script>
+	$(document).ready(function(){
+		$('.more').on('click', function(){
+			let parent = $(this).parent('.vtxt');
+			let _index = parent.attr('comment-data');
+			$.ajax({
+				url: "<?php echo base_url('Comment_list/ajax_allCommentData')?>",
+				type: "POST",
+				dataType: "json",
+				data: {
+					csrf_test_name: cb_csrf_hash,
+					index: _index
+				},
+				success: function(data){
+					parent.empty();
+					parent.text('');
+					try{
+						parent.append(data);
+					}catch(error){
+						parent.text(data);
+					}
+					
+				},
+				error: function (request, status, error){
+					console.log(request, status, error)
+				}
+			});
+		})
+	});
+
+	
 
 	$(function () {
 		var istotal = $('.cmmt').find('.item').length;
