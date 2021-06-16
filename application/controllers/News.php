@@ -2,11 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Board_post class
+ * News class
  *
- * Copyright (c) CIBoard <www.ciboard.co.kr>
+ * Copyright (c) RSTEAM <www.rs-team.com>
  *
- * @author CIBoard (develop@ciboard.co.kr)
+ * @author RSTEAM (developer@rs-team.com)
  */
 
 /**
@@ -313,8 +313,6 @@ class News extends CB_Controller
 
 	public function news_url($news_id = 0)
 	{
-		// print_r($news_id);
-		// exit;
 		$eventname = 'event_news_read';
 		$this->load->event($eventname);
 
@@ -323,10 +321,6 @@ class News extends CB_Controller
 
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		// $news_id = (int) $news_id;
-		// if (empty($news_id) OR $news_id < 1) {
-		// 	show_404();
-		// }
 
 		$news = $this->News_model->get_one($news_id);
 
