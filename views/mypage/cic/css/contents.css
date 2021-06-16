@@ -2836,6 +2836,10 @@
     text-align: left;
 }
 
+.board-wrap.list .list table tbody td.l_memo {
+    text-align: center;
+}
+
 .board-wrap.list .list table tbody td.l a {
     display: block;
     white-space: nowrap;

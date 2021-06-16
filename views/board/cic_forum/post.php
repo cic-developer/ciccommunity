@@ -111,26 +111,27 @@
 				
 				</ul>
 			</div>
-
-			<div class="result" style="display:none">
-				<?php if(element('is_bat', $forum) == 1){ ?>
-					<p class="btxt">A. <?php echo element('extra_content', $view)[0]['output'] ?> <span>참여</span></p>
-				<?php }else if(element('is_bat', $forum) == 2) { ?>
-					<p class="btxt">A. <?php echo element('extra_content', $view)[1]['output'] ?> <span>참여</span></p>
-				<?php }else { ?>
-					<p class="btxt"><span>미참여</span></p>
-				<?php } ?>
-				<div class="abr">
-					<p class="cp"><span><?php echo rs_number_format(element('bat_cp', $forum), 2, 0); ?></span> CP</p>
-					<a href="javascript:void(0);" id="more_btn"><span>추가 참여!</span></a>
-					<a href="javascript:void(0);" id="change_btn"><span>의견 변경</span></a>
-				</div>
-			</div>
 			<?php if(element('is_bat', $forum) == 1 || element('is_bat', $forum) == 2){ ?>
-				<div class="btns">
-					<a href="javascript:void(0);" class="enter"><span>투표 참여하기</span></a>
+				<div class="result" >
+					<?php if(element('is_bat', $forum) == 1){ ?>
+						<p class="btxt">A. <?php echo element('extra_content', $view)[0]['output'] ?> <span>참여</span></p>
+					<?php }else if(element('is_bat', $forum) == 2) { ?>
+						<p class="btxt">A. <?php echo element('extra_content', $view)[1]['output'] ?> <span>참여</span></p>
+					<?php }else { ?>
+						<p class="btxt"><span>미참여</span></p>
+					<?php } ?>
+					<div class="abr">
+						<p class="cp"><span><?php echo rs_number_format(element('bat_cp', $forum), 2, 0); ?></span> CP</p>
+						<a href="javascript:void(0);" id="more_btn"><span>추가 참여!</span></a>
+						<a href="javascript:void(0);" id="change_btn"><span>의견 변경</span></a>
+					</div>
 				</div>
-			<?php }?>
+			<?php } ?>
+			<?php //if(element('is_bat', $forum) == 1 || element('is_bat', $forum) == 2){ ?>
+				<!-- <div class="btns">
+					<a href="javascript:void(0);" class="enter"><span>투표 참여하기</span></a>
+				</div> -->
+			<?php //}?>
 		</div>
 		<div class="gap50"></div>
 		<div class="gap50"></div>
@@ -513,16 +514,15 @@
 			}, 450);
 		});
 
-		$('.poll-wrap').find('.btns > .enter').click(function () {
-			if ($(this).closest('.poll-wrap').hasClass('active')) {
-				$(this).closest('.poll-wrap').removeClass('active');
-				$('.poll-wrap').find('.result').hide();
-			} else {
-				$(this).closest('.poll-wrap').addClass('active');
-				$('.poll-wrap').find('.result').show();
-			}
-
-		});
+		// $('.poll-wrap').find('.btns > .enter').click(function () {
+		// 	if ($(this).closest('.poll-wrap').hasClass('active')) {
+		// 		$(this).closest('.poll-wrap').removeClass('active');
+		// 		$('.poll-wrap').find('.result').hide();
+		// 	} else {
+		// 		$(this).closest('.poll-wrap').addClass('active');
+		// 		$('.poll-wrap').find('.result').show();
+		// 	}
+		// });
 		$('.cmmt-like').click(function () {
 			if ($(this).hasClass('active')) {
 				$(this).removeClass('active');

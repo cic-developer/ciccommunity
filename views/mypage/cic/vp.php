@@ -32,8 +32,8 @@
 						<tr>
 							<th>번호</th>
 							<th>vp</th>
-							<th>메모</th>
 							<th>내용</th>
+							<th>메모</th>
 							<th>등록일</th>
 						</tr>
 					</thead>
@@ -42,10 +42,8 @@
 							<tr>
 								<td><span><?php echo number_format(element('num', $post));?></span></td>
 								<td><span><?php echo html_escape(element('vp_point', $post));?></span></td>
-								<td class="l"><span><?php echo html_escape(element('vp_content', $post));?></span></td>
-								<td>
-										<?php echo html_escape(element('vp_action', $post));?>
-								</td>
+								<td><?php echo html_escape(element('vp_action', $post));?></td>
+								<td class="l_memo"><span><?php echo html_escape(element('vp_content', $post));?></span></td>
 								<td><?php echo display_datetime(element('vp_datetime', $post), 'full'); ?></td>
 							</tr>
 						<?php } ?>
