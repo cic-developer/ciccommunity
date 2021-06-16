@@ -2,11 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Cbconfigs class
+ * Point class
  *
- * Copyright (c) CIBoard <www.ciboard.co.kr>
+ * Copyright (c) RSTEAM <www.rs-team.com>
  *
- * @author CIBoard (develop@ciboard.co.kr)
+ * @author RSTEAM (developer@rs-team.com)
  */
 
 /**
@@ -154,6 +154,7 @@ class Point extends CB_Controller
 	// 	$this->view = element('view_skin_file', element('layout', $view));
 	// }
 
+	//vp설정 
 	function VPconfig()
     {
 		// 이벤트 라이브러리를 로딩합니다
