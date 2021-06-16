@@ -109,6 +109,7 @@
 <!-- s: layer-wrap.singo -->
 <script>
 	$(document).ready(function(){
+		// $('.show .more').removeEventListener();
 		$('.more').on('click', function(){
 			let parent = $(this).parent('.vtxt');
 			let _index = parent.attr('comment-data');
@@ -121,7 +122,7 @@
 					index: _index
 				},
 				success: function(data){
-					parent.empty();
+					parent.children().remove();
 					parent.text('');
 					try{
 						parent.append(data);

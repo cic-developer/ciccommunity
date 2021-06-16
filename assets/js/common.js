@@ -7,28 +7,7 @@ $(window).load(function() {
 });
 
 $(function() {
-    //20210617 구진모 댓글 더보기 기능 추가
-    // $('.show .more').on('click', function() {
-    //     let parent = $(this).parent('.vtxt');
-    //     let _index = parent.attr('comment-data');
-    //     $.ajax({
-    //         url: "<?php echo base_url('Comment_list/ajax_allCommentData')?>",
-    //         type: "POST",
-    //         dataType: "json",
-    //         data: {
-    //             csrf_test_name: cb_csrf_hash,
-    //             index: _index
-    //         },
-    //         success: function(data) {
-    //             parent.children().remove();
-    //             parent.text('');
-    //             parent.append(data);
-    //         },
-    //         error: function(request, status, error) {
-    //             console.log(request, status, error)
-    //         }
-    //     });
-    // })
+
 
     // top search
     $(".bt-search").click(function() {
