@@ -413,14 +413,19 @@ $(document).on('ready', async function() {
         let _cal_money = $(this).data('cal-money'); // 수수료를 제한 출금할 cp 
         let _userAddress = children_td[4].innerText;
 
-        var cal_money = parseFloat(_cal_money);
-        var price = parseFloat(per_price);
+        let cal_money = parseFloat(_cal_money);
+        let price = parseFloat(per_price);
 
-        var _per_coin = (cal_money / price) * 100;
+        let _per_coin = (cal_money / price) * 100;
 
-        var per_coin = Math.floor((_per_coin * 100)) / 100; // 예상 퍼코인
-
-        per_coin = String(per_coin).replace(".", "") + "000000000000000000";
+        let per_coin = Math.floor((_per_coin * 100)) / 100; // 예상 퍼코인
+        let _findex = String(per_coin).indexOf(".");
+        let _zerofill = "000000000000000000";
+        if (_findex = !-1) {
+            let _length = per_coint.substring(_findex).length;
+            _zerofill = _zerofill.substring(_length - 1);
+        }
+        per_coin = String(per_coin).replace(".", "") + _zerofill;
 
         // 충전액 필숫값
         if (!_price) {
