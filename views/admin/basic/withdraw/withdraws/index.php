@@ -134,7 +134,7 @@
                                                     <textarea class="form-control" rows="1" cols="75" id="cp_transaction" name="cp_transaction" placeholder="트랜잭션을 입력해주세요" required style="width:100%;"></textarea>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="cp_percoin">예상 퍼코인*:</label>
+                                                    <label for="cp_percoin">지급 퍼코인*:</label>
                                                     <textarea class="form-control" rows="1" cols="75" id="cp_percoin" name="cp_percoin" placeholder="퍼코인을 입력해주세요" style="width:100%;" readonly></textarea>
                                                 </div>
                                                 <div class="form-group">
@@ -378,7 +378,7 @@
         }
 
 
-        if (acttype === 'approve' && ! confirm('선택한 요청을 정말 승인 하시겠습니까?')) return;
+        // if (acttype === 'approve' && ! confirm('선택한 요청을 정말 승인 하시겠습니까?')) return;
         f.action = actpage;
 		f.submit();
     }   

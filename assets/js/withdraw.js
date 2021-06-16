@@ -465,32 +465,36 @@ $(document).on('ready', async function() {
             location.reload();
             return;
         }
+        try {
+            const sendToPerWallet_data = await caver.klay.abi.encodeFunctionCall({
+                name: "transfer",
+                type: "function",
+                inputs: [{
+                        "name": "_to",
+                        "type": "address"
+                    },
+                    {
+                        "name": "_value",
+                        "type": "uint256"
+                    }
+                ],
+            }, [
+                _userAddress,
+                caver_value
+            ]);
+            const sendToPerWallet = await caver.klay.sendTransaction({
+                type: "SMART_CONTRACT_EXECUTION",
+                account,
+                to: token_address,
+                data: sendToPerWallet_data,
+                gas: 3000000,
+            }).on("transactionHash", async(transactionHash) => {
+                $('#myModal-approve').modal({ backdrop: false, keyboard: false });
+                $("#cp_transaction").val(transactionHash);
+            });
+        } catch (error) {
+            alert(error.message);
+        }
 
-        const sendToPerWallet_data = await caver.klay.abi.encodeFunctionCall({
-            name: "transfer",
-            type: "function",
-            inputs: [{
-                    "name": "_to",
-                    "type": "address"
-                },
-                {
-                    "name": "_value",
-                    "type": "uint256"
-                }
-            ],
-        }, [
-            _userAddress,
-            caver_value
-        ]);
-
-        const sendToPerWallet = await caver.klay.sendTransaction({
-            type: "SMART_CONTRACT_EXECUTION",
-            account,
-            to: token_address,
-            data: sendToPerWallet_data,
-            gas: 3000000,
-        }).on("transactionHash", async(transactionHash) => {
-            $("#cp_transaction").val(transactionHash);
-        });
     });
 });
