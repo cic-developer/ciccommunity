@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Coin class
+ * CIC_Coin_list_model class
  *
  * Copyright (c) RsTeam <www.rs-team.com>
  *

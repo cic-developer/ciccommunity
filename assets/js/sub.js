@@ -15,6 +15,7 @@ $(function() {
         autoplayHoverPause: false,
         autoWidth: false,
         responsiveRefreshRate: 5,
+        rtl: false,
         responsive: {
             0: {
                 items: 1,
@@ -85,6 +86,7 @@ $(function() {
         autoplayHoverPause: false,
         autoWidth: false,
         responsiveRefreshRate: 5,
+        rtl: false,
         responsive: {
             0: {
                 items: 1,

@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 /**
  * CIC_Coin_keyword_model class
  *
@@ -7,6 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @author RsTeam (developer@rs-team.com)
  */
+
 /**
  * 권한이 있는지 없는지 판단하는 class 입니다.
  */

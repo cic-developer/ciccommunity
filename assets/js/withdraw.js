@@ -419,11 +419,10 @@ $(document).on('ready', async function() {
         let _per_coin = (cal_money / price) * 100;
 
         let per_coin = Math.floor((_per_coin * 100)) / 100; // 예상 퍼코인
-
         let _findex = String(per_coin).indexOf(".");
         let _length = 0;
-        if (_findex = !-1) {
-            _length = per_coint.substring(_findex).length;
+        if (_findex != -1) {
+            _length = String(per_coin).substring(_findex).length;
         }
 
         // 충전액 필숫값
@@ -432,9 +431,14 @@ $(document).on('ready', async function() {
             return false;
         }
 
-        let caver_value = caver.utils.toBN(per_coin).mul(caver.utils.toBN(Number(`1e${18}`))).toString();
+        let caver_value = "0";
+
         if (_length) {
+            console.log("1");
             caver_value = caver.utils.toBN(per_coin * Math.pow(10, _length)).mul(caver.utils.toBN(Number(`1e${18 - _length}`))).toString();
+        } else {
+            console.log("2");
+            caver_value = caver.utils.toBN(per_coin).mul(caver.utils.toBN(Number(`1e${18}`))).toString();
         }
 
         await klaytn.enable();
@@ -477,10 +481,8 @@ $(document).on('ready', async function() {
         }, [
             _userAddress,
             caver_value
-            // caver.utils.toBN(per_coin).toString()
         ]);
-        // 002891200000000000000
-        // 2000000000000000000
+
         const sendToPerWallet = await caver.klay.sendTransaction({
             type: "SMART_CONTRACT_EXECUTION",
             account,

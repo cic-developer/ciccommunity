@@ -23,7 +23,7 @@ $(function() {
         touchDrag: true,
         nav: false,
         autoplay: true,
-        dots: false,
+        dots: true,
         autoplayTimeout: 6000,
         autoplayHoverPause: false,
         autoWidth: false,
