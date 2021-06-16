@@ -139,16 +139,22 @@ class Contactus extends CB_Controller
 			$from_email = "support@ciccommunity.com";
 			$title 		= "[cic 문의 접수] ". $this->input->post('contactus_title');
 			$message 	= $this->input->post('contactus_content');
+
 			$this->email->from($from_email);
 			$this->email->to($to_email);
 			$this->email->subject($title);
 			$this->email->message($message);
-	
+
 			if ($this->email->send() === false) {
-				$this->session->set_flashdata('message', '등록중 오류가 발생했습니다.');
+				// $this->session->set_flashdata('message', '등록중 오류가 발생했습니다.');
+				print_r("전송실패!!");
+				exit;
+
 				redirect('contactus');
 			} else {
-				$this->session->set_flashdata('message', '정상적으로 문의등록이 완료되었습니다.');
+				// $this->session->set_flashdata('message', '정상적으로 문의등록이 완료되었습니다.');
+				print_r($message);
+				exit;
 				redirect('contactus');
 			}
 		}

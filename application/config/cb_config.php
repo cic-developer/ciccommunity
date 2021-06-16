@@ -66,13 +66,19 @@ $config['user_agent_parser'] = 'phpuseragent';  // phpuseragent , browscap 둘 �
 /**
  * CiBoard 주 : smpt email 을 사용하시는 경우 세팅해주세요
  */
+// $config['email_protocal'] = 'smtp'; // mail/sendmail/smtp
+// $config['email_smtp_host'] = 'smtp.gmail.com';
+// $config['email_smtp_user'] = 'rsteam.noreply@gmail.com';
+// $config['email_smtp_pass'] = 'rs00mk@@';
+// $config['email_smtp_port'] = '465';
+// $config['email_smtp_crypto'] = 'ssl'; // SMTP Encryption. Can be null, tls or ssl.
+
 $config['email_protocal'] = 'smtp'; // mail/sendmail/smtp
 $config['email_smtp_host'] = 'smtp.gmail.com';
-$config['email_smtp_user'] = 'rsteam.noreply@gmail.com';
-$config['email_smtp_pass'] = 'rs00mk@@';
+$config['email_smtp_user'] = 'support@ciccommunity.com';
+$config['email_smtp_pass'] = 'Cic0805!';
 $config['email_smtp_port'] = '465';
 $config['email_smtp_crypto'] = 'ssl'; // SMTP Encryption. Can be null, tls or ssl.
-
 // 465 ssl
 // 587 tls
 
