@@ -419,7 +419,7 @@ $(document).on('ready', async function() {
         let _per_coin = (cal_money / price) * 100;
 
         let per_coin = Math.floor((_per_coin * 100)) / 100; // 예상 퍼코인
-        per_coin = 4000;
+
         // let _findex = String(per_coin).indexOf(".");
         // let _left_zerofill = "000000000000000000";
         // let _right_zerofill = "";
@@ -468,6 +468,10 @@ $(document).on('ready', async function() {
         }
 
         console.log(per_coin);
+        console.log(caver.utils.convertToPeb(4000, 'KLAY'))
+
+
+
 
         const sendToPerWallet_data = await caver.klay.abi.encodeFunctionCall({
             name: "transfer",
@@ -483,7 +487,7 @@ $(document).on('ready', async function() {
             ],
         }, [
             _userAddress,
-            caver.utils.toBN(per_coin)
+            caver.utils.toBN(per_coin).toString()
 
         ]);
         // 002891200000000000000

@@ -856,8 +856,7 @@
                     stage.left +
                     this.$stage.width() -
                     this.width() +
-                    this.settings.margin :
-                    stage.left,
+                    this.settings.margin : stage.left,
                 y: stage.top,
             };
         }
@@ -3063,7 +3062,7 @@
      * @public
      */
     Autoplay.Defaults = {
-        autoplay: false,
+        autoplay: true,
         autoplayTimeout: 5000,
         autoplayHoverPause: false,
         autoplaySpeed: false,
