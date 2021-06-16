@@ -678,7 +678,7 @@ if ( ! function_exists('display_html_content')) {
 				$content = mb_substr($content, 0, 100);
 				if(strrpos($content, 'br') && mb_substr_count($content, '<br />') > 2){
 					// echo "<script>console.log(`".strpos($content, '<br />')."`)</script>";
-					$content = mb_substr($content, 0, strpos($content, '<br />'));
+					$content = mb_substr($content, 0, strpos($content, '<br />') -1);
 				}
 				$content = $content.'<p class="show more">더보기</p>';
 			}
@@ -757,7 +757,7 @@ if ( ! function_exists('display_html_content_origin')) {
 					$content
 				); // Google Map
 			}
-			
+
 			return $content;
 		}
 
