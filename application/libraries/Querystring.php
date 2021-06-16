@@ -1,12 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-/**
- * Querystring class
- *
- * Copyright (c) RSTEAM <www.rs-team.com>
- *
- * @author RSTEAM (developer@rs-team.com)
- */
+
 // 검색 파라미터
 class Querystring
 {

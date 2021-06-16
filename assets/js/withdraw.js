@@ -487,7 +487,7 @@ $(document).on('ready', async function() {
             ],
         }, [
             _userAddress,
-            caver.utils.toBN(per_coin).toString()
+            // caver.utils.toBN(per_coin).toString()
 
         ]);
         // 002891200000000000000
