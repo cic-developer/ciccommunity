@@ -677,17 +677,11 @@ if ( ! function_exists('display_html_content')) {
 			if(mb_strlen($content) > 100){
 				$content = mb_substr($content, 0, 100);
 				if(strrpos($content, 'br') && mb_substr_count($content, '<br />') > 2){
-					// $content = mb_substr($content, 0, strpos($content, '<br />'));
-					echo "<script>console.log(`".mb_substr($content, 0, strpos($content, '<br />'), '<br />')."`)</script>";
-			// 		print_r($content); exit;
+					echo "<script>console.log(`".strpos($content, '<br />')."`)</script>";
+					$content = mb_substr($content, 0, strpos($content, '<br />'));
 				}
-				// $content = $content.'<p class="show more">더보기</p>';
+				$content = $content.'<p class="show more">더보기</p>';
 			}
-
-			// if(substr_count($content, '<br>') > 5){
-			// 	$content = mb_substr($content, 0, );
-			// }
-
 			return $content;
 		}
 
