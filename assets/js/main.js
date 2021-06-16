@@ -52,15 +52,8 @@ $(function() {
         .find(".next")
         .click(function() {
             $(".visual-slide").trigger("next.owl.carousel");
-            var $owl = $(element).owlCarousel(options);
-            var autoplayDelay = 6000;
-
-            if (autoplayDelay) {
-                $owl.trigger('stop.owl.autoplay');
-                setTimeout(function() {
-                    $owl.trigger('play.owl.autoplay');
-                }, autoplayDelay);
-            }
+            $(".visual-slide").trigger("stop.owl.carousel");
+            $(".visual-slide").trigger("play.owl.carousel");
         });
     $(".vis")
         .find(".prev")
