@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Coin Price helper
+ * Chk_birthday helper
  *
  * Copyright (c) RSTEAM <www.rs-team.com>
  *
