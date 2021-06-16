@@ -2,16 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Main class
+ * Deposit class
  *
- * Copyright (c) CIBoard <www.ciboard.co.kr>
+ * Copyright (c) RSTEAM <www.rs-team.com>
  *
- * @author CIBoard (develop@ciboard.co.kr)
+ * @author RSTEAM (developer@rs-team.com)
  */
 
-/**
- * 관리자 메인 controller 입니다.
- */
+
 class Deposit extends CB_Controller
 {
 
