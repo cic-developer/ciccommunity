@@ -367,7 +367,7 @@
     </div>
 </div>
 <script>
-    setInterval(() => $('.visual-slide').trigger('prev.owl.carousel', [600]), 6000);
+    // setInterval(() => $('.visual-slide').trigger('prev.owl.carousel', [600]), 3000);
 
     $(document).on('click', ".banner-hit", function() {
         var banner_id = $(this).data('banner-id');
