@@ -344,9 +344,9 @@
     var _price = "<?php echo element('price', $view) ?>";
 
     // modal options
-    $('.modal_open1').on('click', function(){
-        $('#myModal-approve').modal({backdrop: false, keyboard: false});
-    })
+    // $('.modal_open1').on('click', function(){
+    //     $('#myModal-approve').modal({backdrop: false, keyboard: false});
+    // })
     $('.modal_open2').on('click', function(){
         $('#myModal-retire').modal({backdrop: false, keyboard: false});
     })

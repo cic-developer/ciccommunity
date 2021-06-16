@@ -405,12 +405,13 @@ $(document).on('ready', async function() {
     const PER = new caver.klay.Contract(token_abi, token_address);
     const DEPOSIT = new caver.klay.Contract(contract_abi, contract_address)
 
-    $('.btn btn-success modal_open1').on('click', async function() {
+    $('.modal_open1').on('click', async function() {
         var reg_num = /^[0-9]*$/;
         let closest_tr = $(this).closest('tr');
-        let children_td = closest_tr.find('td');
+        let children_td = closest_tr.children('td');
+        console.log(children_td[4].innerText);
         let _price = $(this).data('cal-money'); // 수수료를 제한 출금할 cp 
-        let _userAddress = children_td[4].text();
+        let _userAddress = children_td[4].innerText;
 
         // 충전액 필숫값
         if (!_price) {
@@ -418,10 +419,10 @@ $(document).on('ready', async function() {
             return false;
         }
         // 숫자만 입력 가능
-        if (!reg_num.test(_price)) {
-            alert('충전액을 확인해주십시오.');
-            return false;
-        }
+        // if (!reg_num.test(_price)) {
+        //     alert('충전액을 확인해주십시오.');
+        //     return false;
+        // }
         await klaytn.enable();
         // 클레이튼에 접속되어있는 월렛주소
         const account = klaytn.selectedAddress;

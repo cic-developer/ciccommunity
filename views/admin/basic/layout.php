@@ -22,9 +22,11 @@
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.extension.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/common.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/caver.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/withdraw.js'); ?>"></script>
 <!--[if lt IE 9]>
-<script type="text/javascript" src="<?php echo base_url('assets/js/html5shiv.min.js'); ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/js/respond.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php //echo base_url('assets/js/html5shiv.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php //echo base_url('assets/js/respond.min.js'); ?>"></script>
 <![endif]-->
 <script type="text/javascript">
 // 자바스크립트에서 사용하는 전역변수 선언
