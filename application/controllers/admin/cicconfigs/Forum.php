@@ -361,6 +361,7 @@ class Forum extends CB_Controller
 		return false;
 	}
 
+	//도전 CIC 포럼 리스트 함수 
 	public function disapproval_forum()
 	{
 		$eventname = 'event_admin_cicconfigs_disapproval_forum_list';
@@ -1421,7 +1422,7 @@ class Forum extends CB_Controller
 		
 		// 이벤트가 존재하면 실행합니다
 		Events::trigger('after', $eventname);
-		/**
+		/** 
 		 * 삭제가 끝난 후 목록페이지로 이동합니다
 		 */
 		$this->session->set_flashdata(
@@ -1469,6 +1470,7 @@ class Forum extends CB_Controller
 		redirect($redirecturl);
 	}
 	
+	//포럼 마감시간 확인 함수 
 	public function _minfrmclosetime($frmclose)
 	{
 		$batclose = $this->input->post('frm_bat_close_datetime');
@@ -1484,7 +1486,7 @@ class Forum extends CB_Controller
 	}
 
 
-
+	//배팅마감시간 확인 함수 
 	public function _minbatclosetime($batclose)
 	{
 		$now = cdate('Y-m-d H:i:s');
