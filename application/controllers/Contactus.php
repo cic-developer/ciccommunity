@@ -144,17 +144,13 @@ class Contactus extends CB_Controller
 			$this->email->to($to_email);
 			$this->email->subject($title);
 			$this->email->message($message);
+			$this->email->set_newline("\r\n");
 
 			if ($this->email->send() === false) {
-				// $this->session->set_flashdata('message', '등록중 오류가 발생했습니다.');
-				print_r("전송실패!!");
-				exit;
-
+				$this->session->set_flashdata('message', '등록중 오류가 발생했습니다.');
 				redirect('contactus');
 			} else {
-				// $this->session->set_flashdata('message', '정상적으로 문의등록이 완료되었습니다.');
-				print_r($message);
-				exit;
+				$this->session->set_flashdata('message', '정상적으로 문의등록이 완료되었습니다.');
 				redirect('contactus');
 			}
 		}
