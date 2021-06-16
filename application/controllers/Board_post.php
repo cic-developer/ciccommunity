@@ -1827,7 +1827,8 @@ class Board_post extends CB_Controller
 		 */
 		$search_option = array(
 			'post_title' => '제목',
-			'post_content' => '내용'
+			'post_content' => '내용',
+			'post_nickname' => '닉네임'
 		);
 		$return['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$return['search_option'] = search_option($search_option, $sfield);

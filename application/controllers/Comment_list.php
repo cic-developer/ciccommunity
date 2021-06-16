@@ -549,4 +549,20 @@ class Comment_list extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 		return true;
 	}
+
+	function ajax_allCommentData(){
+		$_index = $this->input->post('index');
+		$result = $this->Comment_model->get_one($_index);
+		$image_width = ($this->cbconfig->get_device_view_type() === 'mobile')
+		? element('post_mobile_image_width', $board)
+		: element('post_image_width', $board);
+		$_content = display_html_content_origin(
+			element('cmt_content', $result),
+			element('cmt_html', $result),
+			$image_width,
+			true,
+			true
+		);
+		echo json_encode($_content);
+	}
 }

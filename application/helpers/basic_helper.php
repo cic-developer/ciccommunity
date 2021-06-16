@@ -677,7 +677,7 @@ if ( ! function_exists('display_html_content')) {
 			if(mb_strlen($content) > 100){
 				$content = mb_substr($content, 0, 100);
 				if(strrpos($content, 'br') && mb_substr_count($content, '<br />') > 2){
-					echo "<script>console.log(`".strpos($content, '<br />')."`)</script>";
+					// echo "<script>console.log(`".strpos($content, '<br />')."`)</script>";
 					$content = mb_substr($content, 0, strpos($content, '<br />'));
 				}
 				$content = $content.'<p class="show more">더보기</p>';
@@ -729,6 +729,83 @@ if ( ! function_exists('display_html_content')) {
 		return $content;
 	}
 }
+
+//20210617 구진모 html 콘텐츠 원본복구용
+if ( ! function_exists('display_html_content_origin')) {
+	function display_html_content_origin($content = '', $html = '', $thumb_width=700, $autolink = false, $popup = false, $writer_is_admin = false)
+	{
+		$phpversion = phpversion();
+		if (empty($html)) {
+			$content = nl2br(html_escape($content));
+			if ($autolink) {
+				$content = url_auto_link($content, $popup);
+			}
+			$content = preg_replace(
+				"/\[<a\s*href\=\"(http|https|ftp)\:\/\/([^[:space:]]+)\.(gif|png|jpg|jpeg|bmp).*<\/a>(\s\]|\]|)/i",
+				"<img src=\"$1://$2.$3\" alt=\"\" style=\"max-width:100%;border:0;\">",
+				$content
+			);
+			if (version_compare($phpversion, '7.2.0') >= 0) {
+
+			} else {
+				$content = preg_replace_callback(
+					"/{지도\:([^}]*)}/is",
+					create_function('$match', '
+						 global $thumb_width;
+						 return get_google_map($match[1], $thumb_width);
+					'),
+					$content
+				); // Google Map
+			}
+			
+			return $content;
+		}
+
+		$source = array();
+		$target = array();
+
+		$source[] = '//';
+		$target[] = '';
+
+		$source[] = "/<\?xml:namespace prefix = o ns = \"urn:schemas-microsoft-com:office:office\" \/>/";
+		$target[] = '';
+
+		// 테이블 태그의 갯수를 세어 테이블이 깨지지 않도록 한다.
+		$table_begin_count = substr_count(strtolower($content), '<table');
+		$table_end_count = substr_count(strtolower($content), '</table');
+		for ($i = $table_end_count; $i < $table_begin_count; $i++) {
+			$content .= '</table>';
+		}
+
+		$content = preg_replace($source, $target, $content);
+
+		if ($autolink) {
+			$content = url_auto_link($content, $popup);
+		}
+
+		//if ($writer_is_admin === false) {
+			$content = html_purifier($content);
+		//}
+
+		$content = get_view_thumbnail($content, $thumb_width);
+
+		if (version_compare($phpversion, '7.2.0') >= 0) {
+
+		} else {
+			$content = preg_replace_callback(
+				"/{&#51648;&#46020;\:([^}]*)}/is",
+				create_function('$match', '
+					 global $thumb_width;
+					 return get_google_map($match[1], $thumb_width);
+				'),
+				$content
+			); // Google Map
+		}
+
+		return $content;
+	}
+}
+
 
 
 /*
