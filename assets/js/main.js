@@ -52,13 +52,48 @@ $(function() {
         .find(".next")
         .click(function() {
             $(".visual-slide").trigger("next.owl.carousel");
-            $(".visual-slide").trigger('next.owl.autoplay', [6000]);
+            $(".visual-slide").carousel('dispose');
+            $(".visual-slide").owlCarousel({
+                items: 4,
+                autoHeight: false,
+                loop: true,
+                margin: 30,
+                mouseDrag: true,
+                touchDrag: true,
+                nav: false,
+                autoplay: true,
+                dots: true,
+                autoplayTimeout: 6000,
+                autoplayHoverPause: false,
+                autoWidth: false,
+                responsiveRefreshRate: 5,
+                responsive: {
+                    0: {
+                        items: 1,
+                        margin: 25,
+                    },
+                    480: {
+                        items: 2,
+                        margin: 35,
+                    },
+                    780: {
+                        items: 3,
+                        margin: 35,
+                    },
+                    999: {
+                        items: 4,
+                        margin: 35,
+                    },
+                },
+            });
         });
     $(".vis")
         .find(".prev")
         .click(function() {
             $(".visual-slide").trigger("prev.owl.carousel", [600]);
-            $(".visual-slide").trigger('prev.owl.autoplay', [6000]);
+            $(".visual-slide").owlCarousel({
+                autoplayTimeout: 6000
+            });
         });
 
     // forum-slide

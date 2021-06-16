@@ -674,7 +674,6 @@ if ( ! function_exists('display_html_content')) {
 				); // Google Map
 			}
 
-
 			return $content;
 		}
 
