@@ -52,11 +52,17 @@ $(function() {
         .find(".next")
         .click(function() {
             $(".visual-slide").trigger("next.owl.carousel");
+            $(".visual-slide").owlCarousel({
+                autoplayTimeout: 6000
+            });
         });
     $(".vis")
         .find(".prev")
         .click(function() {
             $(".visual-slide").trigger("prev.owl.carousel", [600]);
+            $(".visual-slide").owlCarousel({
+                autoplayTimeout: 6000
+            });
         });
 
     // forum-slide

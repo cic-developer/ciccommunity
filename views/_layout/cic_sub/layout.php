@@ -67,7 +67,13 @@ var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
 <script type="text/javascript" src="<?php echo base_url('assets/js/js.cookie.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/caver.js'); ?>"></script>
 <?php echo $this->managelayout->display_js(); ?>
-
+<script>
+	function confirm_logout(){
+		if(confirm('로그아웃 하시겠습니까?')){
+			location.href="<?php echo site_url('login/logout?url=' . urlencode(current_full_url())); ?>"
+		}
+	}
+</script>
 </head>
 <body <?php echo isset($view) ? element('body_script', $view) : ''; ?>>
     <div id="doc" class="sub">
@@ -78,7 +84,7 @@ var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
 				<ul class="member">
                     <?php if($this->member->is_member()){ ?>
                         <li><a href="<?php echo base_url('/mypage')?>" class="mypage-btn"><span>MY PAGE</span></a></li>
-                        <li><a href="<?php echo site_url('login/logout?url=' . urlencode(current_full_url())); ?>"
+                        <li><a href="#" onclick="confirm_logout()"
                             class="login-btn"><span>LOGOUT</span></a></li>
                     <?php }else{ ?>
                         <li><a href="<?php echo base_url('/register')?>" class="mypage-btn"><span>SIGN UP</span></a></li>
