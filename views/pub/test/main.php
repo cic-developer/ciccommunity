@@ -451,7 +451,7 @@
 					<a href="#n" class="more"><span>동영상 더보기</span></a>
 					<div class="img">
 						<a href="#n" class="play-btn"><span class="blind">재생</span></a>
-						<p><img src="<?php echo base_url('assets/images/movie-img.png')?>" alt=""/></p>
+						<p><img src="<?php echo base_url('assets/images/movie-cha.png')?>" alt=""/></p>
 					</div>
 				</div>
 			</div>
