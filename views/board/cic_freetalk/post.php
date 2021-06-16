@@ -74,38 +74,7 @@
 						</ul>
 					</div>
 					<?php } ?>
-
-					<!-- <div class="modify">
-						<?php //if (element('modify_url', $view)) { ?>
-						<a href="<?php //echo element('modify_url', $view); ?>" class="mo-btn">
-							<span>수정<span>
-						</a>
-						<?php //} ?>
-						<?php //	if (element('delete_url', $view)) { ?>
-						<a href="javascript:void(0);" class="mo-btn btn-one-delete" data-one-delete-url="<?php // echo element('delete_url', $view); ?>">
-							<span>삭제<span>
-						</a>
-						<?php // } ?>
-					</div> -->
 				</div>
-				<!-- <div class="files">
-			<ul>
-				<li><a href="#">2020년 여성과 문화 지원사업 공모.pdf</a></li>
-				<li><a href="#">2020년 개성상인 지원사업 공모.pdf</a></li>
-			</ul>
-		</div>
-		<div class="others">
-			<ul>
-				<li>
-					<p class="btxt">다음글</p>
-					<a href="#">다음 글이 없습니다.</a>
-				</li>
-				<li>
-					<p class="btxt">이전글</p>
-					<a href="#">"축" 대통령 및 국토교통부 장관 표창 수상</a>
-				</li>
-			</ul>
-		</div> -->
 			</div>
 			<div class="lower r">
 				<?php if(element('modify_url', $view)){ ?>
@@ -197,10 +166,6 @@
 					<?php
 						$this->load->view(element('view_skin_path', $layout) . '/comment_write');
 					?>
-					<!-- <textarea placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."></textarea>
-					<div class="btns">
-						<a href="javascript:void(0);" class="write-btn"><span>댓글등록</span></a>
-					</div> -->
 			</div>
 			<div class="cmmt" id="viewcomment">
 			</div>
