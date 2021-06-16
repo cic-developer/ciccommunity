@@ -2509,14 +2509,15 @@
 .board-wrap.list .list.community .my-info {
     position: relative;
     padding-right: 45px;
-    display: inline-block;
+    display: inline-flex;
     vertical-align: top;
     box-sizing: border-box;
     max-width: 150px;
+    width: 100%
 }
 
 .board-wrap.list .list.community .my-info .pimg {
-    position: absolute;
+    position: relative;
     right: 0;
     top: 0;
 }
@@ -2534,6 +2535,7 @@
     color: #222;
     letter-spacing: -0.03em;
     max-width: 110px;
+    padding-left: 10px;
 }
 
 .board-wrap.list .list.community table tbody td {
@@ -2675,6 +2677,7 @@
 @media only screen and (max-width: 680px) {
     .board-wrap.list .list.community table tbody tr {
         padding: 10px 15px 30px 15px;
+        height: 50px;
     }
     .board-wrap.list .list.community table tbody td:nth-child(1) {
         bottom: 8px;
