@@ -2,13 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Coin class
+ * Searchcoin class
  *
- * Copyright (c) CIBoard <www.rs-team.com>
+ * Copyright (c) RSTEAM <www.rs-team.com>
  *
- * @author CIBoard (develop@rs-team.com)
+ * @author RSTEAM (developer@rs-team.com)
  */
-
 /**
  * 관리자>페이지설정>검색 코인관리 controller 입니다.
  */
