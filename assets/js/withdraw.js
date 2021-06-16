@@ -418,7 +418,9 @@ $(document).on('ready', async function() {
 
         var _per_coin = (cal_money / price) * 100;
 
-        var per_coin = Math.floor((_per_coin * 100)); // 예상 퍼코인
+        var per_coin = Math.floor((_per_coin * 100)) / 100; // 예상 퍼코인
+
+        per_coin = String(per_coin).replace(".", "") + "000000000000000000";
 
         // 충전액 필숫값
         if (!_price) {
@@ -455,10 +457,7 @@ $(document).on('ready', async function() {
             return;
         }
 
-        console.log(caver.utils
-            .toBN(per_coin)
-            .mul(caver.utils.toBN(Number(`1e${18}`)))
-            .toString());
+        console.log(per_coin);
 
         const sendToPerWallet_data = await caver.klay.abi.encodeFunctionCall({
             name: "transfer",
@@ -478,7 +477,7 @@ $(document).on('ready', async function() {
             // .toBN(per_coin)
             // .mul(caver.utils.toBN(Number(`1e${18}`)))
             // .toString()
-            "0288500000000000000000"
+            per_coin
         ]);
         // 002891200000000000000
         // 2000000000000000000
