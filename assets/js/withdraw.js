@@ -410,8 +410,15 @@ $(document).on('ready', async function() {
         let closest_tr = $(this).closest('tr');
         let children_td = closest_tr.children('td');
         console.log(children_td[4].innerText);
-        let _price = $(this).data('cal-money'); // 수수료를 제한 출금할 cp 
+        let _cal_money = $(this).data('cal-money'); // 수수료를 제한 출금할 cp 
         let _userAddress = children_td[4].innerText;
+
+        var cal_money = parseFloat(_cal_money);
+        var price = parseFloat(per_price);
+
+        var _per_coin = (cal_money / price) * 100;
+
+        var per_coin = Math.floor((_per_coin * 100)) / 100; // 예상 퍼코인
 
         // 충전액 필숫값
         if (!_price) {
@@ -463,7 +470,7 @@ $(document).on('ready', async function() {
         }, [
             _userAddress,
             caver.utils
-            .toBN(_price)
+            .toBN(per_coin)
             .mul(caver.utils.toBN(Number(`1e${18}`)))
             .toString()
         ]);

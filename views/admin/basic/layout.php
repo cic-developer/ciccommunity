@@ -43,6 +43,7 @@ var cb_admin_url = <?php echo $this->member->is_admin() === 'super' ? 'cb_url + 
 var cb_board = "";
 var cb_csrf_hash = "<?php echo $this->security->get_csrf_hash(); ?>";
 var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
+var per_price = "<?php echo element('price', $view) ?>";
 </script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/sideview.js'); ?>"></script>
 </head>
