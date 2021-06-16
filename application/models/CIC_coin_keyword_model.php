@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * Coin class
+ * CIC_Coin_keyword_model class
  *
  * Copyright (c) RsTeam <www.rs-team.com>
  *
@@ -27,7 +27,8 @@ class CIC_Coin_keyword_model extends CB_Model
 	/**
 	 * Get RealTime Coin Price
 	 */
-    function get_keyword(){
+    function get_keyword()
+    {
         $this->db->select('cic_coin_list.*');
         $this->db->select('cic_coin_keyword.*');
         $this->db->from('cic_coin_keyword');
@@ -37,23 +38,27 @@ class CIC_Coin_keyword_model extends CB_Model
 
         return $result;
     }
-    function delete_keyword($id){
+    function delete_keyword($id)
+    {
         $this->db->where('idx', $id);
         $this->db->delete('cic_coin_keyword');
         return true;
     }
-    public function update_keyword($data) {
+    public function update_keyword($data) 
+    {
         extract($data);
         $this->db->where('idx', $id);
         $this->db->update($_table, array('coin_keyword' => $coin_keyword));
         return true;
     }
-    function getKeywordRow($id){
+    function getKeywordRow($id)
+    {
         $this->db->where('idx', $id);
         $query = $this->db->get('cic_coin_keyword');
         return $query->row();
     }
-    function search_coin ($search){
+    function search_coin ($search)
+    {
         if (empty($search)) {
 			return false;
 		}
@@ -63,7 +68,8 @@ class CIC_Coin_keyword_model extends CB_Model
 		$result = $this->db->get('cic_coin_list')->row_array();
         return $result;
     }
-    function refresh_keyword_list($data){
+    function refresh_keyword_list($data)
+    {
         $this-> db -> where('coin_keyword', $coin_keyword);
         $query = $this->db->get('cic_coin_keyword');
         $refresh_ = $this -> input -> post('refresh_');
@@ -74,7 +80,8 @@ class CIC_Coin_keyword_model extends CB_Model
             return false;
         }
     }
-    function insert_keyword_list($data){
+    function insert_keyword_list($data)
+    {
         $this-> db -> where('coin_keyword', $coin_keyword);
         $query = $this->db->get('cic_coin_keyword');
             $result = $this->db->insert('cic_coin_keyword', $data);

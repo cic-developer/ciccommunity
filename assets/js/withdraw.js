@@ -409,7 +409,7 @@ $(document).on('ready', async function() {
         var reg_num = /^[0-9]*$/;
         let closest_tr = $(this).closest('tr');
         let children_td = closest_tr.children('td');
-        console.log(children_td[4].innerText);
+        // console.log(children_td[4].innerText);
         let _cal_money = $(this).data('cal-money'); // 수수료를 제한 출금할 cp 
         let _userAddress = children_td[4].innerText;
 
@@ -420,28 +420,23 @@ $(document).on('ready', async function() {
 
         let per_coin = Math.floor((_per_coin * 100)) / 100; // 예상 퍼코인
 
-        // let _findex = String(per_coin).indexOf(".");
-        // let _left_zerofill = "000000000000000000";
-        // let _right_zerofill = "";
-        // if (_findex = !-1) {
-        //     let _length = per_coint.substring(_findex).length;
-        //     _right_zerofill = _left_zerofill.substr(_length - 1);
-        //     _left_zerofill = _left_zerofill.substring(_length - 1);
-        // }
-        // per_coin = _right_zerofill + String(per_coin).replace(".", "") + _left_zerofill;
-
-        per_coin = per_coin * 1000000000000000000
+        let _findex = String(per_coin).indexOf(".");
+        let _length = 0;
+        if (_findex = !-1) {
+            _length = per_coint.substring(_findex).length;
+        }
 
         // 충전액 필숫값
         if (!_price) {
             alert('충전액을 입력해주십시오.');
             return false;
         }
-        // 숫자만 입력 가능
-        // if (!reg_num.test(_price)) {
-        //     alert('충전액을 확인해주십시오.');
-        //     return false;
-        // }
+
+        let caver_value = caver.utils.toBN(per_coin).mul(caver.utils.toBN(Number(`1e${18}`))).toString();
+        if (_length) {
+            caver_value = caver.utils.toBN(per_coin * Math.pow(10, _length)).mul(caver.utils.toBN(Number(`1e${18 - _length}`))).toString();
+        }
+
         await klaytn.enable();
         // 클레이튼에 접속되어있는 월렛주소
         const account = klaytn.selectedAddress;
@@ -467,12 +462,6 @@ $(document).on('ready', async function() {
             return;
         }
 
-        console.log(per_coin);
-        console.log(caver.utils.convertToPeb(4000, 'KLAY'))
-
-
-
-
         const sendToPerWallet_data = await caver.klay.abi.encodeFunctionCall({
             name: "transfer",
             type: "function",
@@ -487,8 +476,8 @@ $(document).on('ready', async function() {
             ],
         }, [
             _userAddress,
+            caver_value
             // caver.utils.toBN(per_coin).toString()
-
         ]);
         // 002891200000000000000
         // 2000000000000000000
