@@ -189,8 +189,8 @@
 </div>
 
 <!-- 작성 글 보기-->
-<div class="popupLayer" style="display:none; z-index:1200">
-	<a href="" class="layer_link"> 작성 글 보기</a>
+<div class="popupLayer" style="display:none; z-index:1200;">
+    <a href="" class="layer_link"> 작성 글 보기</a>
 </div>
 <script>
     $(function(){

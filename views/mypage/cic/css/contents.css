@@ -581,6 +581,7 @@
 
 .copyButton:hover {
     background: #fbb906;
+    color: #fff;
 }
 
 .member-wrap.mypage .myinfo .fl .state ul li:nth-child(1) p {
