@@ -27,7 +27,8 @@ class CIC_maincoin_coin_model extends CB_Model
 		parent::__construct();
 	}
 
-	function get_default_list(){
+	function get_default_list()
+	{
 		$where = array(
 			'cmc_default' => '1'
 		);
@@ -47,7 +48,8 @@ class CIC_maincoin_coin_model extends CB_Model
 		return $result;
 	}
 
-	function get_user_list($where_in){
+	function get_user_list($where_in)
+	{
 		$this->db->where_in('cmc_idx', $where_in);
 		$result = $this->get();
 		$i = 0;
@@ -74,7 +76,8 @@ class CIC_maincoin_coin_model extends CB_Model
 		return $return_data;
 	}
 
-	function get_select($symbol){
+	function get_select($symbol)
+	{
 		$where = array(
 			'cmc_symbol' => $symbol,
 		);
@@ -99,7 +102,8 @@ class CIC_maincoin_coin_model extends CB_Model
 		return element('cmc_orderby', $result->row_array()) ? (int)element('cmc_orderby', $result->row_array()) + 1 : 1;
 	}
 
-	function get_beside_coin($cmc_orderby, $type){
+	function get_beside_coin($cmc_orderby, $type)
+	{
 		if($type == 'up'){
 			$where = array(
 				'cmc_default !=' => 2,

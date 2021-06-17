@@ -1,6 +1,8 @@
-<?php //$this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
+<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
 <h3>개인정보 취급방침</h3>
 
+<div id="Article">
+    <div class="wrap_terms">
 <div><br></div>
 <div><br></div>
 <div>(주)CIC Community는 기본적인 서비스 제공을 위한 필수정보와 맞춤 서비스 제공을 위한 선택정보로 구분하여 개인정보를 수집하고 있습니다.</div>
@@ -26,3 +28,5 @@
     <a href="https://dev.ciccommunity.com/admin/page/document/write/3" class="btn btn-danger btn-sm"
         target="_blank">내용수정</a>
 </div>
+</div> <!-- wrap_terms 끝 -->
+</div> <!-- Article 끝 -->

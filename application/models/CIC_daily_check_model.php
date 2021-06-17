@@ -32,7 +32,8 @@ class CIC_daily_check_model extends CI_Model
         }
     }
 
-    function insertDailyCheck($mem_id, $ip, $vp_point, $cp_point){
+    function insertDailyCheck($mem_id, $ip, $vp_point, $cp_point)
+    {
         $now = date('Y-m-d');
         $vp_result = true;
         $cp_result = true;

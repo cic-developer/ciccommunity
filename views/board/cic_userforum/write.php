@@ -140,10 +140,14 @@
 $( document ).ready(function() {
 	$('#element_to_pop_up').bPopup({
 		easing: 'easeOutBack', //uses jQuery easing plugin
-    speed: 450,
-    transition: 'slideDown'
+    speed: 1500,
+    transition: 'slideDown',
+		modalClose: false,
+    opacity: 0.6,
+    positionStyle: 'fixed'
 	});
 });
+
 </script>
 <script type="text/javascript">
 // 글자수 제한
