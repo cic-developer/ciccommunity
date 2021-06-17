@@ -1261,8 +1261,9 @@ class Board_post extends CB_Controller
 			//20210617 구진모 포럼 공유시 이미지 및 내용, 제목 나오게 meta data 추가
 			if($view['forum']){
 				$view['layout']['og_title'] = element('post_title', $post);
-				$view['layout']['og_image'] = element('frm_image', $view['forum']);
+				$view['layout']['og_image'] = base_url('uploads/forum_image/'.element('frm_image', $view['forum'])) ;
 				$view['layout']['og_description'] = mb_substr(Strip_tags(element('post_content', $post)), 0, 50) ;
+				$view['layout']['og_image'] = $view['layout']['og_image']?  $view['layout']['og_image'] : base_url('uploads/forum_banner/2021/06/forum-img01.jpg');
 			}
 			$this->data = $view;
 			$this->layout = element('layout_skin_file', element('layout', $view));
