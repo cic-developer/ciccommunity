@@ -1256,14 +1256,14 @@ class Board_post extends CB_Controller
 				'meta_author' => $meta_author,
 				'page_name' => $page_name,
 			);
-			if($view['forum']){
-				echo "<pre>";
-				print_r($view);
-				echo "</pre>";
-				exit;
-			}
 
 			$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+			//20210617 구진모 포럼 공유시 이미지 및 내용, 제목 나오게 meta data 추가
+			if($view['forum']){
+				$view['layout']['og_title'] = element('post_title', $post);
+				$view['layout']['og_image'] = element('frm_image', $view['forum']);
+				$view['layout']['og_description'] = mb_substr(Strip_tags(element('post_content', $post)), 0, 50) ;
+			}
 			$this->data = $view;
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			if ($show_list_from_view) {

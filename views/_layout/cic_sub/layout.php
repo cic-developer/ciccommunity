@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="<?php echo "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>">
 <?php if (element('og_title', $layout)) { ?> <meta property="og:title" content="<?php echo html_escape(element('og_title', $layout)); ?>"> <?php } ?>
-<?php if (element('og_image', $layout)) { ?> <meta property="twitter:image" content="<?php echo html_escape(element('twitter_image', $layout)); ?>"> <?php } ?>
+<?php if (element('og_image', $layout)) { ?> <meta property="twitter:image" content="<?php echo html_escape(element('og_image', $layout)); ?>"> <?php } ?>
 <?php if (element('og_image', $layout)) { ?> <meta property="og:image" content="<?php echo html_escape(element('og_image', $layout)); ?>"> <?php } ?>
 <?php if (element('og_description', $layout)) { ?> <meta property="og:description" content="<?php echo html_escape(element('og_description', $layout)); ?>"> <?php } ?>
 
