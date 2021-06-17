@@ -8,6 +8,16 @@
 <?php if (element('meta_description', $layout)) { ?><meta name="description" content="<?php echo html_escape(element('meta_description', $layout)); ?>"><?php } ?>
 <?php if (element('meta_keywords', $layout)) { ?><meta name="keywords" content="<?php echo html_escape(element('meta_keywords', $layout)); ?>"><?php } ?>
 <?php if (element('meta_author', $layout)) { ?><meta name="author" content="<?php echo html_escape(element('meta_author', $layout)); ?>"><?php } ?>
+
+<meta property="og:site_name" content="CIC COMMUNITY">
+<meta property="og:type" content="website">
+<meta property="og:url" content="<?php echo "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>">
+<?php if (element('og_title', $layout)) { ?> <meta property="og:title" content="<?php echo html_escape(element('og_title', $layout)); ?>"> <?php } ?>
+<?php if (element('og_image', $layout)) { ?> <meta property="twitter:image" content="<?php echo html_escape(element('twitter_image', $layout)); ?>"> <?php } ?>
+<?php if (element('og_image', $layout)) { ?> <meta property="og:image" content="<?php echo html_escape(element('og_image', $layout)); ?>"> <?php } ?>
+<?php if (element('og_description', $layout)) { ?> <meta property="og:description" content="<?php echo html_escape(element('og_description', $layout)); ?>"> <?php } ?>
+
+
 <?php if (element('favicon', $layout)) { ?><link rel="shortcut icon" type="image/x-icon" href="<?php echo element('favicon', $layout); ?>" /><?php } ?>
 <?php if (element('canonical', $view)) { ?><link rel="canonical" href="<?php echo element('canonical', $view); ?>" /><?php } ?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0 ,maximum-scale=1.0, minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">

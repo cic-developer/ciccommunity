@@ -93,7 +93,7 @@
                                     </p>
                                 </div>
                             </div>
-                        </a>
+                            </a>
                             <div class="abr">
                                 <div class="photo" onclick="alert('asdasdasdasd')">
                                     <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30);?>"
@@ -102,6 +102,7 @@
                                 </div>
                                 <p class="vp"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?> VP</p>
                             </div>
+                        
                     </li>
                     <?php
                         }
