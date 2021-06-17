@@ -516,6 +516,8 @@ class Board_post extends CB_Controller
 			$forum_bat_min = (double) $this->CIC_forum_config_model->item('forum_bat_min');
 			$view['forum']['forum_bat_max'] = $forum_bat_max;
 			$view['forum']['forum_bat_min'] = $forum_bat_min;
+
+			$view['forum']['is_dmin'] = $this->member->is_admin() === 'super' ? 1 : 0;
 		}
 		/**
 		 * 공지사항 게시판
