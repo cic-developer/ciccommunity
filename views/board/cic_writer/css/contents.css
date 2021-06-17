@@ -4323,6 +4323,26 @@
     }
 }
 
+.popup_menuu {
+    cursor: pointer;
+}
+
+.popupLayer {
+    position: fixed;
+    display: absolute;
+    background-color: #ffffff;
+    border: solid 1px #fccb17;
+    width: auto;
+    height: auto;
+    padding: 3px;
+}
+
+.popupLayer div {
+    position: fixed;
+    top: 5px;
+    right: 5px;
+}
+
 @media only screen and (max-width: 680px) {}
 
 @media only screen and (max-width: 480px) {}
