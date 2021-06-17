@@ -2299,14 +2299,18 @@
 
 .board-wrap.list .list.vimg.vp li a {
     /* padding-right: 320px; */
+    width: 60%;
 }
 
 .board-wrap.list .list.vimg.vp li .abr {
-    position: absolute;
-    right: 5px;
-    top: 50%;
+    right: -673px;
+    top: -23px;
     margin-top: -20px;
     height: 40px;
+    display: block;
+    position: relative;
+    padding-right: 10px;
+    padding-left: 90px;
 }
 
 .board-wrap.list .list.vimg.vp li .photo {
