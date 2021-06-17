@@ -2,6 +2,7 @@
 <h3>개인정보 취급방침</h3>
 
 <div id="Article">
+<h1 class="service1">개인정보 처리방침</h1>
     <div class="wrap_terms">
 <div><br></div>
 <div><br></div>

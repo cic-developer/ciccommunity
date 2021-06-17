@@ -257,7 +257,6 @@ class Forum extends CB_Controller
 				}
 			}
 		}
-		
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
@@ -1115,11 +1114,14 @@ class Forum extends CB_Controller
 					if (empty($cfidata['frm_close_datetime']) OR $cfidata['frm_close_datetime'] === '0000-00-00 00:00:00') {
 						$cfidata['frm_close_datetime'] = '';
 					}
-				$view['view']['postdata'] = $postdata;
-				$view['view']['frminfodata'] = $cfidata;
-				$view['view']['pevdata0'] = $pevdata[0];
-				$view['view']['pevdata1'] = $pevdata[1];
-			}
+					if (empty($cfidata['frm_change_close_datetime']) OR $cfidata['frm_change_close_datetime'] === '0000-00-00 00:00:00') {
+						$cfidata['frm_change_close_datetime'] = '';
+					}
+					$view['view']['postdata'] = $postdata;
+					$view['view']['frminfodata'] = $cfidata;
+					$view['view']['pevdata0'] = $pevdata[0];
+					$view['view']['pevdata1'] = $pevdata[1];
+				}
 			
 			/**
 			 * primary key 정보를 저장합니다
@@ -1134,6 +1136,10 @@ class Forum extends CB_Controller
 			 */
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'forum_write');
 			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+			echo "<pre>";
+			print_r($view);
+			echo "</pre>";
+			exit;
 			$this->data = $view;
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));

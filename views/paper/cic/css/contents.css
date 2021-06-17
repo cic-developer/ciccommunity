@@ -5,6 +5,12 @@ div {
     font-weight: 400;
 }
 
+.service1 {
+    position: absolute;
+    padding-top: 150px;
+    font-size: 25px;
+}
+
 #Article {
     overflow: hidden;
     position: relative;
@@ -24,7 +30,7 @@ div {
 
 .wrap_terms {
     margin: 0 auto;
-    margin-top: 170px;
+    margin-top: 200px;
     border-top: 2px solid #4d4d4d;
 }
 

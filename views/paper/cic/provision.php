@@ -1,8 +1,7 @@
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
-<h3>이용약관</h3>
 
 <div id="Article">
-    <h1>서비스 이용약관</h1>
+<h1 class="service1">서비스 이용약관</h1>
     <div class="wrap_terms">
 <div><br></div>
 <div><br></div>
@@ -12,7 +11,7 @@
 <div><br></div>
 <div id="Article">
 <strong id="useterms01_01" class="tit_subject">제 1 조 &nbsp;(목 적)</strong>
-    <div>이 약관은 주식회사 머니넷(이하 총칭하여 "회사"라 합니다)이 제공하는 인터넷 웹사이트의 서비스(도메인명 <a href="">www.moneynet.co.kr,</a> 이하 "서비스"라 합니다)의 이용과
+    <div>이 약관은 주식회사 씨아이씨커뮤니티(이하 총칭하여 "회사"라 합니다)이 제공하는 인터넷 웹사이트의 서비스(도메인명 <a href="">www.ciccommunity.co.kr,</a> 이하 "서비스"라 합니다)의 이용과
         관련하여 회원과 회사간의 권리, 의무, 책임사항 및 이용조건과 절차 등 기본적인 사항을 규정함을 목적으로 합니다.
     </div>
 <strong id="useterms01_01" class="tit_subject">제 2 조 (약관의 효력 및 변경)</strong>
