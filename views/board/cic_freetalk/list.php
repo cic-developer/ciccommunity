@@ -91,7 +91,7 @@
                                 <div class="my-info">
                                     <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30)?>"
                                             alt=""></p>
-                                    <p class="rtxt"><a href="<?php echo current_full_url(); ?>"><?php echo element('post_nickname', $result); ?></a></p>
+                                    <p class="rtxt"><a href="#popup_menu_name" id="popup_menu" onclick="return false"><?php echo element('post_nickname', $result); ?></a></p>
                                 </div>
                             </td>
                             <td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><span
@@ -173,4 +173,12 @@
         </div>
         <!-- page end // -->
     </div>
+    <div id="popup_menu_name">
+        <ul>
+                <li><a href="">검색</a</li>
+        </ul>
+    </div>
+    <script>
+        .
+    </script>
 </div>

@@ -77,7 +77,7 @@
     color:#000;
     display:none; 
     padding:20px;
-    min-width: 50%;
+    min-width: 500px;
     min-height: 180px;
 }
 .b-close{
@@ -90,8 +90,46 @@
 
 <!-- 모달 팝업 -->
 <div id="element_to_pop_up">
-    <a class="b-close">Ⅹ<a/>
-    팝업내용이 들어갑니다.
+    <div class="modal-content" >
+			<div class="modal-header">
+					<h4 class="modal-title">미션 참여 안내</h4>
+					<button type="button" class="b-close" >×</button>
+			</div>
+			<div class="modal-body">
+					<p class="start">잠깐! 포럼등록전에 확인해주세요<br></p><br>
+					<span style="font-weight: bold;">1.</span> 타인의 게시글을 무단으로 복사하여 미션에 참여하는 경우<br>
+					<br>
+					<span style="font-weight: bold;">2.</span> 성의 없는 게시글(저품질)을 게시한 경우<br>
+					<br>
+					<span style="font-weight: bold;">3.</span> 미션 내용과 관계없는 내용을 게시한 경우<br>
+					<br>
+					<span style="font-weight: bold;">4.</span> 미션 보상 수령 후 게시글을 삭제하는 경우<br>
+					<br>
+					<span style="font-weight: bold;">5.</span> 게시글 하나로 두 개의 미션에 참여하는 경우<br>
+					<br>
+					<span style="font-weight: bold;">6.</span> 똑같은 내용의 글을 서로 다른 미디어로 미션에 참여하는 경우<br>
+					<br>
+					<p class="start2">위의 내용에 해당하는 경우 <span style="font-weight:bold; color:#f40315;">어뷰징 및 부정 사용자</span>로 간주할 수 있으며,<br>
+					어뷰징 행위 및 부정 사용 사항에 대해 경고 또는 반려 처리되며 <br>
+					리워드를 지급받을 수 없습니다.<br></p>
+					<br>
+					<br>
+					경고를 받는 경우<br>
+					<br>
+					<p class="start3">1회 경고 패널티 적용<br>
+					2회 경고 영구정지<br></p>
+					<br>
+					의 제재가 이루어집니다. 감사합니다.
+			</div>
+			<div class="modal-footer">
+					<div class="btn-group">
+							<label>
+									<input type="checkbox" class="btn btn-info set_state" id="infoModalBtn">
+									위의 내용에 동의합니다.
+							</label>
+					</div>
+			</div>
+	</div>
 </div>
 
 <!-- bpopup 스크립트 불러오기-->
