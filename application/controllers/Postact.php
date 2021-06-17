@@ -2777,14 +2777,14 @@ class Postact extends CB_Controller
 				exit(json_encode($result));
 			}
 
-			// 배팀 참여 마감시간 확인
-			if(strtotime($checktime) - strtotime($post['frm_bat_close_datetime']) > 0){
-				$result = array(
-					'state' => '0',
-					'message' => '참여 마감시간이 지났습니다',
-				);
-				exit(json_encode($result));
-			}
+			// // 배팀 참여 마감시간 확인
+			// if(strtotime($checktime) - strtotime($post['frm_bat_close_datetime']) > 0){
+			// 	$result = array(
+			// 		'state' => '0',
+			// 		'message' => '참여 마감시간이 지났습니다',
+			// 	);
+			// 	exit(json_encode($result));
+			// }
 
 			// 의견 변경 마감시간 확인
 			if(strtotime($checktime) - strtotime($post['frm_bat_close_datetime']) > 0){

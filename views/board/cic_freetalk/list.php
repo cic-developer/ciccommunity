@@ -146,9 +146,9 @@
             <?php if (element('write_url', element('list', $view))) { ?>
             <div class="lower r">
                 <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn">글쓰기</a>
-            </div>`
+            </div>
             <?php } ?>
-            <!-- s: paging-wrap -->`
+            <!-- s: paging-wrap -->
             <div class="paging-wrap">
                 <?php echo element('paging', element('list', $view)); ?>
             </div>
@@ -174,7 +174,7 @@
         <!-- page end // -->
     </div>
     <div class="popupLayer" style="display:none;">
-	<a href="http://www.naver.com/"> 작성 글 보기</a>
+	<a href="" class="layer_link"> 작성 글 보기</a>
     </div>
     <script>
 
@@ -196,8 +196,7 @@
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
             
-            $('.popupLayer').text($(this).text());
-
+            $('.layer_link').prop('href', 'https://dev.ciccommunity.com/board/freetalk?sfield=post_nickname&skeyword='+ $(this).text() +'&search_submit=');
             $('.popupLayer').css({
                 "top": divTop,
                 "left": divLeft,
