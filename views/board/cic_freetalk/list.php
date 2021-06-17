@@ -196,7 +196,8 @@
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
             
-            $('.layer_link').prop('href', 'https://dev.ciccommunity.com/board/freetalk?sfield=post_nickname&skeyword='+ $(this).text() +'&search_submit=');
+            // $('.layer_link').prop('href', 'https://dev.ciccommunity.com/board/freetalk?sfield=post_nickname&skeyword='+ $(this).text() +'&search_submit=');
+            $('.layer_link').prop('href', `<?php echo base_url('board/freetalk').'?sfield=post_nickname&skeyword='?>${$(this).text()}`);
             $('.popupLayer').css({
                 "top": divTop,
                 "left": divLeft,
