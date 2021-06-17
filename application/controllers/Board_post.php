@@ -1256,6 +1256,13 @@ class Board_post extends CB_Controller
 				'meta_author' => $meta_author,
 				'page_name' => $page_name,
 			);
+			if($view['forum']){
+				echo "<pre>";
+				print_r($view);
+				echo "</pre>";
+				exit;
+			}
+
 			$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
 			$this->data = $view;
 			$this->layout = element('layout_skin_file', element('layout', $view));
