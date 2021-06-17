@@ -77,7 +77,7 @@
     color:#000;
     display:none; 
     padding:20px;
-    min-width:400px;
+    min-width: 50%;
     min-height: 180px;
 }
 .b-close{
@@ -87,11 +87,10 @@
     top:5px;
 }
 </style>
-<!-- Button that triggers the popup -->
-<button id="my-button">이 버튼을 누르면 팝업이 뜹니다.</button>
-<!-- Element to pop up -->
+
+<!-- 모달 팝업 -->
 <div id="element_to_pop_up">
-    <a class="b-close">닫기<a/>
+    <a class="b-close">Ⅹ<a/>
     팝업내용이 들어갑니다.
 </div>
 
@@ -99,12 +98,12 @@
 <script src="jquery.bpopup-0.1.1.min.js"></script>
 
 <script>
-$(document).ready( function() {
-$('element_to_pop_up').bPopup(
-	easing: 'easeOutBack', //uses jQuery easing plugin
-  speed: 450,
-  transition: 'slideDown'
-	);
+$( document ).ready(function() {
+	$('#element_to_pop_up').bPopup({
+		easing: 'easeOutBack', //uses jQuery easing plugin
+    speed: 450,
+    transition: 'slideDown'
+	});
 });
 </script>
 <script type="text/javascript">
