@@ -4330,10 +4330,9 @@
 
 .popupLayer {
     position: fixed;
-    display: none;
+    display: absolute;
     background-color: #ffffff;
     border: solid 1px #fccb17;
-    ;
     width: auto;
     height: auto;
     padding: 3px;

@@ -177,15 +177,14 @@
 	작성 글 보기
     </div>
     <script>
-        $(document).mouseup(function (e){
-            var container = $('popupLayer');
-            if( container.has(e.target).length === 0){
-                container.css('display','none');
-            }
-        });
+        // $(document).mouseup(function (e){
+        //     if( $('popupLayer').has(e.target).length === 0){
+        //         $('popupLayer').css({
+        //             "display": none);
+        //     }
+        // });
 
 $(function(){
-
 	/* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
 	$('.popup_menuu').click(function(e)
 	{
