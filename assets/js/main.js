@@ -102,11 +102,15 @@ $(function() {
         .find(".next")
         .click(function() {
             $(".forum-slide").trigger("next.owl.carousel");
+            $(".forum-slide").trigger("stop.owl.autoplay");
+            $(".forum-slide").trigger("play.owl.autoplay");
         });
     $(".msec-03")
         .find(".prev")
         .click(function() {
             $(".forum-slide").trigger("prev.owl.carousel", [600]);
+            $(".forum-slide").trigger("stop.owl.autoplay");
+            $(".forum-slide").trigger("play.owl.autoplay");
         });
 });
 
