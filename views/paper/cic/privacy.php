@@ -1,3 +1,5 @@
+<?php //$this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
+
 <h3>개인정보 취급방침</h3>
 
 <div><br /></div>

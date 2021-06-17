@@ -1,3 +1,4 @@
+<?php //$this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
         <!-- 본문 시작 -->
         <h3>이용약관</h3>
 

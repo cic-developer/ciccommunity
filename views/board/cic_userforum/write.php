@@ -70,6 +70,43 @@
 </div>
 
 
+<style>
+#element_to_pop_up { 
+    background-color:#fff;
+    border-radius:15px;
+    color:#000;
+    display:none; 
+    padding:20px;
+    min-width:400px;
+    min-height: 180px;
+}
+.b-close{
+    cursor:pointer;
+    position:absolute;
+    right:10px;
+    top:5px;
+}
+</style>
+<!-- Button that triggers the popup -->
+<button id="my-button">이 버튼을 누르면 팝업이 뜹니다.</button>
+<!-- Element to pop up -->
+<div id="element_to_pop_up">
+    <a class="b-close">닫기<a/>
+    팝업내용이 들어갑니다.
+</div>
+
+<!-- bpopup 스크립트 불러오기-->
+<script src="jquery.bpopup-0.1.1.min.js"></script>
+
+<script>
+$(document).ready( function() {
+$('element_to_pop_up').bPopup(
+	easing: 'easeOutBack', //uses jQuery easing plugin
+  speed: 450,
+  transition: 'slideDown'
+	);
+});
+</script>
 <script type="text/javascript">
 // 글자수 제한
 var char_min = parseInt(<?php echo (int) element('post_min_length', element('board', $view)); ?>); // 최소
