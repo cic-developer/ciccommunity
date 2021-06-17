@@ -116,7 +116,7 @@
                                 <div class="my-info">
                                     <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 28, 28); ?>"
                                             alt="<?php echo element('mlc_title', $result); ?>"></p>
-                                    <p class="rtxt"><a href=""><?php echo html_escape(element('post_nickname', $result)); ?></a></p>
+                                    <p class="rtxt"><a class="popup_menuu"><?php echo html_escape(element('post_nickname', $result)); ?></a></p>
                                 </div>
                             </td>
                             <td class="l file">
@@ -195,7 +195,9 @@
             // 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
-            $('.popupLayer').text = 'ㅋㅋ';
+            
+            $('.popupLayer').text($(this).text());
+
             $('.popupLayer').css({
                 "top": divTop,
                 "left": divLeft,

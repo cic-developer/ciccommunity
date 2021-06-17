@@ -2768,6 +2768,7 @@ class Postact extends CB_Controller
 			// 게시글 확인
 			$this->load->model('CIC_forum_model');
 			$post = $this->CIC_forum_model->get_one($post_id);
+
 			if(!$post){
 				$result = array(
 					'state' => '0',
@@ -2785,6 +2786,15 @@ class Postact extends CB_Controller
 				exit(json_encode($result));
 			}
 
+			// 의견 변경 마감시간 확인
+			if(strtotime($checktime) - strtotime($post['frm_bat_close_datetime']) > 0){
+				$result = array(
+					'state' => '0',
+					'message' => '의견 변경 마감시간이 지났습니다',
+				);
+				exit(json_encode($result));
+			}
+			
 			// 포럼 마감시간 확인
 			if(strtotime($checktime) - strtotime($post['frm_close_datetime']) > 0){
 				$result = array(
