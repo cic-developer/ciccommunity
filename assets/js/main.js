@@ -52,13 +52,15 @@ $(function() {
         .find(".next")
         .click(function() {
             $(".visual-slide").trigger("next.owl.carousel");
-            $(".visual-slide").trigger("stop.owl.carousel");
-            $(".visual-slide").trigger("play.owl.carousel");
+            $(".visual-slide").trigger("stop.owl.autoplay");
+            $(".visual-slide").trigger("play.owl.autoplay");
         });
     $(".vis")
         .find(".prev")
         .click(function() {
-            $(".visual-slide").trigger("prev.owl.carousel", [600]);
+            $(".visual-slide").trigger("prev.owl.carousel");
+            $(".visual-slide").trigger("stop.owl.autoplay");
+            $(".visual-slide").trigger("play.owl.autoplay");
         });
 
     // forum-slide

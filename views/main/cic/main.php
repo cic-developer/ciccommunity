@@ -4,7 +4,7 @@
         <!-- s : msec-visual -->
         <div class="msec-visual">
             <div class="bg">
-                <p class="desktop"><img src="<?php echo base_url('assets/images/visual-bg.jpg') ?>" alt="" /></p>
+                <p class="desktop"><img src="<?php echo base_url('assets/images/main-banner.png') ?>" alt="" /></p>
                 <p class="mobile"><img src="<?php echo base_url('assets/images/visual-bgm.jpg') ?>" alt="" /></p>
             </div>
             <div class="cont">

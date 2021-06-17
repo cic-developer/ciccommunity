@@ -147,9 +147,17 @@
 				</div>
 			<?php } ?>
 			<div style="position:absolute; right:0; top:-30%;">
-			<?php if(element('modify_url', $view) && element('type', $forum) == 1){ ?>
+			
+
+			<?php if(element('is_admin', $forum) == 1){
+					if(element('modify_url', $view) && element('type', $forum) == 1){ 
+			?>
 				<a href="<?php echo element('modify_url', $view); ?>" class="bw-btn"><span>수정</span></a>
-			<?php } ?>
+			<?php 
+					} 
+				}
+			?>
+
 			<?php if ( ! element('post_del', element('post', $view)) && element('use_blame', element('board', $view)) && ( ! element('blame_blind_count', element('board', $view)) OR element('post_blame', element('post', $view)) < element('blame_blind_count', element('board', $view)))) { ?>
 				<button style="position:relative; " type="button" class="bw-btn btn btn-black cmmt-singo" id="btn-blame" onClick="post_blame('<?php echo element('post_id', element('post', $view)); ?>', 'post-blame');">신고 <span class="post-blame"><?php echo element('post_blame', element('post', $view)) ? '+' . number_format(element('post_blame', element('post', $view))) : ''; ?></span></button>
 			<?php } ?>

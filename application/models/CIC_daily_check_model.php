@@ -2,11 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * CB_Model class
+ * CIC_daily_check_model class
  *
- * Copyright (c) CIBoard <www.ciboard.co.kr>
+ * Copyright (c) RsTeam <www.rs-team.com>
  *
- * @author CIBoard (develop@ciboard.co.kr)
+ * @author RsTeam (developer@rs-team.com)
  */
 
 class CIC_daily_check_model extends CI_Model
