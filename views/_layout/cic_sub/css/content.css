@@ -7365,7 +7365,7 @@ label input[type='checkbox'] {
 }
 
 .poll-wrap .cont ul {
-    background: url(/assets/images/versus.png) no-repeat center center;
+    background: url(/assets/images/forum-vs02.png) no-repeat center center;
     background-size: auto;
     margin-top: 40px;
 }
@@ -7597,7 +7597,7 @@ label input[type='checkbox'] {
     }
     .poll-wrap .cont ul {
         margin-top: 20px;
-        background-image: url(/assets/images/versus.png);
+        background-image: url(/assets/images/forum-vs02.png);
         background-position: center;
         background-size: 30% auto;
     }

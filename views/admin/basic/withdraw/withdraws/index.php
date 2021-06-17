@@ -51,7 +51,14 @@
                             <td><?php echo number_format(element('wid_idx', $result)); ?></td>
                             <td><?php echo html_escape(element('wid_userid', $result)); ?></td>
                             <td><?php echo html_escape(element('wid_userip', $result)); ?></td>
-                            <td><?php echo element('display_name', $result); ?></td>
+                            <td>
+                                <?php if(html_escape(element('is_member', $result))) { 
+                                            echo element('display_name', $result); 
+                                ?>
+                                <?php } else { 
+                                    echo element('wid_nickname', $result); 
+                                } ?>
+                            </td>
                             <td><?php echo html_escape(element('wid_wallet_address', $result)); ?></td>
                             <td><?php echo rs_number_format(element('wid_req_money', $result), 2, 0); ?></td>
                             <td><?php echo html_escape(element('wid_req_datetime', $result)); ?></td>
@@ -87,12 +94,14 @@
                                 } else{
                                 ?>
                                     <div class="btn-group btn-group-sm" role="group">
+                                    <?php if(html_escape(element('is_member', $result))) { ?>
                                         <button type="button" class="btn btn-success modal_open1" 
                                             data-idx="<?php echo number_format(element('wid_idx', $result)); ?>" 
                                                 data-cal-money="<?php echo element('wid_cal_money', $result); ?>"
                                         >
                                             승인
                                         </button>
+                                    <?php } ?>
                                         <button type="button" class="btn btn-danger modal_open2" data-toggle="modal" 
                                             data-idx="<?php echo number_format(element('wid_idx', $result)); ?>" 
                                         >

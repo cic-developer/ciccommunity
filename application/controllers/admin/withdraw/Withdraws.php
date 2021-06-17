@@ -130,15 +130,15 @@ class Withdraws extends CB_Controller
 				);
 				
 				$result['list'][$key]['num'] = $list_num--;
-				print_r($val);
-				print_r('<br>');
-				print_r('<Hr>');
-				print_r('<br>');
+
+				$member_info = $this->Member_model->get_one($val['wid_mem_idx']);
+				if ( ! $member_info) {
+					$result['list'][$key]['is_member'] = false;
+				}else{
+					$result['list'][$key]['is_member'] = true;
+				}
 			}
 		}
-
-	
-		// exit;
 
 		$view['view']['data'] = $result;
 

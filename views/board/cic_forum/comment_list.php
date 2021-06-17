@@ -122,8 +122,6 @@
 
 
 <script>
-	$(document).ready(function(){
-		// $('.show .more').removeEventListener();
 		$('.more').on('click', function(){
 			let parent = $(this).parent('.vtxt');
 			let _index = parent.attr('comment-data');
@@ -150,7 +148,6 @@
 				}
 			});
 		})
-	});
 </script>
 
 <script>
