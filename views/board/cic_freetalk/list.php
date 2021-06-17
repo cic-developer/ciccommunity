@@ -177,9 +177,12 @@
 	작성 글 보기
     </div>
     <script>
-//         function closeLayer( obj ) {
-// 	$(obj).parent().parent().hide();
-// }
+        $(document).mouseup(function (e){
+            var container = $('popupLayer');
+            if( container.has(e.target).length === 0){
+                container.css('display','none');
+            }
+        });
 
 $(function(){
 
@@ -193,8 +196,8 @@ $(function(){
 		var oHeight = $('.popupLayer').height();
 
 		// 레이어가 나타날 위치를 셋팅한다.
-		var divLeft = e.clientX;
-		var divTop = e.clientY;
+		var divLeft = e.clientX + 10;
+		var divTop = e.clientY + 5;
 
 		// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
 		if( divLeft < 0 ) divLeft = 0;
@@ -203,30 +206,9 @@ $(function(){
 		$('.popupLayer').css({
 			"top": divTop,
 			"left": divLeft,
-			"position": "absolute"
 		}).show();
 	});
 
 });
     </script>
-    <style>
-    .popup_menuu {
-	cursor: pointer;
-}
-
-.popupLayer {
-	position: absolute;
-	display: none;
-	background-color: #ffffff;
-	border: solid 1px #fccb17;;
-    width: auto;
-    height: auto;
-    padding: 3px;
-}
-.popupLayer div {
-	position: absolute;
-	top: 5px;
-	right: 5px
-}
-    </style>
 </div>

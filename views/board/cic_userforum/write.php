@@ -1,7 +1,8 @@
 
-
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/hotfix.css'); ?>
 
+<!-- bpopup 스크립트 불러오기-->
+<script src="jquery.bpopup-0.1.1.min.js"></script>
 <div id="container-wrap">
 	<div id="contents" class="div-cont">
 	<?php
@@ -69,43 +70,40 @@
 	</div>
 </div>
 
-
+<!-- 모달 css -->
 <style>
-#element_to_pop_up { 
-    background-color:#fff;
-    border-radius:15px;
-    color:#000;
-    display:none; 
-    padding:20px;
-    min-width: 500px;
-    min-height: 180px;
+#element_to_pop_up {
+    background-color: #fff;
+    border-radius: 15px;
+    color: #000;
+    display: none;
+    padding: 20px;
 }
-.b-close{
-    cursor:pointer;
-    position:absolute;
-    right:15px;
-    top:10px;
+.b-close {
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
 }
-.modal-header{
-	height : 35px;
-	border-bottom : 1px solid rgba(0,0,0,0.2);
+.modal-header {
+    height: 35px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-.modal-body{
-	margin-top : 20px;
+.modal-body {
+    margin-top: 20px;
 }
-.header_text{
-	font-size : 25px;
-	font-weight : bold;
+.header_text {
+    font-size: 25px;
+    font-weight: bold;
 }
-.body-text__header{
-	font-size : 18px;
-	font-weight : bold;
+.body-text__header {
+    font-size: 18px;
+    font-weight: bold;
 }
-.body-text{
-	font-size:15px;
+.body-text {
+    font-size: 15px;
 }
 </style>
-
 <!-- 모달 팝업 -->
 <div id="element_to_pop_up">
     <div class="modal-content" >
@@ -135,8 +133,8 @@
 	</div>
 </div>
 
-<!-- bpopup 스크립트 불러오기-->
-<script src="jquery.bpopup-0.1.1.min.js"></script>
+
+
 
 <script>
 $( document ).ready(function() {
