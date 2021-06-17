@@ -19,9 +19,6 @@
 					if (element('frm_image', element('data', $view))) {
 					?>
 						<img src="<?php echo forum_image_url(element('frm_image', element('data', $view)), '', 150); ?>" alt="포럼 이미지" title="포럼 이미지" />
-						<!-- <label for="ban_image_del">
-							<input type="checkbox" name="ban_image_del" id="ban_image_del" value="1" <?php echo set_checkbox('ban_image_del', '1'); ?> /> 삭제
-						</label> -->
 					<?php
 					}
 					?>
@@ -33,8 +30,8 @@
 				<label class="col-sm-2 control-label">배팅 변경 마감일</label>
 				<div class="col-sm-10 form-inline" style="height:130px;">
 					<div class="form-group">
-						<div class='input-group date' id='datetimepicker11'>
-							<input type='text' class="form-control" name="frm_change_close_datetime" value="<?php echo set_value('frm_change_close_datetime', element('frm_change_close_datetime', element('frminfodata', $view))); ?>"/>
+						<div class='input-group date' id='datetimepicker12'>
+							<input type='text' class="form-control" name="frm_change_close_datetime" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('frminfodata', $view))); ?>"/>
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
@@ -93,35 +90,12 @@
 						<input type="text" class="form-control" name="pev_value_1" value="<?php echo set_value('pev_value_1', element('pev_value', element('pevdata1', $view))); ?>" />
 					</div>
 				</div>
-						<!-- <div class="form-group">
-							<label class="col-sm-2 control-label">투표 A</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" name="pev_value_0">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 control-label">투표 B</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" name="pev_value_1">
-							</div>
-						</div> -->
+	
 				<script type="text/javascript">
 				var frmbatclosedatetime = "<?php echo set_value('frm_bat_lose_datetime', element('frm_bat_close_datetime', element('frminfodata', $view))); ?>";
 				var frmclosedatetime = "<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('frminfodata', $view))); ?>";
-					// $(function () {
-					// 	$('#datetimepicker10').datetimepicker({
-					// 		format : 'YYYY-MM-DD HH:mm:ss',
-					// 		minDate : new Date(),
-					// 		defaultDate : frmbatclosedatetime ? frmbatclosedatetime : new Date(),
-							
-					// 	});
-					// 	$('#datetimepicker11').datetimepicker({
-					// 		format : 'YYYY-MM-DD HH:mm:ss',
-					// 		minDAte : new Date(),3
-					// 		defaultDate : frmclosedatetime ? frmclosedatetime : new Date(),
-							
-					// 	});
-					// });
+				var frmchangeclosedatetime = "<?php echo set_value('frm_change_close_datetime', element('frm_change_close_datetime', element('frminfodata', $view))); ?>";
+
 					$(document).ready(function(){
 						$('#datetimepicker10').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
@@ -129,48 +103,16 @@
 						});
 						$('#datetimepicker11').datetimepicker({
 							format : 'YYYY-MM-DD HH:mm:ss',
-							defaultDate : frmbatclosedatetime ? frmbatclosedatetime : new Date()
+							defaultDate : frmclosedatetime ? frmclosedatetime : new Date()
+						});
+						$('#datetimepicker12').datetimepicker({
+							format : 'YYYY-MM-DD HH:mm:ss',
+							defaultDate : frmchangeclosedatetime ? frmchangeclosedatetime : new Date()
 						});
 					})
 				</script>
 			</div>
 			
-			<!-- <div class="form-group">
-				<label class="col-sm-2 control-label">포럼 마감일</label>
-				<div class="col-sm-10 form-inline" style="height:130px;">
-					<div class="form-group">
-						<div class='input-group date' id='datetimepicker11'>
-							<input type='text' class="form-control" name="frm_close_datetime" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('data', $view))); ?>"/>
-							<span class="input-group-addon">
-							<span class="glyphicon glyphicon-calendar">
-							</span>
-							</span>
-						</div>
-							<p class="help-block">포럼 마감일은 배팅 마감일 이후로 설정해야합니다.</p>
-					</div>
-				</div>
-				<script type="text/javascript">
-					$(function () {
-						$('#datetimepicker11').datetimepicker({
-							daysOfWeekDisabled: [0, 6]
-						});
-					});
-				</script>
-			</div> -->
-			<!-- <div class="form-group">
-				<label class="col-sm-2 control-label">배팅 마감일</label>
-				<div class="col-sm-10 form-inline">
-					<input type="text" class="form-control datepicker" name="frm_bat_close_datetime" value="<?php echo set_value('frm_bat_close_datetime', element('frm_bat_close_datetime', element('data', $view))); ?>" />
-					<p class="help-block">배팅 마감일은 포럼 마감일 이전으로 설정해야합니다.</p>
-				</div>
-			</div> -->
-			<!-- <div class="form-group">
-				<label class="col-sm-2 control-label">포럼 마감일</label>
-				<div class="col-sm-10 form-inline" id="datetimepicker1">
-					<input type="text" class="form-control" name="frm_close_datetime" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('data', $view))); ?>" />
-					<p class="help-block">포럼 마감일은 배팅 마감일 이후로 설정해야합니다.</p>
-				</div>
-			</div>  -->
 			<div class="btn-group pull-right" role="group" aria-label="...">
 				<button type="button" class="btn btn-default btn-sm btn-history-back" >취소하기</button>
 				<button type="submit" class="btn btn-success btn-sm">저장하기</button>
@@ -186,6 +128,7 @@ $(function() {
 		rules: {
 			frm_bat_close_datetime: {'required' : true},
 			frm_close_datetime: {'required' : true},
+			frm_change_close_datetime: {'required' : true},
 			post_title: {'required' : true},
 			post_content : {'required_smarteditor' : true },
 		}

@@ -25,9 +25,9 @@
 <div>- 은행계좌 정보, 결제기록 등</div>
 <div><br></div>
 <div><br></div>
-<div class="pull-right">
+<!-- <div class="pull-right">
     <a href="https://dev.ciccommunity.com/admin/page/document/write/3" class="btn btn-danger btn-sm"
         target="_blank">내용수정</a>
-</div>
+</div> -->
 </div> <!-- wrap_terms 끝 -->
 </div> <!-- Article 끝 -->

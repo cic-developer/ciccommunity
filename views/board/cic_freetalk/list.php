@@ -173,19 +173,41 @@
         </div>
         <!-- page end // -->
     </div>
-    <div class="popupLayer">
-        작성 글 보기
+    <div class="popupLayer" style="display:none;">
+	<a href="http://www.naver.com/"> 작성 글 보기</a>
     </div>
-
     <script>
-    $('.popup_menuu').click(function(e){
-        var divTop = e.clientY -20;
-        var divLeft = e.clientX -40;
-        $('.popupLayer').css({
-            "top": divTop,
-            "left" : divLet,
-            "position" : "absolute"
-        }).show();
-    })
+
+    $(function(){
+        /* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
+        $('.popup_menuu').click(function(e)
+        {
+            var sWidth = window.innerWidth;
+            var sHeight = window.innerHeight;
+
+            var oWidth = $('.popupLayer').width();
+            var oHeight = $('.popupLayer').height();
+
+            // 레이어가 나타날 위치를 셋팅한다.
+            var divLeft = e.clientX + 10;
+            var divTop = e.clientY + 5;
+
+            // 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+            if( divLeft < 0 ) divLeft = 0;
+            if( divTop < 0 ) divTop = 0;
+            $('.popupLayer').text = 'ㅋㅋ';
+            $('.popupLayer').css({
+                "top": divTop,
+                "left": divLeft,
+                "display" : "block"
+            }).show();
+        });
+    });
+    $(document).mouseup(function (e){
+        var container = $('.popupLayer');
+        if( container.has(e.target).length === 0){
+        container.css('display','none');
+        }
+    });
     </script>
 </div>

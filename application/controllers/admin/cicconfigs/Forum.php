@@ -1035,7 +1035,7 @@ class Forum extends CB_Controller
 	}
 	
 	// 포럼 폼벨리데이션
-		public function forum_write($post_id = 0)
+	public function forum_write($post_id = 0)
 	{
 		
 		// 이벤트 라이브러리를 로딩합니다
@@ -1136,10 +1136,6 @@ class Forum extends CB_Controller
 			 */
 			$layoutconfig = array('layout' => 'layout', 'skin' => 'forum_write');
 			$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-			echo "<pre>";
-			print_r($view);
-			echo "</pre>";
-			exit;
 			$this->data = $view;
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
