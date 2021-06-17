@@ -116,7 +116,7 @@
                                 <div class="my-info">
                                     <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 28, 28); ?>"
                                             alt="<?php echo element('mlc_title', $result); ?>"></p>
-                                    <p class="rtxt"><?php echo html_escape(element('post_nickname', $result)); ?></p>
+                                    <p class="rtxt"><a href=""><?php echo html_escape(element('post_nickname', $result)); ?></a></p>
                                 </div>
                             </td>
                             <td class="l file">

@@ -130,8 +130,15 @@ class Withdraws extends CB_Controller
 				);
 				
 				$result['list'][$key]['num'] = $list_num--;
+				print_r($val);
+				print_r('<br>');
+				print_r('<Hr>');
+				print_r('<br>');
 			}
 		}
+
+	
+		// exit;
 
 		$view['view']['data'] = $result;
 
