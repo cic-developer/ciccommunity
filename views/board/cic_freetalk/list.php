@@ -91,7 +91,7 @@
                                 <div class="my-info">
                                     <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30)?>"
                                             alt=""></p>
-                                    <p class="rtxt"><a href="#popup_menu_name" id="popup_menu" onclick="return false"><?php echo element('post_nickname', $result); ?></a></p>
+                                    <p class="rtxt"><a class="popup_menuu"><?php echo element('post_nickname', $result); ?></a></p>
                                 </div>
                             </td>
                             <td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><span
@@ -173,12 +173,60 @@
         </div>
         <!-- page end // -->
     </div>
-    <div id="popup_menu_name">
-        <ul>
-                <li><a href="">검색</a</li>
-        </ul>
+    <div class="popupLayer">
+	작성 글 보기
     </div>
     <script>
-        .
+//         function closeLayer( obj ) {
+// 	$(obj).parent().parent().hide();
+// }
+
+$(function(){
+
+	/* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
+	$('.popup_menuu').click(function(e)
+	{
+		var sWidth = window.innerWidth;
+		var sHeight = window.innerHeight;
+
+		var oWidth = $('.popupLayer').width();
+		var oHeight = $('.popupLayer').height();
+
+		// 레이어가 나타날 위치를 셋팅한다.
+		var divLeft = e.clientX;
+		var divTop = e.clientY;
+
+		// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+		if( divLeft < 0 ) divLeft = 0;
+		if( divTop < 0 ) divTop = 0;
+
+		$('.popupLayer').css({
+			"top": divTop,
+			"left": divLeft,
+			"position": "absolute"
+		}).show();
+	});
+
+});
     </script>
+    <style>
+    .popup_menuu {
+	cursor: pointer;
+}
+
+.popupLayer {
+	position: absolute;
+	display: none;
+	background-color: #ffffff;
+	border: solid 1px #fccb17;;
+    width: auto;
+    height: auto;
+    padding: 3px;
+}
+.popupLayer div {
+	position: absolute;
+	top: 5px;
+	right: 5px
+}
+    </style>
 </div>

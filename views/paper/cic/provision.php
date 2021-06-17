@@ -1,13 +1,16 @@
-<?php //$this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
+<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
 <h3>이용약관</h3>
 
+<div id="Article">
+    <div class="wrap_terms">
 <div><br></div>
 <div><br></div>
-<div>제 1 장 &nbsp; 총 칙</div>
+<div class="tit_main">제 1 장 &nbsp; 총 칙</div>
 <div><br></div>
 <div>&nbsp;</div>
 <div><br></div>
-<div>제 1 조 &nbsp;(목 적)</div>
+
+<strong id="useterms01_01" class="tit_subject">제 1 조 &nbsp;(목 적)</strong>
 <div>이 약관은 주식회사 머니넷(이하 총칭하여 "회사"라 합니다)이 제공하는 인터넷 웹사이트의 서비스(도메인명 <a href="">www.moneynet.co.kr,</a> 이하 "서비스"라 합니다)의 이용과
     관련하여 회원과 회사간의 권리, 의무, 책임사항 및 이용조건과 절차 등 기본적인 사항을 규정함을 목적으로 합니다.</div>
 <div>제 2 조 (약관의 효력 및 변경)</div>
@@ -30,7 +33,7 @@
 <div>7. 아이핀(i-pin) : 13자리 난수로 이루어진 인터넷상의 주민등록번호 대체 수단</div>
 <div>② 제1항의 용어를 제외한 용어의 정의는 거래 관행 및 관련 법령을 따릅니다.</div>
 <div><br></div>
-<div>제 2 장 &nbsp; 이용계약의 체결</div>
+<div class="tit_main">제 2 장 &nbsp; 이용계약의 체결</div>
 <div>&nbsp;</div>
 <div>제 5 조 (이용계약의 성립)</div>
 <div>이용계약은 서비스를 이용하고자 하는 자의 이용신청에 대한 회사의 이용승낙으로 성립합니다.</div>
@@ -189,4 +192,6 @@
 <div class="pull-right">
     <a href="https://dev.ciccommunity.com/admin/page/document/write/2" class="btn btn-danger btn-sm"
         target="_blank">내용수정</a>
-</div>
+    </div>
+    </div> <!-- wrap_terms 끝 -->
+</div>  <!--Article  끝 -->
