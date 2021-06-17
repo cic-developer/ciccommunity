@@ -1085,6 +1085,11 @@ class Forum extends CB_Controller
 				'rules' => 'trim|required|callback__minfrmclosetime',
 			),
 			array(
+				'field' => 'frm_bat_close_datetime',
+				'label' => '배팅 변경 마감일',
+				'rules' => 'trim|required|callback__minfrmclosetime',
+			),
+			array(
 				'field' => 'post_title',
 				'label' => '포럼 제목',
 				'rules' => 'trim|required',
@@ -1195,6 +1200,7 @@ class Forum extends CB_Controller
 			//set value
 			$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
 			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
+			$frm_change_close_datetime = $this->input->post('frm_change_close_datetime') ? $this->input->post('frm_change_close_datetime') : null;
 			$post_title = $this->input->post('post_title', null, '');
 			$post_content = $this->input->post('post_content', null, '');
 			$pev_value_0 = $this->input->post('pev_value_0', null, '');
@@ -1205,6 +1211,7 @@ class Forum extends CB_Controller
 			$updatedata = array(				
 				'frm_bat_close_datetime' => $frm_bat_close_datetime,
 				'frm_close_datetime' => $frm_close_datetime,
+				'frm_change_close_datetime' => $frm_change_close_datetime,
 			);
 			$_updatedata = array(
 				'post_title' => $post_title,

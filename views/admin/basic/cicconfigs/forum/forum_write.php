@@ -30,6 +30,18 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-sm-2 control-label">배팅 변경 마감일</label>
+				<div class="col-sm-10 form-inline" style="height:130px;">
+					<div class="form-group">
+						<div class='input-group date' id='datetimepicker11'>
+							<input type='text' class="form-control" name="frm_change_close_datetime" value="<?php echo set_value('frm_change_close_datetime', element('frm_change_close_datetime', element('frminfodata', $view))); ?>"/>
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+						<p class="help-block"> 포럼 마감일은 배팅 마감일 이후로 설정해야합니다.</p>
+					</div>
+				</div>
 				<label class="col-sm-2 control-label">배팅 마감일</label>
 				<div class="col-sm-10 form-inline" style="height:130px;">
 					<div class="form-group">

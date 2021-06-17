@@ -2,6 +2,7 @@
 <h3>이용약관</h3>
 
 <div id="Article">
+    <h1>서비스 이용약관</h1>
     <div class="wrap_terms">
 <div><br></div>
 <div><br></div>
@@ -194,9 +195,9 @@
 <div>① 이 약관은 2016년 9월 1일부터 적용됩니다.</div>
 <div><br></div>
 <div><br></div>
-<div class="pull-right">
+<!-- <div class="pull-right">
     <a href="https://dev.ciccommunity.com/admin/page/document/write/2" class="btn btn-danger btn-sm"
-        target="_blank">내용수정</a>
+        target="_blank">내용수정</a> -->
     </div>
     </div> <!-- wrap_terms 끝 -->
 </div>  <!--Article  끝 -->
