@@ -240,7 +240,7 @@
 				if(data.error !== undefined){
 					alert(data.error);
 				} else {
-					alert('성공적으로 처리되었습니다.');
+					// alert('성공적으로 처리되었습니다.');
 					location.reload();
 				}
 			},

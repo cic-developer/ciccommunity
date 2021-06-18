@@ -97,7 +97,7 @@
                         </a>
                             <div class="abr">
                                 <div class="photo">
-                                    <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30);?>"
+                                    <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 140, 140);?>"
                                             alt="<?php echo element('mlc_title', $result); ?>"></p>
                                     <p class="rtxt popup_menuu"><?php echo element('post_nickname', $result); ?></p>
                                 </div>
