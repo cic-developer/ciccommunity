@@ -266,6 +266,9 @@
         container.css('display','none');
         }
     });
+    document.addEventListener('scroll', function() {
+        console.log('zz');
+    });
 </script>
 <style>
 
