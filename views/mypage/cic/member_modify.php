@@ -718,6 +718,10 @@
 		}
 		
 		password1 = $("#new_password").val();
+		if(password1.length < 7) {
+			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호를 7자리 이상 입력해주세요.</p>'
+			$('.password-modify-content').append(html);
+		}
 		if(password1 != currentVal ){ // && currentVal.length > 0){
 			$('.agree-password').remove();
 			html = '<p class="agree-password cred" class="rtxt mg10t">비밀번호가 일치하지 않습니다.</p>';

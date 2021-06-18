@@ -1326,7 +1326,14 @@ body {
     top: 135px;
 }
 
-.f-sns ul {}
+.f-sns ul {
+    width: 207px;
+    position: absolute;
+    left: 2px;
+    top: 35px;
+    text-align: left;
+    outline: 1px dotted red;
+}
 
 .f-sns ul:after {
     display: block;
@@ -1336,6 +1343,7 @@ body {
 
 .f-sns ul li {
     float: left;
+    margin-right: 9px;
 }
 
 .f-sns ul li:nth-child(n+2) {
