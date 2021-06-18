@@ -680,7 +680,7 @@ if ( ! function_exists('display_html_content')) {
 					// echo "<script>console.log(`".strpos($content, '<br />')."`)</script>";
 					$content = mb_substr($content, 0, strpos($content, '<br />') -1);
 				}
-				$content = $content.'<p class="more" style="cursor:pointer">더보기</p>';
+				$content = $content.'<p class="more" style="cursor:pointer; display:inline-block;">&nbsp;&nbsp;&nbsp;더보기</p>';
 			}
 			return $content;
 		}

@@ -2387,7 +2387,7 @@ class Postact extends CB_Controller
 
 				$result = array(
 					'state' => '1',
-					// 'message' => '성공적으로 처리되었습니다',
+					'message' => '성공적으로 처리되었습니다',
 				);
 				exit(json_encode($result));
 			}
@@ -2699,7 +2699,7 @@ class Postact extends CB_Controller
 
 				$result = array(
 					'state' => '1',
-					// 'message' => '성공적으로 처리되었습니다',
+					'message' => '성공적으로 처리되었습니다',
 				);
 				exit(json_encode($result));
 			}
@@ -2893,7 +2893,7 @@ class Postact extends CB_Controller
 					// 성공
 					$result = array(
 						'state' => '1',
-						// 'message' => '성공적으로 처리되었습니다',
+						'message' => '성공적으로 처리되었습니다',
 					);
 					exit(json_encode($result));
 				}
