@@ -18,7 +18,7 @@
 			<!-- s: layer-wrap userInfo -->
 			<div class="layer-wrap userInfo userInfo-<?php echo element('mem_id', $result); ?>">
 				<p>포럼 전적 <span><?php echo number_format(element('mem_forum_win', $result)); ?>승<?php echo number_format(element('mem_forum_lose', $result)); ?>패</span></p>
-				<a href="" class="layer_link"> 작성 글 보기</a>
+				<a href="" class="popup_menuuu">작성 글 보기</a>
 			</div>
 			<!-- e: layer-wrap userInfo -->
 
@@ -119,14 +119,11 @@
 		<a href="javascript:void(0);" class="cancel-btn singo-close"><span>취소</span></a>
 	</div>
 </div>
-<div class="popupLayer" style="display:none; z-index:1200">
-	<a href="" class="layer_link"> 작성 글 보기</a>
-    </div>
     <script>
 
     $(function(){
         /* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
-        $('.popup_menuu').click(function(e)
+        $('.popup_menuuu').click(function(e)
         {
             var sWidth = window.innerWidth;
             var sHeight = window.innerHeight;
@@ -142,24 +139,23 @@
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
             
-            // $('.layer_link').prop('href', 'https://dev.ciccommunity.com/board/freetalk?sfield=post_nickname&skeyword='+ $(this).text() +'&search_submit=');
-            $('.layer_link').prop('href', `<?php echo base_url('board/forum').'?sfield=post_nickname&skeyword='?>${$(this).text()}`);
+            $('.popup_menuu').prop('href', `<?php echo base_url('board/forum').'?sfield=post_nickname&skeyword='.element('cmt_nickname', $result);?>`);
             $('.popupLayer').css({
                 "top": divTop,
                 "left": divLeft,
-                "display" : "block"
-            }).show();
+                "display" : "none"
+            });
         });
     });
-    $(document).mouseup(function (e){
-        var container = $('.popupLayer');
-        if( container.has(e.target).length === 0){
-        container.css('display','none');
-        }
-    });
-    $(window).on("wheel", function (event){
-        $('.popupLayer').css('display','none');
-    });
+    // $(document).mouseup(function (e){
+    //     var container = $('.popupLayer');
+    //     if( container.has(e.target).length === 0){
+    //     container.css('display','none');
+    //     }
+    // });
+    // $(window).on("wheel", function (event){
+    //     $('.popupLayer').css('display','none');
+    // });
     </script>
 
 <!-- s: layer-wrap.singo -->

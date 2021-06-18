@@ -42,8 +42,6 @@ class Mypage extends CB_Controller
 	 */
 	public function index()
 	{
-		print_r($this->member->get_member());
-		exit;
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_mypage_index';
 		$this->load->event($eventname);
@@ -78,8 +76,9 @@ class Mypage extends CB_Controller
 		}
 		$member_info = $this->member->get_member();
 		$view['member'] = $member_info;
-	
-
+		$mem_level = element('mem_level', $member_info);
+		$_attach = element('mlc_attach', $this->CIC_member_level_config_model->get_by_level($mem_level));
+		$view['member']['mlc_attach'] = $_attach;
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 		/**

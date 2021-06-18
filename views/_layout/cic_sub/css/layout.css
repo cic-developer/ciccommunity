@@ -662,7 +662,7 @@ body {
         visibility: hidden;
         padding: 0;
         width: 820px !important;
-        left: 0;
+        left: -6px;
     }
     .topmenu .depth2 {
         position: relative;

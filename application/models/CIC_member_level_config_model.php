@@ -42,6 +42,21 @@ class CIC_member_level_config_model extends CB_Model
 		$result = $this->db->get('cic_member_level_config')->row_array();
 		return $result;
 	}
+
+	function get_by_level($level = 0){
+		if($level >= 0){
+			$this->db->where('mlc_level <=', $level);
+			$this->db->where('mlc_enable', 1);
+			$this->db->order_by('mlc_target_point','DESC');
+		}else{
+			$this->db->where('mlc_level >=', $level);
+			$this->db->where('mlc_enable', 1);
+			$this->db->order_by('mlc_target_point','ASC');
+		}
+		$this->db->limit(1);
+		$result = $this->db->get('cic_member_level_config')->row_array();
+		return $result;
+	}
 }
 
 ?>
