@@ -1392,7 +1392,7 @@ body {
 }
 
 .f-logo h2 {
-    background: url(/assets/images/f-logo.png) no-repeat left center;
+    background: url(/assets/images/footer-logo.png) no-repeat left center;
     height: 37px;
 }
 
@@ -1412,7 +1412,13 @@ body {
     top: 135px;
 }
 
-.f-sns ul {}
+.f-sns ul {
+    width: 229px;
+    position: absolute;
+    left: -8px;
+    top: 0px;
+    text-align: left;
+}
 
 .f-sns ul:after {
     display: block;
@@ -1422,20 +1428,21 @@ body {
 
 .f-sns ul li {
     float: left;
+    margin-right: 11px;
 }
 
 .f-sns ul li:nth-child(n+2) {
-    margin-left: 8px
+    margin-left: 9px
 }
 
 .f-sns ul li a {
     display: block;
     height: 54px;
     border-radius: 100%;
-    width: 54px;
-    border: 2px solid #fff;
+    width: 49px;
+    /* border: 2px solid #fff; */
     box-sizing: border-box;
-    background-size: 100% auto !important
+    background-size: 100% auto !important;
 }
 
 .f-sns ul li:nth-child(1) a {
