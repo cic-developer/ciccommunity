@@ -109,7 +109,6 @@ class Login extends CB_Controller
 
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-
 			if ($this->input->post('returnurl')) {
 				if (validation_errors('<div class="alert alert-warning" role="alert">', '</div>')) {
 					$this->session->set_flashdata(

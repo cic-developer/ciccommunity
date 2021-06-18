@@ -5,6 +5,7 @@
 		<!-- page start // -->
 		<div class="member-wrap login">
 			<?php 
+				echo show_alert_message(trim(validation_errors(' ', ' ')), '<script>alert("', '");</script>');
 				$attributes = array('class' => 'form-horizontal', 'name' => 'flogin', 'id' => 'flogin');
 				echo form_open(current_full_url(), $attributes); 
 			?>
