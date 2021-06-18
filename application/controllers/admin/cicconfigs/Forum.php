@@ -442,7 +442,7 @@ class Forum extends CB_Controller
 
 		$view['view']['primary_key'] = $this->Post_model->primary_key;
 
-		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['base_url'] = admin_url($this->pagedir) . '/disapproval_forum' . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
@@ -579,7 +579,7 @@ class Forum extends CB_Controller
 
 		$view['view']['primary_key'] = $this->Post_model->primary_key;
 
-		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['base_url'] = admin_url($this->pagedir) . '/proceeding_forum' . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
@@ -665,7 +665,7 @@ class Forum extends CB_Controller
 
 		$view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
 
-		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['base_url'] = admin_url($this->pagedir) . '/close_forum' . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
@@ -1387,7 +1387,7 @@ class Forum extends CB_Controller
 
 		$view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
 
-		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['base_url'] = admin_url($this->pagedir) . '/return_forum' . '?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
