@@ -745,6 +745,7 @@ class Board_post extends CB_Controller
 			$view_date_style,
 			$view_date_style_manual
 		);
+
 		$view['view']['post']['is_mobile'] = (element('post_device', $post) === 'mobile') ? true : false;
 		$view['view']['post']['category'] = '';
 		if (element('use_category', $board) && element('post_category', $post)) {
