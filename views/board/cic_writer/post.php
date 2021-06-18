@@ -74,7 +74,7 @@
 					<a href="javascript:void(0);" class="bw-btn btn-one-delete" data-one-delete-url="<?php echo element('delete_url', $view); ?>"><span>삭제</span></a>
 					<?php } ?>
 					<!-- <?php if(element('delete_url', $view)){ ?>
-					<a href="javascript:void(0);" class="bw-btn btn-one-delete" data-one-delete-url="<?php echo element('delete_url', $view); ?>"><span>신고</span></a>
+					
 					<?php } ?> -->
 					<?php if ( ! element('post_del', element('post', $view)) && element('use_blame', element('board', $view)) && ( ! element('blame_blind_count', element('board', $view)) OR element('post_blame', element('post', $view)) < element('blame_blind_count', element('board', $view)))) { ?>
 						<button type="button" class="bw-btn btn btn-black" id="btn-blame" onClick="post_blame('<?php echo element('post_id', element('post', $view)); ?>', 'post-blame');">신고 <span class="post-blame"><?php echo element('post_blame', element('post', $view)) ? '+' . number_format(element('post_blame', element('post', $view))) : ''; ?></span></button>
@@ -82,68 +82,7 @@
 				</div>
 			</div>
 			<div class="gap60"></div>
-			<!-- <div class="best">
-				<div class="fl">
-					<h4>BEST VP UP</h4>
-					<ul>						
-						<?php
-						if (element('list',element('like_point_ranking', $view))) {
-							foreach (element('list',element('like_point_ranking', $view)) as $like_point_ranking) {
-								?>
-								<li>
-									<a href="javascript:void(0);" style="cursor:text;">
-										<span class="num"><?php echo number_format(element('num', $like_point_ranking)); ?></span>
-										<div class="my-info">
-											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $like_point_ranking), 30, 30)?>" alt=""></p>
-											<p class="rtxt"><?php echo html_escape(element('cmt_nickname', $like_point_ranking)); ?></p>
-										</div>
-										<span class="txt"><?php echo html_escape(element('cmt_content', $like_point_ranking)); ?></span>
-										<span class="vp"><?php echo number_format(element('cmt_like_point', $like_point_ranking)); ?></span>
-									</a>
-								</li>
-						<?php
-							}
-						} else {
-						?>
-							<li>
-								<span class="nopost">댓글이 없습니다</span>
-							</li>
-						<?php
-						}
-						?>
-					</ul>
-				</div>
-				<div class="fr">
-					<h4>BEST VP DOWN</h4>
-					<ul>
-						<?php
-						if (element('list',element('dislike_point_ranking', $view))) {
-							foreach (element('list',element('dislike_point_ranking', $view)) as $dislike_point_ranking) {
-								?>
-								<li>
-									<a href="javascript:void(0);" style="cursor:text;">
-										<span class="num"><?php echo number_format(element('num', $dislike_point_ranking)); ?></span>
-										<div class="my-info">
-											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $dislike_point_ranking), 30, 30)?>" alt=""></p>
-											<a class="popup_menuu"><p class="rtxt"><?php echo html_escape(element('cmt_nickname', $dislike_point_ranking)); ?></p></a>
-										</div>
-										<span class="txt"><?php echo html_escape(element('cmt_content', $dislike_point_ranking)); ?></span>
-										<span class="vp"><?php echo number_format(element('cmt_dislike_point', $dislike_point_ranking)); ?></span>
-									</a>
-								</li>
-						<?php
-							}
-						} else {
-						?>
-							<li>
-								<span class="nopost">댓글이 없습니다</span>
-							</li>
-						<?php
-						}
-						?>
-					</ul>
-				</div>
-			</div> -->
+
 		</div>
 
 

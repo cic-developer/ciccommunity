@@ -153,6 +153,12 @@
 
     // 출금금액 validation
     function validateForm() {
+
+        if(is_denied){
+            alert('출금요청이 거부된 회원입니다. (문의)');
+            return;
+        }
+
         var x, text;
         var mem_cp = $("#html_mem_cp").val();
         

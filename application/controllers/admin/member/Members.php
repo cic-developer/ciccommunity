@@ -686,6 +686,13 @@ class Members extends CB_Controller
 			 * 게시물을 수정하는 경우입니다
 			 */
 			if ($this->input->post($primary_key)) {
+				if ($form && is_array($form)) {
+					foreach ($form as $key => $value) {
+						if (element('field_name', $value) == 'mem_warn_2' && $this->input->post(element('field_name', $value), null, '')) {
+							$updatedata['mem_denied'] = 1;
+						}
+					}
+				}
 				$mem_id = $this->input->post($primary_key);
 				$this->{$this->modelname}->update($mem_id, $updatedata);
 				$this->Member_meta_model->save($mem_id, $metadata);

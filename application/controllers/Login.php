@@ -258,6 +258,12 @@ class Login extends CB_Controller
 						'로그인 보상 CP 지급'
 					);
 				}
+				
+				if($this->member->item('mem_warn_1')){
+					alert(
+						'1차 경고를 받았습니다. 경고 2회 누적시 영구정지처리됩니다. 경고 사유: '.$this->member->item('mem_warn_1')
+					);
+				}
 			} 
 
 

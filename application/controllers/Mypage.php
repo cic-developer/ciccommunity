@@ -1527,7 +1527,7 @@ class Mypage extends CB_Controller
 
 		$check = international_age($year, $mon, $day);
 		if($check < 19){
-			alert('만 19세 미만 회원은 이용할 수 없습니다.');
+			alert('만 19세 미만 회원은 이용할 수 없습니다.', base_url());
 			exit;
 		}
 
@@ -1647,6 +1647,17 @@ class Mypage extends CB_Controller
 		 * 로그인이 필요한 페이지입니다
 		 */
 		required_user_login();
+
+				
+		if ( $this->member->item('mem_denied') == 1){
+			$this->session->set_flashdata(
+				'message',
+				'출금요청이 거부된 회원입니다. (문의)'
+			);
+			// 이벤트가 존재하면 실행합니다
+			Events::trigger('after', $eventname);
+			redirect('mypage/withdraw');
+		}
 
 		$userdate = $this->member->item('mem_birthday');;
 
