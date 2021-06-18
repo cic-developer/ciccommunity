@@ -3879,7 +3879,7 @@ flvr.pandora.tv',
 			'skin_emailform' => 'basic',
 
 			'use_login_account' => 'both',
-			'password_length' => '7',
+			'password_length' => '4',
 			'use_member_photo' => '1',
 			'member_photo_width' => '80',
 			'member_photo_height' => '80',
