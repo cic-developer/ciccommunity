@@ -201,7 +201,7 @@ class News extends CB_Controller
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['base_url'] = admin_url($this->pagedir) . '/enable?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
@@ -291,7 +291,7 @@ class News extends CB_Controller
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['base_url'] = admin_url($this->pagedir) . '/show?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
@@ -399,7 +399,7 @@ class News extends CB_Controller
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['base_url'] = admin_url($this->pagedir) . '/most_view_news?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
@@ -503,7 +503,7 @@ class News extends CB_Controller
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['base_url'] = admin_url($this->pagedir) . '/important?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
@@ -610,7 +610,7 @@ class News extends CB_Controller
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['base_url'] = admin_url($this->pagedir) . '/company_config?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
