@@ -72,7 +72,7 @@
                     </li>
                     <li>
                         <div class="txt">
-                            <p class="btxt">기록 <span>모아보기</span></p>
+                            <p class="btxt">내 활동 <span>내역보기</span></p>
                             <p class="stxt">내가 행사 한 <span>VP, <br>댓글</span> 보기</p>
                             <a href="<?php echo base_url('mypage/post')?>"><span>바로가기</span></a>
                         </div>
