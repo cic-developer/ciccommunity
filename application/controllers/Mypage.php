@@ -18,7 +18,7 @@ class Mypage extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('CIC_withdraw', 'CIC_withdraw_log', 'Member', 'Post', 'Comment', 'Point', 'CIC_cp', 'CIC_vp', 'CIC_wconfig');
+	protected $models = array('CIC_withdraw', 'CIC_withdraw_log', 'Member', 'Post', 'Comment', 'Point', 'CIC_cp', 'CIC_vp', 'CIC_wconfig', 'CIC_member_level_config');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -42,6 +42,8 @@ class Mypage extends CB_Controller
 	 */
 	public function index()
 	{
+		print_r($this->member->get_member());
+		exit;
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_mypage_index';
 		$this->load->event($eventname);

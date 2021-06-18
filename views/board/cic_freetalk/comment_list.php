@@ -234,7 +234,7 @@
 
     $(function(){
         /* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
-        $('.popup_menuuu').click(function(e)
+        $('.popup_menuu').click(function(e)
         {
             var sWidth = window.innerWidth;
             var sHeight = window.innerHeight;

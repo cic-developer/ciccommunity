@@ -8,7 +8,9 @@
         ?>
             <div class="myinfo">
                 <div class="fl">
-                    <div class="photo" title="프로필 이미지"><img src="<?php echo base_url('assets/images/popotest.png')?>" alt="">
+                    <div class="photo" title="프로필 이미지">
+                    <img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $member), 140, 140); ?>" alt="">
+                    <!-- <img src="<?php //echo base_url('assets/images/popotest.png')?>" alt=""> -->
                 </div>
                     <div class="my">
                         <p class="btxt" alt="name" title = "이름"> <?=$member['mem_username']?> </p>
