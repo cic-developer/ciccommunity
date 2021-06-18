@@ -230,7 +230,7 @@
 		}
 		
 		const num = cfc_state == 1 ? 0 : 1;
-		const confirm_content = ' ' + (option === 1 ? 'A' :'B') + '의견을 ' + (option === '2' ? 'A' :'B') + '의견으로 변경 하시겠습니까? (기회 ' + num + '회 남음)';
+		const confirm_content = ' ' + (option === '1' ? 'A' :'B') + '의견을 ' + (option === '2' ? 'A' :'B') + '의견으로 변경 하시겠습니까? (기회 ' + num + '회 남음)';
 		var isConfirm = confirm(confirm_content);
 
 		if(cfc_state == 1) {
@@ -301,7 +301,7 @@
 			success: function(data) {
 				if(data.state == 1){
 
-					var title = 'CP를 '+ (option === 1 ? 'A' :'B') + '의견에 투표합니다. ';
+					var title = 'CP를 '+ (option === '1' ? 'A' :'B') + '의견에 투표합니다. ';
 					var max = '';
 					var min = '';
 					if(priceToString(forum_bat_max) != 0){
