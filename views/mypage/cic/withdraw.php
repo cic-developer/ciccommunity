@@ -135,6 +135,8 @@
 </div>
 
 <script>   
+    var is_denied = "<?php html_escape(element('is_denied', $result))?>";
+
     function isNumeric(num){
         // 좌우 trim(공백제거)을 해준다.
         num = String(num).replace(/^\s+|\s+$/g, "");

@@ -716,6 +716,9 @@ class Register extends CB_Controller
 					if ( ! element('use', $value)) {
 						continue;
 					}
+					if(element('field_name', $value) == 'mem_warn_1' || element('field_name', $value) == 'mem_warn_2'){
+						continue;
+					}
 					$required = element('required', $value) ? 'required' : '';
 
 					$html_content[$k]['field_name'] = element('field_name', $value);

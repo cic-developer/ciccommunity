@@ -94,7 +94,7 @@
                                 } else{
                                 ?>
                                     <div class="btn-group btn-group-sm" role="group">
-                                    <?php if(html_escape(element('is_member', $result))) { ?>
+                                    <?php if(html_escape(element('is_member', $result)) && ! html_escape(element('is_denied', $result))) { ?>
                                         <button type="button" class="btn btn-success modal_open1" 
                                             data-idx="<?php echo number_format(element('wid_idx', $result)); ?>" 
                                                 data-cal-money="<?php echo element('wid_cal_money', $result); ?>"

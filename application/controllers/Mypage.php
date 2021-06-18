@@ -1583,6 +1583,13 @@ class Mypage extends CB_Controller
 				);
 				
 				$result['list'][$key]['num'] = $list_num--;
+
+				
+				if ( $this->member->item('mem_denied') == 1){
+					$result['list'][$key]['is_denied'] = true;
+				}else {
+					$result['list'][$key]['is_denied'] = false;
+				}
 			}
 		}
 

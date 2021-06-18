@@ -134,8 +134,14 @@ class Withdraws extends CB_Controller
 				$member_info = $this->Member_model->get_one($val['wid_mem_idx']);
 				if ( ! $member_info) {
 					$result['list'][$key]['is_member'] = false;
-				}else{
+				}else {
 					$result['list'][$key]['is_member'] = true;
+				}
+
+				if ( $member_info['mem_denied'] == 1){
+					$result['list'][$key]['is_denied'] = true;
+				}else {
+					$result['list'][$key]['is_denied'] = false;
 				}
 			}
 		}
@@ -241,6 +247,17 @@ class Withdraws extends CB_Controller
 			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
 			redirect($redirecturl);
 			// show_404();
+		}
+
+		// 
+		if($member_info['is_denied']){
+			$this->session->set_flashdata(
+				'message',
+				'경고로 인하여 출금이 거부된 회원입니다.'
+			);
+			$param =& $this->querystring;
+			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+			redirect($redirecturl);
 		}
 
 		// 로그인한 관리자 정보 불라오기
