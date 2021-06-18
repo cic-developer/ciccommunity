@@ -18,7 +18,7 @@ div {
     max-width: 1160px;
     margin: 0 auto;
     padding: 15px;
-    padding-bottom: 180px;
+    /* padding-bottom: 180px; */
 }
 
 .tit_main {
