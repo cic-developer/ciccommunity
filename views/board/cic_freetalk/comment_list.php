@@ -107,62 +107,55 @@
 	</div>
 </div>
 <!-- s: layer-wrap.singo -->
+<div class="popupLayer" style="display:none; z-index:1200">
+	<a href="" class="layer_link"> 작성 글 보기</a>
+    </div>
+    <script>
+
+    $(function(){
+        /* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
+        $('.popup_menuu').click(function(e)
+        {
+            var sWidth = window.innerWidth;
+            var sHeight = window.innerHeight;
+
+            var oWidth = $('.popupLayer').width();
+            var oHeight = $('.popupLayer').height();
+
+            // 레이어가 나타날 위치를 셋팅한다.
+            var divLeft = e.clientX + 10;
+            var divTop = e.clientY + 5;
+
+            // 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+            if( divLeft < 0 ) divLeft = 0;
+            if( divTop < 0 ) divTop = 0;
+            
+            $('.layer_link').prop('href', `<?php echo base_url('board/freetalk').'?sfield=post_nickname&skeyword='?>${$(this).text()}`);
+            $('.popupLayer').css({
+                "top": divTop,
+                "left": divLeft,
+                "display" : "block"
+            }).show();
+        });
+    });
+    $(document).mouseup(function (e){
+        var container = $('.popupLayer');
+        if( container.has(e.target).length === 0){
+        container.css('display','none');
+        }
+    });
+    $(window).on("wheel", function (event){
+        $('.popupLayer').css('display','none');
+    });
+    </script>
+
 <script>
-	$('.more').on('click', function(){
-		let parent = $(this).parent('.vtxt');
-		let _index = parent.attr('comment-data');
-		$.ajax({
-			url: "<?php echo base_url('Comment_list/ajax_allCommentData')?>",
-			type: "POST",
-			dataType: "json",
-			data: {
-				csrf_test_name: cb_csrf_hash,
-				index: _index
-			},
-			success: function(data){
-				parent.children().remove();
-				parent.text('');
-				try{
-					parent.append(data);
-				}catch(error){
-					parent.text(data);
-				}
-				
-			},
-			error: function (request, status, error){
-				console.log(request, status, error)
-			}
-		});
-	})
 
 	$(function () {
 		var istotal = $('.cmmt').find('.item').length;
 		var ischk = (istotal / 2) + 1
 		$('.cmmt').find('.item:nth-child(n+' + ischk + ')').addClass('vfm');
-		/*$('.ctrls').find('.cmmt-btn').click(function () {
-			$('.cmmt-wrap').find('.singo-btn').removeClass('active');
-			if ($(this).hasClass('active')) {
-				$(this).removeClass('active');
-				$(this).closest('.vcon').removeClass('active');
-				$(this).closest('.reply').removeClass('active');
-				$(this).closest('.ctrls').removeClass('active');
-			} else {
-				$(this).addClass('active');
-				$(this).closest('.vcon').addClass('active');
-				$(this).closest('.reply').addClass('active');
-				$(this).closest('.ctrls').addClass('active');
-			}
-			$('.layer-wrap.singo').bPopup({
-				speed: 0,
-				follow: [false, false],
-				position: [false, false],
-				modalColor: false,
-				modal: false,
-				onClose: function () {
-					$('.cmmt').find('.cread').removeClass('cread')
-				},
-			}).close();
-		});*/
+
 		$('.cmmt-wrap').find('.singo-btn').click(function () {
 			$('.cmmt-wrap').find('.singo-btn').removeClass('active');
 			$(this).addClass('active');
@@ -201,71 +194,32 @@
 			});
 		});
 
-		// $('.show .more').click(function(){
-		// 	let parent = $(this).parent('.vtxt');
-		// 	let _index = parent.attr('comment-data');
-		// 	$.ajax({
-		// 		url: "<?php echo base_url('Comment_list/ajax_allCommentData')?>",
-		// 		type: "POST",
-		// 		dataType: "json",
-		// 		data: {
-		// 			csrf_test_name: cb_csrf_hash,
-		// 			index: _index
-		// 		},
-		// 		success: function(data){
-		// 			parent.children().remove();
-		// 			parent.text('');
-		// 			parent.append(data);
-		// 		},
-		// 		error: function (request, status, error){
-		// 			console.log(request, status, error)
-		// 		}
-		// 	});
-		// })
-
+		$('.more').on('click', function(){
+			let parent = $(this).parent('.vtxt');
+			let _index = parent.attr('comment-data');
+			$.ajax({
+				url: "<?php //echo base_url('Comment_list/ajax_allCommentData')?>",
+				type: "POST",
+				dataType: "json",
+				data: {
+					csrf_test_name: cb_csrf_hash,
+					index: _index
+				},
+				success: function(data){
+					parent.children().remove();
+					parent.text('');
+					try{
+						parent.append(data);
+					}catch(error){
+						parent.text(data);
+					}
+					
+				},
+				error: function (request, status, error){
+					console.log(request, status, error)
+				}
+			});
+		})
 	})
 	
 </script>
-
-<div class="popupLayer" style="display:none; z-index:1200">
-	<a href="" class="layer_link"> 작성 글 보기</a>
-    </div>
-    <script>
-
-    $(function(){
-        /* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
-        $('.popup_menuu').click(function(e)
-        {
-            var sWidth = window.innerWidth;
-            var sHeight = window.innerHeight;
-
-            var oWidth = $('.popupLayer').width();
-            var oHeight = $('.popupLayer').height();
-
-            // 레이어가 나타날 위치를 셋팅한다.
-            var divLeft = e.clientX + 10;
-            var divTop = e.clientY + 5;
-
-            // 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
-            if( divLeft < 0 ) divLeft = 0;
-            if( divTop < 0 ) divTop = 0;
-            
-            // $('.layer_link').prop('href', 'https://dev.ciccommunity.com/board/freetalk?sfield=post_nickname&skeyword='+ $(this).text() +'&search_submit=');
-            $('.layer_link').prop('href', `<?php echo base_url('board/freetalk').'?sfield=post_nickname&skeyword='?>${$(this).text()}`);
-            $('.popupLayer').css({
-                "top": divTop,
-                "left": divLeft,
-                "display" : "block"
-            }).show();
-        });
-    });
-    $(document).mouseup(function (e){
-        var container = $('.popupLayer');
-        if( container.has(e.target).length === 0){
-        container.css('display','none');
-        }
-    });
-    $(window).on("wheel", function (event){
-        $('.popupLayer').css('display','none');
-    });
-    </script>

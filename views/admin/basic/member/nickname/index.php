@@ -33,6 +33,7 @@
 							<th><a href="<?php echo element('mni_nickname', element('sort', $view)); ?>">닉네임</a></th>
 							<th><a href="<?php echo element('mni_start_datetime', element('sort', $view)); ?>">사용시작일</a></th>
 							<th><a href="<?php echo element('mni_end_datetime', element('sort', $view)); ?>">사용종료일</a></th>
+							<!-- <th><a href="<?php echo element('mni_end_datetime', element('sort', $view)); ?>">닉네임변경</a></th> -->
 						</tr>
 					</thead>
 					<tbody>

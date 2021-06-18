@@ -32,6 +32,7 @@
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery/jquery.easing.1.3.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery/datepicker.min.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery/datepicker.kor.js'); ?>"></script>
+
 <script type="text/javascript" src="<?php echo base_url('assets/js/topmenu.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/common.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/layout.js'); ?>"></script>
