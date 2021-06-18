@@ -947,6 +947,7 @@
         position: relative;
         float: none;
         width: auto;
+        margin-left: 22px;
     }
     .member-wrap.mypage .mycic ul li:nth-child(n+3) {
         margin-top: 0
@@ -985,7 +986,7 @@
         background: url(/assets/images/mypage-more.png) no-repeat right center;
         background-size: 8px auto;
         position: Absolute;
-        right: 15px;
+        right: 32px;
         top: 0;
         display: block;
         content: ""
