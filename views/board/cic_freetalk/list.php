@@ -76,9 +76,10 @@
                         <tr>
                             <th>글쓴이</th>
                             <th>제목</th>
-                            <th>등록일</th>
-                            <th>조회</th>
                             <th><span class="cyellow">VP</span></th>
+                            <th>조회</th>
+                            <th>등록일</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -96,12 +97,12 @@
                             </td>
                             <td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><span
                                         class="cate">공지</span><?php echo html_escape(element('title', $result)); ?></a></td>
-                            <td><?php echo element('display_datetime', $result); ?></td>
-                            <td><?php echo number_format(element('post_hit', $result)); ?></td>
                             <td>
                                 <p class="cyellow">12</p>
                                 <!-- <p class="cred">4 진정한 흑우</p> -->
                             </td>
+                            <td><?php echo number_format(element('post_hit', $result)); ?></td>
+                            <td><?php echo element('display_datetime', $result); ?></td>
                         </tr>
                     <?php
                         }
@@ -124,11 +125,9 @@
                                     <span class="reply">(<?php echo element('post_comment_count', $result); ?>)</span>
                                 </a>
                             </td>
-                            <td><?php echo element('display_datetime', $result); ?></td>
+                            <td> <p class="cyellow"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p> </td>
                             <td><?php echo number_format(element('post_hit', $result)); ?></td>
-                            <td>
-                                <p class="cyellow"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p>
-                            </td>
+                            <td><?php echo element('display_datetime', $result); ?></td>
                         </tr>
                     <?php
                         }
