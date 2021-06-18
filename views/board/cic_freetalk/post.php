@@ -94,7 +94,7 @@
 			<a href="<?php echo element('url', element('next_post', $view)); ?>" class="bw-btn"><span>다음글</span></a></p>
 			<div class="gap60"></div>
 			<?php if(html_escape(element('post_notice', element('post', $view))) == 0){ ?>
-			<div class="best">
+			<!-- <div class="best">
 				<div class="fl">
 					<h4>BEST VP UP</h4>
 					<ul>
@@ -155,7 +155,7 @@
 						?>
 					</ul>
 				</div>
-			</div>
+			</div> -->
 			<?php } ?>
 		</div>
 

@@ -82,7 +82,7 @@
 				</div>
 			</div>
 			<div class="gap60"></div>
-			<div class="best">
+			<!-- <div class="best">
 				<div class="fl">
 					<h4>BEST VP UP</h4>
 					<ul>						
@@ -143,7 +143,7 @@
 						?>
 					</ul>
 				</div>
-			</div>
+			</div> -->
 		</div>
 
 
