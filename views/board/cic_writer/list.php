@@ -5,10 +5,7 @@
         <div class="txt">
             <h2>Writer</h2>
             <p>등록된 회원들이 양질의 정보전달 글, 본인의 칼럼을 게시하는 공간 입니다.</p>
-            <div class="lower r" style="z-index: 5000;">
-                <a style="left: 930px; position: absolute;color: #f2b402;" href="<?php echo base_url('/contactus/apply')?>">신청하기
-                </a>
-            </div>
+                <p><a href="<?php echo base_url('/contactus/apply')?>">신청하기</a> </p>
         </div>
         <div class="img"><img src="<?php echo base_url('assets/images/top-vis03.jpg')?>" alt=""></div>
     </div>
@@ -197,5 +194,8 @@
         if( container.has(e.target).length === 0){
         container.css('display','none');
         }
+    });
+    $(window).on("wheel", function (event){
+        $('.popupLayer').css('display','none');
     });
 </script>

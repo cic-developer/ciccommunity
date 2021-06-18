@@ -266,8 +266,8 @@
         container.css('display','none');
         }
     });
-    document.addEventListener('scroll', function() {
-        console.log('zz');
+    $(window).on("wheel", function (event){
+        $('.popupLayer').css('display','none');
     });
 </script>
 <style>

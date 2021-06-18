@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<input type="hidden" name="<?php echo element('primary_key', $view); ?>"	value="<?php echo element(element('primary_key', $view), element('post', $view)); ?>" />
 		<!-- page start // -->
 		<div class="board-wrap write">
-			<h3>Writer 신청하기</h3>
+			<h3>Writer 신청</h3>
 			<div class="entry">
 				<ul>
 					<li class="title-box">

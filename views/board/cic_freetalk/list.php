@@ -213,5 +213,8 @@
         container.css('display','none');
         }
     });
+    $(window).on("wheel", function (event){
+        $('.popupLayer').css('display','none');
+    });
     </script>
 </div>
