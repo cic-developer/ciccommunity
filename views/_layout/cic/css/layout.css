@@ -1347,7 +1347,7 @@ body {
     height: 54px;
     border-radius: 100%;
     width: 54px;
-    border: 2px solid #fff;
+    /* border: 2px solid #fff; */
     box-sizing: border-box;
     background-size: 100% auto !important
 }

@@ -120,7 +120,7 @@
 			if(nickname_ath_result == 0) {alert('닉네임 인증을 진행해주세요'); return;}
 			if(email.length == 0) {alert('이메일을 입력해주세요'); return;}
 			if(password.length == 0) {alert('비밀번호를 입력해주세요'); return;}
-			if(password.length < 4) {alert('비밀번호를 4자리 이상 입력해주세요'); return;}
+			if(password.length < 7) {alert('비밀번호를 7자리 이상 입력해주세요'); return;}
 			if(password != password_re ) {alert('비밀번호가 일치하지 않습니다'); return;}
 			if(password_re.length == 0) {alert('비밀번호 확인을 입력해주세요'); return;}
 			if(nickname.length == 0) {alert('닉네임을 입력해주세요'); return;}

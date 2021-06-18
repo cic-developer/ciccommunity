@@ -230,12 +230,15 @@
 		}
 		
 		const num = cfc_state == 1 ? 0 : 1;
-		const confirm_content = ' ' + (option === '1' ? 'A' :'B') + '의견을 ' + (option === '2' ? 'A' :'B') + '의견으로 변경 하시겠습니까? (기회 ' + num + '회 남음)';
+		// const confirm_content = ' ' + (option === '1' ? 'A' :'B') + '의견을 ' + (option === '2' ? 'A' :'B') + '의견으로 변경 하시겠습니까? (기회 ' + num + '회 남음)';
+		const confirm_content = '의견을 변경하시겠습니까?'
 		var isConfirm = confirm(confirm_content);
-
-		if(cfc_state == 1) {
-			alert('의견 변경횟수를 초과하였습니다');
-			return false;
+		
+		if(isConfirm){
+			if(cfc_state == 1) {
+				alert('의견 변경횟수를 초과하였습니다');
+				return false;
+			}
 		}
 
 		if(isConfirm){
