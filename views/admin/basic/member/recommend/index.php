@@ -1,3 +1,4 @@
+<?php $_type = $this->input->get('type') != 'reg' ?>
 <div class="box">
 	<div class="box-table">
 		<?php
@@ -6,11 +7,14 @@
 		echo form_open(current_full_url(), $attributes);
 		?>
 			<div class="box-table-header">
-	
 				<ul class="nav nav-pills">
-					<li role="presentation" class="<?php echo $this->input->get('type') != 'reg' ? 'active' : ''?>"><a href="javascript:void(0);">레퍼럴 추천인</a></li>
-					<li role="presentation" class="<?php echo $this->input->get('type') == 'reg' ? 'active' : ''?>"><a href="javascript:void(0);">레퍼럴 추천인 회원가입</a></li>
+					<li role="presentation" class="<?php echo $_type ? 'active' : ''?>"><a href="<?php echo base_url('admin/member/recommend?type=rec')?>">레퍼럴 추천인</a></li>
+					<li role="presentation" class="<?php echo !$_type ? 'active' : ''?>"><a href="<?php echo base_url('admin/member/recommend?type=reg') ?>">레퍼럴 추천인 회원가입</a></li>
 				</ul>
+
+                <div class="btn-group pull-right" role="group" aria-label="...">
+                    <a href="javascript:void(0);" class="btn btn-outline btn-default btn-sm">보상지급</a>
+                </div>
 			</div>
 			<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
 			<div class="table-responsive">
@@ -19,12 +23,9 @@
 						<tr>
 							<th>번호</th>
 							<th>회원아이디</th>
-							<th>회원명</th>
-							<th>포인트</th>
-							<th>발생일시</th>
-							<th>포인트내용</th>
-							<th>포인트합</th>
-							<th><input type="checkbox" name="chkall" id="chkall" /></th>
+							<th>닉네임</th>
+							<th>보상 VP</th>
+							<th>보상 CP</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -34,13 +35,10 @@
 					?>
 						<tr>
 							<td><?php echo number_format(element('num', $result)); ?></td>
-							<td><a href="?sfield=point.mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('mem_userid', $result)); ?></a></td>
-							<td><?php echo element('display_name', $result); ?></td>
-							<td class="text-right"><?php echo number_format(element('poi_point', $result)); ?></td>
-							<td><?php echo display_datetime(element('poi_datetime', $result), 'full'); ?></td>
-							<td><?php echo html_escape(element('poi_content', $result)); ?></td>
-							<td class="text-right"><?php echo number_format(element('mem_point', $result)); ?></td>
-							<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
+							<td><?php echo $_type ? element('mem_userid', $result): element('mem_rec_userid', $result);?></td>
+							<td><?php echo $_type ? element('usr_nickname', $result): element('rec_nickname', $result); ?></td>
+							<td><?php echo $_type ? element('rmd_rec_vp', $result): element('rmd_vp', $result); ?></td>
+							<td><?php echo $_type ? element('rmd_rec_cp', $result): element('rmd_cp', $result); ?></td>
 						</tr>
 					<?php
 						}
@@ -56,26 +54,6 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="box-info">
-				<div class="pull-left ml20"><?php echo admin_listnum_selectbox();?></div>
-			</div>
 		<?php echo form_close(); ?>
 	</div>
-	<form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
-		<div class="box-search">
-			<div class="row">
-				<div class="col-md-6 col-md-offset-3">
-					<select class="form-control" name="sfield" >
-						<?php echo element('search_option', $view); ?>
-					</select>
-					<div class="input-group">
-						<input type="text" class="form-control" name="skeyword" value="<?php echo html_escape(element('skeyword', $view)); ?>" placeholder="Search for..." />
-						<span class="input-group-btn">
-							<button class="btn btn-default btn-sm" name="search_submit" type="submit">검색!</button>
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</form>
 </div>
