@@ -13,7 +13,7 @@
 				</ul>
 
                 <div class="btn-group pull-right" role="group" aria-label="...">
-                    <a href="javascript:void(0);" class="btn btn-outline btn-default btn-sm">보상지급</a>
+                    <a href="javascript:void(0);" id="modal_open" class="btn btn-outline btn-default btn-sm" data-toggle="modal">보상지급</a>
                 </div>
 			</div>
 			<div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
@@ -57,3 +57,41 @@
 		<?php echo form_close(); ?>
 	</div>
 </div>
+
+<div class="modal fade" id="myModal-result">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">보상 지급 <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                    <!-- <label for="usr"></label> -->
+                    <div class="form-group">
+                        <label for="reward_vp">보상 VP</label>
+                        <input class="form-control" id="reward_vp" name="reward_vp" placeholder="보상을 지급할 vp를 입력해주세요" required style="width:100%;"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="reward_cp">보상 CP</label>
+                        <input class="form-control" id="reward_cp" name="reward_cp" placeholder="보상을 지급할 cp를 입력해주세요" required style="width:100%;"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="reward_point">보상 명예 포인트</label>
+                        <input class="form-control" id="reward_point" name="reward_point" placeholder="보상을 지급할 포인트를 입력해주세요" required style="width:100%;"></input>
+                    </div>
+            </div>
+                
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success btn-retire">지급하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#modal_open').on('click', function(){
+        $('#myModal-result').modal({backdrop: false, keyboard: false});
+    })
+</script>
