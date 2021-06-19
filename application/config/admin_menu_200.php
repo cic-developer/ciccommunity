@@ -25,6 +25,6 @@ $config['admin_page_menu']['member'] =
 			'memberlevelhistory'	=> array('레벨히스토리', ''),
 			'loginlog'				=> array('로그인현황', ''),
 			'dormant'				=> array('휴면계정관리', ''),
-			'recommend'				=> array('사전예약 보상 지급', ''),
+			'recommend'				=> array('레퍼럴 보상 지급', ''),
 		),
 	);

@@ -31,7 +31,7 @@ class Mem_recommeder_model extends CB_Model
         if($type == 'rec'){
             $this->db->where('rmd_rec_cp', 0);
             $this->db->where('rmd_rec_vp', 0);
-        }else if($type){
+        }else if($type == 'reg'){
             $this->db->where('rmd_cp', 0);
             $this->db->where('rmd_vp', 0);
         }else{
