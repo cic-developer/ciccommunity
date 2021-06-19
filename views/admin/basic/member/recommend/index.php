@@ -24,8 +24,9 @@
 							<th>번호</th>
 							<th>회원아이디</th>
 							<th>닉네임</th>
-							<th>보상 VP</th>
-							<th>보상 CP</th>
+							<?php if($_type){ ?>
+							<th>레퍼럴 인원 수</th>
+							<?php } ?>
 						</tr>
 					</thead>
 					<tbody>
@@ -37,8 +38,9 @@
 							<td><?php echo number_format(element('num', $result)); ?></td>
 							<td><?php echo $_type ? element('mem_userid', $result): element('mem_rec_userid', $result);?></td>
 							<td><?php echo $_type ? element('usr_nickname', $result): element('rec_nickname', $result); ?></td>
-							<td><?php echo $_type ? element('rmd_rec_vp', $result): element('rmd_vp', $result); ?></td>
-							<td><?php echo $_type ? element('rmd_rec_cp', $result): element('rmd_cp', $result); ?></td>
+							<?php if($_type){ ?>
+								<td><?php echo element('is_count', $result) ?></td>
+							<?php } ?>
 						</tr>
 					<?php
 						}
@@ -69,7 +71,7 @@
             <?php echo form_open(current_full_url()); ?>
             <div class="modal-body">
                 <!-- <label for="usr"></label> -->
-				<input type="hidden" name="required_value" value="1">
+				<input type="hidden" name="required_value" value="<?php echo $_type ? 'rec':'reg'?>">
                 <div class="form-group">
                     <label for="reward_vp">보상 VP</label>
                     <input class="form-control" id="reward_vp" name="reward_vp" placeholder="보상을 지급할 vp를 입력해주세요" style="width:100%;"></input>

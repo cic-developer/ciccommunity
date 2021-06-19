@@ -86,7 +86,7 @@ class Recommend extends CB_Controller
 			array(
 				'field' => 'required_value',
 				'label' => '필수 입력값',
-				'rules' => 'trim|numeric|required',
+				'rules' => 'trim|in_list[res,reg]|required',
 			),
 			array(
 				'field' => 'reward_vp',
@@ -103,6 +103,10 @@ class Recommend extends CB_Controller
 		$this->form_validation->set_rules($config);
 		if ($this->form_validation->run() === false) {
 		}else{
+			foreach($result['list'] AS $row){
+
+			}
+
 			$this->session->set_flashdata(
 				'message',
 				'정상적으로 입력되었습니다'

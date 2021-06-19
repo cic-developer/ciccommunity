@@ -31,15 +31,18 @@ class Mem_recommeder_model extends CB_Model
         if($type == 'rec'){
             $this->db->where('rmd_rec_cp', 0);
             $this->db->where('rmd_rec_vp', 0);
+            $this->db->group_by('mem_recommender.mem_rec_userid');
+            $this->db->select('mem_recommender.*, rec_mem.mem_nickname AS rec_nickname, user_mem.mem_nickname AS usr_nickname, COUNT(*) AS is_count');
         }else if($type == 'reg'){
             $this->db->where('rmd_cp', 0);
             $this->db->where('rmd_vp', 0);
+            $this->db->select('mem_recommender.*, rec_mem.mem_nickname AS rec_nickname, user_mem.mem_nickname AS usr_nickname');
         }else{
             return false;
         }
         $this->db->join('member AS rec_mem', 'mem_recommender.mem_rec_userid = rec_mem.mem_userid');
         $this->db->join('member AS user_mem', 'mem_recommender.mem_userid = user_mem.mem_userid');
-        $this->db->select('mem_recommender.*, rec_mem.mem_nickname AS rec_nickname, user_mem.mem_nickname AS usr_nickname');
+        
         $result['list'] = $this->db->get('mem_recommender')->result_array();
         if(!$result['list']){
             return false;
