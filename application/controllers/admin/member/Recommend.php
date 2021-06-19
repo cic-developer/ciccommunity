@@ -24,12 +24,12 @@ class Recommend extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Point','CIC_vp', 'CIC_cp');
+	protected $models = array('Point','CIC_vp', 'CIC_cp', 'Mem_recommeder');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
 	 */
-	protected $modelname = 'Mem_recommender_model';
+	protected $modelname = 'Mem_recommeder_model';
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -62,8 +62,9 @@ class Recommend extends CB_Controller
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
-
-		print_r($this->{$this->modelname});
+		echo "<pre>";
+		print_r($this->Mem_recommeder_model);
+		echo "</pre>";
 		exit;
 		$result = $this->{$this->modelname}->get_recommend_list($_type);
 		$list_num = $result['total_rows'];

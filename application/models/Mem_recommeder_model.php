@@ -41,6 +41,9 @@ class Mem_recommeder_model extends CB_Model
         $this->db->join('member AS user_mem', 'mem_recommender.mem_userid = user_mem.mem_userid');
         $this->db->select('mem_recommender.*, rec_mem.mem_nickname AS rec_nickname, user_mem.mem_nickname AS usr_nickname');
         $result['list'] = $this->db->get('mem_recommender')->result_array();
+        if(!$result['list']){
+            return false;
+        }
         $result['total_rows'] = count($result['list']);
         return $result;
     }
