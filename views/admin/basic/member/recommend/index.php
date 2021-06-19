@@ -77,10 +77,6 @@
                     <label for="reward_cp">보상 CP</label>
                     <input class="form-control" id="reward_cp" name="reward_cp" placeholder="보상을 지급할 cp를 입력해주세요" style="width:100%;"></input>
                 </div>
-                <div class="form-group">
-                    <label for="reward_point">보상 명예 포인트</label>
-                    <input class="form-control" id="reward_point" name="reward_point" placeholder="보상을 지급할 포인트를 입력해주세요" style="width:100%;"></input>
-                </div>
             </div>
                 
             <!-- Modal footer -->
