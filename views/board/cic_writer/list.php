@@ -5,7 +5,9 @@
         <div class="txt">
             <h2>Writer</h2>
             <p>등록된 회원들이 양질의 정보전달 글, 본인의 칼럼을 게시하는 공간 입니다.</p>
+            <?php if($this->member->is_member()) {?>
                 <p style="margin-top: 14px;"><a href="<?php echo base_url('/contactus/apply')?>">신청하기</a> </p>
+            <?php } ?>
         </div>
         <div class="img"><img src="<?php echo base_url('assets/images/top-vis03.jpg')?>" alt=""></div>
     </div>
