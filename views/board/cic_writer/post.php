@@ -142,7 +142,7 @@
 			return false;
 		}
 
-		const title = 'VP를 '+ (like_type === 'up' ? 'UP' :'DOWN') + ' 합니다.';
+		const title = 'VP를 '+ (like_type === 'up' ? 'UP' :'DOWN') + ' 합니다.\n'+`소유 VP는 ${mem_vp} 입니다.`;
 		const _point = prompt(title, 0);
 
 		//취소버튼 누를시

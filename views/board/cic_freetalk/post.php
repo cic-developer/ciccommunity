@@ -93,35 +93,35 @@
 			<p><a href="<?php echo element('url', element('prev_post', $view)); ?>" class="bw-btn"><span>이전글</span></a>
 			<a href="<?php echo element('url', element('next_post', $view)); ?>" class="bw-btn"><span>다음글</span></a></p>
 			<div class="gap60"></div>
-			<?php if(html_escape(element('post_notice', element('post', $view))) == 0){ ?>
+			<?php //if(html_escape(element('post_notice', element('post', $view))) == 0){ ?>
 			<!-- <div class="best">
 				<div class="fl">
 					<h4>BEST VP UP</h4>
 					<ul>
 						<?php
-						if (element('list',element('like_point_ranking', $view))) {
-							foreach (element('list',element('like_point_ranking', $view)) as $like_point_ranking) {
+						//if (element('list',element('like_point_ranking', $view))) {
+							//foreach (element('list',element('like_point_ranking', $view)) as $like_point_ranking) {
 								?>
 								<li>
 									<a href="javascript:void(0);" style="cursor:text;">
-										<span class="num"><?php echo number_format(element('num', $like_point_ranking)); ?></span>
+										<span class="num"><?php //echo number_format(element('num', $like_point_ranking)); ?></span>
 										<div class="my-info">
-											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $like_point_ranking), 30, 30)?>" alt=""></p>
-											<p class="rtxt"><?php echo html_escape(element('cmt_nickname', $like_point_ranking)); ?></p>
+											<p class="pimg"><img src="<?php //echo thumb_url('mlc_attach', element('mlc_attach', $like_point_ranking), 30, 30)?>" alt=""></p>
+											<p class="rtxt"><?php //echo html_escape(element('cmt_nickname', $like_point_ranking)); ?></p>
 										</div>
-										<span class="txt"><?php echo html_escape(element('cmt_content', $like_point_ranking)); ?></span>
-										<span class="vp"><?php echo number_format(element('cmt_like_point', $like_point_ranking)); ?></span>
+										<span class="txt"><?php //echo html_escape(element('cmt_content', $like_point_ranking)); ?></span>
+										<span class="vp"><?php //echo number_format(element('cmt_like_point', $like_point_ranking)); ?></span>
 									</a>
 								</li>
 						<?php
-							}
-						} else {
+							//}
+						//} else {
 						?>
 							<li>
 								<span class="nopost">댓글이 없습니다</span>
 							</li>
 						<?php
-						}
+						//}
 						?>
 					</ul>
 				</div>
@@ -129,34 +129,34 @@
 					<h4>BEST VP DOWN</h4>
 					<ul>
 						<?php
-						if (element('list',element('dislike_point_ranking', $view))) {
-							foreach (element('list',element('dislike_point_ranking', $view)) as $dislike_point_ranking) {
+						//if (element('list',element('dislike_point_ranking', $view))) {
+							//foreach (element('list',element('dislike_point_ranking', $view)) as $dislike_point_ranking) {
 								?>
 								<li>
 									<a href="javascript:void(0);" style="cursor:text;">
-										<span class="num"><?php echo number_format(element('num', $dislike_point_ranking)); ?></span>
+										<span class="num"><?php //echo number_format(element('num', $dislike_point_ranking)); ?></span>
 										<div class="my-info">
-											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $dislike_point_ranking), 30, 30)?>" alt=""></p>
-											<p class="rtxt"><?php echo html_escape(element('cmt_nickname', $dislike_point_ranking)); ?></p>
+											<p class="pimg"><img src="<?php //echo thumb_url('mlc_attach', element('mlc_attach', $dislike_point_ranking), 30, 30)?>" alt=""></p>
+											<p class="rtxt"><?php //echo html_escape(element('cmt_nickname', $dislike_point_ranking)); ?></p>
 										</div>
-										<span class="txt"><?php echo html_escape(element('cmt_content', $dislike_point_ranking)); ?></span>
-										<span class="vp"><?php echo number_format(element('cmt_dislike_point', $dislike_point_ranking)); ?></span>
+										<span class="txt"><?php //echo html_escape(element('cmt_content', $dislike_point_ranking)); ?></span>
+										<span class="vp"><?php //echo number_format(element('cmt_dislike_point', $dislike_point_ranking)); ?></span>
 									</a>
 								</li>
 						<?php
-							}
-						} else {
+							//}
+						//} else {
 						?>
 							<li>
 								<span class="nopost">댓글이 없습니다</span>
 							</li>
 						<?php
-						}
+						//}
 						?>
 					</ul>
 				</div>
 			</div> -->
-			<?php } ?>
+			<?php //} ?>
 		</div>
 
 		<div class="gap60"></div>
@@ -216,7 +216,7 @@
 			return false;
 		}
 
-		const title = 'VP를 '+ (like_type === 'up' ? 'UP' :'DOWN') + ' 합니다.';
+		const title = 'VP를 '+ (like_type === 'up' ? 'UP' :'DOWN') + ' 합니다.\n'+`소유 VP는 ${mem_vp} 입니다.`;
 		const _point = prompt(title, 0);
 
 		//취소버튼 누를시

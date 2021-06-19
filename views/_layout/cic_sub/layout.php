@@ -67,7 +67,8 @@ var cb_board_url = <?php echo ( isset($view) && element('board_key', $view)) ? '
 var cb_device_type = "<?php echo $this->cbconfig->get_device_type() === 'mobile' ? 'mobile' : 'desktop' ?>";
 var cb_csrf_hash = "<?php echo $this->security->get_csrf_hash(); ?>";
 var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
-
+var mem_vp = "<?php echo $this->member->is_member() ? $this->member->item('mem_vp') : 0?>";
+var mem_cp = "<?php echo $this->member->is_member() ? $this->member->item('mem_cp') : 0?>";
 // 지갑 입출금을 위한 변수 선언 지우면 안됩니다.//
 
 </script>
