@@ -69,6 +69,7 @@
             <?php echo form_open(current_full_url()); ?>
             <div class="modal-body">
                 <!-- <label for="usr"></label> -->
+				<input type="hidden" name="required_value" value="1">
                 <div class="form-group">
                     <label for="reward_vp">보상 VP</label>
                     <input class="form-control" id="reward_vp" name="reward_vp" placeholder="보상을 지급할 vp를 입력해주세요" style="width:100%;"></input>

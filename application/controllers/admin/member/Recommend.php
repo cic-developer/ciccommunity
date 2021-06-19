@@ -73,6 +73,42 @@ class Recommend extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
+
+		/**
+		 * Validation 라이브러리를 가져옵니다
+		 */
+		$this->load->library('form_validation');
+
+		/**
+		 * 전송된 데이터의 유효성을 체크합니다
+		 */
+		$config = array(
+			array(
+				'field' => 'required_value',
+				'label' => '필수 입력값',
+				'rules' => 'trim|numeric|required',
+			),
+			array(
+				'field' => 'reward_vp',
+				'label' => '회원아이디',
+				'rules' => 'trim|numeric',
+			),
+			array(
+				'field' => 'reward_cp',
+				'label' => '포인트',
+				'rules' => 'trim|integer',
+			)
+		);
+		
+		$this->form_validation->set_rules($config);
+		if ($this->form_validation->run() === false) {
+		}else{
+			$this->session->set_flashdata(
+				'message',
+				'정상적으로 입력되었습니다'
+			);
+		}
+
 		/**
 		 * 어드민 레이아웃을 정의합니다
 		 */
