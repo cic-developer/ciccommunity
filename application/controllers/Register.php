@@ -425,8 +425,8 @@ class Register extends CB_Controller
 		$configbasic['mem_wallet_address'] = array(
 			'field' => 'mem_wallet_address',
 			'label' => '지갑주소',
-			'rules' => 'trim|required|is_natural_no_zero|is_unique[b]',
-			'description' => 'PER 또는 Kaikas 지갑 주소를 입력해주세요.<br/>지갑주소 입력은 선택사항 입니다. <br>지갑주소를 등록하여 다양한 혜택을 즐겨보세요.</p>',
+			'rules' => 'trim|is_natural_no_zero|is_unique[b]',
+			'description' => '지갑 주소를 입력해주세요.<br/>지갑주소 입력은 선택사항 입니다. <br>지갑주소를 등록하여 다양한 혜택을 즐겨보세요.</p>',
 		);
 		// 추가한 것
 		$configbasic['mem_phone'] = array(
