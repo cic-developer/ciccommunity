@@ -50,7 +50,6 @@ class Recommend extends CB_Controller
 
 		$view = array();
 		$view['view'] = array();
-
 		$_type = $this->input->get('type') ?  $this->input->get('type') : 'rec';
 
 		// 이벤트가 존재하면 실행합니다
@@ -65,14 +64,8 @@ class Recommend extends CB_Controller
 
 		$view['view']['data'] = $result;
 
-		/**
-		 * primary key 정보를 저장합니다
-		 */
-		$view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
-
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-
 
 		/**
 		 * Validation 라이브러리를 가져옵니다
@@ -86,7 +79,7 @@ class Recommend extends CB_Controller
 			array(
 				'field' => 'required_value',
 				'label' => '필수 입력값',
-				'rules' => 'trim|in_list[res,reg]|required',
+				'rules' => 'trim|in_list[rec,reg]|required',
 			),
 			array(
 				'field' => 'reward_vp',
@@ -103,8 +96,30 @@ class Recommend extends CB_Controller
 		$this->form_validation->set_rules($config);
 		if ($this->form_validation->run() === false) {
 		}else{
-			foreach($result['list'] AS $row){
+			$insert_cp = $this->input->post('reward_cp');
+			$insert_vp = $this->input->post('reward_vp');
+			if($_type == 'res'){
+				$_update_data = array(
+					'rmd_rec_cp' => $insert_cp,
+					'rmd_rec_vp' => $insert_vp,
+				);
+				$_insert_id = 'rec_mem_id';
+				$_insert_content = '사전예약 레퍼럴 회원가입 유도 보상';
+				$_insert_relate_id = 'usr_mem_id';
+			}else{
+				$_update_data = array(
+					'rmd_cp' => $insert_cp,
+					'rmd_vp' => $insert_vp,
+				);
+				$_insert_id = 'usr_mem_id';
+				$_insert_content = '사전예약 레퍼럴 회원가입 보상';
+				$_insert_relate_id = 'rec_mem_id';
+			}
+			$this->Mem_recommeder_model->update(NULL, $_update_data);
 
+			foreach($result['list'] AS $row){
+				$this->point->insert_vp($row[$_insert_id], $insert_vp, $_insert_content,'@byadmin', $row[$_insert_relate_id], '사전예약 보상');
+				$this->point->insert_cp($row[$_insert_id], $insert_cp, $_insert_content,'@byadmin', $row[$_insert_relate_id], '사전예약 보상');
 			}
 
 			$this->session->set_flashdata(
