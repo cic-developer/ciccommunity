@@ -66,26 +66,28 @@
                 <h4 class="modal-title">보상 지급 <button type="button" class="close" data-dismiss="modal">&times;</button></h4>
             </div>
             <!-- Modal body -->
+            <?php echo form_open(current_full_url()); ?>
             <div class="modal-body">
-                    <!-- <label for="usr"></label> -->
-                    <div class="form-group">
-                        <label for="reward_vp">보상 VP</label>
-                        <input class="form-control" id="reward_vp" name="reward_vp" placeholder="보상을 지급할 vp를 입력해주세요" required style="width:100%;"></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="reward_cp">보상 CP</label>
-                        <input class="form-control" id="reward_cp" name="reward_cp" placeholder="보상을 지급할 cp를 입력해주세요" required style="width:100%;"></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="reward_point">보상 명예 포인트</label>
-                        <input class="form-control" id="reward_point" name="reward_point" placeholder="보상을 지급할 포인트를 입력해주세요" required style="width:100%;"></input>
-                    </div>
+                <!-- <label for="usr"></label> -->
+                <div class="form-group">
+                    <label for="reward_vp">보상 VP</label>
+                    <input class="form-control" id="reward_vp" name="reward_vp" placeholder="보상을 지급할 vp를 입력해주세요" style="width:100%;"></input>
+                </div>
+                <div class="form-group">
+                    <label for="reward_cp">보상 CP</label>
+                    <input class="form-control" id="reward_cp" name="reward_cp" placeholder="보상을 지급할 cp를 입력해주세요" style="width:100%;"></input>
+                </div>
+                <div class="form-group">
+                    <label for="reward_point">보상 명예 포인트</label>
+                    <input class="form-control" id="reward_point" name="reward_point" placeholder="보상을 지급할 포인트를 입력해주세요" style="width:100%;"></input>
+                </div>
             </div>
                 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-success btn-retire">지급하기</button>
+                <button type="submit" class="btn btn-success btn-retire">지급하기</button>
             </div>
+            <?php echo form_close()?>
         </div>
     </div>
 </div>

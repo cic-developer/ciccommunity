@@ -14,13 +14,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Recommend extends CB_Controller
 {
-
-	/**
-	 * 관리자 페이지 상의 현재 디렉토리입니다
-	 * 페이지 이동시 필요한 정보입니다
-	 */
-	public $pagedir = 'member/points';
-
 	/**
 	 * 모델을 로딩합니다
 	 */
