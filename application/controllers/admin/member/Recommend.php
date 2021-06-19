@@ -58,10 +58,12 @@ class Recommend extends CB_Controller
 		$view = array();
 		$view['view'] = array();
 
+		$_type = $this->input->get('type') ?  $this->input->get('type') : 'rec';
+
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-		$result = $this->{$this->modelname}->get_recommend_list();
+		$result = $this->{$this->modelname}->get_recommend_list($_type);
 		$list_num = $result['total_rows'];
 		if (element('list', $result)) {
 			foreach (element('list', $result) as $key => $val) {
