@@ -47,7 +47,7 @@ class Mem_recommeder_model extends CB_Model
                 mem_recommender.*,
                 rec_mem.mem_nickname AS rec_nickname,
                 rec_mem.mem_id AS rec_mem_id,
-                user_mem.mem_nickname AS usr_nickname
+                user_mem.mem_nickname AS usr_nickname,
                 user_mem.mem_id AS usr_mem_id    
             ');
         }else{

@@ -27,7 +27,7 @@ class Recommend extends CB_Controller
 	/**
 	 * 헬퍼를 로딩합니다
 	 */
-	protected $helpers = array('form', 'array');
+	protected $helpers = array('form', 'array', 'url');
 
 	function __construct()
 	{
@@ -98,7 +98,7 @@ class Recommend extends CB_Controller
 		}else{
 			$insert_cp = $this->input->post('reward_cp');
 			$insert_vp = $this->input->post('reward_vp');
-			if($_type == 'res'){
+			if($_type == 'rec'){
 				$_update_data = array(
 					'rmd_rec_cp' => $insert_cp,
 					'rmd_rec_vp' => $insert_vp,
@@ -126,6 +126,7 @@ class Recommend extends CB_Controller
 				'message',
 				'정상적으로 입력되었습니다'
 			);
+			redirect('admin/member/recommend?type='.$_type);
 		}
 
 		/**
