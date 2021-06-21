@@ -7,7 +7,7 @@
             <p>cic writer로 등록된 회원들만 글쓰기가 가능한 공간입니다</p>
                 <p style="margin-top: 14px;"><a href="<?php echo base_url('/contactus/apply')?>">신청하기</a> </p>
         </div>
-        <div class="img"><img src="<?php echo base_url('assets/images/top-vis03.jpg')?>" alt=""></div>
+        <div class="img"><img src="<?php echo base_url('assets/images/top-vis-writer.jpg')?>" alt=""></div>
     </div>
     <div id="contents" class="div-cont">
         <div class="board-wrap list">
