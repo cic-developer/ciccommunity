@@ -31,7 +31,7 @@
 								<input type="text" id="mem_nickname" name="mem_nickname" placeholder=""
 									value="<?php echo $this->member->item('mem_nickname'); ?>">
 							</p>
-							<a href="javascript:void(0);" class="modify-btn" onclick="check_nickname()"><span>닉네임 확인</span></a>
+							<a href="javascript:void(0);" class="modify-btn" id="ath_nickname"><span>닉네임 확인</span></a>
 						</div>
 					</li>
 					<li>
@@ -873,8 +873,37 @@
 	});
 	
 	// 닉네임 체크
+	// 닉네임 확인
+	$(document).ready(function(){
+		$("#ath_nickname").on('click', function(){
+			var _nickname = $("#mem_nickname").val();
+			// alert(email);
 
-	function check_nickname(){
-		
-	}
+			var result = '';
+			var reason = '';
+			$.ajax({
+				url: cb_url + '/register/ajax_nickname_check',
+				type: 'POST',
+				data: {
+					nickname: _nickname,
+					csrf_test_name : cb_csrf_hash
+				},
+				dataType: 'json',
+				async: true,
+				cache: false,
+				success: function(data) {
+					result = data.result;
+					reason = data.reason;
+					if(result == "no"){
+						alert(reason);
+					}
+
+					if(result == "available"){
+						nickname_ath_result = 1;
+						alert(reason);
+					}
+				}
+			});
+		})
+	})
 </script>
