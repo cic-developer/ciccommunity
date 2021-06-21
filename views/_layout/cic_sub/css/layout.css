@@ -1357,7 +1357,9 @@ body {
 
 @media only screen and (max-width:480px) {
     /* 여기에 모바일 이미지 넣어야함 */
-    #top-vis {}
+    #top-vis .img {
+        background-image: url('assets/images/top-vis-writer-moblie.jpg');
+    }
     .cont-top h2 {
         font-size: 32px;
     }
