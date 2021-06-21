@@ -2,6 +2,7 @@
 	<div class="box-header">
 		<ul class="nav nav-tabs">
 			<li role="presentation"><a href="<?php echo admin_url($this->pagedir); ?>">일반기능</a></li>
+			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/list'); ?>">출석체크 리스트</a></li>
 			<li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/points'); ?>">시간/포인트설정</a></li>
 			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/cleanlog'); ?>">오래된 로그삭제</a></li>
 		</ul>

@@ -741,4 +741,31 @@ class Attendancecfg extends CB_Controller
 		$this->view = element('view_skin_file', element('layout', $view));
 
 	}
+
+	function list(){
+				// 이벤트 라이브러리를 로딩합니다
+				$eventname = 'event_admin_service_attendancecfg_points';
+				$this->load->event($eventname);
+		
+				$view = array();
+				$view['view'] = array();
+		
+				// 이벤트가 존재하면 실행합니다
+				$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		
+				$getdata = $this->Config_model->get_all_meta();
+				$view['view']['data'] = $getdata;
+		
+				// 이벤트가 존재하면 실행합니다
+				$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+		
+				/**
+				 * 어드민 레이아웃을 정의합니다
+				 */
+				$layoutconfig = array('layout' => 'layout', 'skin' => 'list');
+				$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+				$this->data = $view;
+				$this->layout = element('layout_skin_file', element('layout', $view));
+				$this->view = element('view_skin_file', element('layout', $view));
+	}
 }
