@@ -4,10 +4,8 @@
     <div id="top-vis">
         <div class="txt">
             <h2>Writer</h2>
-            <p>등록된 회원들이 양질의 정보전달 글, 본인의 칼럼을 게시하는 공간 입니다.</p>
-            <?php if($this->member->is_member()) {?>
+            <p>cic writer로 등록된 회원들만 글쓰기가 가능한 공간입니다</p>
                 <p style="margin-top: 14px;"><a href="<?php echo base_url('/contactus/apply')?>">신청하기</a> </p>
-            <?php } ?>
         </div>
         <div class="img"><img src="<?php echo base_url('assets/images/top-vis03.jpg')?>" alt=""></div>
     </div>
@@ -99,7 +97,7 @@
                         </a>
                             <div class="abr">
                                 <div class="photo">
-                                    <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 140, 140);?>"
+                                    <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30);?>"
                                             alt="<?php echo element('mlc_title', $result); ?>"></p>
                                     <p class="rtxt popup_menuu"><?php echo element('post_nickname', $result); ?></p>
                                 </div>
