@@ -260,8 +260,9 @@
 	* modal3: 지갑주소변경
 	*/
 	$(document).ready(function(){
+		
 		$("#submitButton").on('click',function(){
-			$("#fregisterform").submit();
+				$("#fregisterform").submit();
 		});
 	});
 
@@ -872,13 +873,11 @@
 		$(this).val( $(this).val().replace(/[^0-9]/g,"").substr(0,6) ); 
 	});
 	
-	// 닉네임 체크
 	// 닉네임 확인
 	$(document).ready(function(){
 		$("#ath_nickname").on('click', function(){
 			var _nickname = $("#mem_nickname").val();
 			// alert(email);
-
 			var result = '';
 			var reason = '';
 			$.ajax({
