@@ -276,7 +276,7 @@ class Contactus extends CB_Controller
 			$to_email 	= "support@ciccommunity.com";
 			// $to_email 	= "developer@rs-team.com";
 			$from_email = "support@ciccommunity.com";
-			$title 		= "[cic 문의 접수] ". $this->input->post('contactus_title');
+			$title 		= "[cic Writer 신청 문의] ". $this->input->post('contactus_title');
 			$message 	= $this->input->post('contactus_content');
 
 			$this->email->from($from_email);
