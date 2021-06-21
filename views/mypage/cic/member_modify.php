@@ -879,11 +879,14 @@ var nickname_ath_result  = 0;
 	// 닉네임 확인
 	$(document).ready(function(){
 		$("#ath_nickname").on('click', function(){
-			if(<?= $this->member->item('mem_nickname')?> === $("#mem_nickname").val()){
+			console.log('<?= $this->member->item('mem_nickname')?>');
+			console.log($("#mem_nickname").val());
+
+			if($("#mem_nickname").val() === "<?= $this->member->item('mem_nickname')?>"){
 				nickname_ath_result = 1;
-				$("#mem_nickname").val(<?= $this->member->item('mem_nickname')?>);
+				console.log('ㅋㅋ');
+				$("#mem_nickname").val(nickname);
 				$("#mem_nickname").attr("disabled", true);
-				alert('');
 			}
 			var _nickname = $("#mem_nickname").val();
 			var result = '';
