@@ -1225,13 +1225,22 @@ if ( ! function_exists('display_datetime')) {
 		} elseif ($type === 'user' && $custom) {
 			return cdate($custom, strtotime($datetime));
 		} elseif ($type === 'full') {
-			if (substr($datetime,0, 10) === cdate('Y-m-d')) {
-				$result = substr($datetime,11,5);
-			} elseif (substr($datetime,0, 4) === cdate('Y')) {
-				$result = substr($datetime,5,11);
-			} else {
-				$result = substr($datetime,0,10);
+			if($custom){
+				if (substr($datetime,0, 10) === cdate('Y-m-d')) {
+					$result = substr($datetime,11,5);
+				}else {
+					$result = cdate($custom, strtotime($datetime));
+				}
+			}else{
+				if (substr($datetime,0, 10) === cdate('Y-m-d')) {
+					$result = substr($datetime,11,5);
+				} elseif (substr($datetime,0, 4) === cdate('Y')) {
+					$result = substr($datetime,5,11);
+				} else {
+					$result = substr($datetime,0,10);
+				}
 			}
+
 		} else {
 			if (substr($datetime,0, 10) === cdate('Y-m-d')) {
 				$result = substr($datetime,11,5);
