@@ -75,7 +75,8 @@
                     <li>
                         <div class="txt">
                             <p class="btxt">내 활동 <span>내역보기</span></p>
-                            <p class="stxt">내가 행사 한 <span>VP, <br>댓글</span> 보기</p>
+                            <!-- <p class="stxt">내가 행사 한 <span>VP, <br>댓글</span> 보기</p> -->
+                            <p class="stxt"><span>CIC COMMUNITY</span>에서 활동한<br/>모든 기록 확인</p>
                             <a href="<?php echo base_url('mypage/post')?>"><span>바로가기</span></a>
                         </div>
                     </li>

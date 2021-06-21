@@ -2806,7 +2806,6 @@ class Membermodify extends CB_Controller
 		$phone_validation_result = $this->session->userdata('phone_confirm'); // phone validation 결과
 		$password_validation_result = $this->session->userdata('password_confirm'); // password validation 결과
 		$wallet_validation_result = $this->session->userdata('wallet_confirm'); // wallet validation 결과
-		// $nickname_validation_result = $this->session->userdata('ath_nickname_result'); // nickname validation 결과
 
 		$mem_id = (int) $this->member->item('mem_id');
 		$new_phone =  $this->member->item('mem_phone');
@@ -2829,17 +2828,26 @@ class Membermodify extends CB_Controller
 				&& $wallet_validation_result == '1'){
 			$new_wallet = $this->input->post('mem_wallet');
 		}
+
+
+		// if($nickname_validation_result == '1'){
+		// 	$new_nickname = $this->input->post('mem_nickname');
+		// }
+		// echo $new_nickname;
+		// exit;
 		
 		$data = array(
 			'mem_wallet_address' => $new_wallet,
 			// 'mem_wallet_address' => '123123123',
 		);
-		echo $this->input->post('mem_nickname');
-		exit;
+
+		// echo $this->input->post('mem_nickname');
+		// exit;
+
 		$arr = array(
 			'mem_phone' => $new_phone,
 			'mem_password' => $new_password,
-			'mem_nickname' => $this->input->post('mem_nickname'),
+			'mem_nickname' => $new_nickname,
 		);
 
 		$this->Member_extra_vars_model->save($mem_id, $data); // memo: return 값이 없다

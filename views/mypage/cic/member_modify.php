@@ -901,8 +901,6 @@ var nickname_ath_result  = 0;
 					}
 
 					if(result == "available"){
-						$("#mem_nickname").attr("disabled", true);
-						$("#mem_nickname").val(_nickname);
 						nickname_ath_result = 1;
 						alert(reason);
 					}
