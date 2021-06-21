@@ -29,6 +29,7 @@
 							<th>도달 포인트</th>
 							<th>활성화</th>
 							<th>아이콘</th>
+							<th>수정</th>
 							<th><input type="checkbox" name="chkall" id="chkall" /></th>
 						</tr>
 					</thead>
@@ -43,6 +44,7 @@
 							<td class="text-right"><?php echo element('mlc_target_point' , $result); ?></td>
 							<td><?php echo element('mlc_enable', $result) == 0 ? '비활성': '활성' ?></td>
 							<td><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach',  $result), 50, 50); ?>" alt="등급 아이콘" title="등급 아이콘" /></td>
+							<td><a class="btn btn-outline btn-default btn-sm" href="<?php echo element('write_url', $view).'/'.element(element('primary_key', $view), $result);?>">수정하기</a></td>
 							<td><input type="checkbox" name="chk[]" class="list-chkbox" value="<?php echo element(element('primary_key', $view), $result); ?>" /></td>
 						</tr>
 					<?php

@@ -237,6 +237,7 @@
 </div>
 
 <script>
+var nickname_ath_result  = 0;
 /*****************************************************************************/
 	/*
 	** 회원탈퇴 시작
@@ -260,9 +261,11 @@
 	* modal3: 지갑주소변경
 	*/
 	$(document).ready(function(){
-		
 		$("#submitButton").on('click',function(){
-				$("#fregisterform").submit();
+			if(nickname_ath_result == 0){
+				alert('닉네임을 확인해주세요'); return;
+			}
+			$("#fregisterform").submit();
 		});
 	});
 
@@ -898,6 +901,8 @@
 					}
 
 					if(result == "available"){
+						$("#mem_nickname").attr("disabled", true);
+						$("#mem_nickname").val(_nickname);
 						nickname_ath_result = 1;
 						alert(reason);
 					}
