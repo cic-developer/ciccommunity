@@ -880,7 +880,6 @@ var nickname_ath_result  = 0;
 	$(document).ready(function(){
 		$("#ath_nickname").on('click', function(){
 			var _nickname = $("#mem_nickname").val();
-			// alert(email);
 			var result = '';
 			var reason = '';
 			$.ajax({
@@ -903,6 +902,8 @@ var nickname_ath_result  = 0;
 					if(result == "available"){
 						nickname_ath_result = 1;
 						alert(reason);
+						$("#mem_nickname").val(nickname);
+						$("#mem_nickname").attr("disabled", true);
 					}
 				}
 			});
