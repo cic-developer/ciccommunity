@@ -1781,7 +1781,7 @@ class Register extends CB_Controller
 		} else {
 			$result = array(
 				'state' => '1',
-				'message' => '해당 이메일로 인증 번호를 발송하였습니다',
+				'message' => "해당 이메일로 인증 번호를 발송하였습니다\n메일 환경에 따라 이메일 전송이 늦어질 수 있습니다.",
 			);
 			exit(json_encode($result));
 		}
