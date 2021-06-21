@@ -44,7 +44,7 @@
 								<td><span><?php echo html_escape(element('cp_point', $post) >= 0 ? '+'.element('cp_point', $post) : element('cp_point', $post));?></span></td>
 								<td class="l_memo"><span><?php echo html_escape(element('cp_content', $post));?></span></td>
 								<td><?php echo html_escape(element('cp_action', $post));?></td>
-								<td><?php echo display_datetime(element('cp_datetime', $post), 'full'); ?></td>
+								<td><?php echo display_datetime(element('cp_datetime', $post), 'user', 'Y-m-d H:i'); ?></td>
 							</tr>
 						<?php } ?>
 					</tbody>

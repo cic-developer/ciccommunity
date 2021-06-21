@@ -2556,7 +2556,7 @@
         display: none;
     }
     .board-wrap.list .list.record table tbody td:nth-child(3) {
-        width: 100%;
+        width: 55%;
         margin-bottom: 2px;
     }
     .board-wrap.list .list.record table tbody td:nth-child(n+4) {
