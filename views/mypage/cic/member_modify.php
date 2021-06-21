@@ -237,7 +237,7 @@
 </div>
 
 <script>
-var nickname_ath_result  = 0;
+var nickname_ath_result  = 1;
 /*****************************************************************************/
 	/*
 	** 회원탈퇴 시작
@@ -879,6 +879,7 @@ var nickname_ath_result  = 0;
 	// 닉네임 확인
 	$(document).ready(function(){
 		$("#ath_nickname").on('click', function(){
+			nickname_ath_result = 0;
 			var _nickname = $("#mem_nickname").val();
 			var result = '';
 			var reason = '';

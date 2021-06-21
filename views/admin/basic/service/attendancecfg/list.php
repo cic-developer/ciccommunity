@@ -12,8 +12,16 @@
 		echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
 		echo show_alert_message(element('alert_message', $view), '<div class="alert alert-auto-close alert-dismissible alert-info"><button type="button" class="close alertclose" >&times;</button>', '</div>');
 		?>
-		<div class="table-responsive">
-			<table class="table table-bordered table-hover table-striped">
+        <div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
+        <div class="table-responsive">
+			<table class="table table-hover table-striped table-bordered">
+                <tbody>
+                <?php if ( ! element('list', element('data', $view))) {?>
+						<tr>
+							<td colspan="17" class="nopost">자료가 없습니다</td>
+						</tr>
+					<?php } ?>
+                </tbody>
             </table>
 		</div>
 		<div class="box-info">
