@@ -237,7 +237,7 @@
 </div>
 
 <script>
-var nickname_ath_result  = 1;
+var nickname_ath_result  = 0;
 /*****************************************************************************/
 	/*
 	** 회원탈퇴 시작
@@ -879,7 +879,12 @@ var nickname_ath_result  = 1;
 	// 닉네임 확인
 	$(document).ready(function(){
 		$("#ath_nickname").on('click', function(){
-			nickname_ath_result = 0;
+			if(<?= $this->member->item('mem_nickname')?> === $("#mem_nickname").val()){
+				nickname_ath_result = 1;
+				$("#mem_nickname").val(<?= $this->member->item('mem_nickname')?>);
+				$("#mem_nickname").attr("disabled", true);
+				alert('');
+			}
 			var _nickname = $("#mem_nickname").val();
 			var result = '';
 			var reason = '';

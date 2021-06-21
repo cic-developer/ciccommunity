@@ -254,12 +254,15 @@ class Attendance extends CB_Controller
 			$insertdata = array(
 				'mem_id' => $this->member->item('mem_id'),
 				'att_point' => $mypoint,
+				'att_cp'	=> $mycp ? $mycp : 0,
+				'att_vp'	=> $myvp ? $myvp : 0,
 				'att_memo' => $this->input->post('memo', null, ''),
 				'att_continuity' => $att_continuity,
 				'att_ranking' => $my_ranking,
 				'att_date' => cdate('Y-m-d'),
 				'att_datetime' => cdate('Y-m-d H:i:s'),
 			);
+
 			$att_id = $this->Attendance_model->insert($insertdata);
 			
 			$this->load->library('point');

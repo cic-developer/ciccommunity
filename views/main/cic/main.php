@@ -4,8 +4,8 @@
         <!-- s : msec-visual -->
         <div class="msec-visual">
             <div class="bg">
-                <p class="desktop"><img src="<?php echo base_url('assets/images/main-banner.png') ?>" alt="" /></p>
-                <p class="mobile"><img src="<?php echo base_url('assets/images/main-banner-iphone.png') ?>" alt="" /></p>
+                <p class="desktop"><img src="<?php echo base_url('assets/images/cic-main-banner.png') ?>" alt="" /></p>
+                <p class="mobile"><img src="<?php echo base_url('assets/images/cic-main-banner-mobile.png') ?>" alt="" /></p>
             </div>
             <div class="cont">
                 <div class="search">
