@@ -261,8 +261,10 @@ class Attendance extends CB_Controller
 				'att_datetime' => cdate('Y-m-d H:i:s'),
 			);
 			$att_id = $this->Attendance_model->insert($insertdata);
-
+			
 			$this->load->library('point');
+			$result['success'] = $my_ranking . '등으로 출석하셨습니다. 감사합니다';
+			$_nextline = false;
 			if($mypoint){
 				$this->point->insert_point(
 					$this->member->item('mem_id'),
@@ -272,6 +274,11 @@ class Attendance extends CB_Controller
 					$att_id,
 					'출석체크'
 				);
+				if(!$_nextline){
+					$result['success'] = $result['success']."\n";
+					$_nextline = true;
+				} 
+				$result['success'] = $result['success']."보상 명예포인트 : ".$mypoint." ";
 			}
 			if($myvp){
 				$this->point->insert_vp(
@@ -282,6 +289,11 @@ class Attendance extends CB_Controller
 					$att_id,
 					'출석체크'
 				);
+				if(!$_nextline){
+					$result['success'] = $result['success']."\n";
+					$_nextline = true;
+				} 
+				$result['success'] = $result['success']."보상 VP : ".$myvp." ";
 			}
 			if($mycp){
 				$this->point->insert_cp(
@@ -292,12 +304,16 @@ class Attendance extends CB_Controller
 					$att_id,
 					'출석체크'
 				);
+				if(!$_nextline){
+					$result['success'] = $result['success']."\n";
+					$_nextline = true;
+				} 
+				$result['success'] = $result['success']."보상 CP : ".$mycp." ";
 			}
 
 			// 이벤트가 존재하면 실행합니다
 			Events::trigger('after', $eventname);
-
-			$result = array('success' => $my_ranking . '등으로 출석하셨습니다. 감사합니다');
+			// $result = array('success' => $my_ranking . '등으로 출석하셨습니다. 감사합니다');
 			exit(json_encode($result));
 		}
 	}

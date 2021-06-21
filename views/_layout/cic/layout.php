@@ -164,7 +164,10 @@
 							</li>
 							<li class="mn_l1 has-sub is-cloose" style="width: auto;">
 								<a href="javascript:alert('현재 준비중입니다.');" class="mn_a1"><span>코인헬퍼</span></a>
-								<div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1; overflow: hidden;">
+								<div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1;">
+                                <ul class="depth2">
+                                        <li class="mn_l2"><a href="<?php echo base_url('/board/forum?type=1')?>" class="mn_a2"><span>준비 중입니다 :)</span></a></li>
+									</ul>
 								</div>
 							</li>
 							<li class="mn_l1 has-sub is-cloose" style="width: auto;">

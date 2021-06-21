@@ -31,6 +31,7 @@
 								<input type="text" id="mem_nickname" name="mem_nickname" placeholder=""
 									value="<?php echo $this->member->item('mem_nickname'); ?>">
 							</p>
+							<a href="javascript:void(0);" class="modify-btn" onclick="check_nickname()"><span>닉네임 확인</span></a>
 						</div>
 					</li>
 					<li>
@@ -870,4 +871,10 @@
 	$(".ath_num").bind("change keyup input",function(){ 
 		$(this).val( $(this).val().replace(/[^0-9]/g,"").substr(0,6) ); 
 	});
+	
+	// 닉네임 체크
+
+	function check_nickname(){
+		
+	}
 </script>

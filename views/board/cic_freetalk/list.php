@@ -99,7 +99,7 @@
                             <td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><span
                                         class="cate">공지</span><?php echo html_escape(element('title', $result)); ?></a></td>
                             <td>
-                                <p class="cyellow">12</p>
+                                <p class="cyellow">-</p>
                                 <!-- <p class="cred">4 진정한 흑우</p> -->
                             </td>
                             <td><?php echo number_format(element('post_hit', $result)); ?></td>
