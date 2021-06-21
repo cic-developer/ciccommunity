@@ -28,8 +28,8 @@
 						<p class="btxt">닉네임</p>
 						<div class="field">
 							<p class="chk-input w210 readonly">
-								<input type="text" placeholder=""
-									value="<?php echo $this->member->item('mem_nickname'); ?>" readonly="">
+								<input type="text" id="mem_nickname" name="mem_nickname" placeholder=""
+									value="<?php echo $this->member->item('mem_nickname'); ?>">
 							</p>
 						</div>
 					</li>
