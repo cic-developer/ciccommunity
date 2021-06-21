@@ -314,7 +314,7 @@
             <div class="msec-04">
                 <div class="cont">
                     <p class="btxt">퍼퍼맨 ‘퍼 내려온다’</p>
-                    <p class="stxt">요즘 핫한 퍼 패 맨의 '퍼 내려온다'를 감상해 <br />보세요!</p>
+                    <p class="stxt">요즘 핫한 퍼퍼맨의 '퍼 내려온다'를 감상해 <br />보세요!</p>
                     <a href="https://www.youtube.com/channel/UC-akAISl4l5sNBI00A1ykqQ" class="more"
                         target="_blink"><span>동영상 더보기</span></a>
                     <div class="img">
@@ -334,7 +334,7 @@
                     <ul>
                         <li>
                             <a href="<?php echo $this->member->is_member() ? base_url('/attendance') : 'javascript:alert(\'로그인이 필요한 서비스입니다.\');';?>">
-                                <p class="desktop"><img src="<?php echo base_url('assets/images/use-img01.png') ?>"
+                                <p class="desktop"><img src="<?php echo base_url('assets/images/check-vp.png') ?>"
                                         alt="" /></p>
                                 <p class="mobile"><img src="<?php echo base_url('assets/images/use-img01m.jpg') ?>"
                                         alt="" /></p>

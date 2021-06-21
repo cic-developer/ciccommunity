@@ -41,7 +41,7 @@
 						<?php foreach(element('list',element('data', $view)) as $post ) { ?>
 							<tr>
 								<td><span><?php echo number_format(element('num', $post));?></span></td>
-								<td><span><?php echo html_escape(element('vp_point', $post));?></span></td>
+								<td><span><?php echo html_escape(element('vp_point', $post) >= 0 ? '+'.element('vp_point', $post):element('vp_point', $post));?></span></td>
 								<td class="l_memo"><span><?php echo html_escape(element('vp_content', $post));?></span></td>
 								<td><?php echo html_escape(element('vp_action', $post));?></td>
 								<td><?php echo display_datetime(element('vp_datetime', $post), 'full'); ?></td>
