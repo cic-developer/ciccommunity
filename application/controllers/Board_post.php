@@ -1566,6 +1566,10 @@ class Board_post extends CB_Controller
 		 * brd_id =3 진행중 포럼 게시물 리스트는 다른 모델을 사용하여 리스트를 불러오기 때문에 제외했습니다.
 		 */
 		if($board['brd_id'] != 3) {
+			//자유게시판일 경우 일반게시글목록에서는 공지사항 게시글 제외
+			if($board['brd_id'] == 1){
+				$where['post_notice'] = 0;
+			}
 			$result = $this->Post_model
 				->get_post_list($per_page, $offset, $where, $category_id, $findex, $forder, $sfield, $skeyword);
 		}

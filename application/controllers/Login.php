@@ -495,7 +495,7 @@ class Login extends CB_Controller
 			// 휴대폰 인증 데이터 삭제
 			$this->session->unset_userdata('dec_data');
 
-			echo("<script>alert('인증에 실패하였습니다');</script>");
+			echo("<script>alert('회원가입된 아이디가 없습니다.');</script>");
 			echo("<script>self.close()</script>");
 		}
 	}

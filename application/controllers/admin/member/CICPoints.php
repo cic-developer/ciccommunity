@@ -210,7 +210,7 @@ class CICPoints extends CB_Controller
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
 		$view['view']['write_url'] = admin_url($this->pagedir . '/write?pointType=vp');
-		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listdelete/?' . $param->output());
+		$view['view']['list_delete_url'] = admin_url($this->pagedir . '/listvpdelete/?' . $param->output());
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
@@ -573,7 +573,7 @@ class CICPoints extends CB_Controller
 			'정상적으로 삭제되었습니다'
 		);
 		$param =& $this->querystring;
-		$redirecturl = admin_url($this->pagedir . '/cp' . $param->output());
+		$redirecturl = admin_url($this->pagedir . '/cp?' . $param->output());
 
 		redirect($redirecturl);
 	}

@@ -2827,11 +2827,6 @@ class Membermodify extends CB_Controller
 				&& $wallet_validation_result == '1'){
 			$new_wallet = $this->input->post('mem_wallet');
 		}
-		if($wallet_mail_ath_result == '1'
-			&& $wallet_nice_ath_result == '1'
-				&& $wallet_validation_result == '1'){
-			$new_nickname = $this->input->post('mem_nickname');
-		}
 
 		$data = array(
 			'mem_wallet_address' => $new_wallet,
@@ -2841,7 +2836,7 @@ class Membermodify extends CB_Controller
 		$arr = array(
 			'mem_phone' => $new_phone,
 			'mem_password' => $new_password,
-			'mem_nickname' => $new_nickname,
+			'mem_nickname' => $this->input->post('mem_nickname'),
 		);
 
 		$this->Member_extra_vars_model->save($mem_id, $data); // memo: return 값이 없다

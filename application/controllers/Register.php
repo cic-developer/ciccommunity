@@ -276,8 +276,12 @@ class Register extends CB_Controller
 			
 			echo("<script>alert('인증에 실패하였습니다!');</script>");
 			echo("<script>self.close()</script>");
+			exit;
 		} 
-
+		log_message('error', '======== 회원가입 폰 인증 Error! Start ========');
+		log_message('error', 'EncodeData is not transferred');
+		log_message('error', json_encode($EncodeData, JSON_UNESCAPED_UNICODE));
+		log_message('error', '======== 회원가입 폰 인증 Error! End ========');
 		echo("<script>alert('인증에 실패하였습니다!');</script>");
 		echo("<script>self.close()</script>");
 	}
