@@ -79,7 +79,7 @@ class CICPoints extends CB_Controller
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
 		$this->CIC_vp_model->allow_search_field 
-			= array('vp_id', 'cic_vp.mem_id', 'vp_datetime', 'vp_content', 'vp_type', 'vp_action'); // 검색이 가능한 필드
+			= array('vp_id', 'cic_vp.mem_id', 'vp_datetime', 'vp_content', 'vp_type', 'vp_action', 'mem_nickname'); // 검색이 가능한 필드
 		$this->CIC_vp_model->search_field_equal = array('vp_id', 'cic_vp.mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->CIC_vp_model->allow_order_field = array('vp_id'); // 정렬이 가능한 필드
 		$result = $this->CIC_vp_model
@@ -116,7 +116,7 @@ class CICPoints extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('poi_datetime' => '날짜', 'poi_content' => '내용');
+		$search_option = array('poi_datetime' => '날짜', 'poi_content' => '내용', 'mem_nickname' => '회원명');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
@@ -168,7 +168,7 @@ class CICPoints extends CB_Controller
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
 		$this->CIC_vp_model->allow_search_field 
-			= array('vp_id', 'cic_vp.mem_id', 'vp_datetime', 'vp_content', 'vp_type', 'vp_action'); // 검색이 가능한 필드
+			= array('vp_id', 'cic_vp.mem_id', 'vp_datetime', 'vp_content', 'vp_type', 'vp_action', 'mem_nickname'); // 검색이 가능한 필드
 		$this->CIC_vp_model->search_field_equal = array('vp_id', 'cic_vp.mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->CIC_vp_model->allow_order_field = array('vp_id'); // 정렬이 가능한 필드
 		$result = $this->CIC_vp_model
@@ -205,7 +205,7 @@ class CICPoints extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('poi_datetime' => '날짜', 'poi_content' => '내용');
+		$search_option = array('poi_datetime' => '날짜', 'poi_content' => '내용', 'mem_nickname' => '회원명');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
@@ -263,7 +263,7 @@ class CICPoints extends CB_Controller
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
 		$this->CIC_cp_model->allow_search_field 
-			= array('cp_id', 'cic_cp.mem_id', 'cp_datetime', 'cp_content', 'cp_type', 'cp_action'); // 검색이 가능한 필드
+			= array('cp_id', 'cic_cp.mem_id', 'cp_datetime', 'cp_content', 'cp_type', 'cp_action', 'mem_nickname'); // 검색이 가능한 필드
 		$this->CIC_cp_model->search_field_equal = array('cp_id', 'cic_cp.mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->CIC_cp_model->allow_order_field = array('cp_id'); // 정렬이 가능한 필드
 		$result = $this->CIC_cp_model
@@ -300,7 +300,7 @@ class CICPoints extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('poi_datetime' => '날짜', 'poi_content' => '내용');
+		$search_option = array('poi_datetime' => '날짜', 'poi_content' => '내용', 'mem_nickname' => '회원명');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);

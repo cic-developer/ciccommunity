@@ -28,7 +28,7 @@
 						<p class="btxt">닉네임</p>
 						<div class="field">
 							<p class="chk-input w210 readonly">
-								<input type="text" id="mem_nickname" name="mem_nickname" placeholder=""
+								<input type="text" id="mem_nickname" name="mem_nickname" placeholder="" onchange="change_nickname()"
 									value="<?php echo $this->member->item('mem_nickname'); ?>">
 							</p>
 							<a href="javascript:void(0);" class="modify-btn" id="ath_nickname"><span>닉네임 확인</span></a>
@@ -262,11 +262,7 @@ var nickname_ath_result  = 0;
 	*/
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){
-			if(<?php echo $this->member->item('mem_nickname')?> === 
-				$("#mem_nickname").val()){
-					alert('닉네임이 같구나'); return;
-				}
-			if(nickname_ath_result == 0){
+			if(nickname_ath_result == 0 && "<?php echo $this->member->item('mem_nickname')?>" !== $("#mem_nickname").val()){
 				alert('닉네임을 확인해주세요'); return;
 			}
 			$("#fregisterform").submit();
@@ -883,10 +879,7 @@ var nickname_ath_result  = 0;
 	// 닉네임 확인
 	$("#ath_nickname").on('click', function(){
 		$(document).ready(function(){
-			console.log("<?php echo $this->member->item('mem_nickname'); ?>");
 			var _nickname = $("#mem_nickname").val();
-			// alert(email);
-
 			var result = '';
 			var reason = '';
 			$.ajax({
@@ -908,11 +901,14 @@ var nickname_ath_result  = 0;
 
 					if(result == "available"){
 						nickname_ath_result = 1;
+						
 						alert(reason);
 					}
 				}
 			});
 		})
 	})
-
+function change_nickname(){
+	nickname_ath_result = 0;
+}
 </script>

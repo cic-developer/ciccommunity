@@ -78,7 +78,7 @@ class Like extends CB_Controller
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
-		$this->{$this->modelname}->allow_search_field = array('lik_id', 'target_id', 'target_type', 'post_id', 'like.mem_id', 'target_mem_id', 'lik_type', 'lik_datetime', 'lik_ip'); // 검색이 가능한 필드
+		$this->{$this->modelname}->allow_search_field = array('lik_id', 'target_id', 'target_type', 'post_id', 'like.mem_id', 'target_mem_id', 'lik_type', 'lik_datetime', 'lik_ip', 'mem_nickname'); // 검색이 가능한 필드
 		$this->{$this->modelname}->search_field_equal = array('lik_id', 'target_id', 'target_type', 'post_id', 'like.mem_id', 'target_mem_id', 'lik_type'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('lik_id'); // 정렬이 가능한 필드
 
@@ -158,7 +158,7 @@ class Like extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('lik_datetime' => '날짜', 'lik_ip' => 'IP');
+		$search_option = array('lik_datetime' => '날짜', 'lik_ip' => 'IP', 'mem_nickname' => '추천인');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
