@@ -2898,4 +2898,63 @@ class Membermodify extends CB_Controller
 		// echo ("<script>alert('');</script>");
 		redirect('/');
 	}
+
+	//
+	public function ajax_nickname_check()
+	{
+		echo $this->member->item($mem_nickname);
+		exit;
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_register_ajax_nickname_check';
+		$this->load->event($eventname);
+
+		$result = array();
+		$this->output->set_content_type('application/json');
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+
+		$nickname = trim($this->input->post('nickname'));
+		if (empty($nickname)) {
+			$this->session->set_userdata('ath_nickname_result', '');
+			$result = array(
+				'result' => 'no',
+				'reason' => '닉네임을 입력해주세요',
+			);
+			exit(json_encode($result));
+		}
+
+		
+		$this->load->helper('chkstring');
+		if (chkstring($nickname, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false) {
+			$this->session->set_userdata('ath_nickname_result', '');
+			$result = array(
+				'result' => 'no',
+				'reason' => '닉네임은 공백없이 한글, 영문, 숫자만 입력 가능합니다',
+			);
+			exit(json_encode($result));
+		}
+		
+		if (preg_match("/[\,]?{$nickname}/i", $this->cbconfig->item('denied_nickname_list'))) {
+			$this->session->set_userdata('ath_nickname_result', '');
+			$result = array(
+				'result' => 'no',
+				'reason' => $nickname . ' 은(는) 예약어로 사용하실 수 없는 닉네임입니다'
+			);
+			exit(json_encode($result));
+		}
+		
+		$countwhere = array(
+			'mem_nickname' => $nickname,
+		);
+		$row = $this->Member_model->count_by($countwhere);
+		if ($row > 0) {
+			$this->session->set_userdata('ath_nickname_result', '');
+			$result = array(
+				'result' => 'no',
+				'reason' => $nickname . ' 는 이미 다른 회원이 사용하고 있는 닉네임입니다'
+			);
+			exit(json_encode($result));
+		}
+	}
 }

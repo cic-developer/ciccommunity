@@ -883,7 +883,7 @@ var nickname_ath_result  = 0;
 			var result = '';
 			var reason = '';
 			$.ajax({
-				url: cb_url + '/register/ajax_nickname_check',
+				url: cb_url + '/Membermodify/ajax_nickname_check',
 				type: 'POST',
 				data: {
 					nickname: _nickname,
