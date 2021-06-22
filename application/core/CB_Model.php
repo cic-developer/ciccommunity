@@ -224,6 +224,7 @@ class CB_Model extends CI_Model
 		}
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
+		// echo $this->db->last_query();
 
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);
