@@ -24,7 +24,7 @@ class Attendancecfg extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Config');
+	protected $models = array('Config', 'Attendance');
 
 	/**
 	 * 이 컨트롤러의 메인 모델 이름입니다
@@ -753,7 +753,8 @@ class Attendancecfg extends CB_Controller
 				// 이벤트가 존재하면 실행합니다
 				$view['view']['event']['before'] = Events::trigger('before', $eventname);
 		
-				$getdata = $this->Config_model->get_all_meta();
+				// $getdata = $this->Config_model->get_all_meta();
+				$getdata = $this->Attendance_model->get_attend_list();
 				$view['view']['data'] = $getdata;
 		
 				// 이벤트가 존재하면 실행합니다
