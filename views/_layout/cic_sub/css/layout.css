@@ -1223,14 +1223,14 @@ body {
 #top-vis h2 {
     font-family: 'GmarketSans';
     font-size: 41px;
-    color: #fff;
+    color: #333;
     font-weight: 700;
     line-height: 1em;
 }
 
 #top-vis p {
     font-size: 15px;
-    color: #fff;
+    color: #333;
     line-height: 1.35em;
     margin-top: 7px;
     font-weight: 300;
@@ -1242,13 +1242,13 @@ body {
 #top-vis a {
     width: 40px;
     height: 20px;
-    border: 1px solid #fff;
+    border: 1px solid #333;
     border-radius: 4px;
     line-height: 20px;
     height: 18px;
     font-size: 13px;
     padding: 2px;
-    color: #fff;
+    color: #333;
     text-align: center;
 }
 
@@ -1373,6 +1373,13 @@ body {
     }
     #top-vis h2 {
         font-size: 29px;
+    }
+    #top-vis p {
+        font-size: 13px;
+        width: 203px;
+        /* text-align: center; */
+        margin: 0 auto;
+        margin-top: 8px;
     }
 }
 
