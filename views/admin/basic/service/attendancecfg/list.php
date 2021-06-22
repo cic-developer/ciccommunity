@@ -1,9 +1,14 @@
 <div class="box">
 	<div class="box-header">
+		<?php ob_start()?>
         <div class="btn-group pull-right" role="group" aria-label="...">
             <button type="button" class="btn btn-outline btn-success btn-sm" id="export_to_excel"><i class="fa fa-file-excel-o"></i> 엑셀 다운로드</button>
             <a href="<?php echo element('listall_url', $view); ?>" class="btn btn-outline btn-default btn-sm">전체목록</a>
         </div>
+		<?php
+			$buttons = ob_get_contents();
+			ob_end_flush();
+		?>
 		<ul class="nav nav-tabs">
 			<li role="presentation"><a href="<?php echo admin_url($this->pagedir); ?>">일반기능</a></li>
 			<li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/list'); ?>">출석체크 리스트</a></li>
@@ -84,6 +89,11 @@ $(function() {
 			day: {required:true, number:true, min:0}
 		}
 	});
+
+	$(document).on('click', '#export_to_excel', function(){
+		exporturl = '<?php echo admin_url($this->pagedir . 'excel' . '?' . $this->input->server('QUERY_STRING', null, '')); ?>';
+		document.location.href = exporturl;
+	})
 });
 //]]>
 </script>
