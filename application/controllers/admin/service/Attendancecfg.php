@@ -754,8 +754,14 @@ class Attendancecfg extends CB_Controller
 				$view['view']['event']['before'] = Events::trigger('before', $eventname);
 		
 				// $getdata = $this->Config_model->get_all_meta();
-				$getdata = $this->Attendance_model->get_attend_list();
+				$getdata = $this->Attendance_model->get_attend_list('','', '', 'att_datetime', 'DESC');
 				$view['view']['data'] = $getdata;
+				if(is_array(element('list',$getdata)) && element('list',$getdata)){
+					$_index = count(element('list',$getdata));
+					foreach(element('list',$getdata) AS $_key => $value){
+						element('list',$getdata)['num'] = $_index--;
+					}
+				}
 		
 				// 이벤트가 존재하면 실행합니다
 				$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

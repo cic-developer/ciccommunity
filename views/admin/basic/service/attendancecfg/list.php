@@ -19,9 +19,6 @@
 		?>
         <div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
         <div class="table-responsive">
-			<pre>
-			<?php //print_r(element('list', element('data', $view)))?>
-			</pre>
 			<table class="table table-hover table-striped table-bordered">
             <thead>
 				<tr>
@@ -37,7 +34,13 @@
                 <tbody>
 					<?php foreach(element('list', element('data', $view)) AS $row) { ?>
 						<tr>
-							<td><?php print_r($row);?></td>
+							<td><?php echo element('num', $row)?></td>
+							<td><?php echo element('mem_nickname', $row)?></td>
+							<td><?php echo element('att_point', $row)?></td>
+							<td><?php echo element('att_vp', $row)?></td>
+							<td><?php echo element('att_cp', $row)?></td>
+							<td><?php echo element('att_ranking', $row)?></td>
+							<td><?php echo element('att_datetime', $row)?></td>
 						</tr>
 					<?php } ?>
 					<?php if ( ! element('list', element('data', $view))) {?>
