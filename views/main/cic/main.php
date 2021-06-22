@@ -222,7 +222,7 @@
             <div class="msec-03">
                 <div class="tits">
                     <h3>실시간 <span>HOT</span> 포럼</h3>
-                    <p>이슈 투표에서 배팅 수수료의 일급을 지급 받을 수 있습니다</p>
+                    <p>이슈 투표에서 투표 수수료의 일급을 지급 받을 수 있습니다</p>
                     <a href="<?php echo base_url('/board/forum')?>" class="more"><span>바로가기</span></a>
                 </div>
                 <div class="cont">
