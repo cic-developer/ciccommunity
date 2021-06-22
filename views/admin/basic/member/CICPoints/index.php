@@ -88,7 +88,13 @@
 						<?php echo element('search_option', $view); ?>
 					</select>
 					<div class="input-group">
+					<?php if('search_option' === '날짜'){ ?>
+						<input type="date" class="form-control" name="skeyword" value="<?php echo html_escape(element('skeyword', $view)); ?>">
+					<?php
+						}else{
+							?>
 						<input type="text" class="form-control" name="skeyword" value="<?php echo html_escape(element('skeyword', $view)); ?>" placeholder="Search for..." />
+					<?php }?>
 						<span class="input-group-btn">
 							<button class="btn btn-default btn-sm" name="search_submit" type="submit">검색!</button>
 						</span>
