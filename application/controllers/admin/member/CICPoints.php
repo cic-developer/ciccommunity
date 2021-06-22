@@ -263,7 +263,7 @@ class CICPoints extends CB_Controller
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
 		$this->CIC_cp_model->allow_search_field 
-			= array('cp_id', 'cic_cp.mem_id', 'cp_datetime', 'cp_content', 'cp_type', 'cp_action', 'mem_nickname'); // 검색이 가능한 필드
+			= array('cp_id', 'cic_cp.mem_id', 'cp_datetime', 'cp_content', 'cp_type', 'cp_action', 'mem_nickname', 'poi_datetime'); // 검색이 가능한 필드
 		$this->CIC_cp_model->search_field_equal = array('cp_id', 'cic_cp.mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->CIC_cp_model->allow_order_field = array('cp_id'); // 정렬이 가능한 필드
 		$result = $this->CIC_cp_model
