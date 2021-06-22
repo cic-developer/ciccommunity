@@ -1195,7 +1195,11 @@ body {
     position: relative;
 }
 
-#top-vis .img {}
+#top-vis .img {
+    background: url(/assets/images/top-vis-writer.jpg) no-repeat center;
+    /* background-size: 100% auto; */
+    height: 144px;
+}
 
 #top-vis .img img {
     height: 150px;
@@ -1356,10 +1360,10 @@ body {
 }
 
 @media only screen and (max-width:480px) {
-    /* 여기에 모바일 이미지 넣어야함 */
-    #top-vis {
-        background-image: url(/assets/images/top-vis-writer-moblie.jpg) no-repeat left center;
-        z-index: 9999;
+    #top-vis .img {
+        background: url(/assets/images/top-vis-writer-moblie.jpg) no-repeat center;
+        /* background-size: 100% auto; */
+        height: 144px;
     }
     .cont-top h2 {
         font-size: 32px;
