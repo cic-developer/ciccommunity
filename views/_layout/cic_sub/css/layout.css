@@ -1196,7 +1196,7 @@ body {
 }
 
 #top-vis .img {
-    background: url(/assets/images/top-vis-writer.jpg) no-repeat center;
+    background: url(/assets/images/top-vis03-writer.jpg) no-repeat center;
     /* background-size: 100% auto; */
     height: 144px;
 }
@@ -1361,7 +1361,7 @@ body {
 
 @media only screen and (max-width:480px) {
     #top-vis .img {
-        background: url(/assets/images/top-vis-writer-moblie.jpg) no-repeat center;
+        background: url(/assets/images/top-vis03-writer-mobile.jpg) no-repeat center;
         /* background-size: 100% auto; */
         height: 144px;
     }
