@@ -262,6 +262,10 @@ var nickname_ath_result  = 0;
 	*/
 	$(document).ready(function(){
 		$("#submitButton").on('click',function(){
+			if(<?php echo $this->member->item('mem_nickname')?> === 
+				$("#mem_nickname").val()){
+					alert('닉네임이 같구나'); return;
+				}
 			if(nickname_ath_result == 0){
 				alert('닉네임을 확인해주세요'); return;
 			}
@@ -877,13 +881,16 @@ var nickname_ath_result  = 0;
 	});
 	
 	// 닉네임 확인
-	$(document).ready(function(){
-		$("#ath_nickname").on('click', function(){
+	$("#ath_nickname").on('click', function(){
+		$(document).ready(function(){
+			console.log("<?php echo $this->member->item('mem_nickname'); ?>");
 			var _nickname = $("#mem_nickname").val();
+			// alert(email);
+
 			var result = '';
 			var reason = '';
 			$.ajax({
-				url: cb_url + '/Membermodify/ajax_nickname_check',
+				url: cb_url + '/register/ajax_nickname_check',
 				type: 'POST',
 				data: {
 					nickname: _nickname,
@@ -902,11 +909,10 @@ var nickname_ath_result  = 0;
 					if(result == "available"){
 						nickname_ath_result = 1;
 						alert(reason);
-						$("#mem_nickname").val(nickname);
-						$("#mem_nickname").attr("disabled", true);
 					}
 				}
 			});
 		})
 	})
+
 </script>
