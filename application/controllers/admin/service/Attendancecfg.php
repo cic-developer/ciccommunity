@@ -757,7 +757,7 @@ class Attendancecfg extends CB_Controller
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
 		$per_page = admin_listnum();
 		$offset = ($page - 1) * $per_page;
-		$findex = $this->input->get('findex', null, 'att_datetime');
+		$findex = $this->input->get('findex', null, 'att_date');
 		$forder = $this->input->get('forder', null, 'DESC');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
