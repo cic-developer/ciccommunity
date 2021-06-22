@@ -41,6 +41,8 @@ class Attendance_model extends CB_Model
 		$this->db->join('member', 'attendance.mem_id = member.mem_id', 'inner');
 		$qry = $this->db->get($this->_table);
 		$result['list'] = $qry->result_array();
+		echo $this->db->last_query();
+		exit;
 
 		$this->db->select('count(*) as rownum');
 		if ($where) {

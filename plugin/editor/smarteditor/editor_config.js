@@ -21,7 +21,20 @@
                 }, //boolean
                 fOnAppLoad: function() {
                     //예제 코드
-                    oEditors.getById["get_id"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+                    let path = window.location.pathname;
+                    if (path === '/contactus/apply') {
+                        oEditors.getById[get_id].exec("PASTE_HTML", [`[다음의 사항을 기재해주시기 바랍니다]
+                        <br><br>
+                        인플루언서 활동이름 : 
+                        <br><br>
+                        인플루언서 활동 영역 : (ex: 유튜브, 블로그 등)
+                        <br><br>
+                        활동 URL : 
+                        <br><br>
+                        연락처(메일 or 전화번호) : 
+                        <br><br>
+                        기타 메시지 : `]);
+                    }
                 },
                 fCreator: "createSEditor2",
             });

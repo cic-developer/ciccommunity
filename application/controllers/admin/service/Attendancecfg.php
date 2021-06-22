@@ -744,47 +744,62 @@ class Attendancecfg extends CB_Controller
 	}
 
 	function list(){
-				// 이벤트 라이브러리를 로딩합니다
-				$eventname = 'event_admin_service_attendancecfg_points';
-				$this->load->event($eventname);
-		
-				$view = array();
-				$view['view'] = array();
-		
-				// 이벤트가 존재하면 실행합니다
-				$view['view']['event']['before'] = Events::trigger('before', $eventname);
-				$param =& $this->querystring;
-				$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-				$per_page = admin_listnum();
-				$offset = ($page - 1) * $per_page;
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_admin_service_attendancecfg_points';
+		$this->load->event($eventname);
 
-				// $getdata = $this->Config_model->get_all_meta();
-				$getdata = $this->Attendance_model->get_attend_list($per_page, $offset, '', 'att_datetime', 'DESC');
-				if(is_array(element('list',$getdata)) && element('list',$getdata)){
-					$_index = count(element('list',$getdata));
-					foreach(element('list',$getdata) AS $_key => $value){
-						$getdata['list'][$_key]['num'] = $_index--;
-					}
-				}
-				$view['view']['data'] = $getdata;
+		$view = array();
+		$view['view'] = array();
 
-				$config['base_url'] = admin_url($this->pagedir) . '/list?' . $param->replace('page');
-				$config['total_rows'] = $getdata['total_rows'];
-				$config['per_page'] = $per_page;
-				$this->pagination->initialize($config);
-				$view['view']['paging'] = $this->pagination->create_links();
-				$view['view']['page'] = $page;
-		
-				// 이벤트가 존재하면 실행합니다
-				$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
-		
-				/**
-				 * 어드민 레이아웃을 정의합니다
-				 */
-				$layoutconfig = array('layout' => 'layout', 'skin' => 'list');
-				$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-				$this->data = $view;
-				$this->layout = element('layout_skin_file', element('layout', $view));
-				$this->view = element('view_skin_file', element('layout', $view));
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		$param =& $this->querystring;
+		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
+		$per_page = admin_listnum();
+		$offset = ($page - 1) * $per_page;
+		$findex = $this->input->get('findex', null, 'att_datetime');
+		$forder = $this->input->get('forder', null, 'DESC');
+		$sfield = $this->input->get('sfield', null, '');
+		$skeyword = $this->input->get('skeyword', null, '');
+		$where = array();
+		if($sfield && $skeyword){
+			$where[$sfield] = $skeyword;
+		}
+		$this->Attendance_model->allow_search_field = array('att_date'); // 검색이 가능한 필드
+		$this->Attendance_model->search_field_equal = array(); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->Attendance_model->allow_order_field = array('att_ranking'); // 정렬이 가능한 필드
+		// $getdata = $this->Config_model->get_all_meta();
+		$getdata = $this->Attendance_model->get_attend_list($per_page, $offset, $where, $findex, $forder);
+		if(is_array(element('list',$getdata)) && element('list',$getdata)){
+			$_index = count(element('list',$getdata));
+			foreach(element('list',$getdata) AS $_key => $value){
+				$getdata['list'][$_key]['num'] = $_index--;
+			}
+		}
+		$view['view']['data'] = $getdata;
+
+		$config['base_url'] = admin_url($this->pagedir) . '/list?' . $param->replace('page');
+		$config['total_rows'] = $getdata['total_rows'];
+		$config['per_page'] = $per_page;
+		$this->pagination->initialize($config);
+		$view['view']['paging'] = $this->pagination->create_links();
+		$view['view']['page'] = $page;
+
+		$search_option = array('att_date' => '참여일');
+		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
+		$view['view']['search_option'] = search_option($search_option, $sfield);
+		$view['view']['listall_url'] = admin_url($this->pagedir) . '/list?';
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+		/**
+		 * 어드민 레이아웃을 정의합니다
+		 */
+		$layoutconfig = array('layout' => 'layout', 'skin' => 'list');
+		$view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+		$this->data = $view;
+		$this->layout = element('layout_skin_file', element('layout', $view));
+		$this->view = element('view_skin_file', element('layout', $view));
 	}
 }

@@ -46,7 +46,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		<!-- page end // -->
 		<?php echo form_close(); ?>
-	</div>
+	</div>s
 </div>
 
 <script type="text/javascript">

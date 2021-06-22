@@ -50,13 +50,30 @@
 					<?php } ?>
                 </tbody>
             </table>
-		</div>
-		<div class="box-info">
-			<?php echo element('paging', $view); ?>
-			<div class="pull-left ml20"><?php echo admin_listnum_selectbox();?></div>
-			<?php echo $buttons; ?>
+			<div class="box-info">
+				<?php echo element('paging', $view); ?>
+				<div class="pull-left ml20"><?php echo admin_listnum_selectbox();?></div>
+				<?php echo $buttons; ?>
+			</div>
 		</div>
 	</div>
+	<form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
+		<div class="box-search">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<select class="form-control" name="sfield" >
+						<?php echo element('search_option', $view); ?>
+					</select>
+					<div class="input-group">
+						<input type="text" class="form-control" name="skeyword" value="<?php echo html_escape(element('skeyword', $view)); ?>" placeholder="Search for..." />
+						<span class="input-group-btn">
+							<button class="btn btn-default btn-sm" name="search_submit" type="submit">검색!</button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
 </div>
 
 <script type="text/javascript">
