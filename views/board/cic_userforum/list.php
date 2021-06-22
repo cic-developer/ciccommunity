@@ -6,7 +6,7 @@
             <p>이슈에 관련해서 투표를 진행하거나 PER 생태계에 대한 의사결정을 하며 의견을 교환할 수 있는 공간입니다. <br />포인트로 투표에 참여할 수 있으며 ‘운영정책’에 따라 지급 포인트를
                 지출하거나 받게 됩니다. </p>
         </div>
-        <div class="img forum"><img src="<?php echo base_url('assets/images/top-vis05.jpg')?>" alt="" /></div>
+        <div class="img forum"></div>
     </div>
     <div id="contents" class="div-cont">
         <!-- page start / -->
