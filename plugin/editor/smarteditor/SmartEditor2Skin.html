@@ -1503,80 +1503,53 @@
             <!-- 입력 -->
             <div class="se2_input_area husky_seditor_editing_area_container">
                 <iframe src="about:blank" id="se2_iframe" name="se2_iframe" class="se2_input_wysiwyg" width="400" height="300" title="글쓰기 영역 : 도구 모음은 ALT+F10을, 도움말은 ALT+0을 누르세요." frameborder="0" style="display: block">
-            <p>짱짱</p></iframe
-          >
-          <textarea
-            name=""
-            rows="10"
-            cols="100"
-            title="HTML 편집 모드"
-            class="se2_input_syntax se2_input_htmlsrc"
-            style="display: none; outline-style: none; resize: none"
-          >
+          </iframe>
+                <textarea name="" rows="10" cols="100" title="HTML 편집 모드" class="se2_input_syntax se2_input_htmlsrc" style="display: none; outline-style: none; resize: none">
           </textarea>
-          <textarea
-            name=""
-            rows="10"
-            cols="100"
-            title="TEXT 편집 모드"
-            class="se2_input_syntax se2_input_text"
-            style="display: none; outline-style: none; resize: none"
-          >
+                <textarea name="" rows="10" cols="100" title="TEXT 편집 모드" class="se2_input_syntax se2_input_text" style="display: none; outline-style: none; resize: none">
           </textarea>
 
-          <!-- 입력창 조절 안내 레이어 -->
-          <div
-            class="ly_controller husky_seditor_resize_notice"
-            style="z-index: 20; display: none"
-          >
-            <p>아래 영역을 드래그하여 입력창 크기를 조절할 수 있습니다.</p>
-            <button type="button" title="닫기" class="bt_clse">
+                <!-- 입력창 조절 안내 레이어 -->
+                <div class="ly_controller husky_seditor_resize_notice" style="z-index: 20; display: none">
+                    <p>아래 영역을 드래그하여 입력창 크기를 조절할 수 있습니다.</p>
+                    <button type="button" title="닫기" class="bt_clse">
               <span>닫기</span>
             </button>
-            <span class="ic_arr"></span>
-          </div>
-          <!-- //입력창 조절 안내 레이어 -->
-          <div class="quick_wrap">
-            <!-- 표/글양식 간단편집기 -->
-            <!--@lazyload_html qe_table-->
-            <div class="q_table_wrap" style="z-index: 150">
-              <button
-                class="_fold se2_qmax q_open_table_full"
-                style="
+                    <span class="ic_arr"></span>
+                </div>
+                <!-- //입력창 조절 안내 레이어 -->
+                <div class="quick_wrap">
+                    <!-- 표/글양식 간단편집기 -->
+                    <!--@lazyload_html qe_table-->
+                    <div class="q_table_wrap" style="z-index: 150">
+                        <button class="_fold se2_qmax q_open_table_full" style="
                   position: absolute;
                   display: none;
                   top: 340px;
                   left: 210px;
                   z-index: 30;
-                "
-                title="최대화"
-                type="button"
-              >
+                " title="최대화" type="button">
                 <span>퀵에디터최대화</span>
               </button>
-              <div
-                class="_full se2_qeditor se2_table_set"
-                style="
+                        <div class="_full se2_qeditor se2_table_set" style="
                   position: absolute;
                   display: none;
                   top: 135px;
                   left: 661px;
                   z-index: 30;
-                "
-              >
-                <div class="se2_qbar q_dragable">
-                  <span class="se2_qmini"
-                    ><button title="최소화" class="q_open_table_fold">
+                ">
+                            <div class="se2_qbar q_dragable">
+                                <span class="se2_qmini"><button title="최소화" class="q_open_table_fold">
                       <span>퀵에디터최소화</span>
-                    </button>
-                  </span>
-                </div>
-                <div class="se2_qbody0">
-                  <div class="se2_qbody">
-                    <dl class="se2_qe1">
-                      <dt>삽입</dt>
-                      <dd>
-                        <button class="se2_addrow" title="행삽입" type="button">
+                                </button>
+                                </span>
+                            </div>
+                            <div class="se2_qbody0">
+                                <div class="se2_qbody">
+                                    <dl class="se2_qe1">
+                                        <dt>삽입</dt>
+                                        <dd>
+                                            <button class="se2_addrow" title="행삽입" type="button">
                           <span>행삽입</span></button
                         ><button
                           class="se2_addcol"
@@ -1585,10 +1558,10 @@
                         >
                           <span>열삽입</span>
                         </button>
-                      </dd>
-                      <dt>분할</dt>
-                      <dd>
-                        <button class="se2_seprow" title="행분할" type="button">
+                                        </dd>
+                                        <dt>분할</dt>
+                                        <dd>
+                                            <button class="se2_seprow" title="행분할" type="button">
                           <span>행분할</span></button
                         ><button
                           class="se2_sepcol"
@@ -1597,11 +1570,11 @@
                         >
                           <span>열분할</span>
                         </button>
-                      </dd>
+                                        </dd>
 
-                      <dt>삭제</dt>
-                      <dd>
-                        <button class="se2_delrow" title="행삭제" type="button">
+                                        <dt>삭제</dt>
+                                        <dd>
+                                            <button class="se2_delrow" title="행삭제" type="button">
                           <span>행삭제</span></button
                         ><button
                           class="se2_delcol"
@@ -1610,19 +1583,19 @@
                         >
                           <span>열삭제</span>
                         </button>
-                      </dd>
-                      <dt>병합</dt>
-                      <dd>
-                        <button class="se2_merrow" title="행병합" type="button">
+                                        </dd>
+                                        <dt>병합</dt>
+                                        <dd>
+                                            <button class="se2_merrow" title="행병합" type="button">
                           <span>행병합</span>
                         </button>
-                      </dd>
-                    </dl>
-                    <div class="se2_qe2 se2_qe2_3">
-                      <!-- 테이블 퀵에디터의 경우만,  se2_qe2_3제거 -->
-                      <!-- 샐배경색 -->
-                      <dl class="se2_qe2_1">
-                        <dt>
+                                        </dd>
+                                    </dl>
+                                    <div class="se2_qe2 se2_qe2_3">
+                                        <!-- 테이블 퀵에디터의 경우만,  se2_qe2_3제거 -->
+                                        <!-- 샐배경색 -->
+                                        <dl class="se2_qe2_1">
+                                            <dt>
                           <input
                             type="radio"
                             checked="checked"
@@ -1631,9 +1604,8 @@
                             class="husky_se2m_radio_bgc"
                           /><label for="se2_cellbg2">셀 배경색</label>
                         </dt>
-                        <dd>
-                          <span class="se2_pre_color"
-                            ><button
+                                            <dd>
+                                                <span class="se2_pre_color"><button
                               style="
                                 background: none repeat scroll 0% 0%
                                   rgb(255, 255, 255);
@@ -1642,35 +1614,27 @@
                               class="husky_se2m_table_qe_bgcolor_btn"
                             >
                               <span>색찾기</span>
-                            </button>
-                          </span>
-                          <!-- layer:셀배경색 -->
-                          <div
-                            style="
+                                                </button>
+                                                </span>
+                                                <!-- layer:셀배경색 -->
+                                                <div style="
                               display: none;
                               position: absolute;
                               top: 20px;
                               left: 0px;
-                            "
-                            class="se2_layer se2_b_t_b1"
-                          >
-                            <div
-                              class="
+                            " class="se2_layer se2_b_t_b1">
+                                                    <div class="
                                 se2_in_layer
                                 husky_se2m_tbl_qe_bg_paletteHolder
-                              "
-                            ></div>
-                          </div>
-                          <!-- //layer:셀배경색-->
-                        </dd>
-                      </dl>
-                      <!-- //샐배경색 -->
-                      <!-- 배경이미지선택 -->
-                      <dl
-                        style="display: none"
-                        class="se2_qe2_2 husky_se2m_tbl_qe_review_bg"
-                      >
-                        <dt>
+                              "></div>
+                                                </div>
+                                                <!-- //layer:셀배경색-->
+                                            </dd>
+                                        </dl>
+                                        <!-- //샐배경색 -->
+                                        <!-- 배경이미지선택 -->
+                                        <dl style="display: none" class="se2_qe2_2 husky_se2m_tbl_qe_review_bg">
+                                            <dt>
                           <input
                             type="radio"
                             name="se2_tbp3"
@@ -1678,9 +1642,8 @@
                             class="husky_se2m_radio_bgimg"
                           /><label for="se2_cellbg3">이미지</label>
                         </dt>
-                        <dd>
-                          <span class="se2_pre_bgimg"
-                            ><button
+                                            <dd>
+                                                <span class="se2_pre_bgimg"><button
                               class="
                                 husky_se2m_table_qe_bgimage_btn
                                 se2_cellimg0
@@ -1688,195 +1651,190 @@
                               type="button"
                             >
                               <span>배경이미지선택</span>
-                            </button>
-                          </span>
-                          <!-- layer:배경이미지선택 -->
-                          <div
-                            style="
+                                                </button>
+                                                </span>
+                                                <!-- layer:배경이미지선택 -->
+                                                <div style="
                               display: none;
                               position: absolute;
                               top: 20px;
                               left: -155px;
-                            "
-                            class="se2_layer se2_b_t_b1"
-                          >
-                            <div
-                              class="
+                            " class="se2_layer se2_b_t_b1">
+                                                    <div class="
                                 se2_in_layer
                                 husky_se2m_tbl_qe_bg_img_paletteHolder
-                              "
-                            >
-                              <ul class="se2_cellimg_set">
-                                <li>
-                                  <button class="se2_cellimg0" type="button">
+                              ">
+                                                        <ul class="se2_cellimg_set">
+                                                            <li>
+                                                                <button class="se2_cellimg0" type="button">
                                     <span>배경없음</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg1" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg1" type="button">
                                     <span>배경1</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg2" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg2" type="button">
                                     <span>배경2</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg3" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg3" type="button">
                                     <span>배경3</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg4" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg4" type="button">
                                     <span>배경4</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg5" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg5" type="button">
                                     <span>배경5</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg6" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg6" type="button">
                                     <span>배경6</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg7" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg7" type="button">
                                     <span>배경7</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg8" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg8" type="button">
                                     <span>배경8</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg9" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg9" type="button">
                                     <span>배경9</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg10" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg10" type="button">
                                     <span>배경10</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg11" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg11" type="button">
                                     <span>배경11</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg12" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg12" type="button">
                                     <span>배경12</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg13" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg13" type="button">
                                     <span>배경13</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg14" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg14" type="button">
                                     <span>배경14</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg15" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg15" type="button">
                                     <span>배경15</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg16" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg16" type="button">
                                     <span>배경16</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg17" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg17" type="button">
                                     <span>배경17</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg18" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg18" type="button">
                                     <span>배경18</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg19" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg19" type="button">
                                     <span>배경19</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg20" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg20" type="button">
                                     <span>배경20</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg21" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg21" type="button">
                                     <span>배경21</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg22" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg22" type="button">
                                     <span>배경22</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg23" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg23" type="button">
                                     <span>배경23</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg24" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg24" type="button">
                                     <span>배경24</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg25" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg25" type="button">
                                     <span>배경25</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg26" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg26" type="button">
                                     <span>배경26</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg27" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg27" type="button">
                                     <span>배경27</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg28" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg28" type="button">
                                     <span>배경28</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg29" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg29" type="button">
                                     <span>배경29</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg30" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg30" type="button">
                                     <span>배경30</span>
                                   </button>
-                                </li>
-                                <li>
-                                  <button class="se2_cellimg31" type="button">
+                                                            </li>
+                                                            <li>
+                                                                <button class="se2_cellimg31" type="button">
                                     <span>배경31</span>
                                   </button>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                          <!-- //layer:배경이미지선택-->
-                        </dd>
-                      </dl>
-                      <!-- //배경이미지선택 -->
-                    </div>
-                    <dl style="display: block" class="se2_qe3 se2_t_proper2">
-                      <dt>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <!-- //layer:배경이미지선택-->
+                                            </dd>
+                                        </dl>
+                                        <!-- //배경이미지선택 -->
+                                    </div>
+                                    <dl style="display: block" class="se2_qe3 se2_t_proper2">
+                                        <dt>
                         <input
                           type="radio"
                           name="se2_tbp3"
@@ -1884,163 +1842,151 @@
                           class="husky_se2m_radio_template"
                         /><label for="se2_tbp4">표 스타일</label>
                       </dt>
-                      <dd>
-                        <div class="se2_qe3_table">
-                          <div class="se2_select_ty2">
-                            <span class="se2_t_style1"></span
+                                        <dd>
+                                            <div class="se2_qe3_table">
+                                                <div class="se2_select_ty2">
+                                                    <span class="se2_t_style1"></span
                             ><button
                               class="se2_view_more husky_se2m_template_more"
                               title="더보기"
                               type="button"
                             >
                               <span>더보기</span>
-                            </button>
-                          </div>
-                          <!-- layer:표스타일 -->
-                          <div
-                            style="display: none; top: 33px; left: 0; margin: 0"
-                            class="se2_layer_t_style"
-                          >
-                            <ul>
-                              <li>
-                                <button class="se2_t_style1" type="button">
+                                                    </button>
+                                                </div>
+                                                <!-- layer:표스타일 -->
+                                                <div style="display: none; top: 33px; left: 0; margin: 0" class="se2_layer_t_style">
+                                                    <ul>
+                                                        <li>
+                                                            <button class="se2_t_style1" type="button">
                                   <span>표 스타일1</span>
                                 </button>
-                              </li>
-                              <li>
-                                <button class="se2_t_style2" type="button">
+                                                        </li>
+                                                        <li>
+                                                            <button class="se2_t_style2" type="button">
                                   <span>표 스타일2</span>
                                 </button>
-                              </li>
-                              <li>
-                                <button class="se2_t_style3" type="button">
+                                                        </li>
+                                                        <li>
+                                                            <button class="se2_t_style3" type="button">
                                   <span>표 스타일3</span>
                                 </button>
-                              </li>
-                              <li>
-                                <button class="se2_t_style4" type="button">
+                                                        </li>
+                                                        <li>
+                                                            <button class="se2_t_style4" type="button">
                                   <span>표 스타일4</span>
                                 </button>
-                              </li>
-                              <li>
-                                <button class="se2_t_style5" type="button">
+                                                        </li>
+                                                        <li>
+                                                            <button class="se2_t_style5" type="button">
                                   <span>표 스타일5</span>
                                 </button>
-                              </li>
-                              <li>
-                                <button class="se2_t_style6" type="button">
+                                                        </li>
+                                                        <li>
+                                                            <button class="se2_t_style6" type="button">
                                   <span>표 스타일6</span>
                                 </button>
-                              </li>
-                              <li>
-                                <button class="se2_t_style7" type="button">
+                                                        </li>
+                                                        <li>
+                                                            <button class="se2_t_style7" type="button">
                                   <span>표 스타일7</span>
                                 </button>
-                              </li>
-                              <li>
-                                <button class="se2_t_style8" type="button">
+                                                        </li>
+                                                        <li>
+                                                            <button class="se2_t_style8" type="button">
                                   <span>표 스타일8</span>
                                 </button>
-                              </li>
-                              <li>
-                                <button class="se2_t_style9" type="button">
+                                                        </li>
+                                                        <li>
+                                                            <button class="se2_t_style9" type="button">
                                   <span>표 스타일9</span>
                                 </button>
-                              </li>
-                              <li>
-                                <button class="se2_t_style10" type="button">
+                                                        </li>
+                                                        <li>
+                                                            <button class="se2_t_style10" type="button">
                                   <span>표 스타일10</span>
                                 </button>
-                              </li>
-                              <li>
-                                <button class="se2_t_style11" type="button">
+                                                        </li>
+                                                        <li>
+                                                            <button class="se2_t_style11" type="button">
                                   <span>표 스타일11</span>
                                 </button>
-                              </li>
-                              <li>
-                                <button class="se2_t_style12" type="button">
+                                                        </li>
+                                                        <li>
+                                                            <button class="se2_t_style12" type="button">
                                   <span>표 스타일12</span>
                                 </button>
-                              </li>
-                              <li>
-                                <button class="se2_t_style13" type="button">
+                                                        </li>
+                                                        <li>
+                                                            <button class="se2_t_style13" type="button">
                                   <span>표 스타일13</span>
                                 </button>
-                              </li>
-                              <li>
-                                <button class="se2_t_style14" type="button">
+                                                        </li>
+                                                        <li>
+                                                            <button class="se2_t_style14" type="button">
                                   <span>표 스타일14</span>
                                 </button>
-                              </li>
-                              <li>
-                                <button class="se2_t_style15" type="button">
+                                                        </li>
+                                                        <li>
+                                                            <button class="se2_t_style15" type="button">
                                   <span>표 스타일15</span>
                                 </button>
-                              </li>
-                              <li>
-                                <button class="se2_t_style16" type="button">
+                                                        </li>
+                                                        <li>
+                                                            <button class="se2_t_style16" type="button">
                                   <span>표 스타일16</span>
                                 </button>
-                              </li>
-                            </ul>
-                          </div>
-                          <!-- //layer:표스타일 -->
-                        </div>
-                      </dd>
-                    </dl>
-                    <div style="display: none" class="se2_btn_area">
-                      <button class="se2_btn_save" type="button">
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- //layer:표스타일 -->
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <div style="display: none" class="se2_btn_area">
+                                        <button class="se2_btn_save" type="button">
                         <span>My 리뷰저장</span>
                       </button>
+                                    </div>
+                                    <div class="se2_qdim0 husky_se2m_tbl_qe_dim1"></div>
+                                    <div class="se2_qdim4 husky_se2m_tbl_qe_dim2"></div>
+                                    <div class="se2_qdim6c husky_se2m_tbl_qe_dim_del_col"></div>
+                                    <div class="se2_qdim6r husky_se2m_tbl_qe_dim_del_row"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="se2_qdim0 husky_se2m_tbl_qe_dim1"></div>
-                    <div class="se2_qdim4 husky_se2m_tbl_qe_dim2"></div>
-                    <div class="se2_qdim6c husky_se2m_tbl_qe_dim_del_col"></div>
-                    <div class="se2_qdim6r husky_se2m_tbl_qe_dim_del_row"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--//@lazyload_html-->
-            <!-- //표/글양식 간단편집기 -->
-            <!-- 이미지 간단편집기 -->
-            <!--@lazyload_html qe_image-->
-            <div class="q_img_wrap">
-              <button
-                class="_fold se2_qmax q_open_img_full"
-                style="
+                    <!--//@lazyload_html-->
+                    <!-- //표/글양식 간단편집기 -->
+                    <!-- 이미지 간단편집기 -->
+                    <!--@lazyload_html qe_image-->
+                    <div class="q_img_wrap">
+                        <button class="_fold se2_qmax q_open_img_full" style="
                   position: absolute;
                   display: none;
                   top: 240px;
                   left: 210px;
                   z-index: 30;
-                "
-                title="최대화"
-                type="button"
-              >
+                " title="최대화" type="button">
                 <span>퀵에디터최대화</span>
               </button>
-              <div
-                class="_full se2_qeditor se2_table_set"
-                style="
+                        <div class="_full se2_qeditor se2_table_set" style="
                   position: absolute;
                   display: none;
                   top: 140px;
                   left: 450px;
                   z-index: 30;
-                "
-              >
-                <div class="se2_qbar q_dragable">
-                  <span class="se2_qmini"
-                    ><button title="최소화" class="q_open_img_fold">
+                ">
+                            <div class="se2_qbar q_dragable">
+                                <span class="se2_qmini"><button title="최소화" class="q_open_img_fold">
                       <span>퀵에디터최소화</span>
-                    </button>
-                  </span>
-                </div>
-                <div class="se2_qbody0">
-                  <div class="se2_qbody">
-                    <div class="se2_qe10">
-                      <label for="se2_swidth">가로</label
+                                </button>
+                                </span>
+                            </div>
+                            <div class="se2_qbody0">
+                                <div class="se2_qbody">
+                                    <div class="se2_qe10">
+                                        <label for="se2_swidth">가로</label
                       ><input
                         type="text"
                         class="input_ty1 widthimg"
@@ -2064,71 +2010,53 @@
                           class="se2_srate"
                           id="se2_srate"
                         /><label for="se2_srate">가로 세로 비율 유지</label>
-                      </div>
-                    </div>
-                    <div class="se2_qe11">
-                      <dl class="se2_qe11_1">
-                        <dt><label for="se2_b_width2">테두리두께</label></dt>
-                        <dd class="se2_numberStepper">
-                          <input
-                            type="text"
-                            class="input_ty1 input bordersize"
-                            value="1"
-                            maxlength="2"
-                            name=""
-                            id="se2_b_width2"
-                            readonly="readonly"
-                          />
-                          <button class="se2_add plus" type="button">
+                                    </div>
+                                </div>
+                                <div class="se2_qe11">
+                                    <dl class="se2_qe11_1">
+                                        <dt><label for="se2_b_width2">테두리두께</label></dt>
+                                        <dd class="se2_numberStepper">
+                                            <input type="text" class="input_ty1 input bordersize" value="1" maxlength="2" name="" id="se2_b_width2" readonly="readonly" />
+                                            <button class="se2_add plus" type="button">
                             <span>1px 더하기</span>
                           </button>
-                          <button class="se2_del minus" type="button">
+                                            <button class="se2_del minus" type="button">
                             <span>1px 빼기</span>
                           </button>
-                        </dd>
-                      </dl>
+                                        </dd>
+                                    </dl>
 
-                      <dl class="se2_qe11_2">
-                        <dt>테두리 색</dt>
-                        <dd>
-                          <span class="se2_pre_color"
-                            ><button
+                                    <dl class="se2_qe11_2">
+                                        <dt>테두리 색</dt>
+                                        <dd>
+                                            <span class="se2_pre_color"><button
                               style="background: #000000"
                               type="button"
                               class="husky_se2m_img_qe_bgcolor_btn"
                             >
                               <span>색찾기</span>
-                            </button>
-                          </span>
-                          <!-- layer:테두리 색 -->
-                          <div
-                            style="
+                                            </button>
+                                            </span>
+                                            <!-- layer:테두리 색 -->
+                                            <div style="
                               display: none;
                               position: absolute;
                               top: 20px;
                               left: -209px;
-                            "
-                            class="se2_layer se2_b_t_b1"
-                          >
-                            <div
-                              class="
+                            " class="se2_layer se2_b_t_b1">
+                                                <div class="
                                 se2_in_layer
                                 husky_se2m_img_qe_bg_paletteHolder
-                              "
-                            ></div>
-                          </div>
-                          <!-- //layer:테두리 색 -->
-                        </dd>
-                      </dl>
-                    </div>
-                    <dl class="se2_qe12">
-                      <dt>정렬</dt>
-                      <dd>
-                        <button
-                          title="정렬없음"
-                          class="se2_align0"
-                          type="button"
-                        >
+                              "></div>
+                                            </div>
+                                            <!-- //layer:테두리 색 -->
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <dl class="se2_qe12">
+                                    <dt>정렬</dt>
+                                    <dd>
+                                        <button title="정렬없음" class="se2_align0" type="button">
                           <span>정렬없음</span></button
                         ><button
                           title="좌측정렬"
@@ -2143,73 +2071,70 @@
                         >
                           <span>우측정렬</span>
                         </button>
-                      </dd>
-                    </dl>
-                    <button class="se2_highedit" type="button">
+                                    </dd>
+                                </dl>
+                                <button class="se2_highedit" type="button">
                       <span>고급편집</span>
                     </button>
-                    <div class="se2_qdim0"></div>
-                  </div>
+                                <div class="se2_qdim0"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <!--//@lazyload_html-->
+                <!-- 이미지 간단편집기 -->
             </div>
-            <!--//@lazyload_html-->
-            <!-- 이미지 간단편집기 -->
-          </div>
         </div>
         <!-- //입력 -->
         <!-- 입력창조절/ 모드전환 -->
         <div class="se2_conversion_mode">
-          <button
-            type="button"
-            class="
+            <button type="button" class="
               se2_inputarea_controller
               husky_seditor_editingArea_verticalResizer
-            "
-            title="입력창 크기 조절"
-          >
+            " title="입력창 크기 조절">
             <span>입력창 크기 조절</span>
           </button>
-          <ul class="se2_converter">
-            <li class="active">
-              <button type="button" class="se2_to_editor">
+            <ul class="se2_converter">
+                <li class="active">
+                    <button type="button" class="se2_to_editor">
                 <span>Editor</span>
               </button>
-            </li>
-            <li>
-              <button type="button" class="se2_to_html">
+                </li>
+                <li>
+                    <button type="button" class="se2_to_html">
                 <span>HTML</span>
               </button>
-            </li>
-            <li>
-              <button type="button" class="se2_to_text">
+                </li>
+                <li>
+                    <button type="button" class="se2_to_text">
                 <span>TEXT</span>
               </button>
-            </li>
-          </ul>
+                </li>
+            </ul>
         </div>
         <!-- //입력창조절/ 모드전환 -->
         <hr />
         <!-- 얼럿 메세지 공통 -->
         <div class="se2_alert_wrap" style="display: none">
-          <div class="se2_alert_content">
-            <div class="se2_alert_txts"></div>
-            <p class="se2_alert_btns">
-              <button type="button" class="se2_confirm">
+            <div class="se2_alert_content">
+                <div class="se2_alert_txts"></div>
+                <p class="se2_alert_btns">
+                    <button type="button" class="se2_confirm">
                 <span>확인</span></button
               ><button type="button" class="se2_cancel">
                 <span>취소</span>
               </button>
-            </p>
-            <a href="#" class="btn_close">닫기</a>
-          </div>
-          <!-- 레이어 중앙정렬 -->
-          <span class="va_line"></span>
-          <div class="ie_cover"></div>
+                </p>
+                <a href="#" class="btn_close">닫기</a>
+            </div>
+            <!-- 레이어 중앙정렬 -->
+            <span class="va_line"></span>
+            <div class="ie_cover"></div>
         </div>
         <!-- //얼럿 메세지 공통 -->
-      </div>
+    </div>
     </div>
     <!-- SE2 Markup End -->
-  </body>
+</body>
+
 </html>
