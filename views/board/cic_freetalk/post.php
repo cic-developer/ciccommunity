@@ -90,8 +90,6 @@
 					<button type="button" class="bw-btn btn btn-black" id="btn-blame" onClick="post_blame('<?php echo element('post_id', element('post', $view)); ?>', 'post-blame');">신고 <span class="post-blame"><?php echo element('post_blame', element('post', $view)) ? '+' . number_format(element('post_blame', element('post', $view))) : ''; ?></span></button>
 				<?php } ?>
 			</div>
-			<p><a href="<?php echo element('url', element('prev_post', $view)); ?>" class="bw-btn"><span>이전글</span></a>
-			<a href="<?php echo element('url', element('next_post', $view)); ?>" class="bw-btn"><span>다음글</span></a></p>
 			<div class="gap60"></div>
 			<?php //if(html_escape(element('post_notice', element('post', $view))) == 0){ ?>
 			<!-- <div class="best">

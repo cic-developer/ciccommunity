@@ -221,8 +221,8 @@
             <!-- s : msec-03 -->
             <div class="msec-03">
                 <div class="tits">
-                    <h3>실시간 <span>HOT</span> 포럼</h3>
-                    <p>이슈 투표에서 투표 수수료의 일급을 지급 받을 수 있습니다</p>
+                    <h3>실시간 <span>BEST</span> 포럼</h3>
+                    <p>이슈 투표에서 포럼 수수료의 일급을 지급 받을 수 있습니다</p>
                     <a href="<?php echo base_url('/board/forum')?>" class="more"><span>바로가기</span></a>
                 </div>
                 <div class="cont">
@@ -336,7 +336,7 @@
                             <a href="<?php echo $this->member->is_member() ? base_url('/attendance') : 'javascript:alert(\'로그인이 필요한 서비스입니다.\');';?>">
                                 <p class="desktop"><img src="<?php echo base_url('assets/images/check-vp.png') ?>"
                                         alt="" /></p>
-                                <p class="mobile"><img src="<?php echo base_url('assets/images/use-img01m.jpg') ?>"
+                                <p class="mobile"><img src="<?php echo base_url('assets/images/check-vp.png') ?>"
                                         alt="" /></p>
                             </a>
                         </li>

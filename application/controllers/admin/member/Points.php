@@ -77,7 +77,7 @@ class Points extends CB_Controller
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
-		$this->{$this->modelname}->allow_search_field = array('poi_id', 'point.mem_id', 'poi_datetime', 'poi_content', 'poi_type', 'poi_action'); // 검색이 가능한 필드
+		$this->{$this->modelname}->allow_search_field = array('poi_id', 'point.mem_id', 'poi_datetime', 'poi_content', 'poi_type', 'poi_action', 'mem_nickname'); // 검색이 가능한 필드
 		$this->{$this->modelname}->search_field_equal = array('poi_id', 'point.mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('poi_id'); // 정렬이 가능한 필드
 		$result = $this->{$this->modelname}
@@ -114,7 +114,7 @@ class Points extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('poi_datetime' => '날짜', 'poi_content' => '내용');
+		$search_option = array('poi_datetime' => '날짜', 'poi_content' => '내용', 'mem_nickname' => '회원명');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
