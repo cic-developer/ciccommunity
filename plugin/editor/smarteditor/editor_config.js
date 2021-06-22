@@ -3,7 +3,7 @@
         $(".smarteditor").each(function(index) {
             var get_id = $(this).attr("id");
 
-            if (!get_id || $(this).prop("nodeName") != 'TEXTAREA') return true;
+            if (!get_id || $(this).prop("nodeName") != "TEXTAREA") return true;
 
             nhn.husky.EZCreator.createInIFrame({
                 oAppRef: oEditors,
@@ -17,13 +17,13 @@
                     //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
                     fOnBeforeUnload: function() {
                         //alert("완료!");
-                    }
+                    },
                 }, //boolean
                 fOnAppLoad: function() {
                     //예제 코드
-                    // oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+                    oEditors.getById["get_id"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
                 },
-                fCreator: "createSEditor2"
+                fCreator: "createSEditor2",
             });
         });
     });

@@ -39,6 +39,7 @@ class Attendancecfg extends CB_Controller
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->library(array('pagination', 'querystring'));
 	}
 
 	/**
@@ -752,9 +753,13 @@ class Attendancecfg extends CB_Controller
 		
 				// 이벤트가 존재하면 실행합니다
 				$view['view']['event']['before'] = Events::trigger('before', $eventname);
-		
+				$param =& $this->querystring;
+				$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
+				$per_page = admin_listnum();
+				$offset = ($page - 1) * $per_page;
+
 				// $getdata = $this->Config_model->get_all_meta();
-				$getdata = $this->Attendance_model->get_attend_list('','', '', 'att_datetime', 'DESC');
+				$getdata = $this->Attendance_model->get_attend_list($per_page, $offset, '', 'att_datetime', 'DESC');
 				if(is_array(element('list',$getdata)) && element('list',$getdata)){
 					$_index = count(element('list',$getdata));
 					foreach(element('list',$getdata) AS $_key => $value){
@@ -762,7 +767,13 @@ class Attendancecfg extends CB_Controller
 					}
 				}
 				$view['view']['data'] = $getdata;
-				
+
+				$config['base_url'] = admin_url($this->pagedir) . '/list?' . $param->replace('page');
+				$config['total_rows'] = $getdata['total_rows'];
+				$config['per_page'] = $per_page;
+				$this->pagination->initialize($config);
+				$view['view']['paging'] = $this->pagination->create_links();
+				$view['view']['page'] = $page;
 		
 				// 이벤트가 존재하면 실행합니다
 				$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
