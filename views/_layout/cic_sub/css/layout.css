@@ -1198,7 +1198,7 @@ body {
 #top-vis .img {
     background: url(/assets/images/top-vis03-writer.jpg) no-repeat center;
     /* background-size: 100% auto; */
-    height: 144px;
+    height: 140px;
 }
 
 #top-vis .img img {
@@ -1218,6 +1218,14 @@ body {
     -ms-transform: translateY(-50%);
     -o-transform: translateY(-50%);
     transform: translateY(-50%);
+}
+
+#top-vis h2 {
+    font-family: 'GmarketSans';
+    font-size: 41px;
+    color: #333;
+    font-weight: 700;
+    line-height: 1em;
 }
 
 #top-vis h2 {
@@ -1363,13 +1371,13 @@ body {
     #top-vis .img {
         background: url(/assets/images/top-vis03-writer-mobile.jpg) no-repeat center;
         /* background-size: 100% auto; */
-        height: 144px;
+        height: 138px;
     }
     .cont-top h2 {
         font-size: 32px;
     }
     .cont-top p {
-        font-size: 16px;
+        font-size: 16px
     }
     #top-vis h2 {
         font-size: 29px;

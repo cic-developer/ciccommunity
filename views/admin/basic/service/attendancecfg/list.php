@@ -19,6 +19,9 @@
 		?>
         <div class="row">전체 : <?php echo element('total_rows', element('data', $view), 0); ?>건</div>
         <div class="table-responsive">
+			<pre>
+			<?php echo element('list', element('data', $view))?>
+			</pre>
 			<table class="table table-hover table-striped table-bordered">
             <thead>
 				<tr>
@@ -32,7 +35,7 @@
                 </tr>
             </thead>
                 <tbody>
-                <?php if ( ! element('list', element('data', $view))) {?>
+					<?php if ( ! element('list', element('data', $view))) {?>
 						<tr>
 							<td colspan="17" class="nopost">자료가 없습니다</td>
 						</tr>
