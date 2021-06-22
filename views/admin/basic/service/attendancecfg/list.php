@@ -91,7 +91,7 @@ $(function() {
 	});
 
 	$(document).on('click', '#export_to_excel', function(){
-		exporturl = '<?php echo admin_url($this->pagedir . 'excel' . '?' . $this->input->server('QUERY_STRING', null, '')); ?>';
+		exporturl = '<?php echo admin_url($this->pagedir . '/excel' . '?' . $this->input->server('QUERY_STRING', null, '')); ?>';
 		document.location.href = exporturl;
 	})
 });

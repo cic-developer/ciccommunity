@@ -802,4 +802,38 @@ class Attendancecfg extends CB_Controller
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
 	}
+
+	function excel(){
+
+		$view = array();
+		$view['view'] = array();
+
+		// 이벤트가 존재하면 실행합니다
+		$view['view']['event']['before'] = Events::trigger('before', $eventname);
+		$findex = $this->input->get('findex', null, 'att_date');
+		$forder = $this->input->get('forder', null, 'DESC');
+		$sfield = $this->input->get('sfield', null, '');
+		$skeyword = $this->input->get('skeyword', null, '');
+		$where = array();
+		if($sfield && $skeyword){
+			$where[$sfield] = $skeyword;
+		}
+		$this->Attendance_model->allow_search_field = array('att_date'); // 검색이 가능한 필드
+		$this->Attendance_model->search_field_equal = array(); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->Attendance_model->allow_order_field = array('att_ranking'); // 정렬이 가능한 필드
+		// $getdata = $this->Config_model->get_all_meta();
+		$getdata = $this->Attendance_model->get_attend_list('', '', $where, $findex, $forder);
+		if(is_array(element('list',$getdata)) && element('list',$getdata)){
+			$_index = count(element('list',$getdata));
+			foreach(element('list',$getdata) AS $_key => $value){
+				$getdata['list'][$_key]['num'] = $_index--;
+			}
+		}
+		$view['view']['data'] = $getdata;
+		$this->data = $view;
+
+		header('Content-type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment; filename=출석체크 리스트.xls');
+		echo $this->load->view('admin/' . ADMIN_SKIN . '/' . $this->pagedir . '/excel', $view, true);
+	}
 }
