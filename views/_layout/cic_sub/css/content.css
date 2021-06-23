@@ -7988,3 +7988,22 @@ label input[type='checkbox'] {
 .title-box .field .chk-input {
     width: 100%;
 }
+
+.popup_menuu {
+    cursor: pointer;
+}
+
+.popupLayer {
+    position: fixed;
+    background-color: #ffffff;
+    border: solid 2px #fccb17;
+    width: auto;
+    height: auto;
+    padding: 3px;
+}
+
+.popupLayer div {
+    position: fixed;
+    top: 5px;
+    right: 5px;
+}

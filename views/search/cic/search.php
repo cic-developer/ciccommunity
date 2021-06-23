@@ -191,7 +191,7 @@
 									<td>
 										<div class="my-info">
 											<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 28, 28); ?>" alt=""></p>
-											<p class="rtxt"><?php echo element('post_nickname', $result); ?></p>
+											<p class="rtxt"><a class="popup_menuu"><?php echo element('post_nickname', $result); ?></a></p>
 										</div>
 									</td>
 									<td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>">
@@ -437,4 +437,45 @@
 		// $('#searchForm').submit();
 		$('.enter').trigger('click');
 	})
+</script>
+
+<div class="popupLayer" style="display:none; z-index:1200;">
+    <a href="" class="layer_link"> 작성 글 보기</a>
+</div>
+<script>
+    $(function(){
+        /* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
+        $('.popup_menuu').click(function(e)
+        {
+            var sWidth = window.innerWidth;
+            var sHeight = window.innerHeight;
+
+            var oWidth = $('.popupLayer').width();
+            var oHeight = $('.popupLayer').height();
+
+            // 레이어가 나타날 위치를 셋팅한다.
+            var divLeft = e.clientX + 10;
+            var divTop = e.clientY + 5;
+
+            // 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+            if( divLeft < 0 ) divLeft = 0;
+            if( divTop < 0 ) divTop = 0;
+            
+            $('.layer_link').prop('href', `<?php echo base_url('search').'?type=&sfield=post_both&findex=&skeyword='?>${$(this).text()}`);
+            $('.popupLayer').css({
+                "top": divTop,
+                "left": divLeft,
+                "display" : "block"
+            }).show();
+        });
+    });
+    $(document).mouseup(function (e){
+        var container = $('.popupLayer');
+        if( container.has(e.target).length === 0){
+        container.css('display','none');
+        }
+    });
+    $(window).on("wheel", function (event){
+        $('.popupLayer').css('display','none');
+    });
 </script>

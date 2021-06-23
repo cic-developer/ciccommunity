@@ -1534,6 +1534,7 @@ class Board_post extends CB_Controller
 
 			$type = $this->input->get('type');
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp());
+			
 			if(!$type) {
 				$type = 1;
 			}
