@@ -25,7 +25,7 @@
 											<div class="item">
 												<a href="<?php echo site_url('/news/news_url/'.element('news_id', $most_view)); ?>">
 													<div class="img"><img
-															src="<?php echo html_escape(element('news_image', $most_view) ? element('news_image', $most_view) : '/assets/images/news-img01.png') ?>" alt="">
+															src="<?php echo html_escape(element('news_image', $most_view) ? element('news_image', $most_view) : base_url('assets/images/news-img01.png')) ?>" alt="">
 													</div>
 													<div class="txt">
 														<p class="btxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('news_title', $most_view))), 17)); ?></p>
