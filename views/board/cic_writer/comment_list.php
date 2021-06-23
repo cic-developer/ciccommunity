@@ -129,7 +129,6 @@
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
             
-            // $('.layer_link').prop('href', 'https://dev.ciccommunity.com/board/freetalk?sfield=post_nickname&skeyword='+ $(this).text() +'&search_submit=');
             $('.layer_link').prop('href', `<?php echo base_url('board/cicwriter').'?sfield=post_nickname&skeyword='?>${$(this).text()}`);
             $('.popupLayer').css({
                 "top": divTop,
@@ -183,30 +182,7 @@
 		var istotal = $('.cmmt').find('.item').length;
 		var ischk = (istotal / 2) + 1
 		$('.cmmt').find('.item:nth-child(n+' + ischk + ')').addClass('vfm');
-		/*$('.ctrls').find('.cmmt-btn').click(function () {
-			$('.cmmt-wrap').find('.singo-btn').removeClass('active');
-			if ($(this).hasClass('active')) {
-				$(this).removeClass('active');
-				$(this).closest('.vcon').removeClass('active');
-				$(this).closest('.reply').removeClass('active');
-				$(this).closest('.ctrls').removeClass('active');
-			} else {
-				$(this).addClass('active');
-				$(this).closest('.vcon').addClass('active');
-				$(this).closest('.reply').addClass('active');
-				$(this).closest('.ctrls').addClass('active');
-			}
-			$('.layer-wrap.singo').bPopup({
-				speed: 0,
-				follow: [false, false],
-				position: [false, false],
-				modalColor: false,
-				modal: false,
-				onClose: function () {
-					$('.cmmt').find('.cread').removeClass('cread')
-				},
-			}).close();
-		});*/
+
 		$('.cmmt-wrap').find('.singo-btn').click(function () {
 			$('.cmmt-wrap').find('.singo-btn').removeClass('active');
 			$(this).addClass('active');

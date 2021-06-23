@@ -2,7 +2,6 @@
     $(document).ready(function() {
         $(".smarteditor").each(function(index) {
             var get_id = $(this).attr("id");
-
             if (!get_id || $(this).prop("nodeName") != "TEXTAREA") return true;
             nhn.husky.EZCreator.createInIFrame({
                 oAppRef: oEditors,
@@ -25,13 +24,13 @@
                         oEditors.getById[get_id].exec("PASTE_HTML", [
                             `[다음의 사항을 기재해주시기 바랍니다]
                         <br><br>
-                        인플루언서 활동이름 : 
+                        인플루언서 활동이름 :
                         <br><br>
                         인플루언서 활동 영역 : (ex: 유튜브, 블로그 등)
                         <br><br>
-                        활동 URL : 
+                        활동 URL :
                         <br><br>
-                        연락처(메일 or 전화번호) : 
+                        연락처(메일 or 전화번호) :
                         <br><br>
                         기타 메시지 : `,
                         ]);
