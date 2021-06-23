@@ -641,6 +641,9 @@ body {
     .topmenu .mn_l1 .mn_a1:hover {
         color: #f47523
     }
+    .topmenu .mn_l1 .mn_a10:hover {
+        color: rgba(58, 57, 57, 0.418);
+    }
     .topmenu .mn_l1:nth-child(n+5) .depth2-wrap {
         right: 0;
         left: auto;

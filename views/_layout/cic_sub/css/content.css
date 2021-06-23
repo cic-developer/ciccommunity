@@ -5802,31 +5802,33 @@
 .search-wrap.list .list.community .my-info {
     position: relative;
     padding-right: 35px;
-    display: inline-block;
+    display: inline-flex;
     vertical-align: top;
     box-sizing: border-box;
     max-width: 140px;
+    width: 100%;
 }
 
 .search-wrap.list .list.community .my-info .pimg {
-    position: absolute;
+    position: relative;
     right: 0;
     top: 0;
 }
 
 .search-wrap.list .list.community .my-info .pimg img {
-    height: 24px;
+    height: 35px;
     vertical-align: top;
 }
 
 .search-wrap.list .list.community .my-info .rtxt {
-    line-height: 24px;
-    text-align: left;
-    font-size: 14px;
+    line-height: 33px;
+    text-align: right;
+    font-size: 15px;
     font-weight: 300;
     color: #222;
     letter-spacing: -0.03em;
     max-width: 110px;
+    padding-left: 10px;
 }
 
 .search-wrap.list .list.community table tbody td {
