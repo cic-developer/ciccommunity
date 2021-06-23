@@ -4,7 +4,6 @@
             var get_id = $(this).attr("id");
 
             if (!get_id || $(this).prop("nodeName") != "TEXTAREA") return true;
-
             nhn.husky.EZCreator.createInIFrame({
                 oAppRef: oEditors,
                 elPlaceHolder: get_id,
@@ -22,8 +21,9 @@
                 fOnAppLoad: function() {
                     //예제 코드
                     let path = window.location.pathname;
-                    if (path === '/contactus/apply') {
-                        oEditors.getById[get_id].exec("PASTE_HTML", [`[다음의 사항을 기재해주시기 바랍니다]
+                    if (path === "/contactus/apply") {
+                        oEditors.getById[get_id].exec("PASTE_HTML", [
+                            `[다음의 사항을 기재해주시기 바랍니다]
                         <br><br>
                         인플루언서 활동이름 : 
                         <br><br>
@@ -33,7 +33,8 @@
                         <br><br>
                         연락처(메일 or 전화번호) : 
                         <br><br>
-                        기타 메시지 : `]);
+                        기타 메시지 : `,
+                        ]);
                     }
                 },
                 fCreator: "createSEditor2",
