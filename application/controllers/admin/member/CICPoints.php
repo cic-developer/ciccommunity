@@ -52,6 +52,7 @@ class CICPoints extends CB_Controller
 	 */
 	public function index()
 	{
+		
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_member_points_index';
 		$this->load->event($eventname);
@@ -71,10 +72,8 @@ class CICPoints extends CB_Controller
 		$forder = $this->input->get('forder', null, 'desc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
-
 		$per_page = admin_listnum();
 		$offset = ($page - 1) * $per_page;
-
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
