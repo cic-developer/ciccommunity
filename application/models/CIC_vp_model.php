@@ -35,7 +35,6 @@ class CIC_vp_model extends CB_Model
 		$select = 'cic_vp.*, member.mem_userid, member.mem_nickname, member.mem_is_admin, member.mem_icon, member.mem_vp';
 		$join[] = array('table' => 'member', 'on' => 'cic_vp.mem_id = member.mem_id', 'type' => 'left');
 		$result = $this->_get_list_common($select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop);
-		echo $select, $join, $limit, $offset, $where, $like, $findex, $forder, $sfield, $skeyword, $sop;
 		return $result;
 	}
 
