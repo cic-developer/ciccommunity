@@ -48,7 +48,7 @@
 							<?php if ($this->cbconfig->item('use_sociallogin')) { ?>
 								<th>소셜연동</th>
 							<?php } ?>
-							<th><a href="<?php echo element('mem_point', element('sort', $view)); ?>">포인트</a></th>
+							<th><a href="<?php echo element('mem_point', element('sort', $view)); ?>">명예포인트</a></th>
 							<th><a href="<?php echo element('mem_register_datetime', element('sort', $view)); ?>">가입일</a></th>
 							<th><a href="<?php echo element('mem_lastlogin_datetime', element('sort', $view)); ?>">최근로그인</a></th>
 							<th>회원그룹</th>

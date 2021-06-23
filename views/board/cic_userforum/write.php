@@ -108,7 +108,7 @@
 <div id="element_to_pop_up">
     <div class="modal-content" >
 			<div class="modal-header">
-					<span class="header_text">미션 참여 안내</span>
+					<span class="header_text">포럼 등록 안내</span>
 					<a class="b-close" style="font-size:25px" >×</a>
 			</div>
 			<div class="modal-body">

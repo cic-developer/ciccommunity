@@ -114,7 +114,7 @@ class Points extends CB_Controller
 		/**
 		 * 쓰기 주소, 삭제 주소등 필요한 주소를 구합니다
 		 */
-		$search_option = array('poi_datetime' => '날짜', 'poi_content' => '내용', 'mem_nickname' => '회원명');
+		$search_option = array('poi_datetime' => '날짜', 'poi_content' => '내용', 'mem_nickname' => '닉네임');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir);
