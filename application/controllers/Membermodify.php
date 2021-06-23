@@ -2533,7 +2533,7 @@ class Membermodify extends CB_Controller
 				$this->session->set_userdata('wallet_confirm', '1');
 				$result = array(
 					'state' => '1',
-					'message' => '사용 가능한 지갑주소입니다',
+					'message' => '등록되었습니다',
 				);
 				exit(json_encode($result));
 			}
