@@ -433,6 +433,7 @@ $config['cache_query_string'] = FALSE;
  * 입력하신 값은 외부에 공개되지 않도록 주의해주세요
  */
 $config['encryption_key'] = 'EjrqhRdlaktlWudwlsWkwlsWkaktlTdjd';
+// $config['encryption_key'] = 'dlrjtdmsdkanrjskdlqfurgoehehlsmsrkqt';
 
 /*
 |--------------------------------------------------------------------------
