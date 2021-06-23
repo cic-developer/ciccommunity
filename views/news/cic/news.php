@@ -25,11 +25,11 @@
 											<div class="item">
 												<a href="<?php echo site_url('/news/news_url/'.element('news_id', $most_view)); ?>">
 													<div class="img"><img
-															src="<?php echo html_escape(element('news_image', $most_view, '/assets/images/news-img01.png')) ?>" alt="">
+															src="<?php echo html_escape(element('news_image', $most_view) ? element('news_image', $most_view) : '/assets/images/news-img01.png') ?>" alt="">
 													</div>
 													<div class="txt">
-														<p class="btxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('news_title', $most_view))), 10)); ?></p>
-														<p class="stxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('news_contents', $most_view))), 10)); ?></p>
+														<p class="btxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('news_title', $most_view))), 17)); ?></p>
+														<p class="stxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('news_contents', $most_view))), 17)); ?></p>
 														<p class="ctxt"><?php echo html_escape(element('comp_name', element('company', $most_view))); ?>
 															<span><?php echo display_datetime(element('news_wdate', $most_view)); ?></span>
 														</p>
