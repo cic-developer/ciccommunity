@@ -761,15 +761,15 @@ class Attendancecfg extends CB_Controller
 		$forder = $this->input->get('forder', null, 'DESC');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
-		$where = array();
-		if($sfield && $skeyword){
-			$where[$sfield] = $skeyword;
-		}
-		$this->Attendance_model->allow_search_field = array('att_date'); // 검색이 가능한 필드
+		// $where = array();
+		// if($sfield && $skeyword){
+		// 	$where[$sfield] = $skeyword;
+		// }
+		$this->Attendance_model->allow_search_field = array('att_date', 'mem_nickname'); // 검색이 가능한 필드
 		$this->Attendance_model->search_field_equal = array(); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->Attendance_model->allow_order_field = array('att_ranking'); // 정렬이 가능한 필드
 		// $getdata = $this->Config_model->get_all_meta();
-		$getdata = $this->Attendance_model->get_attend_list($per_page, $offset, $where, $findex, $forder);
+		$getdata = $this->Attendance_model->get_attend_list($per_page, $offset, '', $findex, $forder, $sfield, $skeyword);
 		if(is_array(element('list',$getdata)) && element('list',$getdata)){
 			$_index = count(element('list',$getdata));
 			foreach(element('list',$getdata) AS $_key => $value){
@@ -785,7 +785,7 @@ class Attendancecfg extends CB_Controller
 		$view['view']['paging'] = $this->pagination->create_links();
 		$view['view']['page'] = $page;
 
-		$search_option = array('att_date' => '참여일');
+		$search_option = array('att_date' => '참여일', 'mem_nickname' => '닉네임');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
 		$view['view']['listall_url'] = admin_url($this->pagedir) . '/list?';
@@ -814,15 +814,15 @@ class Attendancecfg extends CB_Controller
 		$forder = $this->input->get('forder', null, 'DESC');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
-		$where = array();
-		if($sfield && $skeyword){
-			$where[$sfield] = $skeyword;
-		}
-		$this->Attendance_model->allow_search_field = array('att_date'); // 검색이 가능한 필드
+		// $where = array();
+		// if($sfield && $skeyword){
+		// 	$where[$sfield] = $skeyword;
+		// }
+		$this->Attendance_model->allow_search_field = array('att_date', 'mem_nickname'); // 검색이 가능한 필드
 		$this->Attendance_model->search_field_equal = array(); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->Attendance_model->allow_order_field = array('att_ranking'); // 정렬이 가능한 필드
 		// $getdata = $this->Config_model->get_all_meta();
-		$getdata = $this->Attendance_model->get_attend_list('', '', $where, $findex, $forder);
+		$getdata = $this->Attendance_model->get_attend_list('', '', '', $findex, $forder, $sfield, $skeyword);
 		if(is_array(element('list',$getdata)) && element('list',$getdata)){
 			$_index = count(element('list',$getdata));
 			foreach(element('list',$getdata) AS $_key => $value){

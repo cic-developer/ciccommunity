@@ -28,11 +28,14 @@ class Attendance_model extends CB_Model
 	}
 
 
-	public function get_attend_list($limit = '', $offset = '', $where = '', $findex = '', $forder = '')
+	public function get_attend_list($limit = '', $offset = '', $where = '', $findex = '', $forder = '', $sfile = '', $skeyword = '')
 	{
 		$this->db->select('attendance.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_is_admin, member.mem_icon');
 		if ($where) {
 			$this->db->where($where);
+		}
+		if($sfile && $skeyword){
+			$this->db->like($sfile, $skeyword);
 		}
 		$this->db->order_by($findex, $forder);
 		if ($limit) {
@@ -45,6 +48,9 @@ class Attendance_model extends CB_Model
 		$this->db->select('count(*) as rownum');
 		if ($where) {
 			$this->db->where($where);
+		}
+		if($sfile && $skeyword){
+			$this->db->like($sfile, $skeyword);
 		}
 		$this->db->join('member', 'attendance.mem_id = member.mem_id', 'inner');
 		$qry = $this->db->get($this->_table);
