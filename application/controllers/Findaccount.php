@@ -651,7 +651,7 @@ class Findaccount extends CB_Controller
 					return false;
 				}
 			}
-			$loginfailmessage = '<br />회원님은 ' . ($loginfailnum + 1)
+			$loginfailmessage = '\n회원님은 ' . ($loginfailnum + 1)
 				. '회 연속으로 패스워드를 잘못입력하셨습니다. ';
 		}
 
