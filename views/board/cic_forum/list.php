@@ -131,7 +131,11 @@
                             </td>
                             <td class="l">
                                 <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><?php echo html_escape(element('title', $result)); ?>
-                                    <span class="reply">(<?php echo element('post_comment_count', $result); ?>)</span>
+                                    <span class="reply">
+                                        <?php if(element('post_comment_count', $result) != 0) {?>
+                                        (<?php echo element('post_comment_count', $result); ?>)
+                                    </span>
+                                        <?php } ?>
                                 </a>
                             </td>
                             <td><?php echo display_datetime(element('frm_bat_close_datetime', $result), 'full'); ?></td>
