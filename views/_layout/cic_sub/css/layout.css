@@ -1320,7 +1320,7 @@ body {
         font-size: 40px;
     }
     #top-vis .img img {
-        height: 120px;
+        height: 141px;
     }
     #top-vis .img.forum img {
         height: 150px;
@@ -1352,7 +1352,7 @@ body {
         font-size: 35px;
     }
     #top-vis .img img {
-        height: 120px;
+        height: 140px;
     }
     #top-vis p {
         font-size: 13px;
@@ -1636,16 +1636,17 @@ body {
     .f-info {
         padding-left: 0;
         border-top: 1px solid rgba(255, 255, 255, 0.2);
-        margin-top: 25px;
+        margin-top: 55px;
         padding-top: 25px;
         text-align: center;
     }
     .f-sns {
-        top: auto;
-        left: auto;
         position: relative;
-        margin-top: 20px;
+        left: auto;
+        top: 10px;
         text-align: center;
+        margin: 0 auto;
+        width: 216px;
     }
     .f-sns ul {
         text-align: center;
@@ -1709,7 +1710,7 @@ body {
         padding: 35px 15px;
     }
     .f-info {
-        margin-top: 20px;
+        margin-top: 57px;
         padding-top: 20px;
     }
     .f-down p {
