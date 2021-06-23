@@ -214,7 +214,7 @@
                 </div>
                 <div class="f-sns">
                     <ul>
-                        <li><a href="https://www.percommunity.com" target="_blank" title="PER project"><span class="blind">....</span></a></li>
+                        <li><a href="https://perproject.io/" target="_blank" title="PER project"><span class="blind">....</span></a></li>
                         <li><a href="https://www.youtube.com/channel/UC-akAISl4l5sNBI00A1ykqQ" target="_blank" title="Youtubu"><span class="blind">유튜브</span></a></li>
                         <li><a href="https://blog.naver.com/djg162" target="_blank" title="NAVER blog" ><span class="blind">블로그</span></a></li>
                     </ul>
