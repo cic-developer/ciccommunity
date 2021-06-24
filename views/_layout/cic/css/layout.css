@@ -480,6 +480,10 @@ body {
     padding: 7px 55px 7px 15px;
 }
 
+.topmenu .mn_l1 .mn_a10 :hover {
+    color: rgba(58, 57, 57, 0.603) !important;
+}
+
 @media only screen and (max-width:1180px) {
     #logo {
         width: 170px;
@@ -639,10 +643,10 @@ body {
     .topmenu .mn_l1.is-over .mn_a1,
     .topmenu .mn_l1.over .mn_a1,
     .topmenu .mn_l1 .mn_a1:hover {
-        color: #f47523
+        color: #f47523;
     }
-    .topmenu .mn_l1 .mn_a10:hover {
-        color: rgba(58, 57, 57, 0.603);
+    .topmenu .mn_l1 .mn_a10 :hover {
+        color: rgba(58, 57, 57, 0.603)!important;
     }
     .topmenu .mn_l1:nth-child(n+5) .depth2-wrap {
         right: 0;
