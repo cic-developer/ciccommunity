@@ -386,10 +386,6 @@ class Membermodify extends CB_Controller
 					}
 				}
 			}
-			echo '<pre>';
-			print_r($config);
-			echo '</pre>';
-			exit;
 		}
 		
 

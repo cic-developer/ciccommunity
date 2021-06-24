@@ -121,7 +121,7 @@
                                     <p class="stxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('post_content', $result))), 60)); ?>
                                     </p>
                                     <p class="ctxt">
-                                        <span><?php echo html_escape(element('post_nickname', $result)); ?></span>
+                                        <!-- <span><?php// echo html_escape(element('post_nickname', $result)); ?></span> -->
                                         <span><?php echo element('display_datetime', $result); ?></span>
                                         <span>조회 <?php echo number_format(element('post_hit', $result)); ?></span>
                                     </p>

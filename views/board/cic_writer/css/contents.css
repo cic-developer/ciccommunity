@@ -2364,7 +2364,7 @@
 
 @media only screen and (max-width: 680px) {
     .board-wrap.list .list.vimg li {
-        padding-top: 12px;
+        padding-top: 19px;
         padding-bottom: 12px;
     }
 }
@@ -2448,7 +2448,7 @@
     }
     .board-wrap.list .list.vimg.vp li .abr {
         position: relative;
-        right: auto;
+        right: 9px;
         top: auto;
         margin-top: 5px;
         height: 22px;
