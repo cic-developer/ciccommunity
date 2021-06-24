@@ -1839,6 +1839,57 @@
     /* 추가 */
 }
 
+
+/* *******************위쪽에 위치한 검색  ********************/
+
+.board-filter02 {
+    text-align: left;
+    font-size: 0;
+    background: #f4f3f3;
+    padding: 15px 20px;
+}
+
+.board-filter02 .chk-select {
+    width: 100px;
+}
+
+.board-filter02 .chk-select {
+    border: none;
+}
+
+.board-filter02 .chk-select select {
+    border: none;
+}
+
+.board-filter02 .chk-input {
+    width: 100%;
+    max-width: 380px;
+    /*  margin-left:4px; */
+}
+
+.board-filter02 .chk-input input {
+    height: 35px;
+    border: none;
+    padding: 0 35px 0 10px;
+    font-size: 13px;
+    border-radius: 5px;
+}
+
+.board-filter02 .search-btn {
+    position: absolute;
+    right: 0;
+    top: 0px;
+    width: 35px;
+    height: 35px;
+    color: #fff;
+    background: url(/assets/images/ico-search.jpg) no-repeat center center;
+    background-size: 45% auto;
+    box-sizing: border-box;
+    /* 추가 */
+    border: none;
+    /* 추가 */
+}
+
 @media only screen and (max-width: 1200px) {}
 
 @media only screen and (max-width: 999px) {}

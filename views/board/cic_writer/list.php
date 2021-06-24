@@ -72,7 +72,11 @@
                 </div>
             </div>
             <div class="gap60">
-            <div class="board-filter">
+            
+            </div>
+            <div class="list vimg vp">
+                <ul>
+                <div class="board-filter02">
                             <p class="chk-select">
                                 <select name="sfield">
                                     <?php echo element('search_option',  element('list', $view)); ?>
@@ -83,9 +87,6 @@
                                 <button class="search-btn" name="search_submit" type="submit"></button>
                             </p>
                         </div>
-            </div>
-            <div class="list vimg vp">
-                <ul>
                     <?php
                         if (element('list', element('data', element('list', $view)))) {
                             foreach (element('list', element('data', element('list', $view))) as $result) {
