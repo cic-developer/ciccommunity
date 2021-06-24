@@ -638,8 +638,11 @@ body {
     .topmenu .mn_l1.is-open .mn_a1,
     .topmenu .mn_l1.is-over .mn_a1,
     .topmenu .mn_l1.over .mn_a1,
-    .topmenu .mn_l1 .mn_a1:hover {
+    .topmenu .mn_l1 .mn_a1 :hover {
         color: #f47523
+    }
+    .mn_a10:hover {
+        color: #666 !important;
     }
     .topmenu .mn_l1:nth-child(n+5) .depth2-wrap {
         right: 0;
