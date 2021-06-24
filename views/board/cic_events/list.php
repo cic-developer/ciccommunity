@@ -87,20 +87,7 @@
                         </p>
                     </div>
                 </form>
-                <!-- <form id="searchForm" class="navbar-form navbar-right pull-right" action="<?php echo board_url(element('brd_key', element('board', element('list', $view)))); ?>" onSubmit="return postSearch(this);">
-					<input type="hidden" name="findex" value="<?php echo html_escape($this->input->get('findex')); ?>" />
-                    <p class="chk-select">
-                        <select name="sfield">
-                            <option value="post_title" <?php echo ($this->input->get('sfield') === 'post_title') ? ' selected="selected" ' : ''; ?>>제목</option>
-                            <option value="post_content" <?php echo ($this->input->get('sfield') === 'post_content') ? ' selected="selected" ' : ''; ?>>내용</option>
-                        </select>
-                    </p>
-                    <p class="chk-input">
-                        <input type="text" name="skeyword" placeholder="검색어를 입력해주세요" value="<?php echo html_escape($this->input->get('skeyword')); ?>" autocomplete="off">
-                        <a href="javascript:document.querySelector('#searchForm').submit();" class="search-btn"><span>검색</span></a>
-                    </p>
-                
-				</form> -->
+ 
                 <script type="text/javascript">
                 //<![CDATA[
                 function postSearch(f) {
@@ -121,10 +108,10 @@
                     echo 'toggleSearchbox();';
                 }
                 ?>
-                $('.btn-point-info').popover({
-                    template: '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-title"></div><div class="popover-content"></div></div>',
-                    html : true
-                });
+                // $('.btn-point-info').popover({
+                //     template: '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-title"></div><div class="popover-content"></div></div>',
+                //     html : true
+                // });
                 //]]>
                 </script>
             </div>

@@ -121,10 +121,10 @@
                     echo 'toggleSearchbox();';
                 }
                 ?>
-                $('.btn-point-info').popover({
-                    template: '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-title"></div><div class="popover-content"></div></div>',
-                    html : true
-                });
+                // $('.btn-point-info').popover({
+                //     template: '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-title"></div><div class="popover-content"></div></div>',
+                //     html : true
+                // });
                 //]]>
                 </script>
             </div>

@@ -227,7 +227,7 @@ class Contactus extends CB_Controller
 		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
 		 */
 		if($form_validation === false){
-			if (!(element('write_url', element('list', $view)))) {
+			if (!($this->member->item('mem_id'))) {
 				echo '<script>alert("로그인 후 신청 가능합니다");history.back()</script>';
 				// exit;
 			}

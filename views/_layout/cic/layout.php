@@ -178,6 +178,12 @@
 							</li>
 							<li class="mn_l1 is-cloose" style="width: auto;">
 								<a href="<?php echo base_url('board/notice')?>" class="mn_a1"><span>공지사항</span></a>
+                                <div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1; overflow: hidden;">
+									<ul class="depth2">
+                                        <li class="mn_l2"><a href="<?php echo base_url('/board/notice')?>" class="mn_a2"><span>공지사항</span></a></li>
+                                        <li class="mn_l2"><a href="<?php echo base_url('/board/events')?>" class="mn_a2"><span>이벤트</span></a></li>
+									</ul>
+								</div>
 							</li>
 							<li class="mn_l1 is-cloose" style="width: auto;">
 								<a href="<?php echo base_url('/news')?>" class="mn_a1"><span>뉴스</span></a>
