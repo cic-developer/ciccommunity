@@ -86,6 +86,11 @@
                                 <input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword',  element('list', $view))); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
                                 <button class="search-btn" name="search_submit" type="submit"></button>
                             </p>
+                            <?php if (element('write_url', element('list', $view))) { ?>
+                                <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn btn02">글쓰기</a>
+                            <?php }else{?>
+                                <a href="<?php echo base_url('/contactus/apply') ?>" class="by-btn btn02">신청하기</a>
+                            <?php } ?>
                         </div>
                     <?php
                         if (element('list', element('data', element('list', $view)))) {

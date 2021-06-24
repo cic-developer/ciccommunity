@@ -1890,11 +1890,33 @@
     /* 추가 */
 }
 
+.board-filter02 .btn02 {
+    float: right;
+    background: #fecb02;
+    color: #fff;
+    border-color: #fecb02;
+    border-radius: 5px;
+}
+
+.board-filter02 .btn02:hover {
+    background: #ff9333;
+    border-color: #ff9333
+}
+
 @media only screen and (max-width: 1200px) {}
 
 @media only screen and (max-width: 999px) {}
 
-@media only screen and (max-width: 680px) {}
+@media only screen and (max-width: 680px) {
+    .board-filter02 .chk-input input {
+        width: 235px;
+        height: 35px;
+        border: none;
+        padding: 0 35px 0 10px;
+        font-size: 13px;
+        border-radius: 5px;
+    }
+}
 
 @media only screen and (max-width: 480px) {}
 

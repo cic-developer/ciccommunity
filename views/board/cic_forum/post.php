@@ -408,10 +408,14 @@
 		if(priceToString(forum_bat_min) != 0){
 			// min = '(최소 배팅금액: ' + priceToString(forum_bat_min) + ')';
 			min = priceToString(forum_bat_min) + ' ~ ';
+		}else{
+			min = 0 + ' ~ ';
 		}
 		if(priceToString(forum_bat_max) != 0){
 			// max = '(최대 배팅금액: ' + priceToString(forum_bat_max) + ')';
 			max = priceToString(forum_bat_max) + '';
+		}else{
+			max = 0 + '';
 		}
 		// title = title + max + min;
 		title = title + min + max;
