@@ -756,7 +756,6 @@ class Post_model extends CB_Model
 			$this->db->limit($limit, $offset);
 		}
 		$qry = $this->db->get();
-		
 		$result['list'] = $qry->result_array();
 
 		$this->db->select('count(*) as rownum');

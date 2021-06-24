@@ -453,7 +453,7 @@ em {
 =========================================================*/
 
 .paging-wrap {
-    margin-top: 40px;
+    margin-top: 73px;
     font-size: 0px;
     text-align: center;
     display: block;
@@ -542,7 +542,7 @@ em {
 
 @media only screen and (max-width:680px) {
     .paging-wrap {
-        margin-top: 20px;
+        margin-top: 70px;
     }
     .paging-wrap ul {
         padding: 0 5px

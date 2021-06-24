@@ -654,7 +654,7 @@ body {
     }
     .topmenu .mn_l1:nth-child(n+5) .depth2 {
         text-align: right;
-        padding-right: 40px;
+        padding-right: 63px;
     }
     .topmenu .mn_l1:nth-child(5) .depth2-wrap {
         right: -120px !important;

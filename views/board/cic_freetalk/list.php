@@ -64,6 +64,26 @@
                 </div>
             </div>
             <div class="gap60"></div>
+            <div class="board-filter">
+                <form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
+                    <div class="board-filter" style="display:flex;">
+                        <div style="display:flex;">
+                        <p class="chk-select">
+                            <select name="sfield">
+                                <?php echo element('search_option',  element('list', $view)); ?>
+                            </select>
+                        </p>
+                        <p class="chk-input">
+                            <input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword',  element('list', $view))); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
+                            <button class="search-btn" name="search_submit" type="submit"></button>
+                        </p>
+                        </div>
+                        <div>
+                        <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn">글쓰기</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="list community">
                 <table>
                     <colgroup>

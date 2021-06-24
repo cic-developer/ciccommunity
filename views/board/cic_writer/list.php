@@ -160,37 +160,15 @@
                     })
                 </script>
             </div>
-		    <?php if (element('write_url', element('list', $view))) { ?>
-            <div class="lower r">
-                <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn">글쓰기</a>
-            </div>
-            <?php }?>
+            
+            <?php echo $buttons ?>
+
             <!-- s: paging-wrap -->
             <div class="paging-wrap">
                 <?php echo element('paging', element('list', $view)); ?>
             </div>
             <!-- e: paging-wrap -->
-            <!-- s: board-filter -->
-            <!-- <div class="board-filter">
-                <form name="fsearch" id="fsearch" action="<?php //echo current_full_url(); ?>" method="get">
-                    <div class="board-filter">
-                        <p class="chk-select">
-                            <select name="sfield">
-                                <?php //echo element('search_option',  element('list', $view)); ?>
-                            </select>
-                        </p>
-                        <p class="chk-input">
-                            <input type="text" name="skeyword" value="<?php //echo html_escape(element('skeyword',  element('list', $view))); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
-                            <button class="search-btn" name="search_submit" type="submit"></button>
-                        </p>
-                    </div>
-                </form>
-            </div> -->
-
-            <?php echo $buttons ?>
-            <!— e: board-filter —>
         </div>
-        <!— page end // —>
     </div>
     <!-- 작성 글 보기-->
 <div class="popupLayer" style="display:none; z-index:1200">
