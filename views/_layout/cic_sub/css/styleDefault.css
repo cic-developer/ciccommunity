@@ -636,6 +636,7 @@
     }
     
     .by-btn {
+        float: right;
         background: #fecb02;
         color: #fff;
         border-color: #fecb02;

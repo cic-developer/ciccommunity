@@ -227,6 +227,10 @@ class Contactus extends CB_Controller
 		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
 		 */
 		if($form_validation === false){
+			if (!(element('write_url', element('list', $view)))) {
+				echo '<script>alert("로그인 후 이용하세요");history.back()</script>';
+				exit;
+			}
 
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
