@@ -1891,9 +1891,11 @@
 }
 
 .board-filter02 .btn02 {
-    float: right background: #fecb02;
+    float: right;
+    background: #fecb02;
     color: #fff;
     border-color: #fecb02;
+    border-radius: 5px;
 }
 
 .board-filter02 .btn02:hover {
@@ -1905,9 +1907,24 @@
 
 @media only screen and (max-width: 999px) {}
 
-@media only screen and (max-width: 680px) {}
+@media only screen and (max-width: 680px) {
+    .board-filter02 .chk-input {
+        width: 202px;
+        max-width: 380px;
+        /* margin-left: 4px; */
+    }
+}
 
-@media only screen and (max-width: 480px) {}
+@media only screen and (max-width: 480px) {
+    .board-filter02 .chk-input {
+        width: 140px;
+        max-width: 380px;
+        /* margin-left: 4px; */
+    }
+    .board-filter02 .chk-select {
+        width: 75px;
+    }
+}
 
 
 /* =====================================

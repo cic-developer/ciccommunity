@@ -228,7 +228,7 @@ class Contactus extends CB_Controller
 		 */
 		if($form_validation === false){
 			if (!(element('write_url', element('list', $view)))) {
-				echo '<script>alert("로그인 후 이용하세요");history.back()</script>';
+				echo '<script>alert("로그인 후 신청 가능합니다");history.back()</script>';
 				exit;
 			}
 
