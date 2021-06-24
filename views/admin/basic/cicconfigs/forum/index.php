@@ -18,27 +18,27 @@
 			?>
 				<input type="hidden" name="is_submit" value="2" />
 				<div class="form-group">
-					<label class="col-sm-2 control-label">포럼 예치금</label>
+					<label class="col-sm-2 control-label">포럼 예치CP</label>
 					<div class="col-sm-10">
-						<input type="number" class="form-control" name="forum_deposit" id="forum_deposit" value="<?php echo set_value('forum_deposit', element('forum_deposit', element('data', $view))); ?>" style="width:180px;" /> CP &nbsp;&nbsp;&nbsp; 도전 CIC포럼 기본 예치금을 설정할 수 있습니다.
+						<input type="number" class="form-control" name="forum_deposit" id="forum_deposit" value="<?php echo set_value('forum_deposit', element('forum_deposit', element('data', $view))); ?>" style="width:180px;" /> CP &nbsp;&nbsp;&nbsp; 도전 CIC포럼 기본 CP를 설정할 수 있습니다.
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">포럼 배팅 진영 변경 수수료</label>
+					<label class="col-sm-2 control-label">포럼 진영 변경 수수료</label>
 					<div class="col-sm-10">
-						<input type="number" class="form-control" name="forum_bat_change_commission" id="forum_bat_change_commission" value="<?php echo set_value('forum_bat_change_commission', element('forum_bat_change_commission', element('data', $view))); ?>" style="width:180px;" /> % &nbsp;&nbsp;&nbsp; CIC포럼 배팅 진영 변경 수수료를 설정할 수 있습니다.
+						<input type="number" class="form-control" name="forum_bat_change_commission" id="forum_bat_change_commission" value="<?php echo set_value('forum_bat_change_commission', element('forum_bat_change_commission', element('data', $view))); ?>" style="width:180px;" /> % &nbsp;&nbsp;&nbsp; CIC포럼 행사 진영 변경 수수료를 설정할 수 있습니다.
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">포럼 최대 배팅금액</label>
+					<label class="col-sm-2 control-label">포럼 최대 행사금액</label>
 					<div class="col-sm-10">
-						<input type="number" class="form-control" name="forum_bat_max" id="forum_bat_max" value="<?php echo set_value('forum_bat_max', element('forum_bat_max', element('data', $view))); ?>" style="width:180px;" /> CP &nbsp;&nbsp;&nbsp; CIC포럼 최대 배팅금액을 설정할 수 있습니다. ( 0 입력시 해당 설정이 비활성화 됩니다. )
+						<input type="number" class="form-control" name="forum_bat_max" id="forum_bat_max" value="<?php echo set_value('forum_bat_max', element('forum_bat_max', element('data', $view))); ?>" style="width:180px;" /> CP &nbsp;&nbsp;&nbsp; CIC포럼 최대 행사금액을 설정할 수 있습니다. ( 0 입력시 해당 설정이 비활성화 됩니다. )
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">포럼 최소 배팅금액</label>
+					<label class="col-sm-2 control-label">포럼 최소 행사금액</label>
 					<div class="col-sm-10">
-						<input type="number" class="form-control" name="forum_bat_min" id="forum_bat_min" value="<?php echo set_value('forum_bat_min', element('forum_bat_min', element('data', $view))); ?>" style="width:180px;" /> CP &nbsp;&nbsp;&nbsp; CIC포럼 최소 배팅금액을 설정할 수 있습니다. ( 0 입력시 해당 설정이 비활성화 됩니다. )
+						<input type="number" class="form-control" name="forum_bat_min" id="forum_bat_min" value="<?php echo set_value('forum_bat_min', element('forum_bat_min', element('data', $view))); ?>" style="width:180px;" /> CP &nbsp;&nbsp;&nbsp; CIC포럼 최소 행사금액을 설정할 수 있습니다. ( 0 입력시 해당 설정이 비활성화 됩니다. )
 					</div>
 				</div>
 

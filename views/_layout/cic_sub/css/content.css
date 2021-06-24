@@ -6154,11 +6154,14 @@
 }
 
 .search-wrap.list .list.vimg.vp li .abr {
-    position: absolute;
-    right: 5px;
-    top: 50%;
+    position: relative;
+    right: -673px;
+    top: -23px;
     margin-top: -20px;
     height: 40px;
+    display: block;
+    padding-right: 10px;
+    padding-left: 90px;
 }
 
 .search-wrap.list .list.vimg.vp li .photo {
@@ -6177,8 +6180,9 @@
 }
 
 .search-wrap.list .list.vimg.vp li .pimg img {
-    width: 32px;
-    vertical-align: top;
+    width: 39px;
+    margin-left: -6px;
+    height: auto;
 }
 
 .search-wrap.list .list.vimg.vp li .rtxt {
@@ -8011,6 +8015,29 @@ label input[type='checkbox'] {
 }
 
 .popupLayer div {
+    position: fixed;
+    top: 5px;
+    right: 5px;
+}
+
+.title-box .field .chk-input {
+    width: 100%;
+}
+
+.popup_menuu2 {
+    cursor: pointer;
+}
+
+.popupLayer2 {
+    position: fixed;
+    background-color: #ffffff;
+    border: solid 2px #fccb17;
+    width: auto;
+    height: auto;
+    padding: 3px;
+}
+
+.popupLayer2 div {
     position: fixed;
     top: 5px;
     right: 5px;

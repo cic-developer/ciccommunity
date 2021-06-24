@@ -2142,7 +2142,8 @@ class Postact extends CB_Controller
 		} else{
 			$this->form_validation->set_message(
 				'_usePoint_max_check',
-				'배팅 금액은 소수점 2자리 까지 입력할 수 있습니다'
+				// '배팅 금액은 소수점 2자리 까지 입력할 수 있습니다'
+				'행사 금액은 소수점 2자리 까지 입력할 수 있습니다'
 			);
 			
 			return false;
@@ -2172,7 +2173,8 @@ class Postact extends CB_Controller
 			if($usePoint > $forum_bat_max){
 				$this->form_validation->set_message(
 					'_usePoint_max_check',
-					'최대 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다'
+					// '최대 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다'
+					'최대 행사금액 ('. $forum_bat_max .')을 초과할 수 없습니다'
 				);
 				return false;
 			}
@@ -2188,7 +2190,8 @@ class Postact extends CB_Controller
 			if($total_cfc_cp > $forum_bat_max){
 				$this->form_validation->set_message(
 					'_usePoint_max_check',
-					'총 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다'
+					// '총 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다'
+					'총 행사금액 ('. $forum_bat_max .')을 초과할 수 없습니다'
 				);
 				return false;
 			}
@@ -2238,7 +2241,8 @@ class Postact extends CB_Controller
 		$config = array(
 			array(
 				'field' => 'usePoint',
-				'label' => '배팅금액',
+				// 'label' => '배팅금액',
+				'label' => '행사금액',
 				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to['.$member_info['mem_cp'].']',
 			),
 			array(
@@ -2306,7 +2310,8 @@ class Postact extends CB_Controller
 			} else{
 				$result = array(
 					'state' => '0',
-					'message' => '배팅 금액은 소수점 2자리 까지 입력할 수 있습니다'
+					// 'message' => '배팅 금액은 소수점 2자리 까지 입력할 수 있습니다'
+					'message' => '행사 금액은 소수점 2자리 까지 입력할 수 있습니다'
 				);
 				exit(json_encode($result));
 			}
@@ -2321,7 +2326,8 @@ class Postact extends CB_Controller
 			if($isBat){
 				$result = array(
 					'state' => '0',
-					'message' => '이미 배팅하셨습니다',
+					// 'message' => '이미 배팅하셨습니다',
+					'message' => '이미 행사하셨습니다',
 				);
 				exit(json_encode($result));
 			}
@@ -2333,7 +2339,8 @@ class Postact extends CB_Controller
 				if($usePoint > $forum_bat_max){
 					$result = array(
 						'state' => '0',
-						'message' => '최대 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다',
+						// 'message' => '최대 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다',
+						'message' => '최대 행사금액 ('. $forum_bat_max .')을 초과할 수 없습니다',
 					);
 					exit(json_encode($result));
 				}
@@ -2346,7 +2353,8 @@ class Postact extends CB_Controller
 				if($usePoint < $forum_bat_min){
 					$result = array(
 						'state' => '0',
-						'message' => '최소 배팅금액 ('. $forum_bat_min .')미만일 수 없습니다',
+						// 'message' => '최소 배팅금액 ('. $forum_bat_min .')미만일 수 없습니다',
+						'message' => '최소 행사금액 ('. $forum_bat_min .')미만일 수 없습니다',
 					);
 					exit(json_encode($result));
 				}
@@ -2361,7 +2369,8 @@ class Postact extends CB_Controller
 			if($result != 1){
 				$result = array(
 					'state' => '0',
-					'message' => '배팅에 실패하셨습니다2 (관리자 문의)',
+					// 'message' => '배팅에 실패하셨습니다2 (관리자 문의)',
+					'message' => '행사에 실패하셨습니다2 (관리자 문의)',
 				);
 				exit(json_encode($result));
 			}else {
@@ -2370,7 +2379,8 @@ class Postact extends CB_Controller
 				 * cic_cp
 				 */
 				// insert cp -
-				$this->point->insert_cp($mem_id, -$usePoint, '포럼배팅', 'post', $post_id, $this->member->item('mem_id') . '-' . uniqid('') );
+				// $this->point->insert_cp($mem_id, -$usePoint, '포럼배팅', 'post', $post_id, $this->member->item('mem_id') . '-' . uniqid('') );
+				$this->point->insert_cp($mem_id, -$usePoint, '포럼행사', 'post', $post_id, $this->member->item('mem_id') . '-' . uniqid('') );
 
 				/**
 				 * 배팅
@@ -2534,7 +2544,8 @@ class Postact extends CB_Controller
 		$config = array(
 			array(
 				'field' => 'usePoint',
-				'label' => '배팅금액',
+				// 'label' => '배팅금액',
+				'label' => '행사금액',
 				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to['.$member_info['mem_cp'].']',
 			),
 			array(
@@ -2618,7 +2629,8 @@ class Postact extends CB_Controller
 				} else{
 					$result = array(
 						'state' => '0',
-						'message' => '배팅 금액은 소수점 2자리 까지 입력할 수 있습니다'
+						// 'message' => '배팅 금액은 소수점 2자리 까지 입력할 수 있습니다'
+						'message' => '행사 금액은 소수점 2자리 까지 입력할 수 있습니다'
 					);
 					exit(json_encode($result));
 				}
@@ -2633,7 +2645,8 @@ class Postact extends CB_Controller
 					if($total_cfc_cp > $forum_bat_max){
 						$result = array(
 							'state' => '0',
-							'message' => '최대 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다',
+							// 'message' => '최대 배팅금액 ('. $forum_bat_max .')을 초과할 수 없습니다',
+							'message' => '최대 행사금액 ('. $forum_bat_max .')을 초과할 수 없습니다',
 						);
 						exit(json_encode($result));
 					}
@@ -2649,7 +2662,8 @@ class Postact extends CB_Controller
 					if($total_cfc_cp < $forum_bat_min){
 						$result = array(
 							'state' => '0',
-							'message' => '최소 배팅금액 ('. $forum_bat_min .')미만일 수 없습니다',
+							// 'message' => '최소 배팅금액 ('. $forum_bat_min .')미만일 수 없습니다',
+							'message' => '최소 행사금액 ('. $forum_bat_min .')미만일 수 없습니다',
 						);
 						exit(json_encode($result));
 					}
@@ -2672,7 +2686,8 @@ class Postact extends CB_Controller
 				 * cic_cp
 				 */
 				// insert cp -
-				$this->point->insert_cp($mem_id, -$usePoint, '추가포럼배팅', 'post', $post_id, $this->member->item('mem_id') . '-' . uniqid('') );
+				// $this->point->insert_cp($mem_id, -$usePoint, '추가포럼배팅', 'post', $post_id, $this->member->item('mem_id') . '-' . uniqid('') );
+				$this->point->insert_cp($mem_id, -$usePoint, '추가포럼행사', 'post', $post_id, $this->member->item('mem_id') . '-' . uniqid('') );
 				
 				/**
 				 * 추가 배팅
@@ -2692,7 +2707,8 @@ class Postact extends CB_Controller
 				if($_result != 1){
 					$result = array(
 						'state' => '0',
-						'message' => '배팅에 실패하셨습니다2 (관리자 문의)',
+						// 'message' => '배팅에 실패하셨습니다2 (관리자 문의)',
+						'message' => '행사에 실패하셨습니다2 (관리자 문의)',
 					);
 					exit(json_encode($result));
 				}
@@ -2825,7 +2841,8 @@ class Postact extends CB_Controller
 				if(count($isBat) != 1){
 					$result = array(
 						'state' => '0',
-						'message' => '다중배팅 오류 (관리자 문의)',
+						// 'message' => '다중배팅 오류 (관리자 문의)',
+						'message' => '다중행사 오류 (관리자 문의)',
 					);
 					exit(json_encode($result));
 				}

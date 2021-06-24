@@ -163,7 +163,7 @@
                     <!-- 글쓰기시 관리자가 설정한 포인트보다 적으면... alert하면 어떨까 -->
                     
                     <?php if (element('write_url', element('list', $view))) { ?>
-                    <p class="ex-cp">보유 예치금 : <?php echo number_format(element('mem_deposit', $view)); ?> CP</p>
+                    <p class="ex-cp">보유 예치CP : <?php echo number_format(element('mem_deposit', $view)); ?> CP</p>
                     <?php } ?>
                 </div>
             </div>
@@ -199,7 +199,7 @@
                             </colgroup>
                             <tbody>
                                 <tr>
-                                    <th>필요 예치금</th>
+                                    <th>필요 CP</th>
                                     <td><?php echo number_format(element('deposit_meta', $view), 2); ?></td>
                                 </tr>
                                 <tr>

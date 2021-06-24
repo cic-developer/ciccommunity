@@ -9,7 +9,7 @@
 		?>
 			<input type="hidden" name="<?php echo element('primary_key', $view); ?>"	value="<?php echo element(element('primary_key', $view), element('data', $view)); ?>" />
 			<div class="form-group">
-				<label class="col-sm-2 control-label">배팅 마감일</label>
+				<label class="col-sm-2 control-label">행사 마감일</label>
 				<div class="col-sm-10 form-inline">
 					<input type="datetime" class="form-control datepicker" name="frm_bat_close_datetime" value="<?php echo element('frm_bat_close_datetime', element('forum', $view)); ?>" disabled />
 					<p class="help-block"></p>

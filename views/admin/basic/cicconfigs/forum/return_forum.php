@@ -35,7 +35,7 @@
 								<th>작성자</th>
 								<th><a href="<?php echo element('post_hit', element('sort', $view)); ?>">조회</a></th>
 								<th><a href="<?php echo element('post_datetime', element('sort', $view)); ?>">날짜</a></th>
-								<th>배팅마감</th>
+								<th>행사마감</th>
 								<th>포럼마감</th>
 								<th><input type="checkbox" name="chkall" id="chkall" /></th>
 							</tr>

@@ -29,7 +29,7 @@
                             <li>
                             <p class="recomm">추천인 코드</p> 
                             <input id="respon_wallet" type="text" readonly="" value="<?= element('mem_userid', $member) ?>">
-                            <button type="button" class="copyButton" onclick="copyToClipboard('<?= base_url('r/'.element('mem_userid', $member)) ?>')">복사</button>
+                            <button type="button" class="copyButton" onclick="copyToClipboard('<?= base_url('r/'.element('mem_userid', $member)) ?>')">링크 복사</button>
                             </li>
                             <!-- <li>
                                 <p class="point"><?php //echo number_format($member['mem_point']) ?></p>   

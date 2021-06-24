@@ -308,10 +308,12 @@
 					var max = '';
 					var min = '';
 					if(priceToString(forum_bat_max) != 0){
-						max = '(최대 배팅금액: ' + priceToString(forum_bat_max) + ')';
+						// max = '(최대 배팅금액: ' + priceToString(forum_bat_max) + ')';
+						max = '(최대 행사금액: ' + priceToString(forum_bat_max) + ')';
 					}
 					if(priceToString(forum_bat_min) != 0){
-						min = '(최소 배팅금액: ' + priceToString(forum_bat_min) + ')';
+						// min = '(최소 배팅금액: ' + priceToString(forum_bat_min) + ')';
+						min = '(최소 행사금액: ' + priceToString(forum_bat_min) + ')';
 					}
 					title = title + max + min;
 					const _point = prompt(title, 0);
@@ -391,10 +393,12 @@
 		var max = '';
 		var min = '';
 		if(priceToString(forum_bat_max) != 0){
-			max = '(최대 배팅금액: ' + priceToString(forum_bat_max) + ')';
+			// max = '(최대 배팅금액: ' + priceToString(forum_bat_max) + ')';
+			max = '(최대 행사금액: ' + priceToString(forum_bat_max) + ')';
 		}
 		if(priceToString(forum_bat_min) != 0){
-			min = '(최소 배팅금액: ' + priceToString(forum_bat_min) + ')';
+			// min = '(최소 배팅금액: ' + priceToString(forum_bat_min) + ')';
+			min = '(최소 행사금액: ' + priceToString(forum_bat_min) + ')';
 		}
 		title = title + max + min;
 		const _point = prompt(title, 0);

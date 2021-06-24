@@ -27,7 +27,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">배팅 변경 마감일</label>
+				<label class="col-sm-2 control-label">행사 변경 마감일</label>
 				<div class="col-sm-10 form-inline" style="height:130px;">
 					<div class="form-group">
 						<div class='input-group date' id='datetimepicker12'>
@@ -36,10 +36,10 @@
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
 						</div>
-						<p class="help-block"> 포럼 마감일은 배팅 마감일 이후로 설정해야합니다.</p>
+						<p class="help-block"> 포럼 마감일은 행사 마감일 이후로 설정해야합니다.</p>
 					</div>
 				</div>
-				<label class="col-sm-2 control-label">배팅 마감일</label>
+				<label class="col-sm-2 control-label">행사 마감일</label>
 				<div class="col-sm-10 form-inline" style="height:130px;">
 					<div class="form-group">
 						<div class='input-group date' id='datetimepicker10'>
@@ -49,7 +49,7 @@
 							</span>
 							</span>
 						</div>
-						<p class="help-block">배팅 마감일은 포럼 마감일 이전으로 설정해야합니다.</p>
+						<p class="help-block">행사 마감일은 포럼 마감일 이전으로 설정해야합니다.</p>
 					</div>
 				</div>
 				<label class="col-sm-2 control-label">포럼 마감일</label>
@@ -61,7 +61,7 @@
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
 						</div>
-						<p class="help-block"> 포럼 마감일은 배팅 마감일 이후로 설정해야합니다.</p>
+						<p class="help-block"> 포럼 마감일은 행사 마감일 이후로 설정해야합니다.</p>
 					</div>
 				</div>
 				<div class="form-group">

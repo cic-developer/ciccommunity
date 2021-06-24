@@ -331,7 +331,9 @@ class Forum extends CB_Controller
         
 		$this->form_validation->set_message(
 			'_bat_change_commission_decimal_check',
-			'포럼 배팅 진영 변경 수수료는 소수점 2자리 까지 설정이 가능합니다'
+			// '포럼 배팅 진영 변경 수수료는 소수점 2자리 까지 설정이 가능합니다'
+			'포럼 행사 진영 변경 수수료는 소수점 2자리 까지 설정이 가능합니다'
+			
 		);
 		return false;
 	}
@@ -349,7 +351,8 @@ class Forum extends CB_Controller
         
 		$this->form_validation->set_message(
 			'_bat_max_decimal_check',
-			'최대 배팅금액은 소수점 2자리 까지 설정이 가능합니다'
+			// '최대 배팅금액은 소수점 2자리 까지 설정이 가능합니다'
+			'최대 행사금액은 소수점 2자리 까지 설정이 가능합니다'
 		);
 		return false;
 	}
@@ -367,7 +370,8 @@ class Forum extends CB_Controller
         
 		$this->form_validation->set_message(
 			'_bat_min_decimal_check',
-			'최소 배팅금액은 소수점 2자리 까지 설정이 가능합니다'
+			// '최소 배팅금액은 소수점 2자리 까지 설정이 가능합니다'
+			'최소 행사금액은 소수점 2자리 까지 설정이 가능합니다'
 		);
 		return false;
 	}
@@ -988,18 +992,21 @@ class Forum extends CB_Controller
 					
 					$this->session->set_flashdata(
 						'message',
-						'예치금이 반환 되었습니다'
+						// '예치금이 반환 되었습니다'
+						'예치CP가 반환 되었습니다'
 					);
 				}else {
 					$this->session->set_flashdata(
 						'message',
-						'예치금이 반환에 실패하였습니다'
+						// '예치금이 반환에 실패하였습니다'
+						'예치CP 반환에 실패하였습니다'
 					);
 				}
 			}else {
 				$this->session->set_flashdata(
 					'message',
-					'반환할 예치금이 없습니다'
+					// '반환할 예치금이 없습니다'
+					'반환할 CP가 없습니다'
 				);
 			}
 
@@ -1087,7 +1094,8 @@ class Forum extends CB_Controller
 		$config = array(
 			array(
 				'field' => 'frm_bat_close_datetime',
-				'label' => '배팅 종료일',
+				// 'label' => '배팅 종료일',
+				'label' => '행사 종료일',
 				'rules' => 'trim|required|callback__minbatclosetime',
 			),
 			array(
@@ -1097,7 +1105,8 @@ class Forum extends CB_Controller
 			),
 			array(
 				'field' => 'frm_bat_close_datetime',
-				'label' => '배팅 변경 마감일',
+				// 'label' => '배팅 변경 마감일',
+				'label' => '행사 변경 마감일',
 				'rules' => 'trim|required|callback__minfrmclosetime',
 			),
 			array(
@@ -1499,7 +1508,8 @@ class Forum extends CB_Controller
 		if($frmclose < $batclose){
 			$this->form_validation->set_message(
 				'_minfrmclosetime',
-				'포럼 마감일은 배팅 마감일보다 이후로 설정해야합니다.'
+				// '포럼 마감일은 배팅 마감일보다 이후로 설정해야합니다.'
+				'포럼 마감일은 행사 마감일보다 이후로 설정해야합니다.'
 			);
 			return false;
 		}
@@ -1514,7 +1524,8 @@ class Forum extends CB_Controller
 		if($batclose < $now){
 			$this->form_validation->set_message(
 				'_minbatclosetime',
-				'배팅 마감일은 현재 시간 이후로 설정해야합니다.'
+				// '배팅 마감일은 현재 시간 이후로 설정해야합니다.'
+				'행사 마감일은 현재 시간 이후로 설정해야합니다.'
 			);
 			return false;
 		} 
