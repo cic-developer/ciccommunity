@@ -78,22 +78,26 @@ class Forum extends CB_Controller
 		$config = array(
 			array(
 				'field' => 'forum_deposit',
-				'label' => '포럼 예치금',
+				// 'label' => '포럼 예치금',
+				'label' => '포럼 예치CP',
 				'rules' => 'trim|required|greater_than_equal_to[0]|callback__deposit_decimal_check',
 			),
 			array(
 				'field' => 'forum_bat_change_commission',
-				'label' => '포럼 배팅 진영 변경 수수료',
+				// 'label' => '포럼 배팅 진영 변경 수수료',
+				'label' => '포럼 진영 변경 수수료',
 				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[100]|callback__bat_change_commission_decimal_check',
 			),
 			array(
 				'field' => 'forum_bat_max',
-				'label' => '포럼 최대 배팅금액',
+				// 'label' => '포럼 최대 배팅금액',
+				'label' => '포럼 최대 행사금액',
 				'rules' => 'trim|required|greater_than_equal_to[0]|callback__bat_max_decimal_check',
 			),
 			array(
 				'field' => 'forum_bat_min',
-				'label' => '포럼 최소 배팅금액',
+				// 'label' => '포럼 최소 배팅금액',
+				'label' => '포럼 최소 행사금액',
 				'rules' => 'trim|required|greater_than_equal_to[0]|callback__bat_min_decimal_check',
 			),
 		);
@@ -185,8 +189,11 @@ class Forum extends CB_Controller
 							
 							// 반환 기록
 							if($result == 1){
-								$content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
-								$action = '포럼예치금 반환';
+								$content = '관리자로부터 CP가 변경되었습니다. 사용되지 않은 CP는 반환됩니다.';
+								// $content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
+								$action = '포럼 CP 반환';
+								// $action = '포럼예치금 반환';
+
 
 								// insert_cp +
 								$this->point->insert_cp($mem_id, $mem_deposit, $content, 'member', $mem_id, $this->member->item('mem_id') . '-' . uniqid(''));
@@ -226,8 +233,10 @@ class Forum extends CB_Controller
 								
 								// 반환 기록
 								if($result == 1){
-									$content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
-									$action = '포럼예치금 반환';
+									$content =  '관리자로부터 CP가 변경되었습니다. 사용되지 않은 CP는 반환됩니다.';
+									$action = '포럼 CP 반환';
+									// $content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
+									// $action = '포럼예치금 반환';
 
 									// insert_cp
 									$this->point->insert_cp($mem_id, $mem_deposit, $content, 'member', $mem_id, $this->member->item('mem_id') . '-' . uniqid(''));
@@ -246,8 +255,10 @@ class Forum extends CB_Controller
 							
 							// 반환 기록
 							if($result == 1){
-								$content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
-								$action = '포럼예치금 반환';
+								$content =  '관리자로부터 CP가 변경되었습니다. 사용되지 않은 CP는 반환됩니다.';
+								$action = '포럼 CP 반환';
+								// $content = '관리자로부터 예치금 금액이 변경되었습니다. 사용되지 않은 예치금은 반환됩니다.';
+								// $action = '포럼예치금 반환';
 								
 								// insert_cp
 								$this->point->insert_cp($mem_id, $mem_deposit, $content, 'member', $mem_id, $this->member->item('mem_id') . '-' . uniqid(''));
@@ -283,7 +294,8 @@ class Forum extends CB_Controller
         
 		$this->form_validation->set_message(
 			'_deposit_decimal_check',
-			'포럼 예치금은 소수점 2자리 까지 설정이 가능합니다'
+			// '포럼 예치금은 소수점 2자리 까지 설정이 가능합니다'
+			'포럼 CP는 소수점 2자리 까지 설정이 가능합니다'
 		);
 		return false;
 	}

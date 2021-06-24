@@ -88,7 +88,8 @@ class Deposit extends CB_Controller
             $this->Member_model->set_user_modify($mem_id, $arr);
 
             // insert cp -
-            $this->point->insert_cp($mem_id, -$deposit_meta, '포럼예치금입금', 'member', $mem_id, $this->member->item('mem_id') . '-' . uniqid(''));
+            // $this->point->insert_cp($mem_id, -$deposit_meta, '포럼예치금입금', 'member', $mem_id, $this->member->item('mem_id') . '-' . uniqid(''));
+            $this->point->insert_cp($mem_id, -$deposit_meta, '포럼CP예치', 'member', $mem_id, $this->member->item('mem_id') . '-' . uniqid(''));
             
             $result = array(
                 'state' => '1',
@@ -169,17 +170,20 @@ class Deposit extends CB_Controller
             $this->Member_model->set_user_modify($mem_id, $arr);
 
             // insert cp +
-            $result = $this->point->insert_cp($mem_id, $mem_deposit, '포럼예치금반환', 'member', $mem_id, $this->member->item('mem_id') . '-' . uniqid('') );
+            // $result = $this->point->insert_cp($mem_id, $mem_deposit, '포럼예치금반환', 'member', $mem_id, $this->member->item('mem_id') . '-' . uniqid('') );
+            $result = $this->point->insert_cp($mem_id, $mem_deposit, '포럼예치CP반환', 'member', $mem_id, $this->member->item('mem_id') . '-' . uniqid('') );
             
             $result = array(
                 'state' => '1',
-                'message' => '예치금이 반환 되었습니다',
+                // 'message' => '예치금이 반환 되었습니다',
+                'message' => '예치CP가 반환 되었습니다',
             );
             exit(json_encode($result));
         }else {
             $result = array(
 				'state' => '0',
-				'message' => '반환할 예치금이 없습니다',
+				// 'message' => '반환할 예치금이 없습니다',
+                'message' => '반환할 예치CP가 없습니다',
 			);
 			exit(json_encode($result));
         }

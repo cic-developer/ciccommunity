@@ -147,10 +147,10 @@
                     if(element('write_url', element('list', $view))){
                         if (element('isDeposit', $view)) { 
                     ?>
-                        <a href="javascript:void(0);" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:inline-block;"><span>예치금 반환</span></a>
+                        <a href="javascript:void(0);" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:inline-block;"><span>CP 반환</span></a>
                         <a href="javascript:void(0);" class="by-btn" id="deposit_insert" style="display:none;"><span>참여하기</span></a>
                     <?php }else { ?>
-                        <a href="javascript:void(0);" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:none;"><span>예치금 반환</span></a>
+                        <a href="javascript:void(0);" class="by-btn" id="deposit_subtract_confirm" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="display:none;"><span>CP 반환</span></a>
                         <a href="javascript:void(0);" class="by-btn" id="deposit_insert" style="display:inline-block;"><span>참여하기</span></a>
                     <?php 
                         }

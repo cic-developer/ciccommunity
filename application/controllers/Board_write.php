@@ -107,7 +107,9 @@ class Board_write extends CB_Controller
 
 			// 이미 예치된 금액이 있는지 확인
 			if(!$mem_deposit){
-				alert('예치된 금액이 없습니다');
+				// alert('예치된 금액이 없습니다');
+				alert('예치된 CP가 없습니다');
+				
 				return false;
 			}
 			// 예치금이 충분히 있는지 확인

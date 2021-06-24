@@ -342,17 +342,17 @@
                         </li>
                         <li>
                             <a href="<?php echo $this->member->is_member() ? base_url('/mypage/charge') : 'javascript:alert(\'로그인이 필요한 서비스입니다.\');';?>">
-                                <p class="desktop"><img src="<?php echo base_url('assets/images/use-img02.png') ?>"
+                                <p class="desktop"><img src="<?php echo base_url('assets/images/check-char.png') ?>"
                                         alt="" /></p>
-                                <p class="mobile"><img src="<?php echo base_url('assets/images/use-img02m.jpg') ?>"
+                                <p class="mobile"><img src="<?php echo base_url('assets/images/check-char.png') ?>"
                                         alt="" /></p>
                             </a>
                         </li>
                         <li>
                             <a href="javascript:alert('현재 준비중입니다.');">
-                                <p class="desktop"><img src="<?php echo base_url('assets/images/use-img03.png') ?>"
+                                <p class="desktop"><img src="<?php echo base_url('assets/images/check-qna.png') ?>"
                                         alt="" /></p>
-                                <p class="mobile"><img src="<?php echo base_url('assets/images/use-img03m.jpg') ?>"
+                                <p class="mobile"><img src="<?php echo base_url('assets/images/check-qna.png') ?>"
                                         alt="" /></p>
                             </a>
                         </li>

@@ -5955,18 +5955,25 @@
         padding-right: 24px;
     }
     .search-wrap.list .list.community .my-info .pimg img {
-        width: 18px;
+        width: 28px;
+        height: auto;
+        margin-top: -3px;
+        margin-right: -7px;
     }
     .search-wrap.list .list.community .my-info .rtxt {
         line-height: 21px;
         font-size: 13px;
         max-width: none;
     }
+    .search-wrap.list .list.community table tbody td.l.notice a {
+        padding-left: 0px;
+    }
 }
 
 @media only screen and (max-width: 680px) {
     .search-wrap.list .list.community table tbody tr {
         padding: 10px 15px 30px 15px;
+        height: 50px;
     }
     .search-wrap.list .list.community table tbody td:nth-child(1) {
         bottom: 8px;
@@ -6142,7 +6149,8 @@
 }
 
 .search-wrap.list .list.vimg.vp li a {
-    padding-right: 320px;
+    /* padding-right: 320px; */
+    width: 60%;
 }
 
 .search-wrap.list .list.vimg.vp li .abr {
