@@ -1790,6 +1790,13 @@
   paging-wrap
 =========================================================*/
 
+.search-top {
+    display: flex;
+    width: 50%;
+    min-width: 200px;
+    padding-left: 20px;
+}
+
 .board-filter {
     text-align: center;
     font-size: 0;
@@ -2513,7 +2520,7 @@
     vertical-align: top;
     box-sizing: border-box;
     max-width: 150px;
-    width: 100%
+    width: 100%;
 }
 
 .board-wrap.list .list.community .my-info .pimg {
@@ -4341,7 +4348,7 @@
 .popupLayer div {
     position: fixed;
     top: 5px;
-    right: 5px
+    right: 5px;
 }
 
 @media only screen and (max-width: 680px) {}

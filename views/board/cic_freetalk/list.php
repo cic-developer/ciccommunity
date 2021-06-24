@@ -64,10 +64,11 @@
                 </div>
             </div>
             <div class="gap60"></div>
+            <!-- 자유게시판 검색창 -->
             <div class="board-filter">
                 <form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
-                    <div class="board-filter" style="display:flex;">
-                        <div style="display:flex;">
+                    <div class="board-filter" style="display:flex;justify-content:space-between;">
+                        <div class="search-top" id="search-top">
                         <p class="chk-select">
                             <select name="sfield">
                                 <?php echo element('search_option',  element('list', $view)); ?>
@@ -78,12 +79,15 @@
                             <button class="search-btn" name="search_submit" type="submit"></button>
                         </p>
                         </div>
+                        <?php if (element('write_url', element('list', $view))) { ?>
                         <div>
                         <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn">글쓰기</a>
                         </div>
+                        <?php } ?>
                     </div>
                 </form>
             </div>
+            <!--  -->
             <div class="list community">
                 <table>
                     <colgroup>
