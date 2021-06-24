@@ -2,7 +2,7 @@
 <div id="container-wrap">
 	<div id="top-vis">
 		<div class="txt">
-			<h2>Events</h2>
+			<h2>이벤트</h2>
 		</div>
 		<div class="img"><img src="<?php echo base_url('assets/images/top-vis01.jpg') ?>" alt=""></div>
 	</div>

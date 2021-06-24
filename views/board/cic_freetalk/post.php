@@ -2,7 +2,8 @@
 <div id="container-wrap">
 	<div id="top-vis">
 		<div class="txt">
-			<h2>community</h2>
+			<h2>자유게시판</h2>
+			<p>유저들이 자유롭게 소통하는 공간입니다</p>
 		</div>
 		<div class="img"><img src="<?php echo base_url('assets/images/top-vis04.jpg') ?>" alt=""></div>
 	</div>

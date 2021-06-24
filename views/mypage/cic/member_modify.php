@@ -878,6 +878,10 @@ var nickname_ath_result  = 0;
 	
 	// 닉네임 확인
 	$("#ath_nickname").on('click', function(){
+		if("<?php echo $this->member->item('mem_nickname')?>" === $("#mem_nickname").val()){
+			alert('현재 사용중인 닉네임 입니다.');
+			return;
+		}
 		$(document).ready(function(){
 			var _nickname = $("#mem_nickname").val();
 			var result = '';
