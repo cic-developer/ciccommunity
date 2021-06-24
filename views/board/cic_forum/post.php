@@ -231,7 +231,7 @@
 		
 		const num = cfc_state == 1 ? 0 : 1;
 		// const confirm_content = ' ' + (option === '1' ? 'A' :'B') + '의견을 ' + (option === '2' ? 'A' :'B') + '의견으로 변경 하시겠습니까? (기회 ' + num + '회 남음)';
-		const confirm_content = '의견을 변경하시겠습니까?\n'+`소유 CP는 ${mem_cp} 입니다.`;
+		const confirm_content = '의견을 변경하시겠습니까?\n'+`소유 CP : ${mem_cp}`;
 		var isConfirm = confirm(confirm_content);
 		
 		if(isConfirm){
@@ -304,18 +304,27 @@
 			success: function(data) {
 				if(data.state == 1){
 
-					var title = 'CP를 '+ (option === '1' ? 'A' :'B') + '의견에 투표합니다.\n'+`소유 CP는 ${mem_cp} 입니다.`;
+					var title = 'CP를 '+ (option === '1' ? 'A' :'B') + '의견에 투표합니다.\n'+`소유 CP: ${mem_cp} 투표 가능 CP : `;
 					var max = '';
 					var min = '';
-					if(priceToString(forum_bat_max) != 0){
-						// max = '(최대 배팅금액: ' + priceToString(forum_bat_max) + ')';
-						max = '(최대 행사금액: ' + priceToString(forum_bat_max) + ')';
-					}
+					// if(priceToString(forum_bat_max) != 0){
+					// 	// max = '(최대 배팅금액: ' + priceToString(forum_bat_max) + ')';
+					// 	max = '(최대 행사금액: ' + priceToString(forum_bat_max) + ')';
+					// }
 					if(priceToString(forum_bat_min) != 0){
 						// min = '(최소 배팅금액: ' + priceToString(forum_bat_min) + ')';
-						min = '(최소 행사금액: ' + priceToString(forum_bat_min) + ')';
+						min = priceToString(forum_bat_min) + ' ~ ';
+					}else{
+						min = ' 0 ~ ';
 					}
-					title = title + max + min;
+					if(priceToString(forum_bat_max) != 0){
+						// max = '(최대 배팅금액: ' + priceToString(forum_bat_max) + ')';
+						max = priceToString(forum_bat_max);
+					}else{
+						max = '0';
+					}
+					// title = title + max + min;
+					title = title + min + max;
 					const _point = prompt(title, 0);
 					
 					//취소버튼 누를시
@@ -389,18 +398,23 @@
 			return false;
 		}
         
-		var title = 'CP를 '+ (option === 1 ? 'A' :'B') + '의견에 투표합니다.\n'+`소유 CP는 ${mem_cp} 입니다.`;
+		var title = 'CP를 '+ (option === 1 ? 'A' :'B') + '의견에 투표합니다.\n'+`소유 CP: ${mem_cp} 투표 가능 CP : `;
 		var max = '';
 		var min = '';
-		if(priceToString(forum_bat_max) != 0){
-			// max = '(최대 배팅금액: ' + priceToString(forum_bat_max) + ')';
-			max = '(최대 행사금액: ' + priceToString(forum_bat_max) + ')';
-		}
+		// if(priceToString(forum_bat_max) != 0){
+		// 	// max = '(최대 배팅금액: ' + priceToString(forum_bat_max) + ')';
+		// 	max = '(최대 행사금액: ' + priceToString(forum_bat_max) + ')';
+		// }
 		if(priceToString(forum_bat_min) != 0){
 			// min = '(최소 배팅금액: ' + priceToString(forum_bat_min) + ')';
-			min = '(최소 행사금액: ' + priceToString(forum_bat_min) + ')';
+			min = priceToString(forum_bat_min) + ' ~ ';
 		}
-		title = title + max + min;
+		if(priceToString(forum_bat_max) != 0){
+			// max = '(최대 배팅금액: ' + priceToString(forum_bat_max) + ')';
+			max = priceToString(forum_bat_max) + '';
+		}
+		// title = title + max + min;
+		title = title + min + max;
 		const _point = prompt(title, 0);
         
 		//취소버튼 누를시

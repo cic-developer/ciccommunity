@@ -5,7 +5,7 @@
         <div class="txt">
             <h2>Writer</h2>
             <p>cic writer로 등록된 회원들만 글쓰기가 가능한 공간입니다</p>
-                <p style="margin-top: 14px;"><a href="<?php echo base_url('/contactus/apply')?>">신청하기</a> </p>
+                <!-- <p style="margin-top: 14px;"><a href="<?php // echo base_url('/contactus/apply')?>">신청하기</a> </p> -->
         </div>
         <div class="img"></div>
     </div>
@@ -71,7 +71,19 @@
                     </div>
                 </div>
             </div>
-            <div class="gap60"></div>
+            <div class="gap60">
+            <div class="board-filter">
+                            <p class="chk-select">
+                                <select name="sfield">
+                                    <?php echo element('search_option',  element('list', $view)); ?>
+                                </select>
+                            </p>
+                            <p class="chk-input">
+                                <input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword',  element('list', $view))); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
+                                <button class="search-btn" name="search_submit" type="submit"></button>
+                            </p>
+                        </div>
+            </div>
             <div class="list vimg vp">
                 <ul>
                     <?php

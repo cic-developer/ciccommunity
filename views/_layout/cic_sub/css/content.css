@@ -6214,6 +6214,7 @@
 @media only screen and (max-width: 999px) {
     .search-wrap.list .list.vimg.vp li a {
         padding-right: 0;
+        width: 80%;
     }
     .search-wrap.list .list.vimg.vp li .txt {
         display: block;
