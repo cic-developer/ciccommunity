@@ -928,7 +928,7 @@ var nickname_ath_result  = 0;
 			});
 		})
 	})
-function change_nickname(){
-	nickname_ath_result = 0;
-}
+// function change_nickname(){
+// 	nickname_ath_result = 0;
+// }
 </script>

@@ -2812,6 +2812,7 @@ class Membermodify extends CB_Controller
 		$new_phone =  $this->member->item('mem_phone');
 		$new_password =  $this->member->item('mem_password');
 		$new_wallet = $this->member->item('mem_wallet_address');
+
 		
 		// 수정할 데이터 가져오기
 		if($phone_mail_ath_result == '1'
@@ -2830,17 +2831,39 @@ class Membermodify extends CB_Controller
 			$new_wallet = $this->input->post('mem_wallet');
 		}
 
+		$_post_nickname = $this->input->post('mem_nickname');
+
 		$config[0] = array(
 			'field' => 'mem_nickname',
 			'label' => '닉네임',
 			'rules' => 'trim|required|min_length[2]|max_length[20]|callback__mem_nickname_check',
 		);
+
+		$can_update_nickname = false;
+		$change_nickname_date = $this->cbconfig->item('change_nickname_date');
+		if (empty($change_nickname_date)) {
+			$can_update_nickname = true;
+		} elseif (strtotime($this->member->item('meta_nickname_datetime')) < ctimestamp() - $change_nickname_date * 86400) {
+			$can_update_nickname = true;
+		}
+
+		$_change_nickname = false;
+
+		$_origin_nickname = $this->member->item('mem_nickname');
+		if(strcmp($_post_nickname, $_origin_nickname)){
+			$_change_nickname = true;
+		}
+
+		$_do_change = true;
+		if($_change_nickname){
+			$_do_change = $can_update_nickname ? true : false;
+		}
 		
 		$this->load->library(array('form_validation'));
 		$this->form_validation->set_rules($config);
 		$form_validation = $this->form_validation->run();
 
-		if($form_validation){
+		if($form_validation && $_do_change){
 			$data = array(
 				'mem_wallet_address' => $new_wallet,
 				// 'mem_wallet_address' => '123123123',
@@ -2850,8 +2873,10 @@ class Membermodify extends CB_Controller
 			$arr = array(
 				'mem_phone' => $new_phone,
 				'mem_password' => $new_password,
-				'mem_nickname' => $this->input->post('mem_nickname'),
 			);
+			if($_change_nickname){
+				$arr['mem_nickname'] = $_post_nickname;
+			}
 	
 			$this->Member_extra_vars_model->save($mem_id, $data); // memo: return 값이 없다
 			$result = $this->Member_model->set_user_modify($mem_id, $arr);
@@ -2878,6 +2903,7 @@ class Membermodify extends CB_Controller
 			echo("<script>alert('".$_err_message."');</script>");
 			redirect('membermodify/modify');
 		}
+
 	}
 
 	/**
