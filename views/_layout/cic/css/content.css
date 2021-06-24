@@ -6042,16 +6042,16 @@
         overflow: visible;
     }
     .search-wrap.list .list.vimg.vp li .pimg img {
-        width: 20px;
+        width: 16px;
     }
     .search-wrap.list .list.vimg.vp li .rtxt {
-        line-height: 22px;
+        line-height: 18px;
         font-size: 13px;
         max-width: none;
     }
     .search-wrap.list .list.vimg.vp li .vp {
         margin-left: 12px;
-        line-height: 26px;
+        line-height: 22px;
         height: 22px;
     }
 }
@@ -6063,13 +6063,13 @@
         padding-left: 24px;
     }
     .search-wrap.list .list.vimg.vp li .pimg img {
-        width: 16px;
+        width: 25px;
     }
     .search-wrap.list .list.vimg.vp li .rtxt {
-        line-height: 18px;
+        line-height: 20px;
     }
     .search-wrap.list .list.vimg.vp li .vp {
-        line-height: 22px;
+        line-height: 24px;
         height: 20px;
     }
 }
