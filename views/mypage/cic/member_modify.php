@@ -887,11 +887,12 @@ var nickname_ath_result  = 0;
 	
 	// 닉네임 확인
 	$("#ath_nickname").on('click', function(){
-
 <?php if($can_update_nickname) {?>
 		alert('닉네임을 변경하시면 ' + '<?php echo $this->cbconfig->item('change_nickname_date') ?>' + '일 이내에는 변경할 수 없습니다');
 <?php }else { ?>
 		alert('<?php echo $this->member->item('meta_nickname_datetime').' 부터 닉네임을 변경하실 수 있습니다.' ?>');
+		$('#mem_nickname').val("<?php echo $this->member->item('mem_nickname')?>");
+		$('#mem_nickname').attr("disabled", true); 
 		return;
 <?php } ?>
 		if("<?php echo $this->member->item('mem_nickname')?>" === $("#mem_nickname").val()){
