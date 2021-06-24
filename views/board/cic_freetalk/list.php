@@ -64,30 +64,29 @@
                 </div>
             </div>
             <div class="gap60"></div>
-            <!-- 자유게시판 검색창 -->
-            <div class="board-filter">
-                <form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
-                    <div class="board-filter" style="display:flex;justify-content:space-between;">
-                        <div class="search-top" id="search-top">
-                        <p class="chk-select">
-                            <select name="sfield">
-                                <?php echo element('search_option',  element('list', $view)); ?>
-                            </select>
-                        </p>
-                        <p class="chk-input">
-                            <input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword',  element('list', $view))); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
-                            <button class="search-btn" name="search_submit" type="submit"></button>
-                        </p>
-                        </div>
-                        <?php if (element('write_url', element('list', $view))) { ?>
-                        <div>
-                        <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn">글쓰기</a>
-                        </div>
-                        <?php } ?>
+            <?php
+				ob_start();
+				?>
+                    <div class="board-filter02">
+                        <form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
+                            <p class="chk-select">
+                                <select name="sfield">
+                                    <?php echo element('search_option',  element('list', $view)); ?>
+                                </select>
+                            </p>
+                            <p class="chk-input">
+                                <input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword',  element('list', $view))); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
+                                <button class="search-btn" name="search_submit" type="submit"></button>
+                            </p>
+                            <?php if (element('write_url', element('list', $view))) { ?>
+                                <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn btn02">글쓰기</a>
+                            <?php }?>
+                        </form>
                     </div>
-                </form>
-            </div>
-            <!--  -->
+                <?php 
+                $buttons = ob_get_contents();
+				ob_end_flush();
+                ?>
             <div class="list community">
                 <table>
                     <colgroup>
@@ -244,5 +243,12 @@
     $(window).on("wheel", function (event){
         $('.popupLayer').css('display','none');
     });
+    $(window).on("scrollstart",function(){
+        $('.popupLayer').css('display','none');
+    });
+    $(document)).on("scrollstart",function(){
+        $('.popupLayer').css('display','none');
+    });
+    
     </script>
 </div>
