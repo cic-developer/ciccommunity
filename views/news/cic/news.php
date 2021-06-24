@@ -3,7 +3,7 @@
 <div id="container-wrap">
 	<div id="top-vis">
 		<div class="txt">
-			<h2>News</h2>
+			<h2 class="news_center">News</h2>
 			<!-- <p>각 코인의 주요뉴스를 보여드립니다</p> -->
 		</div>
 		<div class="img"><img src="<?php echo base_url('assets/images/top-vis02.jpg') ?>" alt=""></div>

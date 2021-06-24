@@ -1227,12 +1227,13 @@ body {
     transform: translateY(-50%);
 }
 
-#top-vis h2 {
+#top-vis .news_center {
     font-family: 'GmarketSans';
     font-size: 41px;
     color: #333;
     font-weight: 700;
     line-height: 1em;
+    margin-top: 20px;
 }
 
 #top-vis h2 {
