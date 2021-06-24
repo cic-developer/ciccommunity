@@ -1017,7 +1017,7 @@ body,
     background-position: -26px -41px
 }
 
-@media only screen and (max-width:900px) {
+@media only screen and (max-width:1111px) {
     #smart_editor2 #smart_editor2_content {
         border: 1px solid #b5b5b5;
         width: 80%;

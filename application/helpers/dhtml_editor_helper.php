@@ -18,7 +18,7 @@ if ( ! function_exists('display_dhtml_editor')) {
 		if ($editor_type === 'smarteditor' && $is_dhtml_editor) {
 			$editor_url = site_url('plugin/editor/smarteditor');
 			$editorclassname = 'smarteditor';
-			$style = 'style="width:98%;"';
+			$style = 'style="width:98%; min-width:260px;"';
 		}
 		if ($editor_type === 'ckeditor' && $is_dhtml_editor) {
 			$editor_url = site_url('plugin/editor/ckeditor');
