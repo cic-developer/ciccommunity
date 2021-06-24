@@ -386,7 +386,12 @@ class Membermodify extends CB_Controller
 					}
 				}
 			}
+			echo '<pre>';
+			print_r($config);
+			echo '</pre>';
+			exit;
 		}
+		
 
 		$this->form_validation->set_rules($config);
 		$form_validation = $this->form_validation->run();
