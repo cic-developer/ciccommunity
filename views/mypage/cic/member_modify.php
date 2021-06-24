@@ -1,6 +1,15 @@
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css'); ?>
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/contents.css'); ?>
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/modal.css'); ?>
+<?php 
+	$can_update_nickname = false;
+	$change_nickname_date = $this->cbconfig->item('change_nickname_date');
+	if (empty($change_nickname_date)) {
+		$can_update_nickname = true;
+	} elseif (strtotime($this->member->item('meta_nickname_datetime')) < ctimestamp() - $change_nickname_date * 86400) {
+		$can_update_nickname = true;
+	}
+?>
 <script type="text/javascript" src="<?php echo base_url('assets/js/member_modify.js'); ?>"></script>
 
 <div id="container-wrap">
@@ -878,6 +887,13 @@ var nickname_ath_result  = 0;
 	
 	// 닉네임 확인
 	$("#ath_nickname").on('click', function(){
+
+<?php if($can_update_nickname) {?>
+		alert('닉네임을 변경하시면 ' + '<?php echo $this->cbconfig->item('change_nickname_date') ?>' + '일 이내에는 변경할 수 없습니다');
+<?php }else { ?>
+		alert('<?php echo $this->member->item('meta_nickname_datetime').' 부터 닉네임을 변경하실 수 있습니다.' ?>');
+		return;
+<?php } ?>
 		if("<?php echo $this->member->item('mem_nickname')?>" === $("#mem_nickname").val()){
 			alert('현재 사용중인 닉네임 입니다.');
 			return;

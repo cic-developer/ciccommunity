@@ -2874,11 +2874,10 @@ class Membermodify extends CB_Controller
 				redirect('mypage');
 			}
 		}else{
-			print_r($this->form_validation->error_string());
-			// echo("<script>alert('정보수정에 실패하였습니다 (관리자문의)');</script>");
-			// redirect('membermodify/modify');
+			$_err_message = $this->form_validation->error_string();
+			echo("<script>alert('".$_err_message."');</script>");
+			redirect('membermodify/modify');
 		}
-
 	}
 
 	/**
