@@ -480,7 +480,7 @@ body {
     padding: 7px 55px 7px 15px;
 }
 
-.topmenu .mn_l1 .mn_a10 :hover {
+.topmenu .is-cloosehelper :hover {
     color: rgba(58, 57, 57, 0.603) !important;
 }
 

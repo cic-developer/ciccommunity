@@ -76,7 +76,11 @@
             </div>
             <div class="list vimg vp">
                 <ul>
-                <div class="board-filter02">
+                <?php
+				ob_start();
+				?>
+                    <div class="board-filter02">
+                        <form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
                             <p class="chk-select">
                                 <select name="sfield">
                                     <?php echo element('search_option',  element('list', $view)); ?>
@@ -91,7 +95,12 @@
                             <?php }else{?>
                                 <a href="<?php echo base_url('/contactus/apply') ?>" class="by-btn btn02">신청하기</a>
                             <?php } ?>
-                        </div>
+                        </form>
+                    </div>
+                <?php 
+                $buttons = ob_get_contents();
+				ob_end_flush();
+                ?>
                     <?php
                         if (element('list', element('data', element('list', $view)))) {
                             foreach (element('list', element('data', element('list', $view))) as $result) {
@@ -162,21 +171,23 @@
             </div>
             <!-- e: paging-wrap -->
             <!-- s: board-filter -->
-            <div class="board-filter">
-                <form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
-                        <div class="board-filter">
-                            <p class="chk-select">
-                                <select name="sfield">
-                                    <?php echo element('search_option',  element('list', $view)); ?>
-                                </select>
-                            </p>
-                            <p class="chk-input">
-                                <input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword',  element('list', $view))); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
-                                <button class="search-btn" name="search_submit" type="submit"></button>
-                            </p>
-                        </div>
-                    </form>
-            </div>
+            <!-- <div class="board-filter">
+                <form name="fsearch" id="fsearch" action="<?php //echo current_full_url(); ?>" method="get">
+                    <div class="board-filter">
+                        <p class="chk-select">
+                            <select name="sfield">
+                                <?php //echo element('search_option',  element('list', $view)); ?>
+                            </select>
+                        </p>
+                        <p class="chk-input">
+                            <input type="text" name="skeyword" value="<?php //echo html_escape(element('skeyword',  element('list', $view))); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
+                            <button class="search-btn" name="search_submit" type="submit"></button>
+                        </p>
+                    </div>
+                </form>
+            </div> -->
+
+            <?php echo $buttons ?>
             <!— e: board-filter —>
         </div>
         <!— page end // —>
