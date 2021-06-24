@@ -6,7 +6,7 @@
 	$change_nickname_date = $this->cbconfig->item('change_nickname_date');
 	if (empty($change_nickname_date)) {
 		$can_update_nickname = true;
-	} elseif (strtotime($this->member->item('meta_nickname_datetime')) < ctimestamp() - $change_nickname_date * 86400) {
+	} else if (strtotime($this->member->item('meta_nickname_datetime')) < ctimestamp() - $change_nickname_date * 86400) {
 		$can_update_nickname = true;
 	}
 ?>
@@ -889,8 +889,11 @@ var nickname_ath_result  = 0;
 	$("#ath_nickname").on('click', function(){
 <?php if($can_update_nickname) {?>
 		alert('닉네임을 변경하시면 ' + '<?php echo $this->cbconfig->item('change_nickname_date') ?>' + '일 이내에는 변경할 수 없습니다');
-<?php }else { ?>
-		alert('<?php echo $this->member->item('meta_nickname_datetime').' 부터 닉네임을 변경하실 수 있습니다.' ?>');
+<?php }else{ ?>
+		alert('<?php 
+			$_canchange_time = date('Y-m-d H:i:s', (int)strtotime($this->member->item('meta_nickname_datetime'))+ $change_nickname_date * 86400);
+			echo $_canchange_time.' 부터 닉네임을 변경하실 수 있습니다.' ;
+			?>');
 		$('#mem_nickname').val("<?php echo $this->member->item('mem_nickname')?>");
 		$("#mem_nickname").attr("readonly",true);
 		return;
