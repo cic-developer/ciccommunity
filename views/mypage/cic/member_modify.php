@@ -892,7 +892,7 @@ var nickname_ath_result  = 0;
 <?php }else { ?>
 		alert('<?php echo $this->member->item('meta_nickname_datetime').' 부터 닉네임을 변경하실 수 있습니다.' ?>');
 		$('#mem_nickname').val("<?php echo $this->member->item('mem_nickname')?>");
-		$('#mem_nickname').attr("disabled", true); 
+		$("#mem_nickname").attr("readonly",true);
 		return;
 <?php } ?>
 		if("<?php echo $this->member->item('mem_nickname')?>" === $("#mem_nickname").val()){

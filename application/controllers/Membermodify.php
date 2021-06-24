@@ -2876,6 +2876,8 @@ class Membermodify extends CB_Controller
 			);
 			if($_change_nickname){
 				$arr['mem_nickname'] = $_post_nickname;
+				$metadata['meta_nickname_datetime'] = cdate('Y-m-d H:i:s');
+				$this->Member_meta_model->save($mem_id, $metadata);
 			}
 	
 			$this->Member_extra_vars_model->save($mem_id, $data); // memo: return 값이 없다
@@ -2900,7 +2902,9 @@ class Membermodify extends CB_Controller
 			}
 		}else{
 			$_err_message = $this->form_validation->error_string();
-			echo("<script>alert('".$_err_message."');</script>");
+			print_r($this->input->post());
+			exit;
+			echo("<script>alert(`".$_err_message."`);</script>");
 			redirect('membermodify/modify');
 		}
 
