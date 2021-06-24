@@ -2830,46 +2830,55 @@ class Membermodify extends CB_Controller
 			$new_wallet = $this->input->post('mem_wallet');
 		}
 
-
-		
-		$data = array(
-			'mem_wallet_address' => $new_wallet,
-			// 'mem_wallet_address' => '123123123',
+		$config[0] = array(
+			'field' => 'mem_nickname',
+			'label' => '닉네임',
+			'rules' => 'trim|required|min_length[2]|max_length[20]|callback__mem_nickname_check',
 		);
-
-
-		$arr = array(
-			'mem_phone' => $new_phone,
-			'mem_password' => $new_password,
-			'mem_nickname' => $this->input->post('mem_nickname'),
-		);
-
-		$this->Member_extra_vars_model->save($mem_id, $data); // memo: return 값이 없다
-		$result = $this->Member_model->set_user_modify($mem_id, $arr);
-
-		// 세션데이터 지우기
-		$this->session->unset_userdata('phone_modify_ath_mail_result');
-		$this->session->unset_userdata('password_modify_ath_mail_result');
-		$this->session->unset_userdata('wallet_modify_ath_mail_result');
-		$this->session->unset_userdata('password_modify_ath_nice_phone_result');
-		$this->session->unset_userdata('wallet_modify_ath_nice_phone_result');
-		$this->session->unset_userdata('phone_confirm');
-		$this->session->unset_userdata('password_confirm');
-		$this->session->unset_userdata('wallet_confirm');
 		
-		if($result == 0){
-			echo("<script>alert('정보수정에 실패하였습니다 (관리자문의)');</script>");
-			redirect('membermodify/modify');
+		$this->load->library(array('form_validation'));
+		$this->form_validation->set_rules($config);
+		$form_validation = $this->form_validation->run();
+
+		if($form_validation){
+			$data = array(
+				'mem_wallet_address' => $new_wallet,
+				// 'mem_wallet_address' => '123123123',
+			);
+	
+	
+			$arr = array(
+				'mem_phone' => $new_phone,
+				'mem_password' => $new_password,
+				'mem_nickname' => $this->input->post('mem_nickname'),
+			);
+	
+			$this->Member_extra_vars_model->save($mem_id, $data); // memo: return 값이 없다
+			$result = $this->Member_model->set_user_modify($mem_id, $arr);
+	
+			// 세션데이터 지우기
+			$this->session->unset_userdata('phone_modify_ath_mail_result');
+			$this->session->unset_userdata('password_modify_ath_mail_result');
+			$this->session->unset_userdata('wallet_modify_ath_mail_result');
+			$this->session->unset_userdata('password_modify_ath_nice_phone_result');
+			$this->session->unset_userdata('wallet_modify_ath_nice_phone_result');
+			$this->session->unset_userdata('phone_confirm');
+			$this->session->unset_userdata('password_confirm');
+			$this->session->unset_userdata('wallet_confirm');
+			if($result == 1){
+				$this->session->set_userdata(
+					'membermodify',
+					''
+				);			
+				$this->session->set_flashdata('message', '정보수정이 완료되었습니다');
+				redirect('mypage');
+			}
+		}else{
+			print_r($this->form_validation->error_string());
+			// echo("<script>alert('정보수정에 실패하였습니다 (관리자문의)');</script>");
+			// redirect('membermodify/modify');
 		}
-		
-		if($result == 1){
-			$this->session->set_userdata(
-				'membermodify',
-				''
-			);			
-			$this->session->set_flashdata('message', '정보수정이 완료되었습니다');
-			redirect('mypage');
-		}
+
 	}
 
 	/**
