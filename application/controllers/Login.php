@@ -671,8 +671,10 @@ class Login extends CB_Controller
 		$email = $this->input->post('email');
 		$name = $this->input->post('name');
 
-		echo $this->session->userdata('email');
-		exit;
+		if($email !== $this->session->userdata('email')){
+			$this->session->unset_userdata('email');
+			exit;
+		}
 		// 비밀번호 찾기 이메일 전송을 위한, 핸드폰인증 여부 확인
 		$isMobileAth = $this->session->userdata('find_pw_auth_phone_result');
 
