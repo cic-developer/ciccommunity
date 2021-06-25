@@ -18,7 +18,7 @@
 			<!-- s: layer-wrap userInfo -->
 			<div class="layer-wrap userInfo userInfo-<?php echo element('mem_id', $result); ?>">
 				<p>포럼 전적 <span><?php echo number_format(element('mem_forum_win', $result)); ?>승<?php echo number_format(element('mem_forum_lose', $result)); ?>패</span></p>
-				<a href="" class="popup_menuu">작성 글 보기</a>
+				<a href="" class="popup_menuu" style="color:#065fda;;">작성 글 보기</a>
 			</div>
 			<!-- e: layer-wrap userInfo -->
 

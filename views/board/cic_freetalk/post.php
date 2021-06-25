@@ -190,7 +190,6 @@
 	<a href="" class="layer_link"> 작성 글 보기</a>
     </div>
     <script>
-
     $(function(){
         /* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
         $('.popup_menuu').click(function(e)
