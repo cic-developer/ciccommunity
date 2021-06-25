@@ -291,7 +291,7 @@
 		margin: 15% auto; /* 15% from the top and centered */
 		padding: 70px;
 		border: 1px solid #888;
-		width: 50%; /* Could be more or less, depending on screen size */                          
+		width: 25%; /* Could be more or less, depending on screen size */                          
 	}
 
     @media only screen and (min-width: 1000px) and (max-width: 1299px) {
