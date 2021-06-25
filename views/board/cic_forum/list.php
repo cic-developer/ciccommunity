@@ -179,7 +179,7 @@
                             </select>
                         </p>
                         <p class="chk-input">
-                            <input type="hidden" name="type" value="2"> 
+                            <input type="hidden" name="type" value="<?php echo $this->input->get('type')?>"> 
                             <input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword',  element('list', $view))); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
                             <button class="search-btn" name="search_submit" type="submit"></button>
                         </p>

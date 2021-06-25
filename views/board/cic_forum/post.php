@@ -621,7 +621,8 @@
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
             
-            $('.layer_link2').prop('href', `<?php echo base_url('board/forum').'?sfield=post_nickname&skeyword='?>${$(this).text()}`);
+            $('.layer_link2').prop('href', `<?php echo base_url('board/forum').'/?type='.$this->input->get('type').'&sfield=post_nickname&skeyword='?>${$(this).text()}`);
+						//(element('type', $view) == 1 ? '?type=1' : '?type=2')
             $('.popupLayer2').css({
                 "top": divTop,
                 "left": divLeft,
