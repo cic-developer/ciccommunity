@@ -6,7 +6,7 @@
 			<h2 class="news_center">News</h2>
 			<!-- <p>각 코인의 주요뉴스를 보여드립니다</p> -->
 		</div>
-		<div class="img"><img src="<?php echo base_url('assets/images/top-vis02.jpg') ?>" alt=""></div>
+		<div class="img-news"></div>
 	</div>
 	<div id="contents" class="div-cont">
 		<!-- page start // -->
