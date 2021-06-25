@@ -564,8 +564,8 @@ class Login extends CB_Controller
 		$DI = $data['dupinfo'];
 		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
-		
-		// $email = $isDI['mem_email'];
+
+		$email = $isDI['mem_email'];
 		$id = $isDI['mem_id'];
 		$name = $isDI['mem_username'];
 		
@@ -575,6 +575,7 @@ class Login extends CB_Controller
 			if($DI == $_DI){ // 인증완료
 				// 인증 결과 저장
 				$this->session->set_userdata('find_pw_auth_phone_result', '1');
+				$this->session->set_userdata('email', $email);
 				// 휴대폰 인증 데이터 삭제
 				$this->session->unset_userdata('dec_data');
 				
@@ -670,6 +671,8 @@ class Login extends CB_Controller
 		$email = $this->input->post('email');
 		$name = $this->input->post('name');
 
+		echo $this->session->userdata('email');
+		exit;
 		// 비밀번호 찾기 이메일 전송을 위한, 핸드폰인증 여부 확인
 		$isMobileAth = $this->session->userdata('find_pw_auth_phone_result');
 
