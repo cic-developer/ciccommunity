@@ -672,6 +672,7 @@ class Login extends CB_Controller
 		$name = $this->input->post('name');
 
 		if($email !== $this->session->userdata('email')){
+			$this->session->set_userdata('find_pw_auth_phone_result', '');
 			$this->session->unset_userdata('email');
 			exit;
 		}

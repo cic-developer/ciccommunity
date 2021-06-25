@@ -24,7 +24,7 @@
 								<a href="<?php echo goto_url(element('posturl', $bestpost)); ?>"><?php echo number_format(element("num",$bestpost));?>. <?php echo html_escape(element('post_title', $bestpost)); ?><span class="text-right"><?php //echo number_format(element('post_like_point', $bestpost)); ?></span></a>
 							</li>
 						<?php
-                            if(number_format(element("num",$bestpost)) === '5') break; 
+                            if(element("num",$bestpost) > 6){break;}  
 							}
 						}
 						if ( ! element('list', element('bestpost', $view))) {
@@ -51,7 +51,7 @@
 								<a href="<?php echo goto_url(element('posturl', $popularpost)); ?>"><?php echo number_format(element("num",$popularpost));?>. <?php echo html_escape(element('post_title', $popularpost)); ?> <span class="text-right"><?php //echo number_format(element('post_like_point', $popularpost)); ?></span></a>
 							</li>
 						<?php
-                            if(number_format(element("num",$popularpost)) === '5') break;
+                            if(element("num",$popularpost) > 4) break;
 							}
 						}
 						if ( ! element('list', element('popularpost', $view))) {
