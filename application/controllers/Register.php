@@ -1683,7 +1683,7 @@ class Register extends CB_Controller
 		Events::trigger('before', $eventname);
 
 		$nickname = trim($this->input->post('nickname'));
-		
+
 		if (empty($nickname)) {
 			$this->session->set_userdata('ath_nickname_result', '');
 			$result = array(
@@ -1725,6 +1725,9 @@ class Register extends CB_Controller
 			exit(json_encode($result));
 		}
 
+		$countwhere = array(
+			'mni_nickname' => $nickname,
+		);
 		$row = $this->Member_nickname_model->count_by($countwhere);
 
 		if ($row > 0) {
