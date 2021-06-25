@@ -31,7 +31,7 @@
 								<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', element('post', $view))), 20, 20); ?>"
 										alt="<?php echo element('mlc_title', element('level', element('post', $view))); ?>">
 								</p>
-								<a class="popup_menuu"><p class="rtxt"><?php echo element('post_nickname', element('post', $view)); ?></p></a>
+								<p class="rtxt"><?php echo element('post_nickname', element('post', $view)); ?></p>
 							</div>
 						</li>
 						<li>등록일 : <?php echo element('display_datetime', element('post', $view)); ?> </li>

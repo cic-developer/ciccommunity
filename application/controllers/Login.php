@@ -738,6 +738,17 @@ class Login extends CB_Controller
 		
 		return $time;
 	}
+
+	public function ajax_setemail(){
+		$email = $this->input->get('email');
+		$result = $this->session->set_userdata('_password_find_email', $email);
+		if($result){
+			echo json_encode(array('result' => true));
+		}else{
+			echo json_encode(array('result' => $this->session->userdata('_password_find_email')));
+		}
+		
+	}
 	/**
 	 * 이메일 전송 끝
 	 */

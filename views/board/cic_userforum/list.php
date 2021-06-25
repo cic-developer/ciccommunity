@@ -120,7 +120,7 @@
                                 <div class="my-info">
                                     <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30); ?>"
                                             alt="<?php echo element('mlc_title', $result); ?>"></p>
-                                    <p class="rtxt"><a class="popup_menuu"><?php echo html_escape(element('post_nickname', $result)); ?></a></p>
+                                    <p class="rtxt"><?php echo html_escape(element('post_nickname', $result)); ?></p>
                                 </div>
                             </td>
                             <td class="l">

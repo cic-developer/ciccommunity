@@ -24,7 +24,7 @@
 								<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', element('post', $view))), 20, 20); ?>"
 										alt="<?php echo element('mlc_title', element('level', element('post', $view))); ?>">
 								</p>
-								<a class="popup_menuu"><p class="rtxt"><?php echo element('post_nickname', element('post', $view)); ?></p></a>
+								<a class="popup_menuu2"><p class="rtxt"><?php echo element('post_nickname', element('post', $view)); ?></p></a>
 							</div>
 						</li>
 						<li>등록일 : <?php echo element('display_datetime', element('post', $view)); ?> </li>
@@ -599,19 +599,19 @@
 		return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	}
 </script>
-<div class="popupLayer" style="display:none; z-index:1200;">
-    <a href="" class="layer_link"> 작성 글 보기</a>
+<div class="popupLayer2" style="display:none; z-index:1200;">
+    <a href="" class="layer_link2"> 작성 글 보기</a>
 </div>
 <script>
     $(function(){
         /* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
-        $('.popup_menuu').click(function(e)
+        $('.popup_menuu2').click(function(e)
         {
             var sWidth = window.innerWidth;
             var sHeight = window.innerHeight;
 
-            var oWidth = $('.popupLayer').width();
-            var oHeight = $('.popupLayer').height();
+            var oWidth = $('.popupLayer2').width();
+            var oHeight = $('.popupLayer2').height();
 
             // 레이어가 나타날 위치를 셋팅한다.
             var divLeft = e.clientX + 10;
@@ -621,8 +621,8 @@
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
             
-            $('.layer_link').prop('href', `<?php echo base_url('board/forum').'?sfield=post_nickname&skeyword='?>${$(this).text()}`);
-            $('.popupLayer').css({
+            $('.layer_link2').prop('href', `<?php echo base_url('board/forum').'?sfield=post_nickname&skeyword='?>${$(this).text()}`);
+            $('.popupLayer2').css({
                 "top": divTop,
                 "left": divLeft,
                 "display" : "block"
@@ -630,12 +630,12 @@
         });
     });
     $(document).mouseup(function (e){
-        var container = $('.popupLayer');
+        var container = $('.popupLayer2');
         if( container.has(e.target).length === 0){
         container.css('display','none');
         }
     });
     $(window).on("wheel", function (event){
-        $('.popupLayer').css('display','none');
+        $('.popupLayer2').css('display','none');
     });
     </script>
