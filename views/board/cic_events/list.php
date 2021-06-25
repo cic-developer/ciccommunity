@@ -63,8 +63,7 @@
             </div>
             <?php if (element('write_url', element('list', $view))) { ?>
             <div class="lower r">
-                <?php if($this->member->is_admin==='super') { ?>
-                <!--$this->member->item('mem_level') > 50-->
+                <?php if($this->member->is_admin()) { ?>
                 <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn">글쓰기</a>
                 <?php } ?>
             </div>
