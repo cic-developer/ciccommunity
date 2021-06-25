@@ -5,7 +5,7 @@
 			<h2>도전 포럼</h2>
 			<p>등록된 회원들이 양질의 정보전달 글, 본인의 칼럼을 게시하는 공간 입니다.</p>
 		</div>
-		<div class="img"><img src="<?php echo base_url('assets/images/top-vis03.jpg') ?>" alt=""></div>
+		<div class="img-forum"></div>
 	</div>
 	<div id="contents" class="div-cont">
 		<div class="board-wrap detail">

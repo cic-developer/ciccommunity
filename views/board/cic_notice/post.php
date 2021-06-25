@@ -5,7 +5,7 @@
 			<h2 class="news_center">공지사항</h2>
 			<!-- <p>각 코인의 주요뉴스를 보여드립니다</p> -->
 		</div>
-		<div class="img"><img src="<?php echo base_url('assets/images/top-vis01.jpg') ?>" alt=""></div>
+		<div class="img-notice"></div>
 	</div>
 	<div id="contents" class="div-cont">
 		<!-- page start // -->
