@@ -171,7 +171,7 @@
             <!-- e: paging-wrap -->
             <!-- s: board-filter -->
             <div class="board-filter sel">
-                <form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
+                <form name="fsearch" id="fsearch" action="<?php echo current_full_url() ?>" method="get">
                     <div class="board-filter">
                         <p class="chk-select">
                             <select name="sfield">
@@ -179,6 +179,7 @@
                             </select>
                         </p>
                         <p class="chk-input">
+                            <input type="hidden" name="type" value="2"> 
                             <input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword',  element('list', $view))); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
                             <button class="search-btn" name="search_submit" type="submit"></button>
                         </p>
