@@ -193,7 +193,7 @@
             <div id="myModal_deposit" class="modal">
 				<div class="modal-content">
 					<!-- <ul class="entry modify-box"> -->
-                        <table>
+                        <table class="forum-ye">
                             <colgroup>
                             </colgroup>
                             <tbody>
@@ -211,7 +211,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div style="text-align:right;">
+                        <div style="text-align:right; ">
                             <a href="javascript:void(0);" id="deposit_insert_confirm"  data-type="phone" class="by-btn" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="border-radius: 5px; margin-top:15px;">
                                 <span>예치</span>
                             </a>
@@ -289,9 +289,9 @@
 	.modal-content {
 		background-color: #fefefe;
 		margin: 15% auto; /* 15% from the top and centered */
-		padding: 20px;
+		padding: 70px;
 		border: 1px solid #888;
-		width: 20%; /* Could be more or less, depending on screen size */                          
+		width: 50%; /* Could be more or less, depending on screen size */                          
 	}
 
     @media only screen and (min-width: 1000px) and (max-width: 1299px) {
