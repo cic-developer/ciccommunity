@@ -213,7 +213,7 @@
             <div id="footer" class="div-cont">
                 <div class="f-logo">
                     <h2><span class="blind">cic+community</span></h2>
-                    <a href="https://ciccommunity.co.kr" target="_blank" title="새창열림">https://ciccommunity.co.kr</a>
+                    <a href="https://ciccommunity.com" target="_blank" title="새창열림">https://ciccommunity.com</a>
                 </div>
                 <div class="f-sns">
                     <ul>
