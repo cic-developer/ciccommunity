@@ -63,7 +63,10 @@
             </div>
             <?php if (element('write_url', element('list', $view))) { ?>
             <div class="lower r">
+                <?php if($this->member->is_admin==='super') { ?>
+                <!--$this->member->item('mem_level') > 50-->
                 <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn">글쓰기</a>
+                <?php } ?>
             </div>
             <?php } ?>
             <!-- s: paging-wrap -->
