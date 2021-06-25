@@ -1209,6 +1209,18 @@ body {
     height: 140px;
 }
 
+#top-vis .img-freetalk {
+    background: url(/assets/images/top-vis-free.jpg) no-repeat center;
+    /* background-size: 100% auto; */
+    height: 140px;
+}
+
+#top-vis .img-forum {
+    background: url(/assets/images/top-vis-free.jpg) no-repeat center;
+    /* background-size: 100% auto; */
+    height: 140px;
+}
+
 #top-vis .img img {
     height: 150px;
     width: 100%;

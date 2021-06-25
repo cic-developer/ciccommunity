@@ -12,6 +12,7 @@ application/logs/*
 !application/*/.htaccess
 
 application/uploads/*
+application/config/*
 
 composer.lock
 /vendor/

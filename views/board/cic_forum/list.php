@@ -5,7 +5,7 @@
             <h2 class="forumtitle">포럼</h2>
             <p class="issue">이슈와 관련해 투표를 진행하고, 의견을 교환할 수 있는 공간입니다</p>
         </div>
-        <div class="img forum"><img src="<?php echo base_url('assets/images/top-vis05.jpg')?>" alt="" /></div>
+        <div class="img-forum"></div>
     </div>
     <div id="contents" class="div-cont">
         <!-- page start // -->
