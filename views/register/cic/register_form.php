@@ -259,11 +259,14 @@
 	});
 
 	// 닉네임 확인
+
+	
 	$(document).ready(function(){
+		
 		$("#ath_nickname").on('click', function(){
 			var _nickname = $("#mem_nickname").val();
 			// alert(email);
-
+			console.log(_nickname);
 			var result = '';
 			var reason = '';
 			$.ajax({
@@ -287,7 +290,9 @@
 						nickname_ath_result = 1;
 						alert(reason);
 					}
-				}
+				},
+				error:function(request,status,error){
+    		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
 			});
 		})
 	})

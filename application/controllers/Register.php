@@ -1683,6 +1683,7 @@ class Register extends CB_Controller
 		Events::trigger('before', $eventname);
 
 		$nickname = trim($this->input->post('nickname'));
+		
 		if (empty($nickname)) {
 			$this->session->set_userdata('ath_nickname_result', '');
 			$result = array(
@@ -1692,7 +1693,6 @@ class Register extends CB_Controller
 			exit(json_encode($result));
 		}
 
-		
 		$this->load->helper('chkstring');
 		if (chkstring($nickname, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false) {
 			$this->session->set_userdata('ath_nickname_result', '');

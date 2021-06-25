@@ -231,7 +231,7 @@
 		
 		const num = cfc_state == 1 ? 0 : 1;
 		// const confirm_content = ' ' + (option === '1' ? 'A' :'B') + '의견을 ' + (option === '2' ? 'A' :'B') + '의견으로 변경 하시겠습니까? (기회 ' + num + '회 남음)';
-		const confirm_content = '의견을 변경하시겠습니까?\n'+`소유 CP : ${mem_cp}`;
+		const confirm_content = '의견을 변경하시겠습니까? (변경은 1회만 가능합니다.)\n'+`소유 CP : ${mem_cp}`;
 		var isConfirm = confirm(confirm_content);
 		
 		if(isConfirm){
