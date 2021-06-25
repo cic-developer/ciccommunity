@@ -208,7 +208,7 @@
 				async: false,
 				success: function(data) {
 					result = data.result;
-					
+					// console.log(result);
 					// 성공
 					if(result){
 						window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');

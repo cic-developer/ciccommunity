@@ -571,11 +571,11 @@ class Login extends CB_Controller
 		
 		if($isDI){ // 중복 이면 인증완료
 			$_DI = $new_phone = $isDI['mem_dup_info'];
-
-			if($DI == $_DI){ // 인증완료
+			
+			$_email = $this->session->userdata('_password_find_email');
+			if($_email== $email){
 				// 인증 결과 저장
 				$this->session->set_userdata('find_pw_auth_phone_result', '1');
-				$this->session->set_userdata('email', $email);
 				// 휴대폰 인증 데이터 삭제
 				$this->session->unset_userdata('dec_data');
 				
@@ -670,12 +670,6 @@ class Login extends CB_Controller
 		$id = $this->input->post('id');
 		$email = $this->input->post('email');
 		$name = $this->input->post('name');
-
-		if($email !== $this->session->userdata('email')){
-			$this->session->set_userdata('find_pw_auth_phone_result', '');
-			$this->session->unset_userdata('email');
-			exit;
-		}
 		// 비밀번호 찾기 이메일 전송을 위한, 핸드폰인증 여부 확인
 		$isMobileAth = $this->session->userdata('find_pw_auth_phone_result');
 
@@ -741,13 +735,8 @@ class Login extends CB_Controller
 
 	public function ajax_setemail(){
 		$email = $this->input->get('email');
-		$result = $this->session->set_userdata('_password_find_email', $email);
-		if($result){
-			echo json_encode(array('result' => true));
-		}else{
-			echo json_encode(array('result' => $this->session->userdata('_password_find_email')));
-		}
-		
+		$this->session->set_userdata('_password_find_email', $email);
+		echo json_encode(array('result' => true));
 	}
 	/**
 	 * 이메일 전송 끝
