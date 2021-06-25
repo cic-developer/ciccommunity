@@ -291,7 +291,6 @@ class Register extends CB_Controller
 	 */
 	public function form($recommend_userid = '')
 	{
-
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_register_form';
 		$this->load->event($eventname);
