@@ -186,19 +186,21 @@
 		}
 		function fnPopup2(){
 			var email = $('#email').val();
-			var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-			if(email.length == 0){
-				alert('이메일을 입력해주세요');
-				return;
-			}
-			if (email.match(regExp) == null) {
-				alert('이메일 형식에 맞게 입력해주세요');
-				return;
-			}
-			window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
-			document.form_chk2.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
-			document.form_chk2.target = "popupChk";
-			document.form_chk2.submit();
+			sessionStorage.setItem("check_email", email);
+			console.log(sessionStorage.getItem('check_email'));
+		// 	var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		// 	if(email.length == 0){
+		// 		alert('이메일을 입력해주세요');
+		// 		return;
+		// 	}
+		// 	if (email.match(regExp) == null) {
+		// 		alert('이메일 형식에 맞게 입력해주세요');
+		// 		return;
+		// 	}
+		// 	window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
+		// 	document.form_chk2.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+		// 	document.form_chk2.target = "popupChk";
+		// 	document.form_chk2.submit();
 		}
 	/**
 	* 나이스 핸드폰인증 끝

@@ -563,9 +563,8 @@ class Login extends CB_Controller
 		$data = $this->session->userdata('dec_data');
 		$DI = $data['dupinfo'];
 		
-		
 		$isDI = $this->Member_model->get_by_memDI($DI, '');
-
+		
 		// $email = $isDI['mem_email'];
 		$id = $isDI['mem_id'];
 		$name = $isDI['mem_username'];
