@@ -321,5 +321,38 @@ class Level extends CB_Controller
 		return true;
 	}
 
-}
+	public function listdelete() {
+		// 이벤트 라이브러리를 로딩합니다
+		$eventname = 'event_admin_member_members_listdelete';
+		$this->load->event($eventname);
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('before', $eventname);
+
+		/**
+		 * 체크한 게시물의 삭제를 실행합니다
+		 */
+		if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
+			foreach ($this->input->post('chk') as $val) {
+				if ($val) {
+					$this->member->delete_member($val);
+				}
+			}
+		}
+
+		// 이벤트가 존재하면 실행합니다
+		Events::trigger('after', $eventname);
+
+		/**
+		 * 삭제가 끝난 후 목록페이지로 이동합니다
+		 */
+		$this->session->set_flashdata(
+			'message',
+			'정상적으로 삭제되었습니다'
+		);
+		$param =& $this->querystring;
+		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
+
+		redirect($redirecturl);
+	}
 ?>
