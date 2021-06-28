@@ -5829,9 +5829,9 @@
     letter-spacing: -0.03em;
     max-width: 110px;
     padding-left: 10px;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .search-wrap.list .list.community table tbody td {
