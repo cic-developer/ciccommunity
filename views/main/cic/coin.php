@@ -213,7 +213,7 @@
                 </div>
             </div>
             <div class="lower">
-                <p class="ex">※ 가상화폐는 최대 8개까지 선택할 수 있으며, PER 코인은 고정입니다.</p>
+                <p class="ex">※ 가상화폐는 최대 7개까지 선택할 수 있으며, PER 코인은 고정입니다.</p>
                 <a href="javascript:void(0);" class="save-btn"><span>저장</span></a>
                 <a href="javascript:void(0);" class="refresh-btn"><span>초기화</span></a>
             </div>
