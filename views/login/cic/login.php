@@ -10,7 +10,7 @@
 				echo form_open(current_full_url(), $attributes); 
 			?>
 			<input type="hidden" name="url" value="<?php echo html_escape($this->input->get_post('url')); ?>" />
-			<h3>CIC COMMUNITY <br>LOGIN</h3>
+			<h3>LOGIN</h3>
 			<div class="entry">
 				<ul>
 					<li>
@@ -198,10 +198,32 @@
 				alert('이메일 형식에 맞게 입력해주세요');
 				return;
 			}
-			window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
-			document.form_chk2.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
-			document.form_chk2.target = "popupChk";
-			document.form_chk2.submit();
+			$.ajax({
+				url: cb_url + '/login/ajax_setemail',
+				type: 'GET',
+				data: {
+					email: email,
+				},
+				dataType: 'json',
+				async: false,
+				success: function(data) {
+					result = data.result;
+					// console.log(result);
+					// 성공
+					if(result){
+						window.open('', 'popupChk', 'width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no');
+						document.form_chk2.action = "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+						document.form_chk2.target = "popupChk";
+						document.form_chk2.submit();
+					}else{
+						alert('이메일 인증중에 에러가 발생하였습니다.\n네트워크 상태를 확인해주세요');
+					}
+				},
+				error: function() {
+					alert("에러가 발생했습니다");
+				}
+			});
+
 		}
 	/**
 	* 나이스 핸드폰인증 끝

@@ -5,7 +5,7 @@
             <h2 class="forumtitle">포럼</h2>
             <p class="issue">이슈와 관련해 투표를 진행하고, 의견을 교환할 수 있는 공간입니다</p>
         </div>
-        <div class="img forum"><img src="<?php echo base_url('assets/images/top-vis05.jpg')?>" alt="" /></div>
+        <div class="img-forum"></div>
     </div>
     <div id="contents" class="div-cont">
         <!-- page start // -->
@@ -171,7 +171,7 @@
             <!-- e: paging-wrap -->
             <!-- s: board-filter -->
             <div class="board-filter sel">
-                <form name="fsearch" id="fsearch" action="<?php echo current_full_url(); ?>" method="get">
+                <form name="fsearch" id="fsearch" action="<?php echo current_full_url() ?>" method="get">
                     <div class="board-filter">
                         <p class="chk-select">
                             <select name="sfield">
@@ -179,6 +179,7 @@
                             </select>
                         </p>
                         <p class="chk-input">
+                            <input type="hidden" name="type" value="<?php echo $this->input->get('type')?>"> 
                             <input type="text" name="skeyword" value="<?php echo html_escape(element('skeyword',  element('list', $view))); ?>" placeholder="검색어를 입력해주세요" autocomplete="off" />
                             <button class="search-btn" name="search_submit" type="submit"></button>
                         </p>
@@ -214,7 +215,12 @@
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
             
+<<<<<<< HEAD
             $('.layer_link').prop('href', `<?php echo base_url('board/forum').'?sfield=post_nickname&skeyword='?>${$(this).text()}`);
+=======
+            // $('.layer_link').prop('href', 'https://dev.ciccommunity.com/board/freetalk?sfield=post_nickname&skeyword='+ $(this).text() +'&search_submit=');
+            $('.layer_link').prop('href', `<?php echo base_url('board/forum').(element('type', $view) == 1 ? '?type=1' : '?type=2').'&sfield=post_nickname&skeyword='?>${$(this).text()}`);
+>>>>>>> ddedb138895b263d9a9397c6c750badf29ae124a
             $('.popupLayer').css({
                 "top": divTop,
                 "left": divLeft,

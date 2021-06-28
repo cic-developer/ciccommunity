@@ -5,7 +5,7 @@
             <h2>포럼</h2>
             <p>이슈와 관련해 투표를 진행하고, 의견을 교환할 수 있는 공간입니다</p>
         </div>
-        <div class="img forum"><img src="<?php echo base_url('assets/images/top-vis05.jpg')?>" alt="" /></div>
+        <div class="img-forum"></div>
     </div>
     <div id="contents" class="div-cont">
         <!-- page start / -->
@@ -120,7 +120,7 @@
                                 <div class="my-info">
                                     <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30); ?>"
                                             alt="<?php echo element('mlc_title', $result); ?>"></p>
-                                    <p class="rtxt"><a class="popup_menuu"><?php echo html_escape(element('post_nickname', $result)); ?></a></p>
+                                    <p class="rtxt"><?php echo html_escape(element('post_nickname', $result)); ?></p>
                                 </div>
                             </td>
                             <td class="l">
@@ -194,7 +194,7 @@
             <div id="myModal_deposit" class="modal">
 				<div class="modal-content">
 					<!-- <ul class="entry modify-box"> -->
-                        <table>
+                        <table class="forum-ye">
                             <colgroup>
                             </colgroup>
                             <tbody>
@@ -212,7 +212,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div style="text-align:right;">
+                        <div style="text-align:right; ">
                             <a href="javascript:void(0);" id="deposit_insert_confirm"  data-type="phone" class="by-btn" data-deposit-url="<?php echo site_url(element('deposit_url', $view)); ?>" style="border-radius: 5px; margin-top:15px;">
                                 <span>예치</span>
                             </a>
@@ -289,9 +289,9 @@
 	.modal-content {
 		background-color: #fefefe;
 		margin: 15% auto; /* 15% from the top and centered */
-		padding: 20px;
+		padding: 70px;
 		border: 1px solid #888;
-		width: 20%; /* Could be more or less, depending on screen size */                          
+		width: 25%; /* Could be more or less, depending on screen size */                          
 	}
 
     @media only screen and (min-width: 1000px) and (max-width: 1299px) {

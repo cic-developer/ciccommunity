@@ -5,7 +5,7 @@
             <h2 class="news_center">이벤트</h2>
             <!-- <p>각 코인의 주요뉴스를 보여드립니다</p> -->
         </div>
-        <div class="img"><img src="<?php echo base_url('assets/images/top-vis01.jpg') ?>" alt=""></div>
+        <div class="img-event"></div>
     </div>
     <div id="contents" class="div-cont mb-nopad">
         <!-- page start // -->
@@ -63,7 +63,9 @@
             </div>
             <?php if (element('write_url', element('list', $view))) { ?>
             <div class="lower r">
+                <?php if($this->member->is_admin()) { ?>
                 <a href="<?php echo element('write_url', element('list', $view)); ?>" class="by-btn">글쓰기</a>
+                <?php } ?>
             </div>
             <?php } ?>
             <!-- s: paging-wrap -->

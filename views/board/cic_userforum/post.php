@@ -5,7 +5,7 @@
 			<h2>도전 포럼</h2>
 			<p>등록된 회원들이 양질의 정보전달 글, 본인의 칼럼을 게시하는 공간 입니다.</p>
 		</div>
-		<div class="img"><img src="<?php echo base_url('assets/images/top-vis03.jpg') ?>" alt=""></div>
+		<div class="img-forum"></div>
 	</div>
 	<div id="contents" class="div-cont">
 		<div class="board-wrap detail">
@@ -31,7 +31,7 @@
 								<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', element('post', $view))), 20, 20); ?>"
 										alt="<?php echo element('mlc_title', element('level', element('post', $view))); ?>">
 								</p>
-								<a class="popup_menuu"><p class="rtxt"><?php echo element('post_nickname', element('post', $view)); ?></p></a>
+								<p class="rtxt"><?php echo element('post_nickname', element('post', $view)); ?></p>
 							</div>
 						</li>
 						<li>등록일 : <?php echo element('display_datetime', element('post', $view)); ?> </li>

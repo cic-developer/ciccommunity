@@ -309,6 +309,12 @@ table {
     width: 100%
 }
 
+.forum-ye {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    width: 55%;
+}
+
 table.ashow {
     empty-cells: show;
 }

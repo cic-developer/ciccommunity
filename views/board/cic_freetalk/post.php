@@ -5,7 +5,7 @@
 			<h2>자유게시판</h2>
 			<p>유저들이 자유롭게 소통하는 공간입니다</p>
 		</div>
-		<div class="img"><img src="<?php echo base_url('assets/images/top-vis04.jpg') ?>" alt=""></div>
+		<div class="img-freetalk"></div>
 	</div>
 	<div id="contents" class="div-cont">
 		<!-- page start // -->

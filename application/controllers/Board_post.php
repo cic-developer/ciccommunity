@@ -18,7 +18,7 @@ class Board_post extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Like', 'Post', 'Post_meta', 'Post_extra_vars', 'CIC_member_level_config', 'CIC_forum', 'CIC_forum_config','Board_category', 'Comment');
+	protected $models = array('Like', 'Post', 'Post_meta', 'Post_extra_vars', 'CIC_member_level_config', 'CIC_forum', 'CIC_forum_config','Board_category', 'Comment', 'Post_file');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -192,7 +192,7 @@ class Board_post extends CB_Controller
 							'pfi_is_image' => 1,
 						);
 						$file = $this->Post_file_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
-						$bestpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 80);
+						$bestpost['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $file), 240, 160);
 					} else {
 						$thumb_url = base_url('assets/images/news-img01.png');
 						$bestpost['list'][$key]['thumb_url'] = $thumb_url;

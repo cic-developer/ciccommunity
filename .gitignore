@@ -13,6 +13,7 @@ application/logs/*
 
 application/uploads/*
 application/config/*
+
 composer.lock
 /vendor/
 

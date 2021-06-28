@@ -1378,7 +1378,32 @@ body {
 
 @media only screen and (max-width:480px) {
     #top-vis .img {
-        background: url(/assets/images/top-vis03-writer-mobile.jpg) no-repeat center;
+        background: url(/assets/images/top-vis-writer-mo.jpg) no-repeat center;
+        /* background-size: 100% auto; */
+        height: 138px;
+    }
+    #top-vis .img-freetalk {
+        background: url(/assets/images/top-vis-free_mo.jpg) no-repeat center;
+        /* background-size: 100% auto; */
+        height: 138px;
+    }
+    #top-vis .img-forum {
+        background: url(/assets/images/top-vis-forum_mo.jpg) no-repeat center;
+        /* background-size: 100% auto; */
+        height: 138px;
+    }
+    #top-vis .img-notice {
+        background: url(/assets/images/top-vis-notice-mo.jpg) no-repeat center;
+        /* background-size: 100% auto; */
+        height: 138px;
+    }
+    #top-vis .img-event {
+        background: url(/assets/images/top-vis-notice-mo.jpg) no-repeat center;
+        /* background-size: 100% auto; */
+        height: 138px;
+    }
+    #top-vis .img-news {
+        background: url(/assets/images/top-vis-news-mo.jpg) no-repeat center;
         /* background-size: 100% auto; */
         height: 138px;
     }
