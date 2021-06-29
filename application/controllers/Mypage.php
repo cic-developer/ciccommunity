@@ -224,7 +224,7 @@ class Mypage extends CB_Controller
 		$search_option = array('post_title' => '제목', 'post_content' => '내용');
 		$view['view']['skeyword'] = ($sfield && array_key_exists($sfield, $search_option)) ? $skeyword : '';
 		$view['view']['search_option'] = search_option($search_option, $sfield);
-		$view['view']['list_delete_url'] = site_url('mypage/postListdelete');
+		$view['view']['list_delete_url'] = '';//site_url('mypage/postListdelete');
         
 		/**
 		 * 레이아웃을 정의합니다
@@ -2077,72 +2077,72 @@ class Mypage extends CB_Controller
 	/**
 	 * 게시물 목록 페이지에서 선택삭제를 하는 경우 실행되는 메소드입니다
 	 */
-	public function postListdelete()
-	{
+	// public function postListdelete()
+	// {
         
-		// 이벤트 라이브러리를 로딩합니다
-		$eventname = 'event_mypage_post_listdelete';
-		$this->load->event($eventname);
+	// 	// 이벤트 라이브러리를 로딩합니다
+	// 	$eventname = 'event_mypage_post_listdelete';
+	// 	$this->load->event($eventname);
         
-		// 이벤트가 존재하면 실행합니다
-		Events::trigger('before', $eventname);
+	// 	// 이벤트가 존재하면 실행합니다
+	// 	Events::trigger('before', $eventname);
         
-		required_user_login();
+	// 	required_user_login();
         
-		/**
-		 * 체크한 게시물의 삭제를 실행합니다
-		 */
-		$deletePostArr = array();
-		if ($this->input->post('vsel') && is_array($this->input->post('vsel'))) {
-			foreach ($this->input->post('vsel') as $val) {
-				$post_info = $this->Post_model->get_one($val);
-				$post_mem_id = $post_info['mem_id'];
-				$mem_id = (int) $this->member->item('mem_id');
-				// $member_info = $this->member->get_member();
-				// $mem_id = $member_info['mem_id'];
+	// 	/**
+	// 	 * 체크한 게시물의 삭제를 실행합니다
+	// 	 */
+	// 	$deletePostArr = array();
+	// 	if ($this->input->post('vsel') && is_array($this->input->post('vsel'))) {
+	// 		foreach ($this->input->post('vsel') as $val) {
+	// 			$post_info = $this->Post_model->get_one($val);
+	// 			$post_mem_id = $post_info['mem_id'];
+	// 			$mem_id = (int) $this->member->item('mem_id');
+	// 			// $member_info = $this->member->get_member();
+	// 			// $mem_id = $member_info['mem_id'];
 				
-				if ($val && $post_mem_id == $mem_id) {
-					$this->board->delete_post($val);
-				} else {
-					array_push($deletePostArr, $val);
-				}
-			}
-		}else {
-			// 이벤트가 존재하면 실행합니다
-			Events::trigger('after', $eventname);
+	// 			if ($val && $post_mem_id == $mem_id) {
+	// 				$this->board->delete_post($val);
+	// 			} else {
+	// 				array_push($deletePostArr, $val);
+	// 			}
+	// 		}
+	// 	}else {
+	// 		// 이벤트가 존재하면 실행합니다
+	// 		Events::trigger('after', $eventname);
 			
-			$this->session->set_flashdata(
-				'message',
-				'게시물 삭제에 실패하였습니다'
-			);
-			redirect('mypage/post');
-		}
+	// 		$this->session->set_flashdata(
+	// 			'message',
+	// 			'게시물 삭제에 실패하였습니다'
+	// 		);
+	// 		redirect('mypage/post');
+	// 	}
 		
-		// 삭제에 실패한 게시물 배열
-		if($deletePostArr){
-			// 이벤트가 존재하면 실행합니다
-			Events::trigger('after', $eventname);
+	// 	// 삭제에 실패한 게시물 배열
+	// 	if($deletePostArr){
+	// 		// 이벤트가 존재하면 실행합니다
+	// 		Events::trigger('after', $eventname);
             
-			// print_r($deletePostArr); => 확인용
-			$this->session->set_flashdata(
-				'message',
-				'일부 게시물 삭제에 실패하였습니다'
-			);
-			redirect('mypage/post');
-		}else {
-			// 이벤트가 존재하면 실행합니다
-			Events::trigger('after', $eventname);
+	// 		// print_r($deletePostArr); => 확인용
+	// 		$this->session->set_flashdata(
+	// 			'message',
+	// 			'일부 게시물 삭제에 실패하였습니다'
+	// 		);
+	// 		redirect('mypage/post');
+	// 	}else {
+	// 		// 이벤트가 존재하면 실행합니다
+	// 		Events::trigger('after', $eventname);
             
-			/**
-			 * 삭제가 끝난 후 목록페이지로 이동합니다
-			 */
-			$this->session->set_flashdata(
-				'message',
-				'정상적으로 삭제되었습니다'
-			);
-			redirect('mypage/post');
-		}
-	}
+	// 		/**
+	// 		 * 삭제가 끝난 후 목록페이지로 이동합니다
+	// 		 */
+	// 		$this->session->set_flashdata(
+	// 			'message',
+	// 			'정상적으로 삭제되었습니다'
+	// 		);
+	// 		redirect('mypage/post');
+	// 	}
+	// }
 
 	/**
 	 * 댓글 목록 페이지에서 선택삭제를 하는 경우 실행되는 메소드입니다
