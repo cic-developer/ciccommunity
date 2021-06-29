@@ -45,6 +45,7 @@ class Post_model extends CB_Model
 		$search_where = array();
 		$search_like = array();
 		$search_or_like = array();
+
 		if ($sfield && is_array($sfield)) {
 			foreach ($sfield as $skey => $sval) {
 				$ssf = $sval;
@@ -131,6 +132,8 @@ class Post_model extends CB_Model
 		}
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
+		// echo $this->db->last_query();
+		// exit;
 
 		$this->db->select('count(*) as rownum');
 		$this->db->from($this->_table);

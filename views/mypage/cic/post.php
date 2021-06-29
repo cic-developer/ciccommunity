@@ -66,9 +66,9 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="lower r">
-				<a href="javascript:void(0);" class="by-btn list-delete-btn" data-list-delete-url="<?php echo element('list_delete_url', $view); ?>"><span>삭제</span></a>
-			</div>
+			<!-- <div class="lower r">
+				<a href="javascript:void(0);" class="by-btn list-delete-btn" data-list-delete-url="<?php //echo element('list_delete_url', $view); ?>"><span>삭제</span></a>
+			</div> -->
 			<?php echo form_close(); ?>
 			<!-- s: paging-wrap -->
 			<div class="paging-wrap">

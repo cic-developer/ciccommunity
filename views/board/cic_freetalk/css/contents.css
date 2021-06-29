@@ -2591,7 +2591,7 @@
 
 .board-wrap.list .list.community .my-info {
     position: relative;
-    padding-right: 45px;
+    /* padding-right: 45px; */
     display: inline-flex;
     vertical-align: top;
     box-sizing: border-box;

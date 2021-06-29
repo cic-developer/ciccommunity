@@ -26,7 +26,6 @@
 <div><br></div>
 <div><br></div>
 <!-- <div class="pull-right">
-    <a href="https://dev.ciccommunity.com/admin/page/document/write/3" class="btn btn-danger btn-sm"
         target="_blank">내용수정</a>
 </div> -->
 </div> <!-- wrap_terms 끝 -->

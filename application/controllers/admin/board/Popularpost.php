@@ -83,8 +83,8 @@ class Popularpost extends CB_Controller
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
-		$this->{$this->modelname}->allow_search_field = array('post_id', 'post_title', 'post_content', 'mem_id', 'post_username', 'post_nickname', 'post_email', 'post_homepage', 'post_datetime', 'post_ip', 'post_device'); // 검색이 가능한 필드
-		$this->{$this->modelname}->search_field_equal = array('post_id', 'mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->{$this->modelname}->allow_search_field = array('post_id', 'post_title', 'post_content', 'post.mem_id', 'post_username', 'post_nickname', 'post_email', 'post_homepage', 'post_datetime', 'post_ip', 'post_device'); // 검색이 가능한 필드
+		$this->{$this->modelname}->search_field_equal = array('post_id', 'post.mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
 		$this->{$this->modelname}->allow_order_field = array('post_id', 'post_datetime','post_like_point','post_dislike_point','post_hit'); // 정렬이 가능한 필드
 		
 		$checktime = cdate('Y-m-d H:i:s', ctimestamp() - 24 * 60 * 60);

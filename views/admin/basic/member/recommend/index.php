@@ -22,10 +22,14 @@
 					<thead>
 						<tr>
 							<th>번호</th>
-							<th>회원아이디</th>
-							<th>닉네임</th>
+							<th><?php echo '추천받은 '?>회원아이디</th>
+							<th><?php echo '추천받은 '?>닉네임</th>
 							<?php if($_type){ ?>
 							<th>레퍼럴 인원 수</th>
+							<?php }else{ ?>
+							<th>추천한 회원아이디</th>
+							<th>추천한 닉네임</th>
+							<th>등록일</th>
 							<?php } ?>
 						</tr>
 					</thead>
@@ -36,10 +40,14 @@
 					?>
 						<tr>
 							<td><?php echo number_format(element('num', $result)); ?></td>
-							<td><?php echo $_type ? element('mem_userid', $result): element('mem_rec_userid', $result);?></td>
-							<td><?php echo $_type ? element('usr_nickname', $result): element('rec_nickname', $result); ?></td>
+							<td><?php echo element('mem_rec_userid', $result);?></td>
+							<td><?php echo element('rec_nickname', $result); ?></td>
 							<?php if($_type){ ?>
 								<td><?php echo element('is_count', $result) ?></td>
+							<?php }else{ ?>
+								<td><?php echo element('mem_userid', $result); ?></td>
+								<td><?php echo element('usr_nickname', $result);?></td>
+								<td><?php echo element('mem_reg_date', $result); ?></td>
 							<?php } ?>
 						</tr>
 					<?php

@@ -417,7 +417,6 @@ class Forum extends CB_Controller
 		if ($brdid = (int) $this->input->get('brd_id')) {
 			$where['brd_id'] = $brdid;
 		}
-
 		
 		$result = $this->Post_model->
 			get_post_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
@@ -861,9 +860,17 @@ class Forum extends CB_Controller
             
 			$_forum_commission = (double) $this->input->post('forum_commission'); // 포럼 수수료
 			$forum_commission = $total_cp * ($_forum_commission / 100); // 포럼 수수료를 계산한 후 CP
-			$writer_reward = (double) $this->input->post('writer_reward'); // 게시물 작성자 지급 보상 CP
-            
-			$repart_cp =  $total_cp - ( $writer_reward + $forum_commission); // 수수료 보상을 계산후 실제 나누게 될 포인트( 배분 시작 금액)
+			// $writer_reward = (double) $this->input->post('writer_reward'); // 게시물 작성자 지급 보상 CP
+
+			if($this->input->post('writer_reward')){
+				$writer_reward = (double) $this->input->post('writer_reward'); // 게시물 작성자 지급 보상 CP
+				$repart_cp =  $total_cp - ( $writer_reward + $forum_commission); 
+			}else if($this->input->post('prop_writer_reward')){
+				$writer_reward = (double) $this->input->post('prop_writer_reward'); //게시물 작성자 지급 보상 CP%
+				$repart_cp =  $total_cp - (($total_cp *  ($writer_reward / 100)) + $forum_commission);
+				$writer_reward = $total_cp * ($writer_reward / 100);
+			}
+
             
             if($total_cp_vali == 0){
 				$repart_ratio = 0;

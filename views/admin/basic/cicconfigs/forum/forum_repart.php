@@ -56,8 +56,15 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">작성자 보상 설정</label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" name="writer_reward" id="writer_reward" style="width:180px;" required />
+					<input type="number" class="form-control" name="writer_reward" id="writer_reward" style="width:180px;" onchange="reward_check(this)" required/>
 					<p class="help-inline">CP &nbsp;&nbsp; 글 작성자에게 지급할 보상을 설정해주세요.(예: 배분시작9,000cp -> *보상지급1,000cp -> 승리진영에  배분시작8,000cp)</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">작성자 보상 설정</label>
+				<div class="col-sm-10">
+					<input type="number" class="form-control" name="prop_writer_reward" id="prop_writer_reward" style="width:180px;" onchange="reward_check(this)" required/>
+					<p class="help-inline">% &nbsp;&nbsp; 글 작성자에게 지급할 보상을 설정(%)해주세요.(예: 배분시작9,000cp -> *보상지급1,000cp -> 승리진영에  배분시작8,000cp)</p>
 				</div>
 			</div>
 			<div class="form-group">
@@ -95,6 +102,7 @@ $(function() {
 		rules: {
 			forum_commission: { required: true, min:0 , max: 100 },
 			writer_reward: { required: true, min: 0 }//, max: total_cp },
+			prop_writer_reward: { required: true, min:0 , max: 100 },
 		}
 	});
 });
@@ -115,8 +123,12 @@ $(function() {
 		}
 
 		var writer_reward = $('#writer_reward').val(); // 작성자 보상
+
 		var commission = total_cp * (currentVal / 100); // 수수료
-		var repart_cp = Number(total_cp) - (Number(writer_reward) + Number(commission));
+
+			var repart_cp = Number(total_cp) - (Number(writer_reward) + Number(commission));
+	
+
 		$('#repart_cp').val(repart_cp.toFixed(2));
 
 		if($('#repart_cp').val()){
@@ -144,6 +156,7 @@ $(function() {
 		var commission = $('#forum_commission').val();
 		commission = total_cp * (commission / 100); // 수수료
 		var repart_cp = Number(total_cp) - (Number(currentVal) + Number(commission));
+		
 		$('#repart_cp').val(repart_cp.toFixed(2));
 
 		if($('#repart_cp').val()){
@@ -159,4 +172,43 @@ $(function() {
 
 		oldVal2 = currentVal;
 	});
+
+	var oldVal3 = '';
+	$(document).on("propertychange change keyup paste input","#prop_writer_reward",function(){
+		var currentVal = $(this).val();
+		if(currentVal == oldVal3) {
+			return;
+		}
+
+		var commission = $('#forum_commission').val();
+		commission = total_cp * (commission / 100); // 수수료
+		var repart_cp = Number(total_cp) - ((Number(total_cp) * (Number(currentVal) / 100))+ Number(commission));
+
+		$('#repart_cp').val(repart_cp.toFixed(2));
+
+		if($('#repart_cp').val()){
+			var repart_ratio = repart_cp / Number(win_cp);
+			$('#repart_ratio').val(repart_ratio.toFixed(2));
+		}
+
+		if(Number(win_cp) > repart_cp){
+			$('.repart-msg').attr('style', "color:red; display:block;");
+		}else{
+			$('.repart-msg').attr('style', "display:none;");
+		}
+
+		oldVal3 = currentVal;
+	});
+
+	function reward_check(e){
+		if($(e).attr('id') === 'writer_reward'){
+			$("#writer_reward").attr("required" , true);
+			$('#prop_writer_reward').val('');
+			$("#prop_writer_reward").attr("required" , false);
+		}else{
+			$("#prop_writer_reward").attr("required" , true);
+			$('#writer_reward').val('');
+			$("#writer_reward").attr("required" , false);
+		}
+	}
 </script>

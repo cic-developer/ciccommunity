@@ -24,7 +24,7 @@
 								<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', element('post', $view))), 20, 20); ?>"
 										alt="<?php echo element('mlc_title', element('level', element('post', $view))); ?>">
 								</p>
-								<a class="popup_menuu2"><p class="rtxt"><?php echo element('post_nickname', element('post', $view)); ?></p></a>
+								<a class="popup_menuu2" search_id="<?php echo element('mem_id', element('post', $view)); ?>"><p class="rtxt"><?php echo element('post_nickname', element('post', $view)); ?></p></a>
 							</div>
 						</li>
 						<li>등록일 : <?php echo element('display_datetime', element('post', $view)); ?> </li>
@@ -621,7 +621,7 @@
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
             
-            $('.layer_link2').prop('href', `<?php echo base_url('board/forum').'/?type='.$this->input->get('type').'&sfield=post_nickname&skeyword='?>${$(this).text()}`);
+            $('.layer_link2').prop('href', `<?php echo base_url('board/forum').'/?type='.$this->input->get('type').'&sfield=mem_id&skeyword='?>${$(this).attr('search_id')}`);
 						//(element('type', $view) == 1 ? '?type=1' : '?type=2')
             $('.popupLayer2').css({
                 "top": divTop,

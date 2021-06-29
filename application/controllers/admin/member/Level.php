@@ -58,26 +58,25 @@ class Level extends CB_Controller
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before'] = Events::trigger('before', $eventname);
 
-        		/**
+        /**
 		 * 페이지에 숫자가 아닌 문자가 입력되거나 1보다 작은 숫자가 입력되면 에러 페이지를 보여줍니다.
 		 */
 		$param =& $this->querystring;
 		$page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
-		$findex = $this->input->get('findex') ? $this->input->get('findex') : $this->CIC_member_level_config_model->primary_key;
+		$findex = $this->input->get('findex') ? $this->input->get('findex') : 'mlc_level';//$this->CIC_member_level_config_model->primary_key;
 		$forder = $this->input->get('forder', null, 'desc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
 
 		$per_page = admin_listnum();
 		$offset = ($page - 1) * $per_page;
-
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
 		$this->CIC_member_level_config_model->allow_search_field 
-			= array('vp_id', 'cic_vp.mem_id', 'vp_datetime', 'vp_content', 'vp_type', 'vp_action'); // 검색이 가능한 필드
-		$this->CIC_member_level_config_model->search_field_equal = array('vp_id', 'cic_vp.mem_id'); // 검색중 like 가 아닌 = 검색을 하는 필드
-		$this->CIC_member_level_config_model->allow_order_field = array('vp_id'); // 정렬이 가능한 필드
+			= array('mlc_level', 'mlc_title'); // 검색이 가능한 필드
+		$this->CIC_member_level_config_model->search_field_equal = array('mlc_level'); // 검색중 like 가 아닌 = 검색을 하는 필드
+		$this->CIC_member_level_config_model->allow_order_field = array('mlc_level'); // 정렬이 가능한 필드
 		$result = $this->CIC_member_level_config_model
 			->get_list($per_page, $offset, '', '', $findex, $forder, $sfield, $skeyword);
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;

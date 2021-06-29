@@ -77,6 +77,7 @@ class Board_post extends CB_Controller
 			$list_num = 1;
 			$findex = 'post_best_state';
 			$forder = 'desc';
+			
 			$bestpost = $this->Post_model
 				->get_like_point_ranking_list($limit, $offset, $where, $findex, $forder, $sfield, $skeyword);
 			if (element('list', $bestpost)) {
@@ -1374,6 +1375,7 @@ class Board_post extends CB_Controller
 		$forder = $this->input->get('forder', null, 'asc');
 		$sfield = $this->input->get('sfield', null, '');
 		$skeyword = $this->input->get('skeyword', null, '');
+
 		if ($this->cbconfig->get_device_view_type() === 'mobile') {
 			$per_page = element('mobile_list_count', $board)
 				? (int) element('mobile_list_count', $board) : 10;
@@ -1544,6 +1546,11 @@ class Board_post extends CB_Controller
 			}else if($type == 2){
 				$where['cic_forum_info.frm_close_datetime <'] = $checktime;
 			}
+			if($sfield == 'mem_id'){
+				$where['post.mem_id'] = $skeyword;
+				$sfield = '';
+				$skeyword = '';
+			}
 
 			$result = $this->CIC_forum_model
 				->get_post_list($per_page, $offset, $where, $category_id, $findex, $forder, $sfield, $skeyword);
@@ -1571,12 +1578,18 @@ class Board_post extends CB_Controller
 			if($board['brd_id'] == 1){
 				$where['post_notice'] = 0;
 			}
+			if($sfield == 'mem_id'){
+				$where['post.mem_id'] = $skeyword;
+				$sfield = '';
+				$skeyword = '';
+			}
 			$result = $this->Post_model
 				->get_post_list($per_page, $offset, $where, $category_id, $findex, $forder, $sfield, $skeyword);
 		}
-			
+	
 		$list_num = $result['total_rows'] - ($page - 1) * $per_page;
 		if (element('list', $result)) {
+
 			foreach (element('list', $result) as $key => $val) {
 				$result['list'][$key]['post_url'] = post_url(element('brd_key', $board), element('post_id', $val));
 

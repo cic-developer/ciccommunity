@@ -16,7 +16,7 @@
 		?>
 			<div class="<?php echo $_classname; ?>">
 				<div class="info">
-					<a href="javascript:void(0);" class="nickname popup_menuu">
+					<a href="javascript:void(0);" class="nickname popup_menuu" search_id="<?php echo element('mem_id', $result); ?>">
 						<p class="ico"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', $result)), 35, 35); ?>"
 								alt="" ></p>
 						<p class="txt"><?php echo element('cmt_nickname', $result); ?></p>
@@ -129,7 +129,7 @@
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
             
-            $('.layer_link').prop('href', `<?php echo base_url('board/cicwriter').'?sfield=post_nickname&skeyword='?>${$(this).text()}`);
+            $('.layer_link').prop('href', `<?php echo base_url('board/cicwriter').'?sfield=mem_id&skeyword='?>${$(this).attr('search_id')}`);
             $('.popupLayer').css({
                 "top": divTop,
                 "left": divLeft,

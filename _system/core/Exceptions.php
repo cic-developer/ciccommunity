@@ -182,6 +182,7 @@ class CI_Exceptions {
 		include($templates_path.$template.'.php');
 		$buffer = ob_get_contents();
 		ob_end_clean();
+		// print_r($templates_path.$template.'.php');
 		return $buffer;
 	}
 

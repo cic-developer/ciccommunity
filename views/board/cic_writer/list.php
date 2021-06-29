@@ -132,7 +132,7 @@
                                 <div class="photo">
                                     <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30);?>"
                                             alt="<?php echo element('mlc_title', $result); ?>"></p>
-                                    <p class="rtxt popup_menuu"><?php echo element('post_nickname', $result); ?></p>
+                                    <p class="rtxt popup_menuu" search_id="<?php echo html_escape(element('mem_id', $result)); ?>"><?php echo element('post_nickname', $result); ?></p>
                                 </div>
                                 <p class="vp"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?> VP</p>
                             </div>
@@ -193,8 +193,7 @@
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
             
-            // $('.layer_link').prop('href', 'https://dev.ciccommunity.com/board/freetalk?sfield=post_nickname&skeyword='+ $(this).text() +'&search_submit=');
-            $('.layer_link').prop('href', `<?php echo base_url('board/cicwriter').'?sfield=post_nickname&skeyword='?>${$(this).text()}`);
+            $('.layer_link').prop('href', `<?php echo base_url('board/cicwriter').'?sfield=mem_id&skeyword='?>${$(this).attr('search_id')}`);
             $('.popupLayer').css({
                 "top": divTop,
                 "left": divLeft,
