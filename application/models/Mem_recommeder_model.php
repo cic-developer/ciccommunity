@@ -57,7 +57,6 @@ class Mem_recommeder_model extends CB_Model
         $this->db->join('member AS user_mem', 'mem_recommender.mem_userid = user_mem.mem_userid');
         
         $result['list'] = $this->db->get('mem_recommender')->result_array();
-        echo $this->db->last_query();
         if(!$result['list']){
             return false;
         }

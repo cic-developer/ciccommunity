@@ -63,7 +63,6 @@ class Recommend extends CB_Controller
 		}
 
 		$view['view']['data'] = $result;
-		print_r($result);
 
 		// 이벤트가 존재하면 실행합니다
 		$view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
