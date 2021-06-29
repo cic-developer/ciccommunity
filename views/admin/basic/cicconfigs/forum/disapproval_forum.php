@@ -65,7 +65,7 @@
 											<?php echo html_escape(str_replace("&nbsp;"," ",strip_tags(element('post_content', $result)))); ?>
 										</a>
 									</td>
-									<td><?php echo element('post_display_name', $result); ?> <?php if (element('post_userid', $result)) { ?> ( <a href="?sfield=mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('post_userid', $result)); ?></a> ) <?php } ?></td>
+									<td><?php echo element('post_display_name', $result); ?> <?php if (element('post_userid', $result)) { ?> ( <a href="?sfield=post.mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('post_userid', $result)); ?></a> ) <?php } ?></td>
 									<td><?php echo display_datetime(element('post_datetime', $result))?></td>
 									<td><?php echo number_format(element('post_like', $result))?></td>
 									<td><a href="<?php echo admin_url($this->pagedir); ?>/forum_write/<?php echo element(element('primary_key', $view), $result); ?>?type=a" class="btn btn-outline btn-default btn-xs">승인</a></td>

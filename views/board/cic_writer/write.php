@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/hotfix.css'); ?>
+<!-- bpopup 스크립트 불러오기-->
+<script src="../../../assets/js/jquery.bpopup-0.1.1.min.js"></script>
 
 
 <div id="container-wrap">
@@ -117,6 +119,110 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<?php echo form_close(); ?>
 	</div>
 </div>
+
+<?php //모달 CSS ?>
+<style>
+#element_to_pop_up {
+    background-color: #fff;
+    border-radius: 15px;
+    color: #000;
+    display: none;
+    padding: 20px;
+}
+.b-close {
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+.modal-header {
+    height: 35px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.modal-body {
+    margin-top: 20px;
+}
+.header_text {
+    font-size: 25px;
+    font-weight: bold;
+}
+.body-text__header {
+    font-size: 18px;
+    font-weight: bold;
+}
+.body-text {
+    font-size: 15px;
+}
+.btn-group{
+	width:500px;
+	background-color: skyblue;
+	color:white;
+	text-align :center;
+}
+.b-close {
+    cursor: pointer;
+    position: static;
+    right: 0;
+    top: 0;
+		padding : 10px 0;
+		border-radius : 10px;
+}
+.close-modal{
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+</style>
+
+<?php // 모달 팝업 ?>
+<div id="element_to_pop_up">
+    <div class="modal-content" >
+			<div class="modal-header">
+					<span class="header_text">글 작성 전 필독사항</span>
+					<a class="close-modal" style="font-size:25px" onclick="x_modal()">×</a>
+			</div>
+			<div class="modal-body">
+					<p class="body-text__header"><span style="color:red; font-size:22px;">잠깐!</span> 글 작성 전에 확인해 주세요!<br></p><br>
+					<p class="body-text">
+						- 저격성 글 및 특정 인물 지목 작성을 금지합니다.<br>
+						<br>
+						- 도배하는 글 작성을 금지합니다.<br>
+						<br>
+						- 추천 유도 글 작성 또는 추천 코드 가입을 금지합니다.<br>
+						<br>
+						- 뉴스 기사 자료 업로드 시 출처 명시를 꼭 부탁드립니다.<br>
+						<br>
+						- 카카오톡, 텔레그램 등 모든 SNS 회원 모집을 금지합니다.<br>
+						<br>
+						<span style="color:red">※ 위 사항이 지켜지지 않을 시 경고 없이 차단될 수 있습니다.</span><br>
+					</p>
+			</div>
+			<div style="margin:20px 0 10px 0;border-bottom: 1px solid rgba(0, 0, 0, 0.2);"></div>
+			<div class="modal-footer">
+					<div class="b-close btn-group">
+					☑ 모두 확인했고 내용에 동의합니다
+					</div>
+			</div>
+	</div>
+</div>
+
+<script>
+$( document ).ready(function() {
+	$('#element_to_pop_up').bPopup({
+		easing: 'easeOutBack', //uses jQuery easing plugin
+    speed: 1500,
+    transition: 'slideDown',
+		modalClose: false,
+    opacity: 0.6,
+    positionStyle: 'fixed'
+	});
+});
+
+function x_modal(){
+	history.back();
+}
+</script>
 
 <script type="text/javascript">
 // 글자수 제한

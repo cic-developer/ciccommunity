@@ -18,7 +18,7 @@
 			<!-- s: layer-wrap userInfo -->
 			<div class="layer-wrap userInfo userInfo-<?php echo element('mem_id', $result); ?>">
 				<p>포럼 전적 <span><?php echo number_format(element('mem_forum_win', $result)); ?>승<?php echo number_format(element('mem_forum_lose', $result)); ?>패</span></p>
-				<a href="" class="popup_menuu" style="color:#065fda;;">작성 글 보기</a>
+				<a href="" class="popup_menuu" style="color:#065fda;;" data-id="<?php echo element('mem_id', $result); ?>">작성 글 보기</a>
 			</div>
 			<!-- e: layer-wrap userInfo -->
 
@@ -138,8 +138,9 @@
             // 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
-            
-            $('.popup_menuu').prop('href', `<?php echo base_url('board/forum').'?sfield=post_nickname&skeyword='.element('cmt_nickname', $result);?>`);
+			var type =  getParameter("type");
+
+			$('.popup_menuu').prop('href', `<?php echo base_url('board/forum').'?type='?>${type}&sfield=mem_id&skeyword=${$(this).attr('data-id')}`);
             $('.popupLayer').css({
                 "top": divTop,
                 "left": divLeft,
@@ -188,6 +189,13 @@
 				}
 			});
 		})
+		
+		function getParameter(name) {
+			name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+					results = regex.exec(location.search);
+			return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
 </script>
 
 <script>

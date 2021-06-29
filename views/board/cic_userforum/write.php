@@ -2,7 +2,7 @@
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/hotfix.css'); ?>
 
 <!-- bpopup 스크립트 불러오기-->
-<script src="jquery.bpopup-0.1.1.min.js"></script>
+<script src="../../../assets/js/jquery.bpopup-0.1.1.min.js"></script>
 <div id="container-wrap">
 	<div id="contents" class="div-cont">
 	<?php

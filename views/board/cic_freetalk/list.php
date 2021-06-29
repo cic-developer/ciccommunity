@@ -144,7 +144,7 @@
                                 <div class="my-info">
                                     <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 140, 140); ?>"
                                             alt="<?php echo element('mlc_title', $result); ?>"></p>
-                                    <p class="rtxt"><a class="popup_menuu"><?php echo html_escape(element('post_nickname', $result)); ?></a></p>
+                                    <p class="rtxt"><a class="popup_menuu" search_id="<?php echo html_escape(element('mem_id', $result)); ?>"><?php echo html_escape(element('post_nickname', $result)); ?></a></p>
                                 </div>
                             </td>
                             <td class="l file">
@@ -227,7 +227,7 @@
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
             
-            $('.layer_link').prop('href', `<?php echo base_url('board/freetalk').'?sfield=post_nickname&skeyword='?>${$(this).text()}`);
+            $('.layer_link').prop('href', `<?php echo base_url('board/freetalk').'?sfield=mem_id&skeyword='?>${$(this).attr('search_id')}`);
             $('.popupLayer').css({
                 "top": divTop,
                 "left": divLeft,

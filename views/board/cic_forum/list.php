@@ -125,7 +125,7 @@
                                 <div class="my-info">
                                     <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 30, 30); ?>"
                                             alt="<?php echo element('mlc_title', $result); ?>"></p>
-                                    <p class="rtxt"><a class="popup_menuu"><?php echo html_escape(element('post_nickname', $result)); ?></a></p>
+                                    <p class="rtxt"><a class="popup_menuu" search_id="<?php echo html_escape(element('mem_id', $result)); ?>"><?php echo html_escape(element('post_nickname', $result)); ?></a></p>
                                 </div>
                             </td>
                             <td class="l">
@@ -215,12 +215,8 @@
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
             
-<<<<<<< HEAD
-            $('.layer_link').prop('href', `<?php echo base_url('board/forum').'?sfield=post_nickname&skeyword='?>${$(this).text()}`);
-=======
             // $('.layer_link').prop('href', 'https://dev.ciccommunity.com/board/freetalk?sfield=post_nickname&skeyword='+ $(this).text() +'&search_submit=');
-            $('.layer_link').prop('href', `<?php echo base_url('board/forum').(element('type', $view) == 1 ? '?type=1' : '?type=2').'&sfield=post_nickname&skeyword='?>${$(this).text()}`);
->>>>>>> ddedb138895b263d9a9397c6c750badf29ae124a
+            $('.layer_link').prop('href', `<?php echo base_url('board/forum').(element('type', $view) == 1 ? '?type=1' : '?type=2').'&sfield=mem_id&skeyword='?>${$(this).attr('search_id')}`);
             $('.popupLayer').css({
                 "top": divTop,
                 "left": divLeft,
