@@ -104,7 +104,7 @@ class Recommend extends CB_Controller
 					'rmd_rec_vp' => $insert_vp,
 				);
 				$_insert_id = 'rec_mem_id';
-				$_insert_content = '사전예약 레퍼럴 회원가입 유도 보상';
+				$_insert_content = 'cic 커뮤니티 추천인 회원가입 에어드랍';
 				$_insert_relate_id = 'usr_mem_id';
 			}else{
 				$_update_data = array(
@@ -112,7 +112,7 @@ class Recommend extends CB_Controller
 					'rmd_vp' => $insert_vp,
 				);
 				$_insert_id = 'usr_mem_id';
-				$_insert_content = '사전예약 레퍼럴 회원가입 보상';
+				$_insert_content = 'cic 커뮤니티 레퍼럴 추천인 에어드랍';
 				$_insert_relate_id = 'rec_mem_id';
 			}
 			$this->Mem_recommeder_model->update(NULL, $_update_data);

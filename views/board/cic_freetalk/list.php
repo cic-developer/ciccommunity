@@ -119,7 +119,7 @@
                                     <p class="pimg">
                                         <img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 140, 140)?>"alt="">
                                     </p>
-                                    <p class="rtxt"><a class="popup_menuu"><?php echo element('post_nickname', $result); ?></a></p>
+                                    <p class="rtxt"><a class="popup_menuu" search_id="<?php echo html_escape(element('mem_id', $result)); ?>"><?php echo element('post_nickname', $result); ?></a></p>
                                 </div>
                             </td>
                             <td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><span
