@@ -24,7 +24,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">참여금액</label>
+				<label class="col-sm-2 control-label">참여CP</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="total_cp" id="total_cp" value="<?php echo number_format(element('total_cp', $view), 2); ?>" disabled />
 					<p class="help-block"></p>
@@ -50,7 +50,7 @@
 				<label class="col-sm-2 control-label">수수료 설정</label>
 				<div class="col-sm-10">
 					<input type="number" class="form-control" name="forum_commission" id="forum_commission" style="width:180px;" required />
-					<p class="help-inline">% &nbsp;&nbsp; 수수료를 설정해주세요.(예: 참여금액10,000cp -> *수수료10% -> 배분시작9,000cp)</p>
+					<p class="help-inline">% &nbsp;&nbsp; 수수료를 설정해주세요.(예: 참여CP10,000cp -> *수수료10% -> 배분시작9,000cp)</p>
 				</div>
 			</div>
 			<div class="form-group">

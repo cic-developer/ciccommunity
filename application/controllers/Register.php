@@ -1694,11 +1694,11 @@ class Register extends CB_Controller
 		}
 
 		$this->load->helper('chkstring');
-		if (chkstring($nickname, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false) {
+		if (chkstring($nickname, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false || (mb_strlen($nickname, "UTF-8") < 2 ||mb_strlen($nickname, "UTF-8") > 20)) {
 			$this->session->set_userdata('ath_nickname_result', '');
 			$result = array(
 				'result' => 'no',
-				'reason' => '닉네임은 공백없이 한글, 영문, 숫자만 입력 가능합니다',
+				'reason' => '닉네임은 공백없이 한글, 영문, 숫자 2글자 이상 20글자 이하만 입력 가능합니다',
 			);
 			exit(json_encode($result));
 		}

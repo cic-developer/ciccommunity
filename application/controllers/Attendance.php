@@ -266,13 +266,24 @@ class Attendance extends CB_Controller
 			$att_id = $this->Attendance_model->insert($insertdata);
 			
 			$this->load->library('point');
-			$result['success'] = $my_ranking . '등으로 출석하셨습니다. 감사합니다';
+			$_top10 = ((int)$my_ranking >= 1 && (int)$my_ranking <= 10);
+			if($_top10 ){
+				$result['success'] = $my_ranking . '등으로 출석하셨습니다.';
+			}else{
+				$result['success'] = '출석하셨습니다.';
+			}
 			$_nextline = false;
 			if($mypoint){
+				if($_top10){
+					$_point_ment = '출석체크(명예포인트 지급) '. $my_ranking . '등';
+				}else{
+					$_point_ment = '출석체크(명예포인트 지급) ';
+				}
 				$this->point->insert_point(
 					$this->member->item('mem_id'),
 					$mypoint,
-					cdate('Y-m-d') . ' 출석체크(명예포인트 지급) '. $my_ranking . '등',
+					// cdate('Y-m-d') . ' 출석체크(명예포인트 지급) '. $my_ranking . '등',
+					$_point_ment,
 					'attendance',
 					$att_id,
 					'출석체크'
@@ -284,10 +295,16 @@ class Attendance extends CB_Controller
 				$result['success'] = $result['success']."보상 명예포인트 : ".$mypoint." ";
 			}
 			if($myvp){
+				if($_top10){
+					$_vp_ment = '출석체크(VP 지급) '. $my_ranking . '등';
+				}else{
+					$_vp_ment = '출석체크(VP 지급)';
+				}
 				$this->point->insert_vp(
 					$this->member->item('mem_id'),
 					$myvp,
-					cdate('Y-m-d') . ' 출석체크(VP 지급) '. $my_ranking . '등',
+					// cdate('Y-m-d') . ' 출석체크(VP 지급) '. $my_ranking . '등',
+					$_vp_ment,
 					'attendance',
 					$att_id,
 					'출석체크'
@@ -299,10 +316,16 @@ class Attendance extends CB_Controller
 				$result['success'] = $result['success']."보상 VP : ".$myvp." ";
 			}
 			if($mycp){
+				if($_top10){
+					$_cp_ment = '출석체크(CP 지급) '. $my_ranking . '등';
+				}else{
+					$_cp_ment = '출석체크(CP 지급)';
+				}
 				$this->point->insert_cp(
 					$this->member->item('mem_id'),
 					$mycp,
-					cdate('Y-m-d') . ' 출석체크(CP 지급) '. $my_ranking . '등',
+					// cdate('Y-m-d') . ' 출석체크(CP 지급) '. $my_ranking . '등',
+					$_cp_ment,
 					'attendance',
 					$att_id,
 					'출석체크'

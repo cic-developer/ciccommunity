@@ -116,11 +116,24 @@ class Recommend extends CB_Controller
 				$_insert_relate_id = 'rec_mem_id';
 			}
 			$this->Mem_recommeder_model->update(NULL, $_update_data);
-
+			// echo "<pre>";
 			foreach($result['list'] AS $row){
-				$this->point->insert_vp($row[$_insert_id], $insert_vp, $_insert_content,'@byadmin', $row[$_insert_relate_id], '사전예약 보상');
-				$this->point->insert_cp($row[$_insert_id], $insert_cp, $_insert_content,'@byadmin', $row[$_insert_relate_id], '사전예약 보상');
+				if($_type == 'rec'){
+					// print_r(
+					// 	array(
+					// 		'vp' => (int)$row['is_count']*(int)$insert_vp,
+					// 		 'cp' => (int)$row['is_count']*(int)$insert_cp,
+					// 		  'count' => $row['is_count']
+					// ));
+					$this->point->insert_vp($row[$_insert_id], (int)$row['is_count']*(int)$insert_vp, $_insert_content,'@byadmin', $row[$_insert_relate_id], '사전예약 보상');
+					$this->point->insert_cp($row[$_insert_id], (int)$row['is_count']*(int)$insert_cp, $_insert_content,'@byadmin', $row[$_insert_relate_id], '사전예약 보상');
+				}else{
+					$this->point->insert_vp($row[$_insert_id], $insert_vp, $_insert_content,'@byadmin', $row[$_insert_relate_id], '사전예약 보상');
+					$this->point->insert_cp($row[$_insert_id], $insert_cp, $_insert_content,'@byadmin', $row[$_insert_relate_id], '사전예약 보상');
+				}
 			}
+			// echo "</pre>";
+			// exit;
 
 			$this->session->set_flashdata(
 				'message',

@@ -111,7 +111,7 @@
                             <th>제목</th>
                             <th>참여마감<!-- 일:시:분 단위입니다. 일 시:분 이게 나을까요??--></th>
                             <th>포럼마감<!-- 위와 마찬가지이나 마감된 포럼 리스트에서는 연.월.일 형식으로 표시되었으면 합니다.--></th>
-                            <th><span class="cyellow">참여금액</span></th>
+                            <th><span class="cyellow">참여CP</span></th>
                         </tr>
                     </thead>
                     <tbody>

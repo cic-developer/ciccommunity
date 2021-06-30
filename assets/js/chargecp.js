@@ -548,7 +548,7 @@ $(document).on('ready', async function() {
                                 alert('성공적으로 충전되었습니다.');
                                 location.reload();
                             } else {
-                                alert(data.data);
+                                alert('충전 중 문제가 발생하였습니다.\n잠시후 다시 시도해주세요.');
                                 return false;
                             }
                         }
