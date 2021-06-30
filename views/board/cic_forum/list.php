@@ -199,7 +199,6 @@
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
             
-            // $('.layer_link').prop('href', 'https://dev.ciccommunity.com/board/freetalk?sfield=post_nickname&skeyword='+ $(this).text() +'&search_submit=');
             $('.layer_link').prop('href', `<?php echo base_url('board/forum').(element('type', $view) == 1 ? '?type=1' : '?type=2').'&sfield=mem_id&skeyword='?>${$(this).attr('search_id')}`);
             $('.popupLayer').css({
                 "top": divTop,
