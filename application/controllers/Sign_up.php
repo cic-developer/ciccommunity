@@ -17,6 +17,13 @@ class Sign_up extends CB_Controller
     function __construct()
 	{
 		parent::__construct();
+		$_end_date = '2021-06-30 17:00:00';
+		$_end_timestamp = strtotime($_end_date);
+		$_now = strtotime("now");
+		if($_end_timestamp < $_now){
+			redirect('/');
+			exit;
+		}
 	}
 
     public function index(){

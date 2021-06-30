@@ -100,7 +100,8 @@ class Comment_model extends CB_Model
 		}
 
 		// member.mem_forum_win, member.mem_forum_lose를 추가하였습니다.
-		$this->db->select('comment.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point, member.mem_level, member.mem_forum_win, member.mem_forum_lose, cic_member_level_config.*');
+		// 2021.06.30 한호인 member.mem_id -> comment.mem_id 로 수정
+		$this->db->select('comment.*, comment.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point, member.mem_level, member.mem_forum_win, member.mem_forum_lose, cic_member_level_config.*');
 		$this->db->from($this->_table);
 		$this->db->join('member', 'comment.mem_id = member.mem_id', 'left');
 		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');

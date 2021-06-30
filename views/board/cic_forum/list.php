@@ -141,22 +141,6 @@
                             <td><?php echo display_datetime(element('frm_close_datetime', $result), 'full'); ?></td>
                             <td><p class="cyellow"><?php echo rs_number_format(element('cic_forum_total_cp', $result), 2, 0); ?></p></td>
                         </tr>
-                        <!-- <tr>
-                            <td>
-                                <div class="my-info">
-                                    <p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>"
-                                            alt="" /></p>
-                                    <p class="rtxt">코알못259 코알못259</p>
-                                </div>
-                            </td>
-                            <td class="l"><a href="<?php echo base_url('post/4')?>">정치 자료, 성인물은 엄격하게 금지하며 강력하게 제재합니다. <span
-                                        class="reply">(12)</span></a></td>
-                            <td>13:33:59</td>
-                            <td>13:33:59</td>
-                            <td>
-                                <p class="cyellow">10,000,000</p>
-                            </td>
-                        </tr> -->
                     <?php
                         }
                     }

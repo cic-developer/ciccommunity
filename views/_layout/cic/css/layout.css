@@ -484,6 +484,12 @@ body {
     color: rgba(58, 57, 57, 0.603) !important;
 }
 
+#top-vis .img-notice {
+    background: url(/assets/images/top-vis-notice.jpg) no-repeat center;
+    /* background-size: 100% auto; */
+    height: 140px;
+}
+
 @media only screen and (max-width:1180px) {
     #logo {
         width: 170px;
@@ -1118,7 +1124,13 @@ body {
     }
 }
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width:480px) {
+    #top-vis .img-notice {
+        background: url(/assets/images/top-vis-notice-mo.jpg) no-repeat center;
+        /* background-size: 100% auto; */
+        height: 140px;
+    }
+}
 
 
 /* ======================================================
