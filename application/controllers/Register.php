@@ -18,7 +18,7 @@ class Register extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-	protected $models = array('Member_nickname', 'Member_meta', 'Member_auth_email', 'Member_userid', 'Member', 'Config');
+	protected $models = array('Member', 'Member_nickname', 'Member_meta', 'Member_auth_email', 'Member_userid', 'Member', 'Config');
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -38,7 +38,6 @@ class Register extends CB_Controller
 			$this->load->helper('password');
 		}
 	}
-
 
 	/**
 	 * 회원 약관 동의시 작동하는 함수입니다
@@ -1379,13 +1378,27 @@ class Register extends CB_Controller
 					);
 				}
 			}
-			
+			$_post_mem_recommend = $this->input->post('mem_recommend');
+			if($_post_mem_recommend){
+				$countwhere = array(
+					'mem_userid' => $_post_mem_recommend,
+					'mem_denied' => 0,
+				);
+				$row = $this->Member_model->count_by($countwhere);
+				if($row){
+					$recommend_userid = $this->input->post('mem_recommend');
+				}else{
+					$recommend_userid = $this->session->userdata('ref_code');
+				}	
+			}else{
+				$recommend_userid = $this->session->userdata('ref_code');
+			}
 			//기존 추천인코드 삭제
 			$this->session->set_userdata('ref_code', '');
 
 			if ($recommend_userid){
-				$recommend_user = $this->member_model->get_by_userid($recommend_userid);
-				$signid_user = $this->member_model->get_by_memid($mem_id);
+				$recommend_user = $this->Member_model->get_by_userid($recommend_userid);
+				$signid_user = $this->Member_model->get_by_memid($mem_id);
 
 				$_vpRecommendConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 4 AND vpc_enable = 1 AND vpc_value > 0");
 				$_cpRecommendConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 4 AND cpc_enable = 1 AND cpc_value > 0");
@@ -1396,38 +1409,42 @@ class Register extends CB_Controller
 					$this->point->insert_vp(
 						element('mem_id', $recommend_user),
 						element('vpc_value', $_vpRecommendConfig),
-						element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
+						// element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
+						'친구초대',
 						'recommeded',
 						$mem_id,
-						'Supercommunity 홍보 VP 보상'
+						'recommeded'
 					);
 
 					$this->point->insert_cp(
 						element('mem_id', $recommend_user),
 						element('cpc_value', $_cpRecommendConfig),
-						element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
+						// element('mem_nickname',$signid_user).'님이 추천인으로 등록하셨습니다.',
+						'친구초대',
 						'recommeded',
 						$mem_id,
-						'Supercommunity 홍보 CP 보상'
+						'recommeded'
 					);
 				}
 
 				$this->point->insert_vp(
 					$mem_id,
 					element('vpc_value', $_vpSigninConfig),
-					element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
+					// element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
+					'친구초대 회원가입',
 					'recommed',
 					element('mem_id', $recommend_user),
-					'추천인 등록 VP 보상'
+					'recommed'
 				);
 
 				$this->point->insert_cp(
 					$mem_id,
 					element('cpc_value', $_cpSigninConfig),
-					element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
+					// element('mem_nickname',$recommend_user).'님을 추천인으로 등록하셨습니다.',
+					'친구초대 회원가입',
 					'recommed',
 					element('mem_id', $recommend_user),
-					'추천인 등록 CP 보상'
+					'recommed'
 				);
 			}
 

@@ -1,8 +1,3 @@
-<script>
-	if(location.protocol != 'https:'){
-		window.location = 'https://'+location.host+location.pathname;
-	}
-</script>
 <?php
 /**
  * CodeIgniter

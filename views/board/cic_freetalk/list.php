@@ -148,13 +148,17 @@
                                 </div>
                             </td>
                             <td class="l file">
-                                <?php //echo html_escape(element('post_content', $result));
-                                echo strpos(html_escape(element('post_content', $result)), "p")?>
                                 <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><?php echo html_escape(element('title', $result)); ?>
                                 <span class="reply">
+                                    
                                     <?php if(element('post_comment_count', $result) != 0) {?>
-                                    (<?php echo element('post_comment_count', $result); ?>)</span>
+                                        <span>
+                                        (<?php echo element('post_comment_count', $result); ?>)
+                                        </span>
                                     <?php } ?>
+                                    
+                                    </span>
+                                    
                                 </a>
                             </td>
                             <td>
