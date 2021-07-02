@@ -192,7 +192,7 @@
         
         alert('출금정보 확인후 신청해주세요');
         
-        if(acttype === 'req' && ! confirm('입력한 금액을 정말로 출금 하시겠습니까?')) return;
+        if(acttype === 'req' && ! confirm('입력한 금액을 정말로 출금 하시겠습니까?\n심사 진행 후 48시간 이내에 지급됩니다.')) return;
         
         f.action = actpage;
 		f.submit();

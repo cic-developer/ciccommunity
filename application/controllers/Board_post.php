@@ -1578,7 +1578,10 @@ class Board_post extends CB_Controller
 			if($board['brd_id'] == 1){
 				$where['post_notice'] = 0;
 			}
+<<<<<<< HEAD
+=======
 
+>>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
 			if($sfield == 'mem_id'){
 				$where['post.mem_id'] = $skeyword;
 				$sfield = '';

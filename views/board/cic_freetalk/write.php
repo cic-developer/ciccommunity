@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<input type="hidden" class="input px400" name="post_homepage" id="post_homepage" value="<?php echo set_value('post_homepage', element('post_homepage', element('post', $view))); ?>" />
 		<!-- page start // -->
 		<div class="board-wrap write">
-			<h3><?php echo html_escape(element('board_name', element('board', $view))); ?> 글쓰기</h3>
+		<h3><?php echo html_escape(element('board_name', element('board', $view))); ?> 글쓰기 <p style="font-size: 13px; margin-top: 9px; color: red;">작성된 게시글은 수정이 불가합니다 신중하게 작성해주세요</p></h3>
 			<div class="entry">
 				<ul>
 					<li class="title-box">

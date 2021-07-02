@@ -214,7 +214,7 @@
 
 .member-wrap.login h3 {
     font-size: 35px;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     text-align: center;
     font-weight: 400;
     color: #333;
@@ -247,7 +247,7 @@
     height: 40px;
     font-size: 14px;
     letter-spacing: 0.03em;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     border: none;
     font-weight: 300;
     color: #111;
@@ -264,7 +264,7 @@
     line-height: 42px;
     color: #fff;
     text-align: center;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 14px;
     font-weight: 400;
     text-transform: uppercase;
@@ -320,7 +320,7 @@
     height: 100%;
     background: url(/assets/images/login-bg.jpg) no-repeat right bottom;
     display: block;
-    content: '';
+    content: "";
     z-index: -1;
     -webkit-transition: opacity 0.3s ease-out;
     -moz-transition: opacity 0.3s ease-out;
@@ -423,13 +423,13 @@
     margin-left: -1000px;
     width: 2000px;
     display: block;
-    content: '';
+    content: "";
     z-index: -1;
 }
 
 .member-wrap.mypage .myinfo:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -465,7 +465,7 @@
 }
 
 .member-wrap.mypage .myinfo .fl .my .btxt {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 30px;
     font-weight: 700;
     letter-spacing: -0.03em;
@@ -474,7 +474,7 @@
 }
 
 .member-wrap.mypage .myinfo .fl .my .stxt {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 15px;
     font-weight: 300;
     letter-spacing: -0.03em;
@@ -486,7 +486,7 @@
 }
 
 .member-wrap.mypage .myinfo .fl .my .modify-btn {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     width: 40px;
     height: 20px;
     position: absolute;
@@ -517,7 +517,7 @@
 
 .member-wrap.mypage .myinfo .fl .state ul li p {
     padding-left: 35px;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 14px;
     color: #fff;
     font-weight: 300;
@@ -551,7 +551,7 @@
     line-height: 100%;
     height: 61px;
     color: #fff;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 18px;
     font-weight: 900;
     letter-spacing: -0.01em;
@@ -696,7 +696,7 @@
     font-size: 33px;
     color: #fff;
     font-weight: 700;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     line-height: 58px;
     padding-right: 60px;
     text-align: right;
@@ -765,7 +765,7 @@
     font-weight: 300;
     color: #111;
     line-height: 1.2em;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     margin-bottom: 30px;
 }
 
@@ -775,7 +775,7 @@
 
 .member-wrap.mypage .mycic ul:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -915,7 +915,7 @@
         right: 15px;
         top: 0;
         display: block;
-        content: '';
+        content: "";
     }
 }
 
@@ -1179,7 +1179,7 @@
     .member-wrap.withdraw .list table tbody td:nth-child(1):before {
         display: inline-block;
         vertical-align: top;
-        content: '출금 신청일 : ';
+        content: "출금 신청일 : ";
         margin-right: 5px;
     }
     .member-wrap.withdraw .list table tbody td:nth-child(2) {
@@ -1190,7 +1190,7 @@
     .member-wrap.withdraw .list table tbody td:nth-child(2):before {
         display: inline-block;
         vertical-align: top;
-        content: '신청한 CP : ';
+        content: "신청한 CP : ";
         margin-right: 5px;
     }
     .member-wrap.withdraw .list table tbody td:nth-child(3) {
@@ -1232,7 +1232,7 @@
 .member-wrap.appear .filter .month {}
 
 .member-wrap.appear .filter .month p {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 25px;
     font-weight: 900;
     color: #111;
@@ -1265,7 +1265,7 @@
 }
 
 .member-wrap.appear .filter .abr .chk-input input {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     height: 22px;
     border: none;
     font-size: 12px;
@@ -1389,7 +1389,7 @@
 }
 
 .member-wrap.appear .calendar table tbody td .day {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     text-align: left;
     font-weight: 400;
     color: #000;
@@ -1427,7 +1427,7 @@
     display: block;
     line-height: 44px;
     height: 42px;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 16px;
     text-align: center;
     color: #888;
@@ -1759,7 +1759,7 @@
     .member-wrap.charge .list table tbody td:nth-child(1):before {
         display: inline-block;
         vertical-align: top;
-        content: '출금 신청일 : ';
+        content: "출금 신청일 : ";
         margin-right: 5px;
     }
     .member-wrap.charge .list table tbody td:nth-child(2) {
@@ -1770,7 +1770,7 @@
     .member-wrap.charge .list table tbody td:nth-child(2):before {
         display: inline-block;
         vertical-align: top;
-        content: '신청한 CP : ';
+        content: "신청한 CP : ";
         margin-right: 5px;
     }
     .member-wrap.charge .list table tbody td:nth-child(3) {
@@ -1972,7 +1972,7 @@
 
 .board-wrap.list .tab ul:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -2026,7 +2026,7 @@
 
 .board-wrap.list .vtab ul:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -2041,7 +2041,7 @@
     text-align: center;
     position: relative;
     color: #555;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-weight: 400;
     font-size: 25px;
     letter-spacing: -0.02em;
@@ -2054,7 +2054,7 @@
     left: 0;
     bottom: 0;
     display: block;
-    content: '';
+    content: "";
     background: #eee;
 }
 
@@ -2091,7 +2091,7 @@
 }
 
 .board-wrap.list .list.vnews h3 {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 32px;
     line-height: 1.2em;
     color: #111;
@@ -2174,7 +2174,7 @@
 }
 
 .board-wrap.list .list.vnews .item .ctxt.vp {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     margin-top: 12px;
     padding-top: 12px;
     border-top: 1px solid #eaeaea;
@@ -2361,7 +2361,7 @@
     top: 50%;
     margin-top: -4px;
     display: block;
-    content: '';
+    content: "";
     background: #aaa;
 }
 
@@ -2454,7 +2454,7 @@
 }
 
 .board-wrap.list .list.vimg.vp li .vp {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     display: inline-block;
     vertical-align: top;
     margin-left: 20px;
@@ -2563,7 +2563,7 @@
     }
     .board-wrap.list .list.record table tbody tr:after {
         display: block;
-        content: '';
+        content: "";
         clear: both;
     }
     .board-wrap.list .list.record table tbody td {
@@ -2738,7 +2738,7 @@
     }
     .board-wrap.list .list.community table tbody tr:after {
         display: block;
-        content: '';
+        content: "";
         clear: both;
     }
     .board-wrap.list .list.community table tbody td {
@@ -2938,7 +2938,7 @@
     }
     .board-wrap.list .list.forum table tbody tr:after {
         display: block;
-        content: '';
+        content: "";
         clear: both;
     }
     .board-wrap.list .list.forum table tbody td {
@@ -3063,7 +3063,7 @@
     left: 0;
     top: 0;
     display: block;
-    content: '▶';
+    content: "▶";
     font-size: 8px;
 }
 
@@ -3126,7 +3126,7 @@
     }
     .board-wrap.list .list.notice table tbody tr:after {
         display: block;
-        content: '';
+        content: "";
         clear: both;
     }
     .board-wrap.list .list.notice table tbody td {
@@ -3155,11 +3155,11 @@
     }
     .board-wrap.list .list.notice table tbody .notice td:nth-child(1):before {
         display: inline;
-        content: '[';
+        content: "[";
     }
     .board-wrap.list .list.notice table tbody .notice td:nth-child(1):after {
         display: inline;
-        content: ']';
+        content: "]";
     }
     .board-wrap.list .list.notice table tbody td.l a {
         color: #111;
@@ -3222,7 +3222,7 @@
 
 .board-wrap.list .real:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -3243,7 +3243,7 @@
 }
 
 .board-wrap.list .real h4 {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 18px;
     font-weight: 400;
     color: #fff;
@@ -3276,7 +3276,7 @@
 }
 
 .board-wrap.list .real li a span {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     position: absolute;
     right: 0;
     top: 0;
@@ -3342,7 +3342,7 @@
     left: 0;
     top: 4px;
     display: block;
-    content: '▶';
+    content: "▶";
     color: #333;
     font-size: 9px;
     line-height: 1.2em;
@@ -3390,7 +3390,7 @@
 
 .board-wrap.detail .tits ul:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -3416,7 +3416,7 @@
     position: absolute;
     left: -13px;
     display: block;
-    content: '';
+    content: "";
 }
 
 .board-wrap.detail .tits.poll {
@@ -3437,7 +3437,7 @@
 
 .board-wrap.detail .tits .poll-abr ul:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -3641,7 +3641,7 @@
 
 .board-wrap.detail .tits .vp-point ul:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -3768,7 +3768,7 @@
 
 .board-wrap.detail .cons .vp-point ul:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -3994,7 +3994,7 @@
 
 .board-wrap.detail .best:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -4015,7 +4015,7 @@
 }
 
 .board-wrap.detail .best h4 {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 18px;
     font-weight: 400;
     color: #fff;
@@ -4043,7 +4043,7 @@
 }
 
 .board-wrap.detail .best li a .num {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     position: absolute;
     left: 0;
     top: 2px;
@@ -4055,7 +4055,7 @@
 }
 
 .board-wrap.detail .best li a .vp {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     position: absolute;
     right: 0;
     top: 2px;
@@ -4312,7 +4312,7 @@
 
 .cmmt-wrap .cmmt .list .vp-point ul:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -4398,7 +4398,7 @@
     width: 100%;
     height: 100%;
     display: block;
-    content: '';
+    content: "";
 }
 
 .cmmt-wrap .cmmt .nickname .ico {
@@ -4455,7 +4455,7 @@
 
 .cmmt-wrap .cmmt .ctrls ul:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -4485,7 +4485,7 @@
     top: 50%;
     margin-top: -4px;
     display: block;
-    content: '';
+    content: "";
     background: #aaa;
 }
 
@@ -4514,7 +4514,7 @@
     margin-top: -4px;
     line-height: 10px;
     display: block;
-    content: '▼';
+    content: "▼";
     font-size: 8px;
 }
 
@@ -4588,7 +4588,7 @@
     top: 25px;
     background: url(/assets/images/board-reply.jpg) no-repeat;
     display: block;
-    content: '';
+    content: "";
     opacity: 0.3;
 }
 
@@ -4750,7 +4750,7 @@
 
 .layer-wrap.singo .is-btm:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -5122,7 +5122,7 @@
     top: 0;
     background: url(/assets/images/join-pass.png) no-repeat center center;
     display: block;
-    content: '';
+    content: "";
 }
 
 .member-wrap.join .entry li .rtxt {
@@ -5352,7 +5352,7 @@
     }
     .search-wrap.list .filter .abr:after {
         display: block;
-        content: '';
+        content: "";
         clear: both;
     }
     .search-wrap.list .filter .abr .sel-box {
@@ -5739,7 +5739,7 @@
     left: 0;
     top: 0;
     display: block;
-    content: '▶';
+    content: "▶";
     font-size: 8px;
 }
 
@@ -5829,9 +5829,15 @@
     letter-spacing: -0.03em;
     max-width: 110px;
     padding-left: 10px;
+<<<<<<< HEAD
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+=======
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+>>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
 }
 
 .search-wrap.list .list.community table tbody td {
@@ -5921,7 +5927,7 @@
     }
     .search-wrap.list .list.community table tbody tr:after {
         display: block;
-        content: '';
+        content: "";
         clear: both;
     }
     .search-wrap.list .list.community table tbody td {
@@ -6103,7 +6109,7 @@
     top: 50%;
     margin-top: -4px;
     display: block;
-    content: '';
+    content: "";
     background: #aaa;
 }
 
@@ -6201,7 +6207,7 @@
 }
 
 .search-wrap.list .list.vimg.vp li .vp {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     display: inline-block;
     vertical-align: top;
     margin-left: 20px;
@@ -6292,7 +6298,7 @@
     top: 50%;
     margin-top: -1px;
     display: block;
-    content: '';
+    content: "";
     z-index: -1;
 }
 
@@ -6302,7 +6308,7 @@
 
 .board-wrap.list .ftab ul:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -6368,7 +6374,7 @@
 @media only screen and (max-width: 480px) {}
 
 .board-wrap.list .forums h3 {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 32px;
     color: #111;
     line-height: 1.2em;
@@ -6505,7 +6511,7 @@
     width: calc(100% - 30px);
     height: 1px;
     display: block;
-    content: '';
+    content: "";
     top: -1px;
 }
 
@@ -6703,16 +6709,16 @@
     margin-left: 5px;
 }
 
-.board-wrap.write .entry .main-check label input[type='checkbox'] {
+.board-wrap.write .entry .main-check label input[type="checkbox"] {
     -webkit-appearance: checkbox;
     vertical-align: -3px;
 }
 
-.board-wrap.write .entry .main-check label input[type='checkbox']:before {
+.board-wrap.write .entry .main-check label input[type="checkbox"]:before {
     display: none;
 }
 
-label input[type='checkbox'] {
+label input[type="checkbox"] {
     display: inline;
     width: 20px;
     height: 18px;
@@ -7094,7 +7100,7 @@ label input[type='checkbox'] {
 
 .price-wrap .set-list:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -7239,15 +7245,15 @@ label input[type='checkbox'] {
     margin-top: 10px;
 }
 
-.price-wrap .item.unit .chk-radio input[type='radio']+label:before {
+.price-wrap .item.unit .chk-radio input[type="radio"]+label:before {
     border-color: #fcb800;
 }
 
-.price-wrap .item.unit .chk-radio input[type='radio']:checked+label:before {
+.price-wrap .item.unit .chk-radio input[type="radio"]:checked+label:before {
     border-color: #fcb800;
 }
 
-.price-wrap .item.unit .chk-radio input[type='radio']:checked+label:after {
+.price-wrap .item.unit .chk-radio input[type="radio"]:checked+label:after {
     background-color: #fcb800;
 }
 
@@ -7397,7 +7403,7 @@ label input[type='checkbox'] {
 
 .poll-wrap .cont ul:after {
     display: block;
-    content: '';
+    content: "";
     clear: both;
 }
 
@@ -7736,7 +7742,7 @@ label input[type='checkbox'] {
     }
     .poll-wrap .cont li a {
         font-size: 13px;
-        line-height: 17px
+        line-height: 17px;
     }
     /* .poll-wrap .cont li .tx {
         position: absolute;

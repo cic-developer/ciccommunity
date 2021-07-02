@@ -69,6 +69,7 @@
 </div>
 <script type="text/javascript" src="<?php echo base_url('assets/js/chargecp.js'); ?>"></script>
 <script>
+    console.log(window.location.hostname);
     csrf_key = '<?php echo $this->security->get_csrf_token_name(); ?>';
     csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
     userWallet_in_mypage = '<?php echo $this->member->item('mem_wallet_address'); ?>';

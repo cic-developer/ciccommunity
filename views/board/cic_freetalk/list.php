@@ -150,13 +150,24 @@
                             <td class="l file">
                                 <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><?php echo html_escape(element('title', $result)); ?>
                                 <span class="reply">
+                                    
                                     <?php if(element('post_comment_count', $result) != 0) {?>
-                                    (<?php echo element('post_comment_count', $result); ?>)</span>
+                                        <span>
+                                        (<?php echo element('post_comment_count', $result); ?>)
+                                        </span>
                                     <?php } ?>
+                                    
+                                    </span>
+                                    
                                 </a>
                             </td>
+<<<<<<< HEAD
+                            <td>
+                                <?php if(number_format(element('post_like_point', $result)-element('post_dislike_point', $result)) >= 0){ ?>
+=======
                             <td> 
                             <?php if(number_format(element('post_like_point', $result)-element('post_dislike_point', $result)) >= 0){ ?>
+>>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
                                 <p class="cyellow">
                                 <?php } else{?>
                                 <p class="cblue">
