@@ -82,8 +82,8 @@ class CIC_forum_model extends CB_Model
 				}
 			}
 		}
-
-		$this->db->select('post.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point, cic_member_level_config.*, cic_forum_info.*');
+		// 2021.06.29 member.mem_id -> post.mem_id 로 수정(한호인)
+		$this->db->select('post.*, post.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point, cic_member_level_config.*, cic_forum_info.*');
 		$this->db->select_sum('cic_forum_cp.cfc_cp', 'cic_forum_total_cp');
 		$this->db->from($this->_table);
 		$this->db->join('cic_forum_cp', 'post.post_id = cic_forum_cp.pst_id', 'left');

@@ -1847,6 +1847,24 @@
 
 @media only screen and (max-width:480px) {}
 
+@media only screen and (max-width:600px) {
+    .board-filter .chk-input {
+        width: 100% !important;
+        max-width: 170px !important;
+    }
+    .board-filter {
+        text-align: center !important;
+        font-size: 0 !important;
+        margin-top: 20px !important;
+        background: #f4f3f3 !important;
+        padding: 15px 20px !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+}
+
 
 /* =====================================
    board-wrap.list
@@ -3519,6 +3537,7 @@
 
 .board-wrap.detail .upper {
     margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 .board-wrap.detail .upper a {

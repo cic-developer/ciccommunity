@@ -583,6 +583,8 @@ class Coinapi extends CI_Controller
         $usd_price = $this->get_usd_price();
 
         $url = "https://api.binance.com/api/v3/ticker/24hr?symbol={$coin_id}{$market}";
+        // print_r($url);
+        // exit;
         $result = $this->get_curl($url);
         //curl 중 오류발생할 경우 빈 배열 리턴
         if($result === FALSE) return array();

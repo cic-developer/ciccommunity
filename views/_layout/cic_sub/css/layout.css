@@ -1343,6 +1343,11 @@ body {
     .top-btn.over {
         right: 15px;
     }
+    #top-vis .img-notice {
+        background: url(/assets/images/top-vis-notice.jpg) no-repeat center;
+        /* background-size: 100% auto; */
+        height: 138px;
+    }
 }
 
 @media only screen and (max-width:999px) {
@@ -1371,6 +1376,11 @@ body {
         width: 35px;
         height: 35px;
         bottom: 15px;
+    }
+    #top-vis .img-notice {
+        background: url(/assets/images/top-vis-notice.jpg) no-repeat center;
+        /* background-size: 100% auto; */
+        height: 138px;
     }
 }
 
@@ -1403,6 +1413,11 @@ body {
     }
     .top-btn.over {
         right: 10px;
+    }
+    #top-vis .img-notice {
+        background: url(/assets/images/top-vis-notice.jpg) no-repeat center;
+        /* background-size: 100% auto; */
+        height: 138px;
     }
 }
 

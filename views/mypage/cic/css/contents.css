@@ -748,6 +748,15 @@
         top: 0px;
         right: 110px;
     }
+    #respon_wallet {
+        outline: none;
+        color: #fff;
+        border-style: none;
+        border-bottom: 1px solid #fff;
+        background: inherit;
+        font-size: 14px;
+        width: 100px;
+    }
 }
 
 .member-wrap.mypage .myinfo .fr {

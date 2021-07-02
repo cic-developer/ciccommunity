@@ -81,8 +81,8 @@ if (element(element('primary_key', $view), element('data', $view))) {
 $(function() {
 	$('#fadminwrite').validate({
 		rules: {
-			cmc_korean_nm: {required :true, minlength:2, maxlength:10 },
-			cmc_english_nm: {required :true, minlength:2, maxlength:20 },
+			cmc_korean_nm: {required :true, minlength:1, maxlength:10 },
+			cmc_english_nm: {required :true, minlength:1, maxlength:20 },
 			cmc_symbol: {required :true, minlength:2, maxlength:6 },
 		}
 	});

@@ -352,7 +352,7 @@ class Maincoin extends CB_Controller
 		/**
 		 * 페이지네이션을 생성합니다
 		 */
-		$config['base_url'] = admin_url($this->pagedir) . '?' . $param->replace('page');
+		$config['base_url'] = admin_url($this->pagedir) . '/coin?' . $param->replace('page');
 		$config['total_rows'] = $result['total_rows'];
 		$config['per_page'] = $per_page;
 		$this->pagination->initialize($config);
@@ -435,12 +435,12 @@ class Maincoin extends CB_Controller
 			array(
 				'field' => 'cmc_korean_nm',
 				'label' => '코인 이름 - 한글',
-				'rules' => 'trim|required|min_length[2]|max_length[10]',
+				'rules' => 'trim|required|min_length[1]|max_length[10]',
 			),
 			array(
 				'field' => 'cmc_english_nm',
 				'label' => '코인 이름 - 영문',
-				'rules' => 'trim|required|min_length[2]|max_length[20]',
+				'rules' => 'trim|required|min_length[1]|max_length[20]',
 			),
 		);
 		if ($this->input->post($primary_key)) {
