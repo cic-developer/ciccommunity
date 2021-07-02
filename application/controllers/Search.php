@@ -82,14 +82,14 @@ class Search extends CB_Controller
 		} else if($sfield == 'post_nickname'){
 			$sfield_word = '작성자';
 		} else {
-			$sfield_word = '제목 + 내용';
+			$sfield_word = '전체';
 			$sfield === 'post_both';
 		}
 		$view['view']['sfield'] = $sfield;
 		$view['view']['sfield_word'] = $sfield_word;
 
 		if ($sfield === 'post_both') {
-			$sfield = array('post_title', 'post_content');
+			$sfield = array('post_title', 'post_content', 'post_nickname');
 		}
 		
 		if($findex_get == 'view'){

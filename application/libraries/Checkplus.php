@@ -35,7 +35,7 @@ class Checkplus extends CI_Controller
 		$sitepasswd = "nHmB3aEoHAiK";			// NICE로부터 부여받은 사이트 패스워드
 		
 		// Linux = /절대경로/ , Window = D:\\절대경로\\ , D:\절대경로\
-		$cb_encode_path = "/home/bitnami/dev_ciccommunity/CPClient_64bit";
+		$cb_encode_path = "/opt/bitnami/apache/dev_ciccommunity/CPClient_64bit";
 		/*
 		┌ cb_encode_path 변수에 대한 설명  ──────────────────────────────────
 			모듈 경로설정은, '/절대경로/모듈명' 으로 정의해 주셔야 합니다.
@@ -135,7 +135,7 @@ class Checkplus extends CI_Controller
 		$sitepasswd = "nHmB3aEoHAiK";				// NICE로부터 부여받은 사이트 패스워드
 		
 		// Linux = /절대경로/ , Window = D:\\절대경로\\ , D:\절대경로\
-		$cb_encode_path = "/home/bitnami/dev_ciccommunity/CPClient_64bit";
+		$cb_encode_path = "/opt/bitnami/apache/dev_ciccommunity/CPClient_64bit";
 			
 		$enc_data = $EncodeData;		// 암호화된 결과 데이타
 
@@ -235,7 +235,7 @@ class Checkplus extends CI_Controller
 		$sitepasswd = "nHmB3aEoHAiK";				// NICE로부터 부여받은 사이트 패스워드
 		
 		// Linux = /절대경로/ , Window = D:\\절대경로\\ , D:\절대경로\
-		$cb_encode_path = "/home/bitnami/dev_ciccommunity/CPClient_64bit";
+		$cb_encode_path = "/opt/bitnami/apache/dev_ciccommunity/CPClient_64bit";
 			
 		$enc_data = $EncodeData;		// 암호화된 결과 데이타
 

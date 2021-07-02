@@ -21,6 +21,8 @@
 <?php if (element('favicon', $layout)) { ?><link rel="shortcut icon" type="image/x-icon" href="<?php echo element('favicon', $layout); ?>" /><?php } ?>
 <?php if (element('canonical', $view)) { ?><link rel="canonical" href="<?php echo element('canonical', $view); ?>" /><?php } ?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0 ,maximum-scale=1.0, minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="../../../assets/images/ciccommunity.ico" type="image/x-icon" />
 <!------------------------------------------ 퍼블리싱 영역 files --------------------------------------------------->
 <link rel="stylesheet" type="text/css" href="<?php echo element('layout_skin_url', $layout); ?>/css/common.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo element('layout_skin_url', $layout); ?>/css/styleDefault.css" />
@@ -187,7 +189,7 @@ var mem_cp = "<?php echo $this->member->is_member() ? $this->member->item('mem_c
 								</div>
 							</li>
 							<li class="mn_l1 is-cloose" style="width: auto;">
-								<a href="<?php echo base_url('/news')?>" class="mn_a1"><span>뉴스</span></a>
+								<a href="<?php echo base_url('/news/latestnews')?>" class="mn_a1"><span>뉴스</span></a>
 
 							</li>
 						</ul>
