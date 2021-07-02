@@ -192,12 +192,12 @@ var mem_cp = "<?php echo $this->member->is_member() ? $this->member->item('mem_c
 							</li>
 							<li class="mn_l1 has-sub is-cloose" style="width: auto;">
 								<a href="<?php echo base_url('/board/forum')?>" class="mn_a1"><span>포럼</span></a>
-								<div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1; overflow: hidden;">
+								<!-- <div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1; overflow: hidden;">
 									<ul class="depth2">
-                                        <li class="mn_l2"><a href="<?php echo base_url('/board/forum?type=1')?>" class="mn_a2"><span>CIC 포럼</span></a></li>
-                                        <li class="mn_l2"><a href="<?php echo base_url('/board/userforum')?>" class="mn_a2"><span>도전! CIC포럼</span></a></li>
+                                        <li class="mn_l2"><a href="<?php //echo base_url('/board/forum?type=1')?>" class="mn_a2"><span>CIC 포럼</span></a></li>
+                                        <li class="mn_l2"><a href="<?php //echo base_url('/board/userforum')?>" class="mn_a2"><span>도전! CIC포럼</span></a></li>
 									</ul>
-								</div>
+								</div> -->
 							</li>
 							<li class="mn_l1 is-cloose" style="width: auto;">
 								<a href="<?php echo base_url('board/notice')?>" class="mn_a1"><span>공지사항</span></a>
