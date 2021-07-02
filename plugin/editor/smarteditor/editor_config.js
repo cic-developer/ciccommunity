@@ -53,6 +53,11 @@
                             </span><p><span style="color: rgb(154, 154, 154);">과연 비트코인은 국내시간 기준 2021년 12월 31일 18:00까지&nbsp;</span></p><span style="color: rgb(154, 154, 154);">
                             </span><p><span style="color: rgb(154, 154, 154);">코인베이스 거래소 기준 100,000 달러에 도달할수 있을까요?</span></p>`,
                         ]);
+                    } else if (path === "/contactus") {
+                        oEditors.getById[get_id].exec("PASTE_HTML", [
+                            `답변 받으실 이메일 주소 : <br><br>
+                            문의 내용 :`,
+                        ]);
                     }
                 },
                 fCreator: "createSEditor2",

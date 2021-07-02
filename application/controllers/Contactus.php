@@ -150,7 +150,7 @@ class Contactus extends CB_Controller
 				$this->session->set_flashdata('message', '등록중 오류가 발생했습니다.');
 				redirect('contactus');
 			} else {
-				$this->session->set_flashdata('message', '정상적으로 문의등록이 완료되었습니다.');
+				$this->session->set_flashdata('message', '정상적으로 문의등록이 완료되었습니다.\n 문의 답변은 회원님께서 입력하신 메일로 확인 후 회신드리겠습니다.');
 				redirect('contactus');
 			}
 		}

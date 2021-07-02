@@ -99,7 +99,7 @@
                         <col width="100">
                     </colgroup>
                     <thead>
-                        <tr>
+                        <tr style="border-bottom: 1px solid;">
                             <th>글쓴이</th>
                             <th>제목</th>
                             <th><span class="cyellow">VP</span></th>
@@ -113,7 +113,7 @@
                     if (element('notice_list', element('list', $view))) {
                         foreach (element('notice_list', element('list', $view)) as $result) {
                     ?>
-                        <tr>
+                        <tr style="background-color: #f9f9f9;">
                             <td>
                                 <div class="my-info">
                                     <p class="pimg">
@@ -155,7 +155,14 @@
                                     <?php } ?>
                                 </a>
                             </td>
-                            <td> <p class="cyellow"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p> </td>
+                            <td> 
+                            <?php if(number_format(element('post_like_point', $result)-element('post_dislike_point', $result)) >= 0){ ?>
+                                <p class="cyellow">
+                                <?php } else{?>
+                                <p class="cblue">
+                                <?php }?>
+                                <?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p> 
+                            </td>
                             <td><?php echo number_format(element('post_hit', $result)); ?></td>
                             <td><?php echo element('display_datetime', $result); ?></td>
                         </tr>

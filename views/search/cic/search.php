@@ -34,7 +34,7 @@
 					<div class="sel-box c02">
 						<a href="javascript:void(0);" id="optionb" class="sel-btn"><span><?php echo element('sfield_word', $view); ?></span></a>
 						<ul>
-							<li class="<?php echo !in_array(element('sfield', $view), array('post_title','post_content','post_nickname')) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_both"><span>제목 + 내용</span></a></li>
+							<li class="<?php echo !in_array(element('sfield', $view), array('post_title','post_content','post_nickname')) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_both"><span>전체</span></a></li>
 							<li class="<?php echo element('sfield', $view) == 'post_title' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_title"><span>제목</span></a></li>
 							<li class="<?php echo element('sfield', $view) == 'post_content' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_content"><span>내용</span></a></li>
 							<li class="<?php echo element('sfield', $view) == 'post_nickname' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_nickname"><span>작성자</span></a></li>
