@@ -18,7 +18,11 @@ class Register extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
+<<<<<<< HEAD
 	protected $models = array('Member', 'Member_nickname', 'Member_meta', 'Member_auth_email', 'Member_userid', 'Member', 'Config');
+=======
+	protected $models = array('Member', 'Member_nickname', 'Member_meta', 'Member_auth_email', 'Member_userid', 'Member', 'Config','Member_register');
+>>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -1711,11 +1715,11 @@ class Register extends CB_Controller
 		}
 
 		$this->load->helper('chkstring');
-		if (chkstring($nickname, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false) {
+		if (chkstring($nickname, _HANGUL_ + _ALPHABETIC_ + _NUMERIC_) === false || (mb_strlen($nickname, "UTF-8") < 2 ||mb_strlen($nickname, "UTF-8") > 20)) {
 			$this->session->set_userdata('ath_nickname_result', '');
 			$result = array(
 				'result' => 'no',
-				'reason' => '닉네임은 공백없이 한글, 영문, 숫자만 입력 가능합니다',
+				'reason' => '닉네임은 공백없이 한글, 영문, 숫자 2글자 이상 20글자 이하만 입력 가능합니다',
 			);
 			exit(json_encode($result));
 		}
@@ -2144,5 +2148,7 @@ class Register extends CB_Controller
 		
 		return $time;
 	}
+
+
 
 }

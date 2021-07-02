@@ -178,6 +178,7 @@ class CI_Exceptions {
 		{
 			ob_end_flush();
 		}
+		// echo $templates_path.$template.'.php';
 		ob_start();
 		include($templates_path.$template.'.php');
 		$buffer = ob_get_contents();

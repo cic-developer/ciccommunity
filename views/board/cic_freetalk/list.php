@@ -119,7 +119,7 @@
                                     <p class="pimg">
                                         <img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 140, 140)?>"alt="">
                                     </p>
-                                    <p class="rtxt"><a class="popup_menuu"><?php echo element('post_nickname', $result); ?></a></p>
+                                    <p class="rtxt"><a class="popup_menuu" search_id="<?php echo html_escape(element('mem_id', $result)); ?>"><?php echo element('post_nickname', $result); ?></a></p>
                                 </div>
                             </td>
                             <td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><span
@@ -161,8 +161,13 @@
                                     
                                 </a>
                             </td>
+<<<<<<< HEAD
                             <td>
                                 <?php if(number_format(element('post_like_point', $result)-element('post_dislike_point', $result)) >= 0){ ?>
+=======
+                            <td> 
+                            <?php if(number_format(element('post_like_point', $result)-element('post_dislike_point', $result)) >= 0){ ?>
+>>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
                                 <p class="cyellow">
                                 <?php } else{?>
                                 <p class="cblue">

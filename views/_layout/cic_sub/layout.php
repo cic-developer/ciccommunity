@@ -1,3 +1,15 @@
+<?php 
+    $mem_group = $this->member->group();
+    $__writer_group = false;
+    if($mem_group){
+        foreach($mem_group AS $mg){
+            if($mg['mgr_id'] == 2) $__writer_group = true;
+        }
+    }else if($this->member->is_admin()){
+        $__writer_group = true;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,6 +36,8 @@
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="../../../assets/images/ciccommunity.ico" type="image/x-icon" />
 <!------------------------------------------ 퍼블리싱 영역 files --------------------------------------------------->
+   <!-- 파비콘 -->
+   <link rel="shortcut icon" href="../../../assets/images/ciccommunity.ico" type="image/x-icon" />
 <link rel="stylesheet" type="text/css" href="<?php echo element('layout_skin_url', $layout); ?>/css/common.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo element('layout_skin_url', $layout); ?>/css/styleDefault.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo element('layout_skin_url', $layout); ?>/css/layout.css" />
@@ -157,11 +171,19 @@ var mem_cp = "<?php echo $this->member->is_member() ? $this->member->item('mem_c
 								<div class="depth2-wrap" style="display: block; visibility: visible; height: 45px; opacity: 1; overflow: hidden;">
 								</div>
 							</li>
-							<li class="mn_l1 has-sub is-cloose" style="width: auto;">
-								<a href="<?php echo base_url('/board/cicwriter')?>" class="mn_a1"><span>WRITER</span></a>
-								<div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1; overflow: hidden;">
-								</div>
-							</li>
+							<?php if($__writer_group){ ?>
+                                <li class="mn_l1 has-sub is-cloose" style="width: auto;">
+                                    <a href="<?php echo base_url('/board/cicwriter')?>" class="mn_a1"><span>WRITER</span></a>
+                                    <div class="depth2-wrap" style="display: block; visibility: visible; height: 45px; opacity: 1; overflow: hidden;">
+                                    </div>
+                                </li>
+                            <?php }else{ ?>
+                                <li class="mn_l1 has-sub is-cloosehelper" style="width: auto;">
+                                    <a href="<?php echo "javascript:alert('현재 준비중입니다.');" ?>" class="mn_a1"><span>WRITER</span></a>
+                                    <div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1; overflow: hidden;">
+                                    </div>
+                                </li>
+                            <?php } ?>
 							<li class="mn_l1 has-sub is-cloosehelper" style="width: auto;">
 								<a href="javascript:alert('현재 준비중입니다.');" class="mn_a1 mn_a10"><span>코인헬퍼</span></a>
 								<div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1; overflow: hidden;">

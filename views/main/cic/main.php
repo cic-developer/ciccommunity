@@ -328,7 +328,7 @@
             <!-- s : msec-05 -->
             <div class="msec-05">
                 <div class="tits">
-                    <h3>Use cic</h3>
+                    <h3></h3>
                 </div>
                 <div class="cont">
                     <ul>

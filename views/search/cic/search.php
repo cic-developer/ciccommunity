@@ -34,7 +34,7 @@
 					<div class="sel-box c02">
 						<a href="javascript:void(0);" id="optionb" class="sel-btn"><span><?php echo element('sfield_word', $view); ?></span></a>
 						<ul>
-							<li class="<?php echo !in_array(element('sfield', $view), array('post_title','post_content','post_nickname')) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_both"><span>제목 + 내용</span></a></li>
+							<li class="<?php echo !in_array(element('sfield', $view), array('post_title','post_content','post_nickname')) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_both"><span>전체</span></a></li>
 							<li class="<?php echo element('sfield', $view) == 'post_title' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_title"><span>제목</span></a></li>
 							<li class="<?php echo element('sfield', $view) == 'post_content' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_content"><span>내용</span></a></li>
 							<li class="<?php echo element('sfield', $view) == 'post_nickname' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_nickname"><span>작성자</span></a></li>
@@ -249,11 +249,18 @@
 								<div class="txt">
 									<div class="vc">
 										<p class="btxt"><?php echo html_escape(element('post_title', $result)); ?>
+<<<<<<< HEAD
 										<!-- <span class="yellow-bg"></span>  -->
 											<?php if(element('post_comment_count', $result)>0) {?>
 											<span>(<?php echo element('post_comment_count', $result); ?>)</span>
 											<?php } ?>
 										</p>
+=======
+												<?php if(element('post_comment_count', $result)>0) {?>
+												<span>(<?php echo element('post_comment_count', $result); ?>)</span>
+												<?php } ?>
+											</p>
+>>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
 											<p class="stxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('post_content', $result))), 60)); ?></p>
 										<p class="ctxt">
 											<span><?php echo html_escape(element('post_nickname', $result)); ?></span>

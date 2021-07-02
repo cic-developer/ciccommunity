@@ -1,6 +1,7 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+//defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -57,16 +58,25 @@ p {
 </head>
 <body>
 	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
+		<h1><?php //echo $heading; ?></h1>
+		<?php //echo $message; ?>
 	</div>
 </body>
+<<<<<<< HEAD
 </html>
 
 <!-- <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
+=======
+</html> -->
+
+ <!doctype html>
+<html>
+<head>
+<meta charset="utf-8"> 
+>>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
 <?php
 $recommender = '';
 ?>
@@ -74,7 +84,11 @@ $recommender = '';
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:site_name" content="CIC COMMUNITY">
 <meta property="og:type" content="website">
+<<<<<<< HEAD
 <meta property="og:url" content="<?php //echo "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>">
+=======
+<meta property="og:url" content="<?php echo "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>">
+>>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
 <meta property="og:title" content="CIC COMMUNITY"/>
 
 
@@ -95,4 +109,8 @@ $recommender = '';
 <div class="demo form-bg"></div>
 
 </body>
+<<<<<<< HEAD
 </html> -->
+=======
+</html> -
+>>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e

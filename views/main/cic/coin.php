@@ -254,7 +254,7 @@
         }
         //PER코인이 기본적으로 선택이 되어있음
         if(coin_list.length > 7){
-            alert('가상화폐는 최대 8개 까지 선택할 수 있습니다.');
+            alert('가상화폐는 최대 7개 까지 선택할 수 있습니다.');
             return false;
         }
         for(var i = 0; i < coin_list.length; i++){

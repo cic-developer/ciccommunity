@@ -111,7 +111,7 @@
                             <th>제목</th>
                             <th>참여마감<!-- 일:시:분 단위입니다. 일 시:분 이게 나을까요??--></th>
                             <th>포럼마감<!-- 위와 마찬가지이나 마감된 포럼 리스트에서는 연.월.일 형식으로 표시되었으면 합니다.--></th>
-                            <th><span class="cyellow">참여금액</span></th>
+                            <th><span class="cyellow">참여CP</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -141,22 +141,6 @@
                             <td><?php echo display_datetime(element('frm_close_datetime', $result), 'full'); ?></td>
                             <td><p class="cyellow"><?php echo rs_number_format(element('cic_forum_total_cp', $result), 2, 0); ?></p></td>
                         </tr>
-                        <!-- <tr>
-                            <td>
-                                <div class="my-info">
-                                    <p class="pimg"><img src="<?php echo base_url('assets/images/photo-popo.png')?>"
-                                            alt="" /></p>
-                                    <p class="rtxt">코알못259 코알못259</p>
-                                </div>
-                            </td>
-                            <td class="l"><a href="<?php echo base_url('post/4')?>">정치 자료, 성인물은 엄격하게 금지하며 강력하게 제재합니다. <span
-                                        class="reply">(12)</span></a></td>
-                            <td>13:33:59</td>
-                            <td>13:33:59</td>
-                            <td>
-                                <p class="cyellow">10,000,000</p>
-                            </td>
-                        </tr> -->
                     <?php
                         }
                     }
@@ -215,7 +199,10 @@
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
             
+<<<<<<< HEAD
             // $('.layer_link').prop('href', 'https://dev.ciccommunity.com/board/freetalk?sfield=post_nickname&skeyword='+ $(this).text() +'&search_submit=');
+=======
+>>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
             $('.layer_link').prop('href', `<?php echo base_url('board/forum').(element('type', $view) == 1 ? '?type=1' : '?type=2').'&sfield=mem_id&skeyword='?>${$(this).attr('search_id')}`);
             $('.popupLayer').css({
                 "top": divTop,

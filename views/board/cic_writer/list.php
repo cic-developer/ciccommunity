@@ -27,9 +27,13 @@
                                                     <div class="img"><img src="<?php echo element('thumb_url',$bestpost)?>" alt="">
                                                     </div>
                                                     <div class="txt">
+                                                        <?php if(html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('post_content', $bestpost))), 20))) {?>
                                                         <p class="btxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('post_title', $bestpost))), 15)); ?></p>
                                                         <p class="stxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('post_content', $bestpost))), 20)); ?></p>
                                                         <p class="ctxt vp"><?php echo number_format(element("post_like_point",$bestpost))?></p>
+                                                        <?php } else{ ?>
+                                                        <br>
+                                                        <?php }?>
                                                     </div>
                                                 </a>
                                             </div>

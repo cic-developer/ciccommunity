@@ -66,9 +66,15 @@
 					</tbody>
 				</table>
 			</div>
+<<<<<<< HEAD
 			<!-- <div class="lower r">
 				<a href="javascript:void(0);" class="by-btn list-delete-btn" data-list-delete-url="<?php //echo element('list_delete_url', $view); ?>"><span>삭제</span></a>
 			</div> -->
+=======
+			<div class="lower r">
+				<!-- <a href="javascript:void(0);" class="by-btn list-delete-btn" data-list-delete-url="<?php //echo element('list_delete_url', $view); ?>"><span>삭제</span></a> -->
+			</div>
+>>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
 			<?php echo form_close(); ?>
 			<!-- s: paging-wrap -->
 			<div class="paging-wrap">

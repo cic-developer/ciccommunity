@@ -38,7 +38,7 @@
 								<th><a href="<?php echo element('post_datetime', element('sort', $view)); ?>">날짜</a></th>
 								<th><a href="<?php echo element('cic_forum_info.frm_bat_close_datetime', element('sort', $view)); ?>">행사마감</a></th>
 								<th><a href="<?php echo element('cic_forum_info.frm_close_datetime', element('sort', $view)); ?>">포럼마감</a></th>
-								<th><a href="<?php echo element('cic_forum_total_cp', element('sort', $view)); ?>">참여금액</a></th>
+								<th><a href="<?php echo element('cic_forum_total_cp', element('sort', $view)); ?>">참여CP</a></th>
 								<th>수정</th>
 								<th><input type="checkbox" name="chkall" id="chkall" /></th>
 								<!-- <th><input type="checkbox" name="chkall" id="chkall" /></th> -->

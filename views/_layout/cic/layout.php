@@ -1,3 +1,15 @@
+<?php 
+    $mem_group = $this->member->group();
+    $__writer_group = false;
+    if($mem_group){
+        foreach($mem_group AS $mg){
+            if($mg['mgr_id'] == 2) $__writer_group = true;
+        }
+    }else if($this->member->is_admin()){
+        $__writer_group = true;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -16,7 +28,11 @@
     <?php if (element('canonical', $view)) { ?>
     <link rel="canonical" href="<?php echo element('canonical', $view); ?>" /><?php } ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0 ,maximum-scale=1.0, minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
     <!-- 파비콘 -->
 	<link rel="shortcut icon" href="../../../assets/images/ciccommunity.ico" type="image/x-icon" />
     <!------------------------------------------ 퍼블리싱 영역 files --------------------------------------------------->
@@ -159,11 +175,19 @@
 								<div class="depth2-wrap" style="display: block; visibility: visible; height: 45px; opacity: 1; overflow: hidden;">
 								</div>
 							</li>
-							<li class="mn_l1 has-sub is-cloose" style="width: auto;">
-								<a href="<?php echo base_url('/board/cicwriter')?>" class="mn_a1"><span>WRITER</span></a>
-								<div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1; overflow: hidden;">
-								</div>
-							</li>
+                            <?php if($__writer_group){ ?>
+                                <li class="mn_l1 has-sub is-cloose" style="width: auto;">
+                                    <a href="<?php echo base_url('/board/cicwriter')?>" class="mn_a1"><span>WRITER</span></a>
+                                    <div class="depth2-wrap" style="display: block; visibility: visible; height: 45px; opacity: 1; overflow: hidden;">
+                                    </div>
+                                </li>
+                            <?php }else{ ?>
+                                <li class="mn_l1 has-sub is-cloosehelper" style="width: auto;">
+                                    <a href="<?php echo "javascript:alert('현재 준비중입니다.');" ?>" class="mn_a1"><span>WRITER</span></a>
+                                    <div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1; overflow: hidden;">
+                                    </div>
+                                </li>
+                            <?php } ?>
 							<li class="mn_l1 has-sub is-cloosehelper" style="width: auto;">
 								<a href="javascript:alert('현재 준비중입니다.');" class="mn_a1 mn_a10"><span>코인헬퍼</span></a>
 								<!-- <div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1; overflow: hidden;">
@@ -173,8 +197,13 @@
 								<a href="<?php echo base_url('/board/forum')?>" class="mn_a1"><span>포럼</span></a>
 								<!-- <div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1; overflow: hidden;">
 									<ul class="depth2">
+<<<<<<< HEAD
                                         <li class="mn_l2"><a href="<?php //echo base_url('/board/forum?type=1')?>" class="mn_a2"><span>CIC 포럼</span></a></li>
                                         <li class="mn_l2"><a href="<?php //echo base_url('/board/userforum')?>" class="mn_a2"><span>도전! CIC포럼</span></a></li>
+=======
+                                        <li class="mn_l2"><a href="<?php // echo base_url('/board/forum?type=1')?>" class="mn_a2"><span>CIC 포럼</span></a></li>
+                                        <li class="mn_l2"><a href="<?php // echo base_url('/board/userforum')?>" class="mn_a2"><span>도전! CIC포럼</span></a></li>
+>>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
 									</ul>
 								</div> -->
 							</li>
