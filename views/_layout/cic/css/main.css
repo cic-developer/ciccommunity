@@ -343,7 +343,15 @@
 }
 
 .msec-01 .tab ul li.cyellow a {
+<<<<<<< HEAD
     /* color: #fdb302 */
+=======
+<<<<<<< HEAD
+    /* color: #fdb302 */
+=======
+    color: #666
+>>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
+>>>>>>> 1d898080cc9e3e580ab3b9cf15b880861c1e083d
 }
 
 .msec-01 .tab .more {
