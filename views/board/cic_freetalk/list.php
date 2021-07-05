@@ -148,18 +148,15 @@
                                 </div>
                             </td>
                             <td class="l file">
-                                <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><?php echo html_escape(element('title', $result)); ?>
-                                <span class="reply">
-                                    
+                                <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>" style="padding-right:5px; max-width:80%;"><?php echo html_escape(element('title', $result)); ?>
+                                </a>
                                     <?php if(element('post_comment_count', $result) != 0) {?>
-                                        <span>
                                         (<?php echo element('post_comment_count', $result); ?>)
-                                        </span>
                                     <?php } ?>
                                     
-                                    </span>
-                                    
-                                </a>
+                                    <?php if(strpos(element('post_content', $result),'<img') !== false){?>
+                                        <img src="<?php echo base_url('assets/images/list-img.png'); ?>">
+                                    <?php } ?>
                             </td>
                             <td>
                                 <?php if(number_format(element('post_like_point', $result)-element('post_dislike_point', $result)) >= 0){ ?>

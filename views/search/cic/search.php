@@ -194,12 +194,25 @@
 											<p class="rtxt"><a class="popup_menuu"><?php echo element('post_nickname', $result); ?></a></p>
 										</div>
 									</td>
-									<td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>">
-										<?php echo html_escape(element('post_title', $result)); ?></a></td>
+									<td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('post_title', $result)); ?>" style="padding-right:5px; max-width:80%;">
+										<?php echo html_escape(element('post_title', $result)); ?></a>
+										<?php if(element('post_comment_count', $result) != 0) {?>
+											(<?php echo element('post_comment_count', $result); ?>)
+										<?php } ?>
+										
+										<?php if(strpos(element('post_content', $result),'<img') !== false){?>
+											<img src="<?php echo base_url('assets/images/list-img.png'); ?>">
+										<?php } ?>
+										</td>
 									<td><?php echo element('display_datetime', $result); ?></td>
 									<td><?php echo number_format(element('post_hit', $result)); ?></td>
 									<td>
-										<p class="cyellow"><?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p>
+										<?php if(number_format(element('post_like_point', $result)-element('post_dislike_point', $result)) >= 0){ ?>
+											<p class="cyellow">
+											<?php } else{?>
+											<p class="cblue">
+										<?php }?>
+										<?php echo number_format(element('post_like_point', $result)-element('post_dislike_point', $result)); ?></p>
 									</td>
 								</tr>
 							<?php
