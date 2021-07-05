@@ -18,15 +18,7 @@ class Register extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-<<<<<<< HEAD
-	protected $models = array('Member', 'Member_nickname', 'Member_meta', 'Member_auth_email', 'Member_userid', 'Member', 'Config');
-=======
-<<<<<<< HEAD
-	protected $models = array('Member', 'Member_nickname', 'Member_meta', 'Member_auth_email', 'Member_userid', 'Member', 'Config');
-=======
 	protected $models = array('Member', 'Member_nickname', 'Member_meta', 'Member_auth_email', 'Member_userid', 'Member', 'Config','Member_register');
->>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
->>>>>>> 1d898080cc9e3e580ab3b9cf15b880861c1e083d
 
 	/**
 	 * 헬퍼를 로딩합니다

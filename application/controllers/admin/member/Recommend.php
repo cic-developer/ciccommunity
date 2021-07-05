@@ -104,15 +104,7 @@ class Recommend extends CB_Controller
 					'rmd_rec_vp' => $insert_vp,
 				);
 				$_insert_id = 'rec_mem_id';
-<<<<<<< HEAD
-				$_insert_content = 'cic 커뮤니티 추천인 회원가입 에어드랍';
-=======
-<<<<<<< HEAD
-				$_insert_content = 'cic 커뮤니티 추천인 회원가입 에어드랍';
-=======
 				$_insert_content = 'cic 커뮤니티 추천인 에어드랍';
->>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
->>>>>>> 1d898080cc9e3e580ab3b9cf15b880861c1e083d
 				$_insert_relate_id = 'usr_mem_id';
 			}else{
 				$_update_data = array(
@@ -120,15 +112,7 @@ class Recommend extends CB_Controller
 					'rmd_vp' => $insert_vp,
 				);
 				$_insert_id = 'usr_mem_id';
-<<<<<<< HEAD
-				$_insert_content = 'cic 커뮤니티 레퍼럴 추천인 에어드랍';
-=======
-<<<<<<< HEAD
-				$_insert_content = 'cic 커뮤니티 레퍼럴 추천인 에어드랍';
-=======
 				$_insert_content = 'cic 커뮤니티 추천인 회원가입 에어드랍';
->>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
->>>>>>> 1d898080cc9e3e580ab3b9cf15b880861c1e083d
 				$_insert_relate_id = 'rec_mem_id';
 			}
 			$this->Mem_recommeder_model->update(NULL, $_update_data);
