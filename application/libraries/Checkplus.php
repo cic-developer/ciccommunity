@@ -135,11 +135,8 @@ class Checkplus extends CI_Controller
 		$sitepasswd = "nHmB3aEoHAiK";				// NICE로부터 부여받은 사이트 패스워드
 		
 		// Linux = /절대경로/ , Window = D:\\절대경로\\ , D:\절대경로\
-<<<<<<< HEAD
-=======
 
 		// $cb_encode_path = "/opt/bitnami/apache/ciccommunity/CPClient_64bit";
->>>>>>> eddada9fdafa94adc1990fdaf73600df08e43674
 		$cb_encode_path = "/opt/bitnami/apache/ciccommunity/CPClient_64bit";
 		$enc_data = $EncodeData;		// 암호화된 결과 데이타
 
@@ -239,11 +236,8 @@ class Checkplus extends CI_Controller
 		$sitepasswd = "nHmB3aEoHAiK";				// NICE로부터 부여받은 사이트 패스워드
 		
 		// Linux = /절대경로/ , Window = D:\\절대경로\\ , D:\절대경로\
-<<<<<<< HEAD
-=======
 
 		// $cb_encode_path = "/opt/bitnami/apache/ciccommunity/CPClient_64bit";			
->>>>>>> eddada9fdafa94adc1990fdaf73600df08e43674
 		$cb_encode_path = "/opt/bitnami/apache/ciccommunity/CPClient_64bit";
 		$enc_data = $EncodeData;		// 암호화된 결과 데이타
 
