@@ -28,7 +28,10 @@
     <?php if (element('canonical', $view)) { ?>
     <link rel="canonical" href="<?php echo element('canonical', $view); ?>" /><?php } ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0 ,maximum-scale=1.0, minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">
+<<<<<<< HEAD
     
+=======
+>>>>>>> eddada9fdafa94adc1990fdaf73600df08e43674
     <!-- 파비콘 -->
 	<link rel="shortcut icon" href="../../../assets/images/ciccommunity.ico" type="image/x-icon" />
     <!------------------------------------------ 퍼블리싱 영역 files --------------------------------------------------->

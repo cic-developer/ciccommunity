@@ -1,10 +1,33 @@
+<<<<<<< HEAD
             body {
             background-image: url("/assets/images/end-dsk01.jpg");
+=======
+body {
+    background-image: url("/assets/images/end-dsk01.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    /* background-position: center; */
+}
+
+.demo {
+    padding: 50px 0;
+}
+
+@media screen and (max-width: 1100px) {
+    @media screen and (max-width: 990px) {}
+    @media screen and (max-width: 780px) {}
+    @media screen and (max-width: 680px) {}
+    @media screen and (max-width: 480px) {
+        body {
+            background-image: url("/assets/images/end-mobile01.jpg");
+>>>>>>> eddada9fdafa94adc1990fdaf73600df08e43674
             background-size: cover;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            /* background-position: center; */
+            background-position: center;
         }
+<<<<<<< HEAD
         
         .demo {
             padding: 50px 0;
@@ -25,3 +48,11 @@
             }
             @charset "utf-8";
             /* CSS Document */
+=======
+    }
+    @charset "utf-8";
+}
+
+
+/* CSS Document */
+>>>>>>> eddada9fdafa94adc1990fdaf73600df08e43674
