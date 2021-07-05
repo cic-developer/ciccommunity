@@ -151,10 +151,17 @@
 							<li>
                                 <a href="<?php echo goto_url(element('posturl', $popularpost)); ?>" class="new">
                                     <p class="num"><?php echo number_format(element('num', $popularpost));?></p>
-                                    <p class="btxt">
+                                    <p class="btxt" style="padding-right:5px;max-width:80%">
                                         <span class="txt"><?php echo html_escape(element('post_title', $popularpost));?></span>
-                                        <span class="hit">(<?php echo number_format(element('post_comment_count', $popularpost));?>)</span>
                                     </p>
+                                    <span class="hit">
+                                        <?php if(number_format(element('post_comment_count', $popularpost)) > 0) { ?>
+                                        (<?php echo number_format(element('post_comment_count', $popularpost));?>)
+                                        <?php } ?> 
+                                        <?php if(strpos(element('post_content', $popularpost),'<img') !== false){?>
+                                        <img src="<?php echo base_url('assets/images/list-img.png'); ?>">
+                                        <?php } ?>
+                                    </span>
                                     <div>
                                         <p class="stxt"><?php echo element('post_nickname', $popularpost); ?><span><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $popularpost), 30, 30); ?>"alt="" /></span></p>
                                         <p class="date"><?php echo number_format(element('post_hit', $popularpost)); ?>
