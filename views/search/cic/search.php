@@ -249,11 +249,10 @@
 								<div class="txt">
 									<div class="vc">
 										<p class="btxt"><?php echo html_escape(element('post_title', $result)); ?>
-										<!-- <span class="yellow-bg"></span>  -->
-											<?php if(element('post_comment_count', $result)>0) {?>
-											<span>(<?php echo element('post_comment_count', $result); ?>)</span>
-											<?php } ?>
-										</p>
+												<?php if(element('post_comment_count', $result)>0) {?>
+												<span>(<?php echo element('post_comment_count', $result); ?>)</span>
+												<?php } ?>
+											</p>
 											<p class="stxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('post_content', $result))), 60)); ?></p>
 										<p class="ctxt">
 											<span><?php echo html_escape(element('post_nickname', $result)); ?></span>

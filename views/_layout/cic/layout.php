@@ -191,12 +191,6 @@
 							</li>
 							<li class="mn_l1 has-sub is-cloose" style="width: auto;">
 								<a href="<?php echo base_url('/board/forum')?>" class="mn_a1"><span>포럼</span></a>
-								<!-- <div class="depth2-wrap" style="display: block; visibility: visible; height: 0px; opacity: 1; overflow: hidden;">
-									<ul class="depth2">
-                                        <li class="mn_l2"><a href="<?php //echo base_url('/board/forum?type=1')?>" class="mn_a2"><span>CIC 포럼</span></a></li>
-                                        <li class="mn_l2"><a href="<?php //echo base_url('/board/userforum')?>" class="mn_a2"><span>도전! CIC포럼</span></a></li>
-									</ul>
-								</div> -->
 							</li>
 							<li class="mn_l1 is-cloose" style="width: auto;">
 								<a href="<?php echo base_url('board/notice')?>" class="mn_a1"><span>공지사항</span></a>
@@ -235,7 +229,7 @@
             <div id="footer" class="div-cont">
                 <div class="f-logo">
                     <h2><span class="blind">cic+community</span></h2>
-                    <a href="https://www.ciccommunity.com" target="_blank" title="새창열림">https://www.ciccommunity.com</a>
+                    <a href="https://dev.ciccommunity.com" target="_blank" title="새창열림">https://dev.ciccommunity.com</a>
                 </div>
                 <div class="f-sns">
                     <ul>

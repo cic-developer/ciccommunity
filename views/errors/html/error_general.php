@@ -75,7 +75,6 @@ $recommender = '';
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:site_name" content="CIC COMMUNITY">
 <meta property="og:type" content="website">
-<!-- <meta property="og:url" content="<?php //echo "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>"> -->
 <meta property="og:url" content="<?php echo "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>">
 <meta property="og:title" content="CIC COMMUNITY"/>
 
