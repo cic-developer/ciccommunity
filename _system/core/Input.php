@@ -446,7 +446,7 @@ class CI_Input {
 		}
 		else
 		{
-				parent::ip_address();
+				$this->ip_address =  '0.0.0.0';
 		}
 		
 		return $this->ip_address();

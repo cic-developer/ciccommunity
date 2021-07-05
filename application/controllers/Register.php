@@ -18,11 +18,7 @@ class Register extends CB_Controller
 	/**
 	 * 모델을 로딩합니다
 	 */
-<<<<<<< HEAD
 	protected $models = array('Member', 'Member_nickname', 'Member_meta', 'Member_auth_email', 'Member_userid', 'Member', 'Config');
-=======
-	protected $models = array('Member', 'Member_nickname', 'Member_meta', 'Member_auth_email', 'Member_userid', 'Member', 'Config','Member_register');
->>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
 
 	/**
 	 * 헬퍼를 로딩합니다
@@ -1407,7 +1403,7 @@ class Register extends CB_Controller
 				$_vpRecommendConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 4 AND vpc_enable = 1 AND vpc_value > 0");
 				$_cpRecommendConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 4 AND cpc_enable = 1 AND cpc_value > 0");
 				$_vpSigninConfig = $this->CIC_vp_config_model->get_one('','',"vpc_id = 5 AND vpc_enable = 1 AND vpc_value > 0");
-				$_cpSigninConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 5 AND cpc_enable = 1 AND cpc_value > 0");
+				$_cpSigninConfig = $this->CIC_cp_config_model->get_one('','',"cpc_id = 5 AND cpc_enable = 1 AND cpc_value >= 0");
 				
 				if($recommend_user){
 					$this->point->insert_vp(

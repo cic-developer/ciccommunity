@@ -264,7 +264,7 @@
 
                                 <div class="txt">
                                     <div class="vc">
-                                        <p>빈 게시물 입니다 :)</p>
+                                        <p>여러분의 포럼을 등록해 주세요!</p>
                                         <a href="javascript:void(0);"><span>wait!</span></a>
                                     </div>
                                 </div>

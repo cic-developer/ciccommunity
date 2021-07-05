@@ -36,7 +36,27 @@ class Login extends CB_Controller
 
 
 	}
+	// function test2(){
+	// 	print_r(password_hash('Cic0805!', PASSWORD_BCRYPT)); 
+	// }
+	// function test(){
+	// 	// print_r(password_hash('Cic0805!', PASSWORD_BCRYPT)); 
+	// 	$this->db->where('pa_result', 1);
+	// 	// $this->db->where('pa_to','koo@percommunity.com');
+	// 	$this->db->limit(75, 2550);
+	// 	$_arr = $this->db->get('preapply')->result_array();
+	// 	// echo $this->db->last_query();
 
+	// 	echo '<pre>';
+	// 	foreach($_arr as $_a){
+	// 		$this->db->where('mem_userid', $_a['pa_mem_id']);
+	// 		$this->db->set('mem_password', password_hash($_a['pa_password'], PASSWORD_BCRYPT));
+	// 		$this->db->update('member');
+	// 		echo '<br>';
+	// 	}
+	// 	echo '</pre>';
+	// 	// print_r($_arr);
+	// }
 
 	/**
 	 * 로그인 페이지입니다
@@ -366,12 +386,57 @@ class Login extends CB_Controller
 			$this->member->update_login_log(0, $userid, 0, '회원 아이디가 존재하지 않습니다');
 			return false;
 		} elseif ( ! password_verify($password, element('mem_password', $userinfo))) {
-			$this->form_validation->set_message(
-				'_check_id_pw',
-				'회원 아이디와 패스워드가 서로 맞지 않습니다' . $loginfailmessage
-			);
-			$this->member->update_login_log(element('mem_id', $userinfo), $userid, 0, '패스워드가 올바르지 않습니다');
-			return false;
+			//----------20201 07 03 구진모 임시비밀번호 발송을 위한 로직--------------------
+			$_userinfo_mem_id = element('mem_id', $userinfo);
+
+			$this->db->where('mem_id', $_userinfo_mem_id);
+			$this->db->where('change_password', 0);
+			$_result = $this->db->get('tmp_password')->row_array();
+			if($_result && element('send_email',$result) == 0){
+				$this->load->library('email');
+				$_to = element('email_addr', $_result);
+				$_tmp_pass = rand(100000, 999999).'';
+				$this->db->where('mem_id', element('mem_id', $_result));
+				$this->db->set('mem_password', password_hash($_tmp_pass, PASSWORD_BCRYPT));
+				$this->db->update('member');
+				$getdata['imPw'] = $_tmp_pass;
+				$getdata['name'] = element('nickname', $_result);
+				$getdata['site_title'] = $this->cbconfig->item('site_title');
+				$emailform['emailform'] = $getdata;
+				$message = $this->load->view('login/cic/email_form', $emailform, true);
+				$this->email->from( $this->cbconfig->item('webmaster_email'), $this->cbconfig->item('webmaster_name'));
+				$this->email->to($_to);
+				$this->email->subject('[CIC Community] 임시비밀번호 안내메일입니다');
+				$this->email->message($message);
+				$this->email->send();
+				$this->db->where('mem_id', $_userinfo_mem_id);
+				$this->db->where('send_email', 0);
+				$this->db->set('send_email', 1);
+				$this->db->set('tmp_password', $_tmp_pass);
+				$this->db->update('tmp_password');
+
+				$this->form_validation->set_message(
+					'_check_id_pw',
+					'서버 업데이트로 임시비밀번호가 발급되었습니다\n등록메일을 통해 확인바랍니다'
+				);
+				$this->member->update_login_log(element('mem_id', $userinfo), $userid, 0, '패스워드가 올바르지 않습니다');
+				return false;
+			}else if(element('send_email',$result) == 1){
+				$this->form_validation->set_message(
+					'_check_id_pw',
+					'서버 업데이트로 임시비밀번호가 발급되었습니다\n등록메일을 통해 확인바랍니다'
+				);
+				$this->member->update_login_log(element('mem_id', $userinfo), $userid, 0, '패스워드가 올바르지 않습니다');
+				return false;
+			}else{
+				$this->form_validation->set_message(
+					'_check_id_pw',
+					'회원 아이디와 패스워드가 서로 맞지 않습니다' . $loginfailmessage
+				);
+				$this->member->update_login_log(element('mem_id', $userinfo), $userid, 0, '패스워드가 올바르지 않습니다');
+				return false;
+			}
+			//----------20201 07 03 구진모 임시비밀번호 발송을 위한 로직 끝--------------------
 		} elseif (element('mem_denied', $userinfo)) {
 			$this->form_validation->set_message(
 				'_check_id_pw',

@@ -62,21 +62,12 @@ p {
 		<?php //echo $message; ?>
 	</div>
 </body>
-<<<<<<< HEAD
-</html>
-
-<!-- <!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-=======
 </html> -->
 
  <!doctype html>
 <html>
 <head>
 <meta charset="utf-8"> 
->>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
 <?php
 $recommender = '';
 ?>
@@ -84,11 +75,8 @@ $recommender = '';
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:site_name" content="CIC COMMUNITY">
 <meta property="og:type" content="website">
-<<<<<<< HEAD
-<meta property="og:url" content="<?php //echo "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>">
-=======
+<!-- <meta property="og:url" content="<?php //echo "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>"> -->
 <meta property="og:url" content="<?php echo "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>">
->>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
 <meta property="og:title" content="CIC COMMUNITY"/>
 
 
@@ -99,7 +87,7 @@ $recommender = '';
 
 <link rel="stylesheet" href="../../assets/css/style.css">
 
-<title> cic community 사전가입종료</title>
+<title> cic community 점검중</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0">
 <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/perproject-favicon.ico" />
 <link rel="icon" href="../../assets/images/perproject-favicon.ico" type="image/x-icon" />
@@ -109,8 +97,4 @@ $recommender = '';
 <div class="demo form-bg"></div>
 
 </body>
-<<<<<<< HEAD
-</html> -->
-=======
-</html> -
->>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
+</html>

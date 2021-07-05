@@ -2824,6 +2824,12 @@ class Membermodify extends CB_Controller
 				&& $password_validation_result == '1'){
 			$new_password = password_hash($this->input->post('mem_password'), PASSWORD_BCRYPT);
 			
+			// 2021 07 03 구진모 비밀번호 변경시 임시비밀번호를 변경한 사람인지 확인하여 데이터 업데이트
+			$this->db->where('mem_id', $mem_id);
+			$this->db->where('change_password', 0);
+			$this->db->set('change_password', 1);
+			$this->db->update('tmp_password');
+			// 2021 07 03 구진모 비밀번호 변경시 임시비밀번호를 변경한 사람인지 확인하여 데이터 업데이트 끝
 		}
 		if($wallet_mail_ath_result == '1'
 			&& $wallet_nice_ath_result == '1'

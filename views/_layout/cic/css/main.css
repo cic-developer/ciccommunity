@@ -52,7 +52,7 @@
 }
 
 .msec-visual .search .chk-input {
-    width: 100%
+    width: 100%;
 }
 
 .msec-visual .search .chk-input input {
@@ -118,7 +118,7 @@
 }
 
 .msec-visual .item a img {
-    width: 100%
+    width: 100%;
 }
 
 .msec-visual .desktop {}
@@ -128,7 +128,7 @@
 }
 
 .msec-visual .owl-stage-outer {
-    overflow: visible
+    overflow: visible;
 }
 
 .msec-visual .owl-dots {
@@ -161,7 +161,7 @@
     background: #555;
 }
 
-@media only screen and (max-width:1160px) {
+@media only screen and (max-width: 1160px) {
     .msec-visual {
         min-height: 530px;
     }
@@ -184,11 +184,11 @@
     }
     .msec-visual .vis .next {
         right: 0;
-        background-size: 16px auto
+        background-size: 16px auto;
     }
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .msec-visual {
         min-height: auto;
     }
@@ -210,11 +210,11 @@
     }
     .msec-visual .vis .prev {
         margin-top: -27px;
-        background-size: 12px auto
+        background-size: 12px auto;
     }
     .msec-visual .vis .next {
         margin-top: -27px;
-        background-size: 12px auto
+        background-size: 12px auto;
     }
     .msec-visual .owl-dots {
         display: block !important;
@@ -222,7 +222,7 @@
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .msec-visual .bg {
         position: relative;
         left: auto;
@@ -254,7 +254,7 @@
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     .msec-visual .vis {
         overflow: visible;
         padding: 10px 50px;
@@ -279,17 +279,17 @@
     margin: 0 auto;
 }
 
-@media only screen and (max-width:1060px) {}
+@media only screen and (max-width: 1060px) {}
 
-@media only screen and (max-width:999px) {}
+@media only screen and (max-width: 999px) {}
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .msec-cont {
         padding: 0 15px;
     }
 }
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 
 /* ======================================================
@@ -313,7 +313,7 @@
 .msec-01 .tab ul:after {
     display: block;
     content: "";
-    clear: both
+    clear: both;
 }
 
 .msec-01 .tab ul li {
@@ -324,13 +324,13 @@
     margin-left: 55px;
 }
 
-.msec-01 .tab ul li:nth-child(n+2) {
+.msec-01 .tab ul li:nth-child(n + 2) {
     margin-left: 45px;
 }
 
 .msec-01 .tab ul li a {
     color: #666;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 17px;
     font-weight: 400;
     display: block;
@@ -343,11 +343,7 @@
 }
 
 .msec-01 .tab ul li.cyellow a {
-<<<<<<< HEAD
     /* color: #fdb302 */
-=======
-    color: #666
->>>>>>> e7f3b2e96c05c0ebeba432d85243f3c29601869e
 }
 
 .msec-01 .tab .more {
@@ -410,7 +406,7 @@
     font-weight: 500;
     color: #5c5c5c;
     line-height: 1.1em;
-    margin-top: 4px
+    margin-top: 4px;
 }
 
 .msec-01 .list .percent {
@@ -450,18 +446,18 @@
 }
 
 .msec-01 .list .percent.up span:before {
-    content: "▲"
+    content: "▲";
 }
 
 .msec-01 .list .percent.down span:before {
-    content: "▼"
+    content: "▼";
 }
 
-@media only screen and (max-width:1060px) {}
+@media only screen and (max-width: 1060px) {}
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .msec-01 {
-        padding: 60px 0
+        padding: 60px 0;
     }
     .msec-01 .tab ul {
         padding-bottom: 7px;
@@ -469,7 +465,7 @@
     .msec-01 .tab ul li:first-child {
         margin-left: 30px;
     }
-    .msec-01 .tab ul li:nth-child(n+2) {
+    .msec-01 .tab ul li:nth-child(n + 2) {
         margin-left: 30px;
     }
     .msec-01 .tab ul li a {
@@ -489,10 +485,10 @@
         width: 95px;
     }
     .msec-01 .list table colgroup col:nth-child(2) {
-        width: auto
+        width: auto;
     }
     .msec-01 .list table colgroup col:nth-child(3) {
-        width: 30%
+        width: 30%;
     }
     .msec-01 .list table colgroup col:nth-child(4) {
         display: none;
@@ -502,14 +498,14 @@
     }
     .msec-01 .list table thead th {
         font-size: 14px;
-        padding: 8px 0
+        padding: 8px 0;
     }
     .msec-01 .list table thead th:nth-child(4) {
         display: none;
     }
     .msec-01 .list table tbody td {
         font-size: 15px;
-        padding: 10px 0
+        padding: 10px 0;
     }
     .msec-01 .list table tbody td:nth-child(4) {
         display: none;
@@ -525,14 +521,14 @@
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .msec-01 {
-        padding: 40px 0
+        padding: 40px 0;
     }
     .msec-01 .tab ul li:first-child {
         margin-left: 15px;
     }
-    .msec-01 .tab ul li:nth-child(n+2) {
+    .msec-01 .tab ul li:nth-child(n + 2) {
         margin-left: 15px;
     }
     .msec-01 .tab ul li a {
@@ -540,11 +536,11 @@
     }
     .msec-01 .list table thead th {
         font-size: 12px;
-        padding: 5px 0
+        padding: 5px 0;
     }
     .msec-01 .list table tbody td {
         font-size: 13px;
-        padding: 7px 0
+        padding: 7px 0;
     }
     .msec-01 .list .vlogo .txt {
         font-size: 11px;
@@ -556,11 +552,11 @@
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     .msec-01 .tab ul li:first-child {
         margin-left: 5px;
     }
-    .msec-01 .tab ul li:nth-child(n+2) {
+    .msec-01 .tab ul li:nth-child(n + 2) {
         margin-left: 12px;
     }
     .msec-01 .tab ul li a {
@@ -609,7 +605,7 @@
 }
 
 .msec-02 .fl h3 {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 15px;
     font-weight: 400;
     color: #333;
@@ -631,7 +627,7 @@
 }
 
 .msec-02 .fl .list {
-    border-top: 1px solid #c2bdbd
+    border-top: 1px solid #c2bdbd;
 }
 
 .msec-02 .fl .list li {
@@ -652,7 +648,7 @@
     top: 6px;
     background: url(/assets/images/ico-new.png) no-repeat center center;
     display: block;
-    content: ""
+    content: "";
 }
 
 .msec-02 .fl .list li .num {
@@ -745,7 +741,7 @@
     background: #aaa;
 }
 
-@media only screen and (max-width:1060px) {
+@media only screen and (max-width: 1060px) {
     .msec-02 .cont {
         padding-right: 360px;
     }
@@ -761,7 +757,7 @@
     }
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .msec-02 .cont {
         padding-right: 0;
     }
@@ -773,7 +769,7 @@
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .msec-02 {
         padding: 40px 0;
     }
@@ -792,7 +788,7 @@
     }
 }
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 .msec-02 .fr {
     width: 290px;
@@ -803,7 +799,7 @@
 }
 
 .msec-02 .fr h3 {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 15px;
     font-weight: 400;
     color: #333;
@@ -816,7 +812,7 @@
     background: #fff;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1)
+    -moz-box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .msec-02 .fr .tab {}
@@ -859,7 +855,7 @@
 
 .msec-02 .fr .list li {}
 
-.msec-02 .fr .list li:nth-child(n+2) {
+.msec-02 .fr .list li:nth-child(n + 2) {
     margin-top: 10px;
 }
 
@@ -880,22 +876,22 @@
     margin-right: 10px;
 }
 
-@media only screen and (max-width:1060px) {}
+@media only screen and (max-width: 1060px) {}
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .msec-02 .fr {
         margin-top: 30px;
         float: none;
         width: auto;
         position: relative;
         right: auto;
-        top: auto
+        top: auto;
     }
 }
 
-@media only screen and (max-width:680px) {}
+@media only screen and (max-width: 680px) {}
 
-@media only screen and (max-width:480px) {}
+@media only screen and (max-width: 480px) {}
 
 
 /* ======================================================
@@ -927,7 +923,7 @@
 }
 
 .msec-03 .tits h3 {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 25px;
     font-weight: 400;
     color: #fff;
@@ -937,12 +933,12 @@
 
 .msec-03 .tits h3 span {
     font-weight: 700;
-    color: #fcc52d
+    color: #fcc52d;
 }
 
 .msec-03 .tits p {
     margin-top: 2px;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 15px;
     opacity: 0.8;
     font-weight: 300;
@@ -1006,7 +1002,7 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
     display: block;
-    content: ""
+    content: "";
 }
 
 .msec-03 .cont .img img {
@@ -1125,9 +1121,9 @@
     background: #555;
 }
 
-@media only screen and (max-width:1060px) {}
+@media only screen and (max-width: 1060px) {}
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .msec-03 {
         padding: 90px 0 100px 0;
     }
@@ -1171,7 +1167,7 @@
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .msec-03 {
         padding: 90px 0 70px 0;
     }
@@ -1209,7 +1205,7 @@
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     .msec-03 {
         padding: 70px 0 60px 0;
     }
@@ -1263,7 +1259,7 @@
 .msec-04 .cont {}
 
 .msec-04 .cont .btxt {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 40px;
     font-weight: 400;
     color: #111;
@@ -1271,7 +1267,7 @@
 }
 
 .msec-04 .cont .stxt {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 18px;
     font-weight: 300;
     color: #111;
@@ -1288,7 +1284,7 @@
     height: 40px;
     border: 1px solid #999;
     border-radius: 40px;
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 16px;
     font-weight: 300;
     color: #111;
@@ -1309,7 +1305,7 @@
 }
 
 .msec-04 .cont .more:hover span {
-    background-image: url(/assets/images/movie-moreo.png)
+    background-image: url(/assets/images/movie-moreo.png);
 }
 
 .msec-04 .cont .img {
@@ -1345,7 +1341,7 @@
     display: none;
 }
 
-@media only screen and (max-width:1060px) {
+@media only screen and (max-width: 1060px) {
     .msec-04 .cont .img {
         width: 690px;
         height: 440px;
@@ -1354,9 +1350,9 @@
     }
 }
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .msec-04 {
-        padding: 70px 0 40px 0
+        padding: 70px 0 40px 0;
     }
     .msec-04 .cont .btxt {
         font-size: 35px;
@@ -1367,13 +1363,13 @@
     }
     .msec-04 .cont .more {
         margin-top: 40px;
-        font-size: 15px
+        font-size: 15px;
     }
     .msec-04 .cont .img {
         width: 600px;
         height: 384px;
         top: 35px;
-        right: -70px
+        right: -70px;
     }
     .msec-04 .cont .play-btn {
         width: 60px;
@@ -1383,12 +1379,12 @@
     }
 }
 
-@media only screen and (max-width:880px) {
+@media only screen and (max-width: 880px) {
     .msec-04 {
-        padding: 50px 0 20px 0
+        padding: 50px 0 20px 0;
     }
     .msec-04:after {
-        height: 77%
+        height: 77%;
     }
     .msec-04 .cont {
         text-align: center;
@@ -1421,7 +1417,7 @@
         top: auto;
         right: auto;
         position: relative;
-        padding-left: 15px
+        padding-left: 15px;
     }
     .msec-04 .cont .img img {
         width: 100%;
@@ -1439,7 +1435,7 @@
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .msec-04 .cont .btxt {
         font-size: 27px;
     }
@@ -1465,7 +1461,7 @@
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     .msec-04 .cont .play-btn {
         background-size: 25px auto;
     }
@@ -1485,7 +1481,7 @@
 .msec-05 .tits {}
 
 .msec-05 .tits h3 {
-    font-family: 'GmarketSans';
+    font-family: "GmarketSans";
     font-size: 25px;
     font-weight: 400;
     color: #111;
@@ -1497,19 +1493,19 @@
 }
 
 .msec-05 .cont ul {
-    margin: 0 -2%
+    margin: 0 -2%;
 }
 
 .msec-05 .cont ul:after {
     display: block;
     content: "";
-    clear: both
+    clear: both;
 }
 
 .msec-05 .cont li {
     float: left;
     width: 29.33333333%;
-    margin: 0 2%
+    margin: 0 2%;
 }
 
 .msec-05 .cont li a {
@@ -1538,9 +1534,9 @@
     display: none;
 }
 
-@media only screen and (max-width:1060px) {}
+@media only screen and (max-width: 1060px) {}
 
-@media only screen and (max-width:999px) {
+@media only screen and (max-width: 999px) {
     .msec-05 {
         margin-top: 140px;
         padding-bottom: 50px;
@@ -1549,7 +1545,7 @@
         font-size: 22px;
     }
     .msec-05 .cont ul {
-        margin: 0 -1%
+        margin: 0 -1%;
     }
     .msec-05 .cont li {
         width: 31.333333%;
@@ -1557,13 +1553,13 @@
     }
 }
 
-@media only screen and (max-width:880px) {
+@media only screen and (max-width: 880px) {
     .msec-05 {
         margin-top: 30px;
     }
 }
 
-@media only screen and (max-width:680px) {
+@media only screen and (max-width: 680px) {
     .msec-05 {
         padding-bottom: 30px;
     }
@@ -1581,9 +1577,9 @@
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     .msec-05 .cont ul {
-        margin: 0
+        margin: 0;
     }
     .msec-05 .cont li {
         float: none;
@@ -1591,7 +1587,7 @@
         margin: 0;
         text-align: center;
     }
-    .msec-05 .cont li:nth-child(n+2) {
+    .msec-05 .cont li:nth-child(n + 2) {
         margin-top: 20px;
     }
     .msec-05 .cont li a {}

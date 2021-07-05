@@ -64,19 +64,19 @@ class Point extends CI_Controller
 		$this->CI->load->model('Point_model');
 
 		// 이미 등록된 내역이라면 건너뜀
-		if ($poi_type OR $poi_related_id OR $poi_action) {
-			$where = array(
-				'mem_id' => $mem_id,
-				'poi_type' => $poi_type,
-				'poi_related_id' => $poi_related_id,
-				'poi_action' => $poi_action,
-			);
-			$cnt = $this->CI->Point_model->count_by($where);
+		// if ($poi_type OR $poi_related_id OR $poi_action) {
+		// 	$where = array(
+		// 		'mem_id' => $mem_id,
+		// 		'poi_type' => $poi_type,
+		// 		'poi_related_id' => $poi_related_id,
+		// 		'poi_action' => $poi_action,
+		// 	);
+		// 	$cnt = $this->CI->Point_model->count_by($where);
 
-			if ($cnt > 0) {
-				return false;
-			}
-		}
+		// 	if ($cnt > 0) {
+		// 		return false;
+		// 	}
+		// }
 
 		$insertdata = array(
 			'mem_id' => $mem_id,
@@ -141,19 +141,19 @@ class Point extends CI_Controller
 		$this->CI->load->model('CIC_vp_model');
 
 		// 이미 등록된 내역이라면 건너뜀
-		if ($poi_type OR $poi_related_id OR $poi_action) {
-			$where = array(
-				'mem_id' => $mem_id,
-				'vp_type' => $poi_type,
-				'vp_related_id' => $poi_related_id,
-				'vp_action' => $poi_action,
-			);
-			$cnt = $this->CI->CIC_vp_model->count_by($where);
+		// if ($poi_type OR $poi_related_id OR $poi_action) {
+		// 	$where = array(
+		// 		'mem_id' => $mem_id,
+		// 		'vp_type' => $poi_type,
+		// 		'vp_related_id' => $poi_related_id,
+		// 		'vp_action' => $poi_action,
+		// 	);
+		// 	$cnt = $this->CI->CIC_vp_model->count_by($where);
 
-			if ($cnt > 0) {
-				return false;
-			}
-		}
+		// 	if ($cnt > 0) {
+		// 		return false;
+		// 	}
+		// }
 
 		$insertdata = array(
 			'mem_id' => $mem_id,
@@ -215,19 +215,19 @@ class Point extends CI_Controller
 		$this->CI->load->model('CIC_cp_model');
 
 		// 이미 등록된 내역이라면 건너뜀
-		if ($poi_type OR $poi_related_id OR $poi_action) {
-			$where = array(
-				'mem_id' => $mem_id,
-				'cp_type' => $poi_type,
-				'cp_related_id' => $poi_related_id,
-				'cp_action' => $poi_action,
-			);
-			$cnt = $this->CI->CIC_cp_model->count_by($where);
+		// if ($poi_type OR $poi_related_id OR $poi_action) {
+		// 	$where = array(
+		// 		'mem_id' => $mem_id,
+		// 		'cp_type' => $poi_type,
+		// 		'cp_related_id' => $poi_related_id,
+		// 		'cp_action' => $poi_action,
+		// 	);
+		// 	$cnt = $this->CI->CIC_cp_model->count_by($where);
 
-			if ($cnt > 0) {
-				return false;
-			}
-		}
+		// 	if ($cnt > 0) {
+		// 		return false;
+		// 	}
+		// }
 
 		$insertdata = array(
 			'mem_id' => $mem_id,
