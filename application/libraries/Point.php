@@ -95,7 +95,6 @@ class Point extends CI_Controller
 			'mem_point' => $sum,
 		);
 		$this->CI->Member_model->update($mem_id, $updatedata);
-
 		//포인트에 따른 레벨 변경
 		$this->setUserLevel($mem_id);
 		

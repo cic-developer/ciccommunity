@@ -1119,7 +1119,7 @@ class Postact extends CB_Controller
 		if($_writerRatio_vp){
 			$ratio = element('vpc_value', $_writerRatio_vp);
 			$this->point->insert_vp(
-				abs(element('mem_id', $post)),
+				abs(element('mem_id', $comment)),
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
 				$_text_en.' received',
@@ -1143,7 +1143,7 @@ class Postact extends CB_Controller
 		if($_writerRatio_cp){
 			$ratio = element('cpc_value', $_writerRatio_cp);
 			$this->point->insert_cp(
-				abs(element('mem_id', $post)),
+				abs(element('mem_id', $comment)),
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
 				$_text_en.' receive',
@@ -1166,9 +1166,9 @@ class Postact extends CB_Controller
 
 
 		if($_writerRatio_poi){
-			$ratio = element('poi_value', $_writerRatio_poi);
-			$this->point->insert_cp(
-				abs(element('mem_id', $post)),
+			$ratio = element('pc_value', $_writerRatio_poi);
+			$this->point->insert_point(
+				abs(element('mem_id', $comment)),
 				($usedPoint * $ratio)/100,
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
 				$_text_en.' receive',
@@ -1178,7 +1178,7 @@ class Postact extends CB_Controller
 		}
 
 		if($_userRatio_poi){
-			$ratio = element('poi_value', $_writerRatio_poi);
+			$ratio = element('pc_value', $_writerRatio_poi);
 			$this->point->insert_point(
 				$mem_id,
 				($usedPoint * $ratio)/100,
@@ -1189,7 +1189,7 @@ class Postact extends CB_Controller
 			);
 		}
 
-		$_writer_levelup = $this->point->setUserLevel(abs(element('mem_id', $post)));
+		$_writer_levelup = $this->point->setUserLevel(abs(element('mem_id', $comment)));
 		$_user_levelup = $this->point->setUserLevel($mem_id);
 
 		$insertdata = array(
