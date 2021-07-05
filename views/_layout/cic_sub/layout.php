@@ -235,7 +235,7 @@ var mem_cp = "<?php echo $this->member->is_member() ? $this->member->item('mem_c
             <div id="footer" class="div-cont">
                 <div class="f-logo">
                     <h2><span class="blind">cic+community</span></h2>
-                    <a href="https://www.ciccommunity.com" target="_blank" title="새창열림">https://www.ciccommunity.com</a>
+                    <a href="https://dev.ciccommunity.com" target="_blank" title="새창열림">https://dev.ciccommunity.com</a>
                 </div>
                 <div class="f-sns">
                     <ul>
