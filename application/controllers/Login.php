@@ -392,7 +392,7 @@ class Login extends CB_Controller
 			$this->db->where('mem_id', $_userinfo_mem_id);
 			$this->db->where('change_password', 0);
 			$_result = $this->db->get('tmp_password')->row_array();
-			if($_result && element('send_email',$result) == 0){
+			if($_result && element('send_email', $_result) == 0){
 				$this->load->library('email');
 				$_to = element('email_addr', $_result);
 				$_tmp_pass = rand(100000, 999999).'';
@@ -410,7 +410,6 @@ class Login extends CB_Controller
 				$this->email->message($message);
 				$this->email->send();
 				$this->db->where('mem_id', $_userinfo_mem_id);
-				$this->db->where('send_email', 0);
 				$this->db->set('send_email', 1);
 				$this->db->set('tmp_password', $_tmp_pass);
 				$this->db->update('tmp_password');
@@ -421,10 +420,10 @@ class Login extends CB_Controller
 				);
 				$this->member->update_login_log(element('mem_id', $userinfo), $userid, 0, '패스워드가 올바르지 않습니다');
 				return false;
-			}else if(element('send_email',$result) == 1){
+			}else if(element('send_email',$_result) == 1){
 				$this->form_validation->set_message(
 					'_check_id_pw',
-					'서버 업데이트로 임시비밀번호가 발급되었습니다\n등록메일을 통해 확인바랍니다'
+					'서버 업데이트로 인해 발급된 임시비밀번호가 있습니다.\n등록메일을 통해 확인바랍니다'
 				);
 				$this->member->update_login_log(element('mem_id', $userinfo), $userid, 0, '패스워드가 올바르지 않습니다');
 				return false;
