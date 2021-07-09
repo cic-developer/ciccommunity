@@ -26,17 +26,38 @@
 					<p class="help-block">gif, jpg, png 파일 업로드가 가능합니다</p>
 				</div>
 			</div>
+
 			<div class="form-group">
-				<label class="col-sm-2 control-label">행사 변경 마감일</label>
+				<label class="col-sm-2 control-label">수수료 설정</label>
+				<div class="col-sm-10">
+					<input type="number" class="form-control" name="frm_repart_commission" id="frm_repart_commission" 
+					value="<?php echo set_value('frm_repart_commission', element('frm_repart_commission', element('frminfodata', $view))); ?>"
+					style="width:180px;" required />
+					<p class="help-inline">% &nbsp;&nbsp; 수수료를 설정해주세요.(예: 참여CP10,000cp -> *수수료10% -> 배분시작9,000cp)</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">작성자 보상 설정</label>
+				<div class="col-sm-10">
+					<input type="number" class="form-control" name="frm_repart_reward" id="frm_repart_reward" 
+					value="<?php echo set_value('frm_repart_reward', element('frm_repart_reward', element('frminfodata', $view))); ?>"
+					style="width:180px;" onchange="reward_check(this)" required/>
+					<p class="help-inline">% &nbsp;&nbsp; 글 작성자에게 지급할 보상을 설정(%)해주세요.(예: 배분시작10,000cp -> *보상지급10% -> 승리진영에  배분시작9,000cp)</p>
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label">의견 변경 마감일</label>
 				<div class="col-sm-10 form-inline" style="height:130px;">
 					<div class="form-group">
 						<div class='input-group date' id='datetimepicker12'>
-							<input type='text' class="form-control" name="frm_change_close_datetime" value="<?php echo set_value('frm_close_datetime', element('frm_close_datetime', element('frminfodata', $view))); ?>"/>
+							<input type='text' class="form-control" name="frm_change_close_datetime" value="<?php echo set_value('frm_change_close_datetime', element('frm_change_close_datetime', element('frminfodata', $view))); ?>"/>
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
 						</div>
-						<p class="help-block"> 포럼 마감일은 행사 마감일 이후로 설정해야합니다.</p>
+						<p class="help-block"> 의견 변경 마감일은 행사 마감일 이전으로 설정해야합니다.</p>
 					</div>
 				</div>
 				<label class="col-sm-2 control-label">행사 마감일</label>

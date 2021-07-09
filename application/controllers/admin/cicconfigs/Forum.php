@@ -92,13 +92,13 @@ class Forum extends CB_Controller
 				'field' => 'forum_bat_max',
 				// 'label' => '포럼 최대 배팅금액',
 				'label' => '포럼 최대 행사금액',
-				'rules' => 'trim|required|greater_than_equal_to[0]|callback__bat_max_decimal_check',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[100]|callback__bat_max_decimal_check',
 			),
 			array(
 				'field' => 'forum_bat_min',
 				// 'label' => '포럼 최소 배팅금액',
 				'label' => '포럼 최소 행사금액',
-				'rules' => 'trim|required|greater_than_equal_to[0]|callback__bat_min_decimal_check',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[100]|callback__bat_min_decimal_check',
 			),
 		);
 		$this->form_validation->set_rules($config);
@@ -780,9 +780,11 @@ class Forum extends CB_Controller
 		if($getdata['frm_repart_state'] == 1){
 			$redirecturl = admin_url($this->pagedir . '/close_forum');
 			redirect($redirecturl);
+			exit;
 		}
 
 		$total_cp = (double) $getdata['cic_forum_total_cp']; // 총 cp
+
 		$view['view']['forum'] = $getdata;
 		$view['view']['total_cp'] = $total_cp;
 
@@ -800,11 +802,12 @@ class Forum extends CB_Controller
 			$view['view']['B_per'] = ($b_cp/$total_cp) * 100; // B cp %
 
 			// validation을 위한 임시 데이터 저장
-			$win_cp = $a_cp >= $b_cp ? $a_cp : $b_cp;
-			$win_option = $a_cp >= $b_cp ? 1 : 2;
+			$win_cp = $this->input->post('win_option') == 'A' ? $a_cp : $b_cp;
+			$lose_cp = $this->input->post('win_option') == 'A' ? $b_cp : $a_cp;
+			$win_option = $this->input->post('win_option') == 'A' ? 1 : 2;
 		}
-		$total_cp_vali = $total_cp ? $total_cp : 0;
-		
+		$total_cp_vali = $lose_cp;
+
 		/**
 		 * Validation 라이브러리를 가져옵니다
 		 */
@@ -817,12 +820,22 @@ class Forum extends CB_Controller
 				array(
 					'field' => 'forum_commission',
 					'lable' => '수수료 설정',
-					'rules' => 'trim|greater_than_equal_to[0]|less_than_equal_to[100]|callback__forum_commission_check',
+					'rules' => 'required|trim|greater_than_equal_to[0]|less_than_equal_to[100]|callback__forum_commission_check',
 				),
 				array(
-					'field' => 'writer_reward',
+					'field' => 'prop_writer_reward',
 					'lable' => '작성자 보상 설정',
-					'rules' => 'trim|greater_than_equal_to[0]|less_than_equal_to['.$total_cp_vali.']|callback__writer_reward_check',
+					'rules' => 'required|trim|greater_than_equal_to[0]|less_than_equal_to[100]|callback__forum_commission_check',
+				),
+				// array(
+				// 	'field' => 'writer_reward',
+				// 	'lable' => '작성자 보상 설정',
+				// 	'rules' => 'trim|greater_than_equal_to[0]|less_than_equal_to['.$total_cp_vali.']|callback__writer_reward_check',
+				// ),
+				array(
+					'field' => 'win_option',
+					'lable' => '승리 진영 선택',
+					'rules' => 'required|in_list[A,B]',
 				),
 			);
 
@@ -832,7 +845,7 @@ class Forum extends CB_Controller
 		 * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
 		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
 		 */
-		if ($this->form_validation->run() === false) {
+		if ($this->form_validation->run() === false || ($this->input->post('writer_reward') == NULL && $this->input->post('prop_writer_reward') == NULL)) {
 			
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
@@ -858,21 +871,32 @@ class Forum extends CB_Controller
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
             
-			$_forum_commission = (double) $this->input->post('forum_commission'); // 포럼 수수료
-			$forum_commission = $total_cp * ($_forum_commission / 100); // 포럼 수수료를 계산한 후 CP
-			// $writer_reward = (double) $this->input->post('writer_reward'); // 게시물 작성자 지급 보상 CP
-
-			if($this->input->post('writer_reward')){
-				$writer_reward = (double) $this->input->post('writer_reward'); // 게시물 작성자 지급 보상 CP
-				$repart_cp =  $total_cp - ( $writer_reward + $forum_commission); 
-			}else if($this->input->post('prop_writer_reward')){
-				$writer_reward = (double) $this->input->post('prop_writer_reward'); //게시물 작성자 지급 보상 CP%
-				$repart_cp =  $total_cp - (($total_cp *  ($writer_reward / 100)) + $forum_commission);
-				$writer_reward = $total_cp * ($writer_reward / 100);
+			//승리 옵션이 A인 경우 B의견 cp가 보상 cp 반대도 마찬가지
+			switch($this->input->post('win_option')){
+				case 'A' :
+					$total_cp = (double) $getdata['cic_B_cp']; // B cp
+					$win_cp = (double) $getdata['cic_A_cp'];
+					$win_option =  1;
+					break;
+				case 'B' :
+					$total_cp = (double) $getdata['cic_A_cp']; // A cp
+					$win_cp = (double) $getdata['cic_B_cp'];
+					$win_option =  2;
+					break;
+				default :
+					show_404();
+					exit;
 			}
 
-            
-            if($total_cp_vali == 0){
+			$_forum_commission = (double) $this->input->post('forum_commission'); // 포럼 수수료
+			$forum_commission = sprintf("%.2f", $total_cp * ($_forum_commission / 100)); // 포럼 수수료를 계산한 후 CP
+			$_prop_writer_reward = (double) $this->input->post('prop_writer_reward'); // 작성자 보상수수료
+			$prop_writer_reward = sprintf("%.2f" ,$total_cp * ($_prop_writer_reward / 100)); // 작성자 보상수수료를 계산한 후 CP
+
+			$deducted_cost = $forum_commission + $prop_writer_reward; //최종적으로 보상 cp에서 빠지는 금액
+			$repart_cp =  $total_cp - $deducted_cost; //최종적으로 나눠 먹을 수 있는 패자 진영측 cp
+
+            if($repart_cp == 0){
 				$repart_ratio = 0;
 			}else {
 				$repart_ratio = $repart_cp / $win_cp; // 1cp당 지급 비율
@@ -886,13 +910,17 @@ class Forum extends CB_Controller
 			$post = $this->Post_model->get_one($pst_id); // 게시물 정보
 			$writer_id = $post['mem_id']; // 작성자 id
 			$writer_info = $this->Member_model->get_one($writer_id);
-			$writer_cp = (double) $writer_info['mem_cp'];
-			$writer_deposit = (int) $writer_info['mem_deposit'];
-			$writer_changed_cp = $writer_cp + $writer_reward;
-
-			// insert_cp
-			$this->point->insert_cp($writer_id, $writer_reward, '포럼 게시물 작성자', 'post', $pst_id,  $this->member->item('mem_id') . '-' . uniqid(''));
-
+			$writer_cp = (double) element('mem_cp', $writer_info);
+			$writer_deposit = (int) element('mem_deposit', $writer_info);
+			$writer_reward = $this->input->post('writer_reward');
+			if($writer_reward){
+				$writer_changed_cp = $writer_cp + $writer_reward + $prop_writer_reward;
+				$writer_reward_sum = $writer_reward + $prop_writer_reward;
+			}else{
+				$writer_changed_cp = $writer_cp + $prop_writer_reward;
+				$writer_reward_sum = $prop_writer_reward;
+			}
+			$this->point->insert_cp($writer_id, $writer_reward_sum, '포럼 게시물 작성자', 'post', $pst_id,  $this->member->item('mem_id') . '-' . uniqid(''));
 			/**
 			 * 투표자 보상 지급 시작
 			 */
@@ -925,20 +953,12 @@ class Forum extends CB_Controller
 							'mem_forum_lose' => $change_mem_forum_lose
 						);
 						$result = $this->Member_model->set_user_modify($mem_id, $arr);
-						if($result == 0){
-							// 회원정보 수정 실패
-						}
-						if($result == 1){
-							// 회원정보 수정 성공
-						}
-						
 					}else {
-                        
 						// 승리 진영
 						// => 회원 배팅 cp
 						$cfc_cp = (double) $value['cfc_cp'];
 						// => 승리 배분 cp
-						$give_cp =  round($cfc_cp * $repart_ratio, 2);
+						$give_cp =  $cfc_cp + round($cfc_cp * $repart_ratio, 2);
 						$mem_cp = (double) $member_info['mem_cp'];
 						$changed_cp = $mem_cp + $give_cp;
 						// => 회원 승리 전적
@@ -970,11 +990,12 @@ class Forum extends CB_Controller
 			$updatedata = array(
 				'frm_repart_state' => 1,
 				'frm_repart_commission' => $_forum_commission,
-				'frm_repart_reward' => $writer_reward,
-				'frm_total_cp' => $total_cp_vali,
-				'frm_repart_cp' => $repart_cp,
+				'frm_repart_reward' => $_prop_writer_reward,
+				'frm_total_cp' => $getdata['cic_B_cp'] + $getdata['cic_A_cp'],
+				'frm_repart_cp' => $total_cp,
 				'frm_repart_ratio' => $repart_ratio,
-				'frm_repart_real_cp' => $repart_real_cp,
+				'frm_repart_real_cp' => $repart_cp,
+				'frm_win_opinion' => $win_option,
 			);
 			$where = array(
 				'pst_id' => $pst_id,
@@ -1081,10 +1102,7 @@ class Forum extends CB_Controller
 		}
 		
 		$primary_key = $this->Post_model->primary_key;
-		
-		
-		
-		
+
 		$postdata = array();
 		$pevdata = array();
 		$cfidata = array();
@@ -1125,7 +1143,17 @@ class Forum extends CB_Controller
 				'field' => 'post_content',
 				'label' => '포럼 제목',
 				'rules' => 'trim|required',
-				)
+			),
+			array(
+				'field' => 'frm_repart_commission',
+				'label' => '수수료 설정',
+				'rules' => 'required|greater_than_equal_to[0]'
+			),
+			array(
+				'field' => 'frm_repart_reward',
+				'label' => '작성자 보상 설정',
+				'rules' => 'required|greater_than_equal_to[0]'
+			)
 			);
 			
 			$this->form_validation->set_rules($config);
@@ -1206,7 +1234,7 @@ class Forum extends CB_Controller
 					@chmod($file, 0644);
 				}
 				
-                $uploadconfig = array();
+				$uploadconfig = array();
 				$uploadconfig['upload_path'] = $upload_path;
 				$uploadconfig['allowed_types'] = 'jpg|jpeg|png|gif';
 				$uploadconfig['max_size'] = '2000';
@@ -1231,6 +1259,8 @@ class Forum extends CB_Controller
 			$frm_bat_close_datetime = $this->input->post('frm_bat_close_datetime') ? $this->input->post('frm_bat_close_datetime') : null;
 			$frm_close_datetime = $this->input->post('frm_close_datetime') ? $this->input->post('frm_close_datetime') : null;
 			$frm_change_close_datetime = $this->input->post('frm_change_close_datetime') ? $this->input->post('frm_change_close_datetime') : null;
+			$frm_repart_commission = $this->input->post('frm_repart_commission') ? $this->input->post('frm_repart_commission') : 0;
+			$frm_repart_reward = $this->input->post('frm_repart_reward') ? $this->input->post('frm_repart_reward') : 0;
 			$post_title = $this->input->post('post_title', null, '');
 			$post_content = $this->input->post('post_content', null, '');
 			$pev_value_0 = $this->input->post('pev_value_0', null, '');
@@ -1259,15 +1289,16 @@ class Forum extends CB_Controller
 			$pevupdate_1 = array(
 				'B_opinion' => $pev_value_1
 			);
-            if($updatephoto){
+			if($updatephoto){
 				$updatedata['frm_image'] = $updatephoto;
-            }
+			}
 			if($post_id){
-
 				if($this->input->get('type') == 'a'){
 					//도전 cic 포럼에서 진행중인 포럼으로 승격
 					$updatedata['frm_bat_close_datetime'] = $frm_bat_close_datetime;
 					$updatedata['frm_close_datetime'] = $frm_close_datetime;
+					$updatedata['frm_repart_commission'] = $frm_repart_commission;
+					$updatedata['frm_repart_reward'] = $frm_repart_reward;
 					$updatedata['pst_id'] = $post_id;
 					$where = array(
 						'post_id' => $post_id,
@@ -1287,6 +1318,8 @@ class Forum extends CB_Controller
 					// 진행중인 포럼에서 수정
 					$this->Post_model->update($post_id, $brd_updatedata, $where);
 					$this->Post_model->update($post_id, $_updatedata, $where);
+					$updatedata['frm_repart_commission'] = $frm_repart_commission;
+					$updatedata['frm_repart_reward'] = $frm_repart_reward;
 					$this->CIC_forum_info_model->update($post_id, $updatedata, $where);
 					$this->Post_extra_vars_model->update($post_id, $brd_updatedata, $where);
 					$this->Post_extra_vars_model->save($post_id, 3, $pevupdate_0,);
@@ -1331,6 +1364,8 @@ class Forum extends CB_Controller
 					'pst_id' => $post_id
 				);
 				$forumInfoUpdatedata['frm_image'] = $updatephoto;
+				$forumInfoUpdatedata['frm_repart_commission'] = $frm_repart_commission;
+				$forumInfoUpdatedata['frm_repart_reward'] = $frm_repart_reward;
 				$this->CIC_forum_info_model->insert($forumInfoUpdatedata);
 				
 				
