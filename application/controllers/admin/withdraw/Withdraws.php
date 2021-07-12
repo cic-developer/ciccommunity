@@ -350,6 +350,7 @@ class Withdraws extends CB_Controller
 
 	// 출금 요청 반려
 	public function retire(){
+		$this->db->trans_start();
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_admin_withdraw_withdraws_retire';
 		$this->load->event($eventname);
@@ -448,6 +449,10 @@ class Withdraws extends CB_Controller
 			redirect($redirecturl);
 		}
 
+
+		$content = $this->input->post('cp_content2');
+		$memo = $this->input->post('cp_memo2');
+		// 2021 07 09 사유 안들어가길래 확인해봤더니 $content하고 $memo 선언도 안해주고 넣고 있었음...
 		$result = $this->{$this->modelname}->set_withdraw_retire($widIdx, $content, $adminid, $adminip, $memo);
 
 		if($result != 1){
@@ -459,9 +464,6 @@ class Withdraws extends CB_Controller
 			$redirecturl = admin_url($this->pagedir . '?' . $param->output());
 			redirect($redirecturl);
 		}
-
-		$content = $this->input->post('cp_content2');
-		$memo = $this->input->post('cp_memo2');
 		// insert_cp +
 		$this->point->insert_cp($memIdx, $money, $content, 'withdraw', $widIdx, '출금반려');
 	
@@ -476,7 +478,7 @@ class Withdraws extends CB_Controller
 		);
 		$param =& $this->querystring;
 		$redirecturl = admin_url($this->pagedir . '?' . $param->output());
-
+		$this->db->trans_complete();
 		redirect($redirecturl);
 
 	}

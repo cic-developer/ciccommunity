@@ -40,7 +40,7 @@
                             <th><a href="<?php echo element('wid_req_datetime', element('sort', $view)); ?>">요청날짜</a></th>
                             <th><a href="<?php echo element('wid_state', element('sort', $view)); ?>">결과</a></th>
                             <th>출금 PER</th>
-                            <th>트랜젝션</th>
+                            <th style="max-width:300px;overflow:auto;">트랜젝션</th>
                             <th>승인</th>
                         </tr>
                     </thead>
@@ -66,7 +66,13 @@
                             <td><?php echo html_escape(element('wid_req_datetime', $result)); ?></td>
                             <td><?php echo html_escape(element('wid_state', $result)) != null ? (html_escape(element('wid_state', $result)) == 1 ? '<p class="text-success">승인</p>' : '<p class="text-danger">반려</p>' ) : '<p class="text-body">미처리</p>';?></td>
                             <td><?php echo html_escape(element('wid_percoin', $result)); ?></td>
-                            <td><a target="_blank" href="<?php echo 'https://scope.klaytn.com/tx/'.html_escape(element('wid_transaction', $result)).'?tabId=tokenTransfer'?>"><?php echo html_escape(element('wid_transaction', $result)); ?></a></td>
+                            <td style="max-width:300px;overflow:auto;">
+                                <?php if(html_escape(element('wid_state', $result)) == 1){?>
+                                <a target="_blank" href="<?php echo 'https://scope.klaytn.com/tx/'.html_escape(element('wid_transaction', $result)).'?tabId=tokenTransfer'?>"><?php echo html_escape(element('wid_transaction', $result)); ?></a>
+                                <?php }else{ ?>
+                                <?php echo element('wid_content', $result) ?>
+                                <?php } ?>
+                            </td>
                             <td>
                                 <?php
                                 //  모달 데이터
