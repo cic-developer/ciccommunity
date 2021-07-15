@@ -126,6 +126,7 @@ class Board_post extends CB_Controller
 			$forder = 'desc';
 			$popularpost = $this->Post_model
 				->get_like_point_ranking_list($limit, $offset, $where, $findex, $forder, $sfield, $skeyword);
+
 			if (element('list', $popularpost)) {
 				foreach (element('list', $popularpost) as $key => $val) {
 					$popularpost['list'][$key]['post_display_name'] = display_username(
@@ -212,10 +213,10 @@ class Board_post extends CB_Controller
 		if(element('brd_id', element('board', $list)) == 3){
 			$param =& $this->querystring;
 			$view['view']['sort'] = array(
-				'post_id' => $param->sort('post_id', 'asc'),
+				'post_id' => $param->sort('post_id', 'desc'),
 				'post_title' => $param->sort('post_title', 'asc'),
 				'post_content' => $param->sort('post_content', 'asc'),
-				'cic_forum_total_cp' => $param->sort('cic_forum_total_cp', 'asc'),
+				'cic_forum_total_cp' => $param->sort('cic_forum_total_cp', 'desc'),
 				'cic_forum_info.frm_close_datetime' => $param->sort('cic_forum_info.frm_close_datetime', 'asc'),
 			);
 			
@@ -228,6 +229,30 @@ class Board_post extends CB_Controller
 
 			// 정렬순서
 			$view['view']['sorted'] = $this->input->get('findex');
+			
+			// 포럼 status
+			$mem_id = (int) $this->member->item('mem_id');
+			$_mem_batting_cp = $this->CIC_forum_model->mem_batting_cp($mem_id);
+			$mem_batting_cp = array();
+			if(element('mem_bat', $_mem_batting_cp)){
+				foreach (element('mem_bat', $_mem_batting_cp) as $key => $val){
+					$mem_batting_cp['mem_bat'][$key] = $val;
+				}
+			}
+			$view['view']['mem_bat'] = $mem_batting_cp;
+
+			$_mem_join_forum = $this->CIC_forum_model->mem_join_forum($mem_id);
+			$mem_join_forum = array();
+
+			if(element('mem_join_forum', $_mem_join_forum)){
+				foreach (element('mem_join_forum', $_mem_join_forum) as $key => $val){
+					$mem_join_forum['mem_join_forum'][$key] = $val;
+				}
+			}
+			$view['view']['mem_join_forum'] = $mem_join_forum;
+			
+			$_get_mem_battingCP = $this->CIC_forum_model->get_mem_battingCP($mem_id);
+			$view['view']['get_mem_battingCP'] = $_get_mem_battingCP;
 
 			// 배너 가져오기 시작
 			$checktime = cdate('Y-m-d H:i:s', ctimestamp());
@@ -253,11 +278,20 @@ class Board_post extends CB_Controller
 			$view['view']['banner'] = $banner;
 			$view['view']['banner_count'] = element('list', $banner) ? count(element('list', $banner)) : 0;
 			$view['view']['banner_noimage_count'] = 4 - $view['view']['banner_count'];
+			
 
 			// 배너 가져오기 끝
 
-
-			// like 여부 status...
+			//참여 리스트 생성
+			$_partici_order = $this->input->get('partici_order');
+			$_partici_forum = $this->CIC_forum_model->get_participated_forums($mem_id, $_partici_order);
+			$view['view']['partici_forum'] = element('list',$_partici_forum);
+			$view['view']['partici_total_row'] = element('total_row', $_partici_forum);
+			$_total_expect_cp = 0;
+			foreach($view['view']['partici_forum'] AS $_p){
+				$_total_expect_cp += (double)element('expect_cp',$_p);
+			}
+			$view['view']['total_expect_cp'] = $_total_expect_cp;
 		}
 
 		/**
@@ -340,6 +374,49 @@ class Board_post extends CB_Controller
 			$view['view']['banner_count'] = element('list', $banner) ? count(element('list', $banner)) : 0;
 			$view['view']['banner_noimage_count'] = 4 - $view['view']['banner_count'];
 			// 배너 가져오기 끝
+
+			// 포럼 status
+			$mem_id = (int) $this->member->item('mem_id');
+			$_mem_batting_cp = $this->CIC_forum_model->mem_batting_cp($mem_id);
+			$mem_batting_cp = array();
+
+			if(element('mem_bat', $_mem_batting_cp)){
+				foreach (element('mem_bat', $_mem_batting_cp) as $key => $val){
+					$mem_batting_cp['mem_bat'][$key] = $val;
+				}
+			}
+			$view['view']['mem_bat'] = $mem_batting_cp;
+
+			$_mem_join_forum = $this->CIC_forum_model->mem_join_forum($mem_id);
+			$mem_join_forum = array();
+
+			if(element('mem_join_forum', $_mem_join_forum)){
+				foreach (element('mem_join_forum', $_mem_join_forum) as $key => $val){
+					$mem_join_forum['mem_join_forum'][$key] = $val;
+				}
+			}
+			$view['view']['mem_join_forum'] = $mem_join_forum;
+
+			$_get_mem_battingCP = $this->CIC_forum_model->get_mem_battingCP($mem_id);
+			$view['view']['get_mem_battingCP'] = $_get_mem_battingCP;
+			//참여 리스트 생성
+			$_partici_forum = $this->CIC_forum_model->get_participated_forums($mem_id);
+			$view['view']['partici_forum'] = element('list',$_partici_forum);
+			$view['view']['partici_total_row'] = element('total_row', $_partici_forum);
+			$_total_expect_cp = 0;
+			foreach($view['view']['partici_forum'] AS $_p){
+				$_total_expect_cp += (double)element('expect_cp',$_p);
+			}
+			$view['view']['total_expect_cp'] = $_total_expect_cp;
+			//참여 리스트 생성 끝
+
+			//내 도전 포럼 리스트 생성
+			$where = array(
+				'post.brd_id' => 6
+			);
+			$_userforum = $this->CIC_forum_model->get_userforum($mem_id, $where);
+			$view['view']['userforum'] = $_userforum;
+			//내 도전 포럼 리스트 생성 끝
 		}
 		
 		
@@ -476,6 +553,7 @@ class Board_post extends CB_Controller
 		 */
 		if($post['brd_id'] == 3){
 			$view['forum'] = $this->CIC_forum_model->get_one($post_id);
+
 			$total_cp = $view['forum']['cic_forum_total_cp']; // 총 cp
 			
 			$b_cp = 0;

@@ -229,10 +229,177 @@ class Comment_list extends CB_Controller
 						= member_photo_url(element('mem_photo', $val), 64, 64)
 						? member_photo_url(element('mem_photo', $val), 64, 64)
 						: site_url('assets/images/member_default.gif');
+					}
+				}
+		}
+
+		// 베스트 댓글
+		$comment_point = 500; // 댓글 vp 수치 추가 ( 500일시 vp가 500이상인 댓글을 기준으로 높은 )
+		$where = array(
+			'post_id' => $post_id,
+			'cmt_del <>' => 2,
+			'cmt_like_point >' =>$comment_point,
+		);
+		$limit = 3;
+		$list_num = 1;
+		$orderby = 'cmt_like_point desc';
+		$like_point_ranking = $this->Comment_model
+			->get_comment_list($limit, $offset, $where, '', $orderby);
+
+		if (element('list', $like_point_ranking)) {
+			foreach (element('list', $like_point_ranking) as $key => $val) {
+				$like_point_ranking['list'][$key]['meta'] = $meta
+					= $this->Comment_meta_model->get_all_meta(element('cmt_id', $val));
+				$like_point_ranking['list'][$key]['content'] = '';
+
+				$is_blind = (element('comment_blame_blind_count', $board) > 0 && element('cmt_blame', $val) >= element('comment_blame_blind_count', $board)) ? true : false;
+
+				if ($is_blind === true) {
+					$like_point_ranking['list'][$key]['content'] .= '<div class="alert alert-danger">신고가 접수된 게시글입니다. 본인과 관리자만 확인이 가능합니다</div>';
+				}
+				if (element('cmt_secret', $val)) {
+					$like_point_ranking['list'][$key]['content'] .= '<span class="label label-warning">비밀글입니다</span>';
+				}
+				if (($is_blind === false && ! element('cmt_secret', $val)) OR $is_admin !== false OR (element('mem_id', $val) && abs(element('mem_id', $val)) === $mem_id)
+					OR (element('mem_id', $post) && abs(element('mem_id', $post)) === $mem_id)) {
+					$like_point_ranking['list'][$key]['content'] .= display_html_content(
+						element('cmt_content', $val),
+						element('cmt_html', $val),
+						$image_width,
+						$autolink = true,
+						$popup = true
+					);
+					if (element('comment_syntax_highlighter', $board)) {
+						$like_point_ranking['list'][$key]['content'] = preg_replace_callback(
+							"/(\[code\]|\[code=(.*)\])(.*)\[\/code\]/iUs",
+							"content_syntaxhighlighter",
+							$like_point_ranking['list'][$key]['content']
+						); // SyntaxHighlighter
+					}
+				}
+				if (element('cmt_del', $val)) {
+					$like_point_ranking['list'][$key]['content'] = '<div class="alert alert-danger">삭제된 댓글입니다</div>';
+					// $like_point_ranking['list'][$key]['content'] = '<div class="alert alert-danger">이 게시물은 '
+					// 	. html_escape(element('delete_mem_nickname', $meta)) . '님에 의해 '
+					// 	. html_escape(element('delete_datetime', $meta)) . ' 에 삭제 되었습니다</div>';
+				}
+				if (element('mem_id', $val) >= 0) {
+					$like_point_ranking['list'][$key]['display_name'] = display_username(
+						element('cmt_userid', $val),
+						element('cmt_nickname', $val),
+						($use_sideview_icon ? element('mem_icon', $val) : ''),
+						($use_sideview ? 'Y' : 'N')
+					);
+					$level_where = array(
+						'mlc_level' => element('mem_level', $val),
+						'mlc_enable' => 1,
+					);
+					$like_point_ranking['list'][$key]['level'] = $this->CIC_member_level_config_model->get_one('', '', $level_where);
+				} else {
+					$like_point_ranking['list'][$key]['display_name'] = '익명사용자';
+				}
+				$like_point_ranking['list'][$key]['display_datetime'] = display_datetime(
+					element('cmt_datetime', $val),
+					$comment_date_style,
+					$comment_date_style_manual
+				);
+				$like_point_ranking['list'][$key]['is_mobile'] = (element('cmt_device', $val) === 'mobile') ? true : false;
+				$like_point_ranking['list'][$key]['display_ip'] = '';
+
+				$like_point_ranking['list'][$key]['lucky'] = '';
+				if (element('comment-lucky', $meta)) {
+					$like_point_ranking['list'][$key]['lucky'] = element('comment_lucky_name', $board). '에 당첨되어 <span class="luckypoint">' . number_format(element('comment-lucky', $meta)) . '</span> 포인트 지급되었습니다.';
+				}
+				if ($this->member->is_admin() === 'super'
+					OR element('show_comment_ip', $board) === '2') {
+					$like_point_ranking['list'][$key]['display_ip'] = display_ipaddress(element('cmt_ip', $val), '1111');
+				} elseif (element('show_comment_ip', $board) === '1') {
+					$like_point_ranking['list'][$key]['display_ip'] = display_ipaddress(element('cmt_ip', $val), $this->cbconfig->item('ip_display_style'));
+				}
+				$like_point_ranking['list'][$key]['member_photo_url']
+					= member_photo_url(element('mem_photo', $val), 64, 64)
+					? member_photo_url(element('mem_photo', $val), 64, 64)
+					: site_url('assets/images/member_default.gif');
+
+				$like_point_ranking['list'][$key]['cmt_depth'] = strlen($like_point_ranking['list'][$key]['cmt_reply']) * 30;
+
+				$like_point_ranking['list'][$key]['can_update'] = false;
+				$like_point_ranking['list'][$key]['can_delete'] = false;
+				$like_point_ranking['list'][$key]['can_reply'] = false;
+				if ( ! element('post_del', $post) && ! element('cmt_del', $val)) {
+					if ( ! element('mem_id', $val)) {
+						$like_point_ranking['list'][$key]['can_delete'] = true;
+					}
+					if ($is_admin !== false
+						OR (element('mem_id', $val) && $mem_id === abs(element('mem_id', $val)))) {
+						$like_point_ranking['list'][$key]['can_update'] = true;
+						$like_point_ranking['list'][$key]['can_delete'] = true;
+					}
+					if ($key > 0 && $is_admin === false) {
+						if (element('cmt_reply', $val)) {
+							$prev_reply = substr(
+								element('cmt_reply', $val),
+								0,
+								strlen(element('cmt_reply', $val)) - 1
+							);
+							if ($prev_reply === $like_point_ranking['list'][$key-1]['cmt_reply']) {
+								$like_point_ranking['list'][$key-1]['can_update'] = false;
+								$like_point_ranking['list'][$key-1]['can_delete'] = false;
+							}
+						}
+					}
+					if (element('block_delete', $board) && $is_admin === false && (element('brd_id', $board) != 3)) {
+						$like_point_ranking['list'][$key]['can_delete'] = false;
+					}
+					if (strlen(element('cmt_reply', $val)) < 5 && $can_comment_write === true) {
+						$like_point_ranking['list'][$key]['can_reply'] = true;
+					}
+					// 포럼게시판 + 비관리자, can delete = false
+					if($board['brd_id'] == 3 && $this->member->is_admin() != 'super'){
+						$like_point_ranking['list'][$key]['can_delete'] = false;
+					}
 				}
 			}
 		}
-
+		/*
+		$where = array(
+			'post_id' => $post_id,
+			'cmt_del <>' => 2,
+			'cmt_like_point >' => 0,
+		);
+		$limit = 3;
+		$list_num = 1;
+		$orderby = 'cmt_like_point desc';
+		$like_point_ranking = $this->Comment_model
+			->get_comment_list($limit, $offset, $where, '', $orderby);
+		if (element('list', $like_point_ranking)) {
+			foreach (element('list', $like_point_ranking) as $key => $val) {
+				$like_point_ranking['list'][$key]['board'] = $board = $this->board->item_all(element('brd_id', $val));
+				$like_point_ranking['list'][$key]['num'] = $list_num++;
+				if ($board) {
+					$like_point_ranking['list'][$key]['boardurl'] = board_url(element('brd_key', $board));
+					$like_point_ranking['list'][$key]['posturl'] = post_url(element('brd_key', $board), element('post_id', $val));
+				}
+				if (element('mem_id', $val) >= 0) {
+					$like_point_ranking['list'][$key]['display_name'] = display_username(
+						element('cmt_userid', $val),
+						element('cmt_nickname', $val),
+						($use_sideview_icon ? element('mem_icon', $val) : ''),
+						($use_sideview ? 'Y' : 'N')
+					);
+					$level_where = array(
+						'mlc_level' => element('mem_level', $val),
+						'mlc_enable' => 1,
+					);
+					$like_point_ranking['list'][$key]['level'] = $this->CIC_member_level_config_model->get_one('', '', $level_where);
+				} else {
+					$like_point_ranking['list'][$key]['display_name'] = '익명사용자';
+				}
+			}
+		}
+		*/
+		// 
+		
 		/**
 		 * 게시판 목록에 필요한 정보를 가져옵니다.
 		 */
@@ -359,9 +526,10 @@ class Comment_list extends CB_Controller
 				}
 			}
 		}
-
+		
 		$view['view']['data'] = $result;
-		$view['view']['best_list'] = $bestresult;
+		// $view['view']['best_list'] = $bestresult;
+		$view['view']['best_list'] = $like_point_ranking;
 		$view['view']['board'] = $board;
 		$view['view']['post'] = $post;
 		$view['view']['is_admin'] = $is_admin;

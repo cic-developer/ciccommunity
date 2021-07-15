@@ -1,5 +1,4 @@
-if (typeof(CIC_COMMENT_JS) === 'undefined') {
-
+if (typeof CIC_COMMENT_JS === "undefined") {
     var CIC_COMMENT_JS = true;
     var is_submit_comment = false;
 
@@ -15,52 +14,64 @@ if (typeof(CIC_COMMENT_JS) === 'undefined') {
 
     function view_comment(id, post_id, page, opt, message) {
         if (opt) {
-            $('html, body').animate({
-                scrollTop: $('#' + id).offset().top - 100
-            }, 0);
+            $("html, body").animate({
+                    scrollTop: $("#" + id).offset().top - 100,
+                },
+                0
+            );
         }
 
-        var comment_url = cb_url + '/comment_list/lists/' + post_id + '?page=' + page;
+        var comment_url =
+            cb_url + "/comment_list/lists/" + post_id + "?page=" + page;
         var hash = window.location.hash;
 
-        $('#' + id).load(comment_url, function() {
+        $("#" + id).load(comment_url, function() {
             if (message) {
-                $('.alert-comment-list-message-content').html(message);
-                $('.alert-comment-list-message').addClass('alert-success').removeClass('alert-warning').show(0).delay(2500).hide(0);
+                $(".alert-comment-list-message-content").html(message);
+                $(".alert-comment-list-message")
+                    .addClass("alert-success")
+                    .removeClass("alert-warning")
+                    .show(0)
+                    .delay(2500)
+                    .hide(0);
             }
             if (hash) {
                 var st = $(hash).offset().top;
-                $('html, body').animate({ scrollTop: st }, 200); //200ms duration
+                $("html, body").animate({ scrollTop: st }, 200); //200ms duration
             }
-            if (typeof(SyntaxHighlighter) !== 'undefined') {
+            if (typeof SyntaxHighlighter !== "undefined") {
                 SyntaxHighlighter.highlight();
             }
         });
     }
 
     function view_comment_password(cmt_id, post_id) {
-        var comment_url = cb_url + '/comment_list/password/' + cmt_id + '/' + post_id;
+        var comment_url =
+            cb_url + "/comment_list/password/" + cmt_id + "/" + post_id;
         document.location.href = comment_url;
     }
 
-    function add_comment(f, post_id) {
+    function add_comment(f, post_id, comment_type) {
         if (is_submit_comment === true) {
             return false;
         }
-
+        var _page = "";
+        if (comment_type === 1) {
+            _page = f.cmt_page.value;
+        }
         is_submit_comment = true;
 
-        if ($('#char_count')) {
+        if ($("#char_count")) {
             if (char_min > 0 || char_max > 0) {
                 // var cnt = parseInt(cic_check_byte('#cmt_content', '#char_count'));
                 var cnt = parseInt($(f.cmt_content).val().length);
                 if (char_min > 0 && char_min > cnt) {
-                    alert('내용은 ' + char_min + '글자 이상 쓰셔야 합니다.');
+                    alert("내용은 " + char_min + "글자 이상 쓰셔야 합니다.");
                     f.cmt_content.focus();
                     is_submit_comment = false;
                     return false;
                 } else if (char_max > 0 && char_max < cnt) {
-                    alert('내용은 ' + char_max + '글자 이하로 쓰셔야 합니다.');
+                    alert("내용은 " + char_max + "글자 이하로 쓰셔야 합니다.");
                     f.cmt_content.focus();
                     is_submit_comment = false;
                     return false;
@@ -69,8 +80,8 @@ if (typeof(CIC_COMMENT_JS) === 'undefined') {
         }
 
         $(f).validate();
-        if ($(f).valid()) // check if form is valid
-        {
+        if ($(f).valid()) {
+            // check if form is valid
             // do some stuff
         } else {
             is_submit_comment = false;
@@ -78,35 +89,35 @@ if (typeof(CIC_COMMENT_JS) === 'undefined') {
             // just show validation errors, dont post
         }
 
-        var content = '';
+        var content = "";
         $.ajax({
-            url: cb_url + '/postact/filter_spam_keyword',
-            type: 'post',
+            url: cb_url + "/postact/filter_spam_keyword",
+            type: "post",
             data: {
-                title: '',
+                title: "",
                 content: f.cmt_content.value,
-                csrf_test_name: cb_csrf_hash
+                csrf_test_name: cb_csrf_hash,
             },
-            dataType: 'json',
+            dataType: "json",
             async: false,
             cache: false,
             success: function(data) {
                 content = data.content;
-            }
+            },
         });
         if (content) {
-            alert('내용에 금지단어(\'' + content + '\')가 포함되어있습니다');
+            alert("내용에 금지단어('" + content + "')가 포함되어있습니다");
             f.cmt_content.focus();
             is_submit_comment = false;
             return false;
         }
 
         $.ajax({
-            url: cb_url + '/comment_write/update',
-            type: 'POST',
+            url: cb_url + "/comment_write/update",
+            type: "POST",
             cache: false,
             data: $(f).serialize(),
-            dataType: 'json',
+            dataType: "json",
             success: function(data) {
                 is_submit_comment = false;
                 if (data.error) {
@@ -118,115 +129,135 @@ if (typeof(CIC_COMMENT_JS) === 'undefined') {
                     alert(data.success);
                     // $('.alert-comment-message-content').html(data.success);
                     // $('.alert-comment-message').addClass('alert-success').removeClass('alert-warning').show(0).delay(2500).hide(0);
-                    view_comment('viewcomment', post_id, '', '')
-                        // if ($('#char_count')) {
-                        //     if (char_min > 0 || char_max > 0) {
-                        //         cic_check_byte('#cmt_content', '#char_count');
-                        //     }
-                        // }
+                    view_comment("viewcomment", post_id, _page, "");
+                    // if ($('#char_count')) {
+                    //     if (char_min > 0 || char_max > 0) {
+                    //         cic_check_byte('#cmt_content', '#char_count');
+                    //     }
+                    // }
                     init_comment_box();
+                    page_flag = false;
                 }
             },
             error: function(data) {
                 is_submit_comment = false;
-                alert('오류가 발생하였습니다.');
+                alert("오류가 발생하였습니다.");
                 return false;
-            }
+            },
         });
     }
 
     function delete_comment(cmt_id, post_id, page) {
-        if (confirm("정말 삭제 하시겠습니까?\n\n삭제하신 후에는 복구가 불가능합니다.")) {
+        if (
+            confirm("정말 삭제 하시겠습니까?\n\n삭제하신 후에는 복구가 불가능합니다.")
+        ) {
             $.ajax({
-                url: cb_url + '/postact/delete_comment',
-                type: 'POST',
+                url: cb_url + "/postact/delete_comment",
+                type: "POST",
                 cache: false,
                 data: { cmt_id: cmt_id, csrf_test_name: cb_csrf_hash },
-                dataType: 'json',
+                dataType: "json",
                 success: function(data) {
                     if (data.error) {
-                        $('.alert-comment-list-message-content').html(data.error);
-                        $('.alert-comment-list-message').addClass('alert-warning').removeClass('alert-success').show();
+                        $(".alert-comment-list-message-content").html(data.error);
+                        $(".alert-comment-list-message")
+                            .addClass("alert-warning")
+                            .removeClass("alert-success")
+                            .show();
                         return false;
                     } else if (data.password) {
-                        $('.alert-comment-list-message-content').html(data.password);
-                        $('.alert-comment-list-message').addClass('alert-warning').removeClass('alert-success').show();
+                        $(".alert-comment-list-message-content").html(data.password);
+                        $(".alert-comment-list-message")
+                            .addClass("alert-warning")
+                            .removeClass("alert-success")
+                            .show();
                         view_comment_password(post_id, cmt_id);
                         return false;
                     } else if (data.success) {
-                        view_comment('viewcomment', post_id, '', '', data.success);
+                        view_comment("viewcomment", post_id, "", "", data.success);
                         init_comment_box();
                     }
                 },
                 error: function(data) {
-                    alert('오류가 발생하였습니다.');
+                    alert("오류가 발생하였습니다.");
                     return false;
-                }
+                },
             });
         }
     }
 
     function comment_page(post_id, page) {
-        view_comment('viewcomment', post_id, page, '');
+        view_comment("viewcomment", post_id, page, "");
         comment_cur_page = page;
     }
 
     function init_comment_box() {
-        $('#cmt_nickname').val('');
-        $('#cmt_password').val('');
-        $('#cmt_content').val('');
-        $('#captcha').trigger('click');
-        $('#captcha_key').val('');
-        $('#cmt_btn_submit').prop('disabled', false);
+        $("#cmt_nickname").val("");
+        $("#cmt_password").val("");
+        $("#cmt_content").val("");
+        $("#captcha").trigger("click");
+        $("#captcha_key").val("");
+        $("#cmt_btn_submit").prop("disabled", false);
         // cic_check_byte('#cmt_content', '#char_count');
-        comment_box('', 'c');
+        comment_box("", "c");
     }
 
-    var save_before = '';
-    var save_html = document.getElementById('comment_write_box').innerHTML;
+    var save_before = "";
+    var save_html = document.getElementById("comment_write_box").innerHTML;
 
     function comment_box(cmt_id, work) {
         var el_id;
         // 댓글 아이디가 넘어오면 답변, 수정
         if (cmt_id) {
-            if (work === 'c') {
-                el_id = 'reply_' + cmt_id;
+            if (work === "c") {
+                el_id = "reply_" + cmt_id;
             } else {
-                el_id = 'edit_' + cmt_id;
+                el_id = "edit_" + cmt_id;
             }
         } else {
-            el_id = 'comment_write_box';
+            el_id = "comment_write_box";
         }
 
         if (save_before !== el_id) {
-            if (save_before && save_before != 'comment_write_box') {
-                $('#' + save_before).css('display', 'none');
-                $('#' + save_before).html('');
+            if (save_before && save_before != "comment_write_box") {
+                $("#" + save_before).css("display", "none");
+                $("#" + save_before).html("");
             }
 
-            $('#' + el_id).css('display', '');
-            $('#' + el_id).html(save_html);
+            $("#" + el_id).css("display", "");
+            $("#" + el_id).html(save_html);
             // 댓글 수정
-            if (work === 'cu') {
-                $('#' + el_id + ' #cmt_content').val($('#save_comment_' + cmt_id).val());
+            if (work === "cu") {
+                $("#" + el_id + " #cmt_content").val(
+                    $("#save_comment_" + cmt_id).val()
+                );
                 // if (typeof char_count !== 'undefined') {
                 //     cic_check_byte('#cmt_content', '#char_count');
                 // }
-                if ($('#secret_comment_' + cmt_id).val() === '1') {
-                    $('#' + el_id + ' #cmt_secret').prop('checked', true);
+                if ($("#secret_comment_" + cmt_id).val() === "1") {
+                    $("#" + el_id + " #cmt_secret").prop("checked", true);
                 } else {
-                    $('#' + el_id + ' #cmt_secret').prop('checked', false);
+                    $("#" + el_id + " #cmt_secret").prop("checked", false);
                 }
             }
 
-            $('#' + el_id + ' #cmt_id').val(cmt_id);
-            $('#' + el_id + ' #mode').val(work);
+            $("#" + el_id + " #cmt_id").val(cmt_id);
+            $("#" + el_id + " #cmt_page").val($("#comment_page").val());
+            if (cmt_id) {
+                $("#" + el_id + " #cmt_btn_submit").attr(
+                    "onclick",
+                    "add_comment(this.form, " +
+                    window.location.pathname.split("/")[2] +
+                    ", 1)"
+                );
+            }
 
+            $("#" + el_id + " #mode").val(work);
             if (save_before) {
-                $('#captcha').trigger('click');
+                $("#captcha").trigger("click");
             }
             save_before = el_id;
         }
     }
-    comment_box('', 'c');
+    comment_box("", "c");
 }

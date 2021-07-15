@@ -1,3 +1,105 @@
+<input type="hidden" name="comment_page" id="comment_page" value="<?php echo $this->input->get('page');  ?>">
+
+<?php
+if (element('list', element('best_list', $view))) {
+?>
+<!-- 수호선배  -->
+<h1 style="font-size: 1.25em; margin-bottom: 35px;">BEST</h1>
+<div class="list bestline">
+	<ul>
+	<?php
+	$_is_depth = false;
+	if (element('list', element('best_list', $view))) {
+		foreach (element('list', element('best_list', $view)) as $result) {
+			$_cmt_depth = element('cmt_depth', $result)/30;
+			$_classname = $_cmt_depth > 0 ? 'reply cdepth'.$_cmt_depth : 'vcon';
+	?>
+		<?php
+		if($_cmt_depth == 0){
+		?>
+		<li class="item" id="comment_<?php echo element('cmt_id', $result); ?>">
+		<?php
+		}
+		?>
+			<div class="<?php echo $_classname; ?>">
+				<div class="info">
+					<p class="ico"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', $result)), 35, 35); ?>"alt=""></p>
+						<div href="javascript:void(0);" class="tooltip nickname popup_menuu" search_id="<?php echo element('mem_id', $result); ?>">
+							<p class="txt"><?php echo element('cmt_nickname', $result); ?></p>
+							<span class="tooltiptext" style="bottom:-150%">
+								<b><?php if(number_format(element('mlc_level',$result) > 30)){
+											echo '관리자';
+								}else{ ?>
+									레벨 <?php echo element('mlc_level',$result) ?> 
+                                    <?php echo element('mlc_title',$result); ?>
+								<?php	
+								}
+									?></b>
+								<br><b><a href="javascript:void(0);" class="layer_link" style="padding:5px; color:#1e5fc9;"> 
+								작성 글 보기
+								</a></b>
+						</span>
+						</div>
+					<div class="vp-point">
+						<ul>
+							<li>
+								<p class="up" data-contenttype="comment" data-cmtidx="<?php echo element('cmt_id', $result); ?>" style="cursor:pointer;"><?php echo element('cmt_like_point', $result); ?></p>
+							</li>
+							<li>
+								<p class="down" data-contenttype="comment" data-cmtidx="<?php echo element('cmt_id', $result); ?>" style="cursor:pointer;"><?php echo element('cmt_dislike_point', $result); ?></p>
+							</li>
+						</ul>
+
+					</div>
+					
+				</div>
+				<div class="vtxt" comment-data="<?php echo element('cmt_id', $result); ?>">
+					<?php echo element('cmt_content', $result); ?>
+				</div>
+				<div class="ctrls">
+					<ul>
+						<li>
+							<p class="date"><?php echo cdate('Y. m. d H:i' ,strtotime(element('cmt_datetime', $result))); ?></p>
+						</li>
+						<?php if (element('can_update', $result)) { ?>
+							
+						<li>
+							<a href="javascript:;" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'cu'); return false;">수정</a>
+						</li>
+						<?php } ?>
+						<?php if (element('can_delete', $result)) { ?>
+						<li>
+							<a href="javascript:;" onClick="delete_comment('<?php echo element('cmt_id', $result); ?>', '<?php echo element('post_id', $result); ?>', '<?php echo element('page', $view); ?>');">삭제</a>
+						</li>
+						<?php } ?>
+						<!-- <li><a href="javascript:;" class="cmmt-btn" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'c'); return false;"><span>답글</span></a></li> -->
+						<?php if (element('use_comment_blame', element('board', $view)) && ( ! element('comment_blame_blind_count', element('board', $view)) OR element('cmt_blame', $result) < element('comment_blame_blind_count', element('board', $view)))) { ?>
+							<li><a href="javascript:;" id="cmt-btn-blame" onClick="comment_blame('<?php echo element('cmt_id', $result); ?>', 'comment-blame-<?php echo element('cmt_id', $result); ?>');" title="신고하기"><i class="fa fa-bell fa-xs"></i>신고 <span class="comment-blame-<?php echo element('cmt_id', $result); ?>"><?php echo element('cmt_blame', $result) ? '+' . number_format(element('cmt_blame', $result)) : ''; ?></span></a></li>
+						<?php } ?>
+					</ul>
+				</div>
+				<div class="comment" id="edit_<?php echo element('cmt_id', $result); ?>">
+				</div>
+				<div class="comment" id="reply_<?php echo element('cmt_id', $result); ?>">
+				</div>
+				<input type="hidden" value="<?php echo element('cmt_secret', $result); ?>" id="secret_comment_<?php echo element('cmt_id', $result); ?>" />
+				<textarea id="save_comment_<?php echo element('cmt_id', $result); ?>" style="display:none"><?php echo html_escape(element('cmt_content', $result)); ?></textarea>
+			</div>
+	<?php
+		}
+	?>
+	</li>
+	<?php
+	}
+	?>
+	</ul>
+</div>
+<div class="gray-line" style="border-top:1px solid #dedede;"></div>
+<!-- 수호선배 끝 -->
+<?php }
+?>
+
+
 <div class="list">
 	<ul>
 	<?php
@@ -16,11 +118,22 @@
 		?>
 			<div class="<?php echo $_classname; ?>">
 				<div class="info">
-					<a href="javascript:void(0);" class="nickname popup_menuu" search_id="<?php echo element('mem_id', $result); ?>">
-						<p class="ico"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', $result)), 35, 35); ?>"
-								alt=""></p>
-						<p class="txt"><?php echo element('cmt_nickname', $result); ?></p>
-					</a>
+					<p class="ico"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', $result)), 35, 35); ?>"
+					alt=""></p>
+					<div class="tooltip nickname popup_menuu" search_id="<?php echo element('mem_id', $result); ?>">
+							<p class="txt"><?php echo element('cmt_nickname', $result); ?></p>
+							<span class="tooltiptext" style="bottom: -150%;">
+								<b><?php if(number_format(element('mlc_level',$result) > 30)){
+											echo '관리자';
+								}else{ ?>
+									레벨 <?php echo element('mlc_level',$result) ?> 
+                                    <?php echo element('mlc_title',$result); ?>
+								<?php } ?></b>
+								<br><b><a href="javascript:void(0);" class="layer_link" style="padding:5px; color:#1e5fc9;"> 
+								작성 글 보기
+								</a></b>
+							</span>
+						</div>
 					<div class="vp-point">
 						<ul>
 							<li>
@@ -54,8 +167,8 @@
 						</li>
 						<?php } ?>
 						<li><a href="javascript:;" class="cmmt-btn" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'c'); return false;"><span>답글</span></a></li>
-						<?php if (element('use_comment_blame', element('board', $view)) && ( ! element('comment_blame_blind_count', element('board', $view)) OR element('cmt_blame', $result) < element('comment_blame_blind_count', element('board', $view)))) { ?>
-							<li><a href="javascript:;" id="cmt-btn-blame" onClick="comment_blame('<?php echo element('cmt_id', $result); ?>', 'comment-blame-<?php echo element('cmt_id', $result); ?>');" title="신고하기"><i class="fa fa-bell fa-xs"></i>신고 <span class="comment-blame-<?php echo element('cmt_id', $result); ?>"><?php echo element('cmt_blame', $result) ? '+' . number_format(element('cmt_blame', $result)) : ''; ?></span></a></li>
+						<?php if (element('use_comment_blame', element('board', $view)) && ( ! element('comment_blame_blind_count', element('board', $view)) OR element('cmt_blame', $result) < element('comment_blame_blind_count', element('board', $view))) && !(element('mem_id', $result) === $this->member->is_member() )) { ?>
+							<li><a href="javascript:;" id="cmt-btn-blame" onClick="comment_blame('<?php echo element('cmt_id', $result); ?>', 'comment-blame-<?php echo element('cmt_id', $result); ?>');" title="신고하기"><i class="fa fa-bell fa-xs"></i>신고<span class="comment-blame-<?php echo element('cmt_id', $result); ?>"><?php echo element('cmt_blame', $result) ? '+' . number_format(element('cmt_blame', $result)) : ''; ?></span></a></li>
 						<?php } ?>
 					</ul>
 				</div>
@@ -107,12 +220,10 @@
 	</div>
 </div>
 <!-- s: layer-wrap.singo -->
-<div class="popupLayer" style="display:none; z-index:1200">
-	<a href="" class="layer_link"> 작성 글 보기</a>
-    </div>
     <script>
-
+		
     $(function(){
+		// document.querySelectorAll('.cmt_page').value = $('.comment_page').val();
         /* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
         $('.popup_menuu').click(function(e)
         {
@@ -136,6 +247,36 @@
                 "left": divLeft,
                 "display" : "block"
             }).show();
+        });
+		$('.popup_menuu').mouseover(function(e)
+        {
+					
+					var sWidth = window.innerWidth;
+            var sHeight = window.innerHeight;
+
+            var oWidth = $('.popupLayer').width();
+            var oHeight = $('.popupLayer').height();
+
+            // 레이어가 나타날 위치를 셋팅한다.
+            // var divLeft = e.clientX + 10;
+            // var divTop = e.clientY + 5;
+            var divLeft = e.clientX -5;
+            var divTop = e.clientY -5;
+
+            // 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+            if( divLeft < 0 ) divLeft = 0;
+            if( divTop < 0 ) divTop = 0;
+            
+            $('.layer_link').prop('href', `<?php echo base_url('board/freetalk').'?sfield=mem_id&skeyword='?>${$(this).attr('search_id')}`);
+            $('.popupLayer').css({
+                "top": divTop,
+                "left": divLeft,
+                "display" : "block"
+            }).show();
+        });
+        $('.popupLayer').mouseleave(function(e)
+        {
+            $('.popupLayer').css('display','none');
         });
     });
 	//더보기 이벤트

@@ -116,9 +116,10 @@ class Main extends CB_Controller
 			'brd_id' => 1 ,
 		);
 		$limit = 10;
-
+		$findex = 'post_datetime';
+		$forder = 'desc';
 		$popularpost = $this->Post_model
-			->get_like_point_ranking_list($limit, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
+			->get_like_point_ranking_list($limit, $offset, $where, $findex, $forder, $sfield, $skeyword);
 
 		$list_num = 1;
 		

@@ -3905,11 +3905,20 @@
 
 .cmmt-wrap .cmmt .list {
     margin-top: 15px;
-    padding-bottom: 30px;
+    /* padding-bottom: 50px; */
+}
+
+.cmmt-wrap .cmmt .bestline {
+    /* padding: 29px;
+    outline: 2px solid #f9be03; */
 }
 
 .cmmt-wrap .cmmt .list .info {
     position: relative;
+}
+
+.cmmt-wrap .cmmt .list .info .ico img {
+    position: absolute;
 }
 
 .cmmt-wrap .cmmt .list .vp-point {
@@ -3995,6 +4004,7 @@
     display: inline-block;
     font-size: 12px;
     height: 35px;
+    margin-left: 30px;
 }
 
 .cmmt-wrap .cmmt .nickname:after {
@@ -4074,6 +4084,10 @@
     color: #666;
     font-weight: 300;
     font-size: 13px;
+}
+
+.cmmt-wrap .cmmt .ctrls li .dateed {
+    border-bottom: 1px solid gray;
 }
 
 .cmmt-wrap .cmmt .ctrls li:nth-child(n + 2) {
@@ -4435,3 +4449,82 @@
 /* ======================================================
    .content
 =========================================================*/
+
+
+/* Tooltip container */
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    /* If you want dots under the hoverable text */
+}
+
+
+/* Tooltip text */
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 100px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px #fccb17;
+    color: black;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: -120%;
+    left: 80%;
+    margin-left: -60px;
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+    line-height: 20px;
+    font-size: 15px;
+}
+
+
+/* Tooltip arrow */
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #fccb17 transparent;
+    border-collapse: solid 2px #fccb17;
+}
+
+
+/* Show the tooltip text when you mouse over the tooltip container */
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+@media only screen and (max-width: 1000px) {
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 100px;
+        background-color: rgb(255, 255, 255);
+        border: solid 1px #fccb17;
+        color: black;
+        text-align: center;
+        padding: 5px 0;
+        border-radius: 6px;
+        /* Position the tooltip text */
+        position: absolute;
+        z-index: 9999;
+        bottom: -210% !important;
+        left: 80%;
+        margin-left: -60px;
+        /* Fade in tooltip */
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+}

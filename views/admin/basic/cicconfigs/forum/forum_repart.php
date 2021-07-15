@@ -1,4 +1,6 @@
-
+<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
 <div class="box">
 	<div class="box-table">
 		<?php
@@ -53,6 +55,23 @@
 					<p class="help-block"><?php echo number_format(element('B_per', $view), 2); ?> %</p>
 				</div>
 			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label">베팅 적용 마감일</label>
+				<div class="col-sm-10 form-inline" >
+					<div class="form-group">
+						<div class='input-group date' id='datetimepicker'>
+							<input type='text' class="form-control" name="application_deadline" value=""/>
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar">
+								</span>
+							</span>
+						</div>
+						<p class="help-block">해당 마감일 이후에 베팅된 의견은 원금반환만 됩니다.</p>
+					</div>
+				</div>
+			</div>
+
 			<div class="form-group">
 				<label class="col-sm-2 control-label">수수료 설정</label>
 				<div class="col-sm-10">
@@ -195,34 +214,6 @@ $(function() {
 
 	});
 
-	// 작성자 보상 설정
-	// var oldVal2 = '';
-	// $(document).on("propertychange change keyup paste input","#writer_reward",function(){
-	// 	var currentVal = $(this).val();
-	// 	if(currentVal == oldVal2) {
-	// 		return;
-	// 	}
-
-	// 	var commission = $('#forum_commission').val();
-	// 	commission = total_cp * (commission / 100); // 수수료
-	// 	var repart_cp = Number(total_cp) - (Number(currentVal) + Number(commission));
-		
-	// 	$('#repart_cp').val(repart_cp.toFixed(2));
-
-	// 	if($('#repart_cp').val()){
-	// 		var repart_ratio = repart_cp / Number(win_cp);
-	// 		$('#repart_ratio').val(repart_ratio.toFixed(2));
-	// 	}
-
-	// 	if(Number(win_cp) > repart_cp){
-	// 		$('.repart-msg').attr('style', "color:red; display:block;");
-	// 	}else{
-	// 		$('.repart-msg').attr('style', "display:none;");
-	// 	}
-
-	// 	oldVal2 = currentVal;
-	// });
-
 	$(document).on("propertychange change keyup paste input","#prop_writer_reward",function(){
 		let _checked_val = $("input[type=radio][name=win_option]:checked").val();
 		switch(_checked_val){
@@ -254,6 +245,14 @@ $(function() {
 			var repart_ratio = repart_cp / Number(win_cp);
 			$('#repart_ratio').val(repart_ratio.toFixed(2));
 		}
+	});
+
+	$(document).ready(function(){
+		var frmbatclosedatetime = "<?php echo set_value('frm_bat_lose_datetime',  element('frm_bat_close_datetime', element('forum', $view))); ?>";
+		$('#datetimepicker').datetimepicker({
+			format : 'YYYY-MM-DD HH:mm:ss',
+			defaultDate : frmbatclosedatetime
+		});
 	});
 
 </script>

@@ -747,6 +747,7 @@ class Comment_write extends CB_Controller
 				Events::trigger('after_insert', $eventname);
 
 				$result = array('success' => '댓글이 등록되었습니다');
+				
 				exit(json_encode($result));
 
 			} else {

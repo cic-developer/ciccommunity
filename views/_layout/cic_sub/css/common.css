@@ -306,7 +306,7 @@ button.imgBtn {
 table {
     border-collapse: collapse;
     border-spacing: 0px;
-    width: 100%
+    width: 100% !important;
 }
 
 .forum-ye {
@@ -1166,6 +1166,8 @@ table caption {
     clear: both;
     overflow: hidden;
     display: block;
+    margin-top: 20px;
+    padding: 5px;
 }
 
 .gap30 {

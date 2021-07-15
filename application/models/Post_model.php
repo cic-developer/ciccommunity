@@ -440,13 +440,16 @@ class Post_model extends CB_Model
 			}
 		}
 
+		// $this->db->select('post.*, board.brd_key, board.brd_name, board.brd_mobile_name, board.brd_order, board.brd_search,
+		// 	member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point, cic_member_level_config.*');
 		$this->db->select('post.*, board.brd_key, board.brd_name, board.brd_mobile_name, board.brd_order, board.brd_search,
-			member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point, cic_member_level_config.*');
+			member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point, cic_member_level_config.*, cic_forum_info.*');
 		$this->db->from('post');
 		$this->db->join('board', 'post.brd_id = board.brd_id', 'inner');
 		$this->db->join('member', 'post.mem_id = member.mem_id', 'left');
+		$this->db->join('cic_forum_info', 'post.post_id = cic_forum_info.pst_id', 'left outer');
 		$this->db->join('cic_member_level_config', 'member.mem_level = cic_member_level_config.mlc_level AND cic_member_level_config.mlc_enable = 1', 'left');
-
+		
 		
 		if ($where) {
 			$this->db->where($where);
@@ -487,10 +490,16 @@ class Post_model extends CB_Model
 		$result['list'] = $qry->result_array();
 		// echo $this->db->last_query();
 		// exit;
+		// if($board_id==3){
+		// 	echo $this->db->last_query();
+		// }
 
 		$this->db->select('count(*) cnt, board.brd_id');
 		$this->db->from('post');
 		$this->db->join('board', 'post.brd_id = board.brd_id', 'inner');
+		//문제시 밑 삭제
+		$this->db->join('cic_forum_info', 'post.post_id = cic_forum_info.pst_id', 'left outer');
+		
 
 		if ($where) {
 			$this->db->where($where);
@@ -521,7 +530,7 @@ class Post_model extends CB_Model
 		$this->db->group_by('board.brd_id');
 		$qry = $this->db->get();
 		$cnt = $qry->result_array();
-
+	
 		$result['total_rows'] = 0;
 		if ($cnt) {
 			foreach ($cnt as $key => $value) {
@@ -661,9 +670,12 @@ class Post_model extends CB_Model
 
 	public function get_like_point_ranking_list($limit = '', $offset = '', $where = '', $findex = '', $orderby = '', $sfield = '', $skeyword = '', $sop = 'OR')
 	{
-
+		$_findex = $findex;
 		if ( ! in_array(strtolower($findex), $this->allow_order_field)) {
 			$findex = 'post_like_point';
+		}
+		if($_findex === 'post_datetime'){
+			$findex = $_findex;
 		}
 		
 		$sop = (strtoupper($sop) === 'AND') ? 'AND' : 'OR';
@@ -760,6 +772,7 @@ class Post_model extends CB_Model
 		}
 		$qry = $this->db->get();
 		$result['list'] = $qry->result_array();
+
 		// print_r($this->db->last_query());
 		// exit;
 

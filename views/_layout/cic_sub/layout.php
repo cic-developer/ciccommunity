@@ -42,6 +42,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo element('layout_skin_url', $layout); ?>/css/styleDefault.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo element('layout_skin_url', $layout); ?>/css/layout.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo element('layout_skin_url', $layout); ?>/css/content.css" />
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <?php echo $this->managelayout->display_css(); ?>
 
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery/jquery-1.11.3.min.js'); ?>"></script>
@@ -57,11 +58,13 @@
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery/slick.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery/owl.carousel.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery/popup.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/bxslider/jquery.bxslider.js'); ?>"></script>
 
 <link rel="stylesheet" href="<?php echo base_url('assets/js/css/animate.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/js/css/owl.carousel.min.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/js/css/slick-theme.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/js/css/slick.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/js/bxslider/jquery.bxslider.css'); ?>">
 
 <!------------------------------------------------------------------------------------------------------------------>
 

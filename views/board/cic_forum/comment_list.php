@@ -16,20 +16,24 @@
 		}
 		?>
 			<!-- s: layer-wrap userInfo -->
-			<div class="layer-wrap userInfo userInfo-<?php echo element('mem_id', $result); ?>">
-				<p>포럼 전적 <span><?php echo number_format(element('mem_forum_win', $result)); ?>승<?php echo number_format(element('mem_forum_lose', $result)); ?>패</span></p>
-				<a href="" class="popup_menuu" style="color:#065fda;;" data-id="<?php echo element('mem_id', $result); ?>">작성 글 보기</a>
-			</div>
 			<!-- e: layer-wrap userInfo -->
 
 			<div class="<?php echo $_classname; ?>">
 				<div class="info">
-					<a href="javascript:void(0);" class="nickname" data-id="<?php echo element('mem_id', $result); ?>">
-						<p class="ico"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', $result)), 35, 35); ?>"
-								alt=""></p>
-						<p class="txt"><?php echo element('cmt_nickname', $result); ?></p>
-					</a>
-					<!-- <div class="vp-point">
+					<p class="ico"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', $result)), 35, 35); ?>"
+					alt=""></p>
+					<div class="tooltip nickname popup_menuu" data-id="<?php echo element('mem_id', $result); ?>">
+						<p class="txt" style="margin-left:50px;">
+							<?php echo $this->cbconfig->get_device_view_type() != 'mobile' ? element('cmt_nickname', $result) : mb_strlen(element('cmt_nickname', $result)) < 5 ? element('cmt_nickname', $result) : mb_substr(element('cmt_nickname', $result),0,5)."..."; ?>
+							<span class="tooltiptext" >
+								포럼 전적 <br><?php echo number_format(element('mem_forum_win', $result)); ?>승<?php echo number_format(element('mem_forum_lose', $result)); ?>패
+								<br><a href="javascript:void(0);" class="layer_link" style="padding:5px; color:#1e5fc9;">
+									작성 글 보기
+								</a>
+							</span>
+						</p>
+					</div>
+					<div class="vp-point">
 						<ul>
 							<li>
 								<p class="up" data-contenttype="comment" data-cmtidx="<?php echo element('cmt_id', $result); ?>" style="cursor:pointer;"><?php echo element('cmt_like_point', $result); ?></p>
@@ -39,7 +43,7 @@
 							</li>
 						</ul>
 
-					</div> -->
+					</div>
 					
 				</div>
 				<div class="vtxt" comment-data="<?php echo element('cmt_id', $result); ?>">
@@ -62,7 +66,7 @@
 						</li>
 						<?php } ?>
 						<li><a href="javascript:;" class="cmmt-btn" onClick="comment_box('<?php echo element('cmt_id', $result); ?>', 'c'); return false;"><span>답글</span></a></li>
-						<?php if (element('use_comment_blame', element('board', $view)) && ( ! element('comment_blame_blind_count', element('board', $view)) OR element('cmt_blame', $result) < element('comment_blame_blind_count', element('board', $view)))) { ?>
+						<?php if (element('use_comment_blame', element('board', $view)) && ( ! element('comment_blame_blind_count', element('board', $view)) OR element('cmt_blame', $result) < element('comment_blame_blind_count', element('board', $view))) && !($this->member->is_member() === element('mem_id', $result))) { ?>
 							<li><a href="javascript:;" id="cmt-btn-blame" onClick="comment_blame('<?php echo element('cmt_id', $result); ?>', 'comment-blame-<?php echo element('cmt_id', $result); ?>');" title="신고하기"><i class="fa fa-bell fa-xs"></i>신고 <span class="comment-blame-<?php echo element('cmt_id', $result); ?>"><?php echo element('cmt_blame', $result) ? '+' . number_format(element('cmt_blame', $result)) : ''; ?></span></a></li>
 						<?php } ?>
 					</ul>
@@ -139,7 +143,7 @@
             if( divLeft < 0 ) divLeft = 0;
             if( divTop < 0 ) divTop = 0;
 			var type =  getParameter("type");
-
+			$('.layer_link').prop('href', `<?php echo base_url('board/forum').'?type='?>${type}&sfield=mem_id&skeyword=${$(this).attr('data-id')}`);
 			$('.popup_menuu').prop('href', `<?php echo base_url('board/forum').'?type='?>${type}&sfield=mem_id&skeyword=${$(this).attr('data-id')}`);
             $('.popupLayer').css({
                 "top": divTop,
@@ -307,3 +311,89 @@
 
 	
 </script> -->
+
+<style>
+	.tooltip {
+    position: relative;
+    display: inline-block;
+    /* If you want dots under the hoverable text */
+}
+
+
+/* Tooltip text */
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 100px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px #fccb17;
+    color: black;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 9999;
+    bottom: -200%;
+    left: 80%;
+    margin-left: -60px;
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+    height: 60px;
+    line-height: 20px;
+}
+
+
+/* Tooltip arrow */
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: -15%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #fccb17 transparent;
+    border-collapse: solid 2px #fccb17;
+	height: 0px;
+}
+
+
+/* Show the tooltip text when you mouse over the tooltip container */
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+.cmmt-wrap .cmmt .list .info .ico img {
+    border: 0px;
+    vertical-align: middle;
+    position: absolute;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 100px;
+        background-color: rgb(255, 255, 255);
+        border: solid 1px #fccb17;
+        color: black;
+        text-align: center;
+        padding: 5px 0;
+        border-radius: 6px;
+        /* Position the tooltip text */
+        position: absolute;
+        z-index: 9999;
+        bottom: -300% !important;
+        left: 80%;
+        margin-left: -60px;
+        /* Fade in tooltip */
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+}
+</style>

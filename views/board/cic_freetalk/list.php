@@ -117,9 +117,26 @@
                             <td>
                                 <div class="my-info">
                                     <p class="pimg">
-                                        <img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 140, 140)?>"alt="">
+                                        <img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 140, 140)?>"alt=""<?php echo element('mlc_title', $result); ?>"">
                                     </p>
-                                    <p class="rtxt"><a class="popup_menuu" search_id="<?php echo html_escape(element('mem_id', $result)); ?>"><?php echo element('post_nickname', $result); ?></a></p>
+                                    <div class="tooltip popup_menuu" search_id="<?php echo html_escape(element('mem_id', $result)); ?>">
+                                        <p class="rtxt">
+                                            <?php echo element('post_nickname', $result); ?>
+                                            <span class="tooltiptext" >
+                                                <?php if(number_format(element('mlc_level',$result) > 30)){
+                                                    echo '관리자';
+                                                }else{ ?>
+                                                    <b>레벨 <?php echo element('mlc_level',$result) ?> 
+                                                    <?php echo element('mlc_title',$result); ?></b>
+                                                   <?php 
+                                                   }
+                                                    ?>
+                                                <br><b><a href="javascript:void(0);" class="layer_link" style="padding:5px; color:#1e5fc9;"> 
+                                                작성 글 보기
+                                                </a></b>
+                                            </span>
+                                        </div>
+                                    </p>
                                 </div>
                             </td>
                             <td class="l notice"><a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>"><span
@@ -136,20 +153,35 @@
                     }
                     if (element('list', element('data', element('list', $view)))) {
                         foreach (element('list', element('data', element('list', $view))) as $result) {
-                            // print_r(element('post_url', $result));
+                            // print_r($this->db->last_query());
                             // exit;
                     ?>
                         <tr>
                             <td>
                                 <div class="my-info">
                                     <p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', $result), 140, 140); ?>"
-                                            alt="<?php echo element('mlc_title', $result); ?>"></p>
-                                    <p class="rtxt"><a class="popup_menuu" search_id="<?php echo html_escape(element('mem_id', $result)); ?>"><?php echo html_escape(element('post_nickname', $result)); ?></a></p>
-                                </div>
+                                        alt="<?php echo element('mlc_title', $result); ?>"></p>
+                                        <div class="tooltip popup_menuu" search_id="<?php echo html_escape(element('mem_id', $result)); ?>">
+                                            <p class="rtxt">
+                                            <?php echo element('post_nickname', $result); ?>
+                                            <span class="tooltiptext" >
+                                                <?php if(number_format(element('mlc_level',$result) > 30)){
+                                                    echo '관리자';
+                                                }else{?>
+                                                    <b>레벨 <?php echo element('mlc_level',$result) ?> 
+                                                    <?php echo element('mlc_title',$result); ?></b>
+                                                    <?php } ?>
+                                                <br><b><a href="javascript:void(0);" class="layer_link" style="padding:5px; color:#1e5fc9;"> 
+                                                작성 글 보기
+                                                </a></b>
+                                            </span>
+                                        </p>
+                                    </div>
                             </td>
                             <td class="l file">
-                                <a href="<?php echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>" style="padding-right:5px; max-width:80%;"><?php echo html_escape(element('title', $result)); ?>
+                                <a href="<?php echo explode('?',element('post_url', $result))[0];//echo element('post_url', $result); ?>" title="<?php echo html_escape(element('title', $result)); ?>" style="padding-right:5px; max-width:80%;"><?php echo html_escape(element('title', $result)); ?>
                                 </a>
+                                <span style="color:#1e5fc9;">
                                     <?php if(element('post_comment_count', $result) != 0) {?>
                                         (<?php echo element('post_comment_count', $result); ?>)
                                     <?php } ?>
@@ -157,6 +189,7 @@
                                     <?php if(strpos(element('post_content', $result),'<img') !== false){?>
                                         <img src="<?php echo base_url('assets/images/list-img.png'); ?>">
                                     <?php } ?>
+                                </span>
                             </td>
                             <td>
                                 <?php if(number_format(element('post_like_point', $result)-element('post_dislike_point', $result)) >= 0){ ?>
@@ -214,11 +247,8 @@
     </div>
     
     <!-- 작성 글 보기-->
-    <div class="popupLayer" style="display:none; z-index:1200">
-	<a href="" class="layer_link"> 작성 글 보기</a>
-    </div>
     <script>
-
+    var _is_hover = true;
     $(function(){
         /* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
         $('.popup_menuu').click(function(e)
@@ -238,28 +268,70 @@
             if( divTop < 0 ) divTop = 0;
             
             $('.layer_link').prop('href', `<?php echo base_url('board/freetalk').'?sfield=mem_id&skeyword='?>${$(this).attr('search_id')}`);
+            $('#gksghdls').html($(this).attr('search_id'));
             $('.popupLayer').css({
                 "top": divTop,
                 "left": divLeft,
                 "display" : "block"
             }).show();
         });
+        $('.popup_menuu').mouseover(function(e)
+        {
+            if(_is_hover){
+                var sWidth = window.innerWidth;
+                var sHeight = window.innerHeight;
+
+                var oWidth = $('.popupLayer').width();
+                var oHeight = $('.popupLayer').height();
+
+                // 레이어가 나타날 위치를 셋팅한다.
+                // var divLeft = e.clientX + 10;
+                // var divTop = e.clientY + 5;
+                var divLeft = e.clientX + 2;
+                var divTop = e.clientY + 2;
+
+                // 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+                if( divLeft < 0 ) divLeft = 0;
+                if( divTop < 0 ) divTop = 0;
+                
+                $('.layer_link').prop('href', `<?php echo base_url('board/freetalk').'?sfield=mem_id&skeyword='?>${$(this).attr('search_id')}`);
+                $('.popupLayer').css({
+                    "top": divTop,
+                    "left": divLeft,
+                    "display" : "block"
+                }).show();
+                _is_hover = false;
+            }
+        });
+        // $('.popup_menuu').mouseout(function(e)
+        // {
+        //     $('.popupLayer').css('display','none');
+        //     _is_hover = true;
+        // });
     });
     $(document).mouseup(function (e){
         var container = $('.popupLayer');
         if( container.has(e.target).length === 0){
         container.css('display','none');
+        _is_hover = true;
         }
     });
     $(window).on("wheel", function (event){
         $('.popupLayer').css('display','none');
+        _is_hover = true;
     });
     $(window).on("scrollstart",function(){
         $('.popupLayer').css('display','none');
+        _is_hover = true;
     });
     $(document).on("scrollstart",function(){
         $('.popupLayer').css('display','none');
+        _is_hover = true;
     });
     
     </script>
 </div>
+
+<style>
+    
+</style>

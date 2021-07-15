@@ -1,5 +1,3 @@
-
-
 <div class="ov" id="comment_write_box">
 	<?php
 	$attributes = array('name' => 'fcomment', 'id' => 'fcomment');
@@ -8,7 +6,7 @@
 		<input type="hidden" name="mode" id="mode" value="c" />
 		<input type="hidden" name="post_id" value="<?php echo element('post_id', element('post', $view)); ?>" />
 		<input type="hidden" name="cmt_id" value="" id="cmt_id" />
-		<input type="hidden" name="cmt_page" value="" id="cmt_page" />
+		<input type="hidden" name="cmt_page" value="" id="cmt_page" class="cmt_page"/>
 		<textarea class="form-control" name="cmt_content" id="cmt_content" accesskey="c" placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 답글 작성시 타인에 대한 배려와 책임을 담아주세요."<?php if ( ! element('can_comment_write', element('comment', $view))) {echo 'onClick="alert(\'' . html_escape(element('can_comment_write_message', element('comment', $view))) . '\');return false;"';} ?>><?php echo set_value('cmt_content', element('cmt_content', element('comment', $view))); ?></textarea>
 		<div class="btns">
 			<button type="button" class="write-btn" id="cmt_btn_submit"onClick="<?php if ( ! element('can_comment_write', element('comment', $view))) {echo 'alert(\'' . html_escape(element('can_comment_write_message', element('comment', $view))) . '\');return false;"';} else { ?>add_comment(this.form, '<?php echo element('post_id', element('post', $view)); ?>');<?php } ?> "><span>댓글등록</span></a>
@@ -35,7 +33,7 @@ $(function() {
 
 <script type="text/javascript">
 $(document).ready(function($) {
-	view_comment('viewcomment', '<?php echo element('post_id', element('post', $view)); ?>', '', '');
+	view_comment('viewcomment', '<?php echo element('post_id', element('post', $view)); ?>', <?php echo ($this->input->get('page') ?  $this->input->get('page') : '1') ?>, '');
 });
 </script>
 
@@ -67,7 +65,7 @@ $(function() {
 			recaptcha: '',
 			captcha_key: '자동등록방지용 코드가 올바르지 않습니다.'
 		}
-	});
+		});
 });
 //]]>
 </script>

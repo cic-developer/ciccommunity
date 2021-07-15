@@ -27,7 +27,7 @@ class Point extends CI_Controller
 	/**
 	 * 포인트를 추가합니다
 	 */
-	public function insert_point($mem_id = 0, $point = 0, $content = '', $poi_type = '', $poi_related_id = '', $poi_action = '')
+	public function insert_point($mem_id = 0, $point = 0, $content = '', $poi_type = '', $poi_related_id = '', $poi_action = '', $post_id = '')
 	{
 		// echo $mem_id. " / ".$point. " / ". $content. " / ". $poi_type. " / ".$poi_related_id. " / ".$poi_action;
 		// 포인트 사용을 하지 않는다면 return
@@ -86,6 +86,7 @@ class Point extends CI_Controller
 			'poi_type' => $poi_type,
 			'poi_related_id' => $poi_related_id,
 			'poi_action' => $poi_action,
+			'post_id' => $post_id
 		);
 		$this->CI->Point_model->insert($insertdata);
 
@@ -104,7 +105,7 @@ class Point extends CI_Controller
 	/**
 	 * vp를 추가합니다
 	 */
-	public function insert_vp($mem_id = 0, $point = 0, $content = '', $poi_type = '', $poi_related_id = '', $poi_action = '')
+	public function insert_vp($mem_id = 0, $point = 0, $content = '', $poi_type = '', $poi_related_id = '', $poi_action = '', $post_id = '')
 	{
 		// 포인트 사용을 하지 않는다면 return
 		// if ( ! $this->CI->cbconfig->item('use_point')) {
@@ -162,6 +163,7 @@ class Point extends CI_Controller
 			'vp_type' => $poi_type,
 			'vp_related_id' => $poi_related_id,
 			'vp_action' => $poi_action,
+			'post_id' => $post_id
 		);
 		$this->CI->CIC_vp_model->insert($insertdata);
 
@@ -178,7 +180,7 @@ class Point extends CI_Controller
 		/**
 	 * 포인트를 추가합니다
 	 */
-	public function insert_cp($mem_id = 0, $point = 0, $content = '', $poi_type = '', $poi_related_id = '', $poi_action = '')
+	public function insert_cp($mem_id = 0, $point = 0, $content = '', $poi_type = '', $poi_related_id = '', $poi_action = '', $post_id = '')
 	{
 		// 포인트 사용을 하지 않는다면 return
 		// if ( ! $this->CI->cbconfig->item('use_point')) {
@@ -236,6 +238,7 @@ class Point extends CI_Controller
 			'cp_type' => $poi_type,
 			'cp_related_id' => $poi_related_id,
 			'cp_action' => $poi_action,
+			'post_id' => $post_id
 		);
 		
 		$this->CI->CIC_cp_model->insert($insertdata);

@@ -105,6 +105,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     right: 15px;
     top: 10px;
 }
+.modal-footer{
+	display : flex;
+	flex-direction : column;
+	align-items: flex-end;
+	padding-bottom: 10px;
+}
 </style>
 
 <!-- 모달 팝업 -->
@@ -132,18 +138,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 			<div style="margin:20px 0 10px 0;border-bottom: 1px solid rgba(0, 0, 0, 0.2);"></div>
 			<div class="modal-footer">
-					<div class="b-close btn-group">
+				<div class="b-close btn-group">
 					☑ 모두 확인했고 내용에 동의합니다
-					</div>
+				</div>
 			</div>
+			
+			<p align="right" style="font-size:12px;"><input type="checkbox" name="close_week" id="close_week" style="vertical-align: middle;"> 7일간 보지 않기</p>
 	</div>
 </div>
 
 
+<script> 
+var box_check;
 
+$(document).ready(function() { 
+	$(".b-close").on('click', function() {
+		if(box_check){
+			setCookie("close_weeks", "check", "7");
+		}
+	});
+	$("input:checkbox").on('click', function() { 
+		if ( $(this).prop('checked') ) { 
+			box_check = true;
+		} else{
+			box_check = false;
+		}
+	}); 
+});
+</script>
 
 <script>
 $( document ).ready(function() {
+	let checkCookie = getCookie("close_weeks");
+	if(!checkCookie){
 	$('#element_to_pop_up').bPopup({
 		easing: 'easeOutBack', //uses jQuery easing plugin
     speed: 1500,
@@ -152,11 +179,28 @@ $( document ).ready(function() {
     opacity: 0.6,
     positionStyle: 'fixed'
 	});
+	};
 });
+
+
+
 
 function x_modal(){
 	history.back();
 }
+
+// 쿠키 설정 함수(modalWarning)
+var setCookie = function(name, value, exp) {
+var date = new Date();
+date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+};
+
+// 쿠키 가져오기 함수(modalWarning)
+var getCookie = function(name) {
+var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+return value ? value[2] : null;
+};
 </script>
 
 

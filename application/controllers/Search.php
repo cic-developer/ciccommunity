@@ -64,13 +64,16 @@ class Search extends CB_Controller
 			$type_word = 'WRITER';
 		} else if($type == 'news'){
 			$type_word = '뉴스';
+		} else if($type == 'forum'){
+			$type_word = '포럼';
 		} else {
 			$type_word = '통합검색';
 		}
-		$view['view']['is_all'] = $is_all = !in_array($type, array('free','writer','news'));
+		$view['view']['is_all'] = $is_all = !in_array($type, array('free','writer','news', 'forum'));
 		$view['view']['is_free'] = $is_free = ($type == 'free');
 		$view['view']['is_writer'] = $is_writer = ($type == 'writer');
 		$view['view']['is_news'] = $is_news = ($type == 'news');
+		$view['view']['is_forum'] = $is_forum = ($type == 'forum');
 		$view['view']['type'] = $type;
 		$view['view']['type_word'] = $type_word;
 
@@ -89,7 +92,8 @@ class Search extends CB_Controller
 		$view['view']['sfield_word'] = $sfield_word;
 
 		if ($sfield === 'post_both') {
-			$sfield = array('post_title', 'post_content', 'post_nickname');
+			// $sfield = array('post_title', 'post_content', 'post_nickname');
+			$sfield = array('post_title', 'post_content', );
 		}
 		
 		if($findex_get == 'view'){
@@ -251,6 +255,44 @@ class Search extends CB_Controller
 				}
 			}
 		}
+	//통합검색 or Forum 검색일 경우 Forum 정보 불러오기
+		if($is_all || $is_forum){
+			$this->load->model('CIC_forum_info_model');
+			$board_id = 3;
+			
+			//문제시 및
+			$checktime = cdate('Y-m-d H:i:s', ctimestamp());
+			$where = Array();
+			$where['cic_forum_info.frm_close_datetime >='] = $checktime;
+			
+			
+			$forum_result = $this->Post_model
+				->get_search_list($per_page, $offset, $where, $like, $board_id, $findex, $sfield, $skeyword, $sop);
+			
+			$list_num = $forum_result['total_rows'] - ($page - 1) * $per_page;
+			if (element('list', $forum_result)) {
+				foreach (element('list', $forum_result) as $key => $val) {
+					$imagewhere = array(
+						'pst_id' => element('post_id', $val),
+					);
+					
+					$images =  $this->CIC_forum_info_model->get_one('', '', $imagewhere, '', '', 'pfi_id', 'ASC');
+					$forum_result['list'][$key]['images'] = $images;
+					$forum_result['list'][$key]['thumb_url'] = thumb_url('post', element('pfi_filename', $images), 50, 40);
+					$forum_result['list'][$key]['post_url'] = post_url(element('brd_key', $val), element('post_id', $val));
+					$forum_result['list'][$key]['display_name'] = display_username(
+						element('post_userid', $val),
+						element('post_nickname', $val),
+						element('mem_icon', $val),
+						'Y'
+					);
+					
+					$forum_result['list'][$key]['display_datetime'] = display_datetime(element('post_datetime', $val), 'user', 'Y-m-d H:i');
+					$forum_result['list'][$key]['content'] = cut_str(strip_tags(element('post_content', $val)),200);
+					$forum_result['list'][$key]['is_mobile'] = (element('post_device', $val) === 'mobile') ? true : false;
+				}
+			}
+		}
 
 		//통합검색 or 뉴스검색일 경우 뉴스 정보 불러오기
 		$news_result = array();
@@ -284,10 +326,12 @@ class Search extends CB_Controller
 		$free_row = $is_all || $is_free ? (int) $free_result['board_rows']['1'] : 0; // 자유게시판 검색 ROW 
 		$writer_row = $is_all || $is_writer ? (int) $writer_result['board_rows']['2'] : 0; // WRITER 개시판 검색 Row
 		$news_row = $is_all || $is_news ? (int) $news_result['total_rows'] : 0; // WRITER 개시판 검색 Row
+		$forum_row = $is_all || $is_forum ? (int) $forum_result['board_rows']['3'] : 0; // WRITER 개시판 검색 Row
 
 		$view['view']['data'] = $result;
 		$view['view']['free_data'] = $free_result;
 		$view['view']['writer_data'] = $writer_result;
+		$view['view']['forum_data'] = $forum_result;
 		$view['view']['news_data'] = $news_result;
 		$view['view']['boardlist'] = $boardlist;
 		$view['view']['grouplist'] = $grouplist;

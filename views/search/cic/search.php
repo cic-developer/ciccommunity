@@ -15,6 +15,7 @@
 						<li class="<?php echo element('is_free', $view) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_type" data-value="free"><span>자유게시판</span></a></li>
 						<li class="<?php echo element('is_writer', $view) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_type" data-value="writer"><span>WRITER</span></a></li>
 						<li class="<?php echo element('is_news', $view) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_type" data-value="news"><span>뉴스</span></a></li>
+						<li class="<?php echo element('is_forum', $view) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_type" data-value="forum"><span>포럼</span></a></li>
 					</ul>		
 				</div>
 				<div class="field search">
@@ -37,7 +38,7 @@
 							<li class="<?php echo !in_array(element('sfield', $view), array('post_title','post_content','post_nickname')) ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_both"><span>전체</span></a></li>
 							<li class="<?php echo element('sfield', $view) == 'post_title' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_title"><span>제목</span></a></li>
 							<li class="<?php echo element('sfield', $view) == 'post_content' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_content"><span>내용</span></a></li>
-							<li class="<?php echo element('sfield', $view) == 'post_nickname' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_nickname"><span>작성자</span></a></li>
+							<!-- <li class="<?php //echo element('sfield', $view) == 'post_nickname' ? 'active' : ''; ?>"><a href="javascript:void(0);" class="li_sfield" data-value="post_nickname"><span>작성자</span></a></li> -->
 						</ul>
 					</div>
 					<div class="sel-box c03">
@@ -310,6 +311,60 @@
 				<?php
 				}
 				?>
+
+				<?php
+				if(element('is_all', $view) || element('is_forum', $view)){
+				?>
+				<!-- NEWS 시작 -->
+				<div class="tits">
+					<h3>포럼</h3>
+					<?php
+					if(element('is_all', $view)){
+					?>
+					<a href="javascript:void(0);" class="more" data-type="forum"><span>more</span></a>
+					<?php 
+					}
+					?>
+				</div>
+				<div class="list vimg vp">
+					<ul>
+						<?php
+						if (element('list', element('forum_data', $view))) {
+							foreach (element('list', element('forum_data', $view)) as $result) {
+								$image_url = element('frm_image',element('images', $result)) ? base_url('uploads/forum_image/').html_escape(element('frm_image',element('images', $result))) :base_url('assets/images/news-img02.png');
+						?>
+						<li>
+							<a href="<?php echo site_url('/post/'.element('post_id', $result)); ?>" target="_blank">
+								<div class="img"><img src="<?php echo html_escape($image_url) ?>" alt=""></div>
+								
+								<div class="txt">
+									<div class="vc">
+										<p class="btxt"><?php echo html_escape(element('post_title', $result)); ?></p>	
+										<p class="stxt"><?php echo html_escape(cut_str(str_replace("&nbsp;"," ",strip_tags(element('post_content', $result))), 60)); ?></p>
+										<p class="ctxt">
+											<span><?php echo html_escape(element('post_nickname', $result)); ?></span>
+											<span><?php echo display_datetime(element('post_datetime', $result)); ?></span>
+											<span>조회 <?php echo number_format(element('post_hit', $result)); ?></span>
+										</p>
+									</div>
+								</div>
+							</a>
+						</li>
+						<?php
+							}
+						} else {
+						?>
+							<li class="nopost" style="text-align: center">게시물이 없습니다</li>
+						<?php	
+						}
+						?>
+					</ul>
+				</div>
+				<!-- NEWS 끝 -->
+				<?php
+				}
+				?>
+				<div class="gap75"></div>
 
 				<?php
 				if(element('is_all', $view) || element('is_news', $view)){

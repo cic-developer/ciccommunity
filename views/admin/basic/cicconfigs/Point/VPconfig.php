@@ -35,7 +35,7 @@
 		<?php } ?>
 
 			<div class="form-group">
-				<label class="col-sm-3 control-label">추천/비추천 최대최소 입력 포인트<br/>(게시글 추천/비추천 시 입력할 수 있는 VP)</label>
+				<label class="col-sm-3 control-label">자유 게시판 추천/비추천 최대최소 입력 포인트<br/>(게시글 추천/비추천 시 입력할 수 있는 VP)</label>
 				<div class="col-sm-8">
 					최소 입력 VP - 
 					<label for="like_min_vp" class="control-label">
@@ -50,7 +50,7 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-3 control-label">댓글 추천/비추천 최대최소 입력 포인트<br/>(댓글 추천/비추천 시 입력할 수 있는 VP)</label>
+				<label class="col-sm-3 control-label">자유 게시판 댓글 추천/비추천 최대최소 입력 포인트<br/>(댓글 추천/비추천 시 입력할 수 있는 VP)</label>
 				<div class="col-sm-8">
 					최소 입력 VP - 
 					<label for="like_comment_min_vp" class="control-label">
@@ -60,6 +60,51 @@
 					최대 입력 VP - <?php echo element('cfg', $view)?>
 					<label for="like_comment_max_vp" class="control-label">
 						<input type="number" id="like_comment_max_vp" value="<?php echo element('cfg_value',element('like_comment_max_vp', $view))?>" name="like_comment_max_vp"/>
+					</label>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">CIC WRITER 추천/비추천 최대최소 입력 포인트<br/>(게시글 추천/비추천 시 입력할 수 있는 VP)</label>
+				<div class="col-sm-8">
+					최소 입력 VP - 
+					<label for="writer_like_min_vp" class="control-label">
+						<input type="number" id="writer_like_min_vp" value="<?php echo element('cfg_value',element('writer_like_min_vp', $view))?>" name="writer_like_min_vp"/>
+					</label>
+
+					최대 입력 VP - <?php echo element('cfg', $view)?>
+					<label for="writer_like_max_vp" class="control-label">
+						<input type="number" id="writer_like_max_vp" value="<?php echo element('cfg_value',element('writer_like_max_vp', $view))?>" name="writer_like_max_vp"/>
+					</label>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">CIC WRITER 댓글 추천/비추천 최대최소 입력 포인트<br/>(댓글 추천/비추천 시 입력할 수 있는 VP)</label>
+				<div class="col-sm-8">
+					최소 입력 VP - 
+					<label for="like_comment_min_vp" class="control-label">
+						<input type="number" id="writer_like_comment_min_vp" value="<?php echo element('cfg_value',element('writer_like_comment_min_vp', $view))?>" name="writer_like_comment_min_vp"/>
+					</label>
+
+					최대 입력 VP - <?php echo element('cfg', $view)?>
+					<label for="writer_like_comment_max_vp" class="control-label">
+						<input type="number" id="writer_like_comment_max_vp" value="<?php echo element('cfg_value',element('writer_like_comment_max_vp', $view))?>" name="writer_like_comment_max_vp"/>
+					</label>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">포럼 댓글 추천/비추천 최대최소 입력 포인트<br/>(댓글 추천/비추천 시 입력할 수 있는 VP)</label>
+				<div class="col-sm-8">
+					최소 입력 VP - 
+					<label for="forum_comment_min_vp" class="control-label">
+						<input type="number" id="forum_like_comment_min_vp" value="<?php echo element('cfg_value',element('forum_like_comment_min_vp', $view))?>" name="forum_like_comment_min_vp"/>
+					</label>
+
+					최대 입력 VP - <?php echo element('cfg', $view)?>
+					<label for="forum_like_comment_max_vp" class="control-label">
+						<input type="number" id="forum_like_comment_max_vp" value="<?php echo element('cfg_value',element('forum_like_comment_max_vp', $view))?>" name="forum_like_comment_max_vp"/>
 					</label>
 				</div>
 			</div>

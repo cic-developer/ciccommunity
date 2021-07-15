@@ -200,7 +200,36 @@ class Postact extends CB_Controller
 
 	}
 
+	public function ajax_delete_userforum($post_id){
+		$post = $this->Post_model->get_one($post_id);
+		$board = $this->board->item_all(element('brd_id', $post));
+		$mem_id = (int) $this->member->item('mem_id');
+		$is_admin = $this->member->is_admin(
+			array(
+				'board_id' => element('brd_id', $board),
+				'group_id' => element('bgr_id', $board),
+			)
+		);
 
+		if (element('mem_id', $post)) {
+			if ($is_admin === false
+				AND $mem_id !== abs(element('mem_id', $post))) {
+				$result = array('message' => '회원님은 이 글을 삭제할 권한이 없습니다');
+				echo json_encode($result);
+				return;
+			}
+		}
+
+		if(element('brd_id', $post) == 6 && element('post_category', $post) == 2){
+			$this->Post_model->delete(element('post_id', $post));
+			$result = array('message' => '삭제되었습니다.');
+			echo json_encode($result);
+			return;
+		}
+
+		$result = array('message' => '올바르지 않은 접근입니다.');
+		echo json_encode($result);
+	}
 	/**
 	 * 목록에서 여러 게시물 선택삭제하기
 	 */
@@ -689,7 +718,8 @@ class Postact extends CB_Controller
 						element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
 						'point_use',
 						$post_id,
-						'포인트 사용'
+						'포인트 사용',
+						$post_id
 					);
 				break;
 
@@ -773,7 +803,8 @@ class Postact extends CB_Controller
 				element('board_name', $board) . ' ' . $post_id . $_text_ko. '받음',
 				$_text_en.' received',
 				$post_id,
-				$_text_ko.' 받음'
+				$_text_ko.' 받음',
+				$post_id
 			);
 		}
 
@@ -785,7 +816,8 @@ class Postact extends CB_Controller
 				element('board_name', $board) . ' ' . $post_id . $_text_ko,
 				$_text_en,
 				$post_id,
-				$_text_ko.' 함'
+				$_text_ko.' 함',
+				$post_id
 			);
 		}
 		
@@ -797,7 +829,8 @@ class Postact extends CB_Controller
 				element('board_name', $board) . ' ' . $post_id . $_text_ko. '받음',
 				$_text_en.' received',
 				$post_id,
-				$_text_ko.' 받음'
+				$_text_ko.' 받음',
+				$post_id
 			);
 		}
 		
@@ -809,7 +842,8 @@ class Postact extends CB_Controller
 				element('board_name', $board) . ' ' . $post_id . $_text_ko,
 				$_text_en,
 				$post_id,
-				$_text_ko.' 함'
+				$_text_ko.' 함',
+				$post_id
 			);
 		}
 
@@ -822,7 +856,8 @@ class Postact extends CB_Controller
 				element('board_name', $board) . ' ' . $post_id . $_text_ko. '받음',
 				$_text_en.' received',
 				$post_id,
-				$_text_ko.' 받음'
+				$_text_ko.' 받음',
+				$post_id
 			);
 		}
 
@@ -834,7 +869,8 @@ class Postact extends CB_Controller
 				element('board_name', $board) . ' ' . $post_id . $_text_ko,
 				$_text_en,
 				$post_id,
-				$_text_ko.' 함'
+				$_text_ko.' 함',
+				$post_id
 			);
 		}
 
@@ -898,7 +934,7 @@ class Postact extends CB_Controller
 	/**
 	 * 댓글 추천/비추천 하기
 	 */
-	public function comment_like($cmt_id = 0, $like_type = 0)
+	public function comment_like($cmt_id = 0, $like_type = 0, $post_id = 0)
 	{
 		$this->db->trans_start();
 		// 이벤트 라이브러리를 로딩합니다
@@ -1006,10 +1042,28 @@ class Postact extends CB_Controller
 			)
 		);
 
+		switch(element('brd_id', $post)){
+			case 1:
+				$min_like_vp = 'like_comment_min_vp';
+				$max_like_vp = 'like_comment_max_vp';
+			break;
+			case 2:
+				$min_like_vp = 'writer_like_comment_min_vp';
+				$max_like_vp = 'writer_like_comment_max_vp';
+			break;
+			case 3:
+				$min_like_vp = 'forum_like_comment_min_vp';
+				$max_like_vp = 'forum_like_comment_max_vp';
+			break;
+			default:
+				$result = array('error' => '올바르지 않은 댓글 추천 방식입니다.');
+				exit(json_encode($result));
+		}
+
 		//사용되어질 포인트 종류
 		$_defualt_using_point = $this->Config_model->get_one('','',"cfg_key = 'defualt_using_point'");
-		$like_min_vp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_comment_min_vp'"));
-		$like_max_vp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_comment_max_vp'"));
+		$like_min_vp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = '".$min_like_vp."'"));
+		$like_max_vp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = '".$max_like_vp."'"));
 		$like_min_cp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_comment_min_cp'"));
 		$like_max_cp = element('cfg_value',$this->Config_model->get_one('','',"cfg_key = 'like_comment_max_cp'"));
 
@@ -1037,7 +1091,8 @@ class Postact extends CB_Controller
 					element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
 					'point_use',
 					$cmt_id,
-					'포인트 사용'
+					'포인트 사용',
+					element('post_id', $comment)
 				);
 			break;
 
@@ -1068,7 +1123,8 @@ class Postact extends CB_Controller
 					element('board_name', $board) . ' ' . $usedPoint . '포인트사용',
 					'point_use',
 					$cmt_id,
-					'포인트 사용'
+					'포인트 사용',
+					element('post_id', $comment)
 				);
 			break;
 
@@ -1083,10 +1139,15 @@ class Postact extends CB_Controller
 				//자유 게시판인 경우
 				$_config_w_id = 10;
 				$_config_u_id = 12;
-			}else{
+			}else if(element('brd_id', $board) == 2){
 				//CIC Writer인 경우
 				$_config_w_id = 18;
 				$_config_u_id = 20;
+			}
+			else if(element('brd_id', $board) == 3){
+				//CIC forum인 경우
+				$_config_w_id = 22;
+				$_config_u_id = 24;
 			}
 			$_writerRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = ".$_config_w_id." AND vpc_enable = 1");
 			$_userRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = ".$_config_u_id." AND vpc_enable = 1");
@@ -1101,11 +1162,15 @@ class Postact extends CB_Controller
 				//자유 게시판인 경우
 				$_config_w_id = 11;
 				$_config_u_id = 13;
-			}else{
+			}else if(element('brd_id', $board) == 2){
 				//CIC Writer인 경우
 				$_config_w_id = 19;
 				$_config_u_id = 21;
+			}else if(element('brd_id', $board) == 3){
+				$_config_w_id = 23;
+				$_config_u_id = 25;
 			}
+
 			$_writerRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = ".$_config_w_id." AND vpc_enable = 1");
 			$_userRatio_vp = $this->CIC_vp_config_model->get_one('','',"vpc_id = ".$_config_u_id." AND vpc_enable = 1");
 			$_writerRatio_cp = $this->CIC_cp_config_model->get_one('','',"cpc_id = ".$_config_w_id." AND cpc_enable = 1");
@@ -1124,7 +1189,8 @@ class Postact extends CB_Controller
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
 				$_text_en.' received',
 				$cmt_id,
-				$_text_ko.' 받음'
+				$_text_ko.' 받음',
+				element('post_id', $comment)
 			);
 		}
 
@@ -1136,7 +1202,8 @@ class Postact extends CB_Controller
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
 				$_text_en,
 				$cmt_id,
-				$_text_ko.' 함'
+				$_text_ko.' 함',
+				element('post_id', $comment)
 			);
 		}
 		
@@ -1148,7 +1215,8 @@ class Postact extends CB_Controller
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
 				$_text_en.' receive',
 				$cmt_id,
-				$_text_ko.' 받음'
+				$_text_ko.' 받음',
+				element('post_id', $comment)
 			);
 		}
 		
@@ -1160,7 +1228,8 @@ class Postact extends CB_Controller
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
 				$_text_en,
 				$cmt_id,
-				$_text_ko.' 함'
+				$_text_ko.' 함',
+				element('post_id', $comment)
 			);
 		}
 
@@ -1173,7 +1242,8 @@ class Postact extends CB_Controller
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
 				$_text_en.' receive',
 				$cmt_id,
-				$_text_ko.' 받음'
+				$_text_ko.' 받음',
+				element('post_id', $comment)
 			);
 		}
 
@@ -1185,7 +1255,8 @@ class Postact extends CB_Controller
 				element('board_name', $board) . ' ' . $cmt_id . $_text_ko,
 				$_text_en.' receive',
 				$cmt_id,
-				$_text_ko.' 받음'
+				$_text_ko.' 받음',
+				element('post_id', $comment)
 			);
 		}
 
@@ -2262,7 +2333,7 @@ class Postact extends CB_Controller
 		if ($form_validation == false) {
 			$result = array(
 				'state' => '0',
-				'message' => '보유 cp가 부족합니다',
+				'message' => '보유 CP가 부족합니다',
 			);
 			exit(json_encode($result));
 		}else {
@@ -2380,7 +2451,7 @@ class Postact extends CB_Controller
 				 */
 				// insert cp -
 				// $this->point->insert_cp($mem_id, -$usePoint, '포럼배팅', 'post', $post_id, $this->member->item('mem_id') . '-' . uniqid('') );
-				$this->point->insert_cp($mem_id, -$usePoint, '포럼행사', 'post', $post_id, $this->member->item('mem_id') . '-' . uniqid('') );
+				$this->point->insert_cp($mem_id, -$usePoint, '포럼행사', 'post', $post_id, $this->member->item('mem_id') . '-' . uniqid(''), $post_id );
 
 				/**
 				 * 배팅
@@ -2391,6 +2462,7 @@ class Postact extends CB_Controller
 					'mem_id' => $mem_id,
 					'cfc_option' => $option,
 					'cfc_cp' => $usePoint,
+					'cfc_vote_date' => $checktime,
 				);
 				$this->load->model('CIC_forum_model');
 				$this->CIC_forum_model->insert($insertdata);
@@ -2565,7 +2637,7 @@ class Postact extends CB_Controller
 		if ($form_validation == false) {
 			$result = array(
 				'state' => '0',
-				'message' => '보유 cp가 부족합니다',
+				'message' => '보유 CP가 부족합니다',
 			);
 			exit(json_encode($result));
 		}else {
@@ -2676,7 +2748,7 @@ class Postact extends CB_Controller
 				if($mem_cp < $usePoint){
 					$result = array(
 						'state' => '0',
-						'message' => '보유 cp가 부족합니다',
+						'message' => '보유 CP가 부족합니다',
 					);
 					exit(json_encode($result));
 				}
@@ -2687,7 +2759,7 @@ class Postact extends CB_Controller
 				 */
 				// insert cp -
 				// $this->point->insert_cp($mem_id, -$usePoint, '추가포럼배팅', 'post', $post_id, $this->member->item('mem_id') . '-' . uniqid('') );
-				$this->point->insert_cp($mem_id, -$usePoint, '추가포럼행사', 'post', $post_id, $this->member->item('mem_id') . '-' . uniqid('') );
+				$this->point->insert_cp($mem_id, -$usePoint, '추가포럼행사', 'post', $post_id, $this->member->item('mem_id') . '-' . uniqid(''), $post_id );
 				
 				/**
 				 * 추가 배팅

@@ -137,8 +137,11 @@ class Member_model extends CB_Model
 
 	public function set_user_modify($primary_value = '', $arr)
 	{
-		
-		$result = $this->update($primary_value, $arr);
+		if($primary_value){
+			$result = $this->update($primary_value, $arr);
+		}else{
+			$result = false;
+		}
 
 		return $result;
 	}

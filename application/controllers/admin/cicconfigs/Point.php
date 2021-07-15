@@ -193,12 +193,42 @@ class Point extends CB_Controller
 			),
 			array(
 				'field' => 'like_min_vp',
-				'label' => '최소 입력 VP',
+				'label' => '자유게시판 최소 입력 VP',
 				'rules' => 'required|numeric'
 			),
 			array(
 				'field' => 'like_max_vp',
-				'label' => '최대 입력 VP',
+				'label' => '자유게시판 최대 입력 VP',
+				'rules' => 'required|numeric'
+			),
+			array(
+				'field' => 'like_comment_min_vp',
+				'label' => '자유게시판 댓글 최소 입력 VP',
+				'rules' => 'required|numeric'
+			),
+			array(
+				'field' => 'like_comment_max_vp',
+				'label' => '자유게시판 댓글 최대 입력 VP',
+				'rules' => 'required|numeric'
+			),
+			array(
+				'field' => 'writer_like_min_vp',
+				'label' => 'CIC WRITER 최소 입력 VP',
+				'rules' => 'required|numeric'
+			),
+			array(
+				'field' => 'writer_like_max_vp',
+				'label' => 'CIC WRITER 최대 입력 VP',
+				'rules' => 'required|numeric'
+			),
+			array(
+				'field' => 'writer_like_comment_min_vp',
+				'label' => 'CIC WRITER 댓글 최소 입력 VP',
+				'rules' => 'required|numeric'
+			),
+			array(
+				'field' => 'writer_like_comment_max_vp',
+				'label' => 'CIC WRITER 댓글 최대 입력 VP',
 				'rules' => 'required|numeric'
 			),
 		);
@@ -239,6 +269,12 @@ class Point extends CB_Controller
 			$this->Config_model->meta_update('like_max_vp', $_postData['like_max_vp']);
 			$this->Config_model->meta_update('like_comment_min_vp', $_postData['like_comment_min_vp']);
 			$this->Config_model->meta_update('like_comment_max_vp', $_postData['like_comment_max_vp']);
+			$this->Config_model->meta_update('writer_like_min_vp', $_postData['writer_like_min_vp']);
+			$this->Config_model->meta_update('writer_like_max_vp', $_postData['writer_like_max_vp']);
+			$this->Config_model->meta_update('writer_like_comment_min_vp', $_postData['writer_like_comment_min_vp']);
+			$this->Config_model->meta_update('writer_like_comment_max_vp', $_postData['writer_like_comment_max_vp']);
+			$this->Config_model->meta_update('forum_like_comment_min_vp', $_postData['forum_like_comment_min_vp']);
+			$this->Config_model->meta_update('forum_like_comment_max_vp', $_postData['forum_like_comment_max_vp']);
 			if(element('defualt_using_point',$_postData)){
 				$this->Config_model->meta_update('defualt_using_point', $_postData['defualt_using_point']);
 			}
@@ -255,6 +291,12 @@ class Point extends CB_Controller
 		$view['view']['like_max_vp'] = $this->Config_model->get_one('','',"cfg_key = 'like_max_vp'");
 		$view['view']['like_comment_min_vp'] = $this->Config_model->get_one('','',"cfg_key = 'like_comment_min_vp'");
 		$view['view']['like_comment_max_vp'] = $this->Config_model->get_one('','',"cfg_key = 'like_comment_max_vp'");
+		$view['view']['writer_like_min_vp'] = $this->Config_model->get_one('','',"cfg_key = 'writer_like_min_vp'");
+		$view['view']['writer_like_max_vp'] = $this->Config_model->get_one('','',"cfg_key = 'writer_like_max_vp'");
+		$view['view']['writer_like_comment_min_vp'] = $this->Config_model->get_one('','',"cfg_key = 'writer_like_comment_min_vp'");
+		$view['view']['writer_like_comment_max_vp'] = $this->Config_model->get_one('','',"cfg_key = 'writer_like_comment_max_vp'");
+		$view['view']['forum_like_comment_min_vp'] = $this->Config_model->get_one('','',"cfg_key = 'forum_like_comment_min_vp'");
+		$view['view']['forum_like_comment_max_vp'] = $this->Config_model->get_one('','',"cfg_key = 'forum_like_comment_max_vp'");
 		$view['view']['defualt_using_point'] = $this->Config_model->get_one('','',"cfg_key = 'defualt_using_point'"); 
 
 		// 이벤트가 존재하면 실행합니다

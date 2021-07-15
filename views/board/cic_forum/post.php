@@ -8,7 +8,7 @@
 				<div class="binfo">
 					<h4><span>포럼</span> 입니다.</h4>
 					<p>디지털 자산 관련 어떤 이슈가 주목 받을 때 혹은 커뮤니티 운영과 관련해 의사결정을 하는 투표를 진행 할 수 있습니다.</p>
-					<p>보유 포인트를 이용해 투표에 참여 가능하고 투표 결과에 따라 <span class="cblack b">순차적</span>으로 보상 포인트를 지급 받습니다.</p>
+					<p>보유 포인트를 이용해 투표에 참여 가능하고 투표 결과에 따라 <span class="cblack b">순차적</span>으로 <span class="cblack b">보상</span> 포인트를 지급 받습니다.</p>
 				</div>
 				<div class="gap30"></div>
 				<div class="upper r">
@@ -24,7 +24,17 @@
 								<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', element('post', $view))), 20, 20); ?>"
 										alt="<?php echo element('mlc_title', element('level', element('post', $view))); ?>">
 								</p>
-								<a class="popup_menuu2" search_id="<?php echo element('mem_id', element('post', $view)); ?>"><p class="rtxt"><?php echo element('post_nickname', element('post', $view)); ?></p></a>
+								<div class="tooltip2 popup_menuu2" search_id="<?php echo element('mem_id', element('post', $view)); ?>">
+									<p class="rtxt">
+										<?php echo $this->cbconfig->get_device_view_type() != 'mobile' ? element('post_nickname', element('post', $view)) : mb_strlen(element('post_nickname', element('post', $view))) < 5 ? element('post_nickname', element('post', $view)) : mb_substr(element('post_nickname', element('post', $view)),0,5)."..."; ?>
+									</p>
+									<span class="tooltiptext2">
+										<b>포럼 전적 <br><?php echo number_format(element('mem_forum_win', $forum))?>승<?php echo number_format(element('mem_forum_lose', $forum)); ?>패</b>
+										<br><b><a href="javascript:void(0);" class="layer_link2" style="padding:5px; color:#1e5fc9;"> 
+											작성 글 보기
+										</a></b>
+									</span>
+								</div>
 							</div>
 						</li>
 						<li>등록일 : <?php echo element('display_datetime', element('post', $view)); ?> </li>
@@ -116,7 +126,7 @@
 					<?php if(element('is_bat', $forum) == 1){ ?>
 						<p class="btxt">A. <?php echo element('extra_content', $view)[0]['output'] ?> <span>참여</span></p>
 					<?php }else if(element('is_bat', $forum) == 2) { ?>
-						<p class="btxt">A. <?php echo element('extra_content', $view)[1]['output'] ?> <span>참여</span></p>
+						<p class="btxt">B. <?php echo element('extra_content', $view)[1]['output'] ?> <span>참여</span></p>
 					<?php }else { ?>
 						<p class="btxt"><span>미참여</span></p>
 					<?php } ?>
@@ -141,7 +151,7 @@
 				<div class="recommand vp-point">
 					<?php if (element('use_post_like', element('board', $view))) { ?>
 						<div class="btns">
-							<a class="cmmt-like" href="javascript:;" id="btn-post-like" onClick="post_like_forum('<?php echo element('post_id', element('post', $view)); ?>', '1', 'post-like');" title="추천하기">좋아요<span class="post-like"></span><br /><i class="fa fa-thumbs-o-up fa-lg"></i></a>
+							<a class="cmmt-like" href="javascript:;" id="btn-post-like" onClick="post_like_forum('<?php echo element('post_id', element('post', $view)); ?>', '1', 'post-like');" title="추천하기">좋아요<span class="post-like"></span><br /><i class="fa fa-thumbs-o-up fa-lg" style="display:none;"></i></a>
 						</div>
 					<?php } ?>
 				</div>
@@ -159,7 +169,7 @@
 			?>
 
 			<?php if ( ! element('post_del', element('post', $view)) && element('use_blame', element('board', $view)) && ( ! element('blame_blind_count', element('board', $view)) OR element('post_blame', element('post', $view)) < element('blame_blind_count', element('board', $view)))) { ?>
-				<button style="position:relative; " type="button" class="bw-btn btn btn-black cmmt-singo" id="btn-blame" onClick="post_blame('<?php echo element('post_id', element('post', $view)); ?>', 'post-blame');">신고 <span class="post-blame"><?php echo element('post_blame', element('post', $view)) ? '+' . number_format(element('post_blame', element('post', $view))) : ''; ?></span></button>
+				<!-- <button style="position:relative; " type="button" class="bw-btn btn btn-black cmmt-singo" id="btn-blame" onClick="post_blame('<?php //echo element('post_id', element('post', $view)); ?>', 'post-blame');">신고 <span class="post-blame"><?php echo element('post_blame', element('post', $view)) ? '+' . number_format(element('post_blame', element('post', $view))) : ''; ?></span></button> -->
 			<?php } ?>
 			</div>
 		</div>
@@ -326,9 +336,14 @@
 					// title = title + max + min;
 					title = title + min + max;
 					const _point = prompt(title, 0);
-					
+					console.log(_point);
 					//취소버튼 누를시
 					if(_point === null){
+						return false;
+					}
+					
+					if(_point == '0'){
+						alert('최소 투표는 0.01부터 가능합니다.');
 						return false;
 					}
 					
@@ -357,7 +372,14 @@
 								location.reload();
 							}
 							if(data.state == 0){
-								alert(data.message);
+								if(data.message != '보유 CP가 부족합니다'){
+									alert(data.message);
+								}else{
+									let _conf = confirm(data.message + '\nCP를 충전하시겠습니까?');
+									_conf ? location.href = '<?php echo base_url('mypage/charge')?>': location.reload();
+									return;
+								}
+								
 								location.reload();
 							}
 						},
@@ -449,7 +471,13 @@
 					location.reload();
 				}
 				if(data.state == 0){
-					alert(data.message);
+					if(data.message != '보유 CP가 부족합니다'){
+						alert(data.message);
+					}else{
+						let _conf = confirm(data.message + '\nCP를 충전하시겠습니까?');
+						_conf ? location.href = '<?php echo base_url('mypage/charge')?>': location.reload();
+						return;
+					}
 					location.reload();
 				}
 			},
@@ -466,11 +494,11 @@
 	var istotal = $('.cmmt').find('.item').length;
 	var ischk = (istotal / 2) + 1
 	$('.cmmt').find('.item:nth-child(n+' + ischk + ')').addClass('vfm');
-
+	var _flag;
 	// 전적 확인
 	$(document).on('click','.nickname', function(){
+		_flag = true;
 		var id = $(this).data('id');
-
 		var isParent = $(this).closest('.info');
 		$(this).closest('.list').find('.item').removeClass('zdex')
 		$(this).closest('.item').addClass('zdex');
@@ -485,6 +513,34 @@
 			},
 			modalColor: 'transparent',
 			modal: true,
+		});
+
+	})
+	$(document).on('mouseover','.nickname', function(){
+		_flag = true;
+		var id = $(this).data('id');
+		
+		var isParent = $(this).closest('.info');
+		$(this).closest('.list').find('.item').removeClass('zdex')
+		$(this).closest('.item').addClass('zdex');
+		$('.layer-wrap.userInfo-'+id).bPopup({
+			closeClass: "userInfo-close",
+			speed: 0,
+			appendTo: isParent,
+			follow: [false, false],
+			position: [false, false],	
+			onClose: function () {
+				$('.cmmt').find('.item').removeClass('zdex');
+			},
+			modalColor: 'transparent',
+			modal: true,
+		});
+		
+		$('.layer-wrap.userInfo-'+id+'.active').mouseleave(function(e){
+			if(_flag){
+				$('.layer-wrap.userInfo-'+id).bPopup().close();
+				_flag=false;
+			}
 		});
 	})
 
@@ -599,9 +655,6 @@
 		return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	}
 </script>
-<div class="popupLayer2" style="display:none; z-index:1200;">
-    <a href="" class="layer_link2"> 작성 글 보기</a>
-</div>
 <script>
     $(function(){
         /* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
@@ -622,12 +675,70 @@
             if( divTop < 0 ) divTop = 0;
             
             $('.layer_link2').prop('href', `<?php echo base_url('board/forum').'/?type='.$this->input->get('type').'&sfield=mem_id&skeyword='?>${$(this).attr('search_id')}`);
-						//(element('type', $view) == 1 ? '?type=1' : '?type=2')
+			$('.popup_menuu2').prop('href', `<?php echo base_url('board/forum').'?type='?>${type}&sfield=mem_id&skeyword=${$(this).attr('data-id')}`);
+            $('.popupLayer2').css({
+                "top": divTop,
+                "left": divLeft,
+                "display" : "none"
+            }).show();
+        });
+		$('.popup_menuu2').mouseover(function(e)
+        {
+					var sWidth = window.innerWidth;
+            var sHeight = window.innerHeight;
+
+            var oWidth = $('.popupLayer').width();
+            var oHeight = $('.popupLayer').height();
+
+            // 레이어가 나타날 위치를 셋팅한다.
+            // var divLeft = e.clientX + 10;
+            // var divTop = e.clientY + 5;
+            var divLeft = e.clientX -5;
+            var divTop = e.clientY -5;
+
+            // 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+            if( divLeft < 0 ) divLeft = 0;
+            if( divTop < 0 ) divTop = 0;
+            
+            $('.layer_link2').prop('href', `<?php echo base_url('board/forum').'/?type='.$this->input->get('type').'&sfield=mem_id&skeyword='?>${$(this).attr('search_id')}`);
             $('.popupLayer2').css({
                 "top": divTop,
                 "left": divLeft,
                 "display" : "block"
             }).show();
+        });
+        $('.popupLayer2').mouseleave(function(e)
+        {
+            $('.popupLayer2').css('display','none');
+        });
+		$('.popup_menuu2').mouseover(function(e)
+        {
+					var sWidth = window.innerWidth;
+            var sHeight = window.innerHeight;
+
+            var oWidth = $('.popupLayer2').width();
+            var oHeight = $('.popupLayer2').height();
+
+            // 레이어가 나타날 위치를 셋팅한다.
+            // var divLeft = e.clientX + 10;
+            // var divTop = e.clientY + 5;
+            var divLeft = e.clientX -5;
+            var divTop = e.clientY -5;
+
+            // 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+            if( divLeft < 0 ) divLeft = 0;
+            if( divTop < 0 ) divTop = 0;
+            
+            $('.layer_link2').prop('href', `<?php echo base_url('board/forum').'/?type='.$this->input->get('type').'&sfield=mem_id&skeyword='?>${$(this).attr('search_id')}`);
+            $('.popupLayer2').css({
+                "top": divTop,
+                "left": divLeft,
+                "display" : "block"
+            }).show();
+        });
+        $('.popupLayer2').mouseleave(function(e)
+        {
+            $('.popupLayer2').css('display','none');
         });
     });
     $(document).mouseup(function (e){
@@ -639,4 +750,109 @@
     $(window).on("wheel", function (event){
         $('.popupLayer2').css('display','none');
     });
+
+	$(document).on('click', '.up', function(){
+		const content_type = $(this).attr('data-contenttype');
+		const content_idx =  $(this).attr('data-cmtidx');
+		console.log(content_type,content_idx);
+		update_vp(content_idx, content_type, 'up');
+	});
+	
+	$(document).on('click', '.down', function(){
+		const content_type = $(this).attr('data-contenttype');
+		const content_idx = $(this).attr('data-cmtidx');
+		update_vp(content_idx, content_type, 'down');
+	});
+
+	function update_vp(content_idx, content_type, like_type){
+		if(!is_member){
+			alert('로그인이 필요한 서비스입니다.');
+			return false;
+		}
+		const allowed_content_type = ['comment'];
+		const allowed_like_type = ['up', 'down'];
+
+		if(allowed_content_type.indexOf(content_type) == -1){
+			alert('비정상적인 시도입니다.1');
+			return false;
+		}
+		
+		if(!reg_num.test(content_idx)){
+			alert('비정상적인 시도입니다.2');
+			return false;
+		}
+
+		if(allowed_like_type.indexOf(like_type) == -1){
+			alert('비정상적인 시도입니다.3');
+			return false;
+		}
+
+		const title = 'VP를 '+ (like_type === 'up' ? 'UP' :'DOWN') + ' 합니다.\n'+`소유 VP는 ${mem_vp} 입니다.`;
+		const _point = prompt(title, 0);
+
+		//취소버튼 누를시
+		if(_point === null){
+			return false;
+		}
+
+		//숫자를 잘 입력했나 검증
+		if(!reg_num.test(_point)){
+			alert('숫자만 입력할 수 있습니다.');
+			return false;
+		}
+		$.ajax({
+			url: cb_url + '/postact/'+content_type+'_like/'+content_idx+'/'+(like_type === 'up' ? '1' :'2'),
+			type: 'get',
+			data: {
+				usePoint: Number(_point),
+			},
+			dataType: 'json',
+			async: false,
+			cache: false,
+			success: function(data) {
+				if(data.error !== undefined){
+					alert(data.error);
+				} else {
+					// alert('성공적으로 처리되었습니다.');
+
+					location.href = location.href.split('?')[0] + '?page='+ $('#comment_page').val();
+					
+				}
+			},
+			error: function(){
+				alert('에러가 발생했습니다.');
+			}
+		});
+		return true;
+	}
     </script>
+	<style>
+		.tooltip2 .tooltiptext2 {
+    visibility: hidden;
+    width: 100px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px #fccb17;
+    color: black;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 9999;
+    bottom: -310%;
+    left: 80%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    height: 60px;
+    line-height: 20px;
+}
+
+@media only screen and (max-width: 480px) {
+.poll-wrap .result .abr {
+	position: relative;
+    right: -35%;
+    top: 0px;
+    font-size: 0;
+}
+}
+	</style>

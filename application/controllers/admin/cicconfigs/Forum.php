@@ -92,13 +92,13 @@ class Forum extends CB_Controller
 				'field' => 'forum_bat_max',
 				// 'label' => '포럼 최대 배팅금액',
 				'label' => '포럼 최대 행사금액',
-				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[100]|callback__bat_max_decimal_check',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[1000]|callback__bat_max_decimal_check',
 			),
 			array(
 				'field' => 'forum_bat_min',
 				// 'label' => '포럼 최소 배팅금액',
 				'label' => '포럼 최소 행사금액',
-				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[100]|callback__bat_min_decimal_check',
+				'rules' => 'trim|required|greater_than_equal_to[0]|less_than_equal_to[1000]|callback__bat_min_decimal_check',
 			),
 		);
 		$this->form_validation->set_rules($config);
@@ -754,6 +754,7 @@ class Forum extends CB_Controller
 	// 마감된 포럼의 cp 포인트를 관리자가 분배하는 페이지
 	public function forum_repart($pst_id = 0)
 	{
+		$this->db->trans_start();
 		// 이벤트 라이브러리를 로딩합니다.
 		$eventname = 'event_admin_cicconfig_forum_repart';
 		$this->load->event($eventname);
@@ -774,7 +775,12 @@ class Forum extends CB_Controller
 
 		// get forum data && total cp, a cp, b cp
 		$getdata = array();
-		$getdata = $this->CIC_forum_model->get_one($pst_id);
+		$dead_line = $this->input->post('application_deadline');
+		if($dead_line){
+			$getdata = $this->CIC_forum_model->get_one_apply_deadline($pst_id, $dead_line);
+		}else{
+			$getdata = $this->CIC_forum_model->get_one($pst_id);
+		}
         
 		// 배분이 끝난 게시물 접근 제한
 		if($getdata['frm_repart_state'] == 1){
@@ -827,11 +833,6 @@ class Forum extends CB_Controller
 					'lable' => '작성자 보상 설정',
 					'rules' => 'required|trim|greater_than_equal_to[0]|less_than_equal_to[100]|callback__forum_commission_check',
 				),
-				// array(
-				// 	'field' => 'writer_reward',
-				// 	'lable' => '작성자 보상 설정',
-				// 	'rules' => 'trim|greater_than_equal_to[0]|less_than_equal_to['.$total_cp_vali.']|callback__writer_reward_check',
-				// ),
 				array(
 					'field' => 'win_option',
 					'lable' => '승리 진영 선택',
@@ -846,7 +847,6 @@ class Forum extends CB_Controller
 		 * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
 		 */
 		if ($this->form_validation->run() === false || ($this->input->post('writer_reward') == NULL && $this->input->post('prop_writer_reward') == NULL)) {
-			
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 
@@ -867,7 +867,6 @@ class Forum extends CB_Controller
 			$this->layout = element('layout_skin_file', element('layout', $view));
 			$this->view = element('view_skin_file', element('layout', $view));
 		}else {
-            
 			// 이벤트가 존재하면 실행합니다
 			$view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
             
@@ -920,7 +919,9 @@ class Forum extends CB_Controller
 				$writer_changed_cp = $writer_cp + $prop_writer_reward;
 				$writer_reward_sum = $prop_writer_reward;
 			}
-			$this->point->insert_cp($writer_id, $writer_reward_sum, '포럼 게시물 작성자', 'post', $pst_id,  $this->member->item('mem_id') . '-' . uniqid(''));
+
+			if($writer_reward_sum) $this->point->insert_cp($writer_id, $writer_reward_sum, '포럼 게시물 작성자', 'post', $pst_id,  $this->member->item('mem_id') . '-' . uniqid(''));
+			
 			/**
 			 * 투표자 보상 지급 시작
 			 */
@@ -928,7 +929,13 @@ class Forum extends CB_Controller
 			$where = array(
 				'pst_id' => $pst_id
 			);
-			$forum_bats = $this->CIC_forum_model->get_forum_bat($where);
+			
+			if($dead_line){
+				$forum_bats = $this->CIC_forum_model->get_forum_bat($where, '', $dead_line);
+			}else{
+				$forum_bats = $this->CIC_forum_model->get_forum_bat($where);
+			}
+			
             
 			// 실제 배분될 총 cp를 계산할 변수
 			$repart_real_cp = 0;
@@ -978,6 +985,33 @@ class Forum extends CB_Controller
 					}
 				}
 			}
+
+			//참여 마감 시간이 지켜지지 않은 참여에 대해 cp 되돌려주는 기능
+			$where = array(
+				'pst_id' => $pst_id
+			);
+			if($dead_line){
+				$forum_bats = $this->CIC_forum_model->get_forum_bat($where, '', $dead_line, '>');
+				if ($forum_bats && is_array($forum_bats)) {
+					foreach ($forum_bats as $key => $value) {
+						// => 회원id
+						$mem_id = $value['mem_id'];
+						// => 회원 정보
+						$member_info = $this->Member_model->get_one($mem_id);
+						
+						// => 회원 배팅 cp
+						$cfc_cp = (double) $value['cfc_cp'];
+						// => 승리 배분 cp
+						$give_cp =  $cfc_cp;
+						$mem_cp = (double) $member_info['mem_cp'];
+						$changed_cp = $mem_cp + $give_cp;
+
+						// insert cp
+						$this->point->insert_cp($mem_id, $give_cp, '이슈 마감후 참여 CP 반려', 'post', $pst_id,  $this->member->item('mem_id') . '-' . uniqid(''));
+					}
+				}
+			}
+
 			/**
 			 * 투표자 보상 지급 끝
 			 */
@@ -1040,7 +1074,7 @@ class Forum extends CB_Controller
 
 			$param =& $this->querystring; 
 			$redirecturl = admin_url($this->pagedir . '/close_forum');
-			
+			$this->db->trans_complete();
 			redirect($redirecturl);
 			// 게시물이 삭제될 경우, 모든 포인트 반환 및 원상복귀 && cic_forum_cp 데이터 삭제 필수 && cic_forum_info 데이터 삭제 필수
 			// 마감후 분배여부 status 필요
@@ -1351,12 +1385,8 @@ class Forum extends CB_Controller
 				);
 
 
-				$postUpdatedata['post_device']
-				= ($this->cbconfig->get_device_type() === 'mobile') ? 'mobile' : 'desktop';
-				
+				$postUpdatedata['post_device'] = ($this->cbconfig->get_device_type() === 'mobile') ? 'mobile' : 'desktop';
 				$post_id = $this->Post_model->insert($postUpdatedata);
-
-				
 				
 				$forumInfoUpdatedata = array(
 					'frm_bat_close_datetime' => $frm_bat_close_datetime,

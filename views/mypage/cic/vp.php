@@ -42,7 +42,13 @@
 							<tr>
 								<td><span><?php echo number_format(element('num', $post));?></span></td>
 								<td><span><?php echo html_escape(element('vp_point', $post) >= 0 ? '+'.element('vp_point', $post):element('vp_point', $post));?></span></td>
-								<td class="l_memo"><span><?php echo html_escape(element('vp_content', $post));?></span></td>
+								<?php if(html_escape(element('post_id', $post))){?>
+								<td class="l_memo"><span>
+									<a href="<?php echo base_url('post').'/'.element('post_id', $post)?>"><?php echo html_escape(element('vp_content', $post));?></a></span></td>
+								<?php }else{ ?>
+								<td class="l_memo"><span>
+									<?php echo html_escape(element('vp_content', $post));?></span></td>
+								<?php } ?>
 								<td><?php echo preg_match("/[xE0-xFF][x80-xFF][x80-xFF]/", html_escape(element('vp_action', $post))) ? "" : html_escape(element('vp_action', $post));?></td>
 								<td><?php echo display_datetime(element('vp_datetime', $post), 'full', 'Y-m-d H:i'); ?></td>
 							</tr>
@@ -77,3 +83,8 @@
 </div>
 <!-- e: #container-wrap //-->
 
+<style>
+	.l_memo a:hover{
+		text-decoration:underline; color:#555;
+	}
+</style>

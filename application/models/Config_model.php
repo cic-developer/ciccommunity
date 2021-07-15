@@ -37,6 +37,7 @@ class Config_model extends CB_Model
 	public function get_all_meta()
 	{
 		$cachename = $this->cache_name;
+	
 		if ( ! $result = $this->cache->get($cachename)) {
 			$result = array();
 			$res = $this->get();
@@ -70,6 +71,7 @@ class Config_model extends CB_Model
 		}
 
 		$old_value = $this->item($column);
+
 		if (is_null($value)) {
 			$value = '';
 		}
@@ -123,7 +125,6 @@ class Config_model extends CB_Model
 		$this->db->where($this->meta_key, $column);
 		$data = array($this->meta_value => $value);
 		$this->db->update($this->_table, $data);
-
 		return true;
 	}
 }

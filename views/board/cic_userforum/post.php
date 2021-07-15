@@ -110,7 +110,7 @@
 						<div class="recommand vp-point">
 							<?php if (element('use_post_like', element('board', $view))) { ?>
 								<div class="btns">
-									<a class="good enter" href="javascript:;" id="btn-post-like" onClick="post_like_userforum('<?php echo element('post_id', element('post', $view)); ?>', '1', 'post-like')" title="추천하기"><span class="post-like">좋아요 up</span><br /><i class="fa fa-thumbs-o-up fa-lg"></i></a>
+									<a class="good enter" style="display:flex; justify-content: center; align-items: center;" href="javascript:;" id="btn-post-like" onClick="post_like_userforum('<?php echo element('post_id', element('post', $view)); ?>', '1', 'post-like')" title="추천하기"><span class="post-like">좋아요 up</span><br /><i class="fa fa-thumbs-o-up fa-lg" style="padding-left:12px;"></i></a>
 								</div>
 							<?php } ?>
 						</div>

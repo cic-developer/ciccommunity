@@ -53,7 +53,7 @@ class Search_keyword_model extends CB_Model
 	}
 
 	function get_main_rank(){
-		$start_date = cdate('Y-m-d', strtotime('-3 days'));
+		$start_date = cdate('Y-m-d', strtotime('-1 days'));
 		$end_date = cdate('Y-m-d');
 		$result = $this->get_rank($start_date, $end_date);
 

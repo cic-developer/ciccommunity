@@ -32,21 +32,41 @@
 								<p class="pimg"><img src="<?php echo thumb_url('mlc_attach', element('mlc_attach', element('level', element('post', $view))), 20, 20); ?>"
 										alt="<?php echo element('mlc_title', element('level', element('post', $view))); ?>">
 								</p>
-								<a class="popup_menuu" search_id="<?php echo element('mem_id', element('post', $view)); ?>"><p class="rtxt"><?php echo element('post_nickname', element('post', $view)); ?></p></a>
+								<div class="tooltip popup_menuu" search_id="<?php echo element('mem_id', element('post', $view)); ?>">
+									<p class="rtxt">
+										<?php echo element('post_nickname', element('post', $view)); ?>
+									</p>
+									<span class="tooltiptext" >
+										<?php if(number_format(element('mlc_level',element('level',element('post', $view))) > 30)){
+											echo '관리자';
+										}else{ ?>
+											<b>레벨 <?php echo element('mlc_level',element('level',element('post', $view))) ?> 
+											<?php echo html_escape(element('mlc_title',element('level',element('post', $view)))); ?></b>
+										<?php	
+										}
+											?>
+										<br><b><a href="javascript:void(0);" class="layer_link" style="padding:5px; color:#1e5fc9;"> 
+										작성 글 보기
+										</a></b>
+									</span>
+								</div>
 							</div>
 						</li>
 						<li>등록일 : <?php echo element('display_datetime', element('post', $view)); ?> </li>
 						<li>조회 : <?php echo number_format(element('post_hit', element('post', $view))); ?> </li>
 					</ul>
 					<div class="abr">
-						<?php 
-						if(element('level',element('post', $view))) {
+						<?php if((element('mlc_level',element('level',element('post', $view))) >= 30)){ ?>
+							<p style="color:#444;">관리자</p>
+						<?php }else{
+								if(element('level',element('post', $view))) {
 						?>
 						<p <?php echo (element('mlc_level',element('level',element('post', $view))) >= 0) ? 'style="color:#444;"' : '' ?>>
 							<?php echo element('mlc_level',element('level',element('post', $view))).' '.html_escape(element('mlc_title',element('level',element('post', $view)))); ?>
 						</p>
 						<?php 
-						} 
+								} 
+							}
 						?>
 
 						<?php if(html_escape(element('post_notice', element('post', $view))) == 0){ ?>
@@ -178,7 +198,9 @@
 					alert(data.error);
 				} else {
 					// alert('성공적으로 처리되었습니다.');
-					location.reload();
+
+					location.href = location.href.split('?')[0] + '?page='+ $('#comment_page').val();
+					
 				}
 			},
 			error: function(){
@@ -188,9 +210,6 @@
 		return true;
 	}
 </script>
-<div class="popupLayer" style="display:none; z-index:1200">
-	<a href="" class="layer_link"> 작성 글 보기</a>
-    </div>
     <script>
     $(function(){
         /* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
@@ -217,6 +236,36 @@
                 "display" : "block"
             }).show();
         });
+
+				$('.popup_menuu').mouseover(function(e)
+        {
+					var sWidth = window.innerWidth;
+            var sHeight = window.innerHeight;
+
+            var oWidth = $('.popupLayer').width();
+            var oHeight = $('.popupLayer').height();
+
+            // 레이어가 나타날 위치를 셋팅한다.
+            // var divLeft = e.clientX + 10;
+            // var divTop = e.clientY + 5;
+						var divLeft = e.clientX -5;
+            var divTop = e.clientY -5;
+
+            // 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+            if( divLeft < 0 ) divLeft = 0;
+            if( divTop < 0 ) divTop = 0;
+            
+            $('.layer_link').prop('href', `<?php echo base_url('board/freetalk').'?sfield=mem_id&skeyword='?>${$(this).attr('search_id')}`);
+            $('.popupLayer').css({
+                "top": divTop,
+                "left": divLeft,
+                "display" : "block"
+            }).show();
+        });
+				$('.popupLayer').mouseleave(function(e)
+        {
+					$('.popupLayer').css('display','none');
+        });
     });
     $(document).mouseup(function (e){
         var container = $('.popupLayer');
@@ -228,3 +277,26 @@
         $('.popupLayer').css('display','none');
     });
     </script>
+
+	<style>
+		.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 100px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px #fccb17;
+    color: black;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 9999;
+    bottom: -230%;
+    left: 80%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    height: 40px;
+    line-height: 20px;
+	font-size: 15px;
+}
+	</style>

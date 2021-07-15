@@ -42,7 +42,12 @@
 							<tr>
 								<td><span><?php echo number_format(element('num', $post));?></span></td>
 								<td><span><?php echo html_escape(element('poi_point', $post) >= 0 ? '+'.element('poi_point', $post): element('poi_point', $post));?></span></td>
-								<td class="l_memo"><span><?php echo html_escape(element('poi_content', $post));?></span></td>
+								<?php if(html_escape(element('post_id', $post))){?>
+								<td class="l_memo"><span><a href="<?php echo base_url('post').'/'.element('post_id', $post)?>"><?php echo html_escape(element('poi_content', $post));?></a></span></td>
+								<?php }else{ ?>
+								<td class="l_memo"><span>
+									<?php echo html_escape(element('poi_content', $post));?></span></td>
+								<?php } ?>
 								<td><?php echo html_escape(element('poi_action', $post));?></td>
 								<td><?php echo display_datetime(element('poi_datetime', $post), 'full', 'Y-m-d H:i'); ?></td>
 							</tr>
@@ -77,3 +82,8 @@
 </div>
 <!-- e: #container-wrap //-->
 
+<style>
+	.l_memo a:hover{
+		text-decoration:underline; color:#555;
+	}
+</style>
